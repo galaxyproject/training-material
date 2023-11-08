@@ -1,47 +1,52 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}">
 {% assign topic = site.data[page.topic_name] %}
-{% assign topic_material = site.pages | topic_filter:page.topic_name %}
-{% assign title = topic.title %}
+{% assign locale = site.data.lang[page.lang] %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{{ page.title | default: site.title | strip_html }}</title>
+        {% if jekyll.environment == 'production' %}
+            {% include _includes/analytics.html %}
+        {% endif %}
+        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}">
+        <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+        <link rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
+        <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="stylesheet" href="{{ "/assets/css/main.css?v=3" | prepend: site.baseurl }}">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
 
-{% assign tutorial = page %}
-{% assign title = tutorial.title %}
-{% assign contributors = site.data['contributors'] %}
+        {{ page | generate_dublin_core: site }}
 
-  <head>
-    <meta charset="utf-8">
-    <title>{{ title | strip_html }}</title>
-    {% if site.env.GOOGLE_ANALYTICS_ID %}
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-        ga('create', '{{ site.env.GOOGLE_ANALYTICS_ID }}' , 'auto');
-        ga('send', 'pageview');
-    </script>
-    {% endif %}
-    <link rel="stylesheet" href="{{ "/assets/css/slides.css" | prepend: site.baseurl }}">
-    <link rel="stylesheet" href="{{ "/assets/css/font-awesome.css" | prepend: site.baseurl }}" id="theme">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
+        {% assign topic = site.data[page.topic_name] %}
+        {% assign og_title = topic.title %}
+        {% if page.title %}
+            {% assign og_title = page.title %}
+        {% endif %}
+        {% assign og_desc = topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
+        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
+        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
+        {% assign og_image = page.og_image | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
+        <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}">
 
-    {% assign topic = site.data[page.topic_name] %}
-    {% assign og_title = topic.title %}
-    {% if page.title %}
-        {% assign og_title = page.title %}
-    {% endif %}
-    {% assign og_desc = topic.summary %}
-    <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
-    <meta property="og:title" content="Galaxy Training: {{ og_title | truncate: 60}}" />
-    <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
-    <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
-    <script type="application/ld+json">
-      {% include _includes/material.jsonld material=page topic=topic site=site %}
-    </script>
-  </head>
-  <body>
+        <script type="application/ld+json">
+            {% include _includes/material.jsonld material=page topic=topic site=site %}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+{% if topic.custom_css %}
+<style>
+{{ topic.custom_css }}
+</style>
+{% endif %}
+
+    <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
     <textarea id="source">
 name: inverse
 layout: true
@@ -50,11 +55,11 @@ class: center, middle, inverse
 <div class="my-header"><span>
 <a href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
 {% if page.type == "introduction" %}
-  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/slides/{{ page.tutorial_name }}.html{% endcapture %}
+  {% capture link %}{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/topics/{{ topic.name }}/slides/{{ page.tutorial_name }}.html{% endcapture %}
 {% else %}
-  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html{% endcapture %}
+  {% capture link %}{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html{% endcapture %}
 {% endif %}
-<a class="nav-link" href="{{ link }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+<a href="{{ link }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
 </span></div>
 
@@ -62,34 +67,80 @@ class: center, middle, inverse
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.small_logo }}" alt="Galaxy Training Network" style="height: 40px;"/>
 {% else %}
-<img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
+  {% if page.logo contains "://" %}
+<img src="{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" style="height: 40px;"/>
+  {% else %}
+<img src="{{ site.baseurl }}/{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" style="height: 40px;"/>
+  {% endif %}
 {% endif %}
 </span></div>
 
 ---
 
-# {{ title }}
+
+{% if page.logo == "GTN" %}
+<img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" class="cover-logo"/>
+{% else %}
+  {% if page.logo contains "://" %}
+<img src="{% if page.logo %}{{ page.logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="cover-logo" />
+  {% else %}
+<img src="{{ site.baseurl }}/{% if page.logo %}{{ page.logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="cover-logo" />
+  {% endif %}
+{% endif %}
+
+# {{ page.title | default: topic.title }}
+
+
+{% include _includes/contributors-line.html page=page authorsonly=true %}
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  {% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}} &nbsp;
+  {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a>
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+{% if page.video %}
+  {% icon video-slides %} <a href="{{ site.baseurl }}/videos/watch.html?v={{ page.url | remove: '/topics' | remove: '.html' }}">{{locale['video-slides'] | default: "Video slides"}}</a> |
+{% endif %}
+
+  {% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Plain-text slides"}}</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>{{locale['tip'] | default: "Tip"}}: </strong>{{locale['presenter-notes'] | default: "press <kbd>P</kbd> to view the presenter notes"}}
+    | {% icon arrow-keys %} {{locale['first-time-using-slides'] | default: "Use arrow keys to move between slides"}}
+
+</div>
+
+???
+{{locale['presenter-notes-explanation'] | default: "Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting."
+}}
 
 {% if topic.requirements or page.requirements %}
 
 ---
 
-## Requirements
+## {{locale['requirements'] | default: "Requirements"}}
 
-Before diving into this slide deck, we recommend you to have a look at:
+{{ locale['before-diving-in'] | default: "Before diving into this slide deck, we recommend you to have a look at"}}:
 
-{% include snippets/display_extra_training_slides.md extra_trainings=topic.requirements %}
-{% include snippets/display_extra_training_slides.md extra_trainings=page.requirements %}
+{% include _includes/display_extra_training_slides.md extra_trainings=topic.requirements %}
+{% include _includes/display_extra_training_slides.md extra_trainings=page.requirements %}
 
 {% endif %}
-
-.footnote[Tip: press `P` to view the presenter notes]
-
-???
-Presenter notes contain extra information which might be useful if you
-intend to use these slides for teaching.
-
-Press `P` again to switch presenter notes off
 
 ---
 
@@ -97,31 +148,39 @@ Press `P` again to switch presenter notes off
 
 ---
 
-## Thank you!
+## {{ locale['thank-you'] | default: "Thank You" }}!
 
-This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+{{ locale['collaborative-effort'] | default: "This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!" }}
 
-{% if tutorial.contributors %}
-<div class="contributors-line">
-{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}
-</div>
-{% endif %}
+{% include _includes/contributors-line.html page=page %}
 
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
 {% else %}
-<img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
+  {% if page.logo contains "://" %}
+<img src="{{ page.logo }}" alt="page logo" style="height: 100px;"/>
+  {% else %}
+<img src="{{ site.baseurl }}/{{ page.logo }}" alt="page logo" style="height: 100px;"/>
+  {% endif %}
 {% endif %}
+{% if page.contributions %}
+	{% include _includes/funding-statement-short.md contributions=page.contributions %}
+{% endif %}
+</div>
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+{{ locale['license-tutorial'] | default: "This material is licensed under the Creative Commons Attribution 4.0 International License" }}</a>.
 
 {% if page.layout == "base_slides" %}
-.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github.repository_url }}/tree/master{{ page.url }})]
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/main{{ page.url }})]
 {% endif %}
     </textarea>
-    <script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}" type="text/javascript">
-    </script>
-    <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript">
-      var slideshow = remark.create({navigation: {scroll: false,}});
+	<script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
       var hljs = remark.highlighter.engine;
       var snippets = document.querySelectorAll('code.remark-code');
         [].forEach.call(snippets,function(snippet){
@@ -131,5 +190,28 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
         target:function(trigger){return trigger.parentElement;
       }});
     </script>
-  </body>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script type="text/javascript" src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/popper.min.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/bootstrap.min.js?v=3" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/details-element-polyfill.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="{{ "/assets/js/bootstrap-toc.min.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
+
+    </body>
 </html>

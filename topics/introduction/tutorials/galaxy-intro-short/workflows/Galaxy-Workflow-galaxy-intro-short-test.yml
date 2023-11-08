@@ -1,0 +1,16 @@
+---
+- doc: Test sample data for the workflow
+  job:
+    mutant_R1:
+      class: File
+      location: https://zenodo.org/record/582600/files/mutant_R1.fastq
+      filetype: fastqsanger
+  outputs:
+    filter1:
+      asserts:
+        has_text:
+          text: "mutant-no_snps.gff-24928"
+    filter2:
+      asserts:
+        has_text:
+          text: "mutant-no_snps.gff-24928"

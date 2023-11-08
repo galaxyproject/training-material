@@ -1,0 +1,50 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "make serve-gitpod",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "GTN: Fancy Linting",
+            "command": "ruby",
+            "args": [
+                "bin/lint.rb",
+                "--format", "plain"
+            ],
+            "problemMatcher": {
+                "owner": "ruby",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):(\\d+):(\\d+):(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "endLine": 4,
+                    "endColumn": 5,
+                    "message": 6
+                }
+            }
+        },
+        {
+            "label": "GTN: Lint",
+            "type": "shell",
+            "command": "make lint ACTIVATE_ENV=pwd",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test"
+            }
+        }
+    ]
+}

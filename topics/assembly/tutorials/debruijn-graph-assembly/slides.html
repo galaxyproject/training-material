@@ -41,7 +41,7 @@ contributors:
 * Sequences can be reconstructed by moving between nodes in graph
 ]
 .pull-right[
-.image-50[![](../../images/debruijn.png)]
+.image-50[![black and white image of a man wearing glasses](../../images/debruijn.png)]
 ]
 ---
 .enlarge120[# **de Bruijn Graphs**
@@ -51,17 +51,17 @@ contributors:
 * Edges represent consecutive k-mers (which overlap by k-1 symbols)
 ]
 Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
-![](../../images/debruijn01.png)
+![every permutation of 3 0s and/or 1s is shown, each is a node. Lines connect ones that share at least 2 overlap.](../../images/debruijn01.png)
 ---
 .enlarge120[# **Producing sequences**
 
 * Sequences of symbols are produced by moving through the graph
 ]
-![](../../images/debruijn02.png)
+![Same graph as before with arrows listing a path through the graph. Nodes 111, 110, 100, and 000 combine into 111000.](../../images/debruijn02.png)
 
 ---
 .enlarge120[
-# **K-mers?**       .pull-right[.image-25[![](../../images/specialk.png)]]
+# **K-mers?**       .pull-right[.image-25[![Special K Logo](../../images/specialk.png)]]
 
 
 <hr>
@@ -75,62 +75,62 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 ]
 ---
 .enlarge120[
-# **What are K-mers?**       .pull-right[.image-25[![](../../images/specialk.png)]]]
-![](../../images/kmers01.png)
+# **What are K-mers?**       .pull-right[.image-25[![Special K Logo](../../images/specialk.png)]]]
+![k=12 kmers show three sequences with length 12 overlapping. For k=5 10 different shorter sequences are shown.](../../images/kmers01.png)
 
 ---
 .enlarge120[
-# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../../images/abc.png)]]]
-![](../../images/ex1-1.png)
+# **K-mers de Bruijn graph**       .pull-right[.image-25[![Wooden blocks with letters A, B, C.](../../images/abc.png)]]]
+![An example of happiness is given with 4 fragments, happi, pine, iness, appin.](../../images/ex1-1.png)
 ---
 .enlarge120[
-# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../../images/abc.png)]]]
-![](../../images/ex1-2.png)
+# **K-mers de Bruijn graph**       .pull-right[.image-25[![Wooden blocks with letters A, B, C.](../../images/abc.png)]]]
+![all 4-mers are shown from those 5-mers, so happi becomes happ and appi. These are then uniqued.](../../images/ex1-2.png)
 ---
 .enlarge120[
-# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../../images/abc.png)]]]
-![](../../images/ex1-3.png)
+# **K-mers de Bruijn graph**       .pull-right[.image-25[![Wooden blocks with letters A, B, C.](../../images/abc.png)]]]
+![A graph is drawn based on overlaps between those 4-mers.](../../images/ex1-3.png)
 ---
 .enlarge120[
-# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../../images/abc.png)]]]
-![](../../images/ex1-4.png)
+# **K-mers de Bruijn graph**       .pull-right[.image-25[![Wooden blocks with letters A, B, C.](../../images/abc.png)]]]
+![The graph is collapsed into the word happiness, success.](../../images/ex1-4.png)
 
 ---
 .enlarge120[
-# **The problem of repeats**       .pull-right[.image-25[![](../../images/repeatlogo.png)]]]
-![](../../images/ex2-1.png)
+# **The problem of repeats**       .pull-right[.image-25[![Repeat icon](../../images/repeatlogo.png)]]]
+![A second example with the word mississippi is shown. The fragments are now missis, ssissi, ssippi.](../../images/ex2-1.png)
 ---
 .enlarge120[
-# **The problem of repeats**       .pull-right[.image-25[![](../../images/repeatlogo.png)]]]
-![](../../images/ex2-2.png)
+# **The problem of repeats**       .pull-right[.image-25[![Repeat icon](../../images/repeatlogo.png)]]]
+![All 4-mers are generated so missis becomes miss, issi, and ssis. These are then uniqued to get 7 unique 4-mers.](../../images/ex2-2.png)
 ---
 .enlarge120[
-# **The problem of repeats**       .pull-right[.image-25[![](../../images/repeatlogo.png)]]]
-![](../../images/ex2-3.png)
+# **The problem of repeats**       .pull-right[.image-25[![Repeat icon](../../images/repeatlogo.png)]]]
+![A graph is generated but this graph is more complex and has a loop.](../../images/ex2-3.png)
 ---
 .enlarge120[
-# **The problem of repeats**       .pull-right[.image-25[![](../../images/repeatlogo.png)]]]
-![](../../images/ex2-4.png)
+# **The problem of repeats**       .pull-right[.image-25[![Repeat icon](../../images/repeatlogo.png)]]]
+![This graph is walked and now the results are shown, mississippi, mississississippi, or more could be found by following the loop repeatedly.](../../images/ex2-4.png)
 ---
 .enlarge120[
-# **Different k**       .pull-right[.image-25[![](../../images/bigk.png)]]]
-![](../../images/ex2a-1.png)
+# **Different k**       .pull-right[.image-25[![Letter K](../../images/bigk.png)]]]
+![The same mississippi example from the start.](../../images/ex2a-1.png)
 ---
 .enlarge120[
-# **Different k**       .pull-right[.image-25[![](../../images/bigk.png)]]]
-![](../../images/ex2a-2.png)
+# **Different k**       .pull-right[.image-25[![Letter K](../../images/bigk.png)]]]
+![Instead of 4-mers, we now produce 5-mers.](../../images/ex2a-2.png)
 ---
 .enlarge120[
-# **Different k**       .pull-right[.image-25[![](../../images/bigk.png)]]]
-![](../../images/ex2a-3.png)
+# **Different k**       .pull-right[.image-25[![Letter K](../../images/bigk.png)]]]
+![The graph is produced, and now there are two disconnected sets of nodes.](../../images/ex2a-3.png)
 ---
 .enlarge120[
-# **Different k**       .pull-right[.image-25[![](../../images/bigk.png)]]]
-![](../../images/ex2a-4.png)
+# **Different k**       .pull-right[.image-25[![Letter K](../../images/bigk.png)]]]
+![When collapsing this graph we see two results, MISSISSIS and SSIPPI.](../../images/ex2a-4.png)
 
 ---
 .enlarge120[
-# **Choose k wisely**       .pull-right[.image-25[![](../../images/wisely.png)]]]
+# **Choose k wisely**       .pull-right[.image-25[![An old man from some movie.](../../images/wisely.png)]]]
 
 .enlarge120[
 * Lower k
@@ -148,28 +148,28 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 ]
 ---
 .enlarge120[
-# **Read errors**       .pull-right[.image-25[![](../../images/hazardsymbol.png)]]]
-.image-75[![](../../images/ex3-head.png)]
-![](../../images/blank.png)
+# **Read errors**       .pull-right[.image-25[![hazard symbol](../../images/hazardsymbol.png)]]]
+.image-75[![Example 3, happiness again, with fragments happi, iness, aplin, pinet](../../images/ex3-head.png)]
+![Blank image](../../images/blank.png)
 ---
 .enlarge120[
-# **Read errors**       .pull-right[.image-25[![](../../images/hazardsymbol.png)]]]
-.image-75[![](../../images/ex3-head.png)]
-![](../../images/ex3-2.png)
+# **Read errors**       .pull-right[.image-25[![hazard symbol](../../images/hazardsymbol.png)]]]
+.image-75[![Happiness example 5-mers](../../images/ex3-head.png)]
+![all 3-mers are produced](../../images/ex3-2.png)
 ---
 .enlarge120[
-# **Read errors**       .pull-right[.image-25[![](../../images/hazardsymbol.png)]]]
-.image-75[![](../../images/ex3-head.png)]
-![](../../images/ex3-3.png)
+# **Read errors**       .pull-right[.image-25[![hazard symbol](../../images/hazardsymbol.png)]]]
+.image-75[![Happiness example 5-mers](../../images/ex3-head.png)]
+![The three mers are collapsed into an overlap graph](../../images/ex3-3.png)
 ---
 .enlarge120[
-# **Read errors**       .pull-right[.image-25[![](../../images/hazardsymbol.png)]]]
-.image-75[![](../../images/ex3-head.png)]
-![](../../images/ex3-4.png)
+# **Read errors**       .pull-right[.image-25[![hazard symbol](../../images/hazardsymbol.png)]]]
+.image-75[![Happiness example 5-mers](../../images/ex3-head.png)]
+![The graph is coloured and six contigs are produced based on overlaps.](../../images/ex3-4.png)
 
 ---
 .enlarge120[
-# **More coverage**       .pull-right[.image-50[![](../../images/depthlogo.png)]]]
+# **More coverage**       .pull-right[.image-50[![hazard symbol](../../images/depthlogo.png)]]]
 
 .enlarge120[
 * Errors won't be duplicated in every read
@@ -183,8 +183,8 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 ]
 ---
 .enlarge120[
-# **Read errors revisited**       .pull-right[.image-50[![](../../images/hazardsymbol.png)]]]
-![](../../images/ex3a.png)
+# **Read errors revisited**       .pull-right[.image-50[![hazard symbol](../../images/hazardsymbol.png)]]]
+![Same happiness example, all three mers are present, but now the counts are shown. One path has many more counts than the other. Text asks which path looks most valid? why?](../../images/ex3a.png)
 
 ---
 .enlarge120[
@@ -218,7 +218,7 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 
 ## Step 1: Chain merging
 
-![](../../images/tipclipping.png)
+![Looking at a doubly connected graph with forward/reverse sequences and piles of overlaps. Nodes are connected with lines. One node is labelled as already merged, and two nodes sharing a prefix are labelled as further merging possible.](../../images/tipclipping.png)
 
 ---
 .enlarge120[
@@ -226,7 +226,7 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 
 ## Step 2: Tip clipping
 
-![](../../images/shortnodes.png)
+![a graph with every node doubled for forward/reverse strands is shown, clip tips if the length of the tip of the node is less than 2 times k.](../../images/shortnodes.png)
 
 ---
 .enlarge120[
@@ -234,7 +234,7 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 
 
 .pull-left[
-![](../../images/bubblemerging.png)
+![Three graphs are shown, B, C, and D. B is the most complex, C combines two nodes B and B prime, while D collapses even more nodes to further simplify the graph.](../../images/bubblemerging.png)
 ]
 .pull-right[
 ## Step 3: Bubble collapsing
@@ -296,23 +296,15 @@ But: You need to choose **k** and **c** wisely!
 * Breadcrumb algorithm
 ]
 
-![](../../images/breadcrumb.png)
+![Two boxes A and B are at opposite ends, there are many nodes along a line between them, and some sitting outside of the graph or otherwise weirdly connected.](../../images/breadcrumb.png)
 
----
-.enlarge120[
-# **Assembly Exercise #2**
-
-* We will perform an optimised assembly using the Velvet Optimiser in Galaxy.
-* The optimiser will pick a good value for **k** and **c**, and perform graph simplification for us.
-* We will compare the results with our earlier, simple assemblies.
-]
 ---
 .enlarge120[
 # **Extensions of the idea**
 ]
 ---
 .enlarge120[
-# **SPAdes**     .pull-right[.image-50[![](../../images/spades.png)]]]
+# **SPAdes**     .pull-right[.image-50[![spades logo](../../images/spades.png)]]]
 
 .enlarge120[
 * de Bruijn graph assembler by Pavel Pevzner's group out of St. Petersburg
@@ -352,7 +344,7 @@ But: You need to choose **k** and **c** wisely!
 ]
 
 .pull-right[
-![](../../images/minionpacbio.png)
+![image of a minion connected to a computer via a cable. Below a man stands next to a very large machine.](../../images/minionpacbio.png)
 ]
 ---
 .enlarge120[# **Bandage**
@@ -360,11 +352,4 @@ But: You need to choose **k** and **c** wisely!
 * Assembly graph viewer and manipulator
 * Written by Ryan Wick of Centre for Systems Genomics - Uni. Melbourne, Australia
 ]
-![](../../images/bandage.png)
-
----
-.enlarge120[# **Assembly Exercise #3**
-
-* We will perform an assembly with **SPAdes** in **Galaxy**
-* We will again look at the assembly metrics and compare them with our sample and optimised Velvet assemblies.
-]
+![A screenshot of the bandage gui showning drawing options on left and a middle window with a close up of a genome assembly graph.](../../images/bandage.png)

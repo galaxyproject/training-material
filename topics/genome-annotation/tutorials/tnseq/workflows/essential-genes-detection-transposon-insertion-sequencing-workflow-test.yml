@@ -1,0 +1,36 @@
+---
+- doc: Test sample data for the workflow
+  job:
+    Tnseq-Tutorial-reads.fastqsanger.gz:
+      class: File
+      location: https://zenodo.org/record/2579335/files/Tnseq-Tutorial-reads.fastqsanger.gz
+      filetype: fastqsanger.gz
+    condition_barcodes.fasta:
+      class: File
+      location: https://zenodo.org/record/2579335/files/condition_barcodes.fasta
+      filetype: fasta
+    construct_barcodes.fasta:
+      class: File
+      location: https://zenodo.org/record/2579335/files/construct_barcodes.fasta
+      filetype: fasta
+    staph_aur.fasta:
+      class: File
+      location: https://zenodo.org/record/2579335/files/staph_aur.fasta
+      filetype: fasta
+    staph_aur.gff3:
+      class: File
+      location: https://zenodo.org/record/2579335/files/staph_aur.gff3
+      filetype: gff3
+  outputs:
+    essential_both:
+      asserts:
+        has_text:
+          text: 'dnaA'
+    essential_control:
+      asserts:
+        has_text:
+          text: 'recF'
+    essential_condition:
+      asserts:
+        has_text:
+          text: 'argJ'

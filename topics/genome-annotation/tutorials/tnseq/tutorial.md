@@ -24,19 +24,21 @@ key_points:
 contributors:
   - delphine-l
   - bebatut
+subtopic: prokaryote
+priority: 4
 ---
 
 # Introduction
-{:.no_toc}
 
-In microbiology, identifying links between genotype and phenotype is key to understand bacteria growth and virulence mechanisms, and to identify targets for drugs and vaccines. These analysis are limitated by the lack of bacterial genome annotations (*e.g.* 30% of genes for *S. pneumoniae* are of unknown function) and by the fact that genotypes often arose from complex composant interactions.
+
+In microbiology, identifying links between genotype and phenotype is key to understand bacteria growth and virulence mechanisms, and to identify targets for drugs and vaccines. These analysis are limited by the lack of bacterial genome annotations (*e.g.* 30% of genes for *S. pneumoniae* are of unknown function) and by the fact that genotypes often arose from complex composant interactions.
 
 ## Transposon insertion Sequencing
-{:.no_toc}
+
 
 Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. In this technique, the genome is saturated by insertions of transposons. Transposons are highly regulated, discrete DNA segments that can relocate within the genome. They have a large influence on gene expression and can be used to determine the function of genes.
 
-When a transposon inserts itself in a gene, the gene's function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, i.e. creation of mutations of DNA by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene.
+When a transposon inserts itself in a gene, the gene's function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, *i.e.* creation of mutations of DNA by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene.
 
 ![Illustration of tnseq Method](../../images/tnseq/principle_tnseq.png "Transposon insertion sequencing method (from <a href='#Chao2016'> Chao <i>et al.</i> 2016</a>)")
 
@@ -53,11 +55,11 @@ Two type of transposon insertion methods exist:
 - Regulatory element insertion, where different promoters are inserted by the transposon, and we analyze the change in gene expression in addition to the disruption. This method will be the subject of another tutorial.
 
 ## Building a TnSeq library
-{:.no_toc}
+
 
 Different types of transposons can be used depending of the goal of your analysis.
 
-- Randomly pooled tranposon
+- Randomly pooled transposon
     - Mariner-based transposons, common and stable transposons which target the "TA" dinucleotides
 
         The TA are distributed relatively evenly along genome. The Mariner-based transposons can be inserted to impact statistically every gene, with in average more than 30 insertions site per kb. With the low insertion bias, it is easy to build saturated libraries. But local variations means less loci and less statistical power.
@@ -72,11 +74,11 @@ Different types of transposons can be used depending of the goal of your analysi
 
 Independently of the transposon choice we need to be careful about the library complexity. With a large complex library, multiple insertion can be found in every potential locus. The higher density of insertion, the greater precision in identifying limits of regions of interest. If the density of the library is too low, some genes might by chance not be disrupted and mistaken for essential. The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries.
 
-After selection of the type of transposon, we need to modify it to allow insertion site amplification and sequencing to get a library fitting the tranposon insertion. Biases could be introduced during the process due to uneven fragment sizes. To avoid that, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes and therefore avoid a bias in the representation of the insertions.
+After selection of the type of transposon, we need to modify it to allow insertion site amplification and sequencing to get a library fitting the transposon insertion. Biases could be introduced during the process due to uneven fragment sizes. To avoid that, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes and therefore avoid a bias in the representation of the insertions.
 
 As we just want to identify the TA site affected by an insertion, we only need the location of the start of the reads and not a good coverage of the entire genome. Long reads are then not so important. On the other hand, a minimum transposon length of 16 bp is necessary for precise mapping on the genome {% cite Kwon2015 %}. We can therefore not use the BsmFI restriction site (11 to 12 bp) but MmeI.
 
-**In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformely,** with two specific regions used to specifically sequence the region upstream of the insertion {% cite Santiago2015 %}
+**In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformly,** with two specific regions used to specifically sequence the region upstream of the insertion {% cite Santiago2015 %}
 
 ![Structure of the transposon containing several parcodes and adapters](../../images/tnseq/tranposon_structure.png "Structure of the transposon containing several parcodes and adapters (from <a href='#Santiago2015'> Santiago <i>et al.</i> 2015</a>)")
 
@@ -86,16 +88,16 @@ The transposon inserts itself at TA site at the ITR junctions. These ITR junctio
 
 2. An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been added in the backbone to create different length construct, that can later be filtrated. Different promoters are added with an additional 3 bp barcode to analyze differential expression impact. This type of complex analysis will be covered in a follow-up tutorial.
 
-Because of this complex tranposon structure, the reads obtained after sequencing contain a lot of adapters and foreign sequences used to insert and target the transposon. Several step of preprocessing are then need to extract only the transposon sequence before finding its location on the genome.
+Because of this complex transposon structure, the reads obtained after sequencing contain a lot of adapters and foreign sequences used to insert and target the transposon. Several steps of preprocessing are then need to extract only the transposon sequence before finding its location on the genome.
 
 ## Tnseq analysis
-{:.no_toc}
 
-Once the genomic sequences are extracted from the initial reads (i.e. remove non genomic sequences from the reads), they need to be located each on the genome to link them to a TA site and genes. To do that we map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site and identify essential genes of regions.
+
+Once the genomic sequences are extracted from the initial reads (*i.e.* remove non genomic sequences from the reads), they need to be located each on the genome to link them to a TA site and genes. To do that we map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site and identify essential genes of regions.
 
 We will apply this approach in this tutorial using a subset of TnSeq reads from {% cite Santiago2015 %}.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -108,12 +110,13 @@ We will apply this approach in this tutorial using a subset of TnSeq reads from 
 
 Let's start with uploading the data.
 
-> ### {% icon hands_on %} Hands-on: Import the data
+> <hands-on-title>Import the data</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/record/2579335) or a data library (ask your instructor):
 >   - FASTQ file with the Tnseq reads: `Tnseq-Tutorial-reads.fastqsanger.gz`
@@ -130,13 +133,14 @@ Let's start with uploading the data.
 >    https://zenodo.org/record/2579335/files/staph_aur.gff3
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 > 3. Rename the files
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -157,7 +161,7 @@ Because of the experimental design for transposon insertion sequencing, the raw 
 
 First we divide the initial data set by experimental conditions using the 8 bp barcode added during the Illumina multiplexing protocol.
 
-> ### {% icon hands_on %} Hands-on: Inspect condition barcodes
+> <hands-on-title>Inspect condition barcodes</hands-on-title>
 >
 > 1. Inspect the `condition_barcodes` file
 >
@@ -174,14 +178,14 @@ This fasta file contains the barcodes for each condition:
 
 We can see 2 barcodes there: one for control and one for condition.
 
-> ### {% icon comment %} Comment: Barcode symbols used by **Cutadapt**
+> <comment-title>Barcode symbols used by <b>Cutadapt</b></comment-title>
 >
 > The `^` at the beginning of the sequence means we want to anchor the barcode at the beginning of the read. To know more about the symbols used by **Cutadapt**, you check the [**Cutadapt** manual](https://cutadapt.readthedocs.io/en/stable/guide.html#adapter-types).
 {: .comment}
 
 We would like now to split our Tnseq reads in `Tnseq-Tutorial-reads` given the barcodes.
 
-> ### {% icon hands_on %} Hands-on: Split reads by condition barcodes using Cutadapt
+> <hands-on-title>Split reads by condition barcodes using Cutadapt</hands-on-title>
 >
 > 1. **Cutadapt** {% icon tool %} with:
 >     - *"Single-end or Paired-end reads?"*: `Single-end`
@@ -194,22 +198,23 @@ We would like now to split our Tnseq reads in `Tnseq-Tutorial-reads` given the b
 >     - In *"Adapter Options"*
 >       - *"Maximum error rate"*: `0.15` (to allow 1 mismatch)
 >       - *"Match times"*: `3` (to cover cases where barcodes are attached several times)
->     - In *"Output Options"*
->       -  *"Report"*: `Yes`
->       -  *"Multiple output"*: `Yes` (to separate the reads into one file per condition)
+>     - In *"Output Selector"*, select
+>       -  *"Report"*
+>       -  *"Multiple output"* (to separate the reads into one file per condition)
+>       -  *"Untrimmed reads"* (to write reads that do not contain the adapter to a separate file)
 >
 >     The output is a collection of the different conditions datasets, here control and condition, and a report text file.
 >
 > 2. Inspect the report text generated by **Cutadapt** {% icon tool %}
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What percentage of reads has been trimmed for the adapter?
 > 2. How many reads have been trimmed for each condition?
 > 3. What should we change if our barcodes were at the end of the reads ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 100% of the reads were trimmed (line `Reads with adapters`)
 > > 2. 2,847,018 for control (`CTCAGAAG` barcode) and 2,862,108 for condition (`GACGTCAT` barcode)
@@ -221,9 +226,9 @@ We would like now to split our Tnseq reads in `Tnseq-Tutorial-reads` given the b
 
 ## Remove Adapter sequence
 
-Our reads are now divided by condition. We need to trim their tail containing the Illumina adapters, used for initiating the sequencing (`CGTTATGGCACGC`, here). To do so, we emove the adapter and everything downstream, using the end adapter option of **Cutadapt** and not anchor the sequence anywhere. To eliminate reads that might not have been trimmed because of too many mismatches or other reasons, we filter the reads by size, given the known approximate size of the remaining sequences (**how is it computed??**).
+Our reads are now divided by condition. We need to trim their tail containing the Illumina adapters, used for initiating the sequencing (`CGTTATGGCACGC`, here). To do so, we remove the adapter and everything downstream, using the end adapter option of **Cutadapt** and not anchor the sequence anywhere. To eliminate reads that might not have been trimmed because of too many mismatches or other reasons, we filter the reads by size, given the known approximate size of the remaining sequences (**how is it computed??**).
 
-> ### {% icon hands_on %} Hands-on: Remove Adapter with Cutadapt
+> <hands-on-title>Remove Adapter with Cutadapt</hands-on-title>
 >
 > 1. **Cutadapt** {% icon tool %} to remove adapters with:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
@@ -235,21 +240,21 @@ Our reads are now divided by condition. We need to trim their tail containing th
 >              - *"Enter custom 3' adapter sequence"*: `CGTTATGGCACGC`
 >    - In *"Adapter Options"*
 >      - *"Match times"*: `3` (to cover cases where barcodes are attached several times)
->    - In *"Output Options"*
->      -  *"Report"*: `Yes`
+>    - In *"Output Selector"*, select
+>      -  *"Report"*
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    > What are the outputs at this step?
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > The outputs are two collections: one containing the reads in both conditions, and one containing the **Cutadapt** reports for each condition.
 >    > {: .solution }
 >    {: .question}
 >
 > 2. Inspect the generated report files
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    > What percentage of the reads contained the adapter?
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > More than 99% of the reads contained the adapter in both conditions (line `Reads with adapters` in the reports)
 >    > {: .solution }
 >    {: .question}
@@ -260,14 +265,14 @@ Our reads are now divided by condition. We need to trim their tail containing th
 >    - In *"Filter Options"*
 >      - *"Minimum length"* : `64`
 >      - *"Maximum length"* : `70`
->    - In *"Output Options"*
->      -  *"Report"*: `Yes`
+>    - In *"Output Selector"*, select
+>      -  *"Report"*
 >
 > 4. Inspect the generated report files
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    > How many reads where discarded after filtering?
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > Less than 2% of the reads were discarded in both conditions (lines `Reads that were too short` and `Reads that were too long` in the reports)
 >    > {: .solution }
 >    {: .question}
@@ -280,25 +285,25 @@ We can see that is both samples the reads have pass the filtering at more than 9
 
 The constructs used in this experiment contain different strengths and directions of promoters. We use the different constructs as replicates, so we need now to separate the reads based on the construct specific 3 bp barcodes.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > In addition of disrupting a gene at the location of the insertion, such constructs can modify the expression of either upstream or downstream regions. The analysis of such modification will be studied in another training material, but for now we consider that the construct does not impact the essentiality analysis.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Inspect construct barcodes
+> <hands-on-title>Inspect construct barcodes</hands-on-title>
 >
 > 1. Inspect the `construct_barcodes` file
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
->    > What does the `$` mean in the barcode sequence file ?
+>    > What does the `$` mean in the barcode sequence file?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > It means the barcode is anchored at the end of the reads.
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Barcode split with Cutadapt
+> <hands-on-title>Barcode split with Cutadapt</hands-on-title>
 >
 > 1. **Cutadapt** {% icon tool %} with:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
@@ -310,17 +315,17 @@ The constructs used in this experiment contain different strengths and direction
 >               - {% icon param-file %} *"Choose file containing 5' adapters"*: `construct_barcodes` file
 >    - In *"Adapter Options"*
 >       - *"Match times"*: `3` (to cover cases where barcodes are attached several times)
->    - In *"Output Options"*
->       -  *"Report"*: `Yes`
->       - *"Multiple output"* : `Yes` (to separate the reads into one file per condition)
+>    - In *"Output Selector"*, select
+>       -  *"Report"*
+>       - *"Multiple output"* (to separate the reads into one file per condition)
 >
 > 2. Inspect the report files
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
->    > Are the reads equally divided between constructs ?
+>    > Are the reads equally divided between constructs?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > When you look at the reports, you can see that most of the reads have been assigned to the *blunt* construct (`TAC` barcode): the blunt construct is the control and does not contain any promoters. This means that there is less negative selective pressure on blunt than the other ones, that have affected flanking region in addition to the disrupted gene at the insertion site. This won't be a problem here as the tool we use for the essentiality prediction consider the sum of reads in the replicates.
 >    > {: .solution }
 >    {: .question}
@@ -333,7 +338,7 @@ You can notice that the output of this split is a *nested collection*, a collect
 
 The last remaining transposon sequence in the reads is the linker with the MmeI restriction site (`ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT`).
 
-> ### {% icon hands_on %} Hands-on:  Remove Linker with Cutadapt
+> <hands-on-title> Remove Linker with Cutadapt</hands-on-title>
 >
 > 1. **Cutadapt** {% icon tool %} with:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
@@ -345,8 +350,8 @@ The last remaining transposon sequence in the reads is the linker with the MmeI 
 >              - *"Enter custom 3' adapter sequence"*: `ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT`
 >    - In *"Adapter Options"*
 >      - *"Maximum error rate"*: `0.15`
->    - In *"Output Options"*
->      -  *"Report"*: `Yes`
+>    - In *"Output Selector"*, select
+>      -  *"Report"*
 >
 > 2. Inspect the report files and check that the majority of the read have been trimmed
 {: .hands_on}
@@ -359,12 +364,12 @@ Now that we isolated the genomic sequences from the initial reads, we want to al
 
 To identify the location of each TA site to the count them, the first step is to map the reads on the reference genome. We use the **Bowtie**.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > We could also use **Bowtie2** with an end-to-end option, but **Bowtie** is more suitable for very short reads like ours (16-17 bp).
 {: .comment}
 
 
-> ### {% icon hands_on %} Hands-on: Map reads with Bowtie
+> <hands-on-title>Map reads with Bowtie</hands-on-title>
 >
 > 1. **Map with Bowtie for Illumina** {% icon tool %} with:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use one from the history`
@@ -374,35 +379,32 @@ To identify the location of each TA site to the count them, the first step is to
 >      - *"Bowtie settings to use"*: `Full parameters list`
 >      - *"Skip the first n reads (-s)"*: `0`
 >      - *"Maximum number of mismatches permitted in the seed (-n)"*: `0`
->
->            > ### {% icon question %} Questions
->            >
->            > Why are we strictly enforcing no mismatch mapping?
->            >
->            > > ### {% icon solution %} Solution
->            > > Our reads being very short, the smallest size needs precise mapping, allowing even one mismatch would risk having reads mapping in wrong positions.
->            > {: .solution }
->            {: .question}
->
 >      - *"Seed length (-l)"*: `17`
->      - *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* : `Try Hard`
 >      - *"Whether or not to make Bowtie guarantee that reported singleton alignments are 'best' in terms of stratum and in terms of the quality values at the mismatched positions (--best)"*: `Use best`
+>      - *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* : `Try Hard`
+>
+>    > <question-title></question-title>
+>    > Why are we strictly enforcing no mismatch mapping?
+>    > > <solution-title></solution-title>
+>    > > Our reads being very short, the smallest size needs precise mapping, allowing even one mismatch would risk having reads mapping in wrong positions.
+>    > {: .solution }
+>    {: .question}
 >
 > 2. Rename your collection for better clarity
 >
->    {% include snippets/rename_collection.md %}
+>    {% snippet faqs/galaxy/collections_rename.md %}
 >
 {: .hands_on}
 
 ## Compute coverage of the genome
 
-We have now our reads mapped on the reference genome. We can compute the genome coverage, i.e. how much the nucleotides of the genome are covered by reads. This information will be later crossed with our TA sites position.
+We have now our reads mapped on the reference genome. We can compute the genome coverage, *i.e.* how much the nucleotides of the genome are covered by reads. This information will be later crossed with our TA sites position.
 
 In our case, the sequenced reads cover the  5' region flanking region of the TA site where the transposon inserted. We should not then extract the coverage across the whole reads, as it could cover several TA sites, but only the coverage at the 3' end of the read:
 
 ![A read align to the genome with its 3' end covering half of the TA site](../../images/tnseq/Map_cov.png "Mapping read and TA site coverage")
 
-> ### {% icon hands_on %} Hands-on: Compute genome coverage
+> <hands-on-title>Compute genome coverage</hands-on-title>
 >
 > 1. **bamCoverage** {% icon tool %} with:
 >    - {% icon param-collection %} *"BAM/CRAM file"*: collection output of the last **Map with Bowtie for Illumina**
@@ -421,7 +423,7 @@ In order to get the coverage on each TA site we need to prepare a file containin
 
 As you can see on the [previous figure](#figure-4), the read can cover one side or the other of the TA depending on the direction of insertion of the transposon. Depending on the direction of insertion the coverage will be counted on the leftmost position of the TA site or on the rightmost. As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5' end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.
 
-> ### {% icon hands_on %} Hands-on: Get TA sites coordinates
+> <hands-on-title>Get TA sites coordinates</hands-on-title>
 >
 > 1. **Nucleotide subsequence search** {% icon tool %} with:
 >    - {% icon param-file %} *Nucleotide sequence to be searched"*: `staph_aur.fasta`
@@ -440,7 +442,7 @@ As you can see on the [previous figure](#figure-4), the read can cover one side 
 
 The only information we need here are the positions of the 5' end of each TA site for each strand.
 
-> ### {% icon hands_on %} Hands-on: Get forward and reverse strand positions
+> <hands-on-title>Get forward and reverse strand positions</hands-on-title>
 >
 >
 > 1. **Cut columns from a table** {% icon tool %} with:
@@ -450,7 +452,7 @@ The only information we need here are the positions of the 5' end of each TA sit
 >
 > 4. Add the `#forward` tag to the output
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 2. **Cut columns from a table** {% icon tool %} with:
 >    - Cut columns : `c1,c3`
@@ -459,7 +461,7 @@ The only information we need here are the positions of the 5' end of each TA sit
 >
 > 3. **Compute an expression on every row** {% icon tool %} to shift the end position of TA sites  by 1 and get the start of the TA site on the reverse strand with:
 >    - *Add expression"*: `c2-1`
->    - {% icon param-files %} *"as a new column to"*: output of **cut**
+>    - {% icon param-file %} *"as a new column to"*: output of **cut**
 >    - *"Round result?"*: `yes`
 >
 >
@@ -477,9 +479,9 @@ The only information we need here are the positions of the 5' end of each TA sit
 
 We have now 2 files containing the coordinates of our TA sites for both strands. We should cross them with the coverage files to get the coverage on both sides of each TA site.
 
-> ### {% icon hands_on %} Hands-on:  Get coverage of TA sites
+> <hands-on-title> Get coverage of TA sites</hands-on-title>
 >
-> 1. **Join two file** {% icon tool %} with:
+> 1. **Join two files** {% icon tool %} with:
 >    - {% icon param-collection %} *1st file"*: output of **bamCoverage**
 >    - *"Column to use from 1st file"*: `Column 2` (to select the position of the end of the read)
 >    - {% icon param-file %} *"2nd File"*: output of last **cut** with the `forward` tags
@@ -490,21 +492,21 @@ We have now 2 files containing the coordinates of our TA sites for both strands.
 >
 > 2. Add `#forward` tag to the output collections
 >
->    {% include snippets/add_tag_to_collection.md %}
+>    {% snippet faqs/galaxy/collections_add_tag.md %}
 >
 > 3. **Cut columns from a table** {% icon tool %} with:
 >    - Cut columns : `c1,c4`
 >    - *"Delimited by"*: `tab`
->    - {% icon param-file %} *"From"*: output of**Join two file** with the `forward` tag
+>    - {% icon param-file %} *"From"*: output of**Join two files** with the `forward` tag
 >
 >
 > 5. Repeat the same steps for `reverse`
 >
 {: .hands_on}
 
-We now have a read count for each nucleotide at the different TA sites. The insertions on the forward strand files are in a different direction than those on the reverse strand file. In our case, we are only interested in studying the gene disruption, and therefore we do not want to consider the directions separately. We can then combinte the forward and reverse counts together to get a total count per TA site. In order to do that we need to assign the count of both strand to the same nucleotide, by shifting by one position the count on the reverse strand.
+We now have a read count for each nucleotide at the different TA sites. The insertions on the forward strand files are in a different direction than those on the reverse strand file. In our case, we are only interested in studying the gene disruption, and therefore we do not want to consider the directions separately. We can then combine the forward and reverse counts together to get a total count per TA site. In order to do that we need to assign the count of both strand to the same nucleotide, by shifting by one position the count on the reverse strand.
 
-> ### {% icon hands_on %} Hands-on: Get total count per TA site
+> <hands-on-title>Get total count per TA site</hands-on-title>
 >
 > 1. **Compute an expression on every row** {% icon tool %} to shift the positions of reverse strand counts with:
 >    - *Add expression"*: `c1-1` (to shift the position by 1)
@@ -556,18 +558,18 @@ We now have a read count for each nucleotide at the different TA sites. The inse
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Take a look at the output files:
 >
-> 1. What are the data contained in the two columns ?
-> 2. What do the 5 first lines of the blunt sample in the treatment with the condition look like ?
+> 1. What are the data contained in the two columns?
+> 2. What do the 5 first lines of the blunt sample in the treatment with the condition look like?
 >
-> > ### {% icon solution %} Solution
-> > 1. The first column contain the position of the TA site, and the second collumn the number of insertions observed.
+> > <solution-title></solution-title>
+> > 1. The first column contain the position of the TA site, and the second column the number of insertions observed.
 > > 2. Your five first lines should look like this :
-> >     - One collumn with the positions : `4,10,16,42,79`
-> >     - One collumn with the number of insertions : `0,3,20,0,11`
+> >     - One column with the positions : `4,10,16,42,79`
+> >     - One column with the number of insertions : `0,3,20,0,11`
 > >
 > > If your counts are only zeros in one of the blunt sample, you might have made a mistake in merging the counts to the TA sites.
 > >
@@ -577,7 +579,7 @@ We now have a read count for each nucleotide at the different TA sites. The inse
 
 # Predicting Essential Genes with Transit
 
-Now that we have the counts of insertions per TA site, we can use them to predict gene esssentiality. Several methods exist to identify essential genes of regions. They can be divided in two major categories:
+Now that we have the counts of insertions per TA site, we can use them to predict gene essentiality. Several methods exist to identify essential genes of regions. They can be divided in two major categories:
 
 ![Different types of TnSeq Analyses](../../images/tnseq/type_of_analyses.png "Methods of TnSeq Analyses (from <a href='#Chao2016'> Chao <i>et al.</i> 2016</a>)")
 
@@ -592,7 +594,7 @@ Now that we have the counts of insertions per TA site, we can use them to predic
 To predict the essential genes in our datasets, we will use the Transit tool {% cite dejesus2015transit %}.
 
 ## Transit
-Transit is a software that can be used to analyse TnSeq Data. It is compatible with Mariner and Tn5 tranposon. In total, 3 methods are available to assess gene essentiality in one sample.
+Transit is a software that can be used to analyse TnSeq Data. It is compatible with Mariner and Tn5 transposon. In total, 3 methods are available to assess gene essentiality in one sample.
 
 #### Gumbel method
 
@@ -612,7 +614,7 @@ This method require a well-saturated library and is sensitive to sparse datasets
 
 #### Tn5Gaps method
 
-The Tn5Gaps method is a method dedicated to the identification of essential genes in studies using Tn5 transposons. The analysis is performed on the whole genome to identify regions of non insertion overlapping with genes. It is based on a Gumbel analysis method {% cite griffin2011high %} and adapted to Tn5 transposon specificities.  The main difference comes from the fact that Tn5 transposon can insert everywhere, thus
+The Tn5Gaps method is a method dedicated to the identification of essential genes in studies using Tn5 transposons. The analysis is performed on the whole genome to identify regions of non insertion overlapping with genes. It is based on a Gumbel analysis method {% cite griffin2011high %} and adapted to Tn5 transposon specificity. The main difference comes from the fact that Tn5 transposon can insert everywhere, thus
 creating libraries with lower insertion rates. The difference from the Gumbel method described above is that the run of non insertion are computer on the whole genome instead of individual genes. The longest run of non insertion considered is not the longest within the gene, but the longest one overlapping the gene.
 
 
@@ -623,14 +625,14 @@ In our case, we will use the Gumbel method, because we are using Mariner data an
 
 In order to use transit, we need to create a an annotation file in the `prot_table` format, specific to the Transit tool. It can be created this file from a GFF3 from GenBank like the one we uploaded earlier.
 
-> ### {% icon hands_on %} Hands-on : Create annotation file in prot_table format
-> 1. Check that the format of `staph_aur.gff` file is `gff3` and not `gff`
+> <hands-on-title>Hands-on : Create annotation file in prot_table format</hands-on-title>
+> 1. Check that the format of `staph_aur.gff3` file is `gff3` and not `gff`
 > 2. Change the datatype if needed
 >
->    {% include snippets/change_datatype.md %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="gff3" %}
 >
 > 3. **Convert GFF3 to prot_table for TRANSIT** {% icon tool %} with:
->    - {% icon param-file %} *GenBank GFF file"*: the `staph_aur.gf` file
+>    - {% icon param-file %} *GenBank GFF file"*: the `staph_aur.gff3` file
 >
 {: .hands_on}
 
@@ -640,15 +642,15 @@ Now that we have prepared the annotation file, we can use the count per TA site 
 - The number of sites with a single read could be artefactual. We ignore then counts lower than 2
 - A disrupted site that would be very close to the border of the gene may not actually disturb the gene function, and therefore not be an actual signal of disruption. We ignore then insertion near the extremities of the genes.
 
-> ### {% icon hands_on %} Hands-on: Predict gene essentiality with Transit
+> <hands-on-title>Predict gene essentiality with Transit</hands-on-title>
 >
 > 1. **Gumbel** {% icon tool %} with:
 >    - *"Operation mode"*: `Replicates`
 >      - {% icon param-collection %} *"Input .wig files"*: output of the latest **Sort**
 >    - {% icon param-file %} *"Input annotation"*: output of the latest **Convert**
 >    - *"Smallest read-count to consider"*: `2` (to ignore single count insertions)
->    - *"Ignore TAs occuring at given fraction of the N terminus."*: `0.1` (to ignore 10% of the insertion at the N-terminus extremity of the gene)
->    - *"Ignore TAs occuring at given fraction of the C terminus."*: `0.1` (to ignore 10% of the insertion at the C-terminus extremity of the gene)
+>    - *"Ignore TAs occurring at given fraction of the N terminus."*: `0.1` (to ignore 10% of the insertion at the N-terminus extremity of the gene)
+>    - *"Ignore TAs occurring at given fraction of the C terminus."*: `0.1` (to ignore 10% of the insertion at the C-terminus extremity of the gene)
 >
 {: .hands_on}
 
@@ -667,13 +669,13 @@ The output of Transit is a tabulated file containing the following columns:
   - NE=Non-Essential
   - S=too short
 
-> ### {% icon comment %} More details about Transit
+> <comment-title>More details about Transit</comment-title>
 > You can find more information on [Transit manual page](https://transit.readthedocs.io/en/latest/transit_methods.html)
 {: .comment}
 
 We can obtain the list of genes predicted as essential by filtering on the essentiality call.
 
-> ### {% icon hands_on %} Hands-on : Get table of essential genes
+> <hands-on-title>Hands-on : Get table of essential genes</hands-on-title>
 >
 > 1. **Filter data on any column using simple expressions** {% icon tool %} with:
 >    - {% icon param-collection %} *"Filter"*: output of the last **Gumbel**
@@ -682,11 +684,11 @@ We can obtain the list of genes predicted as essential by filtering on the essen
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How many genes are essential in each conditions?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 359 genes are essential in control, and 381 in condition.
 > {: .solution }
@@ -698,26 +700,26 @@ We can obtain the list of genes predicted as essential by filtering on the essen
 
 Now let's compare the results between out two conditions.
 
-> ### {% icon hands_on %} Hands-on: Separate Files from the collection
+> <hands-on-title>Separate Files from the collection</hands-on-title>
 >
 > 1. **Extract Dataset from a list** {% icon tool %} to extract 1st file in the collection with:
 >    - {% icon param-collection %} *Input List"*: output of the last **Filter**
 >    - *How should a dataset be selected?"*: `Select by index`
 >      - *Element index:"*: `0` to select the first dataset
 >
-> 2. Add the `#control` tag
+> 2. Add the `#condition` tag
 >
 > 3. **Extract Dataset from a list** {% icon tool %} to extract 2nd file in the collection with:
 >    - {% icon param-collection %} *Input List"*: output of the last **Filter**
 >    - *How should a dataset be selected?"*: `Select by index`
 >      - *Element index:"*: `1` to select the second dataset
 >
-> 4. Add the `#condition` tag
+> 4. Add the `#control` tag
 {: .hands_on}
 
 We would like now to get the list of essential gene in both conditions
 
-> ### {% icon hands_on %} Hands-on: Get gene essential in both conditions
+> <hands-on-title>Get gene essential in both conditions</hands-on-title>
 >
 > 1. **Join two files** {% icon tool %} with:
 >    - {% icon param-file %} *1st file"*: output of **Extract Dataset** with `control` tag
@@ -731,7 +733,7 @@ We would like now to get the list of essential gene in both conditions
 
 Let's now get the list of essential gene that are different between the two conditions.
 
-> ### {% icon hands_on %} Hands-on: Get gene essential only in control
+> <hands-on-title>Get gene essential only in control</hands-on-title>
 >
 > 1. **Join two files** {% icon tool %} with:
 >    - {% icon param-file %} *1st file"*: output of **Extract Dataset** with `control` tag
@@ -743,7 +745,7 @@ Let's now get the list of essential gene that are different between the two cond
 
 
 
-> ### {% icon hands_on %} Hands-on : Get gene essential only in condition
+> <hands-on-title>Hands-on : Get gene essential only in condition</hands-on-title>
 >
 >  1. **Join two files** {% icon tool %} with:
 >   - *1st file"*: output of **Extract Dataset** with `control` tag
@@ -754,14 +756,14 @@ Let's now get the list of essential gene that are different between the two cond
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many genes are essential in both conditions?
 > 2. How many genes are essential only in control?
 > 3. How many genes are essential only in condition?
 >
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 320 genes are essential in both conditions.
 > > 2. 39 genes are essential only in control.
@@ -771,7 +773,7 @@ Let's now get the list of essential gene that are different between the two cond
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 In this tutorial, we learned how to predict essential genes in different conditions. Although it seems to be a long process, keep in mind that the steps allowing to get the list of TA site does not need to be repeated for each analysis as long as you study the same genome.
 For repetitive analyses, the steps are fewer : mapping, coverage, attribution to TA sites, merging of strands and Transit analysis.
 
@@ -779,9 +781,9 @@ This tutorial focused on simple gene essentiality prediction in individual sampl
 
 Once you get this list of gene, it is interesting to verify manually the genes classified as essentials. In order to do that, you can visualize the read mapped on your genome by displaying the bam files in IGV.
 
->    {% include snippets/add_genome_to_IGV.md %}
+{% snippet topics/visualisation/faqs/visualizations_igv_add_genome.md %}
 
->    {% include snippets/view_mapping_in_IGV.md %}
+{% snippet topics/visualisation/faqs/visualizations_igv_view_mapping.md %}
 
 When looking at the read mapping at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all mapping to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of reads, possibly indicating a growth defect induced by the gene disruption.
 

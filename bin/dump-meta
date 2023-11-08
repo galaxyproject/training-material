@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# rubocop:disable Security/MarshalLoad
+require 'json'
+puts JSON.pretty_generate(Marshal.load(File.binread('.jekyll-metadata')))
+# rubocop:enable Security/MarshalLoad

@@ -1,0 +1,25 @@
+@startuml
+
+!include plantuml_options.txt
+
+participant Controller
+participant Service
+participant Manager
+
+note over Controller, Manager: Galaxy Backend
+
+activate Controller
+Controller -> Service: pydantic
+activate Service
+Service -> Manager: pydantic
+activate Manager
+
+note right of Manager: Vanilla Python function calls.\nUse application components\nto perform "business logic"
+
+Manager --> Service: pydantic
+deactivate Manager
+
+Service --> Controller: pydantic
+deactivate Service
+deactivate Controller
+@enduml

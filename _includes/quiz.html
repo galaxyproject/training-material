@@ -1,0 +1,15 @@
+{% assign own_material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
+{% for q in own_material.quiz %}
+{% if q.id == include.id %}
+	{% assign quiz = q %}
+{% endif %}
+{% endfor %}
+
+<div markdown="1">
+> <div class="box-title" aria-label="quiz box: {{ quiz.title | replace: '"', '&quot;' }}"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Quiz: {{ quiz.title }}</div>
+> Check your knowledge with a quiz!
+>
+>  - [Self Study Mode]({% link quiz/quiz.html %}?mode=self&quiz={{ site.baseurl }}/{{ quiz.path }}) - do the quiz at your own pace, to check your understanding.
+>  - [Classroom Mode]({% link quiz/quiz.html %}?mode=teacher&quiz={{ site.baseurl }}/{{ quiz.path }}) - do the quiz synchronously with a classroom of students.
+{: .question}
+</div>

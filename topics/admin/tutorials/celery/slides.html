@@ -1,0 +1,185 @@
+---
+layout: tutorial_slides
+logo: assets/images/gat.png
+
+title: "Galaxy and Celery"
+contributions:
+  authorship:
+  - mira-miracoli
+  editing:
+  - hexylena
+subtopic: jobs
+
+---
+
+## Can you eat it?
+
+.pull-left[
+Celery is an asynchronous distributed task queue.
+
+It consists of:
+
+- Your Application that sends tasks
+- To a broker with queues
+- Celery workers that execute the tasks
+- A result backend to store the task results
+
+It's written in Python, multiple other languages are supported.
+]
+
+.pull-right[
+	![celery logo, a cartoon of a piece of celery](images/celery.png)
+]
+
+---
+
+## So many features
+
+.pull-left[
+- Different worker/process [pool options](https://distributedpython.com/posts/celery-execution-pools-what-is-it-all-about/), depending on your needs – I/O or CPU bound
+- CeleryBeat a scheduler for repeated tasks
+- Flower, a monitoring interface for
+	- Showing tasks, queues and workers
+	- Prometheus + Grafana integration
+]
+
+.pull-right[
+	![celery logo, a cartoon of a piece of celery, now with the text celery next to it](images/celery-logo.png)
+]
+
+---
+
+# How does Celery improve Galaxy?
+
+
+---
+
+**The Problem**
+
+The Galaxy Server should respond quickly to every request.  
+While this is easily possible for small instances with few users,  
+when scaling to thousands of users and millions of jobs,  
+without Celery, Gunicorn and the job handlers spend much of their time on I/O bound side tasks,  
+for example packing a zip for history export.  
+  
+This leads to slow responses and scheduling.
+
+---
+.pull-left[
+**The Solution**
+
+Queue asynchronous tasks with Celery  
+on a different node or even a whole cluster...
+
+]
+
+.pull-right[
+	![galaxy logo next to celery logo, with two purple hearts](images/galaxy+celery.png)
+]
+
+---
+
+![A workflow diagram is shown with logos and arrows. Galaxy on the left sends tasks to rabbit MQ. Celery fetches tasks from Rabbit MQ and proceses them. Then celery sends results to the backend database. Finally Galaxy fetches those same results back from the backend.](images/workflow.png)
+
+---
+
+## How does the magic work?
+
+ - Celery loads the Galaxy code from NFS when you start the workers
+ - Workers connect to the broker and fetch tasks from the queue
+ - Since all the python modules are already loaded, it can execute the task directly, with almost no delay
+ - Now it runs the code according to the task, for example a SQL update, or a file deletion on the NFS
+ - Results are either sent directly back to the broker or stored e.g. in a Redis DB
+
+---
+
+## What is Celery used for
+
+- Processing upload jobs
+- Processing metadata
+- Recalculating disk usage
+- Purging datasets
+- Changing datatypes
+- Preparing compressed downloads (histories, etc.)
+- Creating PDFs for Galaxy workflow reports
+- Cleaning up short term storage
+- Preparing history exports
+. . .
+
+---
+
+.pull-left[
+## What do you need to enable Celery?
+
+- A properly set up broker, for example with [UseGalaxy.eu RabbitMQ Ansible Role](https://github.com/usegalaxy-eu/ansible-rabbitmq)
+- A result backend, e.g. a Redis server, for example with [geerlingguy's Ansible Role](https://github.com/geerlingguy/ansible-role-redis)
+- A shared filesystem (e.g. NFS) to which you export Galaxy's root dir and which is mounted on the Celery nodes
+- Optional: Flower, the Celery UI, for example with [UseGalaxy.eu Flower Ansible Role](https://github.com/usegalaxy-eu/flower-ansible-role) 
+]
+
+.pull-right[
+![Collection of three logos, Galaxy, RabbitMQ, and celery](images/logos.png)
+]
+
+
+---
+
+.pull-left[
+![](images/celery.png)
+]
+
+.pull-right[
+
+## Where to get Celery?
+
+- It is in your Galaxy virtual environment (`venv`) already!
+- Mount the Galaxy root with `venv` and config dirs on your Celery node
+- Create an Ansible Playbook e.g. with [UseGalaxy.eu's Systemd Role](https://github.com/usegalaxy-eu/ansible-galaxy-systemd)
+- For inspiration, you can check out GalaxyEU's vars [file](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/group_vars/celerycluster.yml)
+]
+
+---
+.pull-left[
+	![screenshot of galaxy documentation page, linked in next section](images/docs.png)
+]
+.pull-right[
+## How to set the Galaxy Config
+- [Configuration in `galaxy.yml` file](https://docs.galaxyproject.org/en/latest/admin/options.html#amqp-internal-connection)
+- Documentation still WIP
+- To connect to your broker, `celery_broker` can be set. Defaults to `amqp_internal_connection` otherwise
+- `celery_conf` takes basically all [documented options](https://docs.celeryq.dev/en/stable/getting-started/first-steps-with-celery.html)
+- Set your [`result_backend`](https://docs.celeryq.dev/en/stable/getting-started/first-steps-with-celery.html#keeping-results) / Redis connection here
+- Celery, Flower and RabbitMQ are all well documented
+]
+
+---
+
+.pull-top[
+## How to monitor Celery
+In the Flower dashboard you can monitor your workers live.  
+The screenshot below shows all registered workers and their status.
+]
+
+.pull-bottom[
+	![screenshot of the flower dashboard showing a bunch of workers](images/flower-screenshot.png)
+]
+
+---
+
+.pull-top[
+## How to monitor Celery Tasks
+In the 'Tasks' tab, you can click on each individual task and see all its details, like    
+args, timestamp, worker, result and stack trace if it errored.
+]
+
+.pull-bottom[
+	![screenshot of a simple flower task](images/flower-screenshot-task.png)
+]
+
+---
+
+## Take Home Message
+ - Celery is a nice way to load off computation from your head-node
+ - On the other hand you have to maintain a broker and monitor your Celery node/cluster
+ - If you have strong load fluctuations, you might need to find a way to scale your Celery cluster flexibly
+ - Not necessarily needed for smaller instances, but can be considered, if your head node has too high load or I/O

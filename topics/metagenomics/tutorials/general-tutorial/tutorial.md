@@ -24,18 +24,18 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
 - Amplicon sequencing, which sequences only the rRNA or ribosomal DNA of organisms
 - Shotgun sequencing, which sequences full genomes of the micro-organisms in the environment
 
-In this tutorial, we will introduce the two mian types of analyses with their general principles and differences. For a more in-depth look at these analyses, we recommend our detailed tutorials on each analysis.
+In this tutorial, we will introduce the two main types of analyses with their general principles and differences. For a more in-depth look at these analyses, we recommend our detailed tutorials on each analysis.
 
-We will use two datasets (one amplicon and one shotgun) from the same [project on the Argentinean agricultural pampean soils](https://www.ebi.ac.uk/metagenomics/projects/SRP016633). In this project, three different geographic regions that are under different types of land uses and two soil types (bulk and rhizospheric) were analyzed using shotgun and amplicon sequencing. We will focus on data from the Argentina Anguil and Pampas Bulk Soil (the original study included one more geographical regions, [see](https://doi.org/10.1186/2049-2618-1-21)).
+We will use two datasets (one amplicon and one shotgun) from the same [project on the Argentinean agricultural pampean soils](https://www.ebi.ac.uk/metagenomics/projects/SRP016633). In this project, three different geographic regions that are under different types of land uses and two soil types (bulk and rhizospheric) were analyzed using shotgun and amplicon sequencing. We will focus on data from the Argentina Anguil and Pampas Bulk Soil (the original study included one more geographical regions {% cite Rascovan2013 %}.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -50,7 +50,7 @@ Amplicon sequencing is a highly targeted approach for analyzing genetic variatio
 In the metagenomics fields, amplicon sequencing refers to capture and sequence of rRNA data in a sample.
 It can be 16S for bacteria or archea or 18S for eukaryotes.
 
-> ### {% icon comment %} Background: The 16S ribosomal RNA gene
+> <comment-title>Background: The 16S ribosomal RNA gene</comment-title>
 > ![The 16S ribosomal RNA gene](../../images/16S_gene.png "The 16S ribosomal RNA gene. Credit: https://www.slideshare.net/beiko/ccbc-tutorial-beiko")
 >
 > The 16S rRNA gene has several properties that make it ideally suited to our purposes
@@ -80,9 +80,9 @@ has been sequenced using 454 GS FLX Titanium. For the tutorial, the original fas
 - Anguil soil: [SRR651839](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS386929/runs/SRR651839/results/versions/2.0)
 
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
-> 1. Import from [Zenodo](https://zenodo.org/record/815875) or from the data library (in "Analyses of metagenomics data") the files
+> 1. Import the following files from [Zenodo](https://zenodo.org/record/815875), or from the shared data library (in `GTN - Material -> {{ page.topic_name }} -> {{ page.title }}`):
 >    - `SRR531818_pampa.fasta`
 >    - `SRR651839_anguil.fasta`
 >
@@ -91,7 +91,7 @@ has been sequenced using 454 GS FLX Titanium. For the tutorial, the original fas
 >    https://zenodo.org/record/815875/files/SRR651839_anguil.fasta
 >    ```
 >
->    > ### {% icon tip %} Tip: Importing data via links
+>    > <tip-title>Importing data via links</tip-title>
 >    >
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
@@ -100,7 +100,7 @@ has been sequenced using 454 GS FLX Titanium. For the tutorial, the original fas
 >    > * Press **Start**
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Importing data from a data library
+>    > <tip-title>Importing data from a data library</tip-title>
 >    >
 >    > * Go into "Shared data" (top panel) then "Data libraries"
 >    > * Click on "Training data" and then "Analyses of metagenomics data"
@@ -128,7 +128,7 @@ Project's QC results: https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samp
 We will perform a multisample analysis with mothur. To do this, we will merge all reads into a single file,
 and create a *group file*, indicating which reads belong to which samples.
 
-> ### {% icon hands_on %} Hands-on: Prepare multisample analysis
+> <hands-on-title>Prepare multisample analysis</hands-on-title>
 >
 > 1. **Merge.files** {% icon tool %} with the following parameters
 >   - "Merge" to `fasta files`
@@ -146,9 +146,9 @@ and create a *group file*, indicating which reads belong to which samples.
 >
 {: .hands_on}
 
-> ### {% icon comment %} Note
+> <comment-title>Note</comment-title>
 >
-> Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples this would quickly become bothersome. The solution? use a collection! To read more about collections in Galaxy, please see [this]() tutorial
+> Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples this would quickly become bothersome. The solution? use a collection! To read more about collections in Galaxy, please see [dedicated collections tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
 {: .comment}
 
 Have a look at the group file. It is a very simple file, it contains two columns: the first contains the read names, the second contains the group (sample) name, in our case `pampa` or `anguil`.
@@ -160,17 +160,17 @@ Because we are sequencing many of the same organisms, we anticipate that many of
 duplicates of each other. Because it's computationally wasteful to align the same thing a bazillion
 times, we'll unique our sequences using the `Unique.seqs` command:
 
-> ### {% icon hands_on %} Hands-on: Remove duplicate sequences
+> <hands-on-title>Remove duplicate sequences</hands-on-title>
 >
 > 1. **Unique.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the merged fasta file
 >   - "output format" to `Name File`
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > How many sequences were unique? How many duplicates were removed?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 19,502 unique sequences and 498 duplicates.
 >    > >
 >    > > This can be determined from the number of lines in the fasta (or names) output, compared to the
@@ -191,7 +191,7 @@ read_name7    read_name8
 ...
 ```
 
-> ### {% icon hands_on %} Hands-on: Count sequences
+> <hands-on-title>Count sequences</hands-on-title>
 >
 > 1. **Count.seqs** {% icon tool %} with the following parameters
 >   - "name" to the name file from `Unique.seqs`
@@ -206,15 +206,15 @@ The `Count.seqs` file keeps track of the number of sequences represented by each
 The first step in any analysis should be to check and improve the quality of our data.
 
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
-> For more information on the topic of quality control, please see our training materials [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %}).
+> For more information on the topic of quality control, please see our [dedicated training materials]({% link topics/sequence-analysis/index.md %}).
 {: .comment}
 
 
 First, let's get a feel for our data:
 
-> ### {% icon hands_on %} Hands-on: Summarize data
+> <hands-on-title>Summarize data</hands-on-title>
 >
 > 1. **Summary.seqs** {% icon tool %} with the following parameters
 >   - "fasta" parameter to the fasta from `Unique.seqs`
@@ -249,7 +249,7 @@ We can filter our dataset on length, base quality, and maximum homopolymer lengt
 
 The following tool will remove any sequences with ambiguous bases (`maxambig` parameter), homopolymer stretches of 9 or more bases (`maxhomop` parameter) and any reads longer than 275 bp or shorter than 225 bp.
 
-> ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
+> <hands-on-title>Filter reads based on quality and length</hands-on-title>
 >
 > 1. **Screen.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta file from `Unique.seqs`
@@ -261,11 +261,11 @@ The following tool will remove any sequences with ambiguous bases (`maxambig` pa
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How many reads were removed in this screening step? (Hint: run the `Summary.seqs` tool again)
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1,804.
 > >
 > > This can be determined by looking at the number of lines in bad.accnos output of screen.seqs step or by comparing the total number of seqs between of the summary.seqs log before and after this screening step
@@ -276,7 +276,7 @@ The following tool will remove any sequences with ambiguous bases (`maxambig` pa
 
 Aligning our sequences to a reference helps improve OTU assignment [[Schloss et. al.](https://www.ncbi.nlm.nih.gov/pubmed/23018771)], so we will now align our sequences to an alignment of the V4 variable region of the 16S rRNA. This alignment has been created as described in [[mothur's MiSeq SOP](https://mothur.org/wiki/MiSeq_SOP)] from the Silva reference database.
 
-> ### {% icon hands_on %} Hands-on: Align sequences
+> <hands-on-title>Align sequences</hands-on-title>
 >
 > 1. Import the `silva.v4.fasta` file in your history
 >
@@ -314,12 +314,12 @@ Mean:   3080.6  13380   244.212 0   4.27946
 total # of seqs:    18178
 ```
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many sequences have been aligned?
 > 2. Between which positions most of the reads are aligned to this references?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. 17,698 are aligned
 > > 2. From this we can see that most of our reads align nicely to positions `3080-13424` on this reference. This corresponds exactly to the V4 target region of the 16S gene.
 > {: .solution }
@@ -327,7 +327,7 @@ total # of seqs:    18178
 
 To make sure that everything overlaps the same region we'll re-run `Screen.seqs` to get sequences that start at or before position 3,080 and end at or after position 13,424.
 
-> ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
+> <hands-on-title>Remove poorly aligned sequences</hands-on-title>
 >
 > 1. **Screen.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the aligned fasta file
@@ -337,16 +337,16 @@ To make sure that everything overlaps the same region we'll re-run `Screen.seqs`
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > How many sequences were removed in this step?
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 4,579 sequences were removed. This is the number of lines in the bad.accnos output.
 > {: .solution }
 {: .question}
 
 Now we know our sequences overlap the same alignment coordinates, we want to make sure they *only* overlap that region. So we'll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain external gap characters (*i.e.* "."), while columns containing only internal gap characters (*i.e.*, "-") are not considered. These can be pulled out without losing any information. We'll do all this with `Filter.seqs`:
 
-> ### {% icon hands_on %} Hands-on: Filter sequences
+> <hands-on-title>Filter sequences</hands-on-title>
 >
 > 1. **Filter.seqs** {% icon tool %} with the following parameters
 >   - "fasta"" to `good.fasta` output from `Screen.seqs`
@@ -360,7 +360,7 @@ The main questions when analyzing amplicon data are: Which micro-organisms are p
 
 The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on their similarity to defined Operational Taxonomic Units (OTUs): groups of similar sequences that can be treated as a single "genus" or "species" (depending on the clustering threshold)
 
-> ### {% icon comment %} Background: Operational Taxonomic Units (OTUs)
+> <comment-title>Background: Operational Taxonomic Units (OTUs)</comment-title>
 >
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene sequence. Each of these clusters is intended to represent a taxonomic unit of a bacterial species or genus depending on the sequence similarity threshold. Typically, OTU clusters are defined by a 97% identity threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species separation.
 >
@@ -372,17 +372,17 @@ The idea is to take the sequences and assign them to a taxon. To do that, we gro
 
 The first thing we want to do is to further de-noise our sequences from potential sequencing errors, by pre-clustering the sequences using the `Pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance, then go from most abundant to least and identify sequences that differ by no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:
 
-> ### {% icon hands_on %} Hands-on: Perform preliminary clustering of sequences and remove undesired sequences
+> <hands-on-title>Perform preliminary clustering of sequences and remove undesired sequences</hands-on-title>
 >
 > 1. **Pre.cluster** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta output from the last `Filter.seqs` run
 >   - "name file or count table" to the count table from the last `Screen.seqs` step
 >   - "diffs" to 2
 >
->   > ### {% icon question %} Question
+>   > <question-title></question-title>
 >   >
 >   >  How many unique sequences are we left with after this clustering of highly similar sequences?
->   > > ### {% icon solution %} Solution
+>   > > <solution-title></solution-title>
 >   > > 10,398
 >   > >
 >   > > This is the number of lines in the fasta output
@@ -394,7 +394,7 @@ The first thing we want to do is to further de-noise our sequences from potentia
 <!-- optional additional QC: chimera.uchime -->
 We would like to classify the sequences using a training set, which is again is provided on [[mothur's MiSeq SOP](https://mothur.org/wiki/MiSeq_SOP)].
 
-> ### {% icon hands_on %} Hands-on: Classify the sequences into phylotypes
+> <hands-on-title>Classify the sequences into phylotypes</hands-on-title>
 >
 > 1. Import the `trainset16_022016.pds.fasta` and `trainset16_022016.pds.tax` in your history
 >
@@ -438,7 +438,7 @@ The next step is to use this information to determine the abundances of the diff
 2. next, sequences are grouped at 97% identity threshold (not using taxonomy info)
 3. finally, for each cluster, a consensus classification is determined based on the classification of the individual sequences and taking their confidence scores into account
 
-> ### {% icon hands_on %} Hands-on: Assign sequences to OTUs
+> <hands-on-title>Assign sequences to OTUs</hands-on-title>
 >
 > 1. **Cluster.split** {% icon tool %} with the following parameters
 >   - "Split by" to `Classification using fasta`
@@ -454,7 +454,7 @@ We obtain a table with the columns being the different identified OTUs, the rows
 
 Next we want to know how many sequences are in each OTU from each group with a distance of 0.03 (97% similarity). We can do this using the `Make.shared` command with the 0.03 cutoff level:
 
-> ### {% icon hands_on %} Hands-on: Estimate OTU abundance
+> <hands-on-title>Estimate OTU abundance</hands-on-title>
 >
 > 2. **Make.shared** {% icon tool %} with the following parameters
 >   - "Select input type" to `OTU list`
@@ -466,7 +466,7 @@ Next we want to know how many sequences are in each OTU from each group with a d
 
 We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each OTU using the `Classify.otu` command:
 
-> ### {% icon hands_on %} Hands-on: Classify the OTUs
+> <hands-on-title>Classify the OTUs</hands-on-title>
 >
 > 3. **Classify.otu** {% icon tool %} with the following parameters
 >   - "list" to output from `Cluster.split`
@@ -476,12 +476,12 @@ We probably also want to know the taxonomy for each of our OTUs. We can get the 
 >   - "label" to `0.03`
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many OTUs with taxonomic assignation are found for the Anguil sample? And for the Pampa sample?
 > 2. What is the annotation of first OTU and its size?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. 2,195 for Anguil and 2,472 for Pampa ("tax.summary")
 > > 2. Otu00001 is associated to 929 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file
 > {: .solution }
@@ -492,7 +492,7 @@ We probably also want to know the taxonomy for each of our OTUs. We can get the 
 We have now determined our OTUs and classified them, but looking at a long text file is not very informative.
 Let's visualize our data using Krona:
 
-> ### {% icon hands_on %} Hands-on: Krona
+> <hands-on-title>Krona</hands-on-title>
 >
 >  First we convert our mothur taxonomy file to a format compatible with Krona
 >
@@ -512,7 +512,7 @@ on one of the rings in the image or playing around with some of the settings.
 This produced a single plot for both your samples, but what if you want to compare
 the two samples?
 
-> ### {% icon hands_on %} Hands-on: Per-sample Krona plots
+> <hands-on-title>Per-sample Krona plots</hands-on-title>
 >
 > 1. **Classify.otu** {% icon tool %}
 >
@@ -526,9 +526,9 @@ the two samples?
 
 In this new Krona output you can switch between the combined plot and the per-sample plots via the selector in the top-left corner.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > Which soil sample had a higher percentage of Acidobacteria, anguil or pampa? what were the respective percentages?
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The anguil sample had a higher proportion of Acidobacteria. The exact percentages can be found by looking at the pie charts at the
 > > top right-hand corner after clicking on the label Acidobacteria. For anguil the percentage is 36%, for the pampa sample it is 26%.
 > >
@@ -539,14 +539,14 @@ In this new Krona output you can switch between the combined plot and the per-sa
 
 To further explore the community structure, we can visualize it with dedicated tools such as Phinch.
 
-> ### {% icon hands_on %} Hands-on: Visualization of the community structure with Phinch
+> <hands-on-title>Visualization of the community structure with Phinch</hands-on-title>
 >
 > 1. **Make.biom** {% icon tool %} with the following parameters
 >   - "shared" to `Make.shared` output
 >   - "constaxonomy" to taxonomy output from the first run of `Classify.otu` (collection)
 > 1. Expand the dataset and click on the "view biom at phinch" link
 >
->     > ### {% icon comment %} Comment
+>     > <comment-title></comment-title>
 >     >
 >     > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
 >    {: .comment}
@@ -569,7 +569,7 @@ In this second part, we will use a metagenomic sample of the Pampas Soil ([SRR60
 
 ## Data upload
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history
 > 2. Import the `SRR606451_pampa` Fasta file from [Zenodo](http://zenodo.org/record/815875) or from the data library (in "Analyses of metagenomics data")
@@ -592,7 +592,7 @@ As for amplicon data, we can extract taxonomic and community structure informati
 
 In this tutorial, we use the second approach with MetaPhlAn2. This tools is using a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
 
-> ### {% icon hands_on %} Hands-on: Taxonomic assignation with MetaPhlAn2
+> <hands-on-title>Taxonomic assignation with MetaPhlAn2</hands-on-title>
 >
 > 1. **MetaPhlAN2** {% icon tool %} with
 >    - "Input file" to the imported file
@@ -624,13 +624,13 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 
 - A SAM file with the results of the mapping of the sequences on the reference database
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the most precise level we have access to with MetaPhlAn2?
 > 2. What are the two orders found in our sample?
 > 3. What is the most abundant family in our sample?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. We have access to species level
 > > 2. Pseudomonadales and Solirubrobacterales are found in our sample
 > > 3. The most abundant family is Pseudomonadaceae with 86.21 % of the assigned sequences
@@ -639,7 +639,7 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 
 Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we want to visualize and explore the community structure with KRONA
 
-> ### {% icon hands_on %} Hands-on: Interactive visualization with KRONA
+> <hands-on-title>Interactive visualization with KRONA</hands-on-title>
 >
 > 1. **Format MetaPhlAn2 output for Krona** {% icon tool %} with
 >    - "Input file" to `Community profile` output of `MetaPhlAn2`
@@ -656,7 +656,7 @@ We would now like to answer the question "What are the micro-organisms doing?" o
 
 In the shotgun data, we have access to the gene sequences from the full genome. We use that to identify the genes, associate them with a function, build pathways, etc., to investigate the functional part of the community.
 
-> ### {% icon hands_on %} Hands-on: Metabolism function identification
+> <hands-on-title>Metabolism function identification</hands-on-title>
 >
 > 1. **HUMAnN2** {% icon tool %} with
 >    - "Input sequence file" to the imported sequence file
@@ -696,30 +696,30 @@ HUMAnN2 generates 3 files
 
 - A file with the abundance of pathways
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How many gene families and pathways have been identified?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 44 gene families but no pathways are identified
 > {: .solution }
 {: .question}
 
 The RPK for the gene families are quite difficult to interpret in term of relative abundance. We decide then to normalize the values
 
-> ### {% icon hands_on %} Hands-on: Normalize the gene family abundances
+> <hands-on-title>Normalize the gene family abundances</hands-on-title>
 >
 > 1. **Renormalize a HUMAnN2 generated table** {% icon tool %} with
 >    - "Gene/pathway table" to the gene family table generated with `HUMAnN2`
 >    - "Normalization scheme" to `Relative abundance`
 >    - "Normalization level" to `Normalization of all levels by community total`
 >
->  > ### {% icon question %} Questions
+>  > <question-title></question-title>
 >  >
 >  > 1. What percentage of sequences has not be assigned to a gene family?
 >  > 2. What is the most abundant gene family?
 >  >
->  > > ### {% icon solution %} Solution
+>  > > <solution-title></solution-title>
 >  > > 1. 55% of the sequences have not be assigned to a gene family
 >  > > 2. The most abundant gene family with 25% of sequences is a putative secreted protein
 >  > {: .solution }
@@ -729,7 +729,7 @@ The RPK for the gene families are quite difficult to interpret in term of relati
 With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are performed by the micro-organisms in my sample?". We can go further in these analyses (for example, with a combination of functional and taxonomic results). We did not detail that in this tutorial but you can find more analyses in our tutorials on shotgun metagenomic data analyses.
 
 # Conclusion
-{:.no_toc}
+
 
 We can summarize the analyses with amplicon and shotgun metagenomic data:
 

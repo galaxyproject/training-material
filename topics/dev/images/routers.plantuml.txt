@@ -1,0 +1,14 @@
+@startuml
+
+!include plantuml_options.txt
+
+class starlette.routing.Router
+class fastapi.APIRouter
+class fastapi_utils.inferring_router.InferringRouter
+class galaxy.webapps.galaxy.api.Router
+
+starlette.routing.Router <|-- fastapi.APIRouter
+fastapi.APIRouter <|-- fastapi_utils.inferring_router.InferringRouter
+fastapi_utils.inferring_router.InferringRouter <|-- galaxy.webapps.galaxy.api.Router
+
+@enduml

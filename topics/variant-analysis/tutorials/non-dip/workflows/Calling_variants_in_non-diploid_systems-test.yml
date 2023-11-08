@@ -1,0 +1,26 @@
+---
+- doc: Test sample data for the workflow
+  job:
+    raw_child-ds-1.fq:
+      class: File
+      location: https://zenodo.org/record/1251112/files/raw_child-ds-1.fq
+      filetype: fastqsanger
+    raw_child-ds-2.fq:
+      class: File
+      location: https://zenodo.org/record/1251112/files/raw_child-ds-2.fq
+      filetype: fastqsanger
+    raw_mother-ds-1.fq:
+      class: File
+      location: https://zenodo.org/record/1251112/files/raw_mother-ds-1.fq
+      filetype: fastqsanger
+    raw_mother-ds-2.fq:
+      class: File
+      location: https://zenodo.org/record/1251112/files/raw_mother-ds-2.fq
+      filetype: fastqsanger
+  outputs:
+    cut_variants:
+      asserts:
+        has_text:
+          text: '694'
+        has_text:
+          text: '671'

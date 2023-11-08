@@ -1,0 +1,48 @@
+@startuml
+
+!include plantuml_options.txt
+participant Browser
+participant "WSGI Server"
+participant Middleware
+participant WebApplication
+participant Controller
+participant Manager
+
+note over WebApplication, Manager: Galaxy Backend
+
+Browser -> "WSGI Server": TCP/IP Request
+activate "WSGI Server"
+note left of Browser: Static content\nCSS, JS, Image
+"WSGI Server" --> Browser
+deactivate "WSGI Server"
+
+Browser -> "WSGI Server": TCP/IP Request
+activate "WSGI Server"
+"WSGI Server" -> Middleware: wsgi environ
+activate Middleware
+Middleware -> WebApplication: wsgi environ
+activate WebApplication
+WebApplication -> Controller: trans, payload
+activate Controller
+Controller -> Manager:
+activate Manager
+
+note left of Browser: API Request
+note right of Manager: Vanilla Python function calls.\nUse application components\nto perform "business logic"
+
+Manager --> Controller: Python objects
+deactivate Manager
+
+Controller --> WebApplication: JSON
+deactivate Controller
+
+WebApplication --> Middleware:
+deactivate WebApplication
+
+Middleware --> "WSGI Server": Stream of bytes
+deactivate Middleware
+
+"WSGI Server" --> Browser
+deactivate "WSGI Server"
+
+@enduml

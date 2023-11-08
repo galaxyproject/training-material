@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Peptide and Protein Quantification via Stable Isotope Labelling (SIL)"
 zenodo_link: "https://zenodo.org/record/1051552"
-level: Intermediate
+level: Advanced
 questions:
   - "What are MS1 features?"
   - "How to quantify based on MS1 features?"
@@ -29,10 +29,12 @@ contributors:
   - stortebecker
   - bgruening
   - matthias313
+subtopic: id-quant
+tags: [DDA, SILAC]
 ---
 
 # Introduction
-{:.no_toc}
+
 
 To compare protein amounts in different samples from MS/MS data, two different experiment setups exist. Firstly, unmodified proteins can be measured in separate runs at one sample per MS-run. Secondly, proteins of samples to compare can be labelled with small chemical tags, mixed, and measured side-by-side in a single MS-run.
 There are two types of chemical tags:
@@ -47,22 +49,22 @@ In this tutorial, we will use tools of the [OpenMS suite](http://www.openms.org)
 ![ms1 feature](../../images/protein-quant-sil_ms1feature.png "MS1 mass traces. A) Two peptide features of co-eluting SIL peptides. B) MS1 spectra at a given RT. C) XIC monoisotopic peak light peptide. D) XIC monoisotopic peak heavy peptide.")
 
 ## Prerequisites
-{:.no_toc}
+
 
 If you are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods]({{site.baseurl}}/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
 
-To learn about *protein identification* in Galaxy, please consider our OpenMS-based [peptide ID tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}).
+To learn about *protein identification* in Galaxy, please consider our OpenMS-based [peptide ID tutorial]({% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}).
 
-> ### {% icon hands_on %} Hands-on: Introduction
+> <hands-on-title>Introduction</hands-on-title>
 > In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio.
-> A detailed description of the full dataset is available in the [PRIDE archive]().
+> A detailed description of the full dataset is available in the [PRIDE archive](https://www.ebi.ac.uk/pride/).
 >
 > Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.
 >
 > To speed up analysis, the input dataset was filtered to include only those data acquired in second 2000-3000 of the original LC gradient.
 {: .hands_on}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -73,17 +75,17 @@ To learn about *protein identification* in Galaxy, please consider our OpenMS-ba
 
 # Peptide and Protein Identification
 
-In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}). Alternatively one can perform the protein identification step by step in the [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}) using the SILAC dataset from [zenodo](https://zenodo.org/record/1051552) **but** beware to specify the labels in the `param_variable_modifications` of **XTandemAdapter** {% icon tool %}.
+In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}). Alternatively one can perform the protein identification step by step in the [Peptide ID Tutorial]({% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}) using the SILAC dataset from [zenodo](https://zenodo.org/record/1051552) **but** beware to specify the labels in the `param_variable_modifications` of **XTandemAdapter** {% icon tool %}.
 
 A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Most search engines allow for some adaptation of the monoisotopic peak and we will use this by leaving `By default, misassignment to the first and second isotopic 13C peak are also considered` at `No`.
 
 [//]: # TODO: Read about monoisotopic peak problem, give citation to review!
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this SILAC Proteome exercise
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the mzml file, containing the measured mass spectra from [Zenodo](https://doi.org/10.5281/zenodo.1051552) or a data library:
 >
@@ -91,10 +93,11 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >    https://zenodo.org/record/1051552/files/HEK_SILAC-K6R6_ST905_part.mzml
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    > ### {% icon comment %} Comment
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+>    > <comment-title></comment-title>
 >    > The data have been preprocessed during the conversion from the machine raw file. We used background removal on MS1 and MS2 level, and MS2 deisotoping.
 >    {: .comment}
 >
@@ -104,7 +107,7 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >    https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta
 >    ```
 >
-> 3. Import the [workflow]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
+> 3. Import the [workflow]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
 >
 >    ```
 >    {{ site.url }}/{{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga
@@ -112,24 +115,25 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >
 > 4. Modify the workflow
 >
->   1. Connect the `mzML` input directly to the **XTandemAdapter** {% icon tool %} node.
+>   1. Connect the `mzML` input directly to the **XTandemAdapter** {% icon tool %} node and delete **PeakPickerHiRes**.
 >   2. Change the **XTandemAdapter** {% icon tool %} parameters: Add the **param_variable_modifications** `Label:13C(6) (K)` and `Label:13C(6) (R)`
 >
 > 4. Run the workflow with
 >   - the mzML dataset `1: mzML dataset`
 >   - the human FASTA database `2: protein FASTA database`
 >
->   > ### {% icon tip %} Tip: Using Galaxy Workflows
+>   > <tip-title>Using Galaxy Workflows</tip-title>
 >   > If you want to learn more about Galaxy workflows, please consult the [Galaxy Introduction]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html#the-workflow-editor)
 >   {: .tip}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 > 1. How many peptides and proteins were successfully identified?
 >
-> > ### {% icon solution %} Solution
-> > 1.    2276 non-redundant peptides and 780 proteins were identified.
+> > <solution-title></solution-title>
+> > 1.    2217 non-redundant peptides and 763 proteins were identified.
+> > Numbers may slightly vary depending on the versions of the tools and the used FASTA file.
 > {: .solution }
 {: .question}
 
@@ -145,17 +149,19 @@ MS1 feature detection is a critical step in quantitative workflows. In principle
 
 The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detection. For SIL we have to use **FeatureFinderMultiplex**, which does not take peptide IDs as an input.
 
-> ### {% icon hands_on %} Hands-on: MS1 Feature Detection
+> <hands-on-title>MS1 Feature Detection</hands-on-title>
 >
-> 1. Run **FeatureFinderMultiplex** {% icon tool %} with
->   - {% icon param-file %} *"LC-MS dataset in centroid or profile mode"*: mzML file
->   - *"Labels used for labelling the samples"*: `[ ][Arg6,Lys6]`,
->   - *"m/z tolerance for search of peak patterns"*: `10`
->   - *"Maximum number of missed cleavages due to incomplete digestion"*: `1`
+> 1. Run {% tool [FeatureFinderMultiplex](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.6+galaxy0) %} with
+>    - {% icon param-file %} *"LC-MS dataset in centroid or profile mode"*: mzML file
+>    - In *"algorithmic parameters"*
+>      - *"Labels used for labelling the samples"*: `[ ][Arg6,Lys6]`
+>      - *"m/z tolerance for search of peak patterns"*: `10`
+>      - *"Maximum number of missed cleavages due to incomplete digestion"*: `1`
+>    - *"Optional outputs"*: `out_multiplets (Optional output file containing all detected peptide groups`
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment: Multiple labels per peptide
+> <comment-title>Multiple labels per peptide</comment-title>
 > When using SILAC-KR or dimethyl-labelling and trypsin digestion, exactly one labelled amino acid per peptide is expected. The only labelled amino acids are lysine (K) and arginine (R) and trypsin cuts after each of them. However, a small percentage of missed cleavage normally occur also in those datasets. Setting *"Maximum number of missed cleavages due to incomplete digestion"* to `1` will be sufficient to deal with most missed cleavages.
 >
 > When using other enzymes (e.g. Lys-C) or other labels (e.g. $$^{18}O$$), several labelled amino acids per peptide are expected. You can search for those features by increasing the parameter *"Maximum number of missed cleavages due to incomplete digestion"*.
@@ -173,39 +179,36 @@ Another refinement of the quantitative result is obtained by removing falsely ma
 
 Finally, the correctly mapped peptides will be combined into protein quantifications with the **ProteinQuantifier** {% icon tool %}.
 
-> ### {% icon hands_on %} Hands-on: Quant to ID matching
+> <hands-on-title>Quant to ID matching</hands-on-title>
 >
-> 1. Run **IDMapper** {% icon tool %} with
->   - {% icon param-file %} *"Protein/peptide identifications file"*: output of **IDFilter**
->   - {% icon param-file %} *"Feature map/consensus map file"*: the `consensusXML` output of **FeatureFinderMultiplex**
->   - *"RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features"*: `20`
->   - *"m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features"*: `10`
->   - *"Match using RT and m/z of sub-features instead of consensus RT and m/z"*: `Yes`
->   - *"Advanced Options"*: `Show advanced options`
->       - *"Store the map index of the sub-feature in the peptide ID"*: `Yes`
+> 1. Run {% tool [IDMapper](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmapper/IDMapper/2.6+galaxy0) %} with
+>    - {% icon param-file %} *"Protein/peptide identifications file"*: output of **FalseDiscoveryRate**
+>    - {% icon param-file %} *"Feature map/consensus map file"*: output of **FeatureFinderMultiplex**
+>    - *"RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features"*: `20`
+>    - *"m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features"*: `10`
+>    - In *"Additional options for consensusXML input"*
+>      - *"Match using RT and m/z of sub-features instead of consensus RT and m/z"*: `Yes`
+>      - *"Store the map index of the sub-feature in the peptide ID"*: `Yes`
 >
-> 2. Run **FileFilter** {% icon tool %} with
->   - {% icon param-file %} *"Input file"*: output of **IDMapper**
->   - *"Remove unassigned peptide identifications"*: `Yes`
+> 2. Run {% tool [IDConflictResolver](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idconflictresolver/IDConflictResolver/2.6+galaxy0) %} with
+>    - {% icon param-file %} *"Input file"*: output of **IDMapper**
 >
-> 3. Run **IDConflictResolver** {% icon tool %}
->    - {% icon param-file %} *"Input file"*: output of **FileFilter**
->
-> 4. Run **MultiplexResolver** {% icon tool %} with
+> 3. Run {% tool [MultiplexResolver](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_multiplexresolver/MultiplexResolver/2.5+galaxy0) %} with
 >    - {% icon param-file %} *"Peptide multiplets with assigned sequence information"*: output of **IDConflictResolver**
 >    - *"Labels used for labelling the samples"*: `[ ][Arg6,Lys6]`
 >    - *"Maximum number of missed cleavages due to incomplete digestion"*: `1`
 >
-> 5. Run **ProteinQuantifier** {% icon tool %} with
+> 4. Run {% tool [ProteinQuantifier](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_proteinquantifier/ProteinQuantifier/2.6+galaxy0) %} with
 >   - {% icon param-file %} *"Input file"*: first output of **MultiplexResolver**
->   - {% icon param-file %} *"Protein inference results"*: output of **IDFilter**
+>   - {% icon param-file %} *"Protein inference results"*: output of **FalseDiscoveryRate**
 >   - *"Calculate protein abundance from this number of proteotypic peptides (most abundant first; '0' for all)"*: `0`
 >   - *"Averaging method used to compute protein abundances from peptide abundances"*: `sum`
 >   - *"Add the log2 ratios of the abundance values to the output"*: `Yes`
+>   - *"Optional outputs"*: `out (Output file for protein abundances)` and `peptide_out (Output file for peptide abundances)`
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment: ProteinQuantifier parameters
+> <comment-title>ProteinQuantifier parameters</comment-title>
 > Peptide quantitation algorithms are more precise for high abundant peptides. Therefore, it is recommended to base protein quantitations on those peptides. In ProteinQuantifier, you may restrict the calculation of protein abundances to the most abundant peptides by using the option "Calculate protein abundance from this number of proteotypic peptides".
 > However, we recommend to use the averaging method `sum` instead. By using this option, protein ratios are based on the sum of all peptide abundances. Thus, highly abundant peptides thus have more influence on protein abundance calculation than low abundant peptides.
 > A simple sum-of-intensities algorithm provided the best estimates of true protein ratios in a comparison of several protein quantitation algorithms ([Carrillo et al., Bioinformatics, 2009](https://www.ncbi.nlm.nih.gov/pubmed/19892804)).
@@ -219,35 +222,35 @@ For proteins, we added a log-transformed ratio to the output, which is saved in 
 To get a quick overview of the results, you can calculate basic descriptive statistics and plot the data as a histogram.
 Comment lines in the beginning of a `tabular` file may sometimes cause errors, therefore we will remove them with the tool **Select last lines from a dataset (tail)**.
 
-> ### {% icon hands_on %} Hands-on: Descriptive Statistics
-> 1. Run **Summary Statistics** {% icon tool %} with
+> <hands-on-title>Descriptive Statistics</hands-on-title>
+> 1. Run {% tool [Summary Statistics](Summary_Statistics1) %} with
 >   - {% icon param-file %} *"Summary statistics on"*: protein table output (first file) of **ProteinQuantifier**
 >   - *"Column or expression"*: `c8`
 >
-> 2. Run **Select last (tail)** {% icon tool %} with
+> 2. Run {% tool [Select last lines from a dataset (tail)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0) %} with
 >   - {% icon param-file %} *"Text file"*: protein table output (first file) of **ProteinQuantifier**
 >   - *"Operation"*: `Keep everything from this line on`
 >   - *"Number of lines"*: `4`
 >
-> 2. Run **Histogram** {% icon tool %} with
+> 3. Run {% tool [Histogram](toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4) %} with
 >   - {% icon param-file %} *"Dataset"*: output of **Select last**
 >   - *"Numerical column for x axis"*: `Column: 8`
 >   - *"Number of breaks (bars)"*: `20`
 >   - *"Plot title"* and *"Label for x axis"* to something meaningful.
 >
->   > ### {% icon comment %} Calculating descriptive statistics for peptides
+>   > <comment-title>Calculating descriptive statistics for peptides</comment-title>
 >   > The peptide table output of **ProteinQuantifier** does not give the log-transformed ratio for each peptide. Nonetheless, you may calculate basic statistics of the FC values by running **Summary Statistics** with *"Column or expression"* set to `log(c6/c5,2)`.
 >   {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 > 1. How many peptides and proteins were successfully quantified?
 > 2. What might have been the mixing ratio of the input dataset?
 > 3. In the histogram, there is a second local maximum at about FC 0. What might that mean?
 >
-> > ### {% icon solution %} Solution
-> > 1.    With the above parameters, you should have quantified 792 peptides and 408 proteins.
+> > <solution-title></solution-title>
+> > 1.    With the above parameters, you should have quantified 870 peptides and 421 proteins (slight variations are expected depending on tool version or fasta file)
 > > 2. In the histogram, you see that the peak of the density curve is between -1.1 and -1.2. In the summary statistics, you can see that the mean protein ratio was -0.98. An FC of -1 indicates that the unlabelled proteins were twice as abundant as their heavy-labelled counterparts. Indeed, the mixing ratio of the dataset was 2 parts light labelled HEK cell lysate and 1 part heavy labelled HEK cell lysate.
 > > 3. Some proteins were quantified with an FC close to 0. These may stem from incomplete SILAC labelling. Even after two weeks of cell culture in SILAC medium, some proteins with a very low turnover rate may remain unlabelled.
 > {: .solution }
@@ -262,17 +265,17 @@ Basic TOPPView tutorials are available as [videos](https://www.openms.de/getting
 
 For the optimization of tool parameters, it is recommended not to work with a complete LC-MS/MS run. Instead, we will use **FileFilter** to extract a small *RT-slice* of our input dataset, i.e. a fraction of the original dataset that was measured during a short period of time. Reducing the test data reduces the time needed for analysis and facilitates visual examination of the data.
 
-Using Galaxy Workflows enables us to quickly re-run a full analysis with changed parameters. To learn about Galaxy Workflows, consult this [tutorial]({{site.baseurl}}{% link topics/galaxy-ui/tutorials/history-to-workflow/tutorial.md %}).
+Using Galaxy Workflows enables us to quickly re-run a full analysis with changed parameters. To learn about Galaxy Workflows, consult this [tutorial]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md %}).
 
 **Cave:** Be aware that only very small parts of your dataset can be checked by visual examination. To minimize biases, try to look at the same areas / features of each result file.
 
-> ### {% icon hands_on %} Hands-on: Data reduction and visual evaluation with TOPPView
+> <hands-on-title>Data reduction and visual evaluation with TOPPView</hands-on-title>
 >
 > 1. Run **FileFilter** {% icon tool %} with
 >   - {% icon param-file %} *"Input file"*: `mzML` file
 >   - *"Retention time range to extract"*: `2000:2200`
 >
-> 2. Extract a workflow out of your history or import the [premade workflow]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
+> 2. Extract a workflow out of your history or import the [premade workflow]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
 >
 > 3. Run the whole workflow again with default settings on the reduced `mzML` file.
 >
@@ -282,7 +285,7 @@ Using Galaxy Workflows enables us to quickly re-run a full analysis with changed
 >
 > 5. Rename the **FileFilter** output to `Annotated features`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 6. Run **FileFilter** {% icon tool %} with
 >   - {% icon param-file %} *"Input file"*: **IDConflictResolver** output
@@ -333,7 +336,7 @@ Using Galaxy Workflows enables us to quickly re-run a full analysis with changed
 
     ![contaminant](../../images/protein-quant-sil_example_contaminant.png "A contaminant. There are no elution peaks for the heavy labelled peptide isoform. A) 2D View. B) 3D View.")
 
-> ### {% icon hands_on %} Hands-on: Check a possible contaminant
+> <hands-on-title>Check a possible contaminant</hands-on-title>
 > 1. Run **TextExporter** {% icon tool %} with
 >   - {% icon param-file %} *"Input file"*: **IDFilter** output file
 > 2. Run **Search in textfiles (grep)** {% icon tool %} with
@@ -386,12 +389,12 @@ Two problems typically disturb correct peptide quantitation:
         1. Use noise-filtering either during pre-processing or by increasing the FeatureFinderMultiplex parameter **Lower bound for the intensity of isotopic peaks**
         2. Reduce the FeatureFinderMultiplex parameter **m/z tolerance for search of peak patterns**.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > 2. How many peptides could not be mapped to MS1 features? (Click on the **IDMapper** output and look at the tool's infobox.)
 > 3. How many features could not be mapped to a peptide identification? (Click on the **ProteinQuantifier** output and look at the tool's infobox.)
 > 1. Which problems are most prominent in the test dataset?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. 1,395 peptide IDs could not be mapped to a feature.
 > > 2. 1,898 features, corresponding to 949 consensus features could not be mapped to a peptide identification.
 > > 3. The mapping of peptide IDs to features seems to have worked mostly fine. The main problems seem to be (1) missing peptide identifications, (2) missing features where a peptide was identified and (3) features that span a shorter RT range than the corresponding peptide's elution peak.
@@ -405,7 +408,7 @@ Also, it is recommended to optimize the tools in the order of their position in 
 
 In the test dataset, several peptides were identified, but not quantified. Some of the peptides were even identified in the unlabelled, as well as in the labelled form. To optimize the feature detection, we will relax the parameters of FeatureFinderMultiplex.
 
-> ### {% icon hands_on %} Hands-on: Optimize Feature Detection
+> <hands-on-title>Optimize Feature Detection</hands-on-title>
 >
 > 1. Run the whole workflow again:
 >    - Change the **FeatureFinderMultiplex** parameter *"Range of isotopes per peptide in the sample"* from `3:6` to `2:6`.
@@ -416,15 +419,15 @@ In the test dataset, several peptides were identified, but not quantified. Some 
 > 3. Compare the number of identified proteins, unmatched features and unmapped peptides for each parameter setting.
 > 4. Visualize the results with TOPPView to check for correct feature detection and feature-to-peptide mapping.
 >
->   > ### {% icon tip %} Tip: Sending workflow results to new history
+>   > <tip-title>Sending workflow results to new history</tip-title>
 >   > When running a workflow, you may send the results to a new history. This helps keeping track of different parameter settings.
 >   {: .tip}
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > Which parameter improved the number of quantified proteins?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Both changes led to more quantified proteins. Increasing the isotope range led to 26 \% more protein quantitations, increasing the RT tolerance led to 7 \% more protein quantitations.
 > {: .solution }
 {: .question}

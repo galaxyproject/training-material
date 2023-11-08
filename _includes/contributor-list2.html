@@ -1,0 +1,73 @@
+{% if include.authorsonly %}
+	{% if include.contributors.authorship %}
+<ul class="text-list">
+			{% for id in include.contributors.authorship %}
+			<li>
+				{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+			</li>
+			{%- if include.newcontributors -%}
+			<li>
+				{% include _includes/contributor-badge.html id='newcontributors' %}
+			</li>
+			{% endif %}
+</ul>
+	{% endif %}
+{% else %}
+<table class="contributions">
+	{% if include.contributors.authorship %}
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			{% for id in include.contributors.authorship %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+			{%- if include.newcontributors -%}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id='newcontributors' %}{% endif %}{% endif %}
+		</td>
+	</tr>
+	{% endif %}
+
+
+	{% if include.contributors.translation %}
+	<tr>
+		<td><abbr title="These people did the translation and localisation of this text.">Translation</abbr></td>
+		<td>
+			{% for id in include.contributors.translation %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</td>
+	</tr>
+	{% endif %}
+
+	{% if include.contributors.editing %}
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			{% for id in include.contributors.editing %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</td>
+	</tr>
+	{% endif %}
+
+	{% if include.contributors.testing %}
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			{% for id in include.contributors.testing %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</td>
+	</tr>
+	{% endif %}
+
+	{% if include.contributors.ux %}
+	<tr>
+		<td><abbr title="These people contributed UX or Design improvements to this tutorial or the GTN as a whole">UX/Designer(s)</abbr></td>
+		<td>
+			{% for id in include.contributors.ux %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</td>
+	</tr>
+	{% endif %}
+
+	{% if include.contributors.infrastructure %}
+	<tr>
+		<td><abbr title="These people managed and provided infrastructure to the GTN or for training purposes">Infrastructure</abbr></td>
+		<td>
+			{% for id in include.contributors.infrastructure %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</td>
+	</tr>
+	{% endif %}
+</table>
+{% endif %}

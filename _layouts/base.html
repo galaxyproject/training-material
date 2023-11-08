@@ -1,68 +1,68 @@
----
----
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{{ page.title | default: site.title }}</title>
-        {% if site.env.GOOGLE_ANALYTICS_ID %}
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-            ga('create', '{{ site.env.GOOGLE_ANALYTICS_ID }}' , 'auto');
-            ga('send', 'pageview');
-        </script>
+        {% if jekyll.environment == 'production' %}
+            {% include _includes/analytics.html %}
         {% endif %}
-        <link rel="stylesheet" href="{{ "/assets/css/bootstrap.min.css?v=3" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "/assets/css/bootstrap-toc.min.css" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "/assets/css/main.css?v=2" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "/assets/css/font-awesome.css" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "/assets/css/academicons.css" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "/assets/css/syntax_highlighting.css" | prepend: site.baseurl }}">
-        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
+        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}">
+        <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+        <link rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        <link rel="preload" href="{{ site.baseurl }}/assets/css/main.css?v=3" as="style">
+        {{ 'load' | bundle_preloads }}
+        <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css?v=3">
+        <link rel="manifest" href="{{ site.baseurl }}/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        {{ page | generate_dublin_core: site }}
 
         {% assign topic = site.data[page.topic_name] %}
         {% assign og_title = topic.title %}
         {% if page.title %}
-          {% assign og_title = page.title %}
+            {% assign og_title = page.title %}
         {% endif %}
-        {% assign og_desc = "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
-        {% if topic.summary %}
-          {% assign og_desc = topic.summary %}
+        {% assign og_desc = topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
+        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}">
+        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}">
+
+        {%- if page.cover %}{% assign coverimage = page.cover %}
+        {%- elsif page.tags contains "cofest" %}{% assign coverimage = "/assets/images/cofest.png" %}
+        {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "/assets/images/GalaxyNews.png" %}
+        {%- elsif page.tags contains "gat" %}{% assign coverimage = "/assets/images/gat.png" %}
+        {%- else %}{% assign coverimage = "/assets/images/GTNLogo1000.png" %}{% endif %}
+        {% assign og_image = page.og_image | default: coverimage | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
+        <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}">
+
+        {% if page.layout == "tutorial_hands_on" %}
+        <script type="application/ld+json">
+            {% include _includes/material.jsonld material=page topic=topic site=site %}
+        </script>
         {% endif %}
-        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
-        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
     </head>
-    <body data-spy="scroll" data-target="#toc">
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        {{ 'theme' | load_bundle }}
+        {% include _includes/default-header.html %}
+        {% if topic.custom_css %}
+        <style>
+        {{ topic.custom_css }}
+        </style>
+        {% endif %}
+        <div class="container main-content" role="main">
         {{ content }}
+        </div>
+        {% include _includes/default-footer.html %}
+
+        {{ 'main' | load_bundle }}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
-    <script type="text/javascript" src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript" src="{{ "/assets/js/popper.min.js" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript" src="{{ "/assets/js/bootstrap.min.js?v=3" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript" src="{{ "/assets/js/details-element-polyfill.js" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="{{ "/assets/js/bootstrap-toc.min.js" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript" src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
-
-    <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript">
-    var snippets=document.querySelectorAll('div.highlight');
-    [].forEach.call(snippets,function(snippet){
-        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
-    });
-
-    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
-        target:function(trigger){return trigger.nextElementSibling;
-    }});
-    </script>
-    {% if page.layout == "topic" %}
-    <script type="text/javascript" src="{{ site.baseurl }}/assets/js/list.min.js"></script>
-    <script type="text/javascript" src="{{ site.baseurl }}/assets/js/topic.js"></script>
-    {% endif %}
 </html>

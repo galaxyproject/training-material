@@ -1,0 +1,100 @@
+name: "[Archive] Monthly Release"
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 4 1 * *'
+  workflow_dispatch:
+
+jobs:
+  setup:
+    if: github.repository_owner == 'galaxyproject'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release Name
+        id: release_name
+        run: |
+          echo "release_title=$(LC_ALL=C date '+%Y %B %d')" >> $GITHUB_ENV
+          echo "release_tag=$(LC_ALL=C date -I)" >> $GITHUB_ENV
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.release_tag }}
+          commitish: main
+          release_name: Release ${{ env.release_title }}
+          body: "Monthly release of the GTN materials"
+          draft: false
+          prerelease: false
+
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # BEGIN Dependencies
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+          architecture: 'x64'
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '19'
+      - uses: actions/cache@v2
+        with:
+          path: |
+            vendor/bundle
+            ~/.cache/pip
+            ~/.npm
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-
+            ${{ runner.os }}-gems-
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config # for node
+          gem install bundler
+          pip install pyyaml
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          npm install
+          bundle pristine ffi
+      # END Dependencies
+
+      - name: Configure AWS credentials from GTN account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Build Site
+        run: |
+          git tag -l
+          git checkout ${SOURCE_TAG}
+          gem install bundler
+          bundle config path vendor/bundle
+          sed -i s"|^baseurl: .*|baseurl: '/archive/${SOURCE_TAG}'|g" _config.yml
+          sed -i s"|^github_repository_branch: .*|github_repository_branch: '${SOURCE_TAG}'|g" _config.yml
+          sed -i s"|^title: .*|title: 'GTN Archive ${SOURCE_TAG}'|g" _config.yml
+          npm install
+          make rebuild-search-index ACTIVATE_ENV=pwd
+          cat metadata/swagger.yaml | ruby bin/yaml2json.rb > api/swagger.json
+          curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
+          curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
+          JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+        env:
+          SOURCE_TAG: ${{ env.release_tag }}
+          GTN_FORK: ${{ github.repository_owner }}
+
+      - name: Deploy 🚀
+        run: |
+          pip install awscli
+          ./bin/publish-archive
+        env:
+          SOURCE_TAG: ${{ env.release_tag }}

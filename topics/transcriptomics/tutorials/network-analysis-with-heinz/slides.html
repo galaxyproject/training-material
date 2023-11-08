@@ -18,7 +18,7 @@ key_points:
   - "Interpreting the pinpointed subnetwork"
 contributors:
   - sanneabeln
-  - cicozhang
+  - ChaoZhang123
 ---
 
 # Metagenomics / metatranscriptomics
@@ -26,7 +26,7 @@ contributors:
 - Sequence all DNA/RNA in a sample from a specific microbial environment
 - Get an overview of the entire microbial community
 
-![sample collection from environment to sequence data](../../images/heinz/sampleextraction.png)
+![sample collection from environment to sequence data. DNA is isolated, manipulated, ligated together with a BAC vector, before a library is constructued and the expression of different proteins analysed in a live sample.](../../images/heinz/sampleextraction.png)
 
 ???
 There are several advantages in sequencing all DNA (metagenomics) or RNA (metatranscriptomics) in a sample to consider the microbial content.
@@ -46,7 +46,7 @@ Metatranscriptomics can also reveal the functional state of the microbiome, sugg
 - The microbiome may weigh as much as 200 grams
 
 
-.image-50[ ![](../../../metagenomics/images/human_microbiome.png)]
+.image-50[ ![image of a human with lines leading from various points on the body to pie charts of bacteria distribution](../../../metagenomics/images/human_microbiome.png)]
 
 .footnote[[Sender et al 2016, PLoS ONE](https://doi.org/10.1371/journal.pbio.1002533)]
 
@@ -64,11 +64,11 @@ Metatranscriptomics can also reveal the functional state of the microbiome, sugg
 - Nasal Cavity
 - Skin
 
-![oral cavity](../../images/heinz/oralcavity.jpg)
+![Picture of someone's mouth, showing their teeth and into their oral cavity and throat.](../../images/heinz/oralcavity.jpg)
 ]
 
 .pull-right[
-![Nature cover "the other genome"](../../images/heinz/othergenome.png)
+![Nature cover "our other genome"](../../images/heinz/othergenome.png)
 ]
 ---
 
@@ -85,7 +85,7 @@ Metatranscriptomics can also reveal the functional state of the microbiome, sugg
 ]
 
 .pull-right[
-![](../../images/heinz/oralcavity.jpg)
+![Picture of someone's mouth, showing their teeth and into their oral cavity and throat.](../../images/heinz/oralcavity.jpg)
 ]
 
 ---
@@ -118,9 +118,9 @@ Metatranscriptomics can also reveal the functional state of the microbiome, sugg
 
 .pull-right[
 
-.image-75[ ![shotgun sequencing illustrated with jigsaw puzzles](../../../metagenomics/images/puzzles-shotgun.png) ]
+.image-75[ ![shotgun sequencing illustrated with jigsaw puzzles, severla individual puzzles are mixed together.](../../../metagenomics/images/puzzles-shotgun.png) ]
 
-.image-75[ ![amplicon sequencing illustrated with jigsaw puzzles](../../../metagenomics/images/puzzles-amplicon.png)]
+.image-75[ ![amplicon sequencing illustrated with jigsaw puzzles, all of the corner pieces of each puzzle are circled.](../../../metagenomics/images/puzzles-amplicon.png)]
 
 ]
 ???
@@ -180,7 +180,7 @@ Here we consider the “metaModules” workflow designed by Ali May et a.
 
 # Exploring the networks of microbial function that are involved in disease
 
-![](../../images/heinz/network.png)
+![A gigantic blob of nodes and lines](../../images/heinz/network.png)
 
 ???
 The key idea is to explore functional  networks of the microbiome that are involved in disease
@@ -211,7 +211,7 @@ The key idea is to explore functional  networks of the microbiome that are invol
 
 # Healthy vs Disease
 
-![comparing microbiomes from healthy and disease samples](../../images/heinz/healthyvsdisease.png)
+![comparing microbiomes from healthy and disease samples. Both are sequenced, and then pie charts showing different microbiomes.](../../images/heinz/healthyvsdisease.png)
 
 ???
 The first part of the workflow entail RNA sequencing of oral microbiome samples.
@@ -226,7 +226,7 @@ With the workflow presented here, we go one step further, and consider which sub
 
 ## Using knowledge to pinpoint the key players
 
-![](../../images/heinz/workflow.png)
+![The healthy and diseased mouths are sequenced, mapped to produce gene counts, these are binned for KO counts, and differential expression analysis produces the p-values of KO Fold changes. The p-values are converted to KO weights, and these are mapped to KO pathways to produce a network with weighted KOs, and maximum scoring subnetworks are extracted.](../../images/heinz/workflow.png)
 
 ???
 
@@ -263,7 +263,7 @@ Of course, each species has its own specific metabolic network - even though we 
 
 # Some (KEGG database) terminology
 
-![KEGG KO groups](../../images/heinz/kegg2.png)
+![KEGG KO groups showing pathways from Species 1 and species 2. Different portions of the pathway are highlighted](../../images/heinz/kegg2.png)
 
 ???
 Now, as orthologous genes in the different species perform the same function, we can collapse the metabolic network of all known bacterial species in to a single network. Here is node represents a KO: a KEGG Orthologous Group, containing orthologous genes performing the same metabolic function in the metabolic network. We use this network of KOs to analyse the microbial sample.
@@ -299,13 +299,13 @@ It is immediately clear that the data contains many overexpressed genes, and it 
 - Where are the most important regions in this large network?
 - How can we find such regions?
 
-![](../../images/heinz/identification.png)
+![the large messy graph from before is shown in the dark, with a torch shining a light on a subset of that graph.](../../images/heinz/identification.png)
 
 ---
 
 # Step 1: Construct a global network
 
-![constructing a global network](../../images/heinz/globalnetwork.png)
+![369 pathway maps are reduced into 6642 KOs and 35405 interactions in a giant messy graph.](../../images/heinz/globalnetwork.png)
 
 ???
 
@@ -315,7 +315,7 @@ The first step is to construct the global KO network, in the pratical this globa
 
 # Step 2: Annotate the network with weights
 
-![network with weights](../../images/heinz/network_heinz.png)
+![A network of KOs are shown with weights on each node.](../../images/heinz/network_heinz.png)
 
 ???
 
@@ -382,7 +382,7 @@ If there is a significant part of the data deregulated, we expect a peak on the 
 
 # P-value to weight transformation
 
-![](../../images/heinz/pvalue-to-weight.png)
+![A graph comparing p-value to density with four regions labelled, A, B, C, and D. A is the region with p less than 0.1 and density greater than 0.5. C is the region directly below, with low p-value but low density. D is the region of higher p-value (0.1-1.0) but low density, and B is the final region of higher p-value and higher density. ](../../images/heinz/pvalue-to-weight.png)
 
 $$ FDR = \frac{C}{A+C}$$
 
@@ -398,7 +398,7 @@ From the true positives, false positives and false negatives we can calculate th
 
 # False discovery rate (FDR) sets the  threshold P-value
 
-![](../../images/heinz/pvalue-to-weight.png "p-value histogram of 7105 KO fold")
+![the same graph as before, caption repeats. A graph comparing p-value to density with four regions labelled, A, B, C, and D. A is the region with p less than 0.1 and density greater than 0.5. C is the region directly below, with low p-value but low density. D is the region of higher p-value (0.1-1.0) but low density, and B is the final region of higher p-value and higher density.](../../images/heinz/pvalue-to-weight.png "p-value histogram of 7105 KO fold")
 
 - The threshold P-value (τ) -> KOs with + and - weights
 - FDR determines the number of positive-scoring nodes and therefore the size of the final subnetwork.
@@ -507,14 +507,14 @@ Some of the pathways found in the deregulated subnetwork have previously been as
 
 Also some potentially interesting novel pathways have been found.
 
-![](../../images/heinz/novelpathways.png)
+![A large graph shown mostly in dark grey, several sub-graphs are highlighted in colour.](../../images/heinz/novelpathways.png)
 
 
 ---
 
 # Real biology vs. 500 random networks
 
-![](../../images/heinz/random-vs-real.png)
+![500 networks with shuffled weights were produced, a graph shows the subnetworks from networks with shuffled weights having low cumulative subnetwork scores, while the original subnetwork has a high score.](../../images/heinz/random-vs-real.png)
 
 ???
 Lastly, it is possible to check how significant the deregulated subnetwork itself is. This goes beyond the scope of the practical work.

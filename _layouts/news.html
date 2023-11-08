@@ -1,0 +1,83 @@
+---
+layout: page
+---
+<article>
+{% assign contributors = site.data['contributors'] %}
+{% if page.cover %}
+ {% assign coverimage = page.cover %}
+ {% assign coverimagealt = page.coveralt %}
+{% elsif page.tags contains "cofest" %}
+ {% assign coverimage = "/assets/images/cofest.png" %}
+ {% assign coverimagealt = "CoFest logo with two generic people shapes conversing next to the GTN logo and text 'gtn cofest'" %}
+{% elsif page.tags contains "galaxy" %}
+ {% assign coverimage = "/assets/images/GalaxyNews.png" %}
+ {% assign coverimagealt = "Galaxy News logo on dark blue background with Galaxy logo and words 'Galaxy News'" %}
+{% elsif page.tags contains "gat" %}
+ {% assign coverimage = "/assets/images/gat.png" %}
+ {% assign coverimagealt = "GTN Logo on a spiral galaxy background with text 'galaxy admin training'" %}
+{% else %}
+ {% assign coverimage = "/assets/images/GTNLogo1000.png" %}
+ {% assign coverimagealt = "GTN logo with a multi-coloured star and the words Galaxy Training Network" %}
+{% endif %}
+<div class="newsitem">
+{% include _includes/contributors-line.html page=page %}
+
+{% for tag in page.tags %}
+<span class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}">{{ tag  }}</span>
+{% endfor %}
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: {{ page.date | date: "%-d %B %Y" }}</span>
+      <span>
+        {% if page.short_id %}
+        {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>
+        {% endif %}
+      </span>
+    </p>
+
+    {{content}}
+
+    {% if page.link %}
+    <a href="{{page.link}}" class="btn btn-primary">Full Story</a>
+    {% endif %}
+
+    {% if page.tutorial %}
+    <a href="{{site.baseurl}}/{{page.tutorial}}" class="btn btn-primary">View Material</a>
+    {% endif %}
+
+    {% if page.cited %}
+    <h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
+    {% bibliography --cited %}
+    {% endif %}
+
+    {% if page.contributions %}
+    {% include _includes/funding-statement.md contributions=page.contributions %}
+    {% endif %}
+  </div>
+
+  <div class="col-md-4">
+    <img alt="{{ coverimagealt }}" src="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}" width="300"/>
+  </div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{{ page | generate_news_jsonld: site }}
+</script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="{% link news.md %}">See all news</a>
+
+<div>
+{% assign recent = site.categories['news'] | where_exp: "item", "item.path != page.path" | slice: 0, 5 %}
+
+{% for n in recent %}
+	{% include _includes/news-card-small.html news=n %}
+{% endfor %}
+</div>

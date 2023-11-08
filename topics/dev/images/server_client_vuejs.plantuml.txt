@@ -1,0 +1,20 @@
+@startuml
+
+!include plantuml_options.txt
+
+note over Browser, Server: HTTP
+
+Browser -> Server: Page Request
+activate Server
+Server -->Browser: Static Content (HTML+JS+CSS)
+deactivate Server
+
+note left of Browser: Components built with VueJS.\nAxios used to build service layer.
+Browser -> Server: API Request (JSON)
+activate Server
+note right of Server: Build JSON response\nin Galaxy "API" controllers
+Server --> Browser: API Response (JSON)
+deactivate Server
+
+note left of Browser: JSON objects stored in Vuex store\nor consumed by components.\nHTML rendered from VueJS\ncomponent templates.\n
+@enduml

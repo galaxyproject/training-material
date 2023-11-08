@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Visualizations: generic plugins"
+title: "Generic plugins"
 questions:
   - "How can visualization plugins benefit science?"
 objectives:
@@ -17,13 +17,14 @@ key_points:
   - "Interactivity is what makes visualizations different from static tools"
   - "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS"
   - "Performance is more important than for static Galaxy tools"
+subtopic: viz
 contributors:
   - shiltemann
   - yhoogstrate
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Visualizations may be very helpful in understanding data better. There is a whole
 range of visualizations, from rather simple scatter and barplots up to projections
@@ -46,14 +47,10 @@ However, for this tutorial we will keep it basic.
 
 Additional documentation about Galaxy visualizations can be found here:
 
-- [VisualizationsRegistry](https://galaxyproject.org/visualizations-registry)
-- [VisualizationsRegistry/Cookbook](https://galaxyproject.org/visualizations-registry/cookbook)
-- [VisualizationsRegistry/Code](https://galaxyproject.org/visualizations-registry/code)
 - [DataProviders](https://galaxyproject.org/data-providers)
 - [DataProviders/Cookbook](https://galaxyproject.org/data-providers/cookbook)
-- [Develop/Visualizations](https://galaxyproject.org/develop/visualizations)
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -71,7 +68,7 @@ to which we align are named `RNAME` in the BAM/SAM specification.
 
 The development of a Galaxy visualization takes place within the Galaxy codebase.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`
 > 2. Explore the plugin directory as follows:
@@ -101,7 +98,7 @@ The development of a Galaxy visualization takes place within the Galaxy codebase
 To create a bridge between our not-yet-written plugin and Galaxy, we need to write a
 configuration in XML format.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > Create the file  `config/alignment_rname_boxplot.xml` with the following contents:
 >
@@ -240,7 +237,7 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
 
 Let's put this all together.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create the mako file `templates/alignment_rname_boxplot.mako`
 > 2. Fill it with the following code:
@@ -296,7 +293,7 @@ Let's put this all together.
 >
 >    If everything went well, our plugin has appeared as a visualization option for the dataset
 >
->    > ### {% icon comment %} Comments
+>    > <comment-title></comment-title>
 >    > You must be logged in to be able to use visualizations
 >    {: .comment}
 >
@@ -355,7 +352,7 @@ Converting the data is not the scope of the tutorial, so here we provide such a 
 The great thing about the mako system is that it does not require to restart galaxy in order to make
 functional changes to the mako files.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Change the mako file to the following:
 >
@@ -426,7 +423,7 @@ chromosome.
 
 ![Example visualization](../../images/vis_plugins_example.png)
 
-The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot).
+The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot).
 To try out this example, simply copy this folder to the `$GALAXY_ROOT/config/plugins/visualizations/` folder
 on your (local) Galaxy and restart Galaxy.
 
@@ -560,7 +557,7 @@ All of those additional settings can be implemented for interactive behaviour,
 contributing to quicker understanding of the data which is generally not so convenient
 using static Galaxy tools.
 
-> ### {% icon comment %} Static files
+> <comment-title>Static files</comment-title>
 >
 > In the example we included Javascript and CSS into the HTML website.
 > Remember that for every new invocation of the visualization the entire CSS en JS are copied
@@ -593,7 +590,7 @@ For more examples of visualization plugins, you can browse this
 [GitHub repo](https://github.com/bgruening/galaxytools/tree/master/visualisations)
 
 # Conclusion
-{:.no_toc}
+
 
 We have just created a visualization plugin in Galaxy to visualize the number of alignments
 per `RNAME` (chromosome) in a BAM file.

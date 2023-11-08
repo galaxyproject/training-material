@@ -1,0 +1,30 @@
+---
+- doc: Test Analysis of molecular dynamics simulations workflow
+  job:
+    protein_pdb:
+      class: File
+      location: https://zenodo.org/record/2537734/files/cbh1test.pdb
+      filetype: pdb
+    protein_mdsimulation_dcd:
+      class: File
+      location: https://zenodo.org/record/2537734/files/cbh1test.dcd
+      filetype: dcd
+  outputs:
+    rmsf_tabular_output:
+      asserts:
+        has_n_columns:
+          n: 2
+        has_line_matching:
+          expression: 1\s+0.29.*
+    pca_tabular_output:
+      asserts:
+        has_n_columns:
+          n: 4
+        has_line_matching:
+          expression: 1\s+0.047.*\s+0.0374.*\s+0.0436.*
+    rmsd_tabular_output:
+      asserts:
+        has_n_columns:
+          n: 2
+        has_line_matching:
+          expression: 2\s+0.21*

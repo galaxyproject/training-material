@@ -35,11 +35,11 @@ follow_up_training:
 contributors:
   - joachimwolff
   - bebatut
-  - erasche
+  - hexylena
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Sequencing produces a collection of sequences without genomic context. We do not know to which part of the genome the sequences correspond to. Mapping the reads of an experiment to a reference genome is a key step in modern genomic data analysis. With the mapping the reads are assigned to a specific location in the genome and insights like the expression level of genes can be gained.
 
@@ -49,7 +49,7 @@ In principle, we could do a BLAST analysis to figure out where the sequenced pie
 
 In the following, we will process a dataset with the mapper **Bowtie2** and we will visualize the data with the program **IGV**.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -60,12 +60,13 @@ In the following, we will process a dataset with the mapper **Bowtie2** and we w
 
 # Prepare the data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `wt_H3K4me3_read1.fastq.gz` and `wt_H3K4me3_read2.fastq.gz` from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
@@ -74,22 +75,23 @@ In the following, we will process a dataset with the mapper **Bowtie2** and we w
 >    https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
 > 3. Rename the files to `reads_1` and `reads_2`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
 We just imported in Galaxy FASTQ files corresponding to paired-end data as we could get directly from a sequencing facility.
 
-During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is always to check their quality. 
+During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is always to check their quality.
 
-There is a dedicated tutorial for [quality control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) of sequencing data. We will not repeat the steps there. You should follow the [tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) and apply it to your data before going further. 
+There is a dedicated tutorial for [quality control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) of sequencing data. We will not repeat the steps there. You should follow the [tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) and apply it to your data before going further.
 
 # Map reads on a reference genome
 
@@ -103,11 +105,11 @@ We need a reference genome to map the reads on.
 
 Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/), a fast and memory-efficient open-source tool particularly good at aligning sequencing reads of about 50 up to 1,000s of bases to relatively long genomes.
 
-> ### {% icon hands_on %} Hands-on: Mapping with Bowtie2
-> 1. **Bowtie2** {% icon tool %} with the following parameters
+> <hands-on-title>Mapping with Bowtie2</hands-on-title>
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0) %} with the following parameters
 >    - *"Is this single or paired library"*: `Paired-end`
->       - {% icon param-file %} *"FASTA/Q file #1"*: `trimmed reads pair 1` (output of **Trim Galore!** {% icon tool %})
->       - {% icon param-file %} *"FASTA/Q file #2"*: `trimmed reads pair 2` (output of **Trim Galore!** {% icon tool %})
+>       - {% icon param-file %} *"FASTA/Q file #1"*: `reads_1`
+>       - {% icon param-file %} *"FASTA/Q file #2"*: `reads_2`
 >       - *"Do you want to set paired-end options?"*: `No`
 >
 >           You should have a look at the parameters there, specially the mate orientation if you know it. They can improve the quality of the paired-end mapping.
@@ -122,14 +124,14 @@ Currently, there are over 60 different mappers, and their number is growing. In 
 >
 > 2. Inspect the `mapping stats` file by clicking on the {% icon galaxy-eye %} (eye) icon
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What information is provided here?
 >    > 2. How many reads have been mapped exactly 1 time?
 >    > 3. How many reads have been mapped more than 1 time? How is it possible? What should we do with them?
 >    > 4. How many pair of reads have not been mapped? What are the causes?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. The information given here is a quantity one. We can see how many sequences are aligned. It does not tell us something about the quality.
 >    > > 2. ~90% reads have been aligned exactly 1 time
 >    > > 3. ~7% reads have been aligned concordantly >1 times. These are called multi-mapped reads. It can happen because of repetitions in the reference genome (multiple copies of a gene for example), particularly when the reads are small. It is difficult to decide where these sequences come from and therefore most of the pipelines ignore them. Always check the statistics there to be sure of not discarding too much information in any downstream analyses.
@@ -159,15 +161,15 @@ After that, you should have a look at the reads and inspect the BAM file where t
 
 The BAM file includes a lot of information about each read, particularly the quality of mapping.
 
-> ### {% icon hands_on %} Hands-on: Summary of mapping quality
-> 1. **Samtools stats - generate statistics for BAM dataset** {% icon tool %} with the following parameters
+> <hands-on-title>Summary of mapping quality</hands-on-title>
+> 1. {% tool [Samtools Stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2) %} with the following parameters
 >    - {% icon param-file %} *"BAM file"*: `aligned reads` (output of **Bowtie2** {% icon tool %})
->    - *"Use reference sequence"*: `Locally cached`
+>    - *"Use reference sequence"*: `Locally cached/Use a built-in genome`
 >      - *"Using genome"*: `Mouse (Mus musculus): mm10 Full`
 >
 > 2. Inspect the {% icon param-file %} `Stats` file
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What is the proportion of mismatches in the mapped reads when aligned to the reference genome?
 >    > 2. What does the error rate represent?
@@ -175,14 +177,14 @@ The BAM file includes a lot of information about each read, particularly the qua
 >    > 4. What is the insert size average?
 >    > 5. How many reads have a mapping quality score below 20?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. There are ~21,900 mismatches for ~4,753,900 bases mapped which on average produces ~0.005 mismatches per mapped bases.
 >    > > 2. The error rate is the proportion of mismatches per mapped bases, so the ratio computed right before.
 >    > > 3. The average quality is the mean quality score of the mapping. It is a Phred score like the one used in the FASTQ file for each nucleotide. But here the score is not per nucleotide, but per read and it represents the probability of mapping quality.
 >    > > 4. The insert size is the distance between the two reads in the pairs.
 >    > > 5. To get the info:
 >    > >      1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with a filter to keep only the reads with a mapping quality >= 20
->    > >      2. **Stats generate statistics for BAM dataset** {% icon tool %} on the output of **Filter**
+>    > >      2. **Samtools Stats** {% icon tool %} on the output of **Filter**
 >    > >
 >    > >    Before filtering: 95,412 reads and after filtering: 89,664 reads.
 >    >  {: .solution }
@@ -197,12 +199,12 @@ The Integrative Genomics Viewer (IGV) is a high-performance visualization tool f
 
 # Visualization using a Genome Browser (JBrowse)
 
-JBrowse is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We'll use it to visualise the mapped reads.
+{% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0) %} is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We'll use it to visualise the mapped reads.
 
 {% include topics/sequence-analysis/tutorials/mapping/jbrowse.md tool="Bowtie2" region_to_zoom="chr2:98,666,236-98,667,473" %}
 
 
 # Conclusion
-{:.no_toc}
+
 
 After quality control, mapping is an important step of most analyses of sequencing data (RNA-Seq, ChIP-Seq, etc) to determine where in the genome our reads originated from and use this information for downstream analyses.

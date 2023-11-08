@@ -1,0 +1,46 @@
+@startuml
+
+!include plantuml_options.txt
+
+participant Controller
+participant Service
+participant "Celery Client"
+participant "Message Queue"
+participant "Celery Server"
+participant "Galaxy Task"
+participant Manager
+
+note over Controller, Service: Galaxy Code on Web Server
+note over "Galaxy Task", Manager: Galaxy Code on Celery Worker
+
+activate "Message Queue"
+activate "Celery Server"
+activate Controller
+Controller -> Service: pydantic
+activate Service
+Service -> "Celery Client": pydantic
+activate "Celery Client"
+"Celery Client" -> "Message Queue": json
+"Celery Client" --> Service: Task
+deactivate "Celery Client"
+Service --> Controller: AsyncTaskResult
+deactivate Service
+deactivate Controller
+
+group On Task Available
+    "Message Queue" <-- "Celery Server": json
+    "Celery Server" -> "Galaxy Task": pydantic
+    activate "Galaxy Task"
+
+    "Galaxy Task" -> "Manager": pydantic
+    activate Manager
+    note right of Manager: Potentially long running tasks.
+    "Manager" --> "Galaxy Task"
+    deactivate Manager
+    "Galaxy Task" --> "Celery Server"
+    deactivate "Galaxy Task"
+end
+deactivate "Message Queue"
+deactivate "Celery Server"
+
+@enduml

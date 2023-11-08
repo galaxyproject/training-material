@@ -36,11 +36,14 @@ follow_up_training:
 time_estimation: "1H"
 contributors:
   - thomaswollmann
+  - kostrykin
+tags:
+  - HeLa
 
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial shows how to segment and extract features from cell nuclei Galaxy for image analysis. As example use case, this tutorial shows you how to compare the phenotypes of PLK1 threated cells in comparison to a control. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3362976).
 
@@ -48,7 +51,7 @@ RNA interference (RNAi) is used in the example use case for silencing genes by w
 
 The example used in this tutorial deals with PLK1 knocked down cells. PLK1 is an early trigger for G2/M transition. PLK1 supports the functional maturation of the centrosome in late G2/early prophase and establishment of the bipolar spindle. PLK1 is being studied as a target for cancer drugs. Many colon and lung cancers are caused by K-RAS mutations. These cancers are dependent on PLK1.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -61,11 +64,11 @@ The example used in this tutorial deals with PLK1 knocked down cells. PLK1 is an
 
 The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3360236)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. If you are logged in, create a new history for this tutorial
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import {% icon galaxy-upload %} the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
@@ -74,8 +77,9 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    https://zenodo.org/record/3362976/files/B2.zip
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. **Unzip file** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
@@ -84,14 +88,15 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 > 4. Rename {% icon galaxy-pencil %} the dataset to `testinput.tif`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 5. **Unzip file** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `All files`
 >
 > 6. Rename {% icon galaxy-pencil %} the resulting collection to `control`
->    {% include snippets/rename_collection.md %}
+>
+>    {% snippet faqs/galaxy/collections_rename.md %}
 >
 > 7. Import {% icon galaxy-upload %} the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
@@ -99,8 +104,9 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    https://zenodo.org/record/3362976/files/B3.zip
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 8. **Unzip** {% icon tool %} to extract the zipped screen:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
@@ -113,18 +119,19 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    min	500	0.
 >    max	100000	0.5
 >    ```
->    {% include snippets/create_new_file.md format="tabular" %}
+>
+>    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
 >
 > 9. Rename {% icon galaxy-pencil %} dataset to `rules`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 {: .hands_on}
 
 
 # Create feature extraction workflow
 First, we will create and test a workflow which extracts mean DAPI intensity, area, and major axis length of cell nuclei from an image.
 
-> ### {% icon hands_on %} Hands-on: Create feature extraction workflow
+> <hands-on-title>Create feature extraction workflow</hands-on-title>
 >
 > 1. **Filter Image** {% icon tool %} with the following parameters to smooth the image:
 >    - *"Image type"*: `Gaussian Blur`
@@ -161,11 +168,14 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >      - {% icon param-check %} `Major Axis Length`
 > 7. Now we can extract the workflow for batch processing
 >    - Name it "feature_extraction".
+>    - Remember to exclude **Unzip** {% icon tool %} by unchecking the tool.
+>    - Don't treat `B2.zip` and `B3.zip` as inputs (the workflow is supposed to be applied to the images directly).
 >
->    {% include snippets/extract_workflow.md %}
+>    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
 > 8. Edit the workflow you just created
->    - Name the inputs `input image` and `filter rules`.
+>    - Add the tool **Input dataset** {% icon tool %} and name it `input image`.
+>    - Name the input for the rules file `filter rules`.
 >    - Mark the results of steps 5 and 6 as outputs (by clicking on the asterisk next to the output name).
 >
 {: .hands_on}
@@ -178,11 +188,11 @@ The resulting workflow should look something like this:
 
 Now we want to apply our extracted workflow to `original data` and merge the results. For this purpose, we create a workflow which uses the previously created workflow as subworkflow.
 
-> ### {% icon hands_on %} Hands-on: Create screen analysis workflow
+> <hands-on-title>Create screen analysis workflow</hands-on-title>
 >
 > 1. Create a new workflow in the workflow editor.
 >
->    {% include snippets/create_new_workflow.md %}
+>    {% snippet faqs/galaxy/workflows_create_new.md %}
 > 2. Add a **Input dataset collection** node and name it `input images`
 > 3. Add a **Input dataset** node and name it `rules`
 > 4. Add the **feature_extraction** workflow as node.
@@ -201,11 +211,12 @@ The resulting workflow should look something like this:
 ![screen analysis workflow](../../images/hela-screen-analysis/analyze_screen_workflow.png "Full screen analysis workflow.")
 
 
-> ### {% icon hands_on %} Hands-on: Run screen analysis workflow
+> <hands-on-title>Run screen analysis workflow</hands-on-title>
 >
 > 1. Run the screen analysis workflow {% icon workflow %} on the `control` screen and the `rules` file
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
 > 2. Run the screen analysis workflow {% icon workflow %} on the `PLK1` screen and the `rules` file
 >
 {: .hands_on}
@@ -214,7 +225,7 @@ The resulting workflow should look something like this:
 
 Finally, we want to plot the results for better interpretation.
 
-> ### {% icon hands_on %} Hands-on: Plot feature extraction results
+> <hands-on-title>Plot feature extraction results</hands-on-title>
 >
 > 1. Click on the `Visualize this data` {% icon galaxy-barchart %} icon of the **Collapse Collection** {% icon tool %} results.
 > 2. Run `Box plot` with the following parameters:
@@ -231,11 +242,11 @@ Finally, we want to plot the results for better interpretation.
 >        - *"Provide a label"*: `Major axis length`
 >        - *"Observations"*: `Column 3`
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > Plot the feature distribution of PLK1 and control. What differences do you observe between the screens?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > The phenotype of PLK1 threated cells show a higher mean intensity and a shorter major axis in comparison to the control.
 >    > {: .solution }
 >    {: .question}
@@ -247,6 +258,6 @@ One of the resulting plots should look something like this:
 ![feature extraction results box plot](../../images/hela-screen-analysis/result_boxplot.png){: width="100%"}
 
 # Conclusion
-{:.no_toc}
+
 
 In this exercise you imported images into Galaxy, segmented cell nuclei, filtered segmentations by morphological features, extracted features from segmentations, scaled your workflow to a whole screen, and plotted the feature extraction results using Galaxy.

@@ -1,6 +1,7 @@
 ---
 layout: tutorial_slides
 logo: "GTN"
+video: true
 
 title: "Genome annotation with Prokka"
 zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
@@ -38,7 +39,13 @@ display the other window
 
 - The tool "Prokka"
 
+???
+
+- In these slides, we will learn what is genome annotation, and which tools can be used for genome annotation.
+- We will describe in detail a tool called Prokka.
+
 ---
+
 ### What is Annotation?
 
 - Classifying and describing parts of the genome sequence
@@ -52,16 +59,46 @@ display the other window
 - We can name features by type and location, *e.g.* gene, pseudogene, repeat
 
 - We can hypothesise functions, *e.g.* antioxidant activity
+
+???
+
+- Annotating a genome means positioning features along the sequence of a genome.
+- Those features can be anything one can find in a genome sequence: genes, but also binding sites for example.
+- When a feature, like a gene for example, is positioned, you can add information about its function.
+- This operation is named "functional annotation".
+
 ---
+
 ### First: assemble the genome
 ![annotation pic](../../images/contigs.png)
+
+???
+
+- Before annotating a genome, you need to assemble it.
+- If you get a high quality assembly, it will be easier to perform a good quality annotation.
+
 ---
+
 ### Then: annotate
 ![annotation pic](../../images/seq_annotation.jpg)
+
+???
+
+- Once you have a good genome sequence, you can annotate it.
+- In this example, there a gene coding for a delta toxin.
+- There is a ribosome binding site in red, and the coding sequence of this gene is in green.
+
 ---
+
 ### Annotation
 ![annotation pic](../../images/annotation_details.png)
+
+???
+
+- For each feature annotated on a genome, you can get its position, its type, and some information about its function or how it is expressed.
+
 ---
+
 ### How do we annotate? many different ways:
 
 - sequence: does it match known sequences in databases?
@@ -69,9 +106,35 @@ display the other window
 - sequence structure: *e.g.* does it look like an exon (start and stop codons)?
 
 - use other data: *e.g.* do lab experiments to investigate biological function
+
+???
+
+- You can annotate features by looking at similarities with known sequences from international databases.
+- Some tools annotate features on a genome by seeking motifs corresponding to known structure (for example gene or exon start or stop).
+- Some lab experiments can help annotate specific regions of a genome, even though it is often much more expensive than an automatic annotation.
+- The lab experiments can provide certainty about function, where automatic annotation is more of a guess.
+
 ---
+
 ### Prokka
 ![annotation pic](../../images/prokka_pipeline.png)
+
+???
+
+- Prokka is a pipeline that runs several other tools to annotate prokaryotic genomes.
+- The input is the assembly of the genome in Fasta format.
+- Prokka runs Aragorn to annotate transfer RNAs.
+- Ribosomal RNAs are annotated with RNAmmer.
+- Infernal uses the Rfam database to annotate non coding RNAs.
+- Finally Prodigal annotated coding genes.
+- Each coding sequence is then compared to the SwissProt sequence database using Blast, and to TIGR and Pfam motif datases using Hmmer3.
+- SignalP is also run to detect signal peptides in each predicted coding sequence.
+- The final result of the whole Prokka pipeline is a set of GFF3, GBK ans ASN1 files.
+
 ---
 ### More information
-Galaxy Training Network Slides: Introduction to Genome Annotation
+Galaxy Training Network Slides: [Introduction to Genome Annotation](../introduction/slides.html)
+
+???
+
+- More information is available in the "Introduction to Genome Annotation" slides.

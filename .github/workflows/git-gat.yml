@@ -1,0 +1,96 @@
+name: "[CI] GIT-GAT"
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'topics/admin/**'
+      - 'bin/knit*'
+  push:
+    branches:
+      - main
+    paths:
+      - 'topics/admin/**'
+      - 'bin/knit*'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Export commits
+        run: |
+            bin/knit-automated.sh export;
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.GIT_GAT_SSH_KEY }}
+          known_hosts: "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
+          if_key_exists: ignore # replace / ignore / fail; optional (defaults to fail)
+        if: github.event.pull_request.head.repo.full_name == 'galaxyproject/training-material' && github.event.pull_request.base.repo.full_name == 'galaxyproject/training-material'
+
+      - name: Setup the repo
+        run: |
+            cd /tmp/git-gat/
+            git config --global init.defaultBranch main
+            git init
+            git config user.email "galaxytrainingnetwork@gmail.com"
+            git config user.name "The Galaxy Training Network"
+
+      - name: Setup the origin (fork)
+        run: |
+            cd /tmp/git-gat/
+            git remote add origin https://github.com/hexylena/git-gat
+        if: github.event.pull_request.head.repo.full_name != 'galaxyproject/training-material' || github.event.pull_request.base.repo.full_name != 'galaxyproject/training-material'
+
+      - name: Setup the origin (branch)
+        run: |
+            cd /tmp/git-gat/
+            git remote add origin git@github.com:hexylena/git-gat
+        if: github.event.pull_request.head.repo.full_name == 'galaxyproject/training-material' && github.event.pull_request.base.repo.full_name == 'galaxyproject/training-material'
+
+      - name: Add scripts directory
+        run: |
+            cd /tmp/git-gat/
+            git fetch origin --tags
+            git add .scripts/
+            git commit -m "admin/init/0000: Add scripts directory"
+            git am 0-commit-0000-root-commit.patch
+            ls -al
+
+      - name: Commit the rounds of patches
+        run: |
+            cd /tmp/git-gat/
+            for i in {10..50}; do
+                # Commit those patches
+                patches=$(ls $i-*.patch 2>/dev/null| wc -c)
+                if (( patches > 0 )); then
+                    git am -3 -C2 $i-*.patch;
+
+                    # And tag it
+                    git tag -f "step-$(( i - 9 ))";
+                fi
+            done
+            rm -f *.patch
+            ls -al
+
+      - name: Push the results
+        run: |
+            cd /tmp/git-gat/
+            # Push the results
+            git push -f -u origin main
+            today=$(date -I)
+            git checkout -b $today
+            git push -f --set-upstream origin $today
+            git push -f --tags
+        if: github.event.pull_request.head.repo.full_name == 'galaxyproject/training-material' && github.event.pull_request.base.repo.full_name == 'galaxyproject/training-material'
+        # TODO: figure out the logic aroudn checking branch name.
+        # && github.ref == 'refs/heads/main'

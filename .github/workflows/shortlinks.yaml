@@ -1,0 +1,53 @@
+name: "[Cron] Update Shortlinks"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '45 0 * * 1'
+jobs:
+  runner-job:
+    runs-on: ubuntu-latest
+    # Only run on main repo on and PRs that match the main repo.
+    if: |
+      github.repository == 'galaxyproject/training-material' &&
+      (github.event_name != 'pull_request' ||
+       github.event.pull_request.head.repo.full_name == github.repository)
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 10
+
+      # BEGIN Dependencies
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0"
+      - uses: actions/cache@v2
+        with:
+          path: |
+            vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bundle pristine ffi
+      # END Dependencies
+
+      - name: Update Shortlinks
+        id: generate
+        run: |
+          echo "new_ids=$(ruby bin/update-shortlink.rb | wc -l)" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        # If it's not a Pull Request then commit any changes as a new PR.
+        if: |
+          github.event_name != 'pull_request' &&
+          steps.generate.outputs.new_ids != ''
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: Update Persistent uniform resource locators
+          branch-suffix: timestamp
+          commit-message: Update PURLs
+          add-paths: metadata/shortlinks.yaml

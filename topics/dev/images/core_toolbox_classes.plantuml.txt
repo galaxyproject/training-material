@@ -1,0 +1,30 @@
+@startuml
+
+!include plantuml_options.txt
+
+package "galaxy.tools.toolbox" {
+
+abstract class AbstractToolBox {
+}
+
+}
+
+package "galaxy.tools" {
+
+class ToolBox
+
+class Tool
+
+}
+
+package "galaxy.tools.action" {
+
+class ToolAction
+
+}
+
+AbstractToolBox <|-- ToolBox
+ToolBox "1" o-- "*" Tool
+Tool -- ToolAction
+
+@enduml

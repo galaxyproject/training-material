@@ -1,0 +1,178 @@
+---
+layout: tutorial_slides
+logo: GTN
+title: "Recurrent neural networks (RNN) \n Deep Learning - Part 2"
+zenodo_link: "https://zenodo.org/record/4477881"
+questions:
+  - "What is a recurrent neural network (RNN)?"
+  - "What are some applications of RNN?"
+objectives:
+  - "Understand the difference between feedforward neural networks (FNN) and RNN"
+  - "Learn various RNN types and architectures"
+  - "Learn how to create a neural network using Galaxy’s deep learning tools"
+  - "Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy"
+key_points:
+requirements:
+  -
+    type: internal
+    topic_name: statistics
+    tutorials:
+      - intro_deep_learning
+      - FNN
+contributors:
+  - kxk302
+---
+
+# What is a recurrent neural network (RNN)?
+
+???
+
+What is a recurrent neural network (RNN)?
+
+---
+
+# Recurrent Neural Network (RNN)
+
+- RNN models sequential data (temporal/ordinal)
+- In RNN, training example is a sequence, which is presented to RNN one at a time 
+	- E.g., sequence of English words is passed to RNN, one at a time 
+	- And, RNN generates a sequence of Persian words, one at a time
+- In RNN, output of network at time *t* is used as input at time *t+1*
+- RNN applied to image description, machine translation, sentiment analysis, etc. 
+
+---
+
+# One-to-many RNN
+
+![Neurons forming a one-to-many recurrent neural network]({{site.baseurl}}/topics/statistics/images/RNN_1_to_n.png) <!-- https://pixy.org/3013900/ CC0 license-->
+
+---
+
+# Many-to-one RNN
+
+![Neurons forming a many-to-one recurrent neural network]({{site.baseurl}}/topics/statistics/images/RNN_n_to_1.png) <!-- https://pixy.org/3013900/ CC0 license-->
+
+---
+
+# Many-to-many RNN
+
+![Neurons forming a many-to-many recurrent neural network]({{site.baseurl}}/topics/statistics/images/RNN_n_to_m.png) <!-- https://pixy.org/3013900/ CC0 license-->
+
+---
+
+# RNN architectures
+
+- Vanilla RNN
+	- Suffers from *vanishing gradient* problem
+- LSTM and GRU
+	- Uses *gates* to avoid vanishing gradient problem
+
+---
+
+# Sentiment analysis
+
+- We perform sentiment analysis on IMDB movie reviews dataset
+- Train RNN on training dataset (25000 positive/negative movie reviews)
+- Test RNN on test set (25000 positive/negative movie reviews)
+- Training and test sets have no overlap
+- Since dealing with text data, good to review mechanisms for representing text data
+
+---
+
+# Text preprocessing
+
+- Tokenize a document, i.e., break it down into words
+- Remove punctuations, URLs, and stop words (‘a’, ‘of’, ‘the’, etc.)
+- Normalize the text, e.g., replace ‘brb’ with ‘Be right back’, etc
+- Run the spell checker to fix typos
+- Make all words lowercase
+
+---
+
+# Text preprocessing
+
+- Perform stemming/lemmatization
+	- If we have words like ‘organizer’, ‘organize’, and ‘organized’
+		- Want to reduce all of them to a single word
+	- Stemming cuts end of these words for a single root
+		- E.g., ‘organiz’.  May not be an actual word
+	- Lemmatization reduces to a root that is actually a word
+		- E.g., ‘organize’
+
+---
+
+# Bag of words (BoW)
+
+- If you don’t care about the order of the words in a document
+- 2D array. Rows represent documents. Columns represent words in vocabulary
+	- All unique words in all documents
+- If a word not present in a document, we have a zero at row and column entry
+- If a word is present in a document, we have a one at row and colum entry
+	- Or, we could use the word count or frequency
+
+---
+
+# Bag of words (BoW)
+
+- Document 1: Magic passed the basketball to Kareem
+- Document 2: Lebron stole the basketball from Curry
+
+![Table showing a bag-of-words representation of sample documents]({{site.baseurl}}/topics/statistics/images/BoW.png) <!-- https://pixy.org/3013900/ CC0 license-->
+
+- BoW is simple, but does not consider rarity of words across documents
+	- Important for document classification
+
+---
+
+# Term frequency inverse document frequency (TF-IDF)
+
+- If you don’t care about the order of the words in a document
+- Similar to BoW, we have an entry for each document-word pair
+- Entry is product of
+	- Term frequency, frequency of a word in a document, and
+	- Inverse document frequency, total number of documents divided by number of documents that have word
+		- Usually use logarithm of the IDF
+- TF-IDF takes into account rarity of a word across documents
+
+---
+
+# One-hot encoding (OHE)
+
+- Technique to convert categorical variables such as words into a vector
+- Suppose our vocabulary has 3 words: orange, apple, banana
+- Each word is represented by a vector of size 3
+
+![Mathematical vectors representing one-hot-encoding representation of words orange, apple, and banana]({{site.baseurl}}/topics/statistics/images/OHE.gif) <!-- https://pixy.org/3013900/ CC0 license-->
+
+- OHE problems
+	- For very large vocabulary sizes requires tremendous amount of storage
+	- Also, no concept of word similarity
+
+---
+
+# Word2Vec
+
+- Each word represented as an *n* dimensional vector
+	- *n* much smaller than vocabulary size
+- Words that have similar meanings are close in vector space
+- Words considered similar if they co-occur often in documents
+- Two Word2Vec architectures
+	- Continuous BoW
+		- predicts probability of a word given the surrounding words
+	- Continuous skip-gram
+		- given a word predicts probability of the surrounding words
+
+---
+
+# Sentiment analysis
+
+- Sentiment classification of IMDB movie reviews with RNN
+- Train RNN using IMDB movie reviews
+- Goal is to learn a model such that given a review we predict whether review is positive/negative
+- We evaluate the trained RNN on test dataset and plot confusion matrix
+
+---
+
+# For references, please see tutorial's References section
+
+---

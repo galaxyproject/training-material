@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Creating a new tutorial - Defining the technical infrastructure"
+title: "Tools, Data, and Workflows for tutorials"
 questions:
   - "How can we define the technical infrastructure for a tutorial?"
   - "How to define the tools needed for a tutorial?"
@@ -15,6 +15,7 @@ objectives:
   - "Creating a Galaxy Docker flavor with the needed tools, data and workflows for a tutorial"
   - "Testing the Galaxy Docker flavor of a tutorial"
 time_estimation: "30m"
+subtopic: writing
 key_points:
   - "Tools, data and workflows can be easily integrated in a Docker flavor to have a useful technical support for a tutorial"
   - "A Galaxy Docker flavor is a great support for training"
@@ -23,19 +24,19 @@ contributors:
   - bebatut
   - bgruening
   - shiltemann
-  - erasche
+  - hexylena
 ---
 
 # Building a Galaxy instance specifically for your training
-{:.no_toc}
+
 
 To be able to run the tutorial, we need a Galaxy instance where all of the needed tools and data are available. Thus we need to describe the needed technical infrastructure.
 
-This files we define in this tutorial will be used to automatically build a Docker Galaxy flavour, and also to test if a public Galaxy instance is able to run the tool.
+The files we define in this tutorial will be used to automatically build a Docker Galaxy flavour, and also to test if a public Galaxy instance is able to run the tool.
 
-In this tutorial, you will learn how to create a virtualised Galaxy instance, based on Docker, to run your training - either on normal computers or cloud environments.
+In this tutorial, you will learn how to create a virtualized Galaxy instance, based on Docker, to run your training - either on normal computers or cloud environments.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -48,12 +49,19 @@ In this tutorial, you will learn how to create a virtualised Galaxy instance, ba
 
 Once the tutorial is ready, we need to develop a workflow that represents the steps taken in the tutorial, and then extract these workflow(s) and add them to the `workflows` directory in the tutorial. Additionally we will need to add some explanation about the workflow(s) in a `README.md` file
 
-> ### {% icon hands_on %} Hands-on: Extract the workflow
+> <hands-on-title>Extract the workflow</hands-on-title>
 >
-> 1. Download the workflow for the tutorial
-> 2. Save it in the `workflow` directory of the tutorial
+> 1. Add the topic name as a Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor.
+> 2. Download the workflow for the tutorial
+> 3. Save it in the `workflow` directory of the tutorial
+> 4. Check that your `workflow` directory has an `index.md` with the contents:
+>
+>    ```yaml
+>    ---
+>    layout: workflow-list
+>    ---
+>    ```
 {: .hands_on}
-
 
 ## Testing the workflow (recommended)
 
@@ -61,7 +69,7 @@ Workflow testing is a great way to get feedback that your tutorial can be run su
 
 Given the workflow you created above and have included in the tutorial folder, you'll need to create a corresponding `-test.yml` file.
 
-> ### {% icon hands_on %} Hands-on: Creating the `-test.yml` file for your workflow
+> <hands-on-title>Creating the `-test.yml` file for your workflow</hands-on-title>
 >
 > 1. Find the correct name for the file; if your workflow was `unicycler.ga`, then your test file should be `unicycler-test.yml`, they need to share the same prefix.
 >
@@ -78,9 +86,9 @@ Given the workflow you created above and have included in the tutorial folder, y
 >      outputs:
 >        ffn:
 >          asserts:
->            has_text:
+>            - that: has_text
 >              text: ">A"
->            has_text:
+>            - that: has_text
 >              text: ">B"
 >    ```
 >
@@ -91,7 +99,7 @@ You'll need to edit the `job` and `outputs` sections according to your workflow'
 
 ### Inputs
 
-Your workflow **must** use "Data Inputs" for each input dataset. For each of these input step in the `.ga` file, you'll need to do the following:
+Your workflow **must** use "Data Inputs" for each input dataset. For each of these input steps in the `.ga` file, you'll need to do the following:
 
 1. Edit the `label`
 2. Edit the `name`
@@ -256,12 +264,12 @@ items:
       description: latest
       items:
       - info: https://doi.org/10.5281/zenodo....
-        url: https://zenodo.org/api/files/URL/to/the/input/file
+        url: https://zenodo.org/records/URL/files/path/to/input
         ext: galaxy-datatype
         src: url
 ```
 
-> ### {% icon hands_on %} Hands-on: Creating the `data-library.yaml`
+> <hands-on-title>Creating the `data-library.yaml`</hands-on-title>
 >
 > 1. Copy the Zenodo link
 > 2. Generate the `data-library.yaml` file and update the tutorial metadata with the link:
@@ -274,7 +282,7 @@ items:
 >    ```
 >
 > 3. Check that the `data-library.yaml` has been generated (or updated)
-> 4. Check tha the Zenodo link is in the metadata at the top of the `tutorial.md`
+> 4. Check that the Zenodo link is in the metadata at the top of the `tutorial.md`
 {: .hands_on}
 
 # Creating the `data-manager.yaml` (optional)
@@ -307,8 +315,8 @@ It is a great way to help users run the tutorial directly inside Galaxy. To lear
 
 # Testing the technical infrastructure
 
-Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about [Setting up Galaxy for Training]({{site.baseurl}}/topics/instructors/tutorials/setup-galaxy-for-training/tutorial.html) about how to test your tutorial requirements.
+Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about [Setting up Galaxy for Training]({{site.baseurl}}/topics/teaching/tutorials/setup-galaxy-for-training/tutorial.html) about how to test your tutorial requirements.
 
 
 # Conclusion
-{:.no_toc}
+

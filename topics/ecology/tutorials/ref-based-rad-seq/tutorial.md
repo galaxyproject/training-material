@@ -7,6 +7,10 @@ title: "RAD-Seq Reference-based data analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
 tags:
   - RAD-seq
+  - Genetic composition EBV class
+  - Species population EBV class
+  - EBV dataset
+  - EBV workflow
 questions:
   - "How to analyze RAD sequencing data using a reference genome for a population genomics study?"
 objectives:
@@ -20,16 +24,16 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862), a genome scan of nucleotide diversity and differentiation in natural populations of threespine stickleback *Gasterosteus aculeatus* was conducted. Authors used Illumina-sequenced RAD tags to identify and type over 45,000 single nucleotide polymorphisms (SNPs) in each of 100 individuals from two oceanic and three freshwater populations.
 
 ![The abstract of the paper on Population Genomics](../../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png)
 
-We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. *Gasterosteus aculeatus* draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conducted (see [de_novo tutorial]({{site.baseurl}}{% link topics/ecology/tutorials/de-novo-rad-seq/tutorial.md %}), enhancing discoverability of new loci of interest but also of false positive one).
+We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. *Gasterosteus aculeatus* draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conducted (see [de_novo tutorial]({% link topics/ecology/tutorials/de-novo-rad-seq/tutorial.md %}), enhancing discoverability of new loci of interest but also of false positive one).
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -47,10 +51,11 @@ The original data is available at NCBI SRA ENA under accession number [SRR034310
 We will look at the first run SRR034310 out of seven which includes 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic). We will download the reads directly from SRA and the remaining data (i.e reference genome, population map file, and barcodes file) from [Zenodo](https://zenodo.org/record/1134547#.WkugUjfjJXI).
 
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS RAD: population genomics with reference genome" for example...
->    {% include snippets/create_new_history.md %}
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **EBI SRA** {% icon tool %} import files from SRA:
 >    - Search for `SRR034310`
@@ -66,21 +71,22 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 >    https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 >    https://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta
 >    ```
->    {% include snippets/import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 4. Make sure the fastq.gz files you imported are of datatype `fastqsanger.gz`
 >
->    {% include snippets/change_datatype.md datatype="fastqsanger.gz" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger.gz" %}
 >
 >    Next, we need to tell Galaxy about the reference genome associated with this.
 >
 > 5. We will define a custom reference build** for this tutorial:
 >
->    {% include snippets/add_custom_build.md name="Stickleback" dbkey="stickleback" fasta="Reference_genome_11_chromosomes.fasta" %}
+>    {% snippet faqs/galaxy/analysis_add_custom_build.md name="Stickleback" dbkey="stickleback" fasta="Reference_genome_11_chromosomes.fasta" %}
 >
 > 6. Next, we set the `dbkey` of our imported fastq files to our custom build key
 >
->    {% include snippets/change_dbkey.md dbkey="stickleback" %}
+>    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="stickleback" %}
 >
 > 7. **Rename datasets** according to the sample names
 >
@@ -92,7 +98,7 @@ The sequences are raw sequences from the sequencing machine, without any pretrea
 
 For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3journal.org/content/1/3/171.full).
 
-> ### {% icon hands_on %} Hands-on: Demultiplexing reads
+> <hands-on-title>Demultiplexing reads</hands-on-title>
 >
 > 1. **Process Radtags** {% icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads files"*: `Single-end files`
@@ -103,14 +109,14 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >    - *"Capture discarded reads to a file"*: `Yes`
 >    - *"Output format"*: `fastq`
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. How many reads where on the original dataset?
 >    > 2. How many are kept?
 >    > 3. Can you try to explain the reason why we loose a lot of reads here?
 >    > 4. What kind of information does this result give concerning the upcoming data analysis and the barcodes design in general?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > The informations can be found in the results log file:
 >    > >
 >    > >  1. 8895289 total reads
@@ -133,7 +139,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
 >
@@ -175,16 +181,16 @@ We propose to continue the tutorial using the dataset collection containing the 
 
 For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis/tutorials/quality-control/tutorial.html): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
-> ### {% icon hands_on %} Hands-on: Quality control
+> <hands-on-title>Quality control</hands-on-title>
 >
 > 1. **FastQC** {% icon tool %} to check the quality of the reads:
 >    - {% icon param-collection %} *"Short read data from your current history"*: the fastq files (collection)
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What is the read length?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > The read length is 32 bp
 >    > {: .solution }
 >    {: .question}
@@ -214,7 +220,7 @@ As there is a draft genome for *Gasterosteus aculeatus*, we can use this informa
 
 To make sense of the reads, their positions within *Gasterosteus aculeatus* genome must be determined. This process is known as aligning or 'mapping' the reads to the reference genome.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/)
 {: .comment}
@@ -224,7 +230,7 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 *[Li et Durbin, Bioinformatics, 2009](https://www.ncbi.nlm.nih.gov/pubmed/19451168)*
 
 
-> ### {% icon hands_on %} Hands-on: Map with BWA
+> <hands-on-title>Map with BWA</hands-on-title>
 >
 > 1. **Map with BWA - map short reads (< 100 bp) against reference genome** {% icon tool %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -242,12 +248,12 @@ We next want to run Stacks on the freshwater and oceanic populations.
 
 Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks, and sstacks using a perl scrip (ref_map.pl) on the members of the population, accounting for the alignments of each read.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > Information on ref_map.pl and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/ref_map.php.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Stacks: Reference map
+> <hands-on-title>Stacks: Reference map</hands-on-title>
 >
 > 1. Create a new file with our population map and name it `Population_map.txt`:
 >
@@ -270,7 +276,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >    sample_GGCC	2
 >    ```
 >
->    {% include snippets/create_new_file.md %}
+>    {% snippet faqs/galaxy/datasets_create_new_file.md %}
 >
 > 2. **Stacks: Reference map** {% icon tool %}:
 >    - *"Select your usage"*: `Population`
@@ -278,7 +284,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >    - *"pecify a population map"*: `Population_map.txt` created above
 >    - *"Minimum depth of coverage"*: `3`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Replace Text` (for example to replace `Rabbit Slough` by a population number like `2`, `Add column` (for example to add `sample_`) or `Cut columns from a table` (to put the new `sample_` column af the first place) and finally `Regex replace` (replacing `(sample_)\t` by `\1`) to generate it...
 >    {: .comment}
 >
@@ -289,7 +295,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 
 # Calculate population genomics statistics
 
-> ### {% icon hands_on %} Hands-on: Calculate population genomics statistics
+> <hands-on-title>Calculate population genomics statistics</hands-on-title>
 >
 > 1. **Stacks: populations** {% icon tool %} with the following parameters:
 >    - *"Input type"*: `Stacks output`
@@ -304,13 +310,13 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >
 > 2. Now look at the output in the file `batch_1.sumstats` named `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from ref_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > >
 > > 1. What is the maximum value of FST' at any SNP? Don't hesitate to look at the [STACKS manual](http://catchenlab.life.illinois.edu/stacks/manual/#files) to find where this parameter is
 > > 2. What is the meaning of this FST' value compared a a classical FST one? Once again, the [STACKS manual](http://catchenlab.life.illinois.edu/stacks/manual/#files) can help you ;)
 > > 3. How many SNPs reach this FST' value?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > 1. 1
 > > > 2. FST’ is a haplotype measure of FST that is scaled to the theoretical maximum FST value at this locus. Depending on how many haplotypes there are, it may not be possible to reach an FST of 1, so this method will scale the value to 1
 > > > 2. 78
@@ -321,7 +327,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as which loci are candidate regarding the genetic differentiation between freshwater and oceanic Stickelback populations. To answer these questions, we analyzed RAD sequence datasets using a reference-based RAD-seq data analysis approach. This approach can be sum up with the following scheme:
 

@@ -1,16 +1,87 @@
 ---
 layout: base
 ---
+<div itemscope itemtype="https://schema.org/FAQPage">
+{% assign contributors = site.data['contributors'] %}
+<section class="tutorial" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
 
-{% include _includes/default-header.html %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{site.baseurl}}/faqs">All FAQs</a></li>
 
-<div class="container main-content">
-    <section>
-        <h1>Frequently asked questions</h1>
+      {% if page.url contains '/faqs/gtn/' %}
+      <li class="breadcrumb-item"><a href="{{site.baseurl}}/faqs/gtn/">GTN FAQs</a></li>
+      {% else %}
 
-        {{ content }}
+      <li class="breadcrumb-item"><a href="{{site.baseurl}}/faqs/galaxy/">Galaxy FAQs</a></li>
 
-    </section>
+      {% if page.url contains 'topic' %}
+        {% if page.url contains 'tutorial' %}  <!-- tutorial FAQ file -->
+
+          {% assign t = page.url | split: '/tutorials/' %}
+          {% assign top = t[0] | append: "/faqs" %}
+          <li class="breadcrumb-item"><a href="{{site.baseurl}}{{top}}">Topic FAQs</a></li>
+          <li class="breadcrumb-item" aria-current="page"><a href="{{site.baseurl}}{{page.dir}}">Tutorial FAQs</a></li>
+
+         {% else %}  <!-- topic-level FAQ file -->
+
+          {% assign t = page.url | split: '/faqs/' %}
+          {% assign top = t[0] | append: "/faqs" %}
+          <li class="breadcrumb-item"><a href="{{site.baseurl}}{{top}}">Topic FAQs</a></li>
+
+         {% endif %}
+        {% endif %}
+      {% endif %}
+
+      <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+
+    </ol>
+  </nav>
+  <h1 itemprop="name">{{page.title}}</h1>
+
+    {% if page.contributors %}
+    <div class="contributors-line" style="font-size:1rem;">{{ locale['authors'] | default: "Authors" }}: {% include
+        _includes/contributor-list.html
+        contributors=page.contributors badge=true newcontributors=true %}</div>
+    <hr>
+    {% endif %}
+
+    <div class="container">
+      <div class="row" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div class="col-md-8" itemprop="text">
+           {{ page.description }}
+
+
+           {{ content | fix_box_titles:page.lang,page.path | regex_replace: '<hr.*—<\/p>', '' }}
+
+        </div>
+        <div class="col-md-4">
+          <h5>Still have questions?</h5>
+
+          {% include _includes/button.html link="https://gitter.im/Galaxy-Training-Network/Lobby" label="Gitter Chat Support" colour="yellow" buttonsize="medium" %}
+
+          {% include _includes/button.html link="https://help.galaxyproject.org" label="Galaxy Help Forum" colour="purple" buttonsize="medium" %}
+
+
+          <h5>Want to embed this snippet (FAQ) in your GTN Tutorial?</h5>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% raw %}{% snippet  {% endraw %}{{ page.path }}{% raw %} %}{% endraw %}
+</code></pre></div></div>
+
+	  {% if page.short_id %}
+          <h5>Persistent URL</h5>
+	  Resource {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>
+	  {% endif %}
+
+
+
+        </div>
+      </div>
+    </div>
+
+    {% if page.cited %}
+    <h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
+    {% bibliography --cited %}
+    {% endif %}
+
+</section>
 </div>
-
-{% include _includes/default-footer.html %}

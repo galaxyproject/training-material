@@ -1,0 +1,83 @@
+---
+type: map
+mapping:
+    title:
+        type: str
+        required: true
+        description: |
+            Title of the Quiz
+        examples:
+            - Diagnostic Assessment
+            - SQL Basics Recap
+    contributors:
+        type: seq
+        required: true
+        description: |
+            Who contributed to this FAQ
+        examples:
+            - shiltemann
+            - hexylena
+        sequence:
+            - type: str
+              required: true
+              enum:
+              - CONTRIBUTORS
+    questions:
+      type: seq
+      required: true
+      description: |
+        The questions that are part of the quiz
+      sequence:
+        - type: map
+          mapping:
+            title:
+              type: str
+              required: true
+              description: |
+                The question title, displayed on the teacher and student screens simultaneously
+              examples:
+                - How you could collect information from learners at the beginning of a course or lesson and how you can use it?
+                - What keyword do you use to retrieve data in SQL
+            answers:
+              type: seq
+              description: |
+                The possible answers to the question you've asked. Consider
+                including common wrong answers, or answers based on common
+                mistakes to help students identify where they went wrong. 
+              examples:
+                - OBTAIN
+                - SELECT
+                - RETRIEVE
+                - RETURN
+              sequence:
+                - type: str
+            correct:
+              type: any
+              description: The correct answer, it MUST be part of the answers list. It can be a list of correct answers if it is a choose-many question
+              examples:
+                - SELECT
+                - [A, B]
+            timeout:
+              type: int
+              required: true
+              description: How long the students have to answer the question
+            image:
+              type: str
+              description: Path to an image, if you'd like to include one along with the question. Should be the full path starting with /
+              examples:
+                - /training-material/topics/data-science/images/carpentries-sql/sql-join-structure.svg
+            live:
+              type: bool
+              description: |
+                Used ONLY with the poll type questions to enable displaying the results as they come in. Great for polling audiences for how they're feeling.
+            type:
+              type: str
+              required: true
+              description: |
+                What type of question to display.
+              enum:
+                - choose-1
+                - choose-many
+                - free-text
+                - poll
+---

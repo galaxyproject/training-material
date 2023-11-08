@@ -1,0 +1,27 @@
+- doc: Test outline for advanced_workflow.ga
+  job:
+    DCD input:
+      class: File
+      path: https://zenodo.org/record/2537734/files/cbh1test.dcd
+    PDB input:
+      class: File
+      path: https://zenodo.org/record/2537734/files/cbh1test.pdb
+  outputs:
+    Cosine Content raw data:
+      asserts:
+        has_n_lines: 1
+        has_text: '0.583'
+    Dihedral Analysis raw data:
+      asserts:
+        has_n_lines: 15
+        has_n_cols: 2 
+    Distance Analysis raw data:
+      asserts:
+        has_n_lines: 15
+    RDF Analysis raw data:
+      asserts:
+        has_n_lines: 100
+    Ramachandran Plot raw data:
+      asserts:
+        has_n_lines: 15
+        has_text: '144.503'

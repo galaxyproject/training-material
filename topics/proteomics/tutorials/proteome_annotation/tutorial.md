@@ -26,16 +26,19 @@ contributors:
 - davidchristiany
 - yvandenb
 
+subtopic: post-process
+tags: [DDA, human]
+
 ---
 
 # Introduction
-{:.no_toc}
+
 
 [ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the study entitled "Proteomic characterization of human exhaled breath condensate" {% cite Lacombe2018 %}.
 The goal of this study was to identify proteins secreted in the respiratory tract (lung, bronchi). Samples were obtained non-invasively by condensation of exhaled air that contains submicron droplets of airway lining fluid. Two pooled samples of EBC, each obtained from 10 healthy donors, were processed. Two 'technical' control samples were processed in parallel to the pooled samples to correct for exogenous protein contamination.
 A total of 229 unique proteins were identified in EBC among which 153 proteins were detected in both EBC pooled samples. A detailed bioinformatics analysis of these 153 proteins showed that most of the proteins identified corresponded to proteins secreted in the respiratory tract (lung, bronchi).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 >
 > 1. TOC
@@ -47,10 +50,11 @@ A total of 229 unique proteins were identified in EBC among which 153 proteins w
 
 For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from {% cite Lacombe2018 %} and two others EBC proteomes previously published ({% cite Muccilli2015 %}  and {% cite Bredberg2011 %}). These datasets are available from Zenodo [here](https://zenodo.org/record/3405119).
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a name
->   {% include snippets/create_new_history.md %}
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the files from [Zenodo](https://zenodo.org/record/3405119) or from the shared data library (ask your instructors).
 >
@@ -60,8 +64,9 @@ For this tutorial, we will use 3 datasets: the list of proteins identified by LC
 >    https://zenodo.org/record/3405119/files/Mucilli.txt
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -70,10 +75,10 @@ For this tutorial, we will use 3 datasets: the list of proteins identified by LC
 
 A group of 10 proteins were identified in both “technical” control samples with an enrichment in EBC samples below a fixed threshold. These proteins were thus considered to be technical contaminants (see list of proteins in Table 4 in {% cite Lacombe2018 %}) and have to be removed from the initial dataset.
 
-> ### {% icon hands_on %} Hands-on: Remove the contaminants
+> <hands-on-title>Remove the contaminants</hands-on-title>
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `Lacombe_et_al_2017_OK.txt`
+>    - {% icon param-file %} *"Input file"*: `Lacombe_2018.txt`
 >    - *"Operation"*: `Discard`
 >    - {% icon param-repeat %} *"Insert Filter by keywords"*
 >      - *"Column number on which to apply the filter"*: `c1`
@@ -81,9 +86,9 @@ A group of 10 proteins were identified in both “technical” control samples w
 >      - *"Enter keywords"*: `copy/paste`
 >        - *"Copy/paste keywords to find"*: `P04264 P35908 P13645 Q5D862 Q5T749 Q8IW75 P81605 P22531 P59666 P78386`
 >
->    > ### {% icon comment %} Outputs
->    > - **Filtered_Lacombe_et_al_2017.txt - Discarded_lines**: output list with the ten proteins (contaminants) removed from the original dataset (10 proteins)
->    > - **Filtered_Lacombe_et_al_2017.txt**: output contains the remaining proteins that will be considered for further analysis (151 proteins)
+>    > <comment-title>Outputs</comment-title>
+>    > - **Filtered_Lacombe_2018.txt - Discarded_lines**: output list with the ten proteins (contaminants) removed from the original dataset (10 proteins)
+>    > - **Filtered_Lacombe_2018.txt**: output contains the remaining proteins that will be considered for further analysis (151 proteins)
 >    {: .comment}
 >
 {: .hands_on}
@@ -93,25 +98,25 @@ A group of 10 proteins were identified in both “technical” control samples w
 
 As EBC samples are obtained from air exhaled through the oral cavity, and even though the RTube collection device contained a saliva trap to separate saliva from the exhaled breath, contamination with salivary proteins had to be assessed. We decided to check the expression pattern for each protein of the "core" EBC proteome using the [The Human Protein Atlas](https://www.proteinatlas.org/) (HPA, {% cite Uhln2005 %}). As HPA is indexed by Ensembl gene identifier (ENSG) we first need to convert Uniprot ID to Ensembl gene (ENSG). Secondly, check for proteins which are highly expressed in the salivary glands as reported by HPA, then in a third step, we filter out these proteins.
 
-> ### {% icon hands_on %} Hands-on: Convert Uniprot ID to Ensembl gene ID
+> <hands-on-title>Convert Uniprot ID to Ensembl gene ID</hands-on-title>
 >
 > 1. **ID Converter** {% icon tool %} with the following parameters:
 >    - *"Enter IDs"*: `Input file containing IDs`
->        - {% icon param-file %} *"Select your file"*: `Filtered_Lacombe_et_al_2017.txt` output from **Filter by keywords** {% icon tool %}
+>        - {% icon param-file %} *"Select your file"*: `Filtered_Lacombe_2018.txt` output from **Filter by keywords** {% icon tool %}
 >    - *"Column number of IDs to map"*: `c1`
 >    - *"Species"*: `Human (Homo sapiens)`
 >        - *"Type/source of IDs"*: `Uniprot accession number (e.g. P31946)`
 >        - *"Target type of IDs you would like to map to"*:
 >          - {% icon param-check %} `Ensembl gene ID (e.g. ENSG00000166913)`
 >
->    > ### {% icon comment %} Output
+>    > <comment-title>Output</comment-title>
 >    >
 >    > In the output file, a new column which contains Ensembl IDs was added (at the end)
 >    {: .comment}
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Check for proteins highly expressed in salivary glands
+> <hands-on-title>Check for proteins highly expressed in salivary glands</hands-on-title>
 >
 > 1. **Add expression data** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs"*: `Input file containing your IDs`
@@ -125,7 +130,7 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 >       - {% icon param-check %} `RNA tissue specificity abundance in "Transcript Per Million`
 >
 >
->    > ### {% icon comment %} Outputs
+>    > <comment-title>Outputs</comment-title>
 >    >
 >    > In the output file, four columns were added (5, 6, 7 and 8) corresponding to the retrieved information from HPA.
 >    {: .comment}
@@ -145,7 +150,7 @@ Q9NZT1  Calmodulin-like protein 5  8  ENSG00000178372   CALML5 Calmodulin-like 5
 In the next step, we will filter the data to remove these biological contaminants (i.e. proteins highly expressed in salivary glands)
 by filtering out the lines that contain the word `salivary` in the column of RNA transcript specific TPM.
 
-> ### {% icon hands_on %} Hands-on: Filter the data to remove the biological contaminants
+> <hands-on-title>Filter the data to remove the biological contaminants</hands-on-title>
 >
 >  1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >     - {% icon param-file %} *"Input file"*: `Add expression data on data ..` from **Add expression data** {% icon tool %}
@@ -156,13 +161,13 @@ by filtering out the lines that contain the word `salivary` in the column of RNA
 >       - *"Enter keywords"*: `copy/paste`
 >          - *"Copy/paste keyword to fine"*: `salivary`
 >
->     > ### {% icon comment %} Outputs
+>     > <comment-title>Outputs</comment-title>
 >     > Two output files are created:
 >     > - **Filtered Add expression data on data .. - Discarded lines** (12 proteins)
 >     > - **FilteredAdd expression data on data ..** (157 proteins)
 >     {: .comment}
 >
->  > ### {% icon tip %} Tip: Using genes instead of keywords
+>  > <tip-title>Using genes instead of keywords</tip-title>
 >  > Note also that a list of “gene” may have been entered (selected on the basis of their TPM value) applied to column 5 instead of the keywords "salivary" to column 8, as it has been done in {% cite Lacombe2018 %}.
 >  {: .tip}
 >
@@ -171,54 +176,11 @@ by filtering out the lines that contain the word `salivary` in the column of RNA
 
 # Functional annotation of the EBC proteome (enrichment analysis)
 
-The resulting list of 157 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset compared to the lung proteome (corresponding to tissue-specific genes extracted from the Human Protein Atlas). To do so, we first build a lung reference proteome (that should be more representative of the studied sample rather than a full human proteome) that will be used for enrichment analysis performed with the ClusterProfiler tool (based on the R package clusterProfiler).
-
-> ### {% icon hands_on %} Hands-on: Build a lung reference proteome as a background for GO terms enrichment analysis
->
-> 1. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
->    - {% icon param-select %} *"Experimental data source (antibody- or RNAseq-based)"*: `Expression profiles based on immunohistochemistry`
->    - {% icon param-select %} *"Select tissue"*: `Lung` and `Bronchus` (you can start typing to filter the list)
->    - *"Expression level"*:
->      - {% icon param-check %} `High`
->      - {% icon param-check %} `Medium`
->      - {% icon param-check %} `Low`
->    - *"Reliability score"*:
->      - {% icon param-check %} `Enhanced`
->      - {% icon param-check %} `Supported`
->
->   > ### Output
->   > - **Tissue-specific expression from IHC**: List of the selected proteins.
->   > 6 columns: 'Gene', 'Gene name' and the retrieved info from HPA.
->   {: .comment}
-{: .hands_on}
-
-
-Note that expression information about respiratory cell types is retrieved (column 4; e.g. macrophages, pneumocytes, respiratory epithelial cells)
-that could be used for further refinement of your reference background.
-
-As the ClusterProfiler tool (which we will use for the enrichment analysis) does not consider ENSG (Ensembl gene) identifiers as input, we need to convert IDs into either entrez Gene ID or Uniprot accession number.
-
-> ### {% icon hands_on %} Hands-on: Convert Ensembl ID to Uniprot and Entrez Gene ID
->
-> 1. **ID Converter** {% icon tool %} with the following parameters:
->    - *"Enter IDs"*: `Input file containing IDs`
->    - {% icon param-file %} *"Select your file"*: `Tissue-specific expression from IHC` from **Build tissue-specific expression dataset** {% icon tool %}
->    - *"Column number of IDs to map"*: `c1`
->    - *"Species"*: `Human (Homo sapiens)`
->      - *"Type/source of IDs"*: `Ensembl gene ID (e.g. ENSG00000166913)`
-       - *"Target type of IDs you would like to map to"*:
->        - {% icon param-check %} `UniProt accession number (e.g. P31946)`
->        - {% icon param-check %} `Entrez gene ID (e.g. 7529)`
->
->    > ### {% icon comment %} Output
->    > In the output file, 2 new columns have been added with the ID retrieved thanks to the conversion.
->    {: .comment}
-{: .hands_on}
-
+The resulting list of 157 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset. To do so, we'll use the ClusterProfiler tool (based on the R package clusterProfiler) for functional annotation. 
 Now we can perform the GO terms analysis. Input list is the EBC proteome to be analyzed after technical and biological contaminants
 removal, which is the output of biological contaminants filter step.
 
-> ### {% icon hands_on %} Hands-on: GO terms analysis
+> <hands-on-title>GO terms analysis</hands-on-title>
 >
 > 1. **GO terms classification and enrichment analysis** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs"*: `Input file containing your IDs`
@@ -233,15 +195,11 @@ removal, which is the output of biological contaminants filter step.
 >    - *"Perform GO categories representation analysis?"*: `Yes`
 >    - *"Ontology level"*: `3`
 >    - *"Perform GO categories enrichment analysis?"*: `Yes`
->      - *"Define your own background IDs?"*: `Yes`
->        - *"Enter your background IDs"*: `Input file containing your background IDs`
->        - {% icon param-file %} *"Select file that contains your background IDs list"*: `ID converter on data ..` from lastest **ID Converter** {% icon tool %} run
->        - *"Column number of IDs"*: `c7`
->        - *"Select type of background IDs"*: `UniProt Accession number`
+>      - *"Define your own background IDs?"*: `No`
 >        - *"Graphical display"*:
 >          - {% icon param-check %} `dot-plot`
 >
->   > ### {% icon comment %} Output
+>   > <comment-title>Output</comment-title>
 >   >
 >   > Results created in History panel are the following:
 >   >   - Cluster profiler
@@ -250,12 +208,8 @@ removal, which is the output of biological contaminants filter step.
 >   >
 >   >   The suffix “GGO” (GroupGO) corresponds to the results “GO categories representation analysis” option
 >   >   (performs a gene/protein classification based on GO distribution at a specific level). The suffix
->   >   “EGO” (EnrichGO) corresponds to the results from the enrichment analysis (based on an
->   >   over-representation test of GO terms against the lung reference background). Two types of graphical output are provided either
+>   >   “EGO” (EnrichGO) corresponds to the results from the enrichment analysis. Two types of graphical output are provided either
 >   >   in the form of bar-plot or dot-plot.
->   >   According to this analysis, the main biological processes over-represented in EBC compared to
->   >   lung were some processes related to the immune system and exocytosis (see EGO.BP.dot.png, for Enriched
->   >   Biological Process GO terms dot-plot representation in png format).
 >   {: .comment}
 {: .hands_on}
 
@@ -267,7 +221,7 @@ via the web service of Reactome ({% cite croft2013reactome %}), an open access, 
 database that aims to provide intuitive bioinformatics tools for the visualization,
 interpretation and analysis of pathway knowledge.
 
-> ### {% icon hands_on %} Hands-on: Protein list mapping on Reactome database
+> <hands-on-title>Protein list mapping on Reactome database</hands-on-title>
 >
 > 1. **Query pathway database [Reactome]** {% icon tool %} with the following parameters:
 >    - *"Input IDs"*: `Input file containing your IDs`
@@ -285,7 +239,7 @@ Here you can explore the Reactome map of your IDs to see the context of your bio
 
 # Comparison with other proteomic datasets from previous studies
 
-> ### {% icon hands_on %} Hands-on: Lists comparison with Venn diagramm tool
+> <hands-on-title>Lists comparison with Venn diagramm tool</hands-on-title>
 >
 > 1. **Venn diagram** {% icon tool %} with the following parameters:
 >    - {% icon param-repeat %} *"Insert List to compare"*
@@ -301,7 +255,7 @@ Here you can explore the Reactome map of your IDs to see the context of your bio
 >      - {% icon param-file %} *"Select your file"*: `output` (Input dataset)
 >      - *"Enter the name of this list"*: `Mucilli et al`
 >
->   > ### {% icon comment %} Output
+>   > <comment-title>Output</comment-title>
 >   >
 >   > The Venn diagram shows the number of proteins specific and in common between the 3 lists.
 >   > ![Graphical output of the Venn diagram](../../images/ProteoreAnnot-Venn.png).
@@ -310,7 +264,7 @@ Here you can explore the Reactome map of your IDs to see the context of your bio
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 ProteoRE offers a panel of tools to annotate a protein list.
 We showed that it is possible to make ID conversion, perform tissu-expression annotation, but also

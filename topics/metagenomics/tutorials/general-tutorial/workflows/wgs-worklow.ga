@@ -1,333 +1,336 @@
 {
-    "a_galaxy_workflow": "true", 
-    "annotation": "", 
-    "format-version": "0.1", 
-    "name": "WGS part in \"Analyses of metagenomics data - The global picture\"", 
-    "steps": {
-        "0": {
-            "annotation": "", 
-            "content_id": null, 
-            "errors": null, 
-            "id": 0, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "SRR606451_pampa.fasta"
-                }
-            ], 
-            "label": null, 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 10, 
-                "top": 10
-            }, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"SRR606451_pampa.fasta\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "2b9a76e9-f7fc-451a-a6f7-16d87f96547b", 
-            "workflow_outputs": []
-        }, 
-        "1": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2/metaphlan2/2.6.0.0", 
-            "errors": null, 
-            "id": 1, 
-            "input_connections": {
-                "input_file": {
-                    "id": 0, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "MetaPhlAn2", 
-            "outputs": [
-                {
-                    "name": "output_file", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "sam_output_file", 
-                    "type": "sam"
-                }, 
-                {
-                    "name": "biom_output_file", 
-                    "type": "biom"
-                }
-            ], 
-            "position": {
-                "left": 230, 
-                "top": 10
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2/metaphlan2/2.6.0.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "8c82c4d90cc6", 
-                "name": "metaphlan2", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"min_cu_len\": \"\\\"2000\\\"\", \"min_alignment_len\": \"\\\"0\\\"\", \"input_file\": \"null\", \"__page__\": null, \"ignore_eukaryotes\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"db\": \"{\\\"db_selector\\\": \\\"cached\\\", \\\"cached_db\\\": \\\"mpa_v20_m200\\\", \\\"__current_case__\\\": 0}\", \"stat_q\": \"\\\"0.1\\\"\", \"ignore_viruses\": \"\\\"true\\\"\", \"ignore_archaea\": \"\\\"true\\\"\", \"analysis_type\": \"{\\\"tax_lev\\\": \\\"a\\\", \\\"analysis_type_select\\\": \\\"rel_ab\\\", \\\"__current_case__\\\": 0}\", \"ignore_bacteria\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
-            "tool_version": "2.6.0.0", 
-            "type": "tool", 
-            "uuid": "6c279be2-d670-4647-9643-52373ba0b81e", 
-            "workflow_outputs": []
-        }, 
-        "2": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0", 
-            "errors": null, 
-            "id": 2, 
-            "input_connections": {
-                "profile": {
-                    "id": 1, 
-                    "output_name": "output_file"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "Format MetaPhlAn2", 
-            "outputs": [
-                {
-                    "name": "krona", 
-                    "type": "tabular"
-                }
-            ], 
-            "position": {
-                "left": 450, 
-                "top": 10
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "fdbd63e92b01", 
-                "name": "metaphlan2krona", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"profile\": \"null\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
-            "tool_version": "2.6.0.0", 
-            "type": "tool", 
-            "uuid": "da2a7136-60c3-4455-848f-aa50e6b14e74", 
-            "workflow_outputs": []
-        }, 
-        "3": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2/humann2/0.9.9.0", 
-            "errors": null, 
-            "id": 3, 
-            "input_connections": {
-                "input": {
-                    "id": 0, 
-                    "output_name": "output"
-                }, 
-                "taxo_profile|taxonomic_profile": {
-                    "id": 1, 
-                    "output_name": "output_file"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "HUMAnN2", 
-            "outputs": [
-                {
-                    "name": "gene_families_tsv", 
-                    "type": "tsv"
-                }, 
-                {
-                    "name": "gene_families_biom", 
-                    "type": "biom1"
-                }, 
-                {
-                    "name": "pathcoverage_tsv", 
-                    "type": "tsv"
-                }, 
-                {
-                    "name": "pathcoverage_biom", 
-                    "type": "biom1"
-                }, 
-                {
-                    "name": "pathabundance_tsv", 
-                    "type": "tsv"
-                }, 
-                {
-                    "name": "pathabundance_biom", 
-                    "type": "biom1"
-                }
-            ], 
-            "position": {
-                "left": 450, 
-                "top": 130
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2/humann2/0.9.9.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "1ab06263e083", 
-                "name": "humann2", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"adv\": \"{\\\"translated_query_coverage_threshold\\\": \\\"50.0\\\", \\\"translated_subject_coverage_threshold\\\": \\\"50.0\\\", \\\"prescreen_threshold\\\": \\\"0.01\\\", \\\"evalue\\\": \\\"1.0\\\", \\\"annotation_gene_index\\\": \\\"8\\\", \\\"minpath\\\": \\\"true\\\", \\\"id_mapping\\\": null, \\\"identity_threshold\\\": \\\"50.0\\\", \\\"remove_statified_output\\\": \\\"true\\\", \\\"xipe\\\": \\\"false\\\", \\\"pick_frames\\\": \\\"true\\\", \\\"gap_fill\\\": \\\"true\\\", \\\"output_format\\\": \\\"tsv\\\", \\\"remove_column_description_output\\\": \\\"true\\\", \\\"output_max_dec\\\": \\\"10\\\"}\", \"__page__\": null, \"bypass\": \"{\\\"bypass_translated_search\\\": \\\"false\\\", \\\"bypass_nucleotide_search\\\": \\\"false\\\", \\\"bypass_prescreen\\\": \\\"false\\\", \\\"bypass_nucleotide_index\\\": \\\"false\\\"}\", \"translated_alignment\": \"\\\"diamond\\\"\", \"protein_db\": \"{\\\"protein_db_selector\\\": \\\"cached\\\", \\\"__current_case__\\\": 0, \\\"protein_database\\\": \\\"uniref-uniref50_diamond-2017-06-16\\\"}\", \"__rerun_remap_job_id__\": null, \"taxo_profile\": \"{\\\"taxonomic_profile_test\\\": \\\"true\\\", \\\"taxonomic_profile\\\": null, \\\"__current_case__\\\": 0}\", \"pathways\": \"\\\"metacyc\\\"\", \"nucleotide_db\": \"{\\\"nucleotide_db_selector\\\": \\\"cached\\\", \\\"nucleotide_database\\\": \\\"chocophlan-full-2017-06-16\\\", \\\"__current_case__\\\": 0}\", \"search_mode\": \"\\\"uniref50\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
-            "tool_version": "0.9.9.0", 
-            "type": "tool", 
-            "uuid": "e81517dc-b51a-45d3-9b75-12eb0fb381d3", 
-            "workflow_outputs": []
-        }, 
-        "4": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.6.1", 
-            "errors": null, 
-            "id": 4, 
-            "input_connections": {
-                "type_of_data|input": {
-                    "id": 2, 
-                    "output_name": "krona"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "Krona pie chart", 
-            "outputs": [
-                {
-                    "name": "output", 
-                    "type": "html"
-                }
-            ], 
-            "position": {
-                "left": 670, 
-                "top": 10
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.6.1", 
-            "tool_shed_repository": {
-                "changeset_revision": "020b3087d0b7", 
-                "name": "taxonomy_krona_chart", 
-                "owner": "crs4", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"type_of_data\": \"{\\\"input\\\": null, \\\"type_of_data_selector\\\": \\\"text\\\", \\\"__current_case__\\\": 1}\", \"__rerun_remap_job_id__\": null, \"root_name\": \"\\\"Root\\\"\", \"combine_inputs\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
-            "tool_version": "2.6.1", 
-            "type": "tool", 
-            "uuid": "3ab16466-7c3e-4d31-b008-2f248c2a9cc7", 
-            "workflow_outputs": []
-        }, 
-        "5": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.9.9.0", 
-            "errors": null, 
-            "id": 5, 
-            "input_connections": {
-                "input": {
-                    "id": 3, 
-                    "output_name": "gene_families_tsv"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "Renormalize", 
-            "outputs": [
-                {
-                    "name": "output_table", 
-                    "type": "tsv"
-                }
-            ], 
-            "position": {
-                "left": 670, 
-                "top": 130
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.9.9.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "ba4dfbdc1295", 
-                "name": "humann2_renorm_table", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"mode\": \"\\\"community\\\"\", \"units\": \"\\\"relab\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"special\": \"\\\"true\\\"\"}", 
-            "tool_version": "0.9.9.0", 
-            "type": "tool", 
-            "uuid": "572e766d-3747-4d96-b4e2-ac91145d19d0", 
-            "workflow_outputs": []
-        }, 
-        "6": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_regroup_table/humann2_regroup_table/0.9.9.0", 
-            "errors": null, 
-            "id": 6, 
-            "input_connections": {
-                "input": {
-                    "id": 3, 
-                    "output_name": "gene_families_tsv"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "Regroup", 
-            "outputs": [
-                {
-                    "name": "output_table", 
-                    "type": "tsv"
-                }
-            ], 
-            "position": {
-                "left": 670, 
-                "top": 250
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_regroup_table/humann2_regroup_table/0.9.9.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "a1747df2bc21", 
-                "name": "humann2_regroup_table", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"function\": \"\\\"sum\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"precision\": \"\\\"3\\\"\", \"ungrouped\": \"\\\"true\\\"\", \"protected\": \"\\\"true\\\"\", \"input\": \"null\", \"built_in\": \"{\\\"built_in_test\\\": \\\"true\\\", \\\"__current_case__\\\": 0, \\\"gene_family_groups\\\": {\\\"groups\\\": \\\"uniref50_go\\\", \\\"gene_family_type\\\": \\\"uniref50\\\", \\\"__current_case__\\\": 0}}\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
-            "tool_version": "0.9.9.0", 
-            "type": "tool", 
-            "uuid": "87b1d6bb-cefc-411f-9bbe-69cba9f530f2", 
-            "workflow_outputs": []
-        }, 
-        "7": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.9.9.0", 
-            "errors": null, 
-            "id": 7, 
-            "input_connections": {
-                "input": {
-                    "id": 6, 
-                    "output_name": "output_table"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "Renormalize", 
-            "outputs": [
-                {
-                    "name": "output_table", 
-                    "type": "tsv"
-                }
-            ], 
-            "position": {
-                "left": 890, 
-                "top": 10
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.9.9.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "ba4dfbdc1295", 
-                "name": "humann2_renorm_table", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"mode\": \"\\\"community\\\"\", \"units\": \"\\\"relab\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"special\": \"\\\"true\\\"\"}", 
-            "tool_version": "0.9.9.0", 
-            "type": "tool", 
-            "uuid": "518cbf0a-e51e-49cf-9f62-2a5b768548db", 
-            "workflow_outputs": []
+  "a_galaxy_workflow": "true",
+  "annotation": "Analyses of metagenomics data - The global picture",
+  "format-version": "0.1",
+  "name": "WGS Part In \"Analyses Of Metagenomics Data - The Global Picture\"",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "SRR606451_pampa.fasta"
         }
-    }, 
-    "uuid": "dda13ebb-0bf8-4dc0-b0fd-6296d9d31188"
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 10
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"SRR606451_pampa.fasta\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "2b9a76e9-f7fc-451a-a6f7-16d87f96547b",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2/metaphlan2/2.6.0.0",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+        "input_file": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "MetaPhlAn2",
+      "outputs": [
+        {
+          "name": "output_file",
+          "type": "tabular"
+        },
+        {
+          "name": "sam_output_file",
+          "type": "sam"
+        },
+        {
+          "name": "biom_output_file",
+          "type": "biom"
+        }
+      ],
+      "position": {
+        "left": 230,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2/metaphlan2/2.6.0.0",
+      "tool_shed_repository": {
+        "changeset_revision": "8c82c4d90cc6",
+        "name": "metaphlan2",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"min_cu_len\": \"\\\"2000\\\"\", \"min_alignment_len\": \"\\\"0\\\"\", \"input_file\": \"null\", \"__page__\": null, \"ignore_eukaryotes\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"db\": \"{\\\"db_selector\\\": \\\"cached\\\", \\\"cached_db\\\": \\\"mpa_v20_m200\\\", \\\"__current_case__\\\": 0}\", \"stat_q\": \"\\\"0.1\\\"\", \"ignore_viruses\": \"\\\"true\\\"\", \"ignore_archaea\": \"\\\"true\\\"\", \"analysis_type\": \"{\\\"tax_lev\\\": \\\"a\\\", \\\"analysis_type_select\\\": \\\"rel_ab\\\", \\\"__current_case__\\\": 0}\", \"ignore_bacteria\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "2.6.0.0",
+      "type": "tool",
+      "uuid": "6c279be2-d670-4647-9643-52373ba0b81e",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "profile": {
+          "id": 1,
+          "output_name": "output_file"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Format MetaPhlAn2",
+      "outputs": [
+        {
+          "name": "krona",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 450,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0",
+      "tool_shed_repository": {
+        "changeset_revision": "fdbd63e92b01",
+        "name": "metaphlan2krona",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"profile\": \"null\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "2.6.0.0",
+      "type": "tool",
+      "uuid": "da2a7136-60c3-4455-848f-aa50e6b14e74",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2/humann2/0.9.9.0",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "taxo_profile|taxonomic_profile": {
+          "id": 1,
+          "output_name": "output_file"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "HUMAnN2",
+      "outputs": [
+        {
+          "name": "gene_families_tsv",
+          "type": "tsv"
+        },
+        {
+          "name": "gene_families_biom",
+          "type": "biom1"
+        },
+        {
+          "name": "pathcoverage_tsv",
+          "type": "tsv"
+        },
+        {
+          "name": "pathcoverage_biom",
+          "type": "biom1"
+        },
+        {
+          "name": "pathabundance_tsv",
+          "type": "tsv"
+        },
+        {
+          "name": "pathabundance_biom",
+          "type": "biom1"
+        }
+      ],
+      "position": {
+        "left": 450,
+        "top": 130
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2/humann2/0.9.9.0",
+      "tool_shed_repository": {
+        "changeset_revision": "1ab06263e083",
+        "name": "humann2",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"translated_query_coverage_threshold\\\": \\\"50.0\\\", \\\"translated_subject_coverage_threshold\\\": \\\"50.0\\\", \\\"prescreen_threshold\\\": \\\"0.01\\\", \\\"evalue\\\": \\\"1.0\\\", \\\"annotation_gene_index\\\": \\\"8\\\", \\\"minpath\\\": \\\"true\\\", \\\"id_mapping\\\": null, \\\"identity_threshold\\\": \\\"50.0\\\", \\\"remove_statified_output\\\": \\\"true\\\", \\\"xipe\\\": \\\"false\\\", \\\"pick_frames\\\": \\\"true\\\", \\\"gap_fill\\\": \\\"true\\\", \\\"output_format\\\": \\\"tsv\\\", \\\"remove_column_description_output\\\": \\\"true\\\", \\\"output_max_dec\\\": \\\"10\\\"}\", \"__page__\": null, \"bypass\": \"{\\\"bypass_translated_search\\\": \\\"false\\\", \\\"bypass_nucleotide_search\\\": \\\"false\\\", \\\"bypass_prescreen\\\": \\\"false\\\", \\\"bypass_nucleotide_index\\\": \\\"false\\\"}\", \"translated_alignment\": \"\\\"diamond\\\"\", \"protein_db\": \"{\\\"protein_db_selector\\\": \\\"cached\\\", \\\"__current_case__\\\": 0, \\\"protein_database\\\": \\\"uniref-uniref50_diamond-2017-06-16\\\"}\", \"__rerun_remap_job_id__\": null, \"taxo_profile\": \"{\\\"taxonomic_profile_test\\\": \\\"true\\\", \\\"taxonomic_profile\\\": null, \\\"__current_case__\\\": 0}\", \"pathways\": \"\\\"metacyc\\\"\", \"nucleotide_db\": \"{\\\"nucleotide_db_selector\\\": \\\"cached\\\", \\\"nucleotide_database\\\": \\\"chocophlan-full-2017-06-16\\\", \\\"__current_case__\\\": 0}\", \"search_mode\": \"\\\"uniref50\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.9.9.0",
+      "type": "tool",
+      "uuid": "e81517dc-b51a-45d3-9b75-12eb0fb381d3",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.6.1",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "type_of_data|input": {
+          "id": 2,
+          "output_name": "krona"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Krona pie chart",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "html"
+        }
+      ],
+      "position": {
+        "left": 670,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.6.1",
+      "tool_shed_repository": {
+        "changeset_revision": "020b3087d0b7",
+        "name": "taxonomy_krona_chart",
+        "owner": "crs4",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"type_of_data\": \"{\\\"input\\\": null, \\\"type_of_data_selector\\\": \\\"text\\\", \\\"__current_case__\\\": 1}\", \"__rerun_remap_job_id__\": null, \"root_name\": \"\\\"Root\\\"\", \"combine_inputs\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "2.6.1",
+      "type": "tool",
+      "uuid": "3ab16466-7c3e-4d31-b008-2f248c2a9cc7",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.9.9.0",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input": {
+          "id": 3,
+          "output_name": "gene_families_tsv"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Renormalize",
+      "outputs": [
+        {
+          "name": "output_table",
+          "type": "tsv"
+        }
+      ],
+      "position": {
+        "left": 670,
+        "top": 130
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.9.9.0",
+      "tool_shed_repository": {
+        "changeset_revision": "ba4dfbdc1295",
+        "name": "humann2_renorm_table",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"mode\": \"\\\"community\\\"\", \"units\": \"\\\"relab\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"special\": \"\\\"true\\\"\"}",
+      "tool_version": "0.9.9.0",
+      "type": "tool",
+      "uuid": "572e766d-3747-4d96-b4e2-ac91145d19d0",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_regroup_table/humann2_regroup_table/0.9.9.0",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "input": {
+          "id": 3,
+          "output_name": "gene_families_tsv"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Regroup",
+      "outputs": [
+        {
+          "name": "output_table",
+          "type": "tsv"
+        }
+      ],
+      "position": {
+        "left": 670,
+        "top": 250
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_regroup_table/humann2_regroup_table/0.9.9.0",
+      "tool_shed_repository": {
+        "changeset_revision": "a1747df2bc21",
+        "name": "humann2_regroup_table",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"function\": \"\\\"sum\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"precision\": \"\\\"3\\\"\", \"ungrouped\": \"\\\"true\\\"\", \"protected\": \"\\\"true\\\"\", \"input\": \"null\", \"built_in\": \"{\\\"built_in_test\\\": \\\"true\\\", \\\"__current_case__\\\": 0, \\\"gene_family_groups\\\": {\\\"groups\\\": \\\"uniref50_go\\\", \\\"gene_family_type\\\": \\\"uniref50\\\", \\\"__current_case__\\\": 0}}\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.9.9.0",
+      "type": "tool",
+      "uuid": "87b1d6bb-cefc-411f-9bbe-69cba9f530f2",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.9.9.0",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "input": {
+          "id": 6,
+          "output_name": "output_table"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Renormalize",
+      "outputs": [
+        {
+          "name": "output_table",
+          "type": "tsv"
+        }
+      ],
+      "position": {
+        "left": 890,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.9.9.0",
+      "tool_shed_repository": {
+        "changeset_revision": "ba4dfbdc1295",
+        "name": "humann2_renorm_table",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"mode\": \"\\\"community\\\"\", \"units\": \"\\\"relab\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"special\": \"\\\"true\\\"\"}",
+      "tool_version": "0.9.9.0",
+      "type": "tool",
+      "uuid": "518cbf0a-e51e-49cf-9f62-2a5b768548db",
+      "workflow_outputs": []
+    }
+  },
+  "uuid": "dda13ebb-0bf8-4dc0-b0fd-6296d9d31188",
+  "tags": [
+    "metagenomics"
+  ]
 }

@@ -1,0 +1,87 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Intermine import/export",
+  "format-version": "0.1",
+  "name": "Intermine import/export",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 257,
+        "top": 403.5
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "13261ad4-770b-4728-9068-d9941d07abf7",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "3df15ab7-6fb7-4a90-81e9-f25868067b8e"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+        "input_tabular": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Create InterMine Interchange",
+          "name": "input_tabular"
+        }
+      ],
+      "label": null,
+      "name": "Create InterMine Interchange",
+      "outputs": [
+        {
+          "name": "intermine_output",
+          "type": "intermine_tabular"
+        }
+      ],
+      "position": {
+        "left": 509,
+        "top": 402.5
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "c24014d80001",
+        "name": "intermine_galaxy_exchange",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"feature_id_column\": \"\\\"2\\\"\", \"feature_id_text\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"feature_column\": \"\\\"1\\\"\", \"input_tabular\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"feature_text\": \"\\\"Gene\\\"\", \"organism_text\": \"\\\"\\\"\", \"organism_column\": \"\\\"3\\\"\"}",
+      "tool_version": "0.0.1",
+      "type": "tool",
+      "uuid": "8e5e0134-7b2a-43c4-b1d4-4d4b62b6af3c",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "intermine_output",
+          "uuid": "bfa0f275-4aee-4d3f-8b7c-4e32e8cc9710"
+        }
+      ]
+    }
+  },
+  "tags": ["galaxy-interface"],
+  "uuid": "6ce8a0ea-f916-47e6-b0ba-f337d947c7ea",
+  "version": 1
+}

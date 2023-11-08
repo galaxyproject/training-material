@@ -1,0 +1,773 @@
+{
+   "uuid":"4b550edb-532b-40b1-a59f-af7e8d7fb72a",
+   "tags":[
+      "cheminformatics",
+      "moleculardynamics",
+      "computational-chemistry"
+   ],
+   "format-version":"0.1",
+   "name":"MD protein-ligand workflow (from PDB structure)",
+   "version":4,
+   "steps":{
+      "0":{
+         "tool_id":null,
+         "tool_version":null,
+         "outputs":[
+
+         ],
+         "workflow_outputs":[
+            {
+               "output_name":"output",
+               "uuid":"2a9ccaa8-d21d-4d92-8e8c-97822d8d5d9e",
+               "label":null
+            }
+         ],
+         "input_connections":{
+
+         },
+         "tool_state":"{\"optional\": false, \"parameter_type\": \"text\"}",
+         "id":0,
+         "uuid":"73aff13d-acd3-41a0-8894-3104a93f9ad0",
+         "errors":null,
+         "name":"Input parameter",
+         "label":"PDB code (e.g. 6hhr)",
+         "inputs":[
+
+         ],
+         "position":{
+            "top":191.5,
+            "left":229.5
+         },
+         "annotation":"",
+         "content_id":null,
+         "type":"parameter_input"
+      },
+      "1":{
+         "tool_id":null,
+         "tool_version":null,
+         "outputs":[
+
+         ],
+         "workflow_outputs":[
+            {
+               "output_name":"output",
+               "uuid":"1fb55337-8d3f-4918-a1af-14c28986ff07",
+               "label":null
+            }
+         ],
+         "input_connections":{
+
+         },
+         "tool_state":"{\"optional\": false, \"parameter_type\": \"text\"}",
+         "id":1,
+         "uuid":"4c514954-d86b-409d-aa30-70545b8522ea",
+         "errors":null,
+         "name":"Input parameter",
+         "label":"Ligand name (e.g. AG5E)",
+         "inputs":[
+
+         ],
+         "position":{
+            "top":340.5,
+            "left":230.5
+         },
+         "annotation":"",
+         "content_id":null,
+         "type":"parameter_input"
+      },
+      "2":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"pdb",
+               "name":"output"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "pdb_id":{
+               "output_name":"output",
+               "id":0
+            }
+         },
+         "tool_state":"{\"pdb_id\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+         "id":2,
+         "tool_shed_repository":{
+            "owner":"bgruening",
+            "changeset_revision":"538790c6c21b",
+            "name":"get_pdb",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"872ff342-7311-4d12-a9a1-701eb9eb810a",
+         "errors":null,
+         "name":"Get PDB file",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":529
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0",
+         "type":"tool"
+      },
+      "3":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"input",
+               "name":"output"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "infile":{
+               "output_name":"output",
+               "id":2
+            }
+         },
+         "tool_state":"{\"lines_before\": \"\\\"0\\\"\", \"regex_type\": \"\\\"-P\\\"\", \"__page__\": null, \"color\": \"\\\"NOCOLOR\\\"\", \"invert\": \"\\\"-v\\\"\", \"__workflow_invocation_uuid__\": \"\\\"d050cd72889311ea8ed3001b21d75532\\\"\", \"case_sensitive\": \"\\\"-i\\\"\", \"__rerun_remap_job_id__\": null, \"url_paste\": \"\\\"HETATM\\\"\", \"lines_after\": \"\\\"0\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+         "id":3,
+         "tool_shed_repository":{
+            "owner":"bgruening",
+            "changeset_revision":"74a8bef53a00",
+            "name":"text_processing",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"6365dceb-8d8d-4704-9433-bea0a04c5005",
+         "errors":null,
+         "name":"Search in textfiles",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":789
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+         "type":"tool"
+      },
+      "4":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"input",
+               "name":"output"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "infile":{
+               "output_name":"output",
+               "id":2
+            },
+            "url_paste":{
+               "output_name":"output",
+               "id":1
+            }
+         },
+         "tool_state":"{\"lines_before\": \"\\\"0\\\"\", \"regex_type\": \"\\\"-P\\\"\", \"__page__\": null, \"color\": \"\\\"NOCOLOR\\\"\", \"invert\": \"\\\"\\\"\", \"case_sensitive\": \"\\\"-i\\\"\", \"__rerun_remap_job_id__\": null, \"url_paste\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"lines_after\": \"\\\"0\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+         "id":4,
+         "tool_shed_repository":{
+            "owner":"bgruening",
+            "changeset_revision":"74a8bef53a00",
+            "name":"text_processing",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"3d185d2e-334d-454a-9914-81cbc58c396d",
+         "errors":null,
+         "name":"Search in textfiles",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+            {
+               "name":"infile",
+               "description":"runtime parameter for tool Search in textfiles"
+            }
+         ],
+         "position":{
+            "top":321,
+            "left":789
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+         "type":"tool"
+      },
+      "5":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2019.1.4",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"top",
+               "name":"output1"
+            },
+            {
+               "type":"gro",
+               "name":"output2"
+            },
+            {
+               "type":"itp",
+               "name":"output3"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "pdb_input":{
+               "output_name":"output",
+               "id":3
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"ff\": \"\\\"amber99sb\\\"\", \"capture_log\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"d050cd72889311ea8ed3001b21d75532\\\"\", \"water\": \"\\\"tip3p\\\"\", \"pdb_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"ignore_h\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+         "id":5,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"cac1886249a2",
+            "name":"gmx_setup",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"d7e0d59c-79ef-4eec-8a7f-a65791b0b1d9",
+         "errors":null,
+         "name":"GROMACS initial setup",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":1062
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2019.1.4",
+         "type":"tool"
+      },
+      "6":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/2.4.2.2.0",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"text",
+               "name":"outfile"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "infile":{
+               "output_name":"output",
+               "id":4
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"dative_bonds\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"d050cd72889311ea8ed3001b21d75532\\\"\", \"appendtotitle\": \"\\\"\\\"\", \"remove_h\": \"\\\"false\\\"\", \"oformat\": \"{\\\"__current_case__\\\": 41, \\\"gen2d\\\": \\\"false\\\", \\\"gen3d\\\": \\\"false\\\", \\\"mol2_ignore_res\\\": \\\"false\\\", \\\"oformat_opts_selector\\\": \\\"mol2\\\"}\", \"ph\": \"\\\"7.0\\\"\", \"unique\": \"{\\\"__current_case__\\\": 0, \\\"unique_opts_selector\\\": \\\"\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"split\": \"\\\"false\\\"\"}",
+         "id":6,
+         "tool_shed_repository":{
+            "owner":"bgruening",
+            "changeset_revision":"b59c91adeac1",
+            "name":"openbabel_compound_convert",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"5540b2d4-6e1a-4ce0-a36d-7865d8ddf6b1",
+         "errors":null,
+         "name":"Compound conversion",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":412,
+            "left":1062
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/2.4.2.2.0",
+         "type":"tool"
+      },
+      "7":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/ambertools_acpype/ambertools_acpype/19.11",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"itp",
+               "name":"output"
+            },
+            {
+               "type":"gro",
+               "name":"gro_output"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "input1":{
+               "output_name":"outfile",
+               "id":6
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"multiplicity\": \"\\\"1\\\"\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"d050cd72889311ea8ed3001b21d75532\\\"\", \"charge\": \"\\\"0\\\"\", \"atomtype\": \"\\\"gaff\\\"\", \"save_gro\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+         "id":7,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"f4230f116196",
+            "name":"ambertools_acpype",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"fe6e5a49-76e2-4e5e-9a1b-fcf5f6764c02",
+         "errors":null,
+         "name":"Generate MD topologies for small molecules",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":1390
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/ambertools_acpype/ambertools_acpype/19.11",
+         "type":"tool"
+      },
+      "8":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_merge_topology_files/gmx_merge_topology_files/3.2.0",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"top",
+               "name":"complex_top"
+            },
+            {
+               "type":"gro",
+               "name":"complex_gro"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "lig_gro":{
+               "output_name":"gro_output",
+               "id":7
+            },
+            "prot_top":{
+               "output_name":"output1",
+               "id":5
+            },
+            "prot_gro":{
+               "output_name":"output2",
+               "id":5
+            },
+            "lig_top":{
+               "output_name":"output",
+               "id":7
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"prot_top\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"prot_gro\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"lig_gro\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"lig_top\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__workflow_invocation_uuid__\": \"\\\"d050cd72889311ea8ed3001b21d75532\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+         "id":8,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"06ea4e040d45",
+            "name":"gmx_merge_topology_files",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"922b485b-cd68-4ac0-9c29-91df8d6322a3",
+         "errors":null,
+         "name":"Merge GROMACS topologies",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":1718
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_merge_topology_files/gmx_merge_topology_files/3.2.0",
+         "type":"tool"
+      },
+      "9":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2019.1.4",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "input_file":{
+               "output_name":"complex_gro",
+               "id":8
+            }
+         },
+         "tool_state":"{\"box\": \"{\\\"__current_case__\\\": 0, \\\"config\\\": \\\"true\\\", \\\"dim\\\": \\\"1.0\\\", \\\"type\\\": \\\"triclinic\\\"}\", \"__page__\": null, \"capture_log\": \"\\\"false\\\"\", \"input_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"output_format\": \"\\\"gro\\\"\", \"__workflow_invocation_uuid__\": \"\\\"d050cd72889311ea8ed3001b21d75532\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}",
+         "id":9,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"3b8a9d5ced85",
+            "name":"gmx_editconf",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"d0b1c6b9-c499-4f15-9d44-7b44ff2ecfaf",
+         "errors":null,
+         "name":"GROMACS structure configuration",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":2046
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2019.1.4",
+         "type":"tool"
+      },
+      "10":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2019.1.4",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output1"
+            },
+            {
+               "type":"top",
+               "name":"output2"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "top_input":{
+               "output_name":"complex_top",
+               "id":8
+            },
+            "gro_input":{
+               "output_name":"output",
+               "id":9
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"capture_log\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"d050cd72889311ea8ed3001b21d75532\\\"\", \"gro_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"water_model\": \"\\\"spc216\\\"\", \"top_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"neutralise\": \"\\\"true\\\"\"}",
+         "id":10,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"1809414a9454",
+            "name":"gmx_solvate",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"d0d02517-7dc6-4447-90a1-5ca6fca923e0",
+         "errors":null,
+         "name":"GROMACS solvation and adding ions",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":2374
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2019.1.4",
+         "type":"tool"
+      },
+      "11":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2019.1.4",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output1"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "top_input":{
+               "output_name":"output2",
+               "id":10
+            },
+            "gro_input":{
+               "output_name":"output1",
+               "id":10
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"capture_log\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"gro_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"top_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"mdp\": \"{\\\"__current_case__\\\": 1, \\\"coulombtype\\\": \\\"PME\\\", \\\"cutoffscheme\\\": \\\"Verlet\\\", \\\"emstep\\\": \\\"0.01\\\", \\\"emtol\\\": \\\"1000.0\\\", \\\"integrator\\\": \\\"steep\\\", \\\"md_steps\\\": \\\"50000\\\", \\\"mdpfile\\\": \\\"default\\\", \\\"rcoulomb\\\": \\\"1.0\\\", \\\"rlist\\\": \\\"1.0\\\", \\\"rvdw\\\": \\\"1.0\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+         "id":11,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"eb6564a60136",
+            "name":"gmx_em",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"92137e6d-03f3-45ce-b2b4-eb209cc26cae",
+         "errors":null,
+         "name":"GROMACS energy minimization",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":2702
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2019.1.4",
+         "type":"tool"
+      },
+      "12":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2019.1.4.1",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output1"
+            },
+            {
+               "type":"xtc",
+               "name":"output4"
+            },
+            {
+               "type":"cpt",
+               "name":"output5"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "inps|itp_in":{
+               "output_name":"output3",
+               "id":5
+            },
+            "top_input":{
+               "output_name":"output2",
+               "id":10
+            },
+            "gro_input":{
+               "output_name":"output1",
+               "id":11
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"capture_log\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"gro_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"sets\": \"{\\\"ensemble\\\": \\\"nvt\\\", \\\"mdp\\\": {\\\"__current_case__\\\": 1, \\\"constraints\\\": \\\"all-bonds\\\", \\\"coulombtype\\\": \\\"PME\\\", \\\"cutoffscheme\\\": \\\"Verlet\\\", \\\"integrator\\\": \\\"md\\\", \\\"md_steps\\\": \\\"50000\\\", \\\"mdpfile\\\": \\\"default\\\", \\\"rcoulomb\\\": \\\"1.0\\\", \\\"rlist\\\": \\\"1.0\\\", \\\"rvdw\\\": \\\"1.0\\\", \\\"step_length\\\": \\\"0.0002\\\", \\\"temperature\\\": \\\"300\\\", \\\"write_freq\\\": \\\"1000\\\"}}\", \"top_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"inps\": \"{\\\"cpt_in\\\": null, \\\"itp_in\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"ndx_in\\\": null}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"outps\": \"{\\\"cpt_out\\\": \\\"true\\\", \\\"edr_out\\\": \\\"false\\\", \\\"str\\\": \\\"gro\\\", \\\"tpr_out\\\": \\\"false\\\", \\\"traj\\\": \\\"xtc\\\", \\\"xvg_out\\\": \\\"false\\\"}\"}",
+         "id":12,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"2e219a2d9327",
+            "name":"gmx_sim",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"28aa8411-a757-453a-9f7d-80ffd9d7d881",
+         "errors":null,
+         "name":"GROMACS simulation",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":3030
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2019.1.4.1",
+         "type":"tool"
+      },
+      "13":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2019.1.4.1",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output1"
+            },
+            {
+               "type":"xtc",
+               "name":"output4"
+            },
+            {
+               "type":"cpt",
+               "name":"output5"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "inps|itp_in":{
+               "output_name":"output3",
+               "id":5
+            },
+            "top_input":{
+               "output_name":"output2",
+               "id":10
+            },
+            "gro_input":{
+               "output_name":"output1",
+               "id":12
+            },
+            "inps|cpt_in":{
+               "output_name":"output5",
+               "id":12
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"capture_log\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"gro_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"sets\": \"{\\\"ensemble\\\": \\\"npt\\\", \\\"mdp\\\": {\\\"__current_case__\\\": 1, \\\"constraints\\\": \\\"all-bonds\\\", \\\"coulombtype\\\": \\\"PME\\\", \\\"cutoffscheme\\\": \\\"Verlet\\\", \\\"integrator\\\": \\\"md\\\", \\\"md_steps\\\": \\\"50000\\\", \\\"mdpfile\\\": \\\"default\\\", \\\"rcoulomb\\\": \\\"1.0\\\", \\\"rlist\\\": \\\"1.0\\\", \\\"rvdw\\\": \\\"1.0\\\", \\\"step_length\\\": \\\"0.0002\\\", \\\"temperature\\\": \\\"300\\\", \\\"write_freq\\\": \\\"1000\\\"}}\", \"top_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"inps\": \"{\\\"cpt_in\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"itp_in\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"ndx_in\\\": null}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"outps\": \"{\\\"cpt_out\\\": \\\"true\\\", \\\"edr_out\\\": \\\"false\\\", \\\"str\\\": \\\"gro\\\", \\\"tpr_out\\\": \\\"false\\\", \\\"traj\\\": \\\"xtc\\\", \\\"xvg_out\\\": \\\"false\\\"}\"}",
+         "id":13,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"2e219a2d9327",
+            "name":"gmx_sim",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"c9142812-1723-4058-9f4b-8db5b829fab8",
+         "errors":null,
+         "name":"GROMACS simulation",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":3331
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2019.1.4.1",
+         "type":"tool"
+      },
+      "14":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2019.1.4.1",
+         "tool_version":null,
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output1"
+            },
+            {
+               "type":"xtc",
+               "name":"output4"
+            },
+            {
+               "type":"cpt",
+               "name":"output5"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "top_input":{
+               "output_name":"output2",
+               "id":10
+            },
+            "gro_input":{
+               "output_name":"output1",
+               "id":13
+            },
+            "inps|cpt_in":{
+               "output_name":"output5",
+               "id":13
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"capture_log\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"gro_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"sets\": \"{\\\"ensemble\\\": \\\"nvt\\\", \\\"mdp\\\": {\\\"__current_case__\\\": 1, \\\"constraints\\\": \\\"none\\\", \\\"coulombtype\\\": \\\"PME\\\", \\\"cutoffscheme\\\": \\\"Verlet\\\", \\\"integrator\\\": \\\"md\\\", \\\"md_steps\\\": \\\"1000000\\\", \\\"mdpfile\\\": \\\"default\\\", \\\"rcoulomb\\\": \\\"1.0\\\", \\\"rlist\\\": \\\"1.0\\\", \\\"rvdw\\\": \\\"1.0\\\", \\\"step_length\\\": \\\"0.0002\\\", \\\"temperature\\\": \\\"300\\\", \\\"write_freq\\\": \\\"1000\\\"}}\", \"top_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"inps\": \"{\\\"cpt_in\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"itp_in\\\": null, \\\"ndx_in\\\": null}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"outps\": \"{\\\"cpt_out\\\": \\\"true\\\", \\\"edr_out\\\": \\\"false\\\", \\\"str\\\": \\\"gro\\\", \\\"tpr_out\\\": \\\"false\\\", \\\"traj\\\": \\\"xtc\\\", \\\"xvg_out\\\": \\\"false\\\"}\"}",
+         "id":14,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"2e219a2d9327",
+            "name":"gmx_sim",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"93b1a759-28a2-4fbc-80a8-4a47a3e850a8",
+         "errors":null,
+         "name":"GROMACS simulation",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":3632
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2019.1.4.1",
+         "type":"tool"
+      }
+   },
+   "annotation":"High Throughput Molecular Dynamics and Analysis",
+   "a_galaxy_workflow":"true"
+}
+

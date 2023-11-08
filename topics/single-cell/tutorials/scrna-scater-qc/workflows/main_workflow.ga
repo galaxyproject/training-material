@@ -1,0 +1,289 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Single-cell quality control with scater",
+  "format-version": "0.1",
+  "name": "Scater",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "annotation.txt"
+        }
+      ],
+      "label": "annotation.txt",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 200
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"annotation.txt\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "3575b170-465d-4e4a-bae1-ff4c1efa142a",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "counts.txt"
+        }
+      ],
+      "label": "counts.txt",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 320
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"counts.txt\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "03bc455e-52cc-4a2e-9a00-049f0fab721f",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "mt_controls.txt"
+        }
+      ],
+      "label": "mt_controls.txt",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 440
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"mt_controls.txt\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "f59c9ecb-0d03-4e93-8f46-5d3ed1b75aea",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "col_data": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "counts": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "mt_controls": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scater: Calculate QC metrics",
+      "outputs": [
+        {
+          "name": "output_loom",
+          "type": "loom"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2",
+      "tool_shed_repository": {
+        "changeset_revision": "fd808de478b1",
+        "name": "scater_create_qcmetric_ready_sce",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"ercc_controls\": \"null\", \"cell_controls\": \"null\", \"__rerun_remap_job_id__\": null, \"mt_controls\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"col_data\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"counts\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/tgac/services/galaxy/prod/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.12.2",
+      "type": "tool",
+      "uuid": "cae20f66-087b-4c66-a317-6511b000a797",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "input_loom": {
+          "id": 3,
+          "output_name": "output_loom"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scater: plot library QC",
+      "outputs": [
+        {
+          "name": "output_plot",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 750,
+        "top": 161
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2",
+      "tool_shed_repository": {
+        "changeset_revision": "2e41b35b5bdd",
+        "name": "scater_plot_dist_scatter",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"input_loom\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/tgac/services/galaxy/prod/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"plot_log\": \"\\\"false\\\"\"}",
+      "tool_version": "1.12.2",
+      "type": "tool",
+      "uuid": "60d1091e-4141-416d-9020-324f6a97abde",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input_loom": {
+          "id": 3,
+          "output_name": "output_loom"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scater: filter SCE",
+      "outputs": [
+        {
+          "name": "output_loom",
+          "type": "loom"
+        }
+      ],
+      "position": {
+        "left": 865,
+        "top": 346
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2",
+      "tool_shed_repository": {
+        "changeset_revision": "b7ea9f09c02f",
+        "name": "scater_filter",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"input_loom\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/tgac/services/galaxy/prod/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"filter_type\": \"{\\\"__current_case__\\\": 0, \\\"detection_limit\\\": \\\"4.0\\\", \\\"expressed_genes\\\": \\\"500\\\", \\\"filter_type_selector\\\": \\\"manual\\\", \\\"library_size\\\": \\\"100000\\\", \\\"percent_counts_MT\\\": \\\"35.0\\\"}\"}",
+      "tool_version": "1.12.2",
+      "type": "tool",
+      "uuid": "b0cf51ed-998b-4aac-a726-5e2c93cefb34",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "input_loom": {
+          "id": 5,
+          "output_name": "output_loom"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scater: plot library QC",
+      "outputs": [
+        {
+          "name": "output_plot",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 1145,
+        "top": 182
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2",
+      "tool_shed_repository": {
+        "changeset_revision": "2e41b35b5bdd",
+        "name": "scater_plot_dist_scatter",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"input_loom\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/tgac/services/galaxy/prod/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"plot_log\": \"\\\"false\\\"\"}",
+      "tool_version": "1.12.2",
+      "type": "tool",
+      "uuid": "8d3fa68e-26e0-4e1b-af9e-95bd0601b0c8",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "input_loom": {
+          "id": 5,
+          "output_name": "output_loom"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scater: PCA plot",
+      "outputs": [
+        {
+          "name": "output_plot",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 1139,
+        "top": 533
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2",
+      "tool_shed_repository": {
+        "changeset_revision": "46fc6751d746",
+        "name": "scater_plot_pca",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"input_loom\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"size_by\": \"\\\"\\\"\", \"colour_by\": \"\\\"Mutation_Status\\\"\", \"__rerun_remap_job_id__\": null, \"shape_by\": \"\\\"Cell_Cycle\\\"\", \"chromInfo\": \"\\\"/tgac/services/galaxy/prod/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.12.2",
+      "type": "tool",
+      "uuid": "010f0c75-1aa5-4a53-b48c-5a7d15009ef5",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+    "transcriptomics"
+  ],
+  "uuid": "9e227801-1847-4a52-9b3e-4d6f0fb0fb34",
+  "version": 0
+}
