@@ -19,9 +19,6 @@ contributors:
   - dannon
 ---
 
-## Introduction
-
-
 In this tutorial we are going to demonstrate how to add a third party
 JavaScript-based visualization to Galaxy, and we'll talk about what the benefits
 are. The plugin we've selected for this exercise is the [*PV-Javascript Protein

@@ -24,13 +24,12 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  - gallantries
 subtopic: analyse
 ---
 
 
-# Introduction
-
+This tutorial will introduce you to how to run RStudio in Galaxy
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 

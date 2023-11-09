@@ -62,8 +62,6 @@ follow_up_training:
         - scrna-case_alevin-combine-datasets
 ---
 
-# Introduction
-
 Este tutorial te ayudará a pasar de datos crudos de secuenciación en archivos FASTQ a una matriz de datos en formato AnnData donde cada célula es una fila y cada gen es una columna. Pero, ¿Qué es una matriz de datos y cuál es el formato AnnData? Lo averiguaremos a su debido tiempo. Enfatizamos que este es el primer paso para procesar datos de secuenciación de células únicas para poder realizar su análisis.
 
 De momento, en tus archivos de secuenciación tienes un montón de cadenas del tipo `ATGGGCTT`, etc. y lo que necesitas saber es cuántas células tienes y qué genes aparecen en ellas. En la segunda parte de este tutorial abordaremos la combinación de archivos FASTQ y el cómo añadir metadatos (por ejemplo, SEXO o GENOTIPO) para análisis posteriores. Estos son los pasos que requieren más recursos computacionales en los análisis de células únicas, ya que partimos de cientos de millones de lecturas, cada una de ellas con cuatro líneas de texto. Posteriormente, en el análisis, estos datos se convertirán en simples conteos de genes, por ejemplo ‘La célula A tiene 4 GAPDHs’ (‘Cell A has 4 GAPDHs’), que es mucho más sencillo de almacenar.

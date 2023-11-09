@@ -26,6 +26,8 @@ contributions:
     - poterlowicz-lab
   editing:
     - hexylena
+  funding:
+      - ELIXIR-UK-DaSH
 subtopic: fair-data
 
 requirements:
@@ -35,8 +37,6 @@ requirements:
       - fair-intro
 ---
 
-
-# Introduction
 
 Encouraging computational reproducibility in research, we will present a variety of data stewardship recommendations that we have found useful in the process of training development. As part of that process, we are exploring the application of the FAIR (Findable, Accessible, Interoperable, Reusable) guidelines to the Galaxy Training Network (GTN) materials, in order to improve their secondary use and adaptation.
 
@@ -53,7 +53,7 @@ This tutorial outlines how to set and use existing resources to make Galaxy trai
 
 Here, we refer to a set of good practices as described in *"Ten simple rules for making training materials FAIR"* {% cite Garcia2020 %}.
 
-![Ten simple rules for making training materials FAIR.](../../images/fair_gtn.png "Ten simple rules for making training materials FAIR. The primary guideline is to share; the Findability rules are description, identity, and registration; the latter two, along with access rules, correspond to accessibility; and the first rule is to share; With the exception of the format rule, which stands alone for interoperability, the remaining four criteria all relate to various facets of reusability")
+![Ten simple rules for making training materials FAIR.]({% link topics/fair/images/fair_gtn.png %} "Ten simple rules for making training materials FAIR. The primary guideline is to share; the Findability rules are description, identity, and registration; the latter two, along with access rules, correspond to accessibility; and the first rule is to share; With the exception of the format rule, which stands alone for interoperability, the remaining four criteria all relate to various facets of reusability")
 
 Image credit: Luc Wiegers and Celia van Gelder {% cite wiegers_luc_2019_3593258 %}
 
@@ -81,7 +81,7 @@ GTN Tutorials aim to follow best practices in course design, so that they can be
 ## Make your training materials (re)usable for trainers
 To help others determine whether the training materials are relevant and adaptable to their particular situations, metadata published alongside training materials should include context and sufficient description including: contributor details, license, description, learning outcomes, audience, requirements, tags/keywords, duration and last revision date Applying the proper licence and tagging training materials with metadata can make it simpler for others to (re)use and adapt them.
 
-GTN provide strong technical support and set of [contributing self learning material](https://training.galaxyproject.org/training-material/topics/contributing/).
+GTN provide strong technical support and set of [contributing self learning material]({% link topics/contributing/index.md %}).
 
 ## Make your training materials usable for trainees
 Prerequisites and learning outcomes are particularly helpful metadata. To be effective, learning objectives must be written using active verbs that describe the expected trainee behaviours as well as the knowledge, skills, and expertise they will have received. Rich metadata requirements and SMART—Specific (Measurable, Attainable, Relevant, and Time-bound) learning outcomes following Bloom's taxonomy {% cite chevron2014metacognitive %} helps to clarify which trainees will benefit most from the training. Self-learning structure of the GTN materials supported by slides and video walkthroughs/tours adds another layer of usability.

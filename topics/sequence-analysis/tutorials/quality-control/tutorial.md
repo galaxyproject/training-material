@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Quality Control"
-zenodo_link: "https://doi.org/10.5281/zenodo.61771"
+zenodo_link: "https://zenodo.org/records/61771"
 questions:
   - How to perform quality control of NGS raw data?
   - What are the quality parameters to check for a dataset?
@@ -35,11 +35,10 @@ contributors:
   - lleroi
   - r1corre
   - stephanierobin
-  - erasmusplus
+  - gallantries
+  - neoformit
 
 ---
-
-# Introduction
 
 
 During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a sequence is generated, also called a **read**, which is simply a succession of nucleotides.
@@ -875,10 +874,10 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 > 2. Import the PacBio HiFi reads `m64011_190830_220126.Q20.subsample.fastq.gz` from [Zenodo](https://zenodo.org/record/5730295)
 >
 >    ```
->    https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/m64011_190830_220126.Q20.subsample.fastq.gz
+>    https://zenodo.org/records/5730295/files/m64011_190830_220126.Q20.subsample.fastq.gz
 >    ```
 >
-> 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
+> 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0) %} with the following parameters
 >    - {% icon param-files %} *"files"*: `m64011_190830_220126.Q20.subsample.fastq.gz`
 >    - *"Options for customizing the plots created"*
 >        - {% icon param-select %} *"Specify the bivariate format of the plots."*: `dot`, `kde`
@@ -912,7 +911,7 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 
 This plot shows the distribution of fragment sizes in the file that was analyzed.
 Unlike most of Illumina runs, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
-In this example, the distribution of read length is centered near 15kbp but the results can be very different depending of your experiment.
+In this example, the distribution of read length is centered near 18kbp but the results can be very different depending of your experiment.
 
 ![Histogram of read lengths](../../images/quality-control/HistogramReadlength.png "Histogram of read length")
 
@@ -951,8 +950,8 @@ One of the strengths of PycoQC is that it is interactive and highly customizable
 > 2. Import the nanopore reads `nanopore_basecalled-guppy.fastq.gz` and `sequencing_summary.txt` from [Zenodo](https://zenodo.org/record/5730295)
 >
 >    ```
->    https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/nanopore_basecalled-guppy.fastq.gz
->    https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/sequencing_summary.txt
+>    https://zenodo.org/records/5730295/files/nanopore_basecalled-guppy.fastq.gz
+>    https://zenodo.org/records/5730295/files/sequencing_summary.txt
 >    ```
 >
 > 3. {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %} with the following parameters
@@ -1087,6 +1086,6 @@ Quality control steps are similar for any type of sequencing data:
 - Quality assessment with tools like:
   - *Short Reads*: {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2) %}
   - *Short+Long*: {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}
-  - *Long Reads*:  {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %}
+  - *Long Reads*:  {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0) %}
   - *Nanopore only*: {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %}
 - Trimming and filtering for **short reads** with a tool like **Cutadapt** {% icon tool %}

@@ -24,7 +24,7 @@ contributions:
     - stephanierobin
     - jkreplak
   funding:
-    - erasmusplus
+    - gallantries
 
 abbreviations:
   SINEs: Short Interspersed Nuclear Elements
@@ -38,10 +38,6 @@ follow_up_training:
 subtopic: eukaryote
 priority: 1
 ---
-
-# Introduction
-
-
 
 When you assemble a new genome, you get its full sequence in FASTA format, in the form of contigs, scaffolds, or even whole chromosomes if you are lucky. However genomes, in particular for eukaryote organisms, contain a varying but significant proportion of repeated elements all along the sequence. These elements belong to different classes, including:
 
@@ -85,9 +81,9 @@ In this tutorial you will learn how to soft-mask the genome sequence of a small 
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/genome_raw.fasta
->    https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_RM2.fasta
->    https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_EDTA.fasta
+>    https://zenodo.org/record/7085837/files/genome_raw.fasta
+>    https://zenodo.org/record/7085837/files/Muco_library_RM2.fasta
+>    https://zenodo.org/record/7085837/files/Muco_library_EDTA.fasta
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

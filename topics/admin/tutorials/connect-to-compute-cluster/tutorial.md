@@ -329,7 +329,7 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    @@ -52,3 +52,6 @@
 >             minute: "0"
 >             hour: "0"
->             job: "GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server /usr/local/bin/gxadmin galaxy cleanup 60"
+>             job: "SHELL=/bin/bash source {{ galaxy_venv_dir }}/bin/activate &&  GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server GALAXY_CONFIG_FILE={{ galaxy_config_file }} /usr/local/bin/gxadmin galaxy cleanup 60"
 >    +    - name: Install slurm-drmaa
 >    +      package:
 >    +        name: slurm-drmaa1

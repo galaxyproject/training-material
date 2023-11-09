@@ -23,8 +23,6 @@ contributors:
 ---
 
 
-# Introduction
-
 
 Metabolomics is a *-omic* science known for being one of the most closely related to phenotypes.
 It involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants.

@@ -21,11 +21,6 @@ contributors:
   - carpentries
 ---
 
-# Introduction
-
-
----
-
 One of the most effective ways to teach new computational skills is through live coding {% cite Rubi2013 %} {% cite Haar2017 %} {% cite Raj2018 %}: *instructors do not use slides to teach the material*, but work through the lesson material, typing in the code or going through the instructions, with the workshop participants following along. This tutorial explains how it works, why we use it, and gives general tips for an effective participatory live coding presentation. We will finish this tutorial by practicing ourselves and providing feedback for each other.
 
 

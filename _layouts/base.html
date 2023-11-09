@@ -15,13 +15,14 @@
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        {% if page.mathjax %}
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        {% endif %}
         <link rel="preload" href="{{ site.baseurl }}/assets/css/main.css?v=3" as="style">
         {{ 'load' | bundle_preloads }}
         <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css?v=3">
         <link rel="manifest" href="{{ site.baseurl }}/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
-
 
         {{ page | generate_dublin_core: site }}
 
@@ -50,7 +51,7 @@
         </script>
         {% endif %}
     </head>
-    <body data-spy="scroll" data-target="#toc">
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         {{ 'theme' | load_bundle }}
         {% include _includes/default-header.html %}
         {% if topic.custom_css %}
@@ -64,6 +65,8 @@
         {% include _includes/default-footer.html %}
 
         {{ 'main' | load_bundle }}
+        {% if page.mathjax %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        {% endif %}
     </body>
 </html>

@@ -7,11 +7,6 @@ redirect_from:
 priority: 1
 zenodo_link: https://zenodo.org/record/5719228
 tags:
-  - single-cell
-  - mouse
-  - human
-  - deconvolution
-  - bulk
   - transcriptomics
 questions:
 - How do we infer cell type proportions from bulk RNA-seq data?
@@ -46,12 +41,10 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
 
-# Introduction
-
-
-<!-- using info from here: https://xuranw.github.io/MuSiC/articles/MuSiC.html -->
 
 Bulk RNA-seq data contains a mixture of transcript signatures from several types of cells. We wish to deconvolve this mixture to obtain estimates of the proportions of cell types within the bulk sample. To do this, we can use single cell RNA-seq data as a reference for estimating the cell type proportions within the bulk data.
+
+<!-- using info from here: https://xuranw.github.io/MuSiC/articles/MuSiC.html -->
 
 In this tutorial, we will use bulk and single-cell RNA-seq data, including matrices of similar tissues from different sources, to illustrate how to infer cell type abundances from bulk RNA-seq.
 
@@ -285,7 +278,7 @@ For now we need to construct our Expression set objects that will be consumed by
 
 Here we shall build two ExpressionSet objects corresponding to the bulk and single-cell datatypes.
 
-### **Construct Expression Set Object**
+### Construct Expression Set Object
 
 > <hands-on-title>Build the Expression Set inputs</hands-on-title>
 >
@@ -304,7 +297,7 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 >
 {: .hands_on}
 
-#### **Inspect Expression Set Object**
+#### Inspect Expression Set Object
 
 We will now inspect these objects we just created to see what information we can extract out of them, and how these multiple datasets are summarized within the object.
 
@@ -511,7 +504,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 
 You will need to again create ExpressionSet objects, as before.
 
-### **Construct Expression Set Object**
+### Construct Expression Set Object
 
 > <hands-on-title>Build the Expression Set inputs</hands-on-title>
 >
@@ -666,3 +659,5 @@ Note how two ExpressionSet objects are constructed: one from bulk RNA-seq tabula
 ![workflow_dendro.png](../../images/bulk-music/workflow_dendro.png "Workflow for generating a dendrogram and clustering cells upon it")
 
 This tutorial is part of the [https://singlecell.usegalaxy.eu](https://singlecell.usegalaxy.eu) portal ({% cite tekman2020single %}).
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}

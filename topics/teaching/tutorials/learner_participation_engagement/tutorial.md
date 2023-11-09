@@ -31,15 +31,12 @@ contributions:
     - ppalagi
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
 ---
 
-<!-- GTN:IGNORE:002 -->
-
-# Introduction
-
-
 Effective training
+
+<!-- GTN:IGNORE:002 -->
 
 > <comment-title>Resources / Reading recommendation</comment-title>
 >
