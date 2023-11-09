@@ -154,7 +154,7 @@ module GtnLinter
       %r{\(https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/([^)]*)\)}
     )
       .map do |idx, _text, selected|
-        #puts "#{idx} 0 #{selected[0]} 1 #{selected[1]} 2 #{selected[2]} 3 #{selected[3]}"
+      #puts "#{idx} 0 #{selected[0]} 1 #{selected[1]} 2 #{selected[2]} 3 #{selected[3]}"
       ReviewDogEmitter.error(
         path: @path,
         idx: idx,
