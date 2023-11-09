@@ -151,16 +151,17 @@ module GtnLinter
   def self.link_gtn_tutorial_external(contents)
     find_matching_texts(
       contents,
-      %r{\((https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/[^)]*)\)}
+      %r{\(https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/([^)]*)\)}
     )
       .map do |idx, _text, selected|
+      # puts "#{idx} 0 #{selected[0]} 1 #{selected[1]} 2 #{selected[2]} 3 #{selected[3]}"
       ReviewDogEmitter.error(
         path: @path,
         idx: idx,
         # We wrap the entire URL (inside the explicit () in a matching group to make it easy to select/replace)
-        match_start: selected.begin(1),
-        match_end: selected.end(1) + 1,
-        replacement: "{% link #{selected[3]}.md %}",
+        match_start: selected.begin(0) + 1,
+        match_end: selected.end(0),
+        replacement: "{% link #{selected[2].gsub('.html', '.md')} %}",
         message: 'Please use the link function to link to other pages within the GTN. ' \
                  'It helps us ensure that all links are correct',
         code: 'GTN:003'
@@ -908,7 +909,7 @@ module GtnLinter
 
       # puts "#{original[0..start_coln - 2]} + #{repl} + #{original[end_coln-1..-1]}"
       fixed = original[0..start_coln - 2] + repl + original[end_coln - 1..]
-      warn "Fixing #{original} to #{fixed}"
+      warn "DIFF\n-#{original}\n+#{fixed}"
       lines[start_line - 1] = fixed
 
       # Save our changes

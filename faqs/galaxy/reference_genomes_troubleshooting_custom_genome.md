@@ -7,7 +7,7 @@ contributors: [jennaj, Nurzhamalyrys]
 ---
 
 
-If a custom genome/transcriptome/exome dataset is producing errors, double check the format and that the chromosome identifiers between **ALL** inputs. Clicking on the bug icon {% icon galaxy-bug %} will often provide a description of the problem. This does not automatically submit a bug report, and it is not always necessary to do so, but it is a good way to get some information about [why a job is failing](https://training.galaxyproject.org/training-material/faqs/galaxy/analysis_troubleshooting.html). 
+If a custom genome/transcriptome/exome dataset is producing errors, double check the format and that the chromosome identifiers between **ALL** inputs. Clicking on the bug icon {% icon galaxy-bug %} will often provide a description of the problem. This does not automatically submit a bug report, and it is not always necessary to do so, but it is a good way to get some information about [why a job is failing]({% link faqs/galaxy/analysis_troubleshooting.md %}). 
 
 - Custom genome not assigned as FASTA format
 

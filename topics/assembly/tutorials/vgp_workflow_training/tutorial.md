@@ -548,3 +548,4 @@ With respect to the total sequence length, we can conclude that the size of our 
 
 If we compare the contact map of our assembled genome with the reference assembly (Fig. above), we can see that the two are indistinguishable, suggesting that we have generated a chromosome level genome assembly.
 
+
