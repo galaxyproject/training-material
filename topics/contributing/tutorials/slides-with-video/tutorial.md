@@ -162,7 +162,7 @@ The above voice example is specific to Spanish language content, hence not being
 
 1. We take our markdown slides, e.g. [`topics/introduction/tutorials/galaxy-intro-short/slides.html`](https://github.com/galaxyproject/training-material/blob/main/topics/introduction/tutorials/galaxy-intro-short/slides.html)
 2. In order for them to be processed, slides must have an annotation saying `video: true` in the header metadata, and then 'speaker notes' (everything after the ??? before the ---)
-3. This is turned into our 'plain text slides' which just renders the markdown a bit more nicely ([example](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html))
+3. This is turned into our 'plain text slides' which just renders the markdown a bit more nicely ([example]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html))
 4. Then we run ari.sh which does the following:
 
 	- `make video` is run which runs [`bin/ari-make.sh`](https://github.com/galaxyproject/training-material/blob/main/bin/ari-make.sh)
