@@ -111,5 +111,3 @@ The fields are separated by tabs, and each row represents a single hit. For more
 >
 > See {% cite Buchfink2014 %} for more discussion.
 {: .details}
-
-

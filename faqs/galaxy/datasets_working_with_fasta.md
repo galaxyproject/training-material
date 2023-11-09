@@ -14,7 +14,7 @@ contributors: [jennaj, garimavs]
     - Formatting criteria:
         - All sequence identifiers must be unique.
         - Some tools will require that there is no description line content, only identifiers, in the fasta title line (“>” line). Use **NormalizeFasta** to remove the description (all content after the first whitespace) and wrap the sequences to 80 bases.
-- [Custom genome](https://training.galaxyproject.org/training-material/faqs/galaxy/analysis_add_custom_build.html), transcriptome exome?
+- [Custom genome]({% link faqs/galaxy/analysis_add_custom_build.md %}), transcriptome exome?
     - Only appropriate for smaller genomes (bacterial, viral, most insects).
     - Not appropriate for any mammalian genomes, or some plants/fungi.
     - Sequence identifiers must be an exact match with all other inputs or expect problems. See **GFF GFT GFF3**.  
