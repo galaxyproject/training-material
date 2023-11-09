@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@732b877c0796e2e424f1353d2e7fc1c09e3343e6",
+		release: "galaxy-training-network@58078dca5165672ca71fce165651c4be6ea76978",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699488815' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699488815' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699520841' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699520841' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-01-24 14:21:57 +0000">
+<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
 <meta name="DC.creator" content="Anne Fouilloux">
 
         
@@ -109,7 +109,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-01-24 14:21:57 +0000",
+  "dateModified": "2023-11-03 14:30:27 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab",
   "interactivityType": "mixed",
@@ -168,7 +168,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab",
   "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/fates-jupyterlab/tutorial.html",
-  "version": 25,
+  "version": 26,
   "timeRequired": "PT6H",
   "teaches": "Motivation for using the Galaxy Climate JupyterLab for CLM-FATES.\n - Setting up CLM-FATES case with Galaxy Climate JupyterLab.\n - Running CLM-FATES in Galaxy for single-point locations where in-situ measurements are available.\n - Analyzing CLM-FATES results.\n - Sharing CLM-FATES simulations.\n - Composing, executing and publishing the corresponding Jupyter notebooks.",
   "keywords": [
@@ -296,13 +296,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "name": "interactive-tools"
     }
   ],
-  "abstract": "# Introduction"
+  "abstract": "The practical aims at familiarizing you with running CLM-FATES within Galaxy Climate JupyterLab."
 }
         </script>
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699488815'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699520841'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -798,7 +798,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -809,7 +809,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00043">https://gxy.io/GTN:T00043</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 25 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 26 </div>
 
     </blockquote>
     </section>
@@ -824,9 +824,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <h1 id="introduction">Introduction</h1>
-
-<p>The practical aims at familiarizing you with running CLM-FATES within Galaxy Climate JupyterLab.</p>
+                <p>The practical aims at familiarizing you with running CLM-FATES within Galaxy Climate JupyterLab.</p>
 
 <blockquote class="agenda">
   <h2 id="agenda">Agenda</h2>
@@ -834,11 +832,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
-      <li><a href="#agenda" id="markdown-toc-agenda">Agenda</a></li>
-      <li><a href="#motivation" id="markdown-toc-motivation">Motivation</a></li>
-    </ol>
-  </li>
+  <li><a href="#agenda" id="markdown-toc-agenda">Agenda</a></li>
+  <li><a href="#motivation" id="markdown-toc-motivation">Motivation</a></li>
   <li><a href="#step-1-get-data" id="markdown-toc-step-1-get-data">Step-1: Get data</a></li>
   <li><a href="#step-2-opening-up-climate-jupyterlab" id="markdown-toc-step-2-opening-up-climate-jupyterlab">Step-2: Opening up Climate JupyterLab</a></li>
   <li><a href="#step-3-create-a-new-session-clm-fates-in-jupyterlab" id="markdown-toc-step-3-create-a-new-session-clm-fates-in-jupyterlab">Step-3: Create a new session CLM-FATES in JupyterLab</a>    <ol>
@@ -1572,7 +1567,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/732b877c0796e2e424f1353d2e7fc1c09e3343e6">732b877</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/58078dca5165672ca71fce165651c4be6ea76978">58078dc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1600,7 +1595,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699488815'></script>
+        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699520841'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@732b877c0796e2e424f1353d2e7fc1c09e3343e6",
+		release: "galaxy-training-network@58078dca5165672ca71fce165651c4be6ea76978",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699488815' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699488815' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699520841' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699520841' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Identifying tuberculosis transmission links: from SNPs to transmission clusters">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-06-29 12:14:13 +0000">
+<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
 <meta name="DC.creator" content="Galo A. Goig">
 <meta name="DC.creator" content="Daniela Brites">
 <meta name="DC.creator" content="Christoph Stritt">
@@ -111,7 +111,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-06-29 12:14:13 +0000",
+  "dateModified": "2023-11-03 14:30:27 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Identifying tuberculosis transmission links: from SNPs to transmission clusters",
   "interactivityType": "mixed",
@@ -170,7 +170,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Identifying tuberculosis transmission links: from SNPs to transmission clusters",
   "url": "https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html",
-  "version": 12,
+  "version": 13,
   "timeRequired": "PT2H",
   "teaches": "Create a SNP alignment\n - Calculate pairwise SNP distances between MTB samples\n - Identify transmission clusters based on SNP distances\n - Study the emergence and spread of drug resistance based on transmission analysis.",
   "keywords": [
@@ -352,13 +352,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "name": "one-health"
     }
   ],
-  "abstract": "# Introduction"
+  "abstract": "In a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates."
 }
         </script>
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699488815'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699520841'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -876,7 +876,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 29, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -887,7 +887,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00145">https://gxy.io/GTN:T00145</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 12 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 13 </div>
 
     </blockquote>
     </section>
@@ -902,9 +902,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <h1 id="introduction">Introduction</h1>
-
-<p>In a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates.</p>
+                <p>In a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates.</p>
 
 <p>This tutorial guides you through transmission cluster identification from preprocessed whole-genome sequencing data of MTB strains. It consists of two parts:</p>
 
@@ -950,7 +948,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#analysis-part-1-identification-of-transmission-clusters-from-per-sample-variants" id="markdown-toc-analysis-part-1-identification-of-transmission-clusters-from-per-sample-variants">Analysis Part 1: Identification of transmission clusters from per-sample variants</a>    <ol>
       <li><a href="#get-the-data" id="markdown-toc-get-the-data">Get the data</a></li>
       <li><a href="#generate-a-snp-alignment" id="markdown-toc-generate-a-snp-alignment">Generate a SNP alignment</a></li>
@@ -2339,7 +2336,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/732b877c0796e2e424f1353d2e7fc1c09e3343e6">732b877</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/58078dca5165672ca71fce165651c4be6ea76978">58078dc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2367,7 +2364,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699488815'></script>
+        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699520841'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

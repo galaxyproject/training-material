@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@732b877c0796e2e424f1353d2e7fc1c09e3343e6",
+		release: "galaxy-training-network@58078dca5165672ca71fce165651c4be6ea76978",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699488815' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699488815' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699520841' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699520841' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Annotating a protein list identified by LC-MS/MS experiments">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
 <meta name="DC.creator" content="Valentin Loux">
 <meta name="DC.creator" content="Florence Combes">
 <meta name="DC.creator" content="David Christiany">
@@ -112,7 +112,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2023-11-03 14:30:27 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Annotating a protein list identified by LC-MS/MS experiments",
   "interactivityType": "mixed",
@@ -171,7 +171,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Annotating a protein list identified by LC-MS/MS experiments",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/tutorial.html",
-  "version": 37,
+  "version": 38,
   "timeRequired": "PT1H",
   "teaches": "Execute a complete annotation pipeline of a protein list identified by LC-MS/MS experiments",
   "keywords": [
@@ -317,13 +317,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "name": "human"
     }
   ],
-  "abstract": "# Introduction"
+  "abstract": "[ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the study entitled \"Proteomic characterization of human exhaled breath condensate\" {% cite Lacombe2018 %}."
 }
         </script>
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699488815'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699520841'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -706,7 +706,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -717,7 +717,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00234">https://gxy.io/GTN:T00234</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 37 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 38 </div>
 
     </blockquote>
     </section>
@@ -732,9 +732,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <h1 id="introduction">Introduction</h1>
-
-<p><a href="http://www.proteore.org">ProteoRE Galaxy instance</a> provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the study entitled “Proteomic characterization of human exhaled breath condensate” <span class="citation"><a href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a></span>.
+                <p><a href="http://www.proteore.org">ProteoRE Galaxy instance</a> provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the study entitled “Proteomic characterization of human exhaled breath condensate” <span class="citation"><a href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a></span>.
 The goal of this study was to identify proteins secreted in the respiratory tract (lung, bronchi). Samples were obtained non-invasively by condensation of exhaled air that contains submicron droplets of airway lining fluid. Two pooled samples of EBC, each obtained from 10 healthy donors, were processed. Two ‘technical’ control samples were processed in parallel to the pooled samples to correct for exogenous protein contamination.
 A total of 229 unique proteins were identified in EBC among which 153 proteins were detected in both EBC pooled samples. A detailed bioinformatics analysis of these 153 proteins showed that most of the proteins identified corresponded to proteins secreted in the respiratory tract (lung, bronchi).</p>
 
@@ -742,7 +740,6 @@ A total of 229 unique proteins were identified in EBC among which 153 proteins w
   <div class="box-title agenda-title" id="agenda">Agenda</div>
 
 <ol id="markdown-toc">
-  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#get-input-datasets" id="markdown-toc-get-input-datasets">Get Input Datasets</a></li>
   <li><a href="#filtering-out-technical-contaminants" id="markdown-toc-filtering-out-technical-contaminants">Filtering out technical contaminants</a></li>
   <li><a href="#check-for-the-presence-of-biological-contaminants" id="markdown-toc-check-for-the-presence-of-biological-contaminants">Check for the presence of biological contaminants</a></li>
@@ -1289,7 +1286,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/732b877c0796e2e424f1353d2e7fc1c09e3343e6">732b877</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/58078dca5165672ca71fce165651c4be6ea76978">58078dc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1317,7 +1314,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699488815'></script>
+        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699520841'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

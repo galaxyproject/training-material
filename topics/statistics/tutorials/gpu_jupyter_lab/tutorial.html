@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@732b877c0796e2e424f1353d2e7fc1c09e3343e6",
+		release: "galaxy-training-network@58078dca5165672ca71fce165651c4be6ea76978",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699488815' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699488815' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699520841' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699520841' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
+<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
 <meta name="DC.creator" content="Anup Kumar">
 
         
@@ -109,7 +109,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-05-17 17:21:19 +0000",
+  "dateModified": "2023-11-03 14:30:27 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy",
   "interactivityType": "mixed",
@@ -168,7 +168,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.html",
-  "version": 15,
+  "version": 16,
   "timeRequired": "PT1H",
   "teaches": "Learn to use Jupyterlab - an online Python editor designed for developing AI algorithms\n - Explore several of its features such as Git, workflow of jupyter notebook, integration to Galaxy\n - Develop AI algorithms using Tensorflow\n - Send long-running jobs to Galaxy's cluster and save results in its history\n - Reproduce results from recent scientific publications - COVID CT scan segmentation and 3D protein structure prediction",
   "keywords": [
@@ -300,13 +300,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "name": "protein-3D-structure"
     }
   ],
-  "abstract": "> <div class="box-title agenda-title" id="agenda">Agenda</div>"
+  "abstract": "[Jupyterlab](https://jupyterlab.readthedocs.io/en/stable/) is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust [Jupyterlab notebook application](https://usegalaxy.eu/root?tool_id=interactive_tool_ml_jupyter_notebook) has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, [Scikit-learn](https://scikit-learn.org/), [Tensorflow](https://www.tensorflow.org/), [ONNX](https://onnx.ai/) to support modern data science projects. It has been developed as an interactive Galaxy tool that runs on an isolated [docker container](https://github.com/anuprulez/ml-jupyter-notebook). The docker container has been built using [nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04](https://hub.docker.com/layers/anupkumar/docker-ml-jupyterlab/galaxy-integration-0.2/images/sha256-e2d7e28a2f975523db0f5ac29c2e2ce3c7a35b061072098ad388d5b42ee86fba?context=repo) as the base container. Moreover, a Galaxy [tool](https://github.com/bgruening/galaxytools/pull/1157) ( `run_jupyter_job`) can be executed using [Bioblend](https://bioblend.readthedocs.io/) which uses Galaxy's remote job handling for long-running machine learning and deep learning training. The training happens remotely on a Galaxy cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a Galaxy history for further use."
 }
         </script>
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699488815'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699520841'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -772,7 +772,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -783,7 +783,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00266">https://gxy.io/GTN:T00266</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 15 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 16 </div>
 
     </blockquote>
     </section>
@@ -798,20 +798,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
+                <p><a href="https://jupyterlab.readthedocs.io/en/stable/">Jupyterlab</a> is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust <a href="https://usegalaxy.eu/root?tool_id=interactive_tool_ml_jupyter_notebook">Jupyterlab notebook application</a> has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, <a href="https://scikit-learn.org/">Scikit-learn</a>, <a href="https://www.tensorflow.org/">Tensorflow</a>, <a href="https://onnx.ai/">ONNX</a> to support modern data science projects. It has been developed as an interactive Galaxy tool that runs on an isolated <a href="https://github.com/anuprulez/ml-jupyter-notebook">docker container</a>. The docker container has been built using <a href="https://hub.docker.com/layers/anupkumar/docker-ml-jupyterlab/galaxy-integration-0.2/images/sha256-e2d7e28a2f975523db0f5ac29c2e2ce3c7a35b061072098ad388d5b42ee86fba?context=repo">nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04</a> as the base container. Moreover, a Galaxy <a href="https://github.com/bgruening/galaxytools/pull/1157">tool</a> ( <code class="language-plaintext highlighter-rouge">run_jupyter_job</code>) can be executed using <a href="https://bioblend.readthedocs.io/">Bioblend</a> which uses Galaxy’s remote job handling for long-running machine learning and deep learning training. The training happens remotely on a Galaxy cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a Galaxy history for further use.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
-      <li><a href="#features-of-jupyterlab" id="markdown-toc-features-of-jupyterlab">Features of Jupyterlab</a></li>
-      <li><a href="#image-segmentation" id="markdown-toc-image-segmentation">Image segmentation</a></li>
-      <li><a href="#covid-ct-scan" id="markdown-toc-covid-ct-scan">COVID CT scan</a></li>
-      <li><a href="#ct-scans-and-masks" id="markdown-toc-ct-scans-and-masks">CT scans and masks</a></li>
-      <li><a href="#protein-3d-structure" id="markdown-toc-protein-3d-structure">Protein 3D structure</a></li>
-    </ol>
-  </li>
+  <li><a href="#features-of-jupyterlab" id="markdown-toc-features-of-jupyterlab">Features of Jupyterlab</a></li>
+  <li><a href="#image-segmentation" id="markdown-toc-image-segmentation">Image segmentation</a></li>
+  <li><a href="#covid-ct-scan" id="markdown-toc-covid-ct-scan">COVID CT scan</a></li>
+  <li><a href="#ct-scans-and-masks" id="markdown-toc-ct-scans-and-masks">CT scans and masks</a></li>
+  <li><a href="#protein-3d-structure" id="markdown-toc-protein-3d-structure">Protein 3D structure</a></li>
   <li><a href="#reproduce-results-from-recent-publications" id="markdown-toc-reproduce-results-from-recent-publications">Reproduce results from recent publications</a>    <ol>
       <li><a href="#open-jupyterlab" id="markdown-toc-open-jupyterlab">Open Jupyterlab</a></li>
       <li><a href="#clone-github-repository" id="markdown-toc-clone-github-repository">Clone Github repository</a></li>
@@ -821,7 +820,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     </ol>
   </li>
   <li><a href="#gpu-juyterlab-tool-in-a-galaxy-workflow" id="markdown-toc-gpu-juyterlab-tool-in-a-galaxy-workflow">GPU Juyterlab tool in a Galaxy workflow</a>    <ol>
-      <li><a href="#introduction-1" id="markdown-toc-introduction-1">Introduction</a></li>
+      <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
       <li><a href="#run-as-a-tool-in-workflow" id="markdown-toc-run-as-a-tool-in-workflow">Run as a tool in workflow</a></li>
     </ol>
   </li>
@@ -829,9 +828,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </ol>
 
 </blockquote>
-
-<h1 id="introduction">Introduction</h1>
-<p><a href="https://jupyterlab.readthedocs.io/en/stable/">Jupyterlab</a> is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust <a href="https://usegalaxy.eu/root?tool_id=interactive_tool_ml_jupyter_notebook">Jupyterlab notebook application</a> has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, <a href="https://scikit-learn.org/">Scikit-learn</a>, <a href="https://www.tensorflow.org/">Tensorflow</a>, <a href="https://onnx.ai/">ONNX</a> to support modern data science projects. It has been developed as an interactive Galaxy tool that runs on an isolated <a href="https://github.com/anuprulez/ml-jupyter-notebook">docker container</a>. The docker container has been built using <a href="https://hub.docker.com/layers/anupkumar/docker-ml-jupyterlab/galaxy-integration-0.2/images/sha256-e2d7e28a2f975523db0f5ac29c2e2ce3c7a35b061072098ad388d5b42ee86fba?context=repo">nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04</a> as the base container. Moreover, a Galaxy <a href="https://github.com/bgruening/galaxytools/pull/1157">tool</a> ( <code class="language-plaintext highlighter-rouge">run_jupyter_job</code>) can be executed using <a href="https://bioblend.readthedocs.io/">Bioblend</a> which uses Galaxy’s remote job handling for long-running machine learning and deep learning training. The training happens remotely on a Galaxy cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a Galaxy history for further use.</p>
 
 <h2 id="features-of-jupyterlab">Features of Jupyterlab</h2>
 <p><a href="https://jupyterlab.readthedocs.io/en/stable/">Jupyterlab</a> notebook has been augmented with several useful features and together they make it ready-to-use for quick prototyping and end-to-end artificial intelligence (AI) projects. Being able to <strong>serve online</strong> makes it convenient to share it with other researchers and users. Its features can be broadly classified into two categories - features that have been added solely as Python packages and those that have been added also as Python packages but have their respective user interfaces. We will briefly discuss these features and later, we will use some of those for building and using AI models.</p>
@@ -1007,7 +1003,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h1 id="gpu-juyterlab-tool-in-a-galaxy-workflow">GPU Juyterlab tool in a Galaxy workflow</h1>
 
-<h2 id="introduction-1">Introduction</h2>
+<h2 id="introduction">Introduction</h2>
 
 <p>In addition to an interactive mode that opens a Jupyterlab in Galaxy, the GPU Jupyterlab tool can also be used as a tool in a Galaxy workflow. In this mode, it takes input datasets from a different tool along with an <code class="language-plaintext highlighter-rouge">ipynb</code> notebook file. It executes the <code class="language-plaintext highlighter-rouge">ipynb</code> file along with the input datasets and produces output datasets inside a dataset collection. This output dataset collection can then be used with other Galaxy tools. This feature enables it to be used in a Galaxy workflow like other Galaxy tools.</p>
 
@@ -1327,7 +1323,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/732b877c0796e2e424f1353d2e7fc1c09e3343e6">732b877</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/58078dca5165672ca71fce165651c4be6ea76978">58078dc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1355,7 +1351,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699488815'></script>
+        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699520841'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
