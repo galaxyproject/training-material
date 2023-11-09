@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@31b5419b29e4b3e49cabdae57eafe28f92cd43ed",
+		release: "galaxy-training-network@ac9260b529f1fccbc1c056140e08ab50414068af",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699532810' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699532810' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699550375' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699550375' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Understanding input error messages">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-02-15 10:36:58 +0000">
+<meta name="DC.date" content="2023-09-28 11:56:59 +0000">
 <meta name="DC.creator" content="Jennifer Hillman-Jackson">
 <meta name="DC.creator" content="Garima Singh">
 
@@ -85,7 +85,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699532810'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699550375'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -248,14 +248,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
            
 
 
-           <p>Input problems are very common across any analysis that makes use of programmed tools.</p>
+           
+
+<p>Input problems are very common across any analysis that makes use of programmed tools.</p>
 
 <ul>
   <li>Causes:
     <ul>
       <li>No quality assurance or content/formatting checks were run on the first datasets of an analysis workflow.</li>
       <li>Incomplete dataset Upload.</li>
-      <li>Incorrect or unassigned <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/#datasets">datatype</a> or <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_change_dbkey.html">database</a>.</li>
+      <li>Incorrect or unassigned <a href="/training-material/faqs/galaxy/index.html#datasets">datatype</a> or <a href="/training-material/faqs/galaxy/datasets_change_dbkey.html">database</a>.</li>
       <li>Tool-specific formatting requirements for inputs were not met.</li>
       <li>Parameters set on a tool form are a mismatch for the input data content or format.</li>
       <li>Inputs were in an error state (red) or were putatively successful (green) but are empty.</li>
@@ -267,10 +269,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </li>
   <li>Solutions:
     <ul>
-      <li>Review our <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/analysis_troubleshooting.html">Troubleshooting Tips</a> for what and where to check.</li>
+      <li>Review our <a href="/training-material/faqs/galaxy/analysis_troubleshooting.html">Troubleshooting Tips</a> for what and where to check.</li>
       <li>Review the <a href="https://training.galaxyproject.org/">GTN</a> for related tutorials on tools/analysis plus FAQs.</li>
       <li>Review <a href="https://help.galaxyproject.org/">Galaxy Help</a> for prior discussion with extended solutions.</li>
-      <li>Review <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/datatypes_understanding_datatypes.html">datatype FAQs</a>.</li>
+      <li>Review <a href="/training-material/faqs/galaxy/datatypes_understanding_datatypes.html">datatype FAQs</a>.</li>
       <li>Review the tool form.
         <ul>
           <li>Input selection areas include usage help.</li>
@@ -281,10 +283,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <li>Review the inputs.
         <ul>
           <li>All inputs must be in a success state (green) and actually contain content.</li>
-          <li>Did you <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_change_datatype.html">directly assign the datatype</a> or <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_convert_datatype.html">convert the datatype</a>? What results when the <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_detect_datatype.html">datatype is detected</a> by Galaxy? If these differ, there is likely a content problem.</li>
+          <li>Did you <a href="/training-material/faqs/galaxy/datasets_change_datatype.html">directly assign the datatype</a> or <a href="/training-material/faqs/galaxy/datasets_convert_datatype.html">convert the datatype</a>? What results when the <a href="/training-material/faqs/galaxy/datasets_detect_datatype.html">datatype is detected</a> by Galaxy? If these differ, there is likely a content problem.</li>
           <li>For most analysis, allowing Galaxy to detect the datatype during Upload is best and adjusting a datatype later should rarely be needed. If a datatype is modified, the change has a specific purpose/reason.</li>
-          <li>Does your data have headers? Is that in specification for the datatype? Does the tool form have an option to specify if the input has headers or not? Do you need to remove headers first for the correct datatype to be detected? Example <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_working_with_reference_annotation.html">GTF</a>.</li>
-          <li>Large inputs? Consider modifying your inputs to be smaller. Examples: <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_working_with_fastq.html">FASTQ</a> and <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_working_with_fasta.html">FASTA</a>.</li>
+          <li>Does your data have headers? Is that in specification for the datatype? Does the tool form have an option to specify if the input has headers or not? Do you need to remove headers first for the correct datatype to be detected? Example <a href="/training-material/faqs/galaxy/datasets_working_with_reference_annotation.html">GTF</a>.</li>
+          <li>Large inputs? Consider modifying your inputs to be smaller. Examples: <a href="/training-material/faqs/galaxy/datasets_working_with_fastq.html">FASTQ</a> and <a href="/training-material/faqs/galaxy/datasets_working_with_fasta.html">FASTA</a>.</li>
         </ul>
       </li>
       <li>Run quality checks on your data.
@@ -295,7 +297,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       </li>
       <li>Reference annotation tips.
         <ul>
-          <li>In most cases, <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_working_with_reference_annotation.html">GTF is preferred over GFF3</a>.</li>
+          <li>In most cases, <a href="/training-material/faqs/galaxy/datasets_working_with_reference_annotation.html">GTF is preferred over GFF3</a>.</li>
           <li>Search <a href="https://help.galaxyproject.org/">Galaxy Help</a> with the keywords “gtf” and “gff3” for more help.</li>
         </ul>
       </li>
@@ -305,7 +307,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
           <li>“Chr1” and “chr1” and “1” do not mean the same thing to a tool.</li>
         </ul>
       </li>
-      <li>Custom genome transcriptome exome tips. See <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_working_with_fasta.html">FASTA</a>.</li>
+      <li>Custom genome transcriptome exome tips. See <a href="/training-material/faqs/galaxy/datasets_working_with_fasta.html">FASTA</a>.</li>
     </ul>
   </li>
 </ul>
@@ -381,7 +383,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/31b5419b29e4b3e49cabdae57eafe28f92cd43ed">31b5419</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/ac9260b529f1fccbc1c056140e08ab50414068af">ac9260b</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -409,7 +411,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699532810'></script>
+        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699550375'></script>
         
     </body>
 </html>
