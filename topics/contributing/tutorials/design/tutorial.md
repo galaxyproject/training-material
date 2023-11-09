@@ -52,9 +52,6 @@ contributions:
     - gallantries
 ---
 
-# Introduction
-
-
 **Teaching and training**, core elements of academic life, can be enormously
 rewarding but also quite challenging. Instructors are often required to perform
 under various constraints, and frequently have to accommodate, engage and

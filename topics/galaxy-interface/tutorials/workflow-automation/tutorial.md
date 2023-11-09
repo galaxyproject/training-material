@@ -30,8 +30,6 @@ contributors:
 subtopic: workflows
 ---
 
-# Introduction
-
 
 Galaxy is well-known as a web-based data analysis platform which provides a graphical interface for executing common bioinformatics tools in a reproducible manner. However, Galaxy is not just a user-friendly interface for executing one tool at a time. It provides two very useful features which allow scaling data analyses up to a high-throughput level: dataset collections and workflows.
 

@@ -44,7 +44,9 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
 
-# Introduction
+Single-cell RNA-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells. The cellular resolution and genome wide scope make it possible to draw new conclusions that are not otherwise possible with bulk RNA-seq.
+
+In this tutorial, we will investigate clustering of single-cell data from 10x Genomics, including preprocessing, clustering and the identification of cell types via known marker genes, using [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({% cite wolf2018scanpy %}). It will be illustrated using a dataset of Peripheral Blood Mononuclear Cells (PBMC), containing 2,700 single cells.
 
 
 > <comment-title></comment-title>
@@ -52,10 +54,6 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 > This tutorial is significantly based on ["Clustering 3K PBMCs" tutorial from Scanpy](https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html#Clustering-3K-PBMCs), ["Seurat - Guided Clustering Tutorial"](https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html) and ["Orchestrating Single-Cell Analysis with Bioconductor"](https://osca.bioconductor.org/) {% cite amezquita2019orchestrating %}.
 >
 {: .comment}
-
-Single-cell RNA-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells. The cellular resolution and genome wide scope make it possible to draw new conclusions that are not otherwise possible with bulk RNA-seq.
-
-In this tutorial, we will investigate clustering of single-cell data from 10x Genomics, including preprocessing, clustering and the identification of cell types via known marker genes, using [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({% cite wolf2018scanpy %}). It will be illustrated using a dataset of Peripheral Blood Mononuclear Cells (PBMC), containing 2,700 single cells.
 
 > <agenda-title></agenda-title>
 >

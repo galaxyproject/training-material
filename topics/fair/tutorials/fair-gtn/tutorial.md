@@ -38,8 +38,6 @@ requirements:
 ---
 
 
-# Introduction
-
 Encouraging computational reproducibility in research, we will present a variety of data stewardship recommendations that we have found useful in the process of training development. As part of that process, we are exploring the application of the FAIR (Findable, Accessible, Interoperable, Reusable) guidelines to the Galaxy Training Network (GTN) materials, in order to improve their secondary use and adaptation.
 
 This tutorial outlines how to set and use existing resources to make Galaxy training development and content creation FAIR.
