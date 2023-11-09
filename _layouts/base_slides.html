@@ -17,6 +17,7 @@
         <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        {{ 'load' | bundle_preloads }}
         <link rel="stylesheet" href="{{ "/assets/css/main.css?v=3" | prepend: site.baseurl }}">
         <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
 
@@ -46,7 +47,7 @@
 </style>
 {% endif %}
 
-    <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
+    {{ 'theme' | load_bundle }}
     <textarea id="source">
 name: inverse
 layout: true
@@ -177,7 +178,6 @@ Useful when presenting."
 {% endif %}
     </textarea>
 	<script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}"></script>
-    <script src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
     <script src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
     <script>
       var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
@@ -203,15 +203,9 @@ Useful when presenting."
 
         }
     </script>
-        <script type="text/javascript" src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/popper.min.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/bootstrap.min.js?v=3" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/details-element-polyfill.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="{{ "/assets/js/bootstrap-toc.min.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
-
+        {{ 'main' | load_bundle }}
+        {% if page.mathjax %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        {% endif %}
     </body>
 </html>
