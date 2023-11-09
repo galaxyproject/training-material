@@ -909,7 +909,7 @@ module GtnLinter
 
       # puts "#{original[0..start_coln - 2]} + #{repl} + #{original[end_coln-1..-1]}"
       fixed = original[0..start_coln - 2] + repl + original[end_coln - 1..]
-      warn "DIFF\n-#{original}\n+#{fixed}"
+      #warn "DIFF\n-#{original}\n+#{fixed}"
       lines[start_line - 1] = fixed
 
       # Save our changes
