@@ -87,7 +87,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    @@ -88,6 +88,9 @@ galaxy_config:
 >         # Tool Dependencies
 >         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
+>         container_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    +    # Data Library Directories
 >    +    library_import_dir: /libraries/admin
 >    +    user_library_import_dir: /libraries/user
@@ -206,18 +206,18 @@ We've included this file in the example data libraries repository we cloned at t
 >   description: some data
 >   synopsis: samples collected from somewhere
 > items:
-> - url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/wildtype.fna
+> - url: https://zenodo.org/records/582600/files/wildtype.fna
 >   src: url
 >   ext: fasta
 >   info: https://doi.org/10.5281/zenodo.582600
 > - name: A directory
 >   description: Exome sequencing means that all protein-coding genes in a genome are
 >   items:
->   - url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R1.fastq
+>   - url: https://zenodo.org/records/582600/files/mutant_R1.fastq
 >     src: url
 >     ext: fastqsanger
 >     info: https://doi.org/10.5281/zenodo.582600
->   - url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R2.fastq
+>   - url: https://zenodo.org/records/582600/files/mutant_R2.fastq
 >     src: url
 >     ext: fastqsanger
 >     info: https://doi.org/10.5281/zenodo.582600

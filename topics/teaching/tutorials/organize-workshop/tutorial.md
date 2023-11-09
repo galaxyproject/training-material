@@ -18,10 +18,7 @@ contributors:
 - hexylena
 ---
 
-# Introduction
-
-
-
+These recommendations are highly inspired from the one by [The Carpentries](https://docs.carpentries.org/topic_folders/hosts_instructors/index.html)
 
 > <agenda-title></agenda-title>
 >
@@ -31,11 +28,6 @@ contributors:
 > {:toc}
 >
 {: .agenda}
-
-
-# Checklists
-
-These recommendations are highly inspired from the one by [The Carpentries](https://docs.carpentries.org/topic_folders/hosts_instructors/index.html)
 
 ## Groundwork
 

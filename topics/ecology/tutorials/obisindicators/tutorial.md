@@ -15,12 +15,10 @@ contributions:
         - Marie59
         - yvanlebras
     funding:
-        - erasmusplus
+        - gallantries
 ---
 
 
-
-# Introduction
 
 OBIS is a global open-access data and information clearing-house on marine biodiversity for science, conservation and sustainable development. In order to visualize their marine data OBIS created the package obisindicators.
 

@@ -17,10 +17,8 @@ key_points:
 contributors:
   - hexylena
   - shiltemann
-  - erasmusplus
+  - gallantries
 ---
-
-# Introduction
 
 
 > JBrowse ({% cite Buels_2016 %}) is a fast, embeddable genome browser built completely with JavaScript

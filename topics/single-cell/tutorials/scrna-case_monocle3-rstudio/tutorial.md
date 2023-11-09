@@ -38,7 +38,6 @@ requirements:
 
 
 tags:
-- single-cell
 - 10x
 - paper-replication
 
@@ -56,6 +55,8 @@ notebook:
   language: r
   snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md
 ---
+
+{% snippet topics/single-cell/faqs/notebook_warning.md %}
 
 ## Setting up the environment and file upload
 Once the installation is done, we should load the needed packages into our notebook. Navigate back to your `notebook`. If you are using our prepopulated notebook, you can follow the tutorial from there. Otherwise, input the following into your fresh notebook.

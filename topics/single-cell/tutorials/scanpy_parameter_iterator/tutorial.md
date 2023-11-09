@@ -34,7 +34,6 @@ key_points:
 
 
 tags:
-- single-cell
 
 contributions:
   authorship:
@@ -47,8 +46,6 @@ contributions:
 
 ---
 
-
-# Introduction
 
 The magic of bioinformatic analysis is that we use maths, statistics and complicated algorithms to deal with huge amounts of data to help us investigate biology. However, analysis is not always straightforward – each tool has various parameters to select. Eventually, we can end up with very different outcomes depending on the values we choose. With analysing scRNA-seq data, it’s almost like you need to know about 75% of your data, then make sure your analysis shows that, for you to then be able to identify the 25% new information.
 

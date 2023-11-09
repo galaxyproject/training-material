@@ -8,7 +8,6 @@ redirect_from:
   - /topics/transcriptomics/tutorials/satac-preprocessing-tenx/tutorial
 zenodo_link: "https://zenodo.org/record/7855968"
 tags:
-  - single-cell
   - 10x
   - epigenetics
 questions:
@@ -44,9 +43,6 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
-
-
-# Introduction
 
 Similar to bulk ATAC-Seq, single-cell ATAC-Seq (scATAC-seq) leverages the hyperactive Tn5 Transposase to profile open chromatin regions but at single-cell resolution. Thus helps in understanding cell type-specific chromatin accessibility from a heterogeneous cell population.
 

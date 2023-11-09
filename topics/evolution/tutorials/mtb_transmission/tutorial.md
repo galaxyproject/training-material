@@ -38,7 +38,6 @@ tags:
 - one-health
 ---
 
-# Introduction
 
 In a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates.
 

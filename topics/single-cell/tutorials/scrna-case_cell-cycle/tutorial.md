@@ -24,7 +24,6 @@ key_points:
 - Cell cycle genes can conceal what is happening in your data if cells are grouping together according to their stage in the cycle
 - Identifying the cell cycle genes and using them to regress out the effects of the cell cycle can reveal underlying patterns in the data
 tags:
-- single-cell
 - 10x
 
 contributions:
@@ -38,7 +37,6 @@ contributions:
 ---
 
 
-# Introduction
 
 Single-cell RNA sequencing can be sensitive to both biological and technical variation, which is why preparing your data carefully is an important part of the analysis. You want the results to reflect the interesting differences in expression between cells that relate to their type or state. Other sources of variation can conceal or confound this, making it harder for you to see what is going on.
 

@@ -30,10 +30,9 @@ contributions:
     - bebatut
     - teresa-m
     funding:
-    - erasmusplus
+    - gallantries
 ---
 
-# Introduction
 
 What is a microbiome? It is a collection of small living creatures.
 These small creatures are called **micro-organisms** and they are **everywhere**. In our gut,

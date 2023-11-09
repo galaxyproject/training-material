@@ -25,8 +25,6 @@ contributors:
     - bebatut
 ---
 
-# Introduction
-
 
 Species Distribution Modeling (SDM) can help understand the distribution of a species depending on its environment. It can also attempt to quantify the impact of climate change on the species habitat, direct conservation efforts and predict invasive species distributions. This is done by associating data of species occurrences (observations) with a set of environmental data (such as temperature and precipitation).
 

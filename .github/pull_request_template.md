@@ -1,24 +1,9 @@
-# Thank you for contributing to the GTN! :yellow_heart:
+--> Please remove all this text before submitting your PR, it's just a checklist to help you :) <--
 
-## Please check that:
-
-- [ ] Your pull request has a **good title**, e.g.
-    - "Fix typo in ansible-galaxy tutorial"
-    - "Add new transcriptomics tutorial covering a new sequencing technology"
-- [ ] Please **replace this entire pull request message** with a *description of your changes*, it will help us review your pull request faster
-- [ ] Check that your images are allowed to be re-hosted by the GTN
-
-Once these are done, you're ready to go!
-
-<details>
-    <summary>Consider sustainable computing with Draft Mode :green_heart:</summary>
-
-Is your pull request finished? 100% ready to be merged? Or do you want some time to work on it first (which we encourage! It's great to have visibility)
-
-If not, then please consider creating this pull request as a draft.
-
-Regular pull requests will trigger automated test runs when they are created
-and every time you update them.
-
-As a small contribution to sustainable computing, we skip the most energy intensive of these tests for pull requests marked as drafts. Once your pull request is ready to go, then you can click a button saying "Ready for Review" and the tests will be run!
-</details>
+1. Give your pull request a **good title**
+    - e.g. "Fix typo in ansible-galaxy tutorial" or "Add new transcriptomics tutorial covering a new sequencing technology"
+2. Describe your changes in detail, list anything you still need some help with or things that are still TODO
+3. Check that your images are allowed to be re-hosted by the GTN!
+4. Still working on it? Make it a **Draft** pull request
+   - Once it is ready, choose **Ready for Review**
+   - Then the automated tests will run and we will know to review and merge it

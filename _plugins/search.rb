@@ -14,9 +14,7 @@ module Jekyll
     end
 
     def getlist(tutorial, attr)
-      [] if tutorial[attr].nil?
-
-      tutorial.fetch(attr, [])
+      tutorial[attr] || []
     end
 
     def render(context)

@@ -8,7 +8,6 @@ redirect_from:
   - /topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial
 zenodo_link: "https://zenodo.org/record/3457880"
 tags:
-  - single-cell
   - 10x
 questions:
   - What is 10X?
@@ -48,9 +47,6 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
-
-
-# Introduction
 
 
 Single-cell RNA-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells.

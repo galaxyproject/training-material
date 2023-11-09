@@ -42,9 +42,6 @@ priority: 8
 ---
 
 
-# Introduction
-
-
 The {CRISPR} system is a bacterial immune system that has been modified for genome engineering. This groundbreaking technology resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Doudna in 2020 ({% cite Uyhazi2021 %}). CRISPR consists of two components: a guide RNA (gRNA) and a non-specific CRISPR-associated endonuclease (Cas9). The gRNA is a short synthetic RNA composed of a scaffold sequence necessary for Cas9-binding (trRNA) and ~20 nucleotide spacer or targeting sequence which defines the genomic target to be modified (crRNA). Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting DSB is then repaired by either error-prone Non-Homologous End Joining (NHEJ) pathway or less efficient but high-fidelity Homology Directed Repair (HDR) pathway. The NHEJ pathway is the most active repair mechanism and it leads to small nucleotide insertions or deletions (indels) at the DSB site. This results in in-frame amino acid deletions, insertions or frameshift mutations leading to premature stop codons within the open reading frame (ORF) of the targeted gene. Ideally, the end result is a loss-of-function mutation within the targeted gene; however, the strength of the knockout phenotype for a given mutant cell is ultimately determined by the amount of residual gene function.
 
 The ease of generating gRNAs makes {CRISPR} one of the most scalable genome editing technologies and it has been recently utilized for genome-wide screens. These screens enable systematic targeting of 1000s of genes, with one gene targeted per cell, to identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity. It is feasible for any laboratory to perform a CRISPR screen ({% cite Cluse2018 %}) and they are being increasingly used to obtain biological insight ({% cite Bock2022 %}, {% cite Przybyla2021 %}). These days, pooled whole-genome knockout, inhibition and activation CRISPR libraries and CRISPR sub-library pools are commonly screened.
@@ -78,9 +75,9 @@ Here we will demonstrate analysing {CRISPR} screen using data from {% cite Fujih
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      T0-Control https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T0-Control.fastq.gz
->      T8-APR-246 https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-APR-246.fastq.gz
->      T8-Vehicle https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-Vehicle.fastq.gz
+>      T0-Control https://zenodo.org/records/5750854/files/T0-Control.fastq.gz
+>      T8-APR-246 https://zenodo.org/records/5750854/files/T8-APR-246.fastq.gz
+>      T8-Vehicle https://zenodo.org/records/5750854/files/T8-Vehicle.fastq.gz
 >      ```
 >
 >    ![Rule-based Uploader](../../images/crispr-screen/crispr_rule_uploader.png)
@@ -110,7 +107,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 
 > <details-title>Adapters file</details-title>
 >
-> The adapters file (`adapter_list.tsv`) we use here with FASTQC was created by adding the two CRISPR adapter sequences (5' and 3' of the guide) to the bottom of the adapters file used by FASTQC [here](https://github.com/s-andrews/FastQC/blob/master/Configuration/adapter_list.txt). The first 12 bases of the CRISPR adapters were used, as that length is currently recommended in the FASTQC adapters file.
+> The adapters file (`adapter_list.tsv`) we use here with FASTQC was created by adding the two CRISPR adapter sequences (5' and 3' of the guide) to the bottom of [the adapters file used by FASTQC](https://github.com/s-andrews/FastQC/blob/master/Configuration/adapter_list.txt). The first 12 bases of the CRISPR adapters were used, as that length is currently recommended in the FASTQC adapters file.
 {: .details}
 
 
@@ -118,7 +115,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 >
 > 1. Import the adapters file from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/adapter_list.tsv
+>    https://zenodo.org/records/5750854/files/adapter_list.tsv
 >    ```
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -168,7 +165,7 @@ We'll trim the adapters from these sequences using [Cutadapt](https://cutadapt.r
 
 > <details-title>Adapter trimming</details-title>
 >
-> In this dataset the adapters start at different positions in the reads, as was shown above. MAGeCK count can trim adapters around the guide sequences. However, the adapters need to start at the same position in each read, requiring the same trimming length, as described on the MAGeCK website [here](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/). An example for what MAGeCK expects is shown below. If you used MAGeCK count trimming with the dataset in this tutorial it wouldn't be able to trim the 5' adapter properly and you would only get ~60% reads mapping instead of >80%.
+> In this dataset the adapters start at different positions in the reads, as was shown above. MAGeCK count can trim adapters around the guide sequences. However, the adapters need to start at the same position in each read, requiring the same trimming length, [as described on the MAGeCK website](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/). An example for what MAGeCK expects is shown below. If you used MAGeCK count trimming with the dataset in this tutorial it wouldn't be able to trim the 5' adapter properly and you would only get ~60% reads mapping instead of >80%.
 >
 > ![Adapters MAGeCK can trim](../../images/crispr-screen/adapter_sequences_mageck.png "Example showing what MAGeCK count expects to be able to auto-detect and trim adapters. Guide sequence is higlighted in blue with the adapter sequences directly adjacent on the right and left. MAGeCK count uses the first 20 bases of each read to map so the sequence after the guide is less important to trim exactly.")
 >
@@ -246,7 +243,7 @@ To count how many guides we have for each gene, we need a library file that tell
 > <hands-on-title>Count guides per gene</hands-on-title>
 > 1. Import the sgRNA library file
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/brunello.tsv
+>    https://zenodo.org/records/5750854/files/brunello.tsv
 >    ```
 >
 > 2. {% tool [MAGeCK count](toolshed.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4) %} with the following parameters:
@@ -259,9 +256,9 @@ To count how many guides we have for each gene, we need a library file that tell
 >
 > 3. We have been using 1% of reads from the samples. Import the MAGeCK count files (sgRNA counts, counts summary and plots pdf) for the full dataset so you can see what results for a real dataset looks like.
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_sgrna_counts.tsv
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_count_summary.tsv
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_count_report.pdf
+>    https://zenodo.org/records/5750854/files/kenji_mageck_sgrna_counts.tsv
+>    https://zenodo.org/records/5750854/files/kenji_mageck_count_summary.tsv
+>    https://zenodo.org/records/5750854/files/kenji_mageck_count_report.pdf
 >    ```
 >
 {: .hands_on}
@@ -272,9 +269,9 @@ MAGeCK count outputs:
 * a Count Summary file
 * a PDF report
 
-**Count Summary file**
+## Count Summary file
 
-The contents of the count summary file is explained on the MAGeCK website [here](https://sourceforge.net/p/mageck/wiki/output/#count_summary_txt), also shown below. The columns are as follows. To help you evaluate the quality of the data, recommended values from the MAGeCK authors are shown in bold.
+The contents of the count summary file is [explained on the MAGeCK website](https://sourceforge.net/p/mageck/wiki/output/#count_summary_txt), also shown below. The columns are as follows. To help you evaluate the quality of the data, recommended values from the MAGeCK authors are shown in bold.
 
 Column | Content
 --- | ---
@@ -305,7 +302,7 @@ GiniIndex | The Gini Index of the read count distribution. A smaller value indic
 > > <solution-title></solution-title>
 > >
 > > 1. The number of reads is ok. For example, for T0 control sample we have 17,272,052 reads mapped to guides. We have 77,441 guides so we have ~220 reads per guide (17,272,052/77,441). A minimum of 100 reads per guide, preferably 300, is recommended.
-> > 2. Yes, in the summary we have >85% mapped for all 3 samples. {MAGeCK} count does not allow any base mismatches between the reads and the library file, as described [here](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/#tutorial-1-allow-mismatches-for-read-mapping) so we expect not all reads will map. Note that we filtered out (6-10%) reads with Cutadapt so we should include those in our unmapped % if we want an accurate count.
+> > 2. Yes, in the summary we have >85% mapped for all 3 samples. {MAGeCK} count does not allow any base mismatches between the reads and the library file, [as described](https://sourceforge.net/p/mageck/wiki/advanced_tutorial/#tutorial-1-allow-mismatches-for-read-mapping) so we expect not all reads will map. Note that we filtered out (6-10%) reads with Cutadapt so we should include those in our unmapped % if we want an accurate count.
 > > 3. T0-Control has 0.71% (546/77441 * 100) sgRNAs that have no reads mapped, which is good. The T8 samples are just slightly high at 2.3% (1752/77441 * 100) and 2.8% (2170/77441 * 100).
 > > 4. The Gini Index is 0.09 for T0-Control (initial state) which is good. The T8 samples are higher at 0.13 and 0.14 but good for a negative selection experiment.
 > >
@@ -486,7 +483,7 @@ The PDF also shows plots with the sgRNA counts for the top 10 genes. These value
 > > <solution-title></solution-title>
 > >
 > > 1. No. We can see in this case that, while one sgRNA is a lot lower in the APR treated sample compared to the vehicle, one increases a little, and the other two sgRNAs don't change much. So we might conclude that this gene is not strongly negatively selected.
-> > 2. None. One reason for this is likely the large number of genes being tested (>20,000). You could try to increase sensitivity with the procedures described [here](https://sourceforge.net/p/mageck/wiki/QA/#i-see-very-few-genes-that-are-below-the-certain-fdr-cutoff-like-010-why-it-is-that-and-what-should-i-do).
+> > 2. None. One reason for this is likely the large number of genes being tested (>20,000). You could try to [increase sensitivity with the procedures described](https://sourceforge.net/p/mageck/wiki/QA/#i-see-very-few-genes-that-are-below-the-certain-fdr-cutoff-like-010-why-it-is-that-and-what-should-i-do).
 > >
 > > ![Plot showing guide counts for FLI1 gene](../../images/crispr-screen/fli1_plot.png){:width="50%"}
 > >
@@ -563,13 +560,13 @@ In addition to the visualisations automatically generated by MAGeCK in the PDF, 
 
 ### Pathway analysis
 
-We can perform pathway analysis on the results to identify pathways that are changing with the treatment. MAGeCK has a pathway analysis module, however, we will use the tool **fgsea** as it outputs some visualisations and the genes enriched in the pathway. For fgsea we need a ranked list of genes and a pathways file in GMT format. We can get the ranked list from our mageck results, we'll use the RRA score column for negative results. For the pathways, we'll use the Hallmark pathways from MSigDB, which can be a good starting point for pathway exploration as discussed [here](http://www.gsea-msigdb.org/gsea/msigdb/collection_details.jsp).
+We can perform pathway analysis on the results to identify pathways that are changing with the treatment. MAGeCK has a pathway analysis module, however, we will use the tool **fgsea** as it outputs some visualisations and the genes enriched in the pathway. For fgsea we need a ranked list of genes and a pathways file in GMT format. We can get the ranked list from our mageck results, we'll use the RRA score column for negative results. For the pathways, we'll use the Hallmark pathways from MSigDB, which can be a [good starting point for pathway exploration](http://www.gsea-msigdb.org/gsea/msigdb/collection_details.jsp).
 
 > <hands-on-title>Perform gene set enrichment with fgsea</hands-on-title>
 >
 > 1. Import the Hallmark pathways file [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available). Set the Type to tabular:
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/h.all.v7.4.symbols.gmt
+>    https://zenodo.org/record/5750854/files/h.all.v7.4.symbols.gmt
 >    ```
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
@@ -605,7 +602,7 @@ We can perform pathway analysis on the results to identify pathways that are cha
 If we have more than two conditions to compare, or a complex experimental design, we can use MAGeCK mle. MAGeCK mle uses a maximum likelihood estimation (MLE) algorithm ({% cite Li2015 %}). It outputs a single value (beta score) per gene instead of a score for both negative and positive selection. A negative beta score indicates negative selection and a positive indicates positive selection. MAGeCK mle can also be used for comparing 2 conditions instead of MAGeCK test (RRA) but it is slower.
 
 To demonstrate using MAGeCK mle, we will compare the drug treatment (T8-APR-246) to T0 and the vehicle (T8-Vehicle) to T0.
-We'll use a design matrix file as described [here](https://sourceforge.net/p/mageck/wiki/input/#design-matrix-file).
+We'll use [a design matrix file](https://sourceforge.net/p/mageck/wiki/input/#design-matrix-file).
 The rules of the design matrix are:
 
 * The design matrix file must include a header line of condition labels
@@ -629,7 +626,7 @@ Examples of more complicated design matrices, for e.g. time series experiments, 
 > <hands-on-title>Test for enrichment with MLE</hands-on-title>
 > 1. Import the design matrix file from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_mle_design_matrix.tsv
+>    https://zenodo.org/record/5750854/files/kenji_mageck_mle_design_matrix.tsv
 >    ```
 >
 > 2. {% tool [MAGeCKs mle](toolshed.g2.bx.psu.edu/repos/iuc/mageck_mle/mageck_mle/0.5.9.2.1) %} with the following parameters:
@@ -639,7 +636,7 @@ Examples of more complicated design matrices, for e.g. time series experiments, 
 >
 {: .hands_on}
 
-MAGeCK mle Gene Summary output is described [here](https://sourceforge.net/p/mageck/wiki/output/#gene_summary_txt-in-mle-subcommand) and below.
+MAGeCK [mle Gene Summary output](https://sourceforge.net/p/mageck/wiki/output/#gene_summary_txt-in-mle-subcommand) is described below.
 
 Column | Content
 --- | ---
