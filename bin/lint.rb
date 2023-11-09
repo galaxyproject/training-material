@@ -154,7 +154,7 @@ module GtnLinter
       %r{\(https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/([^)]*)\)}
     )
       .map do |idx, _text, selected|
-        puts "#{idx} 0 #{selected[0]} 1 #{selected[1]} 2 #{selected[2]} 3 #{selected[3]}"
+        #puts "#{idx} 0 #{selected[0]} 1 #{selected[1]} 2 #{selected[2]} 3 #{selected[3]}"
       ReviewDogEmitter.error(
         path: @path,
         idx: idx,
@@ -909,7 +909,7 @@ module GtnLinter
 
       # puts "#{original[0..start_coln - 2]} + #{repl} + #{original[end_coln-1..-1]}"
       fixed = original[0..start_coln - 2] + repl + original[end_coln - 1..]
-      #warn "DIFF\n-#{original}\n+#{fixed}"
+      warn "DIFF\n-#{original}\n+#{fixed}"
       lines[start_line - 1] = fixed
 
       # Save our changes
