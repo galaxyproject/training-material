@@ -29,5 +29,5 @@ Remote job server indicated a problem running or monitoring this job.
 - Solutions:
     - Try at least one rerun.
     - Check the server homepage for banners or notices. Selected servers also post to the [Galaxy status page](https://status.galaxyproject.org/).
-    - Review the Solutions section of the [Understanding input error messages]({% link faqs/galaxy/analysis_job_failure_input_problem.md %}) FAQ.
+    - Review the Solutions section of the [Understanding input error messages]({% link faqs/galaxy/troubleshooting_input_problem.md %}) FAQ.
     - Your data may actually be too large to process at a public Galaxy server. Alternatives include setting up a [private Galaxy server]({% link faqs/gtn/galaxy_usage.md %}).
