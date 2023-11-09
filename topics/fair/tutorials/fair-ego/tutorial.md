@@ -41,7 +41,7 @@ draft: true
 
 # Introduction
 
-**You** are obviously too important to bother with this research data management ({RDM}) nonsense. Just copy the data management plan ({DPM})from a previous grant application and stop wasting time.
+**You** are obviously too important to bother with this {RDM} nonsense. Just copy the {DMP} from a previous grant application and stop wasting time.
 However, there might be some value in persuading your colleagues to do their {RDM} properly and to adhere to {FAIR} standards. In this tutorial, we explore the purely selfish reasons for encouraging good data management practices based on some real-life examples.
 
 
