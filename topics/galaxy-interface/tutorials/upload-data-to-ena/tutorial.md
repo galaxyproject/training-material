@@ -41,11 +41,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
-<!-- This is a comment. -->
-
 Raw reads contain valuable information, such as coverage depth and quality scores, that is lost in a consensus sequence.
 Submission of raw reads to public repositories allows reuse of data and reproducibility of analysis and enables discovery of minor allelic variants and intrahost variation, for example during the recent COVID-19 pandemic ({% cite Maier2021 %}).
 

@@ -41,10 +41,6 @@ abbreviations:
   G10K: Genome 10K
 ---
 
-# Introduction
-
-------
-
 The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, {Hi-C} data, and (optionally) BioNano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick example of how to run these workflows for one particular scenario, which is, based on our experience, the most common: assembling genomes using {HiFi} Reads combined with {Hi-C} data (both generated from the same individual). 
 
 > <agenda-title></agenda-title>

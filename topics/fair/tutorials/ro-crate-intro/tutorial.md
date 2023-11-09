@@ -55,6 +55,7 @@ abbreviations:
   RO-Crate: Research Object Crate; a way to package research data with structured FAIR metadata
 ---
 
+This tutorial assumes you have already completed [An overview of the RO-Crate concept and its implementations](https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/) and have a basic understanding of working with JSON.
 
 > <agenda-title></agenda-title>
 >
@@ -65,10 +66,6 @@ abbreviations:
 >
 {: .agenda}
 
-
-## Introduction
-
-This tutorial assumes you have already completed [An overview of the RO-Crate concept and its implementations](https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/) and have a basic understanding of working with JSON.
 
 
 In this tutorial, meant to be read along with the [RO-Crate specification](https://www.researchobject.org/ro-crate/1.1/), we'll walk through the initial steps for creating a basic RO-Crate. You are invited to replicate the below steps on your local computer.

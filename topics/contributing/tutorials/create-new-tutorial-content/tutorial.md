@@ -28,7 +28,6 @@ abbreviations:
   JSON: JavaScript Object Notation
 ---
 
-# Introduction
 
 Once we have set up the infrastructure, we are ready to write the tutorial.
 

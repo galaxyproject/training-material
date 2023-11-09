@@ -51,7 +51,6 @@ contributions:
     - epsrc-training-grant
 ---
 
-# Introduction
 
 This tutorial is a follow-up to the ['Single-cell RNA-seq: Case Study']({% link topics/single-cell/index.md %}). We will use the same sample from the previous tutorials. If you haven’t done them yet, it’s highly recommended that you go through them to get an idea how to [prepare a single cell matrix]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}), [combine datasets]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) and [filter, plot and process scRNA-seq data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) to get the data in the form we’ll be working on today.
 
@@ -59,6 +58,14 @@ In this tutorial we will perform trajectory analysis using [monocle3](https://co
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 ## Get data
 We will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)).
@@ -93,15 +100,6 @@ You have two options for uploading these datasets. Importing via history is ofte
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
 >
 {: .hands_on}
-
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
 
 # Preparing the input files
 
