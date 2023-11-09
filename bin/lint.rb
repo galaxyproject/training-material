@@ -403,6 +403,7 @@ module GtnLinter
     'cat1',
     'comp1',
     'gene2exon1',
+    'gff2bed1',
     'intermine',
     'join1',
     'param_value_from_file',
@@ -685,7 +686,7 @@ module GtnLinter
   end
 
   def self.zenodo_api(contents)
-    find_matching_texts(contents, /(zenodo\.org\/api\/files\/)/)
+    find_matching_texts(contents, %r{(zenodo\.org/api/files/)})
       .map do |idx, _text, selected|
       ReviewDogEmitter.error(
         path: @path,
@@ -693,7 +694,7 @@ module GtnLinter
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement: nil,
-        message: 'The Zenodo.org/api URLs are not stable, you must use a URL of the format zenodo.org/record/..., apologies we cannot fix automatically.',
+        message: 'The Zenodo.org/api URLs are not stable, you must use a URL of the format zenodo.org/record/...',
         code: 'GTN:032'
       )
     end
@@ -723,7 +724,7 @@ module GtnLinter
       *check_bad_heading_order(contents),
       *check_bolded_heading(contents),
       *snippets_too_close_together(contents),
-      *zenodo_api(contents),
+      *zenodo_api(contents)
     ]
   end
 
