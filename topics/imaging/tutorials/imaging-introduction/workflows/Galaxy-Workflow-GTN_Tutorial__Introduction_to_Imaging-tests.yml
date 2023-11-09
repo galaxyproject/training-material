@@ -1,0 +1,15 @@
+- doc: Test outline for Workflow-constructed-from-Tutorial-'Introduction-to-image-analysis-using-Galaxy'
+  job:
+    input_image:
+      class: File
+      path: test-data/input_image.tiff
+      filetype: tiff
+  outputs:
+    out:
+      asserts:
+      has_size:
+        value: 1150610
+        delta: 100000
+    output:
+      path: test-data/output.tabular
+      compare: diff
