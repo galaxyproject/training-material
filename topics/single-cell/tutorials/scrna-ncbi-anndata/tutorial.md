@@ -21,7 +21,7 @@ key_points:
 
 tags:
 - single-cell
-- data-management
+- data management
 
 contributions:
   authorship:
