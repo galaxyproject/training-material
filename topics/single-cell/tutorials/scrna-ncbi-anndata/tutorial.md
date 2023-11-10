@@ -7,9 +7,9 @@ priority: 3
 zenodo_link: 'https://zenodo.org/record/10101768'
 
 questions:
-- How do i understand NCBI data?
-- How can i convert raw gene data to the AnnData format?
-- How do i manually and automatically add metadata to my AnnData object?
+- How do I understand NCBI data?
+- How can I convert raw gene data to the AnnData format?
+- How do I manually and automatically add metadata to my AnnData object?
 objectives:
 - Analyse some gene data from NCBI.
 - Convert raw gene expression data into the AnnData format.
@@ -209,7 +209,7 @@ The next step is to annotate our data using the information gathered from the ex
 
 Now for each new column we want to add we need to replace the relvant batch numbers with the appropriate metadata. After that we can cut the modified column out so it is separated. We will repeat this process for each piece of metadata we want to add, all the relevant data can be found in the first table of this tutorial.
 
-First lets add the replicate column which tells us which rows are part of pools of the same patient and tumor location.
+Lets now add the replicate column which tells us which rows are part of pools of the same patient and tumor location.
 
 > <hands-on-title>Create replicate metadata</hands-on-title>
 >
