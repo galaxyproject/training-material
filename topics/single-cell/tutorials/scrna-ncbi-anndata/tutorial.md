@@ -443,7 +443,7 @@ The final tool to run is the ```AnnData Operations``` tool which will add the re
 
 > <hands-on-title>Add final metadata</hands-on-title>
 >
-> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} with the following parameters:
+> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Output of Scanpy FilterCells`
 >    - *"Format of output object"*: `AnnData format`
 >    - *"Copy AnnData to .raw"*: `No`
