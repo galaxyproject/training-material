@@ -203,7 +203,7 @@ The next step is to annotate our data using the information gathered from the ex
 >    - {% icon param-file %} *"Annotated data matrix"*: `Combined Object`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >
-> 2. **Rename** {% icon galaxy-pencil %} output `Combined Object`
+> 2. **Rename** {% icon galaxy-pencil %} output `Observation data`
 >
 {: .hands_on}
 
