@@ -217,7 +217,7 @@ Lets now add the replicate column which tells us which rows are part of pools of
 >    - {% icon param-file %} *"File to process"*: `Observation data`
 >    - *"1: Replacement"*
 >         - *"in column"*: `Column: 2`
->         - *"Find pattern"*: `2|4|8`
+>         - *"Find pattern"*: `2|4|7|8`
 >         - *"Replace with"*: `poolA`
 >    - **+ Insert Replacement**
 >    - *"2: Replacement"*
@@ -232,7 +232,7 @@ Lets now add the replicate column which tells us which rows are part of pools of
 >    - **+ Insert Replacement**
 >    - *"4: Replacement"*
 >         - *"in column"*: `Column: 2`
->         - *"Find pattern"*: `0|1|7`
+>         - *"Find pattern"*: `0|1`
 >         - *"Replace with"*: `NA`
 >    - **+ Insert Replacement**
 >    - *"5: Replacement"*
