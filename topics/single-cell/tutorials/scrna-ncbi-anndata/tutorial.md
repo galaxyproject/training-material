@@ -1,9 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Converting NCBI data to the AnnData Format
+title: Converting NCBI Data to the AnnData Format
 subtopic: datamanipulation
 priority: 3
+zenodo_link: 'https://zenodo.org/record/10101768'
 
 questions:
 - How do i understand NCBI data?
@@ -39,11 +40,53 @@ The goal of this tutorial is to take raw NCBI data from some published research,
 
 # Obtaining the Data
 
-The first step is the obtain the data, for this tutorial we will use data from the following paper: [https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/). The data for this research is stored in the Gene Expression Omnibus (GEO) which is a public repository storing public genomics data, the link to the data can be found in the following GEO repository: [https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031).
+The first step is the obtain the data, for this tutorial we will use data from the paper {% cite Song2022 %}. The data for this research is stored in the Gene Expression Omnibus (GEO) which is a public repository storing public genomics data.
 
-Looking at the GEO repository we can see a lot of data including descriptions of the data and associated paper, what we are interested in however is the supplemental data found at the bottom of the page. Under the download section ```(custom)``` allows us to select individual files to download, however we are going to download all of the data by selecting the ```(http)``` link.
+You can access the data for this tutorial in multiple ways:
 
-That should download a .TAR file which contains all the files compressed into one archive, we will need to decompress/extract this to reveal a folder full of .GZ files, these individual files are further compressed and will each need to be decompressed, this can be done all at once by highlighting all the files in the folder and decompressing/extracting them together.
+1 - Downloading and extracting the data manually on to your local machine:
+
+> <hands-on-title>Option 1: Manually downloading data</hands-on-title>
+>
+> 1. Using a web browser navigate to the GEO repsitory for the paper
+> 
+>   ```
+>   https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031
+>   ```
+>
+> 2. Click on ```(http)``` in the supplemental materials section of the page to download the data
+> 3. Using an archive tool (e.g. 7zip) extract the .TAR file
+> 4. Using the same archive tool extract all of the .GZ files
+>
+{: .hands_on}
+
+2 - Uploading the extracted and filtered data directly from Zenodo:
+
+> <hands-on-title>Option 2: Uploading from Zenodo</hands-on-title>
+>
+> 1. Create a new history for this tutorial
+> 2. Import the following files from [Zenodo]({{ page.zenodo_link }})
+>
+>    ```
+>    {{ page.zenodo_link }}/files/GSM5353214_PA_AUG_PB_1A_S1.dge.txt
+>    {{ page.zenodo_link }}/files/GSM5353215_PA_AUG_PB_1B_S2.dge.txt
+>    {{ page.zenodo_link }}/files/GSM5353216_PA_PB1A_Pool_1_3_S50_L002_dge.txt
+>    {{ page.zenodo_link }}/files/GSM5353217_PA_PB1A_Pool_2_S107_L004_dge.txt
+>    {{ page.zenodo_link }}/files/GSM5353218_PA_PB1B_Pool_1_2_S74_L003_dge.txt
+>    {{ page.zenodo_link }}/files/GSM5353219_PA_PB1B_Pool_2_S24_L001_dge.txt
+>    {{ page.zenodo_link }}/files/GSM5353220_PA_PB1B_Pool_3_S51_L002_dge.txt
+>    {{ page.zenodo_link }}/files/GSM5353221_PA_PB2A_Pool_1_3_S25_L001_dge.txt
+>    {{ page.zenodo_link }}/files/GSM5353222_PA_PB2B_Pool_1_3_S52_L002_dge.txt
+>    {{ page.zenodo_link }}/files/GSM5353223_PA_PB2B_Pool_2_S26_L001_dge.txt
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. Check that the datatype is `tabular`
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>
+{: .hands_on}
 
 We now have the raw gene expression data that we will be processing downloaded, however we will need to manually add some metadata which requires finding out some more information about our files. Looking at the link for the paper ([https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/)) we can see a link for accessing the full text, clicking on that will lead us to a page ([https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/)) which contains more supplementary materials. Under this section we should see various .xlsx files (Excel spreadsheets), go ahead and download Supplementary Dataset 1 (```41467_2021_27322_MOESM2_ESM.xlsx```), this one spreadsheet contains all the information we need to further understand our data.
 
@@ -75,7 +118,7 @@ You may also notice that we have multiple sample files with the same name suffix
 
 # Importing the Data
 
-Now we have a general understanding of our data we can import it into Galaxy and start processing it!
+Now we have a general understanding of our data we can import it into Galaxy and start processing it! (**If you imported the data from Zenodo earlier you can skip the next step**)
 
 > <hands-on-title>Upload data to Galaxy</hands-on-title>
 >
@@ -87,8 +130,8 @@ GSM5353215_PA_AUG_PB_1B_S2.dge.txt
 GSM5353216_PA_PB1A_Pool_1_3_S50_L002_dge.txt
 GSM5353217_PA_PB1A_Pool_2_S107_L004_dge.txt
 GSM5353218_PA_PB1B_Pool_1_2_S74_L003_dge.txt
-GSM5353219_PA_PB1B_Pool_3_5_S100_L002_dge.txt
-GSM5353220_PA_PB1B_Pool_3_5_S51_L002_dge.txt
+GSM5353219_PA_PB1B_Pool_2_S24_L001_dge.txt
+GSM5353220_PA_PB1B_Pool_3_S51_L002_dge.txt
 GSM5353221_PA_PB2A_Pool_1_3_S25_L001_dge.txt
 GSM5353222_PA_PB2B_Pool_1_3_S52_L002_dge.txt
 GSM5353223_PA_PB2B_Pool_2_S26_L001_dge.txt
@@ -375,6 +418,10 @@ With the metadata completed the last step is to add it to our original combined 
 With the manual annotations added we need to do some further processing to add some statistical metadata about the genes, this is done automatically by running two different tools.
 
 We can run the ```Scanpy FilterCells``` tool with a large range of filtering values to not actually filter anything but instead add some metadata about the counts and number of expressed genes.
+
+> <warning-title>Scanpy FilterCells version issue</warning-title>
+> The {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy9) %} tool (used below) does not work in the latest version (**1.8.1+galaxy93**), switch to version **1.8.1+galaxy9** in order to run the tool without error.
+{: .warning}
 
 > <hands-on-title>Add initial metadata</hands-on-title>
 >
