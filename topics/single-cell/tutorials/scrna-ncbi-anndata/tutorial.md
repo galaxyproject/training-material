@@ -175,7 +175,7 @@ Looking at the observation data (obs) of one of the files we can see that it is 
 >
 {: .hands_on}
 
-Now we have all the AnnData files with the data in the correct position we can combine all the data into a single AnnData file which will make it much easier to work with. This combination operation will add an additional column called **batch** which tells us which AnnData object each bit of data came from, this will be useful for further processing!
+Now we have all the AnnData files with the data in the correct orientation we can combine all the data into a single AnnData file which will make it much easier to work with. This combination operation will add an additional column called **batch** which tells us which AnnData object each bit of data came from, this will be useful for further processing!
 
 > <hands-on-title>Combine AnnData objects</hands-on-title>
 >
