@@ -73,7 +73,7 @@ tar -xvzf salmon-1.10.0_linux_x86_64.tar.gz
 
 We're going to use Alevin {% cite article-Alevin %} for demonstration purposes, but we do not endorse one method over another.
 
-## Get Data
+# Get Data
 
 We continue working on the same example data - a very small subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). For the purposes of this tutorial, the datasets have been subsampled to only 50k reads (around 1% of the original files). Those are two fastq files - one with transcripts and the onther one with cell barcodes. You can download the files by running the code below:
 
@@ -144,7 +144,7 @@ To generate gene-level quantifications based on transcriptome quantification, Al
 We will use the murine reference annotation as retrieved from Ensembl in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript-gene mapping by passing that information to a tool that extracts just the transcript identifiers we need.
 
 
-## Generate a transcript to gene map and filtered FASTA
+# Generate a transcript to gene map and filtered FASTA
 
 You can have a look at the Terminal tab again. Has the package `atlas-gene-annotation-manipulation` been installed yet? If yes, you can execute the code cell below and while it's running, I'll explain all the parameters we set here. 
 
@@ -158,7 +158,7 @@ Why filtered FASTA?
 Sometimes it's important that there are no transcripts in a FASTA-format transcriptome that cannot be matched to a transcript/gene mapping. Salmon, for example,  used to produce errors when this mismatch was present. We can synchronise the cDNA file by removing mismatches as we have done above.
 
 
-## Generate a transcriptome index
+# Generate a transcriptome index
 
 We will use Salmon in mapping-based mode, so first we have to build a salmon index for our transcriptome. We will run the salmon indexer as so:
 
@@ -183,7 +183,7 @@ reference salmon
 check if we need decoy --decoys decoys.txt 
 -->
 
-## Use Alevin
+# Use Alevin
 
 Time to use Alevin now! Alevin works under the same indexing scheme (as salmon) for the reference, and consumes the set of FASTA/Q files(s) containing the Cellular Barcode(CB) + Unique Molecule identifier (UMI) in one read file and the read sequence in the other. Given just the transcriptome and the raw read files, alevin generates a cell-by-gene count matrix (in a fraction of the time compared to other tools).
 
@@ -223,7 +223,7 @@ All the required input parameters are described in [the documentation](https://s
 
 - `--dumpFeatures` - if activated, alevin dumps all the features used by the CB classification and their counts at each cell level. It’s generally used in pair with other command line flags.
 
-We have also added some additional parameters (`--freqThreshold`, `--keepCBFraction`) and their values are derived from the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) after QC. 
+We have also added some additional parameters (`--freqThreshold`, `--keepCBFraction`) and their values are derived from the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) after QC to stop Alevin from applying its own thresholds.
 
 Once all the above requirement are satisfied, Alevin can be run using the following command:
 
@@ -232,7 +232,7 @@ salmon-latest_linux_x86_64/bin/salmon alevin -l ISR -1 barcodes_701.fastq -2 tra
 ```
 
 
-This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, you can look through all the different files to find different parameters such as the mapping rate, but we'll just pass the whole output folder directory for downstream analysis. 
+This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, you can look through all the different files to find information such as the mapping rate, but we'll just pass the whole output folder directory for downstream analysis. 
 
 
 > <warning-title>Process stopping</warning-title>
@@ -246,45 +246,54 @@ This tool will take a while to run. Alevin produces many file outputs, not all o
 check if we can get alevinQC to work - paste the info from the other tutorial?
 -->
 
+# Alevin output to SummarizedExperiment 
 
-# Basic QC
+Let's change gear a little bit. We've done the work in bash, and now we're switching to R to complete the processing. To do so, you have to change Kernel to R (either click on `Kernel` -> `Change Kernel...` in the upper left corner of your JupyterLab or click on the displayed current kernel in the upper right corner and change it).
+![Figure showing the JupyterLab interface with an arrow pointing to the left corner, showing the option `Kernel` -> `Change Kernel...` and another arrow pointing to the right corner, showing the icon of the current kernel. The pop-up window asks which kernel should be chosen instead.](../../images//switch_kernel.jpg "Two ways of switching kernel.")
 
-The question we're looking to answer here, is: "do we mostly have a single cell per droplet"? That's what experimenters are normally aiming for, but it's not entirely straightforward to get exactly one cell per droplet. Sometimes almost no cells make it into droplets, other times we have too many cells in each droplet. At a minimum, we should easily be able to distinguish droplets with cells from those without.
+Now load the library that we have previously installed in terminal:
 
-Now, the image generated here (400k) isn't the most informative - but you are dealing with a fraction of the reads! If you run the total sample (so identical steps above, but with significantly more time!) you'd get the image below.
+```R
+library(tximeta)
+```
 
-![raw droplet barcode plots-total](../../images/scrna-casestudy/wab-raw_barcodes-total.png "Total sample - 32,579,453 reads - raw")
+The [tximeta package](https://bioconductor.org/packages/devel/bioc/vignettes/tximeta/inst/doc/tximeta.html) REF (Love et al. 2020) is used for import of transcript-level quantification data into R/Bioconductor and requires that the entire output of alevin is present and unmodified. 
 
-This is our own formulation of the barcode plot based on a [discussion](https://github.com/COMBINE-lab/salmon/issues/362#issuecomment-490160480) we had with community members. The left hand plots with the smooth lines are the main plots, showing the UMI counts for individual cell barcodes ranked from high to low. We expect a sharp drop-off between cell-containing droplets and ones that are empty or contain only cell debris. Now, this data is not an ideal dataset, so for perspective, in an ideal world with a very clean 10x run, data will look a bit more like the following taken from the lung atlas (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6653/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6653/)).
+First, let's specify the path to the quants_mat.gz file: 
 
-![raw droplet barcode plots - lung atlas](../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png "Pretty data - raw")
+```R
+path <- 'alevin_output/alevin/quants_mat.gz'
+```
+We will specify the following arguments when running *tximeta*:
+- 'coldata' a data.frame with at least two columns:
+  - files - character, paths of quantification files
+  - names - character, sample names
+- 'type' - what quantifier was used (can be 'salomon', 'alevin', etc.)
 
-In that plot, you can see the clearer 'knee' bend, showing the cut-off between empty droplets and cell-containing droplets.
+With that we can create a dataframe and pass it to tximeta to create SummarizedExperiment object.
 
-The right hand plots are density plots from the first one, and the thresholds are generated either using [dropletUtils](https://bioconductor.org/packages/release/bioc/html/DropletUtils.html) or by the method described in the discussion mentioned above. We could use any of these thresholds to select cells, assuming that anything with fewer counts is not a valid cell. By default, Alevin does something similar, and we can learn something about that by plotting just the barcodes Alevin retains.
+```R
+coldata <- data.frame(files = path, names="sample701")
+alevin_se <- tximeta(coldata, type = "alevin")
+```
 
-In experiments with relatively simple characteristics, this 'knee detection' method works relatively well. But some populations (such as our sample!) present difficulties. For instance, sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple 'knees' for multiple sub-populations. The [emptyDrops](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1662-y) method has become a popular way of dealing with this. emptyDrops still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar. In order to ultimately run emptyDrops (or indeed, whatever tool you like that accomplishes biologically relevant thresholding), we first need to re-run Alevin, but prevent it from applying its own less than ideal thresholds.
+Inspect the created object:
+```R
+alevin_se
+```
 
-To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it from applying it's own thresholds. Click the re-run icon {% icon galaxy-refresh %} on any Alevin output in your history, because almost every parameter is the same as before, except you need to change the following:
+As you can see, *rowData names* and *colData names* are still empty. Let's add some metadata! 
 
-Alevin outputs MTX format, which we can pass to the dropletUtils package and run emptyDrops. Unfortunately the matrix is in the wrong orientation for tools expecting files like those produced by 10X software (which dropletUtils does). We need to 'transform' the matrix such that cells are in columns and genes are in rows.
+# Adding in metadata
 
-Alevin outputs MTX format, which we can pass to the dropletUtils package and run emptyDrops. Unfortunately the matrix is in the wrong orientation for tools expecting files like those produced by 10X software (which dropletUtils does). We need to 'transform' the matrix such that cells are in columns and genes are in rows.
+## Gene metadata
 
+As you saw above, the genes IDs are stored in *rownames*. Let's exctract them into a separate object:
 
-> <hands-on-title>Generate gene information</hands-on-title>
->
-> 1. {% tool [GTF2GeneList](toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0) %} with the following parameters:
->    - *"Feature type for which to derive annotation"*: `gene`
->    - *"Field to place first in output table"*: `gene_id`
->    - *"Suppress header line in output?"*: `Yes`
->    - *"Comma-separated list of field names to extract from the GTF (default: use all fields)"*: `gene_id,gene_name,mito`
->    - *"Append version to transcript identifiers?"*: `Yes`
->    - *"Flag mitochondrial features?"*: `Yes` - note, this will auto-fill a bunch of acronyms for searching in the GTF for mitochondrial associated genes. This is good!
->    - *"Filter a FASTA-format cDNA file to match annotations?"*: `No` - we don't need to, we're done with the FASTA!
-> 2. Check that the output file type is `tabular`. If not, change the file type by clicking the 'Edit attributes'{% icon galaxy-pencil %} on the dataset in the history (as if you were renaming the file.) Then click `Datatypes` and type in `tabular`. Click `Change datatype`.)
-> 2. Rename {% icon galaxy-pencil %} the annotation table to `Gene Information`
-{: .hands_on}
+```R
+gene_ID <- rownames(alevin_se)
+```
+
 
 Inspect {% icon galaxy-eye %} the **Gene Information** object in the history. Now you have made a new key for gene_id, with gene name and a column of mitochondrial information (false = not mitochondrial, true = mitochondrial). We need to add this information into the salmonKallistoMtxTo10x output 'Gene table'. But we need to keep 'Gene table' in the same order, since it is referenced in the 'Matrix table' by row.
 
