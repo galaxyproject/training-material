@@ -253,7 +253,7 @@ Let's change gear a little bit. We've done the work in bash, and now we're switc
 
 Now load the library that we have previously installed in terminal:
 
-```R
+```r
 library(tximeta)
 ```
 
@@ -261,7 +261,7 @@ The [tximeta package](https://bioconductor.org/packages/devel/bioc/vignettes/txi
 
 First, let's specify the path to the quants_mat.gz file: 
 
-```R
+```r
 path <- 'alevin_output/alevin/quants_mat.gz'
 ```
 We will specify the following arguments when running *tximeta*:
@@ -272,27 +272,173 @@ We will specify the following arguments when running *tximeta*:
 
 With that we can create a dataframe and pass it to tximeta to create SummarizedExperiment object.
 
-```R
+```r
 coldata <- data.frame(files = path, names="sample701")
 alevin_se <- tximeta(coldata, type = "alevin")
 ```
 
 Inspect the created object:
-```R
+```r
 alevin_se
 ```
 
-As you can see, *rowData names* and *colData names* are still empty. Let's add some metadata! 
+As you can see, *rowData names* and *colData names* are still empty. Before we add some metadata,  we will first identify barcodes that correspond to non-empty droplets. 
 
-# Adding in metadata
+# Identify barcodes that correspond to non-empty droplets 
 
-## Gene metadata
+Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]() for multiple sub-populations. The [emptyDrops]() method has become a popular way of dealing with this. emptyDrops still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar. 
+
+```r
+library(DropletUtils)               # load the library and required packages
+```
+
+emptyDrops takes multiple arguments that you can read about in the [documentation](https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html). However, in this case, we will only specify the following arguments:
+
+- `m` -	A numeric matrix-like object - usually a dgTMatrix or dgCMatrix - containing droplet data prior to any filtering or cell calling. Columns represent barcoded droplets, rows represent genes.
+- `lower` - A numeric scalar specifying the lower bound on the total UMI count, at or below which all barcodes are assumed to correspond to empty droplets.
+- `niters` - An integer scalar specifying the number of iterations to use for the Monte Carlo p-value calculations.
+- `retain` - A numeric scalar specifying the threshold for the total UMI count above which all barcodes are assumed to contain cells.
+
+Let's then extract the matrix from our `alevin_se` object. It's stored in *assays* -> *counts*. 
+
+```r
+matrix_alevin <- assays(alevin_se)$counts
+```
+
+And now run emptyDrops:
+```r
+# Identify likely cell-containing droplets
+out <- emptyDrops(matrix_alevin, lower = 100, niters = 1000, retain = 20)
+out
+```
+<!---
+comment on those values
+-->
+
+False discovery rate - ???
+```r
+is.cell <- out$FDR <= 0.01
+sum(is.cell, na.rm=TRUE)
+```
+
+We got rid of the background droplets containing no cells, so now we will filter the matrix that we passed on to emptyDrops, so that it corresponds to the remaining cells. 
+
+```r
+emptied_matrix <- matrix_alevin[,which(is.cell),drop=FALSE]          # filter the matrix
+dim(emptied_matrix)                                                  # check the dimension of the filtered matrix
+```
+
+From here, we can move on to adding cell metadata.
+
+# Adding cell metadata
+
+The genes IDs are stored in *colnames*. Let's exctract them into a separate object:
+```r
+barcode <- colnames(alevin_se)
+```
+
+Now, we can simply add those barcodes into *colData names* which stores cell metadata. To do this, we will create a column called `barcode` in *colData* and pass the stored values into there.
+
+```r
+colData(alevin_se)$barcode <- barcode
+```
+
+As we saw above, the dimension of the filtered matrix is A x B. It means that there are X cells and Y genes. We will now extract those cells from the filtered matrix. 
+
+```r
+retained_cells <- colnames(emptied_matrix)
+retained_cells
+```
+
+Now, we can simply add those barcodes into *rowData names* which stores gene metadata. To do this, we will create a column called `gene_ID` in *rowData* and pass the stored values into there.
+
+ 
+# Adding gene metadata 
 
 As you saw above, the genes IDs are stored in *rownames*. Let's exctract them into a separate object:
 
-```R
+```r
 gene_ID <- rownames(alevin_se)
 ```
+
+Now, we can simply add those genes IDs into *rowData names* which stores gene metadata. To do this, we will create a column called `gene_ID` in *rowData* and pass the stored values into there.
+
+```r
+rowData(alevin)$gene_ID <- gene_ID
+```
+
+## Adding genes symbols based on their IDs
+
+Since gene symbols are much more informative than only gene IDs, we will add them to our metadata. We will base this annotation on Ensembl - the genome database – with the use of the library BioMart. We will use the archive Genome assembly GRCm38 to get the gene names. Please note that the updated version (GRCm39) is available, but some of the gene IDs are not in that EnsEMBL database. The code below is written in a way that it will work for the updated dataset too, but will produce ‘NA’ where the corresponding gene name couldn’t be found.
+
+```r
+# get relevant gene names
+library("biomaRt")                                      # load the BioMart library
+ensembl.ids <- gene_ID                               
+mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL")    # connect to a specified BioMart database and dataset hosted by Ensembl
+ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl", host='https://nov2020.archive.ensembl.org') 	
+
+# The line above connects to a specified BioMart database and dataset within this database.
+# In our case we choose the mus musculus database and to get the desired Genome assembly GRCm38,
+# we specify the host with this archive. If you want to use the most recent version of the dataset, just run:
+# ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl")
+```
+```r
+genes <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
+               filters = 'ensembl_gene_id',
+               values = ensembl.ids,
+               mart = ensembl_m)
+
+# The line above retrieves the specified attributes from the connected BioMart database;
+# 'ensembl_gene_id' are genes IDs,
+# 'external_gene_name' are the genes symbols that we want to get for our values stored in ‘ensembl.ids’.
+```
+```r
+# see the resulting data
+head(genes)                          
+```
+```r
+# replace IDs for gene names
+gene_names <- ensembl.ids	 
+count = 1 	 
+for (geneID in gene_names)
+{
+ index <- which(genes==geneID)    # finds an index of geneID in the genes object created by getBM()
+ if (length(index)==0)            # condition in case if there is no corresponding gene name in the chosen dataset
+  {
+    gene_names[count] <- 'NA'
+  }
+  else
+  {
+    gene_names[count] <- genes$external_gene_name[index] 	# replaces gene ID by the corresponding gene name based on the found geneID’s index
+  }
+ count = count + 1                # increased count so that every element in gene_names is replaced
+}
+```
+```r
+# add the gene names into rowData in a new column gene_name
+rowData(alevin_se)$gene_name <- gene_names
+```
+```r
+# see the changes
+rowData(alevin_se)                  
+```
+
+If you are working on your own data and it’s not mouse data, you can check available datasets for other species and just use relevant dataset in `useMart()` function.
+```r
+listDatasets(mart)                # available datasets
+```
+
+> <warning-title>Ensembl connection problems</warning-title>
+> Sometimes you may encounter some connection issues with Ensembl. To improve performance Ensembl provides several mirrors of their site distributed around the globe. When you use the default settings for useEnsembl() your queries will be directed to your closest mirror geographically. In theory this should give you the best performance, however this is not always the case in practice. For example, if the nearest mirror is experiencing many queries from other users it may perform poorly for you. In such cases, the other mirrors should be chosen automatically.
+>
+{: .warning}
+
+
+<!---
+add mito annotation
+-->
+
 
 
 Inspect {% icon galaxy-eye %} the **Gene Information** object in the history. Now you have made a new key for gene_id, with gene name and a column of mitochondrial information (false = not mitochondrial, true = mitochondrial). We need to add this information into the salmonKallistoMtxTo10x output 'Gene table'. But we need to keep 'Gene table' in the same order, since it is referenced in the 'Matrix table' by row.
