@@ -215,7 +215,7 @@ Let's change gear a little bit. We've done the work in bash, and now we're switc
 
 Now load the library that we have previously installed in terminal:
 
-```r
+```bash
 library(tximeta)
 ```
 
@@ -223,7 +223,7 @@ The [tximeta package](https://bioconductor.org/packages/devel/bioc/vignettes/txi
 
 First, let's specify the path to the quants_mat.gz file: 
 
-```r
+```bash
 path <- 'alevin_output/alevin/quants_mat.gz'
 ```
 We will specify the following arguments when running *tximeta*:
@@ -234,13 +234,13 @@ We will specify the following arguments when running *tximeta*:
 
 With that we can create a dataframe and pass it to tximeta to create SummarizedExperiment object.
 
-```r
+```bash
 coldata <- data.frame(files = path, names="sample701")
 alevin_se <- tximeta(coldata, type = "alevin")
 ```
 
 Inspect the created object:
-```r
+```bash
 alevin_se
 ```
 
@@ -250,7 +250,7 @@ As you can see, *rowData names* and *colData names* are still empty. Before we a
 
 Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]() for multiple sub-populations. The [emptyDrops]() method has become a popular way of dealing with this. emptyDrops still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar. 
 
-```r
+```bash
 library(DropletUtils)               # load the library and required packages
 ```
 
@@ -263,12 +263,12 @@ emptyDrops takes multiple arguments that you can read about in the [documentatio
 
 Let's then extract the matrix from our `alevin_se` object. It's stored in *assays* -> *counts*. 
 
-```r
+```bash
 matrix_alevin <- assays(alevin_se)$counts
 ```
 
 And now run emptyDrops:
-```r
+```bash
 # Identify likely cell-containing droplets
 out <- emptyDrops(matrix_alevin, lower = 100, niters = 1000, retain = 20)
 out
@@ -278,14 +278,14 @@ comment on those values
 -->
 
 False discovery rate - ???
-```r
+```bash
 is.cell <- out$FDR <= 0.01
 sum(is.cell, na.rm=TRUE)
 ```
 
 We got rid of the background droplets containing no cells, so now we will filter the matrix that we passed on to emptyDrops, so that it corresponds to the remaining cells. 
 
-```r
+```bash
 emptied_matrix <- matrix_alevin[,which(is.cell),drop=FALSE]          # filter the matrix
 ```
 
@@ -294,20 +294,20 @@ From here, we can move on to adding metadata and we'll return to `emptied_matrix
 # Adding cell metadata
 
 The cells barcodes are stored in *colnames*. Let's exctract them into a separate object:
-```r
+```bash
 barcode <- colnames(alevin_se)
 ```
 
 Now, we can simply add those barcodes into *colData names* where we will keep the cell metadata. To do this, we will create a column called `barcode` in *colData* and pass the stored values into there.
 
-```r
+```bash
 colData(alevin_se)$barcode <- barcode
 colData(alevin_se)
 ```
 
 That's only cell barcodes for now! However, after running *emptyDrops*, we generated lots of cell information that is currently stored in `out` object (Total, LogProb, PValue, Limited, FDR). Let's add those values to cell metadata! Since we already have *barcodes* in there, we will simply bind the emptyDrops output to the existing dataframe:
 
-```r
+```bash
 colData(alevin_se) <- cbind(colData(alevin_se),out)
 colData(alevin_se)
 ```
@@ -319,13 +319,13 @@ As you can see, the new columns were appended successfully and now the dataframe
 
 The genes IDs are stored in *rownames*. Let's exctract them into a separate object:
 
-```r
+```bash
 gene_ID <- rownames(alevin_se)
 ```
 
 Analogically, we will add those genes IDs into *rowData names* which stores gene metadata. To do this, we will create a column called `gene_ID` in *rowData* and pass the stored values into there.
 
-```r
+```bash
 rowData(alevin)$gene_ID <- gene_ID
 ```
 
@@ -333,7 +333,7 @@ rowData(alevin)$gene_ID <- gene_ID
 
 Since gene symbols are much more informative than only gene IDs, we will add them to our metadata. We will base this annotation on Ensembl - the genome database – with the use of the library BioMart. We will use the archive Genome assembly GRCm38 to get the gene names. Please note that the updated version (GRCm39) is available, but some of the gene IDs are not in that EnsEMBL database. The code below is written in a way that it will work for the updated dataset too, but will produce ‘NA’ where the corresponding gene name couldn’t be found.
 
-```r
+```bash
 # get relevant gene names
 library("biomaRt")                                      # load the BioMart library
 ensembl.ids <- gene_ID                               
@@ -345,7 +345,7 @@ ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl", host='https://n
 # we specify the host with this archive. If you want to use the most recent version of the dataset, just run:
 # ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl")
 ```
-```r
+```bash
 genes <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
                filters = 'ensembl_gene_id',
                values = ensembl.ids,
@@ -355,11 +355,11 @@ genes <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
 # 'ensembl_gene_id' are genes IDs,
 # 'external_gene_name' are the genes symbols that we want to get for our values stored in ‘ensembl.ids’.
 ```
-```r
+```bash
 # see the resulting data
 head(genes)                          
 ```
-```r
+```bash
 # replace IDs for gene names
 gene_names <- ensembl.ids	 
 count = 1 	 
@@ -377,17 +377,17 @@ for (geneID in gene_names)
  count = count + 1                # increased count so that every element in gene_names is replaced
 }
 ```
-```r
+```bash
 # add the gene names into rowData in a new column gene_name
 rowData(alevin_se)$gene_name <- gene_names
 ```
-```r
+```bash
 # see the changes
 rowData(alevin_se)                  
 ```
 
 If you are working on your own data and it’s not mouse data, you can check available datasets for other species and just use relevant dataset in `useMart()` function.
-```r
+```bash
 listDatasets(mart)                # available datasets
 ```
 
@@ -405,21 +405,21 @@ add mito annotation
 
 Let's go back to the `emptied_matrix` object. Do you remember how many cells were left after filtering? We can check that by looking at the matrix' dimensions:
 
-```r
+```bash
 dim(matrix_alevin)                                                  # check the dimension of the unfiltered matrix
 dim(emptied_matrix)                                                  # check the dimension of the filtered matrix
 ```
 
 We've gone from X to Y cells. We've filtered the matrix, but not our SummarizedExperiment. We can subset `alevin_se` based on the cells that were left after filtering. We will store them in a separate list, as we did with the barcodes:
 
-```r
+```bash
 retained_cells <- colnames(emptied_matrix)
 retained_cells
 ```
 
 And now we can subset our SummarizedExperiment based on the barcodes that are in the `retained_cells` list:
 
-```r
+```bash
 alevin_subset <- alevin_se[, colData(alevin_se)$barcode %in% retained_cells]
 alevin_subset
 ```
@@ -446,13 +446,13 @@ We are currently analysing sample N701, so let's finish it off by adding the inf
 
 We will label batch as an integer - "0" for sample N701, "1" for N702 etc. The way to do it is creating a list with zeros of the length corresponding to the number of cells that we have in our SummarizedExperiment object, like so:
 
-```r
+```bash
 batch <- rep("0", length(colnames(alevin_subset)))
 ```
 
 And now create a batch slot in the *colData names* and append the `batch` list in the same way as we did with barcodes:
 
-```r
+```bash
 colData(alevin_subset)$batch <- batch
 colData(alevin_subset)
 ```
@@ -463,7 +463,7 @@ A new column appeared, full of zeros - as expected!
 
 It's all the same for genotype, but instead creating a list with zeros, we'll create a list with string "wildtype" and append it into genotype slot:
 
-```r
+```bash
 genotype <- rep("wildtype", length(colnames(alevin_subset)))
 colData(alevin_subset)$genotype <- genotype
 ```
@@ -471,13 +471,13 @@ colData(alevin_subset)$genotype <- genotype
 ## Sex 
 
 You already know what to do, right? A list with string "male" and then adding it into a new slot! 
-```r
+```bash
 sex <- rep("male", length(colnames(alevin_subset)))
 colData(alevin_subset)$sex <- sex
 ```
 
 Check if all looks fine:
-```r
+```bash
 colData(alevin_subset)
 ```
 
@@ -494,7 +494,7 @@ But first, we have to save the results of our hard work on sample 701!
 
 Saving files is quite straight forward. Just specify which object you want to save and how you want the file to be named. Don't forget the extension!
 
-```r
+```bash
 save(alevin_subset, file = "alevin_701.RData")
 ```
 
@@ -521,7 +521,7 @@ The files are there! Now back to R - switch kernel again.
 
 Above we described all the steps done in R and explained what each bit of code does. Below all those steps are in one block of code, so read carefully and make sure you understand everything! 
 
-```r
+```bash
 path2 <- 'alevin_output_702/alevin/quants_mat.gz'
 alevin2 <- tximeta(coldata = data.frame(files = path2, names = "sample702"), type = "alevin")
 
@@ -593,25 +593,25 @@ Alright, another sample pre-processed!
 
 Pre-processed sample 702 is there, but we still need to load sample 701 that we saved before switching kernels. It's equally easy as saving the object:
 
-```r
+```bash
 load("alevin_701.RData")
 ```
 
 Check if it was loaded ok:
-```r
+```bash
 alevin_701
 ```
 
 Now we can combine those two objects into one using one simple command:
 
-```r
+```bash
 alevin_combined <- cbind(alevin_701, alevin_702)
 alevin_combined
 ```
 
 If you have more samples, just append them in the same way. We won't process another sample here, but pretending that we have third sample, we would combine it like this:
 
-```r
+```bash
 alevin_subset3 <- alevin_702      # copy dataset for demonstration purposes
 alevin_combined_demo <- cbind(alevin_combined, alevin_subset3)
 alevin_combined_demo
@@ -624,7 +624,7 @@ You get the point, right? It's imporant though that the rowData names and colDat
 
 It is generally more common to use SingleCellExperiment format rather than SummarizedExperiment. The conversion is quick and easy, and goes like this:
 
-```r
+```bash
 alevin_sce <- as(alevin_combined, "SingleCellExperiment")
 alevin_sce
 ```
@@ -632,13 +632,13 @@ As you can see, all the embeddings have been successfully transfered during this
 
 You've already learned how to save and load objects in Jupyter notebook, let's then save the SCE file:
 
-```r
+```bash
 save(alevin_sce, file = "alevin_combined_sce.rdata")
 ```
 
 The last thing that might be useful is exporting the files into your Galaxy history. To do it... guess what! Yes - switching kernels again! But this time we choose Python kernel and run the following command:
 
-```python
+```bash
 put("alevin_combined_sce.rdata")
 ```
 
