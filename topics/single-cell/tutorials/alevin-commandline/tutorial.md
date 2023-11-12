@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Generating a single cell matrix using Alevin (bash + R)'
+title: 'Generating a single cell matrix using Alevin and combining datasets (bash + R)'
 subtopic: single-cell-CS-code
 priority: 1
 zenodo_link: 
@@ -15,10 +15,10 @@ objectives:
   - Interpret quality control (QC) plots to make informed decisions on cell thresholds
   - Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata
 
-time_estimation: 1H
+time_estimation: 2H
 
 key_points:
-  - Create a scanpy-accessible AnnData object from FASTQ files, including relevant gene metadata
+  - Create a SCE object from FASTQ files, including relevant gene and cell metadata
 
 requirements:
 -
@@ -35,11 +35,9 @@ follow_up_training:
         - scrna-case_alevin-combine-datasets
 
 tags:
-- single-cell
 - 10x
 - paper-replication
 - jupyter-notebook
-- interactive-tools
 
 
 contributions:
@@ -70,7 +68,6 @@ Once you've downloaded a specific binary (here we're using version 1.10.0), just
 tar -xvzf salmon-1.10.0_linux_x86_64.tar.gz
 ```
 
-
 We're going to use Alevin {% cite article-Alevin %} for demonstration purposes, but we do not endorse one method over another.
 
 # Get Data
@@ -82,61 +79,25 @@ wget -nv https://zenodo.org/
 wget -nv https://zenodo.org/
 ```
 
-<!---
-begin
-might add question if it's formatted nicely 
-how would you know which file is which
--->
-
  > <question-title></question-title>
 >
-> Test rendering
+> How to differentiate between the two files if they are just called 'Read 1' and 'Read 2'?
 >
 > > <solution-title></solution-title>
 > >
-> > is it ok?
+> > The file which contains the cell barcodes and UMI is significantly shorter (indeed, 20 bp!) compared to the other file containing longer, transcript read. For ease, we will use explicit file names.
 > >
 > {: .solution}
 >
 {: .question}
 
-<!---
-end
-might add question if it's formatted nicely 
-how would you know which file is which
--->
 
-Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. These files are included in the data import step below. 
+Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. These files are included in the data import step below. You can also download these for your species of interest [from Ensembl](https://www.ensembl.org/info/data/ftp/index.html).
 
 ```bash
-wget -nv https://zenodo.org/
-wget -nv https://zenodo.org/
+wget -nv https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.100.gtf.gff
+wget -nv https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.cdna.all.fa.fasta
 ```
-
-<!---
-begin
-leave as normal text or make it into a tip or extract into data ingest tutorial?
--->
-
-You can also download these for your species of interest [from Ensembl](https://www.ensembl.org/info/data/ftp/index.html). Once you find the cDNA FASTA file you are interested in, right click on the link and choose "Copy link address" and paste it along the command `wget -nv`, then extract it using `tar`. Here is the example how to do it:
-
-```bash
-# Getting FASTA file
-wget -nv https://ftp.ensembl.org/pub/release-110/fasta/mus_musculus/cdna/
-tar  
-```
-Do exactly the same to get the GTF file:
-
-```bash
-# Getting GTF file
-wget -nv https://ftp.ensembl.org/pub/release-110/gtf/mus_musculus
-tar  
-```
-
-<!---
-end
-leave as normal text or make it into a tip or extract into data ingest tutorial?
--->
 
 Why do we need FASTA and GTF files? 
 To generate gene-level quantifications based on transcriptome quantification, Alevin and similar tools require a conversion between transcript and gene identifiers. We can derive a transcript-gene conversion from the gene annotations available in genome resources such as Ensembl. The transcripts in such a list need to match the ones we will use later to build a binary transcriptome index. If you were using spike-ins, you'd need to add these to the transcriptome and the transcript-gene mapping.
@@ -149,7 +110,7 @@ We will use the murine reference annotation as retrieved from Ensembl in GTF for
 You can have a look at the Terminal tab again. Has the package `atlas-gene-annotation-manipulation` been installed yet? If yes, you can execute the code cell below and while it's running, I'll explain all the parameters we set here. 
 
 ```bash
-gtf2featureAnnotation.R -g gtf.gff -c fasta.fasta -d "transcript_id" -t "transcript" -f "transcript_id" -o map_code -l "transcript_id,gene_id" -r -e filtered_fasta_code 
+gtf2featureAnnotation.R -g gtf.gff -c fasta.fasta -d "transcript_id" -t "transcript" -f "transcript_id" -o map -l "transcript_id,gene_id" -r -e filtered_fasta
 ```
 
 In essence, [gtf2featureAnnotation.R script](https://github.com/ebi-gene-expression-group/atlas-gene-annotation-manipulation) takes a GTF annotation file and creates a table of annotation by feature, optionally filtering a cDNA file supplied at the same time. Therefore the first parameter `-g` stands for "gtf-file" and requires a path to a valid GTF file. Then `-c` takes a cDNA file for extracting meta info and/or filtering - that's our FASTA! Where --parse-cdnas (that's our `-c`) is specified, we need to specify, using `-d`, which field should be used to compare to identfiers from the FASTA. We set that to "transcript_id" - feel free to inspect the GTF file to explore other attributes. We pass the same value in `-f`, meaning first-field, ie. the name of the field to place first in output table. To specify which other fields to retain in the output table, we provide comma-separated list of those fields, and since we're only interested in transcript to gene map, we put those two names ("transcript_id,gene_id") into `-l`. `-t` stands for the feature type to use, and in our case we're using "transcript". Guess what `-o` is! Indeed, that's the output annotation table - here we specify the file path of our transcript to gene map. We will also have another output denoted by `-e` and that's the path to a filtered FASTA. Finally, we also put `-r` which is there only to suppress header on output. Summarising, output will be a an annotation table, and a FASTA-format cDNAs file with unannotated transcripts removed.
@@ -163,7 +124,7 @@ Sometimes it's important that there are no transcripts in a FASTA-format transcr
 We will use Salmon in mapping-based mode, so first we have to build a salmon index for our transcriptome. We will run the salmon indexer as so:
 
 ```bash
-salmon-latest_linux_x86_64/bin/salmon index -t filtered_fasta_code -i salmon_index_code -k 31
+salmon-latest_linux_x86_64/bin/salmon index -t filtered_fasta -i salmon_index -k 31
 ```
 
 Where `-t` stands for our filtered FASTA file, and `-i` is the output the mapping-based index. To build it, the funciton is using an auxiliary k-mer hash over k-mers of length 31. While the mapping algorithms will make used of arbitrarily long matches between the query and reference, the k size selected here will act as the minimum acceptable length for a valid match. Thus, a smaller value of k may slightly improve sensitivity. We find that a k of 31 seems to work well for reads of 75bp or longer, but you might consider a smaller k if you plan to deal with shorter reads. Also, a shorter value of k may improve sensitivity even more when using selective alignment (enabled via the –validateMappings flag). So, if you are seeing a smaller mapping rate than you might expect, consider building the index with a slightly smaller k.
@@ -249,7 +210,7 @@ check if we can get alevinQC to work - paste the info from the other tutorial?
 # Alevin output to SummarizedExperiment 
 
 Let's change gear a little bit. We've done the work in bash, and now we're switching to R to complete the processing. To do so, you have to change Kernel to R (either click on `Kernel` -> `Change Kernel...` in the upper left corner of your JupyterLab or click on the displayed current kernel in the upper right corner and change it).
-![Figure showing the JupyterLab interface with an arrow pointing to the left corner, showing the option `Kernel` -> `Change Kernel...` and another arrow pointing to the right corner, showing the icon of the current kernel. The pop-up window asks which kernel should be chosen instead.](../../images//switch_kernel.jpg "Two ways of switching kernel.")
+![Figure showing the JupyterLab interface with an arrow pointing to the left corner, showing the option `Kernel` -> `Change Kernel...` and another arrow pointing to the right corner, showing the icon of the current kernel. The pop-up window asks which kernel should be chosen instead.](../../images/scrna-pre-processing/switch_kernel.jpg "Two ways of switching kernel.")
 
 Now load the library that we have previously installed in terminal:
 
