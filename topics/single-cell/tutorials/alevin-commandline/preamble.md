@@ -85,11 +85,11 @@ Before we start working on the tutorial notebook, we need to install required pa
 >
 > 1. Navigate back to the `Terminal` (see Option 1 in the box above)
 > 2. In the Terminal tab open, write the following, one line at a time:
->```
->conda install -y -c bioconda atlas-gene-annotation-manipulation
->```
 > ```
 >conda install -y -c bioconda bioconductor-tximeta
+>```
+>```
+>conda install -y -c bioconda atlas-gene-annotation-manipulation
 >```
 >```
 >conda install -y -c bioconda bioconductor-dropletutils
