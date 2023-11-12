@@ -86,10 +86,10 @@ Before we start working on the tutorial notebook, we need to install required pa
 > 1. Navigate back to the `Terminal` (see Option 1 in the box above)
 > 2. In the Terminal tab open, write the following, one line at a time:
 > ```
->conda install -y -c bioconda bioconductor-tximeta
+>conda install -y -c bioconda bioconductor-tximeta                     # install this first to avoid problem with re-installation of rtracklayer
 >```
 >```
->conda install -y -c bioconda atlas-gene-annotation-manipulation
+>conda install -y -c bioconda atlas-gene-annotation-manipulation     
 >```
 >```
 >conda install -y -c bioconda bioconductor-dropletutils
@@ -98,4 +98,4 @@ Before we start working on the tutorial notebook, we need to install required pa
 {: .hands_on}
 
 
-Installation will take a while, so in the meantime, when it's running, you can open the notebook and follow the rest of this tutorial there!
+Installation will take a long while, so in the meantime, when it's running, you can open the notebook and follow the rest of this tutorial there!
