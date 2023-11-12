@@ -143,6 +143,11 @@ To generate gene-level quantifications based on transcriptome quantification, Al
 
 We will use the murine reference annotation as retrieved from Ensembl in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript-gene mapping by passing that information to a tool that extracts just the transcript identifiers we need.
 
+There is also one folder that we will use later on, but since currently we're using bash, it's easier to unzip that folder now. Don't worry, we will come back to it later!
+
+```bash
+unzip 
+```
 
 # Generate a transcript to gene map and filtered FASTA
 
@@ -325,10 +330,9 @@ We got rid of the background droplets containing no cells, so now we will filter
 
 ```r
 emptied_matrix <- matrix_alevin[,which(is.cell),drop=FALSE]          # filter the matrix
-dim(emptied_matrix)                                                  # check the dimension of the filtered matrix
 ```
 
-From here, we can move on to adding cell metadata and we'll return to `emptied_matrix` soon.
+From here, we can move on to adding metadata and we'll return to `emptied_matrix` soon.
 
 # Adding cell metadata
 
@@ -341,30 +345,28 @@ Now, we can simply add those barcodes into *colData names* where we will keep th
 
 ```r
 colData(alevin_se)$barcode <- barcode
-colData(alevin)
+colData(alevin_se)
 ```
 
-
-
-As we saw above, the dimension of the filtered matrix is A x B. It means that there are X cells and Y genes. We will now extract those cells from the filtered matrix. 
+That's only cell barcodes for now! However, after running *emptyDrops*, we generated lots of cell information that is currently stored in `out` object (Total, LogProb, PValue, Limited, FDR). Let's add those values to cell metadata! Since we already have *barcodes* in there, we will simply bind the emptyDrops output to the existing dataframe:
 
 ```r
-retained_cells <- colnames(emptied_matrix)
-retained_cells
+colData(alevin_se) <- cbind(colData(alevin_se),out)
+colData(alevin_se)
 ```
 
-Now, we can simply add those barcodes into *rowData names* which stores gene metadata. To do this, we will create a column called `gene_ID` in *rowData* and pass the stored values into there.
+As you can see, the new columns were appended successfully and now the dataframe has 6 columns. 
 
  
 # Adding gene metadata 
 
-As you saw above, the genes IDs are stored in *rownames*. Let's exctract them into a separate object:
+The genes IDs are stored in *rownames*. Let's exctract them into a separate object:
 
 ```r
 gene_ID <- rownames(alevin_se)
 ```
 
-Now, we can simply add those genes IDs into *rowData names* which stores gene metadata. To do this, we will create a column called `gene_ID` in *rowData* and pass the stored values into there.
+Analogically, we will add those genes IDs into *rowData names* which stores gene metadata. To do this, we will create a column called `gene_ID` in *rowData* and pass the stored values into there.
 
 ```r
 rowData(alevin)$gene_ID <- gene_ID
@@ -442,50 +444,197 @@ listDatasets(mart)                # available datasets
 add mito annotation
 -->
 
+# Subsetting the object
+
+Let's go back to the `emptied_matrix` object. Do you remember how many cells were left after filtering? We can check that by looking at the matrix' dimensions:
+
+```r
+dim(matrix_alevin)                                                  # check the dimension of the unfiltered matrix
+dim(emptied_matrix)                                                  # check the dimension of the filtered matrix
+```
+
+We've gone from X to Y cells. We've filtered the matrix, but not our SummarizedExperiment. We can subset `alevin_se` based on the cells that were left after filtering. We will store them in a separate list, as we did with the barcodes:
+
+```r
+retained_cells <- colnames(emptied_matrix)
+retained_cells
+```
+
+And now we can subset our SummarizedExperiment based on the barcodes that are in the `retained_cells` list:
+
+```r
+alevin_subset <- alevin_se[, colData(alevin_se)$barcode %in% retained_cells]
+alevin_subset
+```
+
+And that's our subset! We have now filtered matrix, some gene and cell metadata... but we can do more!
+
+# Adding more metadata 
+
+If you have a look at the Experimental Design from that study, you might notice that there is actually more information about the cells. The most important for us would be batch, genotype and sex, summarised in the small table below. 
+
+| Index | Batch | Genotype | Sex |
+|------ |--------------------|
+| N701 | 0    | wildtype    | male    |
+| N702 | 1    | knockout   | male    |
+| N703 | 2    | knockout   | female    |
+| N704 | 3    | wildtype    | male    |
+| N705 | 4    | wildtype    | male    |
+| N706 | 5    | wildtype    | male    |
+| N707 | 6    | knockout    | male    |
+
+We are currently analysing sample N701, so let's finish it off by adding the information from the table. 
+
+## Batch 
+
+We will label batch as an integer - "0" for sample N701, "1" for N702 etc. The way to do it is creating a list with zeros of the length corresponding to the number of cells that we have in our SummarizedExperiment object, like so:
+
+```r
+batch <- rep("0", length(colnames(alevin_subset)))
+```
+
+And now create a batch slot in the *colData names* and append the `batch` list in the same way as we did with barcodes:
+
+```r
+colData(alevin_subset)$batch <- batch
+colData(alevin_subset)
+```
+
+A new column appeared, full of zeros - as expected! 
+
+## Genotype
+
+It's all the same for genotype, but instead creating a list with zeros, we'll create a list with string "wildtype" and append it into genotype slot:
+
+```r
+genotype <- rep("wildtype", length(colnames(alevin_subset)))
+colData(alevin_subset)$genotype <- genotype
+```
+
+## Sex 
+
+You already know what to do, right? A list with string "male" and then adding it into a new slot! 
+```r
+sex <- rep("male", length(colnames(alevin_subset)))
+colData(alevin_subset)$sex <- sex
+```
+
+Check if all looks fine:
+```r
+colData(alevin_subset)
+```
+
+3 new columns appeared with the information that we've just added - perfect! You can add any information you need in this way, as long as it's the same for all the cells from one sample. 
 
 
-Inspect {% icon galaxy-eye %} the **Gene Information** object in the history. Now you have made a new key for gene_id, with gene name and a column of mitochondrial information (false = not mitochondrial, true = mitochondrial). We need to add this information into the salmonKallistoMtxTo10x output 'Gene table'. But we need to keep 'Gene table' in the same order, since it is referenced in the 'Matrix table' by row.
+# More datasets
 
-> <hands-on-title>Combine MTX Gene Table with Gene Information</hands-on-title>
->
-> 1. {% tool [Join two Datasets](join1) %} with the following parameters:
->    - *"Join"*: `Gene Table`
->    - *"Using column"*: `Column: 1`
->    - *"with"*: `Gene Information`
->    - *"and column"*: `Column: 1`
->    - *"Keep lines of first input that do not join with second input"*: `Yes`
->    - *"Keep lines of first input that are incomplete"*: `Yes`
->    - *"Fill empty columns"*: `No`
->    - *"Keep the header lines"*: `No`
->
->
->    If you inspect {% icon galaxy-eye %} the object, you'll see we have joined these tables and now have quite a few gene_id repeats. Let's take those out, while keeping the order of the original 'Gene Table'.
->
->
-> 2.  {% tool [Cut columns from a table](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c1,c4,c5`
->    - *"Delimited by"*: `Tab`
->    - *"From"*: output of **Join two Datasets** {% icon tool %}
->
-> 3. Rename output `Annotated Gene Table`
-{: .hands_on}
+We've done the analysis for one sample. But there are 7 samples in this experiment and it would be very handy to have all the information in one place. Therefore, you would need to repeat all the steps for the subsequent samples (that's when you'll appreciate wrapped tools and automation in Galaxy workflows!). To make your life easier, we will show you how to combine the datasets on smaller scale. Also, to save you some time, we've already run alevin on sample 702 (also subsampled to 50k reads). Let's quickly repeat the steps we performed in R to complete the analysis of sample 702 in the same way as we did with 701. 
 
-Inspect {% icon galaxy-eye %} your `Annotated Gene Table`. That's more like it! You now have `gene_id`, `gene_name`, and `mito`. Now let's get back to your journey to emptyDrops and sophisticated thresholding of empty droplets!
+At the very beginnig of the tutorial we unzipped the folder with the alevin output of sample 702, remember that? Normally, you would switch kernel to bash to run alevin, and then back to R to complete the analysis, but for the purpose of this tutorial we've done it for you so that you can continue in R. 
 
-# emptyDrops
+> <warning-title>Switching kernels & losing variables</warning-title>
+>  
+> Be aware that every time when you switch kernel, you will lose variables you store in the objects that you've created, unless you save them. Therefore, if you want to switch from R to bash, make sure you save your R objects! The last section of this tutorial will show you how to do it. 
+> 
+{: .warning}
 
-emptyDrops {% cite article-emptyDrops %} works with a specific form of R object called a SingleCellExperiment. We need to convert our transformed MTX files into that form, using the DropletUtils Read10x tool:
+<!---
+maybe actually switch to bash to show how to save and load objects?
+-->
 
-> <hands-on-title>Converting to SingleCellExperiment format</hands-on-title>
->
-> 1. {% tool [DropletUtils Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `Matrix table`
->    - {% icon param-file %} *"Gene Table"*: `Annotated Gene Table`
->    - {% icon param-file %} *"Barcode/cell table"*: `Barcode table`
->    - *"Should metadata file be added?"*: `No`
->
-> 2. Rename {% icon galaxy-pencil %} output: `SCE Object`
-{: .hands_on}
+## Analysis of sample 702
 
-Fantastic! Now that our matrix is combined into an object, specifically the SingleCellExperiment format, we can now run emptyDrops! Let's get rid of those background droplets containing no cells!
+Above we described all the steps and explained what each bit of code does. Below all those steps are in one block of code, so read carefully and make sure you understand everything! 
+
+```r
+path2 <- 'alevin_output_702/alevin/quants_mat.gz'
+alevin2 <- tximeta(coldata = data.frame(files = path2, names = "sample702"), type = "alevin")
+
+matrix_alevin2 <- assays(alevin2)$counts
+
+out2 <- emptyDrops(matrix_alevin2, lower = 100, niters = 1000, retain = 20)
+
+is.cell2 <- out2$FDR <= 0.01
+sum(is.cell2, na.rm=TRUE)
+
+emptied_matrix2 <- matrix_alevin2[,which(is.cell2),drop=FALSE]
+
+barcode2 <- colnames(alevin2)
+colData(alevin2)$barcode <- barcode2
+colData(alevin2) <- cbind(colData(alevin2),out2)
+
+gene_ID2 <- rownames(alevin2)
+rowData(alevin2)$gene_ID <- gene_ID2
+
+# get relevant gene names
+ensembl.ids2 <- gene_ID2               # fData() allows to access cds rowData table
+mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL")    # connect to a specified BioMart database and dataset hosted by Ensembl
+ensembl_m2 = useMart("ensembl", dataset="mmusculus_gene_ensembl", host='https://nov2020.archive.ensembl.org') 	
+
+genes2 <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
+               filters = 'ensembl_gene_id',
+               values = ensembl.ids2,
+               mart = ensembl_m2)
+
+# replace IDs for gene names
+gene_names2 <- ensembl.ids2
+count = 1 	 
+for (geneID in gene_names2)
+{
+ index <- which(genes2==geneID)    # finds an index of geneID in the genes object created by getBM()
+ if (length(index)==0)            # condition in case if there is no corresponding gene name in the chosen dataset
+  {
+    gene_names2[count] <- 'NA'
+  }
+  else
+  {
+    gene_names2[count] <- genes2$external_gene_name[index] 	# replaces gene ID by the corresponding gene name based on the found geneID’s index
+  }
+ count = count + 1                # increased count so that every element in gene_names is replaced
+}
+
+rowData(alevin2)$gene_name <- gene_names2
+
+retained_cells2 <- colnames(emptied_matrix2)
+alevin_subset2 <- alevin2[, colData(alevin2)$barcode %in% retained_cells2]
+
+batch2 <- rep("1", length(colnames(alevin_subset2)))
+colData(alevin_subset2)$batch <- batch2
+
+genotype2 <- rep("knockout", length(colnames(alevin_subset2)))
+colData(alevin_subset2)$genotype <- genotype2
+
+sex2 <- rep("male", length(colnames(alevin_subset2)))
+colData(alevin_subset2)$sex <- sex2
+
+alevin_subset2
+```
+
+Alright, another sample pre-processed!
+
+
+# Combining datasets
+
+Now we can combine those two objects into one using one simple command:
+
+```r
+alevin_combined <- cbind(alevin_subset, alevin_subset2)
+alevin_combined
+```
+
+If you have more samples, just append them in the same way. We won't process another sample here, but pretending that we have third sample, we would combine it like this:
+
+```r
+alevin_subset3 <- alevin_subset2       # copy dataset for demonstration purposes
+alevin_combined_demo <- cbind(alevin_combined, alevin_subset3)
+alevin_combined_demo
+```
+
+You get the point, right? It's imporant though that the rowData names and colData names are the same in each sample. 
+
+
+# Saving and exporting the files 
+
+
 
