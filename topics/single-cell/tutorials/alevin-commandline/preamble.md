@@ -7,10 +7,9 @@ As a recap, we fill go from raw FASTQ files to a cell x gene data matrix in AnnD
 2.	Making a transcript-to-gene ID mapping
 3.	Creating Salmon index
 4.	Quantification of transcript expression using Alevin
-5.	(Quality control using Alevin)
-6.	Creating Summarized Experiment from the Alevin output
-7.	Adding metadata
-8.	Combining samples data
+5.	Creating Summarized Experiment from the Alevin output
+6.	Adding metadata
+7.	Combining samples data
 
 
 ## Launching JupyterLab
@@ -52,7 +51,7 @@ You have two options for how to proceed with this JupyterLab tutorial - you can 
 >
 > 1. Select the **Bash** icon under **Notebook**
 >
->   ![Bash icon](../../images/bash.png "Bash Notebook Button")
+>   ![Bash icon](../../images/scrna-pre-processing/bash.png "Bash Notebook Button")
 >
 > 2. Save your file (**File**: **Save**, or click the {% icon galaxy-save %} Save icon at the top left)
 >
@@ -86,14 +85,14 @@ Before we start working on the tutorial notebook, we need to install required pa
 >
 > 1. Navigate back to the `Terminal` (see Option 1 in the box above)
 > 2. In the Terminal tab open, write the following, one line at a time:
+>```
+>conda install -y -c bioconda atlas-gene-annotation-manipulation
+>```
 > ```
 >conda install -y -c bioconda bioconductor-tximeta
 >```
 >```
 >conda install -y -c bioconda bioconductor-dropletutils
->```
->```
->conda install -y -c bioconda atlas-gene-annotation-manipulation
 >```
 >
 {: .hands_on}
