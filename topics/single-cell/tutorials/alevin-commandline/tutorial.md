@@ -143,11 +143,6 @@ To generate gene-level quantifications based on transcriptome quantification, Al
 
 We will use the murine reference annotation as retrieved from Ensembl in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript-gene mapping by passing that information to a tool that extracts just the transcript identifiers we need.
 
-There is also one folder that we will use later on, but since currently we're using bash, it's easier to unzip that folder now. Don't worry, we will come back to it later!
-
-```bash
-unzip 
-```
 
 # Generate a transcript to gene map and filtered FASTA
 
@@ -228,7 +223,7 @@ All the required input parameters are described in [the documentation](https://s
 
 - `--dumpFeatures` - if activated, alevin dumps all the features used by the CB classification and their counts at each cell level. It’s generally used in pair with other command line flags.
 
-We have also added some additional parameters (`--freqThreshold`, `--keepCBFraction`) and their values are derived from the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) after QC to stop Alevin from applying its own thresholds.
+We have also added some additional parameters (`--freqThreshold`, `--keepCBFraction`) and their values are derived from the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) after QC to stop Alevin from applying its own thresholds. However, if you're not sure what value to pick, you can simply allow Alevin to make its own calls on what constitutes empty droplets.
 
 Once all the above requirement are satisfied, Alevin can be run using the following command:
 
@@ -531,21 +526,38 @@ colData(alevin_subset)
 
 We've done the analysis for one sample. But there are 7 samples in this experiment and it would be very handy to have all the information in one place. Therefore, you would need to repeat all the steps for the subsequent samples (that's when you'll appreciate wrapped tools and automation in Galaxy workflows!). To make your life easier, we will show you how to combine the datasets on smaller scale. Also, to save you some time, we've already run alevin on sample 702 (also subsampled to 50k reads). Let's quickly repeat the steps we performed in R to complete the analysis of sample 702 in the same way as we did with 701. 
 
-At the very beginnig of the tutorial we unzipped the folder with the alevin output of sample 702, remember that? Normally, you would switch kernel to bash to run alevin, and then back to R to complete the analysis, but for the purpose of this tutorial we've done it for you so that you can continue in R. 
+But first, we have to save the results of our hard work on sample 701!
 
-> <warning-title>Switching kernels & losing variables</warning-title>
->  
-> Be aware that every time when you switch kernel, you will lose variables you store in the objects that you've created, unless you save them. Therefore, if you want to switch from R to bash, make sure you save your R objects! The last section of this tutorial will show you how to do it. 
-> 
-{: .warning}
+## Saving sample 701 data
 
-<!---
-maybe actually switch to bash to show how to save and load objects?
--->
+Saving files is quite straight forward. Just specify which object you want to save and how you want the file to be named. Don't forget the extension!
+
+```r
+save(alevin_subset, file = "alevin_701.RData")
+```
+
+You will see the new file in the panel on the left. 
+
 
 ## Analysis of sample 702
 
-Above we described all the steps and explained what each bit of code does. Below all those steps are in one block of code, so read carefully and make sure you understand everything! 
+Normally, at this point you would switch kernel to bash to run alevin, and then back to R to complete the analysis of another sample. Here, we are providing you with the alevin output for the next sample, but to give you some practise in switching kernels and saving data, we will use bash to unzip the folder with that output data.
+
+> <warning-title>Switching kernels & losing variables</warning-title>
+>  
+> Be aware that every time when you switch kernel, you will lose variables you store in the objects that you've created, unless you save them. Therefore, if you want to switch from R to bash, make sure you save your R objects! You can then load them anytime.
+> 
+{: .warning}
+
+Let's switch the kernel back to bash and run the following code to unzip the alevin output for sample 702:
+
+```bash
+unzip 
+```
+
+The files are there! Now back to R - switch kernel again. 
+
+Above we described all the steps done in R and explained what each bit of code does. Below all those steps are in one block of code, so read carefully and make sure you understand everything! 
 
 ```r
 path2 <- 'alevin_output_702/alevin/quants_mat.gz'
@@ -602,13 +614,14 @@ alevin_subset2 <- alevin2[, colData(alevin2)$barcode %in% retained_cells2]
 batch2 <- rep("1", length(colnames(alevin_subset2)))
 colData(alevin_subset2)$batch <- batch2
 
-genotype2 <- rep("knockout", length(colnames(alevin_subset2)))
+genotype2 <- rep("wildtype", length(colnames(alevin_subset2)))
 colData(alevin_subset2)$genotype <- genotype2
 
 sex2 <- rep("male", length(colnames(alevin_subset2)))
 colData(alevin_subset2)$sex <- sex2
 
-alevin_subset2
+alevin_702 <- alevin_subset2
+alevin_702
 ```
 
 Alright, another sample pre-processed!
@@ -616,17 +629,28 @@ Alright, another sample pre-processed!
 
 # Combining datasets
 
+Pre-processed sample 702 is there, but we still need to load sample 701 that we saved before switching kernels. It's equally easy as saving the object:
+
+```r
+load("alevin_701.RData")
+```
+
+Check if it was loaded ok:
+```r
+alevin_701
+```
+
 Now we can combine those two objects into one using one simple command:
 
 ```r
-alevin_combined <- cbind(alevin_subset, alevin_subset2)
+alevin_combined <- cbind(alevin_701, alevin_702)
 alevin_combined
 ```
 
 If you have more samples, just append them in the same way. We won't process another sample here, but pretending that we have third sample, we would combine it like this:
 
 ```r
-alevin_subset3 <- alevin_subset2       # copy dataset for demonstration purposes
+alevin_subset3 <- alevin_702      # copy dataset for demonstration purposes
 alevin_combined_demo <- cbind(alevin_combined, alevin_subset3)
 alevin_combined_demo
 ```
@@ -636,5 +660,33 @@ You get the point, right? It's imporant though that the rowData names and colDat
 
 # Saving and exporting the files 
 
+It is generally more common to use SingleCellExperiment format rather than SummarizedExperiment. The conversion is quick and easy, and goes like this:
 
+```r
+alevin_sce <- as(alevin_combined, "SingleCellExperiment")
+alevin_sce
+```
+As you can see, all the embeddings have been successfully transfered during this conversion and believe me, sce object will be more useful for you! 
 
+You've already learned how to save and load objects in Jupyter notebook, let's then save the SCE file:
+
+```r
+save(alevin_sce, file = "alevin_combined_sce.rdata")
+```
+
+The last thing that might be useful is exporting the files into your Galaxy history. To do it... guess what! Yes - switching kernels again! But this time we choose Python kernel and run the following command:
+
+```python
+put("alevin_combined_sce.rdata")
+```
+
+# Conclusion
+
+Well done! In this tutorial we have:
+- examined raw read data, annotations and necessary input files for quantification
+- created an index in salmon and run Alevin 
+- identified barcodes that correspond to non-empty droplets
+- added gene and cell metadata
+- applied the necessary conversion to pass these data to downstream processes.
+
+As you might now appreciate, some tasks are much quicker and easier when run in the code, but the reproducibility and automation of Galaxy workflows is a huge advantage that helps in dealing with many samples more quickly and efficiently. 
