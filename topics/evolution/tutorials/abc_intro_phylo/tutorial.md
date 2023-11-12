@@ -17,6 +17,7 @@ time_estimation: 2H
 contributors:
 - mcharleston
 - adamtaranto
+- burkemlou
 
 ---
 
@@ -24,9 +25,9 @@ contributors:
 
 Phylogenetics is essential for comparing biological species and understanding biodiversity for conservation. This tutorial discusses the basic principles and methods of phylogenetic inference and what you can learn from phylogenetic estimation. It is intended to help you make informed decisions about which methods to use in your own research.  
 
-Using real-life data and standard tools that are (mostly) available in Galaxy the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data. 
+Using real-life data and standard tools that are (mostly) available in Galaxy, the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data. 
 
-This is not a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of how the methods work.
+This is not a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of phylogenetics and how the methods work.
 
 The exercises are beginner level, but you should know how molecular sequence data is produced and what it looks like. Maybe you've even built phylogenetic trees before but want to know more about the principles behind the tools.
 
@@ -35,7 +36,7 @@ This tutorial does not cover workflows all the way from read data to phylogeny, 
 ## Scope:
 **We will cover:**
 
-test
+
 
 * What a phylogeny is
 * Motivation: 
@@ -78,11 +79,6 @@ On successful completion of this workshop you will be able to:
 
 
 
-> <details-title>Further reading</details-title>
-> Here is a link to the PLoS article on Galaxy tutorials:
-> - [Galaxy Training: A powerful framework for teaching!](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752)
-{: .details}
-
 ## Overview
 
 This tutorial has the following structure:
@@ -102,7 +98,7 @@ This tutorial has the following structure:
 
 ## What is a Phylogeny?
 
-![IThink](./images/Darwin_tree.png){:align="center", width="400px"}
+![IThink](./images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. [Wikimedia commons](https://en.m.wikipedia.org/wiki/File:Darwins_first_tree.jpg) ){:align="center", width="400px"}
 
 <!-- **needs a reference** -->
 
@@ -951,3 +947,9 @@ and Le Sy Vinh (2018) UFBoot2: Improving the ultrafast bootstrap
 approximation. Mol. Biol. Evol., 35:518–522.
 https://doi.org/10.1093/molbev/msx281
 
+
+
+> <details-title>Further reading</details-title>
+> Here is a link to the PLoS article on Galaxy tutorials:
+> - [Galaxy Training: A powerful framework for teaching!](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752)
+{: .details}
