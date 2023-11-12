@@ -24,7 +24,15 @@ contributions:
     - by-covid
 license: Apache-2.0
 subtopic: ro-crate
+requirements:
+- type: "internal"
+  topic_name: galaxy-interface
+  tutorials:
+    - workflow-editor
+    - history-to-workflow
 ---
+
+Workflows are a powerful Galaxy feature that allows you to scale up your analysis by performing an end-to-end analysis with a single click of a button. In order to keep provenance of the workflow invocation (an invocation of a workflow means one run or execution of the workflow) it can be exported from Galaxy in the form of a [Workflow Run Crate](https://w3id.org/ro/wfrun/workflow) RO-Crate profile.
 
 > <agenda-title></agenda-title>
 >
@@ -36,22 +44,11 @@ subtopic: ro-crate
 {: .agenda}
 
 
-## Introduction
-
-Requirements:
-
-[Using Galaxy and Managing your Data](https://training.galaxyproject.org/training-material/topics/galaxy-interface/):
-- [Creating, Editing and Importing Galaxy Workflows]({% link topics/galaxy-interface/tutorials/workflow-editor/tutorial.md %}) 
-- [Extracting Workflows from Histories](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html )
-
-
-Workflows are a powerful Galaxy feature that allows you to scale up your analysis by performing an end-to-end analysis with a single click of a button. In order to keep provenance of the workflow invocation (an invocation of a workflow means one run or execution of the workflow) it can be exported from Galaxy in the form of a [Workflow Run Crate](https://w3id.org/ro/wfrun/workflow) RO-Crate profile.
-
-Additionaly, the exported Workflow Run Crate allows for sharing workflow run provenance with those unfamiliar with Galaxy and its standard export format.
+Additionally, the exported Workflow Run Crate allows for sharing workflow run provenance with those unfamiliar with Galaxy and its standard export format.
 
 This tutorial will guide you through the steps of defining such a report for your workflow, .
 
-This tutorial will show you how to generate Galaxy-based [Workflow Run RO-Crate](https://w3id.org/ro/crate/) after running the workflow. 
+This tutorial will show you how to generate Galaxy-based [Workflow Run RO-Crate](https://w3id.org/ro/crate/) after running the workflow.
 
 
 ## Import an example workflow
@@ -128,7 +125,7 @@ After the workflow has completed, we can export the RO-Crate. The crate does not
 >    - Location where the export should be sent to (Download locally or a remote location)
 >
 > 5. Click on the Download option
-> 
+>
 >    ![screenshot of the beginning of the workflow run export options](./images/workflow-invocation-export.png)
 >
 {: .hands_on}

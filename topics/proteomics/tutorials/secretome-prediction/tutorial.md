@@ -21,7 +21,10 @@ contributors:
 
 subtopic: post-process
 tags: [human]
+draft: true
 ---
+
+<!-- Moved to draft due to lack of agenda, not using citation mechanism, not including any hands-on boxes, not using a workflow step despite that being the focus -->
 
 # Secretome Prediction using GO annotations and localization prediction
 

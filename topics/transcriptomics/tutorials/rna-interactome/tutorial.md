@@ -22,11 +22,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
-<!-- This is a comment. -->
-
 With the advances in the next-generation sequencing technologies, genome-wide RNA-RNA interaction predictions are now
 possible. The most recent line of development has been to ligate the microRNA to the site-specific interaction region of
  the target, selecting these interactions via cross-linking to one of the Argonaute proteins required for microRNA-based

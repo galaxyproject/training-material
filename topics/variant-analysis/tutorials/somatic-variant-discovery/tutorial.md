@@ -26,8 +26,6 @@ contributors:
 ---
 
 
-# Introduction
-
 
 Human Copy Number Variations (hCNVs) are the result of structural genomic rearrangements that result in the duplication or deletion of DNA segments. These changes contribute significantly to human genetic variability, diseases, and somatic genome variations in cancer and other diseases {% cite Nam2015 %}. hCNVs can be routinely investigated by genomic hybridisation and sequencing technologies
 . There is a range of software tools that can be used to identify and quantify hCNVs. Unfortunately, locating hCNVs is still a challenge in standardising formats for data representation and exchange. Furthermore, the sensitivity, specificity, reproducibility, and reusability of hCNV detection and analysis research software varies. As a result, there is a need for the adoption of community-developed standards for data discovery and exchange. To address that ELIXIR developed {% cite Beacon %} protocol and {% cite GA4GH %} standards, as well as mechanisms for annotating, benchmarking, creating reproducible and sharable tools and workflows, such as {% cite WorkflowHub %}, Galaxy, and {% cite OpenEBench %}, and, most importantly, accessible training resources and infrastructure.

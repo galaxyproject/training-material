@@ -33,8 +33,6 @@ tags:
 
 ---
 
-# Introduction
-
 
 Image analysis is the extraction of meaningful information from images by means of digital image processing techniques. Imaging is an important component in a wide range of scientific fields of study, such as astronomy, medicine, physics, biology, geography, chemistry, robotics, and industrial manufacturing.
 

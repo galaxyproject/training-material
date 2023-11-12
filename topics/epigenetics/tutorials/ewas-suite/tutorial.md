@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Infinium Human Methylation BeadChip"
-zenodo_link: "https://zenodo.org/record/1251211#.WwREQ1Mvz-Y"
+zenodo_link: "https://zenodo.org/record/1251211"
 questions:
   - "Which DNA regions and positions are diffrentialy methylated in pre MAPKi treatment and post MAPKi resistance Melanomas GSE65183?"
   - "How to analyse and visualise Infinium Human Methylation BeadChip's?"
@@ -18,6 +18,9 @@ contributors:
   - Khaled196
   - poterlowicz-lab
 ---
+
+This tutorial is based on Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance {% cite Hugo2015 %}.
+
 > <agenda-title></agenda-title>
 > In this tutorial we will do:
 > 1. TOC
@@ -26,12 +29,6 @@ contributors:
 >
 >
 {: .agenda}
-
-This tutorial is based on Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance {% cite Hugo2015 %}.
-
-The data we use in this tutorial are available at [Zenodo](https://zenodo.org/record/1251211).
-
----
 
 # Introduction
 
