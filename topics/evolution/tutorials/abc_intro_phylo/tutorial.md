@@ -98,18 +98,17 @@ This tutorial has the following structure:
 
 ## What is a Phylogeny?
 
-![IThink](./images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. [Wikimedia commons](https://en.m.wikipedia.org/wiki/File:Darwins_first_tree.jpg) ){:align="center", width="400px"}
+![IThink](./images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. [Wikimedia commons](https://en.m.wikipedia.org/wiki/File:Darwins_first_tree.jpg)"){:align="center", width="400px"}
 
 <!-- **needs a reference** -->
 
-A **phylogenetic tree*, also called a _phylogeny_, is most often a tree-like structure, like Darwin's famous sketch reproduced above, in which the tips of the diagram represent extant (that is, living/existing) taxonomic entities like species, or genera, or strains (in general called "taxa"), and the lines connecting them together describe the evolutionary relationships between them.
-The connections between those lines within the figure above correspond to hypothetical ancestral taxa: they're representing branching events when species split into two new species, or a strain developed a phylogenetic important offshoot strain, etc.
-
-Through the SARS-Cov2 pandemic, we have all probably seen a phylogenetic tree of strains, showing how they have branched from each other over time.
+A **phylogenetic tree*, also called a _phylogeny_, is usually a tree-like structure, like Darwin's famous sketch reproduced above. The leaves or tips of the tree represent extant (that is, living/existing) taxonomic entities like species, or genera, or strains (in general called "taxa"). The lines connecting the taxa describe the evolutionary relationships between them.
+The intersections between lines within the figure above correspond to hypothetical ancestral taxa. They represent branching events when species split into two new species, or a strain developed a phylogenetic important offshoot strain, etc.
 
 The phylogeny of a group of taxa is the best representation of their evolutionary relationships.
-As such it is also the main basis on which we can build statistics comparing species: without the phylogeny, comparing species (or strains, genera, etc.) is not meaningful.  
-As Theodosius Dobzhansky famously wrote, **Nothing in Biology Makes Sense Except in the Light of Evolution**.
+It is also the main basis on which we can build statistics comparing species: without the phylogeny, comparing species (or strains, genera, etc.) is not meaningful.  
+
+As Theodosius Dobzhansky famously wrote, **"Nothing in biology makes sense except in the light of evolution"** {% cite 6ef38333-9ecd-3f40-8f3e-5f3d6df3c4b4 %}.
 
 
 ## Motivation
