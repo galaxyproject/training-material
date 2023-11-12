@@ -328,20 +328,23 @@ emptied_matrix <- matrix_alevin[,which(is.cell),drop=FALSE]          # filter th
 dim(emptied_matrix)                                                  # check the dimension of the filtered matrix
 ```
 
-From here, we can move on to adding cell metadata.
+From here, we can move on to adding cell metadata and we'll return to `emptied_matrix` soon.
 
 # Adding cell metadata
 
-The genes IDs are stored in *colnames*. Let's exctract them into a separate object:
+The cells barcodes are stored in *colnames*. Let's exctract them into a separate object:
 ```r
 barcode <- colnames(alevin_se)
 ```
 
-Now, we can simply add those barcodes into *colData names* which stores cell metadata. To do this, we will create a column called `barcode` in *colData* and pass the stored values into there.
+Now, we can simply add those barcodes into *colData names* where we will keep the cell metadata. To do this, we will create a column called `barcode` in *colData* and pass the stored values into there.
 
 ```r
 colData(alevin_se)$barcode <- barcode
+colData(alevin)
 ```
+
+
 
 As we saw above, the dimension of the filtered matrix is A x B. It means that there are X cells and Y genes. We will now extract those cells from the filtered matrix. 
 
