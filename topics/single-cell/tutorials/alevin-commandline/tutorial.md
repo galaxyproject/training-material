@@ -95,8 +95,8 @@ wget -nv https://zenodo.org/
 Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. These files are included in the data import step below. You can also download these for your species of interest [from Ensembl](https://www.ensembl.org/info/data/ftp/index.html).
 
 ```bash
-wget -nv https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.100.gtf.gff
-wget -nv https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.cdna.all.fa.fasta
+wget -c https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.100.gtf.gff -O GRCm38_gtf.gff
+wget -c https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.cdna.all.fa.fasta -O GRCm38_cdna.fasta
 ```
 
 Why do we need FASTA and GTF files? 
@@ -110,7 +110,7 @@ We will use the murine reference annotation as retrieved from Ensembl in GTF for
 You can have a look at the Terminal tab again. Has the package `atlas-gene-annotation-manipulation` been installed yet? If yes, you can execute the code cell below and while it's running, I'll explain all the parameters we set here. 
 
 ```bash
-gtf2featureAnnotation.R -g gtf.gff -c fasta.fasta -d "transcript_id" -t "transcript" -f "transcript_id" -o map -l "transcript_id,gene_id" -r -e filtered_fasta
+gtf2featureAnnotation.R -g GRCm38_gtf.gff -c GRCm38_cdna.fasta -d "transcript_id" -t "transcript" -f "transcript_id" -o map -l "transcript_id,gene_id" -r -e filtered_fasta
 ```
 
 In essence, [gtf2featureAnnotation.R script](https://github.com/ebi-gene-expression-group/atlas-gene-annotation-manipulation) takes a GTF annotation file and creates a table of annotation by feature, optionally filtering a cDNA file supplied at the same time. Therefore the first parameter `-g` stands for "gtf-file" and requires a path to a valid GTF file. Then `-c` takes a cDNA file for extracting meta info and/or filtering - that's our FASTA! Where --parse-cdnas (that's our `-c`) is specified, we need to specify, using `-d`, which field should be used to compare to identfiers from the FASTA. We set that to "transcript_id" - feel free to inspect the GTF file to explore other attributes. We pass the same value in `-f`, meaning first-field, ie. the name of the field to place first in output table. To specify which other fields to retain in the output table, we provide comma-separated list of those fields, and since we're only interested in transcript to gene map, we put those two names ("transcript_id,gene_id") into `-l`. `-t` stands for the feature type to use, and in our case we're using "transcript". Guess what `-o` is! Indeed, that's the output annotation table - here we specify the file path of our transcript to gene map. We will also have another output denoted by `-e` and that's the path to a filtered FASTA. Finally, we also put `-r` which is there only to suppress header on output. Summarising, output will be a an annotation table, and a FASTA-format cDNAs file with unannotated transcripts removed.
@@ -141,7 +141,7 @@ reference salmon
 -->
 
 <!---
-check if we need decoy --decoys decoys.txt 
+check if we need decoy --decoys decoys.txt (unrecognised flag)
 -->
 
 # Use Alevin
@@ -159,6 +159,12 @@ Time to use Alevin now! Alevin works under the same indexing scheme (as salmon) 
 > {: .solution}
 >
 {: .question}
+
+Alevin can be run using the following command:
+
+```bash
+salmon-latest_linux_x86_64/bin/salmon alevin -l ISR -1 barcodes_701.fastq -2 transcript_701.fastq --dropseq  -i salmon_index -p 10 -o alevin_output --tgMap map --freqThreshold 3 --keepCBFraction 1 --dumpFeatures
+```
 
 All the required input parameters are described in [the documentation](https://salmon.readthedocs.io/en/latest/alevin.html), but for the ease of use, they are presented below as well:
 
@@ -186,12 +192,6 @@ All the required input parameters are described in [the documentation](https://s
 
 We have also added some additional parameters (`--freqThreshold`, `--keepCBFraction`) and their values are derived from the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) after QC to stop Alevin from applying its own thresholds. However, if you're not sure what value to pick, you can simply allow Alevin to make its own calls on what constitutes empty droplets.
 
-Once all the above requirement are satisfied, Alevin can be run using the following command:
-
-```bash
-salmon-latest_linux_x86_64/bin/salmon alevin -l ISR -1 barcodes_701.fastq -2 transcript_701.fastq --dropseq  -i salmon_index_code -p 10 -o alevin_output_code --tgMap map_code --freqThreshold 3 --keepCBFraction 1 --dumpFeatures
-```
-
 
 This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, you can look through all the different files to find information such as the mapping rate, but we'll just pass the whole output folder directory for downstream analysis. 
 
@@ -210,7 +210,8 @@ check if we can get alevinQC to work - paste the info from the other tutorial?
 # Alevin output to SummarizedExperiment 
 
 Let's change gear a little bit. We've done the work in bash, and now we're switching to R to complete the processing. To do so, you have to change Kernel to R (either click on `Kernel` -> `Change Kernel...` in the upper left corner of your JupyterLab or click on the displayed current kernel in the upper right corner and change it).
-![Figure showing the JupyterLab interface with an arrow pointing to the left corner, showing the option `Kernel` -> `Change Kernel...` and another arrow pointing to the right corner, showing the icon of the current kernel. The pop-up window asks which kernel should be chosen instead.](../../images/scrna-pre-processing/switch_kernel.jpg "Two ways of switching kernel.")
+![Figure showing the JupyterLab interface with an arrow pointing to the left corner, showing the option 'Kernel' -> 'Change Kernel...' and another arrow pointing to the right corner, showing the icon of the current kernel. The pop-up window asks which kernel should be chosen instead.](../../images/scrna-pre-processing/switch_kernel.jpg "Two ways of switching kernel.")
+
 
 Now load the library that we have previously installed in terminal:
 
