@@ -75,8 +75,8 @@ We're going to use Alevin {% cite article-Alevin %} for demonstration purposes, 
 We continue working on the same example data - a very small subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). For the purposes of this tutorial, the datasets have been subsampled to only 50k reads (around 1% of the original files). Those are two fastq files - one with transcripts and the onther one with cell barcodes. You can download the files by running the code below:
 
 ```bash
-wget -nv https://zenodo.org/
-wget -nv https://zenodo.org/
+wget -nv https://zenodo.org/records/10116786/files/transcript_701.fastq
+wget -nv https://zenodo.org/records/10116786/files/barcodes_701.fastq
 ```
 
  > <question-title></question-title>
@@ -326,7 +326,7 @@ gene_ID <- rownames(alevin_se)
 Analogically, we will add those genes IDs into *rowData names* which stores gene metadata. To do this, we will create a column called `gene_ID` in *rowData* and pass the stored values into there.
 
 ```bash
-rowData(alevin)$gene_ID <- gene_ID
+rowData(alevin_se)$gene_ID <- gene_ID
 ```
 
 ## Adding genes symbols based on their IDs
@@ -410,7 +410,7 @@ dim(matrix_alevin)                                                  # check the 
 dim(emptied_matrix)                                                  # check the dimension of the filtered matrix
 ```
 
-We've gone from X to Y cells. We've filtered the matrix, but not our SummarizedExperiment. We can subset `alevin_se` based on the cells that were left after filtering. We will store them in a separate list, as we did with the barcodes:
+We've gone from 3608 to 35 cells. We've filtered the matrix, but not our SummarizedExperiment. We can subset `alevin_se` based on the cells that were left after filtering. We will store them in a separate list, as we did with the barcodes:
 
 ```bash
 retained_cells <- colnames(emptied_matrix)
@@ -495,7 +495,7 @@ But first, we have to save the results of our hard work on sample 701!
 Saving files is quite straight forward. Just specify which object you want to save and how you want the file to be named. Don't forget the extension!
 
 ```bash
-save(alevin_subset, file = "alevin_701.RData")
+save(alevin_subset, file = "alevin_701.rdata")
 ```
 
 You will see the new file in the panel on the left. 
@@ -514,7 +514,10 @@ Normally, at this point you would switch kernel to bash to run alevin, and then 
 Let's switch the kernel back to bash and run the following code to unzip the alevin output for sample 702:
 
 ```bash
-unzip 
+wget https://zenodo.org/records/10116786/files/alevin_output_702.zip
+```
+```bash
+unzip alevin_output_702.zip
 ```
 
 The files are there! Now back to R - switch kernel again. 
@@ -522,6 +525,10 @@ The files are there! Now back to R - switch kernel again.
 Above we described all the steps done in R and explained what each bit of code does. Below all those steps are in one block of code, so read carefully and make sure you understand everything! 
 
 ```bash
+library(tximeta)
+library(DropletUtils)
+library(biomaRt)
+
 path2 <- 'alevin_output_702/alevin/quants_mat.gz'
 alevin2 <- tximeta(coldata = data.frame(files = path2, names = "sample702"), type = "alevin")
 
@@ -594,7 +601,7 @@ Alright, another sample pre-processed!
 Pre-processed sample 702 is there, but we still need to load sample 701 that we saved before switching kernels. It's equally easy as saving the object:
 
 ```bash
-load("alevin_701.RData")
+load("alevin_701.rdata")
 ```
 
 Check if it was loaded ok:
@@ -625,6 +632,7 @@ You get the point, right? It's imporant though that the rowData names and colDat
 It is generally more common to use SingleCellExperiment format rather than SummarizedExperiment. The conversion is quick and easy, and goes like this:
 
 ```bash
+# library(SingleCellExperiment)             # might need to run this if code below is not working
 alevin_sce <- as(alevin_combined, "SingleCellExperiment")
 alevin_sce
 ```
