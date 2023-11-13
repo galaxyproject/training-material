@@ -45,7 +45,7 @@ contributions:
     - nomadscientist
 
   funding:
-    - 
+    - eosc-life
 
 notebook:
   language: bash
