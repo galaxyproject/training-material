@@ -19,6 +19,8 @@ key_points:
 contributions:
   authorship:
     - wee-snufkin
+  funding: 
+  - elixir-fair-data
 
 requirements:
   -
@@ -34,9 +36,6 @@ follow_up_training:
     topic_name: single-cell
     tutorials:
         - scrna-case_basic-pipeline
-
-funding: 
-  - elixir-fair-data
 
 tags:
   - transcriptomics
