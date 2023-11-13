@@ -79,7 +79,7 @@ Before creating an AnnData object, we need to make a small modification in exper
 >
 > 2. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - *"Select cells from"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
->    - *"using column"*: `c12`
+>    - *"using column"*: `Column: 12`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `1`
