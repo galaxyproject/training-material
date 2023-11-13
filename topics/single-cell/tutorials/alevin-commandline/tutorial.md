@@ -483,7 +483,8 @@ And now we can subset our SummarizedExperiment based on the barcodes that are in
 
 ```bash
 alevin_subset <- alevin_se[, colData(alevin_se)$barcode %in% retained_cells]
-alevin_subset
+alevin_701 <- alevin_subset
+alevin_701
 ```
 
 And that's our subset, ready for downstream analysis!
@@ -500,7 +501,7 @@ But first, we have to save the results of our hard work on sample 701!
 Saving files is quite straight forward. Just specify which object you want to save and how you want the file to be named. Don't forget the extension!
 
 ```bash
-save(alevin_subset, file = "alevin_701.rdata")
+save(alevin_701, file = "alevin_701.rdata")
 ```
 
 You will see the new file in the panel on the left. 
@@ -554,14 +555,14 @@ colData(alevin2)$barcode <- barcode2                                            
 
 colData(alevin2) <- cbind(colData(alevin2),out2)                                 # add emptyDrops info
 
-batch2 <- rep("1", length(colnames(alevin_subset2)))
-colData(alevin_subset2)$batch <- batch2                                          # add batch info
+batch2 <- rep("1", length(colnames(alevin2)))
+colData(alevin2)$batch <- batch2                                                # add batch info
 
-genotype2 <- rep("wildtype", length(colnames(alevin_subset2)))
-colData(alevin_subset2)$genotype <- genotype2                                    # add genotype info
+genotype2 <- rep("wildtype", length(colnames(alevin2)))
+colData(alevin2)$genotype <- genotype2                                          # add genotype info
 
-sex2 <- rep("male", length(colnames(alevin_subset2)))
-colData(alevin_subset2)$sex <- sex2                                              # add sex info
+sex2 <- rep("male", length(colnames(alevin2)))
+colData(alevin2)$sex <- sex2                                                    # add sex info
 
 ## adding gene metadata ##
 gene_ID2 <- rownames(alevin2)
@@ -647,7 +648,7 @@ You get the point, right? It's imporant though that the rowData names and colDat
 It is generally more common to use SingleCellExperiment format rather than SummarizedExperiment. The conversion is quick and easy, and goes like this:
 
 ```bash
-# library(SingleCellExperiment)                 # might need to run this if code below is not working
+library(SingleCellExperiment)                                 # might need to load this library
 alevin_sce <- as(alevin_combined, "SingleCellExperiment")
 alevin_sce
 ```
@@ -656,14 +657,14 @@ As you can see, all the embeddings have been successfully transfered during this
 You've already learned how to save and load objects in Jupyter notebook, let's then save the SCE file:
 
 ```bash
-save(alevin_sce, file = "alevin_combined_sce.rdata")
+save(alevin_sce, file = "alevin_sce.rdata")
 ```
 
 The last thing that might be useful is exporting the files into your Galaxy history. To do it... guess what! Yes - **switching kernels again**! But this time we choose Python kernel and run the following command:
 
 ```bash
 # that's Python now! 
-put("alevin_combined_sce.rdata")
+put("alevin_sce.rdata")
 ```
 
 # Conclusion
