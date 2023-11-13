@@ -29,8 +29,6 @@ contributions:
     - biont
 ---
 
-# Introduction
-
 When we do a bioinformatics analysis, e.g. RNA-seq, we might end up with a list of gene names. We then need to explore these genes. But how can we do that? What are the resources available for that? And how to navigate through them?
 
 The aim of this tutorial is to familiarize ourselves with that, using Human opsins as an example.

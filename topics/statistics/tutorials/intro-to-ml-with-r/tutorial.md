@@ -46,8 +46,6 @@ contributors:
   - gallantries
 ---
 
-# Introduction to Machine Learning and Data mining
-
 This is an Introduction to Machine Learning in R, in which you'll learn the basics of unsupervised learning for pattern recognition and supervised learning for prediction. At the end of this workshop, we hope that you will:
 - appreciate the importance of performing exploratory data analysis (or EDA) before starting to model your data.
 - understand the basics of unsupervised learning and know the examples of principal component analysis (PCA) and k-means clustering.

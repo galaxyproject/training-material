@@ -40,8 +40,6 @@ requirements:
 ---
 
 
-# Introduction
-
 The FAIR (Findable, Accessible, Interoperable, Reusable)  data stewardship created the foundation for sharing and publishing digital assets, especially data. This apply to machine accessibility and emphasize that all digital assets should share data in a way that will enable maximum use and reuse.
 
 This tutorial is a short introduction to the FAIR data management framework. You can find out more at the [FAIR Pointers](https://elixir-uk-dash.github.io/FAIR-Pointers/ep1/index.html) online course.
