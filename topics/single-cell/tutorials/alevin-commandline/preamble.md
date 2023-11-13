@@ -1,7 +1,6 @@
 # Introduction 
 
 This tutorial is the part of [Single-cell RNA-seq: Case Study]({% link topics/single-cell/index.md %}) series and focuses on generating a single cell matrix using [Alevin]( https://salmon.readthedocs.io/en/latest/alevin.html) in bash command line. It is a replication of the [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) and will guide you through the same steps that you followed in the previous tutorial and will give you more understanding of what is happening ‘behind the scenes’ or ‘inside the tools’ if you will.
-We will work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)).
 As a recap, we fill go from raw FASTQ files to a cell x gene data matrix in AnnData format. After completing the previous tutorial you should already know what is a data matrix and AnnData format. We will perform the following steps:
 1.	Getting the appropriate files
 2.	Making a transcript-to-gene ID mapping
@@ -64,15 +63,6 @@ You have two options for how to proceed with this JupyterLab tutorial - you can 
 {: .warning}
 
 Let's crack on!
-
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
 
 {% snippet topics/single-cell/faqs/notebook_warning.md %}
 
