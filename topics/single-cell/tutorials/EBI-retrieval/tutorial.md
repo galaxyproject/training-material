@@ -35,6 +35,9 @@ follow_up_training:
     tutorials:
         - scrna-case_basic-pipeline
 
+funding: 
+  - elixir-fair-data
+
 tags:
   - transcriptomics
   - data management
