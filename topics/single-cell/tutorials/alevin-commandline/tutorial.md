@@ -38,12 +38,10 @@ tags:
 - 10x
 - paper-replication
 
-
 contributions:
   authorship:
     - wee-snufkin
     - nomadscientist
-
   funding:
     - eosc-life
 
