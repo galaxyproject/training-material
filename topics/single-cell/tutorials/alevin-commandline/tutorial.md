@@ -447,9 +447,22 @@ listDatasets(mart)                # available datasets
 {: .warning}
 
 
-<!---
-add mito annotation?
--->
+## Flag mitochondrial genes
+
+We can also flag mitochondrial genes. Usually those are the genes whose name starts with 'mt-' or 'MT-'. Therefore, we will store those characters in `mito_genes_names` and then use *grepl()* to find those genes stored in *gene_name* slot. 
+
+```bash
+mito_genes_names <- '^mt-|^MT-'                                    # how mitochondrial gene names can start
+mito <- grepl(mito_genes_names, rowData(alevin_se)$gene_name)      # find mito genes 
+mito                                                               # see the resulting boolean list
+```
+
+Now we can add another slot in *rowData* and call it *mito* that will keep boolean values (true/false) to indicate which genes are mitochondrial.
+```bash
+rowData(alevin_se)$mito <- mito
+rowData(alevin_se)
+```
+
 
 # Subsetting the object
 
@@ -579,7 +592,11 @@ for (geneID in gene_names2)
  count = count + 1                # increased count so that every element in gene_names is replaced
 }
 
-rowData(alevin2)$gene_name <- gene_names2                      # add gene names to gene metadata
+rowData(alevin2)$gene_name <- gene_names2                              # add gene names to gene metadata
+
+mito_genes_names <- '^mt-|^MT-'                                        # how mitochondrial gene names can start
+mito2 <- grepl(mito_genes_names, rowData(alevin2)$gene_name)           # find mito genes 
+rowData(alevin2)$mito <- mito2                                         # add mitochondrial information to gene metadata
 
 ## create a subset of filtered object ##
 retained_cells2 <- colnames(emptied_matrix2)
