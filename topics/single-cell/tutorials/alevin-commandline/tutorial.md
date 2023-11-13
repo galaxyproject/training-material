@@ -37,7 +37,6 @@ follow_up_training:
 tags:
 - 10x
 - paper-replication
-- jupyter-notebook
 
 
 contributions:
