@@ -89,7 +89,7 @@ Now, we can extract metadata from an image.
 
 > <hands-on-title>Extract Image Metadata</hands-on-title>
 >
-> 1. {% tool [Image Info](toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/0.2) %} with the following parameters to extract metadata from the image:
+> 1. {% tool [Show image info](toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/0.2) %} with the following parameters to extract metadata from the image:
 >    - {% icon param-file %} *"Input Image"*: `input.tif` file (output of the previous step)
 > 2. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and search for image acquisition information
 >
@@ -113,10 +113,9 @@ Not all tools can handle all image formats. Especially proprietary microscope im
 
 > <hands-on-title>Convert Image</hands-on-title>
 >
-> 1. {% tool [Convert image](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0) %} with the following parameters to convert the image to PNG:
+> 1. {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2) %} with the following parameters to convert the image to PNG:
 >    - {% icon param-file %} *"Input Image"*: `input.tif` file
 >    - *"Output data type"*: `PNG`
->    - *"Pyramid image"*: `No Pyramid`
 > 2. Rename {% icon galaxy-pencil %} the generated file to `viz_input`
 > 3. Click on the {% icon galaxy-eye %} (eye) icon next to the file name to look at the file content
 >
@@ -146,7 +145,7 @@ Next we will normalize the histogram to improve the contrast. We do this using a
 >    - {% icon param-file %} *"Source file"*: `input.tif` file
 >    - *"Histogram Equalization Algorithm"*: `CLAHE`
 > 2. Rename {% icon galaxy-pencil %} the generated file to `input_normalized`
-> 3. {% tool [Convert image](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0) %} with the following parameters to convert the image to PNG:
+> 3. {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2) %} with the following parameters to convert the image to PNG:
 >    - {% icon param-file %} *"Input Image"*: `input_normalized` file (output of {% tool [Histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1) %})
 >    - *"Output data type"*: `PNG`
 > 4. Rename {% icon galaxy-pencil %} the generated file to `viz_normalized`
@@ -174,7 +173,7 @@ Specific features of interest (e.g., edges, noise) can be enhanced or suppressed
 >    - {% icon param-file %} *"Source file"*: `input_smoothed` file (output of {% tool [Filter Image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3) %})
 >    - *"Histogram Equalization Algorithm"*: `CLAHE`
 > 4. Rename {% icon galaxy-pencil %} the generated file to `input_smoothed_normalized`
-> 5. {% tool [Convert image](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0) %} with the following parameters to convert the image to PNG:
+> 5. {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2) %} with the following parameters to convert the image to PNG:
 >    - {% icon param-file %} *"Input Image"*: `input_smoothed_normalized` file (output of {% tool [Histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1) %})
 >    - *"Output data type"*: `PNG`
 > 6. Rename {% icon galaxy-pencil %} the generated file to `viz_smoothed_normalized`
@@ -200,7 +199,7 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 > 3. {% tool [Binary 2 Label](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4) %} with the following parameters to segment the image:
 >    - {% icon param-file %} *"Binary Image File"*: `input_segmented` file (output of {% tool [Auto Threshold](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5) %})
 > 4. Rename {% icon galaxy-pencil %} the generated file to `input_segmented_labeled`
-> 5. {% tool [Convert image](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0) %} with the following parameters to convert the image to PNG:
+> 5. {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2) %} with the following parameters to convert the image to PNG:
 >    - {% icon param-file %} *"Input Image"*: `input_segmented_labeled` file (output of {% tool [Binary 2 Label](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4) %})
 >    - *"Output data type"*: `PNG`
 > 6. Rename {% icon galaxy-pencil %} the converted image to `viz_segmented`
@@ -225,7 +224,7 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    > >      - {% icon param-file %} *"Source file"*: `input_segmented_labeled` file (output of {% tool [Binary 2 Label](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4) %})
 >    > >      - *"Histogram Equalization Algorithm"*: `CLAHE`
 >    > >
->    > >    - {% tool [Convert image](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0) %} with the following parameters to convert the image to PNG:
+>    > >    - {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2) %} with the following parameters to convert the image to PNG:
 >    > >      - {% icon param-file %} *"Input Image"*: output of {% tool [Histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1) %}
 >    > >      - *"Output data type"*: `PNG`
 >    > >
