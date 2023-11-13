@@ -18,7 +18,7 @@ objectives:
 time_estimation: 2H
 
 key_points:
-  - Create a SCE object from FASTQ files, including relevant gene and cell metadata
+  - Create a SCE object from FASTQ files, including relevant gene and cell metadata, and do it all in Jupyter Notebook!
 
 requirements:
 -
@@ -56,7 +56,7 @@ notebook:
 
 # Setting up the environment 
 
-Alevin is a tool integrated with the salmon software, so first we need to get salmon. You can install salmon using bioconda, but in this tutorial we will show an alternative method - downloading the pre-compiled binaries from the [releases page](https://github.com/COMBINE-lab/salmon/releases).
+Alevin is a tool integrated with the [Salmon software](https://salmon.readthedocs.io/en/latest/salmon.html), so first we need to get Salmon. You can install salmon using bioconda, but in this tutorial we will show an alternative method - downloading the pre-compiled binaries from the [releases page](https://github.com/COMBINE-lab/salmon/releases).
 
 ```bash
 wget -nv https://github.com/COMBINE-lab/salmon/releases/download/v1.10.0/salmon-1.10.0_linux_x86_64.tar.gz
@@ -68,7 +68,7 @@ Once you've downloaded a specific binary (here we're using version 1.10.0), just
 tar -xvzf salmon-1.10.0_linux_x86_64.tar.gz
 ```
 
-We're going to use Alevin {% cite article-Alevin %} for demonstration purposes, but we do not endorse one method over another.
+We're going to use Alevin for demonstration purposes, but we do not endorse one method over another.
 
 # Get Data
 
@@ -140,9 +140,6 @@ Where `-t` stands for our filtered FASTA file, and `-i` is the output the mappin
 reference salmon
 -->
 
-<!---
-check if we need decoy --decoys decoys.txt (unrecognised flag)
--->
 
 # Use Alevin
 
@@ -204,7 +201,7 @@ This tool will take a while to run. Alevin produces many file outputs, not all o
 
 
 <!---
-check if we can get alevinQC to work - paste the info from the other tutorial?
+check if we can get alevinQC to work - and paste the info from the first Alevin tutorial?
 -->
 
 # Alevin output to SummarizedExperiment 
@@ -219,7 +216,7 @@ Now load the library that we have previously installed in terminal:
 library(tximeta)
 ```
 
-The [tximeta package](https://bioconductor.org/packages/devel/bioc/vignettes/tximeta/inst/doc/tximeta.html) REF (Love et al. 2020) is used for import of transcript-level quantification data into R/Bioconductor and requires that the entire output of alevin is present and unmodified. 
+The [tximeta package](https://bioconductor.org/packages/devel/bioc/vignettes/tximeta/inst/doc/tximeta.html) created by {% cite Love2020 %} is used for import of transcript-level quantification data into R/Bioconductor and requires that the entire output of alevin is present and unmodified. 
 
 First, let's specify the path to the quants_mat.gz file: 
 
@@ -248,7 +245,7 @@ As you can see, *rowData names* and *colData names* are still empty. Before we a
 
 # Identify barcodes that correspond to non-empty droplets 
 
-Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]() for multiple sub-populations. The [emptyDrops]() method has become a popular way of dealing with this. emptyDrops still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar. 
+Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}#Basic-QC) for multiple sub-populations. The emptyDrops method ({% cite Lun2019 %}) has become a popular way of dealing with this. emptyDrops still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar. 
 
 ```bash
 library(DropletUtils)               # load the library and required packages
@@ -273,14 +270,12 @@ And now run emptyDrops:
 out <- emptyDrops(matrix_alevin, lower = 100, niters = 1000, retain = 20)
 out
 ```
-<!---
-comment on those values
--->
 
-False discovery rate - ???
+We also correct for multiple testing by controlling the false discovery rate (FDR) using the Benjamini-Hochberg (BH) method ({% cite Benjamini1995 %}). Putative cells are defined as those barcodes that have significantly poor fits to the ambient model at a specified FDR threshold. Here, we will use an FDR threshold of 1%. This means that the expected proportion of empty droplets in the set of retained barcodes is no greater than 1%, which we consider to be acceptably low for downstream analyses. 
+
 ```bash
-is.cell <- out$FDR <= 0.01
-sum(is.cell, na.rm=TRUE)
+is.cell <- out$FDR <= 0.01                           
+sum(is.cell, na.rm=TRUE)                              # check how many cells left after filtering
 ```
 
 We got rid of the background droplets containing no cells, so now we will filter the matrix that we passed on to emptyDrops, so that it corresponds to the remaining cells. 
@@ -313,6 +308,61 @@ colData(alevin_se)
 ```
 
 As you can see, the new columns were appended successfully and now the dataframe has 6 columns. 
+
+If you have a look at the Experimental Design from that study, you might notice that there is actually more information about the cells. The most important for us would be batch, genotype and sex, summarised in the small table below. 
+
+| Index | Batch | Genotype | Sex |
+|------ |--------------------|
+| N701 | 0    | wildtype    | male    |
+| N702 | 1    | knockout   | male    |
+| N703 | 2    | knockout   | female    |
+| N704 | 3    | wildtype    | male    |
+| N705 | 4    | wildtype    | male    |
+| N706 | 5    | wildtype    | male    |
+| N707 | 6    | knockout    | male    |
+
+We are currently analysing sample N701, so let's add its information from the table. 
+
+## Batch 
+
+We will label batch as an integer - "0" for sample N701, "1" for N702 etc. The way to do it is creating a list with zeros of the length corresponding to the number of cells that we have in our SummarizedExperiment object, like so:
+
+```bash
+batch <- rep("0", length(colnames(alevin_se)))
+```
+
+And now create a batch slot in the *colData names* and append the `batch` list in the same way as we did with barcodes:
+
+```bash
+colData(alevin_se)$batch <- batch
+colData(alevin_se)
+```
+
+A new column appeared, full of zeros - as expected! 
+
+## Genotype
+
+It's all the same for genotype, but instead creating a list with zeros, we'll create a list with string "wildtype" and append it into genotype slot:
+
+```bash
+genotype <- rep("wildtype", length(colnames(alevin_se)))
+colData(alevin_se)$genotype <- genotype
+```
+
+## Sex 
+
+You already know what to do, right? A list with string "male" and then adding it into a new slot! 
+```bash
+sex <- rep("male", length(colnames(alevin_se)))
+colData(alevin_se)$sex <- sex
+```
+
+Check if all looks fine:
+```bash
+colData(alevin_se)
+```
+
+3 new columns appeared with the information that we've just added - perfect! You can add any information you need in this way, as long as it's the same for all the cells from one sample. 
 
  
 # Adding gene metadata 
@@ -398,7 +448,7 @@ listDatasets(mart)                # available datasets
 
 
 <!---
-add mito annotation
+add mito annotation?
 -->
 
 # Subsetting the object
@@ -407,7 +457,7 @@ Let's go back to the `emptied_matrix` object. Do you remember how many cells wer
 
 ```bash
 dim(matrix_alevin)                                                  # check the dimension of the unfiltered matrix
-dim(emptied_matrix)                                                  # check the dimension of the filtered matrix
+dim(emptied_matrix)                                                 # check the dimension of the filtered matrix
 ```
 
 We've gone from 3608 to 35 cells. We've filtered the matrix, but not our SummarizedExperiment. We can subset `alevin_se` based on the cells that were left after filtering. We will store them in a separate list, as we did with the barcodes:
@@ -424,64 +474,7 @@ alevin_subset <- alevin_se[, colData(alevin_se)$barcode %in% retained_cells]
 alevin_subset
 ```
 
-And that's our subset! We have now filtered matrix, some gene and cell metadata... but we can do more!
-
-# Adding more metadata 
-
-If you have a look at the Experimental Design from that study, you might notice that there is actually more information about the cells. The most important for us would be batch, genotype and sex, summarised in the small table below. 
-
-| Index | Batch | Genotype | Sex |
-|------ |--------------------|
-| N701 | 0    | wildtype    | male    |
-| N702 | 1    | knockout   | male    |
-| N703 | 2    | knockout   | female    |
-| N704 | 3    | wildtype    | male    |
-| N705 | 4    | wildtype    | male    |
-| N706 | 5    | wildtype    | male    |
-| N707 | 6    | knockout    | male    |
-
-We are currently analysing sample N701, so let's finish it off by adding the information from the table. 
-
-## Batch 
-
-We will label batch as an integer - "0" for sample N701, "1" for N702 etc. The way to do it is creating a list with zeros of the length corresponding to the number of cells that we have in our SummarizedExperiment object, like so:
-
-```bash
-batch <- rep("0", length(colnames(alevin_subset)))
-```
-
-And now create a batch slot in the *colData names* and append the `batch` list in the same way as we did with barcodes:
-
-```bash
-colData(alevin_subset)$batch <- batch
-colData(alevin_subset)
-```
-
-A new column appeared, full of zeros - as expected! 
-
-## Genotype
-
-It's all the same for genotype, but instead creating a list with zeros, we'll create a list with string "wildtype" and append it into genotype slot:
-
-```bash
-genotype <- rep("wildtype", length(colnames(alevin_subset)))
-colData(alevin_subset)$genotype <- genotype
-```
-
-## Sex 
-
-You already know what to do, right? A list with string "male" and then adding it into a new slot! 
-```bash
-sex <- rep("male", length(colnames(alevin_subset)))
-colData(alevin_subset)$sex <- sex
-```
-
-Check if all looks fine:
-```bash
-colData(alevin_subset)
-```
-
-3 new columns appeared with the information that we've just added - perfect! You can add any information you need in this way, as long as it's the same for all the cells from one sample. 
+And that's our subset, ready for downstream analysis!
 
 
 # More datasets
@@ -525,31 +518,42 @@ The files are there! Now back to R - switch kernel again.
 Above we described all the steps done in R and explained what each bit of code does. Below all those steps are in one block of code, so read carefully and make sure you understand everything! 
 
 ```bash
+## load libraries again ##
 library(tximeta)
 library(DropletUtils)
 library(biomaRt)
 
-path2 <- 'alevin_output_702/alevin/quants_mat.gz'
-alevin2 <- tximeta(coldata = data.frame(files = path2, names = "sample702"), type = "alevin")
+## running tximeta ##
+path2 <- 'alevin_output_702/alevin/quants_mat.gz'                                                    # path to alevin output for N702
+alevin2 <- tximeta(coldata = data.frame(files = path2, names = "sample702"), type = "alevin")        # create SummarizedExperiment from Alevin output
 
-matrix_alevin2 <- assays(alevin2)$counts
+## running emptyDrops ##
+matrix_alevin2 <- assays(alevin2)$counts                                                             # extract matrix from SummarizedExperiment
+out2 <- emptyDrops(matrix_alevin2, lower = 100, niters = 1000, retain = 20)                          # apply emptyDrops
+is.cell2 <- out2$FDR <= 0.01                                                                         # apply FDR threshold
+emptied_matrix2 <- matrix_alevin2[,which(is.cell2),drop=FALSE]                                       # subset the matrix to the cell-containing droplets
 
-out2 <- emptyDrops(matrix_alevin2, lower = 100, niters = 1000, retain = 20)
-
-is.cell2 <- out2$FDR <= 0.01
-sum(is.cell2, na.rm=TRUE)
-
-emptied_matrix2 <- matrix_alevin2[,which(is.cell2),drop=FALSE]
-
+## adding cell metadata ##
 barcode2 <- colnames(alevin2)
-colData(alevin2)$barcode <- barcode2
-colData(alevin2) <- cbind(colData(alevin2),out2)
+colData(alevin2)$barcode <- barcode2                                             # add barcodes
 
+colData(alevin2) <- cbind(colData(alevin2),out2)                                 # add emptyDrops info
+
+batch2 <- rep("1", length(colnames(alevin_subset2)))
+colData(alevin_subset2)$batch <- batch2                                          # add batch info
+
+genotype2 <- rep("wildtype", length(colnames(alevin_subset2)))
+colData(alevin_subset2)$genotype <- genotype2                                    # add genotype info
+
+sex2 <- rep("male", length(colnames(alevin_subset2)))
+colData(alevin_subset2)$sex <- sex2                                              # add sex info
+
+## adding gene metadata ##
 gene_ID2 <- rownames(alevin2)
 rowData(alevin2)$gene_ID <- gene_ID2
 
 # get relevant gene names
-ensembl.ids2 <- gene_ID2               # fData() allows to access cds rowData table
+ensembl.ids2 <- gene_ID2               
 mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL")    # connect to a specified BioMart database and dataset hosted by Ensembl
 ensembl_m2 = useMart("ensembl", dataset="mmusculus_gene_ensembl", host='https://nov2020.archive.ensembl.org') 	
 
@@ -575,19 +579,11 @@ for (geneID in gene_names2)
  count = count + 1                # increased count so that every element in gene_names is replaced
 }
 
-rowData(alevin2)$gene_name <- gene_names2
+rowData(alevin2)$gene_name <- gene_names2                      # add gene names to gene metadata
 
+## create a subset of filtered object ##
 retained_cells2 <- colnames(emptied_matrix2)
 alevin_subset2 <- alevin2[, colData(alevin2)$barcode %in% retained_cells2]
-
-batch2 <- rep("1", length(colnames(alevin_subset2)))
-colData(alevin_subset2)$batch <- batch2
-
-genotype2 <- rep("wildtype", length(colnames(alevin_subset2)))
-colData(alevin_subset2)$genotype <- genotype2
-
-sex2 <- rep("male", length(colnames(alevin_subset2)))
-colData(alevin_subset2)$sex <- sex2
 
 alevin_702 <- alevin_subset2
 alevin_702
@@ -619,7 +615,7 @@ alevin_combined
 If you have more samples, just append them in the same way. We won't process another sample here, but pretending that we have third sample, we would combine it like this:
 
 ```bash
-alevin_subset3 <- alevin_702      # copy dataset for demonstration purposes
+alevin_subset3 <- alevin_702                        # copy dataset for demonstration purposes
 alevin_combined_demo <- cbind(alevin_combined, alevin_subset3)
 alevin_combined_demo
 ```
@@ -632,7 +628,7 @@ You get the point, right? It's imporant though that the rowData names and colDat
 It is generally more common to use SingleCellExperiment format rather than SummarizedExperiment. The conversion is quick and easy, and goes like this:
 
 ```bash
-# library(SingleCellExperiment)             # might need to run this if code below is not working
+# library(SingleCellExperiment)                 # might need to run this if code below is not working
 alevin_sce <- as(alevin_combined, "SingleCellExperiment")
 alevin_sce
 ```
