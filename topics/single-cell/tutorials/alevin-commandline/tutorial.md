@@ -516,20 +516,23 @@ Normally, at this point you would switch kernel to bash to run alevin, and then 
 > 
 {: .warning}
 
-Let's switch the kernel back to bash and run the following code to unzip the alevin output for sample 702:
+Let's **switch the kernel back to bash** and run the following code to unzip the alevin output for sample 702:
 
 ```bash
+# we're in bash again!
 wget https://zenodo.org/records/10116786/files/alevin_output_702.zip
 ```
 ```bash
 unzip alevin_output_702.zip
 ```
 
-The files are there! Now back to R - switch kernel again. 
+The files are there! Now **back to R - switch kernel again**. 
 
 Above we described all the steps done in R and explained what each bit of code does. Below all those steps are in one block of code, so read carefully and make sure you understand everything! 
 
 ```bash
+# we're in R now!
+
 ## load libraries again ##
 library(tximeta)
 library(DropletUtils)
@@ -656,9 +659,10 @@ You've already learned how to save and load objects in Jupyter notebook, let's t
 save(alevin_sce, file = "alevin_combined_sce.rdata")
 ```
 
-The last thing that might be useful is exporting the files into your Galaxy history. To do it... guess what! Yes - switching kernels again! But this time we choose Python kernel and run the following command:
+The last thing that might be useful is exporting the files into your Galaxy history. To do it... guess what! Yes - **switching kernels again**! But this time we choose Python kernel and run the following command:
 
 ```bash
+# that's Python now! 
 put("alevin_combined_sce.rdata")
 ```
 
