@@ -98,7 +98,7 @@ This tutorial has the following structure:
 
 ## What is a Phylogeny?
 
-![IThink](./images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. [Wikimedia commons](https://en.m.wikipedia.org/wiki/File:Darwins_first_tree.jpg)"){:align="center", width="400px"}
+![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](./images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. [Wikimedia commons](https://en.m.wikipedia.org/wiki/File:Darwins_first_tree.jpg)"){:align="center", width="400px"}
 
 <!-- **needs a reference** -->
 
@@ -114,42 +114,34 @@ As Theodosius Dobzhansky famously wrote, **"Nothing in biology makes sense excep
 ## Why we need phylogenetics
 
 There are many ways in which we can use phylogenetic analyses: from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in [Charles Darwin's famous sketch](#figure-1), 
-to the total diversity represented by sequenced genomes...
+to families:
 
-<!-- all birds... -->
-
-![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg "A modern view of the tree of life based on sequenced genomes. {% cite PMID:27572647 %} reproduced under Creative Commons Attribution 4.0 International License"){:align="center", width=600}
-
-![Insecta](./images/Hexapoda_phylogenetic_tree.png){: align="center"}
-(Rainford JL, Hofreiter M, Nicholson DB, Mayhew PJ (2014) Phylogenetic Distribution of Extant Richness Suggests Metamorphosis Is a Key Innovation Driving Diversification in Insects. PLoS ONE 9(10): e109085. https://doi.org/10.1371/journal.pone.0109085; CCBY 4.0 DEED license)
- © 2014 Rainford et al. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+![Phylogenetic tree of hexapod families](./images/Hexapoda_phylogenetic_tree.png "Phylogeny of extant hexapod families. {% cite PMID:25275450 %} reproduced under Creative Commons Attribution 4.0 International License"){: align="center"}
 
 
 and much bigger projects across all of life:
 
-![UnderstandinEvolTree](./images/nmicrobiol201648-f1.jpg){:align="center", width="500"}
-(from Understanding Evolution. 2019. University of California Museum of Paleontology. 4th November 2019; http://evolution.berkeley.edu) (CC BY-NC-SA 4.0)
+![Phylogenetic tree of life based on sequenced genomes](./images/nmicrobiol201648-f1.jpg "A modern view of the tree of life based on sequenced genomes. {% cite PMID:27572647 %} reproduced under Creative Commons Attribution 4.0 International License"){:align="center", width="500"}
 
-Aside from fundamental understanding, there are other strong motivators for inferring phylogenetic relationships:
+Aside from fundamental understanding of biology, other strong motivators for inferring phylogenetic relationships include:
 
-- Designing vaccines, for example for SARS-CoV2 and influenza;
-- Measuring phylogenetic diversity for guiding conservation efforts;
-- Understanding coevolution: around 70% of emergent human diseases have come from other species;
+- Designing vaccines, for example for SARS-CoV2 and influenza
+- Measuring phylogenetic diversity for guiding conservation efforts
+- Understanding coevolution: around 70% of emergent human diseases have come from other species
 - Dating major evolutionary events, to study the effects of environmental change on different species.
 
-> <comment-title>Gene trees, species trees</comment-title>
-> 
-> It's worth noting that getting the phylogeny from a set of genes -- what we often call a **gene tree** -- might *not* > give us the phylogeny of the species that house those genes, *even if we get everything right!*
+> <comment-title>Gene trees, species trees reconcilitation problem</comment-title>
+> It's worth noting that getting the phylogeny from a set of genes -- what we often call a **gene tree** -- might *not* give us the phylogeny of the species that house those genes, *even if we get everything right!*
 >
-> This happens because there are other processes that can lead to the so-called "gene tree" not being the same as the species tree:
->	- lateral gene transfer events
->	- gene duplication
->	- gene loss and incomplete lineage sorting
->	- recombination
->
-> This could send us off down a very deep and difficult rabbit-hole: that of the gene-tree / species tree problem: but today we will work under the assumption (which is reasonable in this case) that the gene tree will reflect the species relationships.
+> This happens because there are other processes that can influence the so-called "gene tree" such as:
+> - lateral gene transfer events
+> - gene duplication
+> - gene loss and incomplete lineage sorting
+> - recombination
 >
 > **The situation where gene trees and species trees differ is often called the "gene tree / species tree reconciliation problem", and while it is very interesting and important, it is beyond the scope of this tutorial.**
+>
+> Today we will work under the assumption (which is reasonable for the dataset we will use) that the gene tree will reflect the species relationships.
 >
 {: .comment}
 
