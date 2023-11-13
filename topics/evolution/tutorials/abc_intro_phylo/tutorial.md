@@ -145,46 +145,6 @@ Aside from fundamental understanding of biology, other strong motivators for inf
 >
 {: .comment}
 
-# Basic Methodology
-
-First and foremost, **phylogenetic inferences is a statistic estimation process.**
-
-It is not generally possible to prove that any tree inferred is *correct* -- since we cannot go back in time and observe speciation events.
-One obvious consequence of this is that different estimates of the phylogenetic tree relating a given set of species may differ, even if no errors were made.  
-Finding an optimal tree is *hard*!
-
-All we start with is something like this:
-
-![We Just Have The Leaf Data](./images/WeJustHaveLeaves.png){:align="center"}
-
-So, how do we do it?
-
-There are several ways to estimate a tree, such as:
-
-1. Go with what we think is the case already (this is not recommended!)
-2. Attempt to build a tree based on similarity and dissimilarity, with such tools as Neighbor-Joining (NJ) or FastME (we will do this first thing after getting the alignment!)
-3. Choose some kind of score function, such as Parsimony or Maximum Likelihood, to potential trees and find the best one (we will do this second!)
-4. Something else entirely (networks? inference based on their parasites?).
-
-
-This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
-
-> <comment-title>Common Evolutionary Assumptions used in Phylogenetic Estimation</comment-title>
-> 
->  These may help your understanding of why things are done this way:
->
-> 1. Evolution is “memoryless” (which means we can use the powerful mathematics of Markov processes). 
-This assumption means that the future evolutionary trajectory of an organism is not affected by its past: how we got here is not important, only how we adapt and evolve now.
-> 
-> 2. Phylogenetic relationships can be correctly represented by a tree! (This isn't *always* assumed, but it is very common.)  Trees are a very attractive representation of evolution, and it is part of our language: "The tree of life" is a common phrase.  However it is not always the case that evolution is best explained by a tree-like, "branching" process, as there can be hybridisation events, and species can share genetic material, or even envelop each other, creating organelles.
-> 3. The **Molecular clock** assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is one of those models that are known to be wrong, but which are useful. For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
-> 4. Lineages don’t interact – once they have speciated, they are independent of each other.  Again, this isn't always the case, but the vast majority of methods assume this, particularly if the evolution is also assumed to be tree-like. We also know that biological lineages *do* interact with each other -- but our methods are not able to manage such complexity in general.
->
-> We will (mostly) make these assumptions in this tutorial!
-> 
-> 
-{: .comment}
-
 ## Terminology
 
 We need to define some terms, which may be new to you.
@@ -226,6 +186,49 @@ Phylogeny estimation can be thought of as inferring a collection of compatible h
 The tree above is called a **binary tree**, because each internal node branches into *two* descendants.
 It is a very common assumption that our trees will be binary, and we will make that assumption here.  In fact it is often very hard to come to a means by which a phylogeny could be truly *non*-binary: in most cases this is just due to our inability to resolve the tree completely.
 In this tutorial we will only be considering trees that are binary.
+
+# Basic Methodology
+
+Finding an optimal tree is *hard*!
+
+First and foremost, **phylogenetic inference is a statistic estimation process.**
+
+Different estimates of the phylogenetic tree relating a given set of species may differ, even if no errors were made.
+
+It is generally not possible to prove that any tree inferred is *correct* -- since we cannot go back in time and observe speciation events.
+
+
+All we start with is leaves of the tree which can be living (extant) or older taxa:
+
+![Leaves of a tree are represented as separate rectangles containing the words Extant taxon = living species](./images/WeJustHaveLeaves.png "The 'leaves' of a tree (extand or older taxa) are the starting point for buidling phylogenies"){:align="center"}
+
+So, how do we do it?
+
+There are several ways to estimate a tree, such as:
+
+1. Go with what we think is the case already (this is not recommended!)
+2. Attempt to build a tree based on similarity and dissimilarity, with tools such as Neighbor-Joining (NJ) or FastME (we will do this later in the tutorial)
+3. Choose some kind of score function, such as Parsimony or Maximum Likelihood, to build potential trees and find the best one (we will do this later too)
+4. Something else entirely (networks? inference based on their parasites?).
+
+
+> <comment-title>Common Evolutionary Assumptions used in Phylogenetic Estimation</comment-title>
+> 
+>  These may help your understanding of why things are done this way:
+>
+> 1. Evolution is “memoryless” (which means we can use the powerful mathematics of Markov processes). 
+This assumption means that the future evolutionary trajectory of an organism is not affected by its past: how we got here is not important, only how we adapt and evolve now.
+> 
+> 2. Phylogenetic relationships can be correctly represented by a tree! (This isn't *always* assumed, but it is very common.)  Trees are a very attractive representation of evolution, and it is part of our language: "The tree of life" is a common phrase.  However it is not always the case that evolution is best explained by a tree-like, "branching" process, as there can be hybridisation events, and species can share genetic material, or even envelop each other, creating organelles.
+> 3. The **Molecular clock** assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is one of those models that are known to be wrong, but which are useful. For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
+> 4. Lineages don’t interact – once they have speciated, they are independent of each other.  Again, this isn't always the case, but the vast majority of methods assume this, particularly if the evolution is also assumed to be tree-like. We also know that biological lineages *do* interact with each other -- but our methods are not able to manage such complexity in general.
+>
+> We will (mostly) make these assumptions in this tutorial!
+> 
+> 
+{: .comment}
+
+
 
 ## Building a Tree
 
@@ -889,6 +892,9 @@ An external link[RAxML](https://cme.h-its.org/exelixis/web/software/raxml/)
 > {: .solution}
 >
 {: .question}
+
+
+This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
 
 # About this workshop
 This tutorial is based on a workshop that was run in 2019 under the auspices of Australian BioCommons by Michael Charleston, and attended online by hundreds of people across Australia.
