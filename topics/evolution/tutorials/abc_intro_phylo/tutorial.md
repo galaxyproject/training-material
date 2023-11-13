@@ -111,14 +111,14 @@ It is also the main basis on which we can build statistics comparing species: wi
 As Theodosius Dobzhansky famously wrote, **"Nothing in biology makes sense except in the light of evolution"** {% cite 6ef38333-9ecd-3f40-8f3e-5f3d6df3c4b4 %}.
 
 
-## Motivation
+## Why we need phylogenetics
 
-There are many ways in which we can use phylogenetic analyses: from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in Charles Darwin's famous sketch in Origin of Species above, 
-to...
+There are many ways in which we can use phylogenetic analyses: from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in [Charles Darwin's famous sketch](#figure-1), 
+to the total diversity represented by sequenced genomes...
 
 <!-- all birds... -->
 
-![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg){:align="center", width=600}
+![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg "A modern view of the tree of life based on sequenced genomes. {% cite PMID:27572647 %} reproduced under Creative Commons Attribution 4.0 International License"){:align="center", width=600}
 
 ![Insecta](./images/Hexapoda_phylogenetic_tree.png){: align="center"}
 (Rainford JL, Hofreiter M, Nicholson DB, Mayhew PJ (2014) Phylogenetic Distribution of Extant Richness Suggests Metamorphosis Is a Key Innovation Driving Diversification in Insects. PLoS ONE 9(10): e109085. https://doi.org/10.1371/journal.pone.0109085; CCBY 4.0 DEED license)
