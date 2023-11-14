@@ -46,6 +46,8 @@ tags:
 
 # Introduction 
 
+If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) (SCXA), you will be interested in this tutorial. Here, we will guide you through transforming data imported from a repository into the input file required for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). 
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -55,9 +57,9 @@ tags:
 >
 {: .agenda}
 
-# Getting data from Single Cell Expression Atlas
+# Getting data from the Single Cell Expression Atlas
 
-If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool {% cite Moreno2020.04.08.032698 %} which combines all the preprocessing steps shown in [the previous tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) into one! For this tutorial, the dataset can be seen [at the EBI](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`.
+Galaxy has a specific tool for importing data from the SCXA ({% cite Moreno2020.04.08.032698 %}), which combines all the preprocessing steps shown in [the previous tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) into one! For this tutorial, the dataset can be seen [at the EBI](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment ID of `E-MTAB-6945`.
 
 > <hands-on-title>Retrieving data from Single Cell Expression Atlas</hands-on-title>
 >
@@ -67,7 +69,7 @@ If you happen to be interested in analysing publicly available data, particularl
 >
 {: .hands_on}
 
-It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to the pre-processing that has been shown in this case study tutorial series, and it contains any and all metadata provided by their pipeline as well as the authors (for instance, more cell or gene annotations). So don't worry if the plots generated using this input method are slightly different! 
+It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to the pre-processing that has been shown in this case study tutorial series. The resultant datasets contain any and all metadata provided by the SCXA pipeline as well as the metadata contributed by the original authors (for instance, more cell or gene annotations). So while the AnnData object generated at the end of this tutorial will be similar to that generated using the Alevin workflows ({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) on the original FASTQ files, some of the metadata will be slightly different. Relevant results and interpretation will not change, however!
 
 # Metadata manipulation
 
