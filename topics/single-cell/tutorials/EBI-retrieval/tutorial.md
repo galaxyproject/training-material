@@ -113,7 +113,7 @@ Before creating an AnnData object, we need to make a small modification in exper
 >
 {: .details}
 
-The plotting tool that we will going to use later will fail if the entries are integers and not categorical values, so we will change `1` to `N01` and so on. 
+The plotting tool that we will going to use later will fail if the entries are integers and not categorical values, so we will change `1` to `N01` and so on.
 
 > <hands-on-title> Change batch numbers into names </hands-on-title>
 >
