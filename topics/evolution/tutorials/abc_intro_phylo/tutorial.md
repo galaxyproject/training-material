@@ -188,20 +188,11 @@ In this tutorial we will only consider trees that are binary.
 
 # Basic Methodology
 
-Finding an optimal tree is *hard*!
-
-First and foremost, **phylogenetic inference is a statistic estimation process.**
-
-Different estimates of the phylogenetic tree relating a given set of species may differ, even if no errors were made.
-
-It is generally not possible to prove that any tree inferred is *correct* -- since we cannot go back in time and observe speciation events.
-
+So, how do we estimate phylogenetic trees?
 
 All we start with is leaves of the tree which can be living (extant) or older taxa:
 
 ![Leaves of a tree are represented as separate rectangles containing the words Extant taxon = living species](./images/WeJustHaveLeaves.png "The 'leaves' of a tree (extand or older taxa) are the starting point for buidling phylogenies"){:align="center"}
-
-So, how do we do it?
 
 There are several ways to estimate a tree, such as:
 
@@ -210,20 +201,24 @@ There are several ways to estimate a tree, such as:
 3. Choose some kind of score function, such as Parsimony or Maximum Likelihood, to build potential trees and find the best one (we will do this later too)
 4. Something else entirely (networks? inference based on their parasites?).
 
+**Warning**: Finding an optimal tree is *hard*!
 
-> <comment-title>Common Evolutionary Assumptions used in Phylogenetic Estimation</comment-title>
+First and foremost, **phylogenetic inference is a statistic _estimation_ process.**
+
+Different estimates of the phylogenetic tree relating a given set of species may differ, even if no errors were made.
+
+It is generally not possible to prove that any tree inferred is *correct* -- since we cannot go back in time and observe speciation events. 
+
+> <comment-title>Common evolutionary assumptions used in phylogenetic estimation</comment-title>
 > 
->  These may help your understanding of why things are done this way:
+>  These notes may help your understanding of why things are done this way. We will (mostly) make these assumptions in this tutorial!
 >
 > 1. Evolution is “memoryless” (which means we can use the powerful mathematics of Markov processes). 
 This assumption means that the future evolutionary trajectory of an organism is not affected by its past: how we got here is not important, only how we adapt and evolve now.
 > 
-> 2. Phylogenetic relationships can be correctly represented by a tree! (This isn't *always* assumed, but it is very common.)  Trees are a very attractive representation of evolution, and it is part of our language: "The tree of life" is a common phrase.  However it is not always the case that evolution is best explained by a tree-like, "branching" process, as there can be hybridisation events, and species can share genetic material, or even envelop each other, creating organelles.
+> 2. Phylogenetic relationships can be correctly represented by a tree! (This isn't *always* assumed, but it is very common.)  Trees are a very attractive representation of evolution, and it is part of our language: "The tree of life" is a common phrase.  However evolution is not always best explained by a tree-like, "branching" process as there can be hybridisation events, and species can share genetic material, or even envelop each other, creating organelles.
 > 3. The **Molecular clock** assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is one of those models that are known to be wrong, but which are useful. For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
-> 4. Lineages don’t interact – once they have speciated, they are independent of each other.  Again, this isn't always the case, but the vast majority of methods assume this, particularly if the evolution is also assumed to be tree-like. We also know that biological lineages *do* interact with each other -- but our methods are not able to manage such complexity in general.
->
-> We will (mostly) make these assumptions in this tutorial!
-> 
+> 4. Lineages don’t interact – once they have speciated, they are independent of each other. Again, this isn't always the case, but the vast majority of methods assume this, particularly if the evolution is also assumed to be tree-like. We also know that biological lineages *do* interact with each other -- but our methods are not able to manage such complexity in general.
 > 
 {: .comment}
 
