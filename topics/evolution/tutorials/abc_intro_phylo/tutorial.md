@@ -261,7 +261,7 @@ The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact 
 
 ## Building a Tree
 
-The first method of building a tree begins with a set of *distances*, which record how different the taxa are from each other.
+Building a tree begins with a set of *distances*, which record how different the taxa are from each other.
 Distances have very desirable properties, that can be summarised as follows: for any objects $$ x $$, $$y$$, $$z$$, writing $$d(x,y)$$ means the distance from $$x$$ to $$y$$ etc.  These properties are:
  * *non-negativity* -- distances can never be negative, and in fact we treat two things as identical if they have a distance of 0 between them.
  * *symmetry* -- the distance from $$x$$ to $$y$$ is the same as the distance from $$y$$ to $$x$$; that is, $$d(x,y) = d(y,x)$$.
@@ -295,19 +295,7 @@ Once that decision is made, the two taxa / clades that have been joined are repl
 
 ## Data upload
 
-<!-- Background on the data used in this workshop. -->
-
-<!-- This workshop will use some recent SARS-CoV-2 nucleotide sequence data, from NCBI, the National Center for Biotechnology Information.
-
-The SARS-CoV-2 virus has caused the largest pandemic in modern history (in absolute terms of population affected, in all history) and understanding its evolution is key to managing it.
-
-![SARS-CoV-2](./images/SARS-CoV-2-www.ncbi.nlm.nih.png){:width="500px"}
-
-*Source: /www.ncbi.nlm.nih.gov; CC BY-SA • Alexey Solodovnikov*
-
-The sequences we have chosen for this workshop are complete SARS-CoV2 sequences, publicly available from nextStrain (http). -->
-
-This workshop will use a set of *anolis* lizard DNA sequences, from Jackman, Larson, de Queiroz & Losos (_Phylogenetic Relationships and Tempo of Early Diversication in Anolis Lizards_; *Systematic Biology* 1999 *48*(2):254-285; https://doi.org/10.1080/106351599260283).
+This workshop will use a set of *anolis* lizard DNA sequences, from Jackman, Larson, de Queiroz & Losos (_Phylogenetic Relationships and Tempo of Early Diversication in Anolis Lizards_; *Systematic Biology* 1999 *48*(2):254-285; https://doi.org/10.1080/106351599260283).
 The sequences are from the mitochondrial NADH dehydrogenase subunit 2 gene (ND2) and five transfer RNA (tRNA) genes, with an average sequence length of 1419.109 and a range of [1329,1727].
 
 
@@ -340,9 +328,9 @@ It is not uncommon for a phylogenetic analysis to span hundreds, or even thousan
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >  
-> You can click on the 'eye' icon on the right to see the unaligned data (go ahead!) but the view isn't very helpful.  This is just the raw FASTA file, with the case symbols A, C, G, T for the nucleotides.  You can see that the sequences are of different lengths though, since the last lines of each sequence are of different lengths.
+> You can click on the 'eye' icon {% galaxy-eye %} on the right to see the unaligned data (go ahead!) but the view isn't very informative. This is just the raw FASTA file, with the case symbols A, C, G, T for the nucleotides. You can see that the sequences are of different lengths, since the last lines of each sequence are of different lengths.
 >
-This is a file in **FASTA** or **Fasta** format (pronounced like "faster", not sounding the 'r', or Fast-Eh to rhyme with the first letter of the alphabet), which has a very simple structure, as follows:
+This is a file in **FASTA** or **Fasta** format (pronounced to rhyme with pasta), which has a very simple structure, as follows:
 
 1. each sequence has a name, which appears one its own line after a "greater-than" sign '>'
 2. the next line(s) contain the sequence for that name; continuing either until the next sequence name line, or the end of the file.
@@ -367,23 +355,29 @@ ACTGCTCTAGCACTGAGCCCA
 ACTTGGCGTAGCCGGAGGCC
 ```
 
-The above toy file has four sequences in it named Taxon_1, Taxon_2, ..., each with a short set of characters which we can assume are DNA.
+The above example has four sequences in it named Taxon_1, Taxon_2, ..., each with a short set of characters which we can assume are DNA.
 
 <!-- A line beginning with the greater-than sign `>` holds the sequence name or identifier/ID; the other lines hold the sequence data for the sequence ID above. -->
 
 *Note:* The Fasta format can also include symbols such as a question mark '?' for missing data, or hyphen '-' to indicate an insertion event in that sequence or deletion event in the others, collectively *indel*; thus it is also common to represent a multiple sequence alignment in Fasta format too.
 
-Fasta format is very simple and is commonly used as input to phylogenetic inference programs.  (It is also a common format for storing high-throughput read data, but *without quality scores* -- if you want include read quality you would use FASTQ format.)
+Fasta format is very simple and is commonly used as input to phylogenetic inference programs.  (It is also a common format for storing high-throughput read data, but *without quality scores* -- if you want to include read quality you would use FASTQ format.)
 
 <br>
 
 > <hands-on-title>View your data</hands-on-title>
-> Now let's view the unaligned sequence in a more understandable form.  Click on the green data on its name; the green bar will open up and show you more options, including the little "Visualise" one.  Click that and then select the Multiple Sequence Alignment tool.
+> Now let's view the unaligned sequence in a more understandable form.
+
+> 1.Click on the title of your file to see the row of small icons for saving, linking etc.: 
+> ![LittleIcons](./images/LittleJobIcons.png){:align="center"} 
+>
+> 2. Click on the **visualise icon** that looks like a little bar chart and then select the Multiple Sequence Alignment tool.
 > You should see something like this:
 >
 > ![Unaligned Sequences](./images/UnalignedAnolis.png){:width="600"}
 > 
-> Play around with the view: you can change colour schemes and add or remove various elements.  Good colour schemes for nucleotide data are "Clustal2" and "nucleotide".  
+> Play around with the view. You can change colour schemes and add or remove various elements.  Good colour schemes for nucleotide data are "Clustal2" and "nucleotide".  
+
 > If you cannot see the slider at the top (for moving left or right in the view) you will need to check the "Show residues indices" in the "Vis. elements" drop-down menu.
 > (Do not adjust the scale slider!  Currently, this breaks the page.)
 {: .hands_on}
@@ -444,10 +438,10 @@ Today you will be aligning sequences using a modern multiple alignment program c
 
 > <hands-on-title>Sequence alignment with MAFFT</hands-on-title>
 >
-> 1. In Galaxy, search for and select the MAFFT tool from the tool finder on the left.
-> 2. When you select it, the "Sequences to align" field should already be filled with your unaligned data.  If it isn't, select it using the drop-down menu.
-> 3. Leave the "Data type" field as "auto detection" since MAFFT will recognise all the symbols are nucleotides.
-> 4. Change the MAFFT flavour to "linsi" as this is a recommended setting for most accurate alignment of a relatively small data set such as this one, with fewer than 200 sequences.
+> 1. In Galaxy, search for and select the {% tool MAFFT %} tool from the tool finder on the left.
+> 2. When you select it, the **Sequences to align** field should already be filled with your unaligned data.  If it isn't, select it using the drop-down menu.
+> 3. Leave the **Data type** field as "auto detection" since MAFFT will recognise all the symbols are nucleotides.
+> 4. Change the **MAFFT flavour** to "linsi" as this is a recommended setting for most accurate alignment of a relatively small data set such as this one, with fewer than 200 sequences.
 {: .hands_on}
 
 Here is an image of the resulting alignment:
@@ -466,7 +460,7 @@ This method was created in the 1980s by Saitou & Nei (Saitou, N. & Nei, M. _The 
 
 > <hands-on-title>Build a Neighbour-Joining Tree with FastTree</hands-on-title>
 >
-> 1. Search for the "FastTree" tool in the tool finder.
+> 1. Search for the {% tool FastTree %} tool in the tool finder.
 > 2. Load your MAFFT output file as the input data for FastTree.
 > 3. Under **protein or nucleotide alignment** select "Nucleotide" as it is DNA data
 > 3. For **Nucleotide evolution model** select Jukes-Cantor + CAT
