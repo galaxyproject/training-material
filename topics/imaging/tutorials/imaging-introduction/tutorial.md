@@ -165,7 +165,7 @@ Specific features of interest (e.g., edges, noise) can be enhanced or suppressed
 > <hands-on-title>Filter image</hands-on-title>
 >
 > 1. {% tool [Filter 2D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3) %} with the following parameters to smooth the image:
->    - *"Image type"*: `Gaussian Blur`
+>    - *"Filter type"*: `Gaussian Blur`
 >    - *"Radius/Sigma"*: `3`
 >    - {% icon param-file %} *"Source file"*: `input.tif` file
 > 2. Rename {% icon galaxy-pencil %} the generated file to `input_smoothed`

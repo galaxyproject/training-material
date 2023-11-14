@@ -132,7 +132,7 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 > <hands-on-title>Create feature extraction workflow</hands-on-title>
 >
 > 1. {% tool [Filter 2D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3) %} with the following parameters to smooth the image:
->    - *"Image type"*: `Gaussian Blur`
+>    - *"Filter type"*: `Gaussian Blur`
 >    - *"Radius/Sigma"*: `3`
 >    - {% icon param-file %} *"Source file"*: `testinput.tif` file
 > 2. {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2) %} with the following parameters to segment the image:
