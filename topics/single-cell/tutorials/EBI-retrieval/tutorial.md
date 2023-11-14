@@ -147,6 +147,29 @@ The plotting tool that we will use later will fail if the entries are integers a
 >            - *"Find Regex"*: `7`
 >            - *"Replacement"*: `N07`
 >
+{: .hands_on}
+
+While we're renaming things, let's also fix our titles.
+
+> <hands-on-title> Change cell metadata titles </hands-on-title>
+>
+> 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: output from **Column Regex and Replace** {% icon tool %}
+>    - *"using column"*: `Column: 12`
+>    - In *"Check"*:
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `"Sample Characteristic[genotype]"`
+>            - *"Replacement"*: `genotype`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `"Sample Characteristic[individual]"`
+>            - *"Replacement"*: `batch`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `"Sample Characteristic[sex]"`
+>            - *"Replacement"*: `sex`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `"Sample Characteristic[cell type]"`
+>            - *"Replacement"*: `cell_type`
+>
 > 4. Rename {% icon galaxy-pencil %} output `Cell metadata`
 >
 {: .hands_on}
@@ -161,8 +184,9 @@ Now we can create an AnnData object!
 > 1. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy9) %}
 > 2. Make sure you are using version **1.8.1+galaxy9** of the tool (change by clicking on {% icon tool-versions %} Versions button):
 >   ![List of available tool versions shown when clicking on the 'Versions' button on the top of the page.](../../images/scrna-casestudy/version.png "How to change the version of the tool")
+>
 > 3. Set the following parameters:
->    - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
+>    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
 >    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
 >    - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
 >    - *"Cell metadata table"*: `Cell metadata`
@@ -204,18 +228,7 @@ And the good news is that we can do all those steps using only one tool!
 > 3. Set the following parameters:
 >    - In *"Input object in hdf5 AnnData format"*: `AnnData object`
 >    - In *"Change field names in AnnData observations"*:
->        - {% icon param-repeat %} *"Insert Change field names in AnnData observations"*
->            - *"Original name"*: `Sample Characteristic[genotype]`
->            - *"New name"*: `genotype`
->        - {% icon param-repeat %} *"Insert Change field names in AnnData observations"*
->            - *"Original name"*: `Sample Characteristic[individual]`
->            - *"New name"*: `batch`
->        - {% icon param-repeat %} *"Insert Change field names in AnnData observations"*
->            - *"Original name"*: `Sample Characteristic[sex]`
->            - *"New name"*: `sex`
->        - {% icon param-repeat %} *"Insert Change field names in AnnData observations"*
->            - *"Original name"*: `Sample Characteristic[cell type]`
->            - *"New name"*: `cell_type`
+
 >    - In *"Change field names in AnnData var"*:
 >        - {% icon param-repeat %} *"Insert Change field names in AnnData var"*
 >            - *"Original name"*: `gene_symbols`
