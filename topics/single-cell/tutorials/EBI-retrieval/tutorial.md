@@ -46,7 +46,7 @@ tags:
 
 # Introduction 
 
-If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) (SCXA), you will be interested in this tutorial. Here, we will guide you through transforming data imported from a repository into the input file required for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). 
+Public single cell datasets seem to accumulate by the second. Well annotated, quality datasets are slightly trickier to find. which is why projects like the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) (SCXA) exist - to curate datasets for public use. Here, we will guide you through transforming data imported from the SCXA repository into the input file required for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). 
 
 > <agenda-title></agenda-title>
 >
