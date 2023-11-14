@@ -77,7 +77,7 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 >
 > 1. What format has this tool imported?
 >
-> > <tip-title>Hint</tip-title>
+> > <tip-title></tip-title>
 > >
 > > Selecting the title of each resultant dataset will expand the dataset in the Galaxy history.
 > {: .tip}
@@ -170,7 +170,6 @@ While we're renaming things, let's also fix our titles.
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `"Sample Characteristic[cell type]"`
 >            - *"Replacement"*: `cell_type`
->
 > 2. Rename {% icon galaxy-pencil %} output `Cell metadata`
 >
 {: .hands_on}
@@ -187,7 +186,6 @@ We might like to flag mitochondrial genes. They can be identified quite easily s
 >    - *"Regular Expression"*: `mt`
 >    - *"Match type"*: `case insensitive`
 >    - *"Output"*: `Highlighted HTML (for easier viewing)`
->
 > 3. Rename {% icon galaxy-pencil %} output `Mito genes check`
 >
 {: .hands_on}
@@ -217,7 +215,6 @@ We will do several modifications within the AnnData object so that you can follo
 >    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
 >    - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
 >    - *"Cell metadata table"*: `Cell metadata`
->
 > 4. Rename {% icon galaxy-pencil %} output `AnnData object`
 >
 {: .hands_on}
@@ -243,7 +240,6 @@ And the good news is that we can do both those steps using only one tool!
 >        - {% icon param-repeat %} *"Insert Flag genes that start with these names"*
 >            - *"Starts with"*: `mt-`
 >            - *"Var name"*: `mito`
->
 > 4. Rename {% icon galaxy-pencil %} output `Mito-counted AnnData for downstream analysis`
 >
 {: .hands_on}
@@ -264,16 +260,12 @@ Even though this tutorial was designed specifically to modify the AnnData object
 > <hands-on-title> Create the Seurat Object </hands-on-title>
 >
 > 1. {% tool [Seurat Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/3.2.3+galaxy0) %}
-> 2. Make sure you are using version **1.8.1+galaxy9** of the tool (change by clicking on {% icon tool-versions %} Versions button):
->   ![List of available tool versions shown when clicking on the 'Versions' button on the top of the page.](../../images/scrna-casestudy/version.png "How to change the version of the tool")
->
-> 3. Set the following parameters:
+> 2. Set the following parameters:
 >    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
 >    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
 >    - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
->    - *"Cell metadata table"*: `Cell metadata`
->
-> 4. Rename {% icon galaxy-pencil %} output `AnnData object`
+>    - *"Cell metadata"*: `Cell metadata`
+> 3. Rename {% icon galaxy-pencil %} output `Seurat object`
 >
 {: .hands_on}
 
