@@ -10,7 +10,7 @@ objectives:
 - You will retrieve raw data from the EBI Single Cell Expression Atlas.
 - You will manipulate the metadata and matrix files.
 - You will combine the metadata and matrix files into an AnnData object for downstream analysis.
-  
+
 time_estimation: "15m"
 key_points:
 - The EMBL-EBI Single-cell Expression Atlas contains high quality datasets.
@@ -19,9 +19,8 @@ key_points:
 contributions:
   authorship:
     - wee-snufkin
-  testing:
     - nomadscientist
-  funding: 
+  funding:
   - elixir-fair-data
 
 requirements:
@@ -44,9 +43,9 @@ tags:
   - data management
 ---
 
-# Introduction 
+# Introduction
 
-Public single cell datasets seem to accumulate by the second. Well annotated, quality datasets are slightly trickier to find. which is why projects like the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) (SCXA) exist - to curate datasets for public use. Here, we will guide you through transforming data imported from the SCXA repository into the input file required for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). 
+Public single cell datasets seem to accumulate by the second. Well annotated, quality datasets are slightly trickier to find. which is why projects like the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) (SCXA) exist - to curate datasets for public use. Here, we will guide you through transforming data imported from the SCXA repository into the input file required for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}).
 
 > <agenda-title></agenda-title>
 >
@@ -71,9 +70,42 @@ Galaxy has a specific tool for importing data from the SCXA ({% cite Moreno2020.
 
 It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to the pre-processing that has been shown in this case study tutorial series. The resultant datasets contain any and all metadata provided by the SCXA pipeline as well as the metadata contributed by the original authors (for instance, more cell or gene annotations). So while the AnnData object generated at the end of this tutorial will be similar to that generated using the [Alevin workflows]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) on the original FASTQ files, some of the metadata will be slightly different. Relevant results and interpretation will not change, however!
 
+## Examine the imported files
+
+> <question-title></question-title>
+>
+> 1. What format has this tool imported?
+>
+> > <tip-title></tip-title>
+> >
+> > Selecting the title of each resultant dataset will expand the dataset in the Galaxy history.
+> {: .tip}
+> > <solution-title></solution-title>
+> >
+> > Matrix Market Format! We can tell this because our first file helpfully says `MatrixMarket` in the first line.
+> > ![Green box containing first output, the matrix.mtx file. Columns are labelled 14458, 5218, and 5308559](../../tutorials/EBI-retrieval/images/matrix-output.png "Matrix Market Output")
+> >
+> > This format contains a column referring to each gene (column 1), to each cell (column 2), and the expression values themselves in the final column. To be useful, then, we need to know which genes and cells the numbers are referring to. That's why this format comes with two more files.
+> >
+> > ![Green box containing second output, the genes.tsv file. The first column contains EnsemblIDs such as ENSMUSG######, while the second column contains gene names. There are 14,457 lines.](../../tutorials/EBI-retrieval/images/genes-output.png "Genes Output").
+> >
+> > The genes file lists each EnsemblID and its gene name. The lines (14,457) corresponds with the 14458 in the Matrix file...but the 14458 contains a header, so that's why it has one more than the genes file!
+> >
+> > ![Green box containing third output, the barcodes.tsv file. The file consists of 5,217 lines and a single column containing the cell barcode, variations of ERR2704656-AAAACACTCTGA.](../../tutorials/EBI-retrieval/images/cells-output.png "Cells Output").
+> >
+> > The cells file lists each barcode. The lines (5,217) again corresponds with the 5,218 lines in the Matrix file...which adds in the header again!
+> >
+> > ![Green box containing fourth output, the exp_design.tsv file. The file consists of 5,218 lines and numerous columns starting with 'Assay' and 'Sample Characteristic'.](../../tutorials/EBI-retrieval/images/cell-metadata.png "Experimental Design").
+> >
+> > Finally, and very helpfully!, the tool also includes cell metadata where the `Assay` column corresponds with the barcodes in the Cells Output file. While this is not a required file to create an AnnData object from the three matrix market files, it is extremely necessary for actually interpreting the data. Imagine not knowing which barcodes came from which sample!
+> >
+> {: .solution}
+{: .question}
+
+
 # Metadata manipulation
 
-Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about 7 samples N701 – N707), however in the experimental design table (cell metadata) they are just numbered from 1 to 7. The plotting tool that we will going to use later will fail if the entries are integers and not categoricals, so we will change "1" to "N01" and so on. You can simply preview the experimental design dataset and move to the column "Sample Characteristic[individual]" (that's where the information about batch is - don't worry, we will rename the column header later!). Make a note of the number of that column - number 12 - we will need it to change the batch number to batch name. 
+Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about 7 samples N701 – N707), however in the experimental design table (cell metadata) they are just numbered from 1 to 7. The plotting tool that we will going to use later will fail if the entries are integers and not categoricals, so we will change "1" to "N01" and so on. You can simply preview the experimental design dataset and move to the column "Sample Characteristic[individual]" (that's where the information about batch is - don't worry, we will rename the column header later!). Make a note of the number of that column - number 12 - we will need it to change the batch number to batch name.
 
 > <hands-on-title> Change batch numbers into names </hands-on-title>
 >
@@ -108,7 +140,7 @@ Before creating an AnnData object, we need to make a small modification in exper
 >            - *"Replacement"*: `N07`
 >
 > 4. Rename {% icon galaxy-pencil %} output `Cell metadata`
-> 
+>
 {: .hands_on}
 
 Now we can create an AnnData object!
@@ -117,7 +149,7 @@ Now we can create an AnnData object!
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 
+>
 > 1. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy9) %}
 > 2. Make sure you are using version **1.8.1+galaxy9** of the tool (change by clicking on {% icon tool-versions %} Versions button):
 >   ![List of available tool versions shown when clicking on the 'Versions' button on the top of the page.](../../images/scrna-casestudy/version.png "How to change the version of the tool")
@@ -128,12 +160,12 @@ Now we can create an AnnData object!
 >    - *"Cell metadata table"*: `Cell metadata`
 >
 > 4. Rename {% icon galaxy-pencil %} output `AnnData object`
-> 
+>
 {: .hands_on}
 
 # AnnData manipulation
 
-Now we will do several modifications within the AnnData object so that you can follow this tutorial despite the other way of getting data! 
+Now we will do several modifications within the AnnData object so that you can follow this tutorial despite the other way of getting data!
 We would like to flag mitochondrial genes. They can be identified quite easily since they names start with mt. Since the tool for flagging the mitochondrial genes is case-sensitive, it might be a good idea to check what is the formatting of mitochondrial genes in our dataset.
 
 > <hands-on-title> Check the format of mitochondrial genes names </hands-on-title>
@@ -144,14 +176,14 @@ We would like to flag mitochondrial genes. They can be identified quite easily s
 >    - *"Regular Expression"*: `mt`
 >    - *"Match type"*: `case insensitive`
 >    - *"Output"*: `Highlighted HTML (for easier viewing)`
-> 
+>
 > 3. Rename {% icon galaxy-pencil %} output `Mito genes check`
 >
 {: .hands_on}
 
 If you click on that dataset, you will see all the genes containing 'mt' in their name. We can now clearly see that mitochondrial genes in our dataset start with 'mt-'. Keep that in mind, we will use it in a moment!
 
-Speaking about gene names, we will also change the header of the column containing those names from `gene_symbols` to `Symbol`. This edit is only needed to make our AnnData object compatible with this tutorial's workflow. 
+Speaking about gene names, we will also change the header of the column containing those names from `gene_symbols` to `Symbol`. This edit is only needed to make our AnnData object compatible with this tutorial's workflow.
 
 As I mentioned at the beginning, we will also change the header of the column storing information about batch. Actually, we will change several other headers as well.
 
@@ -193,6 +225,6 @@ And the good news is that we can do all those steps using only one tool!
 And that's all! What's even more exciting about AnnData Operations tool is that it automatically calculates a bunch of metrics, such as log1p_mean_counts, log1p_total_counts, mean_counts, n_cells, n_cells_by_counts, n_counts, pct_dropout_by_counts, total_counts. Amazing, isn't it?
 
 # Conclusion
-Now you can use this object as input for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) and its associated workflow! 
+Now you can use this object as input for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) and its associated workflow!
 
-Even though this tutorial was designed specifically to modify the AnnData object to be compatible with the subsequent tutorial, it also shows useful tools that you can use for your own, independent data analysis. You can find the [workflow](https://singlecell.usegalaxy.eu/u/j.jakiela/w/ebi-single-cell-expression-atlas-files-to-anndata) and the [answer key history](https://singlecell.usegalaxy.eu/u/j.jakiela/h/ebi-single-cell-expression-atlas-files-to-anndata-1). However, if you want to use the workflow from this tutorial, you have to keep in mind that different datasets may have different column names. So you have to check them first, and only then you can modify them. 
+Even though this tutorial was designed specifically to modify the AnnData object to be compatible with the subsequent tutorial, it also shows useful tools that you can use for your own, independent data analysis. You can find the [workflow](https://singlecell.usegalaxy.eu/u/j.jakiela/w/ebi-single-cell-expression-atlas-files-to-anndata) and the [answer key history](https://singlecell.usegalaxy.eu/u/j.jakiela/h/ebi-single-cell-expression-atlas-files-to-anndata-1). However, if you want to use the workflow from this tutorial, you have to keep in mind that different datasets may have different column names. So you have to check them first, and only then you can modify them.
