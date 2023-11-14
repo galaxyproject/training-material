@@ -69,7 +69,7 @@ Galaxy has a specific tool for importing data from the SCXA ({% cite Moreno2020.
 >
 {: .hands_on}
 
-It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to the pre-processing that has been shown in this case study tutorial series. The resultant datasets contain any and all metadata provided by the SCXA pipeline as well as the metadata contributed by the original authors (for instance, more cell or gene annotations). So while the AnnData object generated at the end of this tutorial will be similar to that generated using the Alevin workflows ({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) on the original FASTQ files, some of the metadata will be slightly different. Relevant results and interpretation will not change, however!
+It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to the pre-processing that has been shown in this case study tutorial series. The resultant datasets contain any and all metadata provided by the SCXA pipeline as well as the metadata contributed by the original authors (for instance, more cell or gene annotations). So while the AnnData object generated at the end of this tutorial will be similar to that generated using the [Alevin workflows]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) on the original FASTQ files, some of the metadata will be slightly different. Relevant results and interpretation will not change, however!
 
 # Metadata manipulation
 
