@@ -13,7 +13,7 @@ objectives:
   - "Describe what metagenomics binning is"
   - "Describe common problems in metagenomics binning"
   - "What software tools are available for metagenomics binning"
-  - "Binning of contigs into metagenome-assembled genomes (MAGs) using MetaBAT2 software"
+  - "Binning of contigs into metagenome-assembled genomes (MAGs) using MetaBAT 2 software"
   - "Evaluation of MAG quality and completeness using CheckM software"
 time_estimation: "2H"
 key_points:
@@ -34,7 +34,7 @@ tags:
 
 Metagenomics is the study of genetic material recovered directly from environmental samples, such as soil, water, or gut contents, without the need for isolation or cultivation of individual organisms. Metagenomics binning is a process used to classify DNA sequences obtained from metagenomic sequencing into discrete groups, or bins, based on their similarity to each other.
 
-The goal of metagenomics binning is to assign the DNA sequences to the organisms or taxonomic groups that they originate from, allowing for a better understanding of the diversity and functions of the microbial communities present in the sample. This is typically achieved through computational methods that use sequence similarity, composition, and other features to group the sequences into bins.
+The goal of metagenomics binning is to assign the DNA sequences to the organisms or taxonomic groups that they originate from, allowing for a better understanding of the diversity and functions of the microbial communities present in the sample. This is typically achieved through computational methods that include sequence similarity, composition, and other features to group the sequences into bins.
 
 There are several approaches to metagenomics binning, including:
 
@@ -74,12 +74,12 @@ There are plenty of computational tools to perform metafenomics binning. Some of
 
 A benchmark study of metagenomics software can be found at {%cite Sczyrba2017%}. MetaBAT 2 outperforms previous MetaBAT and other alternatives in both accuracy and computational efficiency . All are based on default parameters ({%cite Sczyrba2017%}).
 
-**In this tutorial, we will learn how to run metagenomic binning tools and evaluate the quality of the results**. In order to do that, we will use data from the study: [Temporal shotgun metagenomic dissection of the coffee fermentation ecosystem](https://www.ebi.ac.uk/metagenomics/studies/MGYS00005630#overview) and MetaBAT2 algorithm. MetaBAT is a popular software tool for metagenomics binning, and there are several reasons why it is often used:
-- High accuracy: MetaBAT uses a combination of tetranucleotide frequency, coverage depth, and read linkage information to bin contigs, which has been shown to be highly accurate and efficient.
-- Easy to use: MetaBAT has a user-friendly interface and can be run on a standard desktop computer, making it accessible to a wide range of researchers with varying levels of computational expertise.
-- Flexibility: MetaBAT can be used with a variety of sequencing technologies, including Illumina, PacBio, and Nanopore, and can be applied to both microbial and viral metagenomes.
-- Scalability: MetaBAT can handle large-scale datasets, and its performance has been shown to improve with increasing sequencing depth.
-- Compatibility: MetaBAT outputs MAGs in standard formats that can be easily integrated into downstream analyses and tools, such as taxonomic annotation and functional prediction.
+**In this tutorial, we will learn how to run metagenomic binning tools and evaluate the quality of the results**. In order to do that, we will use data from the study: [Temporal shotgun metagenomic dissection of the coffee fermentation ecosystem](https://www.ebi.ac.uk/metagenomics/studies/MGYS00005630#overview) and MetaBAT 2 algorithm. MetaBAT is a popular software tool for metagenomics binning, and there are several reasons why it is often used:
+- *High accuracy*: MetaBAT uses a combination of tetranucleotide frequency, coverage depth, and read linkage information to bin contigs, which has been shown to be highly accurate and efficient.
+- *Easy to use*: MetaBAT has a user-friendly interface and can be run on a standard desktop computer, making it accessible to a wide range of researchers with varying levels of computational expertise.
+- *Flexibility*: MetaBAT can be used with a variety of sequencing technologies, including Illumina, PacBio, and Nanopore, and can be applied to both microbial and viral metagenomes.
+- *Scalability*: MetaBAT can handle large-scale datasets, and its performance has been shown to improve with increasing sequencing depth.
+- *Compatibility*: MetaBAT outputs MAGs in standard formats that can be easily integrated into downstream analyses and tools, such as taxonomic annotation and functional prediction.
 
 For an in-depth analysis of the structure and functions of the coffee microbiome, a temporal shotgun metagenomic study (six time points) was performed. The six samples have been sequenced with Illumina MiSeq utilizing whole genome sequencing.
 
@@ -96,13 +96,13 @@ Based on the 6 original dataset of the coffee fermentation system, we generated 
 
 # Prepare analysis history and data
 
-MetaBAT2 takes metagenomic sequencing data as input, typically in the form of assembled contigs in fasta format and coverage information in bam format. Specifically, MetaBAT2 requires two input files:
+MetaBAT 2 takes metagenomic sequencing data as input, typically in the form of assembled contigs in fasta format and coverage information in bam format. Specifically, MetaBAT 2 requires two input files:
 
 - A fasta file containing the assembled contigs, which can be generated from raw metagenomic sequencing reads using an assembler such as MEGAHIT, SPAdes, or IDBA-UD.
 
 - A bam file containing the read coverage information for each contig, which can be generated from the same sequencing reads using mapping software such as Bowtie2 or BWA.
 
-MetaBAT2 also requires a configuration file specifying various parameters and options for the binning process, such as the minimum contig length, the maximum number of clusters to generate, and the maximum expected contamination level.
+MetaBAT 2 also requires a configuration file specifying various parameters and options for the binning process, such as the minimum contig length, the maximum number of clusters to generate, and the maximum expected contamination level.
 
 To run binning, we first need to get the data into Galaxy. Any analysis should get its own Galaxy history. So let's start by creating a new one:
 
@@ -162,14 +162,14 @@ As explained before, there are many challenges to metagenomics binning. The most
 
 ![Image show the binning process where sequences are grouped together based on genome signatures like the kmer profiles of each contig, contig coverage, or GC content](./binning.png "Binning"){:width="60%"}
 
-In this tutorial we will learn how to use **MetaBAT2** tool through Galaxy. **MetaBAT** stands for "Metagenome Binning based on Abundance and Tetranucleotide frequency". It is:
+In this tutorial we will learn how to use **MetaBAT 2** tool through Galaxy. **MetaBAT** stands for "Metagenome Binning based on Abundance and Tetranucleotide frequency". It is:
 
 > *Grouping large fragments assembled from shotgun metagenomic sequences to deconvolute complex microbial communities, or metagenome binning, enables the study of individual organisms and their interactions. Here we developed automated metagenome binning software, called MetaBAT, which integrates empirical probabilistic distances of genome abundance and tetranucleotide frequency. On synthetic datasets MetaBAT on average achieves 98percent precision and 90% recall at the strain level with 281 near complete unique genomes. Applying MetaBAT to a human gut microbiome data set we recovered 176 genome bins with 92% precision and 80% recall. Further analyses suggest MetaBAT is able to recover genome fragments missed in reference genomes up to 19%, while 53 genome bins are novel. In summary, we believe MetaBAT is a powerful tool to facilitate comprehensive understanding of complex microbial communities ({%cite Kang2019%}).*
 
 We will use the uploaded assembled fasta files as input to the algorithm (For simplicity reasons all other parameters will be preserved with their default values).
 
-> <hands-on-title>Individual binning of short-reads with MetaBAT2</hands-on-title>
-> 1.  {% tool [MetaBAT2](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
+> <hands-on-title>Individual binning of short-reads with MetaBAT 2</hands-on-title>
+> 1.  {% tool [MetaBAT 2](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
 >     - *"Fasta file containing contigs"*: `assembly fasta files`
 <!-- >     - In *Advanced options*
 >       - *"Percentage of good contigs considered for binning decided by connection among contigs"*: `default 95`
@@ -187,7 +187,7 @@ We will use the uploaded assembled fasta files as input to the algorithm (For si
 >
 {: .hands_on}
 
-The output files generated by MetaBAT2 include (some of the files below are optional and not produced unless it is required by the user):
+The output files generated by MetaBAT 2 include (some of the files below are optional and not produced unless it is required by the user):
 
 1. The final set of genome bins in FASTA format (`.fa`)
 2. A summary file with information on each genome bin, including its length, completeness, contamination, and taxonomy classification (`.txt`)
@@ -208,12 +208,12 @@ These output files can be further analyzed and used for downstream applications 
 > > 1. Import the six folders containg binning result files from [Zenodo]({{ page.zenodo_link_results }}) or the Shared Data library:
 > >
 > >    ```text
-> >    {{ page.zenodo_link_results }}/files/26_%20MetaBAT2%20on%20data%20ERR2231567_%20Bins.zip
-> >    {{ page.zenodo_link_results }}/files/38_%20MetaBAT2%20on%20data%20ERR2231568_%20Bins.zip
-> >    {{ page.zenodo_link_results }}/files/47_%20MetaBAT2%20on%20data%20ERR2231569_%20Bins.zip
-> >    {{ page.zenodo_link_results }}/files/57_%20MetaBAT2%20on%20data%20ERR2231570_%20Bins.zip
-> >    {{ page.zenodo_link_results }}/files/65_%20MetaBAT2%20on%20data%20ERR2231571_%20Bins.zip
-> >    {{ page.zenodo_link_results }}/files/74_%20MetaBAT2%20on%20data%20ERR2231572_%20Bins.zip
+> >    {{ page.zenodo_link_results }}/files/26_%20MetaBAT 2%20on%20data%20ERR2231567_%20Bins.zip
+> >    {{ page.zenodo_link_results }}/files/38_%20MetaBAT 2%20on%20data%20ERR2231568_%20Bins.zip
+> >    {{ page.zenodo_link_results }}/files/47_%20MetaBAT 2%20on%20data%20ERR2231569_%20Bins.zip
+> >    {{ page.zenodo_link_results }}/files/57_%20MetaBAT 2%20on%20data%20ERR2231570_%20Bins.zip
+> >    {{ page.zenodo_link_results }}/files/65_%20MetaBAT 2%20on%20data%20ERR2231571_%20Bins.zip
+> >    {{ page.zenodo_link_results }}/files/74_%20MetaBAT 2%20on%20data%20ERR2231572_%20Bins.zip
 > >    ```
 > >
 > >
@@ -235,6 +235,43 @@ These output files can be further analyzed and used for downstream applications 
 > {: .solution}
 >
 {: .question}
+
+# De-replication
+
+De-replication is the process of identifying sets of genomes that are the "same" in a list of genomes, and removing all but the “best” genome from each redundant set. How similar genomes need to be to be considered “same”, how to determine which genome is “best”, and other important decisions are discussed in [Important Concepts](https://drep.readthedocs.io/en/latest/choosing_parameters.html).
+
+A common use for genome de-replication is the case of individual assembly of metagenomic data. If metagenomic samples are collected in a series, a common way to assemble the short reads is with a “co-assembly”. That is, combining the reads from all samples and assembling them together. The problem with this is assembling similar strains together can severely fragment assemblies, precluding recovery of a good genome bin. An alternative option is to assemble each sample separately, and then “de-replicate” the bins from each assembly to make a final genome set.
+
+![Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed](./individual-assembly.png "Individual assembly followed by de-replication vs co-assembly"){:width="80%"}
+
+MetaBAT 2 does not explicitly perform dereplication in the sense of identifying groups of identical or highly similar genomes in a given dataset. Instead, MetaBAT 2 focuses on improving the accuracy of binning by leveraging various features such as read coverage, differential coverage across samples, and sequence composition. It aims to distinguish between different genomes present in the metagenomic dataset and assign contigs to the appropriate bins.
+
+Several tools have been designed for the proccess of de-replication. **`dRep`** is a software tool designed for the dereplication of genomes in metagenomic datasets. The goal is to retain a representative set of genomes to improve downstream analyses, such as taxonomic profiling and functional annotation.
+
+An typical workflow of how `dRep` works for dereplication in metagenomics includes:
+
+- *Genome Comparison*: `dRep` uses a pairwise genome comparison approach to assess the similarity between genomes in a given metagenomic dataset.
+
+- *Clustering*: Based on the genome similarities, `dRep` performs clustering to group similar genomes into "genome clusters." Each cluster represents a group of closely related genomes.
+
+- *Genome Quality Assessment*: `dRep` evaluates the quality of each genome within a cluster. It considers factors such as completeness, contamination, and strain heterogeneity.
+
+- *Genome Selection*: Within each genome cluster, `dRep` selects a representative genome based on user-defined criteria. This representative genome is considered as the "dereplicated" version of the cluster.
+
+- *Dereplication Output*: The output of `dRep` includes information about the dereplicated genomes, including their identity, completeness, and contamination. The user can choose a threshold for genome similarity to control the level of dereplication.
+
+> <hands-on-title>General list of actions for de-replication</hands-on-title>
+> 1. Create new history
+> 2. Assemble each sample separately using your favorite assembler
+> 3. Perform a co-assembly to catch low-abundance microbes
+> 4. Bin each assembly separately using your favorite binner
+> 5. Bin co-assembly using your favorite binner
+> 6. Pull the bins from all assemblies together
+> 7. rRun **`dRep`** on them
+> 8. Perform downstream analysis on the de-replicated genome list
+>
+{: .hands_on}
+
 
 # Checking the quality of the bins
 
@@ -313,15 +350,7 @@ The output of "CheckM lineage_wf" includes several files and tables that provide
 
 It should be noted that "CheckM lineage_wf" offers a range of optional outputs that can be generated to provide additional information to the user.
 
-<!--# De-replication
-
-De-replication is the process of identifying sets of genomes that are the "same" in a list of genomes, and removing all but the “best” genome from each redundant set. How similar genomes need to be to be considered “same”, how to determine which genome is “best”, and other important decisions are discussed in [Important Concepts](https://drep.readthedocs.io/en/latest/choosing_parameters.html).
-
-A common use for genome de-replication is the case of individual assembly of metagenomic data. If metagenomic samples are collected in a series, a common way to assemble the short reads is with a “co-assembly”. That is, combining the reads from all samples and assembling them together. The problem with this is assembling similar strains together can severely fragment assemblies, precluding recovery of a good genome bin. An alternative option is to assemble each sample separately, and then “de-replicate” the bins from each assembly to make a final genome set.
-
-![Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed](./images/individual-assembly.png "Individual assembly followed by de-replication vs co-assembly"){:width="80%"}
-
-If we have different samples, then we do an individual assembly for each sample. In the figure above we see that after individual assembly we have results for every individual assembly represented with pie charts. Different colours on these charts show different strains (organisms). Every chart has a different percentage of every strain which means that the assemblies contain different strains in different proportions in each sample.
+<!-- If we have different samples, then we do an individual assembly for each sample. In the figure above we see that after individual assembly we have results for every individual assembly represented with pie charts. Different colours on these charts show different strains (organisms). Every chart has a different percentage of every strain which means that the assemblies contain different strains in different proportions in each sample.
 
 Afterwards, we do the process of de-replication. We try to combine all the assemblies and try to identify which genomes are the most proper.
 
@@ -341,11 +370,11 @@ Co-assembly is a more common practice. But in case of co-assembly the genome mig
 >
 {: .hands_on}
 
-We will perform steps from 1 to 3 in this tutorial a bit later while steps 4 - 8 will be considered in the following tutorial - Binning tutorial.-->
+We will perform steps from 1 to 3 in this tutorial a bit later while steps 4 - 8 will be considered in the following tutorial - Binning tutorial. -->
 
 # Conclusions
 
-In summary, this tutorial shows a step-by-step on how to bin metagenomic contigs using MetaBAT2.
+In summary, this tutorial shows a step-by-step on how to bin metagenomic contigs using MetaBAT 2.
 
 It is critical to select the appropriate binning tool for a specific metagenomics study, as different binning methods may have different strengths and limitations depending on the type of metagenomic data being analyzed. By comparing the outcomes of several binning techniques, researchers can increase the precision and accuracy of genome binning.
 
