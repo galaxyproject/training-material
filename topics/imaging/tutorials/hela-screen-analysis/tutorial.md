@@ -172,7 +172,7 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
 > 8. Edit the workflow you just created
->    - Add the tool {% tool [Input dataset]() %} and name it `input image`.
+>    - Add the tool {% tool Input dataset %} and name it `input image`.
 >    - Name the input for the rules file `filter rules`.
 >    - Mark the results of steps 5 and 6 as outputs (by clicking on the asterisk next to the output name).
 >
@@ -191,12 +191,12 @@ Now we want to apply our extracted workflow to `original data` and merge the res
 > 1. Create a new workflow in the workflow editor.
 >
 >    {% snippet faqs/galaxy/workflows_create_new.md %}
-> 2. Add a {% tool [Input dataset collection]() %} node and name it `input images`
-> 3. Add a {% tool [Input dataset]() %} node and name it `rules`
+> 2. Add a {% tool Input dataset collection %} node and name it `input images`
+> 3. Add a {% tool Input dataset %} node and name it `rules`
 > 4. Add the **feature_extraction** workflow as node.
->    - {% icon param-file %} *"input image"*: `input images` output of {% tool [Input dataset collection]() %}
->    - {% icon param-file %} *"filter rules"*: `rules` output of {% tool [Input dataset]() %}
-> 5. Add a {% tool [Collapse Collection]() %} node.
+>    - {% icon param-file %} *"input image"*: `input images` output of {% tool Input dataset collection %}
+>    - {% icon param-file %} *"filter rules"*: `rules` output of {% tool Input dataset %}
+> 5. Add a {% tool Collapse Collection %} node.
 >    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: output of **feature_extraction** workflow
 >    - *"Keep one header line"*: `Yes`
 >    - *"Append File name"*: `No`
@@ -225,7 +225,7 @@ Finally, we want to plot the results for better interpretation.
 
 > <hands-on-title>Plot feature extraction results</hands-on-title>
 >
-> 1. Click on the `Visualize this data` {% icon galaxy-barchart %} icon of the {% tool [Collapse Collection]() %} results.
+> 1. Click on the `Visualize this data` {% icon galaxy-barchart %} icon of the {% tool Collapse Collection %} results.
 > 2. Run `Box plot` with the following parameters:
 >    - *"Provide a title"*: `Screen features`
 >    - *"X-Axis label"*:
