@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@43d3623f66fbca3cabcab5c00d1b2221e968b72e",
+		release: "galaxy-training-network@30a27e76df96a86553376b0a35135bbd3afb31ba",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699959436' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699959436' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1699971675' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1699971675' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Introduction to image analysis using Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
+<meta name="DC.date" content="2023-11-14 08:24:50 +0000">
 <meta name="DC.creator" content="Thomas Wollmann">
 <meta name="DC.creator" content="Saskia Hiltemann">
 <meta name="DC.creator" content="Leonid Kostrykin">
@@ -111,7 +111,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-11-03 14:30:27 +0000",
+  "dateModified": "2023-11-14 08:24:50 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Introduction to image analysis using Galaxy",
   "interactivityType": "mixed",
@@ -170,7 +170,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Introduction to image analysis using Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html",
-  "version": 28,
+  "version": 31,
   "timeRequired": "PT1H",
   "teaches": "How to handle images in Galaxy.\n - How to perform basic image processing in Galaxy.",
   "keywords": [
@@ -333,7 +333,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699959436'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1699971675'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -763,7 +763,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 14, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -774,7 +774,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00181">https://gxy.io/GTN:T00181</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 28 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 31 </div>
 
     </blockquote>
     </section>
@@ -868,7 +868,7 @@ contains a screen of <a href="https://en.wikipedia.org/wiki/DAPI">DAPI</a> stain
   <div class="box-title hands-on-title" id="hands-on-extract-image-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract Image Metadata</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/0.2" title="Image Info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Image Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2)</span> with the following parameters to extract metadata from the image:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/0.2" title="Show image info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Show image info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2)</span> with the following parameters to extract metadata from the image:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">input.tif</code> file (output of the previous step)</li>
       </ul>
@@ -906,11 +906,10 @@ contains a screen of <a href="https://en.wikipedia.org/wiki/DAPI">DAPI</a> stain
   <div class="box-title hands-on-title" id="hands-on-convert-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert Image</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0" title="Convert image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy0)</span> with the following parameters to convert the image to PNG:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy2)</span> with the following parameters to convert the image to PNG:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">input.tif</code> file</li>
         <li><em>“Output data type”</em>: <code class="language-plaintext highlighter-rouge">PNG</code></li>
-        <li><em>“Pyramid image”</em>: <code class="language-plaintext highlighter-rouge">No Pyramid</code></li>
       </ul>
     </li>
     <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the generated file to <code class="language-plaintext highlighter-rouge">viz_input</code></li>
@@ -942,16 +941,16 @@ be normalized first.</p>
   <div class="box-title hands-on-title" id="hands-on-normalize-histogram-and-convert-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Normalize Histogram and Convert Image</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1" title="Histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters to normalize the histogram of the image:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2" title="Perform histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1-2)</span> with the following parameters to normalize the histogram of the image:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="language-plaintext highlighter-rouge">input.tif</code> file</li>
         <li><em>“Histogram Equalization Algorithm”</em>: <code class="language-plaintext highlighter-rouge">CLAHE</code></li>
       </ul>
     </li>
     <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the generated file to <code class="language-plaintext highlighter-rouge">input_normalized</code></li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0" title="Convert image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy0)</span> with the following parameters to convert the image to PNG:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy2)</span> with the following parameters to convert the image to PNG:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">input_normalized</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1" title="Histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">input_normalized</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2" title="Perform histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1-2)</span>)</li>
         <li><em>“Output data type”</em>: <code class="language-plaintext highlighter-rouge">PNG</code></li>
       </ul>
     </li>
@@ -974,24 +973,24 @@ be normalized first.</p>
   <div class="box-title hands-on-title" id="hands-on-filter-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter image</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3" title="Filter Image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter Image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</span> with the following parameters to smooth the image:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3" title="Filter 2D image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter 2D image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3-3)</span> with the following parameters to smooth the image:
       <ul>
-        <li><em>“Image type”</em>: <code class="language-plaintext highlighter-rouge">Gaussian Blur</code></li>
+        <li><em>“Filter type”</em>: <code class="language-plaintext highlighter-rouge">Gaussian Blur</code></li>
         <li><em>“Radius/Sigma”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="language-plaintext highlighter-rouge">input.tif</code> file</li>
       </ul>
     </li>
     <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the generated file to <code class="language-plaintext highlighter-rouge">input_smoothed</code></li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1" title="Histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters to normalize the histogram of the image:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2" title="Perform histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1-2)</span> with the following parameters to normalize the histogram of the image:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="language-plaintext highlighter-rouge">input_smoothed</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3" title="Filter Image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter Image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="language-plaintext highlighter-rouge">input_smoothed</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3" title="Filter 2D image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter 2D image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3-3)</span>)</li>
         <li><em>“Histogram Equalization Algorithm”</em>: <code class="language-plaintext highlighter-rouge">CLAHE</code></li>
       </ul>
     </li>
     <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the generated file to <code class="language-plaintext highlighter-rouge">input_smoothed_normalized</code></li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0" title="Convert image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy0)</span> with the following parameters to convert the image to PNG:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy2)</span> with the following parameters to convert the image to PNG:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">input_smoothed_normalized</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1" title="Histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">input_smoothed_normalized</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2" title="Perform histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1-2)</span>)</li>
         <li><em>“Output data type”</em>: <code class="language-plaintext highlighter-rouge">PNG</code></li>
       </ul>
     </li>
@@ -1012,23 +1011,23 @@ be normalized first.</p>
   <div class="box-title hands-on-title" id="hands-on-segment-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Segment image</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5" title="Auto Threshold tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Auto Threshold</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5)</span> with the following parameters to segment the image:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2" title="Threshold image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Threshold image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5-2)</span> with the following parameters to segment the image:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="language-plaintext highlighter-rouge">input_smoothed</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3" title="Filter Image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter Image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="language-plaintext highlighter-rouge">input_smoothed</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-2" title="Filter 2D image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter 2D image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3-2)</span>)</li>
         <li><em>“Threshold Algorithm”</em>: <code class="language-plaintext highlighter-rouge">Otsu</code></li>
         <li><em>“Dark Background”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the generated file to <code class="language-plaintext highlighter-rouge">input_segmented</code></li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4" title="Binary 2 Label tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Binary 2 Label</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4)</span> with the following parameters to segment the image:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2" title="Convert binary image to label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert binary image to label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4-2)</span> with the following parameters to segment the image:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Binary Image File”</em>: <code class="language-plaintext highlighter-rouge">input_segmented</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5" title="Auto Threshold tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Auto Threshold</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5)</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Binary Image File”</em>: <code class="language-plaintext highlighter-rouge">input_segmented</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2" title="Threshold image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Threshold image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5-2)</span>)</li>
       </ul>
     </li>
     <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the generated file to <code class="language-plaintext highlighter-rouge">input_segmented_labeled</code></li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0" title="Convert image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy0)</span> with the following parameters to convert the image to PNG:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy2)</span> with the following parameters to convert the image to PNG:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">input_segmented_labeled</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4" title="Binary 2 Label tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Binary 2 Label</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4)</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">input_segmented_labeled</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2" title="Convert binary image to label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert binary image to label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4-2)</span>)</li>
         <li><em>“Output data type”</em>: <code class="language-plaintext highlighter-rouge">PNG</code></li>
       </ul>
     </li>
@@ -1039,13 +1038,13 @@ be normalized first.</p>
         <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
-          <li>What does <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4" title="Binary 2 Label tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Binary 2 Label</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4)</span> do? (Hint: check the tool help section)</li>
+          <li>What does <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2" title="Convert binary image to label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert binary image to label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4-2)</span> do? (Hint: check the tool help section)</li>
           <li>View the <code class="language-plaintext highlighter-rouge">viz_segmented</code> image from the last step, what do you see?
             <ul>
               <li>Can you explain this result?</li>
             </ul>
           </li>
-          <li>Exercise: Try to make the information in this image better visible (Hint: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1" title="Histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span>)</li>
+          <li>Exercise: Try to make the information in this image better visible (Hint: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2" title="Perform histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1-2)</span>)</li>
         </ol>
 
         <blockquote class="solution">
@@ -1053,7 +1052,7 @@ be normalized first.</p>
           <ol>
             <li>The tool assigns each connected component (e.g., segmented cell) in the image an object id and stores it as the intensity value.</li>
             <li>The image looks completely black.
-The object IDs generated by <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4" title="Binary 2 Label tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Binary 2 Label</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4)</span> are relatively low.
+The object IDs generated by <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2" title="Convert binary image to label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert binary image to label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4-2)</span> are relatively low.
 Since the IDs are stored as intensity values, these are too low to be visible in this case. Nevertheless, there is more
 information in this image than meets the eye.</li>
             <li>
@@ -1061,15 +1060,15 @@ information in this image than meets the eye.</li>
 can do that by equalizing the histogram again:</p>
 
               <ul>
-                <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1" title="Histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters to normalize the intensity values:
+                <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2" title="Perform histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1-2)</span> with the following parameters to normalize the intensity values:
                   <ul>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="language-plaintext highlighter-rouge">input_segmented_labeled</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4" title="Binary 2 Label tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Binary 2 Label</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4)</span>)</li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="language-plaintext highlighter-rouge">input_segmented_labeled</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2" title="Convert binary image to label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert binary image to label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4-2)</span>)</li>
                     <li><em>“Histogram Equalization Algorithm”</em>: <code class="language-plaintext highlighter-rouge">CLAHE</code></li>
                   </ul>
                 </li>
-                <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0" title="Convert image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy0)</span> with the following parameters to convert the image to PNG:
+                <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy2)</span> with the following parameters to convert the image to PNG:
                   <ul>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1" title="Histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span></li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2" title="Perform histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1-2)</span></li>
                     <li><em>“Output data type”</em>: <code class="language-plaintext highlighter-rouge">PNG</code></li>
                   </ul>
                 </li>
@@ -1083,11 +1082,11 @@ can do that by equalizing the histogram again:</p>
         </blockquote>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.3" title="Overlay Images tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Overlay Images</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</span> with the following parameters to convert the image to PNG:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.3-3" title="Overlay images tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Overlay images</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3-3)</span> with the following parameters to convert the image to PNG:
       <ul>
         <li><em>“How to visualize the overlay?”</em>: <code class="language-plaintext highlighter-rouge">Segmentation mask over image</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Image”</em>: <code class="language-plaintext highlighter-rouge">viz_normalized</code> file</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Label image”</em>: <code class="language-plaintext highlighter-rouge">input_segmented_labeled</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4" title="Binary 2 Label tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Binary 2 Label</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4)</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Label image”</em>: <code class="language-plaintext highlighter-rouge">input_segmented_labeled</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2" title="Convert binary image to label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert binary image to label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4-2)</span>)</li>
         <li><em>“Contour thickness”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
         <li><em>“Contour color”</em>: <code class="language-plaintext highlighter-rouge">red</code></li>
         <li><em>“Show labels”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
@@ -1095,9 +1094,9 @@ can do that by equalizing the histogram again:</p>
       </ul>
     </li>
     <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon next to the file name, to look at the file content and assess the segmentation performance</li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5" title="Count Objects tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count Objects</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5)</span> with the following parameters to count the segmented objects in the image:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2" title="Count objects in label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count objects in label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5-2)</span> with the following parameters to count the segmented objects in the image:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="language-plaintext highlighter-rouge">input_segmented_labeled</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4" title="Binary 2 Label tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Binary 2 Label</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4)</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="language-plaintext highlighter-rouge">input_segmented_labeled</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2" title="Convert binary image to label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert binary image to label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4-2)</span>)</li>
       </ul>
 
       <blockquote class="question">
@@ -1107,7 +1106,7 @@ can do that by equalizing the histogram again:</p>
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-          <p>The <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5" title="Count Objects tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count Objects</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5)</span> tool counted 425 objects.</p>
+          <p>The <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2" title="Count objects in label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count objects in label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5-2)</span> tool counted 425 objects.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -1311,7 +1310,7 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: 2d_auto_threshold
   owner: imgteam
-  revisions: 0c777d708acc
+  revisions: 3df9f0a4bf34
   tool_panel_section_label: Imaging
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: 2d_histogram_equalization
@@ -1324,6 +1323,11 @@ tools:
   revisions: dba87c4b32d3
   tool_panel_section_label: Imaging
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: 2d_simple_filter
+  owner: imgteam
+  revisions: f70b215d155c
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: bfconvert
   owner: imgteam
   revisions: b07f4839ca77
@@ -1331,7 +1335,7 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: bfconvert
   owner: imgteam
-  revisions: f3360fbeda64
+  revisions: 85edbb7a436b
   tool_panel_section_label: Imaging
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: binary2labelimage
@@ -1344,11 +1348,6 @@ tools:
   revisions: 664232d2a3f7
   tool_panel_section_label: Imaging
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: count_objects
-  owner: imgteam
-  revisions: 5bf8eb50b280
-  tool_panel_section_label: Imaging
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: image_info
   owner: imgteam
   revisions: 7b6d9412c7f8
@@ -1356,7 +1355,7 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: overlay_images
   owner: imgteam
-  revisions: b74693340624
+  revisions: 22ff7c705a83
   tool_panel_section_label: Imaging
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: unzip
@@ -1398,7 +1397,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/43d3623f66fbca3cabcab5c00d1b2221e968b72e">43d3623</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/30a27e76df96a86553376b0a35135bbd3afb31ba">30a27e7</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1426,7 +1425,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699959436'></script>
+        <script src='/training-material/assets/js/bundle.9d052497.js?v=1699971675'></script>
         
     </body>
 </html>
