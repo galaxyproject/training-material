@@ -105,7 +105,15 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 
 # Metadata manipulation
 
-Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about 7 samples N701 – N707), however in the experimental design table (cell metadata) they are just numbered from 1 to 7. The plotting tool that we will going to use later will fail if the entries are integers and not categoricals, so we will change "1" to "N01" and so on. You can simply preview the experimental design dataset and move to the column "Sample Characteristic[individual]" (that's where the information about batch is - don't worry, we will rename the column header later!). Make a note of the number of that column - number 12 - we will need it to change the batch number to batch name.
+Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about the 7 experimental samples (N701 – N707). However, in the {% icon param-file %}`exp_design.tsv` dataset, which contains the cell metadata, these samples are just numbered from 1 to 7.
+
+> <details-title>How did we know this?</details-title>
+>
+> You can preview this column in the the {% icon param-file %}`exp_design.tsv` dataset by selecting the {% icon galaxy-eye %} in the {% icon galaxy-history %} Galaxy history. If you scroll to the right, and move to the column `Sample Characteristic[individual]`, you will find the batch information. Don't worry, we're about to rename and reformat this whole dataset to more useful titles. Make a note of the number of that column - number 12 - as we will need it to change the batch number to a batch name shortly.
+>
+{: .details}
+
+The plotting tool that we will going to use later will fail if the entries are integers and not categorical values, so we will change `1` to `N01` and so on. 
 
 > <hands-on-title> Change batch numbers into names </hands-on-title>
 >
@@ -114,7 +122,7 @@ Before creating an AnnData object, we need to make a small modification in exper
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 > 2. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
->    - *"Select cells from"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
+>    - *"Select cells from"*: {% icon param-file %}`EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
 >    - *"using column"*: `Column: 12`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
