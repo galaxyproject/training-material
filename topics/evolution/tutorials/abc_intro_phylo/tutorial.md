@@ -327,7 +327,7 @@ It is not uncommon for a phylogenetic analysis to span hundreds, or even thousan
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->  
+> {: .hands_on} 
 > You can click on the 'eye' icon {% galaxy-eye %} on the right to see the unaligned data (go ahead!) but the view isn't very informative. This is just the raw FASTA file, with the case symbols A, C, G, T for the nucleotides. You can see that the sequences are of different lengths, since the last lines of each sequence are of different lengths.
 >
 This is a file in **FASTA** or **Fasta** format (pronounced to rhyme with pasta), which has a very simple structure, as follows:
