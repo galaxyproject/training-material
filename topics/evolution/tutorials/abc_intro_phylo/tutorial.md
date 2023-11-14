@@ -147,45 +147,44 @@ Aside from fundamental understanding of biology, other strong motivators for inf
 
 ## Terminology
 
-We need to define some terms, which may be new to you.
+Before we start building trees, let's define some terms, which may be new to you.
 
-![Anatomy of a Tree](./images/TreeAnatomyWithOutgroup.png){:align="center"}
-
-**how to get a figure label on this? Call it Fig 1. Tree Anatomy**
-
-Mathematically a **Tree** is a kind of **graph**, which has objects called **nodes** or **vertices**, connected in pairs by things called **edges**.  
-Trees are a natural way to think about phylogenetic relationships, where the nodes correspond to **taxa**, and the edges, also called **branches**, show the relationships between them. 
-Taxa could be species, or lineages, genera, populations, or even individuals if we are considering something like a genealogy.
-Nodes that only have one edge attached to them are called **leaves** (or **tips**), and these correspond to taxa with no descendant taxa in the tree. 
-These taxa might be from fossils, or be currently living, in which case they're referred to as **extant**.
+![Schematic of a phylogenetic tree where features such as nodes/taxa, edges/branches are annotated](./images/TreeAnatomyWithOutgroup.png "Anatomy of a phylogenetic tree"){:align="center"}
 
 It's common to call **phylogenetic tree** just a **phylogeny**.
 
-Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree, and this node is called the **root**.
-If that's the case then there is a natural direction implied from the root to the tips, going forward in time.
-Such trees and phylogenies are called **rooted**; if there is no such root then they are called **unrooted**. 
+Mathematically a **tree** is a kind of **graph**, which has objects called **nodes** or **vertices** (purple boxes in the figure above), connected in pairs by things called **edges** (green and orange lines in the figure above).  
+
+Trees are a natural way to think about phylogenetic relationships, where the nodes correspond to **taxa**, and the edges, also called **branches**, show the relationships between them. 
+
+Taxa could be species, or lineages, genera, populations, or even individuals if we are considering something like a genealogy.
+
+Nodes that only have one edge attached to them are called **leaves** (or **tips**), and these correspond to taxa with no descendant taxa in the tree. 
+
+These taxa might be from fossils, or be currently living, in which case they're referred to as **extant**.
+
+Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree, and this node is called the **root**. When this is the case there is a natural direction implied from the root to the tips, going forward in time. Such trees and phylogenies are called **rooted**; if there is no such root then they are called **unrooted**. 
 
 *The majority of phylogenetic inference methods produce unrooted trees, but rooted trees are more useful.*
 
-In a rooted phylogeny, all the leaves that are descendant from any given node form a **monophyletic clade** (or often just "**clade**"). 
-(Monophyletic means "one tribe (of) origin" from the Greek.)
+In a rooted phylogeny, all the leaves that are descendant from any given node form a **monophyletic clade**, or often just "**clade**" (monophyletic means "one tribe (of) origin" from the Greek).
 
 One standard way to determine where the root of a tree is, is to include an **outgroup**, which is a set of taxa that are definitely not within the clade of interest (which is then called our **ingroup**) but which share a common ancestor with that clade.
 A good outgroup won't be too distantly related to our ingroup, because if it's too distant then the choice of where it should connect to the ingroup will be hard: ultimately resulting in a guess.
 You can see that in the diagram above the connection of the ingroup to the outgroup could be from multiple locations.
 Once the *unrooted* tree is created, using all the data from ingroup and outgroup taxa, we can confidently say that the root is on the branch connecting our ingroup to our outgroup:
 
-![Rooting a Tree](./images/TreeAnatomyUnrooted.png){:align="center"}
+![Schematic showing connection between an in group and outgroup to root a tree](./images/TreeAnatomyUnrooted.png "Rooting a tree"){:align="center"}
 
-At this point we can imagine lifting up the unrooted tree at the branch connecting our outgroup and ingroup -- that is our best guess at the hypothetical ancestor of all our taxa and gives us a good indication of the branching order of our ingroup (and outgroup but we won't care):
+At this point we can imagine lifting up the unrooted tree at the branch connecting our outgroup and ingroup -- that is our best guess at the hypothetical ancestor of all our taxa and gives us a good indication of the branching order of our ingroup (and the outgroup):
 
-![Lift here!](./images/TreeAnatomyLiftHere.png){:align="center"}
+![Schematic showing how inclusion of an outgroup can be used to lift a tree to create a best guess at the location of the hypothetical ancestor](./images/TreeAnatomyLiftHere.png "'Lifted' tree demonstrating hypothetical ancestor and branching order){:align="center"}
 
-Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about monophyly -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
+Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about **monophyly** -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
 
 The tree above is called a **binary tree**, because each internal node branches into *two* descendants.
-It is a very common assumption that our trees will be binary, and we will make that assumption here.  In fact it is often very hard to come to a means by which a phylogeny could be truly *non*-binary: in most cases this is just due to our inability to resolve the tree completely.
-In this tutorial we will only be considering trees that are binary.
+It is a very common assumption that our trees will be binary, and we make that assumption in this tutorial.  In fact it is often very hard to come to a means by which a phylogeny could be truly *non*-binary: in most cases this is just due to our inability to resolve the tree completely.
+In this tutorial we will only consider trees that are binary.
 
 # Basic Methodology
 
