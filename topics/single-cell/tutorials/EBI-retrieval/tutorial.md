@@ -76,7 +76,7 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 >
 > 1. What format has this tool imported?
 >
-> > <tip-title></tip-title>
+> > <tip-title>Hint</tip-title>
 > >
 > > Selecting the title of each resultant dataset will expand the dataset in the Galaxy history.
 > {: .tip}
@@ -85,19 +85,19 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 > > Matrix Market Format! We can tell this because our first file helpfully says `MatrixMarket` in the first line.
 > > ![Green box containing first output, the matrix.mtx file. Columns are labelled 14458, 5218, and 5308559](../../tutorials/EBI-retrieval/images/matrix-output.png "Matrix Market Output")
 > >
-> > This format contains a column referring to each gene (column 1), to each cell (column 2), and the expression values themselves in the final column. To be useful, then, we need to know which genes and cells the numbers are referring to. That's why this format comes with two more files.
+> > This {% icon param-file %} `matrix.mtx` file, in Matrix Market format, contains a column referring to each gene (column 1), to each cell (column 2), and the expression values themselves in the final column. To be useful, then, we need to know which genes and cells the numbers are referring to. That's why this format comes with two more files.
 > >
-> > ![Green box containing second output, the genes.tsv file. The first column contains EnsemblIDs such as ENSMUSG######, while the second column contains gene names. There are 14,457 lines.](../../tutorials/EBI-retrieval/images/genes-output.png "Genes Output").
+> > ![Green box containing second output, the genes.tsv file. The first column contains EnsemblIDs such as ENSMUSG######, while the second column contains gene names. There are 14,457 lines.](../../tutorials/EBI-retrieval/images/genes-output.png "Genes Output")
 > >
-> > The genes file lists each EnsemblID and its gene name. The lines (14,457) corresponds with the 14458 in the Matrix file...but the 14458 contains a header, so that's why it has one more than the genes file!
+> > The {% icon param-file %} `genes.tsv` file lists each EnsemblID and its gene name. The lines (14,457) corresponds with the 14458 in the Matrix file...but the 14458 contains a header, so that's why it has one more than the genes file!
 > >
-> > ![Green box containing third output, the barcodes.tsv file. The file consists of 5,217 lines and a single column containing the cell barcode, variations of ERR2704656-AAAACACTCTGA.](../../tutorials/EBI-retrieval/images/cells-output.png "Cells Output").
+> > ![Green box containing third output, the barcodes.tsv file. The file consists of 5,217 lines and a single column containing the cell barcode, variations of ERR2704656-AAAACACTCTGA.](../../tutorials/EBI-retrieval/images/cells-output.png "Cells Output")
 > >
-> > The cells file lists each barcode. The lines (5,217) again corresponds with the 5,218 lines in the Matrix file...which adds in the header again!
+> > The {% icon param-file %} `barcodes.tsv` file lists each barcode. The lines (5,217) again correspond with the 5,218 lines in the Matrix file...which adds in the header again!
 > >
-> > ![Green box containing fourth output, the exp_design.tsv file. The file consists of 5,218 lines and numerous columns starting with 'Assay' and 'Sample Characteristic'.](../../tutorials/EBI-retrieval/images/cell-metadata.png "Experimental Design").
+> > ![Green box containing fourth output, the exp_design.tsv file. The file consists of 5,218 lines and numerous columns starting with 'Assay' and 'Sample Characteristic'.](../../tutorials/EBI-retrieval/images/cell-metadata.png "Experimental Design")
 > >
-> > Finally, and very helpfully!, the tool also includes cell metadata where the `Assay` column corresponds with the barcodes in the Cells Output file. While this is not a required file to create an AnnData object from the three matrix market files, it is extremely necessary for actually interpreting the data. Imagine not knowing which barcodes came from which sample!
+> > Finally, and helpfully, the tool also includes cell metadata where the `Assay` column corresponds with the barcodes in the {% icon param-file %} `barcodes.tsv` file. While this is not a required file to create an AnnData object from the three matrix market files, it is extremely necessary for actually interpreting the data. Imagine not knowing which barcodes came from which sample!
 > >
 > {: .solution}
 {: .question}
@@ -105,24 +105,24 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 
 # Metadata manipulation
 
-Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about the 7 experimental samples (N701 – N707). However, in the {% icon param-file %}`exp_design.tsv` dataset, which contains the cell metadata, these samples are just numbered from 1 to 7.
+Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about the 7 experimental samples (N701 – N707). However, in the {% icon param-file %} `exp_design.tsv` dataset, which contains the cell metadata, these samples are just numbered from 1 to 7.
 
 > <details-title>How did we know this?</details-title>
 >
-> You can preview this column in the the {% icon param-file %}`exp_design.tsv` dataset by selecting the {% icon galaxy-eye %} in the {% icon galaxy-history %} Galaxy history. If you scroll to the right, and move to the column `Sample Characteristic[individual]`, you will find the batch information. Don't worry, we're about to rename and reformat this whole dataset to more useful titles. Make a note of the number of that column - number 12 - as we will need it to change the batch number to a batch name shortly.
+> You can preview this column in the the {% icon param-file %} `exp_design.tsv` dataset by selecting the {% icon galaxy-eye %} in the {% icon galaxy-history %} Galaxy history. If you scroll to the right, and move to the column `Sample Characteristic[individual]`, you will find the batch information. Don't worry, we're about to rename and reformat this whole dataset to more useful titles. Make a note of the number of that column - number 12 - as we will need it to change the batch number to a batch name shortly.
 >
 {: .details}
 
-The plotting tool that we will going to use later will fail if the entries are integers and not categorical values, so we will change `1` to `N01` and so on.
+The plotting tool that we will use later will fail if the entries are integers and not categorical values, so we will change `1` to `N01` and so on.
 
 > <hands-on-title> Change batch numbers into names </hands-on-title>
 >
-> 1. Change the datatype of `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv` to `tabular`:
+> 1. Change the datatype of {% icon param-file %} `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv` to `tabular`:
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 > 2. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
->    - *"Select cells from"*: {% icon param-file %}`EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
+>    - {% icon param-file %} *"Select cells from"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
 >    - *"using column"*: `Column: 12`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
