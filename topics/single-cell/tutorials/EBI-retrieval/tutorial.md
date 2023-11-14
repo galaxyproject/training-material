@@ -4,8 +4,8 @@ subtopic: datamanipulation
 priority: 3
 title: EBI Single Cell Expression Atlas files to AnnData | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial
 questions:
-- How do I use EBI Single Cell Expression Atlas?
-- How can I reformat and manipulate the downloads to create the right input for downstream analysis?
+- How do I use the EBI Single Cell Expression Atlas?
+- How can I reformat and manipulate the downloaded files to create the correct input for downstream analysis?
 objectives:
 - You will retrieve raw data from the EBI Single Cell Expression Atlas.
 - You will manipulate the metadata and matrix files.
@@ -13,12 +13,14 @@ objectives:
   
 time_estimation: "15m"
 key_points:
-- The EMBL-EBI Single-cell expression atlas contains high quality datasets.
-- Metadata manipulation is key for generating the correctly formatted resource.
-- To use Scanpy tools, you have to transform your metadata into AnnData object.
+- The EMBL-EBI Single-cell Expression Atlas contains high quality datasets.
+- Metadata manipulation is key for generating the correctly formatted files.
+- To use Scanpy tools, you have to transform your metadata into an AnnData object.
 contributions:
   authorship:
     - wee-snufkin
+  testing:
+    - nomadscientist
   funding: 
   - elixir-fair-data
 
