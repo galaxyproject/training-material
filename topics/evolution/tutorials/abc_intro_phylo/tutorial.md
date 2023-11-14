@@ -227,25 +227,24 @@ This assumption means that the future evolutionary trajectory of an organism is 
 ## Building a Tree
 
 The first method of building a tree begins with a set of *distances*, which record how different the taxa are from each other.
-Distances have very desirable properties, that can be summarised as follows, for any objects $$ x $$, $$y$$, $$z$$, and writing $$d(x,y)$$ to mean the distance from $$x$$ to $$y$$ etc.  These properties are:
+Distances have very desirable properties, that can be summarised as follows: for any objects $$ x $$, $$y$$, $$z$$, writing $$d(x,y)$$ means the distance from $$x$$ to $$y$$ etc.  These properties are:
  * *non-negativity* -- distances can never be negative, and in fact we treat two things as identical if they have a distance of 0 between them.
  * *symmetry* -- the distance from $$x$$ to $$y$$ is the same as the distance from $$y$$ to $$x$$; that is, $$d(x,y) = d(y,x)$$.
  * the *triangle inequality* -- there are no short-cuts!  The distance from $$x$$ to $$z$$ is always *at most* the distance from $$x$$ to $$y$$ plus that from $$y$$ to $$y$$; that is, $$ d(x,y) + d(y,z) \leq d(x,z)$$.
 
- In phylogenetics terms we like distances to represent something like time, and we can assign lengths to branches (see "Tree Anatomy" diagram above).
+ In phylogenetics terms we like distances to represent something like time, and we can assign lengths to branches (see the [Tree Anatomy diagram](#figure-4) above).
 
-Here is a flow-chart of the process:
+Distances can be calculated based on a variety of data. Here is a flow-chart of the process:
 
-![Tree Construction](./images/TreeConstruction.drawio.png){:align="center"}
+![Flow chart illustrating how sequence alignment data or dis/similarity measures can be used to calculate phylogentic distances](./images/TreeConstruction.drawio.png "Tree construction flow-chart){:align="center"}
 
-The blue boxes on the left show some of the input data forms: from the "standard" sequence data to a range of molecular-based measures like DNA-DNA hybridisatin, gene presence/absence, and morphology (physical dimensions).
-The most commonly used kind of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the set of species of interest.
-(Other data are in the form of distances or dissimilarity measures; we will not use that kind of data today.)
+The blue boxes on the left show some of the input data forms. The most commonly used kind of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the set of species of interest. *Aligning* sequences is the process of identifying which individual positions in those sequences are homologous -- that is, which particular nucleotides have evolved from the same common ancestor. We focus on this form of molecular phylogenetics in this tutorial.
 
-*Aligning* sequences is the process of identifying which individual positions in those sequences are homologous -- that is, which particular nucleotides have evolved from the same common ancestor.
-The alignment up of such individual sequence positions across the taxon set is called a *site*, so we talk about the *first site in the alignment*, say, as the position where a particular gene begins for all the species.
+Other input data forms are distances or dissimilarity measures based on molecular-based measures like DNA-DNA hybridisation, gene presence/absence, and morphology (physical dimensions). We will not use that kind of data in this tutorial
 
-In molecular phylogenetics -- which is what we are doing when we use DNA, RNA and AA data -- the fundamental unit of information that we use to estimate the phylogeny is the *site*. (There are some methods based on using more than one site at a time but they are not in common use and we do not cover them in this introduction.)
+
+In molecular phylogenetics -- which is what we are doing when we use DNA, RNA and AA data -- the fundamental unit of information that we use to estimate the phylogeny is the *site*. This is the position at which individual sequence positions align across the taxon. For example, we talk about the *first site in the alignment*, as the position where a particular gene begins for all the species.(There are some methods based on using more than one site at a time but they are not in common use and we do not cover them in this introduction.)
+
 Hence, lining up those homologous sites -- *alignment* -- is a critical part of molecular phylogenetics.
 
 Aligned sequences (see Alignment below) can be converted into distances (green box above), using models for how the sites have evolved.
@@ -254,7 +253,7 @@ These distances can be expressed as a matrix _D_, which becomes the input to a d
 At each step in the distance-based methods (orange boxes) the algorithm selects a pair of taxa, or clades that have been created thus far, to join together to make a new clade.
 Once that decision is made, the two taxa / clades that have been joined are replaced with the clade that the two of them make together:
 
-![Joining Clades](./images/JoiningCladesForTreeConstruction.png){: align="center"}
+![Joining Clades](./images/JoiningCladesForTreeConstruction.png "Joining clades for tree construction"){: align="center"}
 
 ## Challenges
 
