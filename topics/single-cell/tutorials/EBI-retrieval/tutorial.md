@@ -40,7 +40,7 @@ follow_up_training:
         - scrna-case_basic-pipeline
 
 tags:
-  - transcriptomics
+  - data import
   - data management
 ---
 
