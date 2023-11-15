@@ -28,6 +28,9 @@ def fetch_workflows(server)
 end
 
 def fetch_workflowhub()
+  projects = JSON.parse(request("https://workflowhub.eu/projects").body)
+  project_mapping = projects['data'].map{|p| [p['id'], p['attributes']['title']]}.to_h
+
   response = request("https://workflowhub.eu/workflows?filter[workflow_type]=galaxy")
   data = JSON.parse(response.body)
   if !data['links']['next'].nil?
@@ -38,23 +41,32 @@ def fetch_workflowhub()
   data['data'].map.with_index { |w, i|
     # {"id"=>"14", "type"=>"workflows", "attributes"=>{"title"=>"Cheminformatics - Docking"}, "links"=>{"self"=>"/workflows/14"}}
     wf_info = JSON.parse(request("https://workflowhub.eu#{w['links']['self']}").body)
+    creator_list = []
+
     creator0 = wf_info['data']['attributes']['creators'][0]
     owner = ""
     if !creator0.nil?
-      owner = creator0['given_name'] + " " + creator0['family_name']
+      # Primary
+      creator_list.push(creator0['given_name'] + " " + creator0['family_name'])
     else
+      # Other creators
       other = wf_info['data']['attributes']['other_creators']
       if !other.nil? && other.length.positive?
-        owner = wf_info['data']['attributes']['other_creators']
+        creator_list.push(wf_info['data']['attributes']['other_creators'].split(',').map{|x| x.strip})
       else
-        owner = "Unknown"
       end
     end
+    # Projects
+    wf_info['data']['relationships']['projects']['data'].each do |p|
+      creator_list.push(project_mapping[p['id']])
+    end
+
+    creator_list = creator_list.flatten.compact.uniq
 
     begin
       r = {
         'name' => wf_info['data']['attributes']['title'],
-        'owner' => owner,
+        'owner' => creator_list.join(', '),
         'number_of_steps' => wf_info['data']['attributes']['internals']['steps'].length,
         'server' => 'https://workflowhub.eu',
         'id' => wf_info['data']['id'],
