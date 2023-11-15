@@ -201,7 +201,7 @@ All tutorials and slides must give credit to all contributors. This can be any t
      funder: true
      funding_id: 2020-1-NL01-KA203-064717
      funding_statement: |
-        This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+        This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
         ![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)
    ```
 
