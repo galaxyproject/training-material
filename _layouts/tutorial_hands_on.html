@@ -47,7 +47,7 @@ We should ONLY be using new_material (if at all possible.)
 </style>
 {% endif %}
 
-<article class="tutorial topic-{{ page.topic_name }}">
+<article class="tutorial topic-{{ page.topic_name }}" data-pagefind-body  data-pagefind-filter="topic:{{ page.topic_name }}, type:hands-on">
     <h1 data-toc-skip>{{ page.title }}</h1>
     {% if page.draft %}
     <div class="alert alert-warning" role="alert">
@@ -177,7 +177,7 @@ We should ONLY be using new_material (if at all possible.)
             </div>
             <div class="col-sm-10">
                  {% if own_material.notebook %}
-                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook" data-pagefind-ignore="all">
                      {% capture ipynbpath %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
                      {% capture ipynbpathnosoln %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
                      {% capture ipynbpathsimple %}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
@@ -263,7 +263,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                     }}
                 </section>
 
-                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer" data-pagefind-ignore="all">
                 {% if page.key_points %}
                 <blockquote class="key_points">
                     <div class="box-title">{% icon keypoints aria=false %} {{locale['key-points'] | default: "Key points" }}</div>

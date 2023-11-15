@@ -6,7 +6,7 @@
   <a href="{{ site.baseurl }}/hall-of-fame/{{ include.id }}/" class="contributor-badge contributor-{{ include.id }}">
     {%- if contributor_badge_entity.orcid -%}<img src="{% link assets/images/orcid.png %}" alt="orcid logo" width="36" height="36"/>{%- endif -%}
     {{ contributor_badge_entity | fetch_entity_avatar:include.id, 36 }}
-    {{ name }}
+    <span>{{ name }}</span>
   {%- if include.activity -%}
   {%- include _includes/contributor-human-icons.html activity=include.activity -%}
   {%- endif -%}
