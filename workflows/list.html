@@ -7,16 +7,20 @@ title: Cross UseGalaxy.* Workflow Search
 We are testing a new search experience. Tell us what you think!
 </p>
 
+<label for="title">Search</label>
 <div class="row" id="search-form">
-	<div class="col-md-11">
+	<div class="col-md-8">
 	<div class="form-group">
-		<label for="title">Search</label>
 		<input type="text" class="form-control" id="title" placeholder="Search Materials" oninput="onInputDebounced()">
-		<button class="btn btn-primary" onclick="search()">Search</button>
 	</div>
 	</div>
 
-	<div class="col-md-1">
+	<div class="col-md-2">
+		<button style="width: 100%" class="btn btn-primary" onclick="search()">Search</button>
+	</div>
+
+	<div class="col-md-2">
+		Results: <span id="results-count">{{ site.data['workflows'] | size }}</span>
 	</div>
 </div>
 
@@ -89,6 +93,7 @@ function search(){
 
 	// Which should be hidden
 
+	var count = 0;
 	var to_hide = rows.filter(row => {
 		if (textQuery != "" && (
 			row.children[0].innerText.toLowerCase() + " " + 
@@ -96,8 +101,10 @@ function search(){
 		).indexOf(textQuery.toLowerCase()) == -1) {
 			return true;
 		}
+		count += 1;
 		return false;
 	});
+	document.getElementById("results-count").innerText = count;
 
 	// Display all
 	document.querySelectorAll("#results tr").forEach(r => r.style.display = "");
