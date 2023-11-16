@@ -3,7 +3,8 @@ layout: tutorial_hands_on
 
 title: "Binning of metagenomic sequencing data"
 zenodo_link: "https://zenodo.org/record/7818827"
-zenodo_link_results: "https://zenodo.org/record/7845138" 
+extra:
+  zenodo_link_results: "https://zenodo.org/record/7845138" 
 level: Introductory
 questions:
   - "What is metagenomic binning refers to?"
@@ -204,15 +205,15 @@ These output files can be further analyzed and used for downstream applications 
 >
 > > <hands-on-title>Import generated assembly files</hands-on-title>
 > >
-> > 1. Import the six folders containg binning result files from [Zenodo]({{ page.zenodo_link_results }}) or the Shared Data library:
+> > 1. Import the six folders containg binning result files from [Zenodo]({{ page.extra.zenodo_link_results }}) or the Shared Data library:
 > >
 > >    ```text
-> >    {{ page.zenodo_link_results }}/files/26_%20MetaBAT 2%20on%20data%20ERR2231567_%20Bins.zip
-> >    {{ page.zenodo_link_results }}/files/38_%20MetaBAT 2%20on%20data%20ERR2231568_%20Bins.zip
-> >    {{ page.zenodo_link_results }}/files/47_%20MetaBAT 2%20on%20data%20ERR2231569_%20Bins.zip
-> >    {{ page.zenodo_link_results }}/files/57_%20MetaBAT 2%20on%20data%20ERR2231570_%20Bins.zip
-> >    {{ page.zenodo_link_results }}/files/65_%20MetaBAT 2%20on%20data%20ERR2231571_%20Bins.zip
-> >    {{ page.zenodo_link_results }}/files/74_%20MetaBAT 2%20on%20data%20ERR2231572_%20Bins.zip
+> >    {{ page.extra.zenodo_link_results }}/files/26_%20MetaBAT 2%20on%20data%20ERR2231567_%20Bins.zip
+> >    {{ page.extra.zenodo_link_results }}/files/38_%20MetaBAT 2%20on%20data%20ERR2231568_%20Bins.zip
+> >    {{ page.extra.zenodo_link_results }}/files/47_%20MetaBAT 2%20on%20data%20ERR2231569_%20Bins.zip
+> >    {{ page.extra.zenodo_link_results }}/files/57_%20MetaBAT 2%20on%20data%20ERR2231570_%20Bins.zip
+> >    {{ page.extra.zenodo_link_results }}/files/65_%20MetaBAT 2%20on%20data%20ERR2231571_%20Bins.zip
+> >    {{ page.extra.zenodo_link_results }}/files/74_%20MetaBAT 2%20on%20data%20ERR2231572_%20Bins.zip
 > >    ```
 > >
 > >
@@ -321,15 +322,15 @@ Based on the previous analysis we will use **CheckM lineage_wf**: *Assessing the
 >
 > > <hands-on-title>Import generated `CheckM lineage_wf` results</hands-on-title>
 > >
-> > 1. Import the `CheckM lineage_wf` report files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library:
+> > 1. Import the `CheckM lineage_wf` report files from [Zenodo]({{ page.extra.zenodo_link_results }}) or the Shared Data library:
 > >
 > >    ```text
-> >    {{ page.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231567__Bin_statistics.txt
-> >    {{ page.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231568__Bin_statistics.txt
-> >    {{ page.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231569__Bin_statistics.txt
-> >    {{ page.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231570__Bin_statistics.txt
-> >    {{ page.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231571__Bin_statistics.txt
-> >    {{ page.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231572__Bin_statistics.txt
+> >    {{ page.extra.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231567__Bin_statistics.txt
+> >    {{ page.extra.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231568__Bin_statistics.txt
+> >    {{ page.extra.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231569__Bin_statistics.txt
+> >    {{ page.extra.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231570__Bin_statistics.txt
+> >    {{ page.extra.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231571__Bin_statistics.txt
+> >    {{ page.extra.zenodo_link_results }}/files/CheckM_lineage_wf_on_data_ERR2231572__Bin_statistics.txt
 > >    ```
 > >
 > {: .hands_on}
