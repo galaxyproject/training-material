@@ -25,9 +25,10 @@ description: This page will redirect you to a specific page in your preferred Ga
 			<details id="set-preferred" open>
 				<summary>Select your Preferred Galaxy Server</summary>
 				<p class="card-text">
-					<a class="clickthrough btn btn-primary" href="https://usegalaxy.eu">UseGalaxy.eu 🌍🇪🇺</a>
-					<a class="clickthrough btn btn-primary" href="https://usegalaxy.org">UseGalaxy.org 🌎🇺🇸</a>
-					<a class="clickthrough btn btn-primary" href="https://usegalaxy.org.au">UseGalaxy.org.au 🌏</a>
+					{% assign servers = list_usegalaxy_servers_shuffle %}
+					{% for server in servers %}
+					<a class="clickthrough btn btn-primary" href="{{ server.url }}">{{ server.human }} ({{ server.id | upcase }})</a>
+					{% endfor %}
 					<button id="set-other" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Other</button>
 				</p>
 			</details>

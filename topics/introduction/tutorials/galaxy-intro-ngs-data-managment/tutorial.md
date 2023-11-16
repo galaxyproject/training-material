@@ -448,7 +448,7 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 
 > <hands-on-title>Upload `SraRunInfo.csv` file into Galaxy</hands-on-title>
 >
-> 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
+> 1. Go to your Galaxy instance of choice such as one of the [UseGalaxy.* instances](https://galaxyproject.org/usegalaxy/) or any other. (This tutorial uses usegalaxy.org).
 > 1. Click *Upload Data* button:
 > ![Data upload button](../../images/upload_button.png)
 > 1. In the dialog box that would appear click "*Choose local files*" button:

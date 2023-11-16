@@ -62,9 +62,7 @@ contributions:
 >   > <comment-title>Different Galaxy servers</comment-title>
 >   >  This is an image of Galaxy Australia, located at [usegalaxy.org.au](https://usegalaxy.org.au/)
 >   >
->   > The particular Galaxy server that you are using may look slightly different and have a different web address:
->   > - The main Galaxy server is [usegalaxy.org](https://usegalaxy.org/)
->   > - The European Galaxy server is [usegalaxy.eu](https://usegalaxy.eu/)
+>   > The particular Galaxy server that you are using may look slightly different and have a different web address.
 >   >
 >   > You can also find more possible Galaxy servers at the top of this tutorial in **Available on these Galaxies**
 >   {: .comment}
