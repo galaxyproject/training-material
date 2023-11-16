@@ -417,23 +417,30 @@ Today you will be aligning sequences using a modern multiple alignment program c
 > 4. Change the **MAFFT flavour** to "linsi" as this is a recommended setting for most accurate alignment of a relatively small data set such as this one, with fewer than 200 sequences.
 {: .hands_on}
 
-Here is an image of the resulting alignment:
+Here is an image of the resulting alignment. Note that the colours are now vertically aligned:
 
 ![Alignment](./images/MEGA_alignment.png){:width="600px"}
 
-You should ALWAYS check your alignment to see if it makes sense.
-A tool you can use on your own computer is SeaView, available at https://doua.prabi.fr/software/seaview.
+You should ALWAYS visually check your alignment to see if it makes sense.
+A tool you can use on your own computer is [SeaView](https://doua.prabi.fr/software/seaview).
 
 # Distance-based phylogenetic inference
 
-Now we will build our first tree, using a very common method called _Neighbor-Joining_.  
-This method was created in the 1980s by Saitou & Nei (Saitou, N. & Nei, M. _The Neighbor-Joining method: a new method for reconstructing phylogenetic trees_. 1987, *Molecular Biology and Evolution*  , Vol. **4**(4):406-425); see also Studier, J. A. & Keppler, K. J., _A Note on the Neighbor-Joining Algorithm of Saitou and Nei_, 1988. *Molecular Biology and Evolution* **5**(6): 729-731) 
+Now we will build our first tree, using a very common method called _Neighbor-Joining_. This method was created in the 1980s by Saitou & Nei {% cite 10.1093/oxfordjournals.molbev.a040454 %} 
+
+<!-- (Saitou, N. & Nei, M. _The Neighbor-Joining method: a new method for reconstructing phylogenetic trees_. 1987, *Molecular Biology and Evolution*  , Vol. **4**(4):406-425); see also Studier, J. A. & Keppler, K. J., _A Note on the Neighbor-Joining Algorithm of Saitou and Nei_, 1988. *Molecular Biology and Evolution* **5**(6): 729-731) -->
 
 ## Building a Neighbor-Joining Tree 
 
+The Neighbor-Joining (NJ) algorithm is a standard method that takes as input a set of distances between taxa, and sequentially connects them into larger and larger clusters until all taxa have been joined.
+
+NJ is only rarely used as a complete tool for phylogenetic analysis, since although it is quite accurate and fast, there are other fast methods that can be then applied to modify the NJ tree and create a better one.
+
+The FastTree2 program that we are using does this: it first creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* or ME.  A detailed description of how FastTree works is available from [Microbes online](http://www.microbesonline.org/fasttree/).
+
 > <hands-on-title>Build a Neighbour-Joining Tree with FastTree</hands-on-title>
 >
-> 1. Search for the {% tool FastTree %} tool in the tool finder.
+> 1. Search for the {% tool FastTree %} in the tool finder on the left.
 > 2. Load your MAFFT output file as the input data for FastTree.
 > 3. Under **protein or nucleotide alignment** select "Nucleotide" as it is DNA data
 > 3. For **Nucleotide evolution model** select Jukes-Cantor + CAT
@@ -444,11 +451,7 @@ This method was created in the 1980s by Saitou & Nei (Saitou, N. & Nei, M. _The 
 >
 {: .hands_on}
 
-The Neighbor-Joining (NJ) algorithm is a standard method that takes as input a set of distances between taxa, and sequentially connects them into larger and larger clusters until all taxa have been joined.
 
-NJ is only rarely used as a complete tool for phylogenetic analysis, since although it is quite accurate and fast, there are other fast methods that can be then applied to modify the NJ tree and create a better one.
-
-The FastTree2 program that we are using does this: it first creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* or ME.  A detailed description of how FastTree works is available at http://www.microbesonline.org/fasttree/.
 
 <!-- 
 >
@@ -476,7 +479,7 @@ This is **Newick Format**, and it's worth knowing at least a little of what it m
 * If there is a colon ':' followed by a number, then this is the **branch length** for the subtree.
 
 
-![NewickExplained](./images/NewickExplained.png){:align="center"}
+![Schematic showing how the paraenthesised list of taxon names and numbers corresponds to a tree structure](./images/NewickExplained.png "Newick Format"){:align="center"}
 
 The rooted, 3-taxon trees above have three taxa, labelled A, B and C.  Two of the internal nodes have been labelled (x and y), but it isn't necessary to do so in general (for example, if you wanted to use the label for something like support of each branch, as does FastTree).
 
@@ -493,25 +496,25 @@ Note that these two trees are very similar; they only differ in the position of 
 |  C  |  11  |  10  |   0  |
 
 Ideally, these will reflect the actual input distances, but such distances are based on messy real data, and do not necessarily obey this ideal.
-That is why methods like FastTree are employed to find a tree with the best possible agreement between the distance inferred it, and those calculated from such as sequence data.
-The Minimum Evolution criterion optimises... XXX Mike to complete.
+That is why methods like FastTree are employed to find a tree with the best possible agreement between the distance inferred, and those calculated from sequence data.
+<!--The Minimum Evolution criterion optimises... XXX Mike to complete.-->
 
 > <hands-on-title>Visualising a tree</hands-on-title>
-> Click on the title of the completed job and find the row of small icons for saving, linking etc.: 
+> 1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc.: 
 > ![LittleIcons](./images/LittleJobIcons.png){:align="center"} 
 >
-> 1. The "Visualisation" icon looks like a little bar chart.
-> 2. Select that and you will be presented with a couple of options.  When I do it, I get this:
+> 2. Click the "Visualisation" icon looks like a little bar chart.
+> 3. You will be presented with a couple of options.  When I do it, I get this:
 >
 > ![SelectTreeVisualisation](./images/PhylogeneticTreeVisualisationOptions.png){:width="400"}
 > 
-> Select "Phylogenetic Tree Visualisation" -- this seems to be the best one.
+> 4. Select "Phylogenetic Tree Visualisation" -- this seems to be the best one.
 >
 > *Your tree is displayed!*
 > 
 > At the top right of the central panel are a couple of angle brackets: clicking on that will reveal the settings, enabling you to alter the display options.  Try out "Circular" and "Radial".
-> Notice that there are quite a lot of long branches adjacent to the extant taxa (leaves), and that near the centre of the tree these branches are much shorter.
-> Note! **Short branches are much harder to get right.**
+> Notice that there are quite a lot of long branches adjacent to the extant taxa (leaves), and that near the centre of the tree, these branches are much shorter.
+> Note: **Short branches are much harder to get right.**
 >
 {: .hands_on}
 
