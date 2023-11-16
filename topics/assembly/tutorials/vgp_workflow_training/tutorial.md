@@ -157,6 +157,19 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 > Hi-C datasets are large. It will take some time (~15 min) for them to be fully uploaded. Please, be patient.
 {: .warning}
 
+## Organizing the data 
+
+If everything goes smoothly you history will look something like this:
+
+------
+
+![AfterUpload](../../images/vgp_assembly/making_list.svg "History after uploading HiFi and HiC data (left). Creation of a list (collection) combines all HiFi datasets into a single history item called 'HiFi data' (right). See below for instruction on how to make this collection.")
+
+------
+
+The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes collection as an input (it does not access individual datasets). So let's create a collection using steps outlines in the Tip {% icon tip %} below:
+
+{% snippet faqs/galaxy/collections_build_list.md %}
 
 
 ## Other ways to upload data
@@ -165,19 +178,7 @@ You can obviously upload your own datasets via URLs as illustrated above or from
 
 {% snippet faqs/galaxy/dataset_upload_from_genomeark.md %}
 
-## Organizing the data 
 
-If everything goes smoothly you history will look something like this:
-
-------
-
-![AfterUpload](../../images/vgp_assembly/after_upload.png "History after uploading HiFi and HiC data")
-
-------
-
-The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes collection as an input (it does not access individual datasets). So let's create a collection using steps outlines in the Tip {% icon tip %} below:
-
-{% snippet faqs/galaxy/collections_build_list.md %}
 
 Once we have imported the datasets, the next step is to import the VGP workflows from the WorkflowHub.
 
@@ -194,22 +195,22 @@ All current assembly workflows were shown in Fig. 1 above. In this tutorial we w
 ### *K*-mer profiling workflow (WF1) 
 
 ```
-https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/VGP-assembly-v2/kmer-profiling-hifi-VGP1/kmer-profiling-hifi-VGP1.ga)
+https://dockstore.org/workflows/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main:v0.1.4?tab=info
 ```
 ### Assembly (contiging) with Hi-C (WF4) 
 
 ```
-https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/VGP-assembly-v2/Assembly-Hifi-HiC-phasing-VGP4/Assembly-Hifi-HiC-phasing-VGP4.ga
+https://dockstore.org/workflows/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main:v0.1.6?tab=info
 ```
 ### Purge duplicate contigs (WF6)
 
 ```
-https://github.com/galaxyproject/iwc/raw/main/workflows/VGP-assembly-v2/Purge-duplicate-contigs-VGP6/Purge-duplicate-contigs-VGP6.ga
+https://dockstore.org/workflows/github.com/iwc-workflows/Purge-duplicate-contigs-VGP6/main:v0.3.2?tab=info
 ```
 ### Scaffolding with Hi-C (WF8)
 
 ```
-https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/VGP-assembly-v2/Scaffolding-HiC-VGP8/Scaffolding-HiC-VGP8.ga
+https://dockstore.org/workflows/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main:v0.2?tab=info
 ```
 
 ## Other ways to import workflows into Galaxy
