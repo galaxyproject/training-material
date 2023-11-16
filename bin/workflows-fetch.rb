@@ -3,6 +3,8 @@ require 'json'
 require 'net/http'
 require 'uri'
 require 'yaml'
+require './_plugins/gtn/usegalaxy'
+
 
 def request(url)
   uri = URI.parse(url)
@@ -86,13 +88,11 @@ end
 
 
 # Parse the response
-workflows_eu = fetch_workflows('https://usegalaxy.eu')
-puts "INFO: Fetched #{workflows_eu.length} workflows from EU"
-workflows_org = fetch_workflows("https://usegalaxy.org")
-puts "INFO: Fetched #{workflows_org.length} workflows from ORG"
-workflows_aus = fetch_workflows("https://usegalaxy.org.au")
-puts "INFO: Fetched #{workflows_aus.length} workflows from AUS"
-workflows = workflows_eu + workflows_org + workflows_aus
+workflows = Gtn::Usegalaxy.servers.map {|server|
+  workflows = fetch_workflows(server[:url])
+  puts "INFO: Fetched #{workflows.length} workflows from #{server[:name]}"
+  workflows
+}.flatten
 
 # Cleanup the list
 workflows.filter! do |w|

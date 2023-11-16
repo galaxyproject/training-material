@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require './_plugins/gtn/usegalaxy'
 
 module Gtn
   # Handle tool support queries
@@ -21,11 +22,7 @@ module Gtn
       if data.nil? || data.empty? || tool_list.empty? || tool_list.nil?
         return {
           'exact' => [],
-          'inexact' => [
-            { 'name' => 'UseGalaxy.eu', 'url' => 'https://usegalaxy.eu', 'usegalaxy' => true },
-            { 'name' => 'UseGalaxy.org', 'url' => 'https://usegalaxy.org', 'usegalaxy' => true },
-            { 'name' => 'UseGalaxy.org.au', 'url' => 'https://usegalaxy.org.au', 'usegalaxy' => true }
-          ],
+          'inexact' => Gtn::Usegalaxy.servers.map{|x| x['usegalaxy'] = true },
         }
       end
 
