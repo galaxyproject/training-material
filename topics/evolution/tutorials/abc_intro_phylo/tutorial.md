@@ -521,9 +521,9 @@ That is why methods like FastTree are employed to find a tree with the best poss
 # Searching for the "best" tree
 
 The other main way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching the entire set of possible trees for the tree (or trees) that optimises this score.
-Note that such scores are "surrogates for truth" in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case. In many analyses we therefore use *multiple* methods, in the hope that different analyses will all give us the same consistent answer. Minimum Evolution, Maximum Parsimony, and Maximum Likelihood are common such score functions.
+Note that such scores are "surrogates for truth" in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case. In many analyses we therefore use *multiple* methods, in the hope that they will give us the same answer. Minimum Evolution, Maximum Parsimony, and Maximum Likelihood are common such score functions.
 
-**If your conclusion changes based on a choice among reasonable analytical options, then perhaps your data are not adequate.**
+**If your conclusion changes based on your analytical method, then perhaps your data are not adequate.**
 
 
 
@@ -531,69 +531,70 @@ Note that such scores are "surrogates for truth" in that we *hope* the optimal s
 
 Minimum Evolution is the idea that the sum of the branch lengths should be as small as possible to still account for the distances between the leaves of the tree, in that the sum of squared differences between the distances implied by the tree and the observed distances from the data, is minimised.  You can read more about this in an article by [Rzhetsky and Nei](https://academic.oup.com/mbe/article/10/5/1073/1037508){%cite 10.1093/oxfordjournals.molbev.a040056 %}.
 
-There are some variations on this ME criterion, and FastTree uses an approximation to one of them to find good trees.
+There are some variations on this ME criterion, and FastTree uses an approximation of one of them to find good trees.
 
 ## Maximum Parsimony (MP) and Parsimony Length
 
-Most tree estimation methods output trees with branch lengths, which correspond to the amount of evolutionary "work" that has to be done to turn one sequence into another.
+Most tree estimation methods output trees with branch lengths that correspond to the amount of evolutionary "work" that has to be done to turn one sequence into another.
 
 This can be given as the *minimum number of character state changes required* -- the so-called *parsimony length* -- to convert the (hypothetical) sequence at one end of a branch to that at the other end.
 The Maximum Parsimony method is based on this approach.
 
-The parsimony length of a given site pattern in an alignment, given a particular tree, is the minimum number of changes of state that are required to account for the observed characters (e.g. nucleotides) at the leaves of that tree.
+<!--The parsimony length of a given site pattern in an alignment, given a particular tree, is the minimum number of changes of state that are required to account for the observed characters (e.g. nucleotides) at the leaves of that tree.-->
 Finding the parsimony length of a site pattern is easy and fast due to a clever algorithm created by Walter Fitch; hence, finding the score (the "goodness") of a tree is fast. But finding the tree that minimises this score is still computationally intractable, because the space of trees is so huge.
 
-The Maximum Parsimony method for finding the "best" tree is then to search tree space for the tree or trees that *minimises* the parsimony length of any tree for that alignment: note that when parsimony is *maximised*, this means the fewest possible changes required, so the *minimum* length.
+The Maximum Parsimony method for finding the "best" tree is to search tree space for the tree (or trees) that *minimises* the parsimony length of any tree for that alignment. Note that when parsimony is *maximised*, this means the fewest possible changes required, so the *minimum* length.
 
 We do not use the Maximum Parsimony method in this tutorial.
 
 ## Maximum Likelihood (ML) 
 
 Likelihood is the most statistically defensible phylogenetic inference method.
-It is based on the idea that the tree that has the highest probability of producing the sequences at the tips of the tree, as from your alignment, is the tree that is the "most likely" to be correct.
+It is based on the idea that the tree that has the highest probability of producing the sequences at the tips of the tree is the tree that is the "most likely" to be correct.
 
-Likelihood is *not* the same as probability, though they are often confused with each other. However, it is *proportional* to the probability that the tree is correct, out of the set of possible trees and models you might be considering.
+Likelihood is *not* the same as probability, though they are often confused with each other. However, it is *proportional* to the probability that the tree is correct, out of the set of possible trees and models you are considering.
 
-One major assumption we make about molecular sequence data is that each site evolves independently  of the others. Biologically we know this isn't always the case, but in practice this turns out to make things much more tractable, and we still have a very good chance of getting the tree(s) right.
+One major assumption we make about molecular sequence data is that each site evolves independently  of the others. Biologically we know this isn't always the case, but in practice this makes things much more tractable, and we still have a very good chance of getting the tree(s) right.
 
-Another assumption we make is that the substitution rate -- the rate at which changes of nucleotide at a given position in the sequence happen, per unit time -- is only dependent on the current state, i.e., we do not care about how a sequence came to be what it is, only what the sequence is now, to determine what are the probable evolutions of it.
+Another assumption we make is that the substitution rate -- the rate at which changes of nucleotide at a given position in the sequence happen -- is only dependent on the current state, i.e., we do not care about how a sequence came to be what it is, only what the sequence is now, to determine what are the probable evolutions of it.
 This seems much more biologically reasonable and makes this into a Markov process, which in turn enables a lot of calculations to be made simply.
 
 ### Models of sequence evolution
 
-*If you are in a hurry to get stuck in to the phylogenetic analysis you can skip reading this section and go on to the next Hands-on, running IQ Tree.*
+*If you are in a hurry to get stuck in to the phylogenetic analysis you can skip this section and go to the next [Hands-on: running IQ Tree](#estimating-a-maximum-likelihood-tree).*
 
 > <details-title>Model Details</details-title>
 
 > Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
-> The simplest such model for DNA would be that each nucleotide has the same rate of change to each other nucleotide, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC) model published in 1969, and this model has just one parameter.
+> The simplest model for DNA is that each nucleotide has the same rate of change, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC) model published in 1969, and this model has just one parameter.
 > 
-> More biological realism allows for different proportions of the nucleotides -- different base rates -- outside the uniform 25% rate.  This is the Felsenstein 1981 model, known as F81, and it has three more parameters for the rates (not four: given the first three base frequencies this defines the other one).
+> More biological realism allows for different nucleotide proportions outside the uniform 25% rate. This is the Felsenstein 1981 model, known as F81, and it has three more parameters for the rates (not four: given the first three base frequencies this defines the other one).
 > 
-> A next step up in sophistication is the Hasegawa-Kishino-Yano model (HKY) published in 1985, which also acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
+> A next level of sophistication is the Hasegawa-Kishino-Yano model (HKY) published in 1985, which acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
 > Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
 > 
-> ![HKY85](./images/HKY85RateMatrix.png){: align="center", width="300px"}
+> ![HKY85 Formula](./images/HKY85RateMatrix.png "HKY85 formula"){: align="center", width="300px"}
 > 
-> In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "- the sum of everything else in the row."
+> In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "the sum of everything else in the row."
 > 
-> A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the `reversible' property) but otherwise all rates are independent of each other:
+> A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the "reversible" property) but otherwise all rates are independent of each other:
 > 
 > ![GTR](./images/GTRRateMatrix.png){: align="center", width="300px"}
 >
-> A further level of sophistication is the recognition that some sites may be constrained from changing at all: for example, there may be some that have a critical role in fixing the correct amino acid for a protein to function.  This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
+> A further level of sophistication is the recognition that some sites may be constrained from changing at all. For example, there may be some that have a critical role in fixing the correct amino acid for a protein to function. This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
 > 
-> The last level we will think about today is that some sites may evolve faster than others, even if they are under the same kind of model with the same parameters in the matrix $$Q$$.
-> The most common way to allow this is to imagine that the relative rate for a particular site is drawn from a Gamma $$\Gamma$$ probability distribution, which has some nice properties like, for example, allowing most sites to change very slowly and permitting some to change rapidly.
+> The last level of sophistication is that some sites may evolve faster than others, even if they are under the same kind of model with the same parameters in the matrix $$Q$$.
+> The most common way to allow for this is to imagine that the relative rate for a particular site is drawn from a Gamma $$\Gamma$$ probability distribution, which has some nice properties like allowing most sites to change very slowly and permitting some to change rapidly.
 > This is usually denoted by a "+$$\Gamma$$" or "+G" appended to the model name. 
 > 
-> There are **many** more models, with many more parameters and constraints.  Finding the best one to fit a data set is a complex task of itself!
-> Fortunately there are tools to help determine the most appropriate model for a given data set, such as the Akaike Information Criterion (AIC) and some variations of that.
+> There are **many** more models, with many more parameters and constraints.  Finding the best one to fit a data set is a complex task!
+
+> Fortunately there are tools that help determine the most appropriate model for a given data set, such as the Akaike Information Criterion (AIC) and some variations of that.
 > 
-> The program IQTree, which we use next, performs a step to determine which model is most appropriate for your data set, based on AIC and other schemes to avoid over-fitting while still having as good a fit to your data as possible.
-> In that step, trees, and their likelihoods given your data, are estimated for many different models.  Each yields a likelihood score but rather than simply take the model that maximises the likelihood, over-complex models are penalised, to avoid over-fitting.  One such penalty function is the AIC; there are others.
+> The program IQTree, which we use later, performs a step to determine which model is most appropriate for your data set, based on AIC and other schemes to avoid over-fitting while still having as good a fit to your data as possible.
+> In that step, trees, and their likelihoods based on your data, are estimated for many different models. Each yields a likelihood score but rather than simply take the model that maximises the likelihood, over-complex models are penalised, to avoid over-fitting. One such penalty function is the AIC; there are others.
 > 
-> There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you should have some appreciation of what is going on behind the scenes when an ML method is looking for the best model for your data.
+> There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you should have some appreciation of what is going on behind the scenes when an Maximum Likelihood method is looking for the best model for your data.
 > 
 {: .details}
 
@@ -602,20 +603,20 @@ This seems much more biologically reasonable and makes this into a Markov proces
 The rate matrices above define the rates at which nucleotides change. 
 There are other 20x20 matrices for amino acids, and even 64x64 matrices for codons.
 
-To convert from a rate to a probability, hence giving us a likelihood, requires that we have a branch length: then, we can calculate the probability under a given model and after a specific time interval of going from one nucleotide to another.  We multiply these site probabilitues to calculate the probability of going from one sequence to another.
+To convert from a rate to a probability, hence giving us a likelihood, requires that we have a branch length. Then, we can calculate the probability under a given model and after a specific time interval of going from one nucleotide to another. We multiply these site probabilitues to calculate the probability of going from one sequence to another.
 Thus looking for the optimal tree under likelihood requires we also search for the best-fit **branch lengths**, as well as looking for the best **tree**.
 
-Maximum Likelihood is therefore the **slowest** tree inference method we discuss today.
+Maximum Likelihood is therefore the **slowest** tree inference method we discuss in this tutorial.
 
 # Assessing the Quality of trees
 
 A tree-building method will of course build you a tree.
 
-However, what if your data are not even **from** a tree?  Or, what if the data are from sequences that are so distantly related that they are virtually independent of each other, looking essentially random?
+But what if your data are not even **from** a tree?  Or, what if the data are from sequences that are so distantly related that they are virtually independent of each other, looking essentially random?
 
-It is important that, once you have estimated a tree, you can assess how reliable it is.
+It is important that, once you have estimated a tree, you assess how reliable it is.
 
-Remember that a phylogeny is a *collection of hypotheses of relatedness*: each branch separates some of the taxa from the others, and if the branch is above a subtree it corresponds to a hypothesis that the taxa in that subtree are *monophyletic* with respect to the other taxa in the rest of the tree (as shown in Fig 1.).
+Remember that a phylogeny is a *collection of hypotheses of relatedness*. Each branch separates some of the taxa from the others, and if the branch is above a subtree it corresponds to a hypothesis that the taxa in that subtree are *monophyletic* with respect to the other taxa in the rest of the tree (as shown in Fig 1.).
 
 This means that it is meaningful to assess the reliability of *branches* of your tree, in addition to just assessing it overall.
 
@@ -629,25 +630,27 @@ An unresolved node *may* be a true representation of the branching pattern of a 
 
 In phylogenetics unresolved nodes are more often due to a lack of resolving power in the data, so the phylogenetic method cannot choose the branch ordering:
 
-![Unresolved](./images/Unresolved.png){: align="center", width="400px"}
+![Schematic trees showing unresolved nodes](./images/Unresolved.png "Unresolved nodes"){: align="center", width="400px"}
 
 If there are many unresolved branches in the phylogeny, this is an indication that there is not enough information in your data: you'll need to obtain more.
 
 ## Bootstrapping
 
-A very common (and useful) method for this is called *bootstrapping*, which is a technique that has a solid basis in statistics (not just phylogenetics).  The idea is that one resamples with replacement a data set to create a ``pseudoreplicate'' that is analysed in the same way as the original data, this process being repeated many times to create a distribution.  It's known that bootstrapping is a good way to measure the internal consistency of a data set, and its use in phylogenetics is well established.
+A very common (and useful) method for this is called *bootstrapping*, which is a technique that has a solid basis in statistics (not just phylogenetics). The idea is that one resamples with replacement a data set to create a "pseudoreplicate" that is analysed in the same way as the original data. This process is then repeated many times to create a distribution. It's known that bootstrapping is a good way to measure the internal consistency of a data set, and its use in phylogenetics is well established.
 
 The naive method for bootstrapping is called "non-parametric" and works by effectively resampling the patterns at each site in the alignment, creating a pseudo-alignment of the same total number of sites, then re-building the tree.
 
-IQTree has a very -- excuse me, *ultra-* -- fast bootstrapping method that is cleverer than the naive method and which works if anything a bit better.  See (citation Minh Bui et al. I think) for details.
+IQTree has a very -- *ultra-* -- fast bootstrapping method that is cleverer than the naive method and which works a bit better. <!--See (citation Minh Bui et al. I think) for details.>>
 
-When we come to using IQTree next, we will also select to do bootstrapping on the tree.  (FastTree does not do bootstrapping natively, but can in conjuction with other tools (see http://meta.microbesonline.org/fasttree/ for details).  It's a little fiddly to accomplish this so we will not try that in this tutorial.)
+When we use IQTree in the next part of the tutorial, we will also do bootstrapping on the tree.  
 
-Bootstrapping can be done on any inference method: so for us, we will use the likelihood method, searching for the tree and branch lengths that maximises the likelihood for (1) our actual data, and then (2), for each of the pseudoreplicates, noting for each of these which branches occur in the best trees found.
+Bootstrapping can be done on any inference method. We will use the likelihood method, searching for the tree and branch lengths that maximises the likelihood for (1) our actual data, and then (2), for each of the pseudoreplicates, noting for each of these which branches occur in the best trees found.
 
-By keeping track of which branches occur in the best trees found for each of the pseudoreplicates we can note how often the branches in the best tree for our *actual* data occur in the resampled data.  If they occur a lot -- say, 80% of the time or more -- then we can be fairly sure that that branch is well supported by the data.
+By keeping track of which branches occur in the best trees found for each of the pseudoreplicates, we can note how often the branches in the best tree for our *actual* data occur in the resampled data.  If they occur a lot -- say, 80% of the time or more -- then we can be fairly sure that that branch is well supported by the data.
 
-Bootstrap values therefore appear for each branch, and are most often expressed as a percentage or proportion.  Branches at the leaves occur in every possible tree so these would get 100% bootstrap values every time, and don't tell us anything.
+Bootstrap values therefore appear for each branch, and are most often expressed as a percentage or proportion. Branches at the leaves occur in every possible tree so these would get 100% bootstrap values every time, and don't tell us anything.
+
+(Note: FastTree does not do bootstrapping natively, but can in conjuction with other tools ([see details](http://meta.microbesonline.org/fasttree/ )). It's fiddly to do this so we will not try it in this tutorial.)
 
 
 <!-- ## How tree-like?
@@ -663,37 +666,35 @@ Background on ML. How it works. Software. Bootstrap values.
 ## IQTree
 
 IQTree is a state-of-the-art cross-platform program that uses maximum likelihood to find optimal phylogenetic trees.
-It can also perform model selection and bootstrapping.
-Also, it's on Galaxy!
+It can perform model selection and bootstrapping.
+And it's on Galaxy!
 
 ##  Estimating a Maximum Likelihood tree 
 
 > <hands-on-title>Estimating a Maximum Likelihood tree with IQTree</hands-on-title>
 >
-> 1. Find the IQTree program in the tool finder.
-> 2. Load your alignmed sequence data, e.g. the alignment from MAFFT.
+> 1. Find the {% tool IQTree %} program in the tool finder.
+> 2. Load your alignmed sequence data, i.e. the alignment from MAFFT.
 > 3. Leave the selection of data type as DNA.
 > 4. Ignore the Time Tree Reconstruciton settings and Likelihood Mapping analysis settings.
-> 5. Under the Modelling Parameters, leave Automatic model selection ON, and the other parameters as they are except the last: "Write maximum likelihood site ratios to .mlrate file" set to Yes.
-> 6. Leave all the Tree Parameters as they are but do have a look at them and see if you can work out what some of them do.
-> 7. For Bootstrap Parameters select Ultrafast bootstrap parameters and enter 1000 bootstrap replicates.
-> 8. Execute
+> 5. Under the **Modelling Parameters**, leave Automatic model selection ON, and the other parameters as they are except the last: Set **"Write maximum likelihood site ratios to .mlrate file"** to "Yes".
+> 6. Leave all the Tree Parameters as they are. (Have a look at them and see if you can work out what they do).
+> 7. For **Bootstrap Parameters** select "Ultrafast bootstrap parameters" and enter "1000" bootstrap replicates.
+> 8. Click "Execute"
 >
 {: .hands_on}
 
-While this is running you might use your time to read the Models of sequence evolution and Bootstrapping sections above.
-(Though actually, you may not get that much time.)
+While this is running you might use your time to read the [Models of sequence evolution](#models-of-sequence-evolution) and [Bootstrapping](#bootstrapping) sections above.
 
-![IQTreePhylovis](./images/PhyloVisTree.png){:align="center"}
 
-The resulting tree found by IQTree, displayed using PhyloVis.
+![IQTreePhylovis](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis."){:align="center"}
 
-Observe the bootstrap values for deep branches are not as high.
+Observe the bootstrap values in the IQTree output for deep branches are not as high.
 
 Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates of the probability that the branch is correct, so are not quite the same as traditional "naive" bootstrap values.
 
 > <hands-on-title>Visualising your tree</hands-on-title>
-> 1. View your tree!
+> 1. View your tree
 > 2. What are the bootrap values near the root of the tree? Do you think those branches are well supported?
 > 3. Which do you think is the biggest well-supported clade?
 {: .hands_on}
