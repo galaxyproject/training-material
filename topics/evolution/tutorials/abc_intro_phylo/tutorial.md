@@ -19,6 +19,7 @@ contributors:
 - adamtaranto
 - burkemlou
 
+
 ---
 
 # Introduction
@@ -273,18 +274,11 @@ Distances can be calculated based on a variety of data. Here is a flow-chart of 
 
 ![Flow chart illustrating how sequence alignment data or dis/similarity measures can be used to calculate phylogentic distances](./images/TreeConstruction.drawio.png "Tree construction flow-chart){:align="center"}
 
-The blue boxes on the left show some of the input data forms. The most commonly used kind of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the set of species of interest. *Aligning* sequences is the process of identifying which individual positions in those sequences are homologous -- that is, which particular nucleotides have evolved from the same common ancestor. We focus on this form of molecular phylogenetics in this tutorial.
+The blue boxes on the left show some of the input data forms. The most commonly used kind of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the set of species of interest. We focus on this form of molecular phylogenetics in this tutorial.
 
-Other input data forms are distances or dissimilarity measures based on molecular-based measures like DNA-DNA hybridisation, gene presence/absence, and morphology (physical dimensions). We will not use that kind of data in this tutorial
+Other input data forms are distances or dissimilarity measures based on molecular-based measures like DNA-DNA hybridisation, gene presence/absence, and morphology (physical dimensions). We will not discuss this kind of data in this tutorial.
 
-
-In molecular phylogenetics -- which is what we are doing when we use DNA, RNA and AA data -- the fundamental unit of information that we use to estimate the phylogeny is the *site*. For example, we talk about the *first site in the alignment*, as the position where a particular gene begins for all the species.
-
-Hence, lining up those homologous sites -- *alignment* -- is a critical part of molecular phylogenetics.
-
-(There are some methods based on using more than one site at a time but they are not in common use and we do not cover them in this introduction.)
-
-Aligned sequences (see Alignment below) can be converted into distances (green box above), using models for how the sites have evolved.
+Aligned sequences (see Alignment below) can be converted into distances (green box above), using models for how the sites (i.e. specific nucleotides or amino acids) have evolved.
 These distances can be expressed as a matrix _D_, which becomes the input to a distance-based method.
 
 At each step in the distance-based methods (orange boxes) the algorithm selects a pair of taxa, or clades that have been created thus far, to join together to make a new clade.
@@ -397,38 +391,17 @@ Fasta format is very simple and is commonly used as input to phylogenetic infere
 
 # Sequence Alignment
 
-Sequence alignment is a very well developed process, but there can still be some arbitrariness that can make it tricky.
-For a start, while aligning just *two* sequences is "easy", in the sense that an optimal alignment between two sequences can be found in a reasonable amount of time, optimally aligning multiple sequences is *computationally intractable*.
-
 Aligning sequences amounts to finding the nucleotide positions (sites) that we can be confident have the same evolutionary history: they correspond to each other across species and can be considered to have evolved from the same common ancestor.
 A good clue to identify these sites, which are called <em>homologous</em>, is that they are well conserved, with only a few changes.
 
-Sequence alignment is a complex process and there are many techniques that have been developed to tackle it.
+Below we have an example of an alignment. On the left are the sequences from in Fasta format.
+In the middle we see an alignment of those sequences, which has a number of gaps in it that help line up the sites so more of them agree.
+A sign of a "good" alignment is one in which the colours line up vertically. The overhanging parts can be removed as seen in the "trimmed version" on the right.
 
-> <comment-title>Dynamic Programming aside</comment-title>
-> While aligning multiple (more than two) sequences is computationally too costly to do in such a way as to guarantee that the result is optimal, it <em>is</em> possible to align two sequences in a reasonable amount of time, and guarantee that the result is optimal for some scoring scheme.
-> 
-{: .comment}
+![Example of sequence alignment](./images/ToyAlignmentAndTrim.png "Sequence alignment"){:width="700"}
 
-Below we have another toy example, beginning with the original sequences on the left, an alignment of those sequences in the middle, and then a "trimmed" version of the alignment, without parts that we cannot use today:
+While aligning *two* sequences is "easy", in the sense that an optimal alignment between two sequences can be found in a reasonable amount of time, optimally aligning multiple sequences is *computationally intractable*. Multiple sequence alignment is a complex process and many methods have been developed to tackle this challenge.
 
-![Aligning a toy example](./images/ToyAlignmentAndTrim.png){:width="700"}
-
-On the left are the toy sequences from the Fasta format example.
-In the second table we see an alignment of those sequences, which has a number of gaps in it that help line up the sites so more of them agree.
-A sign of a "good" alignment is one in which there are a lot of colours that line up vertically.
-
-The Fasta format file that would contain this "trimmed" alignment is
-```
->Taxon_1
-ACTGCGTTAGGTCTAGCC
->Taxon_2
-ACTGCTTTAGGTTGAGCC
->Taxon_3
-ACTGCTCTAGCCTGAGCC
->Taxon_4
-ACTGGCGTAGCCGGAGGC
-```
 ## Aligning sequences with MAFFT
 
 Today you will be aligning sequences using a modern multiple alignment program called **MAFFT**, which is available on Galaxy.
@@ -438,7 +411,7 @@ Today you will be aligning sequences using a modern multiple alignment program c
 
 > <hands-on-title>Sequence alignment with MAFFT</hands-on-title>
 >
-> 1. In Galaxy, search for and select the {% tool MAFFT %} tool from the tool finder on the left.
+> 1. In Galaxy, search for and select the {% tool MAFFT %} from the tool finder on the left.
 > 2. When you select it, the **Sequences to align** field should already be filled with your unaligned data.  If it isn't, select it using the drop-down menu.
 > 3. Leave the **Data type** field as "auto detection" since MAFFT will recognise all the symbols are nucleotides.
 > 4. Change the **MAFFT flavour** to "linsi" as this is a recommended setting for most accurate alignment of a relatively small data set such as this one, with fewer than 200 sequences.
