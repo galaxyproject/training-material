@@ -1,0 +1,865 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Microbiome - QC and Contamination Filtering",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0001-9852-1987",
+            "name": "B\u00e9r\u00e9nice Batut",
+            "url": "https://orcid.org/0000-0001-9852-1987"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0001-9047-4215",
+            "name": "Engy Nasr",
+            "url": "https://orcid.org/0000-0001-9047-4215"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Pathogen-Detection-Nanopore-Pre-Processing-collection",
+    "steps": {
+        "0": {
+            "annotation": "Nanopore reads of each sample are all in a single fastq or fastq.gz file",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Nanopore reads of each sample are all in a single fastq or fastq.gz file",
+                    "name": "Collection of all samples"
+                }
+            ],
+            "label": "Collection of all samples",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 904
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "f658618f-1eae-4728-8662-00c92b2ed12b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Preprocessing (Trimming)",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.4",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Porechop",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 280,
+                "top": 570
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.4",
+            "tool_shed_repository": {
+                "changeset_revision": "5f76b20953e5",
+                "name": "porechop",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adapter_search_settings\": {\"adapter_threshold\": \"90.0\", \"check_reads\": \"10000\", \"scoring_scheme\": \"3,-6,-5,-2\"}, \"barcode_binning_settings\": {\"barcode_threshold\": \"75.0\", \"barcode_diff\": \"5.0\", \"require_two_barcodes\": false, \"discard_unassigned\": false}, \"end_adapter_settings\": {\"end_size\": \"150\", \"min_trim_size\": \"4\", \"extra_end_trim\": \"2\", \"end_threshold\": \"75.0\"}, \"format\": \"fastq.gz\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"middle_adapter_settings\": {\"no_split\": false, \"discard_middle\": false, \"middle_threshold\": \"85.0\", \"extra_middle_trim_good_side\": \"10\", \"extra_middle_trim_bad_side\": \"100\", \"min_split_read_size\": \"1000\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.4",
+            "type": "tool",
+            "uuid": "378d064d-b7b1-4e7e-bce3-d1d742f051b1",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Porechop output Trimmed Reads",
+                    "output_name": "outfile",
+                    "uuid": "4f51f33f-e2a9-4a3f-81d3-b924e2e6d751"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "Quality Check Before Preprocessing",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "mode|reads|files": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NanoPlot",
+            "outputs": [
+                {
+                    "name": "output_html",
+                    "type": "html"
+                },
+                {
+                    "name": "nanostats",
+                    "type": "txt"
+                },
+                {
+                    "name": "nanostats_post_filtering",
+                    "type": "txt"
+                },
+                {
+                    "name": "read_length",
+                    "type": "png"
+                },
+                {
+                    "name": "log_read_length",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 280,
+                "top": 966
+            },
+            "post_job_actions": {
+                "RenameDatasetActionlog_read_length": {
+                    "action_arguments": {
+                        "newname": "Nanoplot on Reads Before Preprocessing Log Transformed Histogram Read Length"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "log_read_length"
+                },
+                "RenameDatasetActionnanostats": {
+                    "action_arguments": {
+                        "newname": "Nanoplot on Reads Before Preprocessing NanoStats"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "nanostats"
+                },
+                "RenameDatasetActionnanostats_post_filtering": {
+                    "action_arguments": {
+                        "newname": "Nanoplot on Reads Before Preprocessing NanoStats post filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "nanostats_post_filtering"
+                },
+                "RenameDatasetActionoutput_html": {
+                    "action_arguments": {
+                        "newname": "Nanoplot QC on Reads Before Preprocessing HTML Report"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_html"
+                },
+                "RenameDatasetActionread_length": {
+                    "action_arguments": {
+                        "newname": "Nanoplot on Reads Before Preprocessing Histogram Read Length"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "read_length"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "edbb6c5028f5",
+                "name": "nanoplot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"customization\": {\"color\": null, \"format\": \"png\", \"plots\": null, \"N50\": false}, \"filter\": {\"maxlength\": null, \"minlength\": null, \"drop_outliers\": false, \"downsample\": null, \"loglength\": false, \"percentqual\": false, \"alength\": false, \"minqual\": null, \"readtype\": null, \"barcoded\": false}, \"mode\": {\"choice\": \"batch\", \"__current_case__\": 0, \"reads\": {\"type\": \"fastq\", \"__current_case__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.28.2+galaxy1",
+            "type": "tool",
+            "uuid": "8909757e-098f-4331-a20a-8538b1400ada",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Nanoplot on Reads Before Preprocessing Log Transformed Histogram Read Length",
+                    "output_name": "log_read_length",
+                    "uuid": "2e38fcb0-9e13-4ef5-9b7e-7423b4794dcc"
+                },
+                {
+                    "label": "Nanoplot QC on Reads Before Preprocessing HTML Report",
+                    "output_name": "output_html",
+                    "uuid": "c1513a6f-392c-406b-9a9e-5a05f54014a8"
+                },
+                {
+                    "label": "Nanoplot on Reads Before Preprocessing NanoStats",
+                    "output_name": "nanostats",
+                    "uuid": "059eab67-5735-4a8c-bc9f-408da9f088c0"
+                },
+                {
+                    "label": "Nanoplot on Reads Before Preprocessing NanoStats post filtering",
+                    "output_name": "nanostats_post_filtering",
+                    "uuid": "dcc872d2-02f4-4fb7-bea5-c7b2e69ba3b1"
+                },
+                {
+                    "label": "Nanoplot on Reads Before Preprocessing Histogram Read Length",
+                    "output_name": "read_length",
+                    "uuid": "c727d318-e1a7-4f06-91ea-5edbc6fade01"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "Quality Check Before Preprocessing",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "adapters"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 560,
+                "top": 895
+            },
+            "post_job_actions": {
+                "RenameDatasetActionhtml_file": {
+                    "action_arguments": {
+                        "newname": "FastQC Quality Check Before Preprocessing HTML file"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "html_file"
+                },
+                "RenameDatasetActiontext_file": {
+                    "action_arguments": {
+                        "newname": "FastQC Quality Check Before Preprocessing Text file"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "text_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5ec9f6bceaee",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.74+galaxy0",
+            "type": "tool",
+            "uuid": "48987696-318e-40b7-8ca7-a02c09bd1975",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "FastQC Quality Check Before Preprocessing Text file",
+                    "output_name": "text_file",
+                    "uuid": "bd2e36d7-a4f8-425c-a732-d88f42f94f8c"
+                },
+                {
+                    "label": "FastQC Quality Check Before Preprocessing HTML file",
+                    "output_name": "html_file",
+                    "uuid": "57e6b0be-4896-4da0-ac1a-31d7bf3a26c7"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "Preprocessing",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "single_paired|in1": {
+                    "id": 1,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "fastp",
+            "outputs": [
+                {
+                    "name": "out1",
+                    "type": "input"
+                },
+                {
+                    "name": "report_html",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 560,
+                "top": 582
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout1": {
+                    "action_arguments": {
+                        "newname": "Nanopore sequenced reads processed with Fastp"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out1"
+                },
+                "RenameDatasetActionreport_html": {
+                    "action_arguments": {
+                        "newname": "Nanopore sequenced reads processed with Fastp"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "report_html"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "dbf9c561ef29",
+                "name": "fastp",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filter_options\": {\"quality_filtering_options\": {\"disable_quality_filtering\": false, \"qualified_quality_phred\": null, \"unqualified_percent_limit\": null, \"n_base_limit\": null}, \"length_filtering_options\": {\"disable_length_filtering\": false, \"length_required\": null, \"length_limit\": null}, \"low_complexity_filter\": {\"enable_low_complexity_filter\": false, \"complexity_threshold\": null}}, \"output_options\": {\"report_html\": true, \"report_json\": false}, \"overrepresented_sequence_analysis\": {\"overrepresentation_analysis\": false, \"overrepresentation_sampling\": null}, \"read_mod_options\": {\"polyg_tail_trimming\": {\"trimming_select\": \"\", \"__current_case__\": 1, \"poly_g_min_len\": null}, \"polyx_tail_trimming\": {\"polyx_trimming_select\": \"\", \"__current_case__\": 1}, \"umi_processing\": {\"umi\": false, \"umi_loc\": \"\", \"umi_len\": null, \"umi_prefix\": \"\"}, \"cutting_by_quality_options\": {\"cut_by_quality5\": false, \"cut_by_quality3\": false, \"cut_window_size\": null, \"cut_mean_quality\": null}, \"base_correction_options\": {\"correction\": false}}, \"single_paired\": {\"single_paired_selector\": \"single\", \"__current_case__\": 0, \"in1\": {\"__class__\": \"ConnectedValue\"}, \"adapter_trimming_options\": {\"disable_adapter_trimming\": false, \"adapter_sequence1\": \"\"}, \"global_trimming_options\": {\"trim_front1\": null, \"trim_tail1\": null}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.20.1+galaxy0",
+            "type": "tool",
+            "uuid": "fca322ee-e40e-4ee9-b8b8-921c7123d33b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Nanopore sequenced reads processed with Fastp HTML Report ",
+                    "output_name": "report_html",
+                    "uuid": "cd5d8fc9-e725-4835-98d9-0bca217f4dd8"
+                },
+                {
+                    "label": "Nanopore sequenced reads processed with Fastp",
+                    "output_name": "out1",
+                    "uuid": "cf423d0c-ab15-4a1e-930c-0c8ed367aeba"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "Nanoplot Quality Check After Preprocessing",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "mode|reads|files": {
+                    "id": 4,
+                    "output_name": "out1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NanoPlot",
+            "outputs": [
+                {
+                    "name": "output_html",
+                    "type": "html"
+                },
+                {
+                    "name": "nanostats",
+                    "type": "txt"
+                },
+                {
+                    "name": "nanostats_post_filtering",
+                    "type": "txt"
+                },
+                {
+                    "name": "read_length",
+                    "type": "png"
+                },
+                {
+                    "name": "log_read_length",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 840,
+                "top": 0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionlog_read_length": {
+                    "action_arguments": {
+                        "newname": "Nanoplot on Reads After Preprocessing Log Transformed Histogram Read Length"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "log_read_length"
+                },
+                "RenameDatasetActionnanostats": {
+                    "action_arguments": {
+                        "newname": "Nanoplot on Reads After Preprocessing NanoStats"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "nanostats"
+                },
+                "RenameDatasetActionnanostats_post_filtering": {
+                    "action_arguments": {
+                        "newname": "Nanoplot on Reads After Preprocessing NanoStats post filtering"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "nanostats_post_filtering"
+                },
+                "RenameDatasetActionoutput_html": {
+                    "action_arguments": {
+                        "newname": "Nanoplot QC on Reads After Preprocessing HTML Report"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_html"
+                },
+                "RenameDatasetActionread_length": {
+                    "action_arguments": {
+                        "newname": "Nanoplot on Reads After Preprocessing Histogram Read Length"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "read_length"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "edbb6c5028f5",
+                "name": "nanoplot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"customization\": {\"color\": null, \"format\": \"png\", \"plots\": null, \"N50\": false}, \"filter\": {\"maxlength\": null, \"minlength\": null, \"drop_outliers\": false, \"downsample\": null, \"loglength\": false, \"percentqual\": false, \"alength\": false, \"minqual\": null, \"readtype\": null, \"barcoded\": false}, \"mode\": {\"choice\": \"batch\", \"__current_case__\": 0, \"reads\": {\"type\": \"fastq\", \"__current_case__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.28.2+galaxy1",
+            "type": "tool",
+            "uuid": "2fe29f22-790e-4d32-98d6-23ca4341153a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Nanoplot on Reads After Preprocessing Histogram Read Length",
+                    "output_name": "read_length",
+                    "uuid": "f32ba6ef-9bc1-4a81-8146-bb346b6ffa8e"
+                },
+                {
+                    "label": "Nanoplot on Reads After Preprocessing NanoStats",
+                    "output_name": "nanostats",
+                    "uuid": "0cfee358-4f8b-4a9d-8c1a-0a940cdeedae"
+                },
+                {
+                    "label": "Nanoplot on Reads After Preprocessing NanoStats post filtering",
+                    "output_name": "nanostats_post_filtering",
+                    "uuid": "8f3cfd7b-6ac5-4917-bd48-1bedc12a0a76"
+                },
+                {
+                    "label": "Nanoplot QC on Reads After Preprocessing HTML Report",
+                    "output_name": "output_html",
+                    "uuid": "3ae0f96b-10bc-4869-a810-817b3467e657"
+                },
+                {
+                    "label": "Nanoplot on Reads After Preprocessing Log Transformed Histogram Read Length",
+                    "output_name": "log_read_length",
+                    "uuid": "a678588d-233a-47d7-95e8-c7939d7677d5"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "single_paired|input_sequences": {
+                    "id": 4,
+                    "output_name": "out1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Kraken2",
+            "outputs": [
+                {
+                    "name": "report_output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 840,
+                "top": 500
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Kraken2 with Kalamri database"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionreport_output": {
+                    "action_arguments": {
+                        "newname": "Kraken2 with Kalamri database Report"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "report_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e674066930b2",
+                "name": "kraken2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"confidence\": \"0.0\", \"kraken2_database\": \"kalamari\", \"min_base_quality\": \"0\", \"minimum_hit_groups\": \"2\", \"quick\": false, \"report\": {\"create_report\": true, \"use_mpa_style\": false, \"report_zero_counts\": true, \"report_minimizer_data\": true}, \"single_paired\": {\"single_paired_selector\": \"no\", \"__current_case__\": 2, \"input_sequences\": {\"__class__\": \"ConnectedValue\"}}, \"split_reads\": false, \"use_names\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.1+galaxy1",
+            "type": "tool",
+            "uuid": "812aa35c-560f-4d46-8f70-980cadf6c959",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Kraken2 with Kalamri database output",
+                    "output_name": "output",
+                    "uuid": "dadf4422-55c7-412b-a735-dbd638a80736"
+                },
+                {
+                    "label": "Kraken2 with Kalamri database Report",
+                    "output_name": "report_output",
+                    "uuid": "4cbf81c5-07cc-4466-ad62-7ffce8fc99a4"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "Quality Check After Preprocessing",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_file": {
+                    "id": 4,
+                    "output_name": "out1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "adapters"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 840,
+                "top": 706
+            },
+            "post_job_actions": {
+                "RenameDatasetActionhtml_file": {
+                    "action_arguments": {
+                        "newname": "FastQC Quality Check After Preprocessing HTML file"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "html_file"
+                },
+                "RenameDatasetActiontext_file": {
+                    "action_arguments": {
+                        "newname": "FastQC Quality Check After Preprocessing Text file"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "text_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5ec9f6bceaee",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.74+galaxy0",
+            "type": "tool",
+            "uuid": "4474d327-4fd4-45dc-8991-f853846e641c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "FastQC Quality Check After Preprocessing HTML file",
+                    "output_name": "html_file",
+                    "uuid": "b03b7ac6-5759-427b-b613-2bd822606338"
+                },
+                {
+                    "label": "FastQC Quality Check After Preprocessing Text file",
+                    "output_name": "text_file",
+                    "uuid": "218c340c-d245-42c2-afb0-5b493faad109"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "__FILTER_FAILED_DATASETS__",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter failed datasets",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1120,
+                "top": 341
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Successful Kraken2 with Kalamari Tabular output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__FILTER_FAILED_DATASETS__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "7402c290-e09f-48bd-9d6e-67355bbb0701",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Successful Kraken2 with Kalamari Tabular output",
+                    "output_name": "output",
+                    "uuid": "3c1cc394-29be-4d4a-a02c-b695ed34fe36"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "__FILTER_FAILED_DATASETS__",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "report_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter failed datasets",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1120,
+                "top": 536
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Successful Kraken2 with Kalamari Tabular Report output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__FILTER_FAILED_DATASETS__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "8a6935de-6ee8-48b2-bc90-c79afbbfe9da",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Successful Kraken2 with Kalamari Tabular Report output",
+                    "output_name": "output",
+                    "uuid": "5c034d4b-e26d-4357-bd23-25f766e351bb"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "Quality Control Before and After Preprocessing\n\n",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "results_0|software_cond|output_0|input": {
+                    "id": 3,
+                    "output_name": "text_file"
+                },
+                "results_0|software_cond|output_1|input": {
+                    "id": 7,
+                    "output_name": "text_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MultiQC",
+            "outputs": [
+                {
+                    "name": "stats",
+                    "type": "input"
+                },
+                {
+                    "name": "html_report",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 1120,
+                "top": 955
+            },
+            "post_job_actions": {
+                "RenameDatasetActionhtml_report": {
+                    "action_arguments": {
+                        "newname": "MultiQC HTML report Before and After Preprocessing"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "html_report"
+                },
+                "RenameDatasetActionstats": {
+                    "action_arguments": {
+                        "newname": "MultiQC Stats Before and After Preprocessing"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "stats"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "9a913cdee30e",
+                "name": "multiqc",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"comment\": \"\", \"export\": false, \"flat\": false, \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}], \"saveLog\": false, \"title\": \"MultiQC Report Before and After PreProcessing\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.11+galaxy0",
+            "type": "tool",
+            "uuid": "affa6703-0145-4bb3-9824-64d40fc25337",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "MultiQC HTML report Before and After Preprocessing",
+                    "output_name": "html_report",
+                    "uuid": "a9025e09-e05d-4ed0-beaf-39d212996b55"
+                },
+                {
+                    "label": "MultiQC Stats Before and After Preprocessing",
+                    "output_name": "stats",
+                    "uuid": "1f055aaa-a283-4620-b926-f0b6de57410b"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/krakentools_extract_kraken_reads/krakentools_extract_kraken_reads/1.2+galaxy1",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "library|input_1": {
+                    "id": 4,
+                    "output_name": "out1"
+                },
+                "report": {
+                    "id": 9,
+                    "output_name": "output"
+                },
+                "results": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Krakentools: Extract Kraken Reads By ID",
+            "outputs": [
+                {
+                    "name": "output_1",
+                    "type": "fasta.gz"
+                }
+            ],
+            "position": {
+                "left": 1489,
+                "top": 620
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_1": {
+                    "action_arguments": {
+                        "newname": "Nanopore Processed Sequenced Reads"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/krakentools_extract_kraken_reads/krakentools_extract_kraken_reads/1.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "f329328da134",
+                "name": "krakentools_extract_kraken_reads",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"exclude\": true, \"fastq_output\": true, \"include_children\": true, \"include_parents\": true, \"library\": {\"type\": \"single\", \"__current_case__\": 0, \"input_1\": {\"__class__\": \"ConnectedValue\"}}, \"max\": \"100000000\", \"report\": {\"__class__\": \"ConnectedValue\"}, \"results\": {\"__class__\": \"ConnectedValue\"}, \"taxid\": \"9031 9606 9913\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2+galaxy1",
+            "type": "tool",
+            "uuid": "8ed9d195-685a-4e1c-8488-717446b8601c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Nanopore Processed Sequenced Reads",
+                    "output_name": "output_1",
+                    "uuid": "0f9bb996-d78f-4dd7-bc2b-334558a04865"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "microbiome",
+        "nanopore"
+    ],
+    "uuid": "7557d023-231a-4188-a24d-d1fa38f42488",
+    "version": 62
+}

@@ -23,8 +23,6 @@ contributors:
 - simonbray
 ---
 
-# Introduction
-
 
 In this tutorial you will learn how to apply Galaxy tools to solve [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine logistic regression, which is an example of a linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step.
 
@@ -114,7 +112,7 @@ The second thing we need is an optimization algorithm for iteratively updating t
 
 > <hands-on-title>Train logistic regression classifier</hands-on-title>
 >
-> 1. **Generalized linear models** {% icon tool %} with the following parameters to train the regressor:
+> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select a linear method"*: `Logistic Regression`
 >          - *"Select input type"*: `tabular data`
@@ -150,7 +148,7 @@ Now, we will predict the class in the test dataset using this classifier in orde
 
 > <hands-on-title>Predict class using the logistic regression classifier</hands-on-title>
 >
-> 1. **Generalized linear models** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `LogisticRegression_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -175,7 +173,7 @@ We will evaluate the classification by comparing the predicted with the expected
 Now we visualize and analyze the classification using the "Plot confusion matrix, precision, recall and ROC and AUC curves" tool.
 
 > <hands-on-title>Check and visualize the classification</hands-on-title>
-> 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.2) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_noheader`
 >    - {% icon param-file %} *"Select predicted data file"*: `LogisticRegression_result`
 >    - {% icon param-file %} *"Select trained model"*: `LogisticRegression_model`
@@ -246,7 +244,7 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearest
 
 > <hands-on-title>Train k-nearest neighbor classifier</hands-on-title>
 >
-> 1. **Nearest Neighbors Classification** {% icon tool %} with the following parameters to train the regressor:
+> {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Classifier type"*: `Nearest Neighbors`
 >          - *"Select input type"*: `tabular data`
@@ -276,7 +274,7 @@ Now, we should evaluate the performance on the test dataset to find out whether 
 
 > <hands-on-title>Predict class using the k-nearest neighbor classifier</hands-on-title>
 >
-> 1. **Nearest Neighbors Classification** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+> {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `NearestNeighbors_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -289,7 +287,7 @@ Now, we should evaluate the performance on the test dataset to find out whether 
 Now we visualize and analyze the classification. As you can see, `NearestNeighbors_result` has a header, so use `test_rows_labels` to compare. 
 
 > <hands-on-title>Check and visualize the classification</hands-on-title>
-> 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.2) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `NearestNeighbors_result`
 >    - {% icon param-file %} *"Select trained model"*: `NearestNeighbors_model`
@@ -315,7 +313,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.
 
 > <hands-on-title>Train a SVM classifier</hands-on-title>
 >
-> 1. **Support vector machines (SVMs)** {% icon tool %} with the following parameters to train the regressor:
+>  {% tool [Support vector machines (SVMs)](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select a linear method"*: `Linear Support Vector Classification`
 >          - *"Select input type"*: `tabular data`
@@ -347,7 +345,7 @@ Now we will evaluate the performance of the SVM classifier:
 
 > <hands-on-title>Predict class SVM classifier</hands-on-title>
 >
-> 1. **Support vector machines (SVMs)** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+>  {% tool [Support vector machines (SVMs)](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `SVM_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -360,7 +358,7 @@ Now we will evaluate the performance of the SVM classifier:
 Now let's visualize the results:
 
 > <hands-on-title>Check and visualize the classification</hands-on-title>
-> 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.2) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `SVM_result`
 >    - {% icon param-file %} *"Select trained model"*: `SVM_model`
@@ -379,7 +377,7 @@ One big advantage of random forest is that it can be used for both classificatio
 
 > <hands-on-title>Train random forest</hands-on-title>
 >
-> 1. **Ensemble methods** {% icon tool %} with the following parameters to train the regressor:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Random forest classifier`
 >          - *"Select input type"*: `tabular data`
@@ -411,7 +409,7 @@ After learning on the training dataset, we should evaluate the performance on th
 
 > <hands-on-title>Predict targets using the random forest</hands-on-title>
 >
-> 1. **Ensemble methods** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `RandomForest_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -442,7 +440,7 @@ At the last step, we will create a bagging classifier by using  the **Pipeline b
 
 > <hands-on-title>Create pipeline</hands-on-title>
 >
-> 1. **Pipeline builder** {% icon tool %} with the following parameters:
+> {% tool [Pipeline builder](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0.8.4) %}:
 >    - In *"Final Estimator"*:
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `BaggingClassifier`
@@ -459,7 +457,7 @@ After extracting the parameter names from the **Pipeline builder** file, we will
 
 > <hands-on-title>Hyperparameter search</hands-on-title>
 >
-> 1. **Hyperparameter search** {% icon tool %} with the following parameters:
+> {% tool [Hyperparameter search](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.8.4) %}:
 >    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
 >        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (output of **Pipeline builder** {% icon tool %})
 >        - {% icon param-files %} *"Is the estimator a deep learning model?"*: `NO` {% icon tool %})
@@ -501,7 +499,7 @@ Using the **Hyperparameter search** tool, we found the best model, based on the 
 
 > <hands-on-title>Predict age</hands-on-title>
 >
-> 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >        - {% icon param-files %} *"Models"*: `zipped` file (output of **Hyperparameter search** {% icon tool %})
 >        - {% icon param-files %} *"Data (tabular)"*: `test_rows` tabular file

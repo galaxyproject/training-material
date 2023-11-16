@@ -42,9 +42,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
 Terrestrial ecosystem models have been widely used to study the impact of climate changes on vegetation and terrestrial biogeochemical cycles in climate modelling community. They are also more and more applied in ecological studies to help ecologists to better understand the processes. But the technical challenges are still too high for most of the ecologists to use them. This practical aims at familiarizing you (especially ecologists) with running a terrestrial ecosystem model (i.e., CLM-FATES) at site-level in Galaxy and analyzing the model results.
 It will also teach you on how to create Galaxy workflow for your site-level CLM-FATES simulations to make your research fully reproducible. We hope this tutorial will promote the use of CLM-FATES and other terrestrial ecosystem models by a broader community.
 
@@ -219,12 +216,12 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 > > You may have to login again to [live.usegalaxy.eu](https://live.usegalaxy.eu) (use the same username and password than on other useGalaxy.eu subdomains)
 > > and switch to the correct history.
 > >
-> > You can access the tool by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
+> > You can access the tool by clicking [here to launch it on EU](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
 > {: .tip}
 >
 > 1. Open the {% tool [Panoply](interactive_tool_panoply) %}
 > 2. Check **ALP1_exp.nc** dataset selected in the netcdf input field
-> 3. Click Execute
+> 3. Click Run Tool
 > 4. The tool will start running and will stay running permanently
 > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
 > 6. Click on your Panoply instance

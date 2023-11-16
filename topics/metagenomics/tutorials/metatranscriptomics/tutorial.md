@@ -31,10 +31,7 @@ contributors:
 - emmaleith
 - pravs3683
 - shiltemann
-
+- paulzierep
 ---
 
-
-
-
-{% include {{ page.dir }}content.md short=false %}
+{% include topics/metagenomics/tutorials/metatranscriptomics/content.md short=false %}

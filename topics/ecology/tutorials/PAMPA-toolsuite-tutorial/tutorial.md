@@ -35,8 +35,6 @@ contributors:
 
 ---
 
-# Introduction
-
 
 This tutorial aims to present the PAMPA Galaxy workflow, how to use it to compute common
 biodiversity metrics from species abundance data and analyse it through generalized
@@ -115,6 +113,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >    for you to find it again later if needed.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the CSV files from [Zenodo](https://doi.org/10.5281/zenodo.4264936) via link with the three following links

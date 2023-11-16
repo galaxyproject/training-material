@@ -25,8 +25,6 @@ contributors:
 ---
 
 
-# Introduction
-
 
 You may already know that there are different types of *-omic* sciences; out of these, metabolomics is most closely related to phenotypes.
 Metabolomics involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants. It  focuses on studying the very small molecules
@@ -217,7 +215,7 @@ The sampleMetadata file is a tab-separated table, in text format. This table has
 software you find appropriate to construct your table, as long as you save your file in a compatible format. For example, you can
 use a spreadsheet software such as Microsoft Excel or LibreOffice.
 
-> <comment-title>Important: Save your table in the correct format</comment-title>
+> <warning-title>Important: Save your table in the correct format</warning-title>
 >
 > The file has to be a `.txt`or a `.tsv` (tab-separated values). Neither `.xlsx` nor `.odt` are supported.
 > If you use a spreadsheet software, be sure to change the default format to **Text (Tab delimited)** or equivalent.
@@ -228,7 +226,7 @@ Once your sampleMetadata table is ready, you can proceed to the upload. In this 
 > <tip-title>Optional: Filling the <i>sampleMetadata</i> using the template obtained from Galaxy</tip-title>
 >
 > For this tutorial, we already provide the *sampleMetadata* file, so you only have to upload it to Galaxy. Below we
-explain how we filled this file from the template we generated in Galaxy.
+> explain how we filled this file from the template we generated in Galaxy.
 >
 > First, we used **xcms get a sampleMetadata file** {% icon tool %} as mentioned in the previous tip box.
 >
@@ -247,7 +245,7 @@ explain how we filled this file from the template we generated in Galaxy.
 > HU_neg_048 | .
 >
 > We used a spreadsheet software to open the file. First, we completed the class column. You will see in further XCMS steps that this
-second column matters.
+> second column matters.
 >
 > sample_name | class
 > --- | ---
@@ -277,9 +275,9 @@ second column matters.
 > HU_neg_048 | sample | 0 | sample | 39 | ne1 | 997 | 3 | 39 | 19.49 | Female
 >
 > In particular, the `batch`, `sampleType` and `injectionOrder` columns are mandatory to correct the data from signal drift (see later in
-the tutorial).
+> the tutorial).
 > Once we completed the table filling, we saved the file, minding to stick with the original format. Then, our *sampleMetadata* was ready to
-be uploaded into Galaxy.
+> be uploaded into Galaxy.
 >
 {: .tip}
 
@@ -305,10 +303,10 @@ be uploaded into Galaxy.
 >    > <comment-title></comment-title>
 >    >
 >    > Here we provided the sampleMetadata file so we know that the upload led to a 'tabular' file. But from experience we also know that
-it can happen that, when uploading a sampleMetadata table, a user obtains other inappropriate types of data. This is generally due to the file
-not following all the requirements about the format (*e.g.* wrong separator, or lines with different numbers of columns).
+>    > it can happen that, when uploading a sampleMetadata table, a user obtains other inappropriate types of data. This is generally due to the file
+>    > not following all the requirements about the format (*e.g.* wrong separator, or lines with different numbers of columns).
 >    > Thus, we highly recommend that you always take a second to check the data type after the upload. This way you can handle the problem
-right away if you happen to get one of these obvious issues.
+>    > right away if you happen to get one of these obvious issues.
 >    {: .comment}
 >
 > 3. Rename your sampleMetadata file with a shorter name 'sampleMetadata_completed.tsv'
@@ -325,10 +323,10 @@ right away if you happen to get one of these obvious issues.
 > > <solution-title></solution-title>
 > >
 > > 1. At least 2, with the identifiers and the class column. But as many as you need to describe the potential variability of your samples
-(*e.g.* the person in charge of the sample preparation, the temperature...). The statistical analysis will expose the relevant parameters.
+> >    (*e.g.* the person in charge of the sample preparation, the temperature...). The statistical analysis will expose the relevant parameters.
 > > 2. Sample, QC, blank... The class (the 2nd column) is useful for the preprocessing step with XCMS to detect the metabolite across the samples.
-So it can be important to separate very different types of samples, as biological ones and blank ones for example. If you don't have any specific class
-that you want to consider in XCMS preprocessing, just fill everywhere with `sample` or a dot `.` for example.
+> >    So it can be important to separate very different types of samples, as biological ones and blank ones for example. If you don't have any specific class
+> >    that you want to consider in XCMS preprocessing, just fill everywhere with `sample` or a dot `.` for example.
 > >
 > {: .solution}
 >
@@ -358,7 +356,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 >    > <comment-title></comment-title>
 >    >
 >    > If you use this tool at a later step of XCMS workflow while having provided, in the Merger step (see further in this tutorial), a sampleMetadata with a second column containing groups,
-you will get colouring according to these groups even without providing a sampleMetadata file as a 'plot chromatogram' parameter.
+>    > you will get colouring according to these groups even without providing a sampleMetadata file as a 'plot chromatogram' parameter.
 >    {: .comment}
 >
 {: .hands_on}
@@ -414,8 +412,8 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 >    > <comment-title></comment-title>
 >    >
 >    > Along with the parameters used in the core centWave algorithm, XCMS provides other filtering options allowing you to get
-rid of ions that you don't want to consider. For example, you can use *Spectra Filters* allowing you to discard some RT or M/z
-ranges, or *Noise filter* (as in this hands-on) not to use low intensity measures in the ROI detection step.
+>    > rid of ions that you don't want to consider. For example, you can use *Spectra Filters* allowing you to discard some RT or M/z
+>    > ranges, or *Noise filter* (as in this hands-on) not to use low intensity measures in the ROI detection step.
 >    {: .comment}
 >
 {: .hands_on}
@@ -502,10 +500,10 @@ Here is an example of two m/z slides obtained from the hands-on:
 > > <solution-title></solution-title>
 > >
 > > 1. There are 3 peak groups in this m/z slice. The two peaks that are not assigned to peak groups are alone in their retention time area. Thus,
-the number of samples under the corresponding density peaks does not reach the minimum fraction of samples set by the user (0.5) to consider a peak group.
+> >    the number of samples under the corresponding density peaks does not reach the minimum fraction of samples set by the user (0.5) to consider a peak group.
 > > 2. If the bandwidth value had been set to a smaller value, the density peak width would have been smaller. With a small-enough bandwidth value,
-there could have been two density peaks instead of one under the current first density peak. Thus, the sample in line 5 would have been out of the
-previous peak group, thus not assigned to any peak group due to the 0.5 minimum fraction limit.
+> >    there could have been two density peaks instead of one under the current first density peak. Thus, the sample in line 5 would have been out of the
+> >    previous peak group, thus not assigned to any peak group due to the 0.5 minimum fraction limit.
 > >
 > {: .solution}
 >
@@ -546,9 +544,9 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 >    > <comment-title></comment-title>
 >    >
 >    > If you have a very large number of samples (*e.g.* a thousand), it might be impossible to find peaks that are present in 100% of your samples.
-If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
-time correction. A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
-(*e.g.* when dealing with some blank samples).
+>    > If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
+>    > time correction. A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
+>    > (*e.g.* when dealing with some blank samples).
 >    {: .comment}
 >
 {: .hands_on}
@@ -560,7 +558,7 @@ It also allows you to check whether the well behaved peaks were distributed homo
 > <tip-title>Check the impact of RT correction using 'xcms plot chromatogram'</tip-title>
 >
 > Apart from the plots generated by the adjustRtime tool, you can check the impact of the retention time
-correction by comparing the chromatogram you obtained previously to a new one generated after correction.
+> correction by comparing the chromatogram you obtained previously to a new one generated after correction.
 >
 > > <hands-on-title>xcms plot chromatogram</hands-on-title>
 > >
@@ -601,8 +599,8 @@ lower a little the bandwidth parameter.
 >    > <comment-title></comment-title>
 >    >
 >    > When performing this second grouping (or at the first one if you do not plan to perform retention time correction),
-you can take this opportunity to check how your peak table looks like at this point of the XCMS extraction. For this, you can
-set the 'Get the Peak List' option to `Yes`.
+>    > you can take this opportunity to check how your peak table looks like at this point of the XCMS extraction. For this, you can
+>    > set the 'Get the Peak List' option to `Yes`.
 >    {: .comment}
 >
 {: .hands_on}
@@ -614,13 +612,12 @@ last adjustRtime step and thus your last grouping step, you will obtain your fin
 >
 > 1. How many ions did you obtained with the final grouping step?
 > 2. Open the dataMatrix file you obtained with the final grouping. This table corresponds to intensities for each ion and each
-sample. What do you notice when looking at the intensity of the first ion regarding the first sample?
+>    sample. What do you notice when looking at the intensity of the first ion regarding the first sample?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. The final grouping step led to 5815 ions.
-> > 2. The first ion (M58T69) has a 'NA' value for the first sample (QC1_014). This is also the case for several other ions
-and samples.
+> > 2. The first ion (M58T69) has a 'NA' value for the first sample (QC1_014). This is also the case for several other ions and samples.
 > >
 > {: .solution}
 >
@@ -636,12 +633,12 @@ To be able to get the information that may actually exist behind NAs, there is a
 > <comment-title></comment-title>
 >
 > Before performing the 'fillChromPeaks' step, it is highly recommended to first have a look at your data concerning the distribution
-of NAs in your data. Indeed, this will allow you to check whether your results are consistent with your expectations; if not you
-may want to go back to some of your parameter choices in previous XCMS steps.
+> of NAs in your data. Indeed, this will allow you to check whether your results are consistent with your expectations; if not you
+> may want to go back to some of your parameter choices in previous XCMS steps.
 > To perform your NA diagnosis, you can use the variableMetadata file and dataMatrix file that you obtained with the last grouping step
-with the 'Get the Peak List' option to `Yes`. The variableMetadata file contains information about your ions: you will find information
-about the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample; you can get
-an overview of it using the **Intensity Check** {% icon tool %} module.
+> with the 'Get the Peak List' option to `Yes`. The variableMetadata file contains information about your ions: you will find information
+> about the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample; you can get
+> an overview of it using the **Intensity Check** {% icon tool %} module.
 {: .comment}
 
 
@@ -710,7 +707,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
 >    > <comment-title></comment-title>
 >    >
 >    > As said previously, there are quite a few parameters in this tool, some of them having very high impact on your annotations.
-In particular, the **Mode** parameter will influence a lot your results regarding pcgroups, and adducts (that will not be computed otherwise).
+>    > In particular, the **Mode** parameter will influence a lot your results regarding pcgroups, and adducts (that will not be computed otherwise).
 >    {: .comment}
 >
 {: .hands_on}
@@ -737,16 +734,16 @@ Concerning the **sampleMetadata** file, for the next steps of the workflow, ther
 >
 > The preprocessing part of this analysis can be quite time-consuming, and already corresponds to quite a few number of steps, depending of your analysis.
 > It can also generate several versions of your 3 tables, with only one of interest for each at the end of the extraction process. We highly recommend,
-at this step of the metabolomic workflow, to split your analysis by beginning a new Galaxy history with only the 3 tables you need. This will help
-you in limiting selecting the wrong dataset in further analyses, and bring a little tidiness for future review of your analysis process.
+> at this step of the metabolomic workflow, to split your analysis by beginning a new Galaxy history with only the 3 tables you need. This will help
+> you in limiting selecting the wrong dataset in further analyses, and bring a little tidiness for future review of your analysis process.
 >
 > To begin a new history with the 3 tables from your current history, you can use the functionality 'copy dataset' and copy it into a new history.
 >
 > We also recommend you to rename your 3 tables before proceeding with the next steps of the metabolomic workflow. Indeed, you may have notice that
-the XCMS tools generate output names that contain the different XCMS steps you used, allowing easy traceability while browsing your history.
-However, knowing that the next steps of analysis are also going to extend the 3 tables' names, if you keep the original names it will become very
-long and thus may reduce the names' readability. Hence, we highly recommend you to rename them with something short, *e.g.* 'sampleMetadata',
-'variableMetadata' and 'dataMatrix', or anything not too long that you may find convenient.
+> the XCMS tools generate output names that contain the different XCMS steps you used, allowing easy traceability while browsing your history.
+> However, knowing that the next steps of analysis are also going to extend the 3 tables' names, if you keep the original names it will become very
+> long and thus may reduce the names' readability. Hence, we highly recommend you to rename them with something short, *e.g.* 'sampleMetadata',
+> 'variableMetadata' and 'dataMatrix', or anything not too long that you may find convenient.
 {: .comment}
 
 
@@ -816,29 +813,29 @@ It provides a variety of useful information:
 >
 > Look at the 'Quality_Metrics_figure.pdf' file.
 > 1. Look at the proportion of ions with a pool coefficient of variation <30%. Knowing that pools are identical samples, and that
-values with a CV > 30% can not be considered stables, what can you conclude about your dataset regarding the possibility to
-compare intensities between samples?
+>    values with a CV > 30% can not be considered stables, what can you conclude about your dataset regarding the possibility to
+>    compare intensities between samples?
 > 2. Look at the sum of intensities per sample according to injection order. What major information do you observe on the plot?
-Can this observation help you understand the CV results you just looked at?
+>    Can this observation help you understand the CV results you just looked at?
 > 3. Now look at the PCA plot. Can you explain the first component (t1)? Use the previous plot to help you.
 >
 > > <solution-title></solution-title>
 > >
 > > 1. You can read on the plot that *pool CV < 30%: 26%*, meaning that the pool values are stable only for a quarter of the ions
-in your dataset. If the pooled samples are not stable, this means that you can observe differences between samples even when
-there are no biological differences. Thus, comparing samples becomes difficult and has high risk of being unreliable.
-Consequently, with only a quarter of the ions being stable regarding pool intensities, performing statistical analyses on
-this full dataset would probably lead to unreliable results.
+> >    in your dataset. If the pooled samples are not stable, this means that you can observe differences between samples even when
+> >    there are no biological differences. Thus, comparing samples becomes difficult and has high risk of being unreliable.
+> >    Consequently, with only a quarter of the ions being stable regarding pool intensities, performing statistical analyses on
+> >    this full dataset would probably lead to unreliable results.
 > > 2. We can see in the figure that the global intensity of samples seems to decrease with the injection order. In particular,
-the fact that the pooled samples' intensities decrease leads us to suspect a signal drift due to the clogging effect of successive
-injection of samples.
-> > This signal drift could be the reason why so many ions in the dataset led to high CV values for pools, since it prevents
-at least part of the ions to be stable regarding pools' intensities.
+> >    the fact that the pooled samples' intensities decrease leads us to suspect a signal drift due to the clogging effect of successive
+> >    injection of samples.
+> >    This signal drift could be the reason why so many ions in the dataset led to high CV values for pools, since it prevents
+> >    at least part of the ions to be stable regarding pools' intensities.
 > > 3. If we look closely at the samples' identifiers on the plot, it seems that the lowest numbers in IDs are at the right side
-of the first component. Knowing that these numbers correspond to an order in the injection sequence, we can link it to the
-previous picture's samples. Then, what we can observe is that the order of samples in the first component of PCA from right to left
-corresponds approximately to the decreasing order of sums of intensities. Thus, we can conclude that the main variability in
-the dataset may be due to the signal drift.
+> >    of the first component. Knowing that these numbers correspond to an order in the injection sequence, we can link it to the
+> >    previous picture's samples. Then, what we can observe is that the order of samples in the first component of PCA from right to left
+> >    corresponds approximately to the decreasing order of sums of intensities. Thus, we can conclude that the main variability in
+> >    the dataset may be due to the signal drift.
 > >
 > {: .solution}
 >
@@ -947,7 +944,7 @@ your data using the **Generic_Filter** {% icon tool %} tool.
 >    > <comment-title></comment-title>
 >    >
 >    > You can see here that you can take the opportunity of this filtering step to get rid of the pools. Indeed, next step is
-statistical analysis, and you do not need the pools anymore since they do not participate in the scientific design of the study.
+>    > statistical analysis, and you do not need the pools anymore since they do not participate in the scientific design of the study.
 >    {: .comment}
 >
 {: .hands_on}
@@ -962,13 +959,13 @@ statistical analysis, and you do not need the pools anymore since they do not pa
 > > <solution-title></solution-title>
 > >
 > > 1. The *0.3* value corresponds to the maximum value kept in the dataset ('Interval of values to remove: *upper*') regarding the
-*poolCV* column in your *Variable metadata* file. As mentioned previously in 'Step 1: global variability in the data' section,
-pool CV values are commonly considered as reflecting unstable ions when superior to 0.3.
-Although the signal drift correction decreased the proportion of ions with pool CV > 30% from 74% to 53%, we still need to get
-rid of these remaining unstable ions for which sample comparisons would be difficult and at high risk of being unreliable.
+> >    *poolCV* column in your *Variable metadata* file. As mentioned previously in 'Step 1: global variability in the data' section,
+> >    pool CV values are commonly considered as reflecting unstable ions when superior to 0.3.
+> >    Although the signal drift correction decreased the proportion of ions with pool CV > 30% from 74% to 53%, we still need to get
+> >    rid of these remaining unstable ions for which sample comparisons would be difficult and at high risk of being unreliable.
 > > 2. The *1.0* value corresponds to the maximum value kept in the dataset ('Interval of values to remove: *upper*') regarding the
-*poolCV_over_sampleCV* column in your *Variable metadata* file. This means that any ion with a pool CV / sample CV ratio above 1
-(*i.e.* a pool CV greater than the sample CV) is discarded from the dataset.
+> >    *poolCV_over_sampleCV* column in your *Variable metadata* file. This means that any ion with a pool CV / sample CV ratio above 1
+> >    (*i.e.* a pool CV greater than the sample CV) is discarded from the dataset.
 > > 3. Filtering led to 2706 ions and 6 samples.
 > >
 > {: .solution}
@@ -1013,11 +1010,11 @@ and the ions that we have in our dataset. For this calculation we can use the **
 >    > <comment-title></comment-title>
 >    >
 >    > In this tutorial, we chose to perform the analysis without multiple testing correction. This choice is not
-based on a relevant statistical strategy (which would more likely be to *use* multiple testing correction). It is based on
-the fact that with only 6 biological samples in a dataset of 2706 ions it is almost impossible to settle for correlation
-coefficients significantly different from zero. Consequently, to illustrate better the filtering step that will follow,
-we chose not to apply the multiple testing correction, allowing us to obtain something that looks like 'significant' results
-regarding statistical indices.
+>    > based on a relevant statistical strategy (which would more likely be to *use* multiple testing correction). It is based on
+>    > the fact that with only 6 biological samples in a dataset of 2706 ions it is almost impossible to settle for correlation
+>    > coefficients significantly different from zero. Consequently, to illustrate better the filtering step that will follow,
+>    > we chose not to apply the multiple testing correction, allowing us to obtain something that looks like 'significant' results
+>    > regarding statistical indices.
 >    {: .comment}
 >
 {: .hands_on}
@@ -1130,8 +1127,8 @@ review to identify relevant proposed annotation.
 
 > <comment-title></comment-title>
 > Once you reviewed carefully your annotation and settled for a subset of candidate identities, your are ready for further adventures.
-For now, Galaxy4Metabolomics stops here but we have various perspectives of additional tools for the future (a little bit of
-[MetExplore](https://metexplore.toulouse.inra.fr/index.html/) for example?).
+> For now, Galaxy4Metabolomics stops here but we have various perspectives of additional tools for the future (a little bit of
+> [MetExplore](https://metexplore.toulouse.inra.fr/index.html/) for example?).
 {: .comment}
 
 

@@ -24,9 +24,6 @@ subtopic: workflows
 ---
 
 
-# Introduction
-
-
 Workflows are a powerful feature in Galaxy that allow you to chain multiple steps of an analysis together.
 To make a workflow reusable with slightly different settings you can define and use workflow parameters.
 
@@ -208,9 +205,9 @@ In this example we will construct a workflow where we calculate the sum of all v
 >       - {% icon param-select %} *"Choose the type of parameter for this field"*: Integer Parameter
 >       - *"Enter integer that should be part of the computed value"*: Click on `Add connection to module` {% icon galaxy-wf-connection %}
 >       - {% icon wf-input %} *"Input"*: Connect the output of the **Parse parameter value** {% icon tool %}
-> 5. Add **Compute an expression on every row** {% icon tool %} to the workflow
->     - *"Add expression as a new column to"*: click on `Add connection to module`, then connect the output of **Compose text parameter value** {% icon tool %}
->     - *"as a new column to"*: Select the output of the **Input dataset** {% icon tool %}
+> 5. Add **Compute on rows** {% icon tool %} to the workflow
+>     - *"Input file"*: Select the output of the **Input dataset** {% icon tool %}
+>     - *"Add expression"*: click on `Add connection to module`, then connect the output of **Compose text parameter value** {% icon tool %}
 {: .hands_on}
 
 With this you're ready to run the workflow!

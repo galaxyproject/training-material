@@ -19,8 +19,6 @@ contributors:
   - malloryfreeberg
 ---
 
-# Introduction
-
 
 Small, noncoding RNA (sRNA) molecules, typically 18-40nt in length, are key features of post-transcriptional regulatory mechanisms governing gene expression. Through interactions with protein cofactors, these tiny sRNAs typically function by perfectly or imperfectly basepairing with substrate RNA molecules, and then eliciting downstream effects such as translation inhibition or RNA degradation. Different subclasses of sRNAs - *e.g.* microRNAs (miRNAs), Piwi-interaction RNAs (piRNAs), and endogenous short interferring RNAs (siRNAs) - exhibit unique characteristics, and their relative abundances in biological contexts can indicate whether they are active or not. In this tutorial, we will examine expression of the piRNA subclass of sRNAs and their targets in *Drosophila melanogaster*.
 
@@ -50,20 +48,22 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 > 1. Create a new history and name it something meaningful (*e.g.* sRNA-seq tutorial)
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the 3 `Blank_RNAi_sRNA-seq` and 3 `Symp_RNAi_sRNA-seq` FASTQ files from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
 >    ```
-https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    Set the datatype of the read (.fastqsanger) files to **fastq**
@@ -78,10 +78,10 @@ https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastq
 > 3. Import the remaining files from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
 >    ```
-https://zenodo.org/record/826906/files/dm3_transcriptome_Tx2Gene_downsampled.tab.gz
-https://zenodo.org/record/826906/files/dm3_transcriptome_sequences_downsampled.fa.gz
-https://zenodo.org/record/826906/files/dm3_miRNA_hairpin_sequences.fa.gz
-https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
+>    https://zenodo.org/record/826906/files/dm3_transcriptome_Tx2Gene_downsampled.tab.gz
+>    https://zenodo.org/record/826906/files/dm3_transcriptome_sequences_downsampled.fa.gz
+>    https://zenodo.org/record/826906/files/dm3_miRNA_hairpin_sequences.fa.gz
+>    https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
 >    ```
 >
 >    - Set the datatype of the annotation file to **tab** and assign the Genome as **dm3**

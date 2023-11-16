@@ -22,13 +22,9 @@ contributors:
   - bebatut
 ---
 
-# Introduction
-
-
 In this tutorial, you will learn how to provision your Galaxy instance to support training modules from the GTN repository.
 
 Tutorials in this repository are all supplemented with files describing the technical requirements to run them. This makes it easy to automate installation of tutorial requirements.
-  - `tools.yaml`: describes the Tool Shed tools used in the tutorial
   - `data-library.yaml`: describes the input datasets
   - `data-manager.yaml`: describes the reference data required by tools
   - `workflows` folder: contains one or more workflows with all steps in the tutorial
@@ -167,12 +163,12 @@ The only thing the script cannot currently automate is the installation of the i
 
 
 
-### Installing an entire topic
+## Installing an entire topic
 
 If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/bin/install_topic_requirements.sh)
 
 
-### Installing a subset of components
+## Installing a subset of components
 
 If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours) please see the [Quickstart section](#quickstart) for the individual commands used by the script
 
@@ -198,7 +194,7 @@ Using ephemeris directly:
 
 ```
 # install tools
-shed-tools install -g <Galaxy URL> -a <API key> -t topics/<topic>/tutorials/<tutorial>/tools.yaml
+shed-tools install -g <Galaxy URL> -a <API key> -t <(curl https://training.galaxyproject.org/training-material/api/topics/<topic>/tutorials/<tutorial>/tutorial.json | jq .admin_install_yaml -r)
 
 # create data library with input datasets
 setup-data-libraries -g <Galaxy URL> -a <API key> -i topics/<topic>/tutorials/<tutorial>/data-library.yaml

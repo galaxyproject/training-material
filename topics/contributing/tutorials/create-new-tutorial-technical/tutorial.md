@@ -86,9 +86,9 @@ Given the workflow you created above and have included in the tutorial folder, y
 >      outputs:
 >        ffn:
 >          asserts:
->            has_text:
+>            - that: has_text
 >              text: ">A"
->            has_text:
+>            - that: has_text
 >              text: ">B"
 >    ```
 >
@@ -264,7 +264,7 @@ items:
       description: latest
       items:
       - info: https://doi.org/10.5281/zenodo....
-        url: https://zenodo.org/api/files/URL/to/the/input/file
+        url: https://zenodo.org/records/URL/files/path/to/input
         ext: galaxy-datatype
         src: url
 ```

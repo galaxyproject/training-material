@@ -25,8 +25,6 @@ contributors:
     - bebatut
 ---
 
-# Introduction
-
 
 Species Distribution Modeling (SDM) can help understand the distribution of a species depending on its environment. It can also attempt to quantify the impact of climate change on the species habitat, direct conservation efforts and predict invasive species distributions. This is done by associating data of species occurrences (observations) with a set of environmental data (such as temperature and precipitation).
 
@@ -51,6 +49,7 @@ In this study the datasets are all imported from the [GBIF](https://www.gbif.org
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. **Get species occurrences data** {% icon tool %} with the following parameters

@@ -24,6 +24,8 @@ contributors:
 subtopic: manage
 ---
 
+{% snippet faqs/gtn/galaxy_tested_with.md version="22.01" %}
+
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
 
 # Getting data
@@ -75,7 +77,10 @@ Because our data is *paired* we need to create a hierarchical collection called 
 To begin creating a collection we need to select datasets we would like to bundle. This is done using checkbox button of Galaxy's history menu. Fig. 2 below shows this process.
 
 
-![selecting multiple datasets](../../images/collections/select_multiple_datasets.gif "Selecting multiple datasets and creating a paired collection.")
+
+![selecting multiple datasets](../../images/collections/select_multiple_datasets.gif  "Selecting multiple datasets and creating a paired collection.")
+
+
 
 
 The above process ended with appearance of Galaxy collection wizard. In this case Galaxy automatically assigned pairs using the `_1` and `_2` endings of dataset names. Let's however pretend that this did not happen. Click on **Unpair all** (highlighted in red in the figure above) link and then on **Filters** link (see animation in Fig. 3). The interface will change into its unpaired state.
@@ -94,7 +99,7 @@ Clicking on collection will expand it to show four pairs it contains (panel **B*
 
 # Processing data organized as a collection
 
-By now we see that a collection can be used to bundle a large number of items into a single history item. Galaxy tools tools take collection as input. Let's map reads contained in collection `M117-collection` against human mitochondrial genome. Before we can do this we need to upload mitochondrial genome using the following URL (see a {% icon tip %} **Tip** on how to do this [below](#tip-importing-via-links)):
+By now we see that a collection can be used to bundle a large number of items into a single history item. Galaxy tools take collection as input. Let's map reads contained in collection `M117-collection` against human mitochondrial genome. Before we can do this we need to upload mitochondrial genome using the following URL (see a {% icon tip %} **Tip** on how to do this [below](#tip-importing-via-links)):
 
 ```
 https://zenodo.org/record/5119008/files/chrM.fa.gz
@@ -112,7 +117,7 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 
 > <hands-on-title>Map sequencing reads to reference genome</hands-on-title>
 >
-> Run {% tool [BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
+> Run {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `chrM.fa.gz` (The mitochondrial genome we just uploaded)
 >    - *"Single or Paired-end reads"*: `Paired Collection`
@@ -124,11 +129,11 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 >
 > ------
 >
-> ![bwa_mem_interface](../../images/bwa_mem_interface_coll_tut.png)
+> ![bwa_mem_interface](../../images/collections/bwa_mem_interface_coll_tut.png)
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 
@@ -157,7 +162,7 @@ After we mapped reads against the mitochondrial genome, we can now call variants
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 
@@ -181,7 +186,7 @@ We will now convert VCF datasets into tab delimited format as it will be easier 
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 
@@ -210,7 +215,7 @@ We now extracted meaningful fields from VCF datasets. But they still exist as a 
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 
@@ -329,7 +334,7 @@ This tool combines individual datasets or collections into a new collection. The
 
 This tools allow filtering elements from a data collection.  It takes an input collection and a text file with names (i.e. identifiers). The tool behaviour is controlled by **How should the elements to remove be determined?** drop-down. It has the following options:
 
-**Remove if identifiers are ABSENT from file**
+#### Remove if identifiers are ABSENT from file
 
 Given a collection:
 
@@ -358,7 +363,7 @@ the tool will return two collections:
  (discarded): [Dataset X]
 ```
 
-**Remove if identifiers are PRESENT in file**
+#### Remove if identifiers are PRESENT in file
 
 Given a collection:
 
@@ -391,7 +396,7 @@ the tool will return two collections:
 
 New identifiers can be supplied as either a simple list or a tab-delimited file mapping old identifier to the new ones. This is controlled using **How should the new identifiers be specified?** drop-down:
 
-**Using lines in a simple text file**
+#### Using lines in a simple text file
 
 Given a collection:
 
@@ -418,7 +423,7 @@ the tool will return:
              [Dataset Gamma]
 ```
 
-**Map original identifiers to new ones using a two column table**
+#### Map original identifiers to new ones using a two column table
 
 Given a collection:
 
@@ -449,7 +454,7 @@ the tool will return:
 
 {% icon tool %} **Sort collection** sorts dataset collection alphabetically, numerically, or using predetermined order from a supplied file.
 
-**Numeric sort**
+#### Numeric sort
 
 The tool sort in ascending order. When *numeric* sort is chosen, the tool ignores non-numeric characters. For example, if a collection contains the following elements:
 
@@ -467,7 +472,7 @@ The tool will output:
              [Donkey543] 
 ```
 
-**Sorting from file**
+#### Sorting from file
 
 Alternative, one can supply a single column text file containing elements identifiers in the desired sort order. For example, suppose there a collection:
 
@@ -506,7 +511,7 @@ More about tags
 > <tip-title>More about tags</tip-title>
 > Galaxy allows tagging datasets to facilitate analyses. There are several types of tags including simple tags, name tags, and group tags. **Simple** tags allow you to attach an alternative label to a dataset, which will make it easier to find it later. **Name** tags allow you to track propagation of a dataset through the analyses: all datasets derived from the initial dataset labeled with a name tag will inherit it. Finally, **group** tags allow you to label group of datasets. This is useful. for example, for differential expression analysis where you can have two groups of datasets labeled as "treatment" and "control".
 >
->To learn mote about tags go to [training site](https://training.galaxyproject.org/training-material/search?query=tags).
+>To learn mote about tags go to [training site]({% link search.md %}?query=tags).
 {: .tip}
 
 ## Tools that change collection structure
@@ -544,7 +549,7 @@ Merging them will produce a single collection with only two datasets:
 
 This behavior can be changed by clicking on "*Advanced Options*" link. The following options are available:
 
-**Keep first instance (Default behavior)**
+#### Keep first instance (Default behavior)
 
 Input:
 
@@ -569,7 +574,7 @@ Output:
 Here if two collection have identical dataset names, a dataset is chosen from the *first* collection.
 
 
-**Keep last instance**
+#### Keep last instance
 
 Input:
 
@@ -594,7 +599,7 @@ Output:
 Here if two collection have identical dataset names, a dataset is chosen from the *last* collection.
 
 
-**Append suffix to conflicted element identifiers**
+#### Append suffix to conflicted element identifiers
 
 Input:
 
@@ -619,7 +624,7 @@ Output:
 ```
 
 
-**Append suffix to conflicted element identifiers after first on encountered**
+#### Append suffix to conflicted element identifiers after first on encountered
 
 Input:
 
@@ -644,7 +649,7 @@ Output:
                     [Dataset Y]
 ```
 
-**Append suffix to every element identifier**
+#### Append suffix to every element identifier
 
 Input:
 
@@ -668,7 +673,7 @@ Output:
                     [Dataset Y_2]
 ```
 
-**Fail collection creation**
+#### Fail collection creation
 
 This option will simply trigger an error.
 
@@ -704,3 +709,4 @@ If you have a collection with three elements (image below), merging it on the fi
 
 ![Collapse collection](../../images/collections/collapse_collection.svg)
 
+<!-- GTN:IGNORE:002 -->

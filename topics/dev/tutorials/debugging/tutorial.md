@@ -39,9 +39,6 @@ requirements:
 subtopic: core
 ---
 
-# Introduction
-
-
 In this tutorial we will demonstrate how to find and fix common types of bugs you may encounter as a contributor to Galaxy. We will step you through the process of finding and fixing a bug - from locating specific errors in the logs of Galaxy's GitHub Actions, to identifying their cause, developing a solution and committing your edits
 
 With the skills from this tutorial, it is our hope that you will feel more prepared to develop solutions for Galaxy and more confidently navigate any obstacles along the way.
@@ -206,14 +203,14 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 >
 >    Can you see what's causing this behavior?
 >
->    > > <solution-title></solution-title>
->    > > The genexp is evaluated and subsequently joined using a space as a delimiter. The space is, obviously, a typo: we don't want to _add_ anything to the string, so the delimiter should be the empty string instead:
->    > > ```python
->    > > return "".join(c for c in unicodify(s) if unicodedata.category(c) != "Cc")
->    > > ```
->    > {: .solution }
+>    > <solution-title></solution-title>
+>    > The genexp is evaluated and subsequently joined using a space as a delimiter. The space is, obviously, a typo: we don't want to _add_ anything to the string, so the delimiter should be the empty string instead:
+>    > ```python
+>    > return "".join(c for c in unicodify(s) if unicodedata.category(c) != "Cc")
+>    > ```
+>    {: .solution }
 >
->    > Make the change, save the file, run the same test. Now it should pass.
+>    Make the change, save the file, run the same test. Now it should pass.
 >
 > 4. **Finishing up**
 >
@@ -560,7 +557,8 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >
 >    Here's the bug report:
 >
->    ```In the User menu, clicking the Datasets option causes an error message to be displayed on the page: "Uncaught exception in exposed API method".```
+>    > In the User menu, clicking the Datasets option causes an error message to be displayed on the page: "Uncaught exception in exposed API method".
+>    {: .quote}
 >
 >    Make sure you are in `GALAXY_ROOT`. Then start your local Galaxy using the `uvicorn` command*:
 >
@@ -716,9 +714,9 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >
 >    > <code-in-title>Pdb</code-in-title>
 >    > ```
->    (Pdb) str_as_bool('True')
->    False
->    ```
+>    > (Pdb) str_as_bool('True')
+>    > False
+>    > ```
 >    {: .code-in}
 >
 >    That doesn't look right! Exit the debugger (type in `q`, then `Enter`, then `CTRL-C ` to exit Galaxy.

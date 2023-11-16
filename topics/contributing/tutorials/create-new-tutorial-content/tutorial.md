@@ -21,12 +21,13 @@ contributions:
   editing:
   - bgruening
   - shiltemann
+  funding:
+  - gallantries
 abbreviations:
   API: Application Programming Interface
   JSON: JavaScript Object Notation
 ---
 
-# Introduction
 
 Once we have set up the infrastructure, we are ready to write the tutorial.
 
@@ -192,8 +193,8 @@ All tutorials and slides must give credit to all contributors. This can be any t
    To define a funding body in the `CONTRIBUTORS.yaml` there are a few extra fields available:
 
    ```yaml
-   erasmusplus:
-     name: Erasmus+ Programme
+   gallantries:
+     name: Gallantries Project
      joined: 2020-09
      avatar: "https://www.erasmusplus.nl/assets/images/logo.png"
      github: false
@@ -282,6 +283,18 @@ The generated tutorial is structured with:
 > 4. Add a small conclusion and relate the results to the original question
 >
 {: .hands_on}
+
+## Self Study Tutorials
+
+By following all of the guidelines in this file you can be sure that your tutorial will be optimised for self-study.
+The GTN framework encourages the use of snippets, and PTDK ensures tutorials have fully detailed parameters learners should configure.
+If you make use of snippets in appropriate places, learners can easily follow a tutorial despite different skill levels with Galaxy.
+
+Additionally use of [Question and Solution boxes](#questions-and-solutions-boxes) can ensure that students can self-check their understanding and progress as they progress through the tutorial.
+Generally we recommend one or more questions (and associated correct solutions!) after every hands-on box (which might have a one or more steps to follow.)
+These questions will let students be sure their work is correct before they proceed too far.
+As such you should design your questions carefully in order to catch common and likely failure modes that learners may encounter.
+If a student might forget to select a less-common or deeply-nested parameter, be sure that your question following that hands on tests that properly, and if possible explain that in the solutions.
 
 ## Adding images with captions
 
@@ -386,6 +399,27 @@ The rendered table is then given as a minimum-width and centred matrix:
 > | Feat2 | 1    | 2    | 3    |
 > | Feat3 | 2    | 3    | 4    |
 {: .matrix}
+
+## Internally linking to other training material
+
+If you want to link to other training material within your text, please use the {%raw%}`{​% link path/to/file.ext %​}`{%endraw%} tag:
+
+{%raw%}
+```markdown
+[link text]( {% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %} )
+```
+{%endraw%}
+
+(Note the `.md` extension, and not `.html`, always provide the file name here, it will automatically be converted to the correct link)
+
+If you want to link to a specific section in a tutorial using an anchor (e.g. `#getting-started`), place it outside of the {%raw%}`{​% link %​}`{%endraw%} tag:
+
+{%raw%}
+```markdown
+[link text]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}#section-name)
+```
+{%endraw%}
+
 
 # Improving the learning experience with Boxes
 
@@ -498,7 +532,7 @@ We find that having users walk through the tutorial, doing all of the steps is i
 >      - *"Which tool was used generate logs?"*: `STAR`
 >      - *"Type of FastQC output?"*: `Log`
 >      - *"STAR log output"*: the generated `log` files (multiple datasets)
-{: .hands_on}
+{: .hands​_on}
 ```
 {% endraw %}
 
@@ -550,7 +584,7 @@ The available icons are:
 >    - {% icon param-toggle %} *"My toggle button"*: `Yes`
 >    - {% icon param-repeat %} **My repeat parameter**
 >      - *"param1"*: `42`
-{: .hands_on}
+{: .hands​_on}
 ```
 {% endraw %}
 
@@ -569,7 +603,7 @@ which, when rendered, look like:
 >      - *"param1"*: `42`
 {: .hands_on}
 
-## **Questions** and **solution** boxes
+## **Questions** and **Solutions** boxes
 
 Questions can be added to force trainees to think about what they are currently doing, and to put things in perspective.
 They can also help the instructors by exposing and clarifying common scenarios, errors, or applications.
@@ -581,7 +615,7 @@ They can also help the instructors by exposing and clarifying common scenarios, 
 > 1. Why are some tests filtered?
 > 2. Does it improve the *p*-value distribution?
 >
-> > <solution-title></solution-title>
+> > <solution​-title></solution​-title>
 > >
 > > 1. Sol for the first question
 > > 2. Sol for the second question
@@ -611,6 +645,8 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
 
 In the box below, initially hidden, we add the correct answer and possibly any additional explanation. Self-trainees can then check the solution and its explanation.
 
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-selfstudy.md %}
+
 
 ## **Tips** box
 
@@ -625,7 +661,7 @@ Tips boxes are really just for 'tips', usually hints regarding Galaxy operations
 > * Select **Paste/Fetch Data**
 > * Paste the link into the text field
 > * Press **Start**
-{: .tip}
+{: .tip​}
 ```
 {% endraw %}
 
@@ -668,7 +704,7 @@ The detail box is used to give more background explanation on the subject. By de
 >
 > Add more details in Markdown...
 >
-{: .details}
+{: .details​}
 ```
 {% endraw %}
 
@@ -722,9 +758,9 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 >    > >
 >    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
 >    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    > {: .solution}
->    {: .question}
-{: .hands_on}
+>    > {: .solution​}
+>    {: .question​}
+{: .hands​_on}
 ```
 {% endraw %}
 
@@ -736,13 +772,13 @@ Normally a single column, with the boxes above one another, it will automaticall
 
 {% raw %}
 ```markdown
-> > <code-in-title>Bash</code-in-title>
+> > <code​-in-title>Bash</code​-in-title>
 > > ```bash
 > > cat /tmp/test.ini
 > > ```
 > {: .code-in}
 >
-> > <code-out-title></code-out-title>
+> > <code​-out-title></code​-out-title>
 > > The file should look like:
 > >
 > > ```ini
@@ -868,6 +904,8 @@ The alternative is to figure out the ID for the tool you want to use:
 
 Many common questions or instructions may be useful to share between different tutorials. For example instructions on how to start a new history or importing data. To make these types of snippets easier to re-use and avoid duplication, they are available in the form of *snippets*.
 
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching.md %}
+
 ### Finding snippets
 These are available in folders named `faqs`, either at the project level, topic level, or tutorial level.
 
@@ -914,6 +952,7 @@ or without a box altogether:
 {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 
 
+
 ### Creating new FAQs/snippets
 
 Do you want to include something in your tutorial that you think might be useful in other tutorials as well? Or are you answering a frequently asked question? Consider creating a snippet for it
@@ -940,6 +979,8 @@ Here you can write the snippet / answer to the FAQ in Markdown
 {% assign kid_key = "FAQ Schema" %}
 {% assign kid_val = site.data['schema-faq'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-faqs.md %}
 
 ### FAQ pages
 
@@ -1101,6 +1142,8 @@ The branch can be selected via URL parameter e.g. for courses, to prevent users 
 - [See this page with Ananas](?gtn-cyoa=Ananas#choose-your-own-tutorial)
 - [See this page with Avocados](?gtn-cyoa=Avocados#choose-your-own-tutorial)
 
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-cyoa.md %}
+
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
 
@@ -1187,6 +1230,7 @@ To use this system, you need to take care of a few things:
 
 - Do **not** use hands-on boxes for segments that should be executed (code needs to be left aligned!)
 - Do **not** use snippets
+- Do **not** use icons `{% raw %}{% icon X %}{% endraw %}`
 - Do not use a terminal or prompt character (that would be included in the execution.)
 - Avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
 
@@ -1262,7 +1306,6 @@ If you have created a new tutorial, please also consider writing a [GTN news pos
 
 
 ## Footnotes (Rendered)
-
 
 <script type="text/javascript">
 // Replace all ZWSPs with nothing, to prevent users copying them and them not working.

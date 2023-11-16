@@ -25,8 +25,6 @@ contributors:
 
 ---
 
-# Introduction
-
 
 Artificial neural networks are a machine learning discipline that have been successfully applied to problems
 in pattern classification, clustering, regression, association, time series prediction, optimiztion, and control {% cite JainEtAl %}.
@@ -265,7 +263,7 @@ element is 1, corresponding to the digit, and the rest are 0's.
 >    - *"Input file"* : Select `y_train`
 >    - *"Does the dataset contain header?"* : Select `No`
 >    - *"Total number of classes"*: Select `10`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -303,7 +301,7 @@ element is 1, corresponding to the digit, and the rest are 0's.
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*": `10`
 >                - *"Activation function"*: `softmax`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 Each image is passed in as a 784 dimensional vector (28 x 28 = 784). The reshape layer reshapes it into (28, 28, 1) dimensions -- 28 rows (image height), 28 columns (image width), and
@@ -329,7 +327,7 @@ probability is predicted by CNN. The model config can be downloaded as a JSON fi
 >    - In *"Fit Parameters"*:
 >        - *"epochs"*: `2`
 >        - *"batch_size"*: `500`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 A loss function measures how different the predicted output is versus the expected output. For multi-class classification problems, we use
@@ -351,7 +349,7 @@ The model builder can be downloaded as a zip file.
 >        - *"Choose how to select data by column:"*: `All columns`
 >        - *"Dataset containing class labels or target values"*: Select the OHE representation of `y_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 >
 {: .hands_on}
@@ -370,7 +368,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 >    - *"Select input data type for prediction"*: `tabular data`
 >    - *"Training samples dataset"*: Select `X_test` dataset
 >    - *"Choose how to select data by column:"*: `All columns`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -386,7 +384,7 @@ The prediction step generates 1 dataset. It's a file that has predictions (0 to 
 >    - *"Choose how to select data by column:"*: `All columns`
 >    - *"Select dataset containing the predicted labels"*": Select `Model Prediction` from the previous step
 >    - *"Does the dataset contain header:"*: `Yes`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 

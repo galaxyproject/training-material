@@ -18,7 +18,7 @@ key_points:
     - "Heinz helps narrow down the scope to find the key pathways"
     - "Multiple CPUs will accelerate the computation especially for the complex datasets"
 contributors:
-    - cicozhang
+    - ChaoZhang123
 ---
 
 # Overview
@@ -54,7 +54,7 @@ parameters to speed up the analysis for the purposes of this tutorial.
 In this tutorial, we will run the Heinz workflow step by step to understand how each step works. To get an overview of what this workflow does
 and what kind of calculation is involved, view the flowchart below.
 
-![Heinz flowchart](../../images/flowchart-heinz.png)
+![Heinz flowchart](../../images/transcriptomics_images/flowchart-heinz.png)
 
 # Obtaining and preparing data  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105)
 
@@ -98,6 +98,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > 1. Make sure we have an empty Galaxy history. Give it a sensible name.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. **Upload Disease Dataset**
@@ -187,16 +188,13 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > > 1. Click on the **checkmark icon** at top of your history.
 > >   ![Checkmark icon in history menu](../../../../shared/images/history_menu_buttons2.png)
 > >
-> > 2. Select all the files whose name contains `CP`, then click on **for all selected..** and select
+> > 2. Select all the files whose name contains `CP`, then click on **n of N selected** and select
 > >   **Build Dataset List** from the dropdown menu.
 > >
 > > 3. In the next dialog window, you need to give a name, here we just set it to `CP`, then click **Create list**.
 > >
-> > 4. Hidden these selected files by clicking on **for all selected..** and selecting **Hidden datasets**.
-> >   **Note:** This step is optional, we do it here to keep Galaxy history clean.
-> >
-> > 5. Redo the Step 2, 3, 4 for CN, set the name of the data list as 'CN'.
-> {: .details}
+> > 4. Redo the Step 2, 3 for CN, set the name of the data list as 'CN'.
+> {: .hands_on}
 {: .tip}
 
 
@@ -265,7 +263,7 @@ under alternative hypothesis, the noise component (which holds under null hypoth
 modeled by a uniform distribution. With this knowledge, we can fit these p-values to a mixture model
 (BUM model), as the figure below shows.
 
-![p-values are fitted to a mixture model](../../images/bum.jpeg){:width="50%"}
+![p-values are fitted to a mixture model](../../images/transcriptomics_images/bum.jpeg){:width="50%"}
 
 > <comment-title>Why do we need a mixture model?</comment-title>
 >
@@ -429,7 +427,7 @@ The result we got from the last step is not very human-readable, is it? It is a 
 
 In this tutorial, you probably get a similar graph to the following:
 
-![p-values are fitted to a mixture model](../../images/Heinz_visualisation.png){:width="30%"}
+![p-values are fitted to a mixture model](../../images/transcriptomics_images/Heinz_visualisation.png){:width="30%"}
 
 > <question-title></question-title>
 >
@@ -445,7 +443,7 @@ In this tutorial, you probably get a similar graph to the following:
 
 In addition to the tool we will use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer visualization, if we use the original data from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), perform all of these steps and visualize the result by eXamine, we can get a visualization as follows:
 
-![metaModules Result](../../images/metaModules.png){:width="60%"}
+![metaModules Result](../../images/transcriptomics_images/metaModules.png){:width="60%"}
 
 If you are interested, you may try to make sense of the result yourself. To answer the question "which pathways are potentially contributing to dental caries?", we need to find the key pathways relevant to the subnetwork. To achieve that, we probably need to combine information from other bioinformatics services and literature.
 
@@ -464,7 +462,7 @@ Let's assume that these are the operations we always need for different datasets
 >
 {: .hands_on}
 
-![Heinz workflow](../../images/heinz-workflow.png)
+![Heinz workflow](../../images/transcriptomics_images/heinz-workflow.png)
 
 As a self practice, you ran the newly created workflow with the dataset in this tutorial. Do you feel the convenience of running a workflow directly?
 

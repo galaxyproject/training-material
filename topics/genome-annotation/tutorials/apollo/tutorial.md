@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Refining Genome Annotations with Apollo (prokaryotes)
-zenodo_link: https://zenodo.org/record/3270822
+zenodo_link: https://zenodo.org/record/4889110
 tags:
   - prokaryote
 questions:
@@ -23,12 +23,14 @@ key_points:
   - Apollo allows a group to view and manually refine predicted genome annotations
   - Use Apollo to edit annotations within your group.
   - Export manual annotations as GFF3.
-contributors:
-  - abretaud
-  - hexylena
-  - nathandunn
-  - mboudet
-  - erasmusplus
+contributions:
+  authorship:
+    - abretaud
+    - hexylena
+    - nathandunn
+    - mboudet
+  funding:
+    - gallantries
 
 requirements:
   - type: "internal"
@@ -45,14 +47,12 @@ abbreviations:
   OGS: Official Gene Set
 ---
 
+
+After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
+
 > <warning-title>Only works on UseGalaxy.eu</warning-title>
 > Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.
 {: .warning}
-
-# Introduction
-
-
-After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
 [Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this. It is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
 
@@ -94,6 +94,7 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 > 0. Create a new history and give it a good name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 1. Click the upload icon {% icon galaxy-upload %}
@@ -103,21 +104,21 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 > 3. Copy & Paste the following table into the Rule-based uploader textbox:
 >
 >    ```
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/augustus.gff3	Augustus	gff3
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/blastp_vs_swissprot_2018-01-22.blastxml	Blastp vs swissprot	blastxml
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_K12_Coverage.bigwig	BWA-MEM K12 Coverage	bigwig
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_K12_Mapping.bam	BWA-MEM K12 Mapping	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_O104_Coverage.bigwig	BWA-MEM O104 Coverage	bigwig
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_O104_Mapping.bam	BWA-MEM O104 Mapping	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/E._coli_str_K-12_substr_MG1655_100kb_subset.fasta	Genome	fasta
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/K12_Variants.vcf	K12 Variants	vcf
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/NCBI_AnnotWriter_Genes.gff3	NCBI AnnotWriter Genes	gff3
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/O104_H4_LASTZ_Alignment.bed	O104 H4 LASTZ Alignment	bed
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/O104_Variants.vcf	O104 Variants	vcf
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927169_rep1.bam	TopHat SRR1927169 rep1	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat SRR1927169 rep1 Coverage	bigwig
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927170_rep2.bam	TopHat SRR1927170 rep2	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat SRR1927170 rep2 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/augustus.gff3	Augustus	gff3
+>    https://zenodo.org/records/4889110/files/blastp_vs_swissprot_2018-01-22.blastxml	Blastp vs swissprot	blastxml
+>    https://zenodo.org/records/4889110/files/BWA-MEM_K12_Coverage.bigwig	BWA-MEM K12 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/BWA-MEM_K12_Mapping.bam	BWA-MEM K12 Mapping	bam
+>    https://zenodo.org/records/4889110/files/BWA-MEM_O104_Coverage.bigwig	BWA-MEM O104 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/BWA-MEM_O104_Mapping.bam	BWA-MEM O104 Mapping	bam
+>    https://zenodo.org/records/4889110/files/E._coli_str_K-12_substr_MG1655_100kb_subset.fasta	Genome	fasta
+>    https://zenodo.org/records/4889110/files/K12_Variants.vcf	K12 Variants	vcf
+>    https://zenodo.org/records/4889110/files/NCBI_AnnotWriter_Genes.gff3	NCBI AnnotWriter Genes	gff3
+>    https://zenodo.org/records/4889110/files/O104_H4_LASTZ_Alignment.bed	O104 H4 LASTZ Alignment	bed
+>    https://zenodo.org/records/4889110/files/O104_Variants.vcf	O104 Variants	vcf
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927169_rep1.bam	TopHat SRR1927169 rep1	bam
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat SRR1927169 rep1 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927170_rep2.bam	TopHat SRR1927170 rep2	bam
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat SRR1927170 rep2 Coverage	bigwig
 >    ```
 > 4. Click **Build**
 >
@@ -163,7 +164,7 @@ Let's begin by building a JBrowse instance with all the data we have for this ge
 > To reduce the size of the data, in this tutorial we will only work on a portion of the *Escherichia coli K12 str. MG1655* genome.
 {: .comment}
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -455,7 +456,7 @@ Once you have added some alterations, Apollo will automatically display the effe
 
 # Exporting and collaborating
 
-{% include {{ page.dir }}collab.md eukaryote=false %}
+{% include topics/genome-annotation/tutorials/apollo/collab.md eukaryote=false %}
 
 # Conclusion
 

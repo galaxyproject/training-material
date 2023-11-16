@@ -22,9 +22,6 @@ contributors:
   - annefou
 ---
 
-# Introduction
-
-
 This training will demonstrate how to reproduce analyses performed in the Galaxy framework. Before we start with the hands-on part, we would like to give you some information about Galaxy.
 
 Galaxy is a scientific workflow, data integration and data analysis and publishing platform. Galaxy is an open-source platform for accessible, reproducible, and transparent computational research. While Galaxy was started to allow non-bioinformaticians to analyze DNA sequencing data, it nowadays enables analysis tasks of many different domains including machine learning, ecology, climate science and  omics-type of analyses. Galaxy is easy to use because it is accessible via a web-browser and provides a graphical user interface which enables access to pre-installed tools and large computational resources. In Galaxy, all analyses are stored in so-called histories. The history keeps track of all the tools, tool versions and parameters that were used in the analysis. From such a history, a workflow can be extracted; this workflow can be used to easily repeat the analysis on different data. Both, histories and workflows, can either be shared privately with colleagues or publicly, for example as part of a published manuscript.
@@ -68,7 +65,7 @@ The Galaxy interface consists of three main parts:
 
 # Create a history and load data into it
 
-Each analysis in Galaxy starts by creating a new analysis history and loading data into it. Galaxy supports a huge variety of data types and data sources. Different ways of bringing data into Galaxy are explained [here]({{site.baseurl}}/topics/galaxy-interface/tutorials/get-data/slides.html#1). To reproduce published results, the data needs to be loaded from the public repository where the authors have deposited the data. This is most often done by importing data via a web link.
+Each analysis in Galaxy starts by creating a new analysis history and loading data into it. Galaxy supports a huge variety of data types and data sources. Different ways of bringing data into Galaxy are explained [in the interface slides]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}). To reproduce published results, the data needs to be loaded from the public repository where the authors have deposited the data. This is most often done by importing data via a web link.
 
 
 > <hands-on-title>Create history</hands-on-title>
@@ -113,6 +110,7 @@ Each analysis in Galaxy starts by creating a new analysis history and loading da
 >      - Option 2: Datatypes can be **manually set**
 >
 >    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
 > 4. Add an `#iris` tag {% icon galaxy-tags %} to the dataset
@@ -132,7 +130,7 @@ Each analysis in Galaxy starts by creating a new analysis history and loading da
 >
 > {% snippet faqs/galaxy/collections_build_list.md %}
 >
-> In case you want to run a published Galaxy workflow on your own data, you can find explanations about the options to upload your own data [here](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/get-data/slides.html#1).
+> In case you want to run a published Galaxy workflow on your own data, you can find explanations about the options to upload your own data [in the interface slides]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}).
 {: .details}
 
 
@@ -191,7 +189,7 @@ This tutorial follows option 1, but options 2 and 3 are no more difficult
 {: .hands_on}
 
 > <comment-title>Hidden datasets in history</comment-title>
-> Some workflow outputs might be considered as not very important intermediate results and are thus marked as getting hidden in the analysis history after they turned green. This makes the history easier to navigate through the main results which are visible in the history. Hidden datasets can be made visible individually by clicking on "hidden" on top of the history and then clicking "unhide" for the individual datasets. To unhide many dataset at once, click "operations on multiple datasets" at the top right of the history; then select all hidden datasets that you would like to unhide, then click "For all selected... unhide dataset".
+> Some workflow outputs might be considered as not very important intermediate results and are thus marked as getting hidden in the analysis history after they turned green. This makes the history easier to navigate through the main results which are visible in the history. Hidden datasets can be made visible individually by clicking on the eye with a slash on top of the history and then clicking "Unhide" for the individual datasets. To unhide many dataset at once, click {% icon galaxy-selector %} "Select Items" at the top left of the history; then select all hidden datasets that you would like to unhide, then click "For n of N selected" and then "Unhide".
 {: .comment}
 
 By starting the workflow all jobs are sent to the Galaxy cluster for analysis. Sometimes it can take a bit until the datasets show up in your history. The jobs are processed one after the other or in parallel if the same input is used for several steps. Grey means waiting to run, yellow means running and green means finished. Red means there was an error.
@@ -252,7 +250,7 @@ However, sometimes you may wish to do more, like...
 
 # Manipulating the analysis
 
-Maybe you are interested in changing some of the original tool parameters and see how this changes the result. The parameter changes can be either done inside the workflow editor, which makes it easy to change many parameters at once (training on [Using Workflow Parameters](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html)) or directly in the history. To repeat a single analysis step with new parameters this can be done directly in the Galaxy history with the `re-run` option.
+Maybe you are interested in changing some of the original tool parameters and see how this changes the result. The parameter changes can be either done inside the workflow editor, which makes it easy to change many parameters at once (training on [Using Workflow Parameters]({% link topics/galaxy-interface/tutorials/workflow-parameters/tutorial.md %})) or directly in the history. To repeat a single analysis step with new parameters this can be done directly in the Galaxy history with the `re-run` option.
 
 > <hands-on-title>Manipulate the analysis steps</hands-on-title>
 >

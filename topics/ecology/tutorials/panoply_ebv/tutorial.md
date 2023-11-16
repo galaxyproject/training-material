@@ -29,8 +29,7 @@ contributors:
 ---
 
 
-# Introduction
-
+The practical aims at familiarzing you with the [Panoply](https://www.giss.nasa.gov/tools/panoply/) Galaxy interactive tool. Panoply is among the most popular tool to visualize geo-referenced data stored in [Network Common Data Form](https://en.wikipedia.org/wiki/NetCDF) (netCDF). It provides a graphical interface for inspecting (show metadata) and visualizing netCDF data. It supports many features to customize your plots and we will introduce some of them in this lesson.
 
 > <comment-title></comment-title>
 >
@@ -38,7 +37,6 @@ contributors:
 >
 {: .comment}
 
-The practical aims at familiarzing you with the [Panoply](https://www.giss.nasa.gov/tools/panoply/) Galaxy interactive tool. Panoply is among the most popular tool to visualize geo-referenced data stored in [Network Common Data Form](https://en.wikipedia.org/wiki/NetCDF) (netCDF). It provides a graphical interface for inspecting (show metadata) and visualizing netCDF data. It supports many features to customize your plots and we will introduce some of them in this lesson.
 
 In this tutorial, you will learn to:
 - Plot EBV cube arrays.
@@ -119,7 +117,7 @@ In this tutorial, we will be using data from the [GEO BON EBV data portal](https
 > >
 > > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} by clicking [on the Panoply interactive tool shortcut](https://usegalaxy.eu/?tool_id=interactive_tool_panoply)
 > > 2. Check **martins_comcom_id1_20220208_v1.nc** dataset selected in the netcdf input field
-> > 3. Click Execute
+> > 3. Click Run Tool
 > > 4. The tool will start running and will stay running permanently
 > > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
 > > 6. Click on your Panoply instance

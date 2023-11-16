@@ -33,9 +33,6 @@ contributors:
   - hexylena
 ---
 
-# Introduction
-
-
 We stumbled upon a paper ({% cite Li2012 %}) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
 However, the list of genes is neither in the supplement of the paper, nor part of the GEO submission.
 The closest thing we could find is a file in GEO containing a list of the regions where the signal is significantly enriched (so called *peaks*):
@@ -282,7 +279,7 @@ As we can see, the peak file lacks `chr` before any chromosome number. But what 
 >     - *"Text file"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"Operation"*: `Keep last lines`
 >     - *"Number of lines"*: Choose a value, e.g. `100`
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 > 3. Wait for the job to finish
 > 4. Inspect the file through the {% icon galaxy-eye %} (eye) icon (**View data**)
 >
@@ -496,7 +493,7 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 
 > <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-delete %} button.
 >
 >    This will make the creation of the workflow easier.
 >

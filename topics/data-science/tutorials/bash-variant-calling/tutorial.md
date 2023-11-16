@@ -12,12 +12,15 @@ key_points:
   - "Bioinformatic command line tools are collections of commands that can be used to carry out bioinformatic analyses."
   - "To use most powerful bioinformatic tools, you will need to use the command line."
   - "There are many different file formats for storing genomics data. It is important to understand what type of information is contained in each file, and how it was derived."
-contributors:
+contributions:
+  authorship:
   - Sofokli5
   - fpsom
   - shiltemann
   - hexylena
   - carpentries
+  funding:
+  - gallantries
 ---
 
 
@@ -124,7 +127,7 @@ The alignment process consists of two steps:
 > > $ mv sub/ ~/dc_workshop/data/trimmed_fastq_small
 > > ```
 > {: .code-in}
-> >
+>
 > You will also need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because `mkdir` can accept multiple new directory names as input.
 >
 > > <code-in-title>Create result directories</code-in-title>
@@ -165,8 +168,8 @@ The alignment process consists of two steps:
 > <hands-on-title>Align reads to reference genome</hands-on-title>
 >
 > The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an
-aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it
-is faster and more accurate.
+> aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it
+> is faster and more accurate.
 >
 > An example of what a `bwa` command looks like is below. This command will not run, as we do not have the files `ref_genome.fa`, `input_file_R1.fastq`, or `input_file_R2.fastq`.
 >
@@ -189,7 +192,7 @@ is faster and more accurate.
 > > $ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
 > > ```
 > {: .code-in}
-> >
+>
 > > <code-out-title></code-out-title>
 > > ```
 > > [M::bwa_idx_load_from_disk] read 0 ALT contigs
@@ -308,9 +311,9 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 > <hands-on-title>Step 1: Calculate the read coverage of positions in the genome</hands-on-title>
 >
 > Do the first pass on variant calling by counting read coverage with
-[bcftools](https://samtools.github.io/bcftools/bcftools.html). We will
-use the command `mpileup`. The flag `-O b` tells bcftools to generate a
-bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
+> [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will
+> use the command `mpileup`. The flag `-O b` tells bcftools to generate a
+> bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
 > > <code-in-title>`mpileup` command</code-in-title>
 > > ```bash
 > > $ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
@@ -351,7 +354,7 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 
 > <hands-on-title>Explore the VCF format:</hands-on-title>
 >
-> > {% icon code-in%}
+> > <code-in-title></code-in-title>
 > > ```bash
 > > $ less -S results/vcf/SRR2584866_final_variants.vcf
 > > ```
@@ -361,7 +364,7 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 > created, the version of bcftools that was used, the command line parameters used, and
 > some additional information:
 >
-> > {% icon code-out%} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > ##fileformat=VCFv4.2
 > > ##FILTER<ID=PASS,Description="All filters passed">

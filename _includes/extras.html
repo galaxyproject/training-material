@@ -4,8 +4,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right">
 
-        {% assign thispage = page.url | replace: '.html', '.md' %}
-        <a class="dropdown-item" href="{{ site.github_repository }}{% unless thispage == '/' %}/edit/{{ site.github_repository_branch }}{{ thispage }}{% endunless %}" title="Edit on GitHub">
+        <a class="dropdown-item" href="{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/{{ page.path }}" title="Edit on GitHub">
           {% icon github %} Edit on GitHub
         </a>
 
@@ -46,36 +45,9 @@
             </a>
         {% endif %}
 
-        <div class="dropdown-item">
-            <div>
-                {% icon gtn-theme %} Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                <label data-value="default" class="btn btn-secondary">
-                    <input type="radio" name="options" id="default" autocomplete="off"> Default
-                </label>
-                <label data-value="night" class="btn btn-secondary">
-                    <input type="radio" name="options" id="night" autocomplete="off"> Night
-                </label>
-                <label data-value="midnight" class="btn btn-secondary">
-                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
-                </label>
-                <label data-value="rainbow" class="btn btn-secondary">
-                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
-                </label>
-                <label data-value="progress" class="btn btn-secondary">
-                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
-                </label>
-                <label data-value="halloween" class="btn btn-secondary">
-                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
-                </label>
-                <label data-value="straya" class="btn btn-secondary">
-                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
-                </label>
-            </div>
-
-        </div>
+		<a href="{% link preferences.md %}" class="dropdown-item">
+			{% icon gtn-theme %} User Preferences <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -84,9 +56,9 @@
 
             <div id="archive-selector">
             {% for tag in site.git_tags_recent %}
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/{{tag}}{{ page.url }}" title="Version {{tag}}">{{ tag }}</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/{{tag}}{{ page.url }}">{{ tag }}</a>
             {% endfor %}
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
         </div>

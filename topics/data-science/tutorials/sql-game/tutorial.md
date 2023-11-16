@@ -26,7 +26,7 @@ subtopic: sql
 contributors:
 - hexylena
 - NUKnightLab
-- erasmusplus
+- gallantries
 - avans-atgm
 tags:
 - game

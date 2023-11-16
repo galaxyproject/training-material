@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: Somatic Variant Discovery from WES Data Using Control-FREEC
 zenodo_link: https://doi.org/10.5281/zenodo.2582555
+subtopic: human-genetics-cancer
 questions:
 - What are the specific challenges in locating human Copy Number Variances (hCNVs)?
 - How to preprocess the sequenced reads for hCNVs detection?  
@@ -17,15 +18,13 @@ key_points:
   to minimize false-positive hCNVs.
 contributors:
 - Khaled196
-- kpbioteam
+- kkamieniecka
 - wm75
-- davidsalgado
-- kpoterlowicz
+- d-salgado
+- poterlowicz-lab
 
 ---
 
-
-# Introduction
 
 
 Human Copy Number Variations (hCNVs) are the result of structural genomic rearrangements that result in the duplication or deletion of DNA segments. These changes contribute significantly to human genetic variability, diseases, and somatic genome variations in cancer and other diseases {% cite Nam2015 %}. hCNVs can be routinely investigated by genomic hybridisation and sequencing technologies
@@ -54,14 +53,16 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 | SLGFSK-T_231336_r2_chr5_12_17 | fastq  | Cancer tissue | Sanger / Illumina 1.9 | 101 |16293448 | 5, 12 and 7 | 868.7 MB |
 
 ## Get data
-> <hands-on-title>Data upload</hands-on-title>
+
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. For this tutorial, make a new history.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-2. Import the data files from
+> 2. Import the data files from
 >    [Zenodo](https://zenodo.org/record/2582555):
 >
 >    ```
@@ -116,7 +117,7 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 # Quality control and mapping of NGS reads
 The data was obtained following a series of laboratory procedures, including DNA preparation, extraction, and sequencing, which means there is a possibility of errors occurring during those steps, which could affect data quality. To address that, it is necessary to test the quality of the fastq reads. The data quality needs to be within an acceptable range before looking for hCNVs. The low-quality data can lead us to false results. To detect low-quality data,  preprocessing step is required to trim or discard the low-quality reads before proceeding with the mapping and hCNV detection steps.
 
-> <comment-title>More on quality control and mapping</comment-title>
+> <comment-title>More on quality control and mapping</comment-title>
 >  To read more about quality control this is tutorial on Galaxy training network 
 > [ Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) 
 > For mapping [Mapping]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %})
@@ -124,7 +125,7 @@ The data was obtained following a series of laboratory procedures, including DNA
 
 
 ## Quality Control
-> <hands-on-title>Quality control of the input datasets</hands-on-title>
+> <hands-on-title>Quality control of the input datasets</hands-on-title>
 > 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on the fastq datasets
 >       - {% icon param-files %} *"Short read data from the current history"*: all 4 FASTQ  datasets selected with **Multiple datasets**
 >
@@ -180,7 +181,7 @@ As previously demonstrated, The data have relatively high-quality sequenced read
 However, the aim is to detect clear reads for hCNVs and will use a trimming step to see if the analysis can be improved.
 
 
-> <hands-on-title>Read trimming and filtering of the normal tissue reads</hands-on-title>
+> <hands-on-title>Read trimming and filtering of the normal tissue reads</hands-on-title>
 > 1. Run {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5) %} to trim and filter the normal tissue reads
 >    - *"Single-end or paired-end reads?"*: `Paired-end (two separate
 >      input files)`
@@ -231,17 +232,17 @@ This step will creates four files in the history. The sizes of those two files v
 The other two are for unmated reads as a result of excessive trimming.
 However, because of the high average data quality, there was no need to perform excessive trimming by selecting the previous three trimming conditions, so those files should be empty. Those files can be heden to keep the history cleaner.
 
-> <details-title>Keeping attention on the data type</details-title>
+> <details-title>Keeping attention on the data type</details-title>
 > Track whether the reads are paired or unpaired, and remember to include them in any tool to be used.
 > The reason is that there are some tools, such as read mappers,
 > that expect reads to be in a specific order and having unmapped reads can result in significant.
 {: .details}
 
-> <hands-on-title>Read trimming and filtering of the tumor tissue reads</hands-on-title>
+> <hands-on-title>Read trimming and filtering of the tumor tissue reads</hands-on-title>
 > 2. repeat the previous step for **tumor tissue** reads following the same steps as above.
 {: .hands_on}
 
-> <hands-on-title>Exercise: Quality control of the polished datasets</hands-on-title>
+> <hands-on-title>Exercise: Quality control of the polished datasets</hands-on-title>
 > Use {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} and {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %} like before,
 > but using the four trimmed datasets produced by Trimmomatic as input.
 >
@@ -262,12 +263,12 @@ However, because of the high average data quality, there was no need to perform 
 
 ## Read Mapping
 
-> <hands-on-title>Read Mapping</hands-on-title>
+> <hands-on-title>Read Mapping</hands-on-title>
 > 1. Use {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} to map the reads from the **normal tissue** sample to the reference genome
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
 >        - *"Using reference genome"*: `Human: hg19` (or a similarly named option)
 >
->      > <comment-title>Using the imported `hg19` sequence</comment-title>
+>      > <comment-title>Using the imported `hg19` sequence</comment-title>
 >      > If you have imported the `hg19` sequence as a fasta dataset into your
 >      > history instead:
 >      >   - *"Will you select a reference genome from your history or use a
@@ -290,7 +291,7 @@ However, because of the high average data quality, there was no need to perform 
 >      - *"Platform/technology used to produce the reads (PL)"*: `ILLUNINA`
 >      - *"Select analysis mode"*: `Simple illumina mode`
 >
->    > <comment-title>More on read group identifiers and sample names</comment-title>
+>    > <comment-title>More on read group identifiers and sample names</comment-title>
 >    > In general, we can choose our own ID and SM values, but the ID should
 >    > unambiguously identify the sequencing run that produced the reads,
 >    > while the SM value should identify the biological sample.
@@ -316,9 +317,9 @@ However, because of the high average data quality, there was no need to perform 
 >        - *"Read group sample name (SM)"*: `Not available.`
 >      - *"Platform/technology used to produce the reads (PL)"*: `ILLUNINA`
 >      - *"Select analysis mode"*: `Simple illumina mode`
- {: .hands_on}
+{: .hands_on}
 
- > Name the created list as **Mapping-lsit**
+Name the created list as **Mapping-lsit**
 
 
 
@@ -334,7 +335,7 @@ After the mapping step, the data are ready to the hCNV detection step. This tuto
 
 The remaining data preprocessing until the Control-FreeC step is the same for Normal and Tumor reads.  Create a data collection to include those two files.
 
-> <hands-on-title>Filtrate the mapped reads</hands-on-title>
+> <hands-on-title>Filtrate the mapped reads</hands-on-title>
 > 1. Use {% tool [Build list](__BUILD_LIST__) %} to creat a list from the maped reads of the **normal tissue** and **tumor tissue**
 >    -  {% icon param-file %} *"Dataset"*: `Insert dataset`
 >       - *"Input dataset"*: `The output of map with BWA-MEM for normal tissue`
@@ -365,7 +366,7 @@ works by filtrating the mapped reads by removing the low-quality regions
 and the duplicated reads. This step is needed to reduce the running time
 and in results interpretation.
 
-> <hands-on-title>Data filtration and Remove duplicates</hands-on-title>
+> <hands-on-title>Data filtration and Remove duplicates</hands-on-title>
 > 1. Run {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3) %}  with the following parameters
 >   - {% icon param-collection %} *"SAM/BAM/CRAM dataset"*: The outpot of  `Relabel identifiers` dataset cpllection.
 >   -  *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
@@ -394,7 +395,7 @@ and in results interpretation.
 To detect hCNVs expression accurately. The reads must go through the lift alignment process. Lift Alignment works by shifting reads that contain indels to the left of a reference genome until they can not be shifted anymore. As a result, it will only extract reads with indels, with no false reads (reads that mismatch with the reference genome other than the indels).
 
 
-> <hands-on-title>Homogenize the positional distributed indels</hands-on-title>
+> <hands-on-title>Homogenize the positional distributed indels</hands-on-title>
 > 1. Run {% tool [BamLeftAlign](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1) %}  with the following parameters
 >   -  *"Choose the source for the reference genome"*: `Locally cached `
 >   -  {% icon param-collection %} *"Select alignment file in BAM format"*: The outpot of  `tool RmDup`.
@@ -416,7 +417,7 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 
 ## Filtrate indels
 
-> <hands-on-title>Filtrate the indels reads</hands-on-title>
+> <hands-on-title>Filtrate the indels reads</hands-on-title>
 > 1. Run {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3) %}  with the following parameters
 >   -  {% icon param-collection %} *"BAM file to recalculate"*: The outpot of  `Samtools CalMD`.
 >   -  *"What would you like to look at?"*: `Just the input header (-H)`
@@ -470,7 +471,7 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 >   -  *"Reference data"*:`No`
 {: .hands_on}
 
-> <hands-on-title>Extract files form list</hands-on-title>
+> <hands-on-title>Extract files form list</hands-on-title>
 > extract the files from the list to handel them separitly
 > 1. Run {% tool [Extract Dataset](__EXTRACT_DATASET__) %}  with the following parameters:
 >   -  {% icon param-collection %} *"Input List"*: `The outpot of Samtools view`.
@@ -493,7 +494,7 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 The data are now ready to detect hCNV. Control-FREEC detects copy-number alterations and allelic imbalances (including loss of heterozygosity; LOH) by automatically computing, normalising, and segmenting copy number profile and beta allele frequency (BAF) profile, and then calling copy number alterations and LOH. Control-FREEC differentiates between somatic and germline variants. Based on those profiles. The control reads display the gene status for each segment.
 ![Controlfreec](../../images/Control_Freec_output.png "1. Control-FREEC calculates copy number and BAF profiles and detects regions of copy number gain/loss and LOH regions in chromosomes 5,12 17. Gains, losses and LOH are shown in red, blue and light blue, respectively.")
 
-> <comment-title>More on control_FREEC and hCNVs detection</comment-title>
+> <comment-title>More on control_FREEC and hCNVs detection</comment-title>
 > Control-freec works by: 
 > 1. Annotating genomic changes and heterozygosity loss in the sample dataset.
 > 2. Distinguishes between germline and somatic variants by creating copy number profile and BAF profile.
@@ -520,7 +521,7 @@ The data are now ready to detect hCNV. Control-FREEC detects copy-number alterat
 
 
 
-> <hands-on-title>Detection of copy-number changes</hands-on-title>
+> <hands-on-title>Detection of copy-number changes</hands-on-title>
 > 1. Import the DED file for the captured reagions from [Zenodo](https://doi.org/10.5281/zenodo.5697358):
 >
 >    ```
@@ -591,7 +592,7 @@ present the link between their data at a high rate by providing the ability to c
 and elements in creating the plot. Circos visualise the genomic alterations in genome structure and 
 the relationships between the genomic intervals [Krzywinski, Schein et al. 2009](https://genome.cshlp.org/content/19/9/1639.short).
 
- > <hands-on-title>Visualise the hCNV findings</hands-on-title>
+> <hands-on-title>Visualise the hCNV findings</hands-on-title>
 > 1. Run {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %}  with the following parameters
 >   -  *"Reference Genome Source"*: `Custom Karyotype`
 >   -  {% icon param-file %} *"Sample file"*: The outpot of  `Output dataset out_chr_sorted_circos from control freec`

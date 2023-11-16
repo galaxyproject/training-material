@@ -67,7 +67,7 @@ contributors:
   - carpentries
   - hexylena
   - bazante1
-  - erasmusplus
+  - gallantries
   - avans-atgm
 tags:
 - bash
@@ -816,7 +816,7 @@ done
 
 it would work exactly the same way.
 
-**Don't do this.**
+# Don't do this.
 
 Programs are only useful if people can understand them,
 so meaningless names (like `x`) or misleading names (like `temperature`)
@@ -1232,7 +1232,7 @@ and edits it to read:
 for datafile in NENE*A.txt NENE*B.txt; do echo $datafile; bash goostats.sh $datafile stats-$datafile; done
 ```
 
-> ## Beginning and End
+> <tip-title>Beginning and End</tip-title>
 >
 > We can move to the beginning of a line in the shell by typing <kbd>Ctrl</kbd>+<kbd>A</kbd>
 > and to the end using <kbd>Ctrl</kbd>+<kbd>E</kbd>.
@@ -1331,7 +1331,7 @@ so she decides to get some coffee and catch up on her reading.
 > > ```
 > {: .code-in}
 >
-> > <tip-title>Solution</tip-title>
+> > <solution-title></solution-title>
 > > The second version is the one we want to run.
 > > This prints to screen everything enclosed in the quote marks, expanding the
 > > loop variable name because we have prefixed it with a dollar sign.

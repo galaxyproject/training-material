@@ -4,9 +4,6 @@
   {% assign genome_name = "genome.fasta"%}
 {% endif %}
 
-# Introduction
-{:.no_toc}
-
 Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
 
 In this tutorial we will use a software tool called Maker {% cite Campbell2014 %} to annotate the genome sequence of a small eukaryote: *Schizosaccharomyces pombe* (a yeast).
@@ -19,7 +16,7 @@ Maker uses ab-initio predictors (like [Augustus](http://bioinf.uni-greifswald.de
 
 In this tutorial you will learn how to perform a genome annotation, and how to evaluate its quality. {% unless include.short %}You will see how training ab-initio predictors is an important step to produce good results. {% endunless %}Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome browser to visualise the results.
 
-More information about Maker can be found [here](http://www.yandell-lab.org/software/maker.html).
+More information about Maker can be found [on their website](http://www.yandell-lab.org/software/maker.html).
 
 This tutorial was inspired by the MAKER Tutorial for [WGS Assembly and Annotation Winter School 2018](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018), don't hesitate to consult it for more information on Maker, and on how to run it with command line.
 
@@ -86,6 +83,7 @@ To annotate a genome using Maker, you need the following files:
 >    {% endif %}
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
@@ -685,7 +683,6 @@ You will now see new tracks displaying all the evidences used by Maker to genera
 {% endunless %}
 
 # Conclusion
-{:.no_toc}
 
 Congratulations, you finished this tutorial! You learned how to annotate an eukaryotic genome using Maker, how to evaluate the quality of the annotation, and how to visualize it using the JBrowse genome browser.
 

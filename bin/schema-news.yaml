@@ -1,0 +1,175 @@
+---
+type: map
+mapping:
+    layout:
+        type: str
+        required: true
+        enum:
+            - news
+    title:
+        type: str
+        required: true
+        description: |
+            Title of the news post
+        examples:
+            - 'BY-COVID and RO-Crate collaboration brings new topic: FAIR Data, Workflows & More'
+            - "New Tutorial Feature: Choose Your Own Tutorial"
+    tags:
+        type: seq
+        sequence:
+            - type: str
+              required: true
+        description: |
+            A free form list of tags that are relevant for your tutorial.
+        examples:
+            - new topic
+            - new tutorial
+            - new feature
+            - covid-19
+            - git-gat
+    contributors:
+        type: seq
+        sequence:
+            - type: str
+              required: true
+              enum:
+              - CONTRIBUTORS
+              - ORGANISATIONS
+              - FUNDERS
+        description: |
+            List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
+        examples:
+            - hexylena
+            - shiltemann
+    contributions:
+        required: true
+        description: |
+            List of tutorial contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.
+        examples: |
+            contributions:
+                authorship:
+                    - shiltemann
+                    - bebatut
+                editing:
+                    - hexylena
+                    - bebatut
+                    - natefoo
+                testing:
+                    - bebatut
+                infrastructure:
+                    - natefoo
+                translation:
+                    - shiltemann
+                funding:
+                    - gallantries
+        type: map
+        mapping:
+            authorship:
+                description: These entities wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.
+                type: seq
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            editing:
+                type: seq
+                description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            testing:
+                type: seq
+                description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            ux:
+                type: seq
+                description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            infrastructure:
+                type: seq
+                description: These entities managed and provided infrastructure to the GTN or for training purposes
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - FUNDERS
+            funding:
+                type: seq
+                description: These entities provided funding support for the development of this resource
+                sequence:
+                - type: str
+                  enum:
+                  - ORGANISATIONS
+                  - FUNDERS
+            translation:
+                type: seq
+                description: These entities did translation and localisation work on this resource
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+    cover:
+        type: str
+        description: |
+            link to a picture that will be used as the cover for the article
+        examples:
+            - "assets/images/BYCOVID_logo_tagline.png"
+    coveralt:
+        type: str
+        description: |
+            If a cover is provided, then alt text is Mandatory.
+        examples:
+            - "logo of by covid with subtitle reading beyond covid"
+    abbreviations:
+        type: map
+        mapping:
+            "=":
+                type: str
+                description: |
+                    The expansion of the abbreviated term.
+        description: |
+            A dictionary of abbreviations and their expansions.
+        examples: |
+            abbreviations:
+                SQL: Structured Query Language
+                API: Application Programming Interface
+    redirect_from:
+        type: seq
+        sequence:
+            - type: str
+        description: |
+            If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
+        examples:
+        - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
+    tutorial:
+        type: str
+        description: |
+            Include a link to a specific page as a call to action button at the bottom of the page.
+        examples:
+        - topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial.html
+    link:
+        type: str
+        description: |
+            Basically an alias for tutorial, except requiring a full URL
+        examples:
+          - https://example.org
+    external:
+        type: bool
+        description: |
+            Whether clicking on the "read story link" goes directly to another site.
+        enum:
+          - true
+          - false

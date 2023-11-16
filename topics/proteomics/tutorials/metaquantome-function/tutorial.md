@@ -42,8 +42,6 @@ tags: [microbiome]
 ---
 
 
-# Introduction
-
 
 metaQuantome software suite {% cite Easterly2019 %} was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.
 
@@ -74,6 +72,7 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}): a Functional File and an Intensity file.
@@ -188,12 +187,12 @@ In function mode, the following information is required apart from metaQuantome 
 >
 >
 >    > <comment-title></comment-title>
->    >The structure of the output file depends on the analysis mode and the experimental design, but the columns generally look like this, with one row for each term:
+>    > The structure of the output file depends on the analysis mode and the experimental design, but the columns generally look like this, with one row for each term:
 >    >
-| term id | info about term. (one or more columns) | mean term intensity (by sample group)            | term intensity (by sample)                                                      | number of unique peptides (by sample) | number of sample children in each sample |
-|---------|----------------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------|---------------------------------------|------------------------------------------|
-| term1   | name, rank, etc.                       | note that this is the log2 of the mean intensity | this is the log2 of term intensity in each sample. Missing data is coded as NA. | integer. 0 is coded as NA             | integer. 0 is coded as NA                |
-|         |                                        |                                                  |                                                                                 |                                       |                                          |
+>    > | term id | info about term. (one or more columns) | mean term intensity (by sample group)            | term intensity (by sample)                                                      | number of unique peptides (by sample) | number of sample children in each sample |
+>    > |---------|----------------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------|---------------------------------------|------------------------------------------|
+>    > | term1   | name, rank, etc.                       | note that this is the log2 of the mean intensity | this is the log2 of term intensity in each sample. Missing data is coded as NA. | integer. 0 is coded as NA             | integer. 0 is coded as NA                |
+>    > |         |                                        |                                                  |                                                                                 |                                       |                                          |
 >    {: .comment}
 >
 {: .hands_on}

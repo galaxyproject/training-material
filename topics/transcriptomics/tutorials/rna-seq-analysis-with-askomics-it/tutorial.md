@@ -33,10 +33,7 @@ contributors:
 ---
 
 
-# Introduction
 
-
-<!-- AskOmics intro -->
 AskOmics is a web application for data integration and querying using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and BED annotation) into "RDF triples" and store them in a specific kind of database: an "RDF triplestore". Under this form, data can then be queried using a specific language: "SPARQL". AskOmics hides the complexity of these technologies and allows to perform complex queries using a user-friendly interface.
 
 <!-- AskOmics for RNA-Seq -->
@@ -88,6 +85,7 @@ We will use four files for this analysis:
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq AskOmics`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files.
@@ -97,6 +95,7 @@ We will use four files for this analysis:
 >    - Option 2: From [Zenodo](https://zenodo.org/record/3950862)
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    - You can paste the links below into the **Paste/Fetch** box:

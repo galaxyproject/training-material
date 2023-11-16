@@ -11,9 +11,9 @@ contributors: [jennaj, Melkeb]
 
 - **If using a Custom Reference genome**, the methods below also apply, but the first step is to make certain that the Custom Genome is formatted correctly. Improper formatting is the most common root cause of CG related errors.
 
-Method 1: [Finding BAM dataset identifiers](https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_BAM_dataset_identifiers.html)
+Method 1: [Finding BAM dataset identifiers]({% link faqs/galaxy/datasets_BAM_dataset_identifiers.md %})
 
-Method 2: [Directly obtaining UCSC sourced *genome* identifiers](https://training.galaxyproject.org/training-material/faqs/galaxy/datasets_UCSC_sourced_genome.html)
+Method 2: [Directly obtaining UCSC sourced *genome* identifiers]({% link faqs/galaxy/datasets_UCSC_sourced_genome.md %})
 
 Method 3: [Adjusting identifiers for UCSC sourced data used with other sourced data](https://galaxyproject.org/support/chrom-identifiers/#adjusting-identifiers-or-input-source)
 

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Metaproteomics tutorial"
-edam_ontology: "topic_0121"
+edam_ontology: ["topic_0121"]
 zenodo_link: "https://doi.org/10.5281/zenodo.839701"
 questions:
   - "How can I match metaproteomic mass spectrometry data to peptide sequences derived from shotgun metagenomic data?"
@@ -25,9 +25,6 @@ subtopic: multi-omics
 tags: [microbiome]
 ---
 
-# Introduction
-
-
 In this metaproteomics tutorial we will identify expressed proteins from a complex bacterial community sample.
 For this MS/MS data will be matched to peptide sequences provided through a FASTA file.
 
@@ -36,7 +33,7 @@ at a given point in time. It has the potential to unravel the mechanistic detail
 the host / environment by analyzing the functional dynamics of the microbiome.
 
 In this tutorial, we will analyze a sample of sea water that was collected in August of 2013 from the Bering
-Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). The data were originally published in [May et al., 2016](https://www.ncbi.nlm.nih.gov/pubmed/27396978).
+Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). The data were originally published in {% cite May_2016 %}.
 
 > <agenda-title></agenda-title>
 >
@@ -64,6 +61,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.
@@ -93,11 +91,9 @@ We have a choice to run all these steps using a single workflow, then discuss ea
 
 > <hands-on-title>Pretreatments</hands-on-title>
 >
-> 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow.ga) or download it to your computer.
->    - Import the workflow into Galaxy
+> 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/metaproteomics/workflows/workflow.ga" title="Pretreatments" %}
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -114,12 +110,12 @@ We have a choice to run all these steps using a single workflow, then discuss ea
 ## Match peptide sequences
 
 The search database labelled `FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA` is the input database that
-will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see [May et al. (2016)](https://www.ncbi.nlm.nih.gov/pubmed/27396978)). The full original database can be accessed from [here](https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta). The contaminant database (cRAP) was merged with the original database.
+will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see {% cite May_2016 %}). The full original database [is available online](https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta). The contaminant database (cRAP) was merged with the original database.
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.
 The created dataset collection of the three *MGF files* in the history is used as the MS/MS input.
 
-#### SearchGUI
+### SearchGUI
 
 > <hands-on-title>SearchGUI</hands-on-title>
 >
@@ -171,7 +167,7 @@ The created dataset collection of the three *MGF files* in the history is used a
 >
 >    - leave everything else as default
 >
-> 2. Click **Execute**.
+> 2. Click **Run Tool**.
 >
 {: .hands_on}
 
@@ -185,7 +181,7 @@ SearchGUI archive file) that will serve as an input for the next section, Peptid
 >
 {: .comment}
 
-#### PeptideShaker
+### PeptideShaker
 
 [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that
 processes data from the SearchGUI software tool. It serves to organize the Peptide-Spectral
@@ -223,7 +219,7 @@ outputs.
 >       > Galaxy instance to your local computer in a text file if desired.
 >       {: .comment}
 >
-> 2. Click **Execute** and inspect the resulting files after they turned green with the **View data** icon:
+> 2. Click **Run Tool** and inspect the resulting files after they turned green with the **View data** icon:
 >     ![View data button](../../images/view_data_icon.png)
 >
 {: .hands_on}
@@ -264,7 +260,7 @@ proteins and provides a fast matching algorithm for peptides.
 > or operated on within Galaxy.
 {: .comment}
 
-#### Recieving the list of peptides: Query Tabular
+### Recieving the list of peptides: Query Tabular
 
 In order to use *Unipept*, a list containing the peptide sequences has to be generated.
 The tool **Query Tabular** can load tabular data (the PSM report in this case) into a SQLite data base.
@@ -334,7 +330,7 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >
 >    - **include query result column headers**: `No`
 >
-> 2. Click **Execute** and inspect the query results file after it turned green. If everything went well, it should look similiar:
+> 2. Click **Run Tool** and inspect the query results file after it turned green. If everything went well, it should look similiar:
 >
 >     ![Query Tabular output showing the peptides](../../images/query_tabular_1.png "Query Tabular output")
 >
@@ -361,12 +357,12 @@ Therefore we can search the database for the peptides and count the occurrence w
 >          ORDER BY sequence
 >
 >
-> 2. Click **Execute**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
+> 2. Click **Run Tool**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
 >
 {: .hands_on}
 
 
-#### Retrieve taxonomy for peptides: Unipept
+### Retrieve taxonomy for peptides: Unipept
 
 The generated list of peptides can now be used to search via *Unipept*.
 We do a taxonomy analysis using the UniPept pept2lca function to return the taxonomic lowest common ancestor for each peptide:
@@ -381,7 +377,7 @@ We do a taxonomy analysis using the UniPept pept2lca function to return the taxo
 >    - **Select column with peptides**: `Column 1`
 >    - **Choose outputs**: Select `tabular` and `JSON taxonomy tree`
 >
-> 2. Click **Execute**. The history should grow by two files. View each to see the difference.
+> 2. Click **Run Tool**. The history should grow by two files. View each to see the difference.
 >
 >       > <comment-title></comment-title>
 >       >
@@ -461,7 +457,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 >          ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
 >
 >
-> 2. Click **Execute** and inspect the query results file after it turned green:
+> 2. Click **Run Tool** and inspect the query results file after it turned green:
 >
 >     ![Query Tabular output showing gene, PSMs and distinct peptides](../../images/metaproteomics_summary.png "Query Tabular output")
 >
@@ -498,7 +494,7 @@ This allows to get an insight of the **biological process**, the **molecular fun
 >
 {: .comment}
 
-#### Data upload
+### Data upload
 
 For this tutorial, a tabular file containing the relevant GO terms has been created. It contains the GO aspect, the ID and the name.
 It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839701.svg)](https://doi.org/10.5281/zenodo.839701).
@@ -525,17 +521,17 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 
 > <details-title>Creating your own Gene Ontology list</details-title>
 >
-> The latest Gene Ontology can be downloaded [here](http://geneontology.org/page/download-ontology) as a text file in the `OBO` format.
+> The latest Gene Ontology can be downloaded [the GO website](http://geneontology.org/page/download-ontology) as a text file in the `OBO` format.
 > `OBO` files are human-readable (in addition to machine-readable) and can be opened in any text editor. They contain more information than just the name and aspect.
 >
 > In order to receive a file like we use in the tutorial for your own analysis, different tools are available to extract information from `OBO` files,
-> one of them being [ONTO-PERL](https://doi.org/10.1093/bioinformatics/btn042).
+> one of them being ONTO-PERL ({% cite Antezana_2008 %}).
 > An example file with all GO terms from 08.07.2017 named `Gene_Ontology_Terms_full_07.08.2017.tabular` can be found on the [Zenodo repository](https://doi.org/10.5281/zenodo.839701) of this tutorial as well.
 > You could also upload the Gene Ontology Terms by copying this link on to the Upload Data - Paste/Fetch data `https://zenodo.org/record/839701/files/Gene_Ontology_Terms_full_07.08.2017.tabular`
 >
 {: .details}
 
-#### Retrieve GO IDs for peptides: Unipept
+### Retrieve GO IDs for peptides: Unipept
 
 The **UniPept** application `pept2prot` can be used to return the list of proteins containing each peptide.
 The option `retrieve extra information` option is set to `yes` so that we retrieve Gene Ontology assignments (`go_references`)
@@ -552,7 +548,7 @@ for each protein.
 >    - **Select column with peptides**: `Column 1`
 >    - **Choose outputs**: Select `tabular`
 >
-> 2. Click **Execute**.
+> 2. Click **Run Tool**.
 >
 > 3. inspect the result:
 >
@@ -561,7 +557,7 @@ for each protein.
 {: .hands_on}
 
 
-#### Combine all information to quantify the GO results
+### Combine all information to quantify the GO results
 
 As a final step we will use **Query Tabular** in a more sophisticated way to combine all information to quantify the GO analysis. The three used file and the extracted information are:
 
@@ -690,7 +686,7 @@ As a final step we will use **Query Tabular** in a more sophisticated way to com
 >          ORDER BY sequence
 >
 >
-> 5. Click **Execute**.
+> 5. Click **Run Tool**.
 >
 {: .hands_on}
 
@@ -717,7 +713,7 @@ With this we have combined all the data into a single database which we can now 
 >
 >          ORDER BY  bering_peptides desc,bering_psms desc
 >
-> 2. Click **Execute**.
+> 2. Click **Run Tool**.
 > 3. Repeat these steps two times by replacing `molecular_function` in the fifth row of the SQL query by `biological_process` and `cellular_component`.
 >
 {: .hands_on}

@@ -22,7 +22,6 @@ contributors:
   - lldelisle
 ---
 
-# Introduction
 
 
 Galaxy is a great solution to train bioinformatics concepts:

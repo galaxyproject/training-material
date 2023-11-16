@@ -1,3 +1,4 @@
+<article>
 {% assign n = include.news %}
 
 {% if n.cover %}
@@ -13,7 +14,7 @@
  {% assign coverimage = "/assets/images/gat.png" %}
  {% assign coverimagealt = "GTN Logo on a spiral galaxy background with text 'galaxy admin training'" %}
 {% else %}
- {% assign coverimage = "/assets/images/GTN.png" %}
+ {% assign coverimage = "/assets/images/GTNLogo1000.png" %}
  {% assign coverimagealt = "GTN logo with a multi-coloured star and the words Galaxy Training Network" %}
 {% endif %}
 
@@ -34,7 +35,7 @@
         {% include _includes/contributors-line.html page=n %}
 
         {% for tag in n.tags %}
-<button class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="Click to show all tutorials with this tag">{{ tag  }}</button>
+<span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag  }}</span>
 {% endfor %}
     <hr/>
     <p class="card-text">
@@ -49,4 +50,4 @@
   </div>
  </div>
 </div>
-
+</article>

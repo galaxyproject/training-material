@@ -16,8 +16,6 @@ contributors:
 ---
 
 
-# Introduction
-
 
 If you are working on your own training materials and want preview them online without installing anything on your computer, you can do this using GitPod!
 
@@ -69,7 +67,7 @@ If you are working on your own training materials and want preview them online w
 >    > <tip-title>Make this even easier with the GitPod browser extension!</tip-title>
 >    >  1. To make this even easier, you can install the GitPod browser extension
 >    >     - [Firefox](https://addons.mozilla.org/en-GB/firefox/addon/gitpod/)
->    >     - [Chrome or Edge](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbekii)
+>    >     - [Chrome or Edge](https://chrome.google.com/webstore/detail/gitpod-always-ready-to-co/dodmmooeoklaejobgleioelladacbeki)
 >    >  2. Now it is just a single click to open any GitHub repository in GitPod
 >    >     ![screenshot of the button the GitPod browser extension adds to GitHub repository ](../../images/gitpod/browser-extension.png)
 >    {: .tip}
@@ -213,7 +211,7 @@ When you have finished your changes, it all looks good in the preview, you want 
 >    - If you used option 1 and want to do that right away, you can click on the link in the terminal:
 >      ![link in the terminal to open a PR](../../images/gitpod/push.png)
 >
-> > ### Note: GitPod Permissions
+> > <tip-title>GitPod Permissions</tip-title>
 > > If this is your first time using GitPod, you may need to grant permissions to let GitPod push to your GitHub fork
 > > ![prompt to changes permissions](../../images/gitpod/access.png)
 > > This will take you through a process to authorize GitPod, and set permissions

@@ -22,10 +22,6 @@ tags:
 ---
 
 
-# Introduction
-
-
-<!-- This is a comment. -->
 
 
 __Healthy soils__ are an essential element in maintaining the planet’s ecological balance. That is why their protection must be considered a priority in order to guarantee the well-being of humanity. The alteration of microbial populations often precedes changes in the physical and chemical properties of soils, so monitoring their condition can serve to predict their future evolution, allowing to develop strategies to __mitigate ecosystem damage__.
@@ -68,7 +64,6 @@ In this example, we will use a dataset originally hosted in the __NCBI SRA datab
 	- Surface sample (0-5 cm): `rhizosphere_top.fastq.gz`
 	- Deep sample (10-15 cm): `rhizosphere_bottom.fastq.gz`
 
->
 > <question-title></question-title>
 >
 >  Why do we sequence the 16S rRNA genes for analyzing microbial communities?
@@ -100,6 +95,7 @@ In this example, we will use a dataset originally hosted in the __NCBI SRA datab
 >     - Assign a name to the new collection: `soil collection`
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
@@ -165,7 +161,6 @@ If we examine figure 3, we can see that up to 3000 bp the quality of our sequenc
 
 Let's have a look at figure 4, which shows the content of the GC by sequence.
 
->
 > <question-title></question-title>
 >
 > What can cause GC content to show a bimodal peak?
@@ -179,7 +174,7 @@ Let's have a look at figure 4, which shows the content of the GC by sequence.
 {: .question}
 
 > <comment-title></comment-title>
-> For more information on the topic of quality control, please see our training materials [here](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html).
+> For more information on the topic, please see [the quality control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 {: .comment}
 
 
@@ -216,7 +211,7 @@ To increase the specificity of the analysis, we will select the reads with lengt
 >
 > 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Single-end`
-     - {% icon param-collection %} *"Dataset collection"*: `soil collection trimmed`
+>    - {% icon param-collection %} *"Dataset collection"*: `soil collection trimmed`
 >        - In *"Adapter Trimming Options"*:
 >            - *"Disable adapter trimming"*: `Yes`
 >    - In *"Filter Options"*:
@@ -266,13 +261,7 @@ One of the key steps in metagenomic data analysis is to identify the taxon to wh
 
 To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood2019 %}). This tool uses the minimizer method to sample the k-mers (all the read's subsequences of length _k_) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using __dustmasker__.
 
-
-> <comment-title></comment-title>
-> __Kraken2__ uses a compact hash table, a probabilistic data structure that allows for faster queries and lower memory requirements. It applies a spaced seed mask of _s_ spaces to the minimizer and calculates a compact hash code, which is then used as a search query in its compact hash table; the lowest common ancestor (LCA) taxon associated with the compact hash code is then assigned to the k-mer.
-> You can find more information about the __Kraken2__ algorithm in the paper [_Improved metagenomic analysis with Kraken 2_](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0).
-{: .comment}
-
-![Taxonomic classification](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kraken2 sequence classification algorithm. To classify a sequence, each l-mer is mapped to the lowest common ancestor (LCA) of the genomes that contain that l-mer in a database. In the classification tree, each node has a weight equal to the number of l-mers in the sequence associated with the node’s taxon. Image originally published in {% cite Wood2014 %}.")
+{% snippet topics/metagenomics/faqs/kraken.md %}
 
 For this tutorial, we will use the __SILVA database__ ({% cite Quast2012 %}). It includes over 3.2 million 16S rRNA sequences from the _Bacteria_, _Archaea_ and _Eukaryota_ domains.
 

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Mass spectrometry imaging: Loading and exploring MSI data"
-edam_ontology: "topic_0121"
+edam_ontology: ["topic_0121"]
 zenodo_link: "https://doi.org/10.5281/zenodo.1560645"
 level: Introductory
 questions:
@@ -25,8 +25,6 @@ subtopic: special
 tags: [mouse, imaging]
 ---
 
-# Introduction
-
 
 
 Mass spectrometry imaging (MSI) is applied to measure the spatial distribution of hundreds of biomolecules in a sample. A mass spectrometer scans over the entire sample and collects a mass spectrum every 5-200 µm. This results in thousands of spots in which a mass spectrum is acquired. Each mass spectrum consists of hundreds of analytes that are measured by their mass-to-charge (m/z) ratio. For each analyte the peak intensity in the mass spectra of every pixel is known and can be set together to map the spatial distribution of the analyte in the sample.
@@ -40,7 +38,7 @@ Depending on the analyte of interest and the application, different mass spectro
 One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix which absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement complete mass spectra with hundreds of m/z - intensity pairs are acquired in thousands of sample plots leading to big and complex data. Each mass spectrum is annotated with coordinates (x,y) that define its location in the sample. This allows to visualize the intensity distribution of each m/z feature in the sample as a heatmap. Depending on the analyte of interest, the sample type and the mass spectrometer the sample preparation steps as well as the properties of the acquired data differ.
 
 This tutorial introduces the handling of the mass spectrometry imaging (MSI) file type imzML in Galaxy and some first steps to explore the data.
-The imzML file format was introduced to ease the exchange of MSI data between different instruments and data analysis software ([Schramm et al., Journal of Proteomics, 2012](https://doi.org/10.1016/j.jprot.2012.07.026)). More and more vendors provide an imzML export option and there are [software solutions](https://ms-imaging.org/wp/imzml/software-tools/) to convert proprietary files into imzML files. Before starting any analysis it is recommended to visualize all features of the data in different ways to better understand the data and to obtain an idea about it's quality and usefulness.
+The imzML file format was introduced to ease the exchange of MSI data between different instruments and data analysis software ({% cite Schramm_2012 %}). More and more vendors provide an imzML export option and there are [software solutions](https://ms-imaging.org/wp/imzml/software-tools/) to convert proprietary files into imzML files. Before starting any analysis it is recommended to visualize all features of the data in different ways to better understand the data and to obtain an idea about it's quality and usefulness.
 
 
 > <agenda-title></agenda-title>
@@ -116,7 +114,7 @@ The data for this tutorial comes from MALDI-TOF imaging of peptides in a mouse k
 
 Before starting any analysis, it is important to confirm that the quality of the acquired data is sufficient.
 Furthermore, knowing the data's properties is important to choose the right preprocessing steps and parameters.
-The steps that most influence the spatial delocalization and preparation quality in an MALDI imaging experiment is the homogeneous matrix deposition and for peptide analysis in addition the trypsin deposition and digestion step as reported by [Ly et al.](https://doi.org/10.1002/prca.201800029). To monitor the digestion quality, three *Bombesin* peptide drops were spotted close to the tissue. Furthermore, the mouse kidney dataset contains internal calibrants that were sprayed together with the matrix onto the tissue and can be used to monitor intensity gradients and mass accuracy. The used calibrants were *Angiotensin I*, *Substance P*, *Fibrinopeptide B* and *ACTH_18-39*.
+The steps that most influence the spatial delocalization and preparation quality in an MALDI imaging experiment is the homogeneous matrix deposition and for peptide analysis in addition the trypsin deposition and digestion step as reported by {% cite Ly_2019 %}. To monitor the digestion quality, three *Bombesin* peptide drops were spotted close to the tissue. Furthermore, the mouse kidney dataset contains internal calibrants that were sprayed together with the matrix onto the tissue and can be used to monitor intensity gradients and mass accuracy. The used calibrants were *Angiotensin I*, *Substance P*, *Fibrinopeptide B* and *ACTH_18-39*.
 
 The **MSI Qualitycontrol* {% icon tool %} provides a fast way to obtain plenty of descriptive statistic plots for MSI datasets.
 Internal calibrants or other known, ubiquitous m/z features can be used to obtain further quality measures, such as m/z accuracies.
@@ -150,7 +148,7 @@ The mouse kidney dataset contains internal calibrants that were sprayed together
 >    - *"Plot fold change of two m/z"*: `Insert Plot fold change of two m/z`
 >    - *"M/z 1"*: `1224.63` (digested *Bombesin*)
 >    - *"M/z 2"*: `1619.89` (full length *Bombesin*)
->    - Press **Execute**
+>    - Press **Run Tool**
 {: .hands_on}
 
 

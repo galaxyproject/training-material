@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Funannotate
-zenodo_link: https://zenodo.org/record/5726818
+zenodo_link: https://zenodo.org/record/7867921
 tags:
   - eukaryote
 questions:
@@ -32,7 +32,7 @@ contributions:
     - r1corre
     - stephanierobin
   funding:
-    - erasmusplus
+    - gallantries
 
 abbreviations:
   NMDS: Non-metric multidimensional scaling
@@ -46,9 +46,6 @@ requirements:
 subtopic: eukaryote
 priority: 2
 ---
-
-
-# Introduction
 
 
 Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
@@ -95,52 +92,19 @@ To annotate our genome using Funannotate, we will use the following files:
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/genome_masked.fasta
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R1.fq.gz
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R2.fq.gz
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/SwissProt_subset.fasta
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gbk
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gff3
+>    https://zenodo.org/record/7867921/files/genome_masked.fasta
+>    https://zenodo.org/record/7867921/files/rnaseq_R1.fq.gz
+>    https://zenodo.org/record/7867921/files/rnaseq_R2.fq.gz
+>    https://zenodo.org/record/7867921/files/SwissProt_subset.fasta
+>    https://zenodo.org/record/7867921/files/alternate_annotation.gbk
+>    https://zenodo.org/record/7867921/files/alternate_annotation.gff3
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
-
-# Preparing the genome sequence
-
-Before annotating the genome, we want to make sure that the fasta file is properly formatted. We do it now to make sure we will not encounter unexpected errors later in the annotation process.
-
-Funannotate provides two little tools to help us. Let's run the two tools, one after the other.
-
-The first one ({% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2) %}) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool also removes any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).
-
-The second tool will ensure that our fasta file is sorted, based on the length of the contigs (the longest ones first). It will also rename contigs to make sure the name are standard (they will all begin with `scaffold_`, then a number).
-
-> <hands-on-title>Polish the assembly</hands-on-title>
->
-> 1. {% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Assembly to clean"*: `genome_masked.fasta` (Input dataset)
->
-> 2. {% tool [Sort assembly](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Assembly to sort"*: `output` (output of **Funannotate assembly clean** {% icon tool %})
->
-{: .hands_on}
-
-After this step, the genome is clean, sorted, and ready for the structural annotation.
-
-> <question-title></question-title>
->
-> How many sequences are removed by this cleaning step ?
->
-> > <solution-title></solution-title>
-> >
-> > The repeat masked genome contains 1461 sequences, while the cleand one only contains 1425, so 36 were removed.
-> >
-> {: .solution}
->
-{: .question}
 
 # Preparing RNASeq data
 
@@ -150,14 +114,14 @@ You would normally get the Fastq files directly from SRA and use them in the fol
 
 To make use of this RNASeq data, we need to map it on the genome. We will use **RNA star** {% icon tool %} and get a result in the form of a BAM file, that we will use in the rest of the tutorial.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: `rnaseq_R1.fq.gz` (Input dataset)
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: `rnaseq_R2.fq.gz` (Input dataset)
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
->        - {% icon param-file %} *"Select a reference genome"*: `genome` (output of **Sort assembly** {% icon tool %})
+>        - {% icon param-file %} *"Select a reference genome"*: `genome_masked.fasta` (Input dataset)
 >        - *"Length of the SA pre-indexing string"*: `11`
 >
 {: .hands_on}
@@ -194,10 +158,10 @@ There are other parameters to finely tune how Funannotate will run ab-initio pre
 
 Funannotate is also able to use GeneMark to predict new genes, but to due to licensing restrictions, this software is not available on every Galaxy instance. We will ignore this for this tutorial, it will not impact the results too much.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
-> 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Assembly to annotate"*: `genome` (output of **Sort assembly** {% icon tool %})
+> 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.15+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Assembly to annotate"*: `genome_masked.fasta` (Input dataset)
 >    - *"Funannotate database"*: select the latest version available
 >    - In *"Organism"*:
 >        - *"Name of the species to annotate"*: `Mucor mucedo`
@@ -272,9 +236,9 @@ The next step will show you how Funannotate can use this `.sbt` file, and the `l
 
 Now we have a structural annotation, and the results of both **EggNOG Mapper** and **InterProScan**. Each one is in a separate file, so we will now combine all this data into a single file that will contain both the structural *and* the functional annotation. This will be the final output of our annotation pipeline, ready to be submitted to the NCBI reference database.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
-> 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2) %} with the following parameters:
+> 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.15+galaxy1) %} with the following parameters:
 >    - *"Input format"*: `GenBank (from 'Funannotate predict annotation' tool)`
 >        - {% icon param-file %} *"Genome annotation in genbank format"*: `annotation (genbank)` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"Funannotate database"*: select the latest version available
@@ -301,9 +265,9 @@ If you display the GFF3 output, you will notice that the functional information,
 
 We now have a complete annotation, including functional annotation, but it's time to evaluate the quality of this annotation. [BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.6+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `protein sequences` (output of **Funannotate functional** {% icon tool %})
 >    - *"Mode"*: `annotated gene sets (protein)`
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
@@ -332,11 +296,11 @@ We now have a complete annotation, including functional annotation, but it's tim
 
 With Galaxy, you can visualize the annotation you have generated using JBrowse genome browser. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an RNASeq track, using the BAM file created with **RNA STAR** {% icon tool %}.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: `genome` (output of **Sort assembly** {% icon tool %})
+>        - {% icon param-file %} *"Select the reference genome"*: `genome_masked.fasta` (Input dataset)
 >    - In *"Track Group"*:
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `Annotation`
@@ -372,7 +336,7 @@ Earlier, we have seen how general statistics and BUSCO results can help to evalu
 
 Let's run **AEGeAn ParsEval** first: it compares two annotations in GFF3 format.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [AEGeAn ParsEval](toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0) %} with the following parameters:
 >    - {% icon param-file %} *"Reference GFF3 file"*: `gff3` (output of **Funannotate functional** {% icon tool %})
@@ -385,7 +349,7 @@ Let's run **AEGeAn ParsEval** first: it compares two annotations in GFF3 format.
 
 The output is a web page where you can see how many loci or genes are identical or different between the two annotations. By clicking on the `(+)` links, or on the scaffold names, you can see the results more in detail, even at the gene level.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Display the report
 > 2. Click on `scaffold_11`
@@ -414,9 +378,9 @@ The output is a web page where you can see how many loci or genes are identical 
 
 **Funannotate compare** {% icon tool %} is another tool to compare several annotations. It uses genbank files, as generated by **Funannotate functional** {% icon tool %}.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
-> 1. {% tool [Funannotate compare](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2) %} with the following parameters:
+> 1. {% tool [Funannotate compare](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.15+galaxy1) %} with the following parameters:
 >    - {% icon param-files %} *"Genome annotations in genbank format"*: `alternate_annotation.gbk` (Input dataset) and `gbk` (output of **Funannotate functional** {% icon tool %})
 >    - *"Funannotate database"*: select the latest version available
 >

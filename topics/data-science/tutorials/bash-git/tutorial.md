@@ -48,7 +48,7 @@ contributions:
     - hexylena
   funding:
     - carpentries
-    - erasmusplus
+    - gallantries
 
 ---
 
@@ -161,7 +161,7 @@ Before diving in the tutorial, we need to open {% tool [RStudio](interactive_too
 
 > <hands-on-title>Installing git</hands-on-title>
 > The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself.
-We go to "Tools" and pick the "Shell..." option and we are good to go. Our workspace is the left, terminal window that just opened.
+> We go to "Tools" and pick the "Shell..." option and we are good to go. Our workspace is the left, terminal window that just opened.
 >
 > Fortunately, [miniconda](https://docs.conda.io/en/latest/miniconda.html) is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.
 >
@@ -170,13 +170,13 @@ We go to "Tools" and pick the "Shell..." option and we are good to go. Our works
 > > $ conda create -n name_of_your_env nano git
 > > $ conda activate name_of_your_env
 > > ```
->{: .code-in}
+> {: .code-in}
 >
 >
->| Software | Version | Manual | Available for | Description |
->| -------- | ------------ | ------ | ------------- | ----------- |
->| [git](https://git-scm.com/) | 2.35.3 | [git Manual](https://git-scm.com/book/en/v2) | Linux, MacOS | Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. |
->| [GNU nano](https://www.nano-editor.org/) | 2.9.8 | [Nano manual](https://www.nano-editor.org/dist/latest/nano.html) | Linux, MacOS | GNU nano is a small and friendly text editor. |
+> | Software | Version | Manual | Available for | Description |
+> | -------- | ------------ | ------ | ------------- | ----------- |
+> | [git](https://git-scm.com/) | 2.35.3 | [git Manual](https://git-scm.com/book/en/v2) | Linux, MacOS | Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. |
+> | [GNU nano](https://www.nano-editor.org/) | 2.9.8 | [Nano manual](https://www.nano-editor.org/dist/latest/nano.html) | Linux, MacOS | GNU nano is a small and friendly text editor. |
 >
 {: .hands_on}
 
@@ -271,7 +271,7 @@ It is possible to reconfigure the text editor for Git whenever you want to chang
 
 > <tip-title>Exiting Vim</tip-title>
 > Note that Vim is the default editor for many programs. If you haven't used Vim before and wish to exit a session without saving
-your changes, press <kbd>Esc</kbd> then type `:q!` and hit <kbd>Enter</kbd> or <kbd></kbd> or on Macs, <kbd>Return</kbd>.
+> your changes, press <kbd>Esc</kbd> then type `:q!` and hit <kbd>Enter</kbd> or <kbd></kbd> or on Macs, <kbd>Return</kbd>.
 > If you want to save your changes and quit, press <kbd>Esc</kbd> then type `:wq` and hit <kbd>Enter</kbd> or <kbd></kbd> or on Macs, <kbd>Return</kbd>.
 {: .tip}
 
@@ -359,10 +359,9 @@ same commands to choose another editor or update your email address.
 > More generally, you can get the list of available `git` commands and further resources of the Git manual typing:
 >
 > > <code-in-title>Access available commands</code-in-title>
-> >```bash
-> >$ git help
-> >```
->
+> > ```bash
+> > $ git help
+> > ```
 > {: .code-in}
 >
 {: .tip}
@@ -499,7 +498,6 @@ wording of the output might be slightly different.
 > > to the `suspects` directory.
 > >
 > {: .solution}
-
 {: .question}
 
 > <tip-title>"Nested" repositories</tip-title>
@@ -1143,7 +1141,7 @@ Let's save our changes:
 >    > ```
 >    {: .code-in}
 >
->    > Note, our newly created empty directory `mysteries` does not appear in
+>    Note, our newly created empty directory `mysteries` does not appear in
 >    the list of untracked files even if we explicitly add it (_via_ `git add`) to our
 >    repository. This is the reason why you will sometimes see `.gitkeep` files
 >    in otherwise empty directories. Unlike `.gitignore`, these files are not special

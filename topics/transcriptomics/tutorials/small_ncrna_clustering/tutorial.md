@@ -21,15 +21,13 @@ contributors:
 ---
 
 
-# Introduction
-
 Small Non-coding RNAs (ncRNAs) play a vital role in many cellular processes such as RNA splicing, translation, gene regulation. The small RNA-seq is a type of RNA-seq in which RNA fragments are size selected to capture only short RNAs. One of the most common applications of the small RNA-seq is discovering novel small ncRNAs. Mapping the small RNA-seq data reveals interesting patterns that represent the traces of the small RNA processing.
 
 For example, consider the miRNA biogenesis. The primary miRNA transcripts are processed by Drosha-complexes and results in hairpin precursor miRNAs. Then after they transported to the cytoplasm, Dicer slices off the hairpin. One of the RNA strands bound by Argonaute proteins regulates the target mRNA while the other strand is degraded.
 
-The following figure (bottom part of the figure is taken from [DOI: 10.1038/nrg3162](https://doi.org/10.1038/nrg3162)) represents one of the small RNA processing patterns. The vertical block bars represent a mapped reads on reference genome. The height of the bars represents the number of reads mapped at that location. Reads in each bubble represent a *read profile*. In this case, they both are from miRNAs. From the small RNA-seq, we often see the two processed miRNA strands after mapping. The miRNA strand which targets the mRNA is expressed and we see more reads compared to the degraded strand. The gap between those two piles of reads represents the missing hairpin.
+The following figure (bottom part of the figure is taken from {% cite Pasquinelli2012 %}) represents one of the small RNA processing patterns. The vertical block bars represent a mapped reads on reference genome. The height of the bars represents the number of reads mapped at that location. Reads in each bubble represent a *read profile*. In this case, they both are from miRNAs. From the small RNA-seq, we often see the two processed miRNA strands after mapping. The miRNA strand which targets the mRNA is expressed and we see more reads compared to the degraded strand. The gap between those two piles of reads represents the missing hairpin.
 
-![read profiles](../../images/blockclust_profiles.png "Patterns of processing in read profiles")
+![read profiles](../../images/transcriptomics_images/blockclust_profiles.png "Patterns of processing in read profiles")
 
 In this tutorial, we will learn how to use **BlockClust** to cluster similar processing patterns together.
 
@@ -99,7 +97,7 @@ Now it is time to do the actual conversion.
 
 Now we group the adjacent reads into so-called blocks and blockgroups using blockbuster tool. In general, each blockgroup should represent a single ncRNA read profile.
 
-![blocks of a blockgroup](../../images/blockclust_blocks.png "Representation of blocks and blockgroups of a read profile")
+![blocks of a blockgroup](../../images/transcriptomics_images/blockclust_blocks.png "Representation of blocks and blockgroups of a read profile")
 
 > <details-title>More details about the theory</details-title>
 >

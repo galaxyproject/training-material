@@ -18,13 +18,11 @@ contributions:
   authorship:
     - abretaud
   funding:
-    - erasmusplus
+    - gallantries
 subtopic: eukaryote
 priority: 6
 ---
 
-
-# Introduction
 
 When performing the structural annotation of a genome sequence, you get the position of each gene, but you don't have information about their name of their function. That's the goal of **functional annotation**.
 
@@ -56,15 +54,16 @@ We will annotate a small set of **protein sequences**. These sequences were pred
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/6628a5e4-d6be-47bd-bdaa-f2646112578e/proteins.fasta
+>    https://zenodo.org/record/6861851/files/proteins.fasta
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
-{% include {{ page.dir }}content.md short=true %}
+{% include topics/genome-annotation/tutorials/functional/content.md short=true %}
 
 # Conclusion
 

@@ -31,8 +31,6 @@ subtopic: multi-omics
 tags: [proteogenomics]
 ---
 
-# Introduction
-{: .no_toc}
 
 The third and the last workflow in the proteogenomics tutorial is to identifying the "**Novel peptides**" using BlastP and to localize the peptides to its genomic coordinates. Inputs from both workflow 1 and 2 will be used in this workflow.
 Please look at the following tutorials in this proteogenomics series before starting this tutorial:
@@ -50,8 +48,6 @@ Please look at the following tutorials in this proteogenomics series before star
 {: .agenda}
 
 # Pretreatments
-
-{: .no_toc}
 
 All the files to run this workflow can be obtained from the [second tutorial]({% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %}) output. Once the tabular output is generated, we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.
 
@@ -103,7 +99,7 @@ The first step in this tutorial is to perfrom BLAST-P analysis using the NCBI-NR
 >      - {% icon param-select %} **Restrict search of database to a given set of ID's** - `No restriction, search the entire database`
 >      - {% icon param-check %} **Minimum query coverage per hsp (percentage, 0 to 100)?** - `0`
 >      - {% icon param-check %} **Compute locally optimal Smith-Waterman alignments** - `No`
->  2. Click **Execute** and inspect the query results file after it turned green.
+>  2. Click **Run Tool** and inspect the query results file after it turned green.
 >
 {: .hands_on}
 
@@ -160,7 +156,7 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 >       {: .comment}
 >    - *"Include query result column headers"*: `Yes`
 >
->  2. Click **Execute** and inspect the query results file after it turned green.
+>  2. Click **Run Tool** and inspect the query results file after it turned green.
 >
 {: .hands_on}
 
@@ -186,7 +182,7 @@ Once this step is completed, a tabular output containing novel proteoforms are d
 >      ```
 >    - *"include query result column headers"*: `Yes`
 >
-> 2. Click **Execute** and inspect the query results file after it turned green.
+> 2. Click **Run Tool** and inspect the query results file after it turned green.
 >
 {: .hands_on}
 
@@ -302,7 +298,7 @@ peptides provided as input. This outputs bed file for peptides.
 >      ![Output PGC](../../images/Output_PGC.png){:width="50%"}
 >
 >
-> 2. Click **Execute** and inspect the resulting files
+> 2. Click **Run Tool** and inspect the resulting files
 >
 {: .hands_on}
 
@@ -318,7 +314,7 @@ Given chromosomal locations of peptides in a BED file, PepPointer classifies the
 >   - {% icon param-file %} *"GTF file with the genome of interest"* - `edited_Mus_Musculus_GRCm38.90_Ensembl_GTF`
 >   - {% icon param-file %} *"BED file with chromosomal coordinates of peptides"*: `Bed file from Peptide genomic coordinate tool`
 >
-> 2. Click **Execute** and inspect the query results file after it turned green.
+> 2. Click **Run Tool** and inspect the query results file after it turned green.
 >
 > This tool provides a bed output with the classification of the genomic location of the peptides.The Mus-musculus GTF file will be in your history if you have completed the proteogenomics 1 tutorial.
 >
@@ -370,7 +366,7 @@ The final tool for this workflow generates a tabular output that summarizes the 
 >
 >     - *"include query result column headers"*: `Yes`
 >
-> 2. Click **Execute** and inspect the query results file after it turned green. If everything went well, it should look similiar:
+> 2. Click **Run Tool** and inspect the query results file after it turned green. If everything went well, it should look similiar:
 >
 >    ![Final Summary](../../images/final_summary.png){:width="100%"}
 >

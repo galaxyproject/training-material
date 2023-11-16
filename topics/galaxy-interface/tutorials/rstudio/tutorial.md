@@ -24,13 +24,12 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  - gallantries
 subtopic: analyse
 ---
 
 
-# Introduction
-
+This tutorial will introduce you to how to run RStudio in Galaxy
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 
@@ -198,13 +197,15 @@ You have hopefully noticed a pattern - an R function has three key properties:
 2. A pair of `()` after the name
 3. 0 or more arguments inside the parentheses
 
-    An argument may be a specific input for your function and/or may modify the function's behavior. For example the function `round()` will round a number with a decimal:
+   An argument may be a specific input for your function and/or may modify the function's behavior. For example the function `round()` will round a number with a decimal:
 
-    ```R
-    # This will round a number to the nearest integer
-    > round(3.14)
-    [1] 3
-    ```
+   > <code-in-title></code-in-title>
+   > ```R
+   > # This will round a number to the nearest integer
+   > > round(3.14)
+   > [1] 3
+   > ```
+   {: .code_in}
 
 ## Getting help
 

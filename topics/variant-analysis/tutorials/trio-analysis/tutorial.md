@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Trio Analysis using Synthetic Datasets from RD-Connect GPAP
+subtopic: human-genetics-cancer
 zenodo_link: 'https://doi.org/10.5281/zenodo.6483454'
 questions:
 - How do you import data from the EGA?
@@ -23,12 +24,9 @@ contributors:
 - hexylena
 - shiltemann
 tags:
-- cancer
 - cyoa
 
 ---
-
-# Introduction
 
 To discover causal mutations of inherited diseases it’s common practice to do a trio analysis. In a trio analysis DNA is sequenced of both the patient and parents. Using this method, it’s possible to identify multiple inheritance patterns. Some examples of these patterns are autosomal recessive, autosomal dominant, and  de-novo variants, which are represented in the figure below. To elaborate, the most left tree shows an autosomal dominant inhertitance pattern where the offspring inherits a faulty copy of the gene from one of the parents. The center subfigure represents an autosomal recessive disease, here the offspring inherited a faulty copy of the same gene from both parents. In the right subfigure a de-novo mutation is shown, which is caused by a mutation during the offspring’s lifetime.
 
@@ -36,11 +34,11 @@ To discover causal mutations of inherited diseases it’s common practice to do 
 
 To discover these mutations either whole exome sequencing (WES) or whole genome sequencing (WGS) can be used. With these technologies it is possible to uncover the DNA of the parents and offspring to find (shared) mutations in the DNA. These mutations can include insertions/deletions (indels), loss of heterozygosity (LOH), single nucleotide variants (SNVs), copy number variations (CNVs), and fusion genes.
 
-In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} tool, so we don't have to leave Galaxy to retrieve our data.
+In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0) %} tool, so we don't have to leave Galaxy to retrieve our data.
 
-We will not start our analysis from scratch, since the main goal of this tutorial is to use the HTSGET protocol to download variant information from an online archive and to find the causative variant from those variants. If you want to learn how to do the analysis from scratch, using the raw reads, you can have a look at the [Exome sequencing data analysis for diagnosing a genetic disease](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/tutorial.html) tutorial.
+We will not start our analysis from scratch, since the main goal of this tutorial is to use the HTSGET protocol to download variant information from an online archive and to find the causative variant from those variants. If you want to learn how to do the analysis from scratch, using the raw reads, you can have a look at the [Exome sequencing data analysis for diagnosing a genetic disease]({% link topics/variant-analysis/tutorials/exome-seq/tutorial.md %}) tutorial.
 
-> <agenda-title></agenda-title>
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -61,7 +59,7 @@ We offer two ways to download the files. Firstly, you can download the files dir
 <div class="Zenodo" markdown="1">
 I see, you can't wait to get DAC access. To download the data from zenodo for this tutorial you can follow the step below.
 
-> <hands-on-title>Retrieve data from zenodo</hands-on-title>
+> <hands-on-title>Retrieve data from zenodo</hands-on-title>
 >
 > 1. Import the 3 VCFs from [Zenodo](https://zenodo.org/record/6483454) to Galaxy **as a collection**.
 >    ```
@@ -89,9 +87,9 @@ I see, you can't wait to get DAC access. To download the data from zenodo for th
 ## Getting DAC access
 Our test data is stored in EGA, which can be easily accessed using the EGA Download Client. Our specific EGA dataset accession ID is: "EGAD00001008392". However, before you can access this data you need to request DAC access to this dataset. This can be requested by emailing to <helpdesk@ega-archive.org>, don’t forget to mention the dataset ID! When the EGA grants you access it will create an account for you, if you don't have it already. Next, you should link your account to your Galaxy account by going to the homepage on Galaxy and at the top bar click **User > Preferences > Manage Information**. Now add your email and password of your (new) EGA account under: **Your EGA (european Genome Archive) account**. After that you can check if you can log in and see if you have access to the dataset.
 
-> <hands-on-title>Check log-in and authorized datasets</hands-on-title>
+> <hands-on-title>Check log-in and authorized datasets</hands-on-title>
 >
-> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} with the following parameters:
+> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0) %} with the following parameters:
 >    - *"What would you like to do?"*: `List my authorized datasets`
 >
 > > <comment-title>Check if the dataset is listed.</comment-title>
@@ -102,11 +100,11 @@ Our test data is stored in EGA, which can be easily accessed using the EGA Downl
 {: .hands_on}
 
 ## Download list of files
-When you have access to the EGA dataset, you can download all the needed files. However, the EGA dataset contains many different filetypes and cases, but we are only interested in the VCFs from case 5 and, to reduce execution time, the variants on chromosome 17. To be able to donwload these files we first need to request the list of files from which we can download. Make sure to use **version 4+** of the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %}.
+When you have access to the EGA dataset, you can download all the needed files. However, the EGA dataset contains many different filetypes and cases, but we are only interested in the VCFs from case 5 and, to reduce execution time, the variants on chromosome 17. To be able to donwload these files we first need to request the list of files from which we can download. Make sure to use **version 4+** of the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0) %}.
 
-> <hands-on-title>Request list of files in the dataset</hands-on-title>
+> <hands-on-title>Request list of files in the dataset</hands-on-title>
 >
-> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} **version 4+** with the following parameters:
+> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0) %} **version 4+** with the following parameters:
 >    - *"What would you like to do?"*: `List files in a datasets`
 >    - *"EGA Dataset Accession ID?"*: `EGAD00001008392`
 >
@@ -119,7 +117,7 @@ When you have access to the EGA dataset, you can download all the needed files. 
 ## Filter list of files
 Now that we have listed all the files, we need to filter out the files we actually need. We can do this by using a simple regular expression or regex. With regex it will be easy to find or replace patterns within a textfile.
 
-> <hands-on-title>Filter out VCFs from list of files</hands-on-title>
+> <hands-on-title>Filter out VCFs from list of files</hands-on-title>
 >
 > 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `List of EGA datasets` (output of **EGA Download Client** {% icon tool %})
@@ -137,9 +135,9 @@ EGAF00005573866	1	33350163	7e612852ee0824be458fbf9aeecaa61a	Case5_M.17.g.vcf.gz
 EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 ```
 
-> <hands-on-title>Download listed VCFs</hands-on-title>
+> <hands-on-title>Download listed VCFs</hands-on-title>
 >
-> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} with the following parameters:
+> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0) %} with the following parameters:
 >    - *"What would you like to do?"*: `Download multiple files (based on a file with IDs)`
 >        - {% icon param-file %} *"Table with IDs to download"*: `Filtered list of files` (output of **Search in textfiles** {% icon tool %})
 >        - *"Column containing the file IDs"*: `Column: 1`
@@ -154,7 +152,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 ## Decompress VCFs
 Finally, we need to decompress our bgzipped VCFs, since we will use a text manipulation tool as a next step to process the VCFs. To decompress the vcf we will use a built-in tool from Galaxy, which can be accessed by manipulating the file itself in a similair fashion as changing its detected type.
 
-> <hands-on-title>Convert compressed vcf to uncompressed.</hands-on-title>
+> <hands-on-title>Convert compressed vcf to uncompressed.</hands-on-title>
 >
 > Open the collection of VCFs and execute the following steps for each VCF.
 >
@@ -168,14 +166,7 @@ Finally, we need to decompress our bgzipped VCFs, since we will use a text manip
 >
 > After transforming all the VCFs you need to combine the converted VCFs into a colllection again.
 >
-> > <tip-title>Adding files to collection</tip-title>
-> >
-> > 1. Click on the dataset **selector icon** {% icon param-check %} in your history.
-> > 2. Select the 3 vcf files.
-> > 3. Click on the button **For all selected...** and select **Build Dataset List**
-> > 4. Give the new collection a name and click on **Create collection**.
-> >
-> {: .tip}
+> {% snippet faqs/galaxy/collections_build_list.md datasets_description="the 3 vcf files" n="3" %}
 >
 {: .hands_on}
 
@@ -187,7 +178,7 @@ Before starting the analysis, the VCF files have to be pre-processed in order to
 ## Add chromosome prefix to vcf
 Firstly, our next tool has some assumptions about our input VCFs. The tool expects the chromosome numbers to start with a prefix `chr`. Our VCFs only use the chromosome numbers however, the VCFs just use the chromosome numbers. This is due to a difference in reference genome used when creating the VCFs. To change the prefix in the VCFs we will use regex again.
 
-> <hands-on-title>Add chr prefix using regex</hands-on-title>
+> <hands-on-title>Add chr prefix using regex</hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `VCFs` (output of **Convert compressed file to uncompressed.** {% icon tool %})
@@ -211,7 +202,7 @@ Firstly, our next tool has some assumptions about our input VCFs. The tool expec
 > >     - The first match, the pattern in the first brackets `##contig=<.*ID=`, matches the contig header lines, which start with `##contig=<`. It is followed by a match anything `.` for zero-or-more times `*` until it finds `ID=`.
 > >     - The second match, the pattern in the second brackets `[0-9MYX].+`, matches the chromosome numbers and characters `[0-9MYX]` followed by a matching anything `.` for one-or-more times `+`.
 > >     - The replacement pattern `\1chr\2` means that the prefix `chr` has to be inserted between the first match `\1` or `##contig=<.*ID=` and the second match `\2` or `[0-9MYX].+`.
-> {: .tip}
+> {: .comment}
 >
 {: .hands_on}
 
@@ -222,7 +213,7 @@ One of the normalization steps is splitting multiallelic variants, 2 variants de
 
 ![Image of different representations of the same variant. On the top the variant is shown in the reference sequence GGGCACACACAGGG and the alternate sequence GGGCACACAGGG. Underneath the image is divided into two panels, the left panel aligns each allele to the reference genome, and the right panel represents the variants in a VCF with the columns POS (position), REF (reference), and ALT (alternate). From top to bottom it shows that A is not left-aligned with the reference CAC and the alternate C  at position 6, B is neither left-aligned nor parsimonious with reference GCACA and alternate GCA at position 3, C is not parsimonious with reference GGCA and alternate GG at position 2, and D is normalized with reference GCA and the alternate position G at position 3.](../../images/trio-analysis/variant_normalization.png "The different ways to represent INDELs. (Source: https://academic.oup.com/bioinformatics/article/31/13/2202/196142)")
 
-> <hands-on-title>Normalize VCF</hands-on-title>
+> <hands-on-title>Normalize VCF</hands-on-title>
 >
 > 1. {% tool [bcftools norm](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"VCF/BCF Data"*: `VCFs with chr prefix` (output of **Text reformatting** {% icon tool %})
@@ -235,7 +226,7 @@ One of the normalization steps is splitting multiallelic variants, 2 variants de
 >        - *"Targets"*: `Do not restrict to Targets`
 >    - *"output_type"*: `uncompressed VCF`
 >
-> > <tip-title>Check the normalization summary</tip-title>
+> > <tip-title>Check the normalization summary</tip-title>
 > >
 > > You can have a look at the summary to check what changes were made. First, expand the output of bcftools norm (by clicking on the box) and it should be listed in the box. If not you can find it by clicking on the icon view details {% icon details %} and look at the output of the ToolStandard Error.
 > >
@@ -246,7 +237,7 @@ One of the normalization steps is splitting multiallelic variants, 2 variants de
 ## Filter NON_REF sites
 After normalizing the VCFs we will filter out the variants with a NON_REF tag in the ALT column, the column which represents the mutated nucleotide(s). According to the header, these sites correspond to: "any possible alternative allele at this location". So these sites are a sort of placeholders for potential variants. However we are not interested in this kind of variants and they slow our analysis down quite a lot, so we will filter them out.
 
-> <hands-on-title>Filter out NON_REF sites</hands-on-title>
+> <hands-on-title>Filter out NON_REF sites</hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Normalized VCFs` (output of **bcftools norm** {% icon tool %})
@@ -271,7 +262,7 @@ After normalizing the VCFs we will filter out the variants with a NON_REF tag in
 ## Merge VCF collection into one dataset
 Finally, we can merge the 3 separate files of the parents and patient into a single VCF. This will put overlapping variants on the same line by aligning the samples format column. If a sample misses a certain variant then on the line of that variant the sample's format information will look like this: `./.:.:.:.:.:.`. This makes it easier to find shared and missing variants between the parents and ofspring. A tool which can do this is the {% tool [bcftools merge](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10) %} tool.
 
-> <hands-on-title>Merge VCFs</hands-on-title>
+> <hands-on-title>Merge VCFs</hands-on-title>
 >
 > 1. {% tool [bcftools merge](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10) %} with the following parameters:
 >    - {% icon param-file %} *"Other VCF/BCF Datasets"*: `<NON_REF> filtered VCFs` (output of **Text reformatting** {% icon tool %})
@@ -295,7 +286,7 @@ To understand what the effect of our variants are, we need to annotate our varia
 ## Annotate with SNPeff
 Running SnpEff will produce the annotated VCF and an HTML summary file. The annotations are added to the INFO column in the VCF and the added INFO IDs (`ANN`, `LOF`, and `NMD`) are explained in the header. The summary files include the HTML stats file which contains general metrics, such as the number of annotated variants, the impact of all the variants, and much more.
 
-> <hands-on-title>Annotation with SnpEff</hands-on-title>
+> <hands-on-title>Annotation with SnpEff</hands-on-title>
 >
 > 1. {% tool [SnpEff eff:](toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `Merged VCF` (output of **bcftools merge** {% icon tool %})
@@ -319,12 +310,30 @@ Running SnpEff will produce the annotated VCF and an HTML summary file. The anno
 >
 {: .question}
 
+## Compress VCF
+Now that we have finished running all the tools which require the VCF format as input, they can be converted back to the **vcf_bgzip** format. To compress the VCF we will use a built-in tool from Galaxy, which can be accessed by manipulating the file itself in a similair fashion as changing its detected type.
 
-# GEMINI analyses
+> <hands-on-title> Compress **vcf** back to **vcf_bgzip** </hands-on-title>
+>
+> Execute the following steps for the SnpEff VCF.
+>
+> 1. Click on the **pencil** {% icon galaxy-pencil %} of the SnpEff VCF.
+>
+> 2. Click on the **convert tab** {% icon galaxy-gear %}.
+>
+> 3. Under **Target datatype** select `vcf_bgzip (using 'Convert uncompressed file to compressed.')`
+>
+> 4. Click {% icon exchange %} **Create Dataset**.
+>
+{: .hands_on}
+
+# Trio Analysis
+
+## GEMINI analyses
 Next, we will transform our VCF into a GEMINI database which makes it easier to query the VCFs and to determine different inheritence patterns between the mother, father, and offspring. In addition, GEMINI will add even more annotations to the variants. This allows us to filter the variants even more which gets us to closer to the real causative variant.
 All these steps are performed by the {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %} tool. However, before we can load the VCF we also need to define a pedigree file.
 
-## Create a pedigree file describing the family trio
+### Create a pedigree file describing the family trio
 A pedigree file is a file that informs GEMINI which family members are affected by the disease and which sample name corresponds to what individual. This information is saved as a table containing information about the phenotype of the family.
 
 1. **#family_id**: Which family a row belongs to.
@@ -334,7 +343,7 @@ A pedigree file is a file that informs GEMINI which family members are affected 
 5. **sex**: The sex of the person.
 6. **phenotype**: Wether or not the person is affected by the disease.
 
-> <hands-on-title>Creating the PED file</hands-on-title>
+> <hands-on-title>Creating the PED file</hands-on-title>
 >
 > 1. Upload the pedigree file from below.
 > ```
@@ -350,27 +359,27 @@ A pedigree file is a file that informs GEMINI which family members are affected 
 
 For more information on the PED file you can read the help section of the {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %} tool in the description, which can be found at the bottom of the page when clicking on the tool.
 
-## Load GEMINI database
+### Load GEMINI database
 Now we can transform the subsampled VCF and PED file into a GEMINI database. Note that this can take a very long time depending on the size of the VCF. In our case it should take around 30-40 minutes.
 
-> <hands-on-title>Transform VCF and PED files into a GEMINI database</hands-on-title>
+> <hands-on-title>Transform VCF and PED files into a GEMINI database</hands-on-title>
 >
 > 1. {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"VCF dataset to be loaded in the GEMINI database"*: `SNPeff annotated VCF` (output of **SnpEff eff** {% icon tool %})
+>    - {% icon param-file %} *"VCF dataset to be loaded in the GEMINI database"*: `SnpEff Annotated vcf_bgzip` (output of **Convert uncompressed file to compressed.** {% icon tool %})
 >    - {% icon param-file %} *"Sample and family information in PED format"*: the pedigree file prepared above
 >
 >
 {: .hands_on}
 
 
-## Find inheritance pattern
+### Find inheritance pattern
 With the GEMINI database it is now possible to identify the causative variant that could explain the breast cancer in the mother and daughter. The inheritance information makes it a bit easier to determine which tool to run to find the causative variant, instead of finding it by trying all the different inheritance patterns.
 
 > <question-title></question-title>
 >
 > Which inheritance pattern could have occurred in this family trio?
 >
-> > <tip-title>Possible patterns</tip-title>
+> > <tip-title>Possible patterns</tip-title>
 > > The available inheritance patterns can be found in the {% tool [GEMINI inheritance pattern](toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1) %} tool.
 > {: .tip}
 >
@@ -392,7 +401,7 @@ Based on these findings it would make sense to start looking for inherited autos
 
 To find the most plausible causative variant we will use the {% tool [GEMINI inheritance pattern](toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1) %} tool. This tool allows us to select the most likely inheritance pattern (autosomal dominant). Below it is explained how to run the tool for this specific pattern, but you can always try other inheritence patterns if you are curious.
 
-> <hands-on-title>Run GEMINI autosomal dominant inhertiance pattern</hands-on-title>
+> <hands-on-title>Run GEMINI autosomal dominant inhertiance pattern</hands-on-title>
 >
 > 1. {% tool [GEMINI inheritance pattern](toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1) %} with the following parameters:
 >    - {% icon param-file %} *"GEMINI database"*: `GEMINI database` (output of **GEMINI load** {% icon tool %})
@@ -424,8 +433,54 @@ To find the most plausible causative variant we will use the {% tool [GEMINI inh
 {: .question}
 
 
+## Gene.iobio Analyses
+Alternatively, the trio analysis can be done using gene.iobio {% cite Di_Sera_2021 %}. The {% tool [gene.iobio visualisation](toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1) %} tool generates an html file which sends the VCFs to the iobio site using public URLs. Therefore, your history has to be shared, i.e. **everyone with a link can access your history!**
+
+
+> <hands-on-title> Make files accessible for gene.iobio </hands-on-title>
+>
+> 1. Open the **History Options menu** {% icon galaxy-dropdown %} at the topright corner of your history panel.
+> 2. select **Share or Publish** {% icon workflow %}.
+> 3. Then toggle the {% icon galaxy-toggle %} **Make History accessible**.
+>
+{: .hands_on}
+
+For this tool it is not required to set any filtering steps or determine the most plausible inheritence pattern. Since gene.iobio runs multiple default filtering steps for autosomal dominant, recessive, *De novo*, compound heterozygous, and X-linked recessive inheritance patterns. In addition, it prioritizes variants based on gene-disease association algorithms, which significantly reduces processing time.
+
+> <hands-on-title> Generate gene.iobio html </hands-on-title>
+>
+> 1. {% tool [gene.iobio visualisation](toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1) %} with the following parameters:
+>    - {% icon param-file %} *"Proband VCF file"*: `SnpEff Annotated vcf_bgzip` (output of **Convert compressed file to uncompressed.** {% icon tool %})
+>    - *"Proband sex"*: `Female`
+>    - *"Proband sample name"*: `Case6C`
+>    - *"Single/Trio analysis"*: `Trio`
+>        - In *"Father input"*:
+>            - {% icon param-file %} *"Father VCF file"*: `SnpEff Annotated vcf_bgzip` (output of **Convert compressed file to uncompressed.** {% icon tool %})
+>            - *"Father sample name"*: `Case6F`
+>        - In *"Mother input"*:
+>            - {% icon param-file %} *"Mother VCF file"*: `SnpEff Annotated vcf_bgzip` (output of **Convert compressed file to uncompressed.** {% icon tool %})
+>            - *"Is the mother affected?"*: `Yes`
+>            - *"Mother sample name"*: `Case6M`
+>    - *"Select reference genome version"*: `GRCh37`
+>
+>    > <tip-title> Using gene.iobio </tip-title>
+>    >
+>    > To open the generated html file click on the **eye** {% icon galaxy-eye %}, which will show the gene.iobio interface. Now a phenotype has to be added to generate a list of genes which likely contain causative variants, in this case it is breast cancer. Next, click on the **Hamburger icon** in the topleft corner of the gene.iobio interface. This will show 20 genes including the BRCA1 gene with the causative variant under the **Genes** tab. Click on the BRCA1 gene and gene.iobio starts analyzing the gene for causative variants. Then under the **Variants** tab you will find the causative variant listed. You can click on the variant block to see more information on it. A report will show with information on the type, location, and quality of the variant, the associated phenotype, the pathogenicity, the population frequency, conservation of the location of the variant, and the inheritence pattern (Autosomal dominant).
+>    {: .tip}
+>
+>    > <tip-title> Increase genes to analyze </tip-title>
+>    >
+>    > More genes can be analyzed in three ways 1) the generated list of genes associated with a phenotypm can be increased. 2) The list of genes associated with another phenotype can be combined with the current list of genes. 3) A gene can manually be added.
+>    >
+>    > 1. To increase the number of genes in the generated list of genes click on the **gear icon** {% icon galaxy-gear %} in gene.iobio and click on the drop down box under **Keep top n genes from phenotype search**.
+>    > 2. To add more genes to the analysis type and select another phenotype in the top bar. After finding your phenotype of interest press enter and click **Combine genes with current list** in the pop-up screen.
+>    > 3. To add a single gene to the analysis type and select a gene name in the top bar. After finding your gene of interest press enter.
+>    {: .tip}
+>
+{: .hands_on}
+
 # Conclusion
-In this tutorial we have illustrated how to easily download a dataset of interest savely and securely from the EGA using the HTSGET protocol. In addition, we performed a trio analysis to find the causative variant in an autosomal dominant inherited disease. We were able to find the causative variant by pre-processing and annotating our VCFs using the SnpEff and GEMINI annotations. With this workflow you can now easily analyse and find the causative variant(s) in many different family trios from any database which HTSGET can connect to.
+In this tutorial we have illustrated how to easily download a dataset of interest savely and securely from the EGA using the HTSGET protocol. In addition, we performed a trio analysis to find the causative variant in an autosomal dominant inherited disease. We pre-processed and annotated our VCFs using the SnpEff and found the causative variant using both the GEMINI and gene.iobio tool. With this workflow you can now easily analyse and find the causative variant(s) in many different family trios from any database which HTSGET can connect to.
 
 # Workflow
 Here is the final layout of the workflow. For more details you can download the workflow from the overview at the top of the page.

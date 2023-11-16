@@ -31,9 +31,6 @@ contributors:
   - hexylena
 ---
 
-# Introduction
-
-
 This tutorial aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
 {% snippet faqs/galaxy/analysis_results_may_vary.md %}
@@ -258,7 +255,7 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >    {: .tip}
 >
 >
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 > 3. Wait for the job to finish
 > 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). If everything went okay, you should see a file that looks similar to this:
 >
@@ -313,7 +310,7 @@ Since each line in our file represents a single overlap between SNP and exon, we
 >
 >    ![Operation to perform on each group](../../images/101_datamash_2.png)
 >
-> 2. Click **Execute**. Your new output dataset will look something like this:
+> 2. Click **Run Tool**. Your new output dataset will look something like this:
 >
 >    ![Contents of the `Group` output dataset](../../images/101_14.png)
 >
@@ -343,7 +340,7 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 >    - *"with flavor"*: `Numerical sort`
 >    - *"everything in"*: `Descending order`
 >
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 >
 > 3. Examine the output file.
 >
@@ -374,7 +371,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 >    - "*Operation*": `Keep first lines`
 >    - *"Number of lines"*: `5`
 >
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 >
 > 3. Examine the output file, this should contain only the first 5 lines of the previous dataset.
 >
@@ -394,7 +391,7 @@ Congratulations! You have now determined which exons on chromosome 22 have the h
 >    - *"and column"*: `Column: 1`
 >    - *"to find"*: `Matching rows of 1st dataset`
 >
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 > 3. Examine your output file. It should contain the locations of your top 5 exons:
 >
 >    ![Contents of the `Compare two Datasets` output dataset](../../images/101_19.png)
@@ -414,7 +411,11 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
-> 3. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
+> 3. Click on the dataset in your history to expand it, then click on the {% icon galaxy-barchart %} (**Visualize**) icon
+>
+>    ![visualize button on the expanded history item](../../images/101_ucsc_visualize.png)
+>
+> 4. To **visualize the data in UCSC genome browser**, click on `display at UCSC (main)` now visible at the top (blue box) of the Visualize menu.
 >
 >    ![`display at UCSC main` link](../../images/101_displayucsc.png)
 >
@@ -452,7 +453,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 > <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-delete %} button.
 >
 >    This will make the creation of the workflow easier.
 >

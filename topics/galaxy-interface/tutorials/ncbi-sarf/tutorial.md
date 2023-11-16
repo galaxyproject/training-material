@@ -28,8 +28,6 @@ requirements:
       - upload-rules
 ---
 
-# Background
-
 Traditionally, after a list of run accessions has been filtered on the NCBI website, the accessions are used to download and extract fastq using the SRA toolkit to enter into the next steps of the workflow. A newer compressed data type, generated from raw submitted data containing SARS-CoV-2 sequence, is also accessible to Galaxy users from SRA in the Cloud.
 
 SRA Aligned Read Format (SARF) provides further output options beyond basic fastq format, for example:
@@ -207,7 +205,7 @@ With that you should have 7 different files in your history. If you examine the 
 > 2. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0) %} tail to head (cat) files with the following parameters:
 >
 >    - {% icon param-collection %} *"Datasets to Concatenate"*: `contigs.json` collection
->    - Click Execute
+>    - Click Run Tool
 >
 > 3. Rename this history item to `contigs.single.json`
 >
@@ -218,7 +216,7 @@ With that you should have 7 different files in your history. If you examine the 
 >    - {% icon param-file %} *"JSON Input"*: `contigs.single.json`
 >    - *"jq filter"*: `[.[]]`
 >    - *"Convert output to tabular"*: `yes`
->    - Click Execute
+>    - Click Run Tool
 >
 > 5. Rename this file `contigs.tsv`
 >
@@ -272,7 +270,7 @@ Now that a table has been generated, we will query the table to find the runs of
 >    >
 >    {: .tip}
 >
-> 2. Click **Execute** and rename the output file to `Run_list`
+> 2. Click **Run Tool** and rename the output file to `Run_list`
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="Run_list" %}
 >
@@ -381,7 +379,7 @@ Now that we have assembled a list of Runs that have contigs we are interested in
 >    - {% icon param-collection %}*"sra archive"*: `sarf_path`
 >    - In "Advanced Options":
 >      - *"Table name within cSRA object"*: `REFERENCE`
->    - Click Execute
+>    - Click Run Tool
 >
 >    The resulting dataset includes the contigs generated from these runs with placeholder `?` for quality scores
 >
@@ -390,7 +388,7 @@ Now that we have assembled a list of Runs that have contigs we are interested in
 >    Run {% tool [Fastq to Fasta converter](toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5) %}
 >
 >    - {% icon param-collection %}*"FASTQ file to convert"*: `sarf_contigs` (note: in the video this did not get renamed)
->    - Click Execute
+>    - Click Run Tool
 >
 >    The resulting dataset includes the contigs generated from these Runs in fasta format
 >
