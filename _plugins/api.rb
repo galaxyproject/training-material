@@ -143,6 +143,18 @@ module Jekyll
       page2.data['layout'] = nil
       site.pages << page2
 
+      # Tool Categories
+      page2 = PageWithoutAFile.new(site, '', 'api/', 'toolcats.json')
+      page2.content = JSON.generate(site.data['toolcats'])
+      page2.data['layout'] = nil
+      site.pages << page2
+
+      # Tool Categories
+      page2 = PageWithoutAFile.new(site, '', 'api/', 'toolshed-revisions.json')
+      page2.content = JSON.generate(site.data['toolshed-revisions'])
+      page2.data['layout'] = nil
+      site.pages << page2
+
       # Contributors
       puts '[GTN/API] Contributors, Funders, Organisations'
       %w[contributors funders organisations].each do |type|
