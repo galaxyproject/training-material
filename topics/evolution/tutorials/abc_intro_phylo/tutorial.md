@@ -278,18 +278,18 @@ The blue boxes on the left show some of the input data forms. The most commonly 
 
 Other input data forms are distances or dissimilarity measures based on molecular-based measures like DNA-DNA hybridisation, gene presence/absence, and morphology (physical dimensions). We will not discuss this kind of data in this tutorial.
 
-Aligned sequences (see Alignment below) can be converted into distances (green box above), using models for how the sites (i.e. specific nucleotides or amino acids) have evolved.
+Aligned sequences can be converted into distances (green box above), using models for how the sites (i.e. specific nucleotides or amino acids) have evolved.
 These distances can be expressed as a matrix _D_, which becomes the input to a distance-based method.
 
 At each step in the distance-based methods (orange boxes) the algorithm selects a pair of taxa, or clades that have been created thus far, to join together to make a new clade.
-Once that decision is made, the two taxa / clades that have been joined are replaced with the clade that the two of them make together:
+Once that decision is made, the two taxa / clades that have been joined are replaced with the clade that the two of them make together as seen in the figure below.
 
 ![Joining Clades](./images/JoiningCladesForTreeConstruction.png "Joining clades for tree construction"){: align="center"}
 
 
-## Data upload
+## About the data we're using
 
-This workshop will use a set of *anolis* lizard DNA sequences, from Jackman, Larson, de Queiroz & Losos (_Phylogenetic Relationships and Tempo of Early Diversication in Anolis Lizards_; *Systematic Biology* 1999 *48*(2):254-285; https://doi.org/10.1080/106351599260283).
+In this tutorial we will use a set of *Anolis* lizard DNA sequences, from Jackman, Larson, de Queiroz & Losos {% cite 10.1080/106351599260283 %} to trial some phylogenetic methods.
 The sequences are from the mitochondrial NADH dehydrogenase subunit 2 gene (ND2) and five transfer RNA (tRNA) genes, with an average sequence length of 1419.109 and a range of [1329,1727].
 
 
@@ -301,9 +301,9 @@ gawk 'BEGIN {OFS=","} {if (length>100) print length; else print $1}' anolis-raw.
 sed -r 'N;s/^(>[A-Za-z2\.]+)\n/\1,/g' anolis-sequence-lengths.txt -->
 
 
-We are using a relatively small set of sequences because phylogenetic estimation on many sequences is computationally very intensive, and can take weeks of time even on a high-performance computer.
-It is not uncommon for a phylogenetic analysis to span hundreds, or even thousands, of taxa.
+We are using a relatively small set of sequences to ensure the methods run quickly for the purposes of the tutorial. 
 
+In the real world, it is not uncommon for a phylogenetic analysis to span hundreds, or even thousands, of taxa. Phylogenetic estimation on this many sequences is computationally very intensive, and can take weeks of time even on a high-performance computer.
 
 ## Get the data
 
@@ -324,12 +324,12 @@ It is not uncommon for a phylogenetic analysis to span hundreds, or even thousan
 > {: .hands_on} 
 > You can click on the 'eye' icon {% galaxy-eye %} on the right to see the unaligned data (go ahead!) but the view isn't very informative. This is just the raw FASTA file, with the case symbols A, C, G, T for the nucleotides. You can see that the sequences are of different lengths, since the last lines of each sequence are of different lengths.
 >
-This is a file in **FASTA** or **Fasta** format (pronounced to rhyme with pasta), which has a very simple structure, as follows:
+This is a file in **FASTA** or **Fasta** format (pronounced to rhyme with pasta). Fasta format is is commonly used as input to phylogenetic inference programs and has a very simple structure, as follows:
 
-1. each sequence has a name, which appears one its own line after a "greater-than" sign '>'
-2. the next line(s) contain the sequence for that name; continuing either until the next sequence name line, or the end of the file.
+1. Each sequence has a name, which appears on its own line after a '>' sign 
+2. The next line(s) contain the sequence; continuing either until the next sequence name line, or the end of the file.
 
-Example:
+The below example has four sequences in it named Taxon_1, Taxon_2, etc, each with a short set of characters which we can assume are DNA sequences.
 
 <!-- ```
 >SEQUENCE_1
@@ -349,13 +349,13 @@ ACTGCTCTAGCACTGAGCCCA
 ACTTGGCGTAGCCGGAGGCC
 ```
 
-The above example has four sequences in it named Taxon_1, Taxon_2, ..., each with a short set of characters which we can assume are DNA.
+
 
 <!-- A line beginning with the greater-than sign `>` holds the sequence name or identifier/ID; the other lines hold the sequence data for the sequence ID above. -->
 
-*Note:* The Fasta format can also include symbols such as a question mark '?' for missing data, or hyphen '-' to indicate an insertion event in that sequence or deletion event in the others, collectively *indel*; thus it is also common to represent a multiple sequence alignment in Fasta format too.
+*Note:* The Fasta format can also include symbols such as a question mark '?' for missing data, or hyphen '-' to indicate an insertion or deletion events, collectively *indel*. It is common to represent a multiple sequence alignment in Fasta format with these symbols.
 
-Fasta format is very simple and is commonly used as input to phylogenetic inference programs.  (It is also a common format for storing high-throughput read data, but *without quality scores* -- if you want to include read quality you would use FASTQ format.)
+ It is also a common format for storing high-throughput read data, but *without quality scores* -- if you want to include read quality you would use FASTQ format.
 
 <br>
 
@@ -365,7 +365,7 @@ Fasta format is very simple and is commonly used as input to phylogenetic infere
 > 1.Click on the title of your file to see the row of small icons for saving, linking etc.: 
 > ![LittleIcons](./images/LittleJobIcons.png){:align="center"} 
 >
-> 2. Click on the **visualise icon** that looks like a little bar chart and then select the Multiple Sequence Alignment tool.
+> 2. Click on the **visualise icon** that looks like a bar chart and then select the **Multiple Sequence Alignment tool**.
 > You should see something like this:
 >
 > ![Unaligned Sequences](./images/UnalignedAnolis.png){:width="600"}
