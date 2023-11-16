@@ -222,7 +222,7 @@ module TopicFilter
   #    "dir" => "topics/assembly/tutorials/velvet-assembly"
   #    "type" => "tutorial"
   #  }
-  def self.annotate_path(path)
+  def self.annotate_path(path, layout)
     parts = path.split('/')
     parts.shift if parts[0] == '.'
 
@@ -244,9 +244,9 @@ module TopicFilter
 
     return nil if parts[-1] =~ /data[_-]library.yaml/ || parts[-1] =~ /data[_-]manager.yaml/
 
-    if parts[4] =~ /tutorial.*\.md/
+    if parts[4] =~ /tutorial.*\.md/ || layout == 'tutorial_hands_on'
       material['type'] = 'tutorial'
-    elsif parts[4] =~ /slides.*\.html/
+    elsif parts[4] =~ /slides.*\.html/ || %w[tutorial_slides base_slides introduction_slides].include?(layout)
       material['type'] = 'slides'
     elsif parts[4] =~ /ipynb$/
       material['type'] = 'ipynb'
@@ -339,7 +339,7 @@ module TopicFilter
 
       # Extract the material metadata based on the path
       page.data['url'] = page.url
-      material_meta = annotate_path(page.path)
+      material_meta = annotate_path(page.path, page.data['layout'])
 
       # If unannotated then we want to skip this material.
       next if material_meta.nil?
@@ -486,7 +486,9 @@ module TopicFilter
           'trs_endpoint' => "#{domain}/#{trs}",
           'license' => license,
           'creators' => creators,
+          'name' => wf_json['name'],
           'test_results' => workflow_test_outputs,
+          'modified' => File.mtime(wf_path),
         }
       end
     end
@@ -519,7 +521,7 @@ module TopicFilter
     topic_name_human = site.data[page_obj['topic_name']]['title']
     page_obj['topic_name_human'] = topic_name_human # TODO: rename 'topic_name' and 'topic_name' to 'topic_id'
     admin_install = Gtn::Toolshed.format_admin_install(site.data['toolshed-revisions'], page_obj['tools'],
-                                                       topic_name_human)
+                                                       topic_name_human, site.data['toolcats'])
     page_obj['admin_install'] = admin_install
     page_obj['admin_install_yaml'] = admin_install.to_yaml
 
@@ -669,23 +671,6 @@ module TopicFilter
   end
 
   ##
-  # Get the contributors for a material.
-  # This is the third time I've seen this function.
-  # I should probably refactor it out
-  #
-  # Parameters:
-  # +material+:: A material object
-  # Returns:
-  # +Array+:: An array of contributors as strings.
-  def self.get_contributors(material)
-    if material.key?('contributors')
-      material['contributors']
-    else
-      material['contributions'].map { |_k, v| v }.flatten
-    end
-  end
-
-  ##
   # Get a list of contributors for a list of materials
   # Parameters:
   # +materials+:: An array of materials
@@ -695,8 +680,8 @@ module TopicFilter
     materials
       .map { |_k, v| v['materials'] }.flatten
       # Not 100% sure why this flatten is needed? Probably due to the map over hash
-      .map { |mat| get_contributors(mat) }.flatten.uniq.shuffle
-      .reject { |c| site.data['contributors'][c]['funder'] == true }
+      .map { |mat| Gtn::Contributors.get_contributors(mat) }.flatten.uniq.shuffle
+      .reject { |c| Gtn::Contributors.funder?(site, c) }
   end
 
   ##
@@ -709,8 +694,8 @@ module TopicFilter
     materials
       .map { |_k, v| v['materials'] }.flatten
       # Not 100% sure why this flatten is needed? Probably due to the map over hash
-      .map { |mat| get_contributors(mat) }.flatten.uniq.shuffle
-      .select { |c| site.data['contributors'][c]['funder'] == true }
+      .map { |mat| Gtn::Contributors.get_contributors(mat) }.flatten.uniq.shuffle
+      .select { |c| Gtn::Contributors.funder?(site, c) }
   end
 
   ##

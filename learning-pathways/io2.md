@@ -54,7 +54,7 @@ pathway:
     tutorials:
       - name: beer-data-analysis
         topic: metagenomics
-      - name: nanopore-16s-metagenomics
+      - name: nanopore-16S-metagenomics
         topic: metagenomics
 
   - section: "Year 1: Advanced microbiome analysis"
@@ -89,6 +89,8 @@ pathway:
        For advanced visualisation, tools such as Circos may be utilized where Galaxy’s basic visualisation framework does not suffice. [SC2.2-3; SC1.5]
     tutorials:
       - name: circos
+        topic: visualisation
+      - name: circos-microbial
         topic: visualisation
 
   - section: "Year 3: Introduction to Visualisation with R and Python"

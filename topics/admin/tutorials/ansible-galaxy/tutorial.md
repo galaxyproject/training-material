@@ -30,6 +30,7 @@ contributions:
   - lldelisle
   testing:
   - mira-miracoli
+  - edmontosaurus
 tags:
   - ansible
   - deploying

@@ -21,10 +21,6 @@ contributors:
 
 ---
 
-
-# Introduction
-
-
 Progress in synthetic biology is enabled by powerful bioinformatics tools such as those aimed to design metabolic pathways for the production of chemicals. These tools are available in SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}).
 
 In this tutorial, we will use a set of tools from the **Pathway Analysis workflow** which will enable you to evaluate a set of heterelogous pathways previously produced by the RetroSynthesis workflow in a chassis organism (_E. coli_ iML1515). These workflows are available in the [Galaxy SynbioCAD platform](https://galaxy-synbiocad.org). The goal is to inform the user of the theoretically best performing pathways by ranking them based on the four following criteria: target product flux, thermodynamic feasibility, pathway length and enzyme availability.

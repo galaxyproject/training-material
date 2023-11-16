@@ -56,8 +56,6 @@ follow_up_training:
 ---
 
 
-# Introduction
-
 
 You've done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it's time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, and so forth. We're working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
 
@@ -107,6 +105,12 @@ You can access the data for this tutorial in multiple ways:
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
 >
 {: .hands_on}
+
+4. **Importing data from EBI Single Cell Expression Atlas**
+
+You can also pull the data from publicly available [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home). You can simply access the dataset we are working on by using the tool *EBI SCXA Data Retrieval* with experiment id of [E-MTAB-6945](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads). This [short tutorial]({% link topics/single-cell/tutorials/EBI-retrieval/tutorial.md %}) will show you how to use this tool and modify the output so that it's compatible with this tutorial and its workflow.
+
+
 
 # Important tips for easier analysis
 

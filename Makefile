@@ -27,9 +27,12 @@ else
 	ENV_FILE=environment.yml
 endif
 
-CONDA=$(shell which conda)
+CONDA=$(shell which mamba)
 ifeq ($(CONDA),)
-	CONDA=${HOME}/miniconda3/bin/conda
+    CONDA=$(shell which conda)
+    ifeq ($(CONDA),)
+    	CONDA=${HOME}/miniconda3/bin/mamba
+    endif
 endif
 
 default: help
@@ -53,7 +56,7 @@ COND_ENV_DIR=$(shell dirname $(dir $(CONDA)))
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --no-document --system && \
-		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby fastimage && \
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby fastimage rubyzip && \
 		pushd ${COND_ENV_DIR}/envs/${CONDA_ENV}/share/rubygems/bin && \
 		ln -sf ../../../bin/ruby ruby
 .PHONY: install
@@ -235,6 +238,7 @@ annotate: ## annotate the tutorials with usable Galaxy instances
 	wget https://github.com/hexylena/toolshed-version-database/raw/main/guid-rev.json -O metadata/toolshed-revisions.json && \
 	python bin/supported-fetch.py
 	bin/workflows-fetch.rb
+	bin/fetch-categories.rb
 .PHONY: annotate
 
 rebuild-search-index: ## Rebuild search index

@@ -18,8 +18,7 @@ contributors:
 - hexylena
 ---
 
-
-# Introduction
+In this tutorial you'll learn how to run a workshop as a Galaxy Instructor
 
 
 > <agenda-title></agenda-title>

@@ -15,13 +15,14 @@
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        {% if page.mathjax %}
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        {% endif %}
         <link rel="preload" href="{{ site.baseurl }}/assets/css/main.css?v=3" as="style">
         {{ 'load' | bundle_preloads }}
         <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css?v=3">
         <link rel="manifest" href="{{ site.baseurl }}/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
-
 
         {{ page | generate_dublin_core: site }}
 
@@ -30,11 +31,11 @@
         {% if page.title %}
             {% assign og_title = page.title %}
         {% endif %}
-        {% assign og_desc = topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
-        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}">
+        {% assign og_desc = page.description | default:topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
+        <meta name="description" content="{{ og_desc | strip_html | truncate: 120}}">
         <meta property="og:site_name" content="Galaxy Training Network">
         <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}">
-        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}">
+        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 120}}">
 
         {%- if page.cover %}{% assign coverimage = page.cover %}
         {%- elsif page.tags contains "cofest" %}{% assign coverimage = "/assets/images/cofest.png" %}
@@ -64,6 +65,8 @@
         {% include _includes/default-footer.html %}
 
         {{ 'main' | load_bundle }}
+        {% if page.mathjax %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        {% endif %}
     </body>
 </html>

@@ -34,8 +34,6 @@ contributors:
 
 ---
 
-# Introduction
-
 
 Patient samples for pathogen detection are usually "contaminated" with human host DNA.
 Such contamination, if not removed from sequencing data, may pose an issue with certain types of

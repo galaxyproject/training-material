@@ -28,7 +28,6 @@ abbreviations:
   JSON: JavaScript Object Notation
 ---
 
-# Introduction
 
 Once we have set up the infrastructure, we are ready to write the tutorial.
 
@@ -291,7 +290,7 @@ By following all of the guidelines in this file you can be sure that your tutori
 The GTN framework encourages the use of snippets, and PTDK ensures tutorials have fully detailed parameters learners should configure.
 If you make use of snippets in appropriate places, learners can easily follow a tutorial despite different skill levels with Galaxy.
 
-Additionally use of [Question and Solution boxes](#questions-and-solution-boxes) can ensure that students can self-check their understanding and progress as they progress through the tutorial.
+Additionally use of [Question and Solution boxes](#questions-and-solutions-boxes) can ensure that students can self-check their understanding and progress as they progress through the tutorial.
 Generally we recommend one or more questions (and associated correct solutions!) after every hands-on box (which might have a one or more steps to follow.)
 These questions will let students be sure their work is correct before they proceed too far.
 As such you should design your questions carefully in order to catch common and likely failure modes that learners may encounter.

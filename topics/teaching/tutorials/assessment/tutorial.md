@@ -34,8 +34,6 @@ contributions:
     - gallantries
 ---
 
-# Introduction
-
 **Assessment** is the evaluation or estimation of the nature, quality, or ability of someone or something, while **feedback** integrate the output of the assessment in the learning process.
 
 Assessment and feedback phase falls in the overall Nicholls process ({% cite via2020course %}, {% cite nicholls2002developing %}):

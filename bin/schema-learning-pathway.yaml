@@ -19,7 +19,12 @@ mapping:
         required: true
         description: |
             Description of the pathway
-
+    type:
+        type: str
+        enum:
+          - use
+          - admin-dev
+          - instructors
     cover-image:
         type: str
         description: cover image
@@ -39,17 +44,17 @@ mapping:
             - type: str
               required: true
               description: A contributor's ID in the CONTRIBUTORS.yaml file.
-                #enum:
-                #- CONTRIBUTORS
+              enum:
+              - CONTRIBUTORS
 
     funding:
         type: seq
         description: These entities provided funding support for the development of this resource
         sequence:
         - type: str
-          #enum:
-          #- CONTRIBUTORS
-
+          enum:
+          - ORGANISATIONS
+          - FUNDERS
     tags:
         type: seq
         description: Any relevant tags that would help a user discover this LP

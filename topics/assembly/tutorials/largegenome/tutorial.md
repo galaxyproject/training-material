@@ -23,8 +23,6 @@ contributors:
   - annasyme
 ---
 
-# Introduction
-
 *Note: We recommend running this tutorial on either the Galaxy Europe or Galaxy Australia servers. Other servers (such as Galaxy main) have not yet been configured fully for all the tools in this analysis.*
 
 ## What is genome assembly?
