@@ -70,6 +70,8 @@ tags:
 - SQL
 ---
 
+This tutorial will introduce you to {SQL} which can be used to query databases!
+
 > <comment-title></comment-title>
 >
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Databases and SQL](https://github.com/swcarpentry/sql-novice-survey/) lesson, which is licensed CC-BY 4.0.
