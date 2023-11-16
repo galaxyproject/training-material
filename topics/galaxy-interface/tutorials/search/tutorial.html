@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@690a538a6e13d280924672042e711ddad4402bab",
+		release: "galaxy-training-network@e5d3e1a7812eecf1e2439fa142376620e93fe273",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700093366' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1700093366' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700127690' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1700127690' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Searching Your History">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-10-18 08:58:35 +0000">
+<meta name="DC.date" content="2023-11-15 11:27:38 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Anton Nekrutenko">
 
@@ -110,7 +110,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2022-10-18 08:58:35 +0000",
+  "dateModified": "2023-11-15 11:27:38 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Searching Your History",
   "interactivityType": "mixed",
@@ -169,7 +169,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Searching Your History",
   "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/search/tutorial.html",
-  "version": 4,
+  "version": 5,
   "timeRequired": "PT5M",
   "teaches": "Feel confident in searching your history",
   "keywords": [
@@ -241,13 +241,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "mentions": [
 
   ],
-  "abstract": "> <div class="box-title agenda-title" id="agenda">Agenda</div>"
+  "abstract": "{% include topics/galaxy-interface/tutorials/search/search.md %}"
 }
         </script>
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700093366'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700127690'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -559,7 +559,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 15, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -570,7 +570,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00158">https://gxy.io/GTN:T00158</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
 
     </blockquote>
     </section>
@@ -585,22 +585,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
-
-  <p>In this tutorial, we will deal with:</p>
-
-<ol id="markdown-toc">
-  <li><a href="#basic-searching" id="markdown-toc-basic-searching">Basic Searching</a>    <ol>
-      <li><a href="#clearing-a-search" id="markdown-toc-clearing-a-search">Clearing a Search</a></li>
-    </ol>
-  </li>
-  <li><a href="#advanced-searching" id="markdown-toc-advanced-searching">Advanced Searching</a></li>
-</ol>
-
-</blockquote>
-
-<h1 id="basic-searching">Basic Searching</h1>
+                <h1 id="basic-searching">Basic Searching</h1>
 
 <p>You can filter what datasets are shown and search for datasets using the search bar at the top of the panel. Enter
 any text that a dataset you’d be looking for would contain, including:</p>
@@ -817,7 +802,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/690a538a6e13d280924672042e711ddad4402bab">690a538</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/e5d3e1a7812eecf1e2439fa142376620e93fe273">e5d3e1a</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -845,7 +830,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.9d052497.js?v=1700093366'></script>
+        <script src='/training-material/assets/js/bundle.9d052497.js?v=1700127690'></script>
         
     </body>
 </html>
