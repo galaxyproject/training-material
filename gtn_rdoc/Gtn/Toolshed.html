@@ -98,7 +98,7 @@
       <div id="method-c-format_admin_install" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">format_admin_install</span><span
-            class="method-args">(data, tool_list, topic)</span>
+            class="method-args">(data, tool_list, topic, tool_cats)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -125,7 +125,7 @@
 
           <div class="method-source-code" id="format_admin_install-source">
             <pre><span class="ruby-comment"># File _plugins/gtn/toolshed.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">format_admin_install</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">tool_list</span>, <span class="ruby-identifier">topic</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">format_admin_install</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">tool_list</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-identifier">tool_cats</span>)
   <span class="ruby-comment"># p &quot;Calculating supported servers for this tool list&quot;</span>
   <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">empty?</span>
 
@@ -135,7 +135,7 @@
       <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tool_info</span>[<span class="ruby-value">1</span>],
       <span class="ruby-string">&#39;owner&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tool_info</span>[<span class="ruby-value">0</span>],
       <span class="ruby-string">&#39;revisions&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tool_info</span>[<span class="ruby-value">2</span>],
-      <span class="ruby-string">&#39;tool_panel_section_label&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">topic</span>,
+      <span class="ruby-string">&#39;tool_panel_section_label&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tool_cats</span>[<span class="ruby-node">&quot;#{tool_info[0]}/#{tool_info[1]}&quot;</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">topic</span>,
       <span class="ruby-string">&#39;tool_shed_url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;https://toolshed.g2.bx.psu.edu/&#39;</span>,
     }
   <span class="ruby-keyword">end</span>

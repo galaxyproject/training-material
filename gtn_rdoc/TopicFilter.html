@@ -121,7 +121,7 @@
       <div id="method-c-annotate_path" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">annotate_path</span><span
-            class="method-args">(path)</span>
+            class="method-args">(path, layout)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -154,7 +154,7 @@
 
           <div class="method-source-code" id="annotate_path-source">
             <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 225</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">annotate_path</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">annotate_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">layout</span>)
   <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)
   <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">shift</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;.&#39;</span>
 
@@ -176,9 +176,9 @@
 
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/data[_-]library.yaml/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/data[_-]manager.yaml/</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/tutorial.*\.md/</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/tutorial.*\.md/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">layout</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;tutorial_hands_on&#39;</span>
     <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;tutorial&#39;</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/slides.*\.html/</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/slides.*\.html/</span> <span class="ruby-operator">||</span> <span class="ruby-node">%w[tutorial_slides base_slides introduction_slides]</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">layout</span>)
     <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;slides&#39;</span>
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/ipynb$/</span>
     <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;ipynb&#39;</span>
@@ -274,7 +274,7 @@
 
     <span class="ruby-comment"># Extract the material metadata based on the path</span>
     <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;url&#39;</span>] = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">url</span>
-    <span class="ruby-identifier">material_meta</span> = <span class="ruby-identifier">annotate_path</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span>)
+    <span class="ruby-identifier">material_meta</span> = <span class="ruby-identifier">annotate_path</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>])
 
     <span class="ruby-comment"># If unannotated then we want to skip this material.</span>
     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">material_meta</span>.<span class="ruby-identifier">nil?</span>
@@ -1251,7 +1251,7 @@
   <span class="ruby-identifier">topic_name_human</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;topic_name&#39;</span>]][<span class="ruby-string">&#39;title&#39;</span>]
   <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;topic_name_human&#39;</span>] = <span class="ruby-identifier">topic_name_human</span> <span class="ruby-comment"># TODO: rename &#39;topic_name&#39; and &#39;topic_name&#39; to &#39;topic_id&#39;</span>
   <span class="ruby-identifier">admin_install</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Toolshed</span>.<span class="ruby-identifier">format_admin_install</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;toolshed-revisions&#39;</span>], <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tools&#39;</span>],
-                                                     <span class="ruby-identifier">topic_name_human</span>)
+                                                     <span class="ruby-identifier">topic_name_human</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;toolcats&#39;</span>])
   <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;admin_install&#39;</span>] = <span class="ruby-identifier">admin_install</span>
   <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;admin_install_yaml&#39;</span>] = <span class="ruby-identifier">admin_install</span>.<span class="ruby-identifier">to_yaml</span>
 
