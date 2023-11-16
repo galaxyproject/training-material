@@ -520,48 +520,48 @@ That is why methods like FastTree are employed to find a tree with the best poss
 
 # Searching for the "best" tree
 
-The other main way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching all of the set of possible trees for the tree or trees that optimises this score.
-Note that such scores are "surrogates for truth," in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case, and in many analyses we therefore use *multiple* methods, in the hope that different analyses will all give us the same consistent answer.
+The other main way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching the entire set of possible trees for the tree (or trees) that optimises this score.
+Note that such scores are "surrogates for truth" in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case. In many analyses we therefore use *multiple* methods, in the hope that different analyses will all give us the same consistent answer. Minimum Evolution, Maximum Parsimony, and Maximum Likelihood are common such score functions.
 
 **If your conclusion changes based on a choice among reasonable analytical options, then perhaps your data are not adequate.**
 
-Minimum Evolution, Maximum Parsimony, and Maximum Likelihood are common such score functions.
+
 
 ## Minimum Evolution (ME)
 
-Minimum Evolution is the idea that the sum of the branch lengths should be as small as possible to still account for the distances between the leaves of the tree, in that the sum of squared differences between the distances implied by the tree and the observed distances from the data, is minimised.  The interested reader is directed to an article by Rzhetsky and Nei (1993) at https://academic.oup.com/mbe/article/10/5/1073/1037508.
+Minimum Evolution is the idea that the sum of the branch lengths should be as small as possible to still account for the distances between the leaves of the tree, in that the sum of squared differences between the distances implied by the tree and the observed distances from the data, is minimised.  You can read more about this in an article by [Rzhetsky and Nei](https://academic.oup.com/mbe/article/10/5/1073/1037508){%cite 10.1093/oxfordjournals.molbev.a040056 %}.
 
 There are some variations on this ME criterion, and FastTree uses an approximation to one of them to find good trees.
 
 ## Maximum Parsimony (MP) and Parsimony Length
 
-Most tree estimation methods output trees with branch lengths, which correspond to the amount of evolutionary ``work'' that has to be done to turn one sequence into another.
+Most tree estimation methods output trees with branch lengths, which correspond to the amount of evolutionary "work" that has to be done to turn one sequence into another.
 
 This can be given as the *minimum number of character state changes required* -- the so-called *parsimony length* -- to convert the (hypothetical) sequence at one end of a branch to that at the other end.
 The Maximum Parsimony method is based on this approach.
 
-The parsimony length of a given site pattern in an alignment, given a particular tree, is the minimum number of changes of state that are required to account for the observed characters (e.g., nucleotides) at the leaves of that tree.
-Finding the parsimony length of a site pattern is easy and fast due to a clever algorithm created by Walter Fitch; hence, finding the score (the ``goodness'') of a tree is fast -- but still, finding the tree that minimises this score is still computationally intractable, because the space of trees is so huge.
+The parsimony length of a given site pattern in an alignment, given a particular tree, is the minimum number of changes of state that are required to account for the observed characters (e.g. nucleotides) at the leaves of that tree.
+Finding the parsimony length of a site pattern is easy and fast due to a clever algorithm created by Walter Fitch; hence, finding the score (the "goodness") of a tree is fast. But finding the tree that minimises this score is still computationally intractable, because the space of trees is so huge.
 
-The Maximum Parsimony method for finding the ``best'' tree is then to search tree space for the tree or trees that *minimises* the parsimony length of any tree for that alignment: note that when parsimony is *maximised*, this means the fewest possible changes  required, so the *minimum* length.
+The Maximum Parsimony method for finding the "best" tree is then to search tree space for the tree or trees that *minimises* the parsimony length of any tree for that alignment: note that when parsimony is *maximised*, this means the fewest possible changes required, so the *minimum* length.
 
-We do not use the Maximum Parsimony method in this tutorial (but we may add it, later).
+We do not use the Maximum Parsimony method in this tutorial.
 
 ## Maximum Likelihood (ML) 
 
 Likelihood is the most statistically defensible phylogenetic inference method.
-It is based on the idea that the tree that has the highest probability of producind the sequences at the tips of the tree, as from your alignment, is the tree that is the ``most likely'' to be correct.
+It is based on the idea that the tree that has the highest probability of producing the sequences at the tips of the tree, as from your alignment, is the tree that is the "most likely" to be correct.
 
-Likelihood is *not* the same as probability, though they are often confused with each other.  However, it is *proportional* to the probability that the tree is correct, out of the set of possible trees and models you might be considering.
+Likelihood is *not* the same as probability, though they are often confused with each other. However, it is *proportional* to the probability that the tree is correct, out of the set of possible trees and models you might be considering.
 
-One major assumption we make about molecular sequence data is that each site evolves independently  of the others. 
-Biologically we know this isn't always the case, but in practice this turns out to make things much more tractable, and we still have a very good chance of getting the tree(s) right.
+One major assumption we make about molecular sequence data is that each site evolves independently  of the others. Biologically we know this isn't always the case, but in practice this turns out to make things much more tractable, and we still have a very good chance of getting the tree(s) right.
+
 Another assumption we make is that the substitution rate -- the rate at which changes of nucleotide at a given position in the sequence happen, per unit time -- is only dependent on the current state, i.e., we do not care about how a sequence came to be what it is, only what the sequence is now, to determine what are the probable evolutions of it.
 This seems much more biologically reasonable and makes this into a Markov process, which in turn enables a lot of calculations to be made simply.
 
 ### Models of sequence evolution
 
-*If you are in a hurry to get stuck in to the phylogenetic analysis you can skip reading this section and go on to the next Hands-On, running IQ Tree.*
+*If you are in a hurry to get stuck in to the phylogenetic analysis you can skip reading this section and go on to the next Hands-on, running IQ Tree.*
 
 > <details-title>Model Details</details-title>
 
