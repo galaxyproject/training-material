@@ -66,7 +66,7 @@ This tutorial assumes you are comfortable getting data into Galaxy, running jobs
 
 The {VGP} assembly pipeline has a modular organization, consisting in ten workflows (Fig. 1). It can used with the following types of input data:
 
-|  Input | Assembly quality  | Analysis trajectory <br>(Fig. 1) |
+|  Input data | Assembly quality  | Analysis trajectory <br>([Fig. 1)](#figure-1)|
 |------|---------------|-----|
 | HiFi | The minimum requirement | A |
 | HiFi + HiC| Better continuity | B |
@@ -77,7 +77,7 @@ The {VGP} assembly pipeline has a modular organization, consisting in ten workfl
 | HiFi + parental + BioNano | Better haplotype resolution and improved continuity | G |
 | HiFi + parental data + Hi-C + BioNano | Better haplotype resolution and ultimate continuity | H |
 
-If this table "HiFi" and "Hi-C" are derived from the individual whose genome is being assembled. "Parental data" is high coverage Illumina data derived from parents of the individual being assembled. Datasets containing parental data are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions. 
+If this table "HiFi" and "Hi-C" are derived from the individual whose genome is being assembled. "Parental data" is high coverage Illumina data derived from parents of the individual being assembled. Datasets containing parental data are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions. 
 
 ![The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
 <br>
@@ -207,19 +207,16 @@ All analyses described in this tutorial are performed using *workflows*--chains 
 >
 {: .hands-on}
 
-## Other ways to import workflows into Galaxy
-
-### From DockStore
-
-{% snippet faqs/galaxy/workflows_import_from_dockstore.md %}
-
-### From WorkflowHub
-
-{% snippet faqs/galaxy/workflows_import_from_workflowhub.md filter="name:vgp" %}
-
-### From GitHub
-
-{% snippet faqs/galaxy/workflows_import_from_github.md %}
+> <details-title>Other ways to import workflows the data</details-title>
+> You can import workflows from a variety of different sources including [DockStore](https://dockstore.org), [WorkflowHub](https://workflowhub.eu), or a URL:
+>
+> {% snippet faqs/galaxy/workflows_import_from_dockstore.md %}
+>
+> {% snippet faqs/galaxy/workflows_import_from_workflowhub.md %}
+>
+> {% snippet faqs/galaxy/workflows_import_from_url.md %}
+>
+{: .details}
 
 The workflows imported are marked with a red square in the following figure:
 
