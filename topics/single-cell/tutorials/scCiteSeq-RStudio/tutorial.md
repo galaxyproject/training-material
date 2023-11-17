@@ -40,8 +40,8 @@ notebook:
 ---
 
 {% snippet topics/single-cell/faqs/notebook_warning.md %}
-
-> <agenda-title></agenda-title>
+<a name="skipahead"></a>
+> <agenda-title> In RStudio</agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -52,7 +52,7 @@ notebook:
 
 Before we can do any real biological investigation, we need to understand what each of the outputs from our Seurat tool are. Maybe you've already begun to dissect what's what, but just in case, let's run through each of the datasets together. 
 
-# Datasets We'll Review
+# Datasets We'll Review 
 1. [RNA Matrix](#rnamatrix)
 2. [ADT Matrix](#adtmatrix)
 3. [Protein Markers](#proteinmarkers)

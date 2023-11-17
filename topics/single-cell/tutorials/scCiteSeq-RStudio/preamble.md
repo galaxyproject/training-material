@@ -2,7 +2,17 @@
 > <comment-title></comment-title>
 > This tutorial is significantly based on the Seurat documentation({% cite Satija2015 %}) as well as Seurat's vignette entitled [Using Seurat with multimodal data](https://satijalab.org/seurat/articles/multimodal_vignette).
 {: .comment}
+
+> <agenda-title> Getting to RStudio</agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+> [Or skip ahead to analyses in RStudio](#skipahead)
+{: .agenda}
  
+# Cite-Seq Overview
 Multiomic analyses are a new and exciting way to understand the world of biology through bioinformatics! Cite-Seq ({% cite Satija&Smibert2017 %}) is one example of such multimodal technologies. Cite-Seq enables us to measure single cell transcriptomes and cell surface proteins simultaneously. Transcriptomic measurements are achieved via RNA sequencing techniques and the surface protein abundance measurements are quantified via DNA barcoded antibodies. As of current, Cite-Seq boasts its ability to tag up to 125 surface proteins at a time! 
 
 Seurat has kept up to date with the capacities of multimodal technologies such as Cite-Seq, which means once you've familiarized yourself with Seurat, you can seamlessly continue to use the package to analyze and explore many other types multimodal single-cell datasets. 
@@ -11,10 +21,10 @@ Seurat has kept up to date with the capacities of multimodal technologies such a
 >Check out [Filter, Plot, and Explore with Seurat]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio %}) to start doing so in RStudio with an scRNA-seq dataset!
 {: .comment}
 
-Before we can start exploring, we'll process our transcriptomic and surface protein measurements into a Seurat object. The hardworking Galaxy programmers have kindly optimized the Seurat tool to include Cite-Seq functionality. This enables the tool to take our raw csv files as input and output Seurat objects which are easy to explore! 
+Before we can start exploring, we'll process our transcriptomic and surface protein measurements into a Seurat object. The hardworking Galaxy programmers have kindly optimized the Seurat tool to include Cite-Seq functionality. This enables us to input our raw csv files and the tool will output Seurat objects, which are much easy to explore! 
 
 ><comment-title></comment-title>
->If you're interested in what the Seurat tool is doing behind the scenes, check out Seurat's [Using Seurat with multimodal data](https://satijalab.org/seurat/articles/multimodal_vignette) vignette. The first portion of the tutorial is what the Seurat tool accomplishes for us. Ending with the output of a Seurat object which we can then further explore in RStudio.
+>If you're interested in what the Seurat tool is doing behind the scenes, check out Seurat's [Using Seurat with multimodal data](https://satijalab.org/seurat/articles/multimodal_vignette) vignette. The first section of the tutorial is what the Cite-Seq enabled Seurat tool accomplishes for us. Ending with the output of a Seurat object which we can then further explore in RStudio.
 {: .comment}
 
 
@@ -23,7 +33,7 @@ For this tutorial, we'll use a publicly available dataset of 8,617 cord blood mo
 
 ><comment-title></comment-title>
 >A quick note on nomenclature when working with Cite-Seq.
->ADT: ( antibody derived tag) refers to the cell surface protein abundance measurements
+>Antibody derived tag (ADT) refers to the cell surface protein abundance measurements
 >meanwhile RNA: represents the transcriptomic measurements
 {: .comment}
 
@@ -31,7 +41,7 @@ First on the to-do list is importing our csv files. You can do this in a couple 
 
 
 
-**Option 1: Uploading Data via Link**  
+## Option 1: Uploading Data via Link  
 
 > <hands-on-title></hands-on-title>
 >
@@ -48,7 +58,7 @@ First on the to-do list is importing our csv files. You can do this in a couple 
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 {: .hands_on}
 
-**Option 2: Import a History** 
+## Option 2: Import a History 
 
 You can access [this history](https://usegalaxy.eu/u/camila-goclowski/h/cite-seq-tutorial-data) by clicking on the link provided.
 
