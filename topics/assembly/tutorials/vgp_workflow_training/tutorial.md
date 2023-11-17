@@ -54,8 +54,6 @@ The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, ne
 
 # Getting started on Galaxy
 
---------
-
 This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommend you visit the [Galaxy Training Network](https://training.galaxyproject.org). Consider starting with the following trainings:
 - [Introduction to Galaxy]({% link topics/introduction/tutorials/introduction/slides.html %})
 - [Galaxy 101]({% link topics/introduction/tutorials/galaxy-intro-101/tutorial.md %})
@@ -65,8 +63,6 @@ This tutorial assumes you are comfortable getting data into Galaxy, running jobs
 - [Downloading and Deleting Data in Galaxy]({% link topics/galaxy-interface/tutorials/download-delete-data/tutorial.md %})
 
 # The VGP-Galaxy pipeline
-
--------
 
 The {VGP} assembly pipeline has a modular organization, consisting in ten workflows (Fig. 1). It can used with the following types of input data:
 
@@ -83,12 +79,8 @@ The {VGP} assembly pipeline has a modular organization, consisting in ten workfl
 
 If this table "HiFi" and "Hi-C" are derived from the individual whose genome is being assembled. "Parental data" is high coverage Illumina data derived from parents of the individual being assembled. Datasets containing parental data are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions. 
 
-----
-
 ![The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
-
-----
-
+<br>
 The first stage of the pipeline is the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate necessary for parameterizing downstream workflows. The generation of *k*-mer counts can be done from HiFi data only (Workflow 1) or include data from parental reads for trio-based phasing (Workflow 2; trio is a combination of paternal sequencing data with that from an offspring that is being assembled). The second stage is the phased contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases continuity and the quality of the final assembly. The purging stage is generally unnecessary for trio data for which reliable haplotype resolution is performed using *k*-mer profiles obtained from parental reads. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7), with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional) and Hi-C (Workflow 8) data and [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms. A final stage of decontamination (Workflow 9) removes exogenous sequences (e.g., viral and bacterial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
 
 > <comment-title>A note on data quality</comment-title>
@@ -96,8 +88,6 @@ The first stage of the pipeline is the generation of *k*-mer profiles of the raw
 {: .comment}
 
 # Getting the data
-
------
 
 The following steps use PacBio {HiFi} and Illumina {Hi-C} data from baker's yeast ([*Saccharomyces cerevisiae*](https://en.wikipedia.org/wiki/Saccharomyces_cerevisiae)). The tutorial represents trajectory **B** from Fig. 1 above. For this tutorial, the first step is to get the datasets from Zenodo. Specifically, we will be uploading two datasets:
 
@@ -159,59 +149,63 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 ## Organizing the data 
 
-If everything goes smoothly you history will look something like this:
-
-------
+If everything goes smoothly you history will look like shown in Fig. 4 below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes collection as an input (it does not access individual datasets). So let's create a collection using steps outlines in the Tip {% icon tip %} "Creating a dataset collection" that you can find below Fig. 4.
 
 ![AfterUpload](../../images/vgp_assembly/making_list.svg "History after uploading HiFi and HiC data (left). Creation of a list (collection) combines all HiFi datasets into a single history item called 'HiFi data' (right). See below for instruction on how to make this collection.")
 
-------
-
-The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes collection as an input (it does not access individual datasets). So let's create a collection using steps outlines in the Tip {% icon tip %} below:
-
 {% snippet faqs/galaxy/collections_build_list.md %}
 
-
-## Other ways to upload data
-
-You can obviously upload your own datasets via URLs as illustrated above or from your local system. In addition, you can upload data from a major repository called [GenomeArk](https://genomeark.org). GenomeArk is integrated directly into Galaxy Upload. To use GenomeArk following the steps in the Tip {% icon tip %} below:
-
-{% snippet faqs/galaxy/dataset_upload_from_genomeark.md %}
-
+> <details-title>Other ways to upload the data</details-title>
+> You can obviously upload your own datasets via URLs as illustrated above or from your own computer. In addition, you can upload data from a major repository called [GenomeArk](https://genomeark.org). GenomeArk is integrated directly into Galaxy Upload. To use GenomeArk following the steps in the Tip {% icon tip %} below:
+>
+> {% snippet faqs/galaxy/dataset_upload_from_genomeark.md %}
+{: .details}
 
 
-Once we have imported the datasets, the next step is to import the VGP workflows from the WorkflowHub.
+Once we have imported the datasets, the next step is to import the workflows necessary for the analysis of our data from [DockStore](https://dockstore.org).
 
 # Importing workflows
 
------
+All analyses described in this tutorial are performed using *workflows*--chains of tools--shown in [Fig. 1](#figure-1). Specifically, we will use four workflows corresponding to analysis trajectory **B**: 1, 4, 6, and 8. To use these four workflows you need to import them into your Galaxy account following the steps below:
 
-All analyses described in this tutorial are performed using *workflows*--chains of tools. Before we can proceed, we need to import workflows into your Galaxy account. In order to do this you need to follow the instruction below.
-
-## Workflows for this tutorial
-
-All current assembly workflows were shown in Fig. 1 above. In this tutorial we will use the four workflows listed below. 
-
-### *K*-mer profiling workflow (WF1) 
-
-```
-https://dockstore.org/workflows/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main:v0.1.4?tab=info
-```
-### Assembly (contiging) with Hi-C (WF4) 
-
-```
-https://dockstore.org/workflows/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main:v0.1.6?tab=info
-```
-### Purge duplicate contigs (WF6)
-
-```
-https://dockstore.org/workflows/github.com/iwc-workflows/Purge-duplicate-contigs-VGP6/main:v0.3.2?tab=info
-```
-### Scaffolding with Hi-C (WF8)
-
-```
-https://dockstore.org/workflows/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main:v0.2?tab=info
-```
+> <hands-on-title><b>Importing workflows from GitHub</b></hands-on-title>
+> 
+> Links to the four workflows that will be used in this tutorial are listed in the table. Follow the procedure described below the table to import each of them into your Galaxy account.
+> <br>
+>
+> | Workflow | Link |
+> |---------|---------|
+> | *K*-mer profiling workflow (WF1) | [https://raw.githubusercontent.com/iwc-workflows/kmer-profiling-hifi-VGP1/v0.1.4/kmer-profiling-hifi-VGP1.ga](https://raw.githubusercontent.com/iwc-workflows/kmer-profiling-hifi-VGP1/v0.1.4/kmer-profiling-hifi-VGP1.ga) |
+> | Assembly (contiging) with Hi-C workflow (WF4) | [https://raw.githubusercontent.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/v0.1.6/Assembly-Hifi-HiC-phasing-VGP4.ga](https://raw.githubusercontent.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/v0.1.6/Assembly-Hifi-HiC-phasing-VGP4.ga) |
+> | Purge duplicate contigs workflow (WF6) | [https://raw.githubusercontent.com/iwc-workflows/Purge-duplicate-contigs-VGP6/v0.3.2/Purge-duplicate-contigs-VGP6.ga](https://raw.githubusercontent.com/iwc-workflows/Purge-duplicate-contigs-VGP6/v0.3.2/Purge-duplicate-contigs-VGP6.ga) |
+> | Scaffolding with Hi-C workflow (WF8) | [https://raw.githubusercontent.com/iwc-workflows/Scaffolding-HiC-VGP8/v0.2/Scaffolding-HiC-VGP8.ga](https://raw.githubusercontent.com/iwc-workflows/Scaffolding-HiC-VGP8/v0.2/Scaffolding-HiC-VGP8.ga)|
+>
+> <br>
+>
+> **Step 1: Copy the workflow URL into clipboard**
+>
+> 1. Right click on a URL in the table above. 
+> 2. Select "Copy link address" option in the dropdown menu that appears.
+> 3. Go to Galaxy
+>
+>> <warning-title>Make sure you are logged in!</warning-title>
+>> Ensure that you are logged in into your Galaxy account! 
+> {: .warning}
+> 
+> <br>
+>
+> **Step 2: Import the workflow**
+>
+> 1. Click "Workflow" on top of the Galaxy interface.
+> 2. On top-right of the middle pane click "{% icon galaxy-upload %} Import" button.
+> 3. Paste the URL you copied into the clipboard at Step 1 above to "Archived Workflow URL" box.
+> 4. Click "Import workflow" button.
+>
+> This entire procedure is shown in the animated figure below. {% icon warning %} **You need to repeat this process for all four workflows**
+>
+> ![Upload via URL](../../images/vgp_assembly/importing_via_url_vgp_specific.png "Importing a workflow via URL.")
+>
+{: .hands-on}
 
 ## Other ways to import workflows into Galaxy
 
