@@ -43,7 +43,7 @@ notebook:
 <a name="skipahead"></a>
 > <agenda-title> In RStudio</agenda-title>
 >
-> In this tutorial, we will cover:
+> In the rest of this tutorial, we'll cover:
 >
 > 1. TOC
 > {:toc}
@@ -61,13 +61,15 @@ Before we can do any real biological investigation, we need to understand what e
 6. [Combined RNA & Protein Markers](#combinedmarkers)
 
 ><comment-title>gx_get</comment-title>
-> RStudio in Galaxy comes with a gx_get() function. This  is critical to understand and be able to use in order to move datasets from your history into RStudio. The function outputs the file path with which you can access your data via RStudio.
-> To use it, simply use the numbered position of the dataset you are looking to import. For example: 
-> If we want to find the first dataset we imported, simply run the following command: 
+> RStudio in Galaxy comes with a gx_get() function. This  is critical to understand and be able to use in order to move datasets from your history into RStudio. The function outputs the file path from which you access your data via RStudio.
+>
+> To use it,  use the numbered position of the dataset you are looking to import. For example:
+> 
+> If we want to find the first dataset we imported, run the following command: 
 > ```r
 > gx_get(1)
 > ```
->The result of this command will be a file path to the first dataset in your galaxy history. Use that file path for importing purposes. 
+>The result of this command will be a file path to the first dataset in your Galaxy history. Use that file path for future importing commands. 
 {: .comment}
 
 ## RNA Matrix <a name="rnamatrix"></a>
@@ -76,7 +78,7 @@ To take a look at the pre analysis RNA-seq matrix, use the following commands:
 gx_get(1)
 RNA<-read.csv('/import/1')
 ```
-It's worth mentioning that the dataset we are using contains ~5% mouse cells, which we can use as negative controls for the cell surface protein measurements. As such, the RNA expression matrix initially has "HUMAN_" or "MOUSE_" appended to each gene. 
+It's worth mentioning that the dataset we are using contains ~5% mouse cells, which Seurat suggests we can use as negative controls for the cell surface protein measurements. As such, the RNA expression matrix initially has "HUMAN_" or "MOUSE_" appended to each gene. 
 
 Now let's take a look at what's in here. 
 ```r
@@ -84,7 +86,8 @@ view(RNA)
 ```
 ![RNA Matrix](../../images/scCiteSeq-RStudio/Plot3.png "RNA Matrix")
 
-If you're familiar with scRNA-seq matrices, this may look familiar to you. That's because it is exactly that--an RNA-seq matrix. In these matrices we have genes as row names and cell barcodes as column names. The values within the matrix denote the number of transcripts from a given gene within a given cell.
+>
+>If you're familiar with scRNA-seq matrices, this may look familiar to you. That's because it is exactly that--an RNA-seq matrix. In these matrices we have genes as row names and cell barcodes as column names. The values within the matrix denote the number of transcripts from a given gene within a given cell.
 
 You may have noticed there are lots of zero values in this matrix. You may also be thinking, "Won't that create noise in the dataset??" The answer is yes, and removing these zeros is one of the first problems that the Seurat preprocessing tool will solve. 
 
@@ -105,9 +108,14 @@ view(ADT)
 Looks shockingly similar, doesn't it?
 
 In the ADT matrix, we have cell surface proteins (instead of gene names) as row names and the same cell barcodes as column names. 
-# IMPORT HTML INTO RSTUDIO?
-If you ran the same parameters as I did, the next output (number 3 in our history) will be Seurat's run log. This is unfortunately not super easy to import into RStudio since it comes as an html format. It contains all of the run information from the background coding done by the tool. Any warnings, errors, or progress bars will be present in here and are often useful for troubleshooting in case something goes awry. Because of the html formatting, we will not look at this output together, but feel free to explore it on your own using the view (eye) icon in your history. 
-![Eye Button](../../images/scCiteSeq-RStudio/Plot13.png "Eye Button")
+
+<warning-title>Run Log Available (In History)</warning-title>
+>If you ran the same parameters as I did, the next output (number 3 in our history) will be Seurat's run log.
+>This is unfortunately not super easy to import into RStudio since it comes as an html format. It contains all of the run information from the background coding done by the tool. Any warnings, errors, or progress bars will be present in here and are often useful for troubleshooting in case something goes awry.
+>Because of the html formatting, we will not look at this output together, but feel free to explore it on your own using the view (eye) icon in your history. 
+>
+{: .warning}
+
 
 ## Protein Markers <a name="proteinmarkers"></a>
 The next output in my galaxy history are protein markers, let's take a look: 

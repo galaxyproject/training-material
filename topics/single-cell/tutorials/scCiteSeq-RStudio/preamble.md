@@ -64,6 +64,7 @@ You can access [this history](https://usegalaxy.eu/u/camila-goclowski/h/cite-seq
 
 {% snippet faqs/galaxy/histories_import.md %}
 
+# Cite-Seq Enabled Seurat Tool 
 
 Now we'll run those csv files through the updated Seurat tool with the following parameters:
 > <hands-on-title></hands-on-title>
@@ -97,11 +98,13 @@ Now we'll run those csv files through the updated Seurat tool with the following
 {: .hands_on}
 
 ><comment-title></comment-title>
->Note that the parameters listed above are simply one way in which you may use this super useful, one step tool. Feel free to play around with different parameters to see how it changes the data! If you're hoping to follow this tutorial step by step, word for word, be aware that changing any of the above parameters may change the data you get to explore shortly in RStudio. 
+>Note that the parameters listed above are just one way you may use this super useful, one step tool. Feel free to play around with different parameters to see how it affects the data! 
+>
+>If you're hoping to follow this tutorial step by step, word for word, be aware that changing any of the above parameters may change the data you get to explore shortly in RStudio. 
 {: .comment}
 
 # Moving to RStudio
-Now that we have some explorable data in our Galaxy history, let's move into RStudio and keep investigating: 
+Now that we have some explorable data (a Seurat object) in our Galaxy history, let's move into RStudio and keep investigating: 
 > <hands-on-title>Open RStudio in Galaxy</hands-on-title>
 > Run {% tool [RStudio](interactive_tool_rstudio)%}
 {: .hands_on}
