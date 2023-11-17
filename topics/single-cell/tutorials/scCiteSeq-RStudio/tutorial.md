@@ -41,6 +41,15 @@ notebook:
 
 {% snippet topics/single-cell/faqs/notebook_warning.md %}
 
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 Before we can do any real biological investigation, we need to understand what each of the outputs from our Seurat tool are. Maybe you've already begun to dissect what's what, but just in case, let's run through each of the datasets together. 
 
 # Datasets We'll Review

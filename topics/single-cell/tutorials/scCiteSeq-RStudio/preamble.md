@@ -17,6 +17,7 @@ Before we can start exploring, we'll process our transcriptomic and surface prot
 >If you're interested in what the Seurat tool is doing behind the scenes, check out Seurat's [Using Seurat with multimodal data](https://satijalab.org/seurat/articles/multimodal_vignette) vignette. The first portion of the tutorial is what the Seurat tool accomplishes for us. Ending with the output of a Seurat object which we can then further explore in RStudio.
 {: .comment}
 
+
 # Get Your Data
 For this tutorial, we'll use a publicly available dataset of 8,617 cord blood mononuclear cells (CBMCs) which have been sequenced for transcriptomic measurements as well as 11 surface proteins ({% cite Satija&Smibert2017 %}). 
 
@@ -28,35 +29,31 @@ For this tutorial, we'll use a publicly available dataset of 8,617 cord blood mo
 
 First on the to-do list is importing our csv files. You can do this in a couple of ways: 
 
-> **Option 1.**  Use the Upload Data button on the upper left of your screen:
-    ![Upload Data Button](../../images/scCiteSeq-RStudio/Plot1.png)
 
 
-Then select the "Paste/Fetch Data" option:
-![Paste/Fetch Data Button](../../images/scCiteSeq-RStudio/Plot2.png "Paste/Fetch Data")
-    
-Copy the following links into the box:
-# IS THERE A BETTER WAY TO FORMAT THIS?
+**Option 1: Uploading Data via Link**  
 
 > <hands-on-title></hands-on-title>
-> **ADT data:** ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-ADT_umi.csv.gz
-> **RNA data:** ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-RNA_umi.csv.gz
+>
+> 1. Create a new history for this tutorial
+> 2. Import the csv files object from NCBI:
+>  To retrive the ADT file: 
+>    ```
+>    ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-ADT_umi.csv.gz
+>    ```
+>  To retrieve the RNA file: 
+>    ```
+>    ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-RNA_umi.csv.gz
+>    ```
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 {: .hands_on}
 
-Select "Start" and then close once both files indicate they are 100% ready. 
+**Option 2: Import a History** 
 
-The two csv data files should now begin importing into your Galaxy history!  
-
-> **Option 2.** Import A History
 You can access [this history](https://usegalaxy.eu/u/camila-goclowski/h/cite-seq-tutorial-data) by clicking on the link provided.
 
 {% snippet faqs/galaxy/histories_import.md %}
 
-> **Option 3.** Import from a Galaxy Resource Tool
-Zenodo? NCBI? OmicsDI?
-- Is there another publicly available databse to grab this from? Feels incorrect to upload to Zenodo when it's already publicly available (and not mine!) 
-- Exists on OmicsDI but our retrieval tool is still in beta 
-- Currently stored on NCBI & currently searching through the NCBI tools to see if one will work for import 
 
 Now we'll run those csv files through the updated Seurat tool with the following parameters:
 > <hands-on-title></hands-on-title>
@@ -93,7 +90,7 @@ Now we'll run those csv files through the updated Seurat tool with the following
 >Note that the parameters listed above are simply one way in which you may use this super useful, one step tool. Feel free to play around with different parameters to see how it changes the data! If you're hoping to follow this tutorial step by step, word for word, be aware that changing any of the above parameters may change the data you get to explore shortly in RStudio. 
 {: .comment}
 
-# Move to RStudio
+# Moving to RStudio
 Now that we have some explorable data in our Galaxy history, let's move into RStudio and keep investigating: 
 > <hands-on-title>Open RStudio in Galaxy</hands-on-title>
 > Run {% tool [RStudio](interactive_tool_rstudio)%}
