@@ -322,7 +322,7 @@ In the real world, it is not uncommon for a phylogenetic analysis to span hundre
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 > {: .hands_on} 
-> You can click on the 'eye' icon {% galaxy-eye %} on the right to see the unaligned data (go ahead!) but the view isn't very informative. This is just the raw FASTA file, with the case symbols A, C, G, T for the nucleotides. You can see that the sequences are of different lengths, since the last lines of each sequence are of different lengths.
+> You can click on the 'eye' icon {% icon galaxy-eye %} on the right to see the unaligned data (go ahead!) but the view isn't very informative. This is just the raw FASTA file, with the case symbols A, C, G, T for the nucleotides. You can see that the sequences are of different lengths, since the last lines of each sequence are of different lengths.
 >
 This is a file in **FASTA** or **Fasta** format (pronounced to rhyme with pasta). Fasta format is is commonly used as input to phylogenetic inference programs and has a very simple structure, as follows:
 
@@ -503,7 +503,7 @@ That is why methods like FastTree are employed to find a tree with the best poss
 > 1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc.: 
 > ![LittleIcons](./images/LittleJobIcons.png){:align="center"} 
 >
-> 2. Click the "Visualisation" icon looks like a little bar chart.
+> 2. Click the "Visualisation" icon that looks like a little bar chart.
 > 3. You will be presented with a couple of options.  When I do it, I get this:
 >
 > ![SelectTreeVisualisation](./images/PhylogeneticTreeVisualisationOptions.png){:width="400"}
@@ -563,8 +563,7 @@ This seems much more biologically reasonable and makes this into a Markov proces
 
 *If you are in a hurry to get stuck in to the phylogenetic analysis you can skip this section and go to the next [Hands-on: running IQ Tree](#estimating-a-maximum-likelihood-tree).*
 
-> <details-title>Model Details</details-title>
-
+> <details-title>More details on likelihood models</details-title>
 > Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
 > The simplest model for DNA is that each nucleotide has the same rate of change, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC) model published in 1969, and this model has just one parameter.
 > 
@@ -588,14 +587,14 @@ This seems much more biologically reasonable and makes this into a Markov proces
 > This is usually denoted by a "+$$\Gamma$$" or "+G" appended to the model name. 
 > 
 > There are **many** more models, with many more parameters and constraints.  Finding the best one to fit a data set is a complex task!
-
+>
 > Fortunately there are tools that help determine the most appropriate model for a given data set, such as the Akaike Information Criterion (AIC) and some variations of that.
 > 
 > The program IQTree, which we use later, performs a step to determine which model is most appropriate for your data set, based on AIC and other schemes to avoid over-fitting while still having as good a fit to your data as possible.
 > In that step, trees, and their likelihoods based on your data, are estimated for many different models. Each yields a likelihood score but rather than simply take the model that maximises the likelihood, over-complex models are penalised, to avoid over-fitting. One such penalty function is the AIC; there are others.
 > 
 > There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you should have some appreciation of what is going on behind the scenes when an Maximum Likelihood method is looking for the best model for your data.
-> 
+>
 {: .details}
 
 ## Searching for trees and their branch lengths
