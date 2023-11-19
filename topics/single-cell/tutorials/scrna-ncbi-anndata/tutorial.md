@@ -257,17 +257,17 @@ Next we will add the metadata indicating which patient each row came from.
 >    - {% icon param-file %} *"File to process"*: `Observation data`
 >    - *"1: Replacement"*
 >         - *"in column"*: `Column: 2`
->         - *"Find pattern"*: `(0$)|(1$)`
+>         - *"Find pattern"*: `0|1`
 >         - *"Replace with"*: `patient1`
 >    - **+ Insert Replacement**
 >    - *"2: Replacement"*
 >         - *"in column"*: `Column: 2`
->         - *"Find pattern"*: `(2$)|(3$)|(4$)|(5$)|(6$)`
+>         - *"Find pattern"*: `2|3|4|5|6`
 >         - *"Replace with"*: `patient2`
 >    - **+ Insert Replacement**
 >    - *"3: Replacement"*
 >         - *"in column"*: `Column: 2`
->         - *"Find pattern"*: `(7$)|(8$)|(9$)`
+>         - *"Find pattern"*: `7|8|9`
 >         - *"Replace with"*: `patient3`
 >    - **+ Insert Replacement**
 >    - *"5: Replacement"*
@@ -333,6 +333,12 @@ We will now add a column to indicate which sample each row came from using the s
 > 3. **Rename** {% icon galaxy-pencil %} output `Specimen Metadata`
 >
 {: .hands_on}
+
+> <comment-title>$ parameter</comment-title>
+> You may have noticied that some of the parameters in the previous tool used the $ symbol, this is due to how the {% tool Replace Text %} tool works. The tool will replace and **update** the data for every insert operation, meaning that lines that have already been updated could be updated again.
+>
+> Since we are replacing our batch id's with identifiers that include numbers we want to prevent them from being updated again. appending the pattern with the $ symbol tells the tool to only replace the pattern if it is not followed by any other character (so the 1 in `AUG_PB1A` won't be replaced as it is followed by an 'A').
+{: .comment}
 
 Finally we will add the tumor column which indicates which tumor sample each row belongs to.
 
