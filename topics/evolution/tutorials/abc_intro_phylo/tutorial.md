@@ -191,9 +191,9 @@ In this tutorial we will only consider trees that are binary.
 
 So, how do we estimate phylogenetic trees?
 
-All we start with is leaves of the tree which can be living (extant) or older taxa:
+All we start with is the leaves of the tree which can be living (extant) or older taxa:
 
-![Leaves of a tree are represented as separate rectangles containing the words Extant taxon = living species](./images/WeJustHaveLeaves.png "The 'leaves' of a tree (extand or older taxa) are the starting point for buidling phylogenies"){:align="center"}
+![Leaves of a tree are represented as separate rectangles containing the words Extant taxon = living species](./images/WeJustHaveLeaves.png "The 'leaves' of a tree (extant or older taxa) are the starting point for buidling phylogenies"){:align="center"}
 
 There are several ways to estimate a tree, such as:
 
@@ -218,8 +218,8 @@ It is generally not possible to prove that any tree inferred is *correct* -- sin
 This assumption means that the future evolutionary trajectory of an organism is not affected by its past: how we got here is not important, only how we adapt and evolve now.
 > 
 > 2. Phylogenetic relationships can be correctly represented by a tree! (This isn't *always* assumed, but it is very common.)  Trees are a very attractive representation of evolution, and it is part of our language: "The tree of life" is a common phrase.  However evolution is not always best explained by a tree-like, "branching" process as there can be hybridisation events, and species can share genetic material, or even envelop each other, creating organelles.
-> 3. The **Molecular clock** assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is one of those models that are known to be wrong, but which are useful. For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
-> 4. Lineages don’t interact – once they have speciated, they are independent of each other. Again, this isn't always the case, but the vast majority of methods assume this, particularly if the evolution is also assumed to be tree-like. We also know that biological lineages *do* interact with each other -- but our methods are not able to manage such complexity in general.
+> 3. The **Molecular clock** assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is known to be wrong, but is useful. For instance, there is variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information in the data.
+> 4. Lineages don’t interact – once they have speciated, they are independent of each other. This isn't always the case and we know that biological lineages *do* interact with each other -- but our methods are not able to manage such complexity in general. The vast majority of methods make this assumption, particularly if the evolution is also assumed to be tree-like. 
 > 
 {: .comment}
 
@@ -227,11 +227,11 @@ This assumption means that the future evolutionary trajectory of an organism is 
 ## Challenges
 
 Phylogenetic Inference is **Hard**.
-One of the many challenges that make it hard is the sheer number of possible trees that can describe relationships among species.
+One of the things that make it hard is the sheer number of possible trees that can describe relationships among species.
 
 The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact the formula for this number for $$n$$ taxa (we use `taxa' in general, since not all phylogenetic inference is at the species level) is $$(2n-3)!! = (2n-3)(2n-5)...(3)(1),$$ which grows as fast as $$2^{n}n!$$.
 
-### The Number of Unrooted Binary Trees
+**The Number of Unrooted Binary Trees**
 
 > | *n*          | # trees    | notes       |
 > |--------------|------------|-------------|
@@ -268,26 +268,26 @@ Distances have very desirable properties, that can be summarised as follows: for
  * *symmetry* -- the distance from $$x$$ to $$y$$ is the same as the distance from $$y$$ to $$x$$; that is, $$d(x,y) = d(y,x)$$.
  * the *triangle inequality* -- there are no short-cuts!  The distance from $$x$$ to $$z$$ is always *at most* the distance from $$x$$ to $$y$$ plus that from $$y$$ to $$y$$; that is, $$ d(x,y) + d(y,z) \leq d(x,z)$$.
 
- In phylogenetics terms we like distances to represent something like time, and we can assign lengths to branches (see the [Tree Anatomy diagram](#figure-4) above).
+ In phylogenetics terms, we like distances to represent something like time and we can assign lengths to branches (see the [Tree Anatomy diagram](#figure-4) above).
 
 Distances can be calculated based on a variety of data. Here is a flow-chart of the process:
 
 ![Flow chart illustrating how sequence alignment data or dis/similarity measures can be used to calculate phylogentic distances](./images/TreeConstruction.drawio.png "Tree construction flow-chart){:align="center"}
 
-The blue boxes on the left show some of the input data forms. The most commonly used kind of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the set of species of interest. We focus on this form of molecular phylogenetics in this tutorial.
+The blue boxes on the left show some of the input data forms. The most commonly used kind of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the species of interest. We focus on this form of molecular phylogenetics in this tutorial.
 
 Other input data forms are distances or dissimilarity measures based on molecular-based measures like DNA-DNA hybridisation, gene presence/absence, and morphology (physical dimensions). We will not discuss this kind of data in this tutorial.
 
 Aligned sequences can be converted into distances (green box above), using models for how the sites (i.e. specific nucleotides or amino acids) have evolved.
 These distances can be expressed as a matrix _D_, which becomes the input to a distance-based method.
 
-At each step in the distance-based methods (orange boxes) the algorithm selects a pair of taxa, or clades that have been created thus far, to join together to make a new clade.
-Once that decision is made, the two taxa / clades that have been joined are replaced with the clade that the two of them make together as seen in the figure below.
+At each step in the distance-based methods (orange boxes) the algorithm selects a pair of taxa, or clades that have been created so far, to join together to make a new clade.
+Once that decision is made, the two taxa / clades that have been joined are replaced with the clade that the two of them make together as seen in the [figure below](#figure-7).
 
 ![Joining Clades](./images/JoiningCladesForTreeConstruction.png "Joining clades for tree construction"){: align="center"}
 
 
-## About the data we're using
+## Let's build our first tree
 
 In this tutorial we will use a set of *Anolis* lizard DNA sequences, from Jackman, Larson, de Queiroz & Losos {% cite 10.1080/106351599260283 %} to trial some phylogenetic methods.
 The sequences are from the mitochondrial NADH dehydrogenase subunit 2 gene (ND2) and five transfer RNA (tRNA) genes, with an average sequence length of 1419.109 and a range of [1329,1727].
@@ -303,7 +303,7 @@ sed -r 'N;s/^(>[A-Za-z2\.]+)\n/\1,/g' anolis-sequence-lengths.txt -->
 
 We are using a relatively small set of sequences to ensure the methods run quickly for the purposes of the tutorial. 
 
-In the real world, it is not uncommon for a phylogenetic analysis to span hundreds, or even thousands, of taxa. Phylogenetic estimation on this many sequences is computationally very intensive, and can take weeks of time even on a high-performance computer.
+In the real world, a phylogenetic analyses often span hundreds, or even thousands, of taxa. Phylogenetic estimation on this many sequences is computationally very intensive, and can take weeks of time even on a high-performance computer.
 
 ## Get the data
 
@@ -321,15 +321,16 @@ In the real world, it is not uncommon for a phylogenetic analysis to span hundre
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
-> {: .hands_on} 
-> You can click on the 'eye' icon {% icon galaxy-eye %} on the right to see the unaligned data (go ahead!) but the view isn't very informative. This is just the raw FASTA file, with the case symbols A, C, G, T for the nucleotides. You can see that the sequences are of different lengths, since the last lines of each sequence are of different lengths.
+> 
+{: .hands_on} 
+> You can click on the 'eye' icon {% icon galaxy-eye %} on the right to see the unaligned data (go ahead!) but the view isn't very informative. This is the raw FASTA file, with the symbols A, C, G, T representing nucleotides. You can see that the sequences are of different lengths, since the last lines of each sequence are of different lengths.
 >
-This is a file in **FASTA** or **Fasta** format (pronounced to rhyme with pasta). Fasta format is is commonly used as input to phylogenetic inference programs and has a very simple structure, as follows:
+**FASTA** or **Fasta** format (pronounced to rhyme with pasta) format is is commonly used as input to phylogenetic inference programs and has a very simple structure, as follows:
 
 1. Each sequence has a name, which appears on its own line after a '>' sign 
 2. The next line(s) contain the sequence; continuing either until the next sequence name line, or the end of the file.
 
-The below example has four sequences in it named Taxon_1, Taxon_2, etc, each with a short set of characters which we can assume are DNA sequences.
+The example below has four sequences in it named Taxon_1, Taxon_2, etc, each with a short set of characters representing DNA sequences.
 
 <!-- ```
 >SEQUENCE_1
@@ -353,17 +354,15 @@ ACTTGGCGTAGCCGGAGGCC
 
 <!-- A line beginning with the greater-than sign `>` holds the sequence name or identifier/ID; the other lines hold the sequence data for the sequence ID above. -->
 
-*Note:* The Fasta format can also include symbols such as a question mark '?' for missing data, or hyphen '-' to indicate an insertion or deletion events, collectively *indel*. It is common to represent a multiple sequence alignment in Fasta format with these symbols.
+*Note:* The Fasta format can also include symbols such as a question mark '?' for missing data, or hyphen '-' to indicate an insertion or deletion events, collectively *indels*. It is common to represent a multiple sequence alignment in Fasta format with these symbols.
 
  It is also a common format for storing high-throughput read data, but *without quality scores* -- if you want to include read quality you would use FASTQ format.
 
-<br>
-
 > <hands-on-title>View your data</hands-on-title>
 > Now let's view the unaligned sequence in a more understandable form.
-
-> 1.Click on the title of your file to see the row of small icons for saving, linking etc.: 
-> ![LittleIcons](./images/LittleJobIcons.png){:align="center"} 
+>
+> 1. Click on the title of your file to see the row of small icons for saving, linking etc.: 
+> ![Screenshot of Galaxy icons](./images/LittleJobIcons.png){:align="center"} 
 >
 > 2. Click on the **visualise icon** that looks like a bar chart and then select the **Multiple Sequence Alignment tool**.
 > You should see something like this:
@@ -371,9 +370,10 @@ ACTTGGCGTAGCCGGAGGCC
 > ![Unaligned Sequences](./images/UnalignedAnolis.png){:width="600"}
 > 
 > Play around with the view. You can change colour schemes and add or remove various elements.  Good colour schemes for nucleotide data are "Clustal2" and "nucleotide".  
-
+>
 > If you cannot see the slider at the top (for moving left or right in the view) you will need to check the "Show residues indices" in the "Vis. elements" drop-down menu.
-> (Do not adjust the scale slider!  Currently, this breaks the page.)
+> 
+> Do not adjust the scale slider!  Currently, this breaks the page.
 {: .hands_on}
 
 > <question-title>Understanding the FASTA file</question-title>
@@ -391,11 +391,13 @@ ACTTGGCGTAGCCGGAGGCC
 
 # Sequence Alignment
 
+Molecular sequences must first be aligned before they can be used to build phylogenies.
+
 Aligning sequences amounts to finding the nucleotide positions (sites) that we can be confident have the same evolutionary history: they correspond to each other across species and can be considered to have evolved from the same common ancestor.
 A good clue to identify these sites, which are called <em>homologous</em>, is that they are well conserved, with only a few changes.
 
-Below we have an example of an alignment. On the left are the sequences from in Fasta format.
-In the middle we see an alignment of those sequences, which has a number of gaps in it that help line up the sites so more of them agree.
+Below is an example of an alignment. On the left are the sequences in Fasta format.
+In the middle we see an alignment of those sequences, which has gaps in it that help line up the sites so that more of them agree.
 A sign of a "good" alignment is one in which the colours line up vertically. The overhanging parts can be removed as seen in the "trimmed version" on the right.
 
 ![Example of sequence alignment](./images/ToyAlignmentAndTrim.png "Sequence alignment"){:width="700"}
@@ -413,30 +415,31 @@ Today you will be aligning sequences using a modern multiple alignment program c
 >
 > 1. In Galaxy, search for and select the {% tool MAFFT %} from the tool finder on the left.
 > 2. When you select it, the **Sequences to align** field should already be filled with your unaligned data.  If it isn't, select it using the drop-down menu.
-> 3. Leave the **Data type** field as "auto detection" since MAFFT will recognise all the symbols are nucleotides.
-> 4. Change the **MAFFT flavour** to "linsi" as this is a recommended setting for most accurate alignment of a relatively small data set such as this one, with fewer than 200 sequences.
+> 3. In the **Data type** field select "Nucleic acids".
+> 4. Change the **MAFFT flavour** to "linsi". This is a recommended setting for most accurate alignment of a relatively small data set such as this one, with fewer than 200 sequences.
+> 5. Click "Run tool".
 {: .hands_on}
 
 Here is an image of the resulting alignment. Note that the colours are now vertically aligned:
 
-![Alignment](./images/MEGA_alignment.png){:width="600px"}
+![Screenshot of aligned sequences. Vertical columns of purle, blue, gred and green indicate alignment of nucleotides across sequences.](./images/MEGA_alignment.png "Algined sequences"){:width="600px"}
 
 You should ALWAYS visually check your alignment to see if it makes sense.
 A tool you can use on your own computer is [SeaView](https://doua.prabi.fr/software/seaview).
 
 # Distance-based phylogenetic inference
 
-Now we will build our first tree, using a very common method called _Neighbor-Joining_. This method was created in the 1980s by Saitou & Nei {% cite 10.1093/oxfordjournals.molbev.a040454 %} 
+Now we will build our first tree, using a very common method called _Neighbor-Joining_. This method was created in the 1980s by Saitou & Nei ({% cite 10.1093/oxfordjournals.molbev.a040454 %}). 
 
 <!-- (Saitou, N. & Nei, M. _The Neighbor-Joining method: a new method for reconstructing phylogenetic trees_. 1987, *Molecular Biology and Evolution*  , Vol. **4**(4):406-425); see also Studier, J. A. & Keppler, K. J., _A Note on the Neighbor-Joining Algorithm of Saitou and Nei_, 1988. *Molecular Biology and Evolution* **5**(6): 729-731) -->
 
 ## Building a Neighbor-Joining Tree 
 
-The Neighbor-Joining (NJ) algorithm is a standard method that takes as input a set of distances between taxa, and sequentially connects them into larger and larger clusters until all taxa have been joined.
+The Neighbor-Joining (NJ) algorithm is a standard method that takes a set of distances between taxa as input, and sequentially connects them into larger and larger clusters until all taxa have been joined.
 
-NJ is only rarely used as a complete tool for phylogenetic analysis, since although it is quite accurate and fast, there are other fast methods that can be then applied to modify the NJ tree and create a better one.
+NJ is rarely used as a complete tool for phylogenetic analysis. Although it is quite accurate and fast, there are other fast methods that can be then applied to modify the NJ tree and create a better one.
 
-The FastTree2 program that we are using does this: it first creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* or ME.  A detailed description of how FastTree works is available from [Microbes online](http://www.microbesonline.org/fasttree/).
+The FastTree2 program that we are using does this. First it creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* (ME).  A detailed description of how FastTree works is available from [Microbes online](http://www.microbesonline.org/fasttree/).
 
 > <hands-on-title>Build a Neighbour-Joining Tree with FastTree</hands-on-title>
 >
@@ -447,7 +450,7 @@ The FastTree2 program that we are using does this: it first creates a "rough" NJ
 > 3. Select "Show Advanced Options"
 > 4. Select "Use Constant Rates"
 > 4. Turn **off** the Maximum Likelihood: we are not up to that bit yet.
-> 5. Click on "Execute".
+> 5. Click on "Run tool".
 >
 {: .hands_on}
 
@@ -474,8 +477,8 @@ But when it's done, how can you see it?
 Clicking on the output doesn't at first appear to be very illuminating: it's just a parenthesised list of taxon names and numbers.
 This is **Newick Format**, and it's worth knowing at least a little of what it means.  
 
-* Each matched pair of parentheses denotes a **cluster** or **subtree**: such as "(A,B)" means that A and B are each others' closest relatives (also called _sister taxa_).
-* A number after such a cluster (so, after a closing parenthesis) is a **label** for that cluster.  In the output from FastTree, this label is an indicator of the support for that branch.
+* Each matched pair of parentheses denotes a **cluster** or **subtree**: "(A,B)" means that A and B are each others' closest relatives (also called _sister taxa_).
+* A number after a cluster (so, after a closing parenthesis) is a **label** for that cluster.  In the output from FastTree, this label is an indicator of the support for that branch.
 * If there is a colon ':' followed by a number, then this is the **branch length** for the subtree.
 
 
@@ -496,19 +499,21 @@ Note that these two trees are very similar; they only differ in the position of 
 |  C  |  11  |  10  |   0  |
 
 Ideally, these will reflect the actual input distances, but such distances are based on messy real data, and do not necessarily obey this ideal.
-That is why methods like FastTree are employed to find a tree with the best possible agreement between the distance inferred, and those calculated from sequence data.
+That is why methods like FastTree are employed to find a tree with the best possible agreement between the distance inferred, and that calculated from sequence data.
 <!--The Minimum Evolution criterion optimises... XXX Mike to complete.-->
 
 > <hands-on-title>Visualising a tree</hands-on-title>
-> 1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc.: 
+> 1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc. 
 > ![LittleIcons](./images/LittleJobIcons.png){:align="center"} 
 >
 > 2. Click the "Visualisation" icon that looks like a little bar chart.
 > 3. You will be presented with a couple of options.  When I do it, I get this:
+> 4. Select "Phylogenetic Tree Visualisation" -- this seems to be the best one.
 >
 > ![SelectTreeVisualisation](./images/PhylogeneticTreeVisualisationOptions.png){:width="400"}
 > 
-> 4. Select "Phylogenetic Tree Visualisation" -- this seems to be the best one.
+> 
+>
 >
 > *Your tree is displayed!*
 > 
