@@ -34,8 +34,6 @@ follow_up_training:
 
 ---
 
-# Introduction
-
 The goal of this tutorial is to take raw NCBI data from some published research, convert the raw data into the AnnData format then add metadata to the object so that it can be used for further processing / analysis. Here we will look at the steps to obtain, understand, and manipulate the data in order for it to be properly processed.
 
 # Obtaining the Data
