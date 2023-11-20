@@ -41,7 +41,7 @@ R Code for generating the graphs is available in that repository.
 - We have two or more groups, which contains multiple observations; they may have different means, variances, and distributions.
 - The task of the visualization is to show the means and the spread (dispersion) of the data.
 - In this example, two groups have similar means and standard deviations, but quite different distributions.
-- **Are they really "the same"?**
+- Are they really "the same"?
 - Just don't use bar plot for means separation, or at least check a couple things before settling down on a bar plot.
 - It's worth mentioning that I was inspired by many researchers who have tweeted on the limitation of bar graphs.
 
@@ -56,7 +56,7 @@ R Code for generating the graphs is available in that repository.
 - This is quite common in the literature as well, but unfortunately, violin plots (or any sort of smoothed distribution curves) make no sense for small n.
 - Distributions and quartiles can vary widely with small n, even if the underlying observations are similar.
 - Distribution and quartiles are only meaningful with large n.
-- I did an experiment before, where I sampled the *same* normal distribution several times and computed the quartiles for each sample.
+- I did an experiment before, where I sampled the same normal distribution several times and computed the quartiles for each sample.
 - The quartiles only stablize when n gets larger than 50.
 
 ---
@@ -73,7 +73,7 @@ R Code for generating the graphs is available in that repository.
 - When color scales (or color gradients) are used to represent numerical data, the darkest and lightest colors should have special meanings.
 - You can decide what those special meanings are: e.g., max, min, mean, zero. But they should represent something meaningful.
 - A data visualization sin for heat maps/color gradients is when the lightest or darkers colors are some arbitrary numbers.
-- *This is as bad as the longest bar in a bar chart not being the largest value.* Can you imagine that?
+- This is as bad as the longest bar in a bar chart not being the largest value. Can you imagine that?
 
 ---
 
@@ -87,7 +87,7 @@ R Code for generating the graphs is available in that repository.
 
 - We talked about no bar charts for mean separation, but this is a different issue.
 - It has to do with presenting results of a multi-factorial experiment.
-- Bar plot meadows are very common in scientific publications and unfortunately also *ineffective* in communicating the results.
+- Bar plot meadows are very common in scientific publications and unfortunately also ineffective in communicating the results.
 - Bar plot meadows are common because multi-factorial experiments are common.
 - However, a bar plot meadow is poorly designed for its purpose.
 - To communicate results of a multi-factorial experiment, it requires thoughtful designs regarding grouping/faceting by factors of interest.
@@ -104,7 +104,7 @@ R Code for generating the graphs is available in that repository.
 
 ???
 
-- Heatmaps are very common in scientific publications, and *very very* common in omics papers.
+- Heatmaps are very common in scientific publications, and very very common in omics papers.
 - However, for heatmaps to be effective, we have to consider the ordering of rows and columns.
 - In this example, I have cells as columns and features as rows. Grids are showing z scores.
 - It is impossible to get anything useful out of the heatmap without reordering rows and columns.
@@ -209,7 +209,7 @@ R Code for generating the graphs is available in that repository.
 - However, we must be very careful with bar plots that have broken axis. Here is an example.
 - In this example, two graphs (left vs. right) are showing the same data.
 - However, by changing where the axis is broken, one can make certain bars looks longer or shorter.
-- In this example, the length of bar "d" can look *really* different.
+- In this example, the length of bar "d" can look really different.
 - The illusion of bar "d" being very short on the right graph boils down to bar plot being a length based graphics, not a position based graphics.
 
 ---
@@ -225,7 +225,7 @@ R Code for generating the graphs is available in that repository.
 - Pie charts have been criticized, because human are much worse in reading angles and area than reading lengths.
 - In this example, we have two groups, each contains 4 sub-categories.
 - In classic pie charts, the angles (and thus arc lengths & sector area) represent the data.
-- The problem is that it is *very* difficult to compare between groups.
+- The problem is that it is very difficult to compare between groups.
 - We can visually simplify the pie chart into donut charts, where the data are now represented by arc lengths.
 - However, if we want to use lengths to represent the data, why don't we just unwrap the donut and make stacked bars?
 - In stacked bar graphs, bars are shown side-by-side and thus easier to compare across groups.
@@ -241,10 +241,10 @@ R Code for generating the graphs is available in that repository.
 ???
 
 - In this example, we have 3 groups, each of which contains two sub-categories (Type I or Type II).
-- In concentric donuts, you might be tempted to say the data are represented by the arc lengths, which is in fact **inaccurate**.
+- In concentric donuts, you might be tempted to say the data are represented by the arc lengths, which is in fact inaccurate.
 - The arc lengths on the outer rings are much longer than those in the inner rings.
 - Group 2 and Group 3 have the same exact values, but the arc lengths of Group 3 are much longer.
-- In fact the data are represented by the *arc angles*, which we are bad at reading.
+- In fact the data are represented by the arc angles, which we are bad at reading.
 - Since outer rings are longer, the ordering of the groups (which group goes to which ring) has a big impact on the impression of the plot.
 - It can lead to the apparent paradox where larger values have shorter arcs.
 - The better (and simpler!) alternative is just unwrap the donuts and make a good old stacked bar plot.
