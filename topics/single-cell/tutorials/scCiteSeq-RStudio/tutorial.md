@@ -109,7 +109,7 @@ Looks shockingly similar, doesn't it?
 
 In the ADT matrix, we have cell surface proteins (instead of gene names) as row names and the same cell barcodes as column names. 
 
-<warning-title>Run Log Available (In History)</warning-title>
+><warning-title>Run Log Available (In History)</warning-title>
 >If you ran the same parameters as I did, the next output (number 3 in our history) will be Seurat's run log.
 >This is unfortunately not super easy to import into RStudio since it comes as an html format. It contains all of the run information from the background coding done by the tool. Any warnings, errors, or progress bars will be present in here and are often useful for troubleshooting in case something goes awry.
 >Because of the html formatting, we will not look at this output together, but feel free to explore it on your own using the view (eye) icon in your history. 
