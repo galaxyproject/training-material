@@ -663,13 +663,11 @@ Background on ML. How it works. Software. Bootstrap values.
 
 <!-- ## Searching for a tree means optimising its branch lengths too -->
 
-## IQTree
+## Estimating a Maximum Likelihood tree with IQTree
 
 IQTree is a state-of-the-art cross-platform program that uses maximum likelihood to find optimal phylogenetic trees.
 It can perform model selection and bootstrapping.
 And it's on Galaxy!
-
-##  Estimating a Maximum Likelihood tree 
 
 > <hands-on-title>Estimating a Maximum Likelihood tree with IQTree</hands-on-title>
 >
@@ -680,24 +678,24 @@ And it's on Galaxy!
 > 5. Under the **Modelling Parameters**, leave Automatic model selection ON, and the other parameters as they are except the last: Set **"Write maximum likelihood site ratios to .mlrate file"** to "Yes".
 > 6. Leave all the Tree Parameters as they are. (Have a look at them and see if you can work out what they do).
 > 7. For **Bootstrap Parameters** select "Ultrafast bootstrap parameters" and enter "1000" bootstrap replicates.
-> 8. Click "Execute"
+> 8. Click "Run tool"
 >
 {: .hands_on}
 
 While this is running you might use your time to read the [Models of sequence evolution](#models-of-sequence-evolution) and [Bootstrapping](#bootstrapping) sections above.
 
 
+> <hands-on-title>Visualising your tree</hands-on-title>
+> 1. View your tree using 'Phyloviz'
+> 2. What are the bootrap values near the root of the tree? Do you think those branches are well supported?
+> 3. Which do you think is the biggest well-supported clade?
+{: .hands_on}
+
 ![IQTreePhylovis](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis."){:align="center"}
 
 Observe the bootstrap values in the IQTree output for deep branches are not as high.
 
 Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates of the probability that the branch is correct, so are not quite the same as traditional "naive" bootstrap values.
-
-> <hands-on-title>Visualising your tree</hands-on-title>
-> 1. View your tree
-> 2. What are the bootrap values near the root of the tree? Do you think those branches are well supported?
-> 3. Which do you think is the biggest well-supported clade?
-{: .hands_on}
 
 # Phylogenetic Networks
 
