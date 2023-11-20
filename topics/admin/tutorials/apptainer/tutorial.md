@@ -30,6 +30,8 @@ requirements:
 ---
 
 In this tutorial you will learn how to configure Galaxy to run jobs using [Apptainer](https://apptainer.org) containers provided by the [BioContainers](https://biocontainers.pro/) community.
+Make sure to read the documentation on [container in Galaxy](https://docs.galaxyproject.org/en/master/admin/special_topics/mulled_containers.html) and in particular [container resolvers in Galaxy](https://docs.galaxyproject.org/en/master/admin/container_resolvers.html).
+
 
 ## Background
 
