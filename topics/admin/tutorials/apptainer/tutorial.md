@@ -235,17 +235,17 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    --- /dev/null
 >    +++ b/templates/galaxy/config/container_resolvers_conf.yml.j2
 >    @@ -0,0 +1,11 @@
->    +container_resolvers:
->    +  - type: cached_explicit_singularity
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/explicit/"
->    +  - type: cached_mulled_singularity
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
->    +  - type: mulled_singularity
->    +    auto_install: False
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
->    +  - type: build_mulled_singularity
->    +    auto_install: False
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/built/"
+>    +
+>    +- type: cached_explicit_singularity
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/explicit/"
+>    +- type: cached_mulled_singularity
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
+>    +- type: mulled_singularity
+>    +  auto_install: False
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
+>    +- type: build_mulled_singularity
+>    +  auto_install: False
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/built/"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container resolver"}
