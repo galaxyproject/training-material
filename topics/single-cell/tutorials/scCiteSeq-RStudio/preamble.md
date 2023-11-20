@@ -60,7 +60,7 @@ First on the to-do list is importing our csv files. You can do this in a couple 
 
 ## Option 2: Import a History 
 
-You can access [this history](https://usegalaxy.eu/u/camila-goclowski/h/cite-seq-tutorial-data) by clicking on the link provided.
+You can access [this history](https://usegalaxy.eu/u/camila-goclowski/h/citeseqseurattooltutorial) by clicking on the link provided.
 
 {% snippet faqs/galaxy/histories_import.md %}
 
@@ -74,8 +74,8 @@ Now we'll run those csv files through the updated Seurat tool with the following
 > - *"Protein counts file"*: `2: GSE100866_CBMC_8K_10X-ADT_umi.csv.gz`
 > - *"Minimum cells"*: `5`
 > - *"Minimum genes"*: `10`
-> - *"Low threshold for filtering cells"*: ``
-> - *"High threshold for filtering cells"*: ``
+> - *"Low threshold for filtering cells"*: `1500`
+> - *"High threshold for filtering cells"*: `30000`
 > - *"Include violin plot and scatter plot of cell features"*: `No`
 >  - *"Output seurat object after data normalization"*: `No`
 >  - *"Include plot of variable features"*: `No`
@@ -94,7 +94,6 @@ Now we'll run those csv files through the updated Seurat tool with the following
 >  - *"Output list of cite-seq markers"*: `Yes`
 >  - *"Compare specific feature's effect on protein and rna expression?"*: `No`
 >  - *"Compare top RNA and protein features graphicaly against themselves and one another"*: `No`
->  - *"How many of the top features should be shown"*: `5`
 {: .hands_on}
 
 ><comment-title></comment-title>
