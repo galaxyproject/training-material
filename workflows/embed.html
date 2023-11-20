@@ -37,7 +37,14 @@ description: Search for workflows across all UseGalaxy.* servers and WorkflowHub
 				<td>{{ workflow.updated }}</td>
 				<td>
 					{% for id in workflow.ids %}
-					<a href="{{ id[0] }}/published/workflow?id={{ id[1] }}" target="_blank">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+						{% if id[0] == "https://workflowhub.eu" %}
+					<a href="{{ id[0] }}/workflows/{{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a><br/>
+					<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id={{ id[1] }}%26trs_version=1">
+						Load in Galaxy
+					</a><br/>
+						{% else %}
+					<a href="{{ id[0] }}/published/workflow?id={{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+						{% endif %}
 					{% endfor %}
 				</td>
 			</tr>

@@ -1,11 +1,21 @@
 ---
-title: "Update: Embeddable UseGalaxy Workflow List now includes searches WorkflowHub.eu"
+title: "Update: Workflow List now searches WorkflowHub.eu, advanced query syntax"
 contributions:
   authorship: [hexylena]
-  testing: [paulzierep]
+  testing: [paulzierep, wm75]
 tags: [feature update, gtn]
 layout: news
 ---
+
+## WorkflowHub
+
+We have now added support for [WorkflowHub.eu](WorkflowHub.eu) in our [cross-galaxy workflow search]({% link workflows/list.html %}) interface that lets you find workflows from around the universe. The support for WorkflowHub helps us showcase all of the best-practice workflows currently available there! These can all be imported and run directly in Galaxy.
+
+<iframe src="{% link workflows/embed.html %}?all=vgp+Delphine+Lariviere" height="300px" width="100%" class="gtn-embed"></iframe>
+
+The "Load in Galaxy" button uses our [my.galaxy.training]({{ site.baseurl }}/news/2023/04/20/my-galaxy-training.html) service to let you choose which Galaxy server you're redirected to. These links will work for any recent Galaxy server.
+
+## Querying
 
 Based on [a request from Paul](https://github.com/galaxyproject/training-material/issues/4494), more advanced querying was needed.
 

@@ -63,7 +63,10 @@ UseGalaxy.org, UseGalaxy.eu, UseGalaxy.org.au, and WorkflowHub.eu. It is updated
 				<td>
 					{% for id in workflow.ids %}
 						{% if id[0] == "https://workflowhub.eu" %}
-					<a href="{{ id[0] }}/workflows/{{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+					<a href="{{ id[0] }}/workflows/{{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a><br/>
+					<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id={{ id[1] }}%26trs_version=1">
+						Load in Galaxy
+					</a>
 						{% else %}
 					<a href="{{ id[0] }}/published/workflow?id={{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
 						{% endif %}
