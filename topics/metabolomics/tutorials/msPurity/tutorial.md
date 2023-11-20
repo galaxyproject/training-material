@@ -17,11 +17,19 @@ key_points:
 - They will appear at the end of the tutorial 
 requirements:
 - type: "internal"
-    topic_name: metabolomics
-    tutorials:
+  topic_name: metabolomics
+  tutorials:
       - lcms
-contributors:
-- jsaintvanne
+contributions:
+    authorship:
+        - jsaintvanne
+        - Tomnl
+        - RJMW
+    editing:
+        - melpetera
+        - yguitton
+    testing:
+        - workflow4metabolomics
 
 --- 
 
