@@ -507,17 +507,15 @@ That is why methods like FastTree are employed to find a tree with the best poss
 > ![LittleIcons](./images/LittleJobIcons.png){:align="center"} 
 >
 > 2. Click the "Visualisation" icon that looks like a little bar chart.
-> 3. You will be presented with a couple of options.  When I do it, I get this:
-> 4. Select "Phylogenetic Tree Visualisation" -- this seems to be the best one.
->
+> 3. You will be presented with a couple of options that look like this:
+
 > ![SelectTreeVisualisation](./images/PhylogeneticTreeVisualisationOptions.png){:width="400"}
 > 
-> 
->
+> 4. Select "Phylogenetic Tree Visualisation" -- this seems to be the best one.
 >
 > *Your tree is displayed!*
 > 
-> At the top right of the central panel are a couple of angle brackets: clicking on that will reveal the settings, enabling you to alter the display options.  Try out "Circular" and "Radial".
+> Find the angle brackets at the top right of the central panel. Clicking on these to reveal the settings, enabling you to alter the display options. Try out "Circular" and "Radial".
 > Notice that there are quite a lot of long branches adjacent to the extant taxa (leaves), and that near the centre of the tree, these branches are much shorter.
 > Note: **Short branches are much harder to get right.**
 >
@@ -526,9 +524,9 @@ That is why methods like FastTree are employed to find a tree with the best poss
 # Searching for the "best" tree
 
 The other main way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching the entire set of possible trees for the tree (or trees) that optimises this score.
-Note that such scores are "surrogates for truth" in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case. In many analyses we therefore use *multiple* methods, in the hope that they will give us the same answer. Minimum Evolution, Maximum Parsimony, and Maximum Likelihood are common such score functions.
+Note that such scores are "surrogates for truth" in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case. In many analyses we therefore use *multiple* methods, in the hope that they will give us the same answer. Minimum Evolution (ME), Maximum Parsimony (MP), and Maximum Likelihood (ML) are common such score functions.
 
-**If your conclusion changes based on your analytical method, then perhaps your data are not adequate.**
+**Note: If your conclusion changes based on your analytical method, then perhaps your data are not adequate.**
 
 
 
@@ -616,11 +614,11 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 
 A tree-building method will of course build you a tree.
 
-But what if your data are not even **from** a tree?  Or, what if the data are from sequences that are so distantly related that they are virtually independent of each other, looking essentially random?
+But what if your data are not even *from* a tree?  Or, what if the data are from sequences that are so distantly related that they are virtually independent of each other and are essentially random?
 
 It is important that, once you have estimated a tree, you assess how reliable it is.
 
-Remember that a phylogeny is a *collection of hypotheses of relatedness*. Each branch separates some of the taxa from the others, and if the branch is above a subtree it corresponds to a hypothesis that the taxa in that subtree are *monophyletic* with respect to the other taxa in the rest of the tree (as shown in Fig 1.).
+Remember that a phylogeny is a *collection of hypotheses of relatedness*. Each branch separates some of the taxa from the others, and if the branch is above a subtree it corresponds to a hypothesis that the taxa in that subtree are *monophyletic* with respect to the other taxa in the rest of the tree (as shown in [Figure 1](#figure-1).).
 
 This means that it is meaningful to assess the reliability of *branches* of your tree, in addition to just assessing it overall.
 
@@ -630,7 +628,7 @@ This means that it is meaningful to assess the reliability of *branches* of your
 A good phylogenetic tree is one that is *well resolved* -- that is, every time a lineage branches, it forms two new branches.
 Equivalently, every internal node has three edges touching it.
 
-An unresolved node *may* be a true representation of the branching pattern of a group of lineages, but that is generally in the case of very rapid diversification, such as during an island radiation (species arrives in new place with lots of niches; diversifies incredibly quickly).
+An unresolved node *may* be a true representation of the branching pattern of a group of lineages, as is generally in the case of very rapid diversification, such as during an island radiation (species arrives in new place with lots of niches; diversifies incredibly quickly).
 
 In phylogenetics unresolved nodes are more often due to a lack of resolving power in the data, so the phylogenetic method cannot choose the branch ordering:
 
@@ -640,13 +638,11 @@ If there are many unresolved branches in the phylogeny, this is an indication th
 
 ## Bootstrapping
 
-A very common (and useful) method for this is called *bootstrapping*, which is a technique that has a solid basis in statistics (not just phylogenetics). The idea is that one resamples with replacement a data set to create a "pseudoreplicate" that is analysed in the same way as the original data. This process is then repeated many times to create a distribution. It's known that bootstrapping is a good way to measure the internal consistency of a data set, and its use in phylogenetics is well established.
+A very common (and useful) method for dealing with unresolved branches is called *bootstrapping*, which is a technique that has a solid basis in statistics (not just phylogenetics). The idea is that one resamples with a replacement data set to create a "pseudoreplicate" that is analysed in the same way as the original data. This process is then repeated many times to create a distribution. Bootstrapping is known to be a is a good way to measure the internal consistency of a data set, and its use in phylogenetics is well established.
 
 The naive method for bootstrapping is called "non-parametric" and works by effectively resampling the patterns at each site in the alignment, creating a pseudo-alignment of the same total number of sites, then re-building the tree.
 
-IQTree has a very -- *ultra-* -- fast bootstrapping method that is cleverer than the naive method and which works a bit better. <!--See (citation Minh Bui et al. I think) for details.>>
-
-When we use IQTree in the next part of the tutorial, we will also do bootstrapping on the tree.  
+IQTree has a very - *ultra* - fast bootstrapping method that is cleverer than the naive method and which works a bit better. When we use IQTree in the next part of the tutorial, we will also do bootstrapping on the tree.  See (% cite 10.1093/molbev/msaa015 %) for details on the method.
 
 Bootstrapping can be done on any inference method. We will use the likelihood method, searching for the tree and branch lengths that maximises the likelihood for (1) our actual data, and then (2), for each of the pseudoreplicates, noting for each of these which branches occur in the best trees found.
 
