@@ -1,27 +1,27 @@
 --- 
-layout : tutorial_hands_on
+layout: tutorial_hands_on
 
-title : 'Mass spectrometry : MS/MS analysis with msPurity package'
-level : Introductory
-zenodo_link : 'https://zenodo.org/record/3614672' 
-questions : 
-    - What are the main steps of MS/MS datas processing for metabolomic analysis ? 
-    - How te be able to annotate the maximum of spectra using Galaxy ? 
-objectives : 
-    - To be sure you have already comprehend the diversity of LC-MS analysis. 
-    - To learn the principal functions of msPurity package through Galaxy.
-    - To evaluate the potential of this new MS/MS workflow for MS/MS metabolomic analysis. 
-time_estimation : 2H 
-key_points : 
-    - The take-home messages 
-    - They will appear at the end of the tutorial 
-requirements :
-  - type: "internal"
+title: 'Mass spectrometry : MS/MS analysis with msPurity package'
+level: Introductory
+zenodo_link: 'https://zenodo.org/record/3614672' 
+questions:
+- What are the main steps of MS/MS datas processing for metabolomic analysis? 
+- How te be able to annotate the maximum of spectra using Galaxy? 
+objectives:
+- To be sure you have already comprehend the diversity of LC-MS analysis. 
+- To learn the principal functions of msPurity package through Galaxy.
+- To evaluate the potential of this new MS/MS workflow for MS/MS metabolomic analysis. 
+time_estimation: 2H 
+key_points:
+- The take-home messages 
+- They will appear at the end of the tutorial 
+requirements:
+- type: "internal"
     topic_name: metabolomics
-    tutorials: 
+    tutorials:
       - lcms
-contributors : 
-    - jsaintvanne
+contributors:
+- jsaintvanne
 
 --- 
 
