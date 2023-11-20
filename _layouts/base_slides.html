@@ -104,7 +104,7 @@ class: center, middle, inverse
 <!-- modified date -->
 <div class="footnote" style="bottom: 8em;">
   {% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}} &nbsp;
-  {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a>
+  {% if page.short_id %}{% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a>{% endif %}
 </div>
 
 
@@ -177,8 +177,8 @@ Useful when presenting."
 {% endif %}
 </div>
 
-<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-{{ locale['license-tutorial'] | default: "This material is licensed under the Creative Commons Attribution 4.0 International License" }}</a>.
+{{ locale['license-framework'] | default: "Tutorial Content is licensed under" }} {% if page.license%} <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.{% else %}<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.{% endif %}<br/>
+{% if page.copyright %}{{ page.copyright }}{% endif %}
 
 {% if page.layout == "base_slides" %}
 .footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/main{{ page.url }})]
