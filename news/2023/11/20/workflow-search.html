@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Update: Workflow List now searches WorkflowHub.eu, advanced query syntax</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@b0da7bfc3bd5c7d44c0c34d12194a196c9cc27f6",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2023/11/20/workflow-search.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700484104' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1700484104' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Update: Workflow List now searches WorkflowHub.eu, advanced query syntax">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-11-20 12:33:48 +0000">
+<meta name="DC.creator" content="Helena Rasche">
+
+        
+        
+        
+        
+        <meta name="description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Update: Workflow List now searches WorkflowHub.eu, advanc...">
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700484104'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2023-11-20-workflow-search.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2023/11/20/workflow-search.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
+		</a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/news/2023/11/20/workflow-search.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-11-01/news/2023/11/20/workflow-search.html">2023-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-10-01/news/2023/11/20/workflow-search.html">2023-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  <h1>Update: Workflow List now searches WorkflowHub.eu, advanced query syntax</h1>
+
+  <article>
+
+
+<div class="newsitem">
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/paulzierep/" class="contributor-badge contributor-paulzierep"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/paulzierep?s=36" alt="Paul Zierep avatar" width="36" class="avatar" />
+    Paul Zierep</a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Wolfgang Maier avatar" width="36" class="avatar" />
+    Wolfgang Maier</a></td>
+	</tr>
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+
+<span class="label label-default tutorial_tag" id="feature update" style="--color-primary: #8dd5ff; --color-darker: #18c3ff; --color-dimmed: #66ccff;">feature update</span>
+
+<span class="label label-default tutorial_tag" id="gtn" style="--color-primary: #fff3b4; --color-darker: #eed900; --color-dimmed: #fde700;">gtn</span>
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: 20 November 2023</span>
+      <span>
+        
+      </span>
+    </p>
+
+    <h2 id="workflowhub">WorkflowHub</h2>
+
+<p>We have now added support for <a href="WorkflowHub.eu">WorkflowHub.eu</a> in our <a href="/training-material/workflows/list.html">cross-galaxy workflow search</a> interface that lets you find workflows from around the universe. The support for WorkflowHub helps us showcase all of the best-practice workflows currently available there! These can all be imported and run directly in Galaxy.</p>
+
+<iframe src="/training-material/workflows/embed.html?all=vgp+Delphine+Lariviere" height="300px" width="100%" class="gtn-embed"></iframe>
+
+<p>The “Load in Galaxy” button uses our <a href="/training-material/news/2023/04/20/my-galaxy-training.html">my.galaxy.training</a> service to let you choose which Galaxy server you’re redirected to. These links will work for any recent Galaxy server.</p>
+
+<h2 id="querying">Querying</h2>
+
+<p>Based on <a href="https://github.com/galaxyproject/training-material/issues/4494">a request from Paul</a>, more advanced querying was needed.</p>
+
+<p>As such we’ve added a couple of alternative query parameters that you may use:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Query Parameter</th>
+      <th>Example Values</th>
+      <th>Interpretation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">?query=</code></td>
+      <td><code class="language-plaintext highlighter-rouge">?query=single-cell</code></td>
+      <td>This will search for the text <code class="language-plaintext highlighter-rouge">singlecell</code> anywhere in the conjoined fields of title, tags, and authors. This is similar to <code class="language-plaintext highlighter-rouge">all</code> but will look for exact phrases including spaces, rather than splitting up queries word-by-word.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">?all=</code></td>
+      <td><code class="language-plaintext highlighter-rouge">?all=longreads+microbiome</code></td>
+      <td>Each term, separated by a <code class="language-plaintext highlighter-rouge">+</code> (which is interpreted as a ` ` space character in URL parsing), must appear somewhere in those fields. If any term is missing, that workflow will not be included</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">?any=</code></td>
+      <td><code class="language-plaintext highlighter-rouge">?any=longreads+shortread</code></td>
+      <td>As long as one of these terms is present, the result will be shown. So long or short read workflows will match this query. (Assuming they’re tagged properly!)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">?none=</code></td>
+      <td><code class="language-plaintext highlighter-rouge">?none=testing+training</code></td>
+      <td>If you want to exclude one or more terms, you can list them here.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Try some examples here:</p>
+<ul>
+  <li><a href="/training-material/workflows/embed.html?all=microbiome&amp;none=nanopore">microbiome tutorials, without nanopore</a></li>
+  <li><a href="/training-material/workflows/embed.html?query=single-cell">single-cell tutorials using the ‘old’ text query</a></li>
+  <li><a href="/training-material/workflows/embed.html?all=single-cell">single-cell tutorials using the new ?all query (it’s the same.)</a></li>
+  <li><a href="/training-material/workflows/embed.html?all=paulzierep">Just Paul’s workflows</a></li>
+</ul>
+
+<p>If you have any ideas for new features or improvements, please <a href="https://github.com/galaxyproject/training-material/issues/">open an issue on GitHub</a></p>
+
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+  </div>
+
+  <div class="col-md-4">
+    <img alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" src="/training-material//assets/images/GTNLogo1000.png" width="300"/>
+  </div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "url": "https://training.galaxyproject.org/training-material/news/2023/11/20/workflow-search.html",
+  "name": "Update: Workflow List now searches WorkflowHub.eu, advanced query syntax",
+  "headline": "<h2 id=\"workflowhub\">WorkflowHub</h2> ",
+  "keywords": [
+    "feature update",
+    "gtn"
+  ],
+  "description": "<h2 id=\"workflowhub\">WorkflowHub</h2> ",
+  "articleBody": "<h2 id=\"workflowhub\">WorkflowHub</h2>\n\n<p>We have now added support for <a href=\"WorkflowHub.eu\">WorkflowHub.eu</a> in our <a href=\"/training-material/workflows/list.html\">cross-galaxy workflow search</a> interface that lets you find workflows from around the universe. The support for WorkflowHub helps us showcase all of the best-practice workflows currently available there! These can all be imported and run directly in Galaxy.</p>\n\n<iframe src=\"/training-material/workflows/embed.html?all=vgp+Delphine+Lariviere\" height=\"300px\" width=\"100%\" class=\"gtn-embed\"></iframe>\n\n<p>The “Load in Galaxy” button uses our <a href=\"/training-material/news/2023/04/20/my-galaxy-training.html\">my.galaxy.training</a> service to let you choose which Galaxy server you’re redirected to. These links will work for any recent Galaxy server.</p>\n\n<h2 id=\"querying\">Querying</h2>\n\n<p>Based on <a href=\"https://github.com/galaxyproject/training-material/issues/4494\">a request from Paul</a>, more advanced querying was needed.</p>\n\n<p>As such we’ve added a couple of alternative query parameters that you may use:</p>\n\n<table>\n  <thead>\n    <tr>\n      <th>Query Parameter</th>\n      <th>Example Values</th>\n      <th>Interpretation</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><code class=\"language-plaintext highlighter-rouge\">?query=</code></td>\n      <td><code class=\"language-plaintext highlighter-rouge\">?query=single-cell</code></td>\n      <td>This will search for the text <code class=\"language-plaintext highlighter-rouge\">singlecell</code> anywhere in the conjoined fields of title, tags, and authors. This is similar to <code class=\"language-plaintext highlighter-rouge\">all</code> but will look for exact phrases including spaces, rather than splitting up queries word-by-word.</td>\n    </tr>\n    <tr>\n      <td><code class=\"language-plaintext highlighter-rouge\">?all=</code></td>\n      <td><code class=\"language-plaintext highlighter-rouge\">?all=longreads+microbiome</code></td>\n      <td>Each term, separated by a <code class=\"language-plaintext highlighter-rouge\">+</code> (which is interpreted as a ` ` space character in URL parsing), must appear somewhere in those fields. If any term is missing, that workflow will not be included</td>\n    </tr>\n    <tr>\n      <td><code class=\"language-plaintext highlighter-rouge\">?any=</code></td>\n      <td><code class=\"language-plaintext highlighter-rouge\">?any=longreads+shortread</code></td>\n      <td>As long as one of these terms is present, the result will be shown. So long or short read workflows will match this query. (Assuming they’re tagged properly!)</td>\n    </tr>\n    <tr>\n      <td><code class=\"language-plaintext highlighter-rouge\">?none=</code></td>\n      <td><code class=\"language-plaintext highlighter-rouge\">?none=testing+training</code></td>\n      <td>If you want to exclude one or more terms, you can list them here.</td>\n    </tr>\n  </tbody>\n</table>\n\n<p>Try some examples here:</p>\n<ul>\n  <li><a href=\"/training-material/workflows/embed.html?all=microbiome&amp;none=nanopore\">microbiome tutorials, without nanopore</a></li>\n  <li><a href=\"/training-material/workflows/embed.html?query=single-cell\">single-cell tutorials using the ‘old’ text query</a></li>\n  <li><a href=\"/training-material/workflows/embed.html?all=single-cell\">single-cell tutorials using the new ?all query (it’s the same.)</a></li>\n  <li><a href=\"/training-material/workflows/embed.html?all=paulzierep\">Just Paul’s workflows</a></li>\n</ul>\n\n<p>If you have any ideas for new features or improvements, please <a href=\"https://github.com/galaxyproject/training-material/issues/\">open an issue on GitHub</a></p>\n",
+  "datePublished": "2023-11-20 00:00:00 +0000",
+  "dateModified": "2023-11-20 12:33:48 +0000",
+  "author": [
+    "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"http://purl.org/dc/terms/conformsTo\": {\n    \"@id\": \"https://bioschemas.org/profiles/Person/0.3-DRAFT\",\n    \"@type\": \"CreativeWork\"\n  },\n  \"url\": \"https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/\",\n  \"mainEntityOfPage\": \"https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/\",\n  \"name\": \"Helena Rasche\",\n  \"image\": \"https://avatars.githubusercontent.com/hexylena\",\n  \"description\": \"A contributor to the GTN project.\",\n  \"memberOf\": [\n    {\n      \"@type\": \"Organization\",\n      \"email\": \"galaxytrainingnetwork@gmail.com\",\n      \"name\": \"Galaxy Training Network\",\n      \"url\": \"https://training.galaxyproject.org\",\n      \"logo\": \"https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png\"\n    }\n  ],\n  \"identifier\": \"https://orcid.org/0000-0001-9760-8992\",\n  \"orcid\": \"https://orcid.org/0000-0001-9760-8992\"\n}"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://training.galaxyproject.org/news/2023/11/20/workflow-search.html"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "width": 60,
+    "height": 60,
+    "url": "/training-material/assets/images/GTN-60px.png"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
+}
+</script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div>
+
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/10/12/sc_subdomain.html">Single cell subdomain re-launch: Unified and feedback-driven</a>
+	</h3>
+	<p>
+	12 October 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff3b4; --color-darker: #eed900; --color-dimmed: #fde700;">gtn</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00eb6b; --color-darker: #00d15f; --color-dimmed: #00de65;">singlecell</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The European Galaxy Days 2023 CoFest combined the forces of administrator, developer and trainer to update and re-launch the single cell Galaxy instance. Where previously there were two subdomains each with their own sets of tools, there is now a unified subdomain with re-categorized tools that makes sense for users.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/10/05/wendi.html">New Feature: Embeddable GTN Tutorial Lists and UseGalaxy Workflow List Widgets</a>
+	</h3>
+	<p>
+	5 October 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c6c7ff; --color-darker: #acaeff; --color-dimmed: #b9bbff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff3b4; --color-darker: #eed900; --color-dimmed: #fde700;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		We at the GTN strive to bring you the most fun and fancy features we can in a completely static site! Today we’re addressing the question of Wendi Bacon who needed a solution for keeping her single cell subdomain up-to-date with all the latest happenings in the Single Cell world.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/07/20/prefs.html">New Feature: GTN User Preferences</a>
+	</h3>
+	<p>
+	20 July 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c6c7ff; --color-darker: #acaeff; --color-dimmed: #b9bbff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff3b4; --color-darker: #eed900; --color-dimmed: #fde700;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		We have added a new “User Preferences” page for our GTN users! This gives you more control over both how the GTN looks, and works, for you.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="https://ai4life.eurobioimaging.eu/ai4life-teams-up-with-galaxy-training-network-gtn-to-enhance-training-resources/">AI4Life teams up with GTN to enhance training resources</a>
+	</h3>
+	<p>
+	27 June 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c9c7ff; --color-darker: #b0adff; --color-dimmed: #bcbaff;">new topic</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffb4f0; --color-darker: #ff8eea; --color-dimmed: #ffa1ed;">new community</span>
+	
+	</p>
+	<p class="card-text">
+		
+		This is an external post, please follow the link to read it.
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/06/21/fair.html">ELIXIR-UK Fellow Launches New FAIR Data Management Training</a>
+	</h3>
+	<p>
+	21 June 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c9c7ff; --color-darker: #b0adff; --color-dimmed: #bcbaff;">new topic</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffc081; --color-darker: #f8a300; --color-dimmed: #ffb04e;">new tutorial</span>
+	
+	</p>
+	<p class="card-text">
+		
+		Katarzyna Kamieniecka (University of Bradford), a member of the ELIXIR-UK Fellowship Programme, has just launched a new series of lessons to improve {FAIR} data management in the life sciences. The lessons are designed to help researchers and research support staff understand the principles of FAIR data management and apply them to their own work.
+
+		
+	</p>
+</article>
+
+
+</div>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/b0da7bfc3bd5c7d44c0c34d12194a196c9cc27f6">b0da7bf</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2023-11-20-workflow-search.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.9d052497.js?v=1700484104'></script>
+        
+    </body>
+</html>
