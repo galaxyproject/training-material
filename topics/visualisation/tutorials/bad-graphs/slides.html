@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Friends Don't Let Friends Make Bad Graphs</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@522674ff318e8d5dc7e0c8cab97f9e09cf85aafa",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/bad-graphs/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/MIT">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700480563' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1700480563' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Friends Don't Let Friends Make Bad Graphs">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-11-20 11:07:11 +0000">
+<meta name="DC.creator" content="Chenxin Li">
+
+        
+        
+        
+        
+        <meta name="description" content="Training material for data visualisation in Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Friends Don't Let Friends Make Bad Graphs">
+        <meta property="og:description" content="Training material for data visualisation in Galaxy">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "dateModified": "2023-11-20 11:07:11 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Friends Don't Let Friends Make Bad Graphs",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Visualisation",
+    "description": "Training material for data visualisation in Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/visualisation/"
+  },
+  "learningResourceType": "slides",
+  "name": "Friends Don't Let Friends Make Bad Graphs",
+  "url": "https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/bad-graphs/slides.html",
+  "version": 4,
+  "keywords": [
+    "Visualisation"
+  ],
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/cxli233/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/cxli233/",
+      "name": "Chenxin Li",
+      "image": "https://avatars.githubusercontent.com/cxli233",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Visualisation",
+      "description": "Training material for data visualisation in Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/visualisation/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0337",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0337",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0337"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+
+  ],
+  "abstract": "# Friends Don't Let Friends Make Bad Graphs"
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700480563'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/visualisation" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/visualisation/tutorials/bad-graphs/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Friends Don't Let Friends Make Bad Graphs
+
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+	
+<ul class="text-list">
+			
+			<li>
+				<a href="/training-material/hall-of-fame/cxli233/" class="contributor-badge contributor-cxli233"><img src="https://avatars.githubusercontent.com/cxli233?s=36" alt="Chenxin Li avatar" width="36" class="avatar" />
+    Chenxin Li</a></li>
+</ul>
+	
+
+
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+  <i class="far fa-play-circle" aria-hidden="true"></i><span class="visually-hidden">video-slides</span> <a href="/training-material/videos/watch.html?v=/visualisation/tutorials/bad-graphs/slides">Video slides</a> |
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+# Friends Don&apos;t Let Friends Make Bad Graphs
+
+This is an *opinionated* essay about good and bad practices in data visualization.
+
+This material is MIT licensed and adapted from [cxli233/FriendsDontLetFriends](https://github.com/cxli233/FriendsDontLetFriends).
+
+R Code for generating the graphs is available in that repository.
+
+???
+
+- This is an opinionated essay about good and bad practices in data visualization.
+- This material is MIT licensed and adapted from cxli233&apos;s work
+- Please see the linked repository for the source for each of these graphs as well as more links and details.
+
+---
+
+## 1. Friends Don&apos;t Let Friends Make Bar Plots for Means Separation
+
+
+![No Bar Plots for Means Separation](images/dont_bar_plot.png)
+
+.footnote[inspired by many tweets the author saw on limitations of the bar graph. See e.g. &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1371/journal.pbio.1002128&quot;&gt;Weissgerber &lt;i&gt;et al.&lt;/i&gt; 2015&lt;/a&gt;&lt;/span&gt;]
+
+???
+
+- This has to be the first one.
+- Means separation plots are some of the most common in scientific publications.
+- We have two or more groups, which contains multiple observations; they may have different means, variances, and distributions.
+- The task of the visualization is to show the means and the spread (dispersion) of the data.
+- In this example, two groups have similar means and standard deviations, but quite different distributions.
+- Are they really &quot;the same&quot;?
+- Just don&apos;t use bar plot for means separation, or at least check a couple things before settling down on a bar plot.
+- It&apos;s worth mentioning that I was inspired by many researchers who have tweeted on the limitation of bar graphs.
+
+---
+
+## 2. Friends Don&apos;t Let Friends Make Violin Plots for Small Sample Sizes
+
+![Beware of Violin Plots for Small Sample Sizes](images/Beware_of_small_n_box_violin_plot.png)
+
+???
+
+- This is quite common in the literature as well, but unfortunately, violin plots (or any sort of smoothed distribution curves) make no sense for small n.
+- Distributions and quartiles can vary widely with small n, even if the underlying observations are similar.
+- Distribution and quartiles are only meaningful with large n.
+- I did an experiment before, where I sampled the same normal distribution several times and computed the quartiles for each sample.
+- The quartiles only stablize when n gets larger than 50.
+
+---
+
+## 3. Friends Don&apos;t Let Friends Use Bidirectional Color Scales for Unidirectional Data
+
+![Are You Using the Right Color Scale for Your Data?](images/ColorScales.png)
+
+???
+
+- Excuse my language, but this is a truly data visualization sin, and again quite common.
+- I can understand why this error is common, because it appears that many of us have not spent a lot of thoughts on this issue.
+- Color scales are pretty, but we have to be extra careful.
+- When color scales (or color gradients) are used to represent numerical data, the darkest and lightest colors should have special meanings.
+- You can decide what those special meanings are: e.g., max, min, mean, zero. But they should represent something meaningful.
+- A data visualization sin for heat maps/color gradients is when the lightest or darkers colors are some arbitrary numbers.
+- This is as bad as the longest bar in a bar chart not being the largest value. Can you imagine that?
+
+---
+
+## 4. Friends Don&apos;t Let Friends Make Bar Plot Meadow
+
+![Horrendous Giant Bar Plot vs. Better Designed Plot](images/AvoidBarPlotMeadow.png)
+
+.footnote[Data from &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1186/s12870-020-2243-7&quot;&gt;Matand &lt;i&gt;et al.&lt;/i&gt; 2020&lt;/a&gt;&lt;/span&gt;]
+
+???
+
+- We talked about no bar charts for mean separation, but this is a different issue.
+- It has to do with presenting results of a multi-factorial experiment.
+- Bar plot meadows are very common in scientific publications and unfortunately also ineffective in communicating the results.
+- Bar plot meadows are common because multi-factorial experiments are common.
+- However, a bar plot meadow is poorly designed for its purpose.
+- To communicate results of a multi-factorial experiment, it requires thoughtful designs regarding grouping/faceting by factors of interest.
+- In this example, I focus on comparing the effect of `Treatment` &amp; `Explant` on `Response` at the level of each `Variety`.
+- However, if the focus is the effect of `Treatment` &amp; `Variety` on `Response` at the level of each `Exaplant`, then it will require a different layout.
+
+---
+
+## 5. Friends Don&apos;t Let Friends Make Heatmap without (Considering) Reordering Rows &amp; Columns
+
+![A Heatmap before and after reordering rows and columns](images/Reorder_rows_and_columns_for_heatmap.png)
+
+.footnote[Data from &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1101/2022.07.04.498697&quot;&gt;Li &lt;i&gt;et al.&lt;/i&gt; 2022&lt;/a&gt;&lt;/span&gt;]
+
+???
+
+- Heatmaps are very common in scientific publications, and very very common in omics papers.
+- However, for heatmaps to be effective, we have to consider the ordering of rows and columns.
+- In this example, I have cells as columns and features as rows. Grids are showing z scores.
+- It is impossible to get anything useful out of the heatmap without reordering rows and columns.
+- We can reorder rows and columns using clustering, but that is not the only way.
+- Of course, if the rows and columns are mapping to physical entities (rows and columns of a 96-well plate), then you can&apos;t reorder them.
+- But it is a very good idea to at least consider reordering rows and columns.
+
+---
+
+### Bonus: heatmaps can be very pretty
+
+
+![aRt with Heatmap](images/Abstract_R_2022_11_24.png)
+
+.footnote[
+  [R Code](https://github.com/cxli233/FriendsDontLetFriends/blob/main/Scripts/Abstract_aRt.R),
+  [Tutorial on reordering](https://github.com/cxli233/FriendsDontLetFriends/blob/main/Heatmap_tutorial.md)
+]
+
+???
+
+- Heatmaps can be very pretty...if you are good are reordering rows/columns and choosing color gradients.
+- Here is an example &quot;abstract aRt&quot; generated from simulated data.
+
+
+## 6. Friends Don&apos;t Let Friends Make Heatmap without Checking Outliers
+
+
+![Did you check outliers](images/Check_outliers_for_heatmap.png)
+
+???
+
+- Outliers in heatmap can really change how we perceive and interpret the visualization.
+- This generalizes to all sort of visualizations that use colors to represent numeric data.
+- Let me show you an example:
+- In this example, I have 2 observations. For each observations, I measured 20 features.
+- Without checking for outliers, it may appear that the 2 observations are overall similar, except at 2 features.
+- However, after maxing out the color scale around 95th percentile of the data, it reveals that the two observations are distinct across all features.
+
+---
+
+## 7. Friends Don&apos;t Let Friends Forget to Check Data Range at Each Factor Level
+
+
+![Did you check data range at each factor level](images/Check_range_at_factor_level.png)
+
+???
+
+- This is a common issue that many of us have encountered.
+- In a multifactor experiment, sometimes the range of the response variable changes widely between different factor levels.
+- This hypothetical experiment measured 3 compounds across 2 groups (control vs. treatment).
+- Without checking data range for each compound, you will likely have missed that the treatment had a strong effect on compound 1.
+- This is because the concentration of compound 1 has a much narrower range than the other compounds in this experiment.
+
+---
+
+## 8. Friends Don&apos;t Let Friends Make Network Graphs without Trying Different Layouts
+
+
+![Try different network layouts](images/TryDifferentLayouts.png)
+
+.footnote[Data from &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1101/2022.07.04.498697&quot;&gt;Li &lt;i&gt;et al.&lt;/i&gt; 2022&lt;/a&gt;&lt;/span&gt;]
+
+???
+
+- Network graphs are common in scientific publications. They are super useful in presenting relationship data.
+- However, the apparence (not the topology) of the network can make a huge difference in determing if a network graph is effective.
+- Layouts can drastically change the appearance of networks, making them easier or harder to interpret.
+- Here are 3 network graphs from the same data. They look very different from each other.
+
+---
+
+## 9. Friends Don&apos;t Let Friends Confuse Position-based Visualizations with Length-based Visualizations
+
+![Position vs. length based visualizations](images/Position_and_length_based_visualizations.png)
+
+???
+
+- This is always the elephant in the room and the essence of many misleading visualizations.
+- In this example, I measured a response variable across 3 time points.
+- Two of the following graphs are fine, but one of them is a data visualization crime. Can you see why?
+- In dot and line plots, values are represented by positions along the x and y axis.
+- The same idea applies to other position based visualizations, such as box plots.
+- In bar plots, values are represented by the distance from the x axis, and thus the length of the bar.
+- The 3rd graph is not 0-based, which makes the bar length at time point 2 about 3x longer than that at time point 1.
+- In fact, the true difference in means is closer to 1.6x.
+- I hope you can see how confusing length and position based visualizations can lead to misleading graphs.
+
+---
+
+### Watch out for bar plots with broken axis
+
+![Broken axis](images/Broken_axis.png)
+
+.footnote[[Example R Code](https://github.com/cxli233/FriendsDontLetFriends/blob/main/Scripts/Broken_axis.R)]
+
+???
+
+- Broken axis may be useful for depicting data across a wide range of numeric values.
+- (Alternatively, log scaled axis can be used instead.)
+- Broken axis are fine for position based graphics, because the data are represented by positions along the axis.
+- However, we must be very careful with bar plots that have broken axis. Here is an example.
+- In this example, two graphs (left vs. right) are showing the same data.
+- However, by changing where the axis is broken, one can make certain bars looks longer or shorter.
+- In this example, the length of bar &quot;d&quot; can look really different.
+- The illusion of bar &quot;d&quot; being very short on the right graph boils down to bar plot being a length based graphics, not a position based graphics.
+
+---
+
+## 10. Friends Don&apos;t Let Friends Make Pie Chart
+
+![Don&apos;t make pie charts](images/dont_pie_chart.png)
+
+???
+
+- Pie chart is a common type of visualization for fractional data, where fractions add up to 100%.
+- This is achieved by dividing a circle into sectors, and the sectors add up to a full circle.
+- Pie charts have been criticized, because human are much worse in reading angles and area than reading lengths.
+- In this example, we have two groups, each contains 4 sub-categories.
+- In classic pie charts, the angles (and thus arc lengths &amp; sector area) represent the data.
+- The problem is that it is very difficult to compare between groups.
+- We can visually simplify the pie chart into donut charts, where the data are now represented by arc lengths.
+- However, if we want to use lengths to represent the data, why don&apos;t we just unwrap the donut and make stacked bars?
+- In stacked bar graphs, bars are shown side-by-side and thus easier to compare across groups.
+- Fun fact: the scripts underlying stacked bars are much simpler than those underlying the pie charts and donut charts.
+- If you want to produce sub-optimal graph types with ggplot, you actually have to work extra hard.
+
+---
+
+## 11. Friends Don&apos;t Let Friends Make Concentric Donuts
+
+![Don&apos;t make concentric donuts](images/dont_concentric_donuts.png)
+
+???
+
+- In this example, we have 3 groups, each of which contains two sub-categories (Type I or Type II).
+- In concentric donuts, you might be tempted to say the data are represented by the arc lengths, which is in fact inaccurate.
+- The arc lengths on the outer rings are much longer than those in the inner rings.
+- Group 2 and Group 3 have the same exact values, but the arc lengths of Group 3 are much longer.
+- In fact the data are represented by the arc angles, which we are bad at reading.
+- Since outer rings are longer, the ordering of the groups (which group goes to which ring) has a big impact on the impression of the plot.
+- It can lead to the apparent paradox where larger values have shorter arcs.
+- The better (and simpler!) alternative is just unwrap the donuts and make a good old stacked bar plot.
+- BTW, this is also my main issue with circos plots and other circular plot layouts.
+
+---
+
+## 12. Friends Don&apos;t Let Friends Use Red/Green and Rainbow color scales
+
+![are you making a &quot;safe&quot; heatmap?](images/Color_blind_grey_scale_safe_heatmap.png)
+
+???
+
+- Deuteranomaly is the most common type of red/green colorblindness, occurring in 1/16 male and 1/256 female.
+- Any color scales that use shades of red and shades of green in the same time would be a problem for a person with red/green colorblindness (third column of the figure).
+- In addition, red/green and rainbow do not preserve information well at all when printed on black/white (grey scale, second column in figure).
+- Many scientific software still use red/green or rainbow as the default color scales, which drives me crazy.
+- More &quot;modern&quot; color scales, such as viridis are both colorblind-friendly and grey scale-safe (third row of figure).
+- And they look nice too.
+
+---
+
+## 13. Friends Don&apos;t Let Friends Forget to Reorder Stacked Bar Plot
+
+![Reorder your stacked bars](images/Reorder_stacked_bars.png)
+
+.footnote[[Tutorial on optimising](https://github.com/cxli233/FriendsDontLetFriends/blob/main/Scripts/stacked_bars_optimization.Rmd).]
+
+???
+
+- Stacked bar plots are useful for visualizing proportion data.
+- Stacked bar plots are commonly used to visualize community structure or population structure or admixture analysis.
+- This kind of visualization boils down to a collection of samples, where each sample contains multiple classes of members.
+- However, when we have many samples and many classes, stacked bar plots need to be optimized to be effective.
+- And by &quot;optimize&quot; I mean the grouping and ordering of samples.
+- Here we have an example data with 100 samples and 8 classes of member.
+- Due to the number of samples and classes, it is very hard to discern anything from this graph without optimizing the order of bars. What the heck am I looking at?
+- After reordering the bars, wow, that really made a difference, don&apos;t you think?
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/cxli233/" class="contributor-badge contributor-cxli233"><img src="https://avatars.githubusercontent.com/cxli233?s=36" alt="Chenxin Li avatar" width="36" class="avatar" />
+    Chenxin Li</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+	
+
+
+</div>
+
+Tutorial Content is licensed under  <a rel="license" href="https://spdx.org/licenses/MIT">MIT</a>.<br/>
+© Copyright 2022 C. Li
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script src='/training-material/assets/js/bundle.9d052497.js?v=1700480563'></script>
+        
+    </body>
+</html>

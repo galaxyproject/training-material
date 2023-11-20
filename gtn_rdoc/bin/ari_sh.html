@@ -189,7 +189,7 @@
 
 <p># Generate images for use. echo “  Extracting slides” convert “${slides}” -resize 1920x1080 “${build_dir}/slides.%03d.png”</p>
 
-<p>echo “  Building Video | $(npm bin)/editly –json ${build_dir}/editly.json5” $FFMPEG_PATH/ffmpeg -version $(npm bin)/editly –json “${build_dir}/editly.json5”</p>
+<p>echo “  Building Video | ./node_modules/.bin/editly –json ${build_dir}/editly.json5” $FFMPEG_PATH/ffmpeg -version ./node_modules/.bin/editly –json “${build_dir}/editly.json5”</p>
 
 <p># Mux it together echo “  Muxing” ffmpeg -loglevel $ffmpeglog -i “${build_dir}/tmp.mp4” -i “${build_dir}/out.srt” \</p>
 
