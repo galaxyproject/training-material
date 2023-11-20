@@ -9,7 +9,7 @@ layout: news
 
 ## WorkflowHub
 
-We have now added support for [WorkflowHub.eu](WorkflowHub.eu) in our [cross-galaxy workflow search]({% link workflows/list.html %}) interface that lets you find workflows from around the universe. The support for WorkflowHub helps us showcase all of the best-practice workflows currently available there! These can all be imported and run directly in Galaxy.
+We have now added support for [WorkflowHub.eu](https://workflowhub.eu) in our [cross-galaxy workflow search]({% link workflows/list.html %}) interface that lets you find workflows from around the universe. The support for WorkflowHub helps us showcase all of the best-practice workflows currently available there! These can all be imported and run directly in Galaxy.
 
 <iframe src="{% link workflows/embed.html %}?all=vgp+Delphine+Lariviere" height="300px" width="100%" class="gtn-embed"></iframe>
 
