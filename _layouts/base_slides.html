@@ -177,8 +177,8 @@ Useful when presenting."
 {% endif %}
 </div>
 
-{{ locale['license-framework'] | default: "Tutorial Content is licensed under" }} {% if page.license %} <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
-{% else %}<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.{% endif %}
+{{ locale['license-framework'] | default: "Tutorial Content is licensed under" }} {% if page.license%} <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.{% else %}<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.{% endif %}<br/>
+{% if page.copyright %}{{ page.copyright }}{% endif %}
 
 {% if page.layout == "base_slides" %}
 .footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/main{{ page.url }})]
