@@ -84,10 +84,10 @@ module Gtn
       elsif _load_file(site, 'funders').key?(c)
         return ['funder', site.data['funders'][c]]
       else
-        Jekyll.logger.error "Contributor #{c} not found"
+        Jekyll.logger.warning "Contributor #{c} not found"
       end
 
-      [nil, nil]
+      ['contributor', { 'name' => c }]
     end
 
     ##
