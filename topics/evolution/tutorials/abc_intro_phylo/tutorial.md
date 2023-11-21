@@ -691,31 +691,38 @@ While this is running you might use your time to read the [Models of sequence ev
 > 3. Which do you think is the biggest well-supported clade?
 {: .hands_on}
 
-![IQTreePhylovis](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis."){:align="center"}
-
 Observe the bootstrap values in the IQTree output for deep branches are not as high.
 
 Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates of the probability that the branch is correct, so are not quite the same as traditional "naive" bootstrap values.
+
+![IQTreePhylovis](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis."){:align="center"}
 
 # Phylogenetic Networks
 
 <!-- Intro to phylogenetic networks as an alternative to trees -->
 
-Now, perhaps surprisingly, my go-to for doing a phylogenetic estimation is _not_ to start with a tree but to start with a *phylogenetic network*.
+<!-- Now, perhaps surprisingly, my go-to for phylogenetic estimation is _not_ to start with a tree but to start with a *phylogenetic network*.-->
 
-A phylogenetic network can have two purposes: (a) to show an estimate of the evolutonary history that is not strictly branching, so, involving horizontal gene transfer or hybridisation events -- or (b) to show conflicting phylogenetic signal in the data set, suggesting different possible trees.
+Perhaps surprisingly, phylogenetic estimation doesn't have to start with a tree. Instead you can start with *phylogenetic networks*.
 
-We will be using the networks for the second purpose here, because we are for this tutorial working under the assumption that there is a true tree, which is the actual evolutionary history of our species of interest.
+Phylogenetic networks have two purposes: 
+(i) to show an estimate of the evolutonary history that is not strictly branching, so, involving horizontal gene transfer or hybridisation events.
+ 
+ or 
 
-To understand what this kind of phylogenetic network is, and how to interpret one, we need to think about what the branches of a tree _do_: they *split* the taxa into two groups: those on one side of the branch, and those on the other.  We are thinking about unrooted trees in this context, so the two branches coming from the root constitute a single such split.
+ (ii) to show conflicting phylogenetic signal in the data set, suggesting different possible trees.
+
+In this tutorial we use networks for the second purpose because we are working under the assumption that there is a true tree, which is the actual evolutionary history of our species of interest.
+
+To understand what this kind of phylogenetic network is, and how to interpret one, we need to think about what the branches of a tree _do_. Branches *split* the taxa into two groups: those on one side of the branch, and those on the other. We are thinking about unrooted trees in this context, so the two branches coming from the root constitute a single split.
 
 Thus every branch of a tree can be thought of as a _split_ and a tree is a collection of *compatible* splits: where by "compatible" we just mean that they can be on the same tree.
 
 <!-- [diagram here of splits?] -->
 
-So our tree search is an attempt to find some "best" set of _splits_ that are all compatible, and which together explain the evolutionary relationships among the taxa of interest.
+So our tree search is an attempt to find a "best" set of _splits_ that are all compatible, and which together explain the evolutionary relationships among the taxa of interest.
 
-However in any data set there may be support for multiple splits that are _not_ compatible: for example, we might have a set of nucleotide sequence data like this:
+However, the data may support multiple splits that are _not_ compatible. For example, we might have a set of nucleotide sequence data like this:
 
 ![TableOfSitesAndSplits](./images/tableOfSitesForSplits.png){:align="center"}
 
@@ -729,23 +736,27 @@ However in any data set there may be support for multiple splits that are _not_ 
 | Site: | `123456789012345` | `1234`   | `5678`    | `9012` | `34`  | `5`   |
 |       | `         1     ` |          |           | ` 1  ` |       |       | -->
 
-In this table the sequence is first listed in the second column, then broken up into different categories.
+In this table the sequence is listed in full in the second column, then broken up into different categories in subsequent columns.
 
-Above you can see the first four sites are _constant_, so don't tell us anything much about the phylogeny.
-Each of the next four "singleton" sites segregates one taxon from the others (which is again not terribly useful in terms of resolving the branching in the phylogeny).
-The so-called "parsimony informative" sites start at site 9.
-These sites tell us about the support for the _internal_ branches of the tree.
+The first four sites are _constant_, so don't tell us anything much about the phylogeny.
 
-Sites 9-12 suggest splitting the taxa into (1,2) vs (3,4).  We write this as a split 12|34 for brevity, or even just 12.
-The next two sites, numbers 13 and 14, suggest the split (2,3) vs (1,4), which we could write as 23|14 or 14|23 or just 14.
+The next four _singleton_ sites segregate one taxon from the others (which is again not terribly useful in terms of resolving the branching in the phylogeny).
+
+The so-called "parsimony informative" sites start at site 9. These sites tell us about the support for the _internal_ branches of the tree.
+
+Sites 9-12 suggest splitting the taxa into (1,2) vs (3,4).  We write this as a split _12|34_ for brevity, or even just 12.
+
+The next two sites, numbers 13 and 14, suggest the split (2,3) vs (1,4), which we could write as _23|14_ or 14|23 or just 14.
+
 The last site suggests that taxa 1 and 3 should go together.
 
-![Simplest Network](./images/SimpleSplits.png){: align="center"}
+![A simple network of four taxa demonstrating splits that separate the taxa from each other](./images/SimpleSplits.png "Splits in a simple phylogenetic network"){: align="center"}
 
 In the above figure we have four taxa 1,2,3,4, in a phylogenetic network.
 The pairs of parallel lines correspond to two of the _splits_ that could separate taxa from each other, and which could (separately) appear in phylogenetic trees.
-The green, horizontal branches separate taxa 1 and 2 from 3 and 4; the split 12|34.
-These are longer than the blue, vertical ones, which separate taxa 1 and 3 from 2 and 4: the split 13:24.
+
+The green, horizontal branches separate taxa 1 and 2 from 3 and 4; the split 12|34. These are longer than the blue, vertical ones, which separate taxa 1 and 3 from 2 and 4: the split 13:24.
+
 The beauty of the network is that both thes pieces of information can be shown on the same figure, despite them not being compatible -- they can't both be on the same tree.
 
 
