@@ -321,8 +321,7 @@ We can also cross-reference images inside our Markdown with an anchor. For examp
 > should be functional; `figcaption` descriptions should be editorial or
 > illustrative.**
 >
-> [*via thoughtbot.com*](https://thoughtbot.com/blog/alt-vs-figcaption)
-{: .quote}
+{: .quote cite="https://thoughtbot.com/blog/alt-vs-figcaption" author="thoughtbot.com"}
 
 As an example for this image:
 
@@ -853,6 +852,22 @@ Rendered:
 > apikey = super-secret-api-key-wow!
 > ```
 {: .code-out}
+
+## **Quote** boxes
+
+{% raw %}
+```markdown
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra" author="Yogi Berra"}
+```
+{% endraw %}
+
+Rendered:
+
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra" author="Yogi Berra"}
+
+The citation and author parameters are optional, and if provided the `cite` key must be a URL.
 
 # Additional Features to Improve Learning
 
