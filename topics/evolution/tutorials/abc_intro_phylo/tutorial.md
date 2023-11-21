@@ -249,16 +249,6 @@ The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact 
 > |---|---|---|
 
 
-<!-- > <comment-title>This is a comment section</comment-title>
->
-> This is a comment section
->
-> 1. item 1
->
-> 2. item 2
->
-{: .comment} -->
-
 
 ## Building a Tree
 
@@ -380,14 +370,10 @@ ACTTGGCGTAGCCGGAGGCC
 > 1. How many sequences are there in your data?
 > 2. How long is the longest sequence, and what is it?
 > 3. What about the shortest sequence? 
-{: .question}
-
-<details>
-  <summary>Answer</summary>
+>  <solution-title>Answer</solution-title>
   There should be 55 sequences.  The longest is from <i>Anolis paternus</i> with length 1729 nucleotides; the shortest is <i>A. luciae</i> with length 1252.
-</details>
-
-
+> {: .solution}
+{: .question}
 
 # Sequence Alignment
 
@@ -706,6 +692,7 @@ Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates 
 Perhaps surprisingly, phylogenetic estimation doesn't have to start with a tree. Instead you can start with *phylogenetic networks*.
 
 Phylogenetic networks have two purposes: 
+
 (i) to show an estimate of the evolutonary history that is not strictly branching, so, involving horizontal gene transfer or hybridisation events.
  
  or 
@@ -755,7 +742,7 @@ The last site suggests that taxa 1 and 3 should go together.
 In the above figure we have four taxa 1,2,3,4, in a phylogenetic network.
 The pairs of parallel lines correspond to two of the _splits_ that could separate taxa from each other, and which could (separately) appear in phylogenetic trees.
 
-The green, horizontal branches separate taxa 1 and 2 from 3 and 4; the split 12|34. These are longer than the blue, vertical ones, which separate taxa 1 and 3 from 2 and 4: the split 13:24.
+The green, horizontal branches separate taxa 1 and 2 from 3 and 4; the split "12|34". These are longer than the blue, vertical ones, which separate taxa 1 and 3 from 2 and 4: the split "13|24".
 
 The beauty of the network is that both thes pieces of information can be shown on the same figure, despite them not being compatible -- they can't both be on the same tree.
 
@@ -764,18 +751,23 @@ The beauty of the network is that both thes pieces of information can be shown o
 
 > <hands-on-title>Build a Neighbor-Net with Splitstree</hands-on-title>
 >
-> 1. If you haven't already got it, download and install <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html">SplitsTree 4</a> or <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree6/welcome.html">SplitsTree 6 CE</a> (Community Edition) to your own computer and install it. SplitsTree 4 is now rather old, but works well; SplitsTree 6 is still in development but appears (at the time of writing this) to be working well.  They do the same thing, and we will only use tools common to both versions.  Installing either version takes a minute or two.
-> 2. Download the aligned data .FASTA file to your own computer.
+> 1. Download and install <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html">SplitsTree 4</a> or <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree6/welcome.html">SplitsTree 6 CE</a> (Community Edition) on your own computer. 
+Note: SplitsTree 4 is an older version, but works well; SplitsTree 6 is in development but appears to work equally well (at the time of writing this). They do the same thing, and we only use tools common to both versions. Installing either version takes a minute or two.
+> 2. Download the aligned data .FASTA file (the output of MAFFT) to your own computer.
 > 3. Start up SplitsTree and open the file.  Within moments you should see something like this (using SplitsTree 4):
 > ![Default phylogenetic network](./images/ST4-default.png){: align="center"}
-> This network shows a number of deep branches that are quite well resolved, in the sense that they have very long, thin parallelograms, but there is a jumble of very small parallelograms in the centre of the network, indicating that there is not a lot of information in the data to determine the early branching order of the _Anolis_ phylogeny.
-> Click on some of the interior branches, which will highlight sets of parallel lines, that correspond to each split that is shown in the network.
-> 4. Now note that the initial distance measure is using "Uncorrected P" distance, which is simply the proportion of sites that differ between each pair of sequences.  It is also possible to use the more sophisticated models above for maximum likelihood, such as Jukes-Cantor and HKY85. Click on the "Distances" menu and select "HKY85".  A dialog will appear with some options, but you can just click "Apply" and get a network like this:
+> Click on some of the interior branches, which will highlight sets of parallel lines, that correspond to each split that is shown in the network. 
+>This network shows a number of deep branches that are quite well resolved, in the sense that they have very long, thin parallelograms, but there is a jumble of very small parallelograms in the centre of the network, indicating that there is not a lot of information in the data to determine the early branching order of the _Anolis_ phylogeny.
+> 
+> 4. Note that the initial distance measure is using "Uncorrected P" distance, which is simply the proportion of sites that differ between each pair of sequences. It is  possible to use more sophisticated models for maximum likelihood, such as Jukes-Cantor and HKY85. 
+>   Click on the **Distances menu** and select "HKY85".  A dialog will appear with some options, but you can just click "Apply" and get a network like this:
 > ![HKY85 Network](./images/ST4-HKY85.png){: align="center"}
-> The above shows you that the basic structure of the network does not change very much using different distance measures, which is a good thing because it means reasonable assumptions you make about your data are not drastically changing the results.
-> 5. Finally, perform a bootstrap analysis on this network.  Click on the Analysis menu and select Bootstrap.  Leave the default number of replicates as 1000 and click `run`: it will not take too long.  After a few seconds (less than a minute) you should see something like this:
+>   The above shows you that the basic structure of the network does not change very much using different distance measures, which is a good thing because it means reasonable assumptions you make about your data are not drastically changing the results.
+> 5. Finally, perform a bootstrap analysis on this network.  Click on the **Analysis menu** and select Bootstrap.  Leave the default number of replicates as 1000 and click "run".
+>After a few seconds (less than a minute) you should see something like this:
 > ![HKY85 Network with Bootstrap](./images/ST4-HKY85-BS.png){: align="center"}
-> The above shows the percentage of times out of those 1000 replicates that each split shown was in the network created for each replicate.  Zoom in (there is a magnifying glass tool at the top) and scroll around the figure to see which are the strongly supported *splits*, which should correspond to the well supported bootstrap values in the trees you inferred above.
+> This network shows the percentage of times out of those 1000 replicates that each split was in the network created for each replicate. 
+>Zoom in (there is a magnifying glass tool at the top) and scroll around the figure to see which are the strongly supported *splits*, which should correspond to the well supported bootstrap values in the trees you inferred above.
 {: .hands_on}
 
 
@@ -794,21 +786,20 @@ XXX More to go here.
 
 # Summary 
 
-- Phylogeny provides the statistical framework that is essential to comparing biological organisms
+- Phylogeny provides the statistical framework that is essential for comparing biological organisms
 - There are so many trees, choosing the best one is very hard.
-- There are many data options but one of the best is to use molecular
-sequences.
-- Optimality criteria (e.g., MP, ML) help us decide which trees are “good” – by how well they explain the data.
+- There are many data options but one of the best is to use molecular sequences.
+- Optimality criteria (e.g., Maximum Parsimony, Maximum Likelihood) help us decide which trees are “good” – by how well they explain the data.
 - We can search tree space for medium-sized problems with branch-and-bound, and bigger problems with heuristics.
 - Trees can be assessed for robustness by comparing methods, resampling (bootstrap), and considering a phylogenetic network.
 
 
 # Troubleshooting
 
-Here are a few things that can still catch us out:
+Here are a few things that can catch us out:
 
   - **Long Branch Attraction (LBA):** 
-    Be wary of long branches that come out together in the estimated phylogeny: this can be the result pairs of sequences that are very different from the rest, so match each other “by chance” more than they match the rest.
+    Be wary of long branches that come out together in the estimated phylogeny. This can be the result pairs of sequences that are very different from the rest, so match each other “by chance” more than they match the rest.
     
     **Fix:** break up these long branches by adding in some taxa that are closely related to one or the other; remove one long branch at a time to see where the remaining one fits best; consider other methods that are more robust to LBA.
 
@@ -824,60 +815,11 @@ Here are a few things that can still catch us out:
 
   - **The gene trees are different!**
     
-    **Fix:** Well they might not need fixing: it might just be that the genes’ evolutionary histories aren’t the same as those of the species that host them. Look at all the gene trees and see what other events might have led to the differences between them.
+    **Fix:** They might not need fixing: it might just be that the genes’ evolutionary histories aren’t the same as those of the species that host them. Look at all the gene trees and see what other events might have led to the differences between them.
 
   - **I can’t find an outgroup!**
 
     **Fix:** Consider mid-point rooting: it is in most cases pretty good.
-
-
-# Markdown hints
-Internal link [Resources](#resources) 
-An external link[RAxML](https://cme.h-its.org/exelixis/web/software/raxml/)
-
-> example table
->
-> | Sample       | Cluster_id | DR profile | Clustering  |
-> |--------------|------------|------------|-------------|
-> | ERR5987352   | 10         | Pre-MDR    | Clustered   |
-> | ERR6362484   | 10         | Pre-MDR    | Clustered   |
-
-
-
-> <question-title>Exercise 1</question-title>
->
-> 1. question?
->
-> > <solution-title>1</solution-title>
-> >
-> > 1. Solution
-> >
-> {: .solution}
->
-{: .question}
-
-
-> <question-title>Exercise 2</question-title>
->
-> A question
->
-> > <solution-title>4</solution-title>
-> >
-> > Solution
-> >
-> {: .solution}
->
-{: .question}
-
-
-This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
-
-# About this workshop
-This tutorial is based on a workshop that was run in 2019 under the auspices of Australian BioCommons by Michael Charleston, and attended online by hundreds of people across Australia.
-
-The title of that workshop was "Phylogenetics - Back To Basics" and it was aimed at helping you understand how phylogenetic inference works, some of the tools used, and what you can learn from phylogenetic estimation.
-
-It has been adapted to work as a stand-alone, self-paced tutorial, which can run (almost) entirely within Galaxy.
 
 # Resources
 To develop a deeper understanding of phylogenetic trees, there is no better way than estimating phylogenies yourself --- and work through a book on the topic in your own mind's pace.
@@ -920,9 +862,54 @@ and Le Sy Vinh (2018) UFBoot2: Improving the ultrafast bootstrap
 approximation. Mol. Biol. Evol., 35:518–522.
 https://doi.org/10.1093/molbev/msx281
 
+# About this workshop
+This tutorial is based on a 2019 workshop that was run in by Australian BioCommons and Michael Charleston from the University of Tasmania.
 
+It has been adapted to work as a stand-alone, self-paced tutorial, which can run (almost) entirely within Galaxy.
+
+<!-- # Markdown hints
+Internal link [Resources](#resources) 
+An external link[RAxML](https://cme.h-its.org/exelixis/web/software/raxml/)
+
+> example table
+>
+> | Sample       | Cluster_id | DR profile | Clustering  |
+> |--------------|------------|------------|-------------|
+> | ERR5987352   | 10         | Pre-MDR    | Clustered   |
+> | ERR6362484   | 10         | Pre-MDR    | Clustered   |
+
+
+
+> <question-title>Exercise 1</question-title>
+>
+> 1. question?
+>
+> > <solution-title>1</solution-title>
+> >
+> > 1. Solution
+> >
+> {: .solution}
+>
+{: .question}
+
+
+> <question-title>Exercise 2</question-title>
+>
+> A question
+>
+> > <solution-title>4</solution-title>
+> >
+> > Solution
+> >
+> {: .solution}
+>
+{: .question}
+
+
+This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
 
 > <details-title>Further reading</details-title>
 > Here is a link to the PLoS article on Galaxy tutorials:
 > - [Galaxy Training: A powerful framework for teaching!](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752)
-{: .details}
+{: .details} -->
+
