@@ -219,17 +219,11 @@ All analyses described in this tutorial are performed using *workflows*--chains 
 >
 {: .details}
 
-The workflows imported are marked with a red square in the following figure:
+Once all four workflows are imported, your workflow list should look like this:
 
-![Figure 2: Workflow menu](../../images/vgp_assembly/imported_workflows.png  "Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.")
+![Workflow menu](../../images/vgp_assembly/imported_workflows.png  "Workflow list. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The workflows can be run by clicking in the play icon, marked in red in the image.")
 
 Once we have imported the datasets and the workflows, we can start with the genome assembly.
-
-> <comment-title>Workflow-centric Research Objects</comment-title>
->
-> In WorkflowHub, workflows are packaged, registered, downloaded and exchanged as Research Objects using the RO-Crate specification, with test and example data, managed metadata profiles, citations and more.
->
-{: .comment}
 
 # Performing the assembly
 
