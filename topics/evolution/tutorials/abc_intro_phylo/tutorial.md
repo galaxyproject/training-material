@@ -370,8 +370,9 @@ ACTTGGCGTAGCCGGAGGCC
 > 1. How many sequences are there in your data?
 > 2. How long is the longest sequence, and what is it?
 > 3. What about the shortest sequence? 
->  <solution-title>Answer</solution-title>
-  There should be 55 sequences.  The longest is from <i>Anolis paternus</i> with length 1729 nucleotides; the shortest is <i>A. luciae</i> with length 1252.
+>
+> > <solution-title></solution-title>
+> > There should be 55 sequences.  The longest is from <i>Anolis paternus</i> with length 1729 nucleotides; the shortest is <i>A. luciae</i> with length 1252.
 > {: .solution}
 {: .question}
 
