@@ -154,11 +154,13 @@ We should ONLY be using new_material (if at all possible.)
 		{% if page.copyright %}
 		{{ page.copyright }}.
 		{% endif %}
+            {{ locale['license-framework'] | default: "Tutorial Content is licensed under" }}
             {% if page.license %}
-	    Tutorial Content is licensed under <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
+              <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
             {% else %}
-            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">{{ locale['license-framework'] | default: "Tutorial Content is licensed under Creative Commons Attribution 4.0 International License" }}</a>.
-            {% endif %} The GTN Framework is licensed under <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a>
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            {% endif %}
+            The GTN Framework is licensed under <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a>
         </div>
         {% if page.short_id %}
         <div><strong>{% icon purl %} <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
