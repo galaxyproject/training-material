@@ -867,7 +867,13 @@ Rendered:
 > If you don't know where you're going, you might not get there.
 {: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra" author="Yogi Berra"}
 
-The citation and author parameters are optional, and if provided the `cite` key must be a URL.
+The citation and author parameters are both optional. If provided the `cite` key must be a URL.
+
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra"}
+
+> If you don't know where you're going, you might not get there.
+{: .quote author="Yogi Berra"}
 
 # Additional Features to Improve Learning
 
