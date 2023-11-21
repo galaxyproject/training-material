@@ -60,6 +60,7 @@ This tutorial assumes you are comfortable getting data into Galaxy, running jobs
 - [Getting Data into Galaxy]({% link topics/galaxy-interface/tutorials/get-data/slides.html %})
 - [Using Dataset Collections]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %})
 - [Understanding the Galaxy History System]({% link topics/galaxy-interface/tutorials/history/tutorial.md %})
+- [Introduction to Galaxy Analyses]({% link topics/introduction/index.md %})
 - [Downloading and Deleting Data in Galaxy]({% link topics/galaxy-interface/tutorials/download-delete-data/tutorial.md %})
 
 # The VGP-Galaxy pipeline
@@ -236,8 +237,6 @@ Workflows listed in [Fig. 1](#figure-1) support a variety of "analysis trajector
 
 ## Genome profile analysis (WF1)
 
-[{% icon exchange %} Switch to step by step version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#genome-profile-analysis)
-
 Now that our data and workflows are imported, we can run our first workflow. Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size according to our data. The present pipeline uses **Meryl** for generating the *k*-mer database and **Genomescope2** for determining genome characteristics based on a *k*-mer analysis.
 
 ### Launching the workflow
@@ -289,8 +288,6 @@ This distribution is the result of the Poisson process underlying the generation
 
 
 ## Assembly (contiging) with `hifiasm` (WF4)
-
-[{% icon exchange %} Switch to step by step version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#assembly-with-hifiasm)
 
 To generate {contigs} we will use [**hifiasm**](https://github.com/chhylp123/hifiasm) assembler. It is a part of the `Assembly with HiC (WF4)` workflow . This workflow uses **hifiasm** (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alternate pseudohaplotype assemblies. This workflow includes three tools for evaluating assembly quality: [**`gfastats`**](https://github.com/vgl-hub/gfastats), [**`BUSCO`**](https://busco.ezlab.org/) and [**`Merqury`**](https://github.com/marbl/merqury).
 
@@ -410,8 +407,6 @@ Now that we know which haplotype contains the false duplications, we can run the
 
 ## Purging duplicates with `purge_dups`
 
-[{% icon exchange %} Switch to step by step version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#purging-with-purgedups)
-
 An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplotypes, as well as all hemizygous regions from both haplotypes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in downstream analysis, we are going to run the **Purge duplicate contigs (WF6)**, which will allow to identify and reassign heterozygous contigs. This step is only necessary if haplotypic duplications are observed, and the output should be carefully checked for overpurging.
 
 ### Launching the workflow
@@ -456,8 +451,6 @@ The two most important outputs of the purging workflow are purged versions of Pr
 <br>
 
 ## Hi-C scaffolding
-
-[{% icon exchange %} Switch to step by step version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#hi-c-scaffolding)
 
 In this final stage, we will run the **Scaffolding HiC YAHS (WF8)**, which exploits the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them. This information allows [**YAHS**](https://github.com/c-zhou/yahs) -- the main tool in this workflow -- to generate scaffolds that are often chromosome-sized.
 
