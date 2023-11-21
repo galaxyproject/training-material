@@ -15,7 +15,7 @@ else
 	changed_slides="$(echo "$videos" | xargs ./bin/filter-resource-metadata video)"
 fi
 
-$(npm bin)/http-server -p 9876 _site &
+./node_modules/.bin/http-server -p 9876 _site &
 
 for slides in $changed_slides; do
 	echo "====== $slides ======"

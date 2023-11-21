@@ -106,6 +106,12 @@ You can access the data for this tutorial in multiple ways:
 >
 {: .hands_on}
 
+4. **Importing data from EBI Single Cell Expression Atlas**
+
+You can also pull the data from publicly available [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home). You can simply access the dataset we are working on by using the tool *EBI SCXA Data Retrieval* with experiment id of [E-MTAB-6945](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads). This [short tutorial]({% link topics/single-cell/tutorials/EBI-retrieval/tutorial.md %}) will show you how to use this tool and modify the output so that it's compatible with this tutorial and its workflow.
+
+
+
 # Important tips for easier analysis
 
 {% snippet faqs/galaxy/tutorial_mode.md %}

@@ -20,6 +20,7 @@
         {{ 'load' | bundle_preloads }}
         <link rel="stylesheet" href="{{ "/assets/css/main.css?v=3" | prepend: site.baseurl }}">
         <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <meta name="theme-color" content="#2c3143"/>
 
         {{ page | generate_dublin_core: site }}
 
@@ -28,12 +29,18 @@
         {% if page.title %}
             {% assign og_title = page.title %}
         {% endif %}
-        {% assign og_desc = topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
-        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
-        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        {% assign og_image = page.og_image | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
+        {% assign og_desc = page.description | default:topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
+        <meta name="description" content="{{ og_desc | strip_html | truncate: 120}}">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}">
+        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 120}}">
+
+        {%- if page.cover %}{% assign coverimage = page.cover %}
+        {%- elsif page.tags contains "cofest" %}{% assign coverimage = "/assets/images/cofest.png" %}
+        {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "/assets/images/GalaxyNews.png" %}
+        {%- elsif page.tags contains "gat" %}{% assign coverimage = "/assets/images/gat.png" %}
+        {%- else %}{% assign coverimage = "/assets/images/GTNLogo1000.png" %}{% endif %}
+        {% assign og_image = page.og_image | default: coverimage | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
         <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}">
 
         <script type="application/ld+json">
@@ -97,7 +104,7 @@ class: center, middle, inverse
 <!-- modified date -->
 <div class="footnote" style="bottom: 8em;">
   {% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}} &nbsp;
-  {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a>
+  {% if page.short_id %}{% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a>{% endif %}
 </div>
 
 
@@ -170,8 +177,8 @@ Useful when presenting."
 {% endif %}
 </div>
 
-<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-{{ locale['license-tutorial'] | default: "This material is licensed under the Creative Commons Attribution 4.0 International License" }}</a>.
+{{ locale['license-framework'] | default: "Tutorial Content is licensed under" }} {% if page.license%} <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.{% else %}<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.{% endif %}<br/>
+{% if page.copyright %}{{ page.copyright }}{% endif %}
 
 {% if page.layout == "base_slides" %}
 .footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/main{{ page.url }})]
