@@ -414,7 +414,7 @@ To create this table, we need to:
 >   >
 >   > If you click on that dataset, you will see all the genes containing 'mt' in their name. We can now clearly see that mitochondrial genes in thid dataset start with `MT-`, i.e., upper case. Keep that in mind, we will use it in a moment!
 > {: .tip}
-
+>
 > 2. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output of **Select** {% icon tool %}
 >    - *"AWK Program"*: `{print $1 ~ /^MT-/}`
@@ -1915,7 +1915,7 @@ With the annotated cell types, we can also visualize the expression of their can
 {: .question}
 
 # Conclusion
-
+{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/videmp/h/clustering-3k-pbmcs-with-scanpy-196), or check out the [full workflow](https://singlecell.usegalaxy.eu/u/videmp/w/clustering-3k-pbmc-with-scanpy) for this tutorial.
 
 In this tutorial, we investigated clustering and annotation of single-cell data from 10x Genomics using Scanpy. This workflow used here was typical for scRNA-seq data analysis:
 
