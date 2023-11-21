@@ -122,18 +122,18 @@ Now we have a general understanding of our data we can import it into Galaxy and
 >
 > 1. Create a new history for this tutorial
 > 2. Import the following files from the ```GSE176031_RAW``` folder
-> ```
-GSM5353214_PA_AUG_PB_1A_S1.dge.txt
-GSM5353215_PA_AUG_PB_1B_S2.dge.txt
-GSM5353216_PA_PB1A_Pool_1_3_S50_L002_dge.txt
-GSM5353217_PA_PB1A_Pool_2_S107_L004_dge.txt
-GSM5353218_PA_PB1B_Pool_1_2_S74_L003_dge.txt
-GSM5353219_PA_PB1B_Pool_2_S24_L001_dge.txt
-GSM5353220_PA_PB1B_Pool_3_S51_L002_dge.txt
-GSM5353221_PA_PB2A_Pool_1_3_S25_L001_dge.txt
-GSM5353222_PA_PB2B_Pool_1_3_S52_L002_dge.txt
-GSM5353223_PA_PB2B_Pool_2_S26_L001_dge.txt
-> ```
+>    ```
+>    GSM5353214_PA_AUG_PB_1A_S1.dge.txt
+>    GSM5353215_PA_AUG_PB_1B_S2.dge.txt
+>    GSM5353216_PA_PB1A_Pool_1_3_S50_L002_dge.txt
+>    GSM5353217_PA_PB1A_Pool_2_S107_L004_dge.txt
+>    GSM5353218_PA_PB1B_Pool_1_2_S74_L003_dge.txt
+>    GSM5353219_PA_PB1B_Pool_2_S24_L001_dge.txt
+>    GSM5353220_PA_PB1B_Pool_3_S51_L002_dge.txt
+>    GSM5353221_PA_PB2A_Pool_1_3_S25_L001_dge.txt
+>    GSM5353222_PA_PB2B_Pool_1_3_S52_L002_dge.txt
+>    GSM5353223_PA_PB2B_Pool_2_S26_L001_dge.txt
+>    ```
 >
 {: .hands_on}
 
