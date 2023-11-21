@@ -232,7 +232,7 @@ Once we have imported the datasets and the workflows, we can start with the geno
 
 # Performing the assembly
 
-Workflows listed in [Fig. 1](#vgp-galaxy-pipeline-a-collection-of-versatile-workflows) support a variety of "analysis trajectories". The majority of species that were sequenced by the {VGP} usually contain {HiFi} reads for the individual being sequenced supplemented with {Hi-C} data. As a result most assemblies performed by us follow the trajectory **B**. This is why this tutorial was designed to follow this trajectory as well.  
+Workflows listed in [Fig. 1](#figure-1) support a variety of "analysis trajectories". The majority of species that were sequenced by the {VGP} usually contain {HiFi} reads for the individual being sequenced supplemented with {Hi-C} data. As a result most assemblies performed by us follow the trajectory **B**. This is why this tutorial was designed to follow this trajectory as well.  
 
 ## Genome profile analysis (WF1)
 
