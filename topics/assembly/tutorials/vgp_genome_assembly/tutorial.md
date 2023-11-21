@@ -26,6 +26,7 @@ contributors:
 - pickettbd
 - gf777
 - msozzoni
+- nekrut
 abbreviations:
   BUSCO: Benchmarking Universal Single-Copy Orthologs
   NGS: next generation sequencing
@@ -244,8 +245,6 @@ Adapter trimming usually means trimming the adapter sequence off the ends of rea
 
 # Genome profile analysis
 
-[{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#genome-profile-analysis)
-
 Before starting a *de novo* genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size, so that you know what to expect from your assembly. Traditionally, DNA flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One of the widely used genome profiling methods is based on the analysis of *k*-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.
 
 > <details-title><i>K</i>-mer size, sequencing coverage and genome size</details-title>
@@ -352,8 +351,6 @@ This distribution is the result of the Poisson process underlying the generation
 {: .comment}
 
 # Assembly with **hifiasm**
-
-[{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#assembly-with-hifiasm)
 
 Once we have finished the genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source *de novo* assembler specifically developed for PacBio HiFi reads. One of the key advantages of hifiasm is that it allows us to resolve near-identical, but not exactly identical, sequences, such as repeats and segmental duplications ({% cite Cheng2021 %}).
 
@@ -837,8 +834,6 @@ Now let's parse the `transition between haploid & diploid` and `upper bound for 
 
 ## Purging with **purge_dups**
 
-[{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#purging-with-purge_dups)
-
 An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. This can lead to issues in downstream analysis, such as scaffolding, gene annotation and read mapping in general ({% cite Small2007 %}, {% cite Guan2019 %}, {% cite Roach2018 %}). In order to solve this problem, we are going to use purge_dups; this tool will allow us to identify and reassign allelic contigs.
 
 This stage consists of three substages: read-depth analysis, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 8).
@@ -1106,8 +1101,6 @@ At this point, we have a set of contigs, which may or may not be fully phased, d
 
 # Hybrid scaffolding with Bionano optical maps
 
-[{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#hybrid-scaffolding-with-bionano-optical-maps)
-
 In this step, the linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins, and estimate the length of gaps between adjacent contigs. One of the advantages of optical maps is that they can easily span genomic regions that are difficult to resolve using DNA sequencing technologies ({% cite Savara2021 %}, {% cite Yuan2020 %}).
 
 > <details-title>What are Bionano optical maps?</details-title>
@@ -1182,8 +1175,6 @@ Let's evaluate our scaffolds to see the impact of scaffolding on some key assemb
 {: .question}
 
 # Hi-C scaffolding
-
-[{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#hi-c-scaffolding)
 
 Hi-C is a sequencing-based molecular assay designed to identify regions of frequent physical interaction in the genome by measuring the contact frequency between all pairs of loci, allowing us to provide an insight into the three-dimensional organization of a genome  ({% cite Dixon2012 %}, {% cite LiebermanAiden2009 %}). In this final stage, we will exploit the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them with the objective of linking the Bionano scaffolds to a chromosome scale.
 
