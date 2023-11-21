@@ -35,8 +35,8 @@ tags:
 ---
 
 
-> "Nothing in biology makes sense except in the light of evolution." -- Theodosius Dobzhansky, 1973
-{: .quote}
+> "Nothing in biology makes sense except in the light of evolution."
+{: .quote author="Theodosius Dobzhansky" year="1973"}
 
 Phylogenetic trees are a tool for organizing biological diversity. Just as maps provide a spatial framework to the geographer, phylogenies provide an evolutionary context to the biologist: they capture the relationship among "things" (species, individuals, genes), represented as tips in the tree, based on common ancestry.
 

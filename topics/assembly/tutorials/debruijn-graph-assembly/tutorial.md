@@ -225,7 +225,7 @@ The next thing to be aware of is that there can be multiple valid interpretation
 > ![Simple example 4](https://camo.githubusercontent.com/58d0aa7eff4cfd3d36c9210e9f6a2f0265396715/687474703a2f2f72727769636b2e6769746875622e696f2f42616e646167652f696d616765732f77696b692f73696d706c655f6578616d706c655f342e706e67)
 >
 > Additional knowledge, such as information on the approximate size of the bacterial chromosome, can help the researcher to rule out the first alternative. In this way, Bandage has assisted in turning a fragmented assembly of three contigs into a completed genome of one sequence.
-{: .quote}
+{: .quote cite="https://github.com/rrwick/Bandage/wiki/Simple-example"}
 
 # Assemble with SPAdes
 

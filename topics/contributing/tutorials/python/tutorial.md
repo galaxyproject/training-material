@@ -75,8 +75,8 @@ The student's mental model of the code underlies everything they do as a program
 > affects course performance and also increases self efficacy, the other key
 > element in course performance. Given this double impact, helping students
 > develop good mental models should remain a goal in introductory programming
-> courses. {% cite Ramalingam_2004 %}
-{: .quote}
+> courses.
+{: .quote cite="{% cite_url Ramalingam_2004 %}"}
 
 This is a foundational skill to be able to *think* through a program, step by step, and understand how the code executes and which variables exist when, and what their values should be. This mental modelling allows students to predict the behaviour of a system, and when it diverges from their prediction, recognise any potential bugs.
 
@@ -185,8 +185,8 @@ Which option is prefgerrable depends strongly on how advanced your students are.
 
 Debugging is the act of identify and resolving "bugs" or defects within code, a term popularly attributed to my personal hero Admiral Grace Hopper:
 
-> While she was working on a Mark II computer at Harvard University, her associates discovered a moth stuck in a relay and thereby impeding operation, whereupon she remarked that they were "debugging" the system ({% cite enwiki:1069955193 %})
-{: .quote}
+> While she was working on a Mark II computer at Harvard University, her associates discovered a moth stuck in a relay and thereby impeding operation, whereupon she remarked that they were "debugging" the system
+{: .quote cite="{% cite_url enwiki:1069955193 %}"}
 
 Debugging also functions as a reinforcement method we can use once students have an ok mental model of code execution, a necessary pre-requisite for this activity, which can be further developed through debugging ({% cite Ramalingam_2004 %}) alongside their self-efficacy ({% cite Michaeli_2019 %}). Debugging activities can take many forms but most commonly the task is to correct incorrect code, an activity that works best if they are primed with a number of methods of debugging ({% cite Murphy_2008 %}) such as the "Wolf Fence" ({% cite Gauss_1982 %}), commenting out code, or breakpoints.
 
