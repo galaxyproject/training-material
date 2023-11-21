@@ -21,7 +21,7 @@ objectives:
 - Perform a graph-based clustering for cells
 - Identify marker genes for the clusters
 - Construct and run a cell type annotation for the clusters
-time_estimation: 5H
+time_estimation: 8H
 key_points:
 - scRNA-seq data analysis is complex and exploratory process, still in development
 - Different tools and parameters should be tested for each step of the process
