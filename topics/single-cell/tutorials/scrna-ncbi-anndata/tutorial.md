@@ -40,11 +40,12 @@ The goal of this tutorial is to take raw NCBI data from some published research,
 
 The first step is the obtain the data, for this tutorial we will use data from the paper {% cite Song2022 %}. The data for this research is stored in the Gene Expression Omnibus (GEO) which is a public repository storing public genomics data.
 
-You can access the data for this tutorial in multiple ways:
+{% include _includes/cyoa-choices.html option1="Manual" option2="Zenodo" default="Zenodo"
+       text="If you have experience finding and downloading data from GEO then you can use the Zenodo link to load the data directly into Galaxy, if you don't have experience with GEO then you can manually download, prepare, and load the data into Galaxy." %}
 
-1 - Downloading and extracting the data manually on to your local machine:
 
-> <hands-on-title>Option 1: Manually downloading data</hands-on-title>
+<div class="Manual" markdown="1">
+> <hands-on-title>Download and extract the data from GEO</hands-on-title>
 >
 > 1. Using a web browser navigate to the GEO repsitory for the paper
 > 
@@ -57,10 +58,10 @@ You can access the data for this tutorial in multiple ways:
 > 4. Using the same archive tool extract all of the .GZ files
 >
 {: .hands_on}
+</div>
 
-2 - Uploading the extracted and filtered data directly from Zenodo:
-
-> <hands-on-title>Option 2: Uploading from Zenodo</hands-on-title>
+<div class="Zenodo" markdown="1">
+> <hands-on-title>Downloading the data from Zenodo</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the following files from [Zenodo]({{ page.zenodo_link }})
@@ -85,8 +86,9 @@ You can access the data for this tutorial in multiple ways:
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
+</div>
 
-We now have the raw gene expression data that we will be processing downloaded, however we will need to manually add some metadata which requires finding out some more information about our files. Looking at the link for the paper ([https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/)) we can see a link for accessing the full text, clicking on that will lead us to a page ([https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/)) which contains more supplementary materials. Under this section we should see various .xlsx files (Excel spreadsheets), go ahead and download Supplementary Dataset 1 (```41467_2021_27322_MOESM2_ESM.xlsx```), this one spreadsheet contains all the information we need to further understand our data.
+We now have the raw gene expression data that we will be processing, however we will need to manually add some metadata which requires finding out some more information about our files. Looking at the link for the paper ([https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/)) we can see a link for accessing the full text, clicking on that will lead us to a page ([https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/)) which contains more supplementary materials. Under this section we should see various .xlsx files (Excel spreadsheets), go ahead and download Supplementary Dataset 1 (```41467_2021_27322_MOESM2_ESM.xlsx```), this one spreadsheet contains all the information we need to further understand our data.
 
 # Understanding the Data
 
@@ -114,9 +116,10 @@ Finally we need to find the files relating to each patient, inspecting ```GSE176
 
 You may also notice that we have multiple sample files with the same name suffixed with **_Pool_X** these are replications where multiple samples are taken of the same tumor area in order to get a more comprehensive view of the gene data of the tumor, we will need to combine these replication files during processing.
 
+<div class="Manual" markdown="1">
 # Importing the Data
 
-Now we have a general understanding of our data we can import it into Galaxy and start processing it! (**If you imported the data from Zenodo earlier you can skip the next step**)
+Now we have a general understanding of our data we can import it into Galaxy and start processing it!
 
 > <hands-on-title>Upload data to Galaxy</hands-on-title>
 >
@@ -136,14 +139,17 @@ Now we have a general understanding of our data we can import it into Galaxy and
 >    ```
 >
 {: .hands_on}
-
-It is also a good idea to add tags to each sample in order to keep track of what data is being processed, below is some of the imported data with added tags for the patient and sample id:
-
-![Imported data with tags](../../images/scrna-ncbi-anndata/metadata.png "Imported data with tags")
+</div>
 
 # Converting to AnnData and Combining Samples
 
 The first step is to convert all of the raw files into AnnData objects, this can be done one at a time or all at once by selecting ```multiple datasets``` when chosing the input and highlighting all the raw data files.
+
+> <tip-title>Adding Metadata</tip-title>
+> Before starting to process the data it is generally a good idea to add tags to each sample in order to keep track of what data is being processed, below is some of the imported data with added tags for the patient and sample id:
+>
+> ![Imported data with tags](../../images/scrna-ncbi-anndata/metadata.png "Imported data with tags")
+{: .tip}
 
 > <hands-on-title>Convert raw data to AnnData</hands-on-title>
 >
