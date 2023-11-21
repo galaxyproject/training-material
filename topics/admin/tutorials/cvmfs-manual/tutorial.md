@@ -98,7 +98,7 @@ The configuration is not complex for CVMFS:
 >    This tells CVMFS to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance's geo-location to choose the best CVMFS repo server to connect to. You can use the `cvmfs_quota_limit` role variable to control this setting.
 >
 > <tip-title>What is a good size for CVMFS_QUOTA_LIMIT?</tip-title>
-> In production UseGalaxy.org.au uses 100GB, different sites have different needs and you can make your cache smaller depending on your usage. E.g. if your users only use one dataset from the reference data (e.g. just hg38) then perhaps you don't need such a large cache.
+> > In production UseGalaxy.org.au uses 100GB, different sites have different needs and you can make your cache smaller depending on your usage. E.g. if your users only use one dataset from the reference data (e.g. just hg38) then perhaps you don't need such a large cache.
 > {: .tip}
 >
 > 2. Create a `/etc/cvmfs/domain.d/galaxyproject.org.conf` file with the following contents:
