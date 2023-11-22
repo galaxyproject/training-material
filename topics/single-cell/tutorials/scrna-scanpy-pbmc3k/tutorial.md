@@ -301,7 +301,7 @@ Genes that appear in less than a few cells can be considered noise and thus remo
 
 > <hands-on-title>Remove genes found in less than 3 cells</hands-on-title>
 >
-> 1. {% tool [Filter with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Filter with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Input 3k PBMC`
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - *"Filter"*: `Minimum number of cells expressed`
@@ -485,7 +485,7 @@ We can now compute QC metrics on the `AnnData` object.
 
 > <hands-on-title>Compute QC metrics</hands-on-title>
 >
-> 1. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation`
 >    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
 >      - *"Name of kind of values in X"*: `counts`
@@ -559,7 +559,7 @@ We would like to visualize 3 of the more informative QC metrics:
 
 > <hands-on-title>Visualize QC metrics</hands-on-title>
 >
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation and qc metrics`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >      - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
@@ -588,7 +588,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >    >
 >    {: .question}
 >
-> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation and qc metrics`
 >    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
 >      - *"Plotting tool that computed coordinates"*: `Using coordinates`
@@ -612,7 +612,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >    >
 >    {: .question}
 >
-> 5. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 5. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation and qc metrics`
 >    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
 >        - *"Plotting tool that computed coordinates"*: `Using coordinates`
@@ -652,7 +652,7 @@ Based on the previous plot, we would like to remove cells that have:
 
 > <hands-on-title>Remove low-quality cells</hands-on-title>
 >
-> 1. {% tool [Filter with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Filter with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation and qc metrics`
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - *"Filter"*: `Minimum number of genes expressed`
@@ -677,7 +677,7 @@ Based on the previous plot, we would like to remove cells that have:
 >    >
 >    {: .question}
 >
-> 3. {% tool [Filter with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/0.9.6+galaxy1) %} with the following parameters:
+> 3. {% tool [Filter with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Filter** {% icon tool %}
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - *"Filter"*: `Maximum number of genes expressed`
@@ -747,7 +747,7 @@ Here we would to normalize our count table such that each cell have 10,000 reads
 
 > <hands-on-title>Normalize for cell size</hands-on-title>
 >
-> 1. {% tool [Normalize with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Normalize with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC after QC filtering`
 >    - *"Method used for normalization"*: `Normalize counts per cell, using 'pp.normalize_total'`
 >      - *"Target sum"*: `10000.0`
@@ -763,7 +763,7 @@ With log-transformation, the differences in the log-values represent log-fold ch
 
 > <hands-on-title>Log-transform the counts</hands-on-title>
 >
-> 1. {% tool [Inspect and Manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Inspect and Manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Normalize** {% icon tool %}
 >    - *"Method used for inspecting"*: `Logarithmize the data matrix, using 'pp.log1p'`
 {: .hands_on}
@@ -793,7 +793,7 @@ Once the per-gene variation has been quantified, we need to select the subset of
 
 > <hands-on-title>Identify the highly variable genes</hands-on-title>
 >
-> 1. {% tool [Filter with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Filter with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC after QC filtering and normalization`
 >    - *"Method used for filtering"*: `Annotate (and filter) highly variable genes, using 'pp.highly_variable_genes'`
 >      - *"Flavor for computing normalized dispersion"*: `seurat`
@@ -802,7 +802,7 @@ Once the per-gene variation has been quantified, we need to select the subset of
 >        - *"Minimal normalized dispersion cutoff"*: `0.5`
 >      - *"Inplace subset to highly-variable genes?"*: `No`
 >
-> 2. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 2. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of the last **Filter** {% icon tool %}
 >    - *"Method used for plotting"*: `Preprocessing: Plot dispersions versus means for genes, using 'pl.highly_variable_genes'`
 >
@@ -904,12 +904,12 @@ Prior to any downstream analysis like dimensional reduction, we need to apply a 
 
 > <hands-on-title>Scale the data</hands-on-title>
 >
-> 1. {% tool [Remove confounders with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Remove confounders with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG`
 >    - *"Method used for plotting"*: `Regress out unwanted sources of variation, using 'pp.regress_out'`
 >      - *"Keys for observation annotation on which to regress on"*: `total_counts, pct_counts_mito`
 >
-> 2. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/0.9.6+galaxy1) %}
+> 2. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1) %}
 >     with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Remove confounders** {% icon tool %}
 >    - *"Method used for inspecting"*: `Scale data to unit variance and zero mean, using 'pp.scale'`
@@ -945,7 +945,7 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 
 > <hands-on-title>Perform the PCA</hands-on-title>
 >
-> 1. {% tool [Cluster, infer trajectories and embed with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/0.9.6+galaxy1) %}
+> 1. {% tool [Cluster, infer trajectories and embed with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.9.6+galaxy1) %}
 >    with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling`
 >    - *"Method used for plotting"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'tl.pca'`
@@ -1078,7 +1078,7 @@ Scanpy provides several useful ways of visualizing both cells and genes that def
 
 > <hands-on-title>Plot the top 2 PCs the PCA</hands-on-title>
 >
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling and PCA`
 >    - *"Method used for plotting"*: `PCA: Plot PCA results, using 'pl.pca_overview'`
 >      - In *"Plot attributes"*
@@ -1100,7 +1100,7 @@ On these plots we see the different cells projected onto the first 3 PCs. We can
 
 > <hands-on-title>Visualize the top genes associated with PCs</hands-on-title>
 >
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling and PCA`
 >    - *"Method used for plotting"*: `PCA: Rank genes according to contributions to PCs, using 'pl.pca_loadings'`
 >      - *"List of comma-separated components"*: `1,2,3`
@@ -1118,7 +1118,7 @@ On these plots we see the different cells projected onto the first 3 PCs. We can
 >    > {: .solution}
 >    {: .question}
 >
-> 2. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 2. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling and PCA`
 >    - *"Method used for plotting"*: `PCA: Plot PCA results, using 'pl.pca_overview'`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `CST3, NKG7, PPBP`
@@ -1160,7 +1160,7 @@ A simple heuristic for choosing the number of PCs generates an "Elbow plot": a r
 
 > <hands-on-title>Generate an Elbow plot</hands-on-title>
 >
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling and PCA`
 >    - *"Method used for plotting"*: `PCA: Scatter plot in PCA coordinates, using 'pl.pca_variance_ratio'`
 >      - *"Use the log of the values?"*: `Yes`
@@ -1211,7 +1211,7 @@ Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the
 
 > <hands-on-title>Compute the neighborhood graph</hands-on-title>
 >
-> 1. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling and PCA`
 >    - *"Method used for inspecting"*: `Compute a neighborhood graph of observations, using 'pp.neighbors'`
 >      - *"The size of local neighborhood (in terms of number of neighboring data points) used for manifold approximation"*: `10`
@@ -1254,7 +1254,7 @@ Here, we will reduce the neighborhood to 2 UMAP components and then we will chec
 
 > <hands-on-title>Embed and plot the neighborhood graph</hands-on-title>
 >
-> 1. {% tool [Cluster, infer trajectories and embed with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Cluster, infer trajectories and embed with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >    - *"Method used for plotting"*: `Embed the neighborhood graph using UMAP, using 'tl.umap'`
 >
@@ -1280,7 +1280,7 @@ Here, we will reduce the neighborhood to 2 UMAP components and then we will chec
 >    >
 >    {: .question}
 >
-> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP`
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `CST3, NKG7, PPBP`
@@ -1312,7 +1312,7 @@ Currently, the Louvain graph-clustering method (community detection based on opt
 
 > <hands-on-title>Cluster the neighborhood graph</hands-on-title>
 >
-> 1. {% tool [Cluster, infer trajectories and embed with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Cluster, infer trajectories and embed with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP`
 >    - *"Method used for plotting"*: `Cluster cells into subgroups, using 'tl.louvain'`
 >       - *"Flavor for the clustering"*: `vtraag (much more powerful)`
@@ -1344,7 +1344,7 @@ The cells in the same clusters should be co-localized in the UMAP coordinate plo
 
 > <hands-on-title>Plot the neighborhood graph and the clusters</hands-on-title>
 >
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `louvain, CST3, NKG7, PPBP`
@@ -1384,7 +1384,7 @@ The simplest and fastest method is the Welch *t*-test. It has good statistical p
 
 > <hands-on-title>Rank the highly differential genes using t-test</hands-on-title>
 >
-> 1. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
 >    - *"Method used for inspecting"*: `Rank genes for characterizing groups, using 'tl.rank_genes_groups'`
 >      - *"The key of the observations grouping to consider"*: `louvain`
@@ -1422,7 +1422,7 @@ The simplest and fastest method is the Welch *t*-test. It has good statistical p
 >    > {: .solution}
 >    {: .question}
 >
-> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test`
 >    - *"Method used for plotting"*: `Marker genes: Plot ranking of genes using dotplot plot, using 'pl.rank_genes_groups'`
 >      - *"Number of genes to show"*: `20`
@@ -1469,7 +1469,7 @@ Another widely used method for pairwise comparisons between groups of observatio
 
 > <hands-on-title>Rank the highly differential genes using Wilcoxon rank sum</hands-on-title>
 >
-> 1. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
 >
 >      <small>**Note:** *Please pay attention to the dataset name.*</small>
@@ -1483,7 +1483,7 @@ Another widely used method for pairwise comparisons between groups of observatio
 >
 > 2. Rename the generated output `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
 >
-> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
 >    - *"Method used for plotting"*: `Marker genes: Plot ranking of genes using dotplot plot, using 'pl.rank_genes_groups'`
 >      - *"Number of genes to show"*: `20`
@@ -1531,7 +1531,7 @@ CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 
 > <hands-on-title>Compare differential expression for CST3, NKG7 and PPBP in the different clusters</hands-on-title>
 >
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >      - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields in '.obs'`
@@ -1565,7 +1565,7 @@ The assumption should be even more true for the top marker genes. The first way 
 
 > <hands-on-title>Plot expression probability distributions across clusters of top marker genes</hands-on-title>
 >
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
 >    - *"Method used for plotting"*: `Generic: Stacked violin plot, using 'pl.stacked_violin'`
 >      - *"Variables to plot (columns of the heatmaps)"*: `Subset of variables in 'adata.var_names'`
@@ -1600,7 +1600,7 @@ Another approach consists of displaying the mean expression of the marker genes 
 
 > <hands-on-title>Plot top marker gene expression on an UMAP plot</hands-on-title>
 >
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `louvain, LDHB, LYZ, CD74, CCL5, LST1, NKG7, HLA-DPA1, PF4`
@@ -1628,7 +1628,7 @@ We would like now to have a look at the expression of the top 20 marker genes in
 
 > <hands-on-title>Plot heatmap of the gene expression in cells</hands-on-title>
 >
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
 >    - *"Method used for plotting"*: `Marker genes: Plot ranking of genes as heatmap plot, using 'pl.rank_genes_groups_heatmap'`
 >      - *"Number of genes to show"*: `20`
@@ -1661,7 +1661,7 @@ In some cases, it may also be interesting to find marker genes distinguishing on
 
 > <hands-on-title>Identify the marker genes distinguishing cluster 0 from cluster 1 using Wilcoxon rank sum</hands-on-title>
 >
-> 1. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
 >    - *"Method used for inspecting"*: `Rank genes for characterizing groups, using 'tl.rank_genes_groups'`
 >      - *"The key of the observations grouping to consider"*: `louvain`
@@ -1675,7 +1675,7 @@ In some cases, it may also be interesting to find marker genes distinguishing on
 >
 > 2. Rename the generated output `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes for 0 vs 1 with Wilcoxon test`
 >
-> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes for 0 vs 1 with Wilcoxon test`
 >    - *"Method used for plotting"*: `Marker genes: Plot ranking of genes using dotplot plot, using 'pl.rank_genes_groups'`
 >      - *"Number of genes to show"*: `20`
@@ -1699,7 +1699,7 @@ In some cases, it may also be interesting to find marker genes distinguishing on
 The marker genes distinguishing cluster 0 from cluster 1 are extracted based on their differences in expression, which can be easily visualized.
 
 > <hands-on-title>Plot expression difference for the marker genes distinguishing cluster 0 from cluster 1</hands-on-title>
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes for 0 vs 1 with Wilcoxon test`
 >    - *"Method used for plotting"*: `Marker genes: Plot ranking of genes as violin plot, using 'pl.rank_genes_groups_violin'`
 >      - *"Which genes to plot?"*: `A number of genes`
@@ -1819,7 +1819,7 @@ Cluster | Cell type
 >    > {: .solution}
 >    {: .question}
 >
-> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation`
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `louvain`
@@ -1846,7 +1846,7 @@ With the annotated cell types, we can also visualize the expression of their can
 
 > <hands-on-title>Plot expression of canonical marker genes for the annotated cell types</hands-on-title>
 >
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/0.9.6+galaxy1) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation`
 >    - *"Method used for plotting"*: `Generic: Makes a dot plot of the expression values, using 'pl.dotplot'`
 >        - *"Variables to plot (columns of the heatmaps)"*: `Subset of variables in 'adata.var_names'`
