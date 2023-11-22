@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cc5d61ba28e311d4a51aaf735157df8bad7c4a37",
+		release: "galaxy-training-network@d268a6541acf154f83bcb9b216365d85d6a67a6b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700612179' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1700612179' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700645046' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1700645046' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Reference Data with CVMFS without Ansible">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-12-14 16:23:16 +0000">
+<meta name="DC.date" content="2023-11-21 17:39:08 +0000">
 <meta name="DC.creator" content="Simon Gladman">
 <meta name="DC.creator" content="Helena Rasche">
 
@@ -110,7 +110,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2022-12-14 16:23:16 +0000",
+  "dateModified": "2023-11-21 17:39:08 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Reference Data with CVMFS without Ansible",
   "interactivityType": "mixed",
@@ -169,7 +169,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Reference Data with CVMFS without Ansible",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs-manual/tutorial.html",
-  "version": 9,
+  "version": 12,
   "timeRequired": "PT1H",
   "teaches": "Have an understanding of what CVMFS is and how it works\n - Install and configure the CVMFS client on a linux machine and mount the Galaxy reference data repository\n - Configure your Galaxy to use these reference genomes and indices",
   "keywords": [
@@ -249,7 +249,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700612179'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700645046'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -505,7 +505,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 14, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 21, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -518,7 +518,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00004">https://gxy.io/GTN:T00004</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 12 </div>
 
     </blockquote>
     </section>
@@ -634,6 +634,14 @@ CVMFS_USE_GEOAPI=yes
 
       <p>This tells CVMFS to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance’s geo-location to choose the best CVMFS repo server to connect to. You can use the <code class="language-plaintext highlighter-rouge">cvmfs_quota_limit</code> role variable to control this setting.</p>
     </li>
+  </ol>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-what-is-a-good-size-for-cvmfs-quota-limit"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-a-good-size-for-cvmfs-quota-limit" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: What is a good size for CVMFS_QUOTA_LIMIT?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>In production UseGalaxy.org.au uses 100GB, different sites have different needs and you can make your cache smaller depending on your usage. E.g. if your users only use one dataset from the reference data (e.g. just hg38) then perhaps you don’t need such a large cache.</p>
+  </blockquote>
+
+  <ol>
     <li>
       <p>Create a <code class="language-plaintext highlighter-rouge">/etc/cvmfs/domain.d/galaxyproject.org.conf</code> file with the following contents:</p>
 
@@ -891,7 +899,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/cc5d61ba28e311d4a51aaf735157df8bad7c4a37">cc5d61b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/d268a6541acf154f83bcb9b216365d85d6a67a6b">d268a65</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -919,7 +927,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.9d052497.js?v=1700612179'></script>
+        <script src='/training-material/assets/js/bundle.9d052497.js?v=1700645046'></script>
         
     </body>
 </html>
