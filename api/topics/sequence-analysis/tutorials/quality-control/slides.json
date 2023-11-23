@@ -150,6 +150,7 @@
 
       ],
       "name": "GTN - Sequence Analyses - Quality Control (imported from uploaded file)",
+      "title": "GTN - Sequence Analyses - Quality Control (imported from uploaded file)",
       "test_results": {
         "eu": {
           "summary": {
@@ -1350,7 +1351,8 @@
           "version": "0.1"
         }
       },
-      "modified": "2023-11-23 09:48:17 +0000"
+      "modified": "2023-11-23 09:49:19 +0000",
+      "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"FastQC\"];\n  3[\"Cutadapt\"];\n  4[\"FastQC\"];\n  5[\"Cutadapt\"];\n  6[\"MultiQC\"];\n  0 -->|output| 2;\n  1 -->|output| 3;\n  1 -->|output| 4;\n  1 -->|output| 5;\n  0 -->|output| 5;\n  4 -->|text_file| 6;\n  2 -->|text_file| 6;\n"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/quality-control/tutorial.json",

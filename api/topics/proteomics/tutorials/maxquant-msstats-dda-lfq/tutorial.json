@@ -118,8 +118,10 @@
 
       ],
       "name": "Proteomics: MaxQuant and MSstats LFQ workflow",
+      "title": "Proteomics: MaxQuant and MSstats LFQ workflow",
       "test_results": null,
-      "modified": "2023-11-23 09:48:17 +0000"
+      "modified": "2023-11-23 09:49:18 +0000",
+      "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset collection\"];\n  4[\"MaxQuant\"];\n  5[\"Select\"];\n  6[\"Select\"];\n  7[\"Replace Text\"];\n  8[\"Replace Text\"];\n  9[\"MSstats\"];\n  10[\"Datamash\"];\n  11[\"Summary Statistics\"];\n  12[\"Replace Text\"];\n  13[\"Replace Text\"];\n  14[\"Filter\"];\n  15[\"Filter\"];\n  16[\"Filter\"];\n  17[\"Filter\"];\n  18[\"Filter\"];\n  19[\"Cut\"];\n  20[\"Cut\"];\n  21[\"Join\"];\n  22[\"Join\"];\n  23[\"heatmap2\"];\n  24[\"UniProt\"];\n  25[\"heatmap2\"];\n  26[\"UniProt\"];\n  27[\"FASTA-to-Tabular\"];\n  28[\"FASTA-to-Tabular\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  4 -->|proteinGroups| 5;\n  4 -->|evidence| 6;\n  5 -->|out_file1| 7;\n  6 -->|out_file1| 8;\n  1 -->|output| 9;\n  0 -->|output| 9;\n  8 -->|outfile| 9;\n  7 -->|outfile| 9;\n  9 -->|runlevel_data| 10;\n  9 -->|runlevel_data| 11;\n  9 -->|comparison_result| 12;\n  9 -->|quant_sample_matrix| 13;\n  12 -->|outfile| 14;\n  14 -->|out_file1| 15;\n  14 -->|out_file1| 16;\n  15 -->|out_file1| 17;\n  16 -->|out_file1| 18;\n  17 -->|out_file1| 19;\n  18 -->|out_file1| 20;\n  13 -->|outfile| 21;\n  19 -->|out_file1| 21;\n  13 -->|outfile| 22;\n  20 -->|out_file1| 22;\n  21 -->|output| 23;\n  21 -->|output| 24;\n  22 -->|output| 25;\n  22 -->|output| 26;\n  24 -->|outfile_retrieve_fasta| 27;\n  26 -->|outfile_retrieve_fasta| 28;\n"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.json",

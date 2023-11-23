@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@06df5d7b0c2e679458ce2b652ed0191716b35aa1",
+		release: "galaxy-training-network@ae4cd585ada65aa31f012205fc3f8faae66c253c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700732955' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1700732955' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700732955'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -225,53 +225,107 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <p>These workflows are associated with <a href="../tutorial.html">Classification in Machine Learning</a></p>
     <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
-    <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Workflow</th>
-            <th>Updated</th>
-            <th>Import</th>
-            <th>Has Tests</th>
-            <th>Tested</th>
-            <th>License</th>
-            <th>Creators</th>
-        </tr>
-    </thead>
-    <tbody>
+
+    <div class="row">
     
-        <tr>
-            <td><a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/classification_machinelearning/workflows/ml_classification.ga">ml_classification.ga</a></td>
-            <td>Apr 30, 2020</td>
-            <td>
-                <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification">Launch in Tutorial Mode</span>
-		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">What is tutorial mode?</abbr>
-                <br/>
-                <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
-		<br/>
-                <a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org</a>
-		<br/>
-                <a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org.au</a>
-		<br/>
-                <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification"
-		   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-            </td>
-            <td>❌</td>
-            <td>
-		    ❌
-	    </td>
-            <td>
-                
-                None Specified, defaults to
-                <a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
-                
-            </td>
-            <td>
-                
-            </td>
-        </tr>
-    
-    </tbody>
-    </table>
+	<div class="card col-md-6">
+		<div class="card-body">
+			<h5 class="card-title">ml_classification</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated Apr 30, 2020</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification">Launch in Tutorial Mode</span><br/>
+
+			License: 
+				
+				None Specified, defaults to
+				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+				
+				<br/>
+			Tests: ❌
+			Results: Not yet automated
+			</p>
+
+			<a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/classification_machinelearning/workflows/ml_classification.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification"
+			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+
+	</div>
+	<pre class="mermaid">flowchart TD
+  0["Input dataset"];
+  1["Input dataset"];
+  10["Generalized linear models"];
+  11["Nearest Neighbors Classification"];
+  12["Support vector machines (SVMs)"];
+  13["Ensemble methods"];
+  14["Hyperparameter Search"];
+  15["Plot confusion matrix, precision, recall and ROC and AUC curves"];
+  16["Plot confusion matrix, precision, recall and ROC and AUC curves"];
+  17["Plot confusion matrix, precision, recall and ROC and AUC curves"];
+  18["Plot confusion matrix, precision, recall and ROC and AUC curves"];
+  19["Ensemble methods"];
+  2["Input dataset"];
+  20["Plot confusion matrix, precision, recall and ROC and AUC curves"];
+  3["Pipeline Builder"];
+  4["Generalized linear models"];
+  5["Nearest Neighbors Classification"];
+  6["Support vector machines (SVMs)"];
+  7["Ensemble methods"];
+  8["Remove beginning"];
+  9["Estimator attributes"];
+  2 -->|output| 10;
+  4 -->|outfile_fit| 10;
+  2 -->|output| 11;
+  5 -->|outfile_fit| 11;
+  2 -->|output| 12;
+  6 -->|outfile_fit| 12;
+  2 -->|output| 13;
+  7 -->|outfile_fit| 13;
+  0 -->|output| 14;
+  0 -->|output| 14;
+  3 -->|outfile| 14;
+  9 -->|outfile| 14;
+  8 -->|out_file1| 15;
+  10 -->|outfile_predict| 15;
+  4 -->|outfile_fit| 15;
+  1 -->|output| 16;
+  11 -->|outfile_predict| 16;
+  5 -->|outfile_fit| 16;
+  1 -->|output| 17;
+  12 -->|outfile_predict| 17;
+  6 -->|outfile_fit| 17;
+  1 -->|output| 18;
+  13 -->|outfile_predict| 18;
+  7 -->|outfile_fit| 18;
+  2 -->|output| 19;
+  14 -->|outfile_object| 19;
+  1 -->|output| 20;
+  19 -->|outfile_predict| 20;
+  14 -->|outfile_object| 20;
+  0 -->|output| 4;
+  0 -->|output| 4;
+  0 -->|output| 5;
+  0 -->|output| 5;
+  0 -->|output| 6;
+  0 -->|output| 6;
+  0 -->|output| 7;
+  0 -->|output| 7;
+  1 -->|output| 8;
+  3 -->|outfile| 9;
+
+	</pre>
+</div>
+
+
+</div>
 
    <h1 style="margin-top:2em">Importing into Galaxy</h1>
    Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
@@ -294,7 +348,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/06df5d7b0c2e679458ce2b652ed0191716b35aa1">06df5d7</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/ae4cd585ada65aa31f012205fc3f8faae66c253c">ae4cd58</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -318,7 +372,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1700732955'></script>
         
     </body>
 </html>

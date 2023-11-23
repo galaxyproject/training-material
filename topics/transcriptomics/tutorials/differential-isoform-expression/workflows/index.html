@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@06df5d7b0c2e679458ce2b652ed0191716b35aa1",
+		release: "galaxy-training-network@ae4cd585ada65aa31f012205fc3f8faae66c253c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700732955' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1700732955' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700732955'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -225,54 +225,196 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <p>These workflows are associated with <a href="../tutorial.html">Genome-wide alternative splicing analysis</a></p>
     <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
-    <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Workflow</th>
-            <th>Updated</th>
-            <th>Import</th>
-            <th>Has Tests</th>
-            <th>Tested</th>
-            <th>License</th>
-            <th>Creators</th>
-        </tr>
-    </thead>
-    <tbody>
+
+    <div class="row">
     
-        <tr>
-            <td><a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/workflows/main_workflow.ga">main_workflow.ga</a></td>
-            <td>Jun 11, 2023</td>
-            <td>
-                <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main_workflow">Launch in Tutorial Mode</span>
-		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">What is tutorial mode?</abbr>
-                <br/>
-                <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main_workflow" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
-		<br/>
-                <a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main_workflow" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org</a>
-		<br/>
-                <a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main_workflow" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org.au</a>
-		<br/>
-                <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main_workflow"
-		   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-            </td>
-            <td>✅</td>
-            <td>
-		    ❌
-	    </td>
-            <td>
-                
-                <a href="https://spdx.org/licenses/CC-BY-SA-4.0">CC-BY-SA-4.0</a>
-                
-            </td>
-            <td>
-                
-                <span class="contributor-badge">Cristóbal Gallardo Alba</span>
-                
-            </td>
-        </tr>
-    
-    </tbody>
-    </table>
+	<div class="card col-md-6">
+		<div class="card-body">
+			<h5 class="card-title">Genome-wide alternative splicing analysis: human</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Cristóbal Gallardo Alba
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated Jun 11, 2023</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main_workflow">Launch in Tutorial Mode</span><br/>
+
+			License: 
+				
+				<a href="https://spdx.org/licenses/CC-BY-SA-4.0">CC-BY-SA-4.0</a>
+				
+				<br/>
+			Tests: ✅
+			Results: Not yet automated
+			</p>
+
+			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/workflows/main_workflow.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main_workflow" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main_workflow" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main_workflow" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main_workflow"
+			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+
+	</div>
+	<pre class="mermaid">flowchart TD
+  0["Input dataset collection"];
+  1["Input dataset"];
+  2["Input dataset"];
+  3["Input dataset"];
+  4["Input parameter"];
+  5["Input parameter"];
+  6["Input dataset"];
+  7["Input dataset"];
+  8["Input dataset"];
+  9["Input dataset"];
+  10["fastp"];
+  11["Flatten collection"];
+  12["Search in textfiles"];
+  13["Search in textfiles"];
+  14["Convert GTF to BED12"];
+  15["FastQC"];
+  16["gffread"];
+  17["gffread"];
+  18["MultiQC"];
+  19["Search in textfiles"];
+  20["Concatenate datasets"];
+  21["Search in textfiles"];
+  22["Cut"];
+  23["Text reformatting"];
+  24["Parse parameter value"];
+  25["RNA STAR"];
+  26["Concatenate datasets"];
+  27["Text reformatting"];
+  28["Cut"];
+  29["Sort"];
+  30["Unique"];
+  31["RNA STAR"];
+  32["StringTie"];
+  33["Junction Annotation"];
+  34["Junction Saturation"];
+  35["Gene Body Coverage (BAM)"];
+  36["Inner Distance"];
+  37["Infer Experiment"];
+  38["Read Distribution"];
+  39["gffread"];
+  40["StringTie merge"];
+  41["MultiQC"];
+  42["rnaQUAST"];
+  43["gffread"];
+  44["StringTie"];
+  45["Filter collection"];
+  46["IsoformSwitchAnalyzeR"];
+  47["IsoformSwitchAnalyzeR"];
+  48["CPAT"];
+  49["PfamScan"];
+  50["Remove beginning"];
+  51["Text reformatting"];
+  52["Concatenate datasets"];
+  53["IsoformSwitchAnalyzeR"];
+  54["IsoformSwitchAnalyzeR"];
+  0 -->|output| 10;
+  0 -->|output| 11;
+  2 -->|output| 12;
+  2 -->|output| 13;
+  2 -->|output| 14;
+  11 -->|output| 15;
+  12 -->|output| 16;
+  1 -->|output| 16;
+  13 -->|output| 17;
+  1 -->|output| 17;
+  15 -->|text_file| 18;
+  10 -->|report_json| 18;
+  15 -->|text_file| 19;
+  19 -->|output| 20;
+  20 -->|out_file1| 21;
+  21 -->|output| 22;
+  22 -->|out_file1| 23;
+  23 -->|outfile| 24;
+  2 -->|output| 25;
+  24 -->|integer_param| 25;
+  1 -->|output| 25;
+  10 -->|output_paired_coll| 25;
+  25 -->|splice_junctions| 26;
+  26 -->|out_file1| 27;
+  27 -->|outfile| 28;
+  28 -->|out_file1| 29;
+  29 -->|out_file1| 30;
+  2 -->|output| 31;
+  24 -->|integer_param| 31;
+  1 -->|output| 31;
+  10 -->|output_paired_coll| 31;
+  30 -->|outfile| 31;
+  2 -->|output| 32;
+  31 -->|mapped_reads| 32;
+  31 -->|mapped_reads| 33;
+  14 -->|bed_file| 33;
+  31 -->|mapped_reads| 34;
+  14 -->|bed_file| 34;
+  31 -->|mapped_reads| 35;
+  14 -->|bed_file| 35;
+  31 -->|mapped_reads| 36;
+  14 -->|bed_file| 36;
+  31 -->|mapped_reads| 37;
+  14 -->|bed_file| 37;
+  31 -->|mapped_reads| 38;
+  14 -->|bed_file| 38;
+  32 -->|output_gtf| 39;
+  1 -->|output| 39;
+  2 -->|output| 40;
+  32 -->|output_gtf| 40;
+  31 -->|output_log| 41;
+  37 -->|output| 41;
+  38 -->|output| 41;
+  34 -->|outputr| 41;
+  33 -->|stats| 41;
+  35 -->|outputtxt| 41;
+  36 -->|outputfreqtxt| 41;
+  2 -->|output| 42;
+  1 -->|output| 42;
+  39 -->|output_exons| 42;
+  40 -->|out_gtf| 43;
+  1 -->|output| 43;
+  40 -->|out_gtf| 44;
+  31 -->|mapped_reads| 44;
+  3 -->|output| 45;
+  44 -->|transcript_expression| 45;
+  2 -->|output| 46;
+  24 -->|integer_param| 46;
+  5 -->|output| 46;
+  45 -->|output_filtered| 46;
+  40 -->|out_gtf| 46;
+  4 -->|output| 46;
+  45 -->|output_discarded| 46;
+  43 -->|output_exons| 46;
+  46 -->|switchList| 47;
+  17 -->|output_exons| 48;
+  47 -->|isoformNT| 48;
+  16 -->|output_exons| 48;
+  1 -->|output| 48;
+  7 -->|output| 49;
+  47 -->|isoformAA| 49;
+  8 -->|output| 49;
+  9 -->|output| 49;
+  48 -->|orf_seqs_prob_best| 50;
+  50 -->|out_file1| 51;
+  6 -->|output| 52;
+  51 -->|outfile| 52;
+  52 -->|out_file1| 53;
+  49 -->|output| 53;
+  47 -->|switchList| 53;
+  52 -->|out_file1| 54;
+  49 -->|output| 54;
+  47 -->|switchList| 54;
+
+	</pre>
+</div>
+
+
+</div>
 
    <h1 style="margin-top:2em">Importing into Galaxy</h1>
    Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
@@ -295,7 +437,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/06df5d7b0c2e679458ce2b652ed0191716b35aa1">06df5d7</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/ae4cd585ada65aa31f012205fc3f8faae66c253c">ae4cd58</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -319,7 +461,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1700732955'></script>
         
     </body>
 </html>

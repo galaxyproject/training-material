@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@06df5d7b0c2e679458ce2b652ed0191716b35aa1",
+		release: "galaxy-training-network@ae4cd585ada65aa31f012205fc3f8faae66c253c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700732955' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1700732955' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700732955'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -225,172 +225,372 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <p>These workflows are associated with <a href="../tutorial.html">Reference-based RNA-Seq data analysis</a></p>
     <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
-    <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Workflow</th>
-            <th>Updated</th>
-            <th>Import</th>
-            <th>Has Tests</th>
-            <th>Tested</th>
-            <th>License</th>
-            <th>Creators</th>
-        </tr>
-    </thead>
-    <tbody>
+
+    <div class="row">
     
-        <tr>
-            <td><a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/deg-analysis.ga">deg-analysis.ga</a></td>
-            <td>May 2, 2023</td>
-            <td>
-                <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis">Launch in Tutorial Mode</span>
-		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">What is tutorial mode?</abbr>
-                <br/>
-                <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
-		<br/>
-                <a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org</a>
-		<br/>
-                <a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org.au</a>
-		<br/>
-                <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis"
-		   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-            </td>
-            <td>✅</td>
-            <td>
-		    ❌
-	    </td>
-            <td>
-                
-                <a href="https://spdx.org/licenses/MIT">MIT</a>
-                
-            </td>
-            <td>
-                
-                <span class="contributor-badge">Bérénice Batut</span>
-                
-                <span class="contributor-badge">Mallory Freeberg</span>
-                
-                <span class="contributor-badge">Mo Heydarian</span>
-                
-                <span class="contributor-badge">Anika Erxleben</span>
-                
-                <span class="contributor-badge">Pavankumar Videm</span>
-                
-                <span class="contributor-badge">Clemens Blank</span>
-                
-                <span class="contributor-badge">Maria Doyle</span>
-                
-                <span class="contributor-badge">Nicola Soranzo</span>
-                
-                <span class="contributor-badge">Peter van Heusden</span>
-                
-                <span class="contributor-badge">Lucille Delisle</span>
-                
-            </td>
-        </tr>
-    
-        <tr>
-            <td><a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting-paired-and-single.ga">qc-mapping-counting-paired-and-single.ga</a></td>
-            <td>May 2, 2023</td>
-            <td>
-                <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single">Launch in Tutorial Mode</span>
-		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">What is tutorial mode?</abbr>
-                <br/>
-                <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
-		<br/>
-                <a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org</a>
-		<br/>
-                <a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org.au</a>
-		<br/>
-                <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single"
-		   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-            </td>
-            <td>✅</td>
-            <td>
-		    ❌
-	    </td>
-            <td>
-                
-                <a href="https://spdx.org/licenses/MIT">MIT</a>
-                
-            </td>
-            <td>
-                
-                <span class="contributor-badge">Bérénice Batut</span>
-                
-                <span class="contributor-badge">Mallory Freeberg</span>
-                
-                <span class="contributor-badge">Mo Heydarian</span>
-                
-                <span class="contributor-badge">Anika Erxleben</span>
-                
-                <span class="contributor-badge">Pavankumar Videm</span>
-                
-                <span class="contributor-badge">Clemens Blank</span>
-                
-                <span class="contributor-badge">Maria Doyle</span>
-                
-                <span class="contributor-badge">Nicola Soranzo</span>
-                
-                <span class="contributor-badge">Peter van Heusden</span>
-                
-                <span class="contributor-badge">Lucille Delisle</span>
-                
-            </td>
-        </tr>
-    
-        <tr>
-            <td><a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting.ga">qc-mapping-counting.ga</a></td>
-            <td>Oct 20, 2023</td>
-            <td>
-                <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Launch in Tutorial Mode</span>
-		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">What is tutorial mode?</abbr>
-                <br/>
-                <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
-		<br/>
-                <a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org</a>
-		<br/>
-                <a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org.au</a>
-		<br/>
-                <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting"
-		   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-            </td>
-            <td>✅</td>
-            <td>
-		    ❌
-	    </td>
-            <td>
-                
-                <a href="https://spdx.org/licenses/MIT">MIT</a>
-                
-            </td>
-            <td>
-                
-                <span class="contributor-badge">Bérénice Batut</span>
-                
-                <span class="contributor-badge">Mallory Freeberg</span>
-                
-                <span class="contributor-badge">Mo Heydarian</span>
-                
-                <span class="contributor-badge">Anika Erxleben</span>
-                
-                <span class="contributor-badge">Pavankumar Videm</span>
-                
-                <span class="contributor-badge">Clemens Blank</span>
-                
-                <span class="contributor-badge">Maria Doyle</span>
-                
-                <span class="contributor-badge">Nicola Soranzo</span>
-                
-                <span class="contributor-badge">Peter van Heusden</span>
-                
-                <span class="contributor-badge">Lucille Delisle</span>
-                
-            </td>
-        </tr>
-    
-    </tbody>
-    </table>
+	<div class="card col-md-6">
+		<div class="card-body">
+			<h5 class="card-title">DEG Part - Ref Based RNA Seq - Transcriptomics - GTN</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Bérénice Batut, 
+				
+				Mallory Freeberg, 
+				
+				Mo Heydarian, 
+				
+				Anika Erxleben, 
+				
+				Pavankumar Videm, 
+				
+				Clemens Blank, 
+				
+				Maria Doyle, 
+				
+				Nicola Soranzo, 
+				
+				Peter van Heusden, 
+				
+				Lucille Delisle
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated May 2, 2023</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis">Launch in Tutorial Mode</span><br/>
+
+			License: 
+				
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
+				
+				<br/>
+			Tests: ✅
+			Results: Not yet automated
+			</p>
+
+			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/deg-analysis.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis"
+			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+
+	</div>
+	<pre class="mermaid">flowchart TD
+  0["Input dataset collection"];
+  1["Input dataset"];
+  2["Input dataset"];
+  3["Input dataset"];
+  4["Extract element identifiers"];
+  5["Gene length and GC content"];
+  6["Replace Text"];
+  7["Change Case"];
+  8["Tag elements"];
+  9["DESeq2"];
+  10["Compute"];
+  11["Annotate DESeq2/DEXSeq output tables"];
+  12["Table Compute"];
+  13["Cut"];
+  14["Concatenate datasets"];
+  15["Table Compute"];
+  16["Change Case"];
+  17["Filter"];
+  18["goseq"];
+  19["goseq"];
+  20["Cut"];
+  21["Filter"];
+  22["Filter"];
+  23["Filter"];
+  24["Filter"];
+  25["Filter"];
+  26["Pathview"];
+  27["Join two Datasets"];
+  28["Group"];
+  29["Group"];
+  30["Cut"];
+  31["heatmap2"];
+  32["heatmap2"];
+  0 -->|output| 4;
+  1 -->|output| 5;
+  4 -->|output| 6;
+  5 -->|length| 7;
+  0 -->|output| 8;
+  6 -->|outfile| 8;
+  8 -->|output| 9;
+  9 -->|deseq_out| 10;
+  1 -->|output| 11;
+  9 -->|deseq_out| 11;
+  9 -->|counts_out| 12;
+  10 -->|out_file1| 13;
+  2 -->|output| 14;
+  11 -->|output| 14;
+  9 -->|counts_out| 15;
+  12 -->|table| 15;
+  13 -->|out_file1| 16;
+  14 -->|out_file1| 17;
+  16 -->|out_file1| 18;
+  7 -->|out_file1| 18;
+  16 -->|out_file1| 19;
+  7 -->|out_file1| 19;
+  17 -->|out_file1| 20;
+  17 -->|out_file1| 21;
+  18 -->|wallenius_tab| 22;
+  18 -->|wallenius_tab| 23;
+  19 -->|wallenius_tab| 24;
+  19 -->|wallenius_tab| 25;
+  20 -->|out_file1| 26;
+  3 -->|output| 26;
+  9 -->|counts_out| 27;
+  21 -->|out_file1| 27;
+  22 -->|out_file1| 28;
+  23 -->|out_file1| 29;
+  27 -->|out_file1| 30;
+  30 -->|out_file1| 31;
+  30 -->|out_file1| 32;
+
+	</pre>
+</div>
+
+	<div class="card col-md-6">
+		<div class="card-body">
+			<h5 class="card-title">QC + Mapping + Counting (single+paired) - Ref Based RNA Seq - Transcriptomics - GTN</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Bérénice Batut, 
+				
+				Mallory Freeberg, 
+				
+				Mo Heydarian, 
+				
+				Anika Erxleben, 
+				
+				Pavankumar Videm, 
+				
+				Clemens Blank, 
+				
+				Maria Doyle, 
+				
+				Nicola Soranzo, 
+				
+				Peter van Heusden, 
+				
+				Lucille Delisle
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated May 2, 2023</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single">Launch in Tutorial Mode</span><br/>
+
+			License: 
+				
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
+				
+				<br/>
+			Tests: ✅
+			Results: Not yet automated
+			</p>
+
+			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting-paired-and-single.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single"
+			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+
+	</div>
+	<pre class="mermaid">flowchart TD
+  0["Input dataset collection"];
+  1["Input dataset collection"];
+  2["Input dataset"];
+  3["Cutadapt"];
+  4["Flatten collection"];
+  5["Cutadapt"];
+  6["Gene length and GC content"];
+  7["Convert GTF to BED12"];
+  8["RNA STAR"];
+  9["Merge collections"];
+  10["Merge collections"];
+  11["RNA STAR"];
+  12["featureCounts"];
+  13["FastQC"];
+  14["MultiQC"];
+  15["Merge collections"];
+  16["Merge collections"];
+  17["featureCounts"];
+  18["Merge collections"];
+  19["Merge collections"];
+  20["Merge collections"];
+  21["MultiQC"];
+  22["MultiQC"];
+  23["Select last"];
+  24["MultiQC"];
+  25["Merge collections"];
+  26["Merge collections"];
+  27["Infer Experiment"];
+  28["Read Distribution"];
+  29["Read Distribution"];
+  30["Samtools view"];
+  31["Samtools idxstats"];
+  32["MarkDuplicates"];
+  33["pyGenomeTracks"];
+  34["Cut"];
+  35["Sort"];
+  36["MultiQC"];
+  37["MultiQC"];
+  38["Gene Body Coverage (BAM)"];
+  39["MultiQC"];
+  40["MultiQC"];
+  41["Sort"];
+  42["MultiQC"];
+  0 -->|output| 3;
+  1 -->|output| 4;
+  1 -->|output| 5;
+  2 -->|output| 6;
+  2 -->|output| 7;
+  2 -->|output| 8;
+  3 -->|out1| 8;
+  4 -->|output| 9;
+  0 -->|output| 9;
+  5 -->|report| 10;
+  3 -->|report| 10;
+  2 -->|output| 11;
+  5 -->|out_pairs| 11;
+  8 -->|mapped_reads| 12;
+  2 -->|output| 12;
+  9 -->|output| 13;
+  10 -->|output| 14;
+  11 -->|output_log| 15;
+  8 -->|output_log| 15;
+  8 -->|reads_per_gene| 16;
+  11 -->|reads_per_gene| 16;
+  11 -->|mapped_reads| 17;
+  2 -->|output| 17;
+  11 -->|mapped_reads| 18;
+  8 -->|mapped_reads| 18;
+  8 -->|signal_unique_str1| 19;
+  11 -->|signal_unique_str1| 19;
+  8 -->|signal_unique_str2| 20;
+  11 -->|signal_unique_str2| 20;
+  13 -->|text_file| 21;
+  15 -->|output| 22;
+  16 -->|output| 23;
+  16 -->|output| 24;
+  12 -->|output_short| 25;
+  17 -->|output_short| 25;
+  12 -->|output_summary| 26;
+  17 -->|output_summary| 26;
+  18 -->|output| 27;
+  7 -->|bed_file| 27;
+  18 -->|output| 28;
+  7 -->|bed_file| 28;
+  18 -->|output| 29;
+  7 -->|bed_file| 29;
+  18 -->|output| 30;
+  18 -->|output| 31;
+  18 -->|output| 32;
+  19 -->|output| 33;
+  20 -->|output| 33;
+  2 -->|output| 33;
+  23 -->|outfile| 34;
+  25 -->|output| 35;
+  26 -->|output| 36;
+  29 -->|output| 37;
+  30 -->|outputsam| 38;
+  7 -->|bed_file| 38;
+  31 -->|output| 39;
+  32 -->|metrics_file| 40;
+  34 -->|out_file1| 41;
+  38 -->|outputtxt| 42;
+
+	</pre>
+</div>
+
+	<div class="card col-md-6">
+		<div class="card-body">
+			<h5 class="card-title">QC + Mapping + Counting - Ref Based RNA Seq - Transcriptomics - GTN - subworkflows</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Bérénice Batut, 
+				
+				Mallory Freeberg, 
+				
+				Mo Heydarian, 
+				
+				Anika Erxleben, 
+				
+				Pavankumar Videm, 
+				
+				Clemens Blank, 
+				
+				Maria Doyle, 
+				
+				Nicola Soranzo, 
+				
+				Peter van Heusden, 
+				
+				Lucille Delisle
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated Oct 20, 2023</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Launch in Tutorial Mode</span><br/>
+
+			License: 
+				
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
+				
+				<br/>
+			Tests: ✅
+			Results: Not yet automated
+			</p>
+
+			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting"
+			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+
+	</div>
+	<pre class="mermaid">flowchart TD
+  0["Input dataset collection"];
+  1["Input dataset"];
+  2["FastQC"];
+  3["cutadapt"];
+  4["STAR + multiQC"];
+  5["more QC"];
+  6["Determine strandness"];
+  7["count STAR"];
+  8["count featureCount"];
+  0 -->|output| 2;
+  0 -->|output| 3;
+  1 -->|output| 4;
+  3 -->|out_pairs| 4;
+  1 -->|output| 5;
+  4 -->|STAR_BAM| 5;
+  4 -->|STAR_BAM| 6;
+  1 -->|output| 6;
+  4 -->|signal_unique_str1| 6;
+  4 -->|signal_unique_str2| 6;
+  4 -->|reads_per_gene| 6;
+  1 -->|output| 7;
+  4 -->|reads_per_gene| 7;
+  1 -->|output| 8;
+  4 -->|STAR_BAM| 8;
+
+	</pre>
+</div>
+
+
+</div>
 
    <h1 style="margin-top:2em">Importing into Galaxy</h1>
    Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
@@ -413,7 +613,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/06df5d7b0c2e679458ce2b652ed0191716b35aa1">06df5d7</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/ae4cd585ada65aa31f012205fc3f8faae66c253c">ae4cd58</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -437,7 +637,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1700732955'></script>
         
     </body>
 </html>

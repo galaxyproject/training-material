@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@06df5d7b0c2e679458ce2b652ed0191716b35aa1",
+		release: "galaxy-training-network@ae4cd585ada65aa31f012205fc3f8faae66c253c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700732955' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1700732955' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700732955'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -225,192 +225,369 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <p>These workflows are associated with <a href="../tutorial.html">Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition</a></p>
     <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
-    <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Workflow</th>
-            <th>Updated</th>
-            <th>Import</th>
-            <th>Has Tests</th>
-            <th>Tested</th>
-            <th>License</th>
-            <th>Creators</th>
-        </tr>
-    </thead>
-    <tbody>
+
+    <div class="row">
     
-        <tr>
-            <td><a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/Nanopore_Datasets_Gene_based_pathogenic_Identification.ga">Nanopore_Datasets_Gene_based_pathogenic_Identification.ga</a></td>
-            <td>Jul 3, 2023</td>
-            <td>
-                <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification">Launch in Tutorial Mode</span>
-		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">What is tutorial mode?</abbr>
-                <br/>
-                <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
-		<br/>
-                <a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org</a>
-		<br/>
-                <a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org.au</a>
-		<br/>
-                <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification"
-		   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-            </td>
-            <td>✅</td>
-            <td>
-		    ❌
-	    </td>
-            <td>
-                
-                <a href="https://spdx.org/licenses/MIT">MIT</a>
-                
-            </td>
-            <td>
-                
-                <span class="contributor-badge">Engy Nasr</span>
-                
-                <span class="contributor-badge">Bérénice Batut</span>
-                
-            </td>
-        </tr>
-    
-        <tr>
-            <td><a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/Nanopore_Datasets_Pathogen_Tracking_among_all_samples.ga">Nanopore_Datasets_Pathogen_Tracking_among_all_samples.ga</a></td>
-            <td>Jul 4, 2023</td>
-            <td>
-                <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_pathogen_tracking_among_all_samples">Launch in Tutorial Mode</span>
-		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">What is tutorial mode?</abbr>
-                <br/>
-                <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_pathogen_tracking_among_all_samples" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
-		<br/>
-                <a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_pathogen_tracking_among_all_samples" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org</a>
-		<br/>
-                <a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_pathogen_tracking_among_all_samples" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org.au</a>
-		<br/>
-                <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_pathogen_tracking_among_all_samples"
-		   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-            </td>
-            <td>✅</td>
-            <td>
-		    ❌
-	    </td>
-            <td>
-                
-                <a href="https://spdx.org/licenses/MIT">MIT</a>
-                
-            </td>
-            <td>
-                
-                <span class="contributor-badge">Engy Nasr</span>
-                
-                <span class="contributor-badge">Bérénice Batut</span>
-                
-            </td>
-        </tr>
-    
-        <tr>
-            <td><a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/nanopore_preprocessing.ga">nanopore_preprocessing.ga</a></td>
-            <td>Jul 4, 2023</td>
-            <td>
-                <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing">Launch in Tutorial Mode</span>
-		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">What is tutorial mode?</abbr>
-                <br/>
-                <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
-		<br/>
-                <a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org</a>
-		<br/>
-                <a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org.au</a>
-		<br/>
-                <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing"
-		   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-            </td>
-            <td>✅</td>
-            <td>
-		    ❌
-	    </td>
-            <td>
-                
-                <a href="https://spdx.org/licenses/MIT">MIT</a>
-                
-            </td>
-            <td>
-                
-                <span class="contributor-badge">Bérénice Batut</span>
-                
-                <span class="contributor-badge">Engy Nasr</span>
-                
-            </td>
-        </tr>
-    
-        <tr>
-            <td><a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/nanopore_snp_based_pathogenetic_identification.ga">nanopore_snp_based_pathogenetic_identification.ga</a></td>
-            <td>Jul 3, 2023</td>
-            <td>
-                <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification">Launch in Tutorial Mode</span>
-		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">What is tutorial mode?</abbr>
-                <br/>
-                <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
-		<br/>
-                <a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org</a>
-		<br/>
-                <a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org.au</a>
-		<br/>
-                <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification"
-		   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-            </td>
-            <td>✅</td>
-            <td>
-		    ❌
-	    </td>
-            <td>
-                
-                <a href="https://spdx.org/licenses/MIT">MIT</a>
-                
-            </td>
-            <td>
-                
-                <span class="contributor-badge">Engy Nasr</span>
-                
-                <span class="contributor-badge">Bérénice Batut</span>
-                
-            </td>
-        </tr>
-    
-        <tr>
-            <td><a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/nanopore_taxonomy_profiling_and_visualization.ga">nanopore_taxonomy_profiling_and_visualization.ga</a></td>
-            <td>Jul 3, 2023</td>
-            <td>
-                <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization">Launch in Tutorial Mode</span>
-		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">What is tutorial mode?</abbr>
-                <br/>
-                <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
-		<br/>
-                <a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org</a>
-		<br/>
-                <a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org.au</a>
-		<br/>
-                <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization"
-		   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-            </td>
-            <td>✅</td>
-            <td>
-		    ❌
-	    </td>
-            <td>
-                
-                <a href="https://spdx.org/licenses/MIT">MIT</a>
-                
-            </td>
-            <td>
-                
-                <span class="contributor-badge">Engy Nasr</span>
-                
-                <span class="contributor-badge">Bérénice Batut</span>
-                
-            </td>
-        </tr>
-    
-    </tbody>
-    </table>
+	<div class="card col-md-6">
+		<div class="card-body">
+			<h5 class="card-title">Pathogen-Detection-Nanopore-Gene-based-pathogenic-Identification-collection</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Engy Nasr, 
+				
+				Bérénice Batut
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated Jul 3, 2023</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification">Launch in Tutorial Mode</span><br/>
+
+			License: 
+				
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
+				
+				<br/>
+			Tests: ✅
+			Results: Not yet automated
+			</p>
+
+			<a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/Nanopore_Datasets_Gene_based_pathogenic_Identification.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification"
+			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+
+	</div>
+	<pre class="mermaid">flowchart TD
+  0["Input dataset collection"];
+  1["Input dataset"];
+  2["Build list"];
+  3["Extract element identifiers"];
+  4["Flye"];
+  5["Split file"];
+  6["Bandage Image"];
+  7["medaka consensus pipeline"];
+  8["Parse parameter value"];
+  9["Build list"];
+  10["ABRicate"];
+  11["FASTA-to-Tabular"];
+  12["ABRicate"];
+  13["Compose text parameter value"];
+  14["MLST"];
+  15["Cut"];
+  16["Cut"];
+  17["Replace"];
+  18["Replace"];
+  19["Replace Text"];
+  20["Add line to file"];
+  21["Add line to file"];
+  22["Tabular-to-FASTA"];
+  23["Concatenate datasets"];
+  0 -->|output| 2;
+  0 -->|output| 3;
+  2 -->|output| 4;
+  3 -->|output| 5;
+  4 -->|assembly_gfa| 6;
+  4 -->|consensus| 7;
+  0 -->|output| 7;
+  5 -->|list_output_txt| 8;
+  7 -->|out_consensus| 9;
+  7 -->|out_consensus| 10;
+  7 -->|out_consensus| 11;
+  7 -->|out_consensus| 12;
+  8 -->|text_param| 13;
+  9 -->|output| 14;
+  10 -->|report| 15;
+  12 -->|report| 16;
+  8 -->|text_param| 17;
+  13 -->|out1| 17;
+  10 -->|report| 17;
+  13 -->|out1| 18;
+  11 -->|output| 18;
+  14 -->|report| 19;
+  8 -->|text_param| 19;
+  15 -->|out_file1| 20;
+  8 -->|text_param| 20;
+  16 -->|out_file1| 21;
+  8 -->|text_param| 21;
+  18 -->|outfile| 22;
+  1 -->|output| 23;
+  19 -->|outfile| 23;
+
+	</pre>
+</div>
+
+	<div class="card col-md-6">
+		<div class="card-body">
+			<h5 class="card-title">Pathogen-Detection-Nanopore-All-Samples-Analysis</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Engy Nasr, 
+				
+				Bérénice Batut
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated Jul 4, 2023</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_pathogen_tracking_among_all_samples">Launch in Tutorial Mode</span><br/>
+
+			License: 
+				
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
+				
+				<br/>
+			Tests: ✅
+			Results: Not yet automated
+			</p>
+
+			<a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/Nanopore_Datasets_Pathogen_Tracking_among_all_samples.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_pathogen_tracking_among_all_samples" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_pathogen_tracking_among_all_samples" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_pathogen_tracking_among_all_samples" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_pathogen_tracking_among_all_samples"
+			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+
+	</div>
+	<pre class="mermaid">flowchart TD
+  0["Input dataset collection"];
+  1["Input dataset collection"];
+  2["Input dataset collection"];
+  3["Input dataset collection"];
+  4["Collapse Collection"];
+  5["Collapse Collection"];
+  6["Collapse Collection"];
+  7["Split by group"];
+  8["Add line to file"];
+  9["Cut"];
+  10["Filter sequences by ID"];
+  11["Multi-Join"];
+  12["Remove beginning"];
+  13["Replace"];
+  14["Advanced Cut"];
+  15["bedtools getfasta"];
+  16["Replace"];
+  17["ClustalW"];
+  18["Replace"];
+  19["Filter empty datasets"];
+  20["Advanced Cut"];
+  21["FASTTREE"];
+  22["Paste"];
+  23["Newick Display"];
+  24["Transpose"];
+  25["Replace"];
+  26["Heatmap w ggplot"];
+  0 -->|output| 4;
+  1 -->|output| 5;
+  2 -->|output| 6;
+  4 -->|output| 7;
+  6 -->|output| 8;
+  7 -->|split_output| 9;
+  7 -->|split_output| 10;
+  5 -->|output| 10;
+  3 -->|output| 11;
+  8 -->|outfile| 11;
+  9 -->|out_file1| 12;
+  11 -->|outfile| 13;
+  11 -->|outfile| 14;
+  10 -->|output_pos| 15;
+  12 -->|out_file1| 15;
+  13 -->|outfile| 16;
+  15 -->|output| 17;
+  16 -->|outfile| 18;
+  17 -->|output| 19;
+  18 -->|outfile| 20;
+  19 -->|output| 21;
+  14 -->|output| 22;
+  20 -->|output| 22;
+  21 -->|output| 23;
+  22 -->|out_file1| 24;
+  22 -->|out_file1| 25;
+  24 -->|out_file| 26;
+
+	</pre>
+</div>
+
+	<div class="card col-md-6">
+		<div class="card-body">
+			<h5 class="card-title">Pathogen-Detection-Nanopore-Pre-Processing-collection</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Bérénice Batut, 
+				
+				Engy Nasr
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated Jul 4, 2023</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing">Launch in Tutorial Mode</span><br/>
+
+			License: 
+				
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
+				
+				<br/>
+			Tests: ✅
+			Results: Not yet automated
+			</p>
+
+			<a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/nanopore_preprocessing.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing"
+			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+
+	</div>
+	<pre class="mermaid">flowchart TD
+  0["Input dataset collection"];
+  1["Porechop"];
+  2["NanoPlot"];
+  3["FastQC"];
+  4["fastp"];
+  5["NanoPlot"];
+  6["Kraken2"];
+  7["FastQC"];
+  8["Filter failed datasets"];
+  9["Filter failed datasets"];
+  10["MultiQC"];
+  11["Krakentools: Extract Kraken Reads By ID"];
+  0 -->|output| 1;
+  0 -->|output| 2;
+  0 -->|output| 3;
+  1 -->|outfile| 4;
+  4 -->|out1| 5;
+  4 -->|out1| 6;
+  4 -->|out1| 7;
+  6 -->|output| 8;
+  6 -->|report_output| 9;
+  3 -->|text_file| 10;
+  7 -->|text_file| 10;
+  4 -->|out1| 11;
+  9 -->|output| 11;
+  8 -->|output| 11;
+
+	</pre>
+</div>
+
+	<div class="card col-md-6">
+		<div class="card-body">
+			<h5 class="card-title">Pathogen-Detection-Nanopore-SNP-based-pathogenetic-Identification-collection</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Engy Nasr, 
+				
+				Bérénice Batut
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated Jul 3, 2023</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification">Launch in Tutorial Mode</span><br/>
+
+			License: 
+				
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
+				
+				<br/>
+			Tests: ✅
+			Results: Not yet automated
+			</p>
+
+			<a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/nanopore_snp_based_pathogenetic_identification.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification"
+			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+
+	</div>
+	<pre class="mermaid">flowchart TD
+  0["Input dataset collection"];
+  1["Input dataset"];
+  2["Convert compressed file to uncompressed."];
+  3["Map with minimap2"];
+  4["Clair3"];
+  5["bcftools norm"];
+  6["SnpSift Filter"];
+  7["SnpSift Extract Fields"];
+  8["bcftools consensus"];
+  1 -->|output| 2;
+  0 -->|output| 3;
+  2 -->|output1| 3;
+  3 -->|alignment_output| 4;
+  2 -->|output1| 4;
+  4 -->|merge_output| 5;
+  2 -->|output1| 5;
+  5 -->|output_file| 6;
+  6 -->|output| 7;
+  6 -->|output| 8;
+  2 -->|output1| 8;
+
+	</pre>
+</div>
+
+	<div class="card col-md-6">
+		<div class="card-body">
+			<h5 class="card-title">Pathogen Detection-Nanopore-Taxonomy-Profiling-and-Visualization-collection</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Engy Nasr, 
+				
+				Bérénice Batut
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated Jul 3, 2023</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization">Launch in Tutorial Mode</span><br/>
+
+			License: 
+				
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
+				
+				<br/>
+			Tests: ✅
+			Results: Not yet automated
+			</p>
+
+			<a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/nanopore_taxonomy_profiling_and_visualization.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization"
+			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+
+	</div>
+	<pre class="mermaid">flowchart TD
+  0["Input dataset collection"];
+  1["Input dataset"];
+  2["Kraken2"];
+  3["Kraken-biom"];
+  4["Phinch Visualisation"];
+  0 -->|output| 2;
+  2 -->|report_output| 3;
+  1 -->|output| 3;
+  3 -->|biomOutput| 4;
+
+	</pre>
+</div>
+
+
+</div>
 
    <h1 style="margin-top:2em">Importing into Galaxy</h1>
    Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
@@ -433,7 +610,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/06df5d7b0c2e679458ce2b652ed0191716b35aa1">06df5d7</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/ae4cd585ada65aa31f012205fc3f8faae66c253c">ae4cd58</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -457,7 +634,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1700732955'></script>
         
     </body>
 </html>
