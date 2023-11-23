@@ -39,7 +39,20 @@ The exercises are beginner level, but you should know how molecular sequence dat
 
 This tutorial does not cover workflows all the way from read data to phylogeny, multiple sequence alignment or Bayesian methods. We’ve included recommended reading and tutorials on these topics in the resources section.
 
-## Scope:
+> <agenda-title></agenda-title>
+>
+> In this tutorial we will deal with:
+>
+> 1. TOC
+> {:toc}
+>**We will not cover:**
+>
+>* Workflows from read data to sequences
+>* How to get an alignment (much: will use automated methods)
+>* Bayesian phylogenetics: MCMC / BEAST / MrBayes
+{: .agenda}
+
+<!--## Scope:
 **We will cover:**
 
 
@@ -90,7 +103,7 @@ This tutorial has the following structure:
 - Models of sequence evolution: from the sublime to the ridiculous
 - Phylogenetic Networks (**on your own computer, using SplitsTree**), Neighbor-Net
 - Assessing the quality of the tree(s): Bootstrapping, branch lengths; conflict in the networks
-- Maximum Likelihood with IQTree
+- Maximum Likelihood with IQTree -->
 
 
 ## What is a Phylogeny?
