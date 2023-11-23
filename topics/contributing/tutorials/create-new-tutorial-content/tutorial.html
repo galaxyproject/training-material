@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d268a6541acf154f83bcb9b216365d85d6a67a6b",
+		release: "galaxy-training-network@06df5d7b0c2e679458ce2b652ed0191716b35aa1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -59,8 +59,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700698170' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1700698170' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -69,7 +69,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creating content in Markdown">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
+<meta name="DC.date" content="2023-11-21 13:59:25 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Helena Rasche">
 
@@ -112,7 +112,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-11-03 14:30:27 +0000",
+  "dateModified": "2023-11-21 13:59:25 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Creating content in Markdown",
   "interactivityType": "mixed",
@@ -171,7 +171,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Creating content in Markdown",
   "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html",
-  "version": 115,
+  "version": 117,
   "timeRequired": "PT15M",
   "teaches": "Create hands-on\n - Use the different boxes",
   "keywords": [
@@ -301,7 +301,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700698170'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -594,7 +594,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 21, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -607,7 +607,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00058">https://gxy.io/GTN:T00058</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 115 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 117 </div>
 
     </blockquote>
     </section>
@@ -654,6 +654,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <li><a href="#warning-box" id="markdown-toc-warning-box"><strong>Warning</strong> box</a></li>
       <li><a href="#nested-boxes" id="markdown-toc-nested-boxes">Nested boxes</a></li>
       <li><a href="#code-box" id="markdown-toc-code-box"><strong>Code</strong> box</a></li>
+      <li><a href="#quote-boxes" id="markdown-toc-quote-boxes"><strong>Quote</strong> boxes</a></li>
     </ol>
   </li>
   <li><a href="#additional-features-to-improve-learning" id="markdown-toc-additional-features-to-improve-learning">Additional Features to Improve Learning</a>    <ol>
@@ -6121,13 +6122,12 @@ If a student might forget to select a less-common or deeply-nested parameter, be
 
 <h3 id="guidelines-on-alt-vs-figcaption-text">Guidelines on Alt vs Figcaption Text</h3>
 
-<blockquote class="quote">
+<blockquote class="quote" cite="https://thoughtbot.com/blog/alt-vs-figcaption" author="thoughtbot.com">
   <p>While both the alt attribute and the figcaption element provide a way to
 describe images, the way we write for them is different. <strong><code class="language-plaintext highlighter-rouge">alt</code> descriptions
 should be functional; <code class="language-plaintext highlighter-rouge">figcaption</code> descriptions should be editorial or
 illustrative.</strong></p>
 
-  <p><a href="https://thoughtbot.com/blog/alt-vs-figcaption"><em>via thoughtbot.com</em></a></p>
 </blockquote>
 
 <p>As an example for this image:</p>
@@ -6725,6 +6725,28 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
 <span class="py">listen</span> <span class="p">=</span> <span class="s">192.168.0.2</span>
 <span class="py">apikey</span> <span class="p">=</span> <span class="s">super-secret-api-key-wow!</span>
 </code></pre></div>  </div>
+</blockquote>
+
+<h2 id="quote-boxes"><strong>Quote</strong> boxes</h2>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; If you don't know where you're going, you might not get there.</span>
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra" author="Yogi Berra"}
+</code></pre></div></div>
+
+<p>Rendered:</p>
+
+<blockquote class="quote" cite="https://en.m.wikiquote.org/wiki/Yogi_Berra" author="Yogi Berra">
+  <p>If you don’t know where you’re going, you might not get there.</p>
+</blockquote>
+
+<p>The citation and author parameters are both optional. If provided the <code class="language-plaintext highlighter-rouge">cite</code> key must be a URL.</p>
+
+<blockquote class="quote" cite="https://en.m.wikiquote.org/wiki/Yogi_Berra">
+  <p>If you don’t know where you’re going, you might not get there.</p>
+</blockquote>
+
+<blockquote class="quote" author="Yogi Berra">
+  <p>If you don’t know where you’re going, you might not get there.</p>
 </blockquote>
 
 <h1 id="additional-features-to-improve-learning">Additional Features to Improve Learning</h1>
@@ -9108,7 +9130,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d268a6541acf154f83bcb9b216365d85d6a67a6b">d268a65</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/06df5d7b0c2e679458ce2b652ed0191716b35aa1">06df5d7</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -9136,7 +9158,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.9d052497.js?v=1700698170'></script>
+        <script src='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

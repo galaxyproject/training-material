@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d268a6541acf154f83bcb9b216365d85d6a67a6b",
+		release: "galaxy-training-network@06df5d7b0c2e679458ce2b652ed0191716b35aa1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700698170' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.9d052497.js?v=1700698170' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Teaching Python">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-10-27 10:09:01 +0000">
+<meta name="DC.date" content="2023-11-23 09:08:56 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 
         
@@ -109,7 +109,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2022-10-27 10:09:01 +0000",
+  "dateModified": "2023-11-23 09:08:56 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Teaching Python",
   "interactivityType": "mixed",
@@ -168,7 +168,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Teaching Python",
   "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/python/tutorial.html",
-  "version": 9,
+  "version": 12,
   "timeRequired": "PT2H",
   "teaches": "Learn about four different problem design ideas, and one teaching methodology.",
   "keywords": [
@@ -270,7 +270,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700698170'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1700732894'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -557,7 +557,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 27, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 23, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -570,7 +570,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00068">https://gxy.io/GTN:T00068</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 12 </div>
 
     </blockquote>
     </section>
@@ -636,12 +636,12 @@ states with informed experience to resolve issues they encounter as programmers.
 
 <p>The student’s mental model of the code underlies everything they do as a programmer, from conception to implementation to debugging to their self efficacy:</p>
 
-<blockquote class="quote">
+<blockquote class="quote" cite="https://doi.org/10.1145%2F1007996.1008042">
   <p>This study shows that a well-developed and accurate mental model directly
 affects course performance and also increases self efficacy, the other key
 element in course performance. Given this double impact, helping students
 develop good mental models should remain a goal in introductory programming
-courses. <span class="citation"><a href="#Ramalingam_2004">Ramalingam <i>et al.</i> 2004</a></span></p>
+courses.</p>
 </blockquote>
 
 <p>This is a foundational skill to be able to <em>think</em> through a program, step by step, and understand how the code executes and which variables exist when, and what their values should be. This mental modelling allows students to predict the behaviour of a system, and when it diverges from their prediction, recognise any potential bugs.</p>
@@ -766,7 +766,7 @@ This was generated by <a href="https://github.com/hexylena/auto-python/">hexylen
 
 <p>When teaching programming one must constantly be cognisant of the student’s cognitive load. It is a complicated task that demands a lot of students, requiring types of explicit logic analysis that they may not have engaged in before. Both learning based on problem-solving and worked examples may cause high cognitive loads for different audiences, and exploring alternatives is important (<span class="citation"><a href="#Retnowati_2017">Retnowati 2017</a></span>). Faded examples such as what is seen below are exactly such an alternative, starting with a fully worked example and removing successive components until we reach a problem description requiring a full solution. This leads to fewer unproductive learning events (<span class="citation"><a href="#Renkl_2004">Renkl <i>et al.</i> 2004</a></span>).</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Write a function that multiplies two numbers
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### Write a function that multiplies two numbers
 </span><span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
     <span class="k">return</span> <span class="n">c</span>
@@ -774,7 +774,7 @@ This was generated by <a href="https://github.com/hexylena/auto-python/">hexylen
 
 <p>The initial problem shows the entire solution to students</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Write a function that adds two numbers
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### Write a function that adds two numbers
 </span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">___</span><span class="p">):</span>
     <span class="n">____</span>
     <span class="k">return</span> <span class="n">c</span>
@@ -782,7 +782,7 @@ This was generated by <a href="https://github.com/hexylena/auto-python/">hexylen
 
 <p>Increased fading, here we call out blanks students should fill in specifically with syntactically incorrect underscores.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Write a function that subtracts two numbers
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### Write a function that subtracts two numbers
 </span></code></pre></div></div>
 <p>Final fading, the entire problem is gone except for the description of what they need to do.</p>
 
@@ -814,13 +814,13 @@ This was generated by <a href="https://github.com/hexylena/auto-python/">hexylen
 
 <p>Debugging is the act of identify and resolving “bugs” or defects within code, a term popularly attributed to my personal hero Admiral Grace Hopper:</p>
 
-<blockquote class="quote">
-  <p>While she was working on a Mark II computer at Harvard University, her associates discovered a moth stuck in a relay and thereby impeding operation, whereupon she remarked that they were “debugging” the system (<span class="citation"><a href="#enwiki:1069955193">Wikipedia contributors 2022</a></span>)</p>
+<blockquote class="quote" cite="https://en.wikipedia.org/w/index.php?title=Debugging&amp;oldid=1069955193">
+  <p>While she was working on a Mark II computer at Harvard University, her associates discovered a moth stuck in a relay and thereby impeding operation, whereupon she remarked that they were “debugging” the system</p>
 </blockquote>
 
 <p>Debugging also functions as a reinforcement method we can use once students have an ok mental model of code execution, a necessary pre-requisite for this activity, which can be further developed through debugging (<span class="citation"><a href="#Ramalingam_2004">Ramalingam <i>et al.</i> 2004</a></span>) alongside their self-efficacy (<span class="citation"><a href="#Michaeli_2019">Michaeli and Romeike 2019</a></span>). Debugging activities can take many forms but most commonly the task is to correct incorrect code, an activity that works best if they are primed with a number of methods of debugging (<span class="citation"><a href="#Murphy_2008">Murphy <i>et al.</i> 2008</a></span>) such as the “Wolf Fence” (<span class="citation"><a href="#Gauss_1982">Gauss 1982</a></span>), commenting out code, or breakpoints.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Fix me!
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### Fix me!
 </span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="c1"># use a if the number is a multiple of 3, otherwise use b
 </span>    <span class="k">if</span> <span class="n">Number</span> \<span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -1162,7 +1162,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d268a6541acf154f83bcb9b216365d85d6a67a6b">d268a65</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/06df5d7b0c2e679458ce2b652ed0191716b35aa1">06df5d7</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1190,7 +1190,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.9d052497.js?v=1700698170'></script>
+        <script src='/training-material/assets/js/bundle.2da1d01d.js?v=1700732894'></script>
         
     </body>
 </html>
