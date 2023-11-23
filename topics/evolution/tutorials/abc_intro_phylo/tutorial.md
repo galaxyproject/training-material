@@ -12,7 +12,12 @@ questions:
 - How do I estimate a phylogeny?
 objectives:
 - Understand the basic concepts behind phylogenetic trees
-- Be able to read and interrogate a phylogeny encountered in the literature
+- Be able to read and interrogate a phylogeny 
+encountered in the literature
+- Use standard tools to align a set of DNA sequences;
+- Assess the quality of a molecular sequence alignment and be able to modify it appropriately for phylogenetic analysis;
+- Estimate a phylogenetic tree based on a set of aligned molecular sequences;
+- Assess the reliability of estimated phylogenies.
 time_estimation: 2H
 contributors:
 - mcharleston
@@ -28,56 +33,54 @@ Phylogenetics is essential for comparing biological species and understanding bi
 
 Using real-life data and standard tools that are (mostly) available in Galaxy, the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data. 
 
-This is not a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of phylogenetics and how the methods work.
+This is **not** a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of phylogenetics and how the methods work.
 
 The exercises are beginner level, but you should know how molecular sequence data is produced and what it looks like. Maybe you've even built phylogenetic trees before but want to know more about the principles behind the tools.
 
 This tutorial does not cover workflows all the way from read data to phylogeny, multiple sequence alignment or Bayesian methods. We’ve included recommended reading and tutorials on these topics in the resources section.
 
-## Scope:
-**We will cover:**
-
-
-
-* What a phylogeny is
-* Motivation: 
-	* conservation / biodiversity, 
-	* fundamental knowledge, 
-	* designing vaccines
-* Why it’s hard to find a phylogeny
-	* How long it takes
-	* We cannot go back and check
-	* The role of simulation
-	* The plethora of methods (nucleic acid sequence based, morphometric based (body shape)) making it hard to choose
-* Data
-	* What a sequence alignment is and how to interpret one;
-	* What to do with difficult data (lots of gaps in the alignment)
-	* The data we will use: an alignment of malaria sequences.
-* Three different main approaches:
-	* Distance-based
-	* Parsimony
-	* Likelihood (simple models only)
-  * Phylogenetic networks
-* Comparing phylogenies --- what to do when they aren't all the same
-* Analysing robustness using bootstrapping
-* A little on what can possibly (probably) go wrong?
-* A overview of a workflow
-
-**We will not cover:**
-
-* Workflows from read data to sequences
-* How to get an alignment (much: will use automated methods)
-* Bayesian phylogenetics: MCMC / BEAST / MrBayes
-
-## Learning Objectives
-
-On successful completion of this workshop you will be able to:
-
-* Use standard tools to align a set of DNA sequences;
-* Assess the quality of a molecular sequence alignment and be able to modify it appropriately for phylogenetic analysis;
-* Estimate a phylogenetic tree based on a set of aligned molecular sequences;
-* Assess the reliability of estimated phylogenies.
-
+<agenda-title></agenda-title>
+>**We will cover:**
+>
+> 1. TOC
+> {:toc}
+>
+>**We will not cover:**
+>
+>* Workflows from read data to sequences
+>* How to get an alignment (much: will use automated methods)
+>* Bayesian phylogenetics: MCMC / BEAST / MrBayes
+{: .agenda}
+>
+<!--* What a phylogeny is
+>* Motivation: 
+>	* conservation / biodiversity, 
+>	* fundamental knowledge, 
+>	* designing vaccines
+>* Why it’s hard to find a phylogeny
+>	* How long it takes
+>	* We cannot go back and check
+>	* The role of simulation
+>	* The plethora of methods (nucleic acid sequence based, morphometric based (body shape)) making it hard to choose
+>* Data
+>	* What a sequence alignment is and how to interpret one;
+>	* What to do with difficult data (lots of gaps in the alignment)
+>	* The data we will use: an alignment of malaria sequences.
+>* Three different main approaches:
+>	* Distance-based
+>	* Parsimony
+>	* Likelihood (simple models only)
+ > * Phylogenetic networks
+> * Comparing phylogenies --- what to do when they aren't all the same
+> * Analysing robustness using bootstrapping
+> * A little on what can possibly (probably) go wrong?
+> * A overview of a workflow
+>
+>**We will not cover:**
+>
+>* Workflows from read data to sequences
+>* How to get an alignment (much: will use automated methods)
+>* Bayesian phylogenetics: MCMC / BEAST / MrBayes 
 
 
 ## Overview
@@ -94,7 +97,7 @@ This tutorial has the following structure:
 - Models of sequence evolution: from the sublime to the ridiculous
 - Phylogenetic Networks (**on your own computer, using SplitsTree**), Neighbor-Net
 - Assessing the quality of the tree(s): Bootstrapping, branch lengths; conflict in the networks
-- Maximum Likelihood with IQTree
+- Maximum Likelihood with IQTree -->
 
 
 ## What is a Phylogeny?
