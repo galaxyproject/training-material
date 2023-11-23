@@ -52,10 +52,10 @@ This tutorial does not cover workflows all the way from read data to phylogeny, 
 >* Bayesian phylogenetics: MCMC / BEAST / MrBayes
 {: .agenda}
 
-<!--## Scope:
+<!-- Original notes on scope. Now incorporated into the agenda box
+
+## Scope:
 **We will cover:**
-
-
 
 * What a phylogeny is
 * Motivation: 
@@ -106,13 +106,11 @@ This tutorial has the following structure:
 - Maximum Likelihood with IQTree -->
 
 
-## What is a Phylogeny?
 
+## What is a Phylogeny?
 ![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](./images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. [Wikimedia commons](https://en.m.wikipedia.org/wiki/File:Darwins_first_tree.jpg)"){:align="center", width="400px"}
 
-<!-- **needs a reference** -->
-
-A **phylogenetic tree*, also called a _phylogeny_, is usually a tree-like structure, like Darwin's famous sketch reproduced above. The leaves or tips of the tree represent extant (that is, living/existing) taxonomic entities like species, or genera, or strains (in general called "taxa"). The lines connecting the taxa describe the evolutionary relationships between them.
+A *phylogenetic tree*, also called a *phylogeny*, is usually a tree-like structure, like Darwin's famous sketch reproduced above. The leaves or tips of the tree represent extant (living/existing) taxonomic entities like species, or genera, or strains (in general called "taxa"). The lines connecting the taxa describe the evolutionary relationships between them.
 The intersections between lines within the figure above correspond to hypothetical ancestral taxa. They represent branching events when species split into two new species, or a strain developed a phylogenetic important offshoot strain, etc.
 
 The phylogeny of a group of taxa is the best representation of their evolutionary relationships.
