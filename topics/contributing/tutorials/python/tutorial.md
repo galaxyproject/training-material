@@ -148,7 +148,7 @@ def multiply(a, b):
 The initial problem shows the entire solution to students
 
 ```python
-# Write a function that adds two numbers
+### Write a function that adds two numbers
 def add(___):
     ____
     return c
@@ -157,7 +157,7 @@ def add(___):
 Increased fading, here we call out blanks students should fill in specifically with syntactically incorrect underscores.
 
 ```python
-# Write a function that subtracts two numbers
+### Write a function that subtracts two numbers
 ```
 Final fading, the entire problem is gone except for the description of what they need to do.
 
@@ -191,7 +191,7 @@ Debugging is the act of identify and resolving "bugs" or defects within code, a 
 Debugging also functions as a reinforcement method we can use once students have an ok mental model of code execution, a necessary pre-requisite for this activity, which can be further developed through debugging ({% cite Ramalingam_2004 %}) alongside their self-efficacy ({% cite Michaeli_2019 %}). Debugging activities can take many forms but most commonly the task is to correct incorrect code, an activity that works best if they are primed with a number of methods of debugging ({% cite Murphy_2008 %}) such as the "Wolf Fence" ({% cite Gauss_1982 %}), commenting out code, or breakpoints.
 
 ```python
-# Fix me!
+### Fix me!
 for number in range(10):
     # use a if the number is a multiple of 3, otherwise use b
     if Number \% 3 == 0:
