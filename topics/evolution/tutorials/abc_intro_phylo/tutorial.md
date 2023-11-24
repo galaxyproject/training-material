@@ -676,7 +676,7 @@ While this is running you might use your time to read the [Models of sequence ev
 
 > <question-title>Bootstrapping with IQ-Tree</question-title>
 > Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree
->
+> ![IQTreePhylovis](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis."){:align="center"}
 >  1. What are the bootrap values near the root of the tree? Do you think those branches are well supported?
 > 2. Which do you think is the biggest well-supported clade?
  {: .question}
@@ -686,7 +686,7 @@ Observe the bootstrap values in the IQTree output for deep branches are not as h
 
 Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates of the probability that the branch is correct, so are not quite the same as traditional "naive" bootstrap values.
 
-![IQTreePhylovis](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis."){:align="center"}
+
 
 # Phylogenetic Networks
 
@@ -736,9 +736,9 @@ The next four _singleton_ sites segregate one taxon from the others (which is ag
 
 The so-called "parsimony informative" sites start at site 9. These sites tell us about the support for the _internal_ branches of the tree.
 
-Sites 9-12 suggest splitting the taxa into (1,2) vs (3,4).  We write this as a split _12|34_ for brevity, or even just 12.
+Sites 9-12 suggest splitting the taxa into (1,2) vs (3,4). We write this as a split $$12\vert34$$ for brevity, or even just 12.
 
-The next two sites, numbers 13 and 14, suggest the split (2,3) vs (1,4), which we could write as _23|14_ or 14|23 or just 14.
+The next two sites, numbers 13 and 14, suggest the split (2,3) vs (1,4), which we could write as $$23\vert14$$ or $$14\vert23$$ or just 14.
 
 The last site suggests that taxa 1 and 3 should go together.
 
@@ -747,7 +747,7 @@ The last site suggests that taxa 1 and 3 should go together.
 In the above figure we have four taxa 1,2,3,4, in a phylogenetic network.
 The pairs of parallel lines correspond to two of the _splits_ that could separate taxa from each other, and which could (separately) appear in phylogenetic trees.
 
-The green, horizontal branches separate taxa 1 and 2 from 3 and 4; the split "12|34". These are longer than the blue, vertical ones, which separate taxa 1 and 3 from 2 and 4: the split "13|24".
+The green, horizontal branches separate taxa 1 and 2 from 3 and 4; the split $$12\vert34$$. These are longer than the blue, vertical ones, which separate taxa 1 and 3 from 2 and 4: the split $$13\vert24$$.
 
 The beauty of the network is that both thes pieces of information can be shown on the same figure, despite them not being compatible -- they can't both be on the same tree.
 
