@@ -52,7 +52,7 @@ ODV is now integrated in Galaxy as an interactive tool. This kind of tools is wo
 
 To use ODV, you need to use the {% tool [dedicated form](interactive_tool_odv) %}, you can specify input datasets from your hisrtory you want to use in ODV, then press the **execute** button to launch a ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the Galaxy center panel. If you don't see it, you can see and access it through the "Active InteractiveTools" space of the "User" menu or you can click on {% icon galaxy-eye %} on the tool in the history.
 
-Once you finished your work on ODV, if you want to retrieve data and/or entire project, you need to save files in /output, then quit ODV properly through the "Project" Menu tab.
+Once you finished your work on ODV, if you want to retrieve data and/or entire project, you need to save files in ODV/galaxy/outputs, then quit ODV properly through the "Project" Menu tab.
 
 > <details-title>Short introduction on how Galaxy works</details-title>
 >
@@ -89,9 +89,10 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 >    https://argo-gdac-sandbox.s3-eu-west-3.amazonaws.com/pub/dac/coriolis/1900392/1900392_prof.nc
 >    ```
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}  
->  
-> 3. Select your new data before deploying {% tool [ODV instance](interactive_tool_odv) %} by pressing **execute**
-> 4. Access ODV 
+>
+> 3. *"Select if you are using a ODV collection in a zip folder or if you have your own raw data"*: `The data you are using are a Netdcdf or tabular text files`
+> 4. Select your new data before deploying {% tool [ODV instance](interactive_tool_odv) %} by pressing **execute**
+> 5. Access ODV 
 >
 > {% snippet faqs/galaxy/interactive_tools_open.md tool="ODV" %}
 >
@@ -211,13 +212,12 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 
 > <hands-on-title>Save your analysis</hands-on-title>
 > 1. Click right on the scatter image and select **Save plot as**
-> 2. In the pop-up select and go in the **outputs** folder
-> ![Image of the pop-up showing the outputs folder to go in](../../images/coastal_water_dyn/outputs.png)
+> 2. In the pop-up select and go in the **ODV/galaxy/outputs** folder
 > 3. Once you're in the folder you can rename your scatter plot in "File Name:" by "1900392_prof_scatter"
 > 4. You can also change the "Files of type:" by "PNG (*.png *.PNG) 
 > 5. Click on **Save**, then OK and OK.
 > 6. On the map click right and then **Save Map As...**
-> 7. Still in the outputs folder, rename it "1900392_prof_map" check that the "Files of type:" is "PNG (*.png *.PNG) 
+> 7. Still in the ODV/galaxy/outputs folder, rename it "1900392_prof_map" check that the "Files of type:" is "PNG (*.png *.PNG) 
 > 8. Click on **Save**, then OK and OK
 >
 > Now, if you have finished with your analysis you can exit ODV. To do so you need to do it properly. 
