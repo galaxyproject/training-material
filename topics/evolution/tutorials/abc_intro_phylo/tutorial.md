@@ -508,7 +508,7 @@ That is why methods like FastTree are employed to find a tree with the best poss
 
 # Searching for the "best" tree
 
-The other main way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching the entire set of possible trees for the tree (or trees) that optimises this score.
+The other way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching the entire set of possible trees for the tree (or trees) that optimises this score.
 Note that such scores are "surrogates for truth" in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case. In many analyses we therefore use *multiple* methods, in the hope that they will give us the same answer. Minimum Evolution (ME), Maximum Parsimony (MP), and Maximum Likelihood (ML) are common such score functions.
 
 **Note: If your conclusion changes based on your analytical method, then perhaps your data are not adequate.**
@@ -519,7 +519,7 @@ Note that such scores are "surrogates for truth" in that we *hope* the optimal s
 
 Minimum Evolution is the idea that the sum of the branch lengths should be as small as possible to still account for the distances between the leaves of the tree, in that the sum of squared differences between the distances implied by the tree and the observed distances from the data, is minimised.  You can read more about this in an article by [Rzhetsky and Nei](https://academic.oup.com/mbe/article/10/5/1073/1037508){%cite 10.1093/oxfordjournals.molbev.a040056 %}.
 
-There are some variations on this ME criterion, and FastTree uses an approximation of one of them to find good trees.
+There are some variations on this ME criterion and FastTree uses an approximation of one of them to find good trees.
 
 ## Maximum Parsimony (MP) and Parsimony Length
 
@@ -547,9 +547,19 @@ One major assumption we make about molecular sequence data is that each site evo
 Another assumption we make is that the substitution rate -- the rate at which changes of nucleotide at a given position in the sequence happen -- is only dependent on the current state, i.e., we do not care about how a sequence came to be what it is, only what the sequence is now, to determine what are the probable evolutions of it.
 This seems much more biologically reasonable and makes this into a Markov process, which in turn enables a lot of calculations to be made simply.
 
+### Searching for trees and their branch lengths
+
+There are matrices that define the rates at which nucleotides change. 
+There are other 20x20 matrices for amino acids, and even 64x64 matrices for codons.
+
+To convert from a rate to a probability, hence giving us a likelihood, requires that we have a branch length. Then, we can calculate the probability under a given model and after a specific time interval of going from one nucleotide to another. We multiply these site probabilitues to calculate the probability of going from one sequence to another.
+Thus looking for the optimal tree under likelihood requires we also search for the best-fit **branch lengths**, as well as looking for the best **tree**.
+
+Maximum Likelihood is therefore the **slowest** tree inference method we discuss in this tutorial.
+
 ### Models of sequence evolution
 
-*If you are in a hurry to get stuck in to the phylogenetic analysis you can skip this section and go to the next [Hands-on: running IQ Tree](#estimating-a-maximum-likelihood-tree).*
+*If you are in a hurry to do the phylogenetic analysis you can skip this section and go to the next [Hands-on: running IQ Tree](#estimating-a-maximum-likelihood-tree).*
 
 > <details-title>More details on likelihood models</details-title>
 > Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
@@ -585,15 +595,7 @@ This seems much more biologically reasonable and makes this into a Markov proces
 >
 {: .details}
 
-## Searching for trees and their branch lengths
 
-The rate matrices above define the rates at which nucleotides change. 
-There are other 20x20 matrices for amino acids, and even 64x64 matrices for codons.
-
-To convert from a rate to a probability, hence giving us a likelihood, requires that we have a branch length. Then, we can calculate the probability under a given model and after a specific time interval of going from one nucleotide to another. We multiply these site probabilitues to calculate the probability of going from one sequence to another.
-Thus looking for the optimal tree under likelihood requires we also search for the best-fit **branch lengths**, as well as looking for the best **tree**.
-
-Maximum Likelihood is therefore the **slowest** tree inference method we discuss in this tutorial.
 
 # Assessing the Quality of trees
 
@@ -613,7 +615,7 @@ This means that it is meaningful to assess the reliability of *branches* of your
 A good phylogenetic tree is one that is *well resolved* -- that is, every time a lineage branches, it forms two new branches.
 Equivalently, every internal node has three edges touching it.
 
-An unresolved node *may* be a true representation of the branching pattern of a group of lineages, as is generally in the case of very rapid diversification, such as during an island radiation (species arrives in new place with lots of niches; diversifies incredibly quickly).
+An unresolved node *may* be a true representation of the branching pattern of a group of lineages. For example, this is generally the case for very rapid diversification, such as during an island radiation (species arrives in new place with lots of niches; diversifies incredibly quickly).
 
 In phylogenetics unresolved nodes are more often due to a lack of resolving power in the data, so the phylogenetic method cannot choose the branch ordering:
 
@@ -627,13 +629,13 @@ A very common (and useful) method for dealing with unresolved branches is called
 
 The naive method for bootstrapping is called "non-parametric" and works by effectively resampling the patterns at each site in the alignment, creating a pseudo-alignment of the same total number of sites, then re-building the tree.
 
-IQTree has a very - *ultra* - fast bootstrapping method that is cleverer than the naive method and which works a bit better. When we use IQTree in the next part of the tutorial, we will also do bootstrapping on the tree.  See (% cite 10.1093/molbev/msaa015 %) for details on the method.
+IQTree has a very - *ultra* - fast bootstrapping method that is cleverer and works a bit better than the naive method. When we use IQTree in the next part of the tutorial, we will also do bootstrapping on the tree.  See {% cite 10.1093/molbev/msaa015 %} for details on the method.
 
-Bootstrapping can be done on any inference method. We will use the likelihood method, searching for the tree and branch lengths that maximises the likelihood for (1) our actual data, and then (2), for each of the pseudoreplicates, noting for each of these which branches occur in the best trees found.
+Bootstrapping can be done on any inference method. We will use the likelihood method that searches for the tree and branch lengths that maximises the likelihood for (1) our actual data, and then (2) for each of the pseudoreplicates, noting for each of these which branches occur in the best trees found.
 
 By keeping track of which branches occur in the best trees found for each of the pseudoreplicates, we can note how often the branches in the best tree for our *actual* data occur in the resampled data.  If they occur a lot -- say, 80% of the time or more -- then we can be fairly sure that that branch is well supported by the data.
 
-Bootstrap values therefore appear for each branch, and are most often expressed as a percentage or proportion. Branches at the leaves occur in every possible tree so these would get 100% bootstrap values every time, and don't tell us anything.
+Bootstrap values therefore appear for each branch, and are most often expressed as a percentage or proportion. Branches at the leaves that occur in every possible tree so these would get 100% bootstrap values every time, and don't tell us anything.
 
 (Note: FastTree does not do bootstrapping natively, but can in conjuction with other tools ([see details](http://meta.microbesonline.org/fasttree/ )). It's fiddly to do this so we will not try it in this tutorial.)
 
