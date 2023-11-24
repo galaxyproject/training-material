@@ -656,6 +656,8 @@ IQTree is a state-of-the-art cross-platform program that uses maximum likelihood
 It can perform model selection and bootstrapping.
 And it's on Galaxy!
 
+While this is running you might use your time to read the [Models of sequence evolution](#models-of-sequence-evolution) and [Bootstrapping](#bootstrapping) sections above.
+
 > <hands-on-title>Estimating a Maximum Likelihood tree with IQTree</hands-on-title>
 >
 > 1. Find the {% tool IQTree %} program in the tool finder.
@@ -669,14 +671,16 @@ And it's on Galaxy!
 >
 {: .hands_on}
 
-While this is running you might use your time to read the [Models of sequence evolution](#models-of-sequence-evolution) and [Bootstrapping](#bootstrapping) sections above.
 
 
-> <hands-on-title>Visualising your tree</hands-on-title>
-> 1. View your tree using 'Phyloviz'
-> 2. What are the bootrap values near the root of the tree? Do you think those branches are well supported?
-> 3. Which do you think is the biggest well-supported clade?
-{: .hands_on}
+
+> <question-title>Bootstrapping with IQ-Tree</question-title>
+> Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree
+>
+>  1. What are the bootrap values near the root of the tree? Do you think those branches are well supported?
+> 2. Which do you think is the biggest well-supported clade?
+ {: .question}
+
 
 Observe the bootstrap values in the IQTree output for deep branches are not as high.
 
