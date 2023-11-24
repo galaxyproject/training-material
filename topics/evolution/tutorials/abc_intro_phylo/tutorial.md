@@ -37,7 +37,9 @@ This is not a "how to" tutorial, but is instead aimed at giving you a better und
 
 The exercises are beginner level, but you should know how molecular sequence data is produced and what it looks like. Maybe you've even built phylogenetic trees before but want to know more about the principles behind the tools.
 
-This tutorial does not cover workflows all the way from read data to phylogeny, multiple sequence alignment or Bayesian methods. We’ve included recommended reading and tutorials on these topics in the resources section.
+This tutorial does not cover workflows for taking read data to phylogeny, multiple sequence alignment or Bayesian methods. We’ve included recommended reading and tutorials on these topics in the resources section.
+
+This tutorial is adapted from a 2019 workshop that was run by Australian BioCommons and Michael Charleston from the University of Tasmania.
 
 > <agenda-title></agenda-title>
 >
@@ -110,8 +112,8 @@ This tutorial has the following structure:
 ## What is a Phylogeny?
 ![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](./images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. [Wikimedia commons](https://en.m.wikipedia.org/wiki/File:Darwins_first_tree.jpg)"){:align="center", width="400px"}
 
-A *phylogenetic tree*, also called a *phylogeny*, is usually a tree-like structure, like Darwin's famous sketch reproduced above. The leaves or tips of the tree represent extant (living/existing) taxonomic entities like species, or genera, or strains (in general called "taxa"). The lines connecting the taxa describe the evolutionary relationships between them.
-The intersections between lines within the figure above correspond to hypothetical ancestral taxa. They represent branching events when species split into two new species, or a strain developed a phylogenetic important offshoot strain, etc.
+A *phylogenetic tree*, also called a *phylogeny*, is usually a tree-like structure, like [Darwin's famous sketch](#figure-1). The leaves or tips of the tree represent extant (living/existing) taxonomic entities like species, genera, or strains (in general called "taxa"). The lines connecting taxa describe the evolutionary relationships between them.
+The intersections of lines correspond to hypothetical ancestral taxa. They represent branching events when species split into two new species, or a strain developed a phylogenetic important offshoot strain, etc.
 
 The phylogeny of a group of taxa is the best representation of their evolutionary relationships.
 It is also the main basis on which we can build statistics comparing species: without the phylogeny, comparing species (or strains, genera, etc.) is not meaningful.  
@@ -131,12 +133,12 @@ and much bigger projects across all of life:
 
 ![Phylogenetic tree of life based on sequenced genomes](./images/nmicrobiol201648-f1.jpg "A modern view of the tree of life based on sequenced genomes. {% cite PMID:27572647 %} reproduced under Creative Commons Attribution 4.0 International License"){:align="center", width="500"}
 
-Aside from fundamental understanding of biology, other strong motivators for inferring phylogenetic relationships include:
+Aside from gaining a fundamental understanding of biology, other reasons for inferring phylogenetic relationships include:
 
 - Designing vaccines, for example for SARS-CoV2 and influenza
 - Measuring phylogenetic diversity for guiding conservation efforts
-- Understanding coevolution: around 70% of emergent human diseases have come from other species
-- Dating major evolutionary events, to study the effects of environmental change on different species.
+- Understanding coevolution, for example around 70% of emergent human diseases have come from other species
+- Dating major evolutionary events to study the effects of environmental change on different species.
 
 > <comment-title>Gene trees, species trees reconcilitation problem</comment-title>
 > It's worth noting that getting the phylogeny from a set of genes -- what we often call a **gene tree** -- might *not* give us the phylogeny of the species that house those genes, *even if we get everything right!*
@@ -147,52 +149,46 @@ Aside from fundamental understanding of biology, other strong motivators for inf
 > - gene loss and incomplete lineage sorting
 > - recombination
 >
-> **The situation where gene trees and species trees differ is often called the "gene tree / species tree reconciliation problem", and while it is very interesting and important, it is beyond the scope of this tutorial.**
+> **The situation where gene trees and species trees differ is often called the "gene tree / species tree reconciliation problem".**
 >
-> Today we will work under the assumption (which is reasonable for the dataset we will use) that the gene tree will reflect the species relationships.
+> While it is very interesting and important it is beyond the scope of this tutorial. Today we will work under the assumption (which is reasonable for the dataset we will use) that the gene tree will reflect the species relationships.
 >
 {: .comment}
 
 ## Terminology
 
-Before we start building trees, let's define some terms, which may be new to you.
+Before we start building trees, let's define some terms.
 
 ![Schematic of a phylogenetic tree where features such as nodes/taxa, edges/branches are annotated](./images/TreeAnatomyWithOutgroup.png "Anatomy of a phylogenetic tree"){:align="center"}
 
-It's common to call **phylogenetic tree** just a **phylogeny**.
+It's common to call **phylogenetic tree** a **phylogeny**.
 
-Mathematically a **tree** is a kind of **graph**, which has objects called **nodes** or **vertices** (purple boxes in the figure above), connected in pairs by things called **edges** (green and orange lines in the figure above).  
+Mathematically a **tree** is a kind of **graph**, which has objects called **nodes** or **vertices** (purple and white boxes in the figure above), connected in pairs by things called **edges** (green and orange lines in the figure above).  
 
-Trees are a natural way to think about phylogenetic relationships, where the nodes correspond to **taxa**, and the edges, also called **branches**, show the relationships between them. 
+Trees are a natural way to think about phylogenetic relationships. The nodes correspond to **taxa**, and the edges, also called **branches**, show the relationships between them, where taxa could be species, or lineages, genera, populations, or even individuals if we are considering something like a genealogy.
 
-Taxa could be species, or lineages, genera, populations, or even individuals if we are considering something like a genealogy.
+Nodes that only have one edge attached to them are called **leaves** (or **tips**), and these correspond to taxa with no descendant taxa in the tree.  These taxa might be from fossils, or be currently living, in which case they're referred to as **extant**.
 
-Nodes that only have one edge attached to them are called **leaves** (or **tips**), and these correspond to taxa with no descendant taxa in the tree. 
-
-These taxa might be from fossils, or be currently living, in which case they're referred to as **extant**.
-
-Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree, and this node is called the **root**. When this is the case there is a natural direction implied from the root to the tips, going forward in time. Such trees and phylogenies are called **rooted**; if there is no such root then they are called **unrooted**. 
+Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree. This node is called the **root**. When this is the case there is a natural direction implied from the root to the tips, going forward in time. Such trees and phylogenies are called **rooted**; if there is no such root then they are called **unrooted**. 
 
 *The majority of phylogenetic inference methods produce unrooted trees, but rooted trees are more useful.*
 
 In a rooted phylogeny, all the leaves that are descendant from any given node form a **monophyletic clade**, or often just "**clade**" (monophyletic means "one tribe (of) origin" from the Greek).
 
-One standard way to determine where the root of a tree is, is to include an **outgroup**, which is a set of taxa that are definitely not within the clade of interest (which is then called our **ingroup**) but which share a common ancestor with that clade.
+One way to determine where the root of a tree is, is to include an **outgroup** in the data, which is a set of taxa that are definitely not within the clade of interest (which is then called our **ingroup**) but which share a common ancestor with that clade.
 A good outgroup won't be too distantly related to our ingroup, because if it's too distant then the choice of where it should connect to the ingroup will be hard: ultimately resulting in a guess.
-You can see that in the diagram above the connection of the ingroup to the outgroup could be from multiple locations.
-Once the *unrooted* tree is created, using all the data from ingroup and outgroup taxa, we can confidently say that the root is on the branch connecting our ingroup to our outgroup:
+You can see in the diagram above that the connection of the ingroup to the outgroup could be from multiple locations.
+Once the *unrooted* tree is created, using combined data from ingroup and outgroup taxa, we can confidently say that the root is on the branch connecting our ingroup to our outgroup:
 
 ![Schematic showing connection between an in group and outgroup to root a tree](./images/TreeAnatomyUnrooted.png "Rooting a tree"){:align="center"}
 
-At this point we can imagine lifting up the unrooted tree at the branch connecting our outgroup and ingroup -- that is our best guess at the hypothetical ancestor of all our taxa and gives us a good indication of the branching order of our ingroup (and the outgroup):
+We can then imagine lifting up the unrooted tree at the branch connecting our outgroup and ingroup -- that is our best guess at the hypothetical ancestor of all our taxa and gives us a good indication of the branching order of our ingroup (and the outgroup):
 
 ![Schematic showing how inclusion of an outgroup can be used to lift a tree to create a best guess at the location of the hypothetical ancestor](./images/TreeAnatomyLiftHere.png "'Lifted' tree demonstrating hypothetical ancestor and branching order){:align="center"}
 
 Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about **monophyly** -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
 
-The tree above is called a **binary tree**, because each internal node branches into *two* descendants.
-It is a very common assumption that our trees will be binary, and we make that assumption in this tutorial.  In fact it is often very hard to come to a means by which a phylogeny could be truly *non*-binary: in most cases this is just due to our inability to resolve the tree completely.
-In this tutorial we will only consider trees that are binary.
+The tree above is called a **binary tree**, because each internal node branches into *two* descendants. It is a very common assumption that trees are binary, and we make that assumption in this tutorial. In fact it is often very hard to come to a means by which a phylogeny could be truly *non*-binary: in most cases this is just due to our inability to resolve the tree completely.
 
 # Basic Methodology
 
@@ -870,10 +866,7 @@ and Le Sy Vinh (2018) UFBoot2: Improving the ultrafast bootstrap
 approximation. Mol. Biol. Evol., 35:518–522.
 https://doi.org/10.1093/molbev/msx281
 
-# About this workshop
-This tutorial is based on a 2019 workshop that was run in by Australian BioCommons and Michael Charleston from the University of Tasmania.
 
-It has been adapted to work as a stand-alone, self-paced tutorial, which can run (almost) entirely within Galaxy.
 
 <!-- # Markdown hints
 Internal link [Resources](#resources) 
