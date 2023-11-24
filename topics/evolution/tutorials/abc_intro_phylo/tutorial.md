@@ -757,7 +757,8 @@ The beauty of the network is that both thes pieces of information can be shown o
 > <hands-on-title>Build a Neighbor-Net with Splitstree</hands-on-title>
 >
 > 1. Download and install <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html">SplitsTree 4</a> or <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree6/welcome.html">SplitsTree 6 CE</a> (Community Edition) on your own computer. 
-Note: SplitsTree 4 is an older version, but works well; SplitsTree 6 is in development but appears to work equally well (at the time of writing this). They do the same thing, and we only use tools common to both versions. Installing either version takes a minute or two.
+>
+>   Note: SplitsTree 4 is an older version, but works well. SplitsTree 6 is in development but appears to work equally well (at the time of writing). They do the same thing, and we only use tools common to both versions. Installing either version takes a minute or two.
 > 2. Download the aligned data .FASTA file (the output of MAFFT) to your own computer.
 > 3. Start up SplitsTree and open the file.  Within moments you should see something like this (using SplitsTree 4):
 > ![Default phylogenetic network](./images/ST4-default.png){: align="center"}
@@ -765,9 +766,9 @@ Note: SplitsTree 4 is an older version, but works well; SplitsTree 6 is in devel
 >This network shows a number of deep branches that are quite well resolved, in the sense that they have very long, thin parallelograms, but there is a jumble of very small parallelograms in the centre of the network, indicating that there is not a lot of information in the data to determine the early branching order of the _Anolis_ phylogeny.
 > 
 > 4. Note that the initial distance measure is using "Uncorrected P" distance, which is simply the proportion of sites that differ between each pair of sequences. It is  possible to use more sophisticated models for maximum likelihood, such as Jukes-Cantor and HKY85. 
->   Click on the **Distances menu** and select "HKY85".  A dialog will appear with some options, but you can just click "Apply" and get a network like this:
+>   Click on the **Distances menu** and select "HKY85".  A dialog box will appear with some options. Click "Apply" and get a network like this:
 > ![HKY85 Network](./images/ST4-HKY85.png){: align="center"}
->   The above shows you that the basic structure of the network does not change very much using different distance measures, which is a good thing because it means reasonable assumptions you make about your data are not drastically changing the results.
+>   The above shows you that the basic structure of the network does not change very much using different distance measures. This is a good thing because it means reasonable assumptions you make about your data are not drastically changing the results.
 > 5. Finally, perform a bootstrap analysis on this network.  Click on the **Analysis menu** and select Bootstrap.  Leave the default number of replicates as 1000 and click "run".
 >After a few seconds (less than a minute) you should see something like this:
 > ![HKY85 Network with Bootstrap](./images/ST4-HKY85-BS.png){: align="center"}
@@ -788,15 +789,6 @@ You will also see the Newick Format of the best tree found.
 XXX More to go here.
  -->
 
-
-# Summary 
-
-- Phylogeny provides the statistical framework that is essential for comparing biological organisms
-- There are so many trees, choosing the best one is very hard.
-- There are many data options but one of the best is to use molecular sequences.
-- Optimality criteria (e.g., Maximum Parsimony, Maximum Likelihood) help us decide which trees are “good” – by how well they explain the data.
-- We can search tree space for medium-sized problems with branch-and-bound, and bigger problems with heuristics.
-- Trees can be assessed for robustness by comparing methods, resampling (bootstrap), and considering a phylogenetic network.
 
 
 # Troubleshooting
@@ -826,8 +818,17 @@ Here are a few things that can catch us out:
 
     **Fix:** Consider mid-point rooting: it is in most cases pretty good.
 
+# Summary 
+
+- Phylogeny provides the statistical framework that is essential for comparing biological organisms
+- There are so many trees, choosing the best one is very hard.
+- There are many data options but one of the best is to use molecular sequences.
+- Optimality criteria (e.g., Maximum Parsimony, Maximum Likelihood) help us decide which trees are “good” – by how well they explain the data.
+- We can search tree space for medium-sized problems with branch-and-bound, and bigger problems with heuristics.
+- Trees can be assessed for robustness by comparing methods, resampling (bootstrap), and considering a phylogenetic network.
+
 # Resources
-To develop a deeper understanding of phylogenetic trees, there is no better way than estimating phylogenies yourself --- and work through a book on the topic in your own mind's pace.
+To develop a deeper understanding of phylogenetic trees, there is no better way than estimating phylogenies yourself --- and work through a book on the topic at your own pace.
 
 ## Books
 - *Phylogenetics in the genomics era*, 2020. An [open access book](https://hal.inria.fr/PGE) covering a variety of contemporary topics.
@@ -840,10 +841,8 @@ To develop a deeper understanding of phylogenetic trees, there is no better way 
 - [Tree Of Life web project](http://tolweb.org)
 - [Phylogenetic Inference in the Stanford Encyclopedia](https://plato.stanford.edu/entries/phylogenetic-inference/)
 
-## References
+## How to cite the tools used in this tutorial
 
-REFERENCES
-----------
 
 To cite IQ-TREE please use:
 
