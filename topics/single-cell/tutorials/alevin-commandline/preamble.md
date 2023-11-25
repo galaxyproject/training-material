@@ -10,6 +10,10 @@ As a recap, we will go from raw FASTQ files to a cell x gene data matrix in AnnD
 6.	Adding metadata
 7.	Combining samples data
 
+> <warning-title>This tutorial is for teaching purposes</warning-title>
+> We created this tutorial as a gateway to coding to demonstrate what happens behind the Galaxy buttons in the [corresponding tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}). This is why we are using massively subsampled data - it's only for demonstration purposes. If you want to perform this tutorial fully on your own data, you will need another compute power because it's simply not going to scale here. You can always use the Galaxy buttons Alevin version which has large memory and few cores dedicated.
+{: .warning}
+
 
 ## Launching JupyterLab
 
