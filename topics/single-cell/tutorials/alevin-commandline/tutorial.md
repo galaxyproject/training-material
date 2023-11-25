@@ -82,7 +82,7 @@ We're going to use Alevin for demonstration purposes, but we do not endorse one 
 
 # Get Data
 
-We continue working on the same example data - a very small subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). For the purposes of this tutorial, the datasets have been subsampled to only 50k reads (around 1% of the original files). Those are two fastq files - one with transcripts and the onther one with cell barcodes. You can download the files by running the code below:
+We continue working on the same example data - a very small subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). For the purposes of this tutorial, the datasets have been subsampled to only 50k reads (around 1% of the original files). Those are two fastq files - one with transcripts and the another one with cell barcodes. You can download the files by running the code below:
 
 ```bash
 wget -nv https://zenodo.org/records/10116786/files/transcript_701.fastq
@@ -131,25 +131,25 @@ Sometimes it's important that there are no transcripts in a FASTA-format transcr
 
 # Generate a transcriptome index
 
-We will use Salmon in mapping-based mode, so first we have to build a salmon index for our transcriptome. We will run the salmon indexer as so:
+We will use Salmon in mapping-based mode, so first we have to build a Salmon index for our transcriptome. We will run the Salmon indexer as so:
 
 ```bash
 salmon-latest_linux_x86_64/bin/salmon index -t filtered_fasta -i salmon_index -k 31
 ```
 
-Where `-t` stands for our filtered FASTA file, and `-i` is the output the mapping-based index. To build it, the funciton is using an auxiliary k-mer hash over k-mers of length 31. While the mapping algorithms will make used of arbitrarily long matches between the query and reference, the k size selected here will act as the minimum acceptable length for a valid match. Thus, a smaller value of k may slightly improve sensitivity. We find that a k of 31 seems to work well for reads of 75bp or longer, but you might consider a smaller k if you plan to deal with shorter reads. Also, a shorter value of k may improve sensitivity even more when using selective alignment (enabled via the –validateMappings flag). So, if you are seeing a smaller mapping rate than you might expect, consider building the index with a slightly smaller k.
+Where `-t` stands for our filtered FASTA file, and `-i` is the output of the mapping-based index. To build it, the function is using an auxiliary k-mer hash over k-mers of length 31. While the mapping algorithms will make use of arbitrarily long matches between the query and reference, the k size selected here will act as the minimum acceptable length for a valid match. Thus, a smaller value of k may slightly improve sensitivity. We find that a k of 31 seems to work well for reads of 75bp or longer, but you might consider a smaller k if you plan to deal with shorter reads. Also, a shorter value of k may improve sensitivity even more when using selective alignment (enabled via the –validateMappings flag). So, if you are seeing a smaller mapping rate than you might expect, consider building the index with a slightly smaller k.
 
 
 > <details-title>What is the index?</details-title>
 >
-> To be able to search a transcriptome quickly, salmon needs to convert the text (FASTA) format sequences into something it can search quickly, called an 'index'. The index is in a binary rather than human-readable format, but allows fast lookup by Alevin. Because the types of biological and technical sequences we need to include in the index can vary between experiments, and because we often want to use the most up-to-date reference sequences from Ensembl or NCBI, we can end up re-making the indices quite often. 
+> To be able to search a transcriptome quickly, Salmon needs to convert the text (FASTA) format sequences into something it can search quickly, called an 'index'. The index is in a binary rather than human-readable format, but allows fast lookup by Alevin. Because the types of biological and technical sequences we need to include in the index can vary between experiments, and because we often want to use the most up-to-date reference sequences from Ensembl or NCBI, we can end up re-making the indices quite often. 
 >
 {: .details}
 
 
 # Use Alevin
 
-Time to use Alevin now! Alevin works under the same indexing scheme (as salmon) for the reference, and consumes the set of FASTA/Q files(s) containing the Cellular Barcode(CB) + Unique Molecule identifier (UMI) in one read file and the read sequence in the other. Given just the transcriptome and the raw read files, alevin generates a cell-by-gene count matrix (in a fraction of the time compared to other tools).
+Time to use Alevin now! Alevin works under the same indexing scheme (as Salmon) for the reference, and consumes the set of FASTA/Q files(s) containing the Cellular Barcode(CB) + Unique Molecule identifier (UMI) in one read file and the read sequence in the other. Given just the transcriptome and the raw read files, Alevin generates a cell-by-gene count matrix (in a fraction of the time compared to other tools).
 
 
 > <details-title>How does Alevin work in detail?</details-title>
@@ -166,7 +166,7 @@ salmon-latest_linux_x86_64/bin/salmon alevin -l ISR -1 barcodes_701.fastq -2 tra
 
 All the required input parameters are described in [the documentation](https://salmon.readthedocs.io/en/latest/alevin.html), but for the ease of use, they are presented below as well:
 
-- `-l`: library type (same as salmon), we recommend using ISR for both Drop-seq and 10x-v2 chemistry.
+- `-l`: library type (same as Salmon), we recommend using ISR for both Drop-seq and 10x-v2 chemistry.
 
 - `-1`: CB+UMI file(s), alevin requires the path to the FASTQ file containing CB+UMI raw sequences to be given under this command line flag. Alevin also supports parsing of data from multiple files as long as the order is the same as in -2 flag. That's our barcodes_701.fastq file.
 
@@ -293,7 +293,7 @@ out <- emptyDrops(matrix_alevin, lower = 100, niters = 1000, retain = 20)
 out
 ```
 
-We also correct for multiple testing by controlling the false discovery rate (FDR) using the Benjamini-Hochberg (BH) method ({% cite Benjamini1995 %}). Putative cells are defined as those barcodes that have significantly poor fits to the ambient model at a specified FDR threshold. Here, we will use an FDR threshold of 1%. This means that the expected proportion of empty droplets in the set of retained barcodes is no greater than 1%, which we consider to be acceptably low for downstream analyses. 
+We also correct for multiple testing by controlling the false discovery rate (FDR) using the Benjamini-Hochberg (BH) method ({% cite Benjamini1995 %}). Putative cells are defined as those barcodes that have significantly poor fits to the ambient model at a specified FDR threshold. Here, we will use an FDR threshold of 0.01. This means that the expected proportion of empty droplets in the set of retained barcodes is no greater than 1%, which we consider to be acceptably low for downstream analyses. 
 
 ```bash
 is.cell <- out$FDR <= 0.01                           
@@ -522,7 +522,7 @@ But first, we have to save the results of our hard work on sample 701!
 
 ## Saving sample 701 data
 
-Saving files is quite straight forward. Just specify which object you want to save and how you want the file to be named. Don't forget the extension!
+Saving files is quite straightforward. Just specify which object you want to save and how you want the file to be named. Don't forget the extension!
 
 ```bash
 save(alevin_701, file = "alevin_701.rdata")
@@ -695,7 +695,7 @@ put("alevin_sce.rdata")
 
 Well done! In this tutorial we have:
 - examined raw read data, annotations and necessary input files for quantification
-- created an index in salmon and run Alevin 
+- created an index in Salmon and run Alevin 
 - identified barcodes that correspond to non-empty droplets
 - added gene and cell metadata
 - applied the necessary conversion to pass these data to downstream processes.
