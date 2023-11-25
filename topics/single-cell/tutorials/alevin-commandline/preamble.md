@@ -14,7 +14,7 @@ As a recap, we will go from raw FASTQ files to a cell x gene data matrix in AnnD
 ## Launching JupyterLab
 
 > <warning-title>Data uploads & JupyterLab</warning-title>
-> There are a few ways of importing and uploading data into JupyterLab. You might find yourself accidentally doing this differently than the tutorial, and that's ok. There are a few key steps where you will call files from a location - if these don't work from you, check that the file location is correct and change accordingly!
+> There are a few ways of importing and uploading data into JupyterLab. You might find yourself accidentally doing this differently than the tutorial, and that's ok. There are a few key steps where you will call files from a location - if these don't work for you, check that the file location is correct and change accordingly!
 {: .warning}
 
 > {% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
