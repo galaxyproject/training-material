@@ -48,7 +48,7 @@ You have two options for how to proceed with this JupyterLab tutorial - you can 
 
 > <hands-on-title>Option 2: Creating a notebook</hands-on-title>
 >
-> 1. Select the **Bash** icon under **Notebook**
+> 1. If you are in the Launcher window, Select the **Bash** icon under **Notebook** (to open a new Launcher go to File -> New Launcher).
 >
 >   ![Bash icon](../../images/scrna-pre-processing/bash.png "Bash Notebook Button")
 >
@@ -73,7 +73,7 @@ Before we start working on the tutorial notebook, we need to install required pa
 
 ><hands-on-title>Installing the packages</hands-on-title>
 >
-> 1. Navigate back to the `Terminal` (see Option 1 in the box above)
+> 1. Navigate back to the `Terminal` (if you haven't opened it yet, just go to File -> New -> Terminal)
 > 2. In the Terminal tab open, write the following, one line at a time:
 > ```
 >conda install -y -c bioconda bioconductor-tximeta                     # install this first to avoid problem with re-installation of rtracklayer
