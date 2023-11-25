@@ -222,7 +222,7 @@ module TopicFilter
   #    "dir" => "topics/assembly/tutorials/velvet-assembly"
   #    "type" => "tutorial"
   #  }
-  def self.annotate_path(path)
+  def self.annotate_path(path, layout)
     parts = path.split('/')
     parts.shift if parts[0] == '.'
 
@@ -244,9 +244,9 @@ module TopicFilter
 
     return nil if parts[-1] =~ /data[_-]library.yaml/ || parts[-1] =~ /data[_-]manager.yaml/
 
-    if parts[4] =~ /tutorial.*\.md/
+    if parts[4] =~ /tutorial.*\.md/ || layout == 'tutorial_hands_on'
       material['type'] = 'tutorial'
-    elsif parts[4] =~ /slides.*\.html/
+    elsif parts[4] =~ /slides.*\.html/ || %w[tutorial_slides base_slides introduction_slides].include?(layout)
       material['type'] = 'slides'
     elsif parts[4] =~ /ipynb$/
       material['type'] = 'ipynb'
@@ -339,7 +339,7 @@ module TopicFilter
 
       # Extract the material metadata based on the path
       page.data['url'] = page.url
-      material_meta = annotate_path(page.path)
+      material_meta = annotate_path(page.path, page.data['layout'])
 
       # If unannotated then we want to skip this material.
       next if material_meta.nil?
@@ -361,6 +361,39 @@ module TopicFilter
     end
 
     interesting
+  end
+
+  def self.mermaid(wf)
+    # We're converting it to Mermaid.js
+    # flowchart TD
+    #     A[Start] --> B{Is it?}
+    #     B -- Yes --> C[OK]
+    #     C --> D[Rethink]
+    #     D --> B
+    #     B -- No ----> E[End]
+
+    output = "flowchart TD\n"
+    wf['steps'].keys.each do |id|
+      step = wf['steps'][id]
+      output += "  #{id}[\"#{step['name']}\"];\n"
+    end
+
+    wf['steps'].keys.each do |id|
+      # Look at the 'input connections' to this step
+      step = wf['steps'][id]
+      step['input_connections'].each do |_, v|
+        # if v is a list
+        if v.is_a?(Array)
+          v.each do |v2|
+            output += "  #{v2['id']} -->|#{v2['output_name']}| #{id};\n"
+          end
+        else
+          output += "  #{v['id']} -->|#{v['output_name']}| #{id};\n"
+        end
+      end
+    end
+
+    output
   end
 
   def self.resolve_material(site, material)
@@ -466,6 +499,7 @@ module TopicFilter
         wf_json = JSON.parse(File.read(wf_path))
         license = wf_json['license']
         creators = wf_json['creator'] || []
+        wftitle = wf_json['name']
 
         # /galaxy-intro-101-workflow.eu.json
         workflow_test_results = Dir.glob(wf_path.gsub(/.ga$/, '.*.json'))
@@ -487,8 +521,10 @@ module TopicFilter
           'license' => license,
           'creators' => creators,
           'name' => wf_json['name'],
+          'title' => wftitle,
           'test_results' => workflow_test_outputs,
           'modified' => File.mtime(wf_path),
+          'mermaid' => mermaid(wf_json),
         }
       end
     end
@@ -521,7 +557,7 @@ module TopicFilter
     topic_name_human = site.data[page_obj['topic_name']]['title']
     page_obj['topic_name_human'] = topic_name_human # TODO: rename 'topic_name' and 'topic_name' to 'topic_id'
     admin_install = Gtn::Toolshed.format_admin_install(site.data['toolshed-revisions'], page_obj['tools'],
-                                                       topic_name_human)
+                                                       topic_name_human, site.data['toolcats'])
     page_obj['admin_install'] = admin_install
     page_obj['admin_install_yaml'] = admin_install.to_yaml
 

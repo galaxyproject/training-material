@@ -37,7 +37,6 @@ follow_up_training:
         - bulk-music-3-preparebulk
 
 tags:
-  - transcriptomics
   - data management
 ---
 
