@@ -41,7 +41,7 @@ abbreviations:
   G10K: Genome 10K
 ---
 
-The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, {Hi-C} data, and (optionally) BioNano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick example of how to run these workflows for one particular scenario, which is, based on our experience, the most common: assembling genomes using {HiFi} Reads combined with {Hi-C} data (both generated from the same individual). 
+The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, {Hi-C} data, and (optionally) BioNano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick example of how to run these workflows for one particular scenario, which is, based on our experience, the most common: assembling genomes using {HiFi} Reads combined with {Hi-C} data (both generated from the same individual).
 
 > <agenda-title></agenda-title>
 >
@@ -71,21 +71,21 @@ The {VGP} assembly pipeline has a modular organization, consisting in ten workfl
 |------|---------------|-----|
 | HiFi | The minimum requirement | A |
 | HiFi + HiC| Better continuity | B |
-| HiFi + BioNano | Better continuity | C |  
+| HiFi + BioNano | Better continuity | C |
 | HiFi + Hi-C + BioNano | Even better continuity | D |
 | HiFi + parental data| Better haplotype resolution | E |
-| HiFi + parental data + Hi-C| Better haplotype resolution and improved continuity | F | 
+| HiFi + parental data + Hi-C| Better haplotype resolution and improved continuity | F |
 | HiFi + parental + BioNano | Better haplotype resolution and improved continuity | G |
 | HiFi + parental data + Hi-C + BioNano | Better haplotype resolution and ultimate continuity | H |
 
-If this table "HiFi" and "Hi-C" are derived from the individual whose genome is being assembled. "Parental data" is high coverage Illumina data derived from parents of the individual being assembled. Datasets containing parental data are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions. 
+If this table "HiFi" and "Hi-C" are derived from the individual whose genome is being assembled. "Parental data" is high coverage Illumina data derived from parents of the individual being assembled. Datasets containing parental data are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.
 
 ![The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
 <br>
 The first stage of the pipeline is the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate necessary for parameterizing downstream workflows. The generation of *k*-mer counts can be done from HiFi data only (Workflow 1) or include data from parental reads for trio-based phasing (Workflow 2; trio is a combination of paternal sequencing data with that from an offspring that is being assembled). The second stage is the phased contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases continuity and the quality of the final assembly. The purging stage is generally unnecessary for trio data for which reliable haplotype resolution is performed using *k*-mer profiles obtained from parental reads. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7), with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional) and Hi-C (Workflow 8) data and [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms. A final stage of decontamination (Workflow 9) removes exogenous sequences (e.g., viral and bacterial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
 
 > <comment-title>A note on data quality</comment-title>
-> We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions. 
+> We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.
 {: .comment}
 
 # Getting the data
@@ -99,24 +99,31 @@ The following steps use PacBio {HiFi} and Illumina {Hi-C} data from baker's yeas
 
 The following two steps demonstrate how to upload three PacBio {HiFi} datasets into you Galaxy history.
 
+
 > <hands-on-title><b>Uploading <tt>FASTA</tt> datasets from Zenodo</b></hands-on-title>
 >
-> **Step 1**: Copy the following URLs into clipboard.
+> 1. Create a new history for this tutorial
 >
->(you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.)
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
->   ```
->   https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta
->   https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta
->   https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
->   ```
+> 2. Copy the following URLs into clipboard.
+>    - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.)
 >
-> **Step 2**: Upload datasets into Galaxy.
+>     ```
+>     https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta
+>     https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta
+>     https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
+>     ```
 >
-> These datasets are in `fasta` format. Upload by following the steps shown in the figure below.
+> 3. Upload datasets into Galaxy.
+>    - set the datatype to `fasta`
 >
->![Uploading fasta files in Galaxy]({% link faqs/galaxy/images/upload_fastqsanger_via_url.png %} "Here we upload three fasta files. Compressed (.gz or .bz2) datasets are uploaded in exactly the same fashion by selecting an appropriate datatype (fasta.gz or fasta.bz2)")
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
+>
+>    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fasta_via_urls.md %}
+>
 {: .hands_on}
+
 
 ## Uploading `fastqsanger.gz` datasets from Zenodo
 
@@ -128,27 +135,30 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 > <hands-on-title><b>Uploading <tt>fastqsanger.gz</tt> datasets from Zenodo</b></hands-on-title>
 >
-> **Step 1**: Copy the following URLs into clipboard.
+> 1. Copy the following URLs into clipboard.
+>     - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
->(you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.)
+>    ```
+>    https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
+>    https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
+>    ```
 >
->  ```
->  https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
->  https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
->  ```
+> 2. Upload datasets into Galaxy.
+>    - set the datatype to `fastqsanger.gz`
 >
-> **Step 2**: Upload datasets into Galaxy.
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
 >
-> These datasets are in `fastqsanger.gz` format. Upload by following the steps shown in the figure below.
+>    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
 >
-> ![Uploading Fasta files in Galaxy]({% link /faqs/galaxy/images/upload_fastqsanger_via_url.png %} "Here we upload two fastqsanger.gz files. Uncompressed or bz2 compressed (.bz2) detests are uploaded in exactly the same fashion by selecting an appropriation datatype (fastqsanger or fastasanger.bz2)")
 {: .hands_on}
+
+
 
 > <warning-title>These datasets are large!</warning-title>
 > Hi-C datasets are large. It will take some time (~15 min) for them to be fully uploaded. Please, be patient.
 {: .warning}
 
-## Organizing the data 
+## Organizing the data
 
 If everything goes smoothly you history will look like shown in Fig. 4 below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes collection as an input (it does not access individual datasets). So let's create a collection using steps outlines in the Tip {% icon tip %} "Creating a dataset collection" that you can find below Fig. 4.
 
@@ -159,7 +169,7 @@ If everything goes smoothly you history will look like shown in Fig. 4 below. Th
 > <details-title>Other ways to upload the data</details-title>
 > You can obviously upload your own datasets via URLs as illustrated above or from your own computer. In addition, you can upload data from a major repository called [GenomeArk](https://genomeark.org). GenomeArk is integrated directly into Galaxy Upload. To use GenomeArk following the steps in the Tip {% icon tip %} below:
 >
-> {% snippet faqs/galaxy/dataset_upload_from_genomeark.md %}
+> {% snippet faqs/galaxy/datasets_upload_from_genomeark.md %}
 {: .details}
 
 
@@ -170,7 +180,7 @@ Once we have imported the datasets, the next step is to import the workflows nec
 All analyses described in this tutorial are performed using *workflows*--chains of tools--shown in [Fig. 1](#figure-1). Specifically, we will use four workflows corresponding to analysis trajectory **B**: 1, 4, 6, and 8. To use these four workflows you need to import them into your Galaxy account following the steps below:
 
 > <hands-on-title><b>Importing workflows from GitHub</b></hands-on-title>
-> 
+>
 > Links to the four workflows that will be used in this tutorial are listed in the table. Follow the procedure described below the table to import each of them into your Galaxy account.
 > <br>
 >
@@ -185,14 +195,14 @@ All analyses described in this tutorial are performed using *workflows*--chains 
 >
 > **Step 1: Copy the workflow URL into clipboard**
 >
-> 1. Right click on a URL in the table above. 
+> 1. Right click on a URL in the table above.
 > 2. Select "Copy link address" option in the dropdown menu that appears.
 > 3. Go to Galaxy
 >
 >> <warning-title>Make sure you are logged in!</warning-title>
->> Ensure that you are logged in into your Galaxy account! 
+>> Ensure that you are logged in into your Galaxy account!
 > {: .warning}
-> 
+>
 > <br>
 >
 > **Step 2: Import the workflow**
@@ -227,7 +237,7 @@ Once we have imported the datasets and the workflows, we can start with the geno
 
 # Performing the assembly
 
-Workflows listed in [Fig. 1](#figure-1) support a variety of "analysis trajectories". The majority of species that were sequenced by the {VGP} usually contain {HiFi} reads for the individual being sequenced supplemented with {Hi-C} data. As a result most assemblies performed by us follow the trajectory **B**. This is why this tutorial was designed to follow this trajectory as well.  
+Workflows listed in [Fig. 1](#figure-1) support a variety of "analysis trajectories". The majority of species that were sequenced by the {VGP} usually contain {HiFi} reads for the individual being sequenced supplemented with {Hi-C} data. As a result most assemblies performed by us follow the trajectory **B**. This is why this tutorial was designed to follow this trajectory as well.
 
 ## Genome profile analysis (WF1)
 
@@ -256,7 +266,7 @@ Now that our data and workflows are imported, we can run our first workflow. Bef
 > 4. Click on the <kbd>Run workflow</kbd> buttom
 >
 > This should like this:
-> 
+>
 >
 >![Parameters of *k*-mer profiling workflow](../../images/vgp_assembly/wf1_launch_ui.png  "Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.")
 >
@@ -315,7 +325,7 @@ To generate {contigs} we will use [**hifiasm**](https://github.com/chhylp123/hif
 >   - {% icon param-file %} "*GenomeScope Summary*": GenomeScope summary: one of the outputs of the previous workflow (contains tag "`GenomeScopeSummary`")
 >   - {% icon param-file %} "*GenomeScope Model Parameters*": GenomeScope model parameters: one of the outputs of the previous workflow (contains tag "`GenomeScopeParameters`")
 > 4. Click on the <kbd>Run workflow</kbd> button
-{: .hands_on} 
+{: .hands_on}
 
 ### Interpreting the results
 
@@ -388,7 +398,7 @@ As we can see in the report, the results are simplified into four categories: *c
 >
 {: .question}
 
-Despite **BUSCO** being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). `Merqury` provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via *k*-mer copy number analysis. Specifically, it takes our hap1 as the first genome assembly, hap2 as the second genome assembly, and the merylDB generated previously for *k*-mer counts. 
+Despite **BUSCO** being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). `Merqury` provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via *k*-mer copy number analysis. Specifically, it takes our hap1 as the first genome assembly, hap2 as the second genome assembly, and the merylDB generated previously for *k*-mer counts.
 
 By default, `Merqury` generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the copy number (CN) spectrum plot, known as the *spectra-cn* plot. The spectra-cn plot looks at both of your assemblies (here, your haplotypes) taken *together* (fig. 6a).  We can see a small amount of false duplications here: at the 50 mark on the x-axis, there is a small amount of *k*-mers present at 3-copy across the two assemblies (the green bump).
 <br>
@@ -436,7 +446,7 @@ An ideal haploid representation would consist of one allelic copy of all heteroz
 
 ### Interpreting results
 
-The two most important outputs of the purging workflow are purged versions of Primary and Alternate assemblies. These have tags <kbd>PurgedPrimaryAssembly</kbd> and <kbd>PurgedAlternateAssembly</kbd> for Primary and Alternate assemblies, respectively. This step also provides QC metrics for evaluating the effect of purging (Figure below). 
+The two most important outputs of the purging workflow are purged versions of Primary and Alternate assemblies. These have tags <kbd>PurgedPrimaryAssembly</kbd> and <kbd>PurgedAlternateAssembly</kbd> for Primary and Alternate assemblies, respectively. This step also provides QC metrics for evaluating the effect of purging (Figure below).
 
 <br>
 
@@ -483,7 +493,7 @@ In this final stage, we will run the **Scaffolding HiC YAHS (WF8)**, which explo
 
 > <comment-title>Bypassing purging workflow</comment-title>
 > In some situations (such as assemblies utilizing Trio data (Fig. 1) you do not need to perform purging and can go directly from contiging to scaffolding. In this case you will need to use an output of contiging workflow that has a tag `hic_hap1_gfa` for primary assembly or `hic_hap2_gfa` for alternate assembly:
-> 
+>
 >In other words, the only parameter that you will need to set differently (relative to setting above) is this:
 > <hr>
 > {% icon param-file %} "*input GFA*": Output of contiging workflow (WF4) with a tag `hic_hap1_gfa` for primary assembly or `hic_hap2_gfa` for alternate assembly.
