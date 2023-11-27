@@ -45,6 +45,9 @@ Research Data Management (RDM) combines conceptual, organizational, and technica
 For plant sciences, we would like to complement the concept of the data life cycle with the aspect of multiple connections between and iterations within the cycle. These additions mirror the evolution of data, as research data are not static, can build on each other, and sometimes might call for a re-evaluation. In some scenarios you might need to jump back to data collection after you made a breakthrough during your analyses. In another case, you might think that it would be helpful to process older data with different tools or a distinct focus as your results gave you new insights.
 
 
+![TODO: good alt text for your image](images/Lifecycle.jpg "Caption for this image")
+
+
 > <details-title> A collapsible details box </details-title>
 >
 > e.g. to describe more details, it is possible to use the detail boxes which are expandable
