@@ -51,7 +51,6 @@ contributors:
 ---
 
 
-# Introduction
 
 The practical aims at familiarizing you with running CLM-FATES within Galaxy Climate JupyterLab.
 

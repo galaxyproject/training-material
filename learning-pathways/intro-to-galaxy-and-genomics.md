@@ -6,7 +6,7 @@ type: use
 editorial_board:
 - shiltemann
 funding:
-- erasmusplus
+- gallantries
 
 title: Introduction to Galaxy and Sequence analysis
 description: |

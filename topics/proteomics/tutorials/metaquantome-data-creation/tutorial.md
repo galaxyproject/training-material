@@ -35,8 +35,6 @@ tags: [microbiome]
 ---
 
 
-# Introduction
-
 
 Metaproteomics {% cite Metaproteomics_video %} involves characterization of community level expression of microbial proteins from an environmental
 or clinical sample. Metaproteomics data {% cite Metaproteomics_community_effort %} {% cite Jagtap2015 %} is primarily used to determine the functional status of the microbiome under study along with its taxonomic composition. The [Galaxy-P](http://galaxyp.org/) {% cite Galaxy-P_Metaproteomics %} team published a software suite named metaQuantome {% cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional,

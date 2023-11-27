@@ -22,8 +22,6 @@ contributors:
   - yvanlebras
 ---
 
-# Introduction
-
 
 This tutorial is based on the analysis described in [publication](http://www.genetics.org/content/188/4/799).
 Further information about the pipeline is available from [the official STACKS website](http://catchenlab.life.illinois.edu/stacks).

@@ -8,6 +8,7 @@ requirements:
     topic_name: climate
     tutorials:
         - climate-101
+level: Introductory
 questions:
 - What is xarray map plotting?
 - How to plot NetCDF data using xarray map plotting tool?
@@ -29,6 +30,9 @@ contributors:
 ---
 
 
+The data used in this tutorial is [ECMWF Reanalysis 5 hourly data on single levels](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview). We are interested in the following variables: air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool available in the Galaxy Europe (or your favourite Galaxy Instance) server.
+
+It will be a fun learning experience for anyone who loves visualization !
 
 ><comment-title></comment-title>
 >
@@ -36,7 +40,7 @@ contributors:
 >
 {: .comment}
 
- It is beginner friendly and does not require much knowledge about the tool.
+It is beginner friendly and does not require much knowledge about the tool.
 
 > <agenda-title></agenda-title>
 >
@@ -58,11 +62,6 @@ contributors:
 {: .comment}
 
 
-# Introduction
-
-The data used in this tutorial is [ECMWF Reanalysis 5 hourly data on single levels](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview). We are interested in the following variables: air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool available in the Galaxy Europe (or your favourite Galaxy Instance) server.
-
-It will be a fun learning experience for anyone who loves visualization !
 
 # Get data
 

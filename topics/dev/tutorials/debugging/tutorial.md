@@ -39,9 +39,6 @@ requirements:
 subtopic: core
 ---
 
-# Introduction
-
-
 In this tutorial we will demonstrate how to find and fix common types of bugs you may encounter as a contributor to Galaxy. We will step you through the process of finding and fixing a bug - from locating specific errors in the logs of Galaxy's GitHub Actions, to identifying their cause, developing a solution and committing your edits
 
 With the skills from this tutorial, it is our hope that you will feel more prepared to develop solutions for Galaxy and more confidently navigate any obstacles along the way.

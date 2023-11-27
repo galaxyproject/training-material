@@ -20,6 +20,7 @@ if options[:previousCommit].nil?
   exit 1
 end
 
+# rubocop:disable Style/GlobalVars
 $rooms = {
   'test' => {
     server: 'https://matrix.org',
@@ -34,14 +35,17 @@ $rooms = {
     room: '!yuLoaCWKpFHkWPmVEO:gitter.im',
   }
 }
-
+# rubocop:enable Style/GlobalVars
+#
 addedfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=A #{options[:previousCommit]}`.split("\n")
-modifiedfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=M #{options[:previousCommit]}`.split("\n")
+mfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=M #{options[:previousCommit]}`.split("\n")
 # modifiedfiles = `git diff --cached --name-only --ignore-all-space
 # --diff-filter=M #{options[:previousCommit]}`.split("\n")
 
 NOW = Time.now
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
+ORGANISATIONS = YAML.load_file('ORGANISATIONS.yaml')
+FUNDERS = YAML.load_file('FUNDERS.yaml')
 
 # new   news
 # new   slidevideos
@@ -74,8 +78,8 @@ end
 
 def printableMaterial(path)
   d = YAML.load_file(path)
-  {md: linkify(d['title'], path.gsub(/.md/, '.html')),
-  path: path}
+  { md: linkify(d['title'], path.gsub(/.md/, '.html')),
+    path: path }
 end
 
 def fixNews(n)
@@ -96,27 +100,29 @@ data = {
     news: addedfiles.grep(%r{news/_posts/.*\.md}).map { |x| printableMaterial(x) }.map { |n| fixNews(n) }
   },
   modified: {
-    slides: modifiedfiles
+    slides: mfiles
        .select { |x| filterSlides(x) }
        .select { |x| onlyEnabled(x) }
        .map { |x| printableMaterial(x) },
-    tutorials: modifiedfiles
+    tutorials: mfiles
        .select { |x| filterTutorials(x) }
        .select { |x| onlyEnabled(x) }
        .map { |x| printableMaterial(x) },
   },
   contributors: `git diff --unified --ignore-all-space #{options[:previousCommit]} CONTRIBUTORS.yaml`
-       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] }
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
+  organisations: `git diff --unified --ignore-all-space #{options[:previousCommit]} ORGANISATIONS.yaml`
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
+  funders: `git diff --unified --ignore-all-space #{options[:previousCommit]} FUNDERS.yaml`
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
 }
 
 def titleize(t)
-  t.gsub(/-/, ' ').gsub(/\w+/) do |word|
-    word.capitalize
-  end
+  t.gsub('-', ' ').gsub(/\w+/, &:capitalize)
 end
 
 def format_news(news)
-  output = ""
+  output = ''
   if news.length.positive?
     output += "\n\n## Big News!\n\n"
     output += news.join("\n").gsub(/^/, '- ')
@@ -124,49 +130,51 @@ def format_news(news)
   output
 end
 
-def format_tutorials(added, modified, kind: "tutorials")
-  output =""
-  if added.length.positive? or modified.length.positive?
-    output += "\n\n## #{added.length + modified.length} #{kind}!"
-  end
+def format_tutorials(added, modified, kind: 'tutorials', updates: true)
+  output = ''
+  count = added.length
+  count += modified.length if updates
+  output += "\n\n## #{count} #{kind}!" if count.positive?
 
   if added.length.positive?
     output += "\n\nNew #{kind}:\n\n"
-    output += added.map{|n| n[:md]}.join("\n").gsub(/^/, '- ')
+    output += added.map { |n| n[:md] }.join("\n").gsub(/^/, '- ')
   end
 
-  if modified.length.positive?
+  if updates && modified.length.positive?
     output += "\n\nUpdated #{kind}:\n\n"
-    output += modified.map{|n| n[:md]}.join("\n").gsub(/^/, '- ')
+    output += modified.map { |n| n[:md] }.join("\n").gsub(/^/, '- ')
   end
   output
 end
 
-def build_news(data, filter: nil)
+def build_news(data, filter: nil, updates: true)
   infix = filter.nil? ? '' : titleize(filter)
   output = "# GTN #{infix} News for #{NOW.strftime('%b %d')}"
   newsworthy = false
 
   if filter.nil?
-  output += format_news(data[:added][:news])
-  newsworthy = newsworthy | format_news(data[:added][:news]).length.positive?
+    output += format_news(data[:added][:news])
+    newsworthy |= format_news(data[:added][:news]).length.positive?
   end
 
   o = format_tutorials(
-    data[:added][:tutorials].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ },
-    data[:modified][:tutorials].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ }
+    data[:added][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
+    data[:modified][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
+    updates: updates
   )
 
   output += o
-  newsworthy = newsworthy | o.length.positive?
+  newsworthy |= o.length.positive?
 
   o = format_tutorials(
-    data[:added][:slides].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ },
-    data[:modified][:slides].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ },
-    kind: "slides"
+    data[:added][:slides].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
+    data[:modified][:slides].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
+    kind: 'slides',
+    updates: updates
   )
   output += o
-  newsworthy = newsworthy | o.length.positive?
+  newsworthy |= o.length.positive?
 
   if filter.nil? && data[:contributors].length.positive?
     newsworthy = true
@@ -174,12 +182,26 @@ def build_news(data, filter: nil)
     output += data[:contributors].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
   end
 
-  return output, newsworthy
+  if filter.nil? && data[:organisations].length.positive?
+    newsworthy = true
+    output += "\n\n## #{data[:organisations].length} new organisations!\n\n"
+    output += data[:organisations].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
+  end
+
+  if filter.nil? && data[:funders].length.positive?
+    newsworthy = true
+    output += "\n\n## #{data[:funders].length} new funders!\n\n"
+    output += data[:funders].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
+  end
+
+  [output, newsworthy]
 end
 
 def send_news(output, options, channel: 'default')
   if options[:postToMatrix]
+    # rubocop:disable Style/GlobalVars
     homeserver = $rooms[channel]
+    # rubocop:enable Style/GlobalVars
     pp homeserver
 
     data = {
@@ -200,27 +222,27 @@ def send_news(output, options, channel: 'default')
     resp = JSON.parse(req.body)
     puts resp
 
-    if resp['errcode'] == 'M_FORBIDDEN'
-      if resp['error'] =~ /not in room/
-        puts "Not in room, attempting to join"
-        # Join room
-        #  POST /_matrix/client/v3/join/{roomIdOrAlias}
-        uri_join = URI("#{homeserver[:server]}/_matrix/client/v3/join/#{homeserver[:room]}")
-        req = Net::HTTP.post(uri_join, JSON.generate({}), headers)
+    if resp['errcode'] == 'M_FORBIDDEN' && (resp['error'] =~ /not in room/)
+      puts 'Not in room, attempting to join'
+      # Join room
+      #  POST /_matrix/client/v3/join/{roomIdOrAlias}
+      uri_join = URI("#{homeserver[:server]}/_matrix/client/v3/join/#{homeserver[:room]}")
+      req = Net::HTTP.post(uri_join, JSON.generate({}), headers)
+      # Parse response
+      resp = JSON.parse(req.body)
+
+      # Now we're safe to re-try
+      if resp.key?('room_id')
+        req = Net::HTTP.post(uri_send_message, JSON.generate(data), headers)
         # Parse response
         resp = JSON.parse(req.body)
-
-        # Now we're safe to re-try
-        if resp.key?('room_id')
-          req = Net::HTTP.post(uri_send_message, JSON.generate(data), headers)
-          # Parse response
-          resp = JSON.parse(req.body)
-          puts resp
-        end
+        puts resp
       end
     end
   else
+    puts '=============='
     puts output
+    puts '=============='
   end
 end
 
@@ -230,7 +252,5 @@ if newsworthy
   send_news(output, options, channel: channel)
 end
 
-output, newsworthy = build_news(data, filter: 'single-cell')
-if newsworthy
-  send_news(output, options, channel: 'single-cell')
-end
+output, newsworthy = build_news(data, filter: 'single-cell', updates: false)
+send_news(output, options, channel: 'single-cell') if newsworthy

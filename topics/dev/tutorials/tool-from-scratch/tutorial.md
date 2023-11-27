@@ -28,9 +28,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
 Tools wrappers allow any command line runnable code or programs to be run inside a galaxy environment.
 Although Galaxy has thousands of tools readily available, new software and packages will always be useful.
 This tutorial is designed to allow anyone to create, run, and deploy new tools in a Galaxy environment.

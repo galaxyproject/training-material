@@ -3,6 +3,12 @@ layout: page
 title: Licenses
 ---
 
+# Image Credits
+
+Our default avatar is from https://thenounproject.com/icon/users-1926333/ available under CC-BY
+
+# Fonts
+
 ## Atkinson Hyperlegible
 
 <pre>

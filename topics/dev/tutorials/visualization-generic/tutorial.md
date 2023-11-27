@@ -23,9 +23,6 @@ contributors:
   - yhoogstrate
 ---
 
-# Introduction
-
-
 Visualizations may be very helpful in understanding data better. There is a whole
 range of visualizations, from rather simple scatter and barplots up to projections
 of high dimensional data or even entire genomes. Many of these visualizations often

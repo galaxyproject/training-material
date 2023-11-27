@@ -22,7 +22,6 @@ translations:
 ---
 
 
-# Introduction
 Ce tutoriel vous permettra de mieux appréhender le workflow des indicateurs "champs de blocs". Cela vous aidera à comprendre les effets des changements globaux et locaux sur les habitats marins, et l'efficacité des mesures de gestion adoptées, nécessite un suivi standardisé et des indicateurs robustes et sensibles reflétant l'état des habitats.
 
 L'habitat "champs de blocs médiolittoraux" abrite une grande diversité de micro-habitats et d'espèces en raison de sa forte hétérogénéité structurelle et de sa position intermédiaire sur l'estran, ce qui en fait l'un des habitats médiolittoraux les plus diversifiés et d'un grand intérêt écologique le long de la Manche. -Côte atlantique. C'est aussi un habitat très attractif pour la pêche récréative qui, par le remaniement des blocs, peut impacter les communautés.

@@ -25,8 +25,6 @@ subtopic: id-quant
 tags: [DDA]
 ---
 
-# Introduction
-
 
 In mass spectrometry based proteomics experiments, peptides are assigned to experimentally acquired tandem mass spectra (MS2) by a method called peptide-spectral matching. Peptide spectral matching is commonly achieved by using search algorithms to match the acquired MS2 spectra to theoretical spectra. The theoretical spectra are generated from an in silico digestion and fragmentation of proteins in the FASTA database. Ideally, the protein FASTA databases will contain all proteins of the organism under investigation.
 

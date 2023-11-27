@@ -26,20 +26,15 @@ contributions:
     - gallardoalba
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
 ---
 
-# Introduction
-
-
----
+In this tutorial we will discuss the principles of learning
 
 > *Learning results from what the student does and thinks and only from what the student does and thinks. The teacher can advance learning only by influencing what the student does to learn*
 >
 > [H.A. Simon](https://en.wikipedia.org/wiki/Herbert_A._Simon) (one of the founders of the field of [Cognitive Science](https://en.wikipedia.org/wiki/Cognitive_science) and Nobel Laureate)
 {: .quote}
-
----
 
 This quotation from Herbert A. Simon clearly indicates that we cannot talk about teaching, teaching practices or effective teaching techniques if we don't understand first how people learn.
 
@@ -115,11 +110,11 @@ A metaphor is a word from one thematic domain that has been embedded in another 
 We can use metaphors to shape and reveal our way of thinking about learning and, therefore, shape our actions as teachers.
 
 ---
-> *A mind is a fire to be kindled, not a vessel to be filled*
+
+> A mind is a fire to be kindled, not a vessel to be filled
 >
-> Plutard
->
-{: .quote}
+{: .quote author="Plutard"}
+
 ---
 
 How the mind-as-a-vessel-to-be-filled metaphor may affect your way of teaching? You are likely to spend your time in the class at the blackboard, trying to 'transmit' to the students your own knowledge.

@@ -37,8 +37,6 @@ requirements:
 ---
 
 
-# Introduction
-
 
 The [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial, introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool.
 

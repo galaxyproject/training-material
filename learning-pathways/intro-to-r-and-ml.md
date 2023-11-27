@@ -6,7 +6,7 @@ type: use
 editorial_board:
 - fpsom
 funding:
-- erasmusplus
+- gallantries
 
 title: From R to Machine Learning; an introductory course
 description: |

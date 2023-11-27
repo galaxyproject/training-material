@@ -50,9 +50,8 @@ notebook:
   snippet: topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/preamble.md
 
 ---
-> <warning-title>Remember: Notebook-based tutorials can give different outputs!</warning-title>
-> The nature of coding pulls the most recent tools to perform tasks. This can - and often does - change the outputs of an analysis. Be prepared, as you are unlikely to get outputs identical to this tutorial. That's ok! The outputs should still be pretty close (the basic interpretation has survived 5 years of analytical updates and counting...).
-{: .warning}
+
+{% snippet topics/single-cell/faqs/notebook_warning.md %}
 
 # Install libraries
 

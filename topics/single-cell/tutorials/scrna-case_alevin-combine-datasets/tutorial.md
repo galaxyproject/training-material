@@ -58,9 +58,6 @@ follow_up_training:
         - scrna-case_basic-pipeline
 ---
 
-# Introduction
-
-<!-- This is a comment. -->
 
 This tutorial will take you from the multiple AnnData outputs of the [previous tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html) to a single, combined  AnnData object, ready for all the fun downstream processing. We will also look at how to add in metadata (for instance, SEX or GENOTYPE) for analysis later on.
 
@@ -126,8 +123,6 @@ Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows yo
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
 ## Concatenating objects
-
-{% snippet faqs/galaxy/tutorial_mode.md %}
 
 > <hands-on-title>Concatenating AnnData objects</hands-on-title>
 >

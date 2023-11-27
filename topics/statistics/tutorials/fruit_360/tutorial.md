@@ -20,8 +20,6 @@ contributors:
 
 ---
 
-# Introduction
-
 
 The classification of fruits and vegetables offers many useful applications such as 
 automated harvesting by robots, building up stocks for supermarkets, effective detection 

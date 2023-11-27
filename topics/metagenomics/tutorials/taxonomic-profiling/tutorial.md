@@ -25,13 +25,12 @@ contributions:
     - bebatut
     - paulzierep
    funding:
-    - erasmusplus
+    - gallantries
 tags:
 - metagenomics
 - taxonomic profiling
 ---
 
-# Introduction
 
 The term **"microbiome"** describes "a characteristic microbial community occupying a reasonably well-defined habitat which has distinct physio-chemical properties. The term thus not only refers to the microorganisms involved but also encompasses their theatre of activity" ({% cite whipps1988mycoparasitism %}).
 

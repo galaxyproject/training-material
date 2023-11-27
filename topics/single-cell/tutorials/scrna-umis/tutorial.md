@@ -29,8 +29,6 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
 
-# Introduction
-
 
 Barcodes are small oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:
 

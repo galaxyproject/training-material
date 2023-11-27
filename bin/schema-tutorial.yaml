@@ -83,6 +83,8 @@ mapping:
               required: true
               enum:
               - CONTRIBUTORS
+              - FUNDERS
+              - ORGANISATIONS
         description: |
             List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
         examples:
@@ -108,7 +110,7 @@ mapping:
                 translation:
                     - shiltemann
                 funding:
-                    - erasmusplus
+                    - gallantries
         type: map
         mapping:
             authorship:
@@ -118,6 +120,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             editing:
                 type: seq
                 description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
@@ -125,6 +128,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             testing:
                 type: seq
                 description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
@@ -132,6 +136,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             ux:
                 type: seq
                 description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
@@ -139,6 +144,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             infrastructure:
                 type: seq
                 description: These entities managed and provided infrastructure to the GTN or for training purposes
@@ -146,13 +152,16 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - FUNDERS
             funding:
                 type: seq
                 description: These entities provided funding support for the development of this resource
                 sequence:
                 - type: str
                   enum:
-                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - FUNDERS
             translation:
                 type: seq
                 description: These entities did translation and localisation work on this resource
@@ -160,6 +169,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
     subtopic:
         type: str
         description: |

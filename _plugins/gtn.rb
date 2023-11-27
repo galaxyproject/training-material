@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'English'
+require './_plugins/gtn/contributors'
 require './_plugins/gtn/boxify'
 require './_plugins/gtn/mod'
 require './_plugins/gtn/images'
@@ -18,37 +19,6 @@ puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if vers
 
 ##
 # This module contains functions that are used in the GTN, our internal functions that is.
-
-##
-# This function returns the authors of a material, if it has any. (via contributors or contribution)
-# Params:
-# +material+:: The material to get the authors of
-# Returns:
-# +Array+:: The authors of the material
-def get_authors(material)
-  if material.key?('contributors')
-    material['contributors']
-  elsif material.key?('contributions')
-    material['contributions']['authorship']
-  else
-    []
-  end
-end
-
-##
-# This function returns the name of a user, if it is known. Otherwise, it returns the user name.
-# Params:
-# +user+:: The user to get the name of
-# +site+:: The +Jekyll::Site+ object
-# Returns:
-# +String+:: The name of the user
-def lookup_name(user, site)
-  if site.data['contributors'].key?(user)
-    site.data['contributors'][user].fetch('name', user)
-  else
-    user
-  end
-end
 
 module Jekyll
   # The main GTN function library
@@ -211,21 +181,80 @@ module Jekyll
     end
 
     ##
-    # Basically a dupe of 'get_authors'
     # Params:
-    # +contributors+:: The contributors to the material
-    # +contributions+:: The contributions to the material
+    # +data+:: The page data
     # Returns:
-    # +Array+:: The "authors" of the material
-    #
-    # TODO(hexylena) de-duplicate
+    # +Array+:: The "authors" of the material (list of strings)
     #
     # Example:
-    #  {% assign authors = page.contributors | filter_authors:page.contributions -%}
-    def filter_authors(contributors, contributions)
-      return contributors if !contributors.nil?
+    #  {% assign authors = page | filter_authors -%}
+    def filter_authors(data)
+      Gtn::Contributors.get_authors(data)
+    end
 
-      contributions['authorship']
+    ##
+    # Params:
+    # +data+:: The site data
+    # +string+:: The contributor id
+    # Returns:
+    # +Hash+:: The contributing entity
+    #
+    # Example:
+    #  {% assign contrib = site | fetch_contributor: page.contributor -%}
+    def fetch_contributor(site, id)
+      Gtn::Contributors.fetch_contributor(site, id)
+    end
+
+    ##
+    # Params:
+    # +data+:: The contributor's data
+    # Returns:
+    # +String+:: The funding URL
+    #
+    # Example:
+    #  {{ entity | fetch_funding_url }}
+    def fetch_funding_url(entity)
+      Gtn::Contributors.fetch_funding_url(entity)
+    end
+
+    ##
+    # Params:
+    # +data+:: The contributor's data
+    # Returns:
+    # +String+:: The avatar's URL
+    #
+    # Example:
+    #  {{ entity | fetch_entity_avatar: 'alice', 120 }}
+    def fetch_entity_avatar_url(entity, id, width)
+      return 'ERROR_NO_ENTITY' if entity.nil?
+
+      width.nil? ? '' : "width=\"#{width}\""
+      if !entity['avatar'].nil?
+        entity['avatar']
+      elsif entity['github'] != false
+        qp = width.nil? ? '' : "?s=#{width}"
+        "https://avatars.githubusercontent.com/#{id}#{qp}"
+      else
+        '/training-material/assets/images/avatar.png'
+      end
+    end
+
+    ##
+    # Params:
+    # +data+:: The contributor's data
+    # Returns:
+    # +String+:: The funding URL
+    #
+    # Example:
+    #  {{ entity | fetch_entity_avatar: 'alice', 120 }}
+    def fetch_entity_avatar(entity, id, width)
+      if entity.nil?
+        return '<img src="/training-material/assets/images/avatar.png" alt="ERROR_NO_ENTITY avatar" class="avatar"/>'
+      end
+
+      w = width.nil? ? '' : "width=\"#{width}\""
+      url = fetch_entity_avatar_url(entity, id, width)
+      %(<img src="#{url}" alt="#{entity['name']} avatar" #{w} class="avatar" />)
     end
 
     ##
@@ -328,6 +357,10 @@ module Jekyll
       end
     end
 
+    def get_version_number(page)
+      Gtn::ModificationTimes.obtain_modification_count(page['path'])
+    end
+
     def topic_name_from_page(page, site)
       if page.key? 'topic_name'
         site.data[page['topic_name']]['title']
@@ -381,8 +414,33 @@ Liquid::Template.register_filter(Jekyll::GtnFunctions)
 #
 # This exists because the jekyll-feed plugin expects those fields to look like that.
 Jekyll::Hooks.register :posts, :pre_render do |post, _out|
-  post.data['author'] = get_authors(post.data).map { |c| lookup_name(c, post.site) }.join(', ')
+  post.data['author'] = Gtn::Contributors.get_authors(post.data).map do |c|
+    Gtn::Contributors.fetch_name(post.site, c)
+  end.join(', ')
   post.data['image'] = post.data['cover']
+end
+
+# Create back-refs for affiliations
+Jekyll::Hooks.register :site, :post_read do |site|
+  # Users list affiliations on their profile in site.data['contributors']
+  # And we want to create a back-ref to the user from the affiliation
+  site.data['contributors'].each do |name, contributor|
+    if contributor.key?('affiliations')
+      contributor['affiliations'].each do |affiliation|
+        if site.data['organisations'].key?(affiliation)
+          if !site.data['organisations'][affiliation].key?('members')
+            site.data['organisations'][affiliation]['members'] = []
+          end
+
+          site.data['organisations'][affiliation]['members'] << name
+        elsif site.data['funders'].key?(affiliation)
+          site.data['funders'][affiliation]['members'] = [] if !site.data['funders'][affiliation].key?('members')
+
+          site.data['funders'][affiliation]['members'] << name
+        end
+      end
+    end
+  end
 end
 
 if $PROGRAM_NAME == __FILE__

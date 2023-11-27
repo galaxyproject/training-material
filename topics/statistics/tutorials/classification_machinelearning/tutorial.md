@@ -23,8 +23,6 @@ contributors:
 - simonbray
 ---
 
-# Introduction
-
 
 In this tutorial you will learn how to apply Galaxy tools to solve [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine logistic regression, which is an example of a linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step.
 

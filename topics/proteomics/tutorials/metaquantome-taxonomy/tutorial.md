@@ -39,8 +39,6 @@ tags: [microbiome]
 ---
 
 
-# Introduction
-
 
 metaQuantome software suite {% cite Easterly2019 %} was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.
 

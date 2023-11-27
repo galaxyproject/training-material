@@ -159,7 +159,7 @@ When something breaks on the GTN in the UI, we collect information about how tha
 > > - Stack trace
 > > - GTN Javascript variables
 > {: .code-in}
-> 
+>
 > > <code-out-title>How we use it</code-out-title>
 > > - Fixing JavaScript Bugs
 > > - Especially from unusual platforms which we cannot test on.
@@ -177,6 +177,12 @@ Opt out from sentry:
 function savePrivacy() {
 	gtnLocalSet('sentry-opt-out', document.getElementById("sentry-opt-out").value)
 	gtnLocalSet('plausible-opt-out', document.getElementById("plausible-opt-out").value)
+
+	if(document.getElementById("plausible-opt-out").value === "opt-in") {
+		localStorage.removeItem("plausible_ignore")
+	} else {
+		localStorage.setItem("plausible_ignore", "true")
+	}
 }
 // restore from prefs
 document.getElementById("sentry-opt-out").value = gtnLocalGet("sentry-opt-out") || "opt-in";

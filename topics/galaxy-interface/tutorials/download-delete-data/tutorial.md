@@ -24,8 +24,6 @@ subtopic: cleanup
 ---
 
 
-# Introduction
-
 
 This tutorial outlines the process to get your data out of Galaxy and to delete it from Galaxy afterwards.
 

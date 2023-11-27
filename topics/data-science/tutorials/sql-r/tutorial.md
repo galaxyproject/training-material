@@ -45,6 +45,8 @@ tags:
 - R
 ---
 
+In this tutorial you'll learn to use SQL via R. Some R and SQL experience is a pre-requisite.
+
 > <comment-title></comment-title>
 >
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Databases and SQL](https://github.com/swcarpentry/sql-novice-survey/) lesson, which is licensed CC-BY 4.0.

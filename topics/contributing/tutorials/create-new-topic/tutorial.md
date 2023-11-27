@@ -18,7 +18,6 @@ contributions:
   - hexylena
 ---
 
-# Introduction
 
 Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to exome sequencing analysis).
 

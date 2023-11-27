@@ -38,8 +38,6 @@ abbreviations:
 ---
 
 
-# Introduction
-
 
 The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, Bionano optical maps, and {Hi-C} data.
 
@@ -63,7 +61,7 @@ This tutorial assumes you are comfortable getting data into Galaxy, running jobs
 - [Galaxy 101]({% link topics/introduction/tutorials/galaxy-intro-101/tutorial.md %})
 - [Getting Data into Galaxy]({% link topics/galaxy-interface/tutorials/get-data/slides.html %})
 - [Using Dataset Collections]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %})
-- [Introduction to Galaxy Analyses](https://training.galaxyproject.org/training-material/topics/introduction)
+- [Introduction to Galaxy Analyses]({% link topics/introduction/index.md %})
 - [Understanding the Galaxy History System]({% link topics/galaxy-interface/tutorials/history/tutorial.md %})
 - [Downloading and Deleting Data in Galaxy]({% link topics/galaxy-interface/tutorials/download-delete-data/tutorial.md %})
 
@@ -373,6 +371,3 @@ With respect to the total sequence length, we can conclude that the size of our 
 ![Figure 10: Comparison reference genome](../../images/vgp_assembly/hi-c_pretext_conclusion.png "Comparison between contact maps generated using the final assembly (a) and the reference genome (b).")
 
 If we compare the contact map of our assembled genome (fig. 10a) with the reference assembly (fig. 10b), we can see that the two are indistinguishable, suggesting that we have generated a chromosome level genome assembly.
-
-
-

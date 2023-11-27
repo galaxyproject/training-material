@@ -33,8 +33,6 @@ contributions:
 ---
 
 
-# Introduction
-
 The aim of this tutorial is twofold:
 
 1. It introduces general patterns of working with high-throughput sequencing data in Galaxy,
