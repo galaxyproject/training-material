@@ -112,7 +112,7 @@
       "name": "GTN Training: Introduction To Imaging",
       "title": "GTN Training: Introduction To Imaging",
       "test_results": null,
-      "modified": "2023-11-27 00:10:14 +0000",
+      "modified": "2023-11-27 12:31:45 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Unzip\"];\n  10[\"Binary 2 Label\"];\n  11[\"Histogram equalization\"];\n  12[\"Convert image\"];\n  13[\"Count Objects\"];\n  14[\"Convert image\"];\n  15[\"Overlay Segmentation Mask\"];\n  2[\"Image Info\"];\n  3[\"Convert image\"];\n  4[\"Histogram equalization\"];\n  5[\"Filter Image\"];\n  6[\"Convert image\"];\n  7[\"Histogram equalization\"];\n  8[\"Auto Threshold\"];\n  9[\"Convert image\"];\n  0 -->|output| 1;\n  8 -->|output| 10;\n  10 -->|output| 11;\n  10 -->|output| 12;\n  10 -->|output| 13;\n  11 -->|output| 14;\n  6 -->|output| 15;\n  12 -->|output| 15;\n  1 -->|unzipped_single| 2;\n  1 -->|unzipped_single| 3;\n  1 -->|unzipped_single| 4;\n  1 -->|unzipped_single| 5;\n  4 -->|output| 6;\n  5 -->|output| 7;\n  5 -->|output| 8;\n  7 -->|output| 9;\n"
     }
   ],
@@ -173,6 +173,13 @@
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
+        "name": "2d_histogram_equalization",
+        "owner": "imgteam",
+        "revisions": "77f7159d775a",
+        "tool_panel_section_label": "Imaging",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
         "name": "2d_simple_filter",
         "owner": "imgteam",
         "revisions": "dba87c4b32d3",
@@ -208,9 +215,23 @@
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
+        "name": "binary2labelimage",
+        "owner": "imgteam",
+        "revisions": "9bb446db4a1e",
+        "tool_panel_section_label": "Imaging",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
         "name": "count_objects",
         "owner": "imgteam",
         "revisions": "664232d2a3f7",
+        "tool_panel_section_label": "Imaging",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "count_objects",
+        "owner": "imgteam",
+        "revisions": "b58447a2eed2",
         "tool_panel_section_label": "Imaging",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
@@ -244,7 +265,7 @@
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: 81f0cbca04a7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: 3df9f0a4bf34\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_histogram_equalization\n  owner: imgteam\n  revisions: 70316d792fc9\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_simple_filter\n  owner: imgteam\n  revisions: dba87c4b32d3\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_simple_filter\n  owner: imgteam\n  revisions: f70b215d155c\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: b07f4839ca77\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: 85edbb7a436b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: binary2labelimage\n  owner: imgteam\n  revisions: 6e65fd971e13\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: count_objects\n  owner: imgteam\n  revisions: 664232d2a3f7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: image_info\n  owner: imgteam\n  revisions: 7b6d9412c7f8\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: overlay_images\n  owner: imgteam\n  revisions: 22ff7c705a83\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 38eec75fbe9b\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 57f0914ddb7b\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: 81f0cbca04a7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: 3df9f0a4bf34\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_histogram_equalization\n  owner: imgteam\n  revisions: 70316d792fc9\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_histogram_equalization\n  owner: imgteam\n  revisions: 77f7159d775a\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_simple_filter\n  owner: imgteam\n  revisions: dba87c4b32d3\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_simple_filter\n  owner: imgteam\n  revisions: f70b215d155c\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: b07f4839ca77\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: 85edbb7a436b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: binary2labelimage\n  owner: imgteam\n  revisions: 6e65fd971e13\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: binary2labelimage\n  owner: imgteam\n  revisions: 9bb446db4a1e\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: count_objects\n  owner: imgteam\n  revisions: 664232d2a3f7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: count_objects\n  owner: imgteam\n  revisions: b58447a2eed2\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: image_info\n  owner: imgteam\n  revisions: 7b6d9412c7f8\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: overlay_images\n  owner: imgteam\n  revisions: 22ff7c705a83\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 38eec75fbe9b\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 57f0914ddb7b\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {

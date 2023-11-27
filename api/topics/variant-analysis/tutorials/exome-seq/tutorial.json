@@ -125,7 +125,7 @@
       "name": "Exome Seq Training Pre-Mapped W Cached Ref",
       "title": "Exome Seq Training Pre-Mapped W Cached Ref",
       "test_results": null,
-      "modified": "2023-11-27 00:10:16 +0000",
+      "modified": "2023-11-27 12:31:46 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Samtools view\"];\n  5[\"Samtools view\"];\n  6[\"Samtools view\"];\n  7[\"RmDup\"];\n  8[\"RmDup\"];\n  9[\"RmDup\"];\n  10[\"FreeBayes\"];\n  11[\"bcftools norm\"];\n  12[\"SnpEff eff:\"];\n  13[\"GEMINI load\"];\n  14[\"GEMINI inheritance pattern\"];\n  0 -->|output| 4;\n  1 -->|output| 5;\n  2 -->|output| 6;\n  4 -->|outputsam| 7;\n  5 -->|outputsam| 8;\n  6 -->|outputsam| 9;\n  7 -->|output1| 10;\n  8 -->|output1| 10;\n  9 -->|output1| 10;\n  10 -->|output_vcf| 11;\n  11 -->|output_file| 12;\n  12 -->|snpeff_output| 13;\n  3 -->|output| 13;\n  13 -->|outfile| 14;\n"
     },
     {
@@ -147,7 +147,7 @@
       "name": "Exome Seq Training Full W Cached Ref",
       "title": "Exome Seq Training Full W Cached Ref",
       "test_results": null,
-      "modified": "2023-11-27 00:10:16 +0000",
+      "modified": "2023-11-27 12:31:46 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"Input dataset\"];\n  7[\"FastQC\"];\n  8[\"FastQC\"];\n  9[\"Map with BWA-MEM\"];\n  10[\"FastQC\"];\n  11[\"FastQC\"];\n  12[\"Map with BWA-MEM\"];\n  13[\"FastQC\"];\n  14[\"FastQC\"];\n  15[\"Map with BWA-MEM\"];\n  16[\"Samtools view\"];\n  17[\"Samtools view\"];\n  18[\"MultiQC\"];\n  19[\"Samtools view\"];\n  20[\"RmDup\"];\n  21[\"RmDup\"];\n  22[\"RmDup\"];\n  23[\"FreeBayes\"];\n  24[\"bcftools norm\"];\n  25[\"SnpEff eff:\"];\n  26[\"GEMINI load\"];\n  27[\"GEMINI inheritance pattern\"];\n  0 -->|output| 7;\n  1 -->|output| 8;\n  0 -->|output| 9;\n  1 -->|output| 9;\n  2 -->|output| 10;\n  3 -->|output| 11;\n  2 -->|output| 12;\n  3 -->|output| 12;\n  4 -->|output| 13;\n  5 -->|output| 14;\n  4 -->|output| 15;\n  5 -->|output| 15;\n  9 -->|bam_output| 16;\n  12 -->|bam_output| 17;\n  7 -->|text_file| 18;\n  8 -->|text_file| 18;\n  10 -->|text_file| 18;\n  11 -->|text_file| 18;\n  13 -->|text_file| 18;\n  14 -->|text_file| 18;\n  15 -->|bam_output| 19;\n  16 -->|outputsam| 20;\n  17 -->|outputsam| 21;\n  19 -->|outputsam| 22;\n  20 -->|output1| 23;\n  21 -->|output1| 23;\n  22 -->|output1| 23;\n  23 -->|output_vcf| 24;\n  24 -->|output_file| 25;\n  25 -->|snpeff_output| 26;\n  6 -->|output| 26;\n  26 -->|outfile| 27;\n"
     }
   ],
@@ -274,14 +274,14 @@
       {
         "name": "snpeff",
         "owner": "iuc",
-        "revisions": "5b80f544c67f",
+        "revisions": "9473cd297a76",
         "tool_panel_section_label": "Variant Calling",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
         "name": "snpeff",
         "owner": "iuc",
-        "revisions": "5b80f544c67f",
+        "revisions": "9473cd297a76",
         "tool_panel_section_label": "Variant Calling",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
@@ -294,7 +294,7 @@
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 5ec9f6bceaee\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: freebayes\n  owner: devteam\n  revisions: a5937157062f\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_rmdup\n  owner: devteam\n  revisions: 586f9e1cdb2b\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_norm\n  owner: iuc\n  revisions: ebb2e12a6de1\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_inheritance\n  owner: iuc\n  revisions: 2c68e29c3527\n  tool_panel_section_label: Gemini\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_load\n  owner: iuc\n  revisions: 2270a8b83c12\n  tool_panel_section_label: Gemini\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: abfd8a6544d7\n  tool_panel_section_label: Quality Control\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_view\n  owner: iuc\n  revisions: 5826298f6a73\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5b80f544c67f\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5b80f544c67f\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: d94aff5ee623\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 5ec9f6bceaee\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: freebayes\n  owner: devteam\n  revisions: a5937157062f\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_rmdup\n  owner: devteam\n  revisions: 586f9e1cdb2b\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_norm\n  owner: iuc\n  revisions: ebb2e12a6de1\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_inheritance\n  owner: iuc\n  revisions: 2c68e29c3527\n  tool_panel_section_label: Gemini\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_load\n  owner: iuc\n  revisions: 2270a8b83c12\n  tool_panel_section_label: Gemini\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: abfd8a6544d7\n  tool_panel_section_label: Quality Control\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_view\n  owner: iuc\n  revisions: 5826298f6a73\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 9473cd297a76\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 9473cd297a76\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: d94aff5ee623\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {
