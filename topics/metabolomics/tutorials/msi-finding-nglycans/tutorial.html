@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -263,7 +263,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -756,7 +756,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Depending on the analyte of interest and the application, different mass spectrometers are used. A mass spectrometer measures the analytes by ionizing, evaporating and sorting them by their mass-to-charge (m/z) ratio. Put simply, a mass spectrometer consists basically of three parts: an ionization source, a mass analyzer and a detector. The most common ionization sources for MSI are MALDI (Matrix Assisted Laser Desorption/Ionization), DESI (Desorption Electrospray Ionization) and SIMS (Secondary Ion Mass Spectrometry).</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/msi_distribution_maldi_tof_imaging.png" alt="MSI measurement. " width="1131" height="354" loading="lazy" /><a target="_blank" href="../../images/msi_distribution_maldi_tof_imaging.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> MALDI TOF imaging of a mouse kidney</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/msi_distribution_maldi_tof_imaging.png" alt="MSI measurement. " width="1131" height="354" loading="lazy" /><a target="_blank" href="../../images/msi_distribution_maldi_tof_imaging.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> MALDI TOF imaging of a mouse kidney</figcaption></figure>
 
 <p>One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization, a laser is fired onto the sample, which has been covered with a special matrix that absorbs the laser energy and transfers it to the analytes. This process vaporizes and ionizes the analytes. As they are now charged, they can be accelerated in an electric field towards the TOF tube. The time of flight through the tube to the detector is measured, which allows calculation of the mass over charge (m/z) of the analyte, as both mass and charge are correlated with time of flight. During measurement, complete mass spectra with hundreds of m/z - intensity pairs are acquired in thousands of sample plots, leading to large and complex datasets. Each mass spectrum is annotated with coordinates (x,y) that define its location in the sample. This allows visualization of the intensity distribution of each m/z feature in the sample as a heatmap.</p>
 
@@ -803,7 +803,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>To make computation times feasible for this training, we reduced all datasets to a m/z range of 1250 – 2310 and resampled the m/z values with a step size of 0.1. The main part of the training will be performed with the control and one PNGase F treated kidney file, which were both restricted to representative pixels (Figure 2). To test the results on the complete dataset we also provide a file in which all four (m/z reduced and resampled) files (control, calibrants, treated kidney 1 and treated kidney 2) are combined and TIC-normalized. All size-reduced training datasets are available via <a href="https://zenodo.org/record/2628280">Zenodo</a>. We will combine the cropped control and the cropped treated1 file and perform similar steps to those described by <a href="https://doi.org/10.1007/s00216-014-8293-7">Gustafsson et al.</a>. These steps include combining files, preprocessing, unsupervised and supervised analysis, identification of N-glycans and generation of analyte distribution heatmaps.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/msi-diff-abundance-file-dimensions.png" alt="file_dimensions. " width="626" height="752" loading="lazy" /><a target="_blank" href="../../images/msi-diff-abundance-file-dimensions.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Top image: All four files after combining them. Black rectangles show the orientation of the cropped control and cropped treated1 files that are used in the major part of the training. Bottom: Cropped training files after combining them.</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/msi-diff-abundance-file-dimensions.png" alt="file_dimensions. " width="626" height="752" loading="lazy" /><a target="_blank" href="../../images/msi-diff-abundance-file-dimensions.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Top image: All four files after combining them. Black rectangles show the orientation of the cropped control and cropped treated1 files that are used in the major part of the training. Bottom: Cropped training files after combining them.</figcaption></figure>
 
 <h2 id="get-data">Get data</h2>
 
@@ -1248,7 +1248,7 @@ The average peak picking has removed all spatial information and kept only mean 
 
 </blockquote>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/msi-diff-abundance-pca.png" alt="PCA. " width="858" height="808" loading="lazy" /><a target="_blank" href="../../images/msi-diff-abundance-pca.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Distribution of the principal components</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/msi-diff-abundance-pca.png" alt="PCA. " width="858" height="808" loading="lazy" /><a target="_blank" href="../../images/msi-diff-abundance-pca.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Distribution of the principal components</figcaption></figure>
 
 <p>The PCA clustering reveals that the N-glycan profile is different in different kidney compartments. To find the m/z features that correspond to these compartments, the feature tabular file can further be analyzed by sorting the file for the principal components of interest. This reveals the discrete m/z values for the features with the highest loadings: PC1 and PC3: 1905.72, PC4: 2304.91. Later, we will visualize the morphological distribution of those features on the complete dataset.</p>
 
@@ -1285,7 +1285,7 @@ The average peak picking has removed all spatial information and kept only mean 
 
 </blockquote>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/msi-diff-abundance-classification.png" alt="SSC. " width="1186" height="1020" loading="lazy" /><a target="_blank" href="../../images/msi-diff-abundance-classification.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> T-statistics plot for the classification and distribution of the most discriminating m/z feature and class prediction for all spectra.</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/msi-diff-abundance-classification.png" alt="SSC. " width="1186" height="1020" loading="lazy" /><a target="_blank" href="../../images/msi-diff-abundance-classification.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> T-statistics plot for the classification and distribution of the most discriminating m/z feature and class prediction for all spectra.</figcaption></figure>
 
 <p>High accuracy, sensitivity and specificity indicate that the control and PNGase F treated kidney sections can be discriminated quite well. The prediction shows the location of the few misclassified spectra towards the border of the tissue. As our aim is not to build and test a classifier for accurate prediction, we move on to investigate the m/z features that were most discriminative for the two groups more deeply. Looking at the feature tabular file, we spot the 2 m/z features that had the highest loadings in the PCA, amongst the top features with the highest t-statistics. Furthermore, this list can be compared to the m/z features that were determined as potential N-linked glycans in <a href="https://static-content.springer.com/esm/art%3A10.1007%2Fs00216-014-8293-7/MediaObjects/216_2014_8293_MOESM1_ESM.pdf">Gustafsson et al. Figure S6</a>. We found nine out of twelve m/z features. Two m/z features were outside our cropped m/z range and could therefore not be found. The 1079.408 m/z feature is missing in our feature list.</p>
 
@@ -1450,13 +1450,13 @@ Next, we visually explore the abundance distribution for all identified N-glycan
   </ol>
 </blockquote>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/msi-diff-abundance-mz-images.png" alt="overlay_images. " width="1162" height="1110" loading="lazy" /><a target="_blank" href="../../images/msi-diff-abundance-mz-images.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Distribution for three analytes that are localized in different kidney compartments and their overlay.</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/msi-diff-abundance-mz-images.png" alt="overlay_images. " width="1162" height="1110" loading="lazy" /><a target="_blank" href="../../images/msi-diff-abundance-mz-images.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Distribution for three analytes that are localized in different kidney compartments and their overlay.</figcaption></figure>
 
 <h1 id="conclusion">Conclusion</h1>
 
 <p>This tutorial covered combining datasets, data preprocessing and supervised as well as unsupervised statistical analysis.</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/msi-diff-abundance-workflow.png" alt="workflow. " width="1508" height="886" loading="lazy" /><a target="_blank" href="../../images/msi-diff-abundance-workflow.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Workflow that was used during this tutorial.</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/msi-diff-abundance-workflow.png" alt="workflow. " width="1508" height="886" loading="lazy" /><a target="_blank" href="../../images/msi-diff-abundance-workflow.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Workflow that was used during this tutorial.</figcaption></figure>
 
 
                 </section>
@@ -1670,7 +1670,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1698,7 +1698,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

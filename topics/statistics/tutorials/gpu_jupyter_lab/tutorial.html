@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -306,7 +306,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -840,29 +840,29 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <h4 id="features-python-packages-with-user-interfaces">Features (Python packages with user interfaces)</h4>
 <p>There are other features, added as Python packages, that have user interface components. These include <strong><a href="https://github.com/rapidsai/jupyterlab-nvdashboard">GPU utilization dashboards</a></strong> for monitoring the GPU usage and system memory utilization, <strong><a href="https://github.com/voila-dashboards/voila">Voila</a></strong> for rendering output cells of a notebook in a separate tab hiding all code cells, interactive <strong><a href="https://github.com/bqplot/bqplot">Bqplots</a></strong> for plotting, <strong><a href="https://github.com/jupyterlab/jupyterlab-git">Git</a></strong> version control to clone, commit and maintain codebase directly from the notebook and <strong><a href="https://elyra.readthedocs.io/en/stable/">Elyra AI</a></strong> pipelines for knitting together multiple notebooks to create a workflow. Many notebooks are created for processing datasets in different ways. These notebooks can be knit together to form one pipeline where each notebook transforms datasets taking a different form of data from its previous notebook and passing on the transformed datasets to its next notebook. An example workflow created using Elyra AI can be found by the name “METABRIC_ML.pipeline” in the “elyra” folder of a typical Jupyterlab instance. These pipelines can also be executed remotely on multiple “runtimes” supported by docker containers. An example pipeline created in the notebook can be seen in Figure 1. These features, integrated into the Jupyterlab notebook, are useful for the efficient execution and management of data science projects.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/elyra_ai_pipeline.png" alt="Elyra AI pipeline. " width="966" height="482" loading="lazy" /><a target="_blank" href="../../images/elyra_ai_pipeline.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> An example ML pipeline created using Elyra AI in a notebook. Each connected block of the pipeline is a different notebook</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/elyra_ai_pipeline.png" alt="Elyra AI pipeline. " width="966" height="482" loading="lazy" /><a target="_blank" href="../../images/elyra_ai_pipeline.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> An example ML pipeline created using Elyra AI in a notebook. Each connected block of the pipeline is a different notebook</figcaption></figure>
 
 <p>In the following sections, we will look at two examples of machine learning analyses - image segmentation and prediction of 3D structure of protein sequences. We will go through each step of how to perform such analyses in this Jupyterlab notebook.</p>
 
 <h2 id="image-segmentation">Image segmentation</h2>
 <p>In an image classification task, a label is assigned to each image. For example, an image containing a cat gets a label as “cat” (“cat” is given an integer to be used in a machine learning program). But, in an image segmentation task, each pixel of an image gets a label. For example, in an image containing a cat, all the pixels occupied by the cat in the image are denoted by violet color (see Figure 2). More information can be found in the <a href="https://www.tensorflow.org/tutorials/images/segmentation">image segmentation</a> tutorial. Image segmentation is a widely used technique in many fields such as medical imaging to find out abnormal regions in images of tissues, self-driving cars to detect different objects on highways and many more.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/cat_segmentation.png" alt="Image segmentation for a cat. " width="1095" height="370" loading="lazy" /><a target="_blank" href="../../images/cat_segmentation.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Image segmentation for cat. The violet region of the middle plot denotes the cat and the outline of the violet section denoted by the yellow color is the cat's mask</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/cat_segmentation.png" alt="Image segmentation for a cat. " width="1095" height="370" loading="lazy" /><a target="_blank" href="../../images/cat_segmentation.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Image segmentation for cat. The violet region of the middle plot denotes the cat and the outline of the violet section denoted by the yellow color is the cat's mask</figcaption></figure>
 
 <h2 id="covid-ct-scan">COVID CT scan</h2>
 <p>Segmenting lung CT scans task to locate infected regions has been actively proposed to augment the RT-PCR testing for initial screening of COVID infection in humans. Deep learning has been used to predict these regions with high accuracy in studies such as <span class="citation"><a href="#InfNet">Fan 2020</a></span>, <span class="citation"><a href="#JCSWu2021">Wu 2021</a></span> and many more. In Figure 3, the differences between the CT scans of a normal person and a person suffering from COVID-19 can be seen. The regions of the lungs marked by white patches are infected as discussed in <span class="citation"><a href="#SaeedizadehTVUnet">Saeedizadeh 2021</a></span>.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/normal_covid_ct_scans.jpg" alt="Normal and Covid CT scans. " width="508" height="266" loading="lazy" /><a target="_blank" href="../../images/normal_covid_ct_scans.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> (Left) Lungs CT scan for a normal person and (right) lungs CT scan for a person having COVID-19</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/normal_covid_ct_scans.jpg" alt="Normal and Covid CT scans. " width="508" height="266" loading="lazy" /><a target="_blank" href="../../images/normal_covid_ct_scans.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> (Left) Lungs CT scan for a normal person and (right) lungs CT scan for a person having COVID-19</figcaption></figure>
 
 <h2 id="ct-scans-and-masks">CT scans and masks</h2>
 <p>Figure 4 shows CT scans of infected lungs (top row) and borders around the infected regions have been drawn with red color (middle row). In the last row respective masks, from the CT scans, have been taken out denoting the infected regions. These masks are the “segmented” regions from the corresponding CT scans. While creating a dataset for training the deep learning model, Unet (briefly discussed in the following section), the CT scans are the data points and its “known” respective masks of infected regions become their labels (<span class="citation"><a href="#SaeedizadehTVUnet">Saeedizadeh 2021</a></span>).</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/covid_ct_scan_masks.png" alt="Masks. " width="446" height="681" loading="lazy" /><a target="_blank" href="../../images/covid_ct_scan_masks.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Picture shows CT scans and their masks of infected regions that are drawn with red color in middle row plots</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/covid_ct_scan_masks.png" alt="Masks. " width="446" height="681" loading="lazy" /><a target="_blank" href="../../images/covid_ct_scan_masks.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Picture shows CT scans and their masks of infected regions that are drawn with red color in middle row plots</figcaption></figure>
 
 <h3 id="unet-neural-network">Unet neural network</h3>
 <p>Unet neural network is widely used for segmentation tasks in images (<span class="citation"><a href="#Ronnebergerunet">Ronneberger 2015</a></span>). The name “Unet” resembles the shape of its architecture as “U” (see Figure 5). It has two parts - encoder and decoder. The left half of the “U” shape is the encoder that learns the feature representation (downsampling) at a lower level. The right half is the decoder that maps the low-resolution feature representation on the higher resolution (upsampling) pixel space.</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/Unet.jpg" alt="Unet architecture. " width="809" height="537" loading="lazy" /><a target="_blank" href="../../images/Unet.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Architecture of Unet neural network for image segmentation. The name "Unet" resembles the shape of its architecture as 'U'</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/Unet.jpg" alt="Unet architecture. " width="809" height="537" loading="lazy" /><a target="_blank" href="../../images/Unet.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Architecture of Unet neural network for image segmentation. The name "Unet" resembles the shape of its architecture as 'U'</figcaption></figure>
 
 <p>In this tutorial, we will use the dataset of CTs scans and their respective masks to train an Unet neural network model. The model learns to map the infected regions in the CT scans to their masks. For prediction, the trained model is given unseen CT scans and for each CT scan, it predicts infected regions or masks. For this experiment, we will use Jupyterlab for cloning the notebooks from Github that contain scripts for downloading data, creating and training Unet model and prediction tasks. Data (CT scans and also the trained model) required for the notebooks can be downloaded from Zenodo (<span class="citation"><a href="#anupkumar20226091361">Kumar 2022</a></span>). The model can either be trained in Jupyterlab or can be sent to Galaxy’s cluster for remote processing. After remote processing, the created datasets such as the trained model become available in new Galaxy history.</p>
 
@@ -905,7 +905,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     </li>
     <li>The repository “anuprulez/gpu_jupyterlab_ct_image_segmentation” gets immediately cloned.</li>
     <li>Move inside the created folder <code class="language-plaintext highlighter-rouge">gpu_jupyterlab_ct_image_segmentation</code>. A few notebooks can be found inside that are numbered.
-      <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/git_clone.png" alt="Clone repository. " width="461" height="254" loading="lazy" /><a target="_blank" href="../../images/git_clone.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Clone a code repository using Git</figcaption></figure>
+      <figure id="figure-6" style="max-width: 90%;"><img src="../../images/git_clone.png" alt="Clone repository. " width="461" height="254" loading="lazy" /><a target="_blank" href="../../images/git_clone.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Clone a code repository using Git</figcaption></figure>
     </li>
   </ol>
 
@@ -950,7 +950,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     </li>
   </ol>
 
-  <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/true_pred_masks.png" alt="True and predicted masks of CTs scans. " width="3600" height="3600" loading="lazy" /><a target="_blank" href="../../images/true_pred_masks.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Ground truth and predicted masks of COVID CT scans. Predicted masks in the third and fourth columns (computed using slightly different loss functions) are very close to the corresponding original masks in the second column</figcaption></figure>
+  <figure id="figure-7" style="max-width: 90%;"><img src="../../images/true_pred_masks.png" alt="True and predicted masks of CTs scans. " width="3600" height="3600" loading="lazy" /><a target="_blank" href="../../images/true_pred_masks.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Ground truth and predicted masks of COVID CT scans. Predicted masks in the third and fourth columns (computed using slightly different loss functions) are very close to the corresponding original masks in the second column</figcaption></figure>
 
   <p>Figure 7 shows original lungs CT scans in the first column. The second column shows the corresponding true infected regions in white. The third and fourth columns show the infected regions predicted with different loss functions, one is the binary cross-entropy loss and another is the combination of binary cross-entropy loss and total variation loss. Binary cross-entropy calculates loss between two corresponding pixels of true and predicted images. It measures how close the two corresponding pixels are. But, total variation loss measures the amount of noise in predicted images as noisy regions usually show large variations in their neighbourhood. The noise in the predicted images gets minimized and the connectivity of predicted masks improves as well when minimizing this loss.</p>
 
@@ -974,7 +974,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
       </blockquote>
 
-      <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/finished_history_remote_ai.png" alt="Galaxy history. " width="340" height="766" loading="lazy" /><a target="_blank" href="../../images/finished_history_remote_ai.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Galaxy history showing finished datasets after remote training on a Galaxy cluster</figcaption></figure>
+      <figure id="figure-8" style="max-width: 90%;"><img src="../../images/finished_history_remote_ai.png" alt="Galaxy history. " width="340" height="766" loading="lazy" /><a target="_blank" href="../../images/finished_history_remote_ai.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Galaxy history showing finished datasets after remote training on a Galaxy cluster</figcaption></figure>
     </li>
   </ol>
 
@@ -996,7 +996,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <li>Open <strong>7_ColabFold_MMseq2.ipynb</strong> notebook and execute it.</li>
     <li>It needs a few minutes (around 5-10 minutes) to download AlphaFold2 weights (of size approximately 4 GB) and uses these weights for prediction. An example prediction is shown in figure 9.</li>
   </ol>
-  <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/3D_300_L_protein.png" alt="&quot;3D structure of a protein sequence of length 300 with side-chains predicted by ColabFold&quot;. " width="588" height="409" loading="lazy" /><a target="_blank" href="../../images/3D_300_L_protein.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> 3D structure of a protein sequence of length 300 with side-chains predicted by ColabFold</figcaption></figure>
+  <figure id="figure-9" style="max-width: 90%;"><img src="../../images/3D_300_L_protein.png" alt="&quot;3D structure of a protein sequence of length 300 with side-chains predicted by ColabFold&quot;. " width="588" height="409" loading="lazy" /><a target="_blank" href="../../images/3D_300_L_protein.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> 3D structure of a protein sequence of length 300 with side-chains predicted by ColabFold</figcaption></figure>
 
 </blockquote>
 
@@ -1015,7 +1015,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <h2 id="run-as-a-tool-in-workflow">Run as a tool in workflow</h2>
 <p>When the parameter <code class="language-plaintext highlighter-rouge">Execute notebook and return a new one</code> is set to <code class="language-plaintext highlighter-rouge">yes</code>, the GPU Jupyterlab tool can be used as a part of any workflow. In this mode, it requires an <code class="language-plaintext highlighter-rouge">ipynb</code> file/notebook that gets executed in Galaxy and output datasets if any become available in the Galaxy history. Along with a notebook, multiple input datasets can also be attached that become automatically available inside the notebook. They can be accessed inside the notebook and processed to produce desired output datasets. These output datasets can further be used with other Galaxy tools. The following image shows a sample workflow for illustration purposes. Similarly, high-quality workflows to analyse scientific datasets can be created.</p>
 
-<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/workflow_gpu_jupyterlab.png" alt="&quot;A sample Galaxy workflow that uses GPU Jupyterlab as a tool&quot;. " width="832" height="501" loading="lazy" /><a target="_blank" href="../../images/workflow_gpu_jupyterlab.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A sample Galaxy workflow that uses GPU Jupyterlab as a tool which takes input datasets from one tool, trains a machine learning model to predict classes and then the predicted datasets is used as input to another Galaxy tool.</figcaption></figure>
+<figure id="figure-10" style="max-width: 90%;"><img src="../../images/workflow_gpu_jupyterlab.png" alt="&quot;A sample Galaxy workflow that uses GPU Jupyterlab as a tool&quot;. " width="832" height="501" loading="lazy" /><a target="_blank" href="../../images/workflow_gpu_jupyterlab.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A sample Galaxy workflow that uses GPU Jupyterlab as a tool which takes input datasets from one tool, trains a machine learning model to predict classes and then the predicted datasets is used as input to another Galaxy tool.</figcaption></figure>
 
 <p>Let’s look at how can this workflow be created in a step-wise manner. There are 3 steps - first, the training dataset is filtered using the <code class="language-plaintext highlighter-rouge">Filter</code> tool. The output of this tool along with 2 other datasets (<code class="language-plaintext highlighter-rouge">test_rows</code> and <code class="language-plaintext highlighter-rouge">test_rows_labels</code>), a sample IPython notebook is executed by the GPU Jupyterlab tool. The sample IPython notebook trains a simple machine learning model using the train dataset and creates a classification model using <code class="language-plaintext highlighter-rouge">RandomForestClassifier</code>. The trained model is then used to predict classes using the test dataset. The predicted classes is produced as a file in an output collection by the GPU Jupyterlab tool. As a last step, <code class="language-plaintext highlighter-rouge">Cut</code> tool is used to extract the first column of the output collection. Together, these steps showcase how the GPU Jupyterlab tool is used with other Galaxy tools in a workflow.</p>
 
@@ -1325,7 +1325,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1353,7 +1353,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

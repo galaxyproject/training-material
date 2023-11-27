@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -281,7 +281,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -686,7 +686,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <p>The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are <em>in silico</em> reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant_lfq_lcmsms.png" alt="MQ_lcmsms. " width="624" height="242" loading="lazy" /><a target="_blank" href="../../images/maxquant_lfq_lcmsms.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Proteomics using liquid chromatography tandem-mass spectrometry (LC-MS/MS). Adapted from <a href="https://en.wikipedia.org/wiki/Tandem_mass_spectrometry#/media/File:MS_MS.png">wikipedia</a>.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/maxquant_lfq_lcmsms.png" alt="MQ_lcmsms. " width="624" height="242" loading="lazy" /><a target="_blank" href="../../images/maxquant_lfq_lcmsms.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Proteomics using liquid chromatography tandem-mass spectrometry (LC-MS/MS). Adapted from <a href="https://en.wikipedia.org/wiki/Tandem_mass_spectrometry#/media/File:MS_MS.png">wikipedia</a>.</figcaption></figure>
 
 <p>A plethora of software solutions were developed for the analysis of proteomics data. MaxQuant is one of the most popular proteomics softwares because it is an easy to use and free software that offers functionalities for nearly all kinds of proteomics data analysis challenges <span class="citation"><a href="#Cox2008">Cox and Mann 2008</a></span>. Mass spectrometry raw data is normally obtained in a vendor specific, proprietary file format. MaxQuant can directly take those raw files as input. For peptide identification MaxQuant uses a search engine called “Andromeda”. MaxQuant offers highly accurate functionalities for many different proteomics quantification strategies, e.g. label-free, SILAC, TMT.</p>
 
@@ -817,17 +817,17 @@ https://zenodo.org/record/4274987/files/Sample2.raw
 
 <p>Protease digestion is not always complete, therefore we set the <em>“number of missed cleavages”</em> to <code class="language-plaintext highlighter-rouge">1</code>, meaning that the <em>in silico</em> digestion also includes peptides that have an additional Arginine or Lysine in their sequence.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant_param_missedcl.png" alt="MQ_param_missed. " width="1571" height="603" loading="lazy" /><a target="_blank" href="../../images/maxquant_param_missedcl.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Trypsin specificity and missed cleavages. With one missed cleavage all three peptides will be part of the *in silico* peptide database</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/maxquant_param_missedcl.png" alt="MQ_param_missed. " width="1571" height="603" loading="lazy" /><a target="_blank" href="../../images/maxquant_param_missedcl.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Trypsin specificity and missed cleavages. With one missed cleavage all three peptides will be part of the *in silico* peptide database</figcaption></figure>
 
 <p>From the <em>in silico</em> generated peptide database the masses of the peptides are calculated and matched to the measured masses in order to identify them. A peptide’s mass will change due to peptide modifications such as chemical labelling for example applied in different quantitation strategies or biological post translational modifications. Therefore, it is important to also include possible peptide modifications in the <em>in silico</em> generated peptide mass list. <em>“Fixed modifications”</em> are modifications that occur on every occurence of the specific amino acid. Those are often artificially introduced modifications such as Carbamidomethylation of cysteins (C) to prevent re-formation of the disulfid bridges. This is a common procedure in proteomics sample preparation and therefore also the default option in MaxQuant: <code class="language-plaintext highlighter-rouge">Carbamidomethyl (C)</code>. <em>“Variable modifications”</em> are modifications that do not occur on every amino acid such as Oxidation of Methionine might only occur on some Methionines and not all, but only a few peptide N-termini are acetylated. Variable modifications increase the <em>in silico</em> peptide database because each peptide’s mass is calculated once with and once without the additional modification. To keep computation times as short as possible we did not use any variable modification this training, despite the MaxQuant defaults Oxidation of Methionine and Acetylation of N-termini would have been completely valid to use.</p>
 
 <p>MaxQuant supports different <em>“Quantitation Methods”</em>. The three main categories are <code class="language-plaintext highlighter-rouge">label-free quantification</code>, <code class="language-plaintext highlighter-rouge">label-based quantification</code> and <code class="language-plaintext highlighter-rouge">reporter ion MS2</code> quantification. In this tutorial we have chosen <code class="language-plaintext highlighter-rouge">label-free</code> because we did not apply any specific labeling/quantitation strategy to the samples.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant_lfq_quant_methods.png" alt="MQ_quant_methods. " width="1848" height="617" loading="lazy" /><a target="_blank" href="../../images/maxquant_lfq_quant_methods.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Overview of MaxQuant quantification methods</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/maxquant_lfq_quant_methods.png" alt="MQ_quant_methods. " width="1848" height="617" loading="lazy" /><a target="_blank" href="../../images/maxquant_lfq_quant_methods.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Overview of MaxQuant quantification methods</figcaption></figure>
 
 <p>The PTXQC software (<span class="citation"><a href="#Bielow2015">Bielow <i>et al.</i> 2015</a></span>) was built to enable direct proteomcs quality control from MaxQuant result files. This quality control can be directly used in the Galaxy MaxQuant wrapper by setting <em>“Generate PTXQC”</em> to <code class="language-plaintext highlighter-rouge">yes</code>. This will generate a pdf file with multiple quality control plots. Be aware that the cutoffs set in PTXQC might not be applicable to your experiment and mass spectrometer type and therefore “under performing” and “fail” do not necessarily mean that the quality is poor.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant_ptxqc_overview.png" alt="PTXQC_overview. " width="822" height="813" loading="lazy" /><a target="_blank" href="../../images/maxquant_ptxqc_overview.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Overview of PTXQC quality measures for sample1 and sample2</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/maxquant_ptxqc_overview.png" alt="PTXQC_overview. " width="822" height="813" loading="lazy" /><a target="_blank" href="../../images/maxquant_ptxqc_overview.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Overview of PTXQC quality measures for sample1 and sample2</figcaption></figure>
 
 <p>MaxQuant automatically generates several output files. In the <em>“Output Options”</em> all or some of the output files can be selected. The protein information can be obtained by selecting <code class="language-plaintext highlighter-rouge">Protein Groups</code>, while the peptide information is obtained by choosing <code class="language-plaintext highlighter-rouge">Peptides</code>. The applied MaxQuant parameters are stored in the <code class="language-plaintext highlighter-rouge">mqpar.xml</code> This file can be re-used as an input file in the <strong>MaxQuant (using mqpar.xml)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
@@ -983,7 +983,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
   </ol>
 </blockquote>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant_lfq_serum_composition.png" alt="serum_composition. " width="1282" height="618" loading="lazy" /><a target="_blank" href="../../images/maxquant_lfq_serum_composition.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Quantitative serum composition. In Galaxy one can hover over the graph to see the protein names</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/maxquant_lfq_serum_composition.png" alt="serum_composition. " width="1282" height="618" loading="lazy" /><a target="_blank" href="../../images/maxquant_lfq_serum_composition.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Quantitative serum composition. In Galaxy one can hover over the graph to see the protein names</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1306,7 +1306,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1334,7 +1334,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

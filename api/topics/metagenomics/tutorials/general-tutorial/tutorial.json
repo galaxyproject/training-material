@@ -105,7 +105,7 @@
       "name": "Amplicon Tutorial",
       "title": "Amplicon Tutorial",
       "test_results": null,
-      "modified": "2023-11-27 16:33:09 +0000",
+      "modified": "2023-11-27 17:21:28 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Merge.files\"];\n  6[\"Make.group\"];\n  7[\"Unique.seqs\"];\n  8[\"Count.seqs\"];\n  9[\"Summary.seqs\"];\n  10[\"Screen.seqs\"];\n  11[\"Align.seqs\"];\n  12[\"Summary.seqs\"];\n  13[\"Screen.seqs\"];\n  14[\"Filter.seqs\"];\n  15[\"Pre.cluster\"];\n  16[\"Classify.seqs\"];\n  17[\"Cluster.split\"];\n  18[\"Make.shared\"];\n  19[\"Classify.otu\"];\n  20[\"Make.biom\"];\n  21[\"Visualize  with Krona\"];\n  2 -->|output| 5;\n  1 -->|output| 5;\n  1 -->|output| 6;\n  2 -->|output| 6;\n  5 -->|output| 7;\n  6 -->|output| 8;\n  7 -->|out_names| 8;\n  8 -->|seq_count| 9;\n  7 -->|out_fasta| 9;\n  7 -->|out_fasta| 10;\n  8 -->|seq_count| 10;\n  0 -->|output| 11;\n  10 -->|fasta_out| 11;\n  10 -->|count_out| 12;\n  11 -->|out_file| 12;\n  11 -->|out_file| 13;\n  10 -->|count_out| 13;\n  13 -->|fasta_out| 14;\n  14 -->|filteredfasta| 15;\n  13 -->|count_out| 15;\n  15 -->|count_out| 16;\n  3 -->|output| 16;\n  15 -->|fasta_out| 16;\n  4 -->|output| 16;\n  16 -->|taxonomy_out| 17;\n  15 -->|fasta_out| 17;\n  15 -->|count_out| 17;\n  15 -->|count_out| 18;\n  17 -->|otulist| 18;\n  15 -->|count_out| 19;\n  16 -->|taxonomy_out| 19;\n  17 -->|otulist| 19;\n  18 -->|shared| 20;\n  19 -->|taxonomies| 20;\n  19 -->|taxonomies| 21;\n"
     },
     {
@@ -123,7 +123,7 @@
       "name": "WGS Part In \"Analyses Of Metagenomics Data - The Global Picture\"",
       "title": "WGS Part In \"Analyses Of Metagenomics Data - The Global Picture\"",
       "test_results": null,
-      "modified": "2023-11-27 16:33:09 +0000",
+      "modified": "2023-11-27 17:21:28 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"MetaPhlAn2\"];\n  2[\"Format MetaPhlAn2\"];\n  3[\"HUMAnN2\"];\n  4[\"Krona pie chart\"];\n  5[\"Renormalize\"];\n  6[\"Regroup\"];\n  7[\"Renormalize\"];\n  0 -->|output| 1;\n  1 -->|output_file| 2;\n  0 -->|output| 3;\n  1 -->|output_file| 3;\n  2 -->|krona| 4;\n  3 -->|gene_families_tsv| 5;\n  3 -->|gene_families_tsv| 6;\n  6 -->|output_table| 7;\n"
     }
   ],

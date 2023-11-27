@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -263,7 +263,7 @@ genes, as well as other functio...">
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -875,7 +875,7 @@ https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
 
 <p>For our current experiment, we will be looking for the following set of repeats:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/hpc-for-lsgc/GeckoMGV01.PNG" alt="Mycoplasma hyopneumoniae comparison example. " width="1064" height="495" loading="lazy" /><a target="_blank" href="../../images/hpc-for-lsgc/GeckoMGV01.PNG" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> (Left) Sequence comparison between <em>Mycoplasma hyopneumoniae</em> 232 and 7422. (Right) Zoomed-in region where the repeats of interest are located.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/hpc-for-lsgc/GeckoMGV01.PNG" alt="Mycoplasma hyopneumoniae comparison example. " width="1064" height="495" loading="lazy" /><a target="_blank" href="../../images/hpc-for-lsgc/GeckoMGV01.PNG" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> (Left) Sequence comparison between <em>Mycoplasma hyopneumoniae</em> 232 and 7422. (Right) Zoomed-in region where the repeats of interest are located.</figcaption></figure>
 
 <p>Let’s extract the repeats highlighted in red (Figure 1, right) which are aligned to the position 19,610 in the query sequence and perform a multiple sequence alignment on them to check if there are any evolutionary differences. The sequences will be extracted from the reference (i.e. <em>Mycoplasma hyopneumoniae 7422</em>) since this is where the repeats duplicate in respect to the query sequence (notice that in Figure 1 we are selecting the ones stacked vertically).</p>
 
@@ -991,7 +991,7 @@ sequence@_19610_25551_      CTTCTTT-----
 
 <p>Before jumping on the hands-on, let us see an example of the second case: say we wanted to study the evolutionary rearrangements between the grass and common wheat genomes (<em>Aegilops tauschii</em> and <em>Triticum aestivum</em>). The following plot shows the comparison:</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/hpc-for-lsgc/Chrom07.png" alt="Large-scale genome comparison example. " width="995" height="936" loading="lazy" /><a target="_blank" href="../../images/hpc-for-lsgc/Chrom07.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Chromosome comparison for <em>Aegilops tauschii</em> and <em>Triticum aestivum</em>. Since both genomes have seven chromosomes, we would require seven times seven comparisons, i.e. 49 chromosome comparisons with each sequence being over 500 MBs in size!</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/hpc-for-lsgc/Chrom07.png" alt="Large-scale genome comparison example. " width="995" height="936" loading="lazy" /><a target="_blank" href="../../images/hpc-for-lsgc/Chrom07.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Chromosome comparison for <em>Aegilops tauschii</em> and <em>Triticum aestivum</em>. Since both genomes have seven chromosomes, we would require seven times seven comparisons, i.e. 49 chromosome comparisons with each sequence being over 500 MBs in size!</figcaption></figure>
 
 <p>Now there are some things to note here: (1) these alignment-free comparisons can be performed very quickly, (2) we can visually see the large rearrangements and (3) we can identify which chromosome comparisons actually have any signal. This last point is interesting because it allows us to use <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> to quickly identify which comparisons are worth to perform with more accurate tools and avoid lots of unnecessary computation (in this case only the diagonal has similarity, but it might not be the case, <em>e.g.</em> <em>Homo sapiens</em> and <em>Mus musculus</em>).</p>
 
@@ -1110,7 +1110,7 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
 
 <p>Your <code class="language-plaintext highlighter-rouge">Comparison dotplot</code> file (remember to inspect each using the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon) should look like this:</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/hpc-for-lsgc/aegilops-triticum.png" alt="Single chromosome comparison. " width="1000" height="1000" loading="lazy" /><a target="_blank" href="../../images/hpc-for-lsgc/aegilops-triticum.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Each axis corresponds to one sequence, from origin to end.</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/hpc-for-lsgc/aegilops-triticum.png" alt="Single chromosome comparison. " width="1000" height="1000" loading="lazy" /><a target="_blank" href="../../images/hpc-for-lsgc/aegilops-triticum.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Each axis corresponds to one sequence, from origin to end.</figcaption></figure>
 
 <p>Figure 3 shows the comparison plot for the plant chromosomes. Notice that the origin of both sequences is at the top-left and the ending is at the bottom-right of the plot. Noise and small repeats are filtered out automatically by <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> to allow focusing on where the main similarity blocks are located. We can see that there three types of blocks:</p>
 
@@ -1131,7 +1131,7 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
 
 <p>Let us now see how the blocks detected in the comparison are automatically classified for further processing. Figure 4 shows the blocks detected heuristically from the comparison and classified according to their position and orientation. This plot is available in the file <strong>Detected events plot</strong>.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/hpc-for-lsgc/aegilops-triticum-events.png" alt="Events in chromosome comparison. " width="1000" height="1000" loading="lazy" /><a target="_blank" href="../../images/hpc-for-lsgc/aegilops-triticum-events.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Automatically detected events in the chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Legend: conserved blocks (red), inverted blocks (green) and transposed blocks (blue)</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/hpc-for-lsgc/aegilops-triticum-events.png" alt="Events in chromosome comparison. " width="1000" height="1000" loading="lazy" /><a target="_blank" href="../../images/hpc-for-lsgc/aegilops-triticum-events.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Automatically detected events in the chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Legend: conserved blocks (red), inverted blocks (green) and transposed blocks (blue)</figcaption></figure>
 
 <p>In Figure 4 we can see a similar plot to that in Figure 3 but with the addition of colors. Each detected block is labelled according to whether it is in the main diagonal (red), transposed (blue) or inverted (green). Inverted transpositions are also labelled green. Notice that this automatic classification process is based on the Hough transform (<span class="citation"><a href="#duda1972use">Duda and Hart 1972</a></span>) which is governed by a set of parameters which can therefore affect the sensitivity of the detection of blocks, and hence some blocks can be missed.</p>
 
@@ -1350,7 +1350,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1378,7 +1378,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

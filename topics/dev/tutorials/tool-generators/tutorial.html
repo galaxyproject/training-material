@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -343,7 +343,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1189,11 +1189,11 @@ sections of the generated XML file in the toolshed archive. The ToolFactory form
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-detail-to-explore-annotated-toolfactory-form-for-the-hello-world-example"><button class="gtn-boxify-button details" type="button" aria-controls="details-detail-to-explore-annotated-toolfactory-form-for-the-hello-world-example" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Detail to explore: Annotated ToolFactory form for the `Hello World` example</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-  <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/ToolFactory_hello1form.png" alt="First part of the form. " width="941" height="749" loading="lazy" /><a target="_blank" href="../../images/ToolFactory_hello1form.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The first part of the form collects the new tool name and dependencies to be installed. In this case, no Conda dependency is used. bash can be specified as a conda dependency, but it is not very version dependent and usually available. Reproducibility is not an issue for this trivial example. When it is, specify the dependencies and their versions here and the generated tool will always use them. If run in a shell, the bash script <code>echo "Hello $1"</code> in the text box will emit a string that includes the first command line parameter - such as "Hello Galaxy Training Network" This will be collected from STDOUT (configured below) into a new history output file (named and configured below). Positional parameters are chosen so the first parameter on the command line will be emitted when the script runs.</figcaption></figure>
+  <figure id="figure-1" style="max-width: 90%;"><img src="../../images/ToolFactory_hello1form.png" alt="First part of the form. " width="941" height="749" loading="lazy" /><a target="_blank" href="../../images/ToolFactory_hello1form.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The first part of the form collects the new tool name and dependencies to be installed. In this case, no Conda dependency is used. bash can be specified as a conda dependency, but it is not very version dependent and usually available. Reproducibility is not an issue for this trivial example. When it is, specify the dependencies and their versions here and the generated tool will always use them. If run in a shell, the bash script <code>echo "Hello $1"</code> in the text box will emit a string that includes the first command line parameter - such as "Hello Galaxy Training Network" This will be collected from STDOUT (configured below) into a new history output file (named and configured below). Positional parameters are chosen so the first parameter on the command line will be emitted when the script runs.</figcaption></figure>
 
-  <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/ToolFactory_hello2form.png" alt="Second part of the form. " width="714" height="645" loading="lazy" /><a target="_blank" href="../../images/ToolFactory_hello2form.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The second section shows the new generated history output. It uses the special name <code>STDOUT</code> so the tool will take whatever the bash script writes and create a new text file called <code>Hello_output</code>. When the test is generated, the pass criterion is that the default value <code>Galaxy Training Network</code> should appear as the message in <code>hello_output</code>. no difference. Other criteria including <code>sim_size</code> are available for the test applied to each output file. There is no limit (other than your patience) to the number of new generated history outputs. Note that this example has no history input files. Again, any number of these can be specified on the form using the repeat.</figcaption></figure>
+  <figure id="figure-2" style="max-width: 90%;"><img src="../../images/ToolFactory_hello2form.png" alt="Second part of the form. " width="714" height="645" loading="lazy" /><a target="_blank" href="../../images/ToolFactory_hello2form.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The second section shows the new generated history output. It uses the special name <code>STDOUT</code> so the tool will take whatever the bash script writes and create a new text file called <code>Hello_output</code>. When the test is generated, the pass criterion is that the default value <code>Galaxy Training Network</code> should appear as the message in <code>hello_output</code>. no difference. Other criteria including <code>sim_size</code> are available for the test applied to each output file. There is no limit (other than your patience) to the number of new generated history outputs. Note that this example has no history input files. Again, any number of these can be specified on the form using the repeat.</figcaption></figure>
 
-  <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/ToolFactory_hello3form.png" alt="Third part of the form. " width="851" height="734" loading="lazy" /><a target="_blank" href="../../images/ToolFactory_hello3form.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The third section shows the form settings for the user supplied parameter to be passed in to the bash script on the command line. It will be the first positional parameter because the ordinal position is 1. Argparse parameters are shown in other samples. The help and label text for each input file and user defined parameter will appear on the generated tool form for the user so make them informative. This is where you can change the default from "World" to "Galaxy Training Network" on the sample provided and regenerate it to make a new tool later in the tutorial.</figcaption></figure>
+  <figure id="figure-3" style="max-width: 90%;"><img src="../../images/ToolFactory_hello3form.png" alt="Third part of the form. " width="851" height="734" loading="lazy" /><a target="_blank" href="../../images/ToolFactory_hello3form.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The third section shows the form settings for the user supplied parameter to be passed in to the bash script on the command line. It will be the first positional parameter because the ordinal position is 1. Argparse parameters are shown in other samples. The help and label text for each input file and user defined parameter will appear on the generated tool form for the user so make them informative. This is where you can change the default from "World" to "Galaxy Training Network" on the sample provided and regenerate it to make a new tool later in the tutorial.</figcaption></figure>
 
 </blockquote>
 
@@ -1259,7 +1259,7 @@ Script::
 </code></pre></div>  </div>
 
   <p>Which, when seen loaded into Galaxy looks like an ordinary tool:</p>
-  <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/toolfactory_hello_demo_form.png" alt="Generated form seen by the new tool user. " width="1284" height="532" loading="lazy" /><a target="_blank" href="../../images/toolfactory_hello_demo_form.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> The form displayed when the generated Hello tool is executed is below. The user sees a text box to enter any string. When executed, it will be echoed to a new history file called <code>Hello_output</code></figcaption></figure>
+  <figure id="figure-4" style="max-width: 90%;"><img src="../../images/toolfactory_hello_demo_form.png" alt="Generated form seen by the new tool user. " width="1284" height="532" loading="lazy" /><a target="_blank" href="../../images/toolfactory_hello_demo_form.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> The form displayed when the generated Hello tool is executed is below. The user sees a text box to enter any string. When executed, it will be echoed to a new history file called <code>Hello_output</code></figcaption></figure>
   <p>When a user runs the tool and enters some text in the text box, the decorated output will appear in a new history text dataset.
 This may not seem very exciting but it provides a useful pattern that can easily be adapted and extended.
 The script could do something far more interesting and could take unlimited input datasets, user configurable parameters and can produce as many outputs as needed in the history.</p>
@@ -1490,7 +1490,7 @@ Note this is distinct from debugging the script - that is not at all satisfying 
 
 <p>A shell is much better for that.</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/ToolFactory_big_picture.png" alt="Galaxy as an IDE for tools with the ToolFactory. " width="1728" height="973" loading="lazy" /><a target="_blank" href="../../images/ToolFactory_big_picture.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Galaxy can be used as a tool development environment for users who can write their own scripts as shown in this process overview slide.</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/ToolFactory_big_picture.png" alt="Galaxy as an IDE for tools with the ToolFactory. " width="1728" height="973" loading="lazy" /><a target="_blank" href="../../images/ToolFactory_big_picture.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Galaxy can be used as a tool development environment for users who can write their own scripts as shown in this process overview slide.</figcaption></figure>
 
 <h2 id="hello-world-continued">Hello World: Continued</h2>
 
@@ -1910,7 +1910,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1938,7 +1938,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

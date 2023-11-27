@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -59,8 +59,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -295,7 +295,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -893,18 +893,18 @@ Persian words, one at a time. RNN handle sequential data, whether its temporal o
 
 <h2 id="single-layer-fnn">Single layer FNN</h2>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/FFNN_no_hidden.png" alt="Neurons forming the input and output layers of a single layer feedforward neural network. " width="233" height="463" loading="lazy" /><a target="_blank" href="../../images/FFNN_no_hidden.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Single layer feedforward neural network</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/FFNN_no_hidden.png" alt="Neurons forming the input and output layers of a single layer feedforward neural network. " width="233" height="463" loading="lazy" /><a target="_blank" href="../../images/FFNN_no_hidden.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Single layer feedforward neural network</figcaption></figure>
 
 <p>Figure 1 shows a single layer FNN, where the input is 3 dimensional. Each input field is multiplied by a
 weight. Afterwards, the results are summed up, along with a bias, and passed to an activation function.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/activation.gif" alt="An activation function (such as Sigmoid, Tanh, etc.) applied to the input of the only neuron in the output layer of a feedforward neural network. " width="147" height="53" loading="lazy" /><a target="_blank" href="../../images/activation.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Activation of the output neuron o1. Activation function f could be Sigmoid, Tanh, ReLU, etc.</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/activation.gif" alt="An activation function (such as Sigmoid, Tanh, etc.) applied to the input of the only neuron in the output layer of a feedforward neural network. " width="147" height="53" loading="lazy" /><a target="_blank" href="../../images/activation.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Activation of the output neuron o1. Activation function f could be Sigmoid, Tanh, ReLU, etc.</figcaption></figure>
 
 <p>The activation function can have many forms (sigmoid, tanh, ReLU, linear, step function, sign function, etc.).
 Output layer neurons usually have sigmoid or tanh functions. For more information on the listed activation
 functions, please refer to <span class="citation"><a href="#nwankpaEtAl">Nwankpa <i>et al.</i> 2018</a></span>.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/sigmoid.gif" alt="Mathmatical formula for Sigmoid activation function. " width="231" height="39" loading="lazy" /><a target="_blank" href="../../images/sigmoid.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Sigmoid activation function</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/sigmoid.gif" alt="Mathmatical formula for Sigmoid activation function. " width="231" height="39" loading="lazy" /><a target="_blank" href="../../images/sigmoid.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Sigmoid activation function</figcaption></figure>
 
 <h2 id="multi-layer-fnn">Multi-layer FNN</h2>
 
@@ -914,7 +914,7 @@ in which data is non-linearly separable. Per Universal Approximation Theorem, a 
 any function (<span class="citation"><a href="#Cybenko1989">Cybenko 1989</a></span>), although in practice training such a model is very difficult (if not impossible),
 hence, we usually add multiple hidden layers to solve complex problems.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network. " width="361" height="461" loading="lazy" /><a target="_blank" href="../../images/FFNN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network. " width="361" height="461" loading="lazy" /><a target="_blank" href="../../images/FFNN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
 
 <h2 id="learning-algorithm">Learning algorithm</h2>
 
@@ -924,7 +924,7 @@ pairs, called the <em>test set</em>, which is not used by the learning algorithm
 providing the test set inputs to the model and comparing the model outputs to test set outputs. We need to define a <strong>loss function</strong> to objectively
 measure how much the model output is off of the expected output. For classification problems we use the <strong>cross entropy</strong> loss function.</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/CrossEntropy.gif" alt="Mathematical formula for calculating the cross entropy loss function, which quantifies the difference between the predicted and desired output of a neural network. " width="241" height="51" loading="lazy" /><a target="_blank" href="../../images/CrossEntropy.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Cross entropy loss function</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/CrossEntropy.gif" alt="Mathematical formula for calculating the cross entropy loss function, which quantifies the difference between the predicted and desired output of a neural network. " width="241" height="51" loading="lazy" /><a target="_blank" href="../../images/CrossEntropy.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Cross entropy loss function</figcaption></figure>
 
 <p>The loss function is calculated for each input-output pair in the training set. The average of the calculated loss functions for all training
 set input-output pairs is called the <strong>Cost function</strong>. The goal of the learning algorithm is to minimize the cost function. The cost function
@@ -932,7 +932,7 @@ is a function of network weights and biases of all neurons in all layers. The <s
 iteratively computes the gradient of cost function relative to each weight and bias, then updates the weights and biases in the opposite
 direction of the gradient, to find the local minimum.</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/CostFunction.gif" alt="Mathematical formula for calcuating the cross entropy cost function, which is just the average of cross entropy loss functions for training samples. " width="270" height="54" loading="lazy" /><a target="_blank" href="../../images/CostFunction.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Cross entropy cost function</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/CostFunction.gif" alt="Mathematical formula for calcuating the cross entropy cost function, which is just the average of cross entropy loss functions for training samples. " width="270" height="54" loading="lazy" /><a target="_blank" href="../../images/CostFunction.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Cross entropy cost function</figcaption></figure>
 
 <h1 id="recurrent-neural-networks">Recurrent neural networks</h1>
 
@@ -944,19 +944,19 @@ direction of the gradient, to find the local minimum.</p>
 where we have one input and a variable number of outputs. One example application is image captioning, where a single image is provided
 as input and a variable number of words (which caption the image) is returned as output (See Figure 7).</p>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/RNN_1_to_n.png" alt="Neurons forming a one-to-many recurrent neural network. " width="596" height="644" loading="lazy" /><a target="_blank" href="../../images/RNN_1_to_n.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> One-to-many RNN</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/RNN_1_to_n.png" alt="Neurons forming a one-to-many recurrent neural network. " width="596" height="644" loading="lazy" /><a target="_blank" href="../../images/RNN_1_to_n.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> One-to-many RNN</figcaption></figure>
 
 <p>Many-to-one RNN, on the other hand, have a variable number of inputs and a single output. One example application is document sentiment
 classification, where a variable number of words in a document are presented as input, and a single output predicts whether the document
 has a positive or negative sentiment regarding a topic (See Figure 8).</p>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/RNN_n_to_1.png" alt="Neurons forming a many-to-one recurrent neural network. " width="560" height="475" loading="lazy" /><a target="_blank" href="../../images/RNN_n_to_1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Many-to-one RNN</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/RNN_n_to_1.png" alt="Neurons forming a many-to-one recurrent neural network. " width="560" height="475" loading="lazy" /><a target="_blank" href="../../images/RNN_n_to_1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Many-to-one RNN</figcaption></figure>
 
 <p>There are two types of many-to-many RNN. One in which the number of inputs and outputs match, e.g., in labeling the video frames the number
 of frames matches the number of labels, and the other in which the number of inputs and outputs do not match, e.g., in language translation
 we pass in n words in English and get m words in Italian (See Figure 9).</p>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/RNN_n_to_m.png" alt="Neurons forming a many-to-many recurrent neural network. " width="560" height="475" loading="lazy" /><a target="_blank" href="../../images/RNN_n_to_m.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Many-to-many RNN</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%;"><img src="../../images/RNN_n_to_m.png" alt="Neurons forming a many-to-many recurrent neural network. " width="560" height="475" loading="lazy" /><a target="_blank" href="../../images/RNN_n_to_m.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Many-to-many RNN</figcaption></figure>
 
 <h2 id="rnn-architectures">RNN architectures</h2>
 
@@ -1001,7 +1001,7 @@ represent the words in our vocabulary (all the unique words in all the documents
 at the corresponding row and column as the entry. If a word is present in the document, we have a one as the entry – Alternatively, we could use
 the word count or frequency.</p>
 
-<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/BoW.png" alt="Table showing a bag-of-words representation of sample documents. " width="1349" height="78" loading="lazy" /><a target="_blank" href="../../images/BoW.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Bag of words (BoW) representation</figcaption></figure>
+<figure id="figure-10" style="max-width: 90%;"><img src="../../images/BoW.png" alt="Table showing a bag-of-words representation of sample documents. " width="1349" height="78" loading="lazy" /><a target="_blank" href="../../images/BoW.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Bag of words (BoW) representation</figcaption></figure>
 
 <p>Suppose we have the following 2 documents: 1) Magic passed the basketball to Kareem, and 2) Lebron stole the basketball from Curry. The BoW
 representation of these documents is given in Figure 10.</p>
@@ -1024,7 +1024,7 @@ elements are 0; Apple is represented by a vector whose second element is 1 and o
 vector whose third element is 1 and other elements are 0. As you can see only one element in the vector is 1 and the rest are 0’s. The same
 concept applies if the size of the vocabulary is N.</p>
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/OHE.gif" alt="Mathematical vectors representing one-hot-encoding representation of words orange, apple, and banana. " width="359" height="66" loading="lazy" /><a target="_blank" href="../../images/OHE.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> One hot encoding (OHE) representation</figcaption></figure>
+<figure id="figure-11" style="max-width: 90%;"><img src="../../images/OHE.gif" alt="Mathematical vectors representing one-hot-encoding representation of words orange, apple, and banana. " width="359" height="66" loading="lazy" /><a target="_blank" href="../../images/OHE.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> One hot encoding (OHE) representation</figcaption></figure>
 
 <p>The problem with OHE is that for very large vocabulary sizes (say, 100,000 words) it requires tremendous amount of storage. Also, it has no
 concept of word similarity.</p>
@@ -1273,7 +1273,7 @@ to use the <strong>F score</strong>, which is the harmonic mean of precision and
 
 \[F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}}\]
 
-<figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/ConfusionMatrix.png" alt="Confusion matrix for our sentiment analysis problem. " width="890" height="902" loading="lazy" /><a target="_blank" href="../../images/ConfusionMatrix.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Sentiment analysis confusion matrix</figcaption></figure>
+<figure id="figure-12" style="max-width: 90%;"><img src="../../images/ConfusionMatrix.png" alt="Confusion matrix for our sentiment analysis problem. " width="890" height="902" loading="lazy" /><a target="_blank" href="../../images/ConfusionMatrix.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Sentiment analysis confusion matrix</figcaption></figure>
 
 <p>Figure 12 is the resultant confusion matrix for our sentiment analysis problem. The first row in the table represents the <em>true</em> 0 (or negative sentiment)
 class labels (we have 10,397 + 2,103 = 12,500 reviews with negative sentiment). The second row represents the <em>true</em> 1 (or positive sentiment) class labels
@@ -1552,7 +1552,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1580,7 +1580,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

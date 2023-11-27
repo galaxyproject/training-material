@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -292,7 +292,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -766,14 +766,14 @@ You can learn how to prepare and optimize a spectral library for the analysis of
 
 <p>In clinical proteomic studies often two or more conditions should be compared against each other, thus focusing on the proteins which were found in all conditions. Using the data dependent acquisition (DDA) approach could lead to limited numbers of cumulative proteins, due to method instrinsic dependencies (e.g. if the same peptides is selected for fragmentation in all measurements).
 Over the last decade another acquisition method has been developed addressing the urgent need for increased cumulatively identified and quantified peptides and proteins across multiple measurements (<span class="citation"><a href="#Ludwig2018">Ludwig <i>et al.</i> 2018</a></span>). The so called data independent acquisition (DIA) circumvents the time and abundance dependent selection for fragmentation by using predefined fragmentation windows (m/z windows) going through the whole m/z range of the previous MS1 scan.</p>
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/DIA_analysis_window.png" alt="DIA_window_schema. " width="1049" height="583" loading="lazy" /><a target="_blank" href="../../images/DIA_analysis_window.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Measurement principles of DIA and m/z window schema of staggered DIA windows.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/DIA_analysis_window.png" alt="DIA_window_schema. " width="1049" height="583" loading="lazy" /><a target="_blank" href="../../images/DIA_analysis_window.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Measurement principles of DIA and m/z window schema of staggered DIA windows.</figcaption></figure>
 
 <p>Therefore, all peptides which are present in the same m/z window at the same time are fragmented simultaneously and a MS2 spectra containing fragments from multiple peptides is acquired. Using the same m/z windows for all measurements, results in more reproducible fragmentation and potential identification across multiple measurements.
 However, the resulting MS2 spectra contain fragments from multiple peptides and are often more complex and do not allow to directly link a specific (m/z) mass from the MS1 to a single MS2 fragment spectra.</p>
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/DIA_analysis_MS2.png" alt="DIA_vs_DDA. " width="1182" height="297" loading="lazy" /><a target="_blank" href="../../images/DIA_analysis_MS2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The MS2 scans in the DIA approach contain fragment ions from multiple precursers and are therefore more complex than the precursor-specific MS2 scans in DDA.</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/DIA_analysis_MS2.png" alt="DIA_vs_DDA. " width="1182" height="297" loading="lazy" /><a target="_blank" href="../../images/DIA_analysis_MS2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The MS2 scans in the DIA approach contain fragment ions from multiple precursers and are therefore more complex than the precursor-specific MS2 scans in DDA.</figcaption></figure>
 
 <p>To allow for the identification of peptides in those ambiguous MS2 spectra, a spectral library can be used. The spectral library contains experimentally measured  MS2 spectra, which are specific for one precursor (from previous DDA measurements). In more recent approaches the MS2 spectra can be predicted based on theoretical peptide sequences (e.g. from a protein database).</p>
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/DIA_analysis_basic.png" alt="DIA_basics. " width="1436" height="729" loading="lazy" /><a target="_blank" href="../../images/DIA_analysis_basic.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Spectral libraries are necesseary for the identification of peptides in DIA MS2 scans. In this example the spectral library is generated based on DDA data from the same samples.</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/DIA_analysis_basic.png" alt="DIA_basics. " width="1436" height="729" loading="lazy" /><a target="_blank" href="../../images/DIA_analysis_basic.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Spectral libraries are necesseary for the identification of peptides in DIA MS2 scans. In this example the spectral library is generated based on DDA data from the same samples.</figcaption></figure>
 
 <p>One of the open-source software options for DIA data analysis is <em>OpenSwath</em> (<span class="citation"><a href="#Rost2014">Röst <i>et al.</i> 2014</a></span>), which requires a spectral library, retention time alignment peptides as well as the DIA MS data.</p>
 
@@ -844,7 +844,7 @@ https://zenodo.org/record/4307762/files/Sample8.raw
       <p>Generate a collection for all .raw files (and name it DIA_data)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/create_simple_list.png" alt="Creating a simple collection" title="Creating a simple (list) collection in Galaxy's history" /></p> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
   </ol>
@@ -1162,11 +1162,11 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 
 <h1 id="conclusion">Conclusion</h1>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/DIA_analysis_sum.png" alt="DIA_analysis_pipe. " width="1654" height="332" loading="lazy" /><a target="_blank" href="../../images/DIA_analysis_sum.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> All-in one workflow for DIA analysis in Galaxy. The DIA data analysis using OpenSwathWorkflow is highlighted in yellow.</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/DIA_analysis_sum.png" alt="DIA_analysis_pipe. " width="1654" height="332" loading="lazy" /><a target="_blank" href="../../images/DIA_analysis_sum.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> All-in one workflow for DIA analysis in Galaxy. The DIA data analysis using OpenSwathWorkflow is highlighted in yellow.</figcaption></figure>
 
 <p>Using <strong>OpenSwathWorkflow</strong> and a spectral library (from DDA data) we were able to analyze data independent acquisition (DIA) data. Furthermore, we were able to process the FDR scored results and take a guess on which Spike-in contained higher amounts of Ecoli. To further investigate the two different Spike-in amounts as well as getting a significant result we would need to perform statistical analysis e.g. using <strong>MSstats</strong>.</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/DIA_analysis_workflow.png" alt="DIA_OSW_galaxy. " width="1904" height="751" loading="lazy" /><a target="_blank" href="../../images/DIA_analysis_workflow.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Galaxy worfklow containing all necessary steps for the analysis of DIA data using a spectral library and OpenSwathWorkflow</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/DIA_analysis_workflow.png" alt="DIA_OSW_galaxy. " width="1904" height="751" loading="lazy" /><a target="_blank" href="../../images/DIA_analysis_workflow.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Galaxy worfklow containing all necessary steps for the analysis of DIA data using a spectral library and OpenSwathWorkflow</figcaption></figure>
 
                 </section>
 
@@ -1369,7 +1369,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1397,7 +1397,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

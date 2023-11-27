@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -281,7 +281,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -751,7 +751,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Publication quality circos plots are <em>rarely</em> produced on the first try. Developing a quality Circos plot involves a lot of trial and error to find the best way to convey specific pieces of your data to your audience. Usually you will build up the circos plot one track at a time, and play around with different parameter settings until the plot looks exactly like you want it to:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/circos2.gif" alt="Gif of a circos plots through the development process. " width="400" height="400" loading="lazy" /><a target="_blank" href="../../images/circos2.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Circos plots are an iterative process, requiring many iterative steps, each improving your plot and getting you closer to a final image.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/circos2.gif" alt="Gif of a circos plots through the development process. " width="400" height="400" loading="lazy" /><a target="_blank" href="../../images/circos2.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Circos plots are an iterative process, requiring many iterative steps, each improving your plot and getting you closer to a final image.</figcaption></figure>
 
 <p>Circos is an extremely flexible but also very complex tool. The Galaxy Circos tool covers the most commonly used Circos features, but in order to avoid becoming too complex, it does not expose every single configuration option available in Circos. However, the Galaxy Circos tool allows you to download the full set of configuration files it uses, allowing you to manually tweak the plot further.</p>
 
@@ -769,7 +769,7 @@ of tutorials available from the <a href="http://circos.ca">Circos website</a></p
 
 <p>The ideogram depicts your major data classes. For genomics data this is usually chromosomes, but could also be species, or genes, or another resolution level depending on what relationships you want to show. For non-genomic data this could be individuals in a population, countries, or any other major facet of your data that you want to use for grouping.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/circos/ideograms_examples.png" alt="Examples of ideograms in Circos. " width="800" height="800" loading="lazy" /><a target="_blank" href="../../images/circos/ideograms_examples.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The ideogram shows the objects for which you will plot data. Cytogenic bands can be shown as needed and when available.</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/circos/ideograms_examples.png" alt="Examples of ideograms in Circos. " width="800" height="800" loading="lazy" /><a target="_blank" href="../../images/circos/ideograms_examples.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The ideogram shows the objects for which you will plot data. Cytogenic bands can be shown as needed and when available.</figcaption></figure>
 
 <h2 id="data-tracks">Data Tracks</h2>
 
@@ -948,7 +948,7 @@ of tutorials available from the <a href="http://circos.ca">Circos website</a></p
 
 <p>In this section, we will recreate a Circos plot of the VCaP cancer cell line presented in <span class="citation"><a href="#alves2013gene">Alves <i>et al.</i> 2013</a></span>. In this study, data from various sources were combined into a single integrative Circos plot.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/circos/vcap.png" alt="VCaP cancer Circos plot. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/circos/vcap.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Circos plot of the VCaP cancer cell line displaying from the outside in: copy number variation, B-allele frequency, structural variants</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/circos/vcap.png" alt="VCaP cancer Circos plot. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/circos/vcap.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Circos plot of the VCaP cancer cell line displaying from the outside in: copy number variation, B-allele frequency, structural variants</figcaption></figure>
 
 <p>This plot has 4 tracks:</p>
 <ul>
@@ -1129,13 +1129,13 @@ The full definition of <code class="language-plaintext highlighter-rouge">hg18</
 
   <p>Structural variants (SVs) are large-scale genomic rearrangements. SVs involve large segments of DNA (&gt;50 bp) that are deleted, duplicated, translocated or inverted.</p>
 
-  <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/circos/sv-types.jpg" alt="Overview of types of SVs. " width="600" height="401" loading="lazy" /><a target="_blank" href="../../images/circos/sv-types.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Different types of SVs</figcaption></figure>
+  <figure id="figure-4" style="max-width: 90%;"><img src="../../images/circos/sv-types.jpg" alt="Overview of types of SVs. " width="600" height="401" loading="lazy" /><a target="_blank" href="../../images/circos/sv-types.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Different types of SVs</figcaption></figure>
 
   <p>Image Credit: <span class="citation"><a href="#alkan2011genome">Alkan <i>et al.</i> 2011</a></span></p>
 
   <p>One of the first observations of SVs in the human genome is known as the <a href="https://en.wikipedia.org/wiki/Philadelphia_chromosome">Philadelphia Chromosome</a>, a SV observed in leukemia. In this mutation, a translocation of genetic material  occurs between chromosomes 9 and 22, resulting in a fusion between genes <em>BCR</em> and <em>ABL1</em>, causing the production of a hybrid protein, impairing various signalling pathways and causing the cell to divide uncontrollably.</p>
 
-  <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/circos/sv.jpg" alt="the Philedelphia chromosome. " width="800" height="551" loading="lazy" /><a target="_blank" href="../../images/circos/sv.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> The Philadelphia chromosome</figcaption></figure>
+  <figure id="figure-5" style="max-width: 90%;"><img src="../../images/circos/sv.jpg" alt="the Philedelphia chromosome. " width="800" height="551" loading="lazy" /><a target="_blank" href="../../images/circos/sv.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> The Philadelphia chromosome</figcaption></figure>
 
   <p>In cancer analyses it is therefore often useful to examine SVs and look for potential fusion genes that may affect cell function.</p>
 
@@ -1268,7 +1268,7 @@ The full definition of <code class="language-plaintext highlighter-rouge">hg18</
 
 <p>Your output should look something like this:</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/circos/cancer_svs1.png" alt="The plot with an SV track. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/circos/cancer_svs1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> SVs on the VCaP cell line. Red lines indicate <i>interchromosomal</i> SVs, where pieces originating from different chromosomes have fused together. Black lines show breaks withing in single chromosome.</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/circos/cancer_svs1.png" alt="The plot with an SV track. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/circos/cancer_svs1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> SVs on the VCaP cell line. Red lines indicate <i>interchromosomal</i> SVs, where pieces originating from different chromosomes have fused together. Black lines show breaks withing in single chromosome.</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1317,7 +1317,7 @@ at a glance that there are more intrachromosomal SVs (black) than interchromosom
 
 <p>You should see a plot like:</p>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/circos/cancer_svs_chr5.png" alt="Circos plot of chromosome 5 SVs. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/circos/cancer_svs_chr5.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Chromosome 5 of the VCaP cancer cell line. The <a href="https://en.wikipedia.org/wiki/Locus_(genetics)">q arm</a> of this chromosome appears to be affected by an unusually large number of SVs</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/circos/cancer_svs_chr5.png" alt="Circos plot of chromosome 5 SVs. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/circos/cancer_svs_chr5.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Chromosome 5 of the VCaP cancer cell line. The <a href="https://en.wikipedia.org/wiki/Locus_(genetics)">q arm</a> of this chromosome appears to be affected by an unusually large number of SVs</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1341,7 +1341,7 @@ at a glance that there are more intrachromosomal SVs (black) than interchromosom
         <p>No, only part of chromosome 5 appears to be affected. It turns out that this region is exactly one arm of the chromosome.
 This could be caused by a phenomenon known as <em>chromothripsis</em> (see next box).</p>
 
-        <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/circos/chromosome-arms.jpg" alt="Chromosome arms. " width="960" height="720" loading="lazy" /><a target="_blank" href="../../images/circos/chromosome-arms.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> The different arms of a chromosome. The short arm is termed p, the long arm is q. In our sample, the 5q arm appears to be affected by chromothripsis</figcaption></figure>
+        <figure id="figure-8" style="max-width: 90%;"><img src="../../images/circos/chromosome-arms.jpg" alt="Chromosome arms. " width="960" height="720" loading="lazy" /><a target="_blank" href="../../images/circos/chromosome-arms.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> The different arms of a chromosome. The short arm is termed p, the long arm is q. In our sample, the 5q arm appears to be affected by chromothripsis</figcaption></figure>
       </li>
     </ol>
 
@@ -1354,7 +1354,7 @@ This could be caused by a phenomenon known as <em>chromothripsis</em> (see next 
   <p><strong>Chromothripsis</strong> is a phenomenon whereby (part of) a chromosome is shattered in a single catastrophic event, and subsequently imprecisely stitched
 together by the cell’s repair mechanisms. This leads to a huge number of SV junctions.</p>
 
-  <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/circos/chromothripsis.png" alt="Chromothripsis. " width="500" height="621" loading="lazy" /><a target="_blank" href="../../images/circos/chromothripsis.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Chromothripsis is a scattering of the DNA, followed by an imprecise repair process, leading to many structural rearrangements.</figcaption></figure>
+  <figure id="figure-9" style="max-width: 90%;"><img src="../../images/circos/chromothripsis.png" alt="Chromothripsis. " width="500" height="621" loading="lazy" /><a target="_blank" href="../../images/circos/chromothripsis.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Chromothripsis is a scattering of the DNA, followed by an imprecise repair process, leading to many structural rearrangements.</figcaption></figure>
 
   <blockquote class="quote" cite="https://en.wikipedia.org/wiki/Chromothripsis">
     <p><strong>Characteristics of chromothripsis:</strong></p>
@@ -1384,7 +1384,7 @@ together by the cell’s repair mechanisms. This leads to a huge number of SV ju
 
   <p>Some structural variants will lead to a change in this copy number, for example duplications and deletions. Other SVs (such as inversions and translocations) do not result in a change in copy number, since the piece of DNA is just moved, but the number of copies of it remains the same.</p>
 
-  <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/circos/cancer-cnv-intro.png" alt="SVs lead to CNVs. " width="373" height="438" loading="lazy" /><a target="_blank" href="../../images/circos/cancer-cnv-intro.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Duplications and deletions lead to a change in copy number, measurable by a change in read depth. Other SVs such as inversions are copy-number neutral.</figcaption></figure>
+  <figure id="figure-10" style="max-width: 90%;"><img src="../../images/circos/cancer-cnv-intro.png" alt="SVs lead to CNVs. " width="373" height="438" loading="lazy" /><a target="_blank" href="../../images/circos/cancer-cnv-intro.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Duplications and deletions lead to a change in copy number, measurable by a change in read depth. Other SVs such as inversions are copy-number neutral.</figcaption></figure>
 
   <p>In a healthy diploid genome, we expect the copy number to be around 2 in most places, with occasional duplications and deletions which are part of
 the normal variation within the human population. In highly rearranged genomes such as cancer we expect to see a lot more copynumber variation.</p>
@@ -1690,7 +1690,7 @@ but roughly speaking it indicates the frequency (ratio) of the non-reference all
 
   <p>By plotting this percentage, we get our B-allele frequency plot:</p>
 
-  <figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/circos/cnv-baf-intro.png" alt="Example CNV and BAF plots for different copy number states. " width="260" height="341" loading="lazy" /><a target="_blank" href="../../images/circos/cnv-baf-intro.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> expected B-allele frequency plot (top) and Log R ratio plot (bottom) for different copy number states</figcaption></figure>
+  <figure id="figure-11" style="max-width: 90%;"><img src="../../images/circos/cnv-baf-intro.png" alt="Example CNV and BAF plots for different copy number states. " width="260" height="341" loading="lazy" /><a target="_blank" href="../../images/circos/cnv-baf-intro.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> expected B-allele frequency plot (top) and Log R ratio plot (bottom) for different copy number states</figcaption></figure>
 
   <p>When these SNPs are detected at different ratios, it may indicate copy number variation. For example, a region displaying SNP ratios of 33% and 66% may indicate a copy number of 3 for that region (see image above).</p>
 
@@ -1898,7 +1898,7 @@ There is a parameter of the link track type called <em>Bezier</em>, which contro
     </li>
   </ol>
 
-  <figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/circos/vcap.png" alt="VCaP cancer Circos plot. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/circos/vcap.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> The original image from the paper. Try to make the two link tracks look like this</figcaption></figure>
+  <figure id="figure-12" style="max-width: 90%;"><img src="../../images/circos/vcap.png" alt="VCaP cancer Circos plot. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/circos/vcap.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> The original image from the paper. Try to make the two link tracks look like this</figcaption></figure>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2025,7 +2025,7 @@ There is a parameter of the link track type called <em>Bezier</em>, which contro
 
 <p>Circos was originally developed for genomics data, and a lot of the terminology in the tool is reminiscent of genomics (karyotype, ideogram, chromosome), but Circos can be used to plot any type of data. To illustrate this, the next example involves recreating a plot that appeared in <a href="http://www.nytimes.com/interactive/2007/12/15/us/politics/DEBATE.html">an article in the New York Times</a>, visualizing the 2008 presidential debates.</p>
 
-<figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/circos/presidential_debate_nyt.png" alt="Original plot from the NYT article. " width="900" height="660" loading="lazy" /><a target="_blank" href="../../images/circos/presidential_debate_nyt.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Plot showing how many times each presidential candidate mentioned each other candidate in the debates leading up to the 2008 US presidential election.</figcaption></figure>
+<figure id="figure-13" style="max-width: 90%;"><img src="../../images/circos/presidential_debate_nyt.png" alt="Original plot from the NYT article. " width="900" height="660" loading="lazy" /><a target="_blank" href="../../images/circos/presidential_debate_nyt.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Plot showing how many times each presidential candidate mentioned each other candidate in the debates leading up to the 2008 US presidential election.</figcaption></figure>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
@@ -2284,7 +2284,7 @@ huckabee	525	525	clinton	750	750
     </li>
   </ol>
 
-  <figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/circos/presidential_debate_plot.png" alt="Debate plot with coloured links. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/circos/presidential_debate_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Try to make the link track look like this</figcaption></figure>
+  <figure id="figure-14" style="max-width: 90%;"><img src="../../images/circos/presidential_debate_plot.png" alt="Debate plot with coloured links. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/circos/presidential_debate_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Try to make the link track look like this</figcaption></figure>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2354,7 +2354,7 @@ huckabee	525	525	clinton	750	750
 
 <p>Here we will reproduce the output of the <a href="http://circos.ca/documentation/tutorials/recipes/nature_cover_encode/lesson">Circos tutorial</a> for producing an image like that which was used on Nature’s Cover:</p>
 
-<figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/nature_cover_encode.png" alt="Nature Cover ENCODE. " width="500" height="657" loading="lazy" /><a target="_blank" href="../../images/nature_cover_encode.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Nature Cover</figcaption></figure>
+<figure id="figure-15" style="max-width: 90%;"><img src="../../images/nature_cover_encode.png" alt="Nature Cover ENCODE. " width="500" height="657" loading="lazy" /><a target="_blank" href="../../images/nature_cover_encode.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Nature Cover</figcaption></figure>
 
 <h2 id="data-formats">Data Formats</h2>
 
@@ -2629,7 +2629,7 @@ https://zenodo.org/record/4494146/files/highlights.tab
 
 <p>When this has complete, your output should look similar to the following;</p>
 
-<figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/circos-encode.png" alt="Circos simplified Nature ENCODE Cover. " width="1200" height="1200" loading="lazy" /><a target="_blank" href="../../images/circos-encode.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Simplified Nature Cover</figcaption></figure>
+<figure id="figure-16" style="max-width: 90%;"><img src="../../images/circos-encode.png" alt="Circos simplified Nature ENCODE Cover. " width="1200" height="1200" loading="lazy" /><a target="_blank" href="../../images/circos-encode.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Simplified Nature Cover</figcaption></figure>
 
 <h1 id="further-editing">Further Editing</h1>
 
@@ -2877,7 +2877,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2905,7 +2905,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

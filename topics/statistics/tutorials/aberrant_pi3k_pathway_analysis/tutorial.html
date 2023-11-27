@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -289,7 +289,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -643,7 +643,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA dataset using RNA-Seq information and mutational and copy number information of following frequently altered genes. We named this tutorial as PanCancer Aberrant Pathway Activity Analysis (PAPAA).</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_pathway.png" alt="pi3k_pathway. " width="619" height="778" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/pi3k_pathway.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Genes used in this study from ERK/RAS/PI3K pathway. Red text indicates Oncogenes (OG), blue text indicates Tumor suppressors genes (TSG).</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_pathway.png" alt="pi3k_pathway. " width="619" height="778" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/pi3k_pathway.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Genes used in this study from ERK/RAS/PI3K pathway. Red text indicates Oncogenes (OG), blue text indicates Tumor suppressors genes (TSG).</figcaption></figure>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -791,7 +791,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
 <h2 id="machine-learning-methodology">Machine learning methodology</h2>
 <p>Logistic regression is a kind of machine learning approach where statistical analysis is used to predict the outcome of a dependent variable based on observed changes in other variables. e.g. Changes in gene expression are directly connected to alterations/mutations in genes. We used above approach to predict mutational status given the gene expression. Optimizing to the above prediction of mutational status with gene expression variable, we used elastic net penalty with gradient descent algorithm is used to find the optimal cost function by going over a number of iterations. The objective of the classifier is to determine the probability a given sample (<em>i</em>) has a aberrant gene event given the sample’s RNA-Seq measurements (<em>Xi</em>). In order to achieve the objective, the classifier learns a vector of coefficients or gene-specific weights (<em>w</em>) that optimize the following penalized logistic function.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/equation.png" alt="Equations for probability measurement . " width="1537" height="722" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/equation.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutational status can be estimated by Multiplying Xi with gene specific weights (W). The negative log likelihood (L) is used for calculating minimum weights for each sample</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/equation.png" alt="Equations for probability measurement . " width="1537" height="722" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/equation.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutational status can be estimated by Multiplying Xi with gene specific weights (W). The negative log likelihood (L) is used for calculating minimum weights for each sample</figcaption></figure>
 
 <p>Where <em>alpha</em> and <em>l</em> are regularization and elastic net mixing hyperparameters respectively. Their optimal values are found during 5 fold cross validation by using scikit-learn <a href="https://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html">girdsearchCV</a> approach.</p>
 
@@ -819,8 +819,8 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
 <h2 id="papaa-pancancer-classifier">PAPAA: PanCancer classifier</h2>
 <p>This first step is designed to generate model with ERK/RAS/PI3K signaling axis pathway genes (path_genes): ERBB2, KRAS, PIK3CA ,AKT11 genes and various the Cancer Genome Atlas (TCGA) cancer types/diseases: BLCA, BRCA, CESC, COAD, ESCA, LUAD, LUSC, OV, PRAD, READ, STAD, UCEC, and UCS (ref: tcga_dictionary.tsv). This step takes gene expression information (pancan_rnaseq_freeze.tsv), mutational information (pancan_mutation_freeze.tsv), load of mutations in each samples (mutation_burden_freeze.tsv), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv &amp; copy_number_gain_status.tsv) and generates PI3K_OG model. AUROC and AUPR metrics are calculated for training,test,CV and random shuffled sets. As an additional option, the generated model was used to evaluate alternative genes (PTEN, PIK3R1, and STK11) and alternative diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png" alt="Prediction metrics for PI3K_OG model. " width="738" height="455" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.</figcaption></figure>
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_classifier_coef.png" alt="PI3K_OG Classifier Coefficients. " width="508" height="479" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_classifier_coef.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> PI3K_OG classifier coefficients represent the genes that impact the classification</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png" alt="Prediction metrics for PI3K_OG model. " width="738" height="455" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_classifier_coef.png" alt="PI3K_OG Classifier Coefficients. " width="508" height="479" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_classifier_coef.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> PI3K_OG classifier coefficients represent the genes that impact the classification</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-generating-model-from-erbb2-pik3ca-kras-akt1-genes-with-specific-disease-types"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating model from ERBB2,PIK3CA,KRAS,AKT1 genes with specific disease types</div>
@@ -949,7 +949,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
 
 <h2 id="pancancer-compare-within-models">PanCancer compare within models</h2>
 <p>we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model and individual models.</p>
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/within.png" alt="Compare Pan model with with-in disease model. " width="629" height="225" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/within.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Cross-validation performance characteristic metric AUROC for the pan-cancer model compared to individual models trained on each cancer type</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/within.png" alt="Compare Pan model with with-in disease model. " width="629" height="225" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/within.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Cross-validation performance characteristic metric AUROC for the pan-cancer model compared to individual models trained on each cancer type</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-compare-the-erbb2-pik3ca-kras-akt1-pan-model-with-individual-disease-models"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: compare the ERBB2_PIK3CA_KRAS_AKT1 pan model with individual disease models</div>
@@ -1032,7 +1032,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
 
 <h2 id="pancancer-visualize-decisions">PanCancer visualize decisions</h2>
 <p>In this step we generate visualization plots using classifier decision function for samples in each individual disease, total decisions for all samples in all diseases, and hypermutated samples in all diseases.</p>
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_total_decisions.png" alt="PI3K_OG_total_decisions_plot. " width="915" height="706" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_total_decisions.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Probability density plot for total decisions for all samples with the given classifier decision function</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_total_decisions.png" alt="PI3K_OG_total_decisions_plot. " width="915" height="706" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_total_decisions.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Probability density plot for total decisions for all samples with the given classifier decision function</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-visualize-decisions-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize decisions for ERBB2_PIK3CA_KRAS_AKT1 model</div>
@@ -1151,7 +1151,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
 
 <h2 id="pancancer-pathway-count-heatmaps">PanCancer pathway count heatmaps</h2>
 <p>This step generates combined heatmap from mutation and copy number information and summarizes mutation, copy and total counts per sample for all the genes in target pathway.</p>
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_combined_heatmap.png" alt="PI3K_OG_combined_heatmap. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_combined_heatmap.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Combined count heatmap (mutation and copynumber) for all genes in the target pathway with in each cancer type</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_combined_heatmap.png" alt="PI3K_OG_combined_heatmap. " width="3000" height="3000" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_combined_heatmap.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Combined count heatmap (mutation and copynumber) for all genes in the target pathway with in each cancer type</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-heatmaps-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Heatmaps for ERBB2_PIK3CA_KRAS_AKT1 model</div>
@@ -1251,8 +1251,8 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
 
 <h2 id="pancancer-targene-cell-line-predictions">PanCancer targene cell line predictions</h2>
 <p>In this step we use our classifier information and predict mutational status for various cell lines in CCLE and GDSC data sources.</p>
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/ccle_classification.png" alt="CCLE_targene_celline_classification. " width="1050" height="1200" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/ccle_classification.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> PI3K_OG classifiers applied to CCLE cell lines. Cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.</figcaption></figure>
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/gdsc_classification.png" alt="GDSC_targene_celline_classification. " width="1050" height="1200" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/gdsc_classification.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> PI3K_OG classifiers applied to CCLE 390 standard cell lines between CCLE and GDSC cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/ccle_classification.png" alt="CCLE_targene_celline_classification. " width="1050" height="1200" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/ccle_classification.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> PI3K_OG classifiers applied to CCLE cell lines. Cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/gdsc_classification.png" alt="GDSC_targene_celline_classification. " width="1050" height="1200" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/gdsc_classification.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> PI3K_OG classifiers applied to CCLE 390 standard cell lines between CCLE and GDSC cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-analysis-of-ccle-and-gdsc-cell-lines-using-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Analysis of CCLE and GDSC cell-lines using ERBB2_PIK3CA_KRAS_AKT1 model</div>
@@ -1314,7 +1314,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
 
 <h2 id="pancancer-external-sample-status-prediction">PanCancer external sample status prediction</h2>
 <p>In this step we use our classifier information and predict mutational status from external gene expression data. Gene expression data from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822">GSE69822</a>, where MCF10a cell lines are either having PI3KCA/PTENKO mutation or WT/WT+A66 treated samples. Note WT+A66 is wild-type MCF10a cell line treated with A66 a potent PI3K inhibitor. A distribution plot is generated to see how many samples match to prediction. Samples with scores below 0.5 are considered WT and above 0.5 are considered mutant.</p>
-<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/external.png" alt="GSE69822_samples_classification. " width="1937" height="584" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/external.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT/WT+A66 (blue circles) or having a PIK3CA-H1074R/PTENKO mutation (orange circles).</figcaption></figure>
+<figure id="figure-10" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/external.png" alt="GSE69822_samples_classification. " width="1937" height="584" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/external.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT/WT+A66 (blue circles) or having a PIK3CA-H1074R/PTENKO mutation (orange circles).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-external-sample-evaluation-with-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model</div>
@@ -1351,7 +1351,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
 <h2 id="pancancer-targene-pharmacology">PanCancer targene pharmacology</h2>
 <p>In this step we use the classifier derived cell line predictions and use them to evaluate pharmacological response of these cell lines. We plot log IC50 with classifier scores for each cell line and draw a correlation for drug response in absence or presence of targene mutations.</p>
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_gdsc1_ccle_drug.png" alt="Afatinib_pharmacological_response. " width="1800" height="1500" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_gdsc1_ccle_drug.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Natural log fitted IC50 (Ln-IC50) values of Afatinib pharmacological response compared against PI3K_OG classifier scores of various cell lines. Cell lines with mutant (orange) or wild-type (blue) for ERBB2, KRAS, PIK3CA, AKT1 are indicated. The trend lines and p values are shown separately for wild-type or mutant cell lines. Cell lines treated with Afatinib, a known EGFR inhibitor.</figcaption></figure>
+<figure id="figure-11" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_gdsc1_ccle_drug.png" alt="Afatinib_pharmacological_response. " width="1800" height="1500" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_gdsc1_ccle_drug.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Natural log fitted IC50 (Ln-IC50) values of Afatinib pharmacological response compared against PI3K_OG classifier scores of various cell lines. Cell lines with mutant (orange) or wild-type (blue) for ERBB2, KRAS, PIK3CA, AKT1 are indicated. The trend lines and p values are shown separately for wild-type or mutant cell lines. Cell lines treated with Afatinib, a known EGFR inhibitor.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-gdsc1-and-gdsc2-pharmacological-analysis-using-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: GDSC1 and GDSC2 pharmacological analysis using ERBB2_PIK3CA_KRAS_AKT1 model</div>
@@ -1416,7 +1416,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <li>In addition we used our models to evaluated cell-lines pharmacological response against various compounds. This information will be helpful to improve personalized medicine approaches to various individuals.</li>
 </ul>
 
-<figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/aberrant_pi3k_pathway_analysis/project_summary.png" alt="tutorial_summary. " width="720" height="540" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/project_summary.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Galaxy based Machine Learning approach for Pan-cancer Aberrant Pathway Activity Analysis(PAPAA) using TCGA multi-omic data.</figcaption></figure>
+<figure id="figure-12" style="max-width: 90%;"><img src="../../images/aberrant_pi3k_pathway_analysis/project_summary.png" alt="tutorial_summary. " width="720" height="540" loading="lazy" /><a target="_blank" href="../../images/aberrant_pi3k_pathway_analysis/project_summary.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Galaxy based Machine Learning approach for Pan-cancer Aberrant Pathway Activity Analysis(PAPAA) using TCGA multi-omic data.</figcaption></figure>
 
                 </section>
 
@@ -1645,7 +1645,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1673,7 +1673,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

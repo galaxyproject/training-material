@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -342,7 +342,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1558,7 +1558,7 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
       <li>The PCA plot shows that the three groups of cells are separated out according to what phase of the cell cycle they are in. This is what we would expect to see as we are only looking at the cell cycle genes, which by definition are expressed during particular phases.</li>
     </ol>
 
-    <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-case_cell-cycle/CellCycle_PCA1.png" alt="PCA plot showing three separate clusters of cells in the G1, S and G2M Phases. " width="624" height="429" loading="lazy" /><a target="_blank" href="../../images/scrna-case_cell-cycle/CellCycle_PCA1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> PCA Plot of Cell Cycle Genes before regression</figcaption></figure>
+    <figure id="figure-1" style="max-width: 90%;"><img src="../../images/scrna-case_cell-cycle/CellCycle_PCA1.png" alt="PCA plot showing three separate clusters of cells in the G1, S and G2M Phases. " width="624" height="429" loading="lazy" /><a target="_blank" href="../../images/scrna-case_cell-cycle/CellCycle_PCA1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> PCA Plot of Cell Cycle Genes before regression</figcaption></figure>
 
   </blockquote>
 </blockquote>
@@ -1614,7 +1614,7 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
       <li>The cells in different phases are now all mixed up together. This makes sense because we are only plotting the cell cycle genes, but the previously strong effects of the cell cycle on these genes have now been regressed out. There are still some differences between the cells (they don’t all end up at the same point on the PCA chart) because the regression only removes the expected effects of the cell cycle, leaving behind any individual variation in the expression of the cell cycle genes.</li>
     </ol>
 
-    <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-case_cell-cycle/CellCycle_PCA2.png" alt="PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together. " width="624" height="429" loading="lazy" /><a target="_blank" href="../../images/scrna-case_cell-cycle/CellCycle_PCA2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> PCA Plot of Cell Cycle Genes after regression</figcaption></figure>
+    <figure id="figure-2" style="max-width: 90%;"><img src="../../images/scrna-case_cell-cycle/CellCycle_PCA2.png" alt="PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together. " width="624" height="429" loading="lazy" /><a target="_blank" href="../../images/scrna-case_cell-cycle/CellCycle_PCA2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> PCA Plot of Cell Cycle Genes after regression</figcaption></figure>
 
   </blockquote>
 </blockquote>
@@ -1637,9 +1637,9 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
 
     <p>We wouldn’t expect to see such clear distinctions in PCA plots created using all of the genes (not just the cell cycle ones), even before the regression. Although the cell cycle genes can have a significant effect, these won’t be as obvious when other genes are also being taken into account. However, we will still see a difference after we regress out the effects of the cell cycle - the cells in different phases will become more mixed up together. How much of a difference the regression makes will depend on how strong the effects of the cell cycle are in a particular dataset - you can see the effects on this dataset below. You can also replicate these plots after completing the rest of the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial by colouring your PCA plots by phase.</p>
 
-    <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-case_cell-cycle/CellCycle_PCA3.png" alt="PCA plot showing some separation between cells in the G1, S and G2M Phases before regression. " width="624" height="429" loading="lazy" /><a target="_blank" href="../../images/scrna-case_cell-cycle/CellCycle_PCA3.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> PCA Plot using all genes before regression</figcaption></figure>
+    <figure id="figure-3" style="max-width: 90%;"><img src="../../images/scrna-case_cell-cycle/CellCycle_PCA3.png" alt="PCA plot showing some separation between cells in the G1, S and G2M Phases before regression. " width="624" height="429" loading="lazy" /><a target="_blank" href="../../images/scrna-case_cell-cycle/CellCycle_PCA3.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> PCA Plot using all genes before regression</figcaption></figure>
 
-    <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-case_cell-cycle/CellCycle_PCA4.png" alt="PCA plot showing that cells in the G1, S and G2M Phases are more mixed up with each other after the regression. " width="624" height="429" loading="lazy" /><a target="_blank" href="../../images/scrna-case_cell-cycle/CellCycle_PCA4.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> PCA Plot using all genes after regression</figcaption></figure>
+    <figure id="figure-4" style="max-width: 90%;"><img src="../../images/scrna-case_cell-cycle/CellCycle_PCA4.png" alt="PCA plot showing that cells in the G1, S and G2M Phases are more mixed up with each other after the regression. " width="624" height="429" loading="lazy" /><a target="_blank" href="../../images/scrna-case_cell-cycle/CellCycle_PCA4.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> PCA Plot using all genes after regression</figcaption></figure>
 
   </blockquote>
 </blockquote>
@@ -1868,7 +1868,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1896,7 +1896,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -59,8 +59,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -263,7 +263,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -804,7 +804,7 @@ neuron. A synapse can either enhance or inhibit the signal that passes through i
 by changing the effectiveness of synapse. If the signals received exceeds a threshold, the neuron
 <em>fires</em>, i.e., it transmits a signal to other neurons. If not, it will not fire.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/FNN_bio_neuron.png" alt="Sketch of a biological neuron and its components. " width="559" height="245" loading="lazy" /><a target="_blank" href="../../images/FNN_bio_neuron.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A biological neuron (<span class="citation"><a href="#JainEtAl">Jain <i>et al.</i> 1996</a></span>)</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/FNN_bio_neuron.png" alt="Sketch of a biological neuron and its components. " width="559" height="245" loading="lazy" /><a target="_blank" href="../../images/FNN_bio_neuron.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A biological neuron (<span class="citation"><a href="#JainEtAl">Jain <i>et al.</i> 1996</a></span>)</figcaption></figure>
 
 <p>Cerebral cortex, the outer most layer of the brain, is a sheet of neurons about 2 to 3 mm thick,
 with a surface area of about 2,200 \(cm^{2}\). Cerebral cortex has about \(10^{11}\) neurons.
@@ -841,7 +841,7 @@ output is 0 (it does not fire). Bias allows us to shift the activation function.
 <p>Figure 2 shows a Perceptron, a single layer FNN, where the input is 3 dimensional (input layer has
 3 nodes), and output is 1 dimensional (output layer has 1 node).</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/FFNN_no_hidden.png" alt="Neurons forming the input and output layers of a single layer feedforward neural network. " width="233" height="463" loading="lazy" /><a target="_blank" href="../../images/FFNN_no_hidden.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A perceptron</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/FFNN_no_hidden.png" alt="Neurons forming the input and output layers of a single layer feedforward neural network. " width="233" height="463" loading="lazy" /><a target="_blank" href="../../images/FFNN_no_hidden.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A perceptron</figcaption></figure>
 
 <p>In supervised learning, we are given a set of input-output pairs, called the <em>training
 set</em>. Given the training set, the learning algorithm (iteratively) adjusts the model
@@ -857,7 +857,7 @@ Approximation Theorem, a FNN with one hidden layer can represent any function (<
 although in practice training such a model is very difficult (if not impossible), hence, we usually
 add multiple hidden layers to solve complex problems.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network. " width="361" height="461" loading="lazy" /><a target="_blank" href="../../images/FFNN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network. " width="361" height="461" loading="lazy" /><a target="_blank" href="../../images/FFNN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
 
 <p>The problem with multi-layer FNN was lack of a learning algorithm, as the Perceptron’s learning
 algorithm could not be extended to multi-layer FNN. This along with Minsky and Papert highlighting
@@ -881,7 +881,7 @@ techniques that can prevent that (<span class="citation"><a href="#KukackaEtAl">
 <p>There are many activation functions besides the step function used in Perceptron (<span class="citation"><a href="#nwankpaEtAl">Nwankpa <i>et al.</i> 2018</a></span>). Figure 4 shows
 some of the more common activation functions.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/FNN_activation_functions.png" alt="Table showing the formula, graph, derivative, and range of common activation functions. " width="1703" height="836" loading="lazy" /><a target="_blank" href="../../images/FNN_activation_functions.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Common activation functions (Source: https://en.wikipedia.org/wiki/Activation_function)</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/FNN_activation_functions.png" alt="Table showing the formula, graph, derivative, and range of common activation functions. " width="1703" height="836" loading="lazy" /><a target="_blank" href="../../images/FNN_activation_functions.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Common activation functions (Source: https://en.wikipedia.org/wiki/Activation_function)</figcaption></figure>
 
 <p>Linear activation function is used in the output layer of a network when we have a regression problem. It does
 not make sense to use it in all layers, as such multi-layer network can be reduced to a single layer network.
@@ -937,7 +937,7 @@ mutually exclusive, we use another method called <em>multi-hot encoding</em>. Su
 classification, where an image can have a dog, panda, or cat in it. We represent the label by a vector of 3, and if
 dog and cat are present in the image, first and third element of the vector are one and the second element is zero (<span class="citation"><a href="#Bagheri">Bagheri 2020</a></span>).</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/FNN_output_encoding.png" alt="Three images illustrating binary, multiclass, and multilabel classifications and their label representation. " width="1279" height="944" loading="lazy" /><a target="_blank" href="../../images/FNN_output_encoding.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Examples of binary, multiclass, and multilabel classifications and their label representation (<span class="citation"><a href="#Bagheri">Bagheri 2020</a></span>)</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/FNN_output_encoding.png" alt="Three images illustrating binary, multiclass, and multilabel classifications and their label representation. " width="1279" height="944" loading="lazy" /><a target="_blank" href="../../images/FNN_output_encoding.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Examples of binary, multiclass, and multilabel classifications and their label representation (<span class="citation"><a href="#Bagheri">Bagheri 2020</a></span>)</figcaption></figure>
 
 <p>Figure 5 shows examples of binary, multiclass, and multilabel classification problems and their associated one-hot
 encoded or multi-hot encoded labels. The output layer of a neural network for binary classification usually has a
@@ -1258,11 +1258,11 @@ determination) score for our model is 0.87 (out of the best possible score of 1.
 The best value for RMSE is obviously 0 for perfect prediction. The third graph (Figure 8) plots residual (predicted - true) vs
 predicted values. The better our model’s predictions, the closer the points to y=0 line.</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/FNN_true_predicted_plot.png" alt="True vs predicted values plot. " width="1811" height="960" loading="lazy" /><a target="_blank" href="../../images/FNN_true_predicted_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> True vs predicted values plot</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/FNN_true_predicted_plot.png" alt="True vs predicted values plot. " width="1811" height="960" loading="lazy" /><a target="_blank" href="../../images/FNN_true_predicted_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> True vs predicted values plot</figcaption></figure>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/FNN_scatter_plot.png" alt="Scatterplot of true vs predicted values plot. " width="1870" height="952" loading="lazy" /><a target="_blank" href="../../images/FNN_scatter_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Scatterplot of true vs predicted values plot</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/FNN_scatter_plot.png" alt="Scatterplot of true vs predicted values plot. " width="1870" height="952" loading="lazy" /><a target="_blank" href="../../images/FNN_scatter_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Scatterplot of true vs predicted values plot</figcaption></figure>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/FNN_residual_plot.png" alt="Residual vs predicted values plot. " width="1874" height="958" loading="lazy" /><a target="_blank" href="../../images/FNN_residual_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Residual vs predicted values plot</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/FNN_residual_plot.png" alt="Residual vs predicted values plot. " width="1874" height="958" loading="lazy" /><a target="_blank" href="../../images/FNN_residual_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Residual vs predicted values plot</figcaption></figure>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -1518,7 +1518,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1546,7 +1546,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

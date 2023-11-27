@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Using dataset collections">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-09-28 11:56:59 +0000">
+<meta name="DC.date" content="2023-11-27 16:40:51 +0000">
 <meta name="DC.creator" content="Anton Nekrutenko">
 
         
@@ -109,7 +109,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-09-28 11:56:59 +0000",
+  "dateModified": "2023-11-27 16:40:51 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Using dataset collections",
   "interactivityType": "mixed",
@@ -168,7 +168,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Using dataset collections",
   "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html",
-  "version": 26,
+  "version": 27,
   "timeRequired": "PT30M",
   "teaches": "Understand and master dataset collections",
   "keywords": [
@@ -226,7 +226,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -608,7 +608,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 27, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -621,7 +621,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00146">https://gxy.io/GTN:T00146</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 26 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 27 </div>
 
     </blockquote>
     </section>
@@ -661,8 +661,13 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
   <p>The above datasets are in <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> format. It is necessary to explicitly set format in Galaxy. The <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> <strong>Tip</strong> section below explains how to upload these data and set the correct format. There is a variety of <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq format flavors</a> and it is difficult to guess them automatically.</p>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-upload-fastqsanger-datasets-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-fastqsanger-datasets-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Upload fastqsanger datasets via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p>Click on <strong>Upload Data</strong> on the top of the left panel:</p>     <p><img src="/training-material/faqs/galaxy/images/upload_data_button.png" alt="UploadDataButton" /></p>   </li>   <li>     <p>Click on <strong>Paste/Fetch</strong>:</p>     <p><img src="/training-material/faqs/galaxy/images/paste_fetch_data_button.png" alt="PasteFetchButton" /></p>   </li>   <li>     <p>Paste URL into text box that would appear:</p>     <p><img src="/training-material/faqs/galaxy/images/paste_fetch_data_modal.png" alt="PasteFetchModal" /></p>   </li>   <li>     <p>Set <strong>Type (set all)</strong> to <code class="language-plaintext highlighter-rouge">fastqsanger</code> or, if your data is compressed as in URLs above (they have <code class="language-plaintext highlighter-rouge">.gz</code> extensions), to <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></p>     <p><img src="/training-material/faqs/galaxy/images/paste_fetch_set_data_type.png" alt="ChangeTypeDropDown" />:</p>   </li> </ol> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
   <p><!--END_SNIPPET--></p>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-upload-fastqsanger-datasets-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-fastqsanger-datasets-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Upload fastqsanger datasets via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Uploading <code class="language-plaintext highlighter-rouge">fastqsanger</code> or <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> datasets via URL.</p>   <ol>   <li>     <p>Click on <strong>Upload Data</strong> on the top of the left panel:</p>     <p><img src="/training-material/faqs/galaxy/images/upload_data_button.png" alt="UploadDataButton" /></p>   </li>   <li>     <p>Click on <strong>Paste/Fetch</strong>:</p>     <p><img src="/training-material/faqs/galaxy/images/paste_fetch_data_button.png" alt="PasteFetchButton" /></p>   </li>   <li>     <p>Paste URL into text box that would appear:</p>     <p><img src="/training-material/faqs/galaxy/images/paste_fetch_data_modal.png" alt="PasteFetchModal" /></p>   </li>   <li>     <p>Set <strong>Type (set all)</strong> to <code class="language-plaintext highlighter-rouge">fastqsanger</code> or, if your data is compressed as in URLs above (they have <code class="language-plaintext highlighter-rouge">.gz</code> extensions), to <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></p>     <p><img src="/training-material/faqs/galaxy/images/paste_fetch_set_data_type.png" alt="ChangeTypeDropDown" />:</p>   </li> </ol>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-danger-make-sure-you-choose-corect-format"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Danger: Make sure you choose corect format!</div>   <p>When selecting datatype in “<strong>Type (set all)</strong>” dropdown, make sure you select <code class="language-plaintext highlighter-rouge">fastaqsanger</code> or <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> BUT NOT <code class="language-plaintext highlighter-rouge">fastqcssanger</code> or anything else!</p> </blockquote>   <p><img src="/training-material/faqs/galaxy/images/upload_fastqsanger_via_url.png" alt="UploadAnimatedPng" /></p> </blockquote>
+  <p><!--END_SNIPPET--></p>
+
 </blockquote>
 
 <h2 id="about-these-datasets">About these datasets</h2>
@@ -688,11 +693,11 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 
 <p>Because our data is <em>paired</em> we need to create a hierarchical collection called <strong>Paired Dataset Collection</strong> or <strong>Paired Collection</strong>. In such collection there are two layers. The first layer corresponds to individual samples (e.g., <code class="language-plaintext highlighter-rouge">M117-bl</code>). The second layer represent <code class="language-plaintext highlighter-rouge">forward</code> and <code class="language-plaintext highlighter-rouge">reverse</code> reads corresponding to each sample:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/collections/paired_collection.svg" type="image/svg+xml" alt="paired collection. ">paired collection.</object></div><a target="_blank" href="../../images/collections/paired_collection.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The logic of Paired Collection. Here <em>N</em> datasets are bundled into a paired collection with two layers. The first layer corresponds to samples and the second to forward and reverse reads within each sample.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/collections/paired_collection.svg" type="image/svg+xml" alt="paired collection. ">paired collection.</object></div><a target="_blank" href="../../images/collections/paired_collection.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The logic of Paired Collection. Here <em>N</em> datasets are bundled into a paired collection with two layers. The first layer corresponds to samples and the second to forward and reverse reads within each sample.</figcaption></figure>
 
 <p>To begin creating a collection we need to select datasets we would like to bundle. This is done using checkbox button of Galaxy’s history menu. Fig. 2 below shows this process.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/collections/select_multiple_datasets.gif" alt="selecting multiple datasets. " width="2560" height="1328" loading="lazy" /><a target="_blank" href="../../images/collections/select_multiple_datasets.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Selecting multiple datasets and creating a paired collection.</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/collections/select_multiple_datasets.gif" alt="selecting multiple datasets. " width="2560" height="1328" loading="lazy" /><a target="_blank" href="../../images/collections/select_multiple_datasets.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Selecting multiple datasets and creating a paired collection.</figcaption></figure>
 
 <p>The above process ended with appearance of Galaxy collection wizard. In this case Galaxy automatically assigned pairs using the <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> endings of dataset names. Let’s however pretend that this did not happen. Click on <strong>Unpair all</strong> (highlighted in red in the figure above) link and then on <strong>Filters</strong> link (see animation in Fig. 3). The interface will change into its unpaired state.</p>
 
@@ -700,11 +705,11 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 
 <p>Now it is time to name the collection: type <code class="language-plaintext highlighter-rouge">M117-collection</code> in <strong>Name</strong> text box and create the collection by clicking <strong>Create collection</strong>. A new item will appear in the history.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/collections/using_collection_wizard.gif" alt="using collection wizard. " width="1440" height="900" loading="lazy" /><a target="_blank" href="../../images/collections/using_collection_wizard.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Working with collection wizard. Text above this figure explains each step.</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/collections/using_collection_wizard.gif" alt="using collection wizard. " width="1440" height="900" loading="lazy" /><a target="_blank" href="../../images/collections/using_collection_wizard.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Working with collection wizard. Text above this figure explains each step.</figcaption></figure>
 
 <p>Clicking on collection will expand it to show four pairs it contains (panel <strong>B</strong>). Clicking individual pairs will expand them further to reveal <strong>forward</strong> and <strong>reverse</strong> datasets (panel <strong>C</strong>). Expanding these further will enable one to see individual datasets (panel <strong>D</strong>).</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/collections/expanding_collection.gif" alt="expanding collection. " width="1440" height="900" loading="lazy" /><a target="_blank" href="../../images/collections/expanding_collection.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> To look what is inside a collection, just click on it.</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/collections/expanding_collection.gif" alt="expanding collection. " width="1440" height="900" loading="lazy" /><a target="_blank" href="../../images/collections/expanding_collection.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> To look what is inside a collection, just click on it.</figcaption></figure>
 
 <h1 id="processing-data-organized-as-a-collection">Processing data organized as a collection</h1>
 
@@ -718,7 +723,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
   <p>The above dataset is in <code class="language-plaintext highlighter-rouge">fasta.gz</code> format. The <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> <strong>Tip</strong> section below explains how to upload these data and set the correct format.</p>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>     <p>Click <strong>Reset</strong> button at the bottom of the form. If the button is greyed out -&gt; skip to the next step.</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>     <p><code class="language-plaintext highlighter-rouge">https://zenodo.org/record/5119008/files/chrM.fa.gz</code></p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta.gz</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>     <p>Click <strong>Reset</strong> button at the bottom of the form. If the button is greyed out -&gt; skip to the next step.</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>     <p><code class="language-plaintext highlighter-rouge">https://zenodo.org/record/5119008/files/chrM.fa.gz</code></p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta.gz</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
   <p><!--END_SNIPPET--></p>
 </blockquote>
 
@@ -747,11 +752,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 
   <p>The interface should look like this:</p>
 
-  <hr />
-
-  <p><a href="../../images/collections/bwa_mem_interface_coll_tut.png" rel="noopener noreferrer"><img src="../../images/collections/bwa_mem_interface_coll_tut.png" alt="bwa_mem_interface. " width="832" height="940" loading="lazy" /></a></p>
-
-  <hr />
+  <figure id="figure-5" style="max-width: 90%;"><img src="../../images/collections/bwa_mem_interface_coll_tut.png" alt="bwa_mem_interface. " width="832" height="940" loading="lazy" /><a target="_blank" href="../../images/collections/bwa_mem_interface_coll_tut.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Tool interface</figcaption></figure>
 
   <ul>
     <li>Click <strong>Run Tool</strong> button</li>
@@ -922,7 +923,7 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>In this brief analysis we took four paired datasets, created a collection, analyzed this collection and finally created a single report. Such “lifecycle” is shown in the figure below. Here we started with eight fastq datasets representing four paired end samples. A paired collection was reduced to a list of BAM datasets by <code class="language-plaintext highlighter-rouge">BWA-MEM</code>. Varinat calling by <code class="language-plaintext highlighter-rouge">lofreq</code> and field extraction with <code class="language-plaintext highlighter-rouge">SnpEff</code> maintained collection structure: these tools processed four individual datasets changing their formats from BAM to VCF, and from VCF to Tab-delimited. Finally, we collapsed collection by merging its content into a single dataset.</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/collections/collection_lifecycle.svg" type="image/svg+xml" alt="Collection lifecycle. ">Collection lifecycle.</object></div><a target="_blank" href="../../images/collections/collection_lifecycle.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Collection lifecycle. Arrows = individual fastq datasets; Four shades of yellow = four samples analyzed in this example.</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/collections/collection_lifecycle.svg" type="image/svg+xml" alt="Collection lifecycle. ">Collection lifecycle.</object></div><a target="_blank" href="../../images/collections/collection_lifecycle.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Collection lifecycle. Arrows = individual fastq datasets; Four shades of yellow = four samples analyzed in this example.</figcaption></figure>
 
 <p>The last step of our analysis, collapsing a collection, is an example of a <em>collection operation</em>. Galaxy contains an entire section of tools designed for handling of collection data. These can be classified as:</p>
 
@@ -976,8 +977,8 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>Given a collection:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A] 
-             [Dataset B] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A]
+             [Dataset B]
              [Dataset X]
 </code></pre></div></div>
 
@@ -1001,8 +1002,8 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>Given a collection:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A] 
-             [Dataset B] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A]
+             [Dataset B]
              [Dataset X]
 </code></pre></div></div>
 <p>and a text file:</p>
@@ -1031,8 +1032,8 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>Given a collection:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A] 
-             [Dataset B] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A]
+             [Dataset B]
              [Dataset X]
 </code></pre></div></div>
 
@@ -1045,8 +1046,8 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>the tool will return:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset Alpha] 
-             [Dataset Beta] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset Alpha]
+             [Dataset Beta]
              [Dataset Gamma]
 </code></pre></div></div>
 
@@ -1054,8 +1055,8 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>Given a collection:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A] 
-             [Dataset B] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A]
+             [Dataset B]
              [Dataset X]
 </code></pre></div></div>
 
@@ -1068,8 +1069,8 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>the tool will return:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset Alpha] 
-             [Dataset Beta] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset Alpha]
+             [Dataset Beta]
              [Dataset Gamma]
 </code></pre></div></div>
 
@@ -1081,38 +1082,38 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>The tool sort in ascending order. When <em>numeric</em> sort is chosen, the tool ignores non-numeric characters. For example, if a collection contains the following elements:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Horse123] 
-             [Donkey543] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Horse123]
+             [Donkey543]
              [Mule176]
 </code></pre></div></div>
 
 <p>The tool will output:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Horse123]
-             [Mule176] 
-             [Donkey543] 
+             [Mule176]
+             [Donkey543]
 </code></pre></div></div>
 
 <h4 id="sorting-from-file">Sorting from file</h4>
 
 <p>Alternative, one can supply a single column text file containing elements identifiers in the desired sort order. For example, suppose there a collection:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Horse123] 
-             [Donkey543] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Horse123]
+             [Donkey543]
              [Mule176]
 </code></pre></div></div>
 
 <p>and a file specifying sort order:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Donkey543
- Horse123 
+ Horse123
  Mule176
 </code></pre></div></div>
 
 <p>the output will predictably look like this:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Donkey543] 
-             [Horse123] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Donkey543]
+             [Horse123]
              [Mule176]
 </code></pre></div></div>
 
@@ -1148,19 +1149,19 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 <p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>  <strong>Merge collections</strong> takes two or more collections and creates a single collection from them.</p>
 
 <p>By default the tool assumes that collections that are being merged have unique dataset names. If it not the case only one (the first) of the datasets with a repeated name will be included in the merged collection. For example, suppose you have two collections. Each has two datasets named “A” and “B”:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A] 
-               [Dataset B] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 </code></pre></div></div>
 
 <p>Merging them will produce a single collection with only two datasets:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A] 
-                    [Dataset B] 
-                    [Dataset X] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A]
+                    [Dataset B]
+                    [Dataset X]
                     [Dataset Y]
 </code></pre></div></div>
 
@@ -1170,19 +1171,19 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>Input:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A] 
-               [Dataset B] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 </code></pre></div></div>
 
 <p>Output:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A] 
-                    [Dataset B] 
-                    [Dataset X] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A]
+                    [Dataset B]
+                    [Dataset X]
                     [Dataset Y]
 </code></pre></div></div>
 
@@ -1192,19 +1193,19 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>Input:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A] 
-               [Dataset B] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 </code></pre></div></div>
 
 <p>Output:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A] 
-                    [Dataset B] 
-                    [Dataset X] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A]
+                    [Dataset B]
+                    [Dataset X]
                     [Dataset Y]
 </code></pre></div></div>
 
@@ -1214,21 +1215,21 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>Input:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A] 
-               [Dataset B] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 </code></pre></div></div>
 
 <p>Output:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A_1] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A_1]
                     [Dataset B_1]
-                    [Dataset A_2] 
-                    [Dataset B_2]  
-                    [Dataset X] 
+                    [Dataset A_2]
+                    [Dataset B_2]
+                    [Dataset X]
                     [Dataset Y]
 </code></pre></div></div>
 
@@ -1237,21 +1238,21 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 <p>Input:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
- Collection 1: [Dataset A] 
-               [Dataset B] 
+ Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 </code></pre></div></div>
 
 <p>Output:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A]
                     [Dataset B]
-                    [Dataset A_2] 
-                    [Dataset B_2]  
-                    [Dataset X] 
+                    [Dataset A_2]
+                    [Dataset B_2]
+                    [Dataset X]
                     [Dataset Y]
 </code></pre></div></div>
 
@@ -1259,21 +1260,21 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>Input:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A] 
-               [Dataset B] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 </code></pre></div></div>
 
 <p>Output:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A_1] 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A_1]
                     [Dataset B_2]
-                    [Dataset A_2] 
-                    [Dataset B_2]  
-                    [Dataset X_1] 
+                    [Dataset A_2]
+                    [Dataset B_2]
+                    [Dataset X_1]
                     [Dataset Y_2]
 </code></pre></div></div>
 
@@ -1495,7 +1496,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1523,7 +1524,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

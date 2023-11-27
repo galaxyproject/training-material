@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -352,7 +352,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1251,15 +1251,15 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </ol>
 </blockquote>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" alt="raw droplet barcode plots-400k. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> 400k subsample raw</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" alt="raw droplet barcode plots-400k. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> 400k subsample raw</figcaption></figure>
 
 <p>Now, the image generated here (400k) isn’t the most informative - but you are dealing with a fraction of the reads! If you run the total sample (so identical steps above, but with significantly more time!) you’d get the image below.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-raw_barcodes-total.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Total sample - 32,579,453 reads - raw</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/scrna-casestudy/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-raw_barcodes-total.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Total sample - 32,579,453 reads - raw</figcaption></figure>
 
 <p>This is our own formulation of the barcode plot based on a <a href="https://github.com/COMBINE-lab/salmon/issues/362#issuecomment-490160480">discussion</a> we had with community members. The left hand plots with the smooth lines are the main plots, showing the UMI counts for individual cell barcodes ranked from high to low. We expect a sharp drop-off between cell-containing droplets and ones that are empty or contain only cell debris. Now, this data is not an ideal dataset, so for perspective, in an ideal world with a very clean 10x run, data will look a bit more like the following taken from the lung atlas (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6653/results/tsne">study in Single Cell Expression Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6653/">project submission</a>).</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" alt="raw droplet barcode plots - lung atlas. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Pretty data - raw</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" alt="raw droplet barcode plots - lung atlas. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Pretty data - raw</figcaption></figure>
 
 <p>In that plot, you can see the clearer ‘knee’ bend, showing the cut-off between empty droplets and cell-containing droplets.</p>
 
@@ -1281,15 +1281,15 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </ol>
 </blockquote>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-400k.png" alt="raw droplet barcode plots - 400k. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-alevin-barcodes-400k.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> 400k subsample - Alevin processed</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-400k.png" alt="raw droplet barcode plots - 400k. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-alevin-barcodes-400k.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> 400k subsample - Alevin processed</figcaption></figure>
 
 <p>And the full sample looks like:</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Total sample - 32,579,453 reads - Alevin processed</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Total sample - 32,579,453 reads - Alevin processed</figcaption></figure>
 
 <p>And to round this off, here’s the lung atlas plot.</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-lung.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-alevin-barcodes-lung.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Pretty data - Alevin processed</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-lung.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-alevin-barcodes-lung.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Pretty data - Alevin processed</figcaption></figure>
 
 <p>You should see a completely vertical drop-off where Alevin has trunctated the distribution (after excluding any cell barcode that had &lt;10 UMI, Alevin then chose a threshold based off the curve and removed all barcodes with fewer UMIs).</p>
 
@@ -1534,7 +1534,7 @@ Consider…is this a complete set of data?</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-part1workflow.png" alt="Workflow Part 1. " width="1070" height="884" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-alevin-part1workflow.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Workflow  - Steps 1-3</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/scrna-casestudy/wab-alevin-part1workflow.png" alt="Workflow Part 1. " width="1070" height="884" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/wab-alevin-part1workflow.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Workflow  - Steps 1-3</figcaption></figure>
 
 <p>We have:</p>
 
@@ -1839,7 +1839,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1867,7 +1867,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

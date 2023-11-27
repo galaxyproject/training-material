@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -299,7 +299,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -992,7 +992,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
 
 <p>Start by <strong>visiting your Jenkins instance</strong>, at <code class="language-plaintext highlighter-rouge">https://your-domain/jenkins</code></p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/jenkins-01-welcome.png" alt="Welcome to Jenkins. " width="1713" height="499" loading="lazy" /><a target="_blank" href="../../images/jenkins-01-welcome.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Welcome to Jenkins! This is how it looks once you've run the playbook and logged in. The menu on the left gives you some ability to configure Jenkins, below it is the job queue where running and queued jobs will appear. When you have configured some jobs, they will be visible in the central panel.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/jenkins-01-welcome.png" alt="Welcome to Jenkins. " width="1713" height="499" loading="lazy" /><a target="_blank" href="../../images/jenkins-01-welcome.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Welcome to Jenkins! This is how it looks once you've run the playbook and logged in. The menu on the left gives you some ability to configure Jenkins, below it is the job queue where running and queued jobs will appear. When you have configured some jobs, they will be visible in the central panel.</figcaption></figure>
 
 <h2 id="a-simple-job">A simple job</h2>
 
@@ -1009,12 +1009,12 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
     <li>
       <p>Give your job a name like <code class="language-plaintext highlighter-rouge">my-project</code>, and select that it is a <code class="language-plaintext highlighter-rouge">freestyle project</code>, and click “OK”</p>
 
-      <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/jenkins-02-create-job.png" alt="Create a job. " width="976" height="389" loading="lazy" /><a target="_blank" href="../../images/jenkins-02-create-job.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> There are other types of jobs if you install plugins, but we will mostly use freestyle jobs as they are the most appropriate for our case.</figcaption></figure>
+      <figure id="figure-2" style="max-width: 90%;"><img src="../../images/jenkins-02-create-job.png" alt="Create a job. " width="976" height="389" loading="lazy" /><a target="_blank" href="../../images/jenkins-02-create-job.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> There are other types of jobs if you install plugins, but we will mostly use freestyle jobs as they are the most appropriate for our case.</figcaption></figure>
     </li>
     <li>
       <p>The job configuration interface is split into a few sections, visible in the tabs at the top of the page:</p>
 
-      <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/jenkins-03-job-config.png" alt="Job configuration interface. " width="967" height="626" loading="lazy" /><a target="_blank" href="../../images/jenkins-03-job-config.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The job configuration interface, split into 'General', 'Source Code Management', 'Build Triggers', 'Build', and 'Post-build Actions'</figcaption></figure>
+      <figure id="figure-3" style="max-width: 90%;"><img src="../../images/jenkins-03-job-config.png" alt="Job configuration interface. " width="967" height="626" loading="lazy" /><a target="_blank" href="../../images/jenkins-03-job-config.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The job configuration interface, split into 'General', 'Source Code Management', 'Build Triggers', 'Build', and 'Post-build Actions'</figcaption></figure>
     </li>
     <li>
       <p>In the <strong>Build Triggers</strong> section:</p>
@@ -1071,11 +1071,11 @@ env | sort
     <li>
       <p>Your job will appear in the <em>Build History</em> box at the left. <strong>Click</strong> the ball associated with your job, to see the console.</p>
 
-      <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/jenkins-06-job1-run.png" alt="Seeing a Jenkins job's console. " width="366" height="172" loading="lazy" /><a target="_blank" href="../../images/jenkins-06-job1-run.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> The build history box lets you see the status of previous, running, and queued builds. The 'sun' icon indicates that all builds have been successful, it will become more cloudy/overcast if you experience failures. The 'trend' button allows you to visualise how quickly builds have run historically.</figcaption></figure>
+      <figure id="figure-4" style="max-width: 90%;"><img src="../../images/jenkins-06-job1-run.png" alt="Seeing a Jenkins job's console. " width="366" height="172" loading="lazy" /><a target="_blank" href="../../images/jenkins-06-job1-run.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> The build history box lets you see the status of previous, running, and queued builds. The 'sun' icon indicates that all builds have been successful, it will become more cloudy/overcast if you experience failures. The 'trend' button allows you to visualise how quickly builds have run historically.</figcaption></figure>
 
       <p>Clicking the number will bring you to a job information page, where you can click “Console Output” to see the jobs output</p>
 
-      <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/jenkins-07-job1-out.png" alt="Jenkins job output. " width="871" height="857" loading="lazy" /><a target="_blank" href="../../images/jenkins-07-job1-out.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> The output of your first Jenkins job. All jenkins jobs log both the commands that were run, and their outputs. Use this to see which step potentially failed.</figcaption></figure>
+      <figure id="figure-5" style="max-width: 90%;"><img src="../../images/jenkins-07-job1-out.png" alt="Jenkins job output. " width="871" height="857" loading="lazy" /><a target="_blank" href="../../images/jenkins-07-job1-out.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> The output of your first Jenkins job. All jenkins jobs log both the commands that were run, and their outputs. Use this to see which step potentially failed.</figcaption></figure>
     </li>
   </ol>
 </blockquote>
@@ -1612,7 +1612,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1640,7 +1640,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

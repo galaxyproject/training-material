@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -281,7 +281,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -696,7 +696,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Depending on the analyte of interest and the application, different mass spectrometers are used. A mass spectrometer measures the analytes by ionizing, evaporating and sorting them by their mass-to-charge (m/z) ratio. Put simply, a mass spectrometer needs basically three parts: an ionization source, a mass analyzer and a detector. Most common ionization sources for MSI are MALDI (Matrix Assisted Laser Desorption/Ionization), DESI (Desorption Electrospray Ionization) and SIMS (Secondary Ion Mass Spectrometry).</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/MSI1_maldi_tof_imaging.png" alt="MSI measurement. " width="1131" height="354" loading="lazy" /><a target="_blank" href="../../images/MSI1_maldi_tof_imaging.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> MALDI TOF imaging of a mouse kidney</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/MSI1_maldi_tof_imaging.png" alt="MSI measurement. " width="1131" height="354" loading="lazy" /><a target="_blank" href="../../images/MSI1_maldi_tof_imaging.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> MALDI TOF imaging of a mouse kidney</figcaption></figure>
 
 <p>One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix which absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement complete mass spectra with hundreds of m/z - intensity pairs are acquired in thousands of sample plots leading to big and complex data. Each mass spectrum is annotated with coordinates (x,y) that define its location in the sample. This allows to visualize the intensity distribution of each m/z feature in the sample as a heatmap. Depending on the analyte of interest, the sample type and the mass spectrometer the sample preparation steps as well as the properties of the acquired data differ.</p>
 
@@ -723,7 +723,7 @@ The imzML file consists of two files: The first file contains the metadata in an
 
 <p>The data for this tutorial comes from MALDI-TOF imaging of peptides in a mouse kidney. To make computation times more suitable for this training, only the m/z range from 1220 - 1625 and a part of the pixels (purple rectangle in figure 1) containing about half of the kidney and one digestion control spot were kept.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/MSI1_mouse_kidney.png" alt="mouse kidney image. " width="1050" height="489" loading="lazy" /><a target="_blank" href="../../images/MSI1_mouse_kidney.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Mouse kidney sample before and after mass spectrometry measurement and H&amp;E staining</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/MSI1_mouse_kidney.png" alt="mouse kidney image. " width="1050" height="489" loading="lazy" /><a target="_blank" href="../../images/MSI1_mouse_kidney.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Mouse kidney sample before and after mass spectrometry measurement and H&amp;E staining</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-uploading-an-imzml-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Uploading an imzML file</div>
@@ -760,7 +760,7 @@ The imzML file consists of two files: The first file contains the metadata in an
         </ul>
       </blockquote>
 
-      <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/MSI1_upload_composite.png" alt="Upload imzML files. " width="623" height="280" loading="lazy" /><a target="_blank" href="../../images/MSI1_upload_composite.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Upload an imzML file via the composite upload</figcaption></figure>
+      <figure id="figure-3" style="max-width: 90%;"><img src="../../images/MSI1_upload_composite.png" alt="Upload imzML files. " width="623" height="280" loading="lazy" /><a target="_blank" href="../../images/MSI1_upload_composite.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Upload an imzML file via the composite upload</figcaption></figure>
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-ftp-upload-for-large-files"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-ftp-upload-for-large-files" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: FTP upload for large files</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -877,13 +877,13 @@ Internal calibrants or other known, ubiquitous m/z features can be used to obtai
 
 <p>The fold change plots are on page 4 and 5 of the pdf report. The first plot shows the average mass spectra for the digested and the undigested <em>bombesin</em> peptides. The blue lines indicate the provided m/z value and the chosen ppm range. The average intensity of the full length <em>bombesin</em> peptide is higher than the one of the digested peptide but the average intensity is not helpful here, because we only spotted one drop next to the tissue and only the intensity fold change in those pixels is important. The spectra plot is useful to control the chosen m/z value and ppm range. To obtain the log2 fold change in each spectrum, for each peptide the intensities in the m/z ranges are averaged, the intensity of the first m/z feature is divided by the intensity of the second m/z feature and log2 transformed. The log2 fold change for each spectrum (pixel) is plotted on page 5 and reveals that many spectra in the upper left corner (where the <em>bombesin</em> spot is) have a log2 fold change &gt;= 0 what indicates that there is more digested than undigested <em>bombesin</em> peptides and that the tryptic digestion was successful.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/MSI1_foldchange.png" alt="Fold Change. " width="1128" height="568" loading="lazy" /><a target="_blank" href="../../images/MSI1_foldchange.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Avererage mass spectra and log2 fold change for Bombesin and its digested peptide</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/MSI1_foldchange.png" alt="Fold Change. " width="1128" height="568" loading="lazy" /><a target="_blank" href="../../images/MSI1_foldchange.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Avererage mass spectra and log2 fold change for Bombesin and its digested peptide</figcaption></figure>
 
 <h4 id="distribution-images-for-calibrants">Distribution images for Calibrants</h4>
 
 <p>Have a look at the calibrant plots from page 6 on, especially regarding the distribution patterns. The colour code shows the intensity of the m/z value that is closest to the input m/z and if the ppm range contains several m/z features their intensities are averaged. The input m/z value and its name are printed on top of the image, the m/z number in the box shows the closest m/z value (that is 1296.68, as the m/z axis consists of mass bins slight differences are expected). Low <em>angiotensin</em> intensities occur at the boarder of the <em>bombesin</em> spot and at the boarder of the kidney tissue and on some spots in the kidney. In general calibrant intensities are higher in the matrix background than on the tissue due to ion suppression effects. <em>Substance P</em> shows also ion suppression in the <em>bombesin</em> spot. The heatmap shows no spatial intensity gradient what indicates that spraying of calibrants and matrix was homogeneous and that the MS performed stable during data acquisition.</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/MSI1_angiotensin_image.png" alt="Angiotensin heatmap. " width="587" height="543" loading="lazy" /><a target="_blank" href="../../images/MSI1_angiotensin_image.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Intensity distribution image of Angiotensin I</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/MSI1_angiotensin_image.png" alt="Angiotensin heatmap. " width="587" height="543" loading="lazy" /><a target="_blank" href="../../images/MSI1_angiotensin_image.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Intensity distribution image of Angiotensin I</figcaption></figure>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-plotting-heatmaps"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Plotting heatmaps</div>
@@ -899,13 +899,13 @@ Internal calibrants or other known, ubiquitous m/z features can be used to obtai
 <p>The plot on page 10 shows the total ion current (TIC) for each spectrum with a few outlier TIC &gt; 25000. The TIC is the sum of all intensities of a spectrum. Therefore with more peaks in a spectrum the TIC should also be higher. Due to their low intensities, noise peaks contribute less to the TIC than analyte peaks, but with the large amount of noise we have in this dataset, this of course also sums up. Deviations in TICs are common in MALDI MSI due to e.g. unhomogeneous matrix spray, ion source contamination or pH gradients. To render the spectra more comparable TIC normalization is a default preprocessing step for MALDI MSI data but is based on the assumption that there are comparable numbers of signals present in each spectrum <a href="https://link.springer.com/article/10.1007%2Fs00216-011-4929-z">Deininger et al.</a>.
 Both plots can also serve to check for spraying gradients or reduced machine performance during acquisition time. The mouse kidney was measured from bottom to top (plot on page 2), the performance over time can be easier spotted in the upper plots on page 14 and 15, where the x axis represents the spectra in the order they were measured.</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/MSI1_npeaks_TIC.png" alt="Npeaks and TIC heatmap. " width="958" height="524" loading="lazy" /><a target="_blank" href="../../images/MSI1_npeaks_TIC.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Number of peaks and TIC per spectrum</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/MSI1_npeaks_TIC.png" alt="Npeaks and TIC heatmap. " width="958" height="524" loading="lazy" /><a target="_blank" href="../../images/MSI1_npeaks_TIC.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Number of peaks and TIC per spectrum</figcaption></figure>
 
 <h4 id="most-abundand-mz-features">Most abundand m/z features</h4>
 
 <p>The plot on page 13 shows for each spectrum the m/z with the highest intensity (‘base peak’). This plot can already reveal some morphological features of the dataset. The plot for the mouse kidney dataset shows that the base peak is the same on the kidney tissue and the matrix background but a different one in the <em>bombesin</em> spot. According to the legend the base peak in most spectra is roughly at m/z 1350, the base peak in the <em>bombesin</em> spot is roughly at 1280 and in a few spectra at 1570. Later, we will export the spectra information, including the base peak of each spectrum, as a tabular file to find the correct m/z values of the most abundant features in the following spectra: x = 40 y = 50; x = 23, y = 70; x = 20, y = 73.</p>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/MSI1_most_abundant.png" alt="most abundant. " width="350" height="455" loading="lazy" /><a target="_blank" href="../../images/MSI1_most_abundant.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Most abundant m/z for each spectrum and three selected pixel for further investigations</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/MSI1_most_abundant.png" alt="most abundant. " width="350" height="455" loading="lazy" /><a target="_blank" href="../../images/MSI1_most_abundant.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Most abundant m/z for each spectrum and three selected pixel for further investigations</figcaption></figure>
 
 <p>As the feature around m/z 1350 is the highest feature in most of the spectra it is no suprise to find this feature as highest peak in the average spectra plot on page 20. The second highest peak is around 1300 m/z. It is obvious that those features are the calibrants <em>substance P</em> and <em>angiotensin</em> as they occur as high intensity peaks on the tissue as well as on the background. At least the concentration of <em>substance P</em> but also the concentration of <em>angiotensin I</em> could be reduced in further experiments. The concentration of <em>fibrinopeptide B</em> is chosen well as the peak at m/z 1570 is visible in most of the spectra plots but does not dominate the spectra as the other two calibrants do.</p>
 
@@ -919,7 +919,7 @@ Both plots can also serve to check for spraying gradients or reduced machine per
 
 <p>The average m/z error already gives a hint about the m/z accuracy but it is even more important to consider the m/z error in each individual spectrum. The plot on page 27 shows for each calibrant the m/z error in each spectrum. The spectra index corresponds to the order in which the spectra were measured and it becomes obvious that for all calibrants there is a m/z shift of about 200 ppm happening during acquisition. This gradient is also visible in the following plots where the m/z error in ppm is plotted in each pixel. The ppm error for <em>angiotensin</em> is about +50 ppm at the bottom of the dataset (start of acquisition) and decreases to about -150 ppm at the top of the image (end of acquisition). To be able to compare m/z features across the spectra they need to have the same m/z value, therefore recalibration with the <strong>MALDIquant preprocessing</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> or binning with the <strong>MSI preprocessing</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and a  tolerance of 200 ppm is highly recommended.</p>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/MSI1_mz_error.png" alt="mz error. " width="1142" height="929" loading="lazy" /><a target="_blank" href="../../images/MSI1_mz_error.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Plots that show the average and individual m/z errors</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/MSI1_mz_error.png" alt="mz error. " width="1142" height="929" loading="lazy" /><a target="_blank" href="../../images/MSI1_mz_error.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Plots that show the average and individual m/z errors</figcaption></figure>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-plotting-mass-spectra"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Plotting mass spectra</div>
@@ -1166,7 +1166,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1194,7 +1194,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

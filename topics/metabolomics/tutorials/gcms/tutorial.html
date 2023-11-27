@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -261,7 +261,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -796,7 +796,7 @@ https://zenodo.org/record/3631074/files/alg9.mzData
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/create_simple_list.png" alt="Creating a simple collection" title="Creating a simple (list) collection in Galaxy's history" /></p> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
@@ -1030,7 +1030,7 @@ For our example, your file should be named <code class="language-plaintext highl
 <p class="text-justify"><strong>metaMS</strong> is a R package for MS-based metabolomics data. It can do basic peak picking and grouping using functions from <strong>XCMS</strong> and <strong>CAMERA</strong> packages. The main output of <strong>metaMS</strong> is a table of feature intensities in all samples which can be analyzed with multivariate methods immediately. The package also offers the possibility to create in-house databases of mass spectra (including retention information) of pure chemical compounds. These databases can then be used for annotation purposes. The most important functions of this package are <em>runGC</em> and <em>runLC</em> (and each one to create databases <em>createSTDdbGC</em> and <em>createSTDdbLC</em>).</p>
 <p>During this tutorial we are interested in GC-MS analysis, so we will use the <em>runGC</em> function of <strong>metaMS</strong> and described it in details to be able to understand this function. The standard workflow of <strong>metaMS</strong> for GC-MS data is the following :</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/tuto_gcms_workflow_metaMS.png" alt="Workflow metaMS. " width="1589" height="41" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_workflow_metaMS.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Workflow of metaMS for GC datas</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/tuto_gcms_workflow_metaMS.png" alt="Workflow metaMS. " width="1589" height="41" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_workflow_metaMS.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Workflow of metaMS for GC datas</figcaption></figure>
 
 <p class="text-justify">The <em>runGC</em> function is implemented in <strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</strong> in W4M Galaxy. It takes a vector of file names, corresponding to the samples, and a settings list as mandatory arguments. In addition, some extra arguments can be provided. In particular, a database of standards, as discussed later in the tutorial, can be provided for annotation purposes. This tool regroups all these steps that are described in the following parts to be able to understand all its functionalities and particularities. We will run the tool after we understand each of its steps because it is important to know what are the best parameters for our data and why each parameter is done.</p>
 
@@ -1044,7 +1044,7 @@ For our example, your file should be named <code class="language-plaintext highl
 
 <p class="text-justify">Rather than a feature-based analysis with individual peaks, as is the case with <strong>XCMS</strong>, <strong>metaMS</strong> performs a pseudospectrum-based analysis. So, the basic entity is a set of m/z values showing a chromatographic peak at the same retention time.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/tuto_gcms_pseudospectrum_example.png" alt="Pseudospectrum example. " width="567" height="225" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_pseudospectrum_example.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Pseudospectrum example from `msp` file</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/tuto_gcms_pseudospectrum_example.png" alt="Pseudospectrum example. " width="567" height="225" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_pseudospectrum_example.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Pseudospectrum example from `msp` file</figcaption></figure>
 
 <p class="text-justify">This choice is motivated by several considerations. First of all, <strong>in GC the amount of overlap is much less than in LC</strong> : peaks are much narrower. This means that even a one- or two-second difference in retention time can be enough to separate the corresponding mass spectra. Secondly, fragmentation patterns for many compounds are <strong>available in extensive libraries like the <a href="http://www.nist.gov/srd/nist1a.cfm" title="NIST library">NIST library</a></strong>. In addition, the spectra are somewhat easier to interpret since adducts, such as found in LC, are not present. The main advantage of pseudo-spectra, however, is that their use allows the results to be interpreted directly as relative concentrations of chemical compounds : <strong>a fingerprint in terms of chemical composition is obtained</strong>, rather than a fingerprint in terms of hard-to-interpret features. The pseudo-spectra are obtained by simply clustering on retention time, using the <em>runCAMERA</em> function, which for GC data calls <em>groupFWHM</em>. All the usual parameters for the <em>groupFWHM</em> function are included in W4M Galaxy <strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</strong>. The most important parameter is <em>perfwhm</em>, which determines the maximal retention time difference of features in one pseudospectrum.</p>
 
@@ -1054,7 +1054,7 @@ For our example, your file should be named <code class="language-plaintext highl
 
 <p class="text-justify">Once we have identified our pseudo-spectra, we can start the annotation process. This is done by <strong>comparing every pseudospectrum to a database of spectra</strong>. As a similarity measure, we use the weighted dot product as it is fast, simple, and gives good results (<span class="citation"><a href="#Stein1994">Stein and Scott 1994</a></span>). The first step in the comparison is based on retention, since a comparison of either retention time or retention index is much faster than a spectral comparison. The corresponding function is <em>matchSamples2DB</em>. Since the weighted dot product uses scaled mass spectra, the scaling of the database is done once, and then used in all comparisons.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/tuto_gcms_match_spec.png" alt="Match spectra. " width="594" height="311" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_match_spec.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Best match between an experimental pseudospectrum (red) and a database entry (blue)</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/tuto_gcms_match_spec.png" alt="Match spectra. " width="594" height="311" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_match_spec.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Best match between an experimental pseudospectrum (red) and a database entry (blue)</figcaption></figure>
 
 <p class="text-justify">This <em>matchSamples2DB</em> function returns a table where all patterns that have a match with a DB entry are shown in the first column, and the DB entry itself in the second column. If for a particular experimental pattern more than one match is found, the alternatives (with a lower match factor) are shown in the last column. To see the match for a particular pattern, one can use the function <em>matchExpSpec</em>, returning matchfactors (numbers between 0 and 1, where the latter means a perfect match) for all entries in the database (if the plotIt argument is TRUE, the best match is shown – see Figure 2). Samples may contain compounds that are not of any interest, such as plasticizers, internal standards, column material etc…. These can be filtered out before doing an annotation : <strong>metaMS</strong> allows certain categories of database entries (defined in slot <em>matchIrrelevants</em> of the settings object) to be removed before further annotation. If the spectra of these compounds are very specific (and they often are), the retention criterion may be bypassed by setting the maximal retention time difference to very high values, which leads to the removal of such spectra wherever they occur in the chromatogram.</p>
 
@@ -1070,7 +1070,7 @@ For our example, your file should be named <code class="language-plaintext highl
 
 <p class="text-justify">At this stage, all elements are complete : we have the list of pseudo-spectra with an annotation, either as a chemical standard from the database, or an unknown occurring in a sizeable fraction of the injections. The only things left to do is to calculate relative intensities for the pseudo-spectra, and to put the results in an easy-to-use table. This table consists of two parts. The first part is the information on the “features”, which here are the pseudo-spectra. The second part of the table contains the intensities of these features in the individual injections.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/tuto_gcms_finale_table.png" alt="Match spectra. " width="1231" height="311" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_finale_table.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Final table with unknowns and compounds found during **metaMS** processus</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/tuto_gcms_finale_table.png" alt="Match spectra. " width="1231" height="311" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_finale_table.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Final table with unknowns and compounds found during **metaMS** processus</figcaption></figure>
 
 <p>The first five lines are the standards, and the next ones are the unknowns that are identified by the pipeline.  In the manual interpretation of this kind of data, the intensities of one or two “highly specific” features are often used to achieve relative quantitation. In an automatic pipeline, this is a risky strategy: not only can the intensity of a peak vary quite dramatically (relative standard deviations of up to 30% are assumed acceptable in GC-MS, e.g. when SPME is applied), but these errors are all the more pronounced in high-intensity peaks (hence the common use of a relative standard deviation).</p>
 
@@ -1121,11 +1121,11 @@ For our example, your file should be named <code class="language-plaintext highl
 
 <p class="text-justify">If you separated your samples into different classes, this tool can constructs TICs and BPCs one class against one class, in a <code class="language-plaintext highlighter-rouge">pdf</code> file (Figure 5) :</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/tuto_gcms_tic.png" alt="TIC. " width="1245" height="783" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_tic.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> TIC comparing 2 classes</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/tuto_gcms_tic.png" alt="TIC. " width="1245" height="783" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_tic.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> TIC comparing 2 classes</figcaption></figure>
 
 <p class="text-justify">Concerning EICs, it is possible to choose for which compound you want to draw an EIC when you run the W4M Galaxy tool. According to your choice, you will obtain EICs for one compound in each sample you enter in the previous <strong>metaMS</strong> part.</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/tuto_gcms_eic.png" alt="TIC. " width="1000" height="466" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_eic.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Example of EIC of the 'Unknown 1' in sample 'alg2'</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/tuto_gcms_eic.png" alt="TIC. " width="1000" height="466" loading="lazy" /><a target="_blank" href="../../images/tuto_gcms_eic.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Example of EIC of the 'Unknown 1' in sample 'alg2'</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-metams-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: metaMS.plot</div>
@@ -1339,7 +1339,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1367,7 +1367,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

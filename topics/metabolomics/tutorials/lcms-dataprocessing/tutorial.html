@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -268,7 +268,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -717,7 +717,7 @@ In this tutorial we will focus on three main types of processing:</p>
 
 <p>The different Galaxy tools that will be used in this tutorial are given in the following workflow picture.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/tutorial-lcms-proc-wf.png" alt="The picture is composed of 3 main boxes linked by arrows from left to right. In each of the first and last boxes, labelled '3 tabulars', are found 3 files named sampleMetadata, variableMetadata and dataMatrix. In the middle box labelled 'Quality Control' is found the workflow used in this tutorial, represented as tiny boxes with tool names, linked with arrows following the tutorial order." width="2000" height="1096" loading="lazy" /><a target="_blank" href="../../images/tutorial-lcms-proc-wf.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The full tutorial workflow</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/tutorial-lcms-proc-wf.png" alt="The picture is composed of 3 main boxes linked by arrows from left to right. In each of the first and last boxes, labelled '3 tabulars', are found 3 files named sampleMetadata, variableMetadata and dataMatrix. In the middle box labelled 'Quality Control' is found the workflow used in this tutorial, represented as tiny boxes with tool names, linked with arrows following the tutorial order." width="2000" height="1096" loading="lazy" /><a target="_blank" href="../../images/tutorial-lcms-proc-wf.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The full tutorial workflow</figcaption></figure>
 
 <p>All these modules are part of the <a href="http://workflow4metabolomics.org/">Wokflow4Metabolomics</a> tool suit (<span class="citation"><a href="#Giacomoni2014">Giacomoni <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#Guitton2017">Guitton <i>et al.</i> 2017</a></span>).
 They are compatible with the whole data analysis solution maintained by the W4M team.</p>
@@ -1083,7 +1083,7 @@ Thus, there are some assumptions we can begin to make, that we can try to check 
 
 <p>This tool generates several outputs (some of them are going to be used in a later use of this module), however for now only the pdf output is of interest.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/lcmsproc_QM.png" alt="Screenshot of the PDF output from Quality Metrics. It is a composition of several distinct plots. In particular there are a PCA plot and a total intensity per sample plot." width="1302" height="827" loading="lazy" /><a target="_blank" href="../../images/lcmsproc_QM.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> PDF output from Quality Metrics</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/lcmsproc_QM.png" alt="Screenshot of the PDF output from Quality Metrics. It is a composition of several distinct plots. In particular there are a PCA plot and a total intensity per sample plot." width="1302" height="827" loading="lazy" /><a target="_blank" href="../../images/lcmsproc_QM.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> PDF output from Quality Metrics</figcaption></figure>
 
 <p>On the top left of the picture, we can see the two first components of a Principal Component Analysis (PCA) with the projection of samples on it, colored by sample type.
 We can see that the main variability in the dataset distinguishes the blank samples (on the left in black) from the other ones (red for pools and green for samples).
@@ -1260,7 +1260,7 @@ the analytical effects we want to correct, since biologically they are supposed 
 
   <p>For each ion independently, the normalisation process works as described in the following picture:</p>
 
-  <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/lcms_BC_theo.png" alt="An example plot with the normalisation formula. " width="1144" height="353" loading="lazy" /><a target="_blank" href="../../images/lcms_BC_theo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> How this works</figcaption></figure>
+  <figure id="figure-3" style="max-width: 90%;"><img src="../../images/lcms_BC_theo.png" alt="An example plot with the normalisation formula. " width="1144" height="353" loading="lazy" /><a target="_blank" href="../../images/lcms_BC_theo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> How this works</figcaption></figure>
 
   <p>You can see a plot representing 6 sample measures (blue points) in a batch for a given extracted ion. 
 The yellow line represents a model for the signal drift that can be used to normalise the data.
@@ -1270,7 +1270,7 @@ With the given formula, we can correct the signal drift.</p>
   <p>This work has to be done for each batch. 
 Thus, if your sequence is divided into several batches, the idea is to obtain something similar to the following picture:</p>
 
-  <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/lcms_BC_theo2.png" alt="A before/after plot showing an example of intensities before correction, with clear signal drift and batch effects, and after correction, where the effects have been erased thanks to the correction process. " width="1193" height="694" loading="lazy" /><a target="_blank" href="../../images/lcms_BC_theo2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Before/after picture</figcaption></figure>
+  <figure id="figure-4" style="max-width: 90%;"><img src="../../images/lcms_BC_theo2.png" alt="A before/after plot showing an example of intensities before correction, with clear signal drift and batch effects, and after correction, where the effects have been erased thanks to the correction process. " width="1193" height="694" loading="lazy" /><a target="_blank" href="../../images/lcms_BC_theo2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Before/after picture</figcaption></figure>
 
 </blockquote>
 
@@ -1623,7 +1623,7 @@ Let’s try to colour the PCA score plots according to that variable. For this, 
 <p>Among the four output files generated by the tool, the one we are interested in is the <em>Multivariate_figure.pdf</em> file.
 The PCA scores plot representing the projection of samples on the two first components is located at the bottom left corner:</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/lcmsproc_osmo.png" alt="The picture represents the PCA scores plot of components t1 (32% of total variability) and t2 (9% of total variability) with sample labels coloured according to the values from the Osmo column of the sampleMetadata file. We observe a gradation in the colours of samples following the first bisector of the graphic." width="757" height="727" loading="lazy" /><a target="_blank" href="../../images/lcmsproc_osmo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> PCA scores plot</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/lcmsproc_osmo.png" alt="The picture represents the PCA scores plot of components t1 (32% of total variability) and t2 (9% of total variability) with sample labels coloured according to the values from the Osmo column of the sampleMetadata file. We observe a gradation in the colours of samples following the first bisector of the graphic." width="757" height="727" loading="lazy" /><a target="_blank" href="../../images/lcmsproc_osmo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> PCA scores plot</figcaption></figure>
 
 <p>Taking into account that the PCA was computed on Unit-Variance-scaled data (see the <strong>Multivariate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool’s help section for more details),
 this result confirms the impact of total concentration on our dataset.
@@ -2003,7 +2003,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2031,7 +2031,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

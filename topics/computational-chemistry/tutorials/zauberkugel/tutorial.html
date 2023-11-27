@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -59,8 +59,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -272,7 +272,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -651,11 +651,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <p>Historically, the pharmacophore concept was formulated in 1909 by the German physician and Nobel prize laureate Paul Ehrlich (<span class="citation"><a href="#Ehrlich1909">Ehrlich 1909</a></span>). According to the <a href="https://iupac.org/">International Union of Pure and Applied Chemistry (IUPAC)</a>, a pharmacophore is defined as “an ensemble of steric and electronic features that is necessary to ensure the optimal supramolecular interactions with a specific biological target and to trigger (or block) its biological response” (<span class="citation"><a href="#Wermuth1998">Wermuth <i>et al.</i> 1998</a></span>). Starting from the cocrystal structure of a non-covalent protein–ligand complex (e.g. Figure 1), pharmacophore perception involves the extraction of the key molecular features of the bioactive ligand at the protein–ligand contact interface into a single model (<span class="citation"><a href="#Moumbock2019">Moumbock <i>et al.</i> 2019</a></span>). These pharmacophoric features mainly include: H-bond acceptor (HACC or A), H-bond donor (HDON or D), lipophilic group (LIPO or H), negative center (NEGC or N), positive center (POSC or P), and aromatic ring (AROM or R) moieties. Moreover, receptor-based excluded spheres (EXCL) can be added in order to mimic spatial constraints of the binding pocket (Figure 2). Once a pharmacophore model has been generated, a query can be performed either in a forward manner, using several ligands to search for novel putative hits of a given target, or in a reverse manner, by screening a single ligand against multiple pharmacophore models in search of putative protein targets (<span class="citation"><a href="#Steindl2006">Steindl <i>et al.</i> 2006</a></span>).</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/4MVF-STU.png" alt="PDB ID: 4MVF. " width="683" height="638" loading="lazy" /><a target="_blank" href="/training-material/topics/computational-chemistry/images/4MVF-STU.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Crystal Structure of *Plasmodium falciparum* calcium-dependent protein kinase 2 (CDPK2) complexed with staurosporine (STU) with PDB ID: [4MVF](https://www.rcsb.org/structure/4mvf). Image generated using Maestro (Schrödinger LLC, NY).</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="/training-material/topics/computational-chemistry/images/4MVF-STU.png" alt="PDB ID: 4MVF. " width="683" height="638" loading="lazy" /><a target="_blank" href="/training-material/topics/computational-chemistry/images/4MVF-STU.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Crystal Structure of *Plasmodium falciparum* calcium-dependent protein kinase 2 (CDPK2) complexed with staurosporine (STU) with PDB ID: [4MVF](https://www.rcsb.org/structure/4mvf). Image generated using Maestro (Schrödinger LLC, NY).</figcaption></figure>
 
 <p>Bioactive compounds often bind to several target proteins, thereby exhibiting polypharmacology. However, experimentally determining these interactions is laborious, and structure-based virtual screening of bioactive compounds could expedite drug discovery by prioritizing hits for experimental validation. The recently reported ePharmaLib (<span class="citation"><a href="#Moumbock2021">Moumbock <i>et al.</i> 2021</a></span>) dataset is a library of 15,148 e-pharmacophores modeled from solved structures of pharmaceutically relevant protein–ligand complexes of the screening Protein Data Bank (sc-PDB, <span class="citation"><a href="#Desaphy2014">Desaphy <i>et al.</i> 2014</a></span>). ePharmaLib can be used for target fishing of phenotypic hits, side effect predictions, drug repurposing, and scaffold hopping.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/STU.png" alt="STU. " width="1201" height="751" loading="lazy" /><a target="_blank" href="/training-material/topics/computational-chemistry/images/STU.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Depiction of the 2D structure of staurosporine (left) and 3D structure (right) with key pharmacophoric features extracted from the STU–CDPK2 complex (PDB ID: [4MVF](https://www.rcsb.org/structure/4mvf)). Image generated using Maestro (Schrödinger LLC, NY).</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="/training-material/topics/computational-chemistry/images/STU.png" alt="STU. " width="1201" height="751" loading="lazy" /><a target="_blank" href="/training-material/topics/computational-chemistry/images/STU.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Depiction of the 2D structure of staurosporine (left) and 3D structure (right) with key pharmacophoric features extracted from the STU–CDPK2 complex (PDB ID: [4MVF](https://www.rcsb.org/structure/4mvf)). Image generated using Maestro (Schrödinger LLC, NY).</figcaption></figure>
 
 <p>In this tutorial, you will perform pharmacophore-based target prediction of a bioactive ligand known as staurosporine (Figure 2) with the ePharmaLib subset representing <em>Plasmodium falciparum</em> protein targets (138 pharmacophore models) and the open-source pharmacophore alignment program <a href="https://anaconda.org/bioconda/align_it">Align-it</a>, formerly known as PHARAO (<span class="citation"><a href="#Taminau2008">Taminau <i>et al.</i> 2008</a></span>).</p>
 
@@ -1067,13 +1067,13 @@ column    Content
   <p>Upload the Zauberkugel workflow from the following URL:</p>
 
   <!--SNIPPET-->
-  <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a workflow</div>   <div class="show-when-galaxy-proxy-active"> Click here to run the  <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-zauberkugel/versions/main_workflow"><strong>Zauberkugel Workflow</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <p class="hide-when-galaxy-proxy-active">Or copy the URL (e.g. via right-click) of <a href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.ga">this workflow</a>, and import the workflow into Galaxy</p>   <div class="hide-when-galaxy-proxy-active"> <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing a workflow</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote> <!--END_SNIPPET--> </div> </blockquote>
+  <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a workflow</div>   <div class="show-when-galaxy-proxy-active"> Click here to run the  <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-zauberkugel/versions/main_workflow"><strong>Zauberkugel Workflow</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <p class="hide-when-galaxy-proxy-active">Or copy the URL (e.g. via right-click) of <a href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.ga">this workflow</a>, and import the workflow into Galaxy</p>   <div class="hide-when-galaxy-proxy-active"> <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing a workflow</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <p align="center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe></p> </blockquote> <!--END_SNIPPET--> </div> </blockquote>
   <p><!--END_SNIPPET--></p>
 
   <p>The Zauberkugel workflow requires only two inputs; the ligand structure file (SMI format) and the ePharmaLib dataset (PHAR format). The output of the prediction of human targets of staurosporine performed with the ePharmaLib human target subset (<a href="https://zenodo.org/record/6055897">https://zenodo.org/record/6055897</a>) and this workflow is available as a <a href="https://usegalaxy.eu/u/aurelien_moumbock/h/zauberkugel">Galaxy history</a>.</p>
 </blockquote>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/zauberkugel.png" alt="Snapshot of Zauberkugel workflow. " width="1117" height="346" loading="lazy" /><a target="_blank" href="/training-material/topics/computational-chemistry/images/zauberkugel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Zauberkugel — protein target prediction of a bioactive ligand with Align-it and ePharmaLib</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="/training-material/topics/computational-chemistry/images/zauberkugel.png" alt="Snapshot of Zauberkugel workflow. " width="1117" height="346" loading="lazy" /><a target="_blank" href="/training-material/topics/computational-chemistry/images/zauberkugel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Zauberkugel — protein target prediction of a bioactive ligand with Align-it and ePharmaLib</figcaption></figure>
 
 <h1 id="further-analysis">Further analysis</h1>
 
@@ -1276,7 +1276,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1304,7 +1304,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

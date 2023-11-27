@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -358,7 +358,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1113,7 +1113,7 @@ in which they have different nucleotides.</p>
 <p>To do such calculation we need to first build an alignment of all the genomes (a multiple-sequence alignment, or MSA).
 Afterwards, we will use specific software to analyze this MSA, count SNPs, and thus calculate the genetic distance between each pair of samples.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="./images/MSA.png" alt="MSA of 5 MTB genomes. " width="500" height="129" loading="lazy" /><a target="_blank" href="./images/MSA.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A SNP is highlighted in a MSA of five MTB genomes</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="./images/MSA.png" alt="MSA of 5 MTB genomes. " width="500" height="129" loading="lazy" /><a target="_blank" href="./images/MSA.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A SNP is highlighted in a MSA of five MTB genomes</figcaption></figure>
 
 <h3 id="generate-complete-genomes">Generate complete genomes</h3>
 
@@ -1310,11 +1310,11 @@ is highlighted in blue and green. Invariant positions are not highlighted and ha
 on the upper part of the alignment. Most of the MSA is composed of these invariant positions, making
 our file larger than necessary.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="./images/MSA.png" alt="MSA of 5 MTB genomes. " width="500" height="129" loading="lazy" /><a target="_blank" href="./images/MSA.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A SNP is highlighted in a MSA of five MTB genomes</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="./images/MSA.png" alt="MSA of 5 MTB genomes. " width="500" height="129" loading="lazy" /><a target="_blank" href="./images/MSA.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A SNP is highlighted in a MSA of five MTB genomes</figcaption></figure>
 
 <p>After removing invariant positions, we end up with a SNP alignment like the following.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="./images/SNP_MSA.png" alt="MSA of 5 MTB genomes. " width="626" height="129" loading="lazy" /><a target="_blank" href="./images/SNP_MSA.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A SNP alignment where all positions are polymorphic</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="./images/SNP_MSA.png" alt="MSA of 5 MTB genomes. " width="626" height="129" loading="lazy" /><a target="_blank" href="./images/SNP_MSA.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A SNP alignment where all positions are polymorphic</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-removing-invariant-sites-from-a-msa"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Removing invariant sites from a MSA</div>
@@ -1378,7 +1378,7 @@ analysis regardless of whether we are analyzing two or two million samples. Also
 that are dozens of SNPs apart may belong to the same transmission cluster</strong> if there are other samples
 linking them in between as exemplified in the picture below.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="./images/Cluster.png" alt="MSA of 5 MTB genomes. " width="1350" height="739" loading="lazy" /><a target="_blank" href="./images/Cluster.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Example of transmission cluster using 10 SNPs threshold</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="./images/Cluster.png" alt="MSA of 5 MTB genomes. " width="1350" height="739" loading="lazy" /><a target="_blank" href="./images/Cluster.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Example of transmission cluster using 10 SNPs threshold</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-very-important-question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Very Important Question</div>
@@ -1402,7 +1402,7 @@ For example, when a patient that is not sampled is the source of infection of al
 the cluster (may be a superspreading event). You have to consider that, taking into account the
 same SNP distances, another possible (yet still oversimplified) scenario could be…</li>
     </ol>
-    <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="./images/Cluster2.png" alt="MSA of 5 MTB genomes. " width="1755" height="1240" loading="lazy" /><a target="_blank" href="./images/Cluster2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Example of transmission cluster using 10 SNPs threshold</figcaption></figure>
+    <figure id="figure-5" style="max-width: 90%;"><img src="./images/Cluster2.png" alt="MSA of 5 MTB genomes. " width="1755" height="1240" loading="lazy" /><a target="_blank" href="./images/Cluster2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Example of transmission cluster using 10 SNPs threshold</figcaption></figure>
   </blockquote>
 </blockquote>
 
@@ -2338,7 +2338,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2366,7 +2366,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

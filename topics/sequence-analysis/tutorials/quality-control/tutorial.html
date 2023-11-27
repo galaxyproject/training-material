@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -59,8 +59,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -447,7 +447,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1094,7 +1094,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
 
 <p>Rather than looking at quality scores for each individual read, FASTQE looks at quality collectively across all reads within a sample and can calculate the mean for each nucleotide position along the length of the reads. Below shows the mean values for this dataset.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/fastqe-mean-before.png" alt="FASTQE before. " width="817" height="207" loading="lazy" /><a target="_blank" href="../../images/quality-control/fastqe-mean-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> FASTQE mean scores</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/quality-control/fastqe-mean-before.png" alt="FASTQE before. " width="817" height="207" loading="lazy" /><a target="_blank" href="../../images/quality-control/fastqe-mean-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> FASTQE mean scores</figcaption></figure>
 
 <p>You can see the score for each <a href="https://github.com/fastqe/fastqe#scale">emoji in fastqe’s documentation</a>. The emojis below, with Phred scores less than 20, are the ones we hope we don’t see much.</p>
 
@@ -1254,7 +1254,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
 
 <p>With FastQC we can use the per base sequence quality plot to check the base quality of the reads, similar to what we did with FASTQE.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/per_base_sequence_quality-before.png" alt="Per base sequence quality. " width="1005" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_base_sequence_quality-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Per base sequence quality</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/quality-control/per_base_sequence_quality-before.png" alt="Per base sequence quality. " width="1005" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_base_sequence_quality-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Per base sequence quality</figcaption></figure>
 
 <p>On the x-axis are the base position in the read. In this example, the sample contains reads that are up to 296 bp long.</p>
 
@@ -1362,7 +1362,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
 
 <h3 id="adapter-content">Adapter Content</h3>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/adapter_content-before.png" alt="Adapter Content. " width="975" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/adapter_content-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Adapter Content</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/quality-control/adapter_content-before.png" alt="Adapter Content. " width="975" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/adapter_content-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Adapter Content</figcaption></figure>
 
 <p>The plot shows the cumulative percentage of reads with the different adapter sequences at each position. Once an adapter sequence is seen in a read it  is counted as being present right through to the end of the read so the percentage increases with the read length. FastQC can detect some adapters by default (e.g. Illumina, Nextera), for others we could provide a contaminants file as an input to the FastQC tool.</p>
 
@@ -1395,7 +1395,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <p>This plot enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell. The plot shows the deviation from the average quality for each flowcell tile. The hotter colours indicate that reads in the given tile have worse qualities for that position than reads in other tiles. With this sample, you can see that certain tiles show consistently poor quality, especially from ~100bp onwards. A good plot should be blue all over.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/per_tile_sequence_quality-before.png" alt="Per tile sequence quality. " width="1005" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_tile_sequence_quality-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Per tile sequence quality</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/quality-control/per_tile_sequence_quality-before.png" alt="Per tile sequence quality. " width="1005" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_tile_sequence_quality-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Per tile sequence quality</figcaption></figure>
 
 <p>This plot will only appear for Illumina library which retains its original sequence identifiers. Encoded in these is the flowcell tile from which each read came.</p>
 
@@ -1412,13 +1412,13 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <p>It plots the average quality score over the full length of all reads on the x-axis and gives the total number of reads with this score on the y-axis:</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/per_sequence_quality_scores-before.png" alt="Per sequence quality scores. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_sequence_quality_scores-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Per sequence quality scores</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/quality-control/per_sequence_quality_scores-before.png" alt="Per sequence quality scores. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_sequence_quality_scores-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Per sequence quality scores</figcaption></figure>
 
 <p>The distribution of average read quality should be tight peak in the upper range of the plot. It can also report if a subset of the sequences have universally low quality values: it can happen because some sequences are poorly imaged (on the edge of the field of view etc), however these should represent only a small percentage of the total sequences.</p>
 
 <h2 id="per-base-sequence-content">Per base sequence content</h2>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/per_base_sequence_content-before.png" alt="Per base sequence content. " width="1005" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_base_sequence_content-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Per base sequence content for a DNA library</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/quality-control/per_base_sequence_content-before.png" alt="Per base sequence content. " width="1005" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_base_sequence_content-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Per base sequence content for a DNA library</figcaption></figure>
 
 <p>“Per Base Sequence Content” plots the percentage of each of the four nucleotides (T, C, A, G) at each position across all reads in the input sequence file. As for the per base sequence quality, the x-axis is non-uniform.</p>
 
@@ -1452,7 +1452,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <h2 id="per-sequence-gc-content">Per sequence GC content</h2>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/per_sequence_gc_content-before.png" alt="Per sequence GC content. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_sequence_gc_content-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Per sequence GC content</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/quality-control/per_sequence_gc_content-before.png" alt="Per sequence GC content. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_sequence_gc_content-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Per sequence GC content</figcaption></figure>
 
 <p>This plot displays the number of reads vs. percentage of bases G and C per read. It is compared to a theoretical distribution assuming an uniform GC content for all reads, expected for whole genome shotgun sequencing, where the central peak corresponds to the overall GC content of the underlying genome. Since the GC content of the genome is not known, the modal GC content is calculated from the observed data and used to build a reference distribution.</p>
 
@@ -1475,7 +1475,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <p>This plot shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple plot showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment. Our plot shows variable length as we trimmed the data. The biggest peak is at 296bp but there is a second large peak at ~100bp. So even though our sequences range up to 296bp in length, a lot of the good-quality sequences are shorter. This corresponds with the drop we saw in the sequence quality at ~100bp and the red stripes starting at this position in the per tile sequence quality plot.</p>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/sequence_length_distribution-before.png" alt="Sequence length distribution. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/sequence_length_distribution-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Sequence length distribution</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/quality-control/sequence_length_distribution-before.png" alt="Sequence length distribution. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/sequence_length_distribution-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Sequence length distribution</figcaption></figure>
 
 <p>Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain reads of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first \(n\) bases if they match the first \(n\) bases of the adapter up to 90% (by default), with sometimes \(n = 1\).</p>
 
@@ -1483,7 +1483,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <p>The graph shows in blue the percentage of reads of a given sequence in the file which are present a given number of times in the file:</p>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/sequence_duplication_levels-before.png" alt="Sequence Duplication Levels. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/sequence_duplication_levels-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Sequence Duplication Levels</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%;"><img src="../../images/quality-control/sequence_duplication_levels-before.png" alt="Sequence Duplication Levels. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/sequence_duplication_levels-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Sequence Duplication Levels</figcaption></figure>
 
 <p>In a diverse library most sequences will occur only once in the final set. A low level of duplication may indicate a very high level of coverage of the target sequence, but a high level of duplication is more likely to indicate some kind of enrichment bias.</p>
 
@@ -1540,7 +1540,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
 </code></pre></div>    </div>
     <p>and use <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">blastn</a> against the default Nucleotide (nr/nt) database we don’t get any hits. But if we use <a href="https://www.ncbi.nlm.nih.gov/tools/vecscreen/">VecScreen</a> we see it is the Nextera adapter.</p>
-    <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/vecscreen-nextera.png" alt="VecScreen. " width="976" height="310" loading="lazy" /><a target="_blank" href="../../images/quality-control/vecscreen-nextera.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Nextera adapter</figcaption></figure>
+    <figure id="figure-10" style="max-width: 90%;"><img src="../../images/quality-control/vecscreen-nextera.png" alt="VecScreen. " width="976" height="310" loading="lazy" /><a target="_blank" href="../../images/quality-control/vecscreen-nextera.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Nextera adapter</figcaption></figure>
   </blockquote>
 </blockquote>
 
@@ -1549,7 +1549,7 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
 
   <h4 id="per-base-n-content">Per base N content</h4>
 
-  <figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/per_base_n_content-before.png" alt="Per base N content. " width="1005" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_base_n_content-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Per base N content</figcaption></figure>
+  <figure id="figure-11" style="max-width: 90%;"><img src="../../images/quality-control/per_base_n_content-before.png" alt="Per base N content. " width="1005" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_base_n_content-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Per base N content</figcaption></figure>
 
   <p>If a sequencer is unable to make a base call with sufficient confidence, it will write an “N” instead of a conventional base call. This plot displays the percentage of base calls at each position or bin for which an N was called.</p>
 
@@ -1565,7 +1565,7 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
 
   <p>The following example is from a high-quality DNA-Seq library. The biased kmers nearby the start of the read likely are due to slight sequence dependent efficiency of DNA shearing or a result of random priming:</p>
 
-  <figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/kmer_content.png" alt="Kmer Content. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/kmer_content.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Kmer content</figcaption></figure>
+  <figure id="figure-12" style="max-width: 90%;"><img src="../../images/quality-control/kmer_content.png" alt="Kmer Content. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/kmer_content.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Kmer content</figcaption></figure>
 
   <p>This module can be very difficult to interpret. The adapter content plot and overrepesented sequences table are easier to interpret and may give you enough information without needing this plot. RNA-seq libraries may have highly represented kmers that are derived from highly expressed sequences. To learn more about this plot, please check the <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/11%20Kmer%20Content.html">FastQC Kmer Content documentation</a>.</p>
 
@@ -1811,9 +1811,9 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
           <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>Yes, the quality score emojis look better (happier) now.</p>
 
-          <figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/fastqe-mean-before.png" alt="FASTQE before. " width="817" height="207" loading="lazy" /><a target="_blank" href="../../images/quality-control/fastqe-mean-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Before trimming</figcaption></figure>
+          <figure id="figure-13" style="max-width: 90%;"><img src="../../images/quality-control/fastqe-mean-before.png" alt="FASTQE before. " width="817" height="207" loading="lazy" /><a target="_blank" href="../../images/quality-control/fastqe-mean-before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Before trimming</figcaption></figure>
 
-          <figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/fastqe-mean-after.png" alt="FASTQE after. " width="1420" height="344" loading="lazy" /><a target="_blank" href="../../images/quality-control/fastqe-mean-after.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> After trimming</figcaption></figure>
+          <figure id="figure-14" style="max-width: 90%;"><img src="../../images/quality-control/fastqe-mean-after.png" alt="FASTQE after. " width="1420" height="344" loading="lazy" /><a target="_blank" href="../../images/quality-control/fastqe-mean-after.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> After trimming</figcaption></figure>
 
         </blockquote>
       </blockquote>
@@ -1851,7 +1851,7 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
     <ol>
       <li>Yes. The vast majority of the bases have a quality score above 20 now.</li>
     </ol>
-    <figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/per_base_sequence_quality-after.png" alt="Per base sequence quality. " width="1005" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_base_sequence_quality-after.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Per base sequence quality</figcaption></figure>
+    <figure id="figure-15" style="max-width: 90%;"><img src="../../images/quality-control/per_base_sequence_quality-after.png" alt="Per base sequence quality. " width="1005" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/per_base_sequence_quality-after.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Per base sequence quality</figcaption></figure>
 
     <ol>
       <li>Yes. No adapter is detected now.
@@ -2125,7 +2125,7 @@ https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
     <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The Qscore is around Q32.
 In case of PacBio CLR and Nanopore, it’s around Q12 and close to Q31 for Illumina (NovaSeq 6000).</p>
-    <figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/qscore-illumina-pacbio-nanopore.png" alt="Plot of Qscore between Illumina, PacBio and Nanopore. " width="638" height="456" loading="lazy" /><a target="_blank" href="../../images/quality-control/qscore-illumina-pacbio-nanopore.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Comparison of Qscore between Illumina, PacBio and Nanopore</figcaption></figure>
+    <figure id="figure-16" style="max-width: 90%;"><img src="../../images/quality-control/qscore-illumina-pacbio-nanopore.png" alt="Plot of Qscore between Illumina, PacBio and Nanopore. " width="638" height="456" loading="lazy" /><a target="_blank" href="../../images/quality-control/qscore-illumina-pacbio-nanopore.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Comparison of Qscore between Illumina, PacBio and Nanopore</figcaption></figure>
 
     <p>Definition: Qscores is the average per-base error probability, expressed on the log (Phred) scale</p>
   </blockquote>
@@ -2145,7 +2145,7 @@ For other technologies like PacBio CLR and Nanopore, it is larger and mostly dep
 Unlike most of Illumina runs, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
 In this example, the distribution of read length is centered near 18kbp but the results can be very different depending of your experiment.</p>
 
-<figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/HistogramReadlength.png" alt="Histogram of read lengths. " width="657" height="450" loading="lazy" /><a target="_blank" href="../../images/quality-control/HistogramReadlength.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Histogram of read length</figcaption></figure>
+<figure id="figure-17" style="max-width: 90%;"><img src="../../images/quality-control/HistogramReadlength.png" alt="Histogram of read lengths. " width="657" height="450" loading="lazy" /><a target="_blank" href="../../images/quality-control/HistogramReadlength.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Histogram of read length</figcaption></figure>
 
 <h2 id="read-lengths-vs-average-read-quality-plot-using-dots">Read lengths vs Average read quality plot using dots</h2>
 
@@ -2153,7 +2153,7 @@ In this example, the distribution of read length is centered near 18kbp but the 
 In general, there is no link between read length and read quality but this representation allows to visualize both information into a single plot and detect possible aberrations.
 In runs with a lot of short reads the shorter reads are sometimes of lower quality than the rest.</p>
 
-<figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/LengthvsQualityScatterPlot_dot.png" alt="Read lengths vs Average read quality plot using dots. " width="631" height="450" loading="lazy" /><a target="_blank" href="../../images/quality-control/LengthvsQualityScatterPlot_dot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Histogram of read length</figcaption></figure>
+<figure id="figure-18" style="max-width: 90%;"><img src="../../images/quality-control/LengthvsQualityScatterPlot_dot.png" alt="Read lengths vs Average read quality plot using dots. " width="631" height="450" loading="lazy" /><a target="_blank" href="../../images/quality-control/LengthvsQualityScatterPlot_dot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Histogram of read length</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2166,7 +2166,7 @@ The qualification for HiFi reads is:</p>
       <li>A minimal number of 3 subreads</li>
       <li>A read Qscore &gt;=20</li>
     </ul>
-    <figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/pacbio-css-hifi-sequencing.png" alt="PacBio HiFi sequencing. " width="636" height="636" loading="lazy" /><a target="_blank" href="../../images/quality-control/pacbio-css-hifi-sequencing.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> PacBio HiFi sequencing</figcaption></figure>
+    <figure id="figure-19" style="max-width: 90%;"><img src="../../images/quality-control/pacbio-css-hifi-sequencing.png" alt="PacBio HiFi sequencing. " width="636" height="636" loading="lazy" /><a target="_blank" href="../../images/quality-control/pacbio-css-hifi-sequencing.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> PacBio HiFi sequencing</figcaption></figure>
   </blockquote>
 </blockquote>
 
@@ -2232,7 +2232,7 @@ For the minimum (195bp) and maximum (256kbp) read lengths, it can be found with 
 As for PacBio CLR/HiFi, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
 In this example, the distribution of read length is quite dispersed with a minimum read length for the passed reads around 200bp and a maximum length ~150,000bp.</p>
 
-<figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/basecalled_reads_length-pycoqc.png" alt="Basecalled reads length. " width="974" height="500" loading="lazy" /><a target="_blank" href="../../images/quality-control/basecalled_reads_length-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Basecalled reads length</figcaption></figure>
+<figure id="figure-20" style="max-width: 90%;"><img src="../../images/quality-control/basecalled_reads_length-pycoqc.png" alt="Basecalled reads length. " width="974" height="500" loading="lazy" /><a target="_blank" href="../../images/quality-control/basecalled_reads_length-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Basecalled reads length</figcaption></figure>
 
 <h3 id="basecalled-reads-phred-quality">Basecalled reads PHRED quality</h3>
 
@@ -2241,7 +2241,7 @@ The exact definition of Qscores is: the average per-base error probability, expr
 In case of Nanopore data, the distribution is generally centered around 10 or 12.
 For old runs, the distribution can be lower, as basecalling models are less precise than recent models.</p>
 
-<figure id="figure-21" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/basecalled_reads_PHRED_quality-pycoqc.png" alt="Basecalled reads PHRED quality. " width="974" height="500" loading="lazy" /><a target="_blank" href="../../images/quality-control/basecalled_reads_PHRED_quality-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> Basecalled reads PHRED quality</figcaption></figure>
+<figure id="figure-21" style="max-width: 90%;"><img src="../../images/quality-control/basecalled_reads_PHRED_quality-pycoqc.png" alt="Basecalled reads PHRED quality. " width="974" height="500" loading="lazy" /><a target="_blank" href="../../images/quality-control/basecalled_reads_PHRED_quality-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> Basecalled reads PHRED quality</figcaption></figure>
 
 <h2 id="basecalled-reads-length-vs-reads-phred-quality">Basecalled reads length vs reads PHRED quality</h2>
 
@@ -2257,7 +2257,7 @@ Beware that for the same data, the basecaller used (Albacor, Guppy, Bonito), the
 
 <p>As for NanoPlot, this representation give a 2D visualisation of read Qscore according to the length.</p>
 
-<figure id="figure-22" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png" alt="Basecalled reads length vs reads PHRED quality. " width="974" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 22</strong>:</span> Basecalled reads length vs reads PHRED quality</figcaption></figure>
+<figure id="figure-22" style="max-width: 90%;"><img src="../../images/quality-control/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png" alt="Basecalled reads length vs reads PHRED quality. " width="974" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/basecalled_reads_length_vs_reads_PHRED_quality-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 22</strong>:</span> Basecalled reads length vs reads PHRED quality</figcaption></figure>
 
 <h2 id="output-over-experiment-time">Output over experiment time</h2>
 
@@ -2280,7 +2280,7 @@ Beware that for the same data, the basecaller used (Albacor, Guppy, Bonito), the
 The “Cummulative” plot area (light blue) indicates that 50% of all reads and almost 50% of all bases were produced in the first 5h of the 25h experiment.
 Although it is normal that yield decreases over time a decrease like this is not a good sign.</p>
 
-<figure id="figure-23" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/output_over_experiment_time-pycoqc.png" alt="Output over experiment time. " width="974" height="500" loading="lazy" /><a target="_blank" href="../../images/quality-control/output_over_experiment_time-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 23</strong>:</span> Output over experiment time</figcaption></figure>
+<figure id="figure-23" style="max-width: 90%;"><img src="../../images/quality-control/output_over_experiment_time-pycoqc.png" alt="Output over experiment time. " width="974" height="500" loading="lazy" /><a target="_blank" href="../../images/quality-control/output_over_experiment_time-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 23</strong>:</span> Output over experiment time</figcaption></figure>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-other-quot-output-over-experiment-time-quot-profile"><button class="gtn-boxify-button details" type="button" aria-controls="details-other-quot-output-over-experiment-time-quot-profile" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Other &quot;Output over experiment time&quot; profile</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2309,7 +2309,7 @@ Over time, however, the shorter fragments are becoming rarer and thus more long 
 <p>The read length over experiment time should be stable.
 It can slightly increase over the time as short fragments tend to be over-sequenced at the beginning and are less present over the time.</p>
 
-<figure id="figure-24" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/read_length_over_experiment_time-pycoqc.png" alt="Read length over experiment time. " width="974" height="500" loading="lazy" /><a target="_blank" href="../../images/quality-control/read_length_over_experiment_time-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 24</strong>:</span> Read length over experiment time</figcaption></figure>
+<figure id="figure-24" style="max-width: 90%;"><img src="../../images/quality-control/read_length_over_experiment_time-pycoqc.png" alt="Read length over experiment time. " width="974" height="500" loading="lazy" /><a target="_blank" href="../../images/quality-control/read_length_over_experiment_time-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 24</strong>:</span> Read length over experiment time</figcaption></figure>
 
 <h2 id="channel-activity-over-time">Channel activity over time</h2>
 
@@ -2319,7 +2319,7 @@ In this case, the vast majority of channels/pores are inactive (white) throughou
 <p>You would hope for a plot that it is dark near the X-axis, and with higher Y-values (increasing time) doesn’t get too light/white.
 Depending if you chose “Reads” or “Bases” on the left the colour indicates either number of bases or reads per time interval</p>
 
-<figure id="figure-25" style="max-width: 90%; margin:auto;"><img src="../../images/quality-control/channel_activity_over_time-pycoqc.png" alt="Channel activity over time. " width="974" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/channel_activity_over_time-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 25</strong>:</span> Channel activity over time</figcaption></figure>
+<figure id="figure-25" style="max-width: 90%;"><img src="../../images/quality-control/channel_activity_over_time-pycoqc.png" alt="Channel activity over time. " width="974" height="600" loading="lazy" /><a target="_blank" href="../../images/quality-control/channel_activity_over_time-pycoqc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 25</strong>:</span> Channel activity over time</figcaption></figure>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-other-quot-channel-activity-over-time-quot-profile"><button class="gtn-boxify-button details" type="button" aria-controls="details-other-quot-channel-activity-over-time-quot-profile" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Other &quot;Channel activity over time&quot; profile</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2612,7 +2612,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2640,7 +2640,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

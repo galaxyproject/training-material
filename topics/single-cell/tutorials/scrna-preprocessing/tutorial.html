@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -59,8 +59,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -331,7 +331,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -820,13 +820,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Consider the heterogeneity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_hematopoiesis.png" alt="Cell Differentiation of Hematopoietic Stem cells. " width="1100" height="492" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_hematopoiesis.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_hematopoiesis.png" alt="Cell Differentiation of Hematopoietic Stem cells. " width="1100" height="492" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_hematopoiesis.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg</figcaption></figure>
 
 <p>The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell sub-populations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental hierarchies can be inferred based on the proximity of these clusters to one another.</p>
 
 <p>Other than cell development, there are many more factors that can shape the level of gene expression exhibited by a given cell. Intercellular cell-signalling can block or enhance specific transcripts, the total amount of transcripts of a cell increases with the cell-cycle, or the proximity of a cell within a tissue to nutrients or oxygen.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_nbt3711.png" alt="Facets of Cellular Identity. " width="1167" height="596" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_nbt3711.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_nbt3711.png" alt="Facets of Cellular Identity. " width="1167" height="596" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_nbt3711.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016</figcaption></figure>
 
 <p>This tutorial is in part inspired by aspects of the <a href="https://hemberg-lab.github.io/scRNA.seq.course/">Hemberg workflow</a> at the Sanger institute, as well as the <a href="https://github.com/CGATOxford/UMI-tools">CGATOxford workflow</a> which provides the <strong>UMI-tools</strong> suite that we make use of. The barcoding follows the CEL-Seq2 protocol <span class="citation"><a href="#Hashimshony2016">Hashimshony <i>et al.</i> 2016</a></span>,  mentioned in the <a href="/training-material/topics/single-cell/tutorials/scrna-umis/tutorial.html"><em>Understanding Barcodes</em></a> hands-on, and uses the same lane configuration as utilised by the <a href="https://www.ie-freiburg.mpg.de/gruen">Freiburg MPI Grün lab</a>.</p>
 
@@ -845,7 +845,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li><strong>Multi-Batch Processing</strong></li>
 </ol>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" alt="Overview of workflow. " width="933" height="978" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> An overview of the entire workflow</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" alt="Overview of workflow. " width="933" height="978" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> An overview of the entire workflow</figcaption></figure>
 
 <p>The first part of this tutorial will deal with batches, and use example <em>FASTQ</em> data from a single batch, which we will perform <a href="#barcode-extraction">barcode extraction</a> and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.</p>
 
@@ -898,7 +898,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>The size of scRNA files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expedite the analysis by using a smaller subset of actual batch data. We will also be using <em>Mus Musculus</em> annotation data (.gtf) from the  <a href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/">NCBI RefSeq</a> track, as well as a barcodes file (.tsv).</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_upper.png" alt="Workflow Upper. " width="2500" height="1124" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_upper.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Single batch processing</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_upper.png" alt="Workflow Upper. " width="2500" height="1124" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_upper.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Single batch processing</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload-and-organization"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload and organization</div>
@@ -1512,11 +1512,11 @@ The number of columns can be seen by scrolling the file preview window completel
 
   <p>Galaxy provides a workflow that captures the process of all the above stages for a <a href="workflows/scrna_pp_celseq.ga">single pair of FASTQ data</a>:</p>
 
-  <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_single.png" alt="Single Batch Workflow. " width="1416" height="935" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_single.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Single Batch Workflow</figcaption></figure>
+  <figure id="figure-5" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_single.png" alt="Single Batch Workflow. " width="1416" height="935" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_single.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Single Batch Workflow</figcaption></figure>
 
   <p>For multiple batch processing, Galaxy can make use of <em>Nested Workflows</em> that in this case can take in a <a href="workflows/scrna_mp_celseq.ga">list of input paired FASTQ data</a> and process them in parallel.</p>
 
-  <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_nested.png" alt="Multiple Batch Workflow. " width="971" height="715" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_nested.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Nested Multiple Batch Workflow</figcaption></figure>
+  <figure id="figure-6" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_nested.png" alt="Multiple Batch Workflow. " width="971" height="715" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_nested.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Nested Multiple Batch Workflow</figcaption></figure>
 
 </blockquote>
 
@@ -1524,7 +1524,7 @@ The number of columns can be seen by scrolling the file preview window completel
 
 <h1 id="multi-batch-processing">Multi-Batch Processing</h1>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_lower.png" alt="Workflow Lower. " width="2500" height="1016" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_lower.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Multiple batch processing</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_lower.png" alt="Workflow Lower. " width="2500" height="1016" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_lower.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Multiple batch processing</figcaption></figure>
 
 <p>Handling more than one batch of sequencing data is rather trivial when we take into account our main goals and requirements:</p>
 
@@ -1593,7 +1593,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 
 <p>To resolve this we can perform a “Full Table Join” where the missing data for <em>GeneE</em> and <em>GeneA</em> in Batch1 and Batch2 respectively are replaced with zeroes:</p>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/scrna_downstream.svg" alt="Table Join. " width="616" height="494" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/scrna_downstream.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Full Table Join</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/scrna_downstream.svg" alt="Table Join. " width="616" height="494" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/scrna_downstream.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Full Table Join</figcaption></figure>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
@@ -1630,7 +1630,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
       <p><strong>Create a Dataset List</strong></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul>   <p><img src="/training-material/faqs/galaxy/images/create_simple_list.png" alt="Creating a simple collection" title="Creating a simple (list) collection in Galaxy's history" /></p> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
@@ -1868,7 +1868,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 
 <h3 id="cross-contamination-plot">Cross-contamination Plot</h3>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_crosscontamination.png" alt="Contamination Plots. " width="2348" height="1050" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_crosscontamination.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> The Pre-filter and Post-filter plots</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_crosscontamination.png" alt="Contamination Plots. " width="2348" height="1050" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_crosscontamination.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> The Pre-filter and Post-filter plots</figcaption></figure>
 
 <p>Two things to take note of:</p>
 
@@ -1907,7 +1907,7 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 
 <p>In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.</p>
 
-<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" alt="Recap of workflow. " width="933" height="978" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A recap of the entire workflow</figcaption></figure>
+<figure id="figure-10" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" alt="Recap of workflow. " width="933" height="978" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A recap of the entire workflow</figcaption></figure>
 
 <p>This tutorial is part of the https://singlecell.usegalaxy.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
@@ -2236,7 +2236,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2264,7 +2264,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

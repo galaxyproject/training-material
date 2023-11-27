@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -59,8 +59,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -313,7 +313,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -773,7 +773,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>The data for this tutorial comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " width="567" height="402" loading="lazy" /><a target="_blank" href="../../images/rna-seq-reads-to-counts/mouse_exp.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Tutorial Dataset</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " width="567" height="402" loading="lazy" /><a target="_blank" href="../../images/rna-seq-reads-to-counts/mouse_exp.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Tutorial Dataset</figcaption></figure>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -875,7 +875,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the the <code class="language-plaintext highlighter-rouge">DE results</code> file and take a look. It should look like below with 8 columns (just the first few rows are shown).</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/DE_results.png" alt="DE results. " width="1332" height="244" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/DE_results.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> DE results</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/rna-seq-viz-with-heatmap2/DE_results.png" alt="DE results. " width="1332" height="244" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/DE_results.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> DE results</figcaption></figure>
 
 <h1 id="create-heatmap-of-top-de-genes">Create heatmap of top DE genes</h1>
 
@@ -938,7 +938,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <p>First click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon and take a look at the <code class="language-plaintext highlighter-rouge">normalized counts</code> file that we imported. It should look like below (just the first few rows and columns are shown). Note that the normalized count values are log2. We will join our <code class="language-plaintext highlighter-rouge">top 20 by Pvalue</code> file to the <code class="language-plaintext highlighter-rouge">normalized counts</code> file, matching on the ENTREZID columns.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/normalized_counts.png" alt="Normalized counts. " width="2238" height="520" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/normalized_counts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Normalized counts</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/rna-seq-viz-with-heatmap2/normalized_counts.png" alt="Normalized counts. " width="2238" height="520" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/normalized_counts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Normalized counts</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-extract-the-normalized-counts-for-the-top-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the normalized counts for the top genes</div>
@@ -966,7 +966,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <p>The file should look like below with the 20 genes in the rows and the 12 samples in the columns (just the first few columns are shown).</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap_input.png" alt="Heatmap input. " width="644" height="289" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap_input.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Heatmap input</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap_input.png" alt="Heatmap input. " width="644" height="289" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap_input.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Heatmap input</figcaption></figure>
 
 <p>Now that we have our file with just the normalized counts for the genes we want, we can create a heatmap.</p>
 
@@ -991,7 +991,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <p>You should see a heatmap like below. Note that here we are plotting the top genes differentially expressed in the luminal cells from the pregnant mice (<code class="language-plaintext highlighter-rouge">MCL1.LC</code> and <code class="language-plaintext highlighter-rouge">MCL1.LD</code>) versus the luminal cells from the lactating mice (<code class="language-plaintext highlighter-rouge">MCL1.LE</code> and <code class="language-plaintext highlighter-rouge">MCL1.LF</code>). This heatmap enables us to see the expression of these genes in all the samples from the different groups in the experiment (basal virgin, basal pregnant, basal lactating, luminal virgin, luminal pregnant, luminal lactating).</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20.png" alt="Heatmap of top DE genes. " width="690" height="723" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Heatmap of top DE genes</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20.png" alt="Heatmap of top DE genes. " width="690" height="723" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Heatmap of top DE genes</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1007,13 +1007,13 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
         <ol>
           <li>We don’t use clustering here as we want to keep the genes in the order we input (ordered by P value).</li>
           <li>We scale the genes as otherwise large expression values from highly expressed genes would dominate the plot, see below.
-            <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_noscale.png" alt="Heatmap with no scaling. " width="434" height="454" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_noscale.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Heatmap without scaling genes</figcaption></figure>
+            <figure id="figure-6" style="max-width: 90%;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_noscale.png" alt="Heatmap with no scaling. " width="434" height="454" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_noscale.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Heatmap without scaling genes</figcaption></figure>
           </li>
           <li>To make the heatmap with these genes ordered by logFC, we could <strong>Sort</strong> the output of the <strong>Join</strong> step on the logFC column, then <strong>Cut</strong> the columns as before and remake the heatmap. It should look like below.
-            <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_sorted_by_lfc.png" alt="Heatmap sorted by logFC. " width="442" height="449" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_sorted_by_lfc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Heatmap sorted by logFC</figcaption></figure>
+            <figure id="figure-7" style="max-width: 90%;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_sorted_by_lfc.png" alt="Heatmap sorted by logFC. " width="442" height="449" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_sorted_by_lfc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Heatmap sorted by logFC</figcaption></figure>
           </li>
           <li>To make a heatmap of the most upregulated and downregulated significant genes, we could <strong>Sort</strong> on the logFC column (instead of P value above), then use the <strong>Select first</strong> and <strong>Select last</strong> tools to select the genes with the largest and smallest fold changes (10 genes for each) and the <strong>Concatenate</strong> tool to combine the outputs of the first and last Selects into one file. We would then repeat the <strong>Join</strong> and <strong>Cut</strong> steps as before to get the normalized counts and make the heatmap as below (Note that one gene name in the middle is missing as it is a gene that has NA for gene symbol)
-            <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top_up_and_down.png" alt="Heatmap for top logFC. " width="479" height="485" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap2_top_up_and_down.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Heatmap of top 10 up and down</figcaption></figure>
+            <figure id="figure-8" style="max-width: 90%;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top_up_and_down.png" alt="Heatmap for top logFC. " width="479" height="485" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap2_top_up_and_down.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Heatmap of top 10 up and down</figcaption></figure>
           </li>
         </ol>
       </blockquote>
@@ -1025,11 +1025,11 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <p>You can also create a heatmap for a custom set of genes. To demonstrate this, we will create a heatmap for the 31 genes in Figure 6b from the original paper using this dataset (see below). These 31 genes include the authors’ main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors identified as differentially expressed. We will recreate this heatmap here. To see how to visualize these genes in a volcano plot see the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">here</a>.</p>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/fu_heatmap.png" alt="Fu heatmap. " width="932" height="482" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/fu_heatmap.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%;"><img src="../../images/rna-seq-viz-with-heatmap2/fu_heatmap.png" alt="Fu heatmap. " width="932" height="482" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/fu_heatmap.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
 
 <p>These 31 genes are in the file we imported called <code class="language-plaintext highlighter-rouge">heatmap genes</code>, shown below.</p>
 
-<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap_genes.png" alt="Heatmap genes. " height="560" width="62" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap_genes.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Heatmap genes</figcaption></figure>
+<figure id="figure-10" style="max-width: 90%;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap_genes.png" alt="Heatmap genes. " height="560" width="62" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/heatmap_genes.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Heatmap genes</figcaption></figure>
 
 <p>As in the previous example, we need to extract the normalized counts for just these 31 genes. To do that we will join the <code class="language-plaintext highlighter-rouge">heatmap genes</code> file with the <code class="language-plaintext highlighter-rouge">normalized counts</code> file, on the Gene Symbol columns this time (instead of ENTREZID), and then extract the columns we need.</p>
 
@@ -1071,7 +1071,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <p>We now have a table with the 31 genes in columns and the normalized counts for the 12 samples in rows, similar to below (just the first few columns are shown).</p>
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/transposed_input.png" alt="Transposed input. " width="1220" height="384" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/transposed_input.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Transposed input</figcaption></figure>
+<figure id="figure-11" style="max-width: 90%;"><img src="../../images/rna-seq-viz-with-heatmap2/transposed_input.png" alt="Transposed input. " width="1220" height="384" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/transposed_input.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Transposed input</figcaption></figure>
 
 <h2 id="create-heatmap-of-custom-genes-1">Create heatmap of custom genes</h2>
 
@@ -1094,7 +1094,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <p>You should see a heatmap like below.</p>
 
-<figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/fu_heatmap_regenerated.png" alt="Fu heatmap regenerated. " width="678" height="706" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/fu_heatmap_regenerated.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Fu heatmap regenerated</figcaption></figure>
+<figure id="figure-12" style="max-width: 90%;"><img src="../../images/rna-seq-viz-with-heatmap2/fu_heatmap_regenerated.png" alt="Fu heatmap regenerated. " width="678" height="706" loading="lazy" /><a target="_blank" href="../../images/rna-seq-viz-with-heatmap2/fu_heatmap_regenerated.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Fu heatmap regenerated</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1277,7 +1277,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1305,7 +1305,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

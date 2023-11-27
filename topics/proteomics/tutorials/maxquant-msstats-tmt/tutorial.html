@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -304,7 +304,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1194,16 +1194,16 @@ You fractionate all 3 experiments / mixtures into 3 fractions each and measure e
 <p>We obtain several output files from MSstatsTMT. MSstats log file contains the MSstats report with warnings and information about the analysis steps. 
 The QC report allows to visualize protein abundance of conditions for all proteins (first page) or if enabled for each individual protein (following pages).</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant-msstats-tmt/QC_plot.png" alt="QC report. " width="768" height="768" loading="lazy" /><a target="_blank" href="../../images/maxquant-msstats-tmt/QC_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/maxquant-msstats-tmt/QC_plot.png" alt="QC report. " width="768" height="768" loading="lazy" /><a target="_blank" href="../../images/maxquant-msstats-tmt/QC_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
 
 <p>The MSstatsTMT Group Comparison Plot is a very convenient pdf, which you can search for your favorite proteins of interest to check whether these are dysregulated between the conditions. The red error bar gives you a confidence interval of the fold change.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant-msstats-tmt/example_protein.png" alt="Group comparison plot. " width="944" height="593" loading="lazy" /><a target="_blank" href="../../images/maxquant-msstats-tmt/example_protein.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Group comparison plot for the protein A5YKK6 (CCR4-NOT transcription complex subunit 1)</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/maxquant-msstats-tmt/example_protein.png" alt="Group comparison plot. " width="944" height="593" loading="lazy" /><a target="_blank" href="../../images/maxquant-msstats-tmt/example_protein.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Group comparison plot for the protein A5YKK6 (CCR4-NOT transcription complex subunit 1)</figcaption></figure>
 
 <p>The volcano plot plots the negative log10 of the adjusted P Value derived from statistical testing over the log2 fold change between the conditions you compared. A value of 3 on the y axis corresponds to an adjusted P Value of 0.001, whereas a value of 1 on the x axis corresponds to a ratio of 2 meaning that the protein is twice as high in condition 1 than condition 2..
 Please bear in mind that TMT quantitation suffers from ratio compression. There are ways to calculate more accurate fold changes from measured data (or alternatively you can use MS3 quantitation on some machines). However, even with ratio compression, MS2 TMT is an excellent quantitation strategy to detect differentially regulated proteins. Just bear in mind that the reported fold chances of proteins are almost always smaller than the real fold changes between your conditions.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant-msstats-tmt/volcano_plot.png" alt="Volcano plot. " width="951" height="578" loading="lazy" /><a target="_blank" href="../../images/maxquant-msstats-tmt/volcano_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Volcano plot QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/maxquant-msstats-tmt/volcano_plot.png" alt="Volcano plot. " width="951" height="578" loading="lazy" /><a target="_blank" href="../../images/maxquant-msstats-tmt/volcano_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Volcano plot QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
 
                 </section>
 
@@ -1372,7 +1372,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1400,7 +1400,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

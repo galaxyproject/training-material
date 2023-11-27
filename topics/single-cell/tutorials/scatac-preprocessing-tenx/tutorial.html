@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -265,7 +265,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -717,7 +717,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="library-preparation">Library Preparation</h2>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/tenx_libprep_scatac.png" alt="Library Preparation. " width="890" height="343" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/tenx_libprep_scatac.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> An overview of the 10x single-nuclei ATAC-seq library preparation</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/tenx_libprep_scatac.png" alt="Library Preparation. " width="890" height="343" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/tenx_libprep_scatac.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> An overview of the 10x single-nuclei ATAC-seq library preparation</figcaption></figure>
 
 <p>The 10X barcoded gel beads consist of a pool of barcodes which are used to separately index each cell. The individual gel barcodes are delivered to each cell via flow cytometry, where each cell is fed single-file along a liquid tube and tagged with a 10X gel bead. The cells are then isolated from one another within thousands of nanoliter droplets, where each droplet is described by a unique 10x barcode that all reads in that droplet are associated with. The oil is then removed and all (now barcoded) DNA reads are pooled together to be sequenced.</p>
 
@@ -727,7 +727,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>There are two main reagent kits used during the library preparation. Below we can see the layout of the primers used in both chemistries. We can ignore most of these as they are not relevant, namely: the P5 and P7 Illumina primers are used in the Illumina <a href="https://en.wikipedia.org/wiki/Illumina_dye_sequencing#Bridge_amplification">bridge amplification</a> process; the Sample Index is an 8bp primer which is related to the Chromium system that balances nucleotide bias and ensures that there is no sample overlap during the multiplexed sequencing. The primer of interest to us is the Cell Barcode (CB). Unlike scRNA-seq, Unique Molecular Identifiers (UMIs) are not used in scATAC-seq.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/tenx_primers_scatac.svg" alt="chem. " width="899" height="213" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/tenx_primers_scatac.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> 10x scATAC-Seq sequencing library</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/tenx_primers_scatac.svg" alt="chem. " width="899" height="213" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/tenx_primers_scatac.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> 10x scATAC-Seq sequencing library</figcaption></figure>
 
 <p>There are two major chemistries (v1 and v2) used in 10x scATAC-seq library construction. Technically, v2 chemistry is more sensitive and has better data yield. But the final sequencing library is the same. Hence, same the data analysis applies to both chemistries. Both chemistries generate the 4 FASTQ files containing:</p>
 <ul>
@@ -972,7 +972,7 @@ simply by the PCR itself. We will remove these duplicates later on.</p>
   <div class="box-title comment-title" id="comment-on-tn5-insertion"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: on Tn5 insertion</div>
 
   <p>When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp (<span class="citation"><a href="#Kia2017">Kia <i>et al.</i> 2017</a></span>):</p>
-  <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/epigenetics/images/atac-seq/NexteraLibraryConstruction.jpg" alt="Nextera_Library_Construction. " width="378" height="189" loading="lazy" /><a target="_blank" href="/training-material/topics/epigenetics/images/atac-seq/NexteraLibraryConstruction.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Nextera Library Construction</figcaption></figure>
+  <figure id="figure-3" style="max-width: 90%;"><img src="/training-material/topics/epigenetics/images/atac-seq/NexteraLibraryConstruction.jpg" alt="Nextera_Library_Construction. " width="378" height="189" loading="lazy" /><a target="_blank" href="/training-material/topics/epigenetics/images/atac-seq/NexteraLibraryConstruction.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Nextera Library Construction</figcaption></figure>
 
   <p>This means, to have the read start site reflecting the center of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825">Buenrostro et al. 2013</a>. <strong>Genrich</strong> can apply these shifts when ATAC-seq mode is selected. In most cases, we do not have 9bp resolution so we don’t take it into account but if you are interested in the footprint, this is important.</p>
 </blockquote>
@@ -1009,10 +1009,10 @@ At this step, two approaches exist:</p>
   <li>The second one chosen here is to use all reads to be more exhaustive. In this approach, it is very important to re-center the signal of each read on the 5’ extremity (read start site) as this is where Tn5 cuts. Indeed, you want your peaks around the nucleosomes and not directly on the nucleosome:</li>
 </ul>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/epigenetics/images/atac-seq/schemeWithLegend.jpg" alt="ATAC-Seq_reads_relative_to_nucleosomes. " width="680" height="378" loading="lazy" /><a target="_blank" href="/training-material/topics/epigenetics/images/atac-seq/schemeWithLegend.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Scheme of ATAC-Seq reads relative to nucleosomes</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="/training-material/topics/epigenetics/images/atac-seq/schemeWithLegend.jpg" alt="ATAC-Seq_reads_relative_to_nucleosomes. " width="680" height="378" loading="lazy" /><a target="_blank" href="/training-material/topics/epigenetics/images/atac-seq/schemeWithLegend.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Scheme of ATAC-Seq reads relative to nucleosomes</figcaption></figure>
 
 <p>If we only assess the coverage of the 5’ extremity of the reads, the data would be too sparse and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 200bp (100bp in each direction) to assess coverage. We call peaks with MACS2. In order to get the coverage centered on the 5’ extended 100bp on each side we will use <code class="language-plaintext highlighter-rouge">--shift -100</code> and <code class="language-plaintext highlighter-rouge">--extend 200</code>:</p>
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/epigenetics/images/atac-seq/macs2Options.jpg" alt="MACS2_peak_centering_options. " width="643" height="113" loading="lazy" /><a target="_blank" href="/training-material/topics/epigenetics/images/atac-seq/macs2Options.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> MACS2 options to get 100bp each side</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="/training-material/topics/epigenetics/images/atac-seq/macs2Options.jpg" alt="MACS2_peak_centering_options. " width="643" height="113" loading="lazy" /><a target="_blank" href="/training-material/topics/epigenetics/images/atac-seq/macs2Options.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> MACS2 options to get 100bp each side</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-call-peaks-with-macs2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Call peaks with MACS2</div>
@@ -1110,7 +1110,7 @@ At this step, two approaches exist:</p>
 
 <p>The most common format, called <a href="https://anndata.readthedocs.io/en/stable/"><code class="language-plaintext highlighter-rouge">AnnData</code></a>, stores the matrix as well as gene and cell annotations in a concise, compressed and extremely readable manner:</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_anndata.png" alt="Anndata format. " width="1381" height="1122" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_anndata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> <code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. peaks) <code>var</code> and unstructured annotations <code>uns</code>.</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_anndata.png" alt="Anndata format. " width="1381" height="1122" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_anndata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> <code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. peaks) <code>var</code> and unstructured annotations <code>uns</code>.</figcaption></figure>
 
 <p>This format is used by <a href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a> (<span class="citation"><a href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a></span>) and <a href="https://colomemaria.github.io/episcanpy_doc/index.html">EpiScanpy</a> (<span class="citation"><a href="#danese2021episcanpy">Danese <i>et al.</i> 2021</a></span>) tool suites for analyzing single-cell omics data. So we need first to import the matrix and annotations of peaks and cells (present in fragments BED file) into an <code class="language-plaintext highlighter-rouge">AnnData</code> object.</p>
 
@@ -1422,7 +1422,7 @@ chr21_14027127_14027558
 
     <blockquote class="solution">
       <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-      <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/violin_after_initial_filtering.png" alt="IntialViolin. " width="1009" height="490" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/violin_after_initial_filtering.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Violin plot of number of features per cell after initial filtering</figcaption></figure>
+      <figure id="figure-7" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/violin_after_initial_filtering.png" alt="IntialViolin. " width="1009" height="490" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/violin_after_initial_filtering.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Violin plot of number of features per cell after initial filtering</figcaption></figure>
       <p>Both plots indicate that there are two distinct sets of cells:</p>
       <ol>
         <li>Cells with an acceptable number of open chromatin regions.</li>
@@ -1470,8 +1470,8 @@ chr21_14027127_14027558
 
     <blockquote class="solution">
       <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-      <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_cells.png" alt="CoverageCells. " width="571" height="432" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_cells.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Histogram of the number of open chromatin regions per cell</figcaption></figure>
-      <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_cells_log.png" alt="CoverageCellsLog. " width="571" height="432" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_cells_log.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Histogram of the number of open chromatin regions per cell in log scale</figcaption></figure>
+      <figure id="figure-8" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_cells.png" alt="CoverageCells. " width="571" height="432" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_cells.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Histogram of the number of open chromatin regions per cell</figcaption></figure>
+      <figure id="figure-9" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_cells_log.png" alt="CoverageCellsLog. " width="571" height="432" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_cells_log.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Histogram of the number of open chromatin regions per cell in log scale</figcaption></figure>
       <ol>
         <li>The plots show the number of open chromatin regions per cell in 50 bins on the x-axis and the number of cells per bin on the y-axis. It is basically a histogram of the number of open chromatin regions per cell.</li>
         <li>From the first plot with absolute counts, we see that with our threshold of 1000, we can separate between the cells with few detected peaks and cells with high chromatin accessibility.</li>
@@ -1516,8 +1516,8 @@ chr21_14027127_14027558
 
     <blockquote class="solution">
       <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-      <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_features.png" alt="CoverageFeatures. " width="589" height="432" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_features.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Histogram of feature commonness in cells</figcaption></figure>
-      <figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_features_log.png" alt="CoverageFeaturesLog. " width="580" height="432" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_features_log.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Histogram of feature commonness in cells in log scale</figcaption></figure>
+      <figure id="figure-10" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_features.png" alt="CoverageFeatures. " width="589" height="432" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_features.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Histogram of feature commonness in cells</figcaption></figure>
+      <figure id="figure-11" style="max-width: 90%;"><img src="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_features_log.png" alt="CoverageFeaturesLog. " width="580" height="432" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scatac-pre-processing/coverage_features_log.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Histogram of feature commonness in cells in log scale</figcaption></figure>
       <ol>
         <li>The plots show a histogram of the number of cells sharing a feature. As we initially pooled the data from all the cells to detect the peaks, it is expected to see only a small number of cells have more than 10000 peaks in common.</li>
         <li>The red vertical line of our 5 cells threshold is nearly at the left end of the histogram representing the majority of the features have at least 5 cells in common.
@@ -1906,7 +1906,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1934,7 +1934,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

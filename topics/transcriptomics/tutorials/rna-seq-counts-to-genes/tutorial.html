@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -502,7 +502,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1057,7 +1057,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>This is a Galaxy tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">COMBINE R RNAseq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">in this course</a>.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " width="567" height="402" loading="lazy" /><a target="_blank" href="../../images/rna-seq-reads-to-counts/mouse_exp.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Tutorial Dataset</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " width="567" height="402" loading="lazy" /><a target="_blank" href="../../images/rna-seq-reads-to-counts/mouse_exp.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Tutorial Dataset</figcaption></figure>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1163,11 +1163,11 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <p>Let’s take a look at the data. The <code class="language-plaintext highlighter-rouge">countdata</code> file contains information about genes (one gene per row), the first column has the Entrez gene id and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/countdata.png" alt="countdata file. " width="1019" height="481" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/countdata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Count file</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/countdata.png" alt="countdata file. " width="1019" height="481" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/countdata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Count file</figcaption></figure>
 
 <p>The <code class="language-plaintext highlighter-rouge">factordata</code> file contains basic information about the samples that we will need for the analysis. See below. Note that the sample ids must match exactly with the ids in the counts file.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/factordata.png" alt="factordata file. " width="227" height="314" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/factordata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Sample information file</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/factordata.png" alt="factordata file. " width="227" height="314" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/factordata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Sample information file</figcaption></figure>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-formatting-the-data"><button class="gtn-boxify-button details" type="button" aria-controls="details-formatting-the-data" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Formatting the data</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1182,9 +1182,9 @@ https://zenodo.org/record/4273218/files/SampleInfo.txt
 ```
 </code></pre></div>  </div>
 
-  <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/seqdata.png" alt="seqdata file. " width="567" height="306" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/seqdata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Count file (before formatting)</figcaption></figure>
+  <figure id="figure-4" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/seqdata.png" alt="seqdata file. " width="567" height="306" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/seqdata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Count file (before formatting)</figcaption></figure>
 
-  <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/sampleinfo.png" alt="sampleinfo file. " width="454" height="250" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/sampleinfo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Sample information file (before formatting)</figcaption></figure>
+  <figure id="figure-5" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/sampleinfo.png" alt="sampleinfo file. " width="454" height="250" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/sampleinfo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Sample information file (before formatting)</figcaption></figure>
 
   <p>To create the file, <code class="language-plaintext highlighter-rouge">countdata</code>, that contains only the counts for the 12 samples i.e. we’ll remove the gene length column with the <strong>Cut columns from a table (cut)</strong> tool. The sample names are also pretty long so we’ll use the <strong>&gt;Replace Text in entire line</strong> tool to shorten these to contain only the relevant information about each sample. We will also replace the hyphen in the sample names with a dot so they match the names in the sample information file.</p>
 
@@ -1265,7 +1265,7 @@ https://zenodo.org/record/4273218/files/SampleInfo.txt
       </ul>
     </li>
     <li>Rename file as <code class="language-plaintext highlighter-rouge">annodata</code> using the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon. The file should look like below.
-      <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/annodata.png" alt="annodata file. " width="510" height="360" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/annodata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Gene annotation file</figcaption></figure>
+      <figure id="figure-6" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/annodata.png" alt="annodata file. " width="510" height="360" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/annodata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Gene annotation file</figcaption></figure>
     </li>
     <li>Check the number of lines shown on the datasets in the history, there should be 27,180 lines in both. There must be the same number of lines (rows) in the counts and annotation.</li>
   </ol>
@@ -1289,7 +1289,7 @@ https://zenodo.org/record/4273218/files/SampleInfo.txt
 
 <p>In an RNA-seq analysis, the counts are normalized for different sequencing depths between samples. Normalizing to eliminate composition biases between samples is also typically performed. Composition biases can occur, for example, if there are a few highly expressed genes dominating in some samples, leading to less reads from other genes. By default, TMM normalization (<span class="citation"><a href="#robinson2010scaling">Robinson and Oshlack 2010</a></span>) is performed by the limma tool using the edgeR <code class="language-plaintext highlighter-rouge">calcNormFactors</code> function (this can be changed under <strong>Advanced Options</strong>). TMM stands for Trimmed Mean of M values, where a weighted trimmed mean of the log expression ratios is used to scale the counts for the samples. See the figure from the TMM paper below. Note the plot (Figure 1c) that shows how a few highly expressed genes in the liver sample (where the arrow is) results in the majority of other genes in the sample having the appearance of being expressed lower in liver. The mid-line through the points is offset from the expected zero and the TMM normalization factor (red line) scales the counts to adjust for this.</p>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/TMM.png" alt="TMM normalization. " width="1130" height="944" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/TMM.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> TMM normalization (Robinson and Oshlack 2010)</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/TMM.png" alt="TMM normalization. " width="1130" height="944" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/TMM.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> TMM normalization (Robinson and Oshlack 2010)</figcaption></figure>
 
 <h2 id="specify-contrasts-of-interest">Specify Contrast(s) of interest</h2>
 
@@ -1335,7 +1335,7 @@ https://zenodo.org/record/4273218/files/SampleInfo.txt
   <div class="box-title tip-title" id="tip-multiple-factors"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-multiple-factors" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Multiple factors</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If we need to account for additional sources of variation, for example, batch, sex, genotype etc, we can input that information as additional factors. For example, if we were interested in the genes differentially expressed between the luminal and basal cell types, we could include an additional column to account for the variation due to the different stages.</p>
-  <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/multiplefactors_factordata.png" alt="Multiple factors. " width="252" height="330" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/multiplefactors_factordata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Multiple factors</figcaption></figure>
+  <figure id="figure-8" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/multiplefactors_factordata.png" alt="Multiple factors. " width="252" height="330" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/multiplefactors_factordata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Multiple factors</figcaption></figure>
 
 </blockquote>
 
@@ -1347,7 +1347,7 @@ https://zenodo.org/record/4273218/files/SampleInfo.txt
 
 <p>By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This Galaxy limma tool outputs an MDS plot by default in the <code class="language-plaintext highlighter-rouge">Report</code> and a link is also provided to a PDF version (<code class="language-plaintext highlighter-rouge">MDSPlot_CellTypeStatus.pdf</code>). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions, and you may choose to include batch as an additional factor in the differential expression analysis. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under <strong>Output Options</strong> <em>Additional Plots</em> <code class="language-plaintext highlighter-rouge">MDS Extra</code>. These are displayed in the <code class="language-plaintext highlighter-rouge">Report</code> along with a link to a PDF version (MDSPlot_extra.pdf). Selecting the <code class="language-plaintext highlighter-rouge">Glimma Interactive Plots</code> will generate an interactive version of the MDS plot, see the plots section of the report below. If outlier samples are detected you may decide to remove them. Alternatively, you could downweight them by choosing the option in the limma tool <em>Apply voom with sample quality weights?</em>. The voom sample quality weighting is described in the paper <em>Why weight? Modelling sample and observational level variability improves power in RNA-seq analyses (<span class="citation"><a href="#Liu2015">Liu <i>et al.</i> 2015</a></span>)</em>.</p>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/mdsscree.png" alt="MDS Plot. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/mdsscree.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> MDS Plot</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/mdsscree.png" alt="MDS Plot. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/mdsscree.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> MDS Plot</figcaption></figure>
 
 <p>Take a look at the MDS plot coloured by group.</p>
 
@@ -1397,7 +1397,7 @@ https://zenodo.org/record/4273218/files/SampleInfo.txt
 
 <p>In the <code class="language-plaintext highlighter-rouge">Report</code> you should then see the correct MDS plot as below.</p>
 
-<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/mdsscree_corr.png" alt="MDS Plot. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/mdsscree_corr.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> MDS Plot (correct samples)</figcaption></figure>
+<figure id="figure-10" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/mdsscree_corr.png" alt="MDS Plot. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/mdsscree_corr.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> MDS Plot (correct samples)</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1434,11 +1434,11 @@ What is the second greatest source of variation in the data?</p>
 
 <p>Density plots can be output in the <code class="language-plaintext highlighter-rouge">Report</code> if <em>Filter lowly expressed genes</em> is selected. A link is also provided in the <code class="language-plaintext highlighter-rouge">Report</code> to a PDF version (<code class="language-plaintext highlighter-rouge">DensityPlots.pdf</code>). These plots allow comparison of the counts distributions before and after filtering. The samples are coloured by the groups. Count data is not normally distributed, so if we want to examine the distributions of the raw counts we need to log the counts. We typically check the distribution of the read counts on the log2 scale. A CPM value of 1 is equivalent to a log-CPM value of 0 and the CPM we used of 0.5 is equivalent to a log-CPM of -1. It can be seen in the Raw counts (before filtering) plot below, that a large proportion of genes within each sample are not expressed or lowly-expressed, and the Filtered counts plot shows our filter of CPM of 0.5 (in at least 2 samples) removes a lot of these uninformative genes.</p>
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/densityplots.png" alt="Density Plots. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/densityplots.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Density Plots</figcaption></figure>
+<figure id="figure-11" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/densityplots.png" alt="Density Plots. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/densityplots.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Density Plots</figcaption></figure>
 
 <p>The <code class="language-plaintext highlighter-rouge">Report</code> provides links to PDFs of all plots shown in the <code class="language-plaintext highlighter-rouge">Report</code> and also to the rest of the additional plots selected to be output.</p>
 
-<figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/report_plots.png" alt="Report Outputs. " width="352" height="492" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/report_plots.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Report outputs</figcaption></figure>
+<figure id="figure-12" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/report_plots.png" alt="Report Outputs. " width="352" height="492" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/report_plots.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Report outputs</figcaption></figure>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-cpm-plots"><button class="gtn-boxify-button details" type="button" aria-controls="details-cpm-plots" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Cpm plots</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1447,7 +1447,7 @@ What is the second greatest source of variation in the data?</p>
 
   <p>Click on the <code class="language-plaintext highlighter-rouge">CpmPlots.pdf</code> link in the <code class="language-plaintext highlighter-rouge">Report</code>. You should see 12 plots, one for each sample. Two of the plots are shown below. From these plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset (these samples all have sequencing depth of 20-30 million, see the <code class="language-plaintext highlighter-rouge">Library information</code> file below, so a CPM value of 0.5 would be ~10 counts).</p>
 
-  <figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/cpmsvscounts.png" alt="CPM threshold Plots. " width="1232" height="660" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/cpmsvscounts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> CPM vs Raw Counts Plots</figcaption></figure>
+  <figure id="figure-13" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/cpmsvscounts.png" alt="CPM threshold Plots. " width="1232" height="660" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/cpmsvscounts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> CPM vs Raw Counts Plots</figcaption></figure>
 
   <blockquote class="comment">
     <div class="box-title comment-title" id="comment-thresholds"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Thresholds</div>
@@ -1463,7 +1463,7 @@ What is the second greatest source of variation in the data?</p>
 
 <p>We can also use box plots to check the distributions of counts in the samples. Box plots can be selected to be output by the Galaxy limma-voom tool if normalization is applied (TMM is applied by default). The plots are output in the <code class="language-plaintext highlighter-rouge">Report</code> and a link is also provided to a PDF version (<code class="language-plaintext highlighter-rouge">BoxPlots.pdf</code>). The samples are coloured by the groups. With the box plots for these samples we can see that overall the distributions are not identical but still not very different. If a sample is really far above or below the blue horizontal line we may need to investigate that sample further.</p>
 
-<figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/boxplots.png" alt="Box Plots. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/boxplots.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Box Plots</figcaption></figure>
+<figure id="figure-14" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/boxplots.png" alt="Box Plots. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/boxplots.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Box Plots</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1483,7 +1483,7 @@ What is the second greatest source of variation in the data?</p>
 
   <p>The TMM normalization generates normalization factors, where the product of these factors and the library sizes defines the effective library size. TMM normalization (and most scaling normalization methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalization factors for these samples in the <code class="language-plaintext highlighter-rouge">Library information</code> file if we select to output it with <em>“Output Library information file?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>. Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon to view.</p>
 
-  <figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/libinfo.png" alt="Library Info file. " width="567" height="300" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/libinfo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Library information file</figcaption></figure>
+  <figure id="figure-15" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/libinfo.png" alt="Library Info file. " width="567" height="300" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/libinfo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Library information file</figcaption></figure>
 
   <blockquote class="question">
     <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1505,34 +1505,34 @@ What is the second greatest source of variation in the data?</p>
   <p>It is considered good practice to make mean-difference (MD) plots for all the samples as a quality check, as described in this <a href="https://f1000research.com/articles/5-1438/v2">edgeR workflow article</a>. These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample. If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis).</p>
 
   <p>Click on the <code class="language-plaintext highlighter-rouge">MDPlots_Samples.pdf</code> link in the <code class="language-plaintext highlighter-rouge">Report</code>. You should see 12 MD plots, one for each sample. Let’s take a look at the plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalization factors. The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.</p>
-  <figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/mdsampleLA.png" alt="MD Plot LA. " width="1208" height="618" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/mdsampleLA.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> MD Plots for MCL1.LA before and after TMM normalization</figcaption></figure>
-  <figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/mdsampleLE.png" alt="MD Plot LE. " width="1210" height="606" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/mdsampleLE.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> MD Plots for MCL1.LE before and after TMM normalization</figcaption></figure>
+  <figure id="figure-16" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/mdsampleLA.png" alt="MD Plot LA. " width="1208" height="618" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/mdsampleLA.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> MD Plots for MCL1.LA before and after TMM normalization</figcaption></figure>
+  <figure id="figure-17" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/mdsampleLE.png" alt="MD Plot LE. " width="1210" height="606" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/mdsampleLE.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> MD Plots for MCL1.LE before and after TMM normalization</figcaption></figure>
 </blockquote>
 
 <h2 id="voom-variance-plot">Voom variance plot</h2>
 
 <p>This plot is generated by the voom method and displayed in the <code class="language-plaintext highlighter-rouge">Report</code> along with a link to a PDF version (<code class="language-plaintext highlighter-rouge">VoomPlot.pdf</code>). Each dot represents a gene and it shows the mean-variance relationship of the genes in the dataset. This plot can help show if low counts have been filtered adequately and if there is a lot of variation in the data, as shown in the <strong>More details on Voom variance plots</strong> box below.</p>
 
-<figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/voomplot.png" alt="Voom Plot. " width="500" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/voomplot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Voom Plot</figcaption></figure>
+<figure id="figure-18" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/voomplot.png" alt="Voom Plot. " width="500" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/voomplot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Voom Plot</figcaption></figure>
 
 <p>The SA plot below plots log2 residual standard deviations against mean log-CPM values. The average log2 residual standard deviation is marked by a horizontal blue line. This plot shows how the dependence between the means and variances has been removed after the voom weights are applied to the data.</p>
 
-<figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/saplot.png" alt="SA Plot. " width="500" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/saplot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> SA Plot</figcaption></figure>
+<figure id="figure-19" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/saplot.png" alt="SA Plot. " width="500" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/saplot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> SA Plot</figcaption></figure>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-more-details-on-voom-variance-plots"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-voom-variance-plots" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details on Voom variance plots</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If we didn’t filter this dataset for the lowly expressed genes the variance plot would look like below.</p>
 
-  <figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/voomplot_nofilt.png" alt="Voom Nofilter Plot. " width="500" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/voomplot_nofilt.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Voom Plot unfiltered counts</figcaption></figure>
+  <figure id="figure-20" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/voomplot_nofilt.png" alt="Voom Nofilter Plot. " width="500" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/voomplot_nofilt.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Voom Plot unfiltered counts</figcaption></figure>
 
   <p>If we look at the plot generated with the two samples mixed up we can see there’s more variation.</p>
 
-  <figure id="figure-21" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/voomplot_mixed.png" alt="Voom Mixedup Plot. " width="500" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/voomplot_mixed.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> Voom Plot mixed-up samples</figcaption></figure>
+  <figure id="figure-21" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/voomplot_mixed.png" alt="Voom Mixedup Plot. " width="500" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/voomplot_mixed.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> Voom Plot mixed-up samples</figcaption></figure>
 
   <p>More examples of the variation this plot can show can be seen in Figure 1 from the limma-voom paper (<span class="citation"><a href="#Law2014">Law <i>et al.</i> 2014</a></span>), shown below.</p>
 
-  <figure id="figure-22" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/voom_variance_examples.jpg" alt="Voom Plot Examples. " width="785" height="532" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/voom_variance_examples.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 22</strong>:</span> Voom Plot more examples</figcaption></figure>
+  <figure id="figure-22" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/voom_variance_examples.jpg" alt="Voom Plot Examples. " width="785" height="532" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/voom_variance_examples.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 22</strong>:</span> Voom Plot more examples</figcaption></figure>
 
   <p><em>Figure 1: Mean-variance relationships. Gene-wise means and variances of RNA-seq data are represented by black points with a LOWESS trend. Plots are ordered by increasing levels of biological variation in datasets. (a) voom trend for HBRR and UHRR genes for Samples A, B, C and D of the SEQC project; technical variation only. (b) C57BL/6J and DBA mouse experiment; low-level biological variation. (c) Simulation study in the presence of 100 upregulating genes and 100 downregulating genes; moderate-level biological variation. (d) Nigerian lymphoblastoid cell lines; high-level biological variation. (e) Drosophila melanogaster embryonic developmental stages; very high biological variation due to systematic differences between samples. (f) LOWESS voom trends for datasets (a)–(e). HBRR, Ambion’s Human Brain Reference RNA; LOWESS, locally weighted regression; UHRR, Stratagene’s Universal Human Reference RNA</em>.</p>
 </blockquote>
@@ -1541,7 +1541,7 @@ What is the second greatest source of variation in the data?</p>
 
 <p>Genome-wide plots that are useful for checking differentially expressed (DE) results are MD plots (or MA plots) and Volcano plots. There are functions in limma for generating these plots and they are used by this tool. These plots are output by default and shown in the <code class="language-plaintext highlighter-rouge">Report</code> along with a link to PDF versions (<code class="language-plaintext highlighter-rouge">MDPlot_basalpregnant-basallactate.pdf</code> and <code class="language-plaintext highlighter-rouge">VolcanoPlot_basalpregnant-basallactate.pdf</code>). In the volcano plot the top genes (by adjusted p-value) are highlighted. The number of top genes is 10 by default and the user can specify the number of top genes to view (up to 100) under <strong>Advanced Options</strong>. For further information on volcano plots see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">Volcano Plot tutorial</a></p>
 
-<figure id="figure-23" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/mdvolplot_basalpregnant-basallactate.png" alt="MDVol Plot. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/mdvolplot_basalpregnant-basallactate.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 23</strong>:</span> MD Plot and Volcano Plot</figcaption></figure>
+<figure id="figure-23" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/mdvolplot_basalpregnant-basallactate.png" alt="MDVol Plot. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/mdvolplot_basalpregnant-basallactate.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 23</strong>:</span> MD Plot and Volcano Plot</figcaption></figure>
 
 <p>The MD Plot highlighted genes are significant at an adjusted p-value (adj.P) threshold of 0.05 and exhibit log2-fold-change (lfc) of at least 0. These thresholds can be changed under <strong>Advanced Options</strong>.</p>
 
@@ -1596,9 +1596,9 @@ What is the second greatest source of variation in the data?</p>
 
 <p>We can see that much fewer genes are now highlighted in the MD plot and identified as differentially expressed.</p>
 
-<figure id="figure-24" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/TREAT_mdvolplot_basalpregnant-basallactate.png" alt="TREAT MDVol Plot. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/TREAT_mdvolplot_basalpregnant-basallactate.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 24</strong>:</span> TREAT MD and Volcano plots</figcaption></figure>
+<figure id="figure-24" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/TREAT_mdvolplot_basalpregnant-basallactate.png" alt="TREAT MDVol Plot. " width="1000" height="500" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/TREAT_mdvolplot_basalpregnant-basallactate.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 24</strong>:</span> TREAT MD and Volcano plots</figcaption></figure>
 
-<figure id="figure-25" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/TREATdecounts.png" alt="TREAT DE counts. " width="397" height="143" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/TREATdecounts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 25</strong>:</span> TREAT differentially expressed genes</figcaption></figure>
+<figure id="figure-25" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/TREATdecounts.png" alt="TREAT DE counts. " width="397" height="143" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/TREATdecounts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 25</strong>:</span> TREAT differentially expressed genes</figcaption></figure>
 
 <h1 id="visualising-results">Visualising results</h1>
 
@@ -1608,13 +1608,13 @@ What is the second greatest source of variation in the data?</p>
 
 <p>Click on the <code class="language-plaintext highlighter-rouge">Heatmap_basalpregnant-basallactate.pdf</code> link in the <code class="language-plaintext highlighter-rouge">Report</code>. You should see a plot like below.</p>
 
-<figure id="figure-26" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/heatmap.png" alt="Heatmap. " width="495" height="511" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/heatmap.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 26</strong>:</span> Heatmap of top genes</figcaption></figure>
+<figure id="figure-26" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/heatmap.png" alt="Heatmap. " width="495" height="511" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/heatmap.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 26</strong>:</span> Heatmap of top genes</figcaption></figure>
 
 <h2 id="stripcharts-of-top-genes">Stripcharts of top genes</h2>
 
 <p>The limma-voom tool can also auto-generate stripcharts to view the expression of the top genes across the groups. Click on the <code class="language-plaintext highlighter-rouge">Stripcharts_basalpregnant-basallactate.pdf</code> link in the <code class="language-plaintext highlighter-rouge">Report</code>. You should see 10 plots, one for each top gene. Four are shown below. Note that here you can see if replicates tend to group together and how the expression compares to the other groups.</p>
 
-<figure id="figure-27" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/stripcharts.png" alt="Stripchart Plot. " width="1312" height="918" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/stripcharts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 27</strong>:</span> Stripcharts of top genes</figcaption></figure>
+<figure id="figure-27" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/stripcharts.png" alt="Stripchart Plot. " width="1312" height="918" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/stripcharts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 27</strong>:</span> Stripcharts of top genes</figcaption></figure>
 
 <h2 id="interactive-de-plots-glimma">Interactive DE plots (Glimma)</h2>
 
@@ -1628,11 +1628,11 @@ What is the second greatest source of variation in the data?</p>
   <div class="box-title hands-on-title" id="hands-on-search-for-a-gene-of-interest"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Search for a gene of interest</div>
 
   <p><code class="language-plaintext highlighter-rouge">Egf</code> was a gene identifed as very highly expressed in the Fu paper and confirmed with qRT-PCR, see Fig. 6c from the paper below.</p>
-  <figure id="figure-28" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/fu_egf.png" alt="Fu EGF gene. " width="276" height="324" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/fu_egf.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 28</strong>:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
+  <figure id="figure-28" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/fu_egf.png" alt="Fu EGF gene. " width="276" height="324" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/fu_egf.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 28</strong>:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
 
   <p>Search for <code class="language-plaintext highlighter-rouge">Egf</code> in the Glimma interactive table. You should see something similar to below.</p>
 
-  <figure id="figure-29" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/glimma_egf.png" alt="Glimma EGF gene. " width="1578" height="870" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/glimma_egf.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 29</strong>:</span> Glimma EGF gene</figcaption></figure>
+  <figure id="figure-29" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/glimma_egf.png" alt="Glimma EGF gene. " width="1578" height="870" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/glimma_egf.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 29</strong>:</span> Glimma EGF gene</figcaption></figure>
 
   <p>Notice that in the plot on the right above, showing <code class="language-plaintext highlighter-rouge">Egf</code> expression for all samples, we can see it is highly expressed in the luminal lactate group but not the other samples.</p>
 </blockquote>
@@ -1653,15 +1653,15 @@ What is the second greatest source of variation in the data?</p>
   </ol>
 
   <p>You should find that there are more genes differentially expressed for the luminal cells than the basal. There are ~274 genes DE in basal cells versus ~ 1610 in the luminal cells.</p>
-  <figure id="figure-30" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png" alt="Basal Luminal DE counts. " width="425" height="171" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 30</strong>:</span> Basal vs Luminal DE counts</figcaption></figure>
+  <figure id="figure-30" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png" alt="Basal Luminal DE counts. " width="425" height="171" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 30</strong>:</span> Basal vs Luminal DE counts</figcaption></figure>
 
   <p>This is similar to what Fu et al found, many more genes differentially expressed in the luminal cells on lactation, compared to the basal cells.</p>
-  <figure id="figure-31" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/fu_degenes.png" alt="Fu DE genes. " width="1666" height="226" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/fu_degenes.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 31</strong>:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
+  <figure id="figure-31" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/fu_degenes.png" alt="Fu DE genes. " width="1666" height="226" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/fu_degenes.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 31</strong>:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
 </blockquote>
 
 <p>The tables of differentially expressed genes are output as links in the <code class="language-plaintext highlighter-rouge">Report</code> (<code class="language-plaintext highlighter-rouge">limma-voom_basalpregnant-basallactate.tsv</code> and <code class="language-plaintext highlighter-rouge">limma-voom_luminalpregnant-luminallactate.tsv</code>), see below, and also as datasets in the history (<code class="language-plaintext highlighter-rouge">DE tables</code>). With multiple contrasts, a plot for each contrast is generated for relevant plots, as shown below. This enables a quick and easy visual comparison of the contrasts.</p>
 
-<figure id="figure-32" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-counts-to-genes/multiple_contrasts.png" alt="Multiple contrasts. " width="491" height="887" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/multiple_contrasts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 32</strong>:</span> Multiple contrasts output</figcaption></figure>
+<figure id="figure-32" style="max-width: 90%;"><img src="../../images/rna-seq-counts-to-genes/multiple_contrasts.png" alt="Multiple contrasts. " width="491" height="887" loading="lazy" /><a target="_blank" href="../../images/rna-seq-counts-to-genes/multiple_contrasts.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 32</strong>:</span> Multiple contrasts output</figcaption></figure>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-r-code-in-detail"><button class="gtn-boxify-button details" type="button" aria-controls="details-r-code-in-detail" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: R code in detail</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2134,7 +2134,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2162,7 +2162,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

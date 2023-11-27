@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -361,7 +361,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -865,7 +865,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <p>In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (chromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with ~147bp of DNA. When the DNA is being actively transcribed into RNA, the DNA will be opened and loosened from the nucleosome complex. Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the DNA. Consequently, these factors are also important for the activation and inactivation of genes. <strong>A</strong>ssay for <strong>T</strong>ransposase-<strong>A</strong>ccessible <strong>C</strong>hromatin using <strong>seq</strong>uencing (<a href="https://en.wikipedia.org/wiki/ATAC-seq">ATAC-Seq</a>) is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene expression. The method can help identify promoter regions and potential enhancers and silencers. A promoter is the DNA region close to the transcription start site (TSS). It contains binding sites for transcription factors that will recruit the RNA polymerase. An enhancer is a DNA region that can be located up to 1 Mb downstream or upstream of the promoter. When transcription factors bind an enhancer and contact a promoter region, the transcription of the gene is increased. In contrast, a silencer decreases or inhibits the gene’s expression. ATAC-Seq has become popular for identifying accessible regions of the genome as it’s easier, faster and requires less cells than alternative techniques, such as FAIRE-Seq and DNase-Seq.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/atac-seq.jpeg" alt="ATAC-Seq. " width="617" height="616" loading="lazy" /><a target="_blank" href="../../images/atac-seq/atac-seq.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Buenrostro et al. 2013 Nat Methods</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/atac-seq/atac-seq.jpeg" alt="ATAC-Seq. " width="617" height="616" loading="lazy" /><a target="_blank" href="../../images/atac-seq/atac-seq.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Buenrostro et al. 2013 Nat Methods</figcaption></figure>
 
 <p>With ATAC-Seq, to find accessible (open) chromatin regions, the genome is treated with a hyperactive derivative of the Tn5 transposase. A <a href="https://en.wikipedia.org/wiki/Transposase">transposase</a> can bind to a <a href="https://en.wikipedia.org/wiki/Transposable_element">transposable element</a>, which is a DNA sequence that can change its position (jump) within a genome (read the two links to get a deeper insight). During ATAC-Seq, the modified Tn5 inserts DNA sequences corresponding to truncated Nextera adapters into open regions of the genome and concurrently, the DNA is sheared by the transposase activity. The read library is then prepared for sequencing, including PCR amplification with full Nextera adapters and purification steps. Paired-end reads are recommended for ATAC-Seq for the reasons described <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">in their guidelines</a>.</p>
 
@@ -1144,7 +1144,7 @@ They correspond to adapters amplified head-to-head.
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-fastqc-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: FastQC Results</div>
   <p>This is what you should expect from the <strong>Adapter Content</strong> section:</p>
-  <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png" alt="FastQC screenshot of the Adapter Content section. " width="1341" height="825" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> FastQC screenshot on the Adapter Content section</figcaption></figure>
+  <figure id="figure-2" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png" alt="FastQC screenshot of the Adapter Content section. " width="1341" height="825" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> FastQC screenshot on the Adapter Content section</figcaption></figure>
 </blockquote>
 
 <p>The FastQC web page <strong>Adapter Content</strong> section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.</p>
@@ -1153,7 +1153,7 @@ They correspond to adapters amplified head-to-head.
 
 <p>To trim the adapters we provide the Nextera adapter sequences to <strong>Cutadapt</strong>. These adapters are shown in the image below.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/nexteraLibraryPicture.svg.png" alt="Nextera library with the sequence of adapters. " width="1109" height="43" loading="lazy" /><a target="_blank" href="../../images/atac-seq/nexteraLibraryPicture.svg.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Nextera library with the sequence of adapters</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/atac-seq/nexteraLibraryPicture.svg.png" alt="Nextera library with the sequence of adapters. " width="1109" height="43" loading="lazy" /><a target="_blank" href="../../images/atac-seq/nexteraLibraryPicture.svg.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Nextera library with the sequence of adapters</figcaption></figure>
 
 <p>The forward and reverse adapters are slightly different. We will also trim low quality bases at the ends of the reads (quality less than 20). We will only keep reads that are at least 20 bases long. We remove short reads (&lt; 20bp) as they are not useful, they will either be thrown out by the mapping or may interfere with our results at the end.</p>
 
@@ -1229,7 +1229,7 @@ They correspond to adapters amplified head-to-head.
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-cutadapt-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Cutadapt Results</div>
   <p>You should get similar output to this from Cutadapt:</p>
-  <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_cutadaptSummary.png" alt="Summary of cutadapt. " width="384" height="106" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_cutadaptSummary.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Summary of cutadapt</figcaption></figure>
+  <figure id="figure-4" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_cutadaptSummary.png" alt="Summary of cutadapt. " width="384" height="106" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_cutadaptSummary.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Summary of cutadapt</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -1268,7 +1268,7 @@ They correspond to adapters amplified head-to-head.
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-fastqc-results-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: FastQC Results</div>
   <p>Now, you should see under <strong>Overrepresented sequences</strong> that there is no more overrepresented sequences and under <strong>Adapter Content</strong> that the Nextera adapters are no longer present.</p>
-  <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_fastqcAftercutadapt.png" alt="FastQC screenshot on the adapter content section after cutadapt. " width="1328" height="813" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_fastqcAftercutadapt.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> FastQC screenshot on the adapter content section after cutadapt</figcaption></figure>
+  <figure id="figure-5" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_fastqcAftercutadapt.png" alt="FastQC screenshot on the adapter content section after cutadapt. " width="1328" height="813" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_fastqcAftercutadapt.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> FastQC screenshot on the adapter content section after cutadapt</figcaption></figure>
   <p>However, you may have noticed that you have a new section with warning: <strong>Sequence Length Distribution</strong>. This is expected as you trimmed part of the reads.</p>
 </blockquote>
 
@@ -1329,7 +1329,7 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-bowtie2-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Bowtie2 Results</div>
   <p>You should get similar results to this from Bowtie2:</p>
-  <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_bowtie2MappingStats.png" alt="Mapping statistics of bowtie2. " width="508" height="225" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_bowtie2MappingStats.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Mapping statistics of bowtie2</figcaption></figure>
+  <figure id="figure-6" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_bowtie2MappingStats.png" alt="Mapping statistics of bowtie2. " width="508" height="225" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_bowtie2MappingStats.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Mapping statistics of bowtie2</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -1449,7 +1449,7 @@ However, it does not predict the quality of the rest of the data. It is just tha
 The columns of the output are: chromosome name, chromosome length, number of reads mapping to the chromosome, number of unaligned mate whose mate is mapping to the chromosome.
 The first 2 lines of the result would be (after using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span>):</p>
 
-  <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" alt="Samtools idxstats result. " width="262" height="58" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Samtools idxstats result</figcaption></figure>
+  <figure id="figure-7" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" alt="Samtools idxstats result. " width="262" height="58" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Samtools idxstats result</figcaption></figure>
 
   <p>There are 220 000 reads which map to chrM and 165 000 which map to chr22.</p>
 </blockquote>
@@ -1481,7 +1481,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-markduplicates-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: MarkDuplicates Results</div>
   <p>You should get similar output to this from MarkDuplicates:</p>
-  <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_picardRemoveDup.png" alt="Metrics of MarkDuplicates. " width="1139" height="65" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_picardRemoveDup.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Metrics of MarkDuplicates</figcaption></figure>
+  <figure id="figure-8" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_picardRemoveDup.png" alt="Metrics of MarkDuplicates. " width="1139" height="65" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_picardRemoveDup.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Metrics of MarkDuplicates</figcaption></figure>
 </blockquote>
 
 <blockquote class="tip">
@@ -1509,7 +1509,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
     </li>
   </ol>
 
-  <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png" alt="Metrics of MarkDuplicates. " width="421" height="253" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Metrics of MarkDuplicates</figcaption></figure>
+  <figure id="figure-9" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png" alt="Metrics of MarkDuplicates. " width="421" height="253" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Metrics of MarkDuplicates</figcaption></figure>
 
 </blockquote>
 
@@ -1557,7 +1557,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-collectinsertsizemetrics-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: CollectInsertSizeMetrics Results</div>
   <p>This is what you get from CollectInsertSizeMetrics:</p>
-  <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_sizeDistribution.png" alt="Fragment size distribution. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_sizeDistribution.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Fragment size distribution</figcaption></figure>
+  <figure id="figure-10" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_sizeDistribution.png" alt="Fragment size distribution. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_sizeDistribution.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Fragment size distribution</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -1577,16 +1577,16 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
 <p>This fragment size distribution is a good indication if your experiment worked or not.
 In absence of chromatin (without nucleosome), this is the profile you would get:</p>
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Naked.png" alt="Fragment size distribution of a purified DNA. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_sizeDistribution_Naked.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Fragment size distribution of a purified DNA</figcaption></figure>
+<figure id="figure-11" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Naked.png" alt="Fragment size distribution of a purified DNA. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_sizeDistribution_Naked.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Fragment size distribution of a purified DNA</figcaption></figure>
 
 <p>Here are examples of Fragment size distributions of ATAC-Seq which were very noisy:</p>
 
-<figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Failed.png" alt="Fragment size distribution of a failed ATAC-Seq. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_sizeDistribution_Failed.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Fragment size distribution of a failed ATAC-Seq</figcaption></figure>
+<figure id="figure-12" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Failed.png" alt="Fragment size distribution of a failed ATAC-Seq. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_sizeDistribution_Failed.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Fragment size distribution of a failed ATAC-Seq</figcaption></figure>
 
-<figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png" alt="Fragment size distribution of another failed ATAC-Seq. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Fragment size distribution of another very noisy ATAC-Seq</figcaption></figure>
+<figure id="figure-13" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png" alt="Fragment size distribution of another failed ATAC-Seq. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Fragment size distribution of another very noisy ATAC-Seq</figcaption></figure>
 
 <p>A final example of a Fragment size distribution of a very good ATAC-Seq, even if we cannot see the third nucleosome “peak”.</p>
-<figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Good.png" alt="Fragment size distribution of a good ATAC-Seq. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_sizeDistribution_Good.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Fragment size distribution of a good ATAC-Seq</figcaption></figure>
+<figure id="figure-14" style="max-width: 90%;"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Good.png" alt="Fragment size distribution of a good ATAC-Seq. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_sizeDistribution_Good.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Fragment size distribution of a good ATAC-Seq</figcaption></figure>
 
 <h1 id="peak-calling">Peak calling</h1>
 
@@ -1600,13 +1600,13 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <li>The first one is to select only paired whose fragment length is below 100bp corresponding to nucleosome-free regions and to use a peak calling like you would do for a ChIP-seq, joining signal between mates. The disadvantages of this approach is that you can only use it if you have paired-end data and you will miss small open regions where only one Tn5 bound.</li>
   <li>The second one chosen here is to use all reads to be more exhaustive. In this approach, it is very important to re-center the signal of each reads on the 5’ extremity (read start site) as this is where Tn5 cuts. Indeed, you want your peaks around the nucleosomes and not directly on the nucleosome:</li>
 </ul>
-<figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/schemeWithLegend.jpg" alt="Scheme of ATAC-Seq reads relative to nucleosomes. " width="680" height="378" loading="lazy" /><a target="_blank" href="../../images/atac-seq/schemeWithLegend.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Scheme of ATAC-Seq reads relative to nucleosomes</figcaption></figure>
+<figure id="figure-15" style="max-width: 90%;"><img src="../../images/atac-seq/schemeWithLegend.jpg" alt="Scheme of ATAC-Seq reads relative to nucleosomes. " width="680" height="378" loading="lazy" /><a target="_blank" href="../../images/atac-seq/schemeWithLegend.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Scheme of ATAC-Seq reads relative to nucleosomes</figcaption></figure>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-on-tn5-insertion"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: on Tn5 insertion</div>
 
   <p>When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp (<span class="citation"><a href="#Kia2017">Kia <i>et al.</i> 2017</a></span>):</p>
-  <figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/NexteraLibraryConstruction.jpg" alt="Nextera Library Construction. " width="378" height="189" loading="lazy" /><a target="_blank" href="../../images/atac-seq/NexteraLibraryConstruction.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Nextera Library Construction</figcaption></figure>
+  <figure id="figure-16" style="max-width: 90%;"><img src="../../images/atac-seq/NexteraLibraryConstruction.jpg" alt="Nextera Library Construction. " width="378" height="189" loading="lazy" /><a target="_blank" href="../../images/atac-seq/NexteraLibraryConstruction.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Nextera Library Construction</figcaption></figure>
 
   <p>This means in order to have the read start site reflecting the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825">Buenrostro et al. 2013</a>. <strong>Genrich</strong> can apply these shifts when ATAC-seq mode is selected. In most cases, we do not have 9bp resolution so we don’t take it into account but if you are interested in the footprint, this is important.</p>
 </blockquote>
@@ -1631,7 +1631,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
 </blockquote>
 
 <p>We call peaks with MACS2. In order to get the coverage centered on the 5’ extended 100bp each side we will use <code class="language-plaintext highlighter-rouge">--shift -100</code> and <code class="language-plaintext highlighter-rouge">--extend 200</code>:</p>
-<figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/macs2Options.jpg" alt="MACS2 options to get 100bp each side. " width="643" height="113" loading="lazy" /><a target="_blank" href="../../images/atac-seq/macs2Options.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> MACS2 options to get 100bp each side</figcaption></figure>
+<figure id="figure-17" style="max-width: 90%;"><img src="../../images/atac-seq/macs2Options.jpg" alt="MACS2 options to get 100bp each side. " width="643" height="113" loading="lazy" /><a target="_blank" href="../../images/atac-seq/macs2Options.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> MACS2 options to get 100bp each side</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-call-peaks-with-macs2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Call peaks with MACS2</div>
@@ -1812,7 +1812,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-plotheatmap-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: plotHeatmap Results</div>
   <p>This is what you get from plotHeatmap:</p>
-  <figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/plotHeatmapOutput.png" alt="plotHeatmap output. " width="484" height="2294" loading="lazy" /><a target="_blank" href="../../images/atac-seq/plotHeatmapOutput.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> plotHeatmap output</figcaption></figure>
+  <figure id="figure-18" style="max-width: 90%;"><img src="../../images/atac-seq/plotHeatmapOutput.png" alt="plotHeatmap output. " width="484" height="2294" loading="lazy" /><a target="_blank" href="../../images/atac-seq/plotHeatmapOutput.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> plotHeatmap output</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -1902,7 +1902,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-plotheatmap-results-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: plotHeatmap Results</div>
   <p>This is what you get from plotHeatmap, this is much more symetric:</p>
-  <figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/plotHeatmapOutput_CTCF.png" alt="plotHeatmap output on CTCF. " width="778" height="2328" loading="lazy" /><a target="_blank" href="../../images/atac-seq/plotHeatmapOutput_CTCF.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> plotHeatmap output on CTCF</figcaption></figure>
+  <figure id="figure-19" style="max-width: 90%;"><img src="../../images/atac-seq/plotHeatmapOutput_CTCF.png" alt="plotHeatmap output on CTCF. " width="778" height="2328" loading="lazy" /><a target="_blank" href="../../images/atac-seq/plotHeatmapOutput_CTCF.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> plotHeatmap output on CTCF</figcaption></figure>
 </blockquote>
 
 <h2 id="visualise-regions-with-pygenometracks">Visualise Regions with pyGenomeTracks</h2>
@@ -1993,7 +1993,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-pygenometracks-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: pyGenomeTracks Results</div>
   <p>You should get similar to results to this from pyGenomeTracks:</p>
-  <figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/pyGenomeTracksOutput.png" alt="pyGenomeTracks output. " width="1133" height="448" loading="lazy" /><a target="_blank" href="../../images/atac-seq/pyGenomeTracksOutput.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> pyGenomeTracks output</figcaption></figure>
+  <figure id="figure-20" style="max-width: 90%;"><img src="../../images/atac-seq/pyGenomeTracksOutput.png" alt="pyGenomeTracks output. " width="1133" height="448" loading="lazy" /><a target="_blank" href="../../images/atac-seq/pyGenomeTracksOutput.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> pyGenomeTracks output</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -2036,7 +2036,7 @@ inserting adapters for sequencing. The training material gave you an insight int
 with <strong>Bowtie2</strong>, filtered our reads for properly paired, good quality and reads that do not
 map to the mitochondrial genome. We found open chromatin regions with <strong>MACS2</strong>, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of <strong>computeMatrix</strong> and <strong>plotHeatmap</strong>. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of <strong>pyGenomeTracks</strong>. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.</p>
 
-<figure id="figure-21" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/atac-seq/ATACWF.svg" type="image/svg+xml" alt="ATAC workflow. ">ATAC workflow.</object></div><a target="_blank" href="../../images/atac-seq/ATACWF.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> ATAC workflow</figcaption></figure>
+<figure id="figure-21" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/atac-seq/ATACWF.svg" type="image/svg+xml" alt="ATAC workflow. ">ATAC workflow.</object></div><a target="_blank" href="../../images/atac-seq/ATACWF.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> ATAC workflow</figcaption></figure>
 
                 </section>
 
@@ -2274,7 +2274,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2302,7 +2302,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

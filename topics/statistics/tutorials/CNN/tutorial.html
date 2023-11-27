@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -59,8 +59,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -327,7 +327,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -941,7 +941,7 @@ is 3. Such an image can be represented by 64 X 64 X 3 = 12,288 values (rows X co
 the first hidden layer with 500 nodes is now 12,288 X 500 = 6,144,000. It is clear that a FNN cannot scale to handle larger images
 (<span class="citation"><a href="#OSheaEtAl">O’Shea and Nash 2015</a></span>) and that we need a more scalable architecture.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network. " width="361" height="461" loading="lazy" /><a target="_blank" href="../../images/FFNN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network. " width="361" height="461" loading="lazy" /><a target="_blank" href="../../images/FFNN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
 
 <p>Another problem with using FNN for image processing is that a 2 dimensional image is represented as a 1 dimensional vector in the input layer,
 hence, any spatial relationship in the data is ignored. CNN, on the other hand, maintains the spatial structure of the data, and is better suited
@@ -992,7 +992,7 @@ corner of the image, multiplying filter values by the pixel values and adding th
 a time and repeating this process. When we get to the top right corner of the image, we simply move the filter down one pixel and
 restart from the left. This process ends when we get to the bottom right corner of the image.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/Conv_no_padding_no_strides.gif" alt="A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image. " width="244" height="259" loading="lazy" /><a target="_blank" href="../../images/Conv_no_padding_no_strides.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/Conv_no_padding_no_strides.gif" alt="A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image. " width="244" height="259" loading="lazy" /><a target="_blank" href="../../images/Conv_no_padding_no_strides.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
 
 <p>Covolution operator has the following parameters:</p>
 
@@ -1012,46 +1012,46 @@ sized filters are preferred to even sized filters, due to the nice geometric pro
 down. If we want to keep the resultant image size the same, we can use <em>padding</em>. We pad the input in every direction with 0’s before applying the
 filter. If the padding is 1 by 1, then we add 1 zero in evey direction. If its 2 by 2, then we add 2 zeros in every direction, and so on.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/Conv_same_padding_no_strides.gif" alt="A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image. " width="395" height="449" loading="lazy" /><a target="_blank" href="../../images/Conv_same_padding_no_strides.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/Conv_same_padding_no_strides.gif" alt="A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image. " width="395" height="449" loading="lazy" /><a target="_blank" href="../../images/Conv_same_padding_no_strides.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
 
 <p>As mentioned before, we start the convolution by placing the filter on the top left corner of the image, and after multiplying filter and image
 values (and adding them), we move the filter to the right and repeat the process. How many pixels we move to the right (or down) is the <em>stride</em>.
 In figure 2 and 3, the stride of the filter is 1. We move the filter one pixel to the right (or down). But we could use a different stride. Figure 4
 shows an example of using stride of 2.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/Conv_no_padding_strides.gif" alt="A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image. " width="294" height="288" loading="lazy" /><a target="_blank" href="../../images/Conv_no_padding_strides.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/Conv_no_padding_strides.gif" alt="A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image. " width="294" height="288" loading="lazy" /><a target="_blank" href="../../images/Conv_no_padding_strides.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
 
 <p>When we apply a, say 3 by 3, filter to an image, our filter’s output is affected by pixels in a 3 by 3 subset of the image. If we like to have a
 larger <em>receptive field</em> (portion of the image that affect our filter’s output), we could use <em>dilation</em>. If we set the dilation to 2 (Figure 5),
 instead of a contiguous 3 by 3 subset of the image, every other pixel of a 5 by 5 subset of the image affects the filter’s output.</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/Conv_dilation.gif" alt="A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image. " width="395" height="381" loading="lazy" /><a target="_blank" href="../../images/Conv_dilation.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/Conv_dilation.gif" alt="A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image. " width="395" height="381" loading="lazy" /><a target="_blank" href="../../images/Conv_dilation.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image (<span class="citation"><a href="#DumoulinVisin">Dumoulin and Visin 2016</a></span>)</figcaption></figure>
 
 <p>After the filter scans the whole image, we apply an activation function to filter output to introduce non-linearlity. The preferred activation function
 used in CNN is ReLU or one its variants like Leaky ReLU (<span class="citation"><a href="#NwankpaEtAl">Nwankpa <i>et al.</i> 2018</a></span>). ReLU leaves pixels with positive values in filter output as is, and
 replacing negative values with 0 (or a small number in case of Leaky ReLU). Figure 6 shows the results of applying ReLU activation function to a filter
 output.</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/Conv_ReLU.png" alt="Two matrices representing filter output before and after ReLU activation function is applied. " width="406" height="159" loading="lazy" /><a target="_blank" href="../../images/Conv_ReLU.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Applying ReLU activation function to filter output</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/Conv_ReLU.png" alt="Two matrices representing filter output before and after ReLU activation function is applied. " width="406" height="159" loading="lazy" /><a target="_blank" href="../../images/Conv_ReLU.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Applying ReLU activation function to filter output</figcaption></figure>
 
 <p>Given the input size, filter size, padding, stride and dilation you can calculate the output size of the convolution operation as below.</p>
 
 \[\frac{(\text{input size} - \text{(filter size + (filter size -1)*(dilation - 1)})) + (2*padding)}{stride} + 1\]
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/Conv_single_input_channel.png" alt="One matrix representing an input vector and another matrix representing a filter, along with calculation for single input channel two dimensional convolution operation. " width="564" height="254" loading="lazy" /><a target="_blank" href="../../images/Conv_single_input_channel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Illustration of single input channel two dimensional convolution</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/Conv_single_input_channel.png" alt="One matrix representing an input vector and another matrix representing a filter, along with calculation for single input channel two dimensional convolution operation. " width="564" height="254" loading="lazy" /><a target="_blank" href="../../images/Conv_single_input_channel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Illustration of single input channel two dimensional convolution</figcaption></figure>
 
 <p>Figure 7 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input vector (5 x 5 x 1). Figure 8
 illustrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimensions, we are displaying each channel in input
 vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions.</p>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/Conv_multiple_input_channel.png" alt="Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation . " width="643" height="600" loading="lazy" /><a target="_blank" href="../../images/Conv_multiple_input_channel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Illustration of multiple input channel two dimensional convolution</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/Conv_multiple_input_channel.png" alt="Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation . " width="643" height="600" loading="lazy" /><a target="_blank" href="../../images/Conv_multiple_input_channel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Illustration of multiple input channel two dimensional convolution</figcaption></figure>
 
 <p>As Figures 8 and 9 show the output of a multi-channel 2 dimensional filter is a single channel 2 dimensional image. Applying <em>multiple</em> filters to the
 input image results in a multi-channel 2 dimensional image for the output. For example, if the input image is 28 by 28 by 3 (rows x columns x channels),
 and we apply a 3 by 3 filter with 1 by 1 padding, we would get a 28 by 28 by 1 image. If we apply 15 filters to the input image, our output would be 28
 by 28 by 15. Hence, the number of filters in a convolution layer allows us to increase or decrease the channel size.</p>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/Conv_multiple_channel_3d.gif" alt="Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation. " width="948" height="548" loading="lazy" /><a target="_blank" href="../../images/Conv_multiple_channel_3d.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Three dimensional illustration of multiple input channel two dimensional convolution (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%;"><img src="../../images/Conv_multiple_channel_3d.gif" alt="Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation. " width="948" height="548" loading="lazy" /><a target="_blank" href="../../images/Conv_multiple_channel_3d.gif" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Three dimensional illustration of multiple input channel two dimensional convolution (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)</figcaption></figure>
 
 <h3 id="pooling-layer">Pooling layer</h3>
 
@@ -1064,7 +1064,7 @@ filter with a stride of 2 that returns the maximum value as it slides over the i
 <p>The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, which is responsible
 for classification of the image.</p>
 
-<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/Conv_CNN.png" alt="A convolutional neural network with 3 convolution layers followed by 3 pooling layers. " width="842" height="265" loading="lazy" /><a target="_blank" href="../../images/Conv_CNN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A convolutional neural network with 3 convolution layers followed by 3 pooling layers (<span class="citation"><a href="#OSheaEtAl">O’Shea and Nash 2015</a></span>)</figcaption></figure>
+<figure id="figure-10" style="max-width: 90%;"><img src="../../images/Conv_CNN.png" alt="A convolutional neural network with 3 convolution layers followed by 3 pooling layers. " width="842" height="265" loading="lazy" /><a target="_blank" href="../../images/Conv_CNN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A convolutional neural network with 3 convolution layers followed by 3 pooling layers (<span class="citation"><a href="#OSheaEtAl">O’Shea and Nash 2015</a></span>)</figcaption></figure>
 
 <p>As shown in Figure 10, a typical CNN usually has more than one convolution layer plus pooling layer. Each convolution plus pooling layer is responsible
 for feature extraction at a different level of abstraction. For example, the filters in the first layer could detect horizental, vertical, and diagonal
@@ -1390,7 +1390,7 @@ to use the <strong>F score</strong>, which is the harmonic mean of precision and
 
 \[F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}}\]
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/Conv_confusion_matrix.png" alt="Confusion matrix for MNIST image classification problem. " width="875" height="875" loading="lazy" /><a target="_blank" href="../../images/Conv_confusion_matrix.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Image classification confusion matrix</figcaption></figure>
+<figure id="figure-11" style="max-width: 90%;"><img src="../../images/Conv_confusion_matrix.png" alt="Confusion matrix for MNIST image classification problem. " width="875" height="875" loading="lazy" /><a target="_blank" href="../../images/Conv_confusion_matrix.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Image classification confusion matrix</figcaption></figure>
 
 <p>Figure 11 is the resultant confusion matrix for our image problem. The first row in the table represents the <em>true</em> digit 0 class labels (we have
 967 + 2 + 1 + 8 + 2 = 980 digit 0 images). The second row represents the <em>true</em> digit 1 class labels (Again, we have 1,132 + 1 + 2 = 1,135 digit 1
@@ -1606,7 +1606,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1634,7 +1634,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

@@ -62,14 +62,25 @@
       "id": "abueg",
       "url": "https://training.galaxyproject.org/training-material/api/contributors/abueg.json",
       "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abueg/"
+    },
+    {
+      "name": "Anton Nekrutenko",
+      "email": "anton@nekrut.org",
+      "joined": "2017-09",
+      "id": "nekrut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
     }
   ],
   "abbreviations": {
     "primary assembly": "homozygous regions of the genome plus one set of alleles for the heterozygous loci",
     "alternate assembly": "alternate loci not represented in the primary assembly",
     "QV": "assembly consensus quality",
-    "unitig": null,
+    "unitig": "A uniquely assembleable subset of overlapping fragments. A unitig is an assembly of fragments for which there are no competing internal overlaps. A unitig is either a correctly assembled portion of a contig or a collapsed assembly of several high-fidelity copies of a repeat.",
     "contigs": "contiguous sequences in an assembly",
+    "collection": "Galaxy's way to represent multiple datasets as a single interface entity",
+    "collections": "Galaxy's way to represent multiple datasets as a single interface entity",
+    "scaffold": "one or more contigs joined by gap sequence",
     "scaffolds": "one or more contigs joined by gap sequence",
     "Hi-C": "all-versus-all chromatin conformation capture",
     "HiFi": "high fidelity reads",
@@ -93,60 +104,35 @@
   },
   "hands_on": true,
   "slides": false,
-  "workflows": [
-    {
-      "workflow": "main_workflow.ga",
-      "tests": false,
-      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/workflows/main_workflow.ga",
-      "path": "topics/assembly/tutorials/vgp_workflow_training/workflows/main_workflow.ga",
-      "wfid": "assembly-vgp_workflow_training",
-      "wfname": "main_workflow",
-      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-vgp_workflow_training/versions/main_workflow",
-      "license": null,
-      "creators": [
-
-      ],
-      "name": "VGP assembly: training workflow",
-      "title": "VGP assembly: training workflow",
-      "test_results": null,
-      "modified": "2023-11-27 16:33:06 +0000",
-      "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset collection\"];\n  3[\"Input dataset\"];\n  4[\"Cutadapt\"];\n  5[\"Meryl\"];\n  6[\"Collapse Collection\"];\n  7[\"Meryl\"];\n  8[\"Meryl\"];\n  9[\"GenomeScope\"];\n  10[\"Compute\"];\n  11[\"Replace\"];\n  12[\"Compute\"];\n  13[\"Replace\"];\n  14[\"Advanced Cut\"];\n  15[\"Advanced Cut\"];\n  16[\"Search in textfiles\"];\n  17[\"Parse parameter value\"];\n  18[\"Parse parameter value\"];\n  19[\"Convert\"];\n  20[\"Hifiasm\"];\n  21[\"Advanced Cut\"];\n  22[\"GFA to FASTA\"];\n  23[\"GFA to FASTA\"];\n  24[\"Parse parameter value\"];\n  25[\"Busco\"];\n  26[\"Merqury\"];\n  27[\"Busco\"];\n  28[\"Purge overlaps\"];\n  29[\"Map with minimap2\"];\n  30[\"Quast\"];\n  31[\"Map with minimap2\"];\n  32[\"Purge overlaps\"];\n  33[\"Purge overlaps\"];\n  34[\"Purge overlaps\"];\n  35[\"Bionano Hybrid Scaffold\"];\n  36[\"Busco\"];\n  37[\"Concatenate datasets\"];\n  38[\"Concatenate datasets\"];\n  39[\"Purge overlaps\"];\n  40[\"Map with minimap2\"];\n  41[\"Map with BWA-MEM\"];\n  42[\"Map with BWA-MEM\"];\n  43[\"Replace\"];\n  44[\"Quast\"];\n  45[\"Map with minimap2\"];\n  46[\"Purge overlaps\"];\n  47[\"Filter and merge\"];\n  48[\"Purge overlaps\"];\n  49[\"PretextMap\"];\n  50[\"bedtools BAM to BED\"];\n  51[\"Purge overlaps\"];\n  52[\"Pretext Snapshot\"];\n  53[\"Sort\"];\n  54[\"Busco\"];\n  55[\"Quast\"];\n  56[\"SALSA\"];\n  57[\"Map with BWA-MEM\"];\n  58[\"Map with BWA-MEM\"];\n  59[\"Busco\"];\n  60[\"Quast\"];\n  61[\"Filter and merge\"];\n  62[\"PretextMap\"];\n  63[\"Pretext Snapshot\"];\n  2 -->|output| 4;\n  4 -->|out1| 5;\n  4 -->|out1| 6;\n  5 -->|read_db| 7;\n  7 -->|read_db| 8;\n  8 -->|read_db_hist| 9;\n  9 -->|model_params| 10;\n  9 -->|summary| 11;\n  10 -->|out_file1| 12;\n  11 -->|outfile| 13;\n  12 -->|out_file1| 14;\n  12 -->|out_file1| 15;\n  13 -->|outfile| 16;\n  14 -->|output| 17;\n  15 -->|output| 18;\n  16 -->|output| 19;\n  0 -->|output| 20;\n  1 -->|output| 20;\n  4 -->|out1| 20;\n  18 -->|integer_param| 20;\n  19 -->|out_file1| 21;\n  20 -->|hic_balanced_contig_hap2_graph| 22;\n  20 -->|hic_balanced_contig_hap1_graph| 23;\n  21 -->|output| 24;\n  22 -->|out_fa| 25;\n  23 -->|out_fa| 26;\n  22 -->|out_fa| 26;\n  7 -->|read_db| 26;\n  23 -->|out_fa| 27;\n  23 -->|out_fa| 28;\n  4 -->|out1| 29;\n  23 -->|out_fa| 29;\n  24 -->|integer_param| 30;\n  23 -->|out_fa| 30;\n  22 -->|out_fa| 30;\n  4 -->|out1| 30;\n  28 -->|split_fasta| 31;\n  28 -->|split_fasta| 31;\n  29 -->|alignment_output| 32;\n  17 -->|integer_param| 32;\n  18 -->|integer_param| 32;\n  32 -->|pbcstat_cov| 33;\n  32 -->|calcuts_cutoff| 33;\n  31 -->|alignment_output| 33;\n  33 -->|purge_dups_bed| 34;\n  23 -->|out_fa| 34;\n  3 -->|output| 35;\n  34 -->|get_seqs_purged| 35;\n  34 -->|get_seqs_purged| 36;\n  34 -->|get_seqs_hap| 37;\n  22 -->|out_fa| 37;\n  35 -->|ngs_contigs_scaffold_trimmed| 38;\n  35 -->|ngs_contigs_not_scaffolded_trimmed| 38;\n  37 -->|out_file1| 39;\n  6 -->|output| 40;\n  37 -->|out_file1| 40;\n  0 -->|output| 41;\n  38 -->|out_file1| 41;\n  1 -->|output| 42;\n  38 -->|out_file1| 42;\n  38 -->|out_file1| 43;\n  24 -->|integer_param| 44;\n  38 -->|out_file1| 44;\n  6 -->|output| 44;\n  39 -->|split_fasta| 45;\n  39 -->|split_fasta| 45;\n  40 -->|alignment_output| 46;\n  17 -->|integer_param| 46;\n  18 -->|integer_param| 46;\n  41 -->|bam_output| 47;\n  42 -->|bam_output| 47;\n  46 -->|pbcstat_cov| 48;\n  46 -->|calcuts_cutoff| 48;\n  45 -->|alignment_output| 48;\n  47 -->|outfile| 49;\n  47 -->|outfile| 50;\n  48 -->|purge_dups_bed| 51;\n  37 -->|out_file1| 51;\n  49 -->|pretext_map_out| 52;\n  50 -->|output| 53;\n  51 -->|get_seqs_purged| 54;\n  24 -->|integer_param| 55;\n  34 -->|get_seqs_purged| 55;\n  51 -->|get_seqs_purged| 55;\n  6 -->|output| 55;\n  53 -->|out_file1| 56;\n  43 -->|outfile| 56;\n  0 -->|output| 57;\n  56 -->|scaffolds_fasta| 57;\n  1 -->|output| 58;\n  56 -->|scaffolds_fasta| 58;\n  56 -->|scaffolds_fasta| 59;\n  24 -->|integer_param| 60;\n  56 -->|scaffolds_fasta| 60;\n  6 -->|output| 60;\n  57 -->|bam_output| 61;\n  58 -->|bam_output| 61;\n  61 -->|outfile| 62;\n  62 -->|pretext_map_out| 63;\n"
-    }
-  ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/vgp_workflow_training/tutorial.json",
   "tools": [
-    "Convert characters1",
-    "cat1",
-    "param_value_from_file",
-    "sort1",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.7.0+galaxy0",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.16.1+galaxy2",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
-    "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
-    "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6",
-    "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy2",
-    "toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0",
-    "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2",
-    "toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy1",
-    "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
-    "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy1",
-    "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy4",
-    "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0",
-    "toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0",
-    "toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1",
-    "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy4",
-    "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy4",
-    "toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy2",
-    "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.5+galaxy2",
-    "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"
+    "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1"
   ],
   "supported_servers": {
     "exact": [
       {
+        "url": "https://galaxy.mesocentre.uca.fr",
+        "name": "Galaxy@AuBi",
+        "usegalaxy": "false"
+      },
+      {
+        "url": "https://galaxytrakr.org/",
+        "name": "GalaxyTrakr",
+        "usegalaxy": "false"
+      },
+      {
         "url": "https://usegalaxy.eu",
         "name": "UseGalaxy.eu",
+        "usegalaxy": "true"
+      },
+      {
+        "url": "https://usegalaxy.fr/",
+        "name": "UseGalaxy.fr",
+        "usegalaxy": "true"
+      },
+      {
+        "url": "https://usegalaxy.org",
+        "name": "UseGalaxy.org (Main)",
         "usegalaxy": "true"
       },
       {
@@ -156,7 +142,25 @@
       }
     ],
     "inexact": [
-
+      {
+        "url": "https://cpt.tamu.edu/galaxy-public/",
+        "name": "Center for Phage Technology (CPT)"
+      },
+      {
+        "url": "https://galaxy.hyphy.org/",
+        "name": "HyPhy HIV NGS Tools",
+        "usegalaxy": "false"
+      },
+      {
+        "url": "https://usegalaxy.be/",
+        "name": "UseGalaxy.be",
+        "usegalaxy": "true"
+      },
+      {
+        "url": "https://usegalaxy.no/",
+        "name": "UseGalaxy.no",
+        "usegalaxy": "true"
+      }
     ]
   },
   "topic_name_human": "Assembly",
@@ -166,162 +170,15 @@
     "install_resolver_dependencies": true,
     "tools": [
       {
-        "name": "bionano_scaffold",
-        "owner": "bgruening",
-        "revisions": "5258e18bbe23",
-        "tool_panel_section_label": "Assembly",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "hifiasm",
-        "owner": "bgruening",
-        "revisions": "5bec28269d95",
-        "tool_panel_section_label": "Assembly",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "text_processing",
-        "owner": "bgruening",
-        "revisions": "d698c222f354",
-        "tool_panel_section_label": "Text Manipulation",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "text_processing",
-        "owner": "bgruening",
-        "revisions": "f46f0e4f75c4",
-        "tool_panel_section_label": "Text Manipulation",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "text_processing",
-        "owner": "bgruening",
-        "revisions": "d698c222f354",
-        "tool_panel_section_label": "Text Manipulation",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "bwa",
-        "owner": "devteam",
-        "revisions": "e188dc7a68e6",
-        "tool_panel_section_label": "Mapping",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "column_maker",
-        "owner": "devteam",
-        "revisions": "02026300aa45",
-        "tool_panel_section_label": "Text Manipulation",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "bedtools",
-        "owner": "iuc",
-        "revisions": "a1a923cd89e8",
-        "tool_panel_section_label": "BED",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "bellerophon",
-        "owner": "iuc",
-        "revisions": "25ca5d73aedf",
-        "tool_panel_section_label": "Assembly",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "busco",
-        "owner": "iuc",
-        "revisions": "46ae58b1d792",
-        "tool_panel_section_label": "Annotation",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "genomescope",
-        "owner": "iuc",
-        "revisions": "3169a38c2656",
-        "tool_panel_section_label": "Assembly",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "gfa_to_fa",
-        "owner": "iuc",
-        "revisions": "e33c82b63727",
-        "tool_panel_section_label": "Convert Formats",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "merqury",
-        "owner": "iuc",
-        "revisions": "39edec572bae",
-        "tool_panel_section_label": "Assembly",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "meryl",
-        "owner": "iuc",
-        "revisions": "eadfd71dde37",
-        "tool_panel_section_label": "Assembly",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "minimap2",
-        "owner": "iuc",
-        "revisions": "11a0d50a54e6",
-        "tool_panel_section_label": "Mapping",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "pretext_map",
-        "owner": "iuc",
-        "revisions": "dfb8a4497339",
-        "tool_panel_section_label": "Assembly",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "pretext_snapshot",
-        "owner": "iuc",
-        "revisions": "44c66e8d21e6",
-        "tool_panel_section_label": "Graph/Display Data",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "purge_dups",
-        "owner": "iuc",
-        "revisions": "a315c25dc813",
-        "tool_panel_section_label": "Assembly",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
         "name": "quast",
         "owner": "iuc",
-        "revisions": "875d0f36d66f",
+        "revisions": "72472698a2df",
         "tool_panel_section_label": "Assembly",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "salsa",
-        "owner": "iuc",
-        "revisions": "f77f7a7f3b83",
-        "tool_panel_section_label": "Assembly",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "cutadapt",
-        "owner": "lparsons",
-        "revisions": "48f587c13075",
-        "tool_panel_section_label": "FASTA/FASTQ",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "collapse_collections",
-        "owner": "nml",
-        "revisions": "90981f86000f",
-        "tool_panel_section_label": "Collection Operations",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bionano_scaffold\n  owner: bgruening\n  revisions: 5258e18bbe23\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: hifiasm\n  owner: bgruening\n  revisions: 5bec28269d95\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: f46f0e4f75c4\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: column_maker\n  owner: devteam\n  revisions: 02026300aa45\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bedtools\n  owner: iuc\n  revisions: a1a923cd89e8\n  tool_panel_section_label: BED\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bellerophon\n  owner: iuc\n  revisions: 25ca5d73aedf\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: busco\n  owner: iuc\n  revisions: 46ae58b1d792\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: genomescope\n  owner: iuc\n  revisions: 3169a38c2656\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gfa_to_fa\n  owner: iuc\n  revisions: e33c82b63727\n  tool_panel_section_label: Convert Formats\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: merqury\n  owner: iuc\n  revisions: 39edec572bae\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: meryl\n  owner: iuc\n  revisions: eadfd71dde37\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: minimap2\n  owner: iuc\n  revisions: 11a0d50a54e6\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pretext_map\n  owner: iuc\n  revisions: dfb8a4497339\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pretext_snapshot\n  owner: iuc\n  revisions: 44c66e8d21e6\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: purge_dups\n  owner: iuc\n  revisions: a315c25dc813\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: quast\n  owner: iuc\n  revisions: 875d0f36d66f\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: salsa\n  owner: iuc\n  revisions: f77f7a7f3b83\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: 48f587c13075\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 90981f86000f\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: quast\n  owner: iuc\n  revisions: 72472698a2df\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {

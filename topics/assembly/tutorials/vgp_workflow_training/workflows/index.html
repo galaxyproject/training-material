@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -228,212 +228,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
-		<div class="card-body">
-			<h5 class="card-title">VGP assembly: training workflow</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated Apr 6, 2022</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-vgp_workflow_training/versions/main_workflow">Launch in Tutorial Mode</span><br/>
-
-			License: 
-				
-				None Specified, defaults to
-				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
-				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-
-			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/workflows/main_workflow.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-vgp_workflow_training/versions/main_workflow" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-vgp_workflow_training/versions/main_workflow" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-vgp_workflow_training/versions/main_workflow" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-vgp_workflow_training/versions/main_workflow"
-			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-
-	</div>
-	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
-  2["Input dataset collection"];
-  3["Input dataset"];
-  4["Cutadapt"];
-  5["Meryl"];
-  6["Collapse Collection"];
-  7["Meryl"];
-  8["Meryl"];
-  9["GenomeScope"];
-  10["Compute"];
-  11["Replace"];
-  12["Compute"];
-  13["Replace"];
-  14["Advanced Cut"];
-  15["Advanced Cut"];
-  16["Search in textfiles"];
-  17["Parse parameter value"];
-  18["Parse parameter value"];
-  19["Convert"];
-  20["Hifiasm"];
-  21["Advanced Cut"];
-  22["GFA to FASTA"];
-  23["GFA to FASTA"];
-  24["Parse parameter value"];
-  25["Busco"];
-  26["Merqury"];
-  27["Busco"];
-  28["Purge overlaps"];
-  29["Map with minimap2"];
-  30["Quast"];
-  31["Map with minimap2"];
-  32["Purge overlaps"];
-  33["Purge overlaps"];
-  34["Purge overlaps"];
-  35["Bionano Hybrid Scaffold"];
-  36["Busco"];
-  37["Concatenate datasets"];
-  38["Concatenate datasets"];
-  39["Purge overlaps"];
-  40["Map with minimap2"];
-  41["Map with BWA-MEM"];
-  42["Map with BWA-MEM"];
-  43["Replace"];
-  44["Quast"];
-  45["Map with minimap2"];
-  46["Purge overlaps"];
-  47["Filter and merge"];
-  48["Purge overlaps"];
-  49["PretextMap"];
-  50["bedtools BAM to BED"];
-  51["Purge overlaps"];
-  52["Pretext Snapshot"];
-  53["Sort"];
-  54["Busco"];
-  55["Quast"];
-  56["SALSA"];
-  57["Map with BWA-MEM"];
-  58["Map with BWA-MEM"];
-  59["Busco"];
-  60["Quast"];
-  61["Filter and merge"];
-  62["PretextMap"];
-  63["Pretext Snapshot"];
-  2 -->|output| 4;
-  4 -->|out1| 5;
-  4 -->|out1| 6;
-  5 -->|read_db| 7;
-  7 -->|read_db| 8;
-  8 -->|read_db_hist| 9;
-  9 -->|model_params| 10;
-  9 -->|summary| 11;
-  10 -->|out_file1| 12;
-  11 -->|outfile| 13;
-  12 -->|out_file1| 14;
-  12 -->|out_file1| 15;
-  13 -->|outfile| 16;
-  14 -->|output| 17;
-  15 -->|output| 18;
-  16 -->|output| 19;
-  0 -->|output| 20;
-  1 -->|output| 20;
-  4 -->|out1| 20;
-  18 -->|integer_param| 20;
-  19 -->|out_file1| 21;
-  20 -->|hic_balanced_contig_hap2_graph| 22;
-  20 -->|hic_balanced_contig_hap1_graph| 23;
-  21 -->|output| 24;
-  22 -->|out_fa| 25;
-  23 -->|out_fa| 26;
-  22 -->|out_fa| 26;
-  7 -->|read_db| 26;
-  23 -->|out_fa| 27;
-  23 -->|out_fa| 28;
-  4 -->|out1| 29;
-  23 -->|out_fa| 29;
-  24 -->|integer_param| 30;
-  23 -->|out_fa| 30;
-  22 -->|out_fa| 30;
-  4 -->|out1| 30;
-  28 -->|split_fasta| 31;
-  28 -->|split_fasta| 31;
-  29 -->|alignment_output| 32;
-  17 -->|integer_param| 32;
-  18 -->|integer_param| 32;
-  32 -->|pbcstat_cov| 33;
-  32 -->|calcuts_cutoff| 33;
-  31 -->|alignment_output| 33;
-  33 -->|purge_dups_bed| 34;
-  23 -->|out_fa| 34;
-  3 -->|output| 35;
-  34 -->|get_seqs_purged| 35;
-  34 -->|get_seqs_purged| 36;
-  34 -->|get_seqs_hap| 37;
-  22 -->|out_fa| 37;
-  35 -->|ngs_contigs_scaffold_trimmed| 38;
-  35 -->|ngs_contigs_not_scaffolded_trimmed| 38;
-  37 -->|out_file1| 39;
-  6 -->|output| 40;
-  37 -->|out_file1| 40;
-  0 -->|output| 41;
-  38 -->|out_file1| 41;
-  1 -->|output| 42;
-  38 -->|out_file1| 42;
-  38 -->|out_file1| 43;
-  24 -->|integer_param| 44;
-  38 -->|out_file1| 44;
-  6 -->|output| 44;
-  39 -->|split_fasta| 45;
-  39 -->|split_fasta| 45;
-  40 -->|alignment_output| 46;
-  17 -->|integer_param| 46;
-  18 -->|integer_param| 46;
-  41 -->|bam_output| 47;
-  42 -->|bam_output| 47;
-  46 -->|pbcstat_cov| 48;
-  46 -->|calcuts_cutoff| 48;
-  45 -->|alignment_output| 48;
-  47 -->|outfile| 49;
-  47 -->|outfile| 50;
-  48 -->|purge_dups_bed| 51;
-  37 -->|out_file1| 51;
-  49 -->|pretext_map_out| 52;
-  50 -->|output| 53;
-  51 -->|get_seqs_purged| 54;
-  24 -->|integer_param| 55;
-  34 -->|get_seqs_purged| 55;
-  51 -->|get_seqs_purged| 55;
-  6 -->|output| 55;
-  53 -->|out_file1| 56;
-  43 -->|outfile| 56;
-  0 -->|output| 57;
-  56 -->|scaffolds_fasta| 57;
-  1 -->|output| 58;
-  56 -->|scaffolds_fasta| 58;
-  56 -->|scaffolds_fasta| 59;
-  24 -->|integer_param| 60;
-  56 -->|scaffolds_fasta| 60;
-  6 -->|output| 60;
-  57 -->|bam_output| 61;
-  58 -->|bam_output| 61;
-  61 -->|outfile| 62;
-  62 -->|pretext_map_out| 63;
-
-	</pre>
-</div>
-
 
 </div>
 
    <h1 style="margin-top:2em">Importing into Galaxy</h1>
    Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
 
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote> <!--END_SNIPPET-->
+   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <p align="center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe></p> </blockquote> <!--END_SNIPPET-->
 
 </section>
 
@@ -451,7 +252,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -475,7 +276,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

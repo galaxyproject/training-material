@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -293,7 +293,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -749,22 +749,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Regression analysis attempts to determine the relationship between one target variable and a series of independent variables. A regressor learns the mapping between the features of a dataset row (i.e. the values for each of the independent variables) and its target value. It tries to fit a curve for the targets, which can be linear or non-linear. When the targets in a dataset are real numbers, the machine learning task is known as regression and each sample in the dataset has a real-valued output or target. Figure <a href="#figure-1">1</a> shows how a regression curve is fitted which best explains all these points. Here, the curve is a straight line, so this is an example of linear regression. The regression task is to learn this curve, which explains the underlying distribution of the data points. The curve can then be used to make predictions for new data points; the target for a new sample will lie on the curve learned by the regression task.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="images/regression.png" alt="regression. " width="353" height="259" loading="lazy" /><a target="_blank" href="images/regression.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Regression fit through data points.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="images/regression.png" alt="regression. " width="353" height="259" loading="lazy" /><a target="_blank" href="images/regression.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Regression fit through data points.</figcaption></figure>
 
 <p>Linear regression is a technique used to analyze a linear relationship between input variables (independent variables) and a single target variable. A linear relationship means that the data points tend to follow a straight line. Simple linear regression involves only a single input variable. Figure 2 shows a dataset with a linear relationship.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="images/linear_regression_generated_data.png" alt="regression. " width="397" height="252" loading="lazy" /><a target="_blank" href="images/linear_regression_generated_data.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Data points with a linear relationship.</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="images/linear_regression_generated_data.png" alt="regression. " width="397" height="252" loading="lazy" /><a target="_blank" href="images/linear_regression_generated_data.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Data points with a linear relationship.</figcaption></figure>
 
 <p>In linear regression, our goal is to find the line that best models the path of the data points. Figure 3 shows the dataset we used in Figure 2 with a line of best fit through it. The position of the line is determined by certain fitting coefficients (in this simple case, the gradient and intercept) and linear regression helps us pick appropriate values for these coefficients. In this example we have only one input variable and the problem is therefore simple linear regression. Note that in real problems we have more than one input variable. In this case, we call it multiple linear regression. Adding extra input variables just means that we’ll need to find more weights.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="images/linear_regression_regressor.png" alt="regression. " width="397" height="253" loading="lazy" /><a target="_blank" href="images/linear_regression_regressor.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Regression fit through data points.</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="images/linear_regression_regressor.png" alt="regression. " width="397" height="253" loading="lazy" /><a target="_blank" href="images/linear_regression_regressor.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Regression fit through data points.</figcaption></figure>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-cost-function"><button class="gtn-boxify-button details" type="button" aria-controls="details-cost-function" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Cost function</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Once we have a prediction in regression problems, we need some way to tell if it’s reasonable or not. A cost function helps us do this. The cost function compares all the predictions against their actual values and provides a single number that we can use as a measure. Two common cost functions are the error and squared error. The error is how far our prediction is away from the actual value (Figure 4).</p>
 
-  <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="images/cost_function.png" alt="regression. " width="394" height="253" loading="lazy" /><a target="_blank" href="images/cost_function.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Distance between true value and prediction.</figcaption></figure>
+  <figure id="figure-4" style="max-width: 90%;"><img src="images/cost_function.png" alt="regression. " width="394" height="253" loading="lazy" /><a target="_blank" href="images/cost_function.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Distance between true value and prediction.</figcaption></figure>
   <p>We know an error above the actual value and an error below the actual value should be about as bad as each other. The squared error makes this clear because both positive and negative values of the error result in a positive squared error. We will use the Mean Squared Error (MSE) function as our cost function. This function finds the average squared error value for all of our data points. Cost functions are important to us because they measure how accurate our model is against the target values.</p>
 
 </blockquote>
@@ -946,17 +946,17 @@ Hint: Please find the above tool in “Graph/Display data” tool section in Gal
   <li>
     <p>True vs. predicted targets curves: In this plot the corresponding points in both these curves should be close to each other for a good regression performance. We can see that the plot shows this behaviour.</p>
 
-    <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="images/true_pred_curves.png" alt="true_predicted. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/true_pred_curves.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> True vs predicted targets curves.</figcaption></figure>
+    <figure id="figure-5" style="max-width: 90%;"><img src="images/true_pred_curves.png" alt="true_predicted. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/true_pred_curves.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> True vs predicted targets curves.</figcaption></figure>
   </li>
   <li>
     <p><a href="https://towardsdatascience.com/everything-you-need-to-know-about-scatter-plots-for-data-visualisation-924144c0bc5">Scatter plot</a> for true vs. predicted targets: We can see in the scatter plot (figure <a href="#figure-6">6</a>) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (<code class="language-plaintext highlighter-rouge">RMSE</code>) is <code class="language-plaintext highlighter-rouge">4.1</code> and the R2 score is <code class="language-plaintext highlighter-rouge">0.93</code>.</p>
 
-    <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="images/true_vs_pred_scatter.png" alt="scatter_plot. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/true_vs_pred_scatter.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Scatter plot for true vs. predicted targets.</figcaption></figure>
+    <figure id="figure-6" style="max-width: 90%;"><img src="images/true_vs_pred_scatter.png" alt="scatter_plot. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/true_vs_pred_scatter.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Scatter plot for true vs. predicted targets.</figcaption></figure>
   </li>
   <li>
     <p><a href="http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/">Residual plot</a> between residual (predicted - true) and predicted targets: The residual plot shown in figure <a href="#figure-7">7</a> is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.</p>
 
-    <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="images/residual_plot.png" alt="residual_plot. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/residual_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.</figcaption></figure>
+    <figure id="figure-7" style="max-width: 90%;"><img src="images/residual_plot.png" alt="residual_plot. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/residual_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.</figcaption></figure>
   </li>
 </ol>
 
@@ -966,9 +966,9 @@ Hint: Please find the above tool in “Graph/Display data” tool section in Gal
   <div class="box-title details-title" id="details-r2-coefficient-of-determination"><button class="gtn-boxify-button details" type="button" aria-controls="details-r2-coefficient-of-determination" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: R2 (coefficient of determination)</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>In both the parts, learning on datasets is done using cross-validation and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">R2</a> scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures <a href="#figure-8">8</a> and <a href="#figure-9">9</a>. In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the <code class="language-plaintext highlighter-rouge">x = y</code> line as the true and predicted targets are close to each other. In figure <a href="#figure-8">8</a>, we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is <code class="language-plaintext highlighter-rouge">-0.06</code>. On the other hand, figure <a href="#figure-9">9</a> shows a better pattern as most of the points lie along the line and the R2 score is almost <code class="language-plaintext highlighter-rouge">1.0</code>. For RNA-seq dataset, we will compute the cross-validated R2 score using the training set and for DNA methylation dataset, we will compute the R2 score for the test set.</p>
 
-  <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad. " width="800" height="500" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/model_bad.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> This shows an example of a bad model as most of the points are scattered.</figcaption></figure>
+  <figure id="figure-8" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad. " width="800" height="500" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/model_bad.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> This shows an example of a bad model as most of the points are scattered.</figcaption></figure>
 
-  <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/model_good.png" alt="model_good. " width="800" height="500" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/model_good.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> This shows an example of a good model as most of the points lie along the x = y line.</figcaption></figure>
+  <figure id="figure-9" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/model_good.png" alt="model_good. " width="800" height="500" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/model_good.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> This shows an example of a good model as most of the points lie along the x = y line.</figcaption></figure>
 
 </blockquote>
 
@@ -991,7 +991,7 @@ Hint: Please find the above tool in “Graph/Display data” tool section in Gal
 
 <p>It is not a good choice when the relationship between independent and dependent variables is more complicated. For example, Figure 10 shows a dataset that does not have a linear relationship so linear regression would not be a good choice.</p>
 
-<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="images/nonlinear_regression_generated_data.png" alt="regression. " width="393" height="252" loading="lazy" /><a target="_blank" href="images/nonlinear_regression_generated_data.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Data points with nonlinear relationship.</figcaption></figure>
+<figure id="figure-10" style="max-width: 90%;"><img src="images/nonlinear_regression_generated_data.png" alt="regression. " width="393" height="252" loading="lazy" /><a target="_blank" href="images/nonlinear_regression_generated_data.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Data points with nonlinear relationship.</figcaption></figure>
 
 <p>To learn the mapping between several features and the targets, in the next step, we will apply the
 <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor">Gradient boosting regressor</a>. It is an ensemble-based regressor because its prediction is the collective performance of multiple weak learners (e.g. decision trees). It learns features from training dataset and maps all the rows to their respective targets (real numbers). The process of mapping gives a trained model.</p>
@@ -1091,7 +1091,7 @@ These attributes are used to predict the target for a new sample and are stored 
   </ul>
 </blockquote>
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="images/true_vs_pred_scatter_ensemble.png" alt="scatter_plot. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/true_vs_pred_scatter_ensemble.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Scatter plot for true vs. predicted targets using gradient boosting regressor.</figcaption></figure>
+<figure id="figure-11" style="max-width: 90%;"><img src="images/true_vs_pred_scatter_ensemble.png" alt="scatter_plot. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/true_vs_pred_scatter_ensemble.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Scatter plot for true vs. predicted targets using gradient boosting regressor.</figcaption></figure>
 
 <p>R2 score is 0.93, the same as the linear model, but the RMSE is smaller (3.85), which tells us that the predicted targets are closer to the true targets.</p>
 
@@ -1130,7 +1130,7 @@ These attributes are used to predict the target for a new sample and are stored 
 
   <p>This is a model validation technique which estimates the performance of a predictive model on an unseen dataset. A dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> folds and these folds are categorized into training and validation sets. The idea of cross-validation is shown in figure <a href="#figure-12">12</a>. The complete dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> equal parts. 4 out of the 5 parts are used for training and the remaining 1 part is used for validating the performance of training. This is done for <code class="language-plaintext highlighter-rouge">5</code> folds/iterations; each time the validation set (1/5 of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over <code class="language-plaintext highlighter-rouge">5</code> folds.</p>
 
-  <figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/5fold_cv.png" alt="5fold_cv. " width="622" height="347" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/5fold_cv.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> 5-fold cross validation.</figcaption></figure>
+  <figure id="figure-12" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/5fold_cv.png" alt="5fold_cv. " width="622" height="347" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/5fold_cv.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> 5-fold cross validation.</figcaption></figure>
   <p>The image demonstrates how the 5-fold cross-validation works. The complete dataset is divided into 5 equal parts/folds. 4 parts (80%) of the data (training set shown in yellow) are used for training the model and the remaining one part is used for evaluating (validation set shown in blue) the trained model. This is repeated for 5 times till every part/fold is used as the validation set. The accuracies computed for different validation folds are averaged to give 5-fold cross-validation accuracy.</p>
 
 </blockquote>
@@ -1278,15 +1278,15 @@ These attributes are used to predict the target for a new sample and are stored 
   </blockquote>
 </blockquote>
 
-<figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/scatter_plot.png" alt="Scatter plot. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/scatter_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Scatter plot for true and predicted age for test set using hyperparameter search.</figcaption></figure>
+<figure id="figure-13" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/scatter_plot.png" alt="Scatter plot. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/scatter_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Scatter plot for true and predicted age for test set using hyperparameter search.</figcaption></figure>
 
 <p>We can see in the scatter plot (figure <a href="#figure-13">13</a>) that most of the points lie along the <code class="language-plaintext highlighter-rouge">x = y</code> curve. This tells us that the true and predicted ages are close to each other. The root mean square error (<code class="language-plaintext highlighter-rouge">RMSE</code>) is <code class="language-plaintext highlighter-rouge">3.74</code> and the R2 score is <code class="language-plaintext highlighter-rouge">0.94</code>.</p>
 
-<figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/residual_plot.png" alt="Residuals. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/residual_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> The plot shows the residuals (predicted age - true) age against the predicted age.</figcaption></figure>
+<figure id="figure-14" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/residual_plot.png" alt="Residuals. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/residual_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> The plot shows the residuals (predicted age - true) age against the predicted age.</figcaption></figure>
 
 <p>As you can see in the figure, there is no visible pattern between the plotted points, which means our model is good.</p>
 
-<figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" alt="True vs predicted age. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> True vs predicted age for all the samples in the test set.</figcaption></figure>
+<figure id="figure-15" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" alt="True vs predicted age. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> True vs predicted age for all the samples in the test set.</figcaption></figure>
 <p>We can see that the predicted values are close to the true values.</p>
 
 <p>Figure <a href="#figure-13">13</a> shows that we achieved an R2 score of <code class="language-plaintext highlighter-rouge">0.94</code> and root mean square score of <code class="language-plaintext highlighter-rouge">3.74</code> for the test set using Gradient boosting regressor. <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a> mention a similar root mean square score (<code class="language-plaintext highlighter-rouge">3.93</code>) using the random forest regressor. The root mean square score shows the difference between the true and predicted age of humans. The R2 score (<code class="language-plaintext highlighter-rouge">0.94</code>) is close to the best achievable score of <code class="language-plaintext highlighter-rouge">1.0</code> which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in Galaxy, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.</p>
@@ -1494,7 +1494,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1522,7 +1522,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -338,7 +338,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -791,7 +791,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>The purpose of this tutorial is to demonstrate how to perform gene set testing using tools in Galaxy. The data comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. That study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice (see Figure below). How to generate differentially expressed genes from reads (FASTQs) for this dataset is covered in the accompanying tutorials <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a> and <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>. This tutorial is inspired by material from the COMBINE R RNAseq workshop <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">here</a> and the Cancer Research UK workshop <a href="https://bioinformatics-core-shared-training.github.io/cruk-summer-school-2018/RNASeq2018/html/06_Gene_set_testing.nb.html">here</a>.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " width="567" height="402" loading="lazy" /><a target="_blank" href="../../images/rna-seq-reads-to-counts/mouse_exp.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Tutorial Dataset</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " width="567" height="402" loading="lazy" /><a target="_blank" href="../../images/rna-seq-reads-to-counts/mouse_exp.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Tutorial Dataset</figcaption></figure>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1001,7 +1001,7 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
 
 <p>A plot of the top 10 over-represented GO terms (by <em>p</em>-value) can be output from the goseq tool to help visualise results. Click on the <code class="language-plaintext highlighter-rouge">Top over-represented GO terms plot</code> PDF in the history. It should look similar to below.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-genes-to-pathways/basal_top_GO.png" alt="Basal Plot. " width="454" height="458" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/basal_top_GO.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Basal pregnant vs lactating top 10 GO terms</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/rna-seq-genes-to-pathways/basal_top_GO.png" alt="Basal Plot. " width="454" height="458" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/basal_top_GO.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Basal pregnant vs lactating top 10 GO terms</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1011,7 +1011,7 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Running goseq on the luminal file should give a plot similar to below.</p>
-    <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-genes-to-pathways/luminal_top_GO.png" alt="Luminal Plot. " width="454" height="457" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/luminal_top_GO.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Luminal pregnant vs lactating top 10 GO terms</figcaption></figure>
+    <figure id="figure-3" style="max-width: 90%;"><img src="../../images/rna-seq-genes-to-pathways/luminal_top_GO.png" alt="Luminal Plot. " width="454" height="457" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/luminal_top_GO.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Luminal pregnant vs lactating top 10 GO terms</figcaption></figure>
 
   </blockquote>
 </blockquote>
@@ -1069,11 +1069,11 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
 
 <p>fgsea outputs a table of results containing a list of pathways with P values and enrichment scores. It can also output a summary table plot of the top pathways such as the one shown below for the <code class="language-plaintext highlighter-rouge">basallpregnant-basallactate</code> contrast below.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-genes-to-pathways/fgsea_table_basal.png" alt="fgsea Table. " width="510" height="432" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/fgsea_table_basal.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> fgsea Summary table</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/rna-seq-genes-to-pathways/fgsea_table_basal.png" alt="fgsea Table. " width="510" height="432" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/fgsea_table_basal.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> fgsea Summary table</figcaption></figure>
 
 <p>An enrichment plot of the each of the top pathways can also be produced, one is shown below. The barcode pattern shows where the genes in the set are found in the list of ranked genes. Most of the bars to the left indicate enrichment of the set at the top of the ranked list of genes (upregulated) and most bars towards the right indicate enrichment at the bottom of the list (downregulated). The enrichment score reflects the degree to which the genes are enriched at the top or bottom of the list.</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-genes-to-pathways/fgsea_enrichplot.png" alt="fgsea Enrichment. " width="454" height="401" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/fgsea_enrichplot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> fgsea Enrichment plot</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/rna-seq-genes-to-pathways/fgsea_enrichplot.png" alt="fgsea Enrichment. " width="454" height="401" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/fgsea_enrichplot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> fgsea Enrichment plot</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1083,7 +1083,7 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
     <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Running fgsea on the luminal file should give a plot similar to below.</p>
-    <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-genes-to-pathways/fgsea_table_luminal.png" alt="fgsea Luminal. " width="510" height="432" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/fgsea_table_luminal.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> fgsea Summary table for luminal</figcaption></figure>
+    <figure id="figure-6" style="max-width: 90%;"><img src="../../images/rna-seq-genes-to-pathways/fgsea_table_luminal.png" alt="fgsea Luminal. " width="510" height="432" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/fgsea_table_luminal.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> fgsea Summary table for luminal</figcaption></figure>
 
   </blockquote>
 </blockquote>
@@ -1139,11 +1139,11 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
 
 <p>This generates a table of results, and a report. Contained within the report are plots, such as heatmaps of the top ranked pathways, as shown below. Note that we see some similar pathways in the results here as with the fgsea analysis.</p>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_heatmaps.png" alt="EGSEA heatmaps. " width="1035" height="307" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/EGSEA_heatmaps.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> EGSEA heatmaps</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_heatmaps.png" alt="EGSEA heatmaps. " width="1035" height="307" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/EGSEA_heatmaps.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> EGSEA heatmaps</figcaption></figure>
 
 <p>KEGG pathway diagrams are generated if KEGG pathways are selected, as shown below. These show the expression values of the genes overlaid, genes upregulated in the contrast are shown in red, downregulated genes in blue. Ribosome was one of the top GO terms identified for the basal pregnant vs lactate contrast and here we see ribosome pathways are in the top ranked KEGG pathways.</p>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG.png" alt="EGSEA KEGG. " width="1546" height="556" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> EGSEA KEGG pathways</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG.png" alt="EGSEA KEGG. " width="1546" height="556" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> EGSEA KEGG pathways</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1153,7 +1153,7 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
     <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Running EGSEA on the luminal file should give top KEGG gene sets similar to below.</p>
-    <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG_luminal.png" alt="EGSEA KEGG luminal. " width="1550" height="454" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG_luminal.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> EGSEA KEGG pathways for luminal</figcaption></figure>
+    <figure id="figure-9" style="max-width: 90%;"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG_luminal.png" alt="EGSEA KEGG luminal. " width="1550" height="454" loading="lazy" /><a target="_blank" href="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG_luminal.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> EGSEA KEGG pathways for luminal</figcaption></figure>
 
   </blockquote>
 </blockquote>
@@ -1355,7 +1355,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1383,7 +1383,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

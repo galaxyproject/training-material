@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -270,7 +270,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -683,11 +683,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>We represent an observation/sample/data point as an n-dimensional vector and many such data points constitute a dataset. To show an example, let us assume that a dataset, shown in Figure 1, contains many samples and each sample has two dimensions each:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="images/data_before_clustering.png" alt="data. " width="394" height="262" loading="lazy" /><a target="_blank" href="images/data_before_clustering.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Sample data before clustering</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="images/data_before_clustering.png" alt="data. " width="394" height="262" loading="lazy" /><a target="_blank" href="images/data_before_clustering.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Sample data before clustering</figcaption></figure>
 
 <p>Clustering reveals the following three groups, indicated by different colors:</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="images/data_after_clustering.png" alt="data. " width="370" height="248" loading="lazy" /><a target="_blank" href="images/data_after_clustering.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Sample data after clustering</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="images/data_after_clustering.png" alt="data. " width="370" height="248" loading="lazy" /><a target="_blank" href="images/data_after_clustering.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Sample data after clustering</figcaption></figure>
 
 <p>Clustering is divided into two subgroups based on the assignment of data points to clusters:</p>
 
@@ -751,7 +751,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>The choice of a distance measure is crucial in clustering. It defines how the similarity of two elements <code class="language-plaintext highlighter-rouge">(x, y)</code> is calculated as it influences the shape of the clusters. The classical distance measures are <a href="https://en.wikipedia.org/wiki/Euclidean_distance">euclidean</a> and <a href="https://en.wikipedia.org/wiki/Taxicab_geometry">manhattan</a> distances. For the most common clustering algorithms, the default distance measure is euclidean. If the euclidean distance is chosen, then observations having high magnitudes of their respective features will be clustered together. The same holds for the observations having low magnitudes of their respective features. In Figure 3, we group the cells using euclidean distance and their distance matrix.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="images/raceid_distance.svg" type="image/svg+xml" alt="Distances. ">Distances.</object></div><a target="_blank" href="images/raceid_distance.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><div style="overflow-x: auto"><object data="images/raceid_distance.svg" type="image/svg+xml" alt="Distances. ">Distances.</object></div><a target="_blank" href="images/raceid_distance.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -803,14 +803,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Let’s now see how dendrograms help in hierarchical clustering.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="images/Hierarchical_clustering_1.png" alt="data. " width="560" height="420" loading="lazy" /><a target="_blank" href="images/Hierarchical_clustering_1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Hierarchical clustering</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="images/Hierarchical_clustering_1.png" alt="data. " width="560" height="420" loading="lazy" /><a target="_blank" href="images/Hierarchical_clustering_1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Hierarchical clustering</figcaption></figure>
 
 <p>All data points are chosen at the bottom and each one is assigned to a separate cluster. Then, the two closest clusters are merged till just one cluster is left at the top. From the dendrogram thus formed, the distance between two clusters can be determined by computing the height at which two clusters are merged.</p>
 
 <p>By looking at the dendrogram, the clusters can be observed showing different groups in the best way. The optimal number of clusters is the number of vertical lines in the dendrogram cut by a horizontal line that can transverse maximum distance vertically without intersecting a cluster.</p>
 
 <p>In the above example, the best choice of the number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB. For more details, please read <a href="https://www.analyticsvidhya.com/blog/2016/11/an-introduction-to-clustering-and-different-methods-of-clustering/">here</a>.</p>
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="images/Hierarchical_clustering_2.png" alt="data. " width="768" height="480" loading="lazy" /><a target="_blank" href="images/Hierarchical_clustering_2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Hierarchical clustering</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="images/Hierarchical_clustering_2.png" alt="data. " width="768" height="480" loading="lazy" /><a target="_blank" href="images/Hierarchical_clustering_2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Hierarchical clustering</figcaption></figure>
 
 <p>This algorithm explained above uses the bottom-up approach. It is also possible to follow the top-down approach starting with all data points assigned in the same cluster and recursively performing splits till each data point is assigned a separate cluster. The decision of merging two clusters is taken based on the proximity of these clusters.</p>
 
@@ -878,13 +878,13 @@ https://zenodo.org/record/3813447/files/moon.csv
 <p>Our objective is to categorise similar flowers in different groups (Figure 6). We know that we have <strong>3</strong> species of iris flowers (versicolor, virginica, setosa) with
 <strong>50</strong> samples for each. These species look very much alike as shown in the figure below.</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="images/iris_flowers.png" alt="3 species of iris flowers. " width="600" height="181" loading="lazy" /><a target="_blank" href="images/iris_flowers.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> 3 species of iris flowers</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="images/iris_flowers.png" alt="3 species of iris flowers. " width="600" height="181" loading="lazy" /><a target="_blank" href="images/iris_flowers.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> 3 species of iris flowers</figcaption></figure>
 
 <p>In our dataset, we have the following features measured for each flower: <a href="https://en.wikipedia.org/wiki/Petal">petal</a> length, petal width, <a href="https://en.wikipedia.org/wiki/Sepal">sepal</a> length, sepal width</p>
 
 <p>Figure 7 shows the dendrogram of these data.</p>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="images/Hierarchical_iris.png" alt="data. " width="1446" height="611" loading="lazy" /><a target="_blank" href="images/Hierarchical_iris.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Iris data hierarchical clustering</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="images/Hierarchical_iris.png" alt="data. " width="1446" height="611" loading="lazy" /><a target="_blank" href="images/Hierarchical_iris.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Iris data hierarchical clustering</figcaption></figure>
 
 <p>We will apply hierarchical clustering to the iris dataset to find clusters based on two features (of flowers) - sepal length and width.
 <strong>Hint</strong>: Please find the <code class="language-plaintext highlighter-rouge">Numeric Clustering</code> tool in the <code class="language-plaintext highlighter-rouge">Statistics</code> tool section.</p>
@@ -968,7 +968,7 @@ Let’s visualize the clustering results to see how groups have been built. <str
   </ol>
 </blockquote>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="images/hierarchical_scatter.png" alt="data. " width="2100" height="2100" loading="lazy" /><a target="_blank" href="images/hierarchical_scatter.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Hierarchical clustering scatter plot</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%;"><img src="images/hierarchical_scatter.png" alt="data. " width="2100" height="2100" loading="lazy" /><a target="_blank" href="images/hierarchical_scatter.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Hierarchical clustering scatter plot</figcaption></figure>
 
 <h2 id="k-means-clustering">K-means clustering</h2>
 
@@ -1068,7 +1068,7 @@ Let’s visualize the clustering results to see how groups have been built. <str
   </ol>
 </blockquote>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="images/k_means_scatter.png" alt="data. " width="2100" height="2100" loading="lazy" /><a target="_blank" href="images/k_means_scatter.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> K-means clustering scatter plot</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%;"><img src="images/k_means_scatter.png" alt="data. " width="2100" height="2100" loading="lazy" /><a target="_blank" href="images/k_means_scatter.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> K-means clustering scatter plot</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1080,7 +1080,7 @@ Let’s visualize the clustering results to see how groups have been built. <str
 
     <p>Major difficulty found with k-means is the choice of the number of clusters. Different methods are proposed to solve this problem.
 Here, we provide a simple solution. The idea is to compute k-means clustering using different values of clusters k. Next, the within sum of squares is drawn according to the number of clusters. The location of a bend (knee) in the plot is generally considered as an indicator of the appropriate number of clusters.</p>
-    <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="images/number_of_clusters.png" alt="data. " width="1036" height="576" loading="lazy" /><a target="_blank" href="images/number_of_clusters.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Optimal number of clusters</figcaption></figure>
+    <figure id="figure-10" style="max-width: 90%;"><img src="images/number_of_clusters.png" alt="data. " width="1036" height="576" loading="lazy" /><a target="_blank" href="images/number_of_clusters.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Optimal number of clusters</figcaption></figure>
     <p>The plot above represents the variance within the clusters. It decreases as k increases, but it can be seen as a bend (or “elbow”) at k = 4. This bend indicates that
 additional clusters beyond the fourth have little value.</p>
   </blockquote>
@@ -1181,7 +1181,7 @@ additional clusters beyond the fourth have little value.</p>
   </ol>
 </blockquote>
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="images/dbscan_scatter.png" alt="data. " width="2100" height="2100" loading="lazy" /><a target="_blank" href="images/dbscan_scatter.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> DBSCAN clustering scatter plot</figcaption></figure>
+<figure id="figure-11" style="max-width: 90%;"><img src="images/dbscan_scatter.png" alt="data. " width="2100" height="2100" loading="lazy" /><a target="_blank" href="images/dbscan_scatter.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> DBSCAN clustering scatter plot</figcaption></figure>
 
 <p>You will also notice that the green points (factor = -1) in the plot are not contained within any cluster. DBSCAN does not necessarily categorize every data point, and is therefore works very well with handling outliers in a dataset.</p>
 
@@ -1237,7 +1237,7 @@ It increases as the quality of the clusters increase; it is large for compact cl
   </ol>
 </blockquote>
 
-<figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="images/circles_moon_scatter.png" alt="data. " width="1696" height="726" loading="lazy" /><a target="_blank" href="images/circles_moon_scatter.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Scatter plot of circles and moon datasets</figcaption></figure>
+<figure id="figure-12" style="max-width: 90%;"><img src="images/circles_moon_scatter.png" alt="data. " width="1696" height="726" loading="lazy" /><a target="_blank" href="images/circles_moon_scatter.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Scatter plot of circles and moon datasets</figcaption></figure>
 
 <h2 id="find-clusters">Find clusters</h2>
 
@@ -1329,9 +1329,9 @@ It increases as the quality of the clusters increase; it is large for compact cl
 
 <p>You can apply the other two algorithms (k-means and DBSCAN) to moon and circles datasets in the same way as explained above. In the k-means algorithm, please use <code class="language-plaintext highlighter-rouge">k=2</code> and for the DBSCAN algorithm, the parameters should not be the default ones as used earlier. They should be set as follows: for the circles dataset (<code class="language-plaintext highlighter-rouge">maximum neighborhood distance=0.2</code> and <code class="language-plaintext highlighter-rouge">minimal core point density=5</code>) and for the moon dataset (<code class="language-plaintext highlighter-rouge">maximum neighborhood distance=0.3</code> and <code class="language-plaintext highlighter-rouge">minimal core point density=4</code>). You can see the scatter plots of the clustering results for all three clustering algorithms in Figure 13 and 14.</p>
 
-<figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="images/circles_clustering.png" alt="data. " width="6300" height="2100" loading="lazy" /><a target="_blank" href="images/circles_clustering.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Plot of clustering algorithms on circles dataset</figcaption></figure>
+<figure id="figure-13" style="max-width: 90%;"><img src="images/circles_clustering.png" alt="data. " width="6300" height="2100" loading="lazy" /><a target="_blank" href="images/circles_clustering.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Plot of clustering algorithms on circles dataset</figcaption></figure>
 
-<figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="images/moon_clustering.png" alt="data. " width="6300" height="2100" loading="lazy" /><a target="_blank" href="images/moon_clustering.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Plot of clustering algorithms on moon dataset</figcaption></figure>
+<figure id="figure-14" style="max-width: 90%;"><img src="images/moon_clustering.png" alt="data. " width="6300" height="2100" loading="lazy" /><a target="_blank" href="images/moon_clustering.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Plot of clustering algorithms on moon dataset</figcaption></figure>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -1504,7 +1504,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1532,7 +1532,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

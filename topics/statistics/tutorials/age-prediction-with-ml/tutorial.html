@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -268,7 +268,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -667,9 +667,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <h4 id="r2-coefficient-of-determination">R2 (coefficient of determination)</h4>
 <p>In both the parts, learning on datasets is done using cross-validation and the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">R2</a> scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures <a href="#figure-1">1</a> and <a href="#figure-2">2</a>. In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the <code class="language-plaintext highlighter-rouge">x = y</code> line as the true and predicted targets are close to each other. In figure <a href="#figure-1">1</a>, we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is <code class="language-plaintext highlighter-rouge">-0.06</code>. But, figure <a href="#figure-2">2</a> shows a better pattern as most of the points lie along the line and the R2 score is almost <code class="language-plaintext highlighter-rouge">1.0</code>. For RNA-seq dataset, we will compute the cross-validated R2 score using the training set and for DNA methylation dataset, we will compute the R2 score for the test set.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad. " width="800" height="500" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/model_bad.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> This shows an example of a bad model as most of the points are scattered. For a model to be good, most of the points should lie along the x = y  line. It means that the predicted target on the y (vertical) axis is close to the true targets on the x (horizontal) axis.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad. " width="800" height="500" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/model_bad.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> This shows an example of a bad model as most of the points are scattered. For a model to be good, most of the points should lie along the x = y  line. It means that the predicted target on the y (vertical) axis is close to the true targets on the x (horizontal) axis.</figcaption></figure>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/model_good.png" alt="model_good. " width="800" height="500" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/model_good.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> This shows an example of a good model as most of the points lie along the x = y line. Because most of the points lie along the x = y line, R2 score is 0.99 very close to the best score of 1.0</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/model_good.png" alt="model_good. " width="800" height="500" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/model_good.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> This shows an example of a good model as most of the points lie along the x = y line. Because most of the points lie along the x = y line, R2 score is 0.99 very close to the best score of 1.0</figcaption></figure>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -710,7 +710,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   <p>It is a model validation technique which estimates the performance of a predictive model on an unseen data. A dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> folds and these folds are categorised into training and validation sets. The idea of cross-validation is shown in figure <a href="#figure-3">3</a>. The complete dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> equal parts. 80% of the dataset is used for training and the remaining 20% is used for validating the performance of training. This is done for <code class="language-plaintext highlighter-rouge">5</code> folds/iterations, each time the validation set (20% of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over <code class="language-plaintext highlighter-rouge">5</code> folds.</p>
 
-  <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/5fold_cv.png" alt="5fold_cv. " width="622" height="347" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/5fold_cv.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The image shows how the 5-fold cross-validation works. The complete dataset is divided into 5 equal parts/folds. 4 parts (80%) of the data (training set shown in yellow) are used for training the model and the remaining one part is used for evaluating (validation set shown in blue) the trained model. This is repeated for 5 times till every part/fold is used as the validation set. The accuracies computed for different validation folds are averaged to give 5-fold cross-validation accuracy.</figcaption></figure>
+  <figure id="figure-3" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/5fold_cv.png" alt="5fold_cv. " width="622" height="347" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/5fold_cv.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The image shows how the 5-fold cross-validation works. The complete dataset is divided into 5 equal parts/folds. 4 parts (80%) of the data (training set shown in yellow) are used for training the model and the remaining one part is used for evaluating (validation set shown in blue) the trained model. This is repeated for 5 times till every part/fold is used as the validation set. The accuracies computed for different validation folds are averaged to give 5-fold cross-validation accuracy.</figcaption></figure>
 
 </blockquote>
 
@@ -985,7 +985,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>The output plot has the following legend: the colour-coding is based on the <code class="language-plaintext highlighter-rouge">mean_test_score</code> (<code class="language-plaintext highlighter-rouge">c3</code>) column. You can follow the line leading to the score along every column with the parameters’ settings. The columns <code class="language-plaintext highlighter-rouge">c4, c5</code> and <code class="language-plaintext highlighter-rouge">c6</code> are the parameters we chose and <code class="language-plaintext highlighter-rouge">c3</code> is the accuracy column present in the <code class="language-plaintext highlighter-rouge">tabular</code> output of <strong>Hyperparameter search</strong> tool.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/parallel_coor_plot.png" alt="data. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/parallel_coor_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> The visualization of the hyperparameter optimisation tool output. We optimised the values of 3 hyperparameters (alpha, normalize and k). These can be seen as the columns (first three from left to right) in the plot. The rightmost column contains the accuracy values (mean_test_score).</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/parallel_coor_plot.png" alt="data. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/parallel_coor_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> The visualization of the hyperparameter optimisation tool output. We optimised the values of 3 hyperparameters (alpha, normalize and k). These can be seen as the columns (first three from left to right) in the plot. The rightmost column contains the accuracy values (mean_test_score).</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1009,7 +1009,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="compare-results-with-original-paper">Compare results with original paper</h2>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/rna_seq_age.png" alt="rna_seq_age_paper. " width="378" height="321" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/rna_seq_age.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> The plot shows accuracy obtained in the paper from Jason G. Fleischer et al. 2018 (Predicting age from the transcriptome of human dermal fibroblasts) using ElasticNet regressor. The R2 scores achieved in the tutorial and mentioned in the paper using the same regressor are comparable.</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/rna_seq_age.png" alt="rna_seq_age_paper. " width="378" height="321" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/rna_seq_age.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> The plot shows accuracy obtained in the paper from Jason G. Fleischer et al. 2018 (Predicting age from the transcriptome of human dermal fibroblasts) using ElasticNet regressor. The R2 scores achieved in the tutorial and mentioned in the paper using the same regressor are comparable.</figcaption></figure>
 
 <h2 id="summary">Summary</h2>
 
@@ -1255,19 +1255,19 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
   </blockquote>
 </blockquote>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/scatter_plot.png" alt="Scatter plot. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/scatter_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Scatter plot for true and predicted age for test set. It is evident from the plot that most of the points lie along the x = y line, which means that true and predicted ages are close to each other. The root mean squared error in predicting age is 3.76 years and R2 score (0.94) is close to the best score of 1.0.</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/scatter_plot.png" alt="Scatter plot. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/scatter_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Scatter plot for true and predicted age for test set. It is evident from the plot that most of the points lie along the x = y line, which means that true and predicted ages are close to each other. The root mean squared error in predicting age is 3.76 years and R2 score (0.94) is close to the best score of 1.0.</figcaption></figure>
 
 <p>We can see in the scatter plot (figure <a href="#figure-6">6</a>) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (<code class="language-plaintext highlighter-rouge">RMSE</code>) is <code class="language-plaintext highlighter-rouge">3.76</code> and the R2 score is <code class="language-plaintext highlighter-rouge">0.94</code>.</p>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/residual_plot.png" alt="Residuals. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/residual_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> The plot shows the residuals (predicted age - true) age against the predicted age. For a good learning/training, this plot should not show any distinct pattern and the points should be symmetrically distributed along the y = 0 line.</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/residual_plot.png" alt="Residuals. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/residual_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> The plot shows the residuals (predicted age - true) age against the predicted age. For a good learning/training, this plot should not show any distinct pattern and the points should be symmetrically distributed along the y = 0 line.</figcaption></figure>
 
 <p>The <a href="http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/">residual plot</a> shown in figure <a href="#figure-7">7</a> is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good model, there should not be any visible pattern with the plotted points.</p>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" alt="True vs predicted age. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> The plot shows the true vs predicted age for all the samples in the test set. We can see that the predicted values are close to the true values.</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" alt="True vs predicted age. " width="700" height="450" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> The plot shows the true vs predicted age for all the samples in the test set. We can see that the predicted values are close to the true values.</figcaption></figure>
 
 <h2 id="compare-results-with-original-paper-1">Compare results with original paper</h2>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/age-prediction-with-ml/dnam_age_paper.png" alt="dnam_image_paper. " width="459" height="466" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/dnam_age_paper.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> The plot is from Jana Naue et al. 2017 (Chronological age prediction based on DNA methylation) and shows a scatter plot with the predicted age on the vertical axis and the true age on the horizontal axis. The plot is comparable to the scatter plot shown in figure 6. The RMSE score is also comparable. The paper used Random forest as the regressor and we used Gradient boosting as the regressor.</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%;"><img src="../../images/age-prediction-with-ml/dnam_age_paper.png" alt="dnam_image_paper. " width="459" height="466" loading="lazy" /><a target="_blank" href="../../images/age-prediction-with-ml/dnam_age_paper.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> The plot is from Jana Naue et al. 2017 (Chronological age prediction based on DNA methylation) and shows a scatter plot with the predicted age on the vertical axis and the true age on the horizontal axis. The plot is comparable to the scatter plot shown in figure 6. The RMSE score is also comparable. The paper used Random forest as the regressor and we used Gradient boosting as the regressor.</figcaption></figure>
 
 <h2 id="summary-1">Summary</h2>
 
@@ -1459,7 +1459,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1487,7 +1487,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>

@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@98e1a6aedea81f92ce802571fef5d1f900f68f46",
+		release: "galaxy-training-network@def5a1967ee4b3dfe2d49aa3c15eef271d572f3b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701102786' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701105684' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -331,7 +331,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701105684'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -844,7 +844,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>There are 12,738 <a href="http://www.nature.com/nmeth/journal/v12/n4/fig_tab/nmeth.3290_SF13.html">2d-reads</a>. Maximum read length is 27,518 bp. The distribution of reads lengths looks like this:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/ont_length.png" alt="Nanopore read length distribution. " width="640" height="480" loading="lazy" /><a target="_blank" href="../../images/ont_length.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Distribution of nanopore read lengths.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/ont_length.png" alt="Nanopore read length distribution. " width="640" height="480" loading="lazy" /><a target="_blank" href="../../images/ont_length.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Distribution of nanopore read lengths.</figcaption></figure>
 
 <p>You can see that there many reads under the second peak with median of approximately 7.5 kb.</p>
 
@@ -869,7 +869,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>For assembly we will be using <a href="https://github.com/rrwick/Unicycler">Unicycler</a> (also see publication <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span>). Unicycler is designed specifically for <em>hybrid assembly</em> (that is, using both short- and long-read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/unicycler.png" alt="Unicycler process. " width="3700" height="4531" loading="lazy" /><a target="_blank" href="../../images/unicycler.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Simplified view of the Unicycler assembly process (From <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span>) In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce the longest possible set of contigs. These are then polished by aligning the original short reads against contigs and feeding these alignments to Pilon - an assembly improvement tool. <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span></figcaption></figure>
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/unicycler.png" alt="Unicycler process. " width="3700" height="4531" loading="lazy" /><a target="_blank" href="../../images/unicycler.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Simplified view of the Unicycler assembly process (From <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span>) In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce the longest possible set of contigs. These are then polished by aligning the original short reads against contigs and feeding these alignments to Pilon - an assembly improvement tool. <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span></figcaption></figure>
 
 <p>As you can see Unicycler relies heavily on SPAdes (<span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>) and <a href="https://github.com/broadinstitute/pilon/wiki">Pilon</a>. We will briefly describe these two tools.</p>
 
@@ -879,7 +879,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Assemblers usually construct graphs for <em>k</em>-mers of a fixed size. We have noted that when <em>k</em> is small it is difficult to resolve the repeats. If <em>k</em> is too large a corresponding graph may be fragmented (especially if read coverage is low). SPAdes uses several values for <em>k</em> (that are either manually set or inferred automatically) to create a <em>multisized</em> graph that minimized tangledness and fragmentation by combining various <em>k</em>-mers (<span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>)):</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/multiGraph.jpg" alt="Multigraph approach implemented in SPAdes. " width="2400" height="1697" loading="lazy" /><a target="_blank" href="../../images/multiGraph.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads<sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure and text from <span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>.</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/multiGraph.jpg" alt="Multigraph approach implemented in SPAdes. " width="2400" height="1697" loading="lazy" /><a target="_blank" href="../../images/multiGraph.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads<sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure and text from <span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>.</figcaption></figure>
 
 <h5 id="read-pair-utilization">Read pair utilization</h5>
 
@@ -898,7 +898,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li>Reads are corrected using solid <em>k</em>-mers:</li>
 </ol>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/readCorrection.jpg" alt="Read correction with BayesHammer. " width="1200" height="725" loading="lazy" /><a target="_blank" href="../../images/readCorrection.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From <span class="citation"><a href="#Nikolenko2013">Nikolenko <i>et al.</i> 2013</a></span>)</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/readCorrection.jpg" alt="Read correction with BayesHammer. " width="1200" height="725" loading="lazy" /><a target="_blank" href="../../images/readCorrection.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From <span class="citation"><a href="#Nikolenko2013">Nikolenko <i>et al.</i> 2013</a></span>)</figcaption></figure>
 
 <p>In the case of the full dataset, SPAdes error correction changed 14,013,757 bases in 3,382,337 reads - a substantial fraction of the full ~18 million read dataset.</p>
 
@@ -906,7 +906,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Pilon improves draft assemblies by using the information from the original reads aligned to the draft assembly. The following image from a publication by <span class="citation"><a href="#Walker2014">Walker <i>et al.</i> 2014</a></span> highlights the steps of this process:</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/pilon.png" alt="Pilon workflow. " width="1762" height="1028" loading="lazy" /><a target="_blank" href="../../images/pilon.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses reads and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From <span class="citation"><a href="#Walker2014">Walker <i>et al.</i> 2014</a></span>)</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/pilon.png" alt="Pilon workflow. " width="1762" height="1028" loading="lazy" /><a target="_blank" href="../../images/pilon.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses reads and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From <span class="citation"><a href="#Walker2014">Walker <i>et al.</i> 2014</a></span>)</figcaption></figure>
 
 <h3 id="annotation">Annotation</h3>
 
@@ -984,7 +984,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <p>If all goes well you will see datasets uploading and changing states from gray to green as shown below. The figure below also shows how datasets can be tagged.</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/starting_data.png" alt="Datasets in History. " width="1586" height="717" loading="lazy" /><a target="_blank" href="../../images/starting_data.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class="fa fa-tags" aria-hidden="true"></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/starting_data.png" alt="Datasets in History. " width="1586" height="717" loading="lazy" /><a target="_blank" href="../../images/starting_data.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class="fa fa-tags" aria-hidden="true"></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.</figcaption></figure>
 
 <h3 id="assess-read-quality">Assess Read Quality</h3>
 
@@ -1015,11 +1015,11 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <p>A quick look at quality score distribution will show a confusing picture:</p>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/multiqc1.png" alt="QC reported zoomed out. " width="682" height="520" loading="lazy" /><a target="_blank" href="../../images/multiqc1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Because Illumina reads (green) are <b>much</b> shorter that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot...</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/multiqc1.png" alt="QC reported zoomed out. " width="682" height="520" loading="lazy" /><a target="_blank" href="../../images/multiqc1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Because Illumina reads (green) are <b>much</b> shorter that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot...</figcaption></figure>
 
 <p>So let’s zoom in into Illumina data:</p>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/multiqc2.png" alt="QC reported zoomed in. " width="674" height="512" loading="lazy" /><a target="_blank" href="../../images/multiqc2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Zooming in shows quality distribution for Illumina reads. This is excellent data with mean base qualities above 30 across all reads.</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/multiqc2.png" alt="QC reported zoomed in. " width="674" height="512" loading="lazy" /><a target="_blank" href="../../images/multiqc2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Zooming in shows quality distribution for Illumina reads. This is excellent data with mean base qualities above 30 across all reads.</figcaption></figure>
 
 <h2 id="assembly-with-unicycler">Assembly with Unicycler</h2>
 
@@ -1067,7 +1067,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <p>The Quast tool outputs assembly metrics as an html file with metrics and graphs. The image below looks exceptionally boring. This is a <strong>good</strong> thing:</p>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/quast_output.png" alt="Quast Interface. " width="948" height="1177" loading="lazy" /><a target="_blank" href="../../images/quast_output.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Quast Output: Quast provides different statistics such as the number of contigs or scaffolds, the N50 and N75, and the total length of the assembly. You can also access 3 plots, the cumulative length of the contigs, the Nx, or the GC content.</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%;"><img src="../../images/quast_output.png" alt="Quast Interface. " width="948" height="1177" loading="lazy" /><a target="_blank" href="../../images/quast_output.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Quast Output: Quast provides different statistics such as the number of contigs or scaffolds, the N50 and N75, and the total length of the assembly. You can also access 3 plots, the cumulative length of the contigs, the Nx, or the GC content.</figcaption></figure>
 
 <p>One can see that there are two (!) contigs. The largest contig is 4,576,290 bp (for comparison <em>E. coli</em> K12 MG1655 strain genome length is <a href="https://www.ncbi.nlm.nih.gov/nuccore/NZ_APIN00000000.1">4,656,144 bp</a>) and the smallest is 4,581,676 (total length) - 4,576,290 (length of the largest) = 5,386 bp. When we analyzed this dataset for the first time we were initially puzzled by this second contig. But we quickly realized that this is simply the genome of bacteriophage <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_001422.1">phiX174</a> which is routinely used as a spike-in in Illumina sequencing. Thus we have two genomes: the one of <em>E.coli</em> C-1 and phiX174! We can now use Prokka to annotate our two genomes.</p>
 
@@ -1121,22 +1121,22 @@ https://zenodo.org/record/940733/files/minion_2d.fq
     <li>
       <p>Start IGV. It will look something like this:</p>
 
-      <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/igv1.png" alt="IGV just started. " width="901" height="556" loading="lazy" /><a target="_blank" href="../../images/igv1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.</figcaption></figure>
+      <figure id="figure-10" style="max-width: 90%;"><img src="../../images/igv1.png" alt="IGV just started. " width="901" height="556" loading="lazy" /><a target="_blank" href="../../images/igv1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.</figcaption></figure>
     </li>
     <li>
       <p>Locate the output of Unicycler and expand it :</p>
 
-      <figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/unicycler_igv.png" alt="Unicycler result Visualization. " width="419" height="607" loading="lazy" /><a target="_blank" href="../../images/unicycler_igv.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Expanding Unicycler assembly reveals IGV link.</figcaption></figure>
+      <figure id="figure-11" style="max-width: 90%;"><img src="../../images/unicycler_igv.png" alt="Unicycler result Visualization. " width="419" height="607" loading="lazy" /><a target="_blank" href="../../images/unicycler_igv.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Expanding Unicycler assembly reveals IGV link.</figcaption></figure>
     </li>
     <li>
       <p>Click on the <em>local</em> link highlighted with orange outline. The browser will change:</p>
 
-      <figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/igv2.png" alt="IGV with Unicycler assembly. " width="901" height="557" loading="lazy" /><a target="_blank" href="../../images/igv2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Now you can see the major contig shown in the browser window.</figcaption></figure>
+      <figure id="figure-12" style="max-width: 90%;"><img src="../../images/igv2.png" alt="IGV with Unicycler assembly. " width="901" height="557" loading="lazy" /><a target="_blank" href="../../images/igv2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Now you can see the major contig shown in the browser window.</figcaption></figure>
     </li>
     <li>
       <p>Let’s add Prokka annotations to the browser image. For this simply expand Prokka’s GFF3 dataset and click on the <em>local</em> link:</p>
 
-      <figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/prokka_item.png" alt="Expanded GFF3 dataset representing Prokka annotations. " width="356" height="549" loading="lazy" /><a target="_blank" href="../../images/prokka_item.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.</figcaption></figure>
+      <figure id="figure-13" style="max-width: 90%;"><img src="../../images/prokka_item.png" alt="Expanded GFF3 dataset representing Prokka annotations. " width="356" height="549" loading="lazy" /><a target="_blank" href="../../images/prokka_item.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.</figcaption></figure>
     </li>
   </ol>
 
@@ -1144,7 +1144,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <p>You will now see the annotations within the browser window:</p>
 
-<figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/igv3.png" alt="Prokka result Visualization. " width="902" height="557" loading="lazy" /><a target="_blank" href="../../images/igv3.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Viewing annotated assembly withing IGV.</figcaption></figure>
+<figure id="figure-14" style="max-width: 90%;"><img src="../../images/igv3.png" alt="Prokka result Visualization. " width="902" height="557" loading="lazy" /><a target="_blank" href="../../images/igv3.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Viewing annotated assembly withing IGV.</figcaption></figure>
 
                 </section>
 
@@ -1411,7 +1411,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/98e1a6aedea81f92ce802571fef5d1f900f68f46">98e1a6a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/def5a1967ee4b3dfe2d49aa3c15eef271d572f3b">def5a19</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1439,7 +1439,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701102786'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701105684'></script>
         
     </body>
 </html>
