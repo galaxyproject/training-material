@@ -99,6 +99,7 @@ The following steps use PacBio {HiFi} and Illumina {Hi-C} data from baker's yeas
 
 The following two steps demonstrate how to upload three PacBio {HiFi} datasets into you Galaxy history.
 
+
 > <hands-on-title><b>Uploading <tt>FASTA</tt> datasets from Zenodo</b></hands-on-title>
 >
 > 1. Create a new history for this tutorial
@@ -108,11 +109,11 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 > 2. Copy the following URLs into clipboard.
 >    - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.)
 >
->   ```
->   https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta
->   https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta
->   https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
->   ```
+>     ```
+>     https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta
+>     https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta
+>     https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
+>     ```
 >
 > 3. Upload datasets into Galaxy.
 >    - set the datatype to `fasta`
@@ -122,6 +123,7 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 >    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fasta_via_urls.md %}
 >
 {: .hands_on}
+
 
 ## Uploading `fastqsanger.gz` datasets from Zenodo
 
@@ -136,10 +138,10 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 > 1. Copy the following URLs into clipboard.
 >     - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
->  ```
->  https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
->  https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
->  ```
+>    ```
+>    https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
+>    https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
+>    ```
 >
 > 2. Upload datasets into Galaxy.
 >    - set the datatype to `fastqsanger.gz`
@@ -149,6 +151,8 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 >    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
 >
 {: .hands_on}
+
+
 
 > <warning-title>These datasets are large!</warning-title>
 > Hi-C datasets are large. It will take some time (~15 min) for them to be fully uploaded. Please, be patient.

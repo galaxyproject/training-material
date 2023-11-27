@@ -67,8 +67,7 @@ From the Cern website:
 
 > The CernVM File System provides a scalable, reliable and low-maintenance software distribution service. It was developed to assist High Energy Physics (HEP) collaborations to deploy software on the worldwide-distributed computing infrastructure used to run data processing applications. CernVM-FS is implemented as a POSIX read-only file system in user space (a FUSE module). Files and directories are hosted on standard web servers and mounted in the universal namespace /cvmfs."
 >
-> -- [https://cernvm.cern.ch/portal/filesystem](https://cernvm.cern.ch/portal/filesystem)
-{: .quote id="cvmfs-quote"}
+{: .quote id="cvmfs-quote" cite="https://cernvm.cern.ch/portal/filesystem"}
 
 > All right, just a quick recap. CVMFS or
 > Cern-VMFS is a distributed file system perfectly

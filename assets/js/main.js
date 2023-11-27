@@ -195,3 +195,10 @@ document.querySelectorAll('div.highlight').forEach((snippet) => {
 var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
     target:function(trigger){return trigger.nextElementSibling;
 }});
+
+// Cited blockquotes
+document.querySelectorAll("blockquote[cite],blockquote[author]").forEach(bq => {
+	var url = bq.getAttribute("cite") ? `<cite class="text-muted"><a href="${url}"><i>Source</i></a></cite>` : "";
+	var author = bq.getAttribute("author") ? "— " + bq.getAttribute("author") + " " : "";
+	bq.insertAdjacentHTML("beforeend", `<footer>${author}${url}</footer>`)
+})

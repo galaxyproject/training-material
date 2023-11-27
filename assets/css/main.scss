@@ -419,9 +419,12 @@ div.language-diff .p {
 	padding-right: 1em;
 }
 
-footer {
+body > footer {
     margin-top: 5em;
     text-align: center;
+}
+
+footer {
     color: var(--text-color-muted);
     font-size: $font-size - 2;
 }
@@ -695,10 +698,13 @@ blockquote {
 		border-bottom: 1px solid var(--border-light);
 		padding: 1.25rem;
 		color: var(--brand-color-contrast);
+		margin-left: -15px; // BS has a 15px margin on cards, this makes the card title fill the card.
+		margin-right: -15px;
 	}
 
 	.card-body {
 		padding: 0em;
+		flex: 0 1 auto; // Override BS for the workflow listing.
 	}
 }
 

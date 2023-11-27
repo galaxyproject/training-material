@@ -81,13 +81,13 @@ weight observed during the first 10 dpw affected the stability microbiome compar
 
 ![Experiment setup](../../images/experiment_setup.png)
 
-To speed up analysis for this tutorial, we will use only a subset of this data. We will look at a single mouse at 10 different
-time points (5 early, 5 late). In order to assess the error rate of the analysis pipeline and experimental setup, the Schloss lab
+To speed up analysis for this tutorial, we will use only a subset of this data. We will look at a single mouse at 20 different
+time points (10 early, 10 late). In order to assess the error rate of the analysis pipeline and experimental setup, the Schloss lab
 additionally sequenced a mock community with a known composition (genomic DNA from 21 bacterial strains). The sequences used
 for this mock sample are contained in the file `HMP_MOCK.v35.fasta`
 
 > <comment-title>Dataset naming scheme</comment-title>
-> For this tutorial, you are given 10 pairs of files. For example, the following pair of files:<br />
+> For this tutorial, you are given 20 pairs of files. For example, the following pair of files:<br />
 >  `F3D0_S188_L001_R1_001.fastq`<br />
 >  `F3D0_S188_L001_R2_001.fastq`
 >

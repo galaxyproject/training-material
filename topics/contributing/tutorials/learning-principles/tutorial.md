@@ -110,11 +110,11 @@ A metaphor is a word from one thematic domain that has been embedded in another 
 We can use metaphors to shape and reveal our way of thinking about learning and, therefore, shape our actions as teachers.
 
 ---
-> *A mind is a fire to be kindled, not a vessel to be filled*
+
+> A mind is a fire to be kindled, not a vessel to be filled
 >
-> Plutard
->
-{: .quote}
+{: .quote author="Plutard"}
+
 ---
 
 How the mind-as-a-vessel-to-be-filled metaphor may affect your way of teaching? You are likely to spend your time in the class at the blackboard, trying to 'transmit' to the students your own knowledge.

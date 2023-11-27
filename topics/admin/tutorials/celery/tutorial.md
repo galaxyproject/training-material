@@ -50,8 +50,7 @@ From the Celery website:
 >
 >Language interoperability can also be achieved exposing an HTTP endpoint and having a task that requests it (webhooks)."
 >
-> -- [https://docs.celeryq.dev/en/stable/getting-started/introduction.html#what-s-a-task-queue](https://docs.celeryq.dev/en/stable/getting-started/introduction.html#what-s-a-task-queue)
-{: .quote}
+{: .quote cite="https://docs.celeryq.dev/en/stable/getting-started/introduction.html#what-s-a-task-queue"}
 
 [A slideshow presentation on this subject is available](slides.html). 
 
