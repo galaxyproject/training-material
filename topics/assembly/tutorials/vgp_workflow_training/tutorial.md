@@ -114,7 +114,7 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 >   https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
 >   ```
 >
-> 1. Upload datasets into Galaxy.
+> 3. Upload datasets into Galaxy.
 >    - set the datatype to `fasta`
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
@@ -134,7 +134,7 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 > <hands-on-title><b>Uploading <tt>fastqsanger.gz</tt> datasets from Zenodo</b></hands-on-title>
 >
 > 1. Copy the following URLs into clipboard.
-     - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
+>     - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >  ```
 >  https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
