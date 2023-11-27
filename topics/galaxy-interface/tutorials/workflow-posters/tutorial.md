@@ -16,7 +16,7 @@ key_points:
 - Basic image compression
 contributors:
 - ElectronicBlueberry
-level: Beginner
+level: Introductory
 subtopic: workflows
 ---
 
