@@ -49,8 +49,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 > {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
 >
 > {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
->`:w
-
+>
 {: .hands_on}
 
 ## About these datasets
@@ -131,11 +130,9 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 >
 > The interface should look like this:
 >
-> ------
 >
-> ![bwa_mem_interface](../../images/collections/bwa_mem_interface_coll_tut.png)
+> ![bwa_mem_interface](../../images/collections/bwa_mem_interface_coll_tut.png "Tool interface")
 >
-> ------
 >
 >    - Click **Run Tool** button
 >
