@@ -101,9 +101,12 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 
 > <hands-on-title><b>Uploading <tt>FASTA</tt> datasets from Zenodo</b></hands-on-title>
 >
-> **Step 1**: Copy the following URLs into clipboard.
+> 1. Create a new history for this tutorial
 >
->(you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.)
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Copy the following URLs into clipboard.
+>    - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.)
 >
 >   ```
 >   https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta
@@ -111,11 +114,13 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 >   https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
 >   ```
 >
-> **Step 2**: Upload datasets into Galaxy.
+> 1. Upload datasets into Galaxy.
+>    - set the datatype to `fasta`
 >
-> These datasets are in `fasta` format. Upload by following the steps shown in the figure below.
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
 >
->![Uploading fasta files in Galaxy]({% link faqs/galaxy/images/upload_fastqsanger_via_url.png %} "Here we upload three fasta files. Compressed (.gz or .bz2) datasets are uploaded in exactly the same fashion by selecting an appropriate datatype (fasta.gz or fasta.bz2)")
+>    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fasta_via_urls.md %}
+>
 {: .hands_on}
 
 ## Uploading `fastqsanger.gz` datasets from Zenodo
@@ -128,20 +133,21 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 > <hands-on-title><b>Uploading <tt>fastqsanger.gz</tt> datasets from Zenodo</b></hands-on-title>
 >
-> **Step 1**: Copy the following URLs into clipboard.
->
->(you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.)
+> 1. Copy the following URLs into clipboard.
+     - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >  ```
 >  https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
 >  https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 >  ```
 >
-> **Step 2**: Upload datasets into Galaxy.
+> 2. Upload datasets into Galaxy.
+>    - set the datatype to `fastqsanger.gz`
 >
-> These datasets are in `fastqsanger.gz` format. Upload by following the steps shown in the figure below.
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
 >
-> ![Uploading Fasta files in Galaxy]({% link /faqs/galaxy/images/upload_fastqsanger_via_url.png %} "Here we upload two fastqsanger.gz files. Uncompressed or bz2 compressed (.bz2) detests are uploaded in exactly the same fashion by selecting an appropriation datatype (fastqsanger or fastasanger.bz2)")
+>    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
+>
 {: .hands_on}
 
 > <warning-title>These datasets are large!</warning-title>
@@ -159,7 +165,7 @@ If everything goes smoothly you history will look like shown in Fig. 4 below. Th
 > <details-title>Other ways to upload the data</details-title>
 > You can obviously upload your own datasets via URLs as illustrated above or from your own computer. In addition, you can upload data from a major repository called [GenomeArk](https://genomeark.org). GenomeArk is integrated directly into Galaxy Upload. To use GenomeArk following the steps in the Tip {% icon tip %} below:
 >
-> {% snippet faqs/galaxy/dataset_upload_from_genomeark.md %}
+> {% snippet faqs/galaxy/datasets_upload_from_genomeark.md %}
 {: .details}
 
 
