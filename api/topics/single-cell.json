@@ -201,7 +201,7 @@
           "name": "Scater",
           "title": "Scater",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Scater: Calculate QC metrics\"];\n  4[\"Scater: plot library QC\"];\n  5[\"Scater: filter SCE\"];\n  6[\"Scater: plot library QC\"];\n  7[\"Scater: PCA plot\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  2 -->|output| 3;\n  3 -->|output_loom| 4;\n  3 -->|output_loom| 5;\n  5 -->|output_loom| 6;\n  5 -->|output_loom| 7;\n"
         }
       ],
@@ -503,7 +503,7 @@
           "name": "Preprocessing of 10X scRNA-seq data",
           "title": "Preprocessing of 10X scRNA-seq data",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"RNA STARSolo\"];\n  7[\"DropletUtils\"];\n  8[\"DropletUtils\"];\n  9[\"DropletUtils\"];\n  0 -->|output| 6;\n  1 -->|output| 6;\n  2 -->|output| 6;\n  3 -->|output| 6;\n  4 -->|output| 6;\n  5 -->|output| 6;\n  6 -->|output_matrix| 7;\n  6 -->|output_barcodes| 7;\n  6 -->|output_genes| 7;\n  6 -->|output_matrix| 8;\n  6 -->|output_barcodes| 8;\n  6 -->|output_genes| 8;\n  6 -->|output_matrix| 9;\n  6 -->|output_barcodes| 9;\n  6 -->|output_genes| 9;\n"
         }
       ],
@@ -691,7 +691,7 @@
           "name": "scATAC-seq Count Matrix Filtering",
           "title": "scATAC-seq Count Matrix Filtering",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"scATAC-seq Preprocessing\"];\n  2[\"scATAC-seq Preprocessing\"];\n  3[\"scATAC-seq Preprocessing\"];\n  4[\"Plot\"];\n  5[\"scATAC-seq Preprocessing\"];\n  6[\"scATAC-seq Preprocessing\"];\n  7[\"scATAC-seq Preprocessing\"];\n  8[\"scATAC-seq Preprocessing\"];\n  9[\"scATAC-seq Preprocessing\"];\n  10[\"scATAC-seq Preprocessing\"];\n  11[\"scATAC-seq Preprocessing\"];\n  12[\"Plot\"];\n  0 -->|output| 1;\n  1 -->|anndata_out| 2;\n  2 -->|anndata_out| 3;\n  3 -->|anndata_out| 4;\n  3 -->|anndata_out| 5;\n  3 -->|anndata_out| 6;\n  3 -->|anndata_out| 7;\n  3 -->|anndata_out| 8;\n  8 -->|anndata_out| 9;\n  9 -->|anndata_out| 10;\n  10 -->|anndata_out| 11;\n  11 -->|anndata_out| 12;\n"
         },
         {
@@ -713,7 +713,7 @@
           "name": "scATAC-seq FASTQ to Count Matrix",
           "title": "scATAC-seq FASTQ to Count Matrix",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Sinto barcode\"];\n  4[\"FastQC\"];\n  5[\"FastQC\"];\n  6[\"Map with BWA-MEM\"];\n  7[\"Sinto fragments\"];\n  8[\"bedtools SortBED\"];\n  9[\"MACS2 callpeak\"];\n  10[\"Unique\"];\n  11[\"Build count matrix\"];\n  12[\"Inspect AnnData\"];\n  13[\"Inspect AnnData\"];\n  14[\"Inspect AnnData\"];\n  15[\"Inspect AnnData\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  2 -->|output| 3;\n  3 -->|read1_out| 4;\n  3 -->|read2_out| 5;\n  3 -->|read1_out| 6;\n  3 -->|read2_out| 6;\n  6 -->|bam_output| 7;\n  7 -->|fragments| 8;\n  8 -->|output| 9;\n  9 -->|output_narrowpeaks| 10;\n  8 -->|output| 11;\n  10 -->|outfile| 11;\n  11 -->|anndata_out| 12;\n  11 -->|anndata_out| 13;\n  11 -->|anndata_out| 14;\n  11 -->|anndata_out| 15;\n"
         }
       ],
@@ -1008,7 +1008,7 @@
           "name": "CelSeq2: Multi Batch (mm10)",
           "title": "CelSeq2: Multi Batch (mm10)",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Flatten Collection\"];\n  4[\"CelSeq2: Single Batch mm10\"];\n  5[\"Column Join\"];\n  0 -->|output| 3;\n  1 -->|output| 4;\n  3 -->|output| 4;\n  2 -->|output| 4;\n  4 -->|9:out_counts| 5;\n"
         },
         {
@@ -1026,7 +1026,7 @@
           "name": "CelSeq2: Single Batch (mm10)",
           "title": "CelSeq2: Single Batch (mm10)",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"UMI-tools extract\"];\n  4[\"RNA STAR\"];\n  5[\"Filter\"];\n  6[\"featureCounts\"];\n  7[\"UMI-tools count\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  2 -->|output| 4;\n  3 -->|out2| 4;\n  4 -->|mapped_reads| 5;\n  5 -->|out_file1| 6;\n  2 -->|output| 6;\n  6 -->|output_bam| 7;\n"
         }
       ],
@@ -1294,7 +1294,7 @@
           "name": "MuSiC-Deconvolution: Data generation | sc | matrix + ESet",
           "title": "MuSiC-Deconvolution: Data generation | sc | matrix + ESet",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"EBI SCXA Data Retrieval\"];\n  1[\"Input dataset\"];\n  2[\"Scanpy Read10x\"];\n  3[\"Inspect AnnData\"];\n  4[\"Transpose\"];\n  5[\"annotateMyIDs\"];\n  6[\"1st step removed - Convert from Ensembl to GeneSymbol, summing duplicate genes\"];\n  7[\"Construct Expression Set Object\"];\n  8[\"Manipulate Expression Set Object\"];\n  9[\"Manipulate Expression Set Object\"];\n  0 -->|barcode_tsv| 2;\n  0 -->|genes_tsv| 2;\n  0 -->|matrix_mtx| 2;\n  2 -->|output_h5| 3;\n  3 -->|X| 4;\n  4 -->|out_file| 5;\n  5 -->|out_tab| 6;\n  4 -->|out_file| 6;\n  6 -->|Gene Symbol Count Matrix| 7;\n  1 -->|output| 7;\n  7 -->|out_rds| 8;\n  7 -->|out_rds| 9;\n"
         },
         {
@@ -1321,7 +1321,7 @@
           "name": "MuSiC-Deconvolution: Data generation | sc | metadata",
           "title": "MuSiC-Deconvolution: Data generation | sc | metadata",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"EBI SCXA Data Retrieval\"];\n  1[\"Cut\"];\n  2[\"Add line to file\"];\n  3[\"Regex Find And Replace\"];\n  4[\"Join two Datasets\"];\n  5[\"Advanced Cut\"];\n  0 -->|design_tsv| 1;\n  0 -->|barcode_tsv| 2;\n  1 -->|out_file1| 3;\n  2 -->|outfile| 4;\n  3 -->|out_file1| 4;\n  4 -->|out_file1| 5;\n"
         }
       ],
@@ -1654,7 +1654,7 @@
           "name": "Generating a single cell matrix using Alevin 1.9",
           "title": "Generating a single cell matrix using Alevin 1.9",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"GTF2GeneList\"];\n  5[\"GTF2GeneList\"];\n  6[\"Alevin\"];\n  7[\"Alevin\"];\n  8[\"Droplet barcode rank plot\"];\n  9[\"Droplet barcode rank plot\"];\n  10[\"salmonKallistoMtxTo10x\"];\n  11[\"Join two Datasets\"];\n  12[\"Cut\"];\n  13[\"DropletUtils Read10x\"];\n  14[\"DropletUtils emptyDrops\"];\n  15[\"SCEasy convert\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  3 -->|output| 5;\n  0 -->|output| 6;\n  1 -->|output| 6;\n  4 -->|fasta_output| 6;\n  4 -->|feature_annotation| 6;\n  0 -->|output| 7;\n  1 -->|output| 7;\n  4 -->|fasta_output| 7;\n  4 -->|feature_annotation| 7;\n  6 -->|quants_mat_mtx| 8;\n  6 -->|raw_cb_frequency_txt| 9;\n  7 -->|quants_mat_rows_txt| 10;\n  7 -->|quants_mat_cols_txt| 10;\n  7 -->|quants_mat_mtx| 10;\n  10 -->|genes_out| 11;\n  5 -->|feature_annotation| 11;\n  11 -->|out_file1| 12;\n  10 -->|barcodes_out| 13;\n  12 -->|out_file1| 13;\n  10 -->|matrix_out| 13;\n  13 -->|output_rds| 14;\n  14 -->|output_rdata| 15;\n"
         },
         {
@@ -1676,7 +1676,7 @@
           "name": "CS1_Generating a single cell matrix using Alevin",
           "title": "CS1_Generating a single cell matrix using Alevin",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"GTF2GeneList\"];\n  5[\"GTF2GeneList\"];\n  6[\"Alevin\"];\n  7[\"Alevin\"];\n  8[\"Droplet barcode rank plot\"];\n  9[\"Droplet barcode rank plot\"];\n  10[\"salmonKallistoMtxTo10x\"];\n  11[\"Join two Datasets\"];\n  12[\"Cut\"];\n  13[\"DropletUtils Read10x\"];\n  14[\"DropletUtils emptyDrops\"];\n  15[\"SCEasy convert\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  3 -->|output| 5;\n  0 -->|output| 6;\n  1 -->|output| 6;\n  4 -->|fasta_output| 6;\n  4 -->|feature_annotation| 6;\n  0 -->|output| 7;\n  1 -->|output| 7;\n  4 -->|fasta_output| 7;\n  4 -->|feature_annotation| 7;\n  6 -->|quants_mat_mtx| 8;\n  6 -->|raw_cb_frequency_txt| 9;\n  7 -->|quants_mat_rows_txt| 10;\n  7 -->|quants_mat_cols_txt| 10;\n  7 -->|quants_mat_mtx| 10;\n  10 -->|genes_out| 11;\n  5 -->|feature_annotation| 11;\n  11 -->|out_file1| 12;\n  10 -->|barcodes_out| 13;\n  12 -->|out_file1| 13;\n  10 -->|matrix_out| 13;\n  13 -->|output_rds| 14;\n  14 -->|output_rdata| 15;\n"
         }
       ],
@@ -1982,7 +1982,7 @@
           "name": "MuSiC Workflow",
           "title": "MuSiC Workflow",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input parameter\"];\n  3[\"Input dataset\"];\n  4[\"Input parameter\"];\n  5[\"Input parameter\"];\n  6[\"Input dataset\"];\n  7[\"Input dataset\"];\n  8[\"Construct Expression Set Object\"];\n  9[\"Construct Expression Set Object\"];\n  10[\"Inspect Expression Set Object\"];\n  11[\"Inspect Expression Set Object\"];\n  12[\"Inspect Expression Set Object\"];\n  13[\"MuSiC\"];\n  14[\"MuSiC\"];\n  0 -->|output| 8;\n  2 -->|output| 8;\n  1 -->|output| 8;\n  4 -->|output| 9;\n  3 -->|output| 9;\n  8 -->|out_rds| 10;\n  8 -->|out_rds| 11;\n  9 -->|out_rds| 12;\n  9 -->|out_rds| 13;\n  5 -->|output| 13;\n  8 -->|out_rds| 13;\n  9 -->|out_rds| 14;\n  6 -->|output| 14;\n  7 -->|output| 14;\n  8 -->|out_rds| 14;\n"
         }
       ],
@@ -2333,7 +2333,7 @@
           "name": "RaceID Workflow",
           "title": "RaceID Workflow",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Initial processing using RaceID\"];\n  2[\"Clustering using RaceID\"];\n  3[\"Lineage computation using StemID\"];\n  4[\"Cluster Inspection using RaceID\"];\n  5[\"Cluster Inspection using RaceID\"];\n  6[\"Cluster Inspection using RaceID\"];\n  7[\"Lineage Branch Analysis using StemID\"];\n  8[\"Lineage Branch Analysis using StemID\"];\n  0 -->|output| 1;\n  1 -->|outrdat| 2;\n  2 -->|outrdat| 3;\n  2 -->|outrdat| 4;\n  2 -->|outrdat| 5;\n  2 -->|outrdat| 6;\n  3 -->|outrdat| 7;\n  3 -->|outrdat| 8;\n"
         }
       ],
@@ -2545,7 +2545,7 @@
           "name": "MuSiC-Deconvolution: Data generation | bulk | ESet",
           "title": "MuSiC-Deconvolution: Data generation | bulk | ESet",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Remove columns\"];\n  1[\"Advanced Cut\"];\n  2[\"annotateMyIDs\"];\n  3[\"Regex Find And Replace\"];\n  4[\"Copy of Convert from Ensembl to GeneSymbol, summing duplicate genes\"];\n  5[\"Construct Expression Set Object\"];\n  6[\"Manipulate Expression Set Object\"];\n  7[\"Manipulate Expression Set Object\"];\n  0 -->|output_tabular| 2;\n  1 -->|output| 3;\n  2 -->|out_tab| 4;\n  0 -->|output_tabular| 4;\n  4 -->|Gene Symbol Count Matrix| 5;\n  3 -->|out_file1| 5;\n  5 -->|out_rds| 6;\n  5 -->|out_rds| 7;\n"
         }
       ],
@@ -2869,7 +2869,7 @@
           "name": "Clustering 3K PBMCs With Scanpy",
           "title": "Clustering 3K PBMCs With Scanpy",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Import Anndata and loom\"];\n  5[\"Filter\"];\n  6[\"Inspect AnnData\"];\n  7[\"Inspect AnnData\"];\n  8[\"Inspect AnnData\"];\n  9[\"Text reformatting\"];\n  10[\"Replace Text\"];\n  11[\"Filter\"];\n  12[\"Select last\"];\n  13[\"Cut\"];\n  14[\"Concatenate datasets\"];\n  15[\"Manipulate AnnData\"];\n  16[\"Inspect and manipulate\"];\n  17[\"Inspect AnnData\"];\n  18[\"Plot\"];\n  19[\"Plot\"];\n  20[\"Plot\"];\n  21[\"Plot\"];\n  22[\"Filter\"];\n  23[\"Inspect AnnData\"];\n  24[\"Filter\"];\n  25[\"Inspect AnnData\"];\n  26[\"Manipulate AnnData\"];\n  27[\"Inspect AnnData\"];\n  28[\"Normalize\"];\n  29[\"Inspect and manipulate\"];\n  30[\"Manipulate AnnData\"];\n  31[\"Filter\"];\n  32[\"Plot\"];\n  33[\"Inspect AnnData\"];\n  34[\"Manipulate AnnData\"];\n  35[\"Inspect AnnData\"];\n  36[\"Remove confounders\"];\n  37[\"Inspect and manipulate\"];\n  38[\"Cluster, infer trajectories and embed\"];\n  39[\"Plot\"];\n  40[\"Plot\"];\n  41[\"Plot\"];\n  42[\"Plot\"];\n  43[\"Inspect and manipulate\"];\n  44[\"Inspect AnnData\"];\n  45[\"Cluster, infer trajectories and embed\"];\n  46[\"Plot\"];\n  47[\"Cluster, infer trajectories and embed\"];\n  48[\"Inspect and manipulate\"];\n  49[\"Plot\"];\n  50[\"Inspect and manipulate\"];\n  51[\"Plot\"];\n  52[\"Plot\"];\n  53[\"Inspect and manipulate\"];\n  54[\"Plot\"];\n  55[\"Inspect AnnData\"];\n  56[\"Inspect AnnData\"];\n  57[\"Plot\"];\n  58[\"Plot\"];\n  59[\"Inspect AnnData\"];\n  60[\"Plot\"];\n  61[\"Plot\"];\n  62[\"Plot\"];\n  63[\"Inspect AnnData\"];\n  64[\"Plot\"];\n  65[\"Manipulate AnnData\"];\n  66[\"Inspect AnnData\"];\n  67[\"Plot\"];\n  68[\"Plot\"];\n  69[\"Plot\"];\n  70[\"Plot\"];\n  1 -->|output| 4;\n  3 -->|output| 4;\n  2 -->|output| 4;\n  4 -->|anndata| 5;\n  4 -->|anndata| 6;\n  5 -->|anndata_out| 7;\n  5 -->|anndata_out| 8;\n  7 -->|var| 9;\n  9 -->|outfile| 10;\n  9 -->|outfile| 11;\n  10 -->|outfile| 12;\n  12 -->|outfile| 13;\n  0 -->|output| 14;\n  13 -->|out_file1| 14;\n  5 -->|anndata_out| 15;\n  14 -->|out_file1| 15;\n  15 -->|anndata| 16;\n  15 -->|anndata| 17;\n  16 -->|anndata_out| 18;\n  16 -->|anndata_out| 19;\n  16 -->|anndata_out| 20;\n  16 -->|anndata_out| 21;\n  16 -->|anndata_out| 22;\n  22 -->|anndata_out| 23;\n  22 -->|anndata_out| 24;\n  24 -->|anndata_out| 25;\n  24 -->|anndata_out| 26;\n  26 -->|anndata| 27;\n  26 -->|anndata| 28;\n  28 -->|anndata_out| 29;\n  29 -->|anndata_out| 30;\n  30 -->|anndata| 31;\n  31 -->|anndata_out| 32;\n  31 -->|anndata_out| 33;\n  31 -->|anndata_out| 34;\n  34 -->|anndata| 35;\n  34 -->|anndata| 36;\n  36 -->|anndata_out| 37;\n  37 -->|anndata_out| 38;\n  38 -->|anndata_out| 39;\n  38 -->|anndata_out| 40;\n  38 -->|anndata_out| 41;\n  38 -->|anndata_out| 42;\n  38 -->|anndata_out| 43;\n  43 -->|anndata_out| 44;\n  43 -->|anndata_out| 45;\n  45 -->|anndata_out| 46;\n  45 -->|anndata_out| 47;\n  47 -->|anndata_out| 48;\n  47 -->|anndata_out| 49;\n  47 -->|anndata_out| 50;\n  47 -->|anndata_out| 51;\n  47 -->|anndata_out| 52;\n  47 -->|anndata_out| 53;\n  48 -->|anndata_out| 54;\n  48 -->|anndata_out| 55;\n  50 -->|anndata_out| 56;\n  50 -->|anndata_out| 57;\n  50 -->|anndata_out| 58;\n  50 -->|anndata_out| 59;\n  50 -->|anndata_out| 60;\n  50 -->|anndata_out| 61;\n  53 -->|anndata_out| 62;\n  53 -->|anndata_out| 63;\n  53 -->|anndata_out| 64;\n  53 -->|anndata_out| 65;\n  65 -->|anndata| 66;\n  65 -->|anndata| 67;\n  65 -->|anndata| 68;\n  65 -->|anndata| 69;\n  65 -->|anndata| 70;\n"
         }
       ],
@@ -3197,7 +3197,7 @@
           "name": "CS2_Combining datasets after pre-processing",
           "title": "CS2_Combining datasets after pre-processing",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"Input dataset\"];\n  7[\"EBI SCXA Data Retrieval\"];\n  8[\"Manipulate AnnData\"];\n  9[\"Scanpy Read10x\"];\n  10[\"Inspect AnnData\"];\n  11[\"Inspect AnnData\"];\n  12[\"Inspect AnnData\"];\n  13[\"Replace Text\"];\n  14[\"Replace Text\"];\n  15[\"Cut\"];\n  16[\"Cut\"];\n  17[\"Paste\"];\n  18[\"Manipulate AnnData\"];\n  19[\"Manipulate AnnData\"];\n  20[\"AnnData Operations\"];\n  0 -->|output| 8;\n  1 -->|output| 8;\n  2 -->|output| 8;\n  3 -->|output| 8;\n  4 -->|output| 8;\n  5 -->|output| 8;\n  6 -->|output| 8;\n  7 -->|barcode_tsv| 9;\n  7 -->|design_tsv| 9;\n  7 -->|genes_tsv| 9;\n  7 -->|matrix_mtx| 9;\n  8 -->|anndata| 10;\n  8 -->|anndata| 11;\n  8 -->|anndata| 12;\n  11 -->|obs| 13;\n  11 -->|obs| 14;\n  13 -->|outfile| 15;\n  14 -->|outfile| 16;\n  16 -->|out_file1| 17;\n  15 -->|out_file1| 17;\n  8 -->|anndata| 18;\n  17 -->|out_file1| 18;\n  18 -->|anndata| 19;\n  19 -->|anndata| 20;\n"
         }
       ],
@@ -3450,7 +3450,7 @@
           "name": "Cell Cycle Regression Workflow",
           "title": "Cell Cycle Regression Workflow",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Inspect AnnData\"];\n  5[\"Concatenate datasets\"];\n  6[\"Inspect and manipulate\"];\n  7[\"Table Compute\"];\n  8[\"Add column\"];\n  9[\"Scanpy RegressOut\"];\n  10[\"Add column\"];\n  11[\"Join\"];\n  12[\"Sort\"];\n  13[\"Table Compute\"];\n  14[\"Concatenate datasets\"];\n  15[\"Manipulate AnnData\"];\n  16[\"Manipulate AnnData\"];\n  17[\"Manipulate AnnData\"];\n  18[\"Manipulate AnnData\"];\n  19[\"Cluster, infer trajectories and embed\"];\n  20[\"Cluster, infer trajectories and embed\"];\n  21[\"Plot\"];\n  22[\"Plot\"];\n  0 -->|output| 4;\n  1 -->|output| 5;\n  2 -->|output| 5;\n  0 -->|output| 6;\n  2 -->|output| 6;\n  1 -->|output| 6;\n  4 -->|var| 7;\n  5 -->|out_file1| 8;\n  6 -->|anndata_out| 9;\n  7 -->|table| 10;\n  10 -->|out_file1| 11;\n  8 -->|out_file1| 11;\n  11 -->|output| 12;\n  12 -->|out_file1| 13;\n  3 -->|output| 14;\n  13 -->|table| 14;\n  6 -->|anndata_out| 15;\n  14 -->|out_file1| 15;\n  9 -->|output_h5ad| 16;\n  14 -->|out_file1| 16;\n  15 -->|anndata| 17;\n  16 -->|anndata| 18;\n  17 -->|anndata| 19;\n  18 -->|anndata| 20;\n  19 -->|anndata_out| 21;\n  20 -->|anndata_out| 22;\n"
         }
       ],
@@ -4277,7 +4277,7 @@
           "name": "scRNA Plant Analysis",
           "title": "scRNA Plant Analysis",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input parameter\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input parameter\"];\n  4[\"Input parameter\"];\n  5[\"Input parameter\"];\n  6[\"Input parameter\"];\n  7[\"Import Anndata and loom\"];\n  8[\"Import Anndata and loom\"];\n  9[\"Manipulate AnnData\"];\n  10[\"Manipulate AnnData\"];\n  11[\"Inspect and manipulate\"];\n  12[\"Filter\"];\n  13[\"Plot\"];\n  14[\"Filter\"];\n  15[\"Manipulate AnnData\"];\n  16[\"Manipulate AnnData\"];\n  17[\"Manipulate AnnData\"];\n  18[\"Normalize\"];\n  19[\"Inspect and manipulate\"];\n  20[\"Remove confounders\"];\n  21[\"Inspect and manipulate\"];\n  22[\"Cluster, infer trajectories and embed\"];\n  23[\"Inspect and manipulate\"];\n  24[\"Cluster, infer trajectories and embed\"];\n  25[\"Cluster, infer trajectories and embed\"];\n  26[\"Plot\"];\n  27[\"Plot\"];\n  28[\"Plot\"];\n  29[\"Manipulate AnnData\"];\n  30[\"Plot\"];\n  31[\"Plot\"];\n  32[\"Plot\"];\n  1 -->|output| 7;\n  2 -->|output| 8;\n  7 -->|anndata| 9;\n  8 -->|anndata| 9;\n  9 -->|anndata| 10;\n  10 -->|anndata| 11;\n  11 -->|anndata_out| 12;\n  3 -->|output| 12;\n  11 -->|anndata_out| 13;\n  12 -->|anndata_out| 14;\n  4 -->|output| 14;\n  14 -->|anndata_out| 15;\n  5 -->|output| 15;\n  15 -->|anndata| 16;\n  6 -->|output| 16;\n  16 -->|anndata| 17;\n  17 -->|anndata| 18;\n  18 -->|anndata_out| 19;\n  19 -->|anndata_out| 20;\n  20 -->|anndata_out| 21;\n  21 -->|anndata_out| 22;\n  22 -->|anndata_out| 23;\n  23 -->|anndata_out| 24;\n  24 -->|anndata_out| 25;\n  0 -->|output| 25;\n  24 -->|anndata_out| 26;\n  24 -->|anndata_out| 27;\n  25 -->|anndata_out| 28;\n  25 -->|anndata_out| 29;\n  25 -->|anndata_out| 30;\n  29 -->|anndata| 31;\n  29 -->|anndata| 32;\n"
         }
       ],
@@ -4487,7 +4487,7 @@
           "name": "Scanpy Parameter Iterator workflow full (imported from URL)",
           "title": "Scanpy Parameter Iterator workflow full (imported from URL)",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Scanpy ParameterIterator\"];\n  2[\"Input dataset\"];\n  3[\"Scanpy ParameterIterator\"];\n  4[\"Input dataset\"];\n  5[\"Scanpy ParameterIterator\"];\n  6[\"Scanpy ComputeGraph\"];\n  7[\"Scanpy RunTSNE\"];\n  8[\"Scanpy FindCluster\"];\n  9[\"Scanpy RunTSNE\"];\n  10[\"Scanpy RunUMAP\"];\n  11[\"Scanpy PlotEmbed\"];\n  12[\"Scanpy PlotEmbed\"];\n  13[\"Scanpy PlotEmbed\"];\n  14[\"Scanpy RunUMAP\"];\n  15[\"Scanpy FindCluster\"];\n  16[\"Scanpy FindCluster\"];\n  17[\"Scanpy PlotEmbed\"];\n  18[\"Scanpy PlotEmbed\"];\n  0 -->|output| 6;\n  1 -->|parameter_iteration| 6;\n  2 -->|output| 7;\n  3 -->|parameter_iteration| 7;\n  4 -->|output| 8;\n  5 -->|parameter_iteration| 8;\n  6 -->|output_h5ad| 9;\n  7 -->|output_h5ad| 10;\n  8 -->|output_h5ad| 11;\n  8 -->|output_h5ad| 12;\n  8 -->|output_h5ad| 13;\n  9 -->|output_h5ad| 14;\n  10 -->|output_h5ad| 15;\n  14 -->|output_h5ad| 16;\n  15 -->|output_h5ad| 17;\n  16 -->|output_h5ad| 18;\n"
         }
       ],
@@ -4752,7 +4752,7 @@
           "name": "CS3_Filter, Plot and Explore Single-cell RNA-seq Data",
           "title": "CS3_Filter, Plot and Explore Single-cell RNA-seq Data",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Inspect AnnData\"];\n  2[\"Scanpy FilterCells\"];\n  3[\"Plot\"];\n  4[\"Plot\"];\n  5[\"Plot\"];\n  6[\"Plot\"];\n  7[\"Inspect AnnData\"];\n  8[\"Plot\"];\n  9[\"Inspect AnnData\"];\n  10[\"Plot\"];\n  11[\"Plot\"];\n  12[\"Scanpy FilterCells\"];\n  13[\"Inspect AnnData\"];\n  14[\"Inspect AnnData\"];\n  15[\"Scanpy FilterCells\"];\n  16[\"Plot\"];\n  17[\"Inspect AnnData\"];\n  18[\"Scanpy FilterGenes\"];\n  19[\"Plot\"];\n  20[\"Inspect AnnData\"];\n  21[\"Scanpy NormaliseData\"];\n  22[\"Scanpy FindVariableGenes\"];\n  23[\"Scanpy ScaleData\"];\n  24[\"Scanpy RunPCA\"];\n  25[\"Plot\"];\n  26[\"Scanpy ComputeGraph\"];\n  27[\"Scanpy RunTSNE\"];\n  28[\"Scanpy RunUMAP\"];\n  29[\"Scanpy FindCluster\"];\n  30[\"Scanpy FindMarkers\"];\n  31[\"Scanpy FindMarkers\"];\n  32[\"Scanpy PlotEmbed\"];\n  33[\"Scanpy PlotEmbed\"];\n  34[\"Manipulate AnnData\"];\n  35[\"Scanpy PlotEmbed\"];\n  36[\"Inspect AnnData\"];\n  37[\"AnnData Operations\"];\n  38[\"Join two Datasets\"];\n  39[\"Join two Datasets\"];\n  40[\"AnnData Operations\"];\n  41[\"Cut\"];\n  42[\"Cut\"];\n  43[\"Scanpy PlotEmbed\"];\n  0 -->|output| 1;\n  0 -->|output| 2;\n  0 -->|output| 3;\n  0 -->|output| 4;\n  0 -->|output| 5;\n  0 -->|output| 6;\n  0 -->|output| 7;\n  0 -->|output| 8;\n  0 -->|output| 9;\n  0 -->|output| 10;\n  2 -->|output_h5ad| 11;\n  2 -->|output_h5ad| 12;\n  2 -->|output_h5ad| 13;\n  12 -->|output_h5ad| 14;\n  12 -->|output_h5ad| 15;\n  12 -->|output_h5ad| 16;\n  15 -->|output_h5ad| 17;\n  15 -->|output_h5ad| 18;\n  15 -->|output_h5ad| 19;\n  18 -->|output_h5ad| 20;\n  18 -->|output_h5ad| 21;\n  21 -->|output_h5ad| 22;\n  22 -->|output_h5ad| 23;\n  23 -->|output_h5ad| 24;\n  24 -->|output_h5ad| 25;\n  24 -->|output_h5ad| 26;\n  26 -->|output_h5ad| 27;\n  27 -->|output_h5ad| 28;\n  28 -->|output_h5ad| 29;\n  29 -->|output_h5ad| 30;\n  29 -->|output_h5ad| 31;\n  30 -->|output_h5ad| 32;\n  30 -->|output_h5ad| 33;\n  30 -->|output_h5ad| 34;\n  30 -->|output_h5ad| 35;\n  30 -->|output_h5ad| 36;\n  34 -->|anndata| 37;\n  30 -->|output_h5ad| 37;\n  30 -->|output_tsv| 38;\n  36 -->|var| 38;\n  31 -->|output_tsv| 39;\n  36 -->|var| 39;\n  37 -->|output_h5ad| 40;\n  38 -->|out_file1| 41;\n  39 -->|out_file1| 42;\n  40 -->|output_h5ad| 43;\n"
         },
         {
@@ -4779,7 +4779,7 @@
           "name": "Filter, Plot and Explore Single-cell RNA-seq Data updated",
           "title": "Filter, Plot and Explore Single-cell RNA-seq Data updated",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Inspect AnnData\"];\n  2[\"Scanpy FilterCells\"];\n  3[\"Plot\"];\n  4[\"Plot\"];\n  5[\"Plot\"];\n  6[\"Plot\"];\n  7[\"Inspect AnnData\"];\n  8[\"Plot\"];\n  9[\"Inspect AnnData\"];\n  10[\"Plot\"];\n  11[\"Plot\"];\n  12[\"Scanpy FilterCells\"];\n  13[\"Inspect AnnData\"];\n  14[\"Inspect AnnData\"];\n  15[\"Scanpy FilterCells\"];\n  16[\"Plot\"];\n  17[\"Inspect AnnData\"];\n  18[\"Scanpy FilterGenes\"];\n  19[\"Plot\"];\n  20[\"Inspect AnnData\"];\n  21[\"Scanpy NormaliseData\"];\n  22[\"Scanpy FindVariableGenes\"];\n  23[\"Scanpy ScaleData\"];\n  24[\"Scanpy RunPCA\"];\n  25[\"Plot\"];\n  26[\"Scanpy ComputeGraph\"];\n  27[\"Scanpy RunTSNE\"];\n  28[\"Scanpy RunUMAP\"];\n  29[\"Scanpy FindCluster\"];\n  30[\"Scanpy FindMarkers\"];\n  31[\"Scanpy FindMarkers\"];\n  32[\"Scanpy PlotEmbed\"];\n  33[\"Scanpy PlotEmbed\"];\n  34[\"Manipulate AnnData\"];\n  35[\"Scanpy PlotEmbed\"];\n  36[\"Inspect AnnData\"];\n  37[\"AnnData Operations\"];\n  38[\"Join two Datasets\"];\n  39[\"Join two Datasets\"];\n  40[\"AnnData Operations\"];\n  41[\"Cut\"];\n  42[\"Cut\"];\n  43[\"Scanpy PlotEmbed\"];\n  0 -->|output| 1;\n  0 -->|output| 2;\n  0 -->|output| 3;\n  0 -->|output| 4;\n  0 -->|output| 5;\n  0 -->|output| 6;\n  0 -->|output| 7;\n  0 -->|output| 8;\n  0 -->|output| 9;\n  0 -->|output| 10;\n  2 -->|output_h5ad| 11;\n  2 -->|output_h5ad| 12;\n  2 -->|output_h5ad| 13;\n  12 -->|output_h5ad| 14;\n  12 -->|output_h5ad| 15;\n  12 -->|output_h5ad| 16;\n  15 -->|output_h5ad| 17;\n  15 -->|output_h5ad| 18;\n  15 -->|output_h5ad| 19;\n  18 -->|output_h5ad| 20;\n  18 -->|output_h5ad| 21;\n  21 -->|output_h5ad| 22;\n  22 -->|output_h5ad| 23;\n  23 -->|output_h5ad| 24;\n  24 -->|output_h5ad| 25;\n  24 -->|output_h5ad| 26;\n  26 -->|output_h5ad| 27;\n  27 -->|output_h5ad| 28;\n  28 -->|output_h5ad| 29;\n  29 -->|output_h5ad| 30;\n  29 -->|output_h5ad| 31;\n  30 -->|output_h5ad| 32;\n  30 -->|output_h5ad| 33;\n  30 -->|output_h5ad| 34;\n  30 -->|output_h5ad| 35;\n  30 -->|output_h5ad| 36;\n  34 -->|anndata| 37;\n  30 -->|output_h5ad| 37;\n  30 -->|output_tsv| 38;\n  36 -->|var| 38;\n  31 -->|output_tsv| 39;\n  36 -->|var| 39;\n  37 -->|output_h5ad| 40;\n  38 -->|out_file1| 41;\n  39 -->|out_file1| 42;\n  40 -->|output_h5ad| 43;\n"
         }
       ],
@@ -5208,7 +5208,7 @@
           "name": "EBI Single Cell Expression Atlas files to AnnData",
           "title": "EBI Single Cell Expression Atlas files to AnnData",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"EBI SCXA Data Retrieval\"];\n  1[\"Column Regex Find And Replace\"];\n  2[\"Search in textfiles\"];\n  3[\"Scanpy Read10x\"];\n  4[\"AnnData Operations\"];\n  0 -->|design_tsv| 1;\n  0 -->|genes_tsv| 2;\n  0 -->|barcode_tsv| 3;\n  1 -->|out_file1| 3;\n  0 -->|genes_tsv| 3;\n  0 -->|matrix_mtx| 3;\n  3 -->|output_h5ad| 4;\n"
         }
       ],
@@ -5773,7 +5773,7 @@
           "name": "MuSiC-Deconvolution: Compare",
           "title": "MuSiC-Deconvolution: Compare",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"MuSiC Compare\"];\n  6[\"MuSiC Compare\"];\n  7[\"MuSiC Compare\"];\n  2 -->|output| 5;\n  1 -->|output| 5;\n  3 -->|output| 5;\n  0 -->|output| 5;\n  2 -->|output| 6;\n  3 -->|output| 6;\n  1 -->|output| 6;\n  2 -->|output| 7;\n  3 -->|output| 7;\n  4 -->|output| 7;\n"
         }
       ],
@@ -6299,7 +6299,7 @@
           "name": "AnnData object to Monocle input files",
           "title": "AnnData object to Monocle input files",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Inspect AnnData\"];\n  3[\"Inspect AnnData\"];\n  4[\"Inspect AnnData\"];\n  5[\"Filter\"];\n  6[\"Column Regex Find And Replace\"];\n  7[\"Cut\"];\n  8[\"Cut\"];\n  9[\"Join two Datasets\"];\n  10[\"Advanced Cut\"];\n  11[\"Transpose\"];\n  12[\"Join two Datasets\"];\n  13[\"Advanced Cut\"];\n  0 -->|output| 2;\n  0 -->|output| 3;\n  1 -->|output| 4;\n  2 -->|obs| 5;\n  3 -->|var| 6;\n  5 -->|out_file1| 7;\n  6 -->|out_file1| 8;\n  7 -->|out_file1| 9;\n  4 -->|X| 9;\n  9 -->|out_file1| 10;\n  10 -->|output| 11;\n  8 -->|out_file1| 12;\n  11 -->|out_file| 12;\n  12 -->|out_file1| 13;\n"
         },
         {
@@ -6317,7 +6317,7 @@
           "name": "Monocle3 workflow",
           "title": "Monocle3 workflow",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Monocle3 create\"];\n  4[\"Monocle3 preprocess\"];\n  5[\"Monocle3 reduceDim\"];\n  6[\"Monocle3 partition\"];\n  7[\"Monocle3 plotCells\"];\n  8[\"Monocle3 plotCells\"];\n  9[\"Monocle3 plotCells\"];\n  10[\"Monocle3 plotCells\"];\n  11[\"Monocle3 top markers\"];\n  12[\"Monocle3 plotCells\"];\n  13[\"Monocle3 plotCells\"];\n  14[\"Monocle3 plotCells\"];\n  15[\"Monocle3 learnGraph\"];\n  16[\"Monocle3 plotCells\"];\n  17[\"Monocle3 orderCells\"];\n  18[\"Monocle3 diffExp\"];\n  19[\"Monocle3 plotCells\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  2 -->|output| 3;\n  3 -->|output_rds| 4;\n  4 -->|output_rds| 5;\n  5 -->|output_rds| 6;\n  5 -->|output_rds| 7;\n  5 -->|output_rds| 8;\n  5 -->|output_rds| 9;\n  5 -->|output_rds| 10;\n  6 -->|output_rds| 11;\n  6 -->|output_rds| 12;\n  6 -->|output_rds| 13;\n  6 -->|output_rds| 14;\n  6 -->|output_rds| 15;\n  15 -->|output_rds| 16;\n  15 -->|output_rds| 17;\n  17 -->|output_rds| 18;\n  17 -->|output_rds| 19;\n"
         },
         {
@@ -6339,7 +6339,7 @@
           "name": "Trajectory analysis using Monocle3 - full tutorial workflow",
           "title": "Trajectory analysis using Monocle3 - full tutorial workflow",
           "test_results": null,
-          "modified": "2023-11-27 17:21:29 +0000",
+          "modified": "2023-11-27 17:29:32 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Inspect AnnData\"];\n  3[\"Inspect AnnData\"];\n  4[\"Inspect AnnData\"];\n  5[\"Filter\"];\n  6[\"Column Regex Find And Replace\"];\n  7[\"Cut\"];\n  8[\"Cut\"];\n  9[\"Join two Datasets\"];\n  10[\"Advanced Cut\"];\n  11[\"Transpose\"];\n  12[\"Join two Datasets\"];\n  13[\"Advanced Cut\"];\n  14[\"Monocle3 create\"];\n  15[\"Monocle3 preprocess\"];\n  16[\"Monocle3 reduceDim\"];\n  17[\"Monocle3 partition\"];\n  18[\"Monocle3 plotCells\"];\n  19[\"Monocle3 plotCells\"];\n  20[\"Monocle3 plotCells\"];\n  21[\"Monocle3 plotCells\"];\n  22[\"Monocle3 top markers\"];\n  23[\"Monocle3 plotCells\"];\n  24[\"Monocle3 plotCells\"];\n  25[\"Monocle3 plotCells\"];\n  26[\"Monocle3 learnGraph\"];\n  27[\"Monocle3 plotCells\"];\n  28[\"Monocle3 orderCells\"];\n  29[\"Monocle3 diffExp\"];\n  30[\"Monocle3 plotCells\"];\n  0 -->|output| 2;\n  0 -->|output| 3;\n  1 -->|output| 4;\n  2 -->|obs| 5;\n  3 -->|var| 6;\n  5 -->|out_file1| 7;\n  6 -->|out_file1| 8;\n  7 -->|out_file1| 9;\n  4 -->|X| 9;\n  9 -->|out_file1| 10;\n  10 -->|output| 11;\n  8 -->|out_file1| 12;\n  11 -->|out_file| 12;\n  12 -->|out_file1| 13;\n  5 -->|out_file1| 14;\n  13 -->|output| 14;\n  6 -->|out_file1| 14;\n  14 -->|output_rds| 15;\n  15 -->|output_rds| 16;\n  16 -->|output_rds| 17;\n  16 -->|output_rds| 18;\n  16 -->|output_rds| 19;\n  16 -->|output_rds| 20;\n  16 -->|output_rds| 21;\n  17 -->|output_rds| 22;\n  17 -->|output_rds| 23;\n  17 -->|output_rds| 24;\n  17 -->|output_rds| 25;\n  17 -->|output_rds| 26;\n  26 -->|output_rds| 27;\n  26 -->|output_rds| 28;\n  28 -->|output_rds| 29;\n  28 -->|output_rds| 30;\n"
         }
       ],
