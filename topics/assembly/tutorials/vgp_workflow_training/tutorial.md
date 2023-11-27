@@ -225,7 +225,7 @@ All analyses described in this tutorial are performed using *workflows*--chains 
 >
 > {% snippet faqs/galaxy/workflows_import_from_workflowhub.md %}
 >
-> {% snippet faqs/galaxy/workflows_import_from_url.md %}
+> {% snippet faqs/galaxy/workflows_import.md %}
 >
 {: .details}
 
