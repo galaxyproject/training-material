@@ -15,10 +15,12 @@ The best places to ask your analysis questions are:
 - [Galaxy Help forum](https://help.galaxyproject.org)
 - [GTN Matrix chat](https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im)
 
+**Note:** For questions about errors you've encountered in Galaxy, please see our [troubleshooting page]({% link faqs/galaxy/analysis_troubleshooting.md %}).
+
 
 #### How to ask
 
-The more detail you provide, the more likely you are to get a good answer; provide information about:
+The more detail you provide, the better we can help you. Please provide information about:
 - **Your data and experiment** e.g. "paired-end RNASeq, mouse, 16 triplicates, 2 timepoints", etc
 - **Your goal and research question** e.g. "I want to detect diffentially expressed genes between these two groups and generate a volcano plot"
 - **What you have already tried?** Do you already know which tools you want to use? Did you already try some but they didn't work? Why not? Did you find good papers describing something similiar to what you want to do? etc.
@@ -30,9 +32,9 @@ The more detail you provide, the more likely you are to get a good answer; provi
 
 #### Before you ask
 - Check the [Galaxy Help forum](https://help.galaxyproject.org/) to see if others have already asked a similar question before.
-- [Search]({% link search2.html %}) the [GTN website](https://training.galaxyproject.org) for a tutorial that matches what you want to do, and work your way through that. Even if it doesn't doe exactly what you need, you usually learn a lot along the way that will help you adapt it to your own data.
+- [Search]({% link search2.html %}) the [GTN website](https://training.galaxyproject.org) for a tutorial that matches what you want to do, and work your way through that. Even if it doesn't doe exactly what you need, you usually learn a lot along the way that will help you adapt it to your own data or research question.
 
 #### Be patient
 Please remember that most of the people answering questions on Matrix chat and the help forum are **volunteers** from the community. They take time out of their busy days to help you. They may also be in a different time zone, so it may take some time to get answers. Please always be patient and kind to each other, and adhere to our [code of conduct](https://galaxyproject.org/community/coc/).
 
-If you have a question about an error you've encountered in Galaxy, please see our [troublshooting page]({% link faqs/galaxy/analysis_troubleshooting.md %}).
+
