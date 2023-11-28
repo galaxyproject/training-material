@@ -22,6 +22,7 @@ key_points:
 contributions:
   authorship:
     - Brilator
+    - CMR248
   editing:
     - shiltemann
 
