@@ -270,7 +270,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    -        env:
 >    -        - name: LC_ALL
 >    -          value: C
->    -        - name: SINGULARITY_CACHEDIR
+>    -        - name: APPTAINER_CACHEDIR
 >    -          value: /tmp/singularity
 >    -        - name: APPTAINER_TMPDIR
 >    -          value: /tmp
@@ -342,7 +342,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +      # Ensuring a consistent collation environment is good for reproducibility.
 >    +      LC_ALL: C
 >    +      # The cache directory holds the docker containers that get converted
->    +      SINGULARITY_CACHEDIR: /tmp/singularity
+>    +      APPTAINER_CACHEDIR: /tmp/singularity
 >    +      # Singularity uses a temporary directory to build the squashfs filesystem
 >    +      APPTAINER_TMPDIR: /tmp
 >    +  slurm:
@@ -437,7 +437,7 @@ Now that we've configured the resource requirements for a single tool, let's see
 >    {: data-commit="Add TPV default inherits"}
 >
 >    We have defined a `global` section specifying that all tools and destinations should inherit from a specified `default`. We have then defined a tool named `default`, whose properties
->    are implicitly inherited by all tools at runtime. This means that our `testing` tool will also inherit from this default tool, but it explicitly overrides cores
+>    are implicitly inherited by all tools at runtime. This means that our `testing` tool will also inherit from this default tool, but it explicitly overrides cores.
 >    We can also explicitly specify an `inherits` clause if we wish to extend a specific tool or destination, as previously shown in the destinations section.
 >
 > 2. Run the Galaxy playbook. When the new `tpv_rules_local.yml` is copied, TPV will automatically pickup the changes without requiring a restart of Galaxy.
@@ -508,8 +508,8 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    {: data-commit="TPV clamp max cores and mem"}
 >
 >    These changes indicate that the destination will accept jobs that are up to `max_accepted_cores: 24` and `max_accepted_mem: 256`. If the tool requests resources that exceed these limits, the tool will be rejected
->    by the destination. However, once accepted, the resources will be forcibly clamped down to 16 and 128 at most because of the `max_cores` and `max_mem` clauses. (E.g. a tool requesting 24 cores would only be submitted with 16 cores at maximum.) Therefore, a trick that can be used here to support
->    job resource requirements in the shared database that are much larger than your destination can actually support, is to combine `max_accepted_cores/mem/gpus with `max_cores/mem/gpus` to accept the job and then
+>    by the destination. However, once accepted, the resources will be forcibly clamped down to 2 and 8 at most because of the `max_cores` and `max_mem` clauses. (E.g. a tool requesting 24 cores would only be submitted with 16 cores at maximum.) Therefore, a trick that can be used here to support
+>    job resource requirements in the shared database that are much larger than your destination can actually support, is to combine `max_accepted_cores/mem/gpus` with `max_cores/mem/gpus` to accept the job and then
 >    clamp it down to a supported range. This allows even the largest resource requirement in the shared database to be accomodated.
 >
 >    > <comment-title>Clamping in practice</comment-title>
