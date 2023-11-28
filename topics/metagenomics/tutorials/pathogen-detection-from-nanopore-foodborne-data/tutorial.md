@@ -33,6 +33,8 @@ contributions:
    funding:
     - gallantries
     - eosc-life
+   affiliations:
+    - uni-freiburg
 ---
 
 
