@@ -11,6 +11,7 @@ requirements:
       - unicycler-assembly
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "I just assembled a genome. How does it compare with already sequenced genomes?"
   - "How do I find rearranged, inserted, or deleted regions?"
