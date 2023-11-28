@@ -154,7 +154,7 @@
           "name": "Intro to Genome Assembly",
           "title": "Intro to Genome Assembly",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"FastQC\"];\n  4[\"FastQC\"];\n  5[\"FASTQ interlacer\"];\n  6[\"MultiQC\"];\n  7[\"velveth\"];\n  8[\"velvetg\"];\n  9[\"Quast\"];\n  0 -->|output| 3;\n  1 -->|output| 4;\n  0 -->|output| 5;\n  1 -->|output| 5;\n  3 -->|text_file| 6;\n  4 -->|text_file| 6;\n  5 -->|outfile_pairs| 7;\n  7 -->|out_file1| 8;\n  2 -->|output| 9;\n  8 -->|contigs| 9;\n"
         }
       ],
@@ -407,7 +407,7 @@
           "name": "Chloroplast-genome-assembly-and-annotation",
           "title": "Chloroplast-genome-assembly-and-annotation",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Flye assembly\"];\n  5[\"NanoPlot\"];\n  6[\"Map with BWA-MEM\"];\n  7[\"Fasta Statistics\"];\n  8[\"Bandage Info\"];\n  9[\"Bandage Image\"];\n  10[\"pilon\"];\n  11[\"Fasta Statistics\"];\n  12[\"Map with BWA-MEM\"];\n  13[\"Map with BWA-MEM\"];\n  14[\"Prokka\"];\n  15[\"JBrowse\"];\n  16[\"JBrowse\"];\n  1 -->|output| 4;\n  1 -->|output| 5;\n  0 -->|output| 6;\n  4 -->|consensus| 6;\n  4 -->|consensus| 7;\n  4 -->|assembly_gfa| 8;\n  4 -->|assembly_gfa| 9;\n  6 -->|bam_output| 10;\n  4 -->|consensus| 10;\n  10 -->|output_fasta| 11;\n  2 -->|output| 12;\n  10 -->|output_fasta| 12;\n  3 -->|output| 13;\n  10 -->|output_fasta| 13;\n  10 -->|output_fasta| 14;\n  10 -->|output_fasta| 15;\n  12 -->|bam_output| 15;\n  13 -->|bam_output| 15;\n  10 -->|output_fasta| 16;\n  14 -->|out_gff| 16;\n"
         }
       ],
@@ -669,7 +669,7 @@
           "name": "Unicycler training",
           "title": "Unicycler training",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"FastQC\"];\n  4[\"FastQC\"];\n  5[\"Create assemblies with Unicycler\"];\n  6[\"MultiQC\"];\n  7[\"Quast\"];\n  8[\"Prokka\"];\n  0 -->|output| 3;\n  1 -->|output| 4;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  1 -->|output| 5;\n  3 -->|text_file| 6;\n  4 -->|text_file| 6;\n  5 -->|assembly| 7;\n  5 -->|assembly| 8;\n"
         }
       ],
@@ -931,7 +931,7 @@
           "name": "VGP assembly: training workflow",
           "title": "VGP assembly: training workflow",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset collection\"];\n  4[\"GFA to FASTA\"];\n  5[\"GFA to FASTA\"];\n  6[\"Cutadapt\"];\n  7[\"Busco\"];\n  8[\"Busco\"];\n  9[\"Purge overlaps\"];\n  10[\"Collapse Collection\"];\n  11[\"Meryl\"];\n  12[\"Map with minimap2\"];\n  13[\"Quast\"];\n  14[\"Map with minimap2\"];\n  15[\"Meryl\"];\n  16[\"Purge overlaps\"];\n  17[\"Meryl\"];\n  18[\"Merqury\"];\n  19[\"Purge overlaps\"];\n  20[\"GenomeScope\"];\n  21[\"Purge overlaps\"];\n  22[\"Replace\"];\n  23[\"Compute\"];\n  24[\"Bionano Hybrid Scaffold\"];\n  25[\"Concatenate datasets\"];\n  26[\"Busco\"];\n  27[\"Replace\"];\n  28[\"Compute\"];\n  29[\"Concatenate datasets\"];\n  30[\"Purge overlaps\"];\n  31[\"Map with minimap2\"];\n  32[\"Search in textfiles\"];\n  33[\"Advanced Cut\"];\n  34[\"Advanced Cut\"];\n  35[\"BWA-MEM2\"];\n  36[\"BWA-MEM2\"];\n  37[\"Replace\"];\n  38[\"Quast\"];\n  39[\"Busco\"];\n  40[\"Map with minimap2\"];\n  41[\"Purge overlaps\"];\n  42[\"Convert\"];\n  43[\"Filter and merge\"];\n  44[\"Purge overlaps\"];\n  45[\"Advanced Cut\"];\n  46[\"bedtools BAM to BED\"];\n  47[\"PretextMap\"];\n  48[\"Purge overlaps\"];\n  49[\"Sort\"];\n  50[\"Pretext Snapshot\"];\n  51[\"Busco\"];\n  52[\"Quast\"];\n  53[\"SALSA\"];\n  54[\"BWA-MEM2\"];\n  55[\"BWA-MEM2\"];\n  56[\"Busco\"];\n  57[\"Quast\"];\n  58[\"Filter and merge\"];\n  59[\"PretextMap\"];\n  60[\"Pretext Snapshot\"];\n  3 -->|output| 6;\n  4 -->|out_fa| 7;\n  5 -->|out_fa| 8;\n  5 -->|out_fa| 9;\n  6 -->|out1| 10;\n  6 -->|out1| 11;\n  6 -->|out1| 12;\n  5 -->|out_fa| 12;\n  5 -->|out_fa| 13;\n  4 -->|out_fa| 13;\n  6 -->|out1| 13;\n  9 -->|split_fasta| 14;\n  9 -->|split_fasta| 14;\n  11 -->|read_db| 15;\n  12 -->|alignment_output| 16;\n  15 -->|read_db| 17;\n  5 -->|out_fa| 18;\n  4 -->|out_fa| 18;\n  15 -->|read_db| 18;\n  16 -->|pbcstat_cov| 19;\n  16 -->|calcuts_cutoff| 19;\n  14 -->|alignment_output| 19;\n  17 -->|read_db_hist| 20;\n  19 -->|purge_dups_bed| 21;\n  5 -->|out_fa| 21;\n  20 -->|summary| 22;\n  20 -->|model_params| 23;\n  0 -->|output| 24;\n  21 -->|get_seqs_purged| 24;\n  21 -->|get_seqs_hap| 25;\n  4 -->|out_fa| 25;\n  21 -->|get_seqs_purged| 26;\n  22 -->|outfile| 27;\n  23 -->|out_file1| 28;\n  24 -->|ngs_contigs_scaffold_trimmed| 29;\n  24 -->|ngs_contigs_not_scaffolded_trimmed| 29;\n  25 -->|out_file1| 30;\n  10 -->|output| 31;\n  25 -->|out_file1| 31;\n  27 -->|outfile| 32;\n  28 -->|out_file1| 33;\n  28 -->|out_file1| 34;\n  1 -->|output| 35;\n  29 -->|out_file1| 35;\n  2 -->|output| 36;\n  29 -->|out_file1| 36;\n  29 -->|out_file1| 37;\n  29 -->|out_file1| 38;\n  10 -->|output| 38;\n  29 -->|out_file1| 39;\n  30 -->|split_fasta| 40;\n  30 -->|split_fasta| 40;\n  31 -->|alignment_output| 41;\n  32 -->|output| 42;\n  36 -->|bam_output| 43;\n  35 -->|bam_output| 43;\n  41 -->|pbcstat_cov| 44;\n  41 -->|calcuts_cutoff| 44;\n  40 -->|alignment_output| 44;\n  42 -->|out_file1| 45;\n  43 -->|outfile| 46;\n  43 -->|outfile| 47;\n  44 -->|purge_dups_bed| 48;\n  25 -->|out_file1| 48;\n  46 -->|output| 49;\n  47 -->|pretext_map_out| 50;\n  48 -->|get_seqs_purged| 51;\n  21 -->|get_seqs_purged| 52;\n  48 -->|get_seqs_purged| 52;\n  10 -->|output| 52;\n  49 -->|out_file1| 53;\n  37 -->|outfile| 53;\n  1 -->|output| 54;\n  53 -->|scaffolds_fasta| 54;\n  2 -->|output| 55;\n  53 -->|scaffolds_fasta| 55;\n  53 -->|scaffolds_fasta| 56;\n  53 -->|scaffolds_fasta| 57;\n  10 -->|output| 57;\n  55 -->|bam_output| 58;\n  54 -->|bam_output| 58;\n  58 -->|outfile| 59;\n  59 -->|pretext_map_out| 60;\n"
         }
       ],
@@ -1391,7 +1391,7 @@
           "name": "Genome Assembly of MRSA using Illumina MiSeq Data",
           "title": "Genome Assembly of MRSA using Illumina MiSeq Data",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"staramr\"];\n  11[\"Bowtie2\"];\n  12[\"Quast\"];\n  13[\"Bandage Image\"];\n  14[\"Prokka\"];\n  15[\"MultiQC\"];\n  16[\"Select\"];\n  17[\"Table to GFF3\"];\n  18[\"JBrowse\"];\n  19[\"JBrowse\"];\n  2[\"Convert compressed file to uncompressed.\"];\n  3[\"Convert compressed file to uncompressed.\"];\n  4[\"FastQC\"];\n  5[\"Trimmomatic\"];\n  6[\"FastQC\"];\n  7[\"Shovill\"];\n  8[\"FastQC\"];\n  9[\"FastQC\"];\n  7 -->|contigs| 10;\n  5 -->|fastq_out_r1_paired| 11;\n  5 -->|fastq_out_r2_paired| 11;\n  7 -->|contigs| 11;\n  7 -->|contigs| 12;\n  7 -->|contigs_graph| 13;\n  7 -->|contigs| 14;\n  6 -->|text_file| 15;\n  4 -->|text_file| 15;\n  9 -->|text_file| 15;\n  8 -->|text_file| 15;\n  10 -->|detailed_summary| 16;\n  16 -->|out_file1| 17;\n  7 -->|contigs| 18;\n  14 -->|out_gff| 18;\n  11 -->|output| 18;\n  17 -->|output| 18;\n  7 -->|contigs| 19;\n  14 -->|out_gff| 19;\n  11 -->|output| 19;\n  17 -->|output| 19;\n  0 -->|output| 2;\n  1 -->|output| 3;\n  2 -->|output1| 4;\n  3 -->|output1| 5;\n  2 -->|output1| 5;\n  3 -->|output1| 6;\n  5 -->|fastq_out_r1_paired| 7;\n  5 -->|fastq_out_r2_paired| 7;\n  5 -->|fastq_out_r2_paired| 8;\n  5 -->|fastq_out_r1_paired| 9;\n"
         }
       ],
@@ -1748,7 +1748,7 @@
           "name": "assembly_with_preprocessing",
           "title": "assembly_with_preprocessing",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset collection\"];\n  10[\"Samtools fastx\"];\n  11[\"Samtools fastx\"];\n  12[\"Collapse Collection\"];\n  13[\"Zip Collection\"];\n  14[\"Collapse Collection\"];\n  15[\"Collapse Collection\"];\n  16[\"seqtk_sample\"];\n  17[\"seqtk_sample\"];\n  18[\"Create assemblies with Unicycler\"];\n  19[\"Bandage Info\"];\n  2[\"fastp\"];\n  20[\"Filter sequences by length\"];\n  21[\"Bandage Image\"];\n  3[\"NanoPlot\"];\n  4[\"Map with minimap2\"];\n  5[\"MultiQC\"];\n  6[\"Bowtie2\"];\n  7[\"Samtools view\"];\n  8[\"Samtools stats\"];\n  9[\"Samtools view\"];\n  7 -->|outputsam| 10;\n  9 -->|outputsam| 11;\n  10 -->|nonspecific| 12;\n  11 -->|forward| 13;\n  11 -->|reverse| 13;\n  11 -->|forward| 14;\n  11 -->|reverse| 15;\n  14 -->|output| 16;\n  15 -->|output| 17;\n  12 -->|output| 18;\n  16 -->|default| 18;\n  17 -->|default| 18;\n  18 -->|assembly_graph| 19;\n  0 -->|output| 2;\n  18 -->|assembly| 20;\n  18 -->|assembly_graph| 21;\n  1 -->|output| 3;\n  1 -->|output| 4;\n  2 -->|report_json| 5;\n  2 -->|output_paired_coll| 6;\n  4 -->|alignment_output| 7;\n  4 -->|alignment_output| 8;\n  6 -->|output| 9;\n"
         },
         {
@@ -1766,7 +1766,7 @@
           "name": "assembly_with_preprocessing_and_sra_download",
           "title": "assembly_with_preprocessing_and_sra_download",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"Samtools stats\"];\n  11[\"Samtools view\"];\n  12[\"Samtools fastx\"];\n  13[\"Samtools fastx\"];\n  14[\"Collapse Collection\"];\n  15[\"Zip Collection\"];\n  16[\"Collapse Collection\"];\n  17[\"Collapse Collection\"];\n  18[\"seqtk_sample\"];\n  19[\"seqtk_sample\"];\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  20[\"Create assemblies with Unicycler\"];\n  21[\"Bandage Info\"];\n  22[\"Bandage Image\"];\n  23[\"Filter sequences by length\"];\n  3[\"Faster Download and Extract Reads in FASTQ\"];\n  4[\"fastp\"];\n  5[\"NanoPlot\"];\n  6[\"Map with minimap2\"];\n  7[\"MultiQC\"];\n  8[\"Bowtie2\"];\n  9[\"Samtools view\"];\n  6 -->|alignment_output| 10;\n  8 -->|output| 11;\n  9 -->|outputsam| 12;\n  11 -->|outputsam| 13;\n  12 -->|nonspecific| 14;\n  13 -->|forward| 15;\n  13 -->|reverse| 15;\n  13 -->|forward| 16;\n  13 -->|reverse| 17;\n  16 -->|output| 18;\n  17 -->|output| 19;\n  0 -->|output| 2;\n  14 -->|output| 20;\n  18 -->|default| 20;\n  19 -->|default| 20;\n  20 -->|assembly_graph| 21;\n  20 -->|assembly_graph| 22;\n  20 -->|assembly| 23;\n  1 -->|output| 3;\n  2 -->|list_paired| 4;\n  3 -->|output_collection| 5;\n  3 -->|output_collection| 6;\n  4 -->|report_json| 7;\n  4 -->|output_paired_coll| 8;\n  6 -->|alignment_output| 9;\n"
         }
       ],
@@ -2055,7 +2055,7 @@
           "name": "Assembly polishing",
           "title": "Assembly polishing",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input parameter\"];\n  3[\"Input dataset\"];\n  4[\"Racon polish with long reads, x4\"];\n  5[\"Fasta Statistics\"];\n  6[\"medaka consensus pipeline\"];\n  7[\"Fasta Statistics\"];\n  8[\"Racon polish with Illumina reads (R1 only), x2\"];\n  9[\"Fasta Statistics\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  2 -->|output| 4;\n  4 -->|Assembly polished by long reads using Racon| 5;\n  4 -->|Assembly polished by long reads using Racon| 6;\n  1 -->|output| 6;\n  6 -->|out_consensus| 7;\n  6 -->|out_consensus| 8;\n  3 -->|output| 8;\n  8 -->|Assembly polished by short reads using Racon| 9;\n"
         },
         {
@@ -2077,7 +2077,7 @@
           "name": "Assembly with Flye",
           "title": "Assembly with Flye",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Flye assembly\"];\n  2[\"Fasta Statistics\"];\n  3[\"Bandage Image\"];\n  4[\"Quast\"];\n  5[\"Bar chart\"];\n  0 -->|output| 1;\n  1 -->|consensus| 2;\n  1 -->|assembly_gfa| 3;\n  1 -->|consensus| 4;\n  1 -->|assembly_info| 5;\n"
         },
         {
@@ -2099,7 +2099,7 @@
           "name": "Assess genome quality",
           "title": "Assess genome quality",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Busco\"];\n  3[\"Quast\"];\n  0 -->|output| 2;\n  1 -->|output| 3;\n  0 -->|output| 3;\n"
         },
         {
@@ -2121,7 +2121,7 @@
           "name": "Combined workflows for large genome assembly",
           "title": "Combined workflows for large genome assembly",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input parameter\"];\n  4[\"Input dataset\"];\n  5[\"kmer counting - meryl\"];\n  6[\"Data QC\"];\n  7[\"Trim and filter reads - fastp\"];\n  8[\"Assembly with Flye\"];\n  9[\"Assembly polishing\"];\n  10[\"Assess genome quality\"];\n  1 -->|output| 5;\n  1 -->|output| 6;\n  2 -->|output| 6;\n  0 -->|output| 6;\n  1 -->|output| 7;\n  2 -->|output| 7;\n  0 -->|output| 7;\n  7 -->|fastp filtered long reads| 8;\n  8 -->|Flye assembly on input dataset(s) (consensus)| 9;\n  7 -->|fastp filtered R1 reads| 9;\n  7 -->|fastp filtered long reads| 9;\n  3 -->|output| 9;\n  9 -->|8:Assembly polished by short reads using Racon| 10;\n  4 -->|output| 10;\n"
         },
         {
@@ -2143,7 +2143,7 @@
           "name": "Data QC",
           "title": "Data QC",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"NanoPlot\"];\n  4[\"FastQC\"];\n  5[\"FastQC\"];\n  6[\"MultiQC\"];\n  0 -->|output| 3;\n  1 -->|output| 4;\n  2 -->|output| 5;\n  4 -->|text_file| 6;\n  5 -->|text_file| 6;\n"
         },
         {
@@ -2165,7 +2165,7 @@
           "name": "Racon polish with Illumina reads (R1 only), x2",
           "title": "Racon polish with Illumina reads (R1 only), x2",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Map with minimap2\"];\n  3[\"Racon\"];\n  4[\"Map with minimap2\"];\n  5[\"Racon\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  0 -->|output| 3;\n  2 -->|alignment_output| 3;\n  1 -->|output| 3;\n  1 -->|output| 4;\n  3 -->|consensus| 4;\n  3 -->|consensus| 5;\n  4 -->|alignment_output| 5;\n  1 -->|output| 5;\n"
         },
         {
@@ -2187,7 +2187,7 @@
           "name": "Racon polish with long reads, x4",
           "title": "Racon polish with long reads, x4",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input parameter\"];\n  3[\"Map with minimap2\"];\n  4[\"Racon\"];\n  5[\"Map with minimap2\"];\n  6[\"Racon\"];\n  7[\"Map with minimap2\"];\n  8[\"Racon\"];\n  9[\"Map with minimap2\"];\n  10[\"Racon\"];\n  2 -->|output| 3;\n  1 -->|output| 3;\n  0 -->|output| 3;\n  0 -->|output| 4;\n  3 -->|alignment_output| 4;\n  1 -->|output| 4;\n  2 -->|output| 5;\n  1 -->|output| 5;\n  4 -->|consensus| 5;\n  4 -->|consensus| 6;\n  5 -->|alignment_output| 6;\n  1 -->|output| 6;\n  2 -->|output| 7;\n  1 -->|output| 7;\n  6 -->|consensus| 7;\n  6 -->|consensus| 8;\n  7 -->|alignment_output| 8;\n  1 -->|output| 8;\n  2 -->|output| 9;\n  1 -->|output| 9;\n  8 -->|consensus| 9;\n  8 -->|consensus| 10;\n  9 -->|alignment_output| 10;\n  1 -->|output| 10;\n"
         },
         {
@@ -2209,7 +2209,7 @@
           "name": "Trim and filter reads - fastp",
           "title": "Trim and filter reads - fastp",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"fastp\"];\n  4[\"fastp\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  2 -->|output| 4;\n"
         },
         {
@@ -2231,7 +2231,7 @@
           "name": "kmer counting - meryl",
           "title": "kmer counting - meryl",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Meryl\"];\n  2[\"Meryl\"];\n  3[\"GenomeScope\"];\n  0 -->|output| 1;\n  1 -->|read_db| 2;\n  2 -->|read_db_hist| 3;\n"
         }
       ],
@@ -2505,7 +2505,7 @@
           "name": "Genome Assembly of MRSA using Oxford Nanopore MinION Data (imported from uploaded file)",
           "title": "Genome Assembly of MRSA using Oxford Nanopore MinION Data (imported from uploaded file)",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Convert compressed file to uncompressed.\"];\n  2[\"filtlong\"];\n  3[\"NanoPlot\"];\n  4[\"NanoPlot\"];\n  5[\"Flye assembly\"];\n  6[\"Bandage Image\"];\n  7[\"Quast\"];\n  8[\"staramr\"];\n  9[\"Prokka\"];\n  10[\"Select\"];\n  11[\"Table to GFF3\"];\n  12[\"JBrowse\"];\n  0 -->|output| 1;\n  1 -->|output1| 2;\n  1 -->|output1| 3;\n  2 -->|outfile| 4;\n  2 -->|outfile| 5;\n  5 -->|assembly_gfa| 6;\n  5 -->|consensus| 7;\n  5 -->|consensus| 8;\n  5 -->|consensus| 9;\n  8 -->|detailed_summary| 10;\n  10 -->|out_file1| 11;\n  5 -->|consensus| 12;\n  9 -->|out_gff| 12;\n  11 -->|output| 12;\n"
         }
       ],
@@ -2844,7 +2844,7 @@
           "name": "Ecoli Comparison",
           "title": "Ecoli Comparison",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"Collapse Collection\"];\n  11[\"Text transformation\"];\n  12[\"Add column\"];\n  13[\"LASTZ\"];\n  14[\"random_lines1\"];\n  15[\"Filter\"];\n  16[\"Search in textfiles\"];\n  17[\"Concatenate datasets\"];\n  18[\"Cut\"];\n  19[\"Text transformation\"];\n  2[\"Input dataset collection\"];\n  20[\"Datamash\"];\n  21[\"Compute sequence length\"];\n  22[\"Collapse Collection\"];\n  23[\"Merge Columns\"];\n  24[\"Select\"];\n  25[\"Sort\"];\n  26[\"Collapse Collection\"];\n  27[\"Cut\"];\n  28[\"Cut\"];\n  29[\"Concatenate datasets\"];\n  3[\"Input dataset collection\"];\n  30[\"SortBED\"];\n  31[\"ComplementBed\"];\n  32[\"Filter\"];\n  33[\"Filter\"];\n  34[\"Intersect intervals\"];\n  35[\"Join two Datasets\"];\n  4[\"Input dataset collection\"];\n  5[\"Filter sequences by length\"];\n  6[\"LASTZ\"];\n  7[\"Collapse Collection\"];\n  8[\"Select\"];\n  9[\"Text transformation\"];\n  6 -->|output| 10;\n  7 -->|output| 11;\n  8 -->|out_file1| 12;\n  9 -->|output| 13;\n  3 -->|output| 13;\n  10 -->|output| 14;\n  10 -->|output| 15;\n  11 -->|output| 16;\n  11 -->|output| 17;\n  9 -->|output| 17;\n  12 -->|out_file1| 18;\n  13 -->|output| 19;\n  15 -->|out_file1| 20;\n  17 -->|out_file1| 21;\n  18 -->|out_file1| 22;\n  19 -->|output| 23;\n  20 -->|out_file| 24;\n  21 -->|output| 25;\n  23 -->|out_file1| 26;\n  26 -->|output| 27;\n  26 -->|output| 28;\n  27 -->|out_file1| 29;\n  28 -->|out_file1| 29;\n  29 -->|out_file1| 30;\n  25 -->|outfile| 31;\n  30 -->|output| 31;\n  31 -->|output| 32;\n  32 -->|out_file1| 33;\n  33 -->|out_file1| 34;\n  22 -->|output| 34;\n  34 -->|output| 35;\n  1 -->|output| 35;\n  0 -->|output| 5;\n  2 -->|output| 6;\n  0 -->|output| 6;\n  3 -->|output| 7;\n  4 -->|output| 8;\n  5 -->|output| 9;\n"
         }
       ],
@@ -3136,7 +3136,7 @@
           "name": "Metagenomics assembly tutorial workflow",
           "title": "Metagenomics assembly tutorial workflow",
           "test_results": null,
-          "modified": "2023-11-28 00:09:46 +0000",
+          "modified": "2023-11-28 14:29:27 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"metaSPAdes\"];\n  2[\"MEGAHIT\"];\n  3[\"Bowtie2\"];\n  4[\"megahit contig2fastg\"];\n  5[\"Quast\"];\n  6[\"Bandage Image\"];\n  7[\"Bandage Info\"];\n  8[\"Column join\"];\n  0 -->|output| 1;\n  0 -->|output| 2;\n  0 -->|output| 3;\n  2 -->|output| 3;\n  2 -->|output| 4;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  4 -->|fastg| 6;\n  4 -->|fastg| 7;\n  7 -->|outfile| 8;\n"
         },
         {
@@ -3154,7 +3154,7 @@
           "name": "workflow-generate-dataset-for-assembly-tutorial",
           "title": "workflow-generate-dataset-for-assembly-tutorial",
           "test_results": null,
-          "modified": "2023-11-28 00:09:46 +0000",
+          "modified": "2023-11-28 14:29:27 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Cutadapt\"];\n  3[\"MEGAHIT\"];\n  4[\"Bowtie2\"];\n  5[\"BAM filter\"];\n  6[\"BAM filter\"];\n  7[\"Convert, Merge, Randomize\"];\n  8[\"Convert, Merge, Randomize\"];\n  9[\"Select random lines\"];\n  10[\"Select random lines\"];\n  11[\"Filter Tabular\"];\n  12[\"Filter Tabular\"];\n  13[\"Unique\"];\n  14[\"Unique\"];\n  15[\"Concatenate datasets\"];\n  16[\"seqtk_subseq\"];\n  17[\"seqtk_subseq\"];\n  18[\"FastQC\"];\n  19[\"FastQC\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  2 -->|out1| 3;\n  2 -->|out2| 3;\n  2 -->|out1| 4;\n  2 -->|out2| 4;\n  3 -->|output| 4;\n  4 -->|output| 5;\n  4 -->|output| 6;\n  5 -->|outfile| 7;\n  6 -->|outfile| 8;\n  7 -->|out_file1| 9;\n  8 -->|out_file1| 10;\n  9 -->|out_file1| 11;\n  10 -->|out_file1| 12;\n  11 -->|output| 13;\n  12 -->|output| 14;\n  13 -->|outfile| 15;\n  14 -->|outfile| 15;\n  2 -->|out1| 16;\n  15 -->|out_file1| 16;\n  2 -->|out2| 17;\n  15 -->|out_file1| 17;\n  16 -->|default| 18;\n  17 -->|default| 19;\n"
         }
       ],
@@ -3484,7 +3484,7 @@
           "name": "Post-assembly workflow",
           "title": "Post-assembly workflow",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input parameter\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset collection\"];\n  4[\"Input parameter\"];\n  5[\"Input dataset\"];\n  6[\"Input dataset\"];\n  7[\"Input dataset collection\"];\n  8[\"Input dataset collection\"];\n  9[\"Meryl\"];\n  10[\"Collapse Collection\"];\n  11[\"BlobToolKit\"];\n  12[\"gfastats\"];\n  13[\"Convert compressed file to uncompressed.\"];\n  14[\"gfastats\"];\n  15[\"Diamond\"];\n  16[\"Collapse Collection\"];\n  17[\"Collapse Collection\"];\n  18[\"Meryl\"];\n  19[\"HISAT2\"];\n  20[\"Smudgeplot\"];\n  21[\"Replace\"];\n  22[\"Bandage Image\"];\n  23[\"BWA-MEM2\"];\n  24[\"BWA-MEM2\"];\n  25[\"Merqury\"];\n  26[\"Meryl\"];\n  27[\"Samtools stats\"];\n  28[\"Busco\"];\n  29[\"Filter and merge\"];\n  30[\"Extract dataset\"];\n  31[\"Extract dataset\"];\n  32[\"Extract dataset\"];\n  33[\"Extract dataset\"];\n  34[\"Extract dataset\"];\n  35[\"GenomeScope\"];\n  36[\"BlobToolKit\"];\n  37[\"PretextMap\"];\n  38[\"Interactive BlobToolKit\"];\n  39[\"Pretext Snapshot\"];\n  3 -->|output| 9;\n  3 -->|output| 10;\n  5 -->|output| 11;\n  0 -->|output| 11;\n  2 -->|output| 11;\n  1 -->|output| 11;\n  5 -->|output| 12;\n  5 -->|output| 13;\n  5 -->|output| 14;\n  5 -->|output| 15;\n  6 -->|output| 15;\n  7 -->|output| 16;\n  8 -->|output| 17;\n  9 -->|read_db| 18;\n  10 -->|output| 19;\n  5 -->|output| 19;\n  10 -->|output| 20;\n  13 -->|output1| 21;\n  14 -->|output| 22;\n  16 -->|output| 23;\n  5 -->|output| 23;\n  17 -->|output| 24;\n  5 -->|output| 24;\n  5 -->|output| 25;\n  18 -->|read_db| 25;\n  18 -->|read_db| 26;\n  19 -->|output_alignments| 27;\n  21 -->|outfile| 28;\n  24 -->|bam_output| 29;\n  23 -->|bam_output| 29;\n  25 -->|png_files| 30;\n  25 -->|png_files| 31;\n  25 -->|png_files| 32;\n  25 -->|png_files| 33;\n  25 -->|png_files| 34;\n  26 -->|read_db_hist| 35;\n  4 -->|output| 35;\n  15 -->|blast_tabular| 36;\n  11 -->|blobdir| 36;\n  28 -->|busco_table| 36;\n  19 -->|output_alignments| 36;\n  29 -->|outfile| 37;\n  36 -->|blobdir| 38;\n  37 -->|pretext_map_out| 39;\n"
         }
       ],
@@ -3801,7 +3801,7 @@
           "name": "Debruijn Graph",
           "title": "Debruijn Graph",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"VelvetOptimiser\"];\n  3[\"SPAdes\"];\n  4[\"Fasta Statistics\"];\n  5[\"Fasta Statistics\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  0 -->|output| 3;\n  1 -->|output| 3;\n  2 -->|contigs| 4;\n  3 -->|out_contigs| 5;\n"
         }
       ],
@@ -4242,7 +4242,7 @@
           "name": "Genome Assembly Quality Control",
           "title": "Genome Assembly Quality Control",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Busco\"];\n  5[\"Busco\"];\n  6[\"Quast\"];\n  7[\"Busco\"];\n  8[\"Chromeister\"];\n  9[\"Meryl\"];\n  10[\"Merqury\"];\n  11[\"Merqury\"];\n  12[\"Merqury\"];\n  0 -->|output| 4;\n  1 -->|output| 5;\n  0 -->|output| 6;\n  1 -->|output| 6;\n  2 -->|output| 6;\n  2 -->|output| 7;\n  0 -->|output| 8;\n  2 -->|output| 8;\n  3 -->|output| 9;\n  0 -->|output| 10;\n  9 -->|read_db| 10;\n  1 -->|output| 11;\n  9 -->|read_db| 11;\n  2 -->|output| 12;\n  9 -->|read_db| 12;\n"
         }
       ],
@@ -4508,7 +4508,7 @@
           "name": "Genome Assembly using PacBio data",
           "title": "Genome Assembly using PacBio data",
           "test_results": null,
-          "modified": "2023-11-28 00:09:43 +0000",
+          "modified": "2023-11-28 14:29:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Flye\"];\n  3[\"Fasta Statistics\"];\n  4[\"Busco\"];\n  5[\"Fasta Statistics\"];\n  6[\"Quast\"];\n  7[\"Busco\"];\n  0 -->|output| 2;\n  1 -->|output| 3;\n  1 -->|output| 4;\n  2 -->|consensus| 5;\n  1 -->|output| 6;\n  2 -->|consensus| 6;\n  2 -->|consensus| 7;\n"
         }
       ],

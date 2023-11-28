@@ -81,7 +81,7 @@
       "name": "CelSeq2: Multi Batch (mm10)",
       "title": "CelSeq2: Multi Batch (mm10)",
       "test_results": null,
-      "modified": "2023-11-28 00:09:46 +0000",
+      "modified": "2023-11-28 14:29:27 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Flatten Collection\"];\n  4[\"CelSeq2: Single Batch mm10\"];\n  5[\"Column Join\"];\n  0 -->|output| 3;\n  1 -->|output| 4;\n  3 -->|output| 4;\n  2 -->|output| 4;\n  4 -->|9:out_counts| 5;\n"
     },
     {
@@ -99,7 +99,7 @@
       "name": "CelSeq2: Single Batch (mm10)",
       "title": "CelSeq2: Single Batch (mm10)",
       "test_results": null,
-      "modified": "2023-11-28 00:09:46 +0000",
+      "modified": "2023-11-28 14:29:27 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"UMI-tools extract\"];\n  4[\"RNA STAR\"];\n  5[\"Filter\"];\n  6[\"featureCounts\"];\n  7[\"UMI-tools count\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  2 -->|output| 4;\n  3 -->|out2| 4;\n  4 -->|mapped_reads| 5;\n  5 -->|out_file1| 6;\n  2 -->|output| 6;\n  6 -->|output_bam| 7;\n"
     }
   ],
