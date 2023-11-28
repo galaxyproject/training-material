@@ -31,7 +31,7 @@ follow_up_training:
             - metaproteomics
 
 subtopic: multi-omics
-tags: [microbiome]
+tags: [microgalaxy]
 ---
 
 

@@ -35,7 +35,7 @@ requirements:
        - metaquantome-data-creation
 
 subtopic: multi-omics
-tags: [microbiome]
+tags: [microgalaxy]
 ---
 
 

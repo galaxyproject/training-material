@@ -15,6 +15,7 @@ objectives:
 level: Introductory
 tags:
 - metatranscriptomics
+- microgalaxy
 time_estimation: 5H
 key_points:
 - Metatranscriptomics data have the same QC profile that RNA-seq data
