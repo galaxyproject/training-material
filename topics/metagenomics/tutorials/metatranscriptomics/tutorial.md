@@ -32,6 +32,7 @@ contributors:
 - pravs3683
 - shiltemann
 - paulzierep
+- EngyNasr
 ---
 
 {% include topics/metagenomics/tutorials/metatranscriptomics/content.md short=false %}

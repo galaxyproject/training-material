@@ -6,6 +6,7 @@ zenodo_link: "https://doi.org/10.5281/zenodo.940733"
 level: Introductory
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "I have short reads and long reads. How do I assemble a genome?"
 objectives:

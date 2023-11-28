@@ -20,6 +20,7 @@ tags:
 - cookbook
 - eukaryote
 - prokaryote
+- microgalaxy
 requirements:
   -
     type: "internal"

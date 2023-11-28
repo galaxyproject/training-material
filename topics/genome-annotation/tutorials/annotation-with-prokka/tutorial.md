@@ -5,6 +5,7 @@ title: "Genome annotation with Prokka"
 zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "How can we annotate a bacterial genome?"
   - "How can we visualize annotated genomic features?"
