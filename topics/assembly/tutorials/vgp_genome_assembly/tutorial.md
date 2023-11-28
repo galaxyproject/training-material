@@ -118,10 +118,28 @@ For more about the specific scaffolding technologies used in the VGP pipeline (c
 
 # VGP assembly pipeline overview
 
-This training is an adaptation of the VGP assembly pipeline 2.0 (Fig. 2).
+The {VGP} assembly pipeline has a modular organization, consisting in ten workflows (Fig. 1). It can used with the following types of input data:
 
-![VGP pipeline schematic showing steps from genome profiling, to hifiasm contigging, to bionano scaffolding, to HiC scaffolding.](../../images/vgp_assembly/vgp_pipeline_2.0_current.png "VGP Pipeline 2.0. The pipeline starts with reference-free genome profiling using k-mers. Then HiFi reads are assembled into contigs using hifiasm, along with additional phasing data if available. If false duplicates are detected in QC, then the contigs undergo purging. Afterwards, scaffolding takes place with optical maps (if available) and Hi-C data. A final decontamination steps is performed before curation.")
+|  Input data | Assembly quality  | Analysis trajectory <br>([Fig. 2)](#figure-2)|
+|------|---------------|-----|
+| HiFi | The minimum requirement | A |
+| HiFi + HiC| Better continuity | B |
+| HiFi + BioNano | Better continuity | C |
+| HiFi + Hi-C + BioNano | Even better continuity | D |
+| HiFi + parental data| Better haplotype resolution | E |
+| HiFi + parental data + Hi-C| Better haplotype resolution and improved continuity | F |
+| HiFi + parental + BioNano | Better haplotype resolution and improved continuity | G |
+| HiFi + parental data + Hi-C + BioNano | Better haplotype resolution and ultimate continuity | H |
 
+If this table "HiFi" and "Hi-C" are derived from the individual whose genome is being assembled. "Parental data" is high coverage Illumina data derived from parents of the individual being assembled. Datasets containing parental data are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.
+
+![The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
+<br>
+The first stage of the pipeline is the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate necessary for parameterizing downstream workflows. The generation of *k*-mer counts can be done from HiFi data only (Workflow 1) or include data from parental reads for trio-based phasing (Workflow 2; trio is a combination of paternal sequencing data with that from an offspring that is being assembled). The second stage is the phased contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases continuity and the quality of the final assembly. The purging stage is generally unnecessary for trio data for which reliable haplotype resolution is performed using *k*-mer profiles obtained from parental reads. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7), with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional) and Hi-C (Workflow 8) data and [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms. A final stage of decontamination (Workflow 9) removes exogenous sequences (e.g., viral and bacterial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
+
+> <comment-title>A note on data quality</comment-title>
+> We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.
+{: .comment}
 This training has been organized into four main sections: genome profile analysis, assembly of {HiFi} reads with hifiasm, scaffolding with Bionano optical maps, and scaffolding with {Hi-C} data. Additionally, the **assembly with hifiasm** section has two possible paths in this tutorial: solo contigging or solo w/HiC contigging.
 
 Throughout this tutorial, there will be **detail boxes** with additional background information on the science behind the sequencing technologies and software we use in the pipeline. These boxes are minimized by default, but please expand them to learn more about the data we utilize in this pipeline.
@@ -279,11 +297,11 @@ Before starting a *de novo* genome assembly project, it is useful to collect met
 
 > <details-title><i>K</i>-mer size, sequencing coverage and genome size</details-title>
 >
->*K*-mers are unique substrings of length *k* contained within a DNA sequence. For example, the DNA sequence *TCGATCACA* can be decomposed into five unique *k*-mers that have five bases long: *TCGAT*, *CGATC*, *GATCA*, *ATCAC* and *TCACA*. A sequence of length L will have  L-k+1 *k*-mers. On the other hand, the number of possible *k*-mers can be calculated as  n<sup>k</sup>, where n is the number of possible monomers and k is the k-mer size.
+>*K*-mers are unique substrings of length *k* contained within a DNA sequence. For example, the DNA sequence *TCGATCACA* can be decomposed into five unique *k*-mers that have five bases long: *TCGAT*, *CGATC*, *GATCA*, *ATCAC* and *TCACA*. A sequence of length L will have  L-k+1 *k*-mers. On the other hand, the number of possible *k*-mers can be calculated as  n<sup>k</sup>, where n is the number of possible monomers and k is the *k*-mer size.
 >
 >
 >---------| -------------|-----------------------
->  Bases  |  K-mer size  |  Total possible k-mers
+>  Bases  |  *k*-mer size  |  Total possible *k*-mers
 >---------| -------------|-----------------------
 >    4    |       1      |            4
 >    4    |       2      |           16
@@ -292,9 +310,9 @@ Before starting a *de novo* genome assembly project, it is useful to collect met
 >    4    |      10      |    1.048.576
 >---------|--------------|-----------------------
 >
-> Thus, the k-mer size is a key parameter, which must be large enough to map uniquely to the genome, but not too large, since it can lead to wasting computational resources. In the case of the human genome, *k*-mers of 31 bases in length lead to 96.96% of unique *k*-mers.
+> Thus, the *k*-mer size is a key parameter, which must be large enough to map uniquely to the genome, but not too large, since it can lead to wasting computational resources. In the case of the human genome, *k*-mers of 31 bases in length lead to 96.96% of unique *k*-mers.
 >
-> Each unique k-mer can be assigned a value for coverage based on the number of times it occurs in a sequence, whose distribution will approximate a Poisson distribution, with the peak corresponding to the average genome sequencing depth. From the genome coverage, the genome size can be easily computed.
+> Each unique *k*-mer can be assigned a value for coverage based on the number of times it occurs in a sequence, whose distribution will approximate a Poisson distribution, with the peak corresponding to the average genome sequencing depth. From the genome coverage, the genome size can be easily computed.
 {: .details}
 
 ## Generation of _k_-mer spectra with **Meryl**
@@ -303,7 +321,7 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 
 > <comment-title><i>k</i>-mer size estimation</comment-title>
 >
->  Given an estimated genome size (G) and a tolerable collision rate (p), an appropriate k can be computed as k = log4 (G(1 − p)/p).
+>  Given an estimated genome size (*G*) and a tolerable collision rate (*p*), an appropriate *k* can be computed as $$ k = \log_4\left(\frac{G(1-p)}{p}\right) $$ .
 >
 {: .comment}
 
@@ -311,7 +329,7 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 >
 > 1. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
 >    - *"Operation type selector"*: `Count operations`
->        - *"Count operations"*: `Count: count the occurrences of canonical k-mers`
+>        - *"Count operations"*: `Count: count the occurrences of canonical *k*-mers`
 >        - {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
 >        - *"k-mer size selector"*: `Set a k-mer size`
 >            - "*k-mer size*": `31`
@@ -324,7 +342,7 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 > 2. Rename it `meryldb`
 >
 > 3. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} again with the following parameters:
->    - *"Operation type selector"*: `Operations on sets of k-mers`
+>    - *"Operation type selector"*: `Operations on sets of *k*-mers`
 >        - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
 >        - {% icon param-file %} *"Input meryldb"*: `Collection meryldb`
 >
@@ -360,17 +378,17 @@ The next step is to infer the genome properties from the *k*-mer histogram gener
 
 Genomescope will generate six outputs:
 
-- Plots
+- **Plots**:
     - Linear plot: *k*-mer spectra and fitted models: frequency (y-axis) versus coverage.
     - Log plot: logarithmic transformation of the previous plot.
     - Transformed linear plot: *k*-mer spectra and fitted models: frequency times coverage (y-axis) versus coverage (x-axis). This transformation increases the heights of higher-order peaks, overcoming the effect of high heterozygosity.
     - Transformed log plot: logarithmic transformation of the previous plot.
-- Model: this file includes a detailed report about the model fitting.
-- Summary: it includes the properties inferred from the model, such as genome haploid length and the percentage of heterozygosity.
+- **Model**: this file includes a detailed report about the model fitting.
+- **Summary**: it includes the properties inferred from the model, such as genome haploid length and the percentage of heterozygosity.
 
-Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters (fig. 4).
+Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters (Fig. 5).
 
-![Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 31-mer profile. The first peak located at coverage 25x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes information about the inferred total genome length (len), genome unique length percent ('uniq'), overall heterozygosity rate ('ab'), mean k-mer coverage for heterozygous bases ('kcov'), read error rate ('err'), and average rate of read duplications ('dup'). It also reports the user-given parameters of k-mer size ('k') and ploidy ('p')."){:width="65%"}
+![Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 31-mer profile. The first peak located at coverage 25✕ corresponds to the heterozygous peak. The second peak at coverage 50✕, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes information about the inferred total genome length (len), genome unique length percent ('uniq'), overall heterozygosity rate ('ab'), mean *k*-mer coverage for heterozygous bases ('kcov'), read error rate ('err'), and average rate of read duplications ('dup'). It also reports the user-given parameters of *k*-mer size ('k') and ploidy ('p')."){:width="65%"}
 
 <br>
 
@@ -400,17 +418,17 @@ The output of hifiasm will be {GFA} files. These differ from FASTA files in that
 
 Hifiasm can be run in multiple modes depending on data availability:
 
-**Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly (fig. 5).
+**Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly.
 - _Input: only HiFi reads_
 - _Output: scaffolded primary assembly, and alternate contigs_
 ![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "The <b>solo</b> pipeline creates primary and alternate contigs, which then typically undergo purging with purge_dups to reconcile the haplotypes. During the purging process, haplotigs are removed from the primary assembly and added to the alternate assembly, which is then purged to generate the final alternate set of contigs. The purged primary contigs are then carried through scaffolding with Bionano and/or Hi-C data, resulting in one final draft primary assembly to be sent to manual curation.")
 
-**Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual (fig. 6).
+**Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual.
 - _Input: HiFi & HiC reads_
 - _Output: scaffolded hap1 assembly, and scaffolded hap2 assembly (assuming you run the scaffolding on **both** haplotypes)_
 ![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "The <b>Hi-C-phased</b> mode produces hap1 and hap2 contigs, which have been phased using the HiC information as described in {% cite Cheng2021 %}. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
-**Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents (fig. 7).
+**Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents.
 - _Input: HiFi reads from child, Illumina reads from both parents._
 - _Output: scaffolded maternal assembly, and scaffolded paternal assembly (assuming you run the scaffolding on **both** haplotypes)_
 ![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "The <b>trio</b> mode produces maternal and paternal contigs, which have been phased using paternal short read data. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
@@ -570,13 +588,13 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 
 By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn* plot (fig. 7).
 
-![Merqury spectra-cn plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
+![Merqury spectra-cn plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each *k*-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
 
-The black region in the left side corresponds to k-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy k-mers in the genome, while the blue area represents two-copy k-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50x, which we also know from the GenomeScope2 plot we looked at earlier.
+The black region in the left side corresponds to *k*-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50x, which we also know from the GenomeScope2 plot we looked at earlier.
 
 To get an idea of how the *k*-mers have been distributed between our hap1 and hap2 assemblies, we should look at the *spectra-asm* output of Merqury.
 
-![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_hap1hap2_asm.png "Merqury ASM plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it according to which assemblies contain those k-mers. This can tell you which k-mers are found in only one assembly or shared between them."){:width="65%"}
+![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_hap1hap2_asm.png "Merqury ASM plot. This plot tracks the multiplicity of each *k*-mer found in the Hi-Fi read set and colors it according to which assemblies contain those *k*-mers. This can tell you which *k*-mers are found in only one assembly or shared between them."){:width="65%"}
 
 The large green peak is centered at 50x coverage (remember that's our diploid coverage!), indicating that *k*-mers suggested by the reads to be from diploid regions are in fact shared between the two assemblies, as they should be if they are from homozygous regions. The haploid coverage *k*-mers (around ~25x coverage) are split between hap1 and hap2 assemblies, somewhat unevenly but still not as bad as it would be in an assembly without phasing data.
 
@@ -734,13 +752,13 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 
 By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn* plot (fig. 7).
 
-![Merqury spectra-cn plot for the pri/alt assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
+![Merqury spectra-cn plot for the pri/alt assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each *k*-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
 
-The black region in the left side corresponds to k-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy k-mers in the genome, while the blue area represents two-copy k-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50x, which we also know from the GenomeScope2 plot we looked at earlier.
+The black region in the left side corresponds to *k*-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50x, which we also know from the GenomeScope2 plot we looked at earlier.
 
 To get an idea of how the *k*-mers have been distributed between our hap1 and hap2 assemblies, we should look at the *spectra-asm* output of Merqury.
 
-![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_prialt_asm_prepurge.png "Merqury ASM plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it according to which assemblies contain those k-mers. This can tell you which k-mers are found in only one assembly or shared between them."){:width="65%"}
+![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_prialt_asm_prepurge.png "Merqury ASM plot. This plot tracks the multiplicity of each *k*-mer found in the Hi-Fi read set and colors it according to which assemblies contain those *k*-mers. This can tell you which *k*-mers are found in only one assembly or shared between them."){:width="65%"}
 
 For an idea of what a properly phased spectra-asm plot would look like, **please click over to the Hi-C phasing version of this tutorial**. A properly phased spectra-asm plot should have a large green peak centered around the point of diploid coverage (here ~50X), and the two assembly-specific peaks should be centered around the point of haploid coverage (here ~25X) and resembling each other in size.
 
@@ -748,7 +766,7 @@ The spectra-asm plot we have for our primary & alternate assemblies here does no
 
 For further confirmation, we can also look at the individual, assembly-specific {CN} plots. In the Merqury outputs, the `output_merqury.assembly_01.spectra-cn.fl` is a {CN} spectra with *k*-mers colored according to their copy number in the primary assembly.
 
-![Merqury spectra-cn plot for the pri assembly only.](../../images/vgp_assembly/merqury_prialt_priCN_prepurge.png "Merqury CN plot <i>for the primary assembly only</i>. This plot colors k-mers according to their copy number in the primary assembly. K-mers that are present in the reads but not the primary assembly are labelled 'read-only'."){:width="65%"}
+![Merqury spectra-cn plot for the pri assembly only.](../../images/vgp_assembly/merqury_prialt_priCN_prepurge.png "Merqury CN plot <i>for the primary assembly only</i>. This plot colors *k*-mers according to their copy number in the primary assembly. *K*-mers that are present in the reads but not the primary assembly are labelled 'read-only'."){:width="65%"}
 
 In the primary-only {CN} plot, we observe a large 2-copy (colored blue) peak at diploid coverage. Ideally, this would not be here, beacause these diploid regions would be *1-copy in both assemblies*. Purging this assembly should reconcile this by removing one copy of false duplicates, making these 2-copy *k*-mers 1-copy. You might notice the 'read-only' peak at haploid coverage — this is actually expected, because 'read-only' here just means that the *k*-mer in question is not seen in this specific assembly while it was in the original readset. **Often, these 'read-only' _k_-mers are actually present as alternate loci in the other assembly.**
 
