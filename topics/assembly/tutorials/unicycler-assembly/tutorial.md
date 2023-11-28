@@ -172,7 +172,7 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 
 If all goes well you will see datasets uploading and changing states from gray to green as shown below. The figure below also shows how datasets can be tagged.
 
-![Datasets in History](../../images/starting_data.png  "Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class='fa fa-tags' aria-hidden='true'></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.")
+![Datasets in History](../../images/_data.png  "Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class='fa fa-tags' aria-hidden='true'></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.")
 
 ### Assess Read Quality
 
@@ -269,7 +269,7 @@ Let's look at the entire assembly and its annotation in the genome browser. We c
 
 Visualization requires a local installation of IGV. If you have IGV installed - just start it. If you don't - read on.
 
-#### Starting IGV
+### Starting IGV
 
 Go to IGV [download page](http://software.broadinstitute.org/software/igv/download) and select one of the options. The one I would try first would be **Java Web Start**. Simply click the **Launch** button for 10 GB distribution.
 
