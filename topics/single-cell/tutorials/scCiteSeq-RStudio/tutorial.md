@@ -54,7 +54,7 @@ notebook:
 
 Before we can do any real biological investigation, we need to understand what each of the outputs from our Seurat tool are. Maybe you've already begun to dissect what's what, but just in case, let's run through each of the datasets together.
 
-# Datasets We'll Review
+# Datasets we'll review
 1. [RNA Matrix](#rnamatrix)
 2. [ADT Matrix](#adtmatrix)
 3. [Protein Markers](#proteinmarkers)
@@ -62,17 +62,7 @@ Before we can do any real biological investigation, we need to understand what e
 5. [Processed Seurat Object](#processedseuratobject)
 6. [Combined RNA & Protein Markers](#combinedmarkers)
 
-><comment-title>gx_get</comment-title>
-> RStudio in Galaxy comes with a gx_get() function. This  is critical to understand and be able to use in order to move datasets from your history into RStudio. The function outputs the file path from which you access your data via RStudio.
->
-> To use it,  use the numbered position of the dataset you are looking to import. For example:
->
-> If we want to find the first dataset we imported, run the following command:
-> ```r
-> gx_get(1)
-> ```
->The result of this command will be a file path to the first dataset in your Galaxy history. Use that file path for future importing commands.
-{: .comment}
+{% snippet faqs/galaxy/interactive_tools_rstudio_gx_get.md %}
 
 ## RNA Matrix <a name="rnamatrix"></a>
 To take a look at the pre analysis RNA-seq matrix, use the following commands:
@@ -80,18 +70,17 @@ To take a look at the pre analysis RNA-seq matrix, use the following commands:
 gx_get(1)
 RNA<-read.csv('/import/1')
 ```
-It's worth mentioning that the dataset we are using contains ~5% mouse cells, which Seurat suggests we can use as negative controls for the cell surface protein measurements. As such, the RNA expression matrix initially has "HUMAN_" or "MOUSE_" appended to each gene.
+It's worth mentioning that the dataset we are using contains ~5% mouse cells, which the Seurat tutorial suggests we can use as negative controls for the cell surface protein measurements. As such, the RNA expression matrix initially has "HUMAN_" or "MOUSE_" appended to each gene.
 
 Now let's take a look at what's in here.
 ```r
-view(RNA)
+View(RNA)
 ```
 ![RNA Matrix](../../images/scCiteSeq-RStudio/Plot3.png "RNA Matrix")
 
->
->If you're familiar with scRNA-seq matrices, this may look familiar to you. That's because it is exactly that--an RNA-seq matrix. In these matrices we have genes as row names and cell barcodes as column names. The values within the matrix denote the number of transcripts from a given gene within a given cell.
+If you're familiar with scRNA-seq matrices, this may look familiar to you. That's because it is exactly that: an RNA-seq matrix. In these matrices, we have genes as row names and cell barcodes as column names. The values within the matrix denote the number of transcripts from a given gene within a given cell.
 
-You may have noticed there are lots of zero values in this matrix. You may also be thinking, "Won't that create noise in the dataset??" The answer is yes, and removing these zeros is one of the first problems that the Seurat preprocessing tool will solve.
+You may have noticed there are lots of zero values in this matrix. You may also be thinking, "Won't that create noise in the dataset??" The answer is yes, and removing these zeros is one of the first tasks that the Seurat preprocessing tool will perform.
 
 This matrix, with these values shown, are *not* what we will be analyzing later on in this tutorial. We are simply taking a look to get an understanding of what the data looks like *before* preprocessing.
 
@@ -103,7 +92,7 @@ ADT<-read.csv('/import/2')
 ```
 Again, let's take a look at what's in here:
 ```r
-view(ADT)
+View(ADT)
 ```
 ![ADT Matrix](../../images/scCiteSeq-RStudio/Plot4.png "ADT Matrix")
 

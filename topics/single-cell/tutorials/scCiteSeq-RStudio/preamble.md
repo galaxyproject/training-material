@@ -52,13 +52,13 @@ First, we need to import our csv files. You can do this in a couple of ways:
 >
 > 1. Create a new history for this tutorial
 > 2. Import the csv files object from NCBI:
->  To retrive the ADT file:
->    ```
->    ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-ADT_umi.csv.gz
->    ```
 >  To retrieve the RNA file:
 >    ```
 >    ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-RNA_umi.csv.gz
+>    ```
+>  To retrive the ADT file:
+>    ```
+>    ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-ADT_umi.csv.gz
 >    ```
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 {: .hands_on}
@@ -99,16 +99,16 @@ Now we'll run those csv files through the Seurat toolkit with the following para
 
 # Moving to RStudio
 Now that we have some explorable data (a Seurat object) in our Galaxy history, let's move into RStudio and keep investigating:
+
 > <hands-on-title>Open RStudio in Galaxy</hands-on-title>
 > Run {% tool [RStudio](interactive_tool_rstudio)%}
-{: .hands_on}
-
-><comment-title>Next Step</comment-title>
+>
 > The interactive RStudio tool should begin to load now. Make your way over to your Active Interactive Tools page (User (in the top bar of the usegalaxy page) > Active Interactive Tools > RStudio)
 > ![Interactive Tools Button](../../images/scCiteSeq-RStudio/Plot12.png "Interactive Tools")
 >
 >Alternatively, you can use the view (eye) icon in your Galaxy History to open the interactive RStudio environment.
 > ![Eye Button](../../images/scCiteSeq-RStudio/Plot13.png "Eye Button")
-{: .comment}
+>
+{: .hands_on}
 
 It may be a good time to explore some of these output files that are now in your history. Take a look at some of the previews and see if you can get a grasp of what's what. If not, no worries at all, we'll start looking more closely once we've made it into RStudio!
