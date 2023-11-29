@@ -27,6 +27,7 @@ tags:
   - plasmids
   - assembly
   - amr
+  - microgalaxy
 ---
 
 # Overview
