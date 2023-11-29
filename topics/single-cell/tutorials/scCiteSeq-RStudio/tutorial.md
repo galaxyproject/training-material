@@ -96,16 +96,16 @@ View(ADT)
 ```
 ![ADT Matrix](../../images/scCiteSeq-RStudio/Plot4.png "ADT Matrix")
 
-Looks shockingly similar, doesn't it?
+The format looks shockingly similar, doesn't it?
 
 In the ADT matrix, we have cell surface proteins (instead of gene names) as row names and the same cell barcodes as column names.
 
-><warning-title>Run Log Available (In History)</warning-title>
+><details-title>Run Log Available (In History)</details-title>
 >If you ran the same parameters as I did, the next output (number 3 in our history) will be Seurat's run log.
->This is unfortunately not super easy to import into RStudio since it comes as an html format. It contains all of the run information from the background coding done by the tool. Any warnings, errors, or progress bars will be present in here and are often useful for troubleshooting in case something goes awry.
->Because of the html formatting, we will not look at this output together, but feel free to explore it on your own using the view (eye) icon in your history.
+>This is unfortunately not super easy to import into RStudio since it comes as an `html` format. It contains all of the run information from the background coding done by the tool. Any warnings, errors, or progress bars will be present in here and are often useful for troubleshooting in case something goes awry.
+>Because of the `html` formatting, we will not look at this output together, but feel free to explore it on your own using the view (eye) icon in your history.
 >
-{: .warning}
+{: .details}
 
 
 ## Protein Markers <a name="proteinmarkers"></a>
@@ -113,7 +113,7 @@ The next output in my galaxy history are protein markers, let's take a look:
 ```r
 gx_get(4)
 protein_markers<-read.table('/import/4', header = T)
-view(protein_markers)
+View(protein_markers)
 ```
 ![Protein Marker Sheet](../../images/scCiteSeq-RStudio/Plot5.png "Protein Markers")
 
@@ -123,7 +123,11 @@ protein_markers<-subset(protein_markers, p_val_adj < 0.045)
 ```
 Doesn't look like there were actually any insignifcant markers in that list! Although we got lucky this time, I have found that it is in everyone's best interest to always attempt this filter, especially when working with bigger, messier datasets!
 
-Now we have a statistically signficant list of protein markers per cluster! There are a number of statistics that are included in these dataframes, if you're interested in better understanding them, take a look at [Seurat's documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers) for more details.
+Now we have a statistically signficant list of protein markers per cluster!
+
+><details-title>More details on statistics</details-title>
+> There are a number of statistics that are included in these dataframes, if you're interested in better understanding them, take a look at [Seurat's documentation of FindAllMarkers](https://satijalab.org/seurat/reference/findallmarkers) for more details.
+{: .details}
 
 ## RNA Markers <a name="rnamarkers"></a>
 The next dataset in our history should be RNA markers. Let's import them, remove any statistically insignifcant ones, and take a look:
