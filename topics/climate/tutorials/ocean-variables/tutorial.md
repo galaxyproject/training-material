@@ -91,7 +91,7 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 >    {% snippet  faqs/galaxy/datasets_upload.md %}
 >
 >  
-> 3. {% tool [Ocean Data View](https://earth-system.usegalaxy.eu/root?tool_id=interactive_tool_odv) %} with the following parameters:
+> 3. {% tool [Ocean Data View](interactive_tool_odv) %} with the following parameters:
 >    - *"Select if you are using a ODV collection in a zip folder or if you have your own raw data"*: `The data you are using are a ODV collection in a zip folder`
 >    - *"ODV collection in a zip folder."*: `Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip`
 >
@@ -249,7 +249,7 @@ Now, if you have finished with your analysis you can exit ODV. To do so you need
 Use ODV outputs (which you just changed the datatype) as DIVAnd input.
 > <hands-on-title>Run DIVANnd</hands-on-title>
 >
-> 1. Use {% tool [DIVAnd](https://earth-system.usegalaxy.eu/root?tool_id=interactive_tool_divand) %} with the following parameters:
+> 1. Use {% tool [DIVAnd](interactive_tool_divand) %} with the following parameters:
 >    - *"Do you already have a notebook"*: `Start with a fresh notebook`
 >    - *"Include data into the environment"*: `data_from_Eutrophication_Med_profiles_2022_unrestricted`
 > 2. **Run tool**
