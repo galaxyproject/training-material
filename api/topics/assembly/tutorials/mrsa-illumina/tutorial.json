@@ -91,7 +91,7 @@
       "name": "Genome Assembly of MRSA using Illumina MiSeq Data",
       "title": "Genome Assembly of MRSA using Illumina MiSeq Data",
       "test_results": null,
-      "modified": "2023-11-29 10:02:43 +0000",
+      "modified": "2023-11-29 10:06:05 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"staramr\"];\n  11[\"Bowtie2\"];\n  12[\"Quast\"];\n  13[\"Bandage Image\"];\n  14[\"Prokka\"];\n  15[\"MultiQC\"];\n  16[\"Select\"];\n  17[\"Table to GFF3\"];\n  18[\"JBrowse\"];\n  19[\"JBrowse\"];\n  2[\"Convert compressed file to uncompressed.\"];\n  3[\"Convert compressed file to uncompressed.\"];\n  4[\"FastQC\"];\n  5[\"Trimmomatic\"];\n  6[\"FastQC\"];\n  7[\"Shovill\"];\n  8[\"FastQC\"];\n  9[\"FastQC\"];\n  7 -->|contigs| 10;\n  5 -->|fastq_out_r1_paired| 11;\n  5 -->|fastq_out_r2_paired| 11;\n  7 -->|contigs| 11;\n  7 -->|contigs| 12;\n  7 -->|contigs_graph| 13;\n  7 -->|contigs| 14;\n  6 -->|text_file| 15;\n  4 -->|text_file| 15;\n  9 -->|text_file| 15;\n  8 -->|text_file| 15;\n  10 -->|detailed_summary| 16;\n  16 -->|out_file1| 17;\n  7 -->|contigs| 18;\n  14 -->|out_gff| 18;\n  11 -->|output| 18;\n  17 -->|output| 18;\n  7 -->|contigs| 19;\n  14 -->|out_gff| 19;\n  11 -->|output| 19;\n  17 -->|output| 19;\n  0 -->|output| 2;\n  1 -->|output| 3;\n  2 -->|output1| 4;\n  3 -->|output1| 5;\n  2 -->|output1| 5;\n  3 -->|output1| 6;\n  5 -->|fastq_out_r1_paired| 7;\n  5 -->|fastq_out_r2_paired| 7;\n  5 -->|fastq_out_r2_paired| 8;\n  5 -->|fastq_out_r1_paired| 9;\n"
     }
   ],

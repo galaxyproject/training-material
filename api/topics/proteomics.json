@@ -211,7 +211,7 @@
           "name": "DIA_analysis_MSstats",
           "title": "DIA_analysis_MSstats",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"MSstats\"];\n  4[\"Select\"];\n  5[\"Filter\"];\n  6[\"Histogram\"];\n  1 -->|output| 3;\n  2 -->|output| 3;\n  0 -->|output| 3;\n  3 -->|comparison_result| 4;\n  4 -->|out_file1| 5;\n  5 -->|out_file1| 6;\n"
         },
         {
@@ -229,7 +229,7 @@
           "name": "DIA_analysis_MSstats",
           "title": "DIA_analysis_MSstats",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"MSstats\"];\n  3[\"Select\"];\n  4[\"Filter\"];\n  5[\"Histogram\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  2 -->|comparison_result| 3;\n  3 -->|out_file1| 4;\n  4 -->|out_file1| 5;\n"
         }
       ],
@@ -424,7 +424,7 @@
           "name": "metaQuantome_datacreation_workflow",
           "title": "metaQuantome_datacreation_workflow",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"msconvert\"];\n  4[\"Search GUI\"];\n  5[\"Peptide Shaker\"];\n  6[\"Replace Text\"];\n  7[\"Remove beginning\"];\n  8[\"Unipept\"];\n  9[\"FlashLFQ\"];\n  10[\"Unipept\"];\n  11[\"Replace Text\"];\n  12[\"Regex Find And Replace\"];\n  13[\"Cut\"];\n  14[\"Query Tabular\"];\n  15[\"Query Tabular\"];\n  16[\"Filter\"];\n  17[\"Filter\"];\n  18[\"Filter\"];\n  0 -->|output| 3;\n  2 -->|output| 4;\n  3 -->|output| 4;\n  4 -->|searchgui_results| 5;\n  5 -->|output_psm| 6;\n  5 -->|output_peptides| 7;\n  5 -->|output_peptides| 8;\n  1 -->|output| 9;\n  6 -->|outfile| 9;\n  0 -->|output| 9;\n  7 -->|out_file1| 10;\n  8 -->|output_tsv| 11;\n  9 -->|quantifiedPeptides| 12;\n  10 -->|output_ec_tsv| 13;\n  10 -->|output_go_tsv| 14;\n  13 -->|out_file1| 15;\n  14 -->|output| 16;\n  14 -->|output| 17;\n  14 -->|output| 18;\n"
         }
       ],
@@ -745,7 +745,7 @@
           "name": "May19 EncyclopeDIA raw inputs",
           "title": "May19 EncyclopeDIA raw inputs",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset collection\"];\n  3[\"Input dataset\"];\n  4[\"msconvert\"];\n  5[\"msconvert\"];\n  6[\"SearchToLib\"];\n  7[\"EncyclopeDIA Quantify\"];\n  0 -->|output| 4;\n  2 -->|output| 5;\n  3 -->|output| 6;\n  1 -->|output| 6;\n  4 -->|output| 6;\n  3 -->|output| 7;\n  6 -->|elib| 7;\n  5 -->|output| 7;\n"
         }
       ],
@@ -947,7 +947,7 @@
           "name": "Proteomics: Peptide and Protein ID using OpenMS",
           "title": "Proteomics: Peptide and Protein ID using OpenMS",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"PeakPickerHiRes\"];\n  3[\"XTandemAdapter\"];\n  4[\"FileInfo\"];\n  5[\"PeptideIndexer\"];\n  6[\"IDPosteriorErrorProbability\"];\n  7[\"FalseDiscoveryRate\"];\n  8[\"IDScoreSwitcher\"];\n  9[\"FileInfo\"];\n  10[\"FidoAdapter\"];\n  11[\"FalseDiscoveryRate\"];\n  12[\"FileInfo\"];\n  13[\"TextExporter\"];\n  14[\"Select\"];\n  15[\"Select\"];\n  0 -->|output| 2;\n  1 -->|output| 3;\n  2 -->|param_out| 3;\n  3 -->|out| 4;\n  1 -->|output| 5;\n  3 -->|out| 5;\n  5 -->|out| 6;\n  6 -->|out| 7;\n  7 -->|out| 8;\n  8 -->|out| 9;\n  8 -->|out| 10;\n  10 -->|out| 11;\n  11 -->|out| 12;\n  11 -->|out| 13;\n  13 -->|out| 14;\n  13 -->|out| 15;\n"
         },
         {
@@ -965,7 +965,7 @@
           "name": "Peptide And Protein ID Via OMS Using Two Search Engines",
           "title": "Peptide And Protein ID Via OMS Using Two Search Engines",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"XTandemAdapter\"];\n  3[\"MSGFPlusAdapter\"];\n  4[\"IDPosteriorErrorProbability\"];\n  5[\"IDPosteriorErrorProbability\"];\n  6[\"IDMerger\"];\n  7[\"ConsensusID\"];\n  8[\"PeptideIndexer\"];\n  9[\"FalseDiscoveryRate\"];\n  10[\"IDScoreSwitcher\"];\n  11[\"FileInfo\"];\n  12[\"FidoAdapter\"];\n  13[\"FalseDiscoveryRate\"];\n  14[\"IDFilter\"];\n  15[\"FileInfo\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  1 -->|output| 3;\n  2 -->|param_out| 4;\n  3 -->|param_out| 5;\n  5 -->|param_out| 6;\n  4 -->|param_out| 6;\n  6 -->|param_out| 7;\n  1 -->|output| 8;\n  7 -->|param_out| 8;\n  8 -->|param_out| 9;\n  9 -->|param_out| 10;\n  9 -->|param_out| 11;\n  10 -->|param_out| 12;\n  12 -->|param_out| 13;\n  13 -->|param_out| 14;\n  14 -->|param_out| 15;\n"
         }
       ],
@@ -1272,7 +1272,7 @@
           "name": "Peptide And Protein ID Tutorial",
           "title": "Peptide And Protein ID Tutorial",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"PeakPickerHiRes\"];\n  3[\"FileConverter\"];\n  4[\"Search GUI\"];\n  5[\"Peptide Shaker\"];\n  6[\"Select\"];\n  7[\"Select\"];\n  8[\"Select\"];\n  1 -->|output| 2;\n  2 -->|param_out| 3;\n  0 -->|output| 4;\n  3 -->|param_out| 4;\n  4 -->|searchgui_results| 5;\n  5 -->|output_proteins| 6;\n  5 -->|output_proteins| 7;\n  7 -->|out_file1| 8;\n"
         },
         {
@@ -1290,7 +1290,7 @@
           "name": "ProteinID SG PS Tutorial WF datasetCollection",
           "title": "ProteinID SG PS Tutorial WF datasetCollection",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset collection\"];\n  2[\"PeakPickerHiRes\"];\n  3[\"FileConverter\"];\n  4[\"Search GUI\"];\n  5[\"Peptide Shaker\"];\n  6[\"Select\"];\n  7[\"Select\"];\n  8[\"Select\"];\n  1 -->|output| 2;\n  2 -->|param_out| 3;\n  0 -->|output| 4;\n  3 -->|param_out| 4;\n  4 -->|searchgui_results| 5;\n  5 -->|output_proteins| 6;\n  5 -->|output_proteins| 7;\n  7 -->|out_file1| 8;\n"
         }
       ],
@@ -1435,7 +1435,7 @@
           "name": "MaxQuant MSstatsTMT Training",
           "title": "MaxQuant MSstatsTMT Training",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"MaxQuant\"];\n  4[\"MSstatsTMT\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  2 -->|output| 4;\n  3 -->|evidence| 4;\n  3 -->|proteinGroups| 4;\n"
         }
       ],
@@ -1631,7 +1631,7 @@
           "name": "metaquantome-taxonomy-workflow",
           "title": "metaquantome-taxonomy-workflow",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"metaQuantome: create samples file\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"metaQuantome: database\"];\n  4[\"metaQuantome: expand\"];\n  5[\"metaQuantome: filter\"];\n  6[\"metaQuantome: stat\"];\n  7[\"metaQuantome: visualize\"];\n  8[\"metaQuantome: visualize\"];\n  9[\"metaQuantome: visualize\"];\n  10[\"metaQuantome: visualize\"];\n  11[\"metaQuantome: visualize\"];\n  3 -->|outfile| 4;\n  2 -->|output| 4;\n  1 -->|output| 4;\n  0 -->|samples_file| 4;\n  4 -->|outfile| 5;\n  0 -->|samples_file| 5;\n  5 -->|outfile| 6;\n  0 -->|samples_file| 6;\n  6 -->|outfile| 7;\n  0 -->|samples_file| 7;\n  6 -->|outfile| 8;\n  0 -->|samples_file| 8;\n  6 -->|outfile| 9;\n  0 -->|samples_file| 9;\n  6 -->|outfile| 10;\n  0 -->|samples_file| 10;\n  6 -->|outfile| 11;\n  0 -->|samples_file| 11;\n"
         }
       ],
@@ -1823,7 +1823,7 @@
           "name": "Proteomics: database handling",
           "title": "Proteomics: database handling",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Protein Database Downloader\"];\n  1[\"Protein Database Downloader\"];\n  2[\"FASTA-to-Tabular\"];\n  3[\"Add column\"];\n  4[\"Tabular-to-FASTA\"];\n  5[\"FASTA Merge Files and Filter Unique Sequences\"];\n  6[\"DecoyDatabase\"];\n  0 -->|output_database| 2;\n  2 -->|output| 3;\n  3 -->|out_file1| 4;\n  4 -->|output| 5;\n  1 -->|output_database| 5;\n  5 -->|output| 6;\n"
         },
         {
@@ -1841,7 +1841,7 @@
           "name": "Proteomics: database handling including mycoplasma",
           "title": "Proteomics: database handling including mycoplasma",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Protein Database Downloader\"];\n  1[\"Protein Database Downloader\"];\n  2[\"Protein Database Downloader\"];\n  3[\"Protein Database Downloader\"];\n  4[\"Protein Database Downloader\"];\n  5[\"Protein Database Downloader\"];\n  6[\"Protein Database Downloader\"];\n  7[\"Protein Database Downloader\"];\n  8[\"FASTA-to-Tabular\"];\n  9[\"FASTA Merge Files and Filter Unique Sequences\"];\n  10[\"Add column\"];\n  11[\"FASTA-to-Tabular\"];\n  12[\"Tabular-to-FASTA\"];\n  13[\"Add column\"];\n  14[\"Tabular-to-FASTA\"];\n  15[\"FASTA Merge Files and Filter Unique Sequences\"];\n  16[\"DecoyDatabase\"];\n  2 -->|output_database| 8;\n  5 -->|output_database| 9;\n  4 -->|output_database| 9;\n  3 -->|output_database| 9;\n  1 -->|output_database| 9;\n  0 -->|output_database| 9;\n  6 -->|output_database| 9;\n  8 -->|output| 10;\n  9 -->|output| 11;\n  10 -->|out_file1| 12;\n  11 -->|output| 13;\n  13 -->|out_file1| 14;\n  12 -->|output| 15;\n  7 -->|output_database| 15;\n  14 -->|output| 15;\n  15 -->|output| 16;\n"
         }
       ],
@@ -2084,7 +2084,7 @@
           "name": "GTN Proteogemics3 Novel Peptide Analysis",
           "title": "GTN Proteogemics3 Novel Peptide Analysis",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"NCBI BLAST+ blastp\"];\n  6[\"Query Tabular\"];\n  7[\"Query Tabular\"];\n  8[\"Peptide Genomic Coodinate\"];\n  9[\"PepPointer\"];\n  10[\"Query Tabular\"];\n  1 -->|output| 5;\n  5 -->|output1| 6;\n  2 -->|output| 6;\n  6 -->|output| 7;\n  4 -->|output| 8;\n  3 -->|output| 8;\n  7 -->|output| 8;\n  8 -->|peptide_bed| 9;\n  0 -->|output| 9;\n  9 -->|classified| 10;\n  6 -->|output| 10;\n"
         }
       ],
@@ -2317,7 +2317,7 @@
           "name": "metaquantome-function-worklow",
           "title": "metaquantome-function-worklow",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"metaQuantome: database\"];\n  1[\"metaQuantome: create samples file\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"metaQuantome: expand\"];\n  5[\"metaQuantome: filter\"];\n  6[\"metaQuantome: stat\"];\n  7[\"metaQuantome: visualize\"];\n  8[\"metaQuantome: visualize\"];\n  9[\"metaQuantome: visualize\"];\n  10[\"metaQuantome: visualize\"];\n  11[\"metaQuantome: visualize\"];\n  0 -->|outfile| 4;\n  3 -->|output| 4;\n  2 -->|output| 4;\n  1 -->|samples_file| 4;\n  4 -->|outfile| 5;\n  1 -->|samples_file| 5;\n  5 -->|outfile| 6;\n  1 -->|samples_file| 6;\n  6 -->|outfile| 7;\n  6 -->|outfile| 7;\n  6 -->|outfile| 8;\n  1 -->|samples_file| 8;\n  6 -->|outfile| 9;\n  1 -->|samples_file| 9;\n  6 -->|outfile| 10;\n  1 -->|samples_file| 10;\n  6 -->|outfile| 11;\n  1 -->|samples_file| 11;\n"
         }
       ],
@@ -2620,7 +2620,7 @@
           "name": "GTN Proteogenomics1 Database Creation",
           "title": "GTN Proteogenomics1 Database Creation",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"HISAT2\"];\n  4[\"Replace Text\"];\n  5[\"FASTA-to-Tabular\"];\n  6[\"FreeBayes\"];\n  7[\"StringTie\"];\n  8[\"Filter Tabular\"];\n  9[\"CustomProDB\"];\n  10[\"GffCompare\"];\n  11[\"SQLite to tabular\"];\n  12[\"SQLite to tabular\"];\n  13[\"FASTA Merge Files and Filter Unique Sequences\"];\n  14[\"FASTA-to-Tabular\"];\n  15[\"Convert gffCompare annotated GTF to BED\"];\n  16[\"Column Regex Find And Replace\"];\n  17[\"Column Regex Find And Replace\"];\n  18[\"FASTA-to-Tabular\"];\n  19[\"Filter Tabular\"];\n  20[\"Translate BED transcripts\"];\n  21[\"Query Tabular\"];\n  22[\"Column Regex Find And Replace\"];\n  23[\"Concatenate datasets\"];\n  24[\"bed to protein map\"];\n  25[\"Tabular-to-FASTA\"];\n  26[\"Concatenate datasets\"];\n  27[\"FASTA Merge Files and Filter Unique Sequences\"];\n  28[\"Query Tabular\"];\n  0 -->|output| 3;\n  1 -->|output| 4;\n  2 -->|output| 5;\n  3 -->|output_alignments| 6;\n  4 -->|outfile| 7;\n  3 -->|output_alignments| 7;\n  5 -->|output| 8;\n  3 -->|output_alignments| 9;\n  6 -->|output_vcf| 9;\n  4 -->|outfile| 10;\n  7 -->|output_gtf| 10;\n  9 -->|output_genomic_mapping_sqlite| 11;\n  9 -->|output_variant_annotation_sqlite| 12;\n  9 -->|output_rpkm| 13;\n  9 -->|output_snv| 13;\n  9 -->|output_indel| 13;\n  9 -->|output_rpkm| 14;\n  10 -->|transcripts_annotated| 15;\n  11 -->|query_results| 16;\n  12 -->|query_results| 17;\n  13 -->|output| 18;\n  14 -->|output| 19;\n  15 -->|output| 20;\n  17 -->|out_file1| 21;\n  18 -->|output| 22;\n  19 -->|output| 23;\n  8 -->|output| 23;\n  20 -->|translation_bed| 24;\n  22 -->|out_file1| 25;\n  24 -->|output| 26;\n  16 -->|out_file1| 26;\n  2 -->|output| 27;\n  25 -->|output| 27;\n  20 -->|translation_fasta| 27;\n  26 -->|out_file1| 28;\n"
         }
       ],
@@ -2924,7 +2924,7 @@
           "name": "Proteomics: Peptide and Protein Quantification via stable istobe labeling",
           "title": "Proteomics: Peptide and Protein Quantification via stable istobe labeling",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"FeatureFinderMultiplex\"];\n  3[\"XTandemAdapter\"];\n  4[\"FileInfo\"];\n  5[\"PeptideIndexer\"];\n  6[\"IDPosteriorErrorProbability\"];\n  7[\"FalseDiscoveryRate\"];\n  8[\"IDScoreSwitcher\"];\n  9[\"FileInfo\"];\n  10[\"FidoAdapter\"];\n  11[\"FalseDiscoveryRate\"];\n  12[\"FileInfo\"];\n  13[\"TextExporter\"];\n  14[\"IDMapper\"];\n  15[\"Select\"];\n  16[\"Select\"];\n  17[\"IDConflictResolver\"];\n  18[\"MultiplexResolver\"];\n  19[\"ProteinQuantifier\"];\n  20[\"Summary Statistics\"];\n  21[\"Select last\"];\n  22[\"Histogram\"];\n  0 -->|output| 2;\n  1 -->|output| 3;\n  0 -->|output| 3;\n  3 -->|out| 4;\n  1 -->|output| 5;\n  3 -->|out| 5;\n  5 -->|out| 6;\n  6 -->|out| 7;\n  7 -->|out| 8;\n  8 -->|out| 9;\n  8 -->|out| 10;\n  10 -->|out| 11;\n  11 -->|out| 12;\n  11 -->|out| 13;\n  11 -->|out| 14;\n  2 -->|out_multiplets| 14;\n  13 -->|out| 15;\n  13 -->|out| 16;\n  14 -->|out| 17;\n  17 -->|out| 18;\n  18 -->|out| 19;\n  11 -->|out| 19;\n  19 -->|out| 20;\n  19 -->|out| 21;\n  21 -->|outfile| 22;\n"
         }
       ],
@@ -3182,7 +3182,7 @@
           "name": "Secreted Proteins Via GO Annotation And WoLF PSORT For shCTSB Paper",
           "title": "Secreted Proteins Via GO Annotation And WoLF PSORT For shCTSB Paper",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"UniProt\"];\n  4[\"Select\"];\n  5[\"Get subontology from a given OBO term\"];\n  6[\"Get subontology from a given OBO term\"];\n  7[\"Get subontology from a given OBO term\"];\n  8[\"Get subontology from a given OBO term\"];\n  9[\"Get subontology from a given OBO term\"];\n  10[\"WoLF PSORT\"];\n  11[\"Join\"];\n  12[\"Get all the term IDs and term names of a given OBO ontology\"];\n  13[\"Get all the term IDs and term names of a given OBO ontology\"];\n  14[\"Get all the term IDs and term names of a given OBO ontology\"];\n  15[\"Get all the term IDs and term names of a given OBO ontology\"];\n  16[\"Get all the term IDs and term names of a given OBO ontology\"];\n  17[\"Filter\"];\n  18[\"Filter\"];\n  19[\"Join\"];\n  20[\"Join\"];\n  21[\"Join\"];\n  22[\"Join\"];\n  23[\"Convert\"];\n  24[\"Join\"];\n  25[\"Cut\"];\n  26[\"Compare two Datasets\"];\n  27[\"Unique\"];\n  28[\"Cut\"];\n  29[\"Join\"];\n  30[\"Unique\"];\n  0 -->|output| 3;\n  1 -->|output| 4;\n  2 -->|output| 5;\n  2 -->|output| 6;\n  2 -->|output| 7;\n  2 -->|output| 8;\n  2 -->|output| 9;\n  3 -->|outfile_retrieve_fasta| 10;\n  0 -->|output| 11;\n  4 -->|out_file1| 11;\n  5 -->|output| 12;\n  6 -->|output| 13;\n  7 -->|output| 14;\n  8 -->|output| 15;\n  9 -->|output| 16;\n  10 -->|tabular_file| 17;\n  10 -->|tabular_file| 18;\n  12 -->|output| 19;\n  13 -->|output| 19;\n  14 -->|output| 20;\n  15 -->|output| 20;\n  17 -->|out_file1| 21;\n  18 -->|out_file1| 21;\n  19 -->|output| 22;\n  20 -->|output| 22;\n  21 -->|output| 23;\n  22 -->|output| 24;\n  16 -->|output| 24;\n  23 -->|out_file1| 25;\n  11 -->|output| 26;\n  24 -->|output| 26;\n  26 -->|out_file1| 27;\n  27 -->|outfile| 28;\n  25 -->|output| 29;\n  28 -->|output| 29;\n  29 -->|output| 30;\n"
         }
       ],
@@ -3362,7 +3362,7 @@
           "name": "'Biomarkers4Paris' Workflow",
           "title": "'Biomarkers4Paris' Workflow",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Build tissue-specific expression dataset\"];\n  1[\"Build tissue-specific expression dataset\"];\n  2[\"Filter by keywords and/or numerical value\"];\n  3[\"Venn diagram\"];\n  4[\"Cut\"];\n  5[\"Filter by keywords and/or numerical value\"];\n  6[\"Add expression data\"];\n  7[\"Filter by keywords and/or numerical value\"];\n  8[\"ID Converter\"];\n  9[\"Add protein features\"];\n  10[\"Filter by keywords and/or numerical value\"];\n  11[\"Get MS/MS observations in tissue/fluid\"];\n  12[\"Filter by keywords and/or numerical value\"];\n  1 -->|output| 2;\n  0 -->|output| 3;\n  2 -->|kept_lines| 3;\n  3 -->|output_text| 4;\n  4 -->|output| 5;\n  5 -->|kept_lines| 6;\n  6 -->|output| 7;\n  7 -->|kept_lines| 8;\n  8 -->|output| 9;\n  9 -->|output| 10;\n  10 -->|kept_lines| 11;\n  11 -->|output| 12;\n"
         }
       ],
@@ -3566,7 +3566,7 @@
           "name": "MS Imaging Loading Exploring Data",
           "title": "MS Imaging Loading Exploring Data",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"MSI data exporter\"];\n  3[\"MSI Qualitycontrol\"];\n  4[\"Sort\"];\n  5[\"Select\"];\n  0 -->|output| 2;\n  1 -->|output| 3;\n  0 -->|output| 3;\n  2 -->|feature_output| 4;\n  2 -->|pixel_output| 5;\n"
         }
       ],
@@ -3734,7 +3734,7 @@
           "name": "DIA_lib_OSW",
           "title": "DIA_lib_OSW",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset collection\"];\n  3[\"Input dataset collection\"];\n  4[\"MaxQuant\"];\n  5[\"Filter\"];\n  6[\"Filter\"];\n  7[\"diapysef library generation\"];\n  8[\"OpenSwathAssayGenerator\"];\n  9[\"OpenSwathDecoyGenerator\"];\n  10[\"TargetedFileConverter\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  0 -->|output| 4;\n  4 -->|evidence| 5;\n  4 -->|msms| 6;\n  5 -->|out_file1| 7;\n  1 -->|output| 7;\n  6 -->|out_file1| 7;\n  7 -->|output_tabular| 8;\n  8 -->|out| 9;\n  9 -->|out| 10;\n"
         }
       ],
@@ -3990,7 +3990,7 @@
           "name": "Metaproteomics_GTN",
           "title": "Metaproteomics_GTN",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset collection\"];\n  2[\"Input dataset\"];\n  3[\"Search GUI\"];\n  4[\"Peptide Shaker\"];\n  5[\"Query Tabular\"];\n  6[\"Unipept\"];\n  7[\"Unipept\"];\n  8[\"Query Tabular\"];\n  9[\"Query Tabular\"];\n  10[\"SQLite to tabular\"];\n  11[\"SQLite to tabular\"];\n  12[\"SQLite to tabular\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  3 -->|searchgui_results| 4;\n  4 -->|output_psm| 5;\n  5 -->|output| 6;\n  5 -->|output| 7;\n  2 -->|output| 8;\n  6 -->|output_tsv| 8;\n  6 -->|output_tsv| 8;\n  4 -->|output_psm| 8;\n  4 -->|output_psm| 9;\n  7 -->|output_tsv| 9;\n  8 -->|sqlitedb| 10;\n  8 -->|sqlitedb| 11;\n  8 -->|sqlitedb| 12;\n"
         }
       ],
@@ -4182,7 +4182,7 @@
           "name": "DIA_Analysis_OSW",
           "title": "DIA_Analysis_OSW",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset collection\"];\n  4[\"msconvert\"];\n  5[\"OpenSwathWorkflow\"];\n  6[\"PyProphet merge\"];\n  7[\"PyProphet score\"];\n  8[\"PyProphet peptide\"];\n  9[\"PyProphet peptide\"];\n  10[\"PyProphet protein\"];\n  11[\"PyProphet protein\"];\n  12[\"PyProphet export\"];\n  13[\"Select\"];\n  3 -->|output| 4;\n  4 -->|output| 5;\n  2 -->|output| 5;\n  1 -->|output| 5;\n  5 -->|out_osw| 6;\n  2 -->|output| 6;\n  6 -->|output| 7;\n  7 -->|output| 8;\n  8 -->|output| 9;\n  9 -->|output| 10;\n  10 -->|output| 11;\n  0 -->|output| 12;\n  11 -->|output| 12;\n  12 -->|protein_signal| 13;\n"
         }
       ],
@@ -4415,7 +4415,7 @@
           "name": "'Proteome Annotation'",
           "title": "'Proteome Annotation'",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Build tissue-specific expression dataset\"];\n  4[\"Filter by keywords and/or numerical value\"];\n  5[\"ID Converter\"];\n  6[\"ID Converter\"];\n  7[\"Venn diagram\"];\n  8[\"Add expression data\"];\n  9[\"Filter by keywords and/or numerical value\"];\n  10[\"GO terms classification and enrichment analysis\"];\n  11[\"Query pathway database\"];\n  1 -->|output| 4;\n  3 -->|output| 5;\n  4 -->|kept_lines| 6;\n  4 -->|kept_lines| 7;\n  0 -->|output| 7;\n  2 -->|output| 7;\n  6 -->|output| 8;\n  8 -->|output| 9;\n  5 -->|output| 10;\n  9 -->|kept_lines| 10;\n  9 -->|kept_lines| 11;\n"
         },
         {
@@ -4433,7 +4433,7 @@
           "name": "ProteoRE ProteomeAnnotation Tutorial (release 2.0)",
           "title": "ProteoRE ProteomeAnnotation Tutorial (release 2.0)",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"Query Reactome pathway database\"];\n  11[\"GO terms classification and enrichment analysis\"];\n  2[\"Input dataset\"];\n  3[\"Build tissue-specific expression dataset\"];\n  4[\"Filter by keywords and/or numerical value\"];\n  5[\"ID Converter\"];\n  6[\"ID Converter\"];\n  7[\"Venn diagram\"];\n  8[\"Add expression data\"];\n  9[\"Filter by keywords and/or numerical value\"];\n  9 -->|kept_lines| 10;\n  5 -->|output| 11;\n  9 -->|kept_lines| 11;\n  0 -->|output| 4;\n  3 -->|output| 5;\n  4 -->|kept_lines| 6;\n  4 -->|kept_lines| 7;\n  1 -->|output| 7;\n  2 -->|output| 7;\n  6 -->|output| 8;\n  8 -->|output| 9;\n"
         }
       ],
@@ -4668,7 +4668,7 @@
           "name": "Proteomics: MaxQuant and MSstats LFQ workflow",
           "title": "Proteomics: MaxQuant and MSstats LFQ workflow",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset collection\"];\n  4[\"MaxQuant\"];\n  5[\"Select\"];\n  6[\"Select\"];\n  7[\"Replace Text\"];\n  8[\"Replace Text\"];\n  9[\"MSstats\"];\n  10[\"Datamash\"];\n  11[\"Summary Statistics\"];\n  12[\"Replace Text\"];\n  13[\"Replace Text\"];\n  14[\"Filter\"];\n  15[\"Filter\"];\n  16[\"Filter\"];\n  17[\"Filter\"];\n  18[\"Filter\"];\n  19[\"Cut\"];\n  20[\"Cut\"];\n  21[\"Join\"];\n  22[\"Join\"];\n  23[\"heatmap2\"];\n  24[\"UniProt\"];\n  25[\"heatmap2\"];\n  26[\"UniProt\"];\n  27[\"FASTA-to-Tabular\"];\n  28[\"FASTA-to-Tabular\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  4 -->|proteinGroups| 5;\n  4 -->|evidence| 6;\n  5 -->|out_file1| 7;\n  6 -->|out_file1| 8;\n  1 -->|output| 9;\n  0 -->|output| 9;\n  8 -->|outfile| 9;\n  7 -->|outfile| 9;\n  9 -->|runlevel_data| 10;\n  9 -->|runlevel_data| 11;\n  9 -->|comparison_result| 12;\n  9 -->|quant_sample_matrix| 13;\n  12 -->|outfile| 14;\n  14 -->|out_file1| 15;\n  14 -->|out_file1| 16;\n  15 -->|out_file1| 17;\n  16 -->|out_file1| 18;\n  17 -->|out_file1| 19;\n  18 -->|out_file1| 20;\n  13 -->|outfile| 21;\n  19 -->|out_file1| 21;\n  13 -->|outfile| 22;\n  20 -->|out_file1| 22;\n  21 -->|output| 23;\n  21 -->|output| 24;\n  22 -->|output| 25;\n  22 -->|output| 26;\n  24 -->|outfile_retrieve_fasta| 27;\n  26 -->|outfile_retrieve_fasta| 28;\n"
         }
       ],
@@ -4876,7 +4876,7 @@
           "name": "Copy of PeptideDataAnalysis (imported from uploaded file)",
           "title": "Copy of PeptideDataAnalysis (imported from uploaded file)",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"PDAUG Peptide Data Access\"];\n  1[\"PDAUG TSVtoFASTA\"];\n  2[\"PDAUG Peptide Sequence Analysis\"];\n  3[\"PDAUG Sequence Property Based Descriptors\"];\n  4[\"PDAUG Sequence Property Based Descriptors\"];\n  5[\"PDAUG Fisher's Plot\"];\n  6[\"PDAUG Add Class Label\"];\n  7[\"PDAUG Add Class Label\"];\n  8[\"PDAUG Merge Dataframes\"];\n  9[\"PDAUG Basic Plots\"];\n  0 -->|output1| 1;\n  1 -->|output3| 2;\n  1 -->|output2| 2;\n  1 -->|output2| 3;\n  1 -->|output3| 4;\n  1 -->|output3| 5;\n  1 -->|output2| 5;\n  3 -->|output1| 6;\n  4 -->|output1| 7;\n  6 -->|OutFile1| 8;\n  7 -->|OutFile1| 8;\n  8 -->|output1| 9;\n"
         }
       ],
@@ -5055,7 +5055,7 @@
           "name": "PeptideML",
           "title": "PeptideML",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"PDAUG Sequence Property Based Descriptors\"];\n  3[\"PDAUG Sequence Property Based Descriptors\"];\n  4[\"PDAUG Add Class Label\"];\n  5[\"PDAUG Add Class Label\"];\n  6[\"PDAUG Merge Dataframes\"];\n  7[\"PDAUG ML Models\"];\n  8[\"PDAUG ML Models\"];\n  9[\"PDAUG ML Models\"];\n  10[\"PDAUG ML Models\"];\n  11[\"PDAUG ML Models\"];\n  12[\"PDAUG ML Models\"];\n  13[\"PDAUG Merge Dataframes\"];\n  14[\"PDAUG Basic Plots\"];\n  0 -->|output| 2;\n  1 -->|output| 3;\n  2 -->|output1| 4;\n  3 -->|output1| 5;\n  4 -->|OutFile1| 6;\n  5 -->|OutFile1| 6;\n  6 -->|output1| 7;\n  6 -->|output1| 8;\n  6 -->|output1| 9;\n  6 -->|output1| 10;\n  6 -->|output1| 11;\n  6 -->|output1| 12;\n  7 -->|output1| 13;\n  9 -->|output1| 13;\n  8 -->|output1| 13;\n  10 -->|output1| 13;\n  11 -->|output1| 13;\n  12 -->|output1| 13;\n  13 -->|output1| 14;\n"
         }
       ],
@@ -5300,7 +5300,7 @@
           "name": "GTN Proteogemics2 Database Search",
           "title": "GTN Proteogemics2 Database Search",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset collection\"];\n  2[\"Input dataset\"];\n  3[\"Search GUI\"];\n  4[\"Peptide Shaker\"];\n  5[\"mz to sqlite\"];\n  6[\"Query Tabular\"];\n  7[\"Query Tabular\"];\n  8[\"Tabular-to-FASTA\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  3 -->|searchgui_results| 4;\n  4 -->|mzidentML| 5;\n  1 -->|output| 5;\n  0 -->|output| 5;\n  4 -->|output_psm| 6;\n  4 -->|output_psm| 6;\n  2 -->|output| 6;\n  6 -->|output| 7;\n  7 -->|output| 8;\n"
         }
       ],
@@ -5486,7 +5486,7 @@
           "name": "Tails Triple Dimethyl OpenMS2.1",
           "title": "Tails Triple Dimethyl OpenMS2.1",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"FeatureFinderMultiplex\"];\n  3[\"HighResPrecursorMassCorrector\"];\n  4[\"MSGFPlusAdapter\"];\n  5[\"MSGFPlusAdapter\"];\n  6[\"MSGFPlusAdapter\"];\n  7[\"PeptideIndexer\"];\n  8[\"PeptideIndexer\"];\n  9[\"PeptideIndexer\"];\n  10[\"IDMerger\"];\n  11[\"ConsensusID\"];\n  12[\"PeptideIndexer\"];\n  13[\"FalseDiscoveryRate\"];\n  14[\"IDFilter\"];\n  15[\"IDMapper\"];\n  16[\"IDConflictResolver\"];\n  17[\"FileFilter\"];\n  18[\"FileMerger\"];\n  19[\"MzTabExporter\"];\n  0 -->|output| 2;\n  2 -->|param_out_features| 3;\n  0 -->|output| 3;\n  1 -->|output| 4;\n  3 -->|param_out| 4;\n  1 -->|output| 5;\n  3 -->|param_out| 5;\n  3 -->|param_out| 6;\n  1 -->|output| 7;\n  4 -->|param_out| 7;\n  1 -->|output| 8;\n  5 -->|param_out| 8;\n  1 -->|output| 9;\n  6 -->|param_out| 9;\n  7 -->|param_out| 10;\n  8 -->|param_out| 10;\n  9 -->|param_out| 10;\n  10 -->|param_out| 11;\n  1 -->|output| 12;\n  11 -->|param_out| 12;\n  12 -->|param_out| 13;\n  13 -->|param_out| 14;\n  14 -->|param_out| 15;\n  2 -->|param_out| 15;\n  15 -->|param_out| 16;\n  16 -->|param_out| 17;\n  17 -->|param_out| 18;\n  18 -->|param_out| 19;\n"
         }
       ],
@@ -5620,7 +5620,7 @@
           "name": "Proteomics: MaxQuant workflow",
           "title": "Proteomics: MaxQuant workflow",
           "test_results": null,
-          "modified": "2023-11-29 10:02:46 +0000",
+          "modified": "2023-11-29 10:06:08 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"MaxQuant\"];\n  4[\"Filter\"];\n  5[\"Select\"];\n  6[\"Cut\"];\n  7[\"Sort\"];\n  8[\"Compute\"];\n  9[\"Sort\"];\n  10[\"Compute\"];\n  11[\"Cut\"];\n  12[\"Compute\"];\n  13[\"Histogram\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  2 -->|output| 3;\n  3 -->|proteinGroups| 4;\n  4 -->|out_file1| 5;\n  5 -->|out_file1| 6;\n  6 -->|out_file1| 7;\n  6 -->|out_file1| 8;\n  7 -->|outfile| 9;\n  8 -->|out_file1| 10;\n  10 -->|out_file1| 11;\n  10 -->|out_file1| 12;\n  12 -->|out_file1| 13;\n"
         }
       ],
