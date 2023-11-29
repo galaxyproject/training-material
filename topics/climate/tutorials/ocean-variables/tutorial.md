@@ -176,7 +176,7 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 > ![Image on how to change the size of your dots](../../images/ocean_var/size_dots.png)
 >
 > You can now see bigger dots representing your data.
-> ![Image of you maps after the increase of the dots' size]((../../images/ocean_var/big_dots.png)
+> ![Image of you maps after the increase of the dots' size](../../images/ocean_var/big_dots.png)
 >
 > If you want to save it now that you already saved it once in the right folder outputs you just have to click lef on te save icon top left when it's red.
 {: .tip}
