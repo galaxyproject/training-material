@@ -107,12 +107,12 @@ You can access the data for this tutorial in multiple ways:
 >    {{ page.zenodo_link }}/files/N707-400k.h5ad
 >    ```
 >
->    <!-- {% snippet faqs/galaxy/datasets_import_via_link.md %} -->
+>    --> <!-- {% snippet faqs/galaxy/datasets_import_via_link.md %} --> <!--
 >
 > 3. Rename the datasets
 > 4. Check that the datatype is `h5ad`, otherwise you will need to change each file to `h5ad`!
 >
->    <!-- {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %} -->
+>    --> <!-- {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %} --> <!--
 >
 {: .hands_on}
 
