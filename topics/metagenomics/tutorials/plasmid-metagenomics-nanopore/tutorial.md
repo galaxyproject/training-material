@@ -146,8 +146,8 @@ plot the read length distribution of each sample:
 {: .question}
 
 
-For more information on the topic of quality control, please see our training materials
-[here]({{site.baseurl}}/topics/sequence-analysis/)
+For more information on the topic of quality control, please see our 
+[sequence analysis training materials]({{site.baseurl}}/topics/sequence-analysis/)
 
 # De-novo Assembly
 
