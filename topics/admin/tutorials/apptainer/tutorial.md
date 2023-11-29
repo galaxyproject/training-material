@@ -37,8 +37,7 @@ Make sure to read the documentation on [container in Galaxy](https://docs.galaxy
 
 > BioContainers is a community-driven project that provides the infrastructure and basic guidelines to create, manage and distribute bioinformatics packages (e.g Conda) and containers (e.g Docker, Apptainer). BioContainers is based on the popular frameworks Conda, Docker and Apptainer.
 >
-> -- [https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html](https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html)
-{: .quote}
+{: .quote cite="https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html"}
 
 Apptainer is an alternative to Docker that is much friendlier for HPCs
 
@@ -59,9 +58,7 @@ Apptainer is an alternative to Docker that is much friendlier for HPCs
 {: .comment}
 
 > Apptainer is a container platform. It allows you to create and run containers that package up pieces of software in a way that is portable and reproducible.
->
-> -- [https://sylabs.io/guides/3.7/user-guide/introduction.html](https://sylabs.io/guides/3.7/user-guide/introduction.html)
-{: .quote}
+{: .quote cite="https://sylabs.io/guides/3.7/user-guide/introduction.html"}
 
 > <agenda-title></agenda-title>
 >

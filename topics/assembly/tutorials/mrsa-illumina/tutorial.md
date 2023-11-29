@@ -61,7 +61,7 @@ Japan" from {% cite Hikichi_2019 %} which describes:
 > range from asymptomatic colonization of the nasal mucosa to soft tissue
 > infection to fulminant invasive disease. Here, we report the complete
 > genome sequences of eight MRSA strains isolated from patients in Japan.
-{: .quote}
+{: .quote cite="{% cite_url Hikichi_2019 %}"}
 
 > <agenda-title></agenda-title>
 >
