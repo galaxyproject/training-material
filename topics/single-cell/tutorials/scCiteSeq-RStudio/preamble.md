@@ -31,7 +31,10 @@ Before we can start exploring, we'll process our transcriptomic and surface prot
 {: .details}
 
 
-# Get Your Data
+# Using: Galaxy Buttons
+The first half of this tutorial takes place in the Galaxy user interface, like most tutorials.
+
+## Get Your Data
 For this tutorial, we'll use a publicly available dataset of 8,617 cord blood mononuclear cells (CBMCs) which have been sequenced for transcriptomic measurements as well as 11 surface proteins ({% cite SatijaSmibert2017 %}).
 
 ><comment-title></comment-title>
@@ -46,7 +49,7 @@ For this tutorial, we'll use a publicly available dataset of 8,617 cord blood mo
 
 First, we need to import our csv files. You can do this in a couple of ways:
 
-## Option 1: Uploading Data via Link  
+### Option 1: Uploading Data via Link  
 
 > <hands-on-title></hands-on-title>
 >
@@ -63,13 +66,13 @@ First, we need to import our csv files. You can do this in a couple of ways:
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 {: .hands_on}
 
-## Option 2: Import a History
+### Option 2: Import a History
 
 You can access [this history](https://usegalaxy.eu/u/camila-goclowski/h/citeseqseurattooltutorial) by clicking on the link provided.
 
 {% snippet faqs/galaxy/histories_import.md %}
 
-# Cite-Seq Enabled Seurat Tool
+## Cite-Seq Enabled Seurat Tool
 
 Now we'll run those csv files through the Seurat toolkit with the following parameters:
 > <hands-on-title></hands-on-title>
@@ -97,7 +100,8 @@ Now we'll run those csv files through the Seurat toolkit with the following para
 >If you're hoping to follow this tutorial step by step, word for word, be aware that changing any of the above parameters may change the data you get to explore shortly in RStudio.
 {: .details}
 
-# Moving to RStudio
+# Using: RStudio
+
 Now that we have some explorable data (a Seurat object) in our Galaxy history, let's move into RStudio and keep investigating:
 
 > <hands-on-title>Open RStudio in Galaxy</hands-on-title>

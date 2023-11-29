@@ -68,7 +68,7 @@ Before we can do any real biological investigation, we need to understand what e
 To take a look at the pre analysis RNA-seq matrix, use the following commands:
 ```r
 gx_get(1)
-RNA<-read.csv('/import/1')
+RNA<-read.csv('/import/1', sep = "")
 ```
 It's worth mentioning that the dataset we are using contains ~5% mouse cells, which the Seurat tutorial suggests we can use as negative controls for the cell surface protein measurements. As such, the RNA expression matrix initially has "HUMAN_" or "MOUSE_" appended to each gene.
 
@@ -88,7 +88,7 @@ This matrix, with these values shown, are *not* what we will be analyzing later 
 We can do the same thing with the pre-analysis protein matrix. We'll call it the ADT matrix for now, since that is how Seurat recognizes it.
 ```r
 gx_get(2)
-ADT<-read.csv('/import/2')
+ADT<-read.csv('/import/2', sep = "")
 ```
 Again, let's take a look at what's in here:
 ```r
