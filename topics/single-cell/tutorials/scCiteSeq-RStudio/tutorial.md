@@ -10,8 +10,8 @@ questions:
 - How can I visualize and interpret multimodal data in Seurat?
 
 objectives:
-- Learn to use Galaxy's Seurat tool to create a Seurat Object with Cite-seq data
-- Understand the parameters of Galaxy's Seurat tool
+- Learn to use Galaxy's Seurat tool to create a Seurat Object with protein data
+- Understand the parameters of Galaxy's Seurat toolkit
 - Move between Galaxy and RStudio to holistically explore Cite-Seq data
 
 time_estimation: 1H
