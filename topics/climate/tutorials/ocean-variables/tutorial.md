@@ -22,8 +22,6 @@ tags:
   - netcdf data
   - maps
   - marine data
-  - temperature
-  - salinity
   - climate
 contributions:
   authorship:
@@ -104,6 +102,7 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 > {% snippet faqs/galaxy/interactive_tools_open.md tool="ODV" %}
 >
 {: .hands_on}
+
 
 > <details-title> Some complementary information about your data </details-title>
 > The data here are mediterranean Sea - Eutrophication and Acidity aggregated datasets
@@ -234,10 +233,40 @@ Now, if you have finished with your analysis you can exit ODV. To do so you need
 > ![Image in the middle pannel of the map](../../images/ocean_var/galaxy_output.png)
 {: .hands_on}
 
+# DIVAnd : Data-Interpolating Variational Analysis in n dimensions
+
+## Change Datatype
+> <hands-on-title>Change the datatype from ODV outputs</hands-on-title>
+> Go on your out put 'data_from_Eutrophication_Med_profiles_2022_unrestricted'
+>
+> In the Datatypes section select **netcdf**
+>
+> {% snippet  faqs/galaxy/datasets_change_datatype.md %}
+>
+{: .hands_on}
+
+## Launch DIVAnd 
+Use ODV outputs (which you just changed the datatype) as DIVAnd input.
+> <hands-on-title>Run DIVANnd</hands-on-title>
+>
+> 1. Use {% tool [DIVAnd](https://earth-system.usegalaxy.eu/root?tool_id=interactive_tool_divand) %} with the following parameters:
+>    - *"Do you already have a notebook"*: `Start with a fresh notebook`
+>    - *"Include data into the environment"*: `data_from_Eutrophication_Med_profiles_2022_unrestricted`
+> 2. **Run tool**
+> 3. {% snippet faqs/galaxy/interactive_tools_open.md tool="DIVAnd" %}
+{: .hands_on}
+
+Now that you are in yourjupyterlab with the right environment to use DIVAnd and a set of notebooks (in the folder **notebooks**) to guide you, you can start the rest of your analysis.
+You can find your data from ODV in the **data** folder of the jupyterlab. 
+
+Once you are done you have to save all your wanted data and visualisation in the **outputs** folder and the go on the top left in the **file** section and click on **Exit**.
+
+After a couple minutes your outputs shoul appear in your Galaxy history. 
+
+
 # Conclusion
 
-Great you now know how to extract ocean's variables from an ODV collection.
+Great you now know how to extract ocean's variables from an ODV collection and use these extracted data in DIVAnd.
 
 # Extra information
 Coming up soon follow ups tutorials on Coastal Water Dynamics workflow (and other Earth-System related trainings). Keep an {% icon galaxy-eye %} open if you are interested !
-
