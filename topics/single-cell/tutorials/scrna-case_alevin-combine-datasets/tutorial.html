@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4d429b6be8eaaf4377c469abb17918e744813bc8",
+		release: "galaxy-training-network@7056b9d4ceea786baee34c73a228ca8b46a8dde2",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701252364' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701252364' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701255498' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701255498' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Combining single cell datasets after pre-processing">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-29 09:50:06 +0000">
+<meta name="DC.date" content="2023-11-29 10:18:16 +0000">
 <meta name="DC.creator" content="Wendi Bacon">
 <meta name="DC.creator" content="Jonathan Manning">
 
@@ -110,7 +110,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-11-29 09:50:06 +0000",
+  "dateModified": "2023-11-29 10:18:16 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Combining single cell datasets after pre-processing",
   "interactivityType": "mixed",
@@ -169,7 +169,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Combining single cell datasets after pre-processing",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html",
-  "version": 24,
+  "version": 27,
   "timeRequired": "PT1H",
   "teaches": "Combine data matrices from different samples in the same experiment\n - Label the metadata for downstream processing",
   "keywords": [
@@ -368,7 +368,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701252364'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701255498'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -997,7 +997,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00246">https://gxy.io/GTN:T00246</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 24 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 27 </div>
 
     </blockquote>
     </section>
@@ -1079,25 +1079,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 >    https://zenodo.org/record/7075635/files/N707-400k.h5ad
 >    ```
 >
->    <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
-<p><!--END_SNIPPET--></p>
-<blockquote class="notranslate hands_on">
-
-  <ol>
-    <li>Rename the datasets</li>
-    <li>
-      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code>, otherwise you will need to change each file to <code class="language-plaintext highlighter-rouge">h5ad</code>!</p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
-      <p><!--END_SNIPPET--></p>
-    </li>
-  </ol>
-
-</blockquote>
-
-<p>–&gt;</p>
+>    % snippet faqs/galaxy/datasets_import_via_link.md %
+>
+> 3. Rename the datasets
+> 4. Check that the datatype is `h5ad`, otherwise you will need to change each file to `h5ad`!
+>
+>    % snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %
+>
+{: .hands_on}
+REMEMBER TO ADD THE CODE FOR SNIPPETS BACK IN
+-->
 
 <p>Inspect the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> <code class="language-plaintext highlighter-rouge">Experimental Design</code> text file. This shows you how each <code class="language-plaintext highlighter-rouge">N70X</code> corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the <code class="language-plaintext highlighter-rouge">gene_name</code> and <code class="language-plaintext highlighter-rouge">mito</code> metadata previously!</p>
 
@@ -1759,7 +1750,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4d429b6be8eaaf4377c469abb17918e744813bc8">4d429b6</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/7056b9d4ceea786baee34c73a228ca8b46a8dde2">7056b9d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1787,7 +1778,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701252364'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701255498'></script>
         
     </body>
 </html>

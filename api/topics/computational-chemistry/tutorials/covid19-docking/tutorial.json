@@ -73,7 +73,7 @@
       "name": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
       "title": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
       "test_results": null,
-      "modified": "2023-11-29 10:06:06 +0000",
+      "modified": "2023-11-29 10:58:19 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Enumerate changes\"];\n  4[\"Compound conversion\"];\n  5[\"Create Frankenstein ligand\"];\n  6[\"Compound conversion\"];\n  7[\"rDock cavity definition\"];\n  8[\"Split file\"];\n  9[\"rDock docking\"];\n  10[\"Collapse Collection\"];\n  11[\"XChem TransFS pose scoring\"];\n  12[\"Max SuCOS score\"];\n  0 -->|output| 3;\n  1 -->|output| 4;\n  2 -->|output| 5;\n  3 -->|output| 6;\n  4 -->|outfile| 7;\n  5 -->|outfile| 7;\n  6 -->|outfile| 8;\n  4 -->|outfile| 9;\n  8 -->|list_output_sdf| 9;\n  7 -->|activesite| 9;\n  9 -->|output| 10;\n  1 -->|output| 11;\n  10 -->|output| 11;\n  11 -->|output| 12;\n  2 -->|output| 12;\n"
     }
   ],
