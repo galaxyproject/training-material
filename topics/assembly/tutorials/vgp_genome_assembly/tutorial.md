@@ -115,7 +115,6 @@ For more about the specific scaffolding technologies used in the VGP pipeline (c
 
 **Telomere-to-telomere assembly**: Often abbreviated as "T2T", this term refers to an assembly where each chromosome is completely gapless from telomere to telomere. The term usually refers to the recently completed CHM13 human genome ({% cite Nurk2022 %}), though there is an increasing number of efforts to generate T2T genomes for other species.
 
-
 # VGP assembly pipeline overview
 
 The {VGP} assembly pipeline has a modular organization, consisting in ten workflows (Fig. 1). It can used with the following types of input data:
@@ -414,28 +413,39 @@ Once we have finished the genome profiling stage, we can start the genome assemb
 >
 {: .details}
 
-The output of hifiasm will be {GFA} files. These differ from FASTA files in that they are a representation of the assembly graph instead of just linear sequences, so the GFA contains information about sequences, nodes, and edges (*i.e.*, overlaps). This output preserves the most information about how the reads assemble in graph space, and is useful to visualize in tools such as Bandage; however, our QV tools will expect FASTA files, so we will cover the GFA to FASTA conversion step later.
+The output of hifiasm will be [GFA](https://github.com/GFA-spec/GFA-spec) files. These differ from FASTA files in that they are a representation of the assembly graph instead of just linear sequences, so the GFA contains information about sequences, nodes, and edges (*i.e.*, overlaps). This output preserves the most information about how the reads assemble in graph space, and is useful to visualize in tools such as Bandage; however, our QV tools will expect FASTA files, so we will cover the GFA to FASTA conversion step later.
 
-Hifiasm can be run in multiple modes depending on data availability:
+## `hifiasm` assembly modes
+
+Hifiasm can be run in multiple modes depending on data availability
+
+### **Solo** mode
 
 **Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly.
-- _Input: only HiFi reads_
+- _Input: PacBio HiFi reads_
 - _Output: scaffolded primary assembly, and alternate contigs_
 ![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "The <b>solo</b> pipeline creates primary and alternate contigs, which then typically undergo purging with purge_dups to reconcile the haplotypes. During the purging process, haplotigs are removed from the primary assembly and added to the alternate assembly, which is then purged to generate the final alternate set of contigs. The purged primary contigs are then carried through scaffolding with Bionano and/or Hi-C data, resulting in one final draft primary assembly to be sent to manual curation.")
 
+### **Hi-C** phased mode
+
 **Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual.
-- _Input: HiFi & HiC reads_
+- _Input: PacBio HiFi & Illumina HiC reads_
 - _Output: scaffolded hap1 assembly, and scaffolded hap2 assembly (assuming you run the scaffolding on **both** haplotypes)_
 ![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "The <b>Hi-C-phased</b> mode produces hap1 and hap2 contigs, which have been phased using the HiC information as described in {% cite Cheng2021 %}. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
+### **Trio** mode
+
 **Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents.
-- _Input: HiFi reads from child, Illumina reads from both parents._
+- _Input: PacBio HiFi reads from child, Illumina reads from both parents._
 - _Output: scaffolded maternal assembly, and scaffolded paternal assembly (assuming you run the scaffolding on **both** haplotypes)_
 ![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "The <b>trio</b> mode produces maternal and paternal contigs, which have been phased using paternal short read data. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
 No matter which way you run hifiasm, you will have to evaluate the assemblies' {QC} to ensure your genome is in good shape. The VGP pipeline features several reference-free ways of evaluating assembly quality, all of which are automatically generated with our workflows; however, we will run them manually in this tutorial so we can familiarize ourselves with how each QC metric captures a different aspect of assembly quality.
 
 ## Assembly evaluation
+
+There are several tools for assessing various aspects of assembly quality:
+
 - **gfastats**: manipulation & evaluation of assembly graphs and FASTA files, particularly used for summary statistics (*e.g.*, contig count, N50, NG50, etc.) ({% cite Formenti2022 %}).
 ![Schematic of N50 calculation.](../../images/vgp_assembly/n50schematic.jpg "<b>N50</b> is a commonly reported statistic used to represent genome contiguity. N50 is calculated by sorting contigs according to their lengths, and then taking the halfway point of the total genome length. The size of the contig at that halfway point is the N50 value. In the pictured example, the total genome length is 400 bp, so the N50 value is 60 because the contig at the halfway point is 60 bp long. N50 can be interpreted as the value where >50% of an assembly's contigs are at that value or higher. Image adapted from <a href='https://www.molecularecologist.com/2017/03/29/whats-n50/'>Elin Videvall at The Molecular Ecologist</a>.")
 - **{BUSCO}**: assesses completeness of a genome from an evolutionarily informed functional point of view. BUSCO genes are genes that are expected to be present at single-copy in one haplotype for a certain clade, so their presence, absence, or duplication can inform scientists about if an assembly is likely missing important regions, or if it has multiple copies of them, which can indicate a need for purging ({% cite Simo2015 %}).
@@ -466,7 +476,7 @@ If you have the {Hi-C} data for the individual you are assembling with {HiFi} re
 >
 {: .hands_on}
 
-We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap2, but these must be converted to FASTA format for subsequent steps. We will use a tool developed from the VGP: **gfastats**. gfastats is a tool suite that allows for manipulation and evaluation of FASTA and GFA files, but in this instance we will use it to convert our GFAs to FASTA files. Later on we will use it to generate standard summary statistics for our assemblies.
+We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap2, but these must be converted to FASTA format for subsequent steps. We will use a tool developed from the VGP: [`gfastats`](https://github.com/vgl-hub/gfastats). `gfastats` is a tool suite that allows for manipulation and evaluation of FASTA and GFA files, but in this instance we will use it to convert our GFAs to FASTA files. Later on we will use it to generate standard summary statistics for our assemblies.
 
 > <hands-on-title>Convert GFA to FASTA</hands-on-title>
 >
@@ -489,12 +499,12 @@ We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap
 >
 > gfastats will provide us with the following statistics:
 >
-> - No. of contigs: The total number of contigs in the assembly.
-> - Largest contig: The length of the largest contig in the assembly.
-> - Total length: The total number of bases in the assembly.
-> - Nx: The largest contig length, *L*, such that contigs of length >= *L* account for at least *x*% of the bases of the assembly.
-> - NGx: The contig length such that using equal or longer length contigs produces *x*% of the length of the reference genome, rather than *x*% of the assembly length.
-> - GC content: the percentage of nitrogenous bases which are either guanine or cytosine.
+> - **No. of contigs**: The total number of contigs in the assembly.
+> - **Largest contig**: The length of the largest contig in the assembly.
+> - **Total length**: The total number of bases in the assembly.
+> - **Nx**: The largest contig length, *L*, such that contigs of length > *L* account for at least *x*% of the bases of the assembly.
+> - **NGx**: The contig length such that using equal or longer length contigs produces *x*% of the length of the reference genome, rather than *x*% of the assembly length.
+> - **GC content**: the percentage of nitrogenous bases which are either guanine or cytosine.
 >
 {: .comment}
 
@@ -502,24 +512,53 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 
 > <hands-on-title>Assembly evaluation with gfastats</hands-on-title>
 >
-> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Input file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
->    - *"Expected genome size"*: `11747160` (remember we calculated this value earlier, so it should be in your history!)
->    - *"Generates the initial set of paths*": toggle to `yes`
-> 2. Rename the outputs as `Hap1 stats` and `Hap2 stats`
-> 3. {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
->    - {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets
-> 4. Rename the output as `gfastats on hap1 and hap2 (full)`
-> 5. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->    - {% icon param-files %} *"Input file"*: select `gfastats on hap1 and hap2 (full)`
->    - *"that"*: `Don't Match`
->    - *"Type of regex"*: `Basic`
->    - *"Regular Expression"*: `[Ss]caffold`
+> **Step 1**: Assembly statistics generation with {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} using the following parameters:
+>
+> 1. {% icon param-files %} *"Input file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
+> 2. *"Tool mode": `Summary statistics generation`
+> 3. *"Expected genome size"*: `11747160` (remember we calculated this value earlier using `GenomeScope2` [here](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
+> 4. *"Thousands separator in output"*: Set to "No"
+> 5. Rename the outputs as `Hap1 stats` and `Hap2 stats`
+>
+> This would generate summary files that look like this (only first six rows are shown):
+>
+> ```
+> Expected genome size    11747160
+> # scaffolds                    0
+> Total scaffold length          0
+> Average scaffold length      nan
+> Scaffold N50                   0
+> Scaffold auN                0.00
+> ```
+> 
+> Because we ran `gfastats` on hap1 and hap2 outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
+> 
+> **Step 2**: Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
+> 1. {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets. Keep all other setting as they are.
+> 2. Rename the output as `gfastats on hap1 and hap2 (full)`
+>
+> This would generate summary files that look like this (only first five rows are shown):
+>
+> ```
+> # gaps               0  0
+> # gaps in scaffolds  0  0
+> # paths              0  0
+> # segments          17 16
+> ```
+>
+> Now let's extract only relevant information by excluding all lines containing word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs): 
+>
+> **Step 3**: Run {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+> 1. {% icon param-files %} *"Input file"*: select `gfastats on hap1 and hap2 (full)`
+> 2. *"that"*: `Don't Match`
+> 3. *"Type of regex"*: `Basic`
+> 4. *"Regular Expression"*: `scaffold`
+> 5. *"Match type*": leave as `case insensitive`
 > 6. Rename the output as `gfastats on hap1 and hap2 contigs`
 >
 {: .hands_on}
 
-Take a look at the _gfastats on hap1 and hap2 contigs_ output — it should have three columns: 1) name of statistic, 2) hap1 value, and 3) hap2 value. According to the report, both assemblies are quite similar; the hap1 assembly includes 16 contigs, totalling ~11.3Mbp of sequence (the `Total contig length` statistic), while the hap2 assembly includes 17 contigs, whose total length is ~12.2Mbp. (**NB**: Your values may differ slightly, or be reversed between the two haplotypes!)
+Take a look at the _gfastats on hap1 and hap2 contigs_ output — it has three columns: 1) name of statistic, 2) hap1 value, and 3) hap2 value. According to the report, both assemblies are quite similar; the hap1 assembly includes 16 contigs, totalling ~11.3Mbp of sequence (the `Total contig length` statistic), while the hap2 assembly includes 17 contigs, whose total length is ~12.2Mbp. (**NB**: Your values may differ slightly, or be reversed between the two haplotypes!)
 
 > <question-title></question-title>
 >
