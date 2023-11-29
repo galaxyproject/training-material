@@ -382,7 +382,7 @@ The first data track we will configure, will be the structural variants (SVs) us
 SVs are usually described in terms of the SV **breakpoints** (or **junctions**); sets of genomic locations which are separated by a large distance on the reference genome, but have become adjacent in the sample through the occurrence of structural variants. Unfortunately, there is no standard file format for SV data, with different SV callers outputting different formats. Therefore, our first step will be to transform our input dataset to the Circos format for link tracks.
 
 
-**SV File Format:**
+### SV File Format
 
 ```
 #ASSEMBLY_ID	GS000008107-ASM
@@ -402,7 +402,7 @@ SVs are usually described in terms of the SV **breakpoints** (or **junctions**);
 ```
 
 
-**Circos Input Format:**
+### Circos Input Format
 
 ```
 chromosome - start - end - chromosome - start - end
@@ -538,8 +538,7 @@ You should see a plot like:
 > > 2. Low **copy number states- alternation between 2 states** (sometimes 3) suggesting that rearrangements occurred in a short period of time.
 > > 3. In chromothriptic areas you get **alternation of regions which retain heterozygosity-two copy (no loss or gain), with regions that have loss of heterozygosity- one copy** (heterozygous deletion). This suggest that the rearrangements took place at a time that both parental copies of the chromosome were present and hence early on the development of the cancer cell.
 > >
-> > *from [https://en.wikipedia.org/wiki/Chromothripsis](https://en.wikipedia.org/wiki/Chromothripsis)*
-> {: .quote}
+> {: .quote cite="https://en.wikipedia.org/wiki/Chromothripsis"}
 >
 {: .comment}
 

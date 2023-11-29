@@ -40,6 +40,7 @@ requirements:
 tags:
 - 10x
 - paper-replication
+- R
 
 contributions:
   authorship:

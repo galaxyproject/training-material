@@ -6,6 +6,7 @@ zenodo_link: "https://doi.org/10.5281/zenodo.940733"
 level: Introductory
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "I have short reads and long reads. How do I assemble a genome?"
 objectives:
@@ -268,7 +269,7 @@ Let's look at the entire assembly and its annotation in the genome browser. We c
 
 Visualization requires a local installation of IGV. If you have IGV installed - just start it. If you don't - read on.
 
-#### Starting IGV
+### Starting IGV
 
 Go to IGV [download page](http://software.broadinstitute.org/software/igv/download) and select one of the options. The one I would try first would be **Java Web Start**. Simply click the **Launch** button for 10 GB distribution.
 

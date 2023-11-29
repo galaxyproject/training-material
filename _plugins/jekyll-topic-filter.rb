@@ -363,6 +363,39 @@ module TopicFilter
     interesting
   end
 
+  def self.mermaid(wf)
+    # We're converting it to Mermaid.js
+    # flowchart TD
+    #     A[Start] --> B{Is it?}
+    #     B -- Yes --> C[OK]
+    #     C --> D[Rethink]
+    #     D --> B
+    #     B -- No ----> E[End]
+
+    output = "flowchart TD\n"
+    wf['steps'].keys.each do |id|
+      step = wf['steps'][id]
+      output += "  #{id}[\"#{step['name']}\"];\n"
+    end
+
+    wf['steps'].keys.each do |id|
+      # Look at the 'input connections' to this step
+      step = wf['steps'][id]
+      step['input_connections'].each do |_, v|
+        # if v is a list
+        if v.is_a?(Array)
+          v.each do |v2|
+            output += "  #{v2['id']} -->|#{v2['output_name']}| #{id};\n"
+          end
+        else
+          output += "  #{v['id']} -->|#{v['output_name']}| #{id};\n"
+        end
+      end
+    end
+
+    output
+  end
+
   def self.resolve_material(site, material)
     # We've already
     # looked in every /topic/*/tutorials/* folder, and turn these disparate
@@ -466,6 +499,7 @@ module TopicFilter
         wf_json = JSON.parse(File.read(wf_path))
         license = wf_json['license']
         creators = wf_json['creator'] || []
+        wftitle = wf_json['name']
 
         # /galaxy-intro-101-workflow.eu.json
         workflow_test_results = Dir.glob(wf_path.gsub(/.ga$/, '.*.json'))
@@ -487,8 +521,10 @@ module TopicFilter
           'license' => license,
           'creators' => creators,
           'name' => wf_json['name'],
+          'title' => wftitle,
           'test_results' => workflow_test_outputs,
           'modified' => File.mtime(wf_path),
+          'mermaid' => mermaid(wf_json),
         }
       end
     end
