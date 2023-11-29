@@ -86,6 +86,8 @@ You can access the data for this tutorial in multiple ways:
 
    {% snippet faqs/galaxy/histories_import.md %}
 
+
+<!--
 3. **Uploading from Zenodo** (see below)
 
 
@@ -113,6 +115,8 @@ You can access the data for this tutorial in multiple ways:
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
+
+-->
 
 Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata previously!
 
