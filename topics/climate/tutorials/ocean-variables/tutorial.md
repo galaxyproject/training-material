@@ -173,10 +173,10 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 > 1. Go on the central map 
 > 2. Click right and select **Properties...**
 > 3. For example make your data dots bigger in "Display Style" increase the number below "Symbol Size" to 50, click **OK**
-> ![Image on how to change the size of your dots](../../images/coastal_water_dyn/size_dots.png)
+> ![Image on how to change the size of your dots](../../images/ocean_var/size_dots.png)
 >
 > You can now see bigger dots representing your data.
-> ![Image of you maps after the increase of the dots' size]((../../images/coastal_water_dyn/big_dots.png)
+> ![Image of you maps after the increase of the dots' size]((../../images/ocean_var/big_dots.png)
 >
 > If you want to save it now that you already saved it once in the right folder outputs you just have to click lef on te save icon top left when it's red.
 {: .tip}
