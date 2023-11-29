@@ -91,11 +91,11 @@ Now we'll run those csv files through the Seurat toolkit with the following para
 >  - *"Compare top RNA and protein features graphicaly against themselves and one another"*: `No`
 {: .hands_on}
 
-><comment-title></comment-title>
+><details-title>Can I change parameters?</details-title>
 >Note that the parameters listed above are just one way you may use this super useful, one step tool. Feel free to play around with different parameters to see how it affects the data!
 >
 >If you're hoping to follow this tutorial step by step, word for word, be aware that changing any of the above parameters may change the data you get to explore shortly in RStudio.
-{: .comment}
+{: .details}
 
 # Moving to RStudio
 Now that we have some explorable data (a Seurat object) in our Galaxy history, let's move into RStudio and keep investigating:
