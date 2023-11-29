@@ -552,7 +552,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 > 1. {% icon param-files %} *"Input file"*: select `gfastats on hap1 and hap2 (full)`
 > 2. *"that"*: `Don't Match`
 > 3. *"Type of regex"*: `Basic`
-> 4. *"Regular Expression"*: `scaffold`
+> 4. *"Regular Expression"*: enter the word `scaffold`
 > 5. *"Match type*": leave as `case insensitive`
 > 6. Rename the output as `gfastats on hap1 and hap2 contigs`
 >
