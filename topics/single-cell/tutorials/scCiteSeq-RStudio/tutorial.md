@@ -125,8 +125,10 @@ Doesn't look like there were actually any insignifcant markers in that list! Alt
 
 Now we have a statistically signficant list of protein markers per cluster!
 
-><details-title>More details on statistics</details-title>
+><details-title>What do these statistics mean?</details-title>
+>
 > There are a number of statistics that are included in these dataframes, if you're interested in better understanding them, take a look at [Seurat's documentation of FindAllMarkers](https://satijalab.org/seurat/reference/findallmarkers) for more details.
+>
 {: .details}
 
 ## RNA Markers <a name="rnamarkers"></a>
@@ -135,21 +137,21 @@ The next dataset in our history should be RNA markers. Let's import them, remove
 gx_get(5)
 rna_markers<-read.table('/import/5', header = T)
 rna_markers<-subset(rna_markers, p_val_adj < 0.045)
-view(rna_markers)
+View(rna_markers)
 ```
 ![RNA Markers](../../images/scCiteSeq-RStudio/Plot6.png "RNA Markers")
 
-Just like the RNA and ADT matrices looked quite similar, the protein and RNA markers will as well. This is because Seurat is interpretting and analyzing the RNA and ADT assays in the same manner, with the same tools. So once again, if you're interested in what some of the statistic on the rna_markers file mean, take a look at the [Seurat documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers).
+Just like the RNA and ADT matrices looked quite similar, the protein and RNA marker format will as well. This is because Seurat is interpretting and analyzing the RNA and ADT assays in the same manner, with the same tools.
 
 ## Processed Seurat Object <a name="processedseuratobject"></a>
-The next dataset in our history is arguably the most important--the processed Seurat object. This is the dataset we will be further processing and exploring.
+The next dataset in our history is arguably the most important: the processed Seurat object. This is the dataset we will be further processing and exploring.
 
 Before we can import the object, we'll need to call the Seurat packages:
 ```r
 library(Seurat)
 library(SeuratObject)
 ```
-This library() function tells RStudio to prepare an installed package for use. If you don't call up the package, RStudio will not recognize your commands using that package.
+This `library()` function tells RStudio to prepare an installed package for use. If you don't call up the package, RStudio will not recognize your commands using that package.
 
 Now that Seurat is loaded, we can import and open the processed object:
 ```r
@@ -157,7 +159,7 @@ gx_get(6)
 srt<-readRDS('/import/6')
 ```
 
-Now the processed Seurat object, containing both RNA and ADT data, has been loaded into your RStudio environment! We'll come back to this object in a moment for further processing and investigation!
+Now the processed Seurat object, containing both RNA and ADT data, has been loaded into your RStudio environment! We'll come back to this object in a moment for further processing and investigation.
 
 ## Combined Protein & RNA Markers <a name="combinedmarkers"></a>
 The final dataset that I have in my history now is a combined marker list. Let's import and filter this marker list:
@@ -184,14 +186,14 @@ Now, let's get visualizing. Call up the ggplot2 package so RStudio is ready to p
 library(ggplot2)
 ```
 ## FeaturePlots
-Say you want to know how these CBMCs' CD19 protein expression compares to it's RNA expression... To visualize this let's first start with plotting the protein expression:
+Let's say you want to know how these CBMC CD19 protein expression compares to it's RNA expression. To visualize this, let's first start with plotting the protein expression:
 ```r
 DefaultAssay(srt)<-"ADT"
 adt_cd19<-FeaturePlot(srt, features = "CD19", order = T) + ggtitle("CD19 Protein")
 ```
 Take a look:
 ```r
-view(adt_cd19)
+View(adt_cd19)
 ```
 ![CD19 Protein Expression FeaturePlot](../../images/scCiteSeq-RStudio/Plot7.png "CD19 Protein Expression")
 
