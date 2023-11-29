@@ -40,7 +40,7 @@ For this tutorial, we'll use a publicly available dataset of 8,617 cord blood mo
 >
 >**Antibody derived tag (ADT)** refers to the cell surface protein abundance measurements
 >
-> **RNA**: represents the transcriptomic measurements
+> **RNA** represents the transcriptomic measurements
 >
 {: .comment}
 
@@ -71,33 +71,23 @@ You can access [this history](https://usegalaxy.eu/u/camila-goclowski/h/citeseqs
 
 # Cite-Seq Enabled Seurat Tool
 
-Now we'll run those csv files through the updated Seurat tool with the following parameters:
+Now we'll run those csv files through the Seurat toolkit with the following parameters:
 > <hands-on-title></hands-on-title>
 > Run {% tool [Seurat](toolshed.g2.bx.psu.edu/repos/iuc/seurat/seurat/4.3.0.1+galaxy1) %} with the following parameters:
-> - *"Which Seuray method should be run"*: `Cite-seq`
-> - *"RNA counts file"*: `1: GSE100866_CBMC_8K_13AB_10X-RNA_umi.csv.gz`
-> - *"Protein counts file"*: `2: GSE100866_CBMC_8K_10X-ADT_umi.csv.gz`
+> - *"Which Seurat method should be run"*: `Cite-seq`
+> - {% icon param-file %} *"RNA counts file"*: `1: GSE100866_CBMC_8K_13AB_10X-RNA_umi.csv.gz`
+> - {% icon param-file %} *"Protein counts file"*: `2: GSE100866_CBMC_8K_10X-ADT_umi.csv.gz`
 > - *"Minimum cells"*: `5`
 > - *"Minimum genes"*: `10`
 > - *"Low threshold for filtering cells"*: `1500`
 > - *"High threshold for filtering cells"*: `30000`
-> - *"Include violin plot and scatter plot of cell features"*: `No`
->  - *"Output seurat object after data normalization"*: `No`
->  - *"Include plot of variable features"*: `No`
->  - *"Output seurat object after data scaling"*: `No`
 >  - *"Number of PCs to use in plots"*: `15`
->  - *"Include PCA plots"*: `No`
->  - *"Output seurat object after PCA analysis"*: `No`
->  - *"Perplexity parameter"*: ``
 >  - *"Resolution parameter"*: `0.8`
 >  - *"Include UMAP and TSNE plots"*: `Yes`
 >  - *"Output seurat object after TSNE and UMAP analysis"*: `No`
->  - *"Minimum percent cells"*: `0.1`
->  - *"Log fold change threshold"*: `0.25`
 >  - *"Include heatmaps of markers"*: `Yes`
 >  - *"Output marker data"*: `Yes`
 >  - *"Output list of cite-seq markers"*: `Yes`
->  - *"Compare specific feature's effect on protein and rna expression?"*: `No`
 >  - *"Compare top RNA and protein features graphicaly against themselves and one another"*: `No`
 {: .hands_on}
 
