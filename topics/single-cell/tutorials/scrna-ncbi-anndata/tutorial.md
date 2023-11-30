@@ -11,7 +11,7 @@ questions:
 - How can I convert raw gene data to the AnnData format?
 - How do I manually and automatically add metadata to my AnnData object?
 objectives:
-- Analyse some gene data from NCBI.
+- Analyse gene data from NCBI.
 - Convert raw gene expression data into the AnnData format.
 - Add metadata to the AnnData object to prepare it for analysis.
 time_estimation: 1H
@@ -20,12 +20,14 @@ key_points:
 - Metadata and annotations can be added in both manually and automatically with various tools and resources.
 
 tags:
-- single-cell
 - data management
+- data import
 
 contributions:
   authorship:
     - hexhowells
+  editing:
+    - nomadscientist
 
 follow_up_training:
   -
@@ -48,7 +50,7 @@ The first step is the obtain the data, for this tutorial we will use data from t
 > <hands-on-title>Download and extract the data from GEO</hands-on-title>
 >
 > 1. Using a web browser navigate to the GEO repsitory for the paper
-> 
+>
 >   ```
 >   https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031
 >   ```
