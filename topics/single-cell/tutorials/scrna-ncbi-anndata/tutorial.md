@@ -172,7 +172,7 @@ We now need to find the files relating to each patient. Selecting the output {% 
 >    ```
 > 3. For each of those 10 samples, select the *Unhide* icon {% icon galaxy-show-hidden %}. This will move them from {% icon galaxy-show-hidden %} *Hidden* to *Active*.
 >
-> 4. Navigate back to the {% icon fa-map-marker %} *Active* datasets list, where you will now see your 10 target samples.
+> 4. Navigate back to the {% icon galaxy-show-active %} *Active* datasets list, where you will now see your 10 target samples.
 {: .hands_on}
 </div>
 
