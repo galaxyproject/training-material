@@ -5,7 +5,7 @@ title: Converting NCBI Data to the AnnData Format
 subtopic: datamanipulation
 priority: 3
 zenodo_link: 'https://zenodo.org/record/10101768'
- 
+
 questions:
 - How do I understand NCBI data?
 - How can I convert raw gene data to the AnnData format?
@@ -48,7 +48,7 @@ The first step is the obtain the data, for this tutorial we will use data from t
 > <hands-on-title>Download and extract the data from GEO</hands-on-title>
 >
 > 1. Using a web browser navigate to the GEO repsitory for the paper
->
+> 
 >   ```
 >   https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031
 >   ```
