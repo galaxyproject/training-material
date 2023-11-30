@@ -178,12 +178,15 @@ We now need to find the files relating to each patient. Selecting the output {% 
 
 # Converting to AnnData and Combining Samples
 
-The first step is to convert all of the raw files into AnnData objects, this can be done one at a time or all at once by selecting ```multiple datasets``` when chosing the input and highlighting all the raw data files.
+The next step is to convert all of the raw files into AnnData objects, this can be done one at a time or all at once by selecting ```multiple datasets``` when chosing the input and highlighting all the raw data files.
 
-> <tip-title>Adding Metadata</tip-title>
-> Before starting to process the data it is generally a good idea to add tags to each sample in order to keep track of what data is being processed, below is some of the imported data with added tags for the patient and sample id:
+> <tip-title>Tag your datasets</tip-title>
+> Before starting to process the data, it is generally a good idea to add tags to each sample in order to keep track of what data is being processed. Below is some of the imported data with added tags for the patient and sample id. We suggest you replicate this in your history.
 >
 > ![Imported data with tags](../../images/scrna-ncbi-anndata/metadata.png "Imported data with tags")
+>
+>   {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
 {: .tip}
 
 > <hands-on-title>Convert raw data to AnnData</hands-on-title>
