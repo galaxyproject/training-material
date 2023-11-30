@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 
+
 title: 'Cite-Seq Data Processing into RStudio Visualization (Cite-Seq, Seurat, R)'
 subtopic: scmultiomics
 priority: 2
@@ -30,9 +31,13 @@ tags:
 - Cite-Seq
 - RStudio
 
+
 contributions:
   authorship:
     - Camila-goclowski
+  editing:
+    - nomadscientist
+
 
 notebook:
   language: r
@@ -50,6 +55,7 @@ notebook:
 >
 {: .agenda}
 
+
 Before we can do any real biological investigation, we need to understand what each of the outputs from our Seurat tool are. Maybe you've already begun to dissect what's what, but just in case, let's run through each of the datasets together. 
 
 # Datasets We'll Review 
@@ -59,6 +65,7 @@ Before we can do any real biological investigation, we need to understand what e
 4. [RNA Markers](#rnamarkers)
 5. [Processed Seurat Object](#processedseuratobject)
 6. [Combined RNA & Protein Markers](#combinedmarkers)
+
 
 ><comment-title>gx_get</comment-title>
 > RStudio in Galaxy comes with a gx_get() function. This  is critical to understand and be able to use in order to move datasets from your history into RStudio. The function outputs the file path from which you access your data via RStudio.
@@ -97,6 +104,7 @@ This matrix, with these values shown, are *not* what we will be analyzing later 
 We can do the same thing with the pre-analysis protein matrix. We'll call it the ADT matrix for now, since that is how Seurat recognizes it.
 ```r
 gx_get(2)
+
 ADT<-read.csv('/import/2')
 ```
 Again, let's take a look at what's in here:
@@ -132,10 +140,12 @@ protein_markers<-subset(protein_markers, p_val_adj < 0.045)
 ```
 Doesn't look like there were actually any insignifcant markers in that list! Although we got lucky this time, I have found that it is in everyone's best interest to always attempt this filter, especially when working with bigger, messier datasets!
 
+
 Now we have a statistically signficant list of protein markers per cluster! There are a number of statistics that are included in these dataframes, if you're interested in better understanding them, take a look at [Seurat's documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers) for more details. 
 
 ## RNA Markers <a name="rnamarkers"></a>
 The next dataset in our history should be RNA markers. Let's import them, remove any statistically insignifcant ones, and take a look: 
+
 ```r
 gx_get(5)
 rna_markers<-read.table('/import/5', header = T)
@@ -150,19 +160,23 @@ Just like the RNA and ADT matrices looked quite similar, the protein and RNA mar
 The next dataset in our history is arguably the most important--the processed Seurat object. This is the dataset we will be further processing and exploring.
 
 Before we can import the object, we'll need to call the Seurat packages: 
+
 ```r
 library(Seurat)
 library(SeuratObject)
 ```
+
 This library() function tells RStudio to prepare an installed package for use. If you don't call up the package, RStudio will not recognize your commands using that package. 
 
 Now that Seurat is loaded, we can import and open the processed object: 
+
 ```r
 gx_get(6)
 srt<-readRDS('/import/6')
 ```
 
 Now the processed Seurat object, containing both RNA and ADT data, has been loaded into your RStudio environment! We'll come back to this object in a moment for further processing and investigation!
+
 
 ## Combined Protein & RNA Markers <a name="combinedmarkers"></a>
 The final dataset that I have in my history now is a combined marker list. Let's import and filter this marker list:
@@ -175,6 +189,7 @@ markers<-subset(markers, p_val_adj < 0.045)
 We now have a comprehensive list of statistically significant markers.
 
 # A Bit More Processing
+
 Now that we have reviewed all of the datasets that were output by our Seurat Cite-Seq Tool, there's one last step before we can start asking some biological questions: normalization. 
 
 Currently, the Seurat tool's functionality does not allow it to normalize the ADT counts. This option will likely be added shortly, and when it is, this tutorial will be updated as well! For now, let's manually normalize the ADT data and get to the science! 
@@ -188,12 +203,15 @@ Now, let's get visualizing. Call up the ggplot2 package so RStudio is ready to p
 ```r
 library(ggplot2)
 ```
+
 ## FeaturePlots 
 Say you want to know how these CBMCs' CD19 protein expression compares to it's RNA expression... To visualize this let's first start with plotting the protein expression: 
+
 ```r
 DefaultAssay(srt)<-"ADT"
 adt_cd19<-FeaturePlot(srt, features = "CD19", order = T) + ggtitle("CD19 Protein")
 ```
+
 Take a look: 
 ```r
 view(adt_cd19)
@@ -201,6 +219,7 @@ view(adt_cd19)
 ![CD19 Protein Expression FeaturePlot](../../images/scCiteSeq-RStudio/Plot7.png "CD19 Protein Expression")
 
 Next, we'll plot the RNA expression: 
+
 ```r
 DefaultAssay(srt)<-"RNA"
 rna_cd19<-FeaturePlot(srt, features = "CD19", order = T) + ggtitle("CD19 RNA")
@@ -239,12 +258,14 @@ Voila! The same plot but in two different ways! This may feel repetetive, but fi
 
 # FeatureScatter
 We can also plot scatter plots of the cell surface protein expression. These will be functionally similar to biaxial plots used for FACS! 
+
 ```r
 FeatureScatter(srt, feature1 = "adt_CD19", feature2 = "adt_CD3")
 ```
 ![CD19 & CD3 Protein ScatterPlot](../../images/scCiteSeq-RStudio/Plot10.png "CD19 & CD3 Protein Expression")
 
 We can even visualize the RNA vs. protein differences in a scatterplot format: 
+
 ```{r}
 FeatureScatter(srt, feature1 = "adt_CD3", feature2 = "rna_CD3E")
 ```

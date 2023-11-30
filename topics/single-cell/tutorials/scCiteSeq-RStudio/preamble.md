@@ -47,6 +47,7 @@ First on the to-do list is importing our csv files. You can do this in a couple 
 >
 > 1. Create a new history for this tutorial
 > 2. Import the csv files object from NCBI:
+
 >  To retrive the ADT file: 
 >    ```
 >    ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-ADT_umi.csv.gz
@@ -58,8 +59,8 @@ First on the to-do list is importing our csv files. You can do this in a couple 
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 {: .hands_on}
 
-## Option 2: Import a History 
 
+## Option 2: Import a History 
 You can access [this history](https://usegalaxy.eu/u/camila-goclowski/h/citeseqseurattooltutorial) by clicking on the link provided.
 
 {% snippet faqs/galaxy/histories_import.md %}
