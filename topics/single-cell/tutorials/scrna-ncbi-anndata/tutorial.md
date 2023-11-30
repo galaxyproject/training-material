@@ -225,8 +225,8 @@ Examine {% icon galaxy-eye %} the {% icon param-file %} *"Inspect AnnData"* outp
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >
->         - *"Annotated data matrix"*
->           - {% icon param-files %} *Multiple datasets*: `Select all AnnData files`
+>    - *"Annotated data matrix"*
+>         - {% icon param-files %} *Multiple datasets*: `Select all AnnData files`
 >    - *"Function to manipulate the object"*: `Transpose the data matrix, leaving observations and variables interchanged`
 >
 {: .hands_on}
