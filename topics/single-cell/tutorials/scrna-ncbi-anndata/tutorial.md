@@ -50,20 +50,18 @@ The first step is the obtain the data. For this tutorial, we will use data from 
 > <hands-on-title>Download and extract the data from GEO</hands-on-title>
 >
 > 1. Using a web browser navigate to the GEO repository for the paper
->
->   ```
->   https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031
->   ```
->
-> 2. Copy the ```(http)``` link in the supplemental materials section of the page to download the data
+>     ```
+>     https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031
+>     ```
+> 2. Copy the ```(http)``` link located in the supplemental materials section of the page
 >
 > 3. Import the data into Galaxy
 >
-> {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>   {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 4. Change the datatype to `tar`
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tar" %}
+>   {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tar" %}
 >
 > 5. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `tar` file you just imported
@@ -98,7 +96,7 @@ The first step is the obtain the data. For this tutorial, we will use data from 
 {: .hands_on}
 </div>
 
-We now have the raw gene expression data that we will be processing, however we will need to manually add some metadata which requires finding out some more information about our files.
+We now have the raw gene expression data that we will process. However, we will need to manually add some metadata, which requires finding out some more information about our files.
 
 > <hands-on-title>Finding the metadata</hands-on-title>
 >
@@ -149,7 +147,7 @@ Unfortunately, the names of the files don't exactly match the data in our excel 
 - **MAY_PB2A** ---> **PA_PB2A**
 - **MAY_PB2B** ---> **PA_PB2B**
 
-You may also notice that we have multiple sample files with the same name suffixed with **_Pool_X**. These are replications where multiple samples are taken of the same tumor area in order to get a more comprehensive view of the gene data of the tumor. We will need to combine these replication files during processing.
+You may also notice that we have multiple sample files with the same name suffixed with `_Pool_X`. These are replications where multiple samples are taken of the same tumor area in order to get a more comprehensive view of the gene data of the tumor. We will need to combine these replication files during processing.
 
 <div class="Manual" markdown="1">
 
@@ -157,9 +155,9 @@ We now need to find the files relating to each patient. Selecting the output {% 
 
 > <hands-on-title>Unhiding 10 target files</hands-on-title>
 >
-> 1. In the {% icon galaxy-history %} Galaxy history, select the *Include hidden* icon {% icon galaxy-show-hidden %} to see the 53 files in your dataset collection.
+> 1. In the {% icon galaxy-history %} Galaxy history panel, select the *Include hidden* icon {% icon galaxy-show-hidden %} to see the 53 files in your dataset collection.
 >
-> 2. Scroll down to visualise the following 10 samples:
+> 2. Scroll down to visualise the following 10 samples (likely in opposite order to this!):
 >    ```
 >    GSM5353214_PA_AUG_PB_1A_S1.dge.txt
 >    GSM5353215_PA_AUG_PB_1B_S2.dge.txt
@@ -172,9 +170,9 @@ We now need to find the files relating to each patient. Selecting the output {% 
 >    GSM5353222_PA_PB2B_Pool_1_3_S52_L002_dge.txt
 >    GSM5353223_PA_PB2B_Pool_2_S26_L001_dge.txt
 >    ```
-> 3. For each of those 10 samples, select the *Unhide* icon {% icon galaxy-show-hidden %}. This will move them from *Hidden* to *Active*.
+> 3. For each of those 10 samples, select the *Unhide* icon {% icon galaxy-show-hidden %}. This will move them from {% icon galaxy-show-hidden %} *Hidden* to *Active*.
 >
-> 4. Navigate back to the *Active* datasets list, where you will now see your 10 target samples.
+> 4. Navigate back to the {% icon fa-map-marker %} *Active* datasets list, where you will now see your 10 target samples.
 {: .hands_on}
 </div>
 
