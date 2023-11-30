@@ -57,11 +57,13 @@ The first step is the obtain the data. For this tutorial, we will use data from 
 >
 > 3. Import the data into Galaxy
 >
->   {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 4. Change the datatype to `tar`
 >
->   {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tar" %}
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tar" %}
 >
 > 5. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `tar` file you just imported
@@ -151,7 +153,7 @@ You may also notice that we have multiple sample files with the same name suffix
 
 <div class="Manual" markdown="1">
 
-We now need to find the files relating to each patient. Selecting the output {% icon param-file %} **Unzip** tool shows you 53 files in a {% icon param-collection %}. We will work with the 10 files associated with our patient.
+We now need to find the files relating to each patient. Selecting the output {% icon param-file %} **Unzip** tool shows you 53 files in a {% icon param-collection %} dataset collection. We will work with the 10 files associated with our target patients.
 
 > <hands-on-title>Unhiding 10 target files</hands-on-title>
 >
@@ -173,6 +175,15 @@ We now need to find the files relating to each patient. Selecting the output {% 
 > 3. For each of those 10 samples, select the *Unhide* icon {% icon galaxy-show-hidden %}. This will move them from {% icon galaxy-show-hidden %} *Hidden* to *Active*.
 >
 > 4. Navigate back to the {% icon galaxy-show-active %} *Active* datasets list, where you will now see your 10 target samples.
+>
+> 5. In the {% icon galaxy-history %} Galaxy history panel, click the {% icon galaxy-selector %} *Select items* to allow you to select multiple datasets from your history
+>
+> 6.  Select all 10 samples
+>
+> 7. Select the highlighted rectangle `10 of X` (the X may be different depending on what you've imported!) to give you a menu, from which you select `Change data type`
+>
+> 8. Select the dropdown menu and either type in or scroll to find `tabular.gz`
+>
 {: .hands_on}
 </div>
 
@@ -204,7 +215,7 @@ The next step is to convert all of the raw files into AnnData objects, this can 
 >
 {: .hands_on}
 
-Looking at the observation data (obs) of one of the files we can see that it is storing cell data, however we need the variable data (var) to store the cells and the observation data to store the genes, so we also need to transpose all of our AnnData objects, again we can speed up the process by selecting all of the AnnData objects and process them at once.
+Examine {% icon galaxy-eye} the {% icon param-file %} *"Inspect AnnData"* output. You will find a list of genes - however, the `obs` (observations) layer in the AnnData object should store cell data. The `var` (variables) should store the genes data. We need to transpose all of our AnnData objects. We will speed up the process by selecting all of the AnnData objects and processing them at once.
 
 > <comment-title>Check your data</comment-title>
 > Whilst for this specific data the object needed to be transposed this won't always be the case! The easiest way is to check the obs data of the AnnData object using the ```Inspect AnnData``` tool. The obs file should have a column containing gene letters (something like **CGGAAGTGATAC**) if thats the case then the data doesn't need to be transposed!
