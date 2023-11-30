@@ -231,7 +231,7 @@ Examine {% icon galaxy-eye %} the {% icon param-file %} *"Inspect AnnData"* outp
 >
 {: .hands_on}
 
-Now we have all the AnnData files with the data in the correct orientation we can combine all the data into a single AnnData file which will make it much easier to work with. This combination operation will add an additional column called **batch** which tells us which AnnData object each bit of data came from, this will be useful for further processing!
+Now, we have all the AnnData objects with the data in the correct orientation. We can combine them into a single AnnData object, which will make the data easier to work with. This combination operation will add an additional column called **batch** which tells us which AnnData object each bit of data came from. This will be useful for further processing!
 
 > <hands-on-title>Combine AnnData objects</hands-on-title>
 >
