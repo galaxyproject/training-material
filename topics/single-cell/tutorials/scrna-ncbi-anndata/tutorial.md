@@ -157,7 +157,7 @@ We now need to find the files relating to each patient. Selecting the output {% 
 
 > <hands-on-title>Unhiding 10 target files</hands-on-title>
 >
-> 1. In the {% icon galaxy-history %} Galaxy history, select the *Include hidden* icon {% icon galaxy-show-hidden} to see the 53 files in your dataset collection.
+> 1. In the {% icon galaxy-history %} Galaxy history, select the *Include hidden* icon {% icon galaxy-show-hidden %} to see the 53 files in your dataset collection.
 >
 > 2. Scroll down to visualise the following 10 samples:
 >    ```
