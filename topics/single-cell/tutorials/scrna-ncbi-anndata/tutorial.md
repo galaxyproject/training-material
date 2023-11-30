@@ -231,14 +231,14 @@ Examine {% icon galaxy-eye %} the {% icon param-file %} *"Inspect AnnData"* outp
 >
 {: .hands_on}
 
-Now, we have all the AnnData objects with the data in the correct orientation. We can combine them into a single AnnData object, which will make the data easier to work with. This combination operation will add an additional column called **batch** which tells us which AnnData object each bit of data came from. This will be useful for further processing!
+Now, we have all the AnnData objects with the data in the correct orientation. We can combine them into a single AnnData object, which will make the data easier to work with. This combination operation will add an additional column called `batch` which tells us which AnnData object each bit of data came from. This will be useful for further processing!
 
 > <hands-on-title>Combine AnnData objects</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Select first Manipulate AnnData (transpose) output`
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
->         - *"Annotated data matrix to add"*: `Select all other Manipulate AnnData (transpose) outputs`
+>         - {% icon param-file %} *"Annotated data matrix to add"*: `Select all other Manipulate AnnData (transpose) outputs`
 >         - *"Join method"*: `Intersection of variables`
 >         - *"Key to add the batch annotation to obs"*: `batch`
 >         - *"Separator to join the existing index names with the batch category"*: `-`
@@ -247,11 +247,11 @@ Now, we have all the AnnData objects with the data in the correct orientation. W
 >
 {: .hands_on}
 
-Now we have all of our gene expression data stored in a single AnnData object! Now we just need to add our metadata!
+Now we have all of our gene expression data stored in a single AnnData object! We just need to add our metadata!
 
 # Annotating the Data
 
-The next step is to annotate our data using the information gathered from the excel sheet earlier, we will do this by leveraging the batch column generated when the objects were combined for each individual patient/sample (indicated by the batch number) we will add in the relevant annotations. First lets extract the observation data so we can manipulate it.
+The next step is to annotate our data using the information gathered from the excel sheet earlier. We will do this by leveraging the `batch` column generated when the objects were combined for each individual patient/sample (indicated by the batch number). We will add in the relevant annotations. First, let's extract the observation data so we can manipulate it.
 
 > <hands-on-title></hands-on-title>
 >
