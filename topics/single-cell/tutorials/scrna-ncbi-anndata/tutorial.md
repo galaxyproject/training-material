@@ -112,7 +112,7 @@ We now have the raw gene expression data that we will be processing, however we 
 
 This one spreadsheet contains all the information we need to further understand our data.
 
-# Understanding the Data
+## Understanding the Data
 
 If we look at that excel file `41467_2021_27322_MOESM2_ESM.xlsx`, we can see multiple sheets.
 
@@ -140,9 +140,7 @@ For this tutorial, we are only going to process the first 3 patients. A summary 
 
 We can see that each patient has 2 different samples from different tumor locations. This is important information that needs to be added to our dataset so that we can separate it during analysis, if needed.
 
-<div class="Manual" markdown="1">
-
-We now need to find the files relating to each patient. Selecting the output {% icon param-file %} **Unzip** tool shows you 53 files in a {% icon param-collection %}. Unfortunately, the names of the files don't exactly match the data in our excel sheet. This can make finding the right samples a bit difficult! A summary of which samples match which file can be found below:
+Unfortunately, the names of the files don't exactly match the data in our excel sheet. This can make finding the right samples a bit difficult! A summary of which samples match which file can be found below:
 
 - **AUG_PB1A** ---> **PA_AUG_PB_1A**
 - **AUG_PB1B** ---> **PA_AUG_PB_1B**
@@ -154,16 +152,14 @@ We now need to find the files relating to each patient. Selecting the output {% 
 You may also notice that we have multiple sample files with the same name suffixed with **_Pool_X**. These are replications where multiple samples are taken of the same tumor area in order to get a more comprehensive view of the gene data of the tumor. We will need to combine these replication files during processing.
 
 <div class="Manual" markdown="1">
-</div>
 
-# Importing the Data
+We now need to find the files relating to each patient. Selecting the output {% icon param-file %} **Unzip** tool shows you 53 files in a {% icon param-collection %}. We will work with the 10 files associated with our patient.
 
-Now we have a general understanding of our data we can import it into Galaxy and start processing it!
-
-> <hands-on-title>Upload data to Galaxy</hands-on-title>
+> <hands-on-title>Unhiding 10 target files</hands-on-title>
 >
-> 1. Create a new history for this tutorial
-> 2. Import the following files from the ```GSE176031_RAW``` folder
+> 1. In the {% icon galaxy-history %} Galaxy history, select the *Include hidden* icon {% icon galaxy-show-hidden} to see the 53 files in your dataset collection.
+>
+> 2. Scroll down to visualise the following 10 samples:
 >    ```
 >    GSM5353214_PA_AUG_PB_1A_S1.dge.txt
 >    GSM5353215_PA_AUG_PB_1B_S2.dge.txt
@@ -176,7 +172,9 @@ Now we have a general understanding of our data we can import it into Galaxy and
 >    GSM5353222_PA_PB2B_Pool_1_3_S52_L002_dge.txt
 >    GSM5353223_PA_PB2B_Pool_2_S26_L001_dge.txt
 >    ```
+> 3. For each of those 10 samples, select the *Unhide* icon {% icon galaxy-show-hidden %}. This will move them from *Hidden* to *Active*.
 >
+> 4. Navigate back to the *Active* datasets list, where you will now see your 10 target samples.
 {: .hands_on}
 </div>
 
