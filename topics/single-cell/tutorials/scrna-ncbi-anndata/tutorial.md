@@ -263,13 +263,13 @@ The next step is to annotate our data using the information gathered from the ex
 >
 {: .hands_on}
 
-Now for each new column we want to add we need to replace the relvant batch numbers with the appropriate metadata. After that we can cut the modified column out so it is separated. We will repeat this process for each piece of metadata we want to add, all the relevant data can be found in the first table of this tutorial.
+For each new column, we need to replace the relevant batch numbers with the appropriate metadata. After that, we can cut the modified column out so it is separated. We will repeat this process for each piece of metadata we want to add. All the relevant data can be found in the first table of this tutorial.
 
-Lets now add the replicate column which tells us which rows are part of pools of the same patient and tumor location.
+Let's now add the replicate column which tells us which cells are part of pools of the same patient and tumor location.
 
 > <hands-on-title>Create replicate metadata</hands-on-title>
 >
-> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
+> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} *in a specific column* with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Observation data`
 >    - *"1: Replacement"*
 >         - *"in column"*: `Column: 2`
@@ -390,11 +390,11 @@ We will now add a column to indicate which sample each row came from using the s
 >
 {: .hands_on}
 
-> <comment-title>$ parameter</comment-title>
+> <details-title>$ parameter</details-title>
 > You may have noticied that some of the parameters in the previous tool used the $ symbol, this is due to how the {% tool Replace Text %} tool works. The tool will replace and **update** the data for every insert operation, meaning that lines that have already been updated could be updated again.
 >
 > Since we are replacing our batch id's with identifiers that include numbers we want to prevent them from being updated again. appending the pattern with the $ symbol tells the tool to only replace the pattern if it is not followed by any other character (so the 1 in `AUG_PB1A` won't be replaced as it is followed by an 'A').
-{: .comment}
+{: .details}
 
 Finally we will add the tumor column which indicates which tumor sample each row belongs to.
 
