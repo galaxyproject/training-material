@@ -60,7 +60,8 @@ However, there might be some value in persuading your colleagues to do their {RD
 
 Imagine the following situation: An undergrad student wants to do a lab-based project with you. This is great because your post-doc has recently left the lab and there are several promising leads from their work that can be followed up. You propose the following topic to the student: 
 
-**Effect of mutations in the gene CHES-I-like on feeding behaviour in _Drosophila melanogaster_**
+> Effect of mutations in the gene CHES-I-like on feeding behaviour in _Drosophila melanogaster_
+{: .quote}
 
 The only problem is, you can't remember what your post-doc has done so far. This is no problem, as you have followed your data management plan to the letter: _"lab books will be preserved for 10 years in the PI’s office"._ Let's see how effective this strategy actually is.
 
