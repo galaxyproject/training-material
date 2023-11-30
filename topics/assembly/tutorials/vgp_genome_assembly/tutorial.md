@@ -512,13 +512,16 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 
 > <hands-on-title>Assembly evaluation with gfastats</hands-on-title>
 >
-> **Step 1**: Assembly statistics generation with {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} using the following parameters:
+> **Step 1**: Run assembly statistics generation with {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} using the following parameters:
 >
 > 1. {% icon param-files %} *"Input file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
 > 2. *"Tool mode": `Summary statistics generation`
 > 3. *"Expected genome size"*: `11747160` (remember we calculated this value earlier using `GenomeScope2` [here](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
 > 4. *"Thousands separator in output"*: Set to "No"
-> 5. Rename the outputs as `Hap1 stats` and `Hap2 stats`
+>
+> <br>
+>
+> **Step 2**: Rename outputs of `gfastats` step to as `Hap1 stats` and `Hap2 stats`
 >
 > This would generate summary files that look like this (only first six rows are shown):
 >
@@ -533,11 +536,17 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 > 
 > Because we ran `gfastats` on hap1 and hap2 outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
 > 
-> **Step 2**: Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
-> 1. {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets. Keep all other setting as they are.
-> 2. Rename the output as `gfastats on hap1 and hap2 (full)`
+> <br>
 >
-> This would generate summary files that look like this (only first five rows are shown):
+> **Step 3**: Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
+>
+> {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets. Keep all other setting as they are.
+>
+> <br>
+>
+> **Step 4**: Rename the output as `gfastats on hap1 and hap2 (full)`
+>
+> This would generate a joined summary file that looks like this (only first five rows are shown):
 >
 > ```
 > # gaps               0  0
@@ -548,17 +557,28 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 > Now let's extract only relevant information by excluding all lines containing word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs): 
 >
-> **Step 3**: Run {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+> <br>
+>
+> **Step 5**: Run {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
 > 1. {% icon param-files %} *"Input file"*: select `gfastats on hap1 and hap2 (full)`
 > 2. *"that"*: `Don't Match`
 > 3. *"Type of regex"*: `Basic`
 > 4. *"Regular Expression"*: enter the word `scaffold`
 > 5. *"Match type*": leave as `case insensitive`
-> 6. Rename the output as `gfastats on hap1 and hap2 contigs`
+>
+> <br>
+>
+> **Step 6**: Rename the output as `gfastats on hap1 and hap2 contigs`
 >
 {: .hands_on}
 
-Take a look at the _gfastats on hap1 and hap2 contigs_ output — it has three columns: 1) name of statistic, 2) hap1 value, and 3) hap2 value. According to the report, both assemblies are quite similar; the hap1 assembly includes 16 contigs, totalling ~11.3Mbp of sequence (the `Total contig length` statistic), while the hap2 assembly includes 17 contigs, whose total length is ~12.2Mbp. (**NB**: Your values may differ slightly, or be reversed between the two haplotypes!)
+Take a look at the `gfastats on hap1 and hap2 contigs` output — it has three columns: 
+
+  1. Name of statistic
+  2. Value for haplotype 1 (hap1)
+  2. Value for haplotype 2 (hap2)
+
+According to the report, both assemblies are quite similar; the hap1 assembly includes 16 contigs, totalling ~11.3Mbp of sequence (the `Total contig length` statistic), while the hap2 assembly includes 17 contigs, whose total length is ~12.2Mbp. (**NB**: Your values may differ slightly, or be reversed between the two haplotypes!)
 
 > <question-title></question-title>
 >
@@ -577,21 +597,25 @@ Take a look at the _gfastats on hap1 and hap2 contigs_ output — it has three c
 Next, we will use {BUSCO}, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
 
 > <hands-on-title>Assessing assembly completeness with BUSCO</hands-on-title>
+> 
+> **Step 1**: Run {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0) %} with the following parameters:
+> 1. {% icon param-files %} *"Sequences to analyze"*: `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
+> 2. *"Lineage data source"*: `Use cached lineage data`
+> 3. *"Cached database with lineage"*: `Busco v5 Lineage Datasets`
+> 4. *"Mode"*: `Genome assemblies (DNA)`
+> 5. *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+> 6. *"Auto-detect or select lineage?"*: `Select lineage`
+> 7. *"Lineage"*: `Saccharomycetes`
+> 8. *"Which outputs should be generated"*: `short summary text` and `summary image`
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Sequences to analyze"*: `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
->    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Auto-detect or select lineage?"*: `Select lineage`
->       - *"Lineage"*: `Saccharomycetes`
->    - *"Which outputs should be generated"*: `short summary text` and `summary image`
+>> <comment-title></comment-title>
+>>
+>> Remember to modify the *"Lineage"* option if you are working with vertebrate genomes.
+> {: .comment}
 >
->    > <comment-title></comment-title>
->    >
->    > Remember to modify the lineage option if you are working with vertebrate genomes.
->    {: .comment}
+> <br>
 >
-> 2. Rename the outputs as `BUSCO hap1` and `BUSCO hap2`.
+> **Step 2**: Rename the outputs as `BUSCO hap1` and `BUSCO hap2`.
 >
 {: .hands_on}
 
