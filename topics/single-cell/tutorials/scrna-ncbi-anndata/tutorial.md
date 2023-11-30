@@ -159,8 +159,8 @@ We now need to find the files relating to each patient. Selecting the output {% 
 >
 > 2. Scroll down to visualise the following 10 samples (likely in opposite order to this!):
 >    ```
->    GSM5353214_PA_AUG_PB_1A_S1.dge.txt
->    GSM5353215_PA_AUG_PB_1B_S2.dge.txt
+>    GSM5353214_PA_AUG_PB_1A_S1_dge.txt
+>    GSM5353215_PA_AUG_PB_1B_S2_dge.txt
 >    GSM5353216_PA_PB1A_Pool_1_3_S50_L002_dge.txt
 >    GSM5353217_PA_PB1A_Pool_2_S107_L004_dge.txt
 >    GSM5353218_PA_PB1B_Pool_1_2_S74_L003_dge.txt
@@ -194,7 +194,8 @@ The next step is to convert all of the raw files into AnnData objects, this can 
 > 1. {% tool [Import AnnData and loom](toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1) %} with the following parameters:
 >    - *"hd5 format to be created"*: `Anndata file`
 >         - *"Format for the annotated data matrix?"*: `Tabular, CSV, TSV`
->         - {% icon param-file %} *"Annotated data matrix"*: `Select all imported files`
+>         - *"Annotated data matrix"*
+>           - {% icon param-files %} *Multiple datasets*: `Select all imported files`
 >         - *"Does the first column store the row names?"*: `Yes`
 >
 > 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
