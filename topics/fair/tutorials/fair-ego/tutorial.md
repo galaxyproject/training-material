@@ -65,9 +65,8 @@ Imagine the following situation: An undergrad student wants to do a lab-based pr
 
 The only problem is, you can't remember what your post-doc has done so far. This is no problem, as you have followed your data management plan to the letter: _"lab books will be preserved for 10 years in the PI’s office"._ Let's see how effective this strategy actually is.
 
-<question-title>1</question-title>
-The PDF below contains a scan of the lab books in this example. Somewhere, there is an experiment to show the effect of the knock-down of a gene called CHES-I-like on the feeding behaviour of fruit flies. Try to find this information in the lab book.
-
+> <question-title></question-title>
+> The PDF below contains a scan of the lab books in this example. Somewhere, there is an experiment to show the effect of the knock-down of a gene called CHES-I-like on the feeding behaviour of fruit flies. Try to find this information in the lab book.
 > [5 years worth of lab books](Lab-book_excercise1.pdf)
 
 > > <solution-title></solution-title>
