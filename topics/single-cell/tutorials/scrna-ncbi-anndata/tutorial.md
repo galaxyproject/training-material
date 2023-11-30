@@ -40,7 +40,7 @@ The goal of this tutorial is to take raw NCBI data from some published research,
 
 # Obtaining the Data
 
-The first step is the obtain the data, for this tutorial we will use data from the paper {% cite Song2022 %}. The data for this research is stored in the Gene Expression Omnibus (GEO) which is a public repository storing public genomics data.
+The first step is the obtain the data. For this tutorial, we will use data from the paper {% cite Song2022 %}. The data for this research is stored in the Gene Expression Omnibus (GEO) which is a public repository storing public genomics data.
 
 {% include _includes/cyoa-choices.html option1="Manual" option2="Zenodo" default="Zenodo"
        text="If you have experience finding and downloading data from GEO then you can use the Zenodo link to load the data directly into Galaxy, if you don't have experience with GEO then you can manually download, prepare, and load the data into Galaxy." %}
@@ -49,16 +49,24 @@ The first step is the obtain the data, for this tutorial we will use data from t
 <div class="Manual" markdown="1">
 > <hands-on-title>Download and extract the data from GEO</hands-on-title>
 >
-> 1. Using a web browser navigate to the GEO repsitory for the paper
+> 1. Using a web browser navigate to the GEO repository for the paper
 >
 >   ```
 >   https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031
 >   ```
 >
-> 2. Click on ```(http)``` in the supplemental materials section of the page to download the data
-> 3. Using an archive tool (e.g. 7zip) extract the .TAR file
-> 4. Using the same archive tool extract all of the .GZ files
+> 2. Copy the ```(http)``` link in the supplemental materials section of the page to download the data
 >
+> 3. Import the data into Galaxy
+>
+> {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 4. Change the datatype to `tar`
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tar" %}
+>
+> 5. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"input_file"*: `tar` file you just imported
 {: .hands_on}
 </div>
 
@@ -90,11 +98,36 @@ The first step is the obtain the data, for this tutorial we will use data from t
 {: .hands_on}
 </div>
 
-We now have the raw gene expression data that we will be processing, however we will need to manually add some metadata which requires finding out some more information about our files. Looking at the link for the paper ([https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/)) we can see a link for accessing the full text, clicking on that will lead us to a page ([https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/)) which contains more supplementary materials. Under this section we should see various .xlsx files (Excel spreadsheets), go ahead and download Supplementary Dataset 1 (```41467_2021_27322_MOESM2_ESM.xlsx```), this one spreadsheet contains all the information we need to further understand our data.
+We now have the raw gene expression data that we will be processing, however we will need to manually add some metadata which requires finding out some more information about our files.
+
+> <hands-on-title>Finding the metadata</hands-on-title>
+>
+> 1. Follow  the link for the paper ([https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/)), where you can see a link for accessing the full text.
+>
+> 1. Select that link to access the full text ([https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/)) which contains more supplementary materials. Under this section we should see various `.xlsx` files (Excel spreadsheets).
+>
+> 3. Download Supplementary Dataset 1 (```41467_2021_27322_MOESM2_ESM.xlsx```).
+>
+{: .hands_on}
+
+This one spreadsheet contains all the information we need to further understand our data.
 
 # Understanding the Data
 
-Looking at the excel file we can see multiple sheets, navigating to ```Clinical_info``` shows us that the data consists of 11 different patients with some patients having multiple different samples of different tumor specimens. For this tutorial we are only going to process the first 3 patients, a summary of the relevant data can be seen below:
+If we look at that excel file `41467_2021_27322_MOESM2_ESM.xlsx`, we can see multiple sheets.
+
+> <question-title></question-title>
+>
+> 1. How many different patients are in this study?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Navigating to ```Clinical_info``` shows us that the data consists of 11 different patients, with some patients having multiple different samples of different tumor specimens.
+> >
+> {: .solution}
+{: .question}
+
+For this tutorial, we are only going to process the first 3 patients. A summary of the relevant data can be seen below:
 
 | PatientID | Biopsy samples | Tumor Specimen |
 |-----------|----------------|----------------|
@@ -105,9 +138,11 @@ Looking at the excel file we can see multiple sheets, navigating to ```Clinical_
 | Patient 3 | MAY_PB2A       | right-anterior |
 |           | MAY_PB2B       | right-mid      |
 
-We can see that each patient has 2 different samples from different tumor locations, this is important information that needs to be added to our data so that we can seperate it during analysis if needed.
+We can see that each patient has 2 different samples from different tumor locations. This is important information that needs to be added to our dataset so that we can separate it during analysis, if needed.
 
-Finally we need to find the files relating to each patient, inspecting ```GSE176031_RAW``` (downloaded earlier) we can see 53 files, unfortunately the names of the files don't exactly match the data in our excel sheet which can make finding the right samples a bit difficult, a summary of which samples match which file can be found below:
+<div class="Manual" markdown="1">
+
+We now need to find the files relating to each patient. Selecting the output {% icon param-file %} **Unzip** tool shows you 53 files in a {% icon param-collection %}. Unfortunately, the names of the files don't exactly match the data in our excel sheet. This can make finding the right samples a bit difficult! A summary of which samples match which file can be found below:
 
 - **AUG_PB1A** ---> **PA_AUG_PB_1A**
 - **AUG_PB1B** ---> **PA_AUG_PB_1B**
@@ -116,9 +151,11 @@ Finally we need to find the files relating to each patient, inspecting ```GSE176
 - **MAY_PB2A** ---> **PA_PB2A**
 - **MAY_PB2B** ---> **PA_PB2B**
 
-You may also notice that we have multiple sample files with the same name suffixed with **_Pool_X** these are replications where multiple samples are taken of the same tumor area in order to get a more comprehensive view of the gene data of the tumor, we will need to combine these replication files during processing.
+You may also notice that we have multiple sample files with the same name suffixed with **_Pool_X**. These are replications where multiple samples are taken of the same tumor area in order to get a more comprehensive view of the gene data of the tumor. We will need to combine these replication files during processing.
 
 <div class="Manual" markdown="1">
+</div>
+
 # Importing the Data
 
 Now we have a general understanding of our data we can import it into Galaxy and start processing it!
