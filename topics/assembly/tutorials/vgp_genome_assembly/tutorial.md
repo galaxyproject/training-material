@@ -620,7 +620,7 @@ Next, we will use {BUSCO}, which will provide quantitative assessment of the com
 {: .hands_on}
 
 We have asked {BUSCO} to generate two particular outputs: the short summary, and a summary image.
-![BUSCO for hap1 & hap2.](../../images/vgp_assembly/busco_hap1hap2.png "BUSCO results for hap1 (top) and hap2 (bottom). Each haplotype is showing the summary image output as well as the short summary output. The summary image gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary lists these as percentages as well. In our case, neither assembly seems to have duplicated BUSCO genes (there is a very low amount of dark blue in the summary images), though hap1 seems to be marginally less complete (there is more red in the summary imaged compared to hap2).")
+![BUSCO for hap1 & hap2.](../../images/vgp_assembly/busco_hap1hap2.svg "BUSCO results for hap1 and hap2. Each haplotype is showing the summary image output as well as the short summary output. The summary image gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary lists these as percentages as well. In our case, neither assembly seems to have duplicated BUSCO genes (there is a very low amount of dark blue in the summary images).")
 
 > <question-title></question-title>
 >
@@ -629,37 +629,38 @@ We have asked {BUSCO} to generate two particular outputs: the short summary, and
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Hap1 has 1864 complete and single-copy BUSCO genes, which is 87.2% of the gene set.
-> > 2. 181 BUSCO genes are missing.
+> > 1. Hap1 has 2,047 complete and single-copy BUSCO genes, which is 95.8% of the gene set.
+> > 2. 29 BUSCO genes are missing.
 > >
 > {: .solution}
 >
 {: .question}
 
-Despite BUSCO being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via *k*-mer copy number analysis.
+Despite BUSCO being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via *k*-mer copy number analysis. Let's run Merqury elaluation as shown below.
 
 > <hands-on-title><i>k</i>-mer based evaluation with Merqury</hands-on-title>
 >
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
->        - *"Number of assemblies"*: `Two assemblies
->            - {% icon param-file %} *"First genome assembly"*: `Hap1 contigs FASTA`
->            - {% icon param-file %} *"Second genome assembly"*: `Hap2 contigs FASTA`
+> Run {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3) %} with the following parameters:
+>
+> 1. *"Evaluation mode"*: `Default mode`
+> 2. {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
+> 3. *"Number of assemblies"*: `Two assemblies`
+> 4. {% icon param-file %} *"First genome assembly"*: `Hap1 contigs FASTA`
+> 5. {% icon param-file %} *"Second genome assembly"*: `Hap2 contigs FASTA`
 >
 {: .hands_on}
 
-By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn* plot (fig. 7).
+By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn.fl* plot:
 
-![Merqury spectra-cn plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each *k*-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
+![Merqury spectra-cn plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each <i>k</i>-mer found in the HiFi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
 
-The black region in the left side corresponds to *k*-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50x, which we also know from the GenomeScope2 plot we looked at earlier.
+The grey region in the left side corresponds to *k*-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be a result of missing sequences in the assembly. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50✕, which we also know from the GenomeScope2 plot we looked at [earlier](#figure-5).
 
-To get an idea of how the *k*-mers have been distributed between our hap1 and hap2 assemblies, we should look at the *spectra-asm* output of Merqury.
+To get an idea of how the *k*-mers have been distributed between our hap1 and hap2 assemblies, we should look at the *spectra-asm.fl* output of Merqury.
 
-![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_hap1hap2_asm.png "Merqury ASM plot. This plot tracks the multiplicity of each *k*-mer found in the Hi-Fi read set and colors it according to which assemblies contain those *k*-mers. This can tell you which *k*-mers are found in only one assembly or shared between them."){:width="65%"}
+![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_hap1hap2_asm.png "Merqury ASM plot. This plot tracks the multiplicity of each <i>k</i>-mer found in the HiFi read set and colors it according to which assemblies contain those <i>k</i>-mers. This can tell you which <i>k</i>-mers are found in only one assembly or shared between them."){:width="65%"}
 
-The large green peak is centered at 50x coverage (remember that's our diploid coverage!), indicating that *k*-mers suggested by the reads to be from diploid regions are in fact shared between the two assemblies, as they should be if they are from homozygous regions. The haploid coverage *k*-mers (around ~25x coverage) are split between hap1 and hap2 assemblies, somewhat unevenly but still not as bad as it would be in an assembly without phasing data.
+The large green peak is centered at 50✕ coverage (remember that's our diploid coverage!), indicating that *k*-mers suggested by the reads to be from diploid regions are in fact shared between the two assemblies, as they should be if they are from homozygous regions. The haploid coverage *k*-mers (around ~25✕ coverage) are split between hap1 and hap2 assemblies, somewhat unevenly but still not as bad as it would be in an assembly without phasing data.
 
 </div>
 
@@ -668,24 +669,27 @@ The large green peak is centered at 50x coverage (remember that's our diploid co
 
 ## Pseudohaplotype assembly with **hifiasm**
 
-When hifiasm is run without any additional phasing data, it will do its best to generate a pseudohaplotype primary/alternate set of assemblies. These assemblies will typically contain more contigs that switch between parental blocks. Because of this, the primary assembly generated with this method can have a higher N50 value than an assembly generated with haplotype-phasing, but the contigs will contain more switch errors.
+When hifiasm is run without any additional phasing data, it will do its best to generate a pseudohaplotype primary/alternate set of assemblies. These assemblies will typically contain more contigs that switch between parental blocks. Because of this, the primary assembly generated with this method can have a higher $$ N50 $$ value than an assembly generated with haplotype-phasing, but the contigs will contain more switch errors.
 
 > <hands-on-title>Pseudohaplotype assembly with <b>hifiasm</b></hands-on-title>
-> 1. {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.18.8+galaxy1) %} with the following parameters:
->    - *"Assembly mode"*: `Standard`
->        - {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
->       - *"Options for purging duplicates"*: `Specify`
->       - *"Purge level"*: `Light (1)`
+>
+> **Step 1**: Run  {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0) %} with the following parameters:
+>
+> 1. *"Assembly mode"*: `Standard`
+> 2. {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
+> 3. *"Options for purging duplicates"*: `Specify`
+> 4. *"Purge level"*: `Light (1)`
 >
 >
->    > <comment-title>A note on hifiasm purging level</comment-title>
->    > hifiasm has an internal purging function, which we have set to `Light` here. The VGP pipeline currently disables the hifiasm internal purging, in favor of using the <b>purge_dups</b> suite after the fact in order to have more control over the parameters used for purging.
->    {: .comment}
+>> <comment-title>A note on hifiasm purging level</comment-title>
+>> hifiasm has an internal purging function, which we have set to `Light` here. The VGP pipeline currently disables the hifiasm internal purging, in favor of using the <b>purge_dups</b> suite after the fact in order to have more control over the parameters used for purging.
+>{: .comment}
 >
+> <br>
 >
-> 2. After the tool has finished running, rename its outputs as follows:
->   - Rename the `primary assembly contig graph for pseudohaplotype assembly` as `Primary contigs graph` and add a `#pri` tag
->   - Rename the `alternate assembly contig graph for pseudohaplotype assemblyh` as `Alternate contigs graph` and add a `#alt` tag
+> **Step 2**: After the tool has finished running, rename its outputs as follows:
+> 1. Rename the `primary assembly contig graph for pseudohaplotype assembly` as `Primary contigs graph` and add a `#pri` tag
+> 2. Rename the `alternate assembly contig graph for pseudohaplotype assemblyh` as `Alternate contigs graph` and add a `#alt` tag
 >
 {: .hands_on}
 
@@ -693,18 +697,19 @@ We have obtained the primary and alternate contig graphs (as {GFA} files), but t
 
 > <hands-on-title>convert GFA to FASTA</hands-on-title>
 >
-> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Input GFA file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
+>> <tip-title>Selecting multiple datasets</tip-title>
+>> Below we start two `gfastats` jobs by selecting two input datasets. To do this:
+>> 1. Click on {% icon param-files %} **Multiple datasets**
+>> 2. Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest
+>{: .tip}
 >
->    > <tip-title>Select multiple datasets</tip-title>
->    > 1. Click on {% icon param-files %} **Multiple datasets**
->    > 2. Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest
->    {: .tip}
+> **Step 1**: Run {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
+> 1.  {% icon param-files %} *"Input GFA file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
+> 2. *"Tool mode"*: `Genome assembly manipulation`
+> 3. *"Output format"*: `FASTA`
+> 4. *"Generates the initial set of paths*": toggle to `yes`
 >
->    - *"Tool mode"*: `Genome assembly manipulation`
->    - *"Output format"*: `FASTA`
->    - *"Generates the initial set of paths*": toggle to `yes`
-> 2. Rename the outputs as `Primary contigs FASTA` and `Alternate contigs FASTA`
+> **Step 2**: Rename the outputs as `Primary contigs FASTA` and `Alternate contigs FASTA`
 >
 {: .hands_on}
 
