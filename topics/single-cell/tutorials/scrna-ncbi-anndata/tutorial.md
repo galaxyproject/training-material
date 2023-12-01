@@ -187,7 +187,7 @@ We now need to find the files relating to each patient. Selecting the output {% 
 {: .hands_on}
 </div>
 
-# Converting to AnnData and Combining Samples
+# Creating the AnnData object
 
 The next step is to convert all of the raw files into AnnData objects, this can be done one at a time or all at once by selecting ```multiple datasets``` when chosing the input and highlighting all the raw data files.
 
@@ -249,7 +249,7 @@ Now, we have all the AnnData objects with the data in the correct orientation. W
 
 Now we have all of our gene expression data stored in a single AnnData object! We just need to add our metadata!
 
-# Annotating the Data
+# Annotating the data
 
 The next step is to annotate our data using the information gathered from the excel sheet earlier. We will do this by leveraging the `batch` column generated when the objects were combined for each individual patient/sample (indicated by the batch number). We will add in the relevant annotations. First, let's extract the observation data so we can manipulate it.
 
@@ -475,7 +475,7 @@ With the metadata table ready, the last step is to add it to our original combin
 
 {% icon congratulations %} Congratulations! You have successfully interpreted the milieu of files in a published dataset, transformed the data into a usable format, and added all the relevant annotations to the AnnData object! All thats left to do is to add some quality control metrics using automated tools!
 
-# Adding Quality Control Metadata
+# Adding quality control metrics
 
 With the manual annotations added, we need to do some further processing to add some statistical metadata about the genes. This is done automatically by running two different tools.
 
@@ -512,10 +512,10 @@ The final tool, {% icon tool %} **AnnData Operations**, will add the rest of our
 >
 {: .hands_on}
 
-With that run we should be finished! check the observation file to see all the metadata that we've added in throughout the tutorial and take this time to check that all the columns contain data.
+With that run we should be finished! Check the {% icon param-file %} `obs` file to see all the metadata that we've added in throughout the tutorial.
 
 > <warning-title>Check your final object!</warning-title>
-> The above tools will sometimes run without error but not produce the correct results, inspecing the obs file of the final AnnData object you should see that all the columns contain data, if any of the columns are blank then something has gone wrong!
+> The above tools will sometimes run without error but not produce the correct results - just because they run doesn't mean all the parameters and inputs were set properly! When {% icon galaxy-eye %} inspecting the {% icon param-file %} `obs` file of the final AnnData object, you should see that all the columns contain data. If any of the columns are blank, then something has gone wrong!
 {: .warning}
 
 {% icon congratulations %} Congratulations! Now your data is ready for further processing or analysis!
