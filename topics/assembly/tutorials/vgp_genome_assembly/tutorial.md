@@ -703,6 +703,8 @@ We have obtained the primary and alternate contig graphs (as {GFA} files), but t
 >> 2. Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest
 >{: .tip}
 >
+> <br>
+>
 > **Step 1**: Run {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
 > 1.  {% icon param-files %} *"Input GFA file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
 > 2. *"Tool mode"*: `Genome assembly manipulation`
@@ -727,6 +729,93 @@ We have obtained the primary and alternate contig graphs (as {GFA} files), but t
 {: .comment}
 
 Let's use gfastats to get a basic idea of what our assembly looks like. We'll run gfastats on the {GFA} files because gfastats can report graph-specific statistics as well. After generating the stats, we'll be doing some text manipulation to get the stats side-by-side in a pretty fashion.
+
+
+> <hands-on-title>Assembly evaluation with gfastats</hands-on-title>
+>
+> **Step 1**: Run assembly statistics generation with {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} using the following parameters:
+>
+> 1. {% icon param-files %} *"Input file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
+> 2. *"Tool mode": `Summary statistics generation`
+> 3. *"Expected genome size"*: `11747160` (remember we calculated this value earlier using `GenomeScope2` [here](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
+> 4. *"Thousands separator in output"*: Set to "No"
+>
+> <br>
+>
+> **Step 2**: Rename outputs of `gfastats` step to as `Hap1 stats` and `Hap2 stats`
+>
+> This would generate summary files that look like this (only first six rows are shown):
+>
+> ```
+> Expected genome size    11747160
+> # scaffolds                    0
+> Total scaffold length          0
+> Average scaffold length      nan
+> Scaffold N50                   0
+> Scaffold auN                0.00
+> ```
+> 
+> Because we ran `gfastats` on hap1 and hap2 outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
+> 
+> <br>
+>
+> **Step 3**: Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
+>
+> {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets. Keep all other setting as they are.
+>
+> <br>
+>
+> **Step 4**: Rename the output as `gfastats on hap1 and hap2 (full)`
+>
+> This would generate a joined summary file that looks like this (only first five rows are shown):
+>
+> ```
+> # gaps               0  0
+> # gaps in scaffolds  0  0
+> # paths              0  0
+> # segments          17 16
+> ```
+>
+> Now let's extract only relevant information by excluding all lines containing word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs): 
+>
+> <br>
+>
+> **Step 5**: Run {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+> 1. {% icon param-files %} *"Input file"*: select `gfastats on hap1 and hap2 (full)`
+> 2. *"that"*: `Don't Match`
+> 3. *"Type of regex"*: `Basic`
+> 4. *"Regular Expression"*: enter the word `scaffold`
+> 5. *"Match type*": leave as `case insensitive`
+>
+> <br>
+>
+> **Step 6**: Rename the output as `gfastats on hap1 and hap2 contigs`
+>
+{: .hands_on}
+
+Take a look at the `gfastats on hap1 and hap2 contigs` output — it has three columns: 
+
+  1. Name of statistic
+  2. Value for haplotype 1 (hap1)
+  2. Value for haplotype 2 (hap2)
+
+According to the report, both assemblies are quite similar; the hap1 assembly includes 16 contigs, totalling ~11.3Mbp of sequence (the `Total contig length` statistic), while the hap2 assembly includes 17 contigs, whose total length is ~12.2Mbp. (**NB**: Your values may differ slightly, or be reversed between the two haplotypes!)
+
+> <question-title></question-title>
+>
+> 1. What is the length of the longest contigs in the assemblies?
+> 2. What are the N50 values of the two assemblies? Are they very different from each other?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. One assembly's longest contig is 1,532,843 bp, and the other one's is 1,531,728 bp.
+> > 2. One assembly has a N50 of 922,430 and the other's is 923,452. These are pretty close to each other!
+> >
+> {: .solution}
+>
+{: .question}
+
+
 
 > <hands-on-title>Assembly evaluation with gfastats</hands-on-title>
 >
