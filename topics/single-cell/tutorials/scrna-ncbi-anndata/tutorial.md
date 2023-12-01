@@ -342,7 +342,7 @@ Next we will add the metadata indicating which patient each row came from.
 
 We will now add a column to indicate which sample each row came from using the sample ID's described earlier.
 
-> <hands-on-title>Create sample id metadata</hands-on-title>
+> <hands-on-title>Create sample ID metadata</hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Observation data`
@@ -391,9 +391,9 @@ We will now add a column to indicate which sample each row came from using the s
 {: .hands_on}
 
 > <details-title>$ parameter</details-title>
-> You may have noticied that some of the parameters in the previous tool used the $ symbol, this is due to how the {% tool Replace Text %} tool works. The tool will replace and **update** the data for every insert operation, meaning that lines that have already been updated could be updated again.
+> You may have noticed that some of the parameters in the previous tool used the $ symbol. This is due to how the {% tool Replace Text %} tool works. The tool will replace and **update** the data for every insert operation, meaning that lines that have already been updated could be updated again.
 >
-> Since we are replacing our batch id's with identifiers that include numbers we want to prevent them from being updated again. appending the pattern with the $ symbol tells the tool to only replace the pattern if it is not followed by any other character (so the 1 in `AUG_PB1A` won't be replaced as it is followed by an 'A').
+> Since we are replacing our batch ID's with identifiers that include numbers, we want to prevent them from being updated again. Appending the pattern with the `$` symbol tells the tool to only replace the pattern if it is not followed by any other character (so the 1 in `AUG_PB1A` won't be replaced as it is followed by an 'A').
 {: .details}
 
 Finally we will add the tumor column which indicates which tumor sample each row belongs to.
@@ -436,7 +436,7 @@ Finally we will add the tumor column which indicates which tumor sample each row
 >
 {: .hands_on}
 
-Now with all the individual metadata columns created we can combine them together to make a single tabular file containing our metadata. Since the ```Paste``` operation only allows us to combine two columns at once we will need to run the tool a few times to add all the columns together.
+With all the individual metadata columns created, we can now combine them together to make a single tabular file containing our metadata. Since the ```Paste``` operation only allows us to combine two columns at once we will need to run the tool a few times to add all the columns together.
 
 > <hands-on-title>Combine metadata</hands-on-title>
 >
@@ -459,7 +459,7 @@ Now with all the individual metadata columns created we can combine them togethe
 >
 {: .hands_on}
 
-With the metadata completed the last step is to add it to our original combined object!
+With the metadata table ready, the last step is to add it to our original combined object!
 
 > <hands-on-title>Add metadata to AnnData object</hands-on-title>
 >
@@ -473,13 +473,13 @@ With the metadata completed the last step is to add it to our original combined 
 >
 {: .hands_on}
 
-{% icon congratulations %} Congratulations! You have successfully interpreted some data and added all the relevant annotations to the AnnData object! All thats left to do is to add some additional metadata using automated tools!
+{% icon congratulations %} Congratulations! You have successfully interpreted the milieu of files in a published dataset, transformed the data into a usable format, and added all the relevant annotations to the AnnData object! All thats left to do is to add some quality control metrics using automated tools!
 
-# Further Processing the Data
+# Adding Quality Control Metadata
 
-With the manual annotations added we need to do some further processing to add some statistical metadata about the genes, this is done automatically by running two different tools.
+With the manual annotations added, we need to do some further processing to add some statistical metadata about the genes. This is done automatically by running two different tools.
 
-We can run the ```Scanpy FilterCells``` tool with a large range of filtering values to not actually filter anything but instead add some metadata about the counts and number of expressed genes.
+First, we will run the ```Scanpy FilterCells``` tool without actually filtering. This tool will add some metadata about the counts and numbers of expressed genes.
 
 > <warning-title>Scanpy FilterCells version issue</warning-title>
 > The {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy9) %} tool (used below) does not work in the latest version (**1.8.1+galaxy93**), switch to version **1.8.1+galaxy9** in order to run the tool without error.
@@ -489,32 +489,20 @@ We can run the ```Scanpy FilterCells``` tool with a large range of filtering val
 >
 > 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Annotated Object`
->    - *"Format of input object"*: `AnnData format hdf5`
->    - *"Format of output object"*: `AnnData format`
 >    - *"Name of the column in `anndata.var` that contains gene name"*: `_index`
->    - **+ Insert Parameters to select cells to keep**
->    - *"1: Parameters to select cells to keep"*
->         - *"Name of parameter to filter on"*: `n_genes`
->         - *"Min value"*: `0.0`
->         - *"Max value"*: `1000000000.0`
->    - *"Force recalculation of QC vars"*: `No`
 >
 {: .hands_on}
 
-The final tool to run is the ```AnnData Operations``` tool which will add the rest of our metadata, mostly information about the mitocondrial cells in the object which are indicated with cells that start with **MT-**.
+The final tool, {% icon tool %} **AnnData Operations**, will add the rest of our metadata. This is mostly information about the mitochondrial genes present in the object, roughly counted by flagging genes that start with **MT-**.
 
 > <hands-on-title>Add final metadata</hands-on-title>
 >
 > 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Output of Scanpy FilterCells`
->    - *"Format of output object"*: `AnnData format`
->    - *"Copy AnnData to .raw"*: `No`
->    - *"Gene symbols field in AnnData"*: `index`
 >    - **+ Insert Flag genes that start with these names**
 >    - *"1: Parameters to select cells to keep"*
 >         - *"starts withn"*: `MT-`
 >         - *"Var name"*: `mito`
->    - *"Number of top genes"*: `50`
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `Final Object`
 >
