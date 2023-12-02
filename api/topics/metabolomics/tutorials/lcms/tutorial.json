@@ -87,7 +87,7 @@
       "name": "Workflow Constructed From History 'imported: testpourGCC'",
       "title": "Workflow Constructed From History 'imported: testpourGCC'",
       "test_results": null,
-      "modified": "2023-12-01 00:13:59 +0000",
+      "modified": "2023-12-02 00:09:48 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset collection\"];\n  10[\"xcms fillChromPeaks (fillPeaks)\"];\n  11[\"CAMERA.annotate\"];\n  12[\"Batch_correction\"];\n  13[\"Quality Metrics\"];\n  14[\"Quality Metrics\"];\n  15[\"Generic_Filter\"];\n  16[\"Univariate\"];\n  17[\"Generic_Filter\"];\n  18[\"HMDB MS search\"];\n  2[\"MSnbase readMSData\"];\n  3[\"xcms findChromPeaks (xcmsSet)\"];\n  4[\"xcms plot chromatogram\"];\n  5[\"xcms findChromPeaks Merger\"];\n  6[\"xcms groupChromPeaks (group)\"];\n  7[\"xcms adjustRtime (retcor)\"];\n  8[\"xcms plot chromatogram\"];\n  9[\"xcms groupChromPeaks (group)\"];\n  9 -->|xsetRData| 10;\n  10 -->|xsetRData| 11;\n  10 -->|dataMatrix| 12;\n  0 -->|output| 12;\n  11 -->|variableMetadata| 12;\n  10 -->|dataMatrix| 13;\n  0 -->|output| 13;\n  11 -->|variableMetadata| 13;\n  12 -->|dataMatrix_out| 14;\n  0 -->|output| 14;\n  12 -->|variableMetadata_out| 14;\n  12 -->|dataMatrix_out| 15;\n  14 -->|sampleMetadata_out| 15;\n  14 -->|variableMetadata_out| 15;\n  15 -->|dataMatrix_out| 16;\n  15 -->|sampleMetadata_out| 16;\n  15 -->|variableMetadata_out| 16;\n  15 -->|dataMatrix_out| 17;\n  15 -->|sampleMetadata_out| 17;\n  16 -->|variableMetadata_out| 17;\n  17 -->|variableMetadata_out| 18;\n  1 -->|output| 2;\n  2 -->|xsetRData| 3;\n  3 -->|xsetRData| 4;\n  3 -->|xsetRData| 5;\n  5 -->|xsetRData| 6;\n  6 -->|xsetRData| 7;\n  7 -->|xsetRData| 8;\n  7 -->|xsetRData| 9;\n"
     }
   ],
