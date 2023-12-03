@@ -20,8 +20,8 @@ key_points:
 - There are many ways of importing single cell files into Galaxy and converting between single cell formats. 
 contributions:
   authorship:
-    - hexhowells
     - wee-snufkin
+    - hexhowells
     - nomadscientist
   
 funding: 
@@ -215,13 +215,31 @@ And that's all! Your downsampled data is ready to use. You can check your answer
 
 # Format conversion
 
+In Galaxy Toolshed there is a wonderful tool called {% tool [SCEasy](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy1) %} which allows to convert between common single cell formats, such as:
+- AnnData to CellDataSet (CDS)
+- AnnData to Seurat
+- Loom to AnnData
+- Loom to SingleCellExperiment (SCE)
+- SingleCellExperiment (SCE) to AnnData
+- SingleCellExperiment (SCE) to Loom
+- Seurat to AnnData
+- Seurat to SingleCellExperiment (SCE)
+
+> <warning-title>Two SCEasy tools</warning-title>
+>  
+> The updated SCEasy tool is called [**SCEasy Converter**](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy1) and it's only available on usegalaxy.eu. The second tool is called [**SCEasy convert**](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1) and it works on usegalaxy.org, however has limited conversion options.
+> 
+{: .warning}
+
+However, sometimes it is useful to know how to do this conversion manually or at least to know how it all works. Therefore, below are some examples showing how to do it. 
+
 ## AnnData -> Seurat
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
->
+> 
 {: .hands_on}
 
 
