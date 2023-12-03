@@ -95,6 +95,11 @@ Once you know the experiment ID, you can use EBI SCXA Data Retrieval tool in Gal
 
 At this point you might want to do some modifications in the files before downstream analysis. That can include re-formating the cell metadata or changing the names of the column headers, it all depends on your dataset and how you want to perfrom your analysis. It's also fine to transform those files straight away. Now you have the choice to create AnnData object or Seurat object. 
 
+{% include _includes/cyoa-choices.html option1="Scanpy" option2="Seurat" default="Scanpy"
+       text="You can choose whether you want to create an AnnData object for Scanpy Analysis or an RDS object for Seurat Analysis. Galaxy has more resources for Scanpy analysis, but sometimes Seurat might have what you want." %}
+
+ <div class="AnnData object" markdown="1">
+
 > <hands-on-title>Create AnnData object</hands-on-title>
 >
 > {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0) %} with the following parameters:
@@ -104,6 +109,9 @@ At this point you might want to do some modifications in the files before downst
 >    - *"Cell metadata table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
 {: .hands_on}
 
+</div>
+
+<div class="Seurat object" markdown="1">
 
 > <hands-on-title>Create Seurat object / Loom / SCE </hands-on-title>
 >
@@ -117,8 +125,10 @@ At this point you might want to do some modifications in the files before downst
 > You can now choose if you want to get Seurat object, Loom or Single Cell Experiment by selecting your option in *"Choose the format of the output"*.
 {: .hands_on}
 
+</div>
 
 ## Human Cell Atlas Matrix Downloader
+
 Matrix market format:  matrix mtx, genes tsv, barcodes tsv, exp design tsv
 Scnapy read10x to transform those to AnnData object
 Flagging by using AnnData Operations works well (only need to check name of the column with gene symbols):
@@ -127,10 +137,81 @@ No parentheses
 Dash important 
 
 
-# Downsampling 
+# Downsampling FASTQ files
 
-Sometimes it is useful to work on smaller subset of data (especially for teaching / learning purposes). 
-[Workflow](https://singlecell.usegalaxy.eu/u/j.jakiela/w/workflow-constructed-from-history-copy-of-cs1generating-a-single-cell-matrix-using-alevin---how-to-downsample)
+Sometimes it is useful to work on smaller subset of data (especially for teaching / learning purposes). Here is an example of how you can downsample your FASTQ files.
+First, let's get some toy data. We just need two FASTQ files - one containing barcodes, the other with transcripts. 
+
+> <hands-on-title>Get toy data</hands-on-title>
+>
+> You can simply download the files by pasting the links below into "Upload Data" searchbox.
+>
+>    ```
+>    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
+>    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+{: .hands_on}
+
+Funnily enough, those files are already downsampled so that you don't have to wait for too long to download them. We are not going to analyse that data today anyway, it's just for demonstration purposes.
+
+Quick check now which file contains barcodes and which transcripts. If you click on the two datasets, you will see that one has shorter sequences, while the other has longer. It's quite straight-forward to deduce that shorter sequences are barcodes, so let's rename the file `s_1.r_1` as `Barcodes` and file `s_1.r_2` as `Transcripts`.
+
+> <hands-on-title>Rename the files</hands-on-title>
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+{: .hands_on}
+
+Now we will convert the FASTQ files to tabular:
+
+> <hands-on-title> FASTQ to tabular </hands-on-title>
+>
+> 1. {% tool [FASTQ to Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_tabular/fastq_to_tabular/1.1.5) %} with the following parameters:
+>    - {% icon param-file %} *"FASTQ file to convert"*: `Barcodes` 
+>
+> 3. Rename {% icon galaxy-pencil %} the dataset `Barcodes tabular`.
+>    
+> 4. Repeat the same with `Transcripts` file and rename it as `Transcripts tabular`.
+> 
+{: .hands_on}
+
+Now let's select the number of the reads we would like to keep. It's totally up to you, we choose 100000 here.
+
+> <hands-on-title> Downsampling </hands-on-title>
+>
+> 1. {% tool [Select last](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"Text file"*:  `Barcodes tabular` (output of **FASTQ to Tabular** {% icon tool %})
+>    - *"Operation"*: `Keep last lines`
+>    - *"Number of lines"*: `100000`
+>
+> 2. Rename {% icon galaxy-pencil %} the dataset `Barcodes cut`.
+>    
+> 3. Repeat the same with `Transcripts tabular` file and rename it as `Transcripts cut`
+> 
+{: .hands_on}
+
+All done, now we just need to go back to FASTQ from Tabular again!
+
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Tabular to FASTQ](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fastq/tabular_to_fastq/1.1.5) %} with the following parameters:
+>    - {% icon param-file %} *"Tabular file to convert"*: `Barcodes cut` (output of **Select last** {% icon tool %})
+>    - *"Identifier column"*: `c1`
+>    - *"Sequence column"*: `c2`
+>    - *"Quality column"*: `c3`
+>
+> 2. Rename {% icon galaxy-pencil %} the dataset `Downsampled barcode/UMI read`.
+>    
+> 3. Repeat the same with `Transcripts cut` file and rename it as `Downsampled transcript read`
+> 
+{: .hands_on}
+
+And that's all! Your downsampled data is ready to use. You can check your answers in this [example history](https://usegalaxy.eu/u/j.jakiela/h/how-to-downsample-fastq-files) or if you want to accelerate this process, feel free to use the [workflow](https://singlecell.usegalaxy.eu/u/j.jakiela/w/workflow-constructed-from-history-copy-of-cs1generating-a-single-cell-matrix-using-alevin---how-to-downsample) next time!
+
 
 # Format conversion
 
