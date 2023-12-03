@@ -147,8 +147,8 @@ First, let's get some toy data. We just need two FASTQ files - one containing ba
 > You can simply download the files by pasting the links below into "Upload Data" searchbox.
 >
 >    ```
->    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
->    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
+>    https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
+>    https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -235,48 +235,91 @@ However, sometimes it is useful to know how to do this conversion manually or at
 
 ## AnnData -> Seurat
 
-> <hands-on-title> Task description </hands-on-title>
+Let's get an AnnData object that we can further work on. It's the object used in previous tutorials ({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), so check it out if you're curious. 
+
+> <hands-on-title>Get toy data</hands-on-title>
 >
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
-> 
+> You can simply download the files by pasting the links below into "Upload Data" searchbox.
+>
+>    ```
+>    https://zenodo.org/record/7053673/files/Mito-counted_AnnData
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 {: .hands_on}
 
 
-> <hands-on-title> Task description </hands-on-title>
+First, we will extract observations and the full matrix from our AnnData.
+
+> <hands-on-title> Inspect AnnData </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>   
+> 2. Rename {% icon galaxy-pencil %} the output `Observations`.
+>
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - *"Annotated data matrix"*: `Mito-counted_AnnData`
 >    - *"What to inspect?"*: `The full data matrix`
 >
+> 4. Rename {% icon galaxy-pencil %} the output `Matrix`.
+>    
 {: .hands_on}
 
+> <question-title></question-title>
+>
+> What are the rows, and what are the columns in the retrieved Matrix?
+>
+> > <solution-title></solution-title>
+> >
+> > If you just click on the `Matrix` dataset, you will see a preview, showing barcodes in the first column, while genes in the first row.
+> > 
+> {: .solution}
+>
+{: .question}
 
-> <hands-on-title> Task description </hands-on-title>
+To proceed with the conversion, we must have the matrix where the genes are listed in the first column while all the barcodes should be in the first row. Therefore, we need to transpose the current matrix.
+
+> <hands-on-title> Transpose the matrix </hands-on-title>
 >
 > 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0) %} with the following parameters:
->
+>    - *"Input tabular dataset"*: `Matrix`
 >
 {: .hands_on}
 
+And now we are ready to input that data to **DropletUtils** tool.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> DropletUtils </hands-on-title>
 >
 > 1. {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %} with the following parameters:
 >    - *"Format for the input matrix"*: `Tabular`
+>    - *"Count Data"*: output of **Transpose** {% icon tool %}
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `DefaultDrops`
 >            - *"Expected Number of Cells"*: `31178`
 >            - *"Upper Quantile"*: `1.0`
 >            - *"Lower Proportion"*: `0.0`
 >        - *"Format for output matrices"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
+>        - *"Random Seed"*: `100`
 >
 {: .hands_on}
 
-> <hands-on-title> Task description </hands-on-title>
+Finally, let's combine those files that we have just generated and turn them into the Seurat object!
+
+> <hands-on-title> Create Seurat object </hands-on-title>
 >
 > 1. {% tool [Seurat Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/3.2.3+galaxy0) %} with the following parameters:
 >    - *"Choose the format of the input"*: `10X-type MTX`
+>    - *"Expression matrix in sparse matrix format (.mtx)"*: `DropletUtils 10X Matrices`
+>    - *"Gene table"*: `DropletUtils 10X Genes`
+>    - *"Barcode/cell table"*: `DropletUtils 10X Barcodes`
+>    - *"Cell Metadata"*: `Observations`
+>    - *"Choose the format of the output"*: `RDS with a Seurat object`
 >
+> 2. Rename {% icon galaxy-pencil %} the output `Converted Seurat object`.
+>    
 {: .hands_on}
 
 ## AnnData -> SCE
