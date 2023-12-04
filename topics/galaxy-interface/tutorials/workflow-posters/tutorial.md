@@ -8,7 +8,8 @@ questions:
 - How can I print or screenshot my Workflow in high resolution for a poster or presentation?
 - How can I share high detail images of my Workflows?
 objectives:
-- Learn how to utilize external tools to get high resolution images of you Workflow
+- Create a high resolution image of your Workflow, ready for a poster
+- Learn how to utilize external tools to make high resolution images of your Workflow
 - Learn how to compress high resolution Workflow images to share them in the web
 time_estimation: 30M
 key_points:
