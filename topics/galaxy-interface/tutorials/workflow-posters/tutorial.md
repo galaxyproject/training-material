@@ -5,7 +5,7 @@ title: Creating high resolution images of Galaxy Workflows
 tags:
 - workflows
 questions:
-- How can I print my Workflow in high resolution?
+- How can I print or screenshot my Workflow in high resolution for a poster or presentation?
 - How can I share high detail images of my Workflows?
 objectives:
 - Learn how to utilize external tools to get high resolution images of you Workflow
