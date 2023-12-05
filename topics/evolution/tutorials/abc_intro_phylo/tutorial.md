@@ -11,14 +11,14 @@ questions:
 - What information can I get from a phylogenetic tree?
 - How do I estimate a phylogeny?
 objectives:
-- Understand the basic concepts behind phylogenetic trees
+- Understand the basic concepts behind phylogenetic trees and how they are made
 - Be able to read and interrogate a phylogeny encountered in the literature
-- Use standard tools to align a set of DNA sequences
+- Use standard tools to align a set of molecular sequences
 - Assess the quality of a molecular sequence alignment and be able to modify it appropriately for phylogenetic analysis
-- Estimate a phylogenetic tree based on a set of aligned molecular sequences
-- Assess the reliability of estimated phylogenies
-
-time_estimation: 2H
+- Use standard tools to estimate a phylogenetic tree based on a set of aligned molecular sequences
+- Assess the reliability of estimated phylogenies with bootstrapping
+- Explore phylogenetic signal using phylogenetic networks
+time_estimation: 3H
 contributors:
 - mcharleston
 - adamtaranto
