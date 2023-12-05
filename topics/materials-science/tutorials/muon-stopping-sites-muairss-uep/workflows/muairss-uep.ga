@@ -1,276 +1,166 @@
 {
     "a_galaxy_workflow": "true",
-    "annotation": "Simple workflow containing PyMuonSuite tools for training purposes.",
-    "creator": [
-        {
-            "class": "Organization",
-            "name": "Muon Spectroscopy Computational Project",
-            "url": "https://muon-spectroscopy-computational-project.github.io"
-        }
-    ],
+    "annotation": "",
     "format-version": "0.1",
-    "license": "MIT",
-    "name": "Workflow to estimate muon stopping site using UEP (imported from uploaded file)",
+    "name": "Finding the Muon Stopping Site: pymuon-suite in Galaxy",
     "steps": {
         "0": {
-            "annotation": "The starting structure file which will be populated with muons.",
+            "annotation": "CASTEP structural file for the relaxed host material",
             "content_id": null,
             "errors": null,
             "id": 0,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "The starting structure file which will be populated with muons.",
-                    "name": "CASTEP structure file (*.cell)"
+                    "description": "CASTEP structural file for the relaxed host material",
+                    "name": "Copper-out.cell"
                 }
             ],
-            "label": "CASTEP structure file (*.cell)",
+            "label": "Copper-out.cell",
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 10,
-                "top": 123
+                "left": 2.0965249510338584,
+                "top": 0.08734987455441257
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false, \"format\": [\"cell\"], \"tag\": \"\"}",
+            "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "064684aa-9e24-45fd-a72a-9c64308d551f",
+            "uuid": "0a1cc8d8-c2d9-48f6-9a92-9d96778249dc",
+            "when": null,
             "workflow_outputs": []
         },
         "1": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_yaml_config/pm_yaml_config/0.2.1+galaxy0",
+            "annotation": "CASTEP charge density file",
+            "content_id": null,
             "errors": null,
             "id": 1,
             "input_connections": {},
-            "inputs": [],
-            "label": "Configure workflow",
-            "name": "PyMuonSuite AIRSS Configure",
-            "outputs": [
+            "inputs": [
                 {
-                    "name": "out_yaml",
-                    "type": "yaml"
+                    "description": "CASTEP charge density file",
+                    "name": "Copper.den_fmt"
                 }
             ],
+            "label": "Copper.den_fmt",
+            "name": "Input dataset",
+            "outputs": [],
             "position": {
-                "left": 0,
-                "top": 240
+                "left": 2.0965249510338584,
+                "top": 86.09728918976163
             },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_yaml_config/pm_yaml_config/0.2.1+galaxy0",
-            "tool_shed_repository": {
-                "changeset_revision": "ed74ddbf1e80",
-                "name": "pm_yaml_config",
-                "owner": "muon-spectroscopy-computational-project",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"calculator_params\": {\"calculator_cond\": {\"calculator\": \"uep\", \"__current_case__\": 0, \"uep_gw_factor\": \"4.0\", \"uep_chden\": \"\"}}, \"clustering_params\": {\"clustering\": {\"clustering_method\": \"hier\", \"__current_case__\": 0, \"clustering_hier_t\": \"0.2\"}, \"supercell\": \"1\", \"k_points_grid\": \"[1,1,1]\", \"max_scc_steps\": \"200\"}, \"general_params\": {\"poisson_r\": \"0.8\", \"struct_name\": \"si\", \"charged\": \"true\", \"geom_steps\": \"300\", \"vdw_scale\": \"0.25\", \"out_folder\": \"muon-airss-out\", \"geom_force_tol\": \"0.02\", \"random_seed\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.2.1+galaxy0",
-            "type": "tool",
-            "uuid": "16754ab2-3c58-43ea-895f-22a618061d89",
-            "workflow_outputs": [
-                {
-                    "label": "Configuration for struct",
-                    "output_name": "out_yaml",
-                    "uuid": "7bcaac6d-d5db-4c29-9186-84b62fbadb83"
-                }
-            ]
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "73e18b25-ebb9-4835-933c-1b8c1feb74cb",
+            "when": null,
+            "workflow_outputs": []
         },
         "2": {
-            "annotation": "File containing the electronic density of the structure of interest, generated by CASTEP.",
+            "annotation": "main CASTEP output file ",
             "content_id": null,
             "errors": null,
             "id": 2,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "File containing the electronic density of the structure of interest, generated by CASTEP.",
-                    "name": "CASTEP formatted electronic density "
+                    "description": "main CASTEP output file ",
+                    "name": "Copper.castep"
                 }
             ],
-            "label": "CASTEP formatted electronic density ",
+            "label": "Copper.castep",
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 264,
-                "top": 0
+                "left": 0.0,
+                "top": 173.59228833890583
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false, \"format\": [\"den_fmt\"], \"tag\": \"\"}",
+            "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "4f9c8fb1-e2a6-45d8-96a8-e072077b0dc1",
+            "uuid": "2ac4de9c-0f0a-4bdb-971a-cd471c08111e",
+            "when": null,
             "workflow_outputs": []
         },
         "3": {
-            "annotation": "Main output file generated by running CASTEP.",
-            "content_id": null,
+            "annotation": "Galaxy tool used to: load the CASTEP files; complete the Generation parameters to set up the creation of randomly populated muonated structures; and complete the Optimisation parameters to set up the relaxation the electrostatic forces of the muon in each of the randomly populated muonated structures.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_uep_opt/pm_uep_opt/0.3.0+galaxy1",
             "errors": null,
             "id": 3,
-            "input_connections": {},
-            "inputs": [
-                {
-                    "description": "Main output file generated by running CASTEP.",
-                    "name": "CASTEP output file "
-                }
-            ],
-            "label": "CASTEP output file ",
-            "name": "Input dataset",
-            "outputs": [],
-            "position": {
-                "left": 265,
-                "top": 120
-            },
-            "tool_id": null,
-            "tool_state": "{\"optional\": false, \"format\": [\"castep\"], \"tag\": \"\"}",
-            "tool_version": null,
-            "type": "data_input",
-            "uuid": "d900b3cf-3294-4ff6-b4d7-83d6bdf6eb54",
-            "workflow_outputs": []
-        },
-        "4": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_write/pm_muairss_write/0.2.1+galaxy1",
-            "errors": null,
-            "id": 4,
             "input_connections": {
-                "params": {
+                "castep_log": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "charge_density": {
                     "id": 1,
-                    "output_name": "out_yaml"
+                    "output_name": "output"
                 },
                 "structure": {
                     "id": 0,
                     "output_name": "output"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool PyMuonSuite AIRSS Generate",
-                    "name": "params"
-                },
-                {
-                    "description": "runtime parameter for tool PyMuonSuite AIRSS Generate",
-                    "name": "structure"
-                }
-            ],
-            "label": "Generate muonated random structures",
-            "name": "PyMuonSuite AIRSS Generate",
-            "outputs": [
-                {
-                    "name": "muonated_structures",
-                    "type": "zip"
-                }
-            ],
-            "position": {
-                "left": 265,
-                "top": 240
-            },
-            "post_job_actions": {
-                "HideDatasetActionmuonated_structures": {
-                    "action_arguments": {},
-                    "action_type": "HideDatasetAction",
-                    "output_name": "muonated_structures"
-                }
-            },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_write/pm_muairss_write/0.2.1+galaxy1",
-            "tool_shed_repository": {
-                "changeset_revision": "0679aeb7cefc",
-                "name": "pm_muairss_write",
-                "owner": "muon-spectroscopy-computational-project",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"iscastep\": {\"iscastep_sel\": \"false\", \"__current_case__\": 1}, \"params\": {\"__class__\": \"RuntimeValue\"}, \"structure\": {\"__class__\": \"RuntimeValue\"}, \"testing\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.2.1+galaxy1",
-            "type": "tool",
-            "uuid": "6135eba5-cfb4-49c8-a882-27eb5b2e618f",
-            "workflow_outputs": []
-        },
-        "5": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_uep_opt/pm_uep_opt/0.2.1+galaxy1",
-            "errors": null,
-            "id": 5,
-            "input_connections": {
-                "castep_log": {
-                    "id": 3,
-                    "output_name": "output"
-                },
-                "charge_density": {
-                    "id": 2,
-                    "output_name": "output"
-                },
-                "muonated_structures": {
-                    "id": 4,
-                    "output_name": "muonated_structures"
-                }
-            },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool PyMuonSuite AIRSS UEP Optimise",
-                    "name": "castep_log"
-                },
-                {
-                    "description": "runtime parameter for tool PyMuonSuite AIRSS UEP Optimise",
-                    "name": "charge_density"
-                },
-                {
-                    "description": "runtime parameter for tool PyMuonSuite AIRSS UEP Optimise",
-                    "name": "muonated_structures"
-                }
-            ],
-            "label": "Optimise muonated structures",
+            "inputs": [],
+            "label": "PyMuonSuite AIRSS UEP Optimise",
             "name": "PyMuonSuite AIRSS UEP Optimise",
             "outputs": [
                 {
                     "name": "uep_results",
                     "type": "zip"
+                },
+                {
+                    "name": "allpos_file",
+                    "type": "_sniff_"
                 }
             ],
             "position": {
-                "left": 522,
-                "top": 38
+                "left": 345.2278179241512,
+                "top": 0.0
             },
-            "post_job_actions": {
-                "HideDatasetActionuep_results": {
-                    "action_arguments": {},
-                    "action_type": "HideDatasetAction",
-                    "output_name": "uep_results"
-                }
-            },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_uep_opt/pm_uep_opt/0.2.1+galaxy1",
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_uep_opt/pm_uep_opt/0.3.0+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "e4097a3e3e75",
+                "changeset_revision": "eea73e1f65cb",
                 "name": "pm_uep_opt",
                 "owner": "muon-spectroscopy-computational-project",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"castep_log\": {\"__class__\": \"RuntimeValue\"}, \"charge_density\": {\"__class__\": \"RuntimeValue\"}, \"muonated_structures\": {\"__class__\": \"RuntimeValue\"}, \"testing\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.2.1+galaxy1",
+            "tool_state": "{\"__input_ext\": \"input\", \"castep_log\": {\"__class__\": \"ConnectedValue\"}, \"charge_density\": {\"__class__\": \"ConnectedValue\"}, \"chromInfo\": \"/srv/galaxy/var/tool_data/shared/ucsc/chrom/?.len\", \"generation_params\": {\"poisson_r\": \"0.6\", \"vdw_scale\": \"0.5\", \"random_seed\": null, \"allpos_ext\": \"cif\"}, \"optimisation_params\": {\"geom_steps\": \"30\", \"geom_force_tol\": \"0.05\", \"uep_gw_factor\": \"5.0\"}, \"structure\": {\"__class__\": \"ConnectedValue\"}, \"testing\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.0+galaxy1",
             "type": "tool",
-            "uuid": "7745ff9f-460e-444a-8b2f-0324ef89c6dc",
-            "workflow_outputs": []
+            "uuid": "22131f07-c4c4-4ec0-9a45-5c8c8069600c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "All muons in host material",
+                    "output_name": "allpos_file",
+                    "uuid": "f3be7cd2-3974-49f2-aa0e-96c79b4ab34c"
+                }
+            ]
         },
-        "6": {
+        "4": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_read/pm_muairss_read/0.2.1+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_read/pm_muairss_read/0.3.0+galaxy0",
             "errors": null,
-            "id": 6,
+            "id": 4,
             "input_connections": {
                 "optimisation_results": {
-                    "id": 5,
+                    "id": 3,
                     "output_name": "uep_results"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool PyMuonSuite AIRSS Cluster",
-                    "name": "optimisation_results"
-                }
-            ],
-            "label": "Cluster relaxed muonated structures",
+            "inputs": [],
+            "label": null,
             "name": "PyMuonSuite AIRSS Cluster",
             "outputs": [
+                {
+                    "name": "saved_structures",
+                    "type": "input"
+                },
                 {
                     "name": "cluster_report",
                     "type": "txt"
@@ -281,51 +171,26 @@
                 }
             ],
             "position": {
-                "left": 801,
-                "top": 150
+                "left": 675.0461006811669,
+                "top": 4.000867381875212
             },
-            "post_job_actions": {
-                "RenameDatasetActioncluster_data": {
-                    "action_arguments": {
-                        "newname": "Cluster Data"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "cluster_data"
-                },
-                "RenameDatasetActioncluster_report": {
-                    "action_arguments": {
-                        "newname": "Cluster Report"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "cluster_report"
-                }
-            },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_read/pm_muairss_read/0.2.1+galaxy1",
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_read/pm_muairss_read/0.3.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "49b6d76139da",
+                "changeset_revision": "40071ff77285",
                 "name": "pm_muairss_read",
                 "owner": "muon-spectroscopy-computational-project",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"optimisation_results\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.2.1+galaxy1",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/srv/galaxy/var/tool_data/shared/ucsc/chrom/?.len\", \"clustering\": {\"clustering_method\": \"hier\", \"__current_case__\": 0, \"clustering_hier_t\": \"0.2\"}, \"clustering_save\": {\"clustering_save_format\": \"cell\", \"__current_case__\": 1, \"supercell\": \"3\", \"mu_symbol\": \"H:mu\"}, \"optimisation_results\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.0+galaxy0",
             "type": "tool",
-            "uuid": "d7a9af0f-e7b9-41eb-9bba-ac7218585ce4",
-            "workflow_outputs": [
-                {
-                    "label": "Cluster Report",
-                    "output_name": "cluster_report",
-                    "uuid": "51096859-3a84-46a3-a087-0182ec628b6a"
-                },
-                {
-                    "label": "Cluster Data",
-                    "output_name": "cluster_data",
-                    "uuid": "53ea9646-c9e3-4a88-8adb-6e773299c344"
-                }
-            ]
+            "uuid": "73bee6d6-0c2c-46c8-b7c0-7afaf1586cab",
+            "when": null,
+            "workflow_outputs": []
         }
     },
     "tags": [],
-    "uuid": "5201f37f-01e2-4c95-aaae-ba8e22005145",
+    "uuid": "6007377c-5c66-41da-b3fe-b0aaaec0cc93",
     "version": 1
 }
