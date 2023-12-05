@@ -163,13 +163,15 @@ Before we start building trees, let's define some terms.
 
 It's common to call **phylogenetic tree** a **phylogeny**.
 
-Mathematically a **tree** is a kind of **graph**, which has objects called **nodes** or **vertices** (purple and white boxes in the figure above), connected in pairs by things called **edges** (green and orange lines in the figure above).  
+Mathematically a **tree** is a kind of **graph**, which has objects called **nodes** or **vertices** (lavender, white and one blue) boxes in the figure above), connected in pairs by things called **edges** (green and orange lines in the figure above).  
 
 Trees are a natural way to think about phylogenetic relationships. The nodes correspond to **taxa**, and the edges, also called **branches**, show the relationships between them, where taxa could be species, or lineages, genera, populations, or even individuals if we are considering something like a genealogy.
 
-Nodes that only have one edge attached to them are called **leaves** (or **tips**), and these correspond to taxa with no descendant taxa in the tree.  These taxa might be from fossils, or be currently living, in which case they're referred to as **extant**.
+Nodes that only have one edge attached to them are called **leaves** (or **tips**; in white above), and these correspond to taxa with no descendant taxa in the tree.  These taxa might be from fossils, or be currently living, in which case they're referred to as **extant**.
 
-Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree. This node is called the **root**. When this is the case there is a natural direction implied from the root to the tips, going forward in time. Such trees and phylogenies are called **rooted**; if there is no such root then they are called **unrooted**. 
+Internal nodes (in lavender above) correspond to hypothetical common ancestors of the extant taxa: the set of descendents that each one has determines the tree. 
+
+Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree. This node is called the **root** (in blue above). When this is the case there is a natural direction implied from the root to the tips, going forward in time. Such trees and phylogenies are called **rooted**; if there is no such root then they are called **unrooted**. 
 
 *The majority of phylogenetic inference methods produce unrooted trees, but rooted trees are more useful.*
 
@@ -549,11 +551,11 @@ This seems much more biologically reasonable and makes this into a Markov proces
 
 ### Searching for trees and their branch lengths
 
-There are matrices that define the rates at which nucleotides change. 
+When dealing with nucleotides A, C, G, T, there are 4x4 rate matrices with different names: Jukes-Cantor (JC69) with one parameter, Hasegawa-Kishino-Yano (HKY85) with five parameters, and many more, that define the rates at which nucleotides change. 
 There are other 20x20 matrices for amino acids, and even 64x64 matrices for codons.
 
-To convert from a rate to a probability, hence giving us a likelihood, requires that we have a branch length. Then, we can calculate the probability under a given model and after a specific time interval of going from one nucleotide to another. We multiply these site probabilitues to calculate the probability of going from one sequence to another.
-Thus looking for the optimal tree under likelihood requires we also search for the best-fit **branch lengths**, as well as looking for the best **tree**.
+To convert from a rate to a probability, hence giving us a likelihood, requires that we have a branch length. Then, we can calculate the probability under a given model, and after a specific time interval, of going from one nucleotide to another. We multiply these site probabilities to calculate the probability of going from an entire sequence to another.
+Thus, looking for the optimal tree under likelihood requires we also search for the best-fit **branch lengths**, as well as looking for the best **tree**.
 
 Maximum Likelihood is therefore the **slowest** tree inference method we discuss in this tutorial.
 
@@ -563,11 +565,11 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 
 > <details-title>More details on likelihood models</details-title>
 > Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
-> The simplest model for DNA is that each nucleotide has the same rate of change, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC) model published in 1969, and this model has just one parameter.
+> The simplest model for DNA is that each nucleotide has the same rate of change, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC69) model published in 1969, and this model has just one parameter.
 > 
-> More biological realism allows for different nucleotide proportions outside the uniform 25% rate. This is the Felsenstein 1981 model, known as F81, and it has three more parameters for the rates (not four: given the first three base frequencies this defines the other one).
+> More biological realism allows for different nucleotide proportions outside the uniform 25% rate. This is the Felsenstein 1981 model, known as F81, and it has three more parameters for the rates (not four: given the first three base frequencies, this defines the other one).
 > 
-> A next level of sophistication is the Hasegawa-Kishino-Yano model (HKY) published in 1985, which acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
+> A next level of sophistication is the Hasegawa-Kishino-Yano model (HKY85) published in 1985, which acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
 > Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
 > 
 > ![HKY85 Formula](./images/HKY85RateMatrix.png "HKY85 formula"){: align="center", width="300px"}
