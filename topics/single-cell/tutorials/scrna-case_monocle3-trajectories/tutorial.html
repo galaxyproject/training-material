@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9d18fa18be0a483c97ed3d643b7d8ef24fe01d2b",
+		release: "galaxy-training-network@4170822cb02830ad671b218000de7cd4b8bedf0e",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701787416' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701787416' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701787857' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701787857' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Inferring single cell trajectories (Monocle3)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-29 09:12:39 +0000">
+<meta name="DC.date" content="2023-12-04 11:47:53 +0000">
 <meta name="DC.creator" content="Julia Jakiela">
 
         
@@ -109,7 +109,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-11-29 09:12:39 +0000",
+  "dateModified": "2023-12-04 11:47:53 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Inferring single cell trajectories (Monocle3)",
   "interactivityType": "mixed",
@@ -168,7 +168,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Inferring single cell trajectories (Monocle3)",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html",
-  "version": 22,
+  "version": 23,
   "timeRequired": "PT2H",
   "teaches": "Identify which operations to perform on an AnnData object to obtain the files needed for Monocle\n - Follow the Monocle3 workflow and choose the right parameter values\n - Compare the outputs from Scanpy and Monocle\n - Interpet trajectory analysis results",
   "keywords": [
@@ -366,7 +366,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701787416'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701787857'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1050,7 +1050,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 29, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 4, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1063,7 +1063,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00249">https://gxy.io/GTN:T00249</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 22 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 23 </div>
 
     </blockquote>
     </section>
@@ -1614,7 +1614,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 reduceDim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
-        <li><em>“If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot.”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot.”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
     <li>
@@ -1624,7 +1624,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 reduceDim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">genotype</code></li>
-        <li><em>“If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot.”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot.”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
     <li>
@@ -1634,7 +1634,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 reduceDim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
-        <li><em>“If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot.”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot.”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
     <li>
@@ -1644,7 +1644,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 reduceDim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">sex</code></li>
-        <li><em>“If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot.”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot.”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
     <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Sex plot</code></li>
@@ -1926,7 +1926,7 @@ The plot also indicates other specifically expressed genes, such as Hmgb2, Pclaf
 <p>As you can see, the learned trajectory path is just a line connecting the clusters. However, there are some important points to understand here.
 If the resolution of the clusters is high, then the trajectory path will be very meticulous, strongly branched and curved. There’s a danger here that we might start seeing things that don’t really exist.
 You can set an option to learn a single tree structure for all the partitions or use the partitions calculated when clustering and identify disjoint graphs in each. To make the right decision, you have to understand how/if the partitions are related and what would make more biolgical sense. In our case, we were only interested in a big partition containing all the cells and we ignored the small ‘dot’ classified as another partition.
-There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. Those patterns might correspond to various biological processes: transition events for different phases, cell cycle, cell differentiation. Therefore, branching points are quite important on the trajectory path. You can always plot them, <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> checking the correct box in <span><strong>Monocle3 plotCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>.</p>
+There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. Those patterns might correspond to various biological processes: transition events for different phases, cell cycle, cell differentiation. Therefore, branching points are quite important on the trajectory path. You can always plot them, <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> checking the correct box in <span><strong>Monocle3 plotCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>.</p>
 
 <figure id="figure-18" style="max-width: 90%;"><img src="../../images/scrna-casestudy-monocle/learned_trajectory.png" alt="A trajectory path, branching out to connect all the clusters and thus show their relationships." width="480" height="480" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy-monocle/learned_trajectory.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Learned trajectory path</figcaption></figure>
 
@@ -2279,7 +2279,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9d18fa18be0a483c97ed3d643b7d8ef24fe01d2b">9d18fa1</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/4170822cb02830ad671b218000de7cd4b8bedf0e">4170822</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2307,7 +2307,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701787416'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701787857'></script>
         
     </body>
 </html>

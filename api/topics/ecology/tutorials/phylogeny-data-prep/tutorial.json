@@ -87,7 +87,7 @@
       "name": "preparing genomic data for phylogeny recostruction (GTN)",
       "title": "preparing genomic data for phylogeny recostruction (GTN)",
       "test_results": null,
-      "modified": "2023-12-05 14:43:38 +0000",
+      "modified": "2023-12-05 14:50:59 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Replace Text\"];\n  2[\"RepeatMasker\"];\n  3[\"Funannotate predict annotation\"];\n  4[\"Extract ORF\"];\n  5[\"Regex Find And Replace\"];\n  6[\"Collapse Collection\"];\n  7[\"Proteinortho\"];\n  8[\"Busco\"];\n  9[\"Filter\"];\n  10[\"Proteinortho grab proteins\"];\n  11[\"Regex Find And Replace\"];\n  12[\"ClustalW\"];\n  13[\"ClipKIT. Alignment trimming software for phylogenetics.\"];\n  14[\"PhyKit - Alignment-based functions\"];\n  0 -->|output| 1;\n  1 -->|outfile| 2;\n  2 -->|output_masked_genome| 3;\n  3 -->|annot_gbk| 4;\n  4 -->|aa_output| 5;\n  5 -->|out_file1| 6;\n  5 -->|out_file1| 7;\n  5 -->|out_file1| 8;\n  7 -->|proteinortho| 9;\n  6 -->|output| 10;\n  9 -->|out_file1| 10;\n  10 -->|listproteinorthograbproteins| 11;\n  11 -->|out_file1| 12;\n  12 -->|output| 13;\n  13 -->|trimmed_output| 14;\n"
     }
   ],
