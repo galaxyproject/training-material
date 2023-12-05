@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@544af91fb5451dd8cbc48e5766859410973a5bdc",
+		release: "galaxy-training-network@76780feae7221d435e8d3606a2f713c40319ed80",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701735017' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701735017' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701786847' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701786847' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701735017'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701786847'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -230,24 +230,25 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     
 	<div class="card col-md-6">
 		<div class="card-body">
-			<h5 class="card-title">GTN Training: Introduction To Imaging</h5>
+			<h5 class="card-title">Workflow constructed from Tutorial 'Introduction to image analysis using Galaxy'</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Till Korten
 				
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated Jan 22, 2020</small>
+				<small class="text-muted">Last updated Nov 8, 2023</small>
 			</p>
 			<p class="card-text">
 			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-imaging-introduction/versions/galaxy-workflow-gtn_tutorial__introduction_to_imaging">Launch in Tutorial Mode</span><br/>
 
 			License: 
 				
-				None Specified, defaults to
-				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
 				
 				<br/>
-			Tests: ❌
+			Tests: ✅
 			Results: Not yet automated
 			</p>
 
@@ -261,37 +262,33 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
-  1["Unzip"];
-  10["Binary 2 Label"];
-  11["Histogram equalization"];
+  1["Histogram equalization"];
+  2["Image Info"];
+  3["Filter Image"];
+  4["Filter Image"];
+  5["Convert image"];
+  6["Convert image"];
+  7["Auto Threshold"];
+  8["Histogram equalization"];
+  9["Binary 2 Label"];
+  10["Convert image"];
+  11["Overlay Images"];
   12["Convert image"];
   13["Count Objects"];
-  14["Convert image"];
-  15["Overlay Segmentation Mask"];
-  2["Image Info"];
-  3["Convert image"];
-  4["Histogram equalization"];
-  5["Filter Image"];
-  6["Convert image"];
-  7["Histogram equalization"];
-  8["Auto Threshold"];
-  9["Convert image"];
   0 -->|output| 1;
-  8 -->|output| 10;
-  10 -->|output| 11;
-  10 -->|output| 12;
-  10 -->|output| 13;
-  11 -->|output| 14;
-  6 -->|output| 15;
-  12 -->|output| 15;
-  1 -->|unzipped_single| 2;
-  1 -->|unzipped_single| 3;
-  1 -->|unzipped_single| 4;
-  1 -->|unzipped_single| 5;
-  4 -->|output| 6;
-  5 -->|output| 7;
-  5 -->|output| 8;
+  0 -->|output| 2;
+  0 -->|output| 3;
+  0 -->|output| 4;
+  0 -->|output| 5;
+  1 -->|output| 6;
+  3 -->|output| 7;
+  3 -->|output| 8;
   7 -->|output| 9;
+  8 -->|output| 10;
+  6 -->|output| 11;
+  9 -->|output| 11;
+  9 -->|output| 12;
+  9 -->|output| 13;
 
 	</pre>
 </div>
@@ -320,7 +317,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/544af91fb5451dd8cbc48e5766859410973a5bdc">544af91</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/76780feae7221d435e8d3606a2f713c40319ed80">76780fe</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -344,7 +341,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701735017'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701786847'></script>
         
     </body>
 </html>
