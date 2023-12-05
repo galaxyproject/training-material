@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4170822cb02830ad671b218000de7cd4b8bedf0e",
+		release: "galaxy-training-network@c7dd5c3a7820ba7fa96fec1438d931714a5aa79d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701787857' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701787857' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701787868' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701787868' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701787857'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701787868'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -230,32 +230,39 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     
 	<div class="card col-md-6">
 		<div class="card-body">
-			<h5 class="card-title">Clustering 3K PBMCs With Scanpy</h5>
+			<h5 class="card-title">Clustering 3k PBMC with Scanpy</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Bérénice Batut, 
+				
+				Hans-Rudolf Hotz, 
+				
+				Mehmet Tekman, 
+				
+				Pavankumar Videm
 				
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated Nov 12, 2022</small>
+				<small class="text-muted">Last updated Nov 21, 2023</small>
 			</p>
 			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/main_workflow">Launch in Tutorial Mode</span><br/>
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/clustering-3k-pbmc-with-scanpy">Launch in Tutorial Mode</span><br/>
 
 			License: 
 				
-				None Specified, defaults to
 				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
 				
 				<br/>
-			Tests: ❌
+			Tests: ✅
 			Results: Not yet automated
 			</p>
 
-			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/workflows/main_workflow.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/main_workflow" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/main_workflow" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/main_workflow" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/main_workflow"
+			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/workflows/Clustering-3k-PBMC-with-Scanpy.ga" class="btn btn-primary">Download Galaxy Workflow.ga</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/clustering-3k-pbmc-with-scanpy" class="btn btn-secondary hide-when-galaxy-proxy-active">EU</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/clustering-3k-pbmc-with-scanpy" class="btn btn-secondary hide-when-galaxy-proxy-active">US</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/clustering-3k-pbmc-with-scanpy" class="btn btn-secondary hide-when-galaxy-proxy-active">AU</a>
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/clustering-3k-pbmc-with-scanpy"
 			   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
 
 	</div>
@@ -265,143 +272,125 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   2["Input dataset"];
   3["Input dataset"];
   4["Import Anndata and loom"];
-  5["Filter"];
+  5["Inspect AnnData"];
   6["Inspect AnnData"];
   7["Inspect AnnData"];
-  8["Inspect AnnData"];
-  9["Text reformatting"];
-  10["Replace Text"];
-  11["Filter"];
-  12["Select last"];
-  13["Cut"];
-  14["Concatenate datasets"];
-  15["Manipulate AnnData"];
-  16["Inspect and manipulate"];
-  17["Inspect AnnData"];
-  18["Plot"];
+  8["Filter"];
+  9["Inspect AnnData"];
+  10["Inspect AnnData"];
+  11["Select last"];
+  12["Text reformatting"];
+  13["Search in textfiles"];
+  14["Replace Text"];
+  15["Concatenate datasets"];
+  16["Manipulate AnnData"];
+  17["Inspect and manipulate"];
+  18["Inspect AnnData"];
   19["Plot"];
-  20["Plot"];
+  20["Filter"];
   21["Plot"];
-  22["Filter"];
-  23["Inspect AnnData"];
-  24["Filter"];
-  25["Inspect AnnData"];
-  26["Manipulate AnnData"];
-  27["Inspect AnnData"];
-  28["Normalize"];
-  29["Inspect and manipulate"];
-  30["Manipulate AnnData"];
-  31["Filter"];
-  32["Plot"];
-  33["Inspect AnnData"];
-  34["Manipulate AnnData"];
-  35["Inspect AnnData"];
-  36["Remove confounders"];
-  37["Inspect and manipulate"];
-  38["Cluster, infer trajectories and embed"];
-  39["Plot"];
-  40["Plot"];
+  22["Plot"];
+  23["Filter"];
+  24["Manipulate AnnData"];
+  25["Normalize"];
+  26["Inspect and manipulate"];
+  27["Manipulate AnnData"];
+  28["Filter"];
+  29["Manipulate AnnData"];
+  30["Plot"];
+  31["Remove confounders"];
+  32["Inspect and manipulate"];
+  33["Cluster, infer trajectories and embed"];
+  34["Plot"];
+  35["Plot"];
+  36["Inspect and manipulate"];
+  37["Plot"];
+  38["Plot"];
+  39["Cluster, infer trajectories and embed"];
+  40["Cluster, infer trajectories and embed"];
   41["Plot"];
-  42["Plot"];
+  42["Inspect and manipulate"];
   43["Inspect and manipulate"];
-  44["Inspect AnnData"];
-  45["Cluster, infer trajectories and embed"];
+  44["Plot"];
+  45["Inspect AnnData"];
   46["Plot"];
-  47["Cluster, infer trajectories and embed"];
-  48["Inspect and manipulate"];
-  49["Plot"];
-  50["Inspect and manipulate"];
+  47["Plot"];
+  48["Manipulate AnnData"];
+  49["Inspect and manipulate"];
+  50["Inspect AnnData"];
   51["Plot"];
-  52["Plot"];
-  53["Inspect and manipulate"];
+  52["Inspect AnnData"];
+  53["Plot"];
   54["Plot"];
-  55["Inspect AnnData"];
-  56["Inspect AnnData"];
+  55["Plot"];
+  56["Plot"];
   57["Plot"];
   58["Plot"];
-  59["Inspect AnnData"];
+  59["Plot"];
   60["Plot"];
-  61["Plot"];
-  62["Plot"];
-  63["Inspect AnnData"];
-  64["Plot"];
-  65["Manipulate AnnData"];
-  66["Inspect AnnData"];
-  67["Plot"];
-  68["Plot"];
-  69["Plot"];
-  70["Plot"];
-  1 -->|output| 4;
-  3 -->|output| 4;
+  61["Datamash"];
   2 -->|output| 4;
+  0 -->|output| 4;
+  1 -->|output| 4;
   4 -->|anndata| 5;
   4 -->|anndata| 6;
-  5 -->|anndata_out| 7;
-  5 -->|anndata_out| 8;
-  7 -->|var| 9;
-  9 -->|outfile| 10;
-  9 -->|outfile| 11;
-  10 -->|outfile| 12;
-  12 -->|outfile| 13;
-  0 -->|output| 14;
-  13 -->|out_file1| 14;
-  5 -->|anndata_out| 15;
-  14 -->|out_file1| 15;
-  15 -->|anndata| 16;
-  15 -->|anndata| 17;
-  16 -->|anndata_out| 18;
-  16 -->|anndata_out| 19;
-  16 -->|anndata_out| 20;
-  16 -->|anndata_out| 21;
-  16 -->|anndata_out| 22;
-  22 -->|anndata_out| 23;
-  22 -->|anndata_out| 24;
-  24 -->|anndata_out| 25;
-  24 -->|anndata_out| 26;
-  26 -->|anndata| 27;
-  26 -->|anndata| 28;
+  4 -->|anndata| 7;
+  4 -->|anndata| 8;
+  4 -->|anndata| 9;
+  8 -->|anndata_out| 10;
+  10 -->|var| 11;
+  11 -->|outfile| 12;
+  11 -->|outfile| 13;
+  12 -->|outfile| 14;
+  3 -->|output| 15;
+  14 -->|outfile| 15;
+  8 -->|anndata_out| 16;
+  15 -->|out_file1| 16;
+  16 -->|anndata| 17;
+  16 -->|anndata| 18;
+  17 -->|anndata_out| 19;
+  17 -->|anndata_out| 20;
+  17 -->|anndata_out| 21;
+  17 -->|anndata_out| 22;
+  20 -->|anndata_out| 23;
+  23 -->|anndata_out| 24;
+  24 -->|anndata| 25;
+  25 -->|anndata_out| 26;
+  26 -->|anndata_out| 27;
+  27 -->|anndata| 28;
   28 -->|anndata_out| 29;
-  29 -->|anndata_out| 30;
-  30 -->|anndata| 31;
+  28 -->|anndata_out| 30;
+  29 -->|anndata| 31;
   31 -->|anndata_out| 32;
-  31 -->|anndata_out| 33;
-  31 -->|anndata_out| 34;
-  34 -->|anndata| 35;
-  34 -->|anndata| 36;
-  36 -->|anndata_out| 37;
-  37 -->|anndata_out| 38;
-  38 -->|anndata_out| 39;
-  38 -->|anndata_out| 40;
-  38 -->|anndata_out| 41;
-  38 -->|anndata_out| 42;
-  38 -->|anndata_out| 43;
-  43 -->|anndata_out| 44;
-  43 -->|anndata_out| 45;
-  45 -->|anndata_out| 46;
-  45 -->|anndata_out| 47;
-  47 -->|anndata_out| 48;
-  47 -->|anndata_out| 49;
-  47 -->|anndata_out| 50;
-  47 -->|anndata_out| 51;
-  47 -->|anndata_out| 52;
-  47 -->|anndata_out| 53;
-  48 -->|anndata_out| 54;
-  48 -->|anndata_out| 55;
-  50 -->|anndata_out| 56;
-  50 -->|anndata_out| 57;
-  50 -->|anndata_out| 58;
-  50 -->|anndata_out| 59;
-  50 -->|anndata_out| 60;
-  50 -->|anndata_out| 61;
-  53 -->|anndata_out| 62;
-  53 -->|anndata_out| 63;
-  53 -->|anndata_out| 64;
-  53 -->|anndata_out| 65;
-  65 -->|anndata| 66;
-  65 -->|anndata| 67;
-  65 -->|anndata| 68;
-  65 -->|anndata| 69;
-  65 -->|anndata| 70;
+  32 -->|anndata_out| 33;
+  33 -->|anndata_out| 34;
+  33 -->|anndata_out| 35;
+  33 -->|anndata_out| 36;
+  33 -->|anndata_out| 37;
+  33 -->|anndata_out| 38;
+  36 -->|anndata_out| 39;
+  39 -->|anndata_out| 40;
+  39 -->|anndata_out| 41;
+  40 -->|anndata_out| 42;
+  40 -->|anndata_out| 43;
+  40 -->|anndata_out| 44;
+  42 -->|anndata_out| 45;
+  42 -->|anndata_out| 46;
+  43 -->|anndata_out| 47;
+  43 -->|anndata_out| 48;
+  43 -->|anndata_out| 49;
+  43 -->|anndata_out| 50;
+  43 -->|anndata_out| 51;
+  43 -->|anndata_out| 52;
+  43 -->|anndata_out| 53;
+  43 -->|anndata_out| 54;
+  43 -->|anndata_out| 55;
+  48 -->|anndata| 56;
+  48 -->|anndata| 57;
+  48 -->|anndata| 58;
+  49 -->|anndata_out| 59;
+  49 -->|anndata_out| 60;
+  52 -->|obs| 61;
 
 	</pre>
 </div>
@@ -430,7 +419,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4170822cb02830ad671b218000de7cd4b8bedf0e">4170822</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7dd5c3a7820ba7fa96fec1438d931714a5aa79d">c7dd5c3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -454,7 +443,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701787857'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701787868'></script>
         
     </body>
 </html>

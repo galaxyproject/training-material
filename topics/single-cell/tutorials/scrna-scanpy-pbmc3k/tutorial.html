@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4170822cb02830ad671b218000de7cd4b8bedf0e",
+		release: "galaxy-training-network@c7dd5c3a7820ba7fa96fec1438d931714a5aa79d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701787857' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701787857' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701787868' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701787868' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,10 +67,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Clustering 3K PBMCs with Scanpy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
+<meta name="DC.date" content="2023-11-22 14:16:22 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Hans-Rudolf Hotz">
 <meta name="DC.creator" content="Mehmet Tekman">
+<meta name="DC.creator" content="Pavankumar Videm">
 
         
         
@@ -111,7 +112,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-11-03 14:30:27 +0000",
+  "dateModified": "2023-11-22 14:16:22 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Clustering 3K PBMCs with Scanpy",
   "interactivityType": "mixed",
@@ -170,8 +171,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Clustering 3K PBMCs with Scanpy",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html",
-  "version": 11,
-  "timeRequired": "PT5H",
+  "version": 15,
+  "timeRequired": "PT8H",
   "teaches": "Describe an AnnData object to store single-cell data\n - Explain the preprocessing steps for single-cell data\n - Evaluate quality of single-cell data and apply steps to select and filter cells and genes based on QC\n - Execute data normalization and scaling\n - Identify highly variable genes\n - Construct and run a dimensionality reduction using Principal Component Analysis\n - Perform a graph-based clustering for cells\n - Identify marker genes for the clusters\n - Construct and run a cell type annotation for the clusters",
   "keywords": [
     "Single Cell",
@@ -317,6 +318,30 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
           "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
         }
       ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "name": "Pavankumar Videm",
+      "image": "https://avatars.githubusercontent.com/pavanvidem",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5192-126X",
+      "orcid": "https://orcid.org/0000-0002-5192-126X"
     }
   ],
   "about": [
@@ -340,7 +365,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701787857'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701787868'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -510,7 +535,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		Authors: <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
     Bérénice Batut</a><a href="/training-material/hall-of-fame/hrhotz/" class="contributor-badge contributor-hrhotz"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hrhotz?s=36" alt="Hans-Rudolf Hotz avatar" width="36" class="avatar" />
     Hans-Rudolf Hotz</a><a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=36" alt="Mehmet Tekman avatar" width="36" class="avatar" />
-    Mehmet Tekman</a>
+    Mehmet Tekman</a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" />
+    Pavankumar Videm</a>
 	</div>
 
 </div>
@@ -733,7 +759,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
 
         
-        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 5 hours</div>
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 8 hours</div>
         
 
         
@@ -860,6 +886,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		</a>
 	</li>
     
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
     
     
     
@@ -880,12 +912,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
 	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org" title="">
-			UseGalaxy.org (Main)
-		</a>
-	</li>
-    
-	<li>
 		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
 			UseGalaxy.org.au
 		</a>
@@ -901,7 +927,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 22, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -914,7 +940,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00254">https://gxy.io/GTN:T00254</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 11 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 15 </div>
 
     </blockquote>
     </section>
@@ -1068,7 +1094,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
   <div class="box-title hands-on-title" id="hands-on-transform-matrix-and-all-into-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Transform matrix and all into AnnData object</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy0" title="Import Anndata and loom tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import Anndata and loom</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.3+galaxy0" title="Import Anndata and loom tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import Anndata and loom</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><em>“hd5 format to be created”</em>: <code class="language-plaintext highlighter-rouge">Anndata file</code></li>
         <li><em>“Format for the annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Matrix Market (mtx), from Cell ranger or not</code>
@@ -1099,7 +1125,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
   <div class="box-title hands-on-title" id="hands-on-inspect-an-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspect an AnnData object</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Input 3k PBMC</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
@@ -1151,11 +1177,17 @@ output, where general information is provided for each dataset:
               </li>
             </ul>
           </li>
-          <li>For more specific queries, <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> is required.</li>
+          <li>For more specific queries, <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> is required.</li>
         </ul>
       </blockquote>
+
+      <blockquote class="warning">
+        <div class="box-title warning-title" id="warning-large-compute-resource-consumption-please-run-the-next-step-responsibly"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Large compute resource consumption! Please run the next step responsibly.</div>
+        <p>Extracting the complete matrix requires large compute resources and long time to finish. Use this step on matrices with less than 10k cells. To inspect 
+a subset of matrix contents on huge matrices, please change <em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Random chunk of defined size</code></p>
+      </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Input 3k PBMC</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">The full data matrix</code></li>
@@ -1167,7 +1199,7 @@ output, where general information is provided for each dataset:
       <blockquote class="question">
         <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>index	MIR1302-10	FAM138A	OR4F5	RP11-34P13.7	RP11-34P13.8 ...
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	MIR1302-10	FAM138A	OR4F5	RP11-34P13.7	RP11-34P13.8 ...
 AAACATACAACCAC-1	0.0	0.0	0.0	0.0
 AAACATTGAGCTAC-1	0.0	0.0	0.0	0.0
 AAACATTGATCAGC-1	0.0	0.0	0.0	0.0
@@ -1186,7 +1218,7 @@ AAACCGTGTATGCG-1	0.0	0.0	0.0	0.0
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Input 3k PBMC</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
@@ -1198,7 +1230,7 @@ AAACCGTGTATGCG-1	0.0	0.0	0.0	0.0
       <blockquote class="question">
         <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>index
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>""
 AAACATACAACCAC-1
 AAACATTGAGCTAC-1
 AAACATTGATCAGC-1
@@ -1217,7 +1249,7 @@ AAACCGTGTATGCG-1
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Input 3k PBMC</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
@@ -1229,7 +1261,7 @@ AAACCGTGTATGCG-1
       <blockquote class="question">
         <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>index	gene_ids
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	gene_ids
 MIR1302-10	ENSG00000243485
 FAM138A	ENSG00000237613
 OR4F5	ENSG00000186092
@@ -1281,7 +1313,7 @@ RP11-34P13.8	ENSG00000239945
   <div class="box-title hands-on-title" id="hands-on-remove-genes-found-in-less-than-3-cells"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove genes found in less than 3 cells</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Filter with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy1" title="Filter with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Input 3k PBMC</code></li>
         <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Filter genes based on number of cells or counts, using 'pp.filter_genes'</code>
@@ -1376,7 +1408,7 @@ RP11-34P13.8	ENSG00000239945
   <div class="box-title hands-on-title" id="hands-on-extract-gene-annotation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract gene annotation</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
@@ -1393,31 +1425,53 @@ RP11-34P13.8	ENSG00000239945
 <p>To create this table, we need to:</p>
 
 <ol>
+  <li>Remove the first line. We will add another header later.</li>
   <li>
-    <p>Create a file with gene symbols from <code class="language-plaintext highlighter-rouge">Gene annotation</code> and a column with <code class="language-plaintext highlighter-rouge">1</code> for mitochondrial genes and <code class="language-plaintext highlighter-rouge">0</code> for other genes</p>
+    <p>Create a file with gene symbols from <code class="language-plaintext highlighter-rouge">Gene annotation</code> and a column with <code class="language-plaintext highlighter-rouge">1</code> indicating mitochondrial genes and <code class="language-plaintext highlighter-rouge">0</code> for other genes.</p>
 
     <p>Using the <code class="language-plaintext highlighter-rouge">awk</code> program, we would like to print for every line the 1st column and a 2nd column with <code class="language-plaintext highlighter-rouge">1</code> if the 1st column starts with <code class="language-plaintext highlighter-rouge">MT-</code> or <code class="language-plaintext highlighter-rouge">0</code> if not, using the regular expression <code class="language-plaintext highlighter-rouge">$1 ~ /^MT-/</code></p>
   </li>
-  <li>
-    <p>Format it</p>
-
-    <ol>
-      <li>Replace the <code class="language-plaintext highlighter-rouge">0</code> by <code class="language-plaintext highlighter-rouge">False</code> and <code class="language-plaintext highlighter-rouge">1</code> by <code class="language-plaintext highlighter-rouge">True</code></li>
-      <li>Remove the first line</li>
-      <li>Keep only the 2nd column</li>
-      <li>Add <code class="language-plaintext highlighter-rouge">mito</code> on the 1st line</li>
-    </ol>
-  </li>
+  <li>Replace the <code class="language-plaintext highlighter-rouge">0</code> by <code class="language-plaintext highlighter-rouge">False</code> and <code class="language-plaintext highlighter-rouge">1</code> by <code class="language-plaintext highlighter-rouge">True</code></li>
+  <li>Add <code class="language-plaintext highlighter-rouge">mito</code> on the 1st line</li>
 </ol>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-add-mitochondrial-gene-annotation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add mitochondrial gene annotation</div>
 
   <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text file”</em>: <code class="language-plaintext highlighter-rouge">Gene annotation</code></li>
+        <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep everything from this line on</code></li>
+        <li><em>“Number of lines”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-check-the-format-of-mitochondrial-genes-names"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-check-the-format-of-mitochondrial-genes-names" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Check the format of mitochondrial genes names</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>Mitochondrial gene names start with mt. Since the tool for flagging the mitochondrial genes is case-sensitive, it might be a good idea to check what is the formatting of mitochondrial gene names in our dataset.</p>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
+        <ul>
+          <li><em>“Select lines from”</em>: output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Match</code></li>
+          <li><em>“Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">^mt</code></li>
+          <li><em>“Match type”</em>: <code class="language-plaintext highlighter-rouge">case insensitive</code></li>
+          <li><em>“Output”</em>: <code class="language-plaintext highlighter-rouge">Highlighted HTML (for easier viewing)</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <p>If you click on that dataset, you will see all the genes containing ‘mt’ in their name. We can now clearly see that mitochondrial genes in thid dataset start with <code class="language-plaintext highlighter-rouge">MT-</code>, i.e., upper case. Keep that in mind, we will use it in a moment!</p>
+  </blockquote>
+
+  <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text reformatting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Gene annotation</code></li>
-        <li><em>“AWK Program”</em>: <code class="language-plaintext highlighter-rouge">{print $1, $1 ~ /^MT-/}</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“AWK Program”</em>: <code class="language-plaintext highlighter-rouge">{print $1 ~ /^MT-/}</code></li>
       </ul>
     </li>
     <li>
@@ -1435,8 +1489,8 @@ RP11-34P13.8	ENSG00000239945
 
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: output of <strong>Text reformatting</strong></li>
-            <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c2!=0</code></li>
-            <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+            <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c1!=0</code></li>
+            <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
           </ul>
 
           <p>There are 13 genes found as mitochondrial (0.10% of the 13,714 genes).</p>
@@ -1444,21 +1498,19 @@ RP11-34P13.8	ENSG00000239945
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace text in a specific column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace text in a specific column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace text in entire line tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>In <em>“Replacement”</em>:
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
               <ul>
-                <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
                 <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
                 <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">False</code></li>
               </ul>
             </li>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
               <ul>
-                <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
                 <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
                 <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">True</code></li>
               </ul>
@@ -1468,19 +1520,6 @@ RP11-34P13.8	ENSG00000239945
       </ul>
 
       <p><small><strong>Note</strong>: <em>Ensure that you have selected the same column for both replacements.</em></small></p>
-    </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text file”</em>: output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep everything from this line on</code></li>
-        <li><em>“Number of lines”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
-      </ul>
-    </li>
-    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
-      <ul>
-        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Select last</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-      </ul>
     </li>
     <li>
       <p>Create a new <strong>tabular</strong> file from the following</p>
@@ -1499,7 +1538,7 @@ RP11-34P13.8	ENSG00000239945
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Dataset”</em>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em>: output of <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               </ul>
             </li>
           </ul>
@@ -1509,7 +1548,7 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated file <code class="language-plaintext highlighter-rouge">Mitochondrial annotation</code> and ensure that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate Anndata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate Anndata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0" title="Manipulate Anndata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate Anndata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC</code></li>
         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Add new annotation(s) for observations or variables</code>
@@ -1523,7 +1562,7 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated file <code class="language-plaintext highlighter-rouge">3k PBMC with mito annotation</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with mito annotation</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
@@ -1539,7 +1578,7 @@ RP11-34P13.8	ENSG00000239945
   <div class="box-title hands-on-title" id="hands-on-compute-qc-metrics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute QC metrics</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with mito annotation</code></li>
         <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Calculate quality control metrics, using 'pp.calculate_qc_metrics'</code>
@@ -1631,7 +1670,7 @@ RP11-34P13.8	ENSG00000239945
   <div class="box-title hands-on-title" id="hands-on-visualize-qc-metrics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize QC metrics</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with mito annotation and qc metrics</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1643,15 +1682,6 @@ RP11-34P13.8	ENSG00000239945
             </li>
             <li>In <em>“Violin plot attributes”</em>:
               <ul>
-                <li><em>“Add a stripplot on top of the violin plot”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
-                  <ul>
-                    <li><em>“Add a jitter to the stripplot”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
-                      <ul>
-                        <li><em>“Size of the jitter points”</em>: <code class="language-plaintext highlighter-rouge">0.4</code></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
                 <li><em>“Display keys in multiple panels”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
               </ul>
             </li>
@@ -1683,7 +1713,7 @@ RP11-34P13.8	ENSG00000239945
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with mito annotation and qc metrics</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Scatter plot along observations or variables axes, using 'pl.scatter'</code>
@@ -1718,7 +1748,7 @@ RP11-34P13.8	ENSG00000239945
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with mito annotation and qc metrics</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Scatter plot along observations or variables axes, using 'pl.scatter'</code>
@@ -1779,7 +1809,7 @@ RP11-34P13.8	ENSG00000239945
   <div class="box-title hands-on-title" id="hands-on-remove-low-quality-cells"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove low-quality cells</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Filter with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy1" title="Filter with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with mito annotation and qc metrics</code></li>
         <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'</code>
@@ -1814,7 +1844,7 @@ RP11-34P13.8	ENSG00000239945
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Filter with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy1" title="Filter with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'</code>
@@ -1848,7 +1878,7 @@ RP11-34P13.8	ENSG00000239945
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate Anndata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate Anndata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0" title="Manipulate Anndata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate Anndata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Filter observations or variables</code>
@@ -1872,7 +1902,7 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated file <code class="language-plaintext highlighter-rouge">3k PBMC after QC filtering</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC after QC filtering</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
@@ -1912,7 +1942,7 @@ RP11-34P13.8	ENSG00000239945
   <div class="box-title hands-on-title" id="hands-on-normalize-for-cell-size"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Normalize for cell size</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+galaxy0" title="Normalize with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Normalize with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy1" title="Normalize with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Normalize with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC after QC filtering</code></li>
         <li><em>“Method used for normalization”</em>: <code class="language-plaintext highlighter-rouge">Normalize counts per cell, using 'pp.normalize_total'</code>
@@ -1920,7 +1950,6 @@ RP11-34P13.8	ENSG00000239945
             <li><em>“Target sum”</em>: <code class="language-plaintext highlighter-rouge">10000.0</code></li>
             <li><em>“Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li><em>“Name of the field in ‘adata.obs’ where the normalization factor is stored”</em>: <code class="language-plaintext highlighter-rouge">norm</code></li>
-            <li><em>“List of layers to normalize”</em>: <code class="language-plaintext highlighter-rouge">all</code></li>
             <li><em>“How to normalize layers?”</em>: <code class="language-plaintext highlighter-rouge">After: for each layer in layers each cell has a total count equal to target_sum.</code></li>
           </ul>
         </li>
@@ -1938,7 +1967,7 @@ RP11-34P13.8	ENSG00000239945
   <div class="box-title hands-on-title" id="hands-on-log-transform-the-counts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Log-transform the counts</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Inspect and Manipulate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1" title="Inspect and Manipulate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Normalize</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Logarithmize the data matrix, using 'pp.log1p'</code></li>
@@ -1953,7 +1982,7 @@ RP11-34P13.8	ENSG00000239945
   <div class="box-title hands-on-title" id="hands-on-freeze-the-state-of-the-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Freeze the state of the AnnData object</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate Anndata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate Anndata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0" title="Manipulate Anndata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate Anndata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Freeze the current state into the 'raw' attribute</code></li>
@@ -1979,7 +2008,7 @@ RP11-34P13.8	ENSG00000239945
   <div class="box-title hands-on-title" id="hands-on-identify-the-highly-variable-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Identify the highly variable genes</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Filter with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy1" title="Filter with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC after QC filtering and normalization</code></li>
         <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Annotate (and filter) highly variable genes, using 'pp.highly_variable_genes'</code>
@@ -1996,7 +2025,7 @@ RP11-34P13.8	ENSG00000239945
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of the last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Preprocessing: Plot dispersions versus means for genes, using 'pl.highly_variable_genes'</code></li>
@@ -2069,7 +2098,7 @@ RP11-34P13.8	ENSG00000239945
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate Anndata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate Anndata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0" title="Manipulate Anndata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate Anndata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of the last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Filter observations or variables</code>
@@ -2092,7 +2121,7 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated output <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
@@ -2131,7 +2160,7 @@ RP11-34P13.8	ENSG00000239945
   <div class="box-title hands-on-title" id="hands-on-scale-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Scale the data</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.7.1+galaxy0" title="Remove confounders with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove confounders with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.9.6+galaxy1" title="Remove confounders with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove confounders with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Regress out unwanted sources of variation, using 'pp.regress_out'</code>
@@ -2141,7 +2170,7 @@ RP11-34P13.8	ENSG00000239945
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span>
  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Remove confounders</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2189,7 +2218,7 @@ RP11-34P13.8	ENSG00000239945
   <div class="box-title hands-on-title" id="hands-on-perform-the-pca"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Perform the PCA</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Cluster, infer trajectories and embed with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cluster, infer trajectories and embed with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.9.6+galaxy1" title="Cluster, infer trajectories and embed with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cluster, infer trajectories and embed with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span>
 with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling</code></li>
@@ -2275,7 +2304,7 @@ with the following parameters:
 
         </blockquote>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Unstructured annotation (uns)</code>
@@ -2303,7 +2332,7 @@ with the following parameters:
 
         </blockquote>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Multi-dimensional observations annotation (obsm)</code>
@@ -2326,7 +2355,7 @@ with the following parameters:
 
         </blockquote>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Multi-dimensional variables annotation (varm)</code>
@@ -2363,7 +2392,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-plot-the-top-2-pcs-the-pca"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the top 2 PCs the PCA</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">PCA: Plot PCA results, using 'pl.pca_overview'</code>
@@ -2406,7 +2435,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-visualize-the-top-genes-associated-with-pcs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize the top genes associated with PCs</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">PCA: Rank genes according to contributions to PCs, using 'pl.pca_loadings'</code>
@@ -2419,7 +2448,7 @@ with the following parameters:
       <blockquote class="question">
         <div class="box-title question-title" id="question-20"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-        <p><a href="../../images/scrna-scanpy-pbmc3k/pca_loadings.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/pca_loadings.png" alt="PCA loadings. " width="1593" height="453" loading="lazy" /></a></p>
+        <p><a href="../../images/scrna-scanpy-pbmc3k/pca_loadings.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/pca_loadings.png" alt="PCA loadings. " width="1601" height="430" loading="lazy" /></a></p>
 
         <p>What are the top genes for each of the 3 first PCs? What do they represent?</p>
 
@@ -2431,7 +2460,7 @@ with the following parameters:
         </blockquote>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">PCA: Plot PCA results, using 'pl.pca_overview'</code>
@@ -2498,7 +2527,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-generate-an-elbow-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate an Elbow plot</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">PCA: Scatter plot in PCA coordinates, using 'pl.pca_variance_ratio'</code>
@@ -2567,7 +2596,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-compute-the-neighborhood-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute the neighborhood graph</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
         <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Compute a neighborhood graph of observations, using 'pp.neighbors'</code>
@@ -2602,7 +2631,7 @@ with the following parameters:
             <li>Weighted adjacency matrix between cells</li>
           </ul>
 
-          <p>This information can be accessed using <strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+          <p>This information can be accessed using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:</p>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
             <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Unstructured annotation (uns)</code>
@@ -2630,7 +2659,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-embed-and-plot-the-neighborhood-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Embed and plot the neighborhood graph</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Cluster, infer trajectories and embed with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cluster, infer trajectories and embed with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.9.6+galaxy1" title="Cluster, infer trajectories and embed with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cluster, infer trajectories and embed with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embed the neighborhood graph using UMAP, using 'tl.umap'</code></li>
@@ -2651,13 +2680,13 @@ with the following parameters:
 
           <p>This information can be accessed using:</p>
           <ol>
-            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
               <ul>
                 <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP</code></li>
                 <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Generalinformation about the object</code></li>
               </ul>
             </li>
-            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
               <ul>
                 <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph, UMAP</code></li>
                 <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Multi-dimensional observations annotation (obsm)</code></li>
@@ -2669,7 +2698,7 @@ with the following parameters:
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
@@ -2712,7 +2741,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-cluster-the-neighborhood-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cluster the neighborhood graph</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Cluster, infer trajectories and embed with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cluster, infer trajectories and embed with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.9.6+galaxy1" title="Cluster, infer trajectories and embed with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cluster, infer trajectories and embed with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Cluster cells into subgroups, using 'tl.louvain'</code>
@@ -2741,13 +2770,13 @@ with the following parameters:
 
           <p>This information can be accessed using:</p>
           <ol>
-            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
               <ul>
                 <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
                 <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Generalinformation about the object</code></li>
               </ul>
             </li>
-            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
               <ul>
                 <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
                 <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
@@ -2767,7 +2796,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-plot-the-neighborhood-graph-and-the-clusters"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the neighborhood graph and the clusters</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
@@ -2776,7 +2805,6 @@ with the following parameters:
             <li>In <em>“Plot attributes”</em>
               <ul>
                 <li><em>“Number of panels per row”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
-                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow</code></li>
               </ul>
             </li>
           </ul>
@@ -2829,7 +2857,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-rank-the-highly-differential-genes-using-t-test"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Rank the highly differential genes using t-test</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
         <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Rank genes for characterizing groups, using 'tl.rank_genes_groups'</code>
@@ -2870,13 +2898,13 @@ with the following parameters:
 
           <p>This information can be accessed using:</p>
           <ol>
-            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
               <ul>
                 <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test</code></li>
                 <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Generalinformation about the object</code></li>
               </ul>
             </li>
-            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
               <ul>
                 <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test</code></li>
                 <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Unstructured annotation (uns)</code>
@@ -2891,7 +2919,7 @@ with the following parameters:
         </blockquote>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Marker genes: Plot ranking of genes using dotplot plot, using 'pl.rank_genes_groups'</code>
@@ -2903,7 +2931,7 @@ with the following parameters:
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Unstructured annotation (uns)</code>
@@ -2917,7 +2945,7 @@ with the following parameters:
   </ol>
 </blockquote>
 
-<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_t-test.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_t-test.png" alt="Rank genes with t-test. " width="1558" height="1192" loading="lazy" /></a></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_t-test.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_t-test.png" alt="Rank genes with t-test. " width="1555" height="1192" loading="lazy" /></a></p>
 
 <p>We can quickly look at the 5 top ranked genes per cluster:</p>
 
@@ -3013,7 +3041,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-rank-the-highly-differential-genes-using-wilcoxon-rank-sum"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Rank the highly differential genes using Wilcoxon rank sum</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li>
           <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></p>
@@ -3039,7 +3067,7 @@ with the following parameters:
     <li>
       <p>Rename the generated output <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Marker genes: Plot ranking of genes using dotplot plot, using 'pl.rank_genes_groups'</code>
@@ -3051,7 +3079,7 @@ with the following parameters:
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Unstructured annotation (uns)</code>
@@ -3067,7 +3095,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon.png" alt="Rank genes with Wilcoxon. " width="1558" height="1192" loading="lazy" /></a></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon.png" alt="Rank genes with Wilcoxon. " width="1559" height="1192" loading="lazy" /></a></p>
 
 <p>We can quickly look at the 5 top ranked genes per cluster:</p>
 
@@ -3186,7 +3214,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-compare-differential-expression-for-cst3-nkg7-and-ppbp-in-the-different-clusters"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compare differential expression for CST3, NKG7 and PPBP in the different clusters</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -3197,6 +3225,7 @@ with the following parameters:
               </ul>
             </li>
             <li><em>“The key of the observation grouping to consider”</em>: <code class="language-plaintext highlighter-rouge">louvain</code></li>
+            <li><em>“Use ‘raw’ attribute of input if present”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -3205,7 +3234,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><a href="../../images/scrna-scanpy-pbmc3k/violin_plot_rank_genes_groups_CST3_NKG7_PPBP.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_rank_genes_groups_CST3_NKG7_PPBP.png" alt="Violin plot for CST3, NKG7 and PPBP after clustering. " width="2024" height="419" loading="lazy" /></a></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/violin_plot_rank_genes_groups_CST3_NKG7_PPBP.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_rank_genes_groups_CST3_NKG7_PPBP.png" alt="Violin plot for CST3, NKG7 and PPBP after clustering. " width="2009" height="413" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-31"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3235,7 +3264,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-plot-expression-probability-distributions-across-clusters-of-top-marker-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot expression probability distributions across clusters of top marker genes</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Stacked violin plot, using 'pl.stacked_violin'</code>
@@ -3263,7 +3292,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><a href="../../images/scrna-scanpy-pbmc3k/violin_plot_marker_genes.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_marker_genes.png" alt="Violin plot for top marker genes. " width="330" height="250" loading="lazy" /></a></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/violin_plot_marker_genes.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_marker_genes.png" alt="Violin plot for top marker genes. " width="723" height="812" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-32"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3293,7 +3322,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-plot-top-marker-gene-expression-on-an-umap-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot top marker gene expression on an UMAP plot</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
@@ -3303,7 +3332,6 @@ with the following parameters:
             <li>In <em>“Plot attributes”</em>
               <ul>
                 <li><em>“Number of panels per row”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
-                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow</code></li>
               </ul>
             </li>
           </ul>
@@ -3336,7 +3364,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-plot-heatmap-of-the-gene-expression-in-cells"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot heatmap of the gene expression in cells</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Marker genes: Plot ranking of genes as heatmap plot, using 'pl.rank_genes_groups_heatmap'</code>
@@ -3385,7 +3413,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-identify-the-marker-genes-distinguishing-cluster-0-from-cluster-1-using-wilcoxon-rank-sum"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Identify the marker genes distinguishing cluster 0 from cluster 1 using Wilcoxon rank sum</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy1" title="Inspect and Manipulate with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect and Manipulate with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Rank genes for characterizing groups, using 'tl.rank_genes_groups'</code>
@@ -3411,7 +3439,7 @@ with the following parameters:
     <li>
       <p>Rename the generated output <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes for 0 vs 1 with Wilcoxon test</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes for 0 vs 1 with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Marker genes: Plot ranking of genes using dotplot plot, using 'pl.rank_genes_groups'</code>
@@ -3426,7 +3454,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon_0_vs_1.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon_0_vs_1.png" alt="Rank genes 0 vs 1 with Wilcoxon. " width="566" height="453" loading="lazy" /></a></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon_0_vs_1.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon_0_vs_1.png" alt="Rank genes 0 vs 1 with Wilcoxon. " width="563" height="453" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-35"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3446,7 +3474,7 @@ with the following parameters:
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-plot-expression-difference-for-the-marker-genes-distinguishing-cluster-0-from-cluster-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot expression difference for the marker genes distinguishing cluster 0 from cluster 1</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes for 0 vs 1 with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Marker genes: Plot ranking of genes as violin plot, using 'pl.rank_genes_groups_violin'</code>
@@ -3464,7 +3492,7 @@ with the following parameters:
   </ol>
 </blockquote>
 
-<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png" alt="Violin plot for marker genes for clusters 0 vs 1 with Wilcoxon. " width="557" height="495" loading="lazy" /></a></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png" alt="Violin plot for marker genes for clusters 0 vs 1 with Wilcoxon. " width="554" height="494" loading="lazy" /></a></p>
 
 <p>Previous visualizations like the heatmap can also be used to represent the differential expression of the marker genes between both clusters.</p>
 
@@ -3727,7 +3755,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-add-the-cell-type-as-cluster-names"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add the cell type as cluster names</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate Anndata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate Anndata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0" title="Manipulate Anndata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate Anndata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li>
           <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></p>
@@ -3754,7 +3782,7 @@ with the following parameters:
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-37"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-37" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-          <p>The cluster information is available in the <code class="language-plaintext highlighter-rouge">obs</code> attribute of the AnnData object. So to check, we should run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> with the following parameters:</p>
+          <p>The cluster information is available in the <code class="language-plaintext highlighter-rouge">obs</code> attribute of the AnnData object. So to check, we should run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:</p>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
             <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
@@ -3764,7 +3792,7 @@ with the following parameters:
         </blockquote>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
@@ -3775,7 +3803,6 @@ with the following parameters:
               <ul>
                 <li><em>“Location of legend”</em>: <code class="language-plaintext highlighter-rouge">on data</code></li>
                 <li><em>“Draw a frame around the scatter plot?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow</code></li>
               </ul>
             </li>
           </ul>
@@ -3785,7 +3812,7 @@ with the following parameters:
   </ol>
 </blockquote>
 
-<p><a href="../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png" alt="UMAP plot with annotated clusters. " width="535" height="429" loading="lazy" /></a></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png" alt="UMAP plot with annotated clusters. " width="515" height="409" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-38"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3806,7 +3833,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-plot-expression-of-canonical-marker-genes-for-the-annotated-cell-types"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot expression of canonical marker genes for the annotated cell types</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy1" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.6+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Makes a dot plot of the expression values, using 'pl.dotplot'</code>
@@ -3896,7 +3923,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><a href="../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png" alt="Dotplot plot with annotated clusters. " width="709" height="453" loading="lazy" /></a></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png" alt="Dotplot plot with annotated clusters. " width="704" height="421" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-39"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3918,6 +3945,7 @@ with the following parameters:
 </blockquote>
 
 <h1 id="conclusion">Conclusion</h1>
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Well done, you’ve made it to the end! You might want to consult your results with this <a href="https://singlecell.usegalaxy.eu/u/videmp/h/clustering-3k-pbmcs-with-scanpy-196">control history</a>, or check out the <a href="https://singlecell.usegalaxy.eu/u/videmp/w/clustering-3k-pbmc-with-scanpy">full workflow</a> for this tutorial.</p>
 
 <p>In this tutorial, we investigated clustering and annotation of single-cell data from 10x Genomics using Scanpy. This workflow used here was typical for scRNA-seq data analysis:</p>
 
@@ -4007,7 +4035,7 @@ with the following parameters:
                 <p>
                     <ol>
                         <li id="citation-text">
-                            Bérénice Batut, Hans-Rudolf Hotz, Mehmet Tekman,  <b>Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html</a> Online; accessed TODAY
+                            Bérénice Batut, Hans-Rudolf Hotz, Mehmet Tekman, Pavankumar Videm,  <b>Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
@@ -4033,7 +4061,7 @@ with the following parameters:
 
 
 <code id="citation-code">@misc{single-cell-scrna-scanpy-pbmc3k,
-author = "Bérénice Batut and Hans-Rudolf Hotz and Mehmet Tekman",
+author = "Bérénice Batut and Hans-Rudolf Hotz and Mehmet Tekman and Pavankumar Videm",
 	title = "Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)",
 	year = "",
 	month = "",
@@ -4089,17 +4117,12 @@ install_resolver_dependencies: true
 tools:
 - name: text_processing
   owner: bgruening
-  revisions: 9ff72e942410
-  tool_panel_section_label: Text Manipulation
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: text_processing
-  owner: bgruening
   revisions: d698c222f354
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: text_processing
   owner: bgruening
-  revisions: ddf54b12c295
+  revisions: d698c222f354
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: text_processing
@@ -4114,57 +4137,52 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: anndata_import
   owner: iuc
-  revisions: 55e35e9203cf
+  revisions: 93dd15e13e6a
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: anndata_inspect
   owner: iuc
-  revisions: 286a24ac079c
-  tool_panel_section_label: Single-cell
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: anndata_inspect
-  owner: iuc
-  revisions: 688357ad5e61
+  revisions: 6f0d0c784f09
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: anndata_manipulate
   owner: iuc
-  revisions: 9bd945a03d7b
+  revisions: ed4996a16f7f
   tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: datamash_ops
+  owner: iuc
+  revisions: 4c07ddedc198
+  tool_panel_section_label: Join, Subtract and Group
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: scanpy_cluster_reduce_dimension
   owner: iuc
-  revisions: aaa5da8e73a9
+  revisions: 6acb08931836
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: scanpy_filter
   owner: iuc
-  revisions: b409c2486353
+  revisions: a03ff8633507
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: scanpy_inspect
   owner: iuc
-  revisions: c5d3684f7c4c
+  revisions: 3081ff5c84a3
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: scanpy_normalize
   owner: iuc
-  revisions: ab55fe8030b6
+  revisions: 94c19fb1281c
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: scanpy_plot
   owner: iuc
-  revisions: a8f865950ac4
-  tool_panel_section_label: Single-cell
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: scanpy_plot
-  owner: iuc
-  revisions: 6adf98e782f3
+  revisions: 9b0cdb8cf6be
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: scanpy_remove_confounders
   owner: iuc
-  revisions: bf2017df9837
+  revisions: 458e8f43a775
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
@@ -4196,7 +4214,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4170822cb02830ad671b218000de7cd4b8bedf0e">4170822</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7dd5c3a7820ba7fa96fec1438d931714a5aa79d">c7dd5c3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -4224,7 +4242,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701787857'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701787868'></script>
         
     </body>
 </html>
