@@ -822,12 +822,16 @@ Here are a few things that can catch us out:
 
 # Summary 
 
-- Phylogeny provides the statistical framework that is essential for comparing biological organisms
-- There are so many trees, choosing the best one is very hard.
-- There are many data options but one of the best is to use molecular sequences.
-- Optimality criteria (e.g., Maximum Parsimony, Maximum Likelihood) help us decide which trees are “good” – by how well they explain the data.
-- We can search tree space for medium-sized problems with branch-and-bound, and bigger problems with heuristics.
-- Trees can be assessed for robustness by comparing methods, resampling (bootstrap), and considering a phylogenetic network.
+Phylogenetics provides the statistical framework that is essential for comparing biological organisms. A phylogenetic tree provides a best estimate of the evolutionary relationships between species (taxa) of interest, which is the framework we need to compare them.
+
+A key component of molecular phylogenetics is creating an alignment -- this is a complex process that can have different outcomes using different methods.  It is always a good idea to look at the alignment to see if it makes sense: that the insertion/deletion events have been included by the alignment program are consitent with a phylogenetic relationship between the species.
+
+While the estimation of phylogenetic trees is computationally challenging, there are a range of well-validated methods to use, constructing them based on distances, molecular sequences, and other data; these can also be used to create phylogenetic networks that represent the complexities in the data. There is a big range of score functions by which we can compare trees: based on minimum total distance (minimum evolution), on the maximum number of evolutionary "work" to account for the data (maximum parsimony), and on finding the model that has the highest probability of giving us the data we saw (maximum likelihood).
+It's important to remember that these are all statistical estimates, so may differ, and it is good advice to use multiple methods to confirm general phylogenetic relationships, rather than choose a single method.
+
+Phylogenetic trees based on molecular sequences can be analysed by bootstrapping, where representative independent re-samples of the input alignment are analysed again using the same methods, 100s ot 1000s of times, to gauge how reliable each branch is, in the sense of how often the branch is part of the best tree found for each re-sample.  This isn't a measure of confidence in the statistical sense, but a rule of thumb of 80% or more being "good support" is common in the literature -- remembering that as sequences get longer and longer, bootstrap support values go up, no matter how poor the data are!
+
+It's worth noting that this tutorial is only focusing on the estimation of individual best trees, rather than taking a Bayesian approach in which a posterior probability of trees is created, using programs like <a href="https://nbisweden.github.io/MrBayes/index.html">MrBayes</a> or <a href="http://www.beast2.org/">BEAST</a>.  These programs use even more computational resources and can run for many days or weeks as they wander around "tree space" building up a representative distribution of the probability that each tree is "right".  This computational burden is one of the main reasons we have not gone into Bayesian methods in this tutorial, but there are many good ones available on line at the web pages for the above programs.
 
 # Resources
 To develop a deeper understanding of phylogenetic trees, there is no better way than estimating phylogenies yourself --- and work through a book on the topic at your own pace.
