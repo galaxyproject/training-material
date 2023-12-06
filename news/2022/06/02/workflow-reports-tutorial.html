@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9a8f350cb9e8a4d6a53cc84687c9d0dfd8be5878",
+		release: "galaxy-training-network@e5e8cf5734605991baed8a14a3957d4ed5bbd326",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701853915' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701853915' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701855899' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701855899' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -84,7 +84,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701853915'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701855899'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -102,9 +102,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         
-                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
-                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
-                        </a>
+			
 
                         
                     </li>
@@ -143,33 +141,45 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
                     <li class="nav-item dropdown">
-    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
-        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
     </a>
     <div class="dropdown-menu dropdown-menu-right">
 
-        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2022-06-02-workflow-reports-tutorial.md" title="Edit on GitHub">
-          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2022-06-02-workflow-reports-tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
         </a>
 
-        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
             <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
         </a>
 
-        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2022/06/02/workflow-reports-tutorial.html" title="Show view statistics of this page">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2022/06/02/workflow-reports-tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
         </a>
 
         <!-- link to feedback -->
         
-            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+            <a class="dropdown-item" href="/training-material/feedback.html">
                 <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
             </a>
         
-
-		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
-		</a>
 
         <div class="dropdown-item">
             <div>
@@ -254,9 +264,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-<span class="label label-default tutorial_tag" id="new tutorial" style="--color-primary: #ffd8ba; --color-darker: #ffb96c; --color-dimmed: #ffc998;">new tutorial</span>
+<span class="label label-default tutorial_tag" id="new tutorial" style="--color-primary: #ffc081; --color-darker: #f8a300; --color-dimmed: #ffb04e;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" id="Galaxy Tips & Tricks" style="--color-primary: #c9e2ff; --color-darker: #96ccff; --color-dimmed: #b1d7ff;">Galaxy Tips & Tricks</span>
+<span class="label label-default tutorial_tag" id="Galaxy Tips & Tricks" style="--color-primary: #a2d1ff; --color-darker: #67bdff; --color-dimmed: #87c7ff;">Galaxy Tips & Tricks</span>
 
 
 <hr/>
@@ -369,11 +379,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>
 	21 November 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #f6d4ff; --color-darker: #f0b0ff; --color-dimmed: #f3c3ff;">feedback</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #f1b8ff; --color-darker: #ec94ff; --color-dimmed: #efa7ff;">feedback</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #d1e0ff; --color-darker: #a8c8ff; --color-dimmed: #bdd4ff;">testimonial</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #b1cdff; --color-darker: #88b7ff; --color-dimmed: #9dc2ff;">testimonial</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff3b4; --color-darker: #eed900; --color-dimmed: #fde700;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -392,9 +402,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>
 	21 November 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff3b4; --color-darker: #eed900; --color-dimmed: #fde700;">gtn</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00feb9; --color-darker: #00e2a4; --color-dimmed: #00efaf;">communications</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00e8a9; --color-darker: #00ce96; --color-dimmed: #00db9f;">communications</span>
 	
 	</p>
 	<p class="card-text">
@@ -415,9 +425,9 @@ the Galaxy Project Code of Conduct nor our community values.
 	<p>
 	20 November 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #bfe5ff; --color-darker: #7cd0ff; --color-dimmed: #a1daff;">feature update</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #8dd5ff; --color-darker: #18c3ff; --color-dimmed: #66ccff;">feature update</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff3b4; --color-darker: #eed900; --color-dimmed: #fde700;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -436,9 +446,9 @@ the Galaxy Project Code of Conduct nor our community values.
 	<p>
 	12 October 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff3b4; --color-darker: #eed900; --color-dimmed: #fde700;">gtn</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #3fff81; --color-darker: #00e568; --color-dimmed: #00f36f;">singlecell</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00eb6b; --color-darker: #00d15f; --color-dimmed: #00de65;">singlecell</span>
 	
 	</p>
 	<p class="card-text">
@@ -457,9 +467,9 @@ the Galaxy Project Code of Conduct nor our community values.
 	<p>
 	5 October 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #dcddff; --color-darker: #c0c2ff; --color-dimmed: #cecfff;">new feature</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #c6c7ff; --color-darker: #acaeff; --color-dimmed: #b9bbff;">new feature</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff3b4; --color-darker: #eed900; --color-dimmed: #fde700;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -490,7 +500,7 @@ the Galaxy Project Code of Conduct nor our community values.
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9a8f350cb9e8a4d6a53cc84687c9d0dfd8be5878">9a8f350</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/e5e8cf5734605991baed8a14a3957d4ed5bbd326">e5e8cf5</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -518,7 +528,7 @@ the Galaxy Project Code of Conduct nor our community values.
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701853915'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701855899'></script>
         
     </body>
 </html>

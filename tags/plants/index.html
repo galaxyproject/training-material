@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9a8f350cb9e8a4d6a53cc84687c9d0dfd8be5878",
+		release: "galaxy-training-network@e5e8cf5734605991baed8a14a3957d4ed5bbd326",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701853915' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701853915' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701855899' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701855899' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701853915'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701855899'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -101,9 +101,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         
-                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
-                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
-                        </a>
+			
 
                         
                     </li>
@@ -144,36 +142,48 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
                     <li class="nav-item dropdown">
-    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
-        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
     </a>
     <div class="dropdown-menu dropdown-menu-right">
 
-        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/tags/plants/index.md" title="Edit on GitHub">
-          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/tags/plants/index.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
         </a>
 
-        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
             <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
         </a>
 
-        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/tags/plants/" title="Show view statistics of this page">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/tags/plants/">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
         </a>
 
         <!-- link to feedback -->
         
             
             
-                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <a class="dropdown-item" href="/training-material/feedback.html">
                     <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
                 </a>
             
         
-
-		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
-		</a>
 
         <div class="dropdown-item">
             <div>
@@ -278,9 +288,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #74fd00; --color-darker: #67e100; --color-dimmed: #6def00;" title="Click to show all tutorials tagged plants">plants</a>
+              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #69e700; --color-darker: #5dce00; --color-dimmed: #63db00;" title="Click to show all tutorials tagged plants">plants</a>
               
-              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #c7e3ff; --color-darker: #91cdff; --color-dimmed: #add8ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #9ed2ff; --color-darker: #5dbeff; --color-dimmed: #81c8ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
             
             </div>
@@ -535,9 +545,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #74fd00; --color-darker: #67e100; --color-dimmed: #6def00;" title="Click to show all tutorials tagged plants">plants</a>
+              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #69e700; --color-darker: #5dce00; --color-dimmed: #63db00;" title="Click to show all tutorials tagged plants">plants</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f9f6; --color-darker: #00ddda; --color-dimmed: #00ebe8;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00e3e0; --color-darker: #00cac7; --color-dimmed: #00d6d4;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
             
             </div>
@@ -792,11 +802,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=miRNA" class="label label-default tutorial_tag" style="--color-primary: #9decff; --color-darker: #00daf7; --color-dimmed: #5ce4ff;" title="Click to show all tutorials tagged miRNA">miRNA</a>
+              <a href="/training-material/search?query=miRNA" class="label label-default tutorial_tag" style="--color-primary: #00e0fe; --color-darker: #00c7e2; --color-dimmed: #00d3f0;" title="Click to show all tutorials tagged miRNA">miRNA</a>
               
-              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #74fd00; --color-darker: #67e100; --color-dimmed: #6def00;" title="Click to show all tutorials tagged plants">plants</a>
+              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #69e700; --color-darker: #5dce00; --color-dimmed: #63db00;" title="Click to show all tutorials tagged plants">plants</a>
               
-              <a href="/training-material/search?query=stress tolerance" class="label label-default tutorial_tag" style="--color-primary: #38ff89; --color-darker: #00e473; --color-dimmed: #00f27a;" title="Click to show all tutorials tagged stress tolerance">stress tolerance</a>
+              <a href="/training-material/search?query=stress tolerance" class="label label-default tutorial_tag" style="--color-primary: #00ea76; --color-darker: #00d169; --color-dimmed: #00dd6f;" title="Click to show all tutorials tagged stress tolerance">stress tolerance</a>
               
             
             </div>
@@ -1128,12 +1138,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
     
-    <a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" />
-    Cristóbal Gallardo</a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" />
-    Pavankumar Videm</a><a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-beatrizserrano"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" />
-    Beatriz Serrano-Solano</a><a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=36" alt="Mehmet Tekman avatar" width="36" class="avatar" />
-    Mehmet Tekman</a><a href="/training-material/hall-of-fame/annasyme/" class="contributor-badge contributor-annasyme"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/annasyme?s=36" alt="Anna Syme avatar" width="36" class="avatar" />
-    Anna Syme</a>
+    <a href="/training-material/hall-of-fame/annasyme/" class="contributor-badge contributor-annasyme"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/annasyme?s=36" alt="Anna Syme avatar" width="36" class="avatar" />
+    Anna Syme</a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" />
+    Cristóbal Gallardo</a><a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=36" alt="Mehmet Tekman avatar" width="36" class="avatar" />
+    Mehmet Tekman</a><a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-beatrizserrano"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" />
+    Beatriz Serrano-Solano</a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" />
+    Pavankumar Videm</a>
 
     <h2 id="funders">Funders</h2>
     <p>This material was funded by:</p>
@@ -1157,7 +1167,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9a8f350cb9e8a4d6a53cc84687c9d0dfd8be5878">9a8f350</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/e5e8cf5734605991baed8a14a3957d4ed5bbd326">e5e8cf5</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1181,7 +1191,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701853915'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701855899'></script>
         
     </body>
 </html>

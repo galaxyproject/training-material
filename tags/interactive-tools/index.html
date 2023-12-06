@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9a8f350cb9e8a4d6a53cc84687c9d0dfd8be5878",
+		release: "galaxy-training-network@e5e8cf5734605991baed8a14a3957d4ed5bbd326",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701853915' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701853915' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1701855899' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1701855899' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701853915'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1701855899'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -101,9 +101,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         
-                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
-                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
-                        </a>
+			
 
                         
                     </li>
@@ -144,36 +142,48 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
                     <li class="nav-item dropdown">
-    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
-        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
     </a>
     <div class="dropdown-menu dropdown-menu-right">
 
-        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/tags/interactive-tools/index.md" title="Edit on GitHub">
-          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/tags/interactive-tools/index.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
         </a>
 
-        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
             <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
         </a>
 
-        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/tags/interactive-tools/" title="Show view statistics of this page">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/tags/interactive-tools/">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
         </a>
 
         <!-- link to feedback -->
         
             
             
-                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <a class="dropdown-item" href="/training-material/feedback.html">
                     <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
                 </a>
             
         
-
-		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
-		</a>
 
         <div class="dropdown-item">
             <div>
@@ -278,9 +288,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=ansible" class="label label-default tutorial_tag" style="--color-primary: #ffd3ec; --color-darker: #ffaede; --color-dimmed: #ffc1e5;" title="Click to show all tutorials tagged ansible">ansible</a>
+              <a href="/training-material/search?query=ansible" class="label label-default tutorial_tag" style="--color-primary: #ffb6e1; --color-darker: #ff91d5; --color-dimmed: #ffa4db;" title="Click to show all tutorials tagged ansible">ansible</a>
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -599,7 +609,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -920,7 +930,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -1075,11 +1085,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=pangeo" class="label label-default tutorial_tag" style="--color-primary: #00feaf; --color-darker: #00e29c; --color-dimmed: #00f0a5;" title="Click to show all tutorials tagged pangeo">pangeo</a>
+              <a href="/training-material/search?query=pangeo" class="label label-default tutorial_tag" style="--color-primary: #00e8a0; --color-darker: #00cf8e; --color-dimmed: #00db97;" title="Click to show all tutorials tagged pangeo">pangeo</a>
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #7df0ff; --color-darker: #00dbed; --color-dimmed: #00e9fb;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00e1f3; --color-darker: #00c8d8; --color-dimmed: #00d5e6;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -1380,7 +1390,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -1579,9 +1589,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b8f300; --color-darker: #a3d800; --color-dimmed: #ade500;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #a7de00; --color-darker: #95c500; --color-dimmed: #9ed100;" title="Click to show all tutorials tagged R">R</a>
               
             
             </div>
@@ -1820,13 +1830,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
-              <a href="/training-material/search?query=modeling" class="label label-default tutorial_tag" style="--color-primary: #e7daff; --color-darker: #d5bbff; --color-dimmed: #decaff;" title="Click to show all tutorials tagged modeling">modeling</a>
+              <a href="/training-material/search?query=modeling" class="label label-default tutorial_tag" style="--color-primary: #d8c2ff; --color-darker: #c9a5ff; --color-dimmed: #d0b3ff;" title="Click to show all tutorials tagged modeling">modeling</a>
               
-              <a href="/training-material/search?query=gbif" class="label label-default tutorial_tag" style="--color-primary: #ffd6d6; --color-darker: #ffb3b5; --color-dimmed: #ffc5c6;" title="Click to show all tutorials tagged gbif">gbif</a>
+              <a href="/training-material/search?query=gbif" class="label label-default tutorial_tag" style="--color-primary: #ffbbbc; --color-darker: #ff999b; --color-dimmed: #ffaaac;" title="Click to show all tutorials tagged gbif">gbif</a>
               
-              <a href="/training-material/search?query=species populations EBV class" class="label label-default tutorial_tag" style="--color-primary: #f0e400; --color-darker: #d6cb00; --color-dimmed: #e3d700;" title="Click to show all tutorials tagged species populations EBV class">species populations EBV class</a>
+              <a href="/training-material/search?query=species populations EBV class" class="label label-default tutorial_tag" style="--color-primary: #dbd000; --color-darker: #c3b900; --color-dimmed: #cfc500;" title="Click to show all tutorials tagged species populations EBV class">species populations EBV class</a>
               
             
             </div>
@@ -1981,11 +1991,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
-              <a href="/training-material/search?query=EBV cube" class="label label-default tutorial_tag" style="--color-primary: #ffd1fd; --color-darker: #ffa9fd; --color-dimmed: #ffbefd;" title="Click to show all tutorials tagged EBV cube">EBV cube</a>
+              <a href="/training-material/search?query=EBV cube" class="label label-default tutorial_tag" style="--color-primary: #ffb2fd; --color-darker: #ff8afc; --color-dimmed: #ff9ffc;" title="Click to show all tutorials tagged EBV cube">EBV cube</a>
               
-              <a href="/training-material/search?query=Data visualization" class="label label-default tutorial_tag" style="--color-primary: #c7e3ff; --color-darker: #91cdff; --color-dimmed: #add8ff;" title="Click to show all tutorials tagged Data visualization">Data visualization</a>
+              <a href="/training-material/search?query=Data visualization" class="label label-default tutorial_tag" style="--color-primary: #9ed2ff; --color-darker: #5dbeff; --color-dimmed: #81c8ff;" title="Click to show all tutorials tagged Data visualization">Data visualization</a>
               
             
             </div>
@@ -2166,7 +2176,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -2313,7 +2323,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -2494,17 +2504,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
-              <a href="/training-material/search?query=machine-learning" class="label label-default tutorial_tag" style="--color-primary: #ffdf33; --color-darker: #e4c600; --color-dimmed: #f2d200;" title="Click to show all tutorials tagged machine-learning">machine-learning</a>
+              <a href="/training-material/search?query=machine-learning" class="label label-default tutorial_tag" style="--color-primary: #eacb00; --color-darker: #d0b500; --color-dimmed: #ddc000;" title="Click to show all tutorials tagged machine-learning">machine-learning</a>
               
-              <a href="/training-material/search?query=deep-learning" class="label label-default tutorial_tag" style="--color-primary: #ffd3f0; --color-darker: #ffade5; --color-dimmed: #ffc1eb;" title="Click to show all tutorials tagged deep-learning">deep-learning</a>
+              <a href="/training-material/search?query=deep-learning" class="label label-default tutorial_tag" style="--color-primary: #ffb6e8; --color-darker: #ff90de; --color-dimmed: #ffa3e3;" title="Click to show all tutorials tagged deep-learning">deep-learning</a>
               
-              <a href="/training-material/search?query=jupyter-lab" class="label label-default tutorial_tag" style="--color-primary: #fff8cd; --color-darker: #efdf00; --color-dimmed: #feed00;" title="Click to show all tutorials tagged jupyter-lab">jupyter-lab</a>
+              <a href="/training-material/search?query=jupyter-lab" class="label label-default tutorial_tag" style="--color-primary: #fff4a5; --color-darker: #ebda00; --color-dimmed: #f9e800;" title="Click to show all tutorials tagged jupyter-lab">jupyter-lab</a>
               
-              <a href="/training-material/search?query=image-segmentation" class="label label-default tutorial_tag" style="--color-primary: #64ff00; --color-darker: #58e300; --color-dimmed: #5ef100;" title="Click to show all tutorials tagged image-segmentation">image-segmentation</a>
+              <a href="/training-material/search?query=image-segmentation" class="label label-default tutorial_tag" style="--color-primary: #5ae900; --color-darker: #50cf00; --color-dimmed: #55dc00;" title="Click to show all tutorials tagged image-segmentation">image-segmentation</a>
               
-              <a href="/training-material/search?query=protein-3D-structure" class="label label-default tutorial_tag" style="--color-primary: #ffd8b9; --color-darker: #ffb967; --color-dimmed: #ffc995;" title="Click to show all tutorials tagged protein-3D-structure">protein-3D-structure</a>
+              <a href="/training-material/search?query=protein-3D-structure" class="label label-default tutorial_tag" style="--color-primary: #ffc07d; --color-darker: #f7a400; --color-dimmed: #ffb146;" title="Click to show all tutorials tagged protein-3D-structure">protein-3D-structure</a>
               
             
             </div>
@@ -2677,7 +2687,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -2882,7 +2892,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -3079,7 +3089,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -3302,7 +3312,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffd7cb; --color-darker: #ffb69b; --color-dimmed: #ffc6b4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffbda6; --color-darker: #ff9d71; --color-dimmed: #ffad8e;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -3526,26 +3536,26 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
     
-    <a href="/training-material/hall-of-fame/tobyhodges/" class="contributor-badge contributor-tobyhodges"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/tobyhodges?s=36" alt="Toby Hodges avatar" width="36" class="avatar" />
-    Toby Hodges</a><a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=36" alt="Marie Josse avatar" width="36" class="avatar" />
-    Marie Josse</a><a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/natefoo?s=36" alt="Nate Coraor avatar" width="36" class="avatar" />
+    <a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/natefoo?s=36" alt="Nate Coraor avatar" width="36" class="avatar" />
     Nate Coraor</a><a href="/training-material/hall-of-fame/dlalgroup/" class="contributor-badge contributor-dlalgroup"><img src="https://avatars.githubusercontent.com/dlalgroup?s=36" alt="Dennis Lal group avatar" width="36" class="avatar" />
-    Dennis Lal group</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
-    Bérénice Batut</a><a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge contributor-blankenberg"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/blankenberg?s=36" alt="Daniel Blankenberg avatar" width="36" class="avatar" />
-    Daniel Blankenberg</a><a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
-    Anthony Bretaudeau</a><a href="/training-material/hall-of-fame/huitang-earth/" class="contributor-badge contributor-huitang-earth"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/huitang-earth?s=36" alt="Hui Tang avatar" width="36" class="avatar" />
-    Hui Tang</a><a href="/training-material/hall-of-fame/annefou/" class="contributor-badge contributor-annefou"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/annefou?s=36" alt="Anne Fouilloux avatar" width="36" class="avatar" />
-    Anne Fouilloux</a><a href="/training-material/hall-of-fame/mgramm1/" class="contributor-badge contributor-mgramm1"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/mgramm1?s=36" alt="Marie Gramm avatar" width="36" class="avatar" />
-    Marie Gramm</a><a href="/training-material/hall-of-fame/emichn/" class="contributor-badge contributor-emichn"><img src="https://avatars.githubusercontent.com/emichn?s=36" alt="Elisa Michon avatar" width="36" class="avatar" />
-    Elisa Michon</a><a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge contributor-slugger70"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/slugger70?s=36" alt="Simon Gladman avatar" width="36" class="avatar" />
-    Simon Gladman</a><a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge contributor-carpentries"><img src="https://avatars.githubusercontent.com/carpentries?s=36" alt="The Carpentries avatar" width="36" class="avatar" />
-    The Carpentries</a><a href="/training-material/hall-of-fame/colineroyaux/" class="contributor-badge contributor-colineroyaux"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/colineroyaux?s=36" alt="Coline Royaux avatar" width="36" class="avatar" />
-    Coline Royaux</a><a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-yvanlebras"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/yvanlebras?s=36" alt="Yvan Le Bras avatar" width="36" class="avatar" />
-    Yvan Le Bras</a><a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/fpsom?s=36" alt="Fotis E. Psomopoulos avatar" width="36" class="avatar" />
-    Fotis E. Psomopoulos</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
-    Helena Rasche</a><a href="/training-material/hall-of-fame/anuprulez/" class="contributor-badge contributor-anuprulez"><img src="https://avatars.githubusercontent.com/anuprulez?s=36" alt="Anup Kumar avatar" width="36" class="avatar" />
+    Dennis Lal group</a><a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=36" alt="Marie Josse avatar" width="36" class="avatar" />
+    Marie Josse</a><a href="/training-material/hall-of-fame/tobyhodges/" class="contributor-badge contributor-tobyhodges"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/tobyhodges?s=36" alt="Toby Hodges avatar" width="36" class="avatar" />
+    Toby Hodges</a><a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge contributor-blankenberg"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/blankenberg?s=36" alt="Daniel Blankenberg avatar" width="36" class="avatar" />
+    Daniel Blankenberg</a><a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/fpsom?s=36" alt="Fotis E. Psomopoulos avatar" width="36" class="avatar" />
+    Fotis E. Psomopoulos</a><a href="/training-material/hall-of-fame/emichn/" class="contributor-badge contributor-emichn"><img src="https://avatars.githubusercontent.com/emichn?s=36" alt="Elisa Michon avatar" width="36" class="avatar" />
+    Elisa Michon</a><a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-yvanlebras"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/yvanlebras?s=36" alt="Yvan Le Bras avatar" width="36" class="avatar" />
+    Yvan Le Bras</a><a href="/training-material/hall-of-fame/mgramm1/" class="contributor-badge contributor-mgramm1"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/mgramm1?s=36" alt="Marie Gramm avatar" width="36" class="avatar" />
+    Marie Gramm</a><a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
+    Anthony Bretaudeau</a><a href="/training-material/hall-of-fame/annefou/" class="contributor-badge contributor-annefou"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/annefou?s=36" alt="Anne Fouilloux avatar" width="36" class="avatar" />
+    Anne Fouilloux</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a><a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge contributor-carpentries"><img src="https://avatars.githubusercontent.com/carpentries?s=36" alt="The Carpentries avatar" width="36" class="avatar" />
+    The Carpentries</a><a href="/training-material/hall-of-fame/huitang-earth/" class="contributor-badge contributor-huitang-earth"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/huitang-earth?s=36" alt="Hui Tang avatar" width="36" class="avatar" />
+    Hui Tang</a><a href="/training-material/hall-of-fame/colineroyaux/" class="contributor-badge contributor-colineroyaux"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/colineroyaux?s=36" alt="Coline Royaux avatar" width="36" class="avatar" />
+    Coline Royaux</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a><a href="/training-material/hall-of-fame/anuprulez/" class="contributor-badge contributor-anuprulez"><img src="https://avatars.githubusercontent.com/anuprulez?s=36" alt="Anup Kumar avatar" width="36" class="avatar" />
     Anup Kumar</a><a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge contributor-mblue9"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/mblue9?s=36" alt="Maria Doyle avatar" width="36" class="avatar" />
-    Maria Doyle</a>
+    Maria Doyle</a><a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge contributor-slugger70"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/slugger70?s=36" alt="Simon Gladman avatar" width="36" class="avatar" />
+    Simon Gladman</a>
 
     <h2 id="funders">Funders</h2>
     <p>This material was funded by:</p>
@@ -3570,7 +3580,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9a8f350cb9e8a4d6a53cc84687c9d0dfd8be5878">9a8f350</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/e5e8cf5734605991baed8a14a3957d4ed5bbd326">e5e8cf5</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3594,7 +3604,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701853915'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1701855899'></script>
         
     </body>
 </html>
