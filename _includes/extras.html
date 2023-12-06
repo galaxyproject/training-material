@@ -1,8 +1,23 @@
 <li class="nav-item dropdown">
-    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
-        {% icon galaxy-star %} Extras
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	{% icon galaxy-gear %} Settings
     </a>
     <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="{% link user/theme.md %}" class="dropdown-item">
+		{% icon gtn-theme %} Theme
+	</a>
+
+	<a href="{% link user/privacy.md %}" class="dropdown-item">
+		{% icon pref-dataprivate %} Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
 
         <a class="dropdown-item" href="{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/{{ page.path }}" title="Edit on GitHub">
           {% icon github %} Edit on GitHub
@@ -44,10 +59,6 @@
                 {% icon galaxy-barchart %} GTN feedback
             </a>
         {% endif %}
-
-		<a href="{% link preferences.md %}" class="dropdown-item">
-			{% icon gtn-theme %} User Preferences <span class="badge badge-secondary">New</span>
-		</a>
 
         <div class="dropdown-item">
             <div>
