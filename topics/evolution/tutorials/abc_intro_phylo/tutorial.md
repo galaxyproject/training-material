@@ -477,9 +477,9 @@ The rooted, 3-taxon trees above have three taxa, labelled A, B and C.  Two of th
 
 In both trees, A and B are sister taxa, and branch lengths are indicated near each branch: you can see how the branch lengths are above each cluster, including the individual taxa (the "leaves" of the tree), but not above the root.
 
-The Newick format for the tree on the left is "((A:3, B:2)x:2, C:6)y;" and for the one on the right it is "((A:3, B:2)x:3, C:5)y;".
+The Newick format for the tree on the left is "((A:3, B:2)x:2, C:6)y;" and for the one on the right it is "((A:3, B:2)x:3, C:5)y;". The number after each colon is the length of the branch above it (closer to the root). 
 
-Note that these two trees are very similar; they only differ in the position of the root (y), either being distance 2 from node x, or being 3 from it.  The distance between any two nodes in the tree is the sum of the branch lengths on the path connecting them, so for the trees above, the distance matrix is
+Note that these two trees are very similar: they only differ in the position of the root (y), either being distance 2 from node x, or being 3 from it.  The distance between any two nodes in the tree is the sum of the branch lengths on the path connecting them, so for the trees above, the distance matrix is
 
 |     |  A   |   B  |  C   |
 | --- | :--: | :--: | :--: |
@@ -489,7 +489,6 @@ Note that these two trees are very similar; they only differ in the position of 
 
 Ideally, these will reflect the actual input distances, but such distances are based on messy real data, and do not necessarily obey this ideal.
 That is why methods like FastTree are employed to find a tree with the best possible agreement between the distance inferred, and that calculated from sequence data.
-<!--The Minimum Evolution criterion optimises... XXX Mike to complete.-->
 
 > <hands-on-title>Visualising a tree</hands-on-title>
 > 1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc. 
@@ -513,7 +512,7 @@ That is why methods like FastTree are employed to find a tree with the best poss
 The other way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching the entire set of possible trees for the tree (or trees) that optimises this score.
 Note that such scores are "surrogates for truth" in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case. In many analyses we therefore use *multiple* methods, in the hope that they will give us the same answer. Minimum Evolution (ME), Maximum Parsimony (MP), and Maximum Likelihood (ML) are common such score functions.
 
-**Note: If your conclusion changes based on your analytical method, then perhaps your data are not adequate.**
+**Note: If your conclusion changes based on your reasonable choice of analytical method, then perhaps your data are not adequate.**
 
 
 
@@ -540,7 +539,7 @@ We do not use the Maximum Parsimony method in this tutorial.
 ## Maximum Likelihood (ML) 
 
 Likelihood is the most statistically defensible phylogenetic inference method.
-It is based on the idea that the tree that has the highest probability of producing the sequences at the tips of the tree is the tree that is the "most likely" to be correct.
+It is based on the idea that the tree that has the highest probability of producing the sequences at the tips of the tree is the tree that is the "most likely" to be correct: this is called the Maximum Likelihood (ML) Tree.
 
 Likelihood is *not* the same as probability, though they are often confused with each other. However, it is *proportional* to the probability that the tree is correct, out of the set of possible trees and models you are considering.
 
@@ -601,7 +600,7 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 
 # Assessing the Quality of trees
 
-A tree-building method will of course build you a tree.
+A tree-building method will, of course, build you a tree.
 
 But what if your data are not even *from* a tree?  Or, what if the data are from sequences that are so distantly related that they are virtually independent of each other and are essentially random?
 
@@ -640,17 +639,6 @@ By keeping track of which branches occur in the best trees found for each of the
 Bootstrap values therefore appear for each branch, and are most often expressed as a percentage or proportion. Branches at the leaves that occur in every possible tree so these would get 100% bootstrap values every time, and don't tell us anything.
 
 (Note: FastTree does not do bootstrapping natively, but can in conjuction with other tools ([see details](http://meta.microbesonline.org/fasttree/ )). It's fiddly to do this so we will not try it in this tutorial.)
-
-
-<!-- ## How tree-like?
-
-# Basics of Maximum Likelihood
-
-Background on ML. How it works. Software. Bootstrap values.
-
-## Likelihood as probability that observed data came from given tree -->
-
-<!-- ## Searching for a tree means optimising its branch lengths too -->
 
 ## Estimating a Maximum Likelihood tree with IQTree
 
