@@ -11,6 +11,7 @@ objectives:
 - "Understand why finding stopping sites is useful"
 - "Use pymuon-suite in Galaxy to find stopping sites"
 - "Understand the limitations of these tools and techniques"
+time_estimation: 1H
 key_points:
 - Galaxy supports multiple PyMuonSuite tools which can be used together to find muon stopping sites
 - The workflow for finding the stopping site involves three stages - structure generation, structure optimisation, and structure clustering
@@ -217,7 +218,7 @@ Below, a hands-on example on how to run these workflow steps.
 
 > <hands-on-title>PyMuonSuite AIRSS UEP Optimise</hands-on-title>
 >
-> 1. Run the {% tool [PyMuonSuite AIRSS UEP Optimise](https://muongalaxy.stfc.ac.uk/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fmuon-spectroscopy-computational-project%2Fpm_uep_opt%2Fpm_uep_opt%2F0.3.0%2Bgalaxy1&version=0.3.0%20galaxy1) %} tool with the following parameters:
+> 1. Run the {% tool [PyMuonSuite AIRSS UEP Optimise](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_uep_opt/pm_uep_opt/0.3.0+galaxy1) %} tool with the following parameters:
 >    - *"Tool Parameters"*:
 >      - {% icon param-file %} *"Structure file"*: `Cu-out.cell` relaxed CASTEP structural file 
 >      - {% icon param-file %} *"Charge density file"*: `Cu.den_fmt` CASTEP file with charge density of host material
@@ -267,7 +268,7 @@ Below, a hands-on example on how to run this workflow step.
 
 > <hands-on-title>PyMuonSuite AIRSS Cluster</hands-on-title>
 >
-> 1. Run the {% tool [PyMuonSuite AIRSS Cluster](https://muongalaxy.stfc.ac.uk/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fmuon-spectroscopy-computational-project%2Fpm_muairss_read%2Fpm_muairss_read%2F0.3.0%2Bgalaxy0&version=0.3.0%20galaxy0) %} tool with the following parameters:
+> 1. Run the {% tool [PyMuonSuite AIRSS Cluster](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_read/pm_muairss_read/0.3.0+galaxy0) %} tool with the following parameters:
 >    - *"Tool Parameters"*:
 >      - *"optimised muonated structures"*: `PyMuonSuite AIRSS UEP Optimise on data X, data Y and data Z` load the optimised muonated structures `*.zip` file 
 >      - *"Clustering method"*: `hierarchical` Performs hierarchical clustering 
