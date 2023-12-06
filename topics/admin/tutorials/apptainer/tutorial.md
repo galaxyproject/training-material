@@ -30,13 +30,14 @@ requirements:
 ---
 
 In this tutorial you will learn how to configure Galaxy to run jobs using [Apptainer](https://apptainer.org) containers provided by the [BioContainers](https://biocontainers.pro/) community.
+Make sure to read the documentation on [container in Galaxy](https://docs.galaxyproject.org/en/master/admin/special_topics/mulled_containers.html) and in particular [container resolvers in Galaxy](https://docs.galaxyproject.org/en/master/admin/container_resolvers.html).
+
 
 ## Background
 
 > BioContainers is a community-driven project that provides the infrastructure and basic guidelines to create, manage and distribute bioinformatics packages (e.g Conda) and containers (e.g Docker, Apptainer). BioContainers is based on the popular frameworks Conda, Docker and Apptainer.
 >
-> -- [https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html](https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html)
-{: .quote}
+{: .quote cite="https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html"}
 
 Apptainer is an alternative to Docker that is much friendlier for HPCs
 
@@ -57,9 +58,7 @@ Apptainer is an alternative to Docker that is much friendlier for HPCs
 {: .comment}
 
 > Apptainer is a container platform. It allows you to create and run containers that package up pieces of software in a way that is portable and reproducible.
->
-> -- [https://sylabs.io/guides/3.7/user-guide/introduction.html](https://sylabs.io/guides/3.7/user-guide/introduction.html)
-{: .quote}
+{: .quote cite="https://sylabs.io/guides/3.7/user-guide/introduction.html"}
 
 > <agenda-title></agenda-title>
 >
@@ -235,17 +234,17 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    --- /dev/null
 >    +++ b/templates/galaxy/config/container_resolvers_conf.yml.j2
 >    @@ -0,0 +1,11 @@
->    +container_resolvers:
->    +  - type: cached_explicit_singularity
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/explicit/"
->    +  - type: cached_mulled_singularity
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
->    +  - type: mulled_singularity
->    +    auto_install: False
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
->    +  - type: build_mulled_singularity
->    +    auto_install: False
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/built/"
+>    +
+>    +- type: cached_explicit_singularity
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/explicit/"
+>    +- type: cached_mulled_singularity
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
+>    +- type: mulled_singularity
+>    +  auto_install: False
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
+>    +- type: build_mulled_singularity
+>    +  auto_install: False
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/built/"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container resolver"}

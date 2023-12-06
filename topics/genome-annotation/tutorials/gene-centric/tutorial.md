@@ -20,6 +20,7 @@ tags:
 - cookbook
 - eukaryote
 - prokaryote
+- microgalaxy
 requirements:
   -
     type: "internal"
@@ -351,7 +352,7 @@ This is a URL pointing to one of the workflow outputs: `Mapping report` with the
 
 Running the notebook will generate two graphs explained in the next section.
 
-### Interpreting the graphs
+## Interpreting the graphs
 
 Analysis of sample data associated with this tutorial will produce the genome graph shown below. In this graph the Y-axis represents ORFs on positive (1, 2, 3 in red color) and negative (-1, -2, -3 in blue color) strands. The X-axis is genomic coordinates.  Boxes represent matches between amino acid sequences of exons and ORFs they are superimposed to. The color of boxes reflect the extent of amino acid identity. The color key is shown in the left upper corner of the plot. The image is interactive so you can zoom in and out.
 

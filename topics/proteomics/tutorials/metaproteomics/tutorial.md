@@ -22,7 +22,7 @@ contributors:
   - blankclemens
   - subinamehta
 subtopic: multi-omics
-tags: [microbiome]
+tags: [microgalaxy]
 ---
 
 In this metaproteomics tutorial we will identify expressed proteins from a complex bacterial community sample.

@@ -6,6 +6,7 @@ subtopic: introduction
 zenodo_link: "https://doi.org/10.5281/zenodo.1251112"
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "How does frequency of mitochondrial polymorphisms change from mother to child?"
 objectives:
