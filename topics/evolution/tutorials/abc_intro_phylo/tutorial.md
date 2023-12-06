@@ -406,17 +406,32 @@ Today you will be aligning sequences using a modern multiple alignment program c
 >
 > 1. In Galaxy, search for and select the {% tool MAFFT %} from the tool finder on the left.
 > 2. In the MAFFT tool, the **Sequences to align** field should already be filled with your unaligned data.  If it isn't, select it using the drop-down menu.
-> 3. In the **Data type** field select "Nucleic acids".
-> 4. Change the **MAFFT flavour** to "linsi". This is a recommended setting for most accurate alignment of a relatively small data sets with fewer than 200 sequences, such as this one.
-> 5. Click "Run tool".
+> 3. In the **Data type** field select "Auto detection".
+> 4. Leave the **MAFFT flavour** as "fftns". This is a good default.
+> 5. In the **Matrix selection** select "No matrix".
+> 6. Click "Run tool".
 {: .hands_on}
 
 Here is a visualisation of the resulting alignment. Note that the colours are now vertically aligned:
 
 ![Screenshot of aligned sequences. Vertical columns of purle, blue, gred and green indicate alignment of nucleotides across sequences.](./images/MEGA_alignment.png "Algined sequences"){:width="600px"}
 
+> <hands-on-title>Inspecting your alignment</hands-on-title>
+>
+> 1. Click on the title of the completed MAFFT job to show the row of small icons for saving, linking etc. 
+> ![LittleIcons](./images/LittleJobIcons.png){:align="center"} 
+> 2. Click the "Visualisation" icon that looks like a little bar chart.
+> 3. You will be presented with a couple of options. Select "Multiple Sequence Alignment".
+> *Your alignment is displayed!*
+> The colour scheme is horrible to start with because it's not automatically detecting the data as DNA sequences.  Click on the "Color scheme" button and select "Clustal2" for a nicer picture.
+> 4. You can click and drag the display of nucleotides in the upper panel, and when you go far enough to the right you'll see some gaps have been introduced by MAFFT.  On either side of each gap you should see that the nucleotides match up pretty well.  This is because the MAFFT algorithm has identified that these site are homologous, and that either an insertion event has happened for a group of sequences, or a deletion happened in the others.
+> 5. You may be tempted to play around with "Vis. elements" and show the scale slider - don't! It's currently broken and will crash your browser tab :(.
+{: .hands_on}
+
 You should ALWAYS visually check your alignment to see if it makes sense.
 A tool you can use on your own computer is [SeaView](https://doua.prabi.fr/software/seaview).
+
+
 
 # Distance-based phylogenetic inference
 
@@ -682,7 +697,6 @@ Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates 
 
 <!-- Intro to phylogenetic networks as an alternative to trees -->
 
-<!-- Now, perhaps surprisingly, my go-to for phylogenetic estimation is _not_ to start with a tree but to start with a *phylogenetic network*.-->
 
 Perhaps surprisingly, phylogenetic estimation doesn't have to start with a tree. Instead you can start with *phylogenetic networks*.
 
