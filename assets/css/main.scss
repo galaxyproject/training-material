@@ -915,22 +915,28 @@ blockquote {
 
 // This applies a "dark" style to the dropdown menus on small devices since
 // Bootstrap v4 does not do that by default.
+
+.dropdown-menu {
+	background-color: var(--color-background);
+	border-color: var(--border);
+}
+.dropdown-item {
+	color: var(--text-color);
+
+	&:hover, &:focus, &:active {
+		background-color: var(--brand-color);
+		color:  var(--text-color);
+	}
+}
+
+.dropdown-divider {
+	border-top-color: var(--border);
+}
+
 @media (max-width: 768px) {
     .navbar {
         .dropdown-menu {
-		background-color: var(--color-background);
             border-color: transparent;
-        }
-
-        .dropdown-item {
-		color: var(--text-color);
-
-            &:hover,
-            &:focus,
-            &:active {
-                background-color: var(--brand-color);
-                color:  var(--text-color);
-            }
         }
 
         .nav-item,
@@ -1591,6 +1597,10 @@ ul.text-list, ol.text-list {
 	}
 }
 .dropdown-item:focus-visible {
+}
+
+.dropdown-header {
+	color: var(--text-color-muted);
 }
 
 ol.breadcrumb {
