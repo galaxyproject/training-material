@@ -40,11 +40,11 @@ contributions:
 
 # Introduction
 
-You've done all the hard work of: preparing a single cell matrix, processing it, plotting it, interpreting it, and finding lots of lovely genes. Now you want to infer trajectories, or relationships between cells... you can do that here, using the Galaxy interface, or head over to the [Jupyter notebook version of this tutorial]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}) to learn how to perform the same analysis using Python. 
+You've done all the hard work of preparing a single-cell matrix, processing it, plotting it, interpreting it, and finding lots of lovely genes. Now you want to infer trajectories, or relationships between cells... you can do that here, using the Galaxy interface, or head over to the [Jupyter notebook version of this tutorial]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}) to learn how to perform the same analysis using Python. 
 
 Traditionally, we thought that differentiating or changing cells jumped between discrete states, so 'Cell A' became 'Cell B' as part of its maturation. However, most data shows otherwise. Generally, there is a spectrum (a 'trajectory', if you will...) of small, subtle changes along a pathway of that differentiation. Trying to analyse cells every 10 seconds can be pretty tricky, so 'pseudotime' analysis takes a single sample and assumes that those cells are all on slightly different points along a path of differentiation. Some cells might be slightly more mature and others slightly less, all captured at the same 'time'. We 'assume' or 'infer' relationships between cells.
 
-We will use the same sample from the previous three tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cell. Now it's time to look further!
+We will use the same sample from the previous three tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cells. Now it's time to look further!
 
 # Citation
 
@@ -240,7 +240,7 @@ Now that we've recalculated the nearest neighbours, we can use these new neighbo
 ## Working in a group? Decision-time!
 If you are working in a group, you can now divide up a decision here with one *control* and the rest can vary in numbers so that you can compare results throughout the tutorials.
 - Control
-   - Go straight to the [PAGA section](#paga)
+   - Go straight to the [Partition-based Graph Abstraction (PAGA) section](#partition-based-graph-abstraction-paga)
 - Everyone else:
    - you could recluster your cells using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} at a different resolution, perhaps lower than the 0.6 we used before (Take a look at the Cell clusters step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial if you need help with this.
         - Please note that in this case, you will want to change the PAGA step `sc.pl.paga` to group by `louvain` rather than `cell_type`. You can certainly still plot both, we only didn't because with using our old Louvain calls, the cell_type and louvain categories are identical.
@@ -249,7 +249,7 @@ If you are working in a group, you can now divide up a decision here with one *c
 
 - Everyone else: You will want to compare FREQUENTLY with your control team member.
 
-## PPAGAartition-based Graph Abstraction (PAGA)
+## Partition-based Graph Abstraction (PAGA)
 
 [PAGA](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.paga.html) is used to generalise relationships between groups, or likely clusters, in this case. It will make it much easier to see the trajectories between our clusters of T-cells. 
 
@@ -332,7 +332,7 @@ Force-directed graphs can be initialised randomly, or we can prod it in the righ
 
 The experiment that produced this data used two different groups of mice - the control or wildtype group and the knockout mice that were missing a gene involved in the maturation of the thymus gland. Since we know the genotype of the mice from which each sample was collected, we can colour in our plots to see if there are any differences in the cells present in wildtype and knockout mice. 
 
-The easiest way to do this is just to rerun {% icon galaxy-refresh %} the previous step, but changing the attribute we want to use to colour the FDG plot. 
+The easiest way to do this is just to rerun {% icon galaxy-refresh %} the previous step, but change the attribute we want to use to colour the FDG plot. 
 
 > <hands-on-title> Plot by genotype </hands-on-title>
 >
