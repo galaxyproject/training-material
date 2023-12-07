@@ -22,9 +22,11 @@
                             {% icon topic aria=false %} {{ topic.title }}
                         </a>
                         {% else %}
+			{% if page.path == 'index.md' %}
                         <a class="nav-link" href="{{ site.baseurl }}/hall-of-fame" title="Hall of Fame">
                            {% icon hall-of-fame %} Contributors
                         </a>
+			{% endif %}
 
                         {% endif %}
                     </li>
