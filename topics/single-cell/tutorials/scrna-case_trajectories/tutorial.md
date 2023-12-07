@@ -110,7 +110,7 @@ One problem with our current dataset is that it's not just T-cells: we found in 
 > <hands-on-title> Removing macrophages </hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Annotated data matrix"*: `Final cell annotated object` (Input dataset)
 >    - *"Function to manipulate the object"*: `Filter observations or variables`
 >        - *"What to filter?"*: `Observations (obs)`
 >        - *"Type of filtering?"*: `By key (column) values`
