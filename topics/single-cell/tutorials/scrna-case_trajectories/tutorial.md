@@ -228,7 +228,7 @@ Now that we've recalculated the nearest neighbours, we can use these new neighbo
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Oh dear! This doesn't look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn't seem right. Saying that, this spreads out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you've changed the neighborhood graph on which the clusterisation depends). However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let's stick with our known cell types and move from there.
+> > 1. Oh dear! This doesn't look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn't seem right. Saying that this spreads out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you've changed the neighborhood graph on which the clusterisation depends). However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let's stick with our known cell types and move from there.
 > >
 > > ![The T mature and DP L clusters have been stretched out](../../images/scrna-case_trajectories/TrajectoriesFDG2.png "FDG Plot after recalculating neighbours from the diffusion map")
 > {: .solution}
@@ -236,7 +236,7 @@ Now that we've recalculated the nearest neighbours, we can use these new neighbo
 {: .question}
 
 ## Working in a group? Decision-time!
-If you are working in a group, you can now divide up a decision here with one *control* and the rest can vary numbers so that you can compare results throughout the tutorials.
+If you are working in a group, you can now divide up a decision here with one *control* and the rest can vary in numbers so that you can compare results throughout the tutorials.
 - Control
    - Go straight to the [PAGA section](#paga)
 - Everyone else:
@@ -247,7 +247,7 @@ If you are working in a group, you can now divide up a decision here with one *c
 
 - Everyone else: You will want to compare FREQUENTLY with your control team member.
 
-## PAGA
+## PPAGAartition-based Graph Abstraction (PAGA)
 
 [PAGA](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.paga.html) is used to generalise relationships between groups, or likely clusters, in this case. It will make it much easier to see the trajectories between our clusters of T-cells. 
 
@@ -284,8 +284,8 @@ If you are working in a group, you can now divide up a decision here with one *c
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The way the clusters are arranged has changed a bit now. The M4 cluster is right in the middle of the M1-3 clusters, rather than heading off on its own. The M1 cluster is looking like it is driving towards differentiation, which is not somthing we had necessarily been able to specify before by just looking at our cluster graphs or applying our biological knowledge.
-> > 2. Cd4 and Cd8 expression appears highest in the DP-L cluster. The expression of both Cd4 and Cd8 also appears higher than we might expect in the DP-M4 cluster - perhaps this is a sign that it is closer to the DP-L cluster than it seems in this simple plot. 
+> > 1. The way the clusters are arranged has changed a bit now. The M4 cluster is right in the middle of the M1-3 clusters, rather than heading off on its own. The M1 cluster is looking like it is driving towards differentiation, which is not something we had necessarily been able to specify before by just looking at our cluster graphs or applying our biological knowledge.
+> > 2. Cd4 and Cd8 expression appear highest in the DP-L cluster. The expression of both Cd4 and Cd8 also appears higher than we might expect in the DP-M4 cluster - perhaps this is a sign that it is closer to the DP-L cluster than it seems in this simple plot. 
 > >
 > > ![DN cluster is on one side of the plot, with the DP L and T mature clusters on the other side. The other clusters are close together in the centre of the plot. Coloured to show higher Cd4 and Cd8 expression in the M4, DP L and T mature clusters.](../../images/scrna-case_trajectories/TrajectoriesPAGA.png "PAGA plots coloured by cell type, Cd4 expression, and Cd8 expression")
 > {: .solution}
@@ -294,7 +294,7 @@ If you are working in a group, you can now divide up a decision here with one *c
 
 ## Re-draw force-directed graph (again!)
 
-Force directed graphs can be initialised randomly, or we can prod it in the right direction. We'll prod it with our PAGA calculations. Note that you could also try prodding it with tSNE or UMAP. A lot of these tools can be used on top of each other or with each other in different ways, this tutorial is just one example. Similarly, you could be using any **obs** information for grouping, so could do this for *louvain* or *cell_type* for instance.
+Force-directed graphs can be initialised randomly, or we can prod it in the right direction. We'll prod it with our PAGA calculations. Note that you could also try prodding it with tSNE or UMAP. A lot of these tools can be used on top of each other or with each other in different ways, this tutorial is just one example. Similarly, you could be using any **obs** information for grouping, so could do this for *louvain* or *cell_type* for instance.
 
 > <hands-on-title> Initialise FDG using PAGA </hands-on-title>
 >
@@ -423,7 +423,7 @@ Onto the [diffusion pseudotime](https://scanpy.readthedocs.io/en/stable/api/scan
 >
 > > <solution-title></solution-title>
 > >
-> > 1. When we look at the cell type and DPT plots, we can see that there's a clear progresion from our root DN cells, through the various groups of DP cells, into DP-L and then T-mat. This matches with our expectations that the DP-L and DP-mat clusters represent later stages in T-cell development. The DPT plot also confirms that the DP-M4 cluster is heading towards differentiation, which makes sense given its position on our FDG plot. 
+> > 1. When we look at the cell type and DPT plots, we can see that there's a clear progression from our root DN cells, through the various groups of DP cells, into DP-L and then T-mat. This matches with our expectations that the DP-L and DP-mat clusters represent later stages in T-cell development. The DPT plot also confirms that the DP-M4 cluster is heading towards differentiation, which makes sense given its position on our FDG plot. 
 > >
 > > ![Cells in DN cluster are coloured as earliest in pseudotime, which increases through clusters M1 to M4, into cluster DP L and is latest in T mature](../../images/scrna-case_trajectories/TrajectoriesFDGPseudotime.png "FDG plots showing cell types and pseudotime")
 > {: .solution}
