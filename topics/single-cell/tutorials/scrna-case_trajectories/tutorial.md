@@ -32,7 +32,9 @@ contributions:
     - nomadscientist
     - wee-snufkin
     - mtekman
-
+  editing:
+    - pavanvidem
+    - hexylena
 ---
 
 
