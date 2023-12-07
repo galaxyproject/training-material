@@ -127,12 +127,12 @@ You should now have `8569` cells, as opposed to the `8605` you started with. You
 
 ## Draw force-directed graph
 
-First, we will calculate a [force-directed graph](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.draw_graph.html), as an alternate to tSNE, which will likely work better for trajectory analysis.
+First, we will calculate a [force-directed graph](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.draw_graph.html) (FDG), as an alternate to tSNE, which will likely work better for trajectory analysis.
 
 > <hands-on-title> Draw FDG </hands-on-title>
 >
 > 1. {% tool [Scanpy RunFDG](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_fdg/scanpy_run_fdg/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `T-cell_object.h5ad` (output of **Manipulate AnnData** {% icon tool %})
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"Graph layout"*: `fa`
 >
@@ -150,7 +150,7 @@ And now time to plot it!
 > <hands-on-title> Plot the FDG </hands-on-title>
 >
 > 1. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type`
 >    - *"Use raw attributes if present"*: `No`
@@ -160,7 +160,7 @@ And now time to plot it!
 
 > <question-title></question-title>
 >
-> 1. What has the FDG done to our clusters of T cells and what might this suggest about the relationships between these groups?
+> 1. What has the FDG done to our clusters of T-cells and what might this suggest about the relationships between these groups?
 >
 > > <solution-title></solution-title>
 > >
@@ -178,7 +178,7 @@ We'll now perform an *optional step*, that basically takes the place of the PCA.
 > <hands-on-title> Draw the Diffusion Map </hands-on-title>
 >
 > 1. {% tool [Scanpy DiffusionMap](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_diffmap/scanpy_run_diffmap/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"Number of diffusion components to calculate"*: `15`
 >
 >    > <comment-title> Choosing the number of diffusion components </comment-title>
@@ -188,15 +188,15 @@ We'll now perform an *optional step*, that basically takes the place of the PCA.
 >
 {: .hands_on}
 
-## Recalculate Nearest Neighbours
+## Re-calculate Nearest Neighbours
 
 Now that we have our diffusion map, we need to re-calculate neighbors using the diffusion map instead of the PCs. 
 
 > <hands-on-title> Compute neighbours using diffusion map </hands-on-title>
 >
 > 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy DiffusionMap** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `DiffusionMap Anndata` (output of **Scanpy DiffusionMap** {% icon tool %})
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Use the indicated representation"*: `X_diffmap`
 >
 {: .hands_on}
@@ -208,13 +208,13 @@ Now that we've recalculated the nearest neighbours, we can use these new neighbo
 > <hands-on-title> Plot a new FDG </hands-on-title>
 >
 > 1. {% tool [Scanpy RunFDG](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_fdg/scanpy_run_fdg/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Graph object Anndata` (output of **Scanpy ComputeGraph** {% icon tool %})
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Graph layout"*: `fa`
 >
 >
 > 2. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type`
 >    - *"Use raw attributes if present"*: `No`
@@ -249,12 +249,12 @@ If you are working in a group, you can now divide up a decision here with one *c
 
 ## PAGA
 
-[PAGA](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.paga.html) is used to generalise relationships between groups, or likely clusters, in this case. It will make it much easier to see the trajectories between our clusters of T cells. 
+[PAGA](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.paga.html) is used to generalise relationships between groups, or likely clusters, in this case. It will make it much easier to see the trajectories between our clusters of T-cells. 
 
 > <hands-on-title> Plot PAGA </hands-on-title>
 >
 > 1. {% tool [Scanpy PAGA](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_paga/scanpy_run_paga/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"Name of the clustering"*: `cell_type`
 >   
 >    > <comment-title> Plotting gene expression </comment-title>
@@ -263,10 +263,10 @@ If you are working in a group, you can now divide up a decision here with one *c
 >    {: .comment}
 >
 > 2. {% tool [Scanpy PlotTrajectory](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_trajectory/scanpy_plot_trajectory/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy PAGA** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `PAGA object Anndata` (output of **Scanpy PAGA** {% icon tool %})
 >    - *"Layout functions"*: `ForceAtlas2`
 >    - *"Location of legend"*: `On data`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Name of cell annotation or gene that is used to color the nodes"*: `cell_type,ENSMUSG00000023274,ENSMUSG00000053977`
 >
 >
@@ -299,13 +299,13 @@ Force directed graphs can be initialised randomly, or we can prod it in the righ
 > <hands-on-title> Initialise FDG using PAGA </hands-on-title>
 >
 > 1. {% tool [Scanpy RunFDG](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_fdg/scanpy_run_fdg/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy PlotTrajectory** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Plotted PAGA Anndata` (output of **Scanpy PlotTrajectory** {% icon tool %})
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Method to initialise embedding, any key for adata.obsm or choose from the preset methods"*: `paga`
 >    - *"Graph layout"*: `fa`
 >
 > 2. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type`
 >    - *"Use raw attributes if present"*: `No`
@@ -335,7 +335,7 @@ The easiest way to do this is just to rerun {% icon galaxy-refresh %} the previo
 > <hands-on-title> Plot by genotype </hands-on-title>
 >
 > 1. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `genotype`
 >    - *"Use raw attributes if present"*: `No`
@@ -358,12 +358,12 @@ The easiest way to do this is just to rerun {% icon galaxy-refresh %} the previo
 
 ## Plotting Gene Expression
 
-We're also interested in the expression of the two genes that are known to be markers of the two different types of mature T cells, Cd4 and Cd8. We can colour in our plot to show which cells are expressing these genes. 
+We're also interested in the expression of the two genes that are known to be markers of the two different types of mature T-cells, Cd4 and Cd8. We can colour in our plot to show which cells are expressing these genes. 
 
 > <hands-on-title> Plot for gene expression </hands-on-title>
 >
 > 1. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `ENSMUSG00000023274,ENSMUSG00000053977`
 >    - *"Use raw attributes if present"*: `No`
@@ -403,13 +403,13 @@ Onto the [diffusion pseudotime](https://scanpy.readthedocs.io/en/stable/api/scan
 > <hands-on-title> DPT Plot </hands-on-title>
 >
 > 1. {% tool [Scanpy DPT](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_dpt/scanpy_run_dpt/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"Name of attribute that defines clustering"*: `cell_type`
 >    - *"Name of the clustering that defines the root cell type"*: `DN`
 >
 > 
 > 2. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy DPT** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Diffusion pseudotime inference Anndata` (output of **Scanpy DPT** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type,dpt_pseudotime`
 >    - *"Use raw attributes if present"*: `No`
