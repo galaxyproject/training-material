@@ -78,9 +78,9 @@ site in crystalline copper, as described in the lecture, and it assumes
 how to use a Galaxy tool; how to create, view and share a history and how to extract
  and run a Galaxy workflow, are known. Hence, 
 as stated in the requirememnts at the beggining of this tutorial please, before starting
- have a look at this: [A short introduction to Galaxy](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html)
+ have a look at this: [A short introduction to Galaxy]({% link topics/introduction/tutorials/galaxy-intro-short/tutorial.md %})
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -129,8 +129,7 @@ And this is the workflow that can be imported for this tutorial.
  a self-consistent methodology to estimate the electronic 
  structure of the material and relax the structure. Pymuon_suite uses the 
  CASTEP code for running its DFT calculations, and some basic information
-  about how to run a CASTEP geometry optimisation can be found 
-  [here](https://castep-docs.github.io/castep-docs/). 
+  about how to run a geometry optimisation is available in the [CASTEP documentation](https://castep-docs.github.io/castep-docs/).
 
 Once the relaxed structure and its corresponding electronic structure are obtained, 
 a set of CASTEP output files is generated. We need to load just three of these files
@@ -159,8 +158,8 @@ electrostatic forces of the muon in each of the randomly populated muonated stru
 >
 >    ```
 >    https://zenodo.org/records/10219558/files/Cu-out.cell 
-     https://zenodo.org/records/10219558/files/Cu.castep 
-     https://zenodo.org/records/10219558/files/Cu.den_fmt 
+>    https://zenodo.org/records/10219558/files/Cu.castep 
+>    https://zenodo.org/records/10219558/files/Cu.den_fmt 
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -289,86 +288,90 @@ Once the clustering procedure is over, there will appear a new item on the histo
 human-readable summary of the clustering results, with the underlying raw data also provided. The top of the 
 report contains a summary of the settings used to run the clustering, and when it was run.
 
-```
-****************************
-|                          |
-|       PYMUON-SUITE       |
-|  MuAirss Clusters report |
-|                          |
-****************************
-
-Name: struct
-Date: 2023-11-06 09:41:00.787599
-Structure file(s): input_structure.cell
-Parameter file: params.yaml
-
-Clustering method: Hierarchical
-    t = 0.4
-
-*******************
- ```
+> <code-out-title>MuAirss Clusters report</code-out-title>
+> ```
+> ****************************
+> |                          |
+> |       PYMUON-SUITE       |
+> |  MuAirss Clusters report |
+> |                          |
+> ****************************
+> 
+> Name: struct
+> Date: 2023-11-06 09:41:00.787599
+> Structure file(s): input_structure.cell
+> Parameter file: params.yaml
+> 
+> Clustering method: Hierarchical
+>     t = 0.4
+> 
+> *******************
+> ```
+{: .code-out}
 
 The remainder of the report details the clusters and the individual muonated 
 structures composing each cluster. In
 addition to showing the relative numbers of structures forming each cluster,
-we also report the structure with the minimum energy, the average energy for all the strucutres 
+we also report the structure with the minimum energy, the average energy for all the structures 
 and the corresponding standard deviation for that average energy. By analysing of these 
 quantities for different values of the `Poisson radius`, `Van der Waals scale` and 
 `t parameter for hierarchical clustering` parameters, we can determine which 
 are the "stable" clusters, which are the ones associated to potential stopping sites.
 
- ```
-Clusters for struct:
-CALCULATOR: uep
-	2 clusters found
-
-
-	-----------
-	Cluster 1
-	-----------
-	Structures: 7
-
-	Energy (eV):
-	Minimum		Average		StDev
-	-10.30		-10.30		0.00
-
-	Minimum energy structure: struct_7
-
-
-	Structure list:
-	struct_1	struct_3	struct_5	struct_6	
-	struct_7	struct_8	struct_12	
-
-	-----------
-	Cluster 2
-	-----------
-	Structures: 7
-
-	Energy (eV):
-	Minimum		Average		StDev
-	-11.93		-11.93		0.00
-
-	Minimum energy structure: struct_14
-
-
-	Structure list:
-	struct_2	struct_4	struct_9	struct_10	
-	struct_11	struct_13	struct_14	
-
-	----------
-
-	Similarity (ranked):
-	1 <--> 2 (distance = 1.681)
-
---------------------------
-```
+> <code-out-title>MuAirss Clusters report</code-out-title>
+> ```
+> Clusters for struct:
+> CALCULATOR: uep
+> 	2 clusters found
+> 
+> 
+> 	-----------
+> 	Cluster 1
+> 	-----------
+> 	Structures: 7
+> 
+> 	Energy (eV):
+> 	Minimum		Average		StDev
+> 	-10.30		-10.30		0.00
+> 
+> 	Minimum energy structure: struct_7
+> 
+> 
+> 	Structure list:
+> 	struct_1	struct_3	struct_5	struct_6	
+> 	struct_7	struct_8	struct_12	
+> 
+> 	-----------
+> 	Cluster 2
+> 	-----------
+> 	Structures: 7
+> 
+> 	Energy (eV):
+> 	Minimum		Average		StDev
+> 	-11.93		-11.93		0.00
+> 
+> 	Minimum energy structure: struct_14
+> 
+> 
+> 	Structure list:
+> 	struct_2	struct_4	struct_9	struct_10	
+> 	struct_11	struct_13	struct_14	
+> 
+> 	----------
+> 
+> 	Similarity (ranked):
+> 	1 <--> 2 (distance = 1.681)
+> 
+> --------------------------
+> ```
+{: .code-out}
  
 The classical UEP method scans the electrostatic potential looking for minima in it, which 
-are associated to potential muon stopping sites. This method further calssifies those minima 
+are associated to potential muon stopping sites. This method further classifies those minima 
 by estimating their "attractor size".  If you look at the picture in the figure below, the two 
 minima have similar values, but the capacity to "attract" a muon is greater for the minima on the left, 
 which makes it more likely to be a muon stopping site. The probability of a potential stopping site is 
-given by the size of the cluster that forms around its asociated minima.
+given by the size of the cluster that forms around its associated minima.
 
 ![Classifying Mininima of the Host Material's Electrostatic Potential](../../images/theoretical_basis_of_our_variant_of_the_UEP_method.png) 
 
