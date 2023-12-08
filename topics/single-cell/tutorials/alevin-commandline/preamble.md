@@ -1,6 +1,6 @@
 # Introduction 
 
-This tutorial is part of [Single-cell RNA-seq: Case Study]({% link topics/single-cell/index.md %}) series and focuses on generating a single cell matrix using Alevin ({% cite srivastava2019alevin %}) in bash command line. It is a replication of the [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) and will guide you through the same steps that you followed in the previous tutorial and will give you more understanding of what is happening ‘behind the scenes’ or ‘inside the tools’ if you will.
+This tutorial is part of [Single-cell RNA-seq: Case Study]({% link topics/single-cell/index.md %}) series and focuses on generating a single cell matrix using Alevin ({% cite srivastava2019alevin %}) in the bash command line. It is a replication of the [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) and will guide you through the same steps that you followed in the previous tutorial and will give you more understanding of what is happening ‘behind the scenes’ or ‘inside the tools’ if you will.
 As a recap, we will go from raw FASTQ files to a cell x gene data matrix in AnnData format. After completing the previous tutorial you should already know what is a data matrix and AnnData format. We will perform the following steps:
 1.	Getting the appropriate files
 2.	Making a transcript-to-gene ID mapping
@@ -11,7 +11,7 @@ As a recap, we will go from raw FASTQ files to a cell x gene data matrix in AnnD
 7.	Combining samples data
 
 > <warning-title>This tutorial is for teaching purposes</warning-title>
-> We created this tutorial as a gateway to coding to demonstrate what happens behind the Galaxy buttons in the [corresponding tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}). This is why we are using massively subsampled data - it's only for demonstration purposes. If you want to perform this tutorial fully on your own data, you will need another compute power because it's simply not going to scale here. You can always use the Galaxy buttons Alevin version which has large memory and few cores dedicated.
+> We created this tutorial as a gateway to coding to demonstrate what happens behind the Galaxy buttons in the [corresponding tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}). This is why we are using massively subsampled data - it's only for demonstration purposes. If you want to perform this tutorial fully on your own data, you will need another compute power because it's simply not going to scale here. You can always use the Galaxy buttons' Alevin version which has large memory and few cores dedicated.
 {: .warning}
 
 

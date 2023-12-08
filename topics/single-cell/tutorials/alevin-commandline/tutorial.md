@@ -55,7 +55,7 @@ notebook:
 
 # Setting up the environment 
 
-Alevin is a tool integrated with the [Salmon software](https://salmon.readthedocs.io/en/latest/salmon.html), so first we need to get Salmon. You can install Salmon using conda, but in this tutorial we will show an alternative method - downloading the pre-compiled binaries from the [releases page](https://github.com/COMBINE-lab/salmon/releases).
+Alevin is a tool integrated with the [Salmon software](https://salmon.readthedocs.io/en/latest/salmon.html), so first we need to get Salmon. You can install Salmon using conda, but in this tutorial we will show an alternative method - downloading the pre-compiled binaries from the [releases page](https://github.com/COMBINE-lab/salmon/releases). Note that binaries are usually compiled for specific CPU architectures, such as the 64-bit (x86_64) machine release referenced below .
 
 ```bash
 wget -nv https://github.com/COMBINE-lab/salmon/releases/download/v1.10.0/salmon-1.10.0_linux_x86_64.tar.gz
@@ -112,7 +112,7 @@ wget -c https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.cdna.all.fa.
 Why do we need FASTA and GTF files? 
 To generate gene-level quantifications based on transcriptome quantification, Alevin and similar tools require a conversion between transcript and gene identifiers. We can derive a transcript-gene conversion from the gene annotations available in genome resources such as Ensembl. The transcripts in such a list need to match the ones we will use later to build a binary transcriptome index. If you were using spike-ins, you'd need to add these to the transcriptome and the transcript-gene mapping.
 
-We will use the murine reference annotation as retrieved from Ensembl in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript-gene mapping by passing that information to a tool that extracts just the transcript identifiers we need.
+We will use the murine reference annotation as retrieved from Ensembl (*GRCm38* or *mm10*) in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript-gene mapping by passing that information to a tool that extracts just the transcript identifiers we need.
 
 
 # Generate a transcript to gene map and filtered FASTA
@@ -125,7 +125,8 @@ gtf2featureAnnotation.R -g GRCm38_gtf.gff -c GRCm38_cdna.fasta -d "transcript_id
 
 In essence, [gtf2featureAnnotation.R script](https://github.com/ebi-gene-expression-group/atlas-gene-annotation-manipulation) takes a GTF annotation file and creates a table of annotation by feature, optionally filtering a cDNA file supplied at the same time. Therefore the first parameter `-g` stands for "gtf-file" and requires a path to a valid GTF file. Then `-c` takes a cDNA file for extracting meta info and/or filtering - that's our FASTA! Where --parse-cdnas (that's our `-c`) is specified, we need to specify, using `-d`, which field should be used to compare to identfiers from the FASTA. We set that to "transcript_id" - feel free to inspect the GTF file to explore other attributes. We pass the same value in `-f`, meaning first-field, ie. the name of the field to place first in output table. To specify which other fields to retain in the output table, we provide comma-separated list of those fields, and since we're only interested in transcript to gene map, we put those two names ("transcript_id,gene_id") into `-l`. `-t` stands for the feature type to use, and in our case we're using "transcript". Guess what `-o` is! Indeed, that's the output annotation table - here we specify the file path of our transcript to gene map. We will also have another output denoted by `-e` and that's the path to a filtered FASTA. Finally, we also put `-r` which is there only to suppress header on output. Summarising, output will be a an annotation table, and a FASTA-format cDNAs file with unannotated transcripts removed.
 
-Why filtered FASTA?
+**Why filtered FASTA?**
+
 Sometimes it's important that there are no transcripts in a FASTA-format transcriptome that cannot be matched to a transcript/gene mapping. Salmon, for example,  used to produce errors when this mismatch was present. We can synchronise the cDNA file by removing mismatches as we have done above.
 
 
@@ -267,7 +268,7 @@ As you can see, *rowData names* and *colData names* are still empty. Before we a
 
 # Identify barcodes that correspond to non-empty droplets 
 
-Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}#basic-qc) for multiple sub-populations. The emptyDrops method ({% cite Lun2019 %}) has become a popular way of dealing with this. emptyDrops still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar. 
+Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}#basic-qc) for multiple sub-populations. The `emptyDrops` method ({% cite Lun2019 %}) has become a popular way of dealing with this. `emptyDrops` still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar. 
 
 ```bash
 library(DropletUtils)               # load the library and required packages
@@ -335,6 +336,7 @@ If you have a look at the Experimental Design from that study, you might notice 
 
 | Index | Batch | Genotype | Sex |
 |------ |--------------------|
+|--:|--:|:--|:-:|
 | N701 | 0    | wildtype    | male    |
 | N702 | 1    | knockout   | male    |
 | N703 | 2    | knockout   | female    |
@@ -465,6 +467,7 @@ rowData(alevin_se)
 ```
 
 If you are working on your own data and it’s not mouse data, you can check available datasets for other species and just use relevant dataset in `useMart()` function.
+
 ```bash
 listDatasets(mart)                # available datasets
 ```
@@ -516,7 +519,7 @@ And that's our subset, ready for downstream analysis!
 
 # More datasets
 
-We've done the analysis for one sample. But there are 7 samples in this experiment and it would be very handy to have all the information in one place. Therefore, you would need to repeat all the steps for the subsequent samples (that's when you'll appreciate wrapped tools and automation in Galaxy workflows!). To make your life easier, we will show you how to combine the datasets on smaller scale. Also, to save you some time, we've already run alevin on sample 702 (also subsampled to 50k reads). Let's quickly repeat the steps we performed in R to complete the analysis of sample 702 in the same way as we did with 701. 
+We've done the analysis for one sample. But there are 7 samples in this experiment and it would be very handy to have all the information in one place. Therefore, you would need to repeat all the steps for the subsequent samples (that's when you'll appreciate wrapped tools and automation in Galaxy workflows!). To make your life easier, we will show you how to combine the datasets on smaller scale. Also, to save you some time, we've already run Alevin on sample 702 (also subsampled to 50k reads). Let's quickly repeat the steps we performed in R to complete the analysis of sample 702 in the same way as we did with 701. 
 
 But first, we have to save the results of our hard work on sample 701!
 
@@ -664,7 +667,7 @@ alevin_combined_demo <- cbind(alevin_combined, alevin_subset3)
 alevin_combined_demo
 ```
 
-You get the point, right? It's imporant though that the rowData names and colData names are the same in each sample. 
+You get the point, right? It's important though that the rowData names and colData names are the same in each sample. 
 
 
 # Saving and exporting the files 
