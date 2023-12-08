@@ -42,7 +42,7 @@ contributions:
 
 You've done all the hard work of preparing a single-cell matrix, processing it, plotting it, interpreting it, and finding lots of lovely genes. Now you want to infer trajectories, or relationships between cells... you can do that here, using the Galaxy interface, or head over to the [Jupyter notebook version of this tutorial]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}) to learn how to perform the same analysis using Python. 
 
-Traditionally, we thought that differentiating or changing cells jumped between discrete states, so 'Cell A' became 'Cell B' as part of its maturation. However, most data shows otherwise. Generally, there is a spectrum (a 'trajectory', if you will...) of small, subtle changes along a pathway of that differentiation. Trying to analyse cells every 10 seconds can be pretty tricky, so 'pseudotime' analysis takes a single sample and assumes that those cells are all on slightly different points along a path of differentiation. Some cells might be slightly more mature and others slightly less, all captured at the same 'time'. We 'assume' or 'infer' relationships between cells.
+Traditionally, we thought that differentiating or changing cells jumped between discrete states, so 'Cell A' became 'Cell B' as part of its maturation. However, most data shows otherwise. Generally, there is a spectrum (a 'trajectory', if you will...) of small, subtle changes along a pathway of that differentiation. Trying to analyse cells every 10 seconds can be pretty tricky, so 'pseudotime' analysis takes a single sample and assumes that those cells are all on slightly different points along a path of differentiation. Some cells might be slightly more mature and others slightly less, all captured at the same 'time'.  These cells are sorted accordingly along these pseudotime paths of differentiation to build a continuum of cells from one state to the next.  We therefore 'assume' or 'infer' relationships between from this continuum of cells.
 
 We will use the same sample from the previous three tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cells. Now it's time to look further!
 
@@ -102,6 +102,7 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 
 > <comment-title></comment-title>
 > - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
+> - Note that you can favourite any tool for quick retrieval via the ★ symbol at the top of each tool, and at the top of Tools side-menu.
 > - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
 {: .comment}
 
@@ -175,7 +176,7 @@ And now time to plot it!
 
 ## Diffusion maps
 
-We'll now perform an *optional step*, that basically takes the place of the PCA. Instead of using PCs, we can use [diffusion maps](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.diffmap.html).
+We'll now perform an *optional step*, that basically takes the place of the standard Principle Component Analysis (PCA). Instead of using PCs, we can use [diffusion maps](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.diffmap.html).
 
 > <hands-on-title> Draw the Diffusion Map </hands-on-title>
 >
@@ -205,7 +206,7 @@ Now that we have our diffusion map, we need to re-calculate neighbors using the 
 
 ## Re-draw the FDG
 
-Now that we've recalculated the nearest neighbours, we can use these new neighbours to re-draw the FDG to see how this changes the plot. 
+Now that we've re-calculated the nearest neighbours, we can use these new neighbours to re-draw the FDG to see how this changes the plot. 
 
 > <hands-on-title> Plot a new FDG </hands-on-title>
 >
@@ -321,7 +322,7 @@ Force-directed graphs can be initialised randomly, or we can prod it in the righ
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The interesting change here is that our DP-M4 cells are now heading on a clear trajectory towards differentiation. It looks like we've got the correct ordering of cells from DN through the DP groups and on towards T-mature. We didn't see this in our previous plots. 
+> > 1. The interesting change here occurs between the Double Negative (DN) and Double Positive Module 4 (DP-M4) cells. Our DP-M4 cells are now heading on a clear trajectory towards differentiation. It looks like we've got the correct ordering of cells from DN through the DP groups and on towards T-mature. We didn't see this in our previous plots. 
 > >
 > > ![The M4 cluster is now closer to the DP L cluster](../../images/scrna-case_trajectories/TrajectoriesFDG3.png "FDG plot initiated from the PAGA plot")
 > {: .solution}
