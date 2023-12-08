@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Generating a single cell matrix using Alevin and combining datasets (bash + R)</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@5c4f29500474814d08883ef5f8fb236fe4a6c378",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/alevin-commandline/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702047148' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702047148' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Generating a single cell matrix using Alevin and combining datasets (bash + R)">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-12-08 10:30:24 +0000">
+<meta name="DC.creator" content="Julia Jakiela">
+<meta name="DC.creator" content="Wendi Bacon">
+
+        
+        
+        
+        
+        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Generating a single cell matrix using Alevin and combinin...">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "dateModified": "2023-12-08 10:30:24 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Generating a single cell matrix using Alevin and combining datasets (bash + R)",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Generating a single cell matrix using Alevin and combining datasets (bash + R)",
+  "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/alevin-commandline/tutorial.html",
+  "version": 30,
+  "timeRequired": "PT2H",
+  "teaches": "Generate a cellxgene matrix for droplet-based single cell sequencing data\n - Interpret quality control (QC) plots to make informed decisions on cell thresholds\n - Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata",
+  "keywords": [
+    "Single Cell",
+    "10x",
+    "paper-replication",
+    "jupyter-notebook"
+  ],
+  "description": "The questions this  addresses are:\n - I have some single cell FASTQ files I want to analyse. Where do I start?\n - How to generate a single cell matrix using command line?\n\n\nThe objectives are:\n - Generate a cellxgene matrix for droplet-based single cell sequencing data\n - Interpret quality control (QC) plots to make informed decisions on cell thresholds\n - Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html",
+      "name": "Generating a single cell matrix using Alevin",
+      "description": "Hands-on for 'Generating a single cell matrix using Alevin' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "name": "Julia Jakiela",
+      "image": "https://avatars.githubusercontent.com/wee-snufkin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "orcid": "https://orcid.org/0000-0002-8170-8806"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "name": "Pavankumar Videm",
+      "image": "https://avatars.githubusercontent.com/pavanvidem",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5192-126X",
+      "orcid": "https://orcid.org/0000-0002-5192-126X"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "10x"
+    },
+    {
+      "@type": "Thing",
+      "name": "paper-replication"
+    },
+    {
+      "@type": "Thing",
+      "name": "jupyter-notebook"
+    }
+  ],
+  "abstract": "# Setting up the environment "
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702047148'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/single-cell" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Single Cell
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/single-cell/faqs/" title="Check our FAQs for the Single Cell topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/alevin-commandline/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/tutorials/alevin-commandline/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/single-cell/tutorials/alevin-commandline/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/topics/single-cell/tutorials/alevin-commandline/tutorial.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-11-01/topics/single-cell/tutorials/alevin-commandline/tutorial.html">2023-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-single-cell">
+    <h1 data-toc-skip>Generating a single cell matrix using Alevin and combining datasets (bash + R)</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=36" alt="Julia Jakiela avatar" width="36" class="avatar" />
+    Julia Jakiela</a><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" />
+    Pavankumar Videm</a></td>
+	</tr>
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>I have some single cell FASTQ files I want to analyse. Where do I start?</p>
+</li>
+        
+        <li><p>How to generate a single cell matrix using command line?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Generate a cellxgene matrix for droplet-based single cell sequencing data</p>
+</li>
+        
+        <li><p>Interpret quality control (QC) plots to make informed decisions on cell thresholds</p>
+</li>
+        
+        <li><p>Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/single-cell">Single Cell</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Generating a single cell matrix using Alevin:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/single-cell/tutorials/alevin-commandline/single-cell-alevin-commandline.ipynb" title="Jupyter Notebook" alt="Generating a single cell matrix using Alevin and combining datasets (bash + R) Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+    
+
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 8, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 30 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
+                     
+                     
+                     
+                     
+                    
+                        
+                        <!--SNIPPET--><h1 id="introduction">Introduction</h1> <p>This tutorial is part of <a href="/training-material/topics/single-cell/index.html">Single-cell RNA-seq: Case Study</a> series and focuses on generating a single cell matrix using Alevin (<span class="citation"><a href="#srivastava2019alevin">Srivastava <i>et al.</i> 2019</a></span>) in the bash command line. It is a replication of the <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">previous tutorial</a> and will guide you through the same steps that you followed in the previous tutorial and will give you more understanding of what is happening ‘behind the scenes’ or ‘inside the tools’ if you will. As a recap, we will go from raw FASTQ files to a cell x gene data matrix in AnnData format. After completing the previous tutorial you should already know what is a data matrix and AnnData format. We will perform the following steps:</p> <ol>   <li>Getting the appropriate files</li>   <li>Making a transcript-to-gene ID mapping</li>   <li>Creating Salmon index</li>   <li>Quantification of transcript expression using Alevin</li>   <li>Creating Summarized Experiment from the Alevin output</li>   <li>Adding metadata</li>   <li>Combining samples data</li> </ol> <blockquote class="warning">   <div class="box-title warning-title" id="warning-this-tutorial-is-for-teaching-purposes"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: This tutorial is for teaching purposes</div>   <p>We created this tutorial as a gateway to coding to demonstrate what happens behind the Galaxy buttons in the <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">corresponding tutorial</a>. This is why we are using massively subsampled data - it’s only for demonstration purposes. If you want to perform this tutorial fully on your own data, you will need another compute power because it’s simply not going to scale here. You can always use the Galaxy buttons’ Alevin version which has large memory and few cores dedicated.</p> </blockquote> <h2 id="launching-jupyterlab">Launching JupyterLab</h2> <blockquote class="warning">   <div class="box-title warning-title" id="warning-data-uploads-amp-jupyterlab"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Data uploads &amp; JupyterLab</div>   <p>There are a few ways of importing and uploading data into JupyterLab. You might find yourself accidentally doing this differently than the tutorial, and that’s ok. There are a few key steps where you will call files from a location - if these don’t work for you, check that the file location is correct and change accordingly!</p> </blockquote> <blockquote>   <!--SNIPPET-->   <blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Launch JupyterLab</div>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-jupyterlab-in-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-jupyterlab-in-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Launch JupyterLab in Galaxy</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently JupyterLab in Galaxy is available on <a href="https://live.usegalaxy.eu">Live.useGalaxy.eu</a>, <a href="https://usegalaxy.org">usegalaxy.org</a> and <a href="https://usegalaxy.eu">usegalaxy.eu</a>.</p>   <blockquote class="hands_on">     <div class="box-title hands-on-title" id="hands-on-run-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run JupyterLab</div>     <ol>       <li><span class="tool" data-tool="interactive_tool_jupyter_notebook" title="Interactive Jupyter Notebook tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Interactive Jupyter Notebook</strong></span>. Note that on some Galaxies this is called <span class="tool" data-tool="interactive_tool_jupyter_notebook" title="Interactive JupyTool and notebook tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Interactive JupyTool and notebook</strong></span>:</li>       <li>Click Run Tool</li>       <li>         <p>The tool will start running and will stay running permanently</p>         <p>This may take a moment, but once the <code class="language-plaintext highlighter-rouge">Executed notebook</code> in your history is <strong>orange</strong>, you are up and running!</p>       </li>       <li>Click on the <strong>User</strong> menu at the top and go to <strong>Active Interactive Tools</strong> and locate the JupyterLab instance you started.</li>       <li>Click on your JupyterLab instance</li>     </ol>   </blockquote> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-try-jupyterlab-if-not-available-on-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-try-jupyterlab-if-not-available-on-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Launch Try JupyterLab if not available on Galaxy</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If JupyterLab is not available on the Galaxy instance:</p>   <ol>     <li>Start <a href="https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab">Try JupyterLab</a></li>   </ol> </blockquote> </blockquote>   <p><!--END_SNIPPET--></p> </blockquote> <p>Welcome to JupyterLab!</p> <blockquote class="warning">   <div class="box-title warning-title" id="warning-danger-you-can-lose-data"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Danger: You can lose data!</div>   <p>Do NOT delete or close this notebook dataset in your history. YOU WILL LOSE IT!</p> </blockquote> <h2 id="open-the-notebook">Open the notebook</h2> <p>You have two options for how to proceed with this JupyterLab tutorial - you can run the tutorial from a pre-populated notebook, or you can copy and paste the code for each step into a fresh notebook and run it. The initial instructions for both options are below.</p> <blockquote class="hands_on">   <div class="box-title hands-on-title" id="hands-on-option-1-open-the-notebook-directly-in-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 1: Open the notebook directly in JupyterLab</div>   <ol>     <li>Open a <code class="language-plaintext highlighter-rouge">Terminal</code> in JupyterLab with File -&gt; New -&gt; Terminal</li>   </ol>   <p><img src="../../images/scrna-casestudy-monocle/terminal_choose.jpg" alt="Screenshot of the Launcher tab with an arrow indicating where to find Terminal." title="This is how the Launcher tab looks like and where you can find Terminal." /></p>   <ol>     <li>Run       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/alevin-commandline/single-cell-alevin-commandline.ipynb<br></code></pre></div>      </div>     </li>     <li>Select the notebook that appears in the list of files on the left.</li>   </ol>   <p>Remember that you can also download this <i class="far fa-file-code" aria-hidden="true"></i><span class="visually-hidden">notebook</span> <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/alevin-commandline/single-cell-alevin-commandline.ipynb">Jupyter Notebook</a> from the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy_instance</span> Supporting Materials in the Overview box at the beginning of this tutorial.</p> </blockquote> <blockquote class="hands_on">   <div class="box-title hands-on-title" id="hands-on-option-2-creating-a-notebook"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 2: Creating a notebook</div>   <ol>     <li>If you are in the Launcher window, Select the <strong>Bash</strong> icon under <strong>Notebook</strong> (to open a new Launcher go to File -&gt; New Launcher).</li>   </ol>   <p><img src="../../images/scrna-pre-processing/bash.png" alt="Bash icon" title="Bash Notebook Button" /></p>   <ol>     <li>       <p>Save your file (<strong>File</strong>: <strong>Save</strong>, or click the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> Save icon at the top left)</p>     </li>     <li>       <p>If you right click on the file in the folder window at the left, you can rename your file <code class="language-plaintext highlighter-rouge">whateveryoulike.ipynb</code></p>     </li>   </ol> </blockquote> <blockquote class="warning">   <div class="box-title warning-title" id="warning-you-should-b-save-b-frequently"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: You should <b>Save</b> frequently!</div>   <p>This is both for good practice and to protect you in case you accidentally close the browser. Your environment will still run, so it will contain the last saved notebook you have. You might eventually stop your environment after this tutorial, but ONLY once you have saved and exported your notebook (more on that at the end!) Note that you can have multiple notebooks going at the same time within this JupyterLab, so if you do, you will need to save and export each individual notebook. You can also download them at any time.</p> </blockquote> <p>Let’s crack on!</p> <!--SNIPPET--> <blockquote class="warning">   <div class="box-title warning-title" id="warning-notebook-based-tutorials-can-give-different-outputs"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Notebook-based tutorials can give different outputs</div>   <p>The nature of coding pulls the most recent tools to perform tasks. This can - and often does - change the outputs of an analysis. Be prepared, as you are unlikely to get outputs identical to a tutorial if you are running it in a programming environment like a Jupyter Notebook or R-Studio. That’s ok! The outputs should still be pretty close.</p> </blockquote> <p><!--END_SNIPPET--></p> <h2 id="installation">Installation</h2> <p>Before we start working on the tutorial notebook, we need to install required packages.</p> <blockquote class="hands_on">   <div class="box-title hands-on-title" id="hands-on-installing-the-packages"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing the packages</div>   <ol>     <li>Navigate back to the <code class="language-plaintext highlighter-rouge">Terminal</code> (if you haven’t opened it yet, just go to File -&gt; New -&gt; Terminal)</li>     <li>In the Terminal tab open, write the following, one line at a time:       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install -y -c bioconda bioconductor-tximeta                     # install this first to avoid problem with re-installation of rtracklayer<br></code></pre></div>      </div>       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install -y -c bioconda atlas-gene-annotation-manipulation     <br></code></pre></div>      </div>       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install -y -c bioconda bioconductor-dropletutils<br></code></pre></div>      </div>     </li>   </ol> </blockquote> <p>Installation will take a long while, so in the meantime, when it’s running, you can open the notebook and follow the rest of this tutorial there!</p> <!--END_SNIPPET-->
+                    
+                </section>
+                
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="setting-up-the-environment">Setting up the environment</h1>
+
+<p>Alevin is a tool integrated with the <a href="https://salmon.readthedocs.io/en/latest/salmon.html">Salmon software</a>, so first we need to get Salmon. You can install Salmon using conda, but in this tutorial we will show an alternative method - downloading the pre-compiled binaries from the <a href="https://github.com/COMBINE-lab/salmon/releases">releases page</a>. Note that binaries are usually compiled for specific CPU architectures, such as the 64-bit (x86_64) machine release referenced below .</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-nv</span> https://github.com/COMBINE-lab/salmon/releases/download/v1.10.0/salmon-1.10.0_linux_x86_64.tar.gz
+</code></pre></div></div>
+
+<p>Once you’ve downloaded a specific binary (here we’re using version 1.10.0), just extract it like so:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar</span> <span class="nt">-xvzf</span> salmon-1.10.0_linux_x86_64.tar.gz
+</code></pre></div></div>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-conda-installation-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-conda-installation-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Conda installation</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>As mentioned, installing salmon using conda is also an option, and you can do it using the following command in the terminal:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda install -c bioconda salmon
+</code></pre></div>  </div>
+
+  <p>However, for this tutorial, it would be easier and quicker to use the downloaded pre-compiled binaries, as shown above.</p>
+
+</blockquote>
+
+<p>We’re going to use Alevin for demonstration purposes, but we do not endorse one method over another.</p>
+
+<h1 id="get-data">Get Data</h1>
+
+<p>We continue working on the same example data - a very small subset of the reads in a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span> (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">study in Single Cell Expression Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">project submission</a>). For the purposes of this tutorial, the datasets have been subsampled to only 50k reads (around 1% of the original files). Those are two fastq files - one with transcripts and the another one with cell barcodes. You can download the files by running the code below:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-nv</span> https://zenodo.org/records/10116786/files/transcript_701.fastq
+wget <span class="nt">-nv</span> https://zenodo.org/records/10116786/files/barcodes_701.fastq
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How to differentiate between the two files if they are just called ‘Read 1’ and ‘Read 2’?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>The file which contains the cell barcodes and UMI is significantly shorter (indeed, 20 bp!) compared to the other file containing longer, transcript read. For ease, we will use explicit file names.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. These files are included in the data import step below. You can also download these for your species of interest <a href="https://www.ensembl.org/info/data/ftp/index.html">from Ensembl</a>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-c</span> https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.100.gtf.gff <span class="nt">-O</span> GRCm38_gtf.gff
+wget <span class="nt">-c</span> https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.cdna.all.fa.fasta <span class="nt">-O</span> GRCm38_cdna.fasta
+</code></pre></div></div>
+
+<p>Why do we need FASTA and GTF files? 
+To generate gene-level quantifications based on transcriptome quantification, Alevin and similar tools require a conversion between transcript and gene identifiers. We can derive a transcript-gene conversion from the gene annotations available in genome resources such as Ensembl. The transcripts in such a list need to match the ones we will use later to build a binary transcriptome index. If you were using spike-ins, you’d need to add these to the transcriptome and the transcript-gene mapping.</p>
+
+<p>We will use the murine reference annotation as retrieved from Ensembl (<em>GRCm38</em> or <em>mm10</em>) in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript-gene mapping by passing that information to a tool that extracts just the transcript identifiers we need.</p>
+
+<h1 id="generate-a-transcript-to-gene-map-and-filtered-fasta">Generate a transcript to gene map and filtered FASTA</h1>
+
+<p>You can have a look at the Terminal tab again. Has the package <code class="language-plaintext highlighter-rouge">atlas-gene-annotation-manipulation</code> been installed yet? If yes, you can execute the code cell below and while it’s running, I’ll explain all the parameters we set here.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gtf2featureAnnotation.R <span class="nt">-g</span> GRCm38_gtf.gff <span class="nt">-c</span> GRCm38_cdna.fasta <span class="nt">-d</span> <span class="s2">"transcript_id"</span> <span class="nt">-t</span> <span class="s2">"transcript"</span> <span class="nt">-f</span> <span class="s2">"transcript_id"</span> <span class="nt">-o</span> map <span class="nt">-l</span> <span class="s2">"transcript_id,gene_id"</span> <span class="nt">-r</span> <span class="nt">-e</span> filtered_fasta
+</code></pre></div></div>
+
+<p>In essence, <a href="https://github.com/ebi-gene-expression-group/atlas-gene-annotation-manipulation">gtf2featureAnnotation.R script</a> takes a GTF annotation file and creates a table of annotation by feature, optionally filtering a cDNA file supplied at the same time. Therefore the first parameter <code class="language-plaintext highlighter-rouge">-g</code> stands for “gtf-file” and requires a path to a valid GTF file. Then <code class="language-plaintext highlighter-rouge">-c</code> takes a cDNA file for extracting meta info and/or filtering - that’s our FASTA! Where –parse-cdnas (that’s our <code class="language-plaintext highlighter-rouge">-c</code>) is specified, we need to specify, using <code class="language-plaintext highlighter-rouge">-d</code>, which field should be used to compare to identfiers from the FASTA. We set that to “transcript_id” - feel free to inspect the GTF file to explore other attributes. We pass the same value in <code class="language-plaintext highlighter-rouge">-f</code>, meaning first-field, ie. the name of the field to place first in output table. To specify which other fields to retain in the output table, we provide comma-separated list of those fields, and since we’re only interested in transcript to gene map, we put those two names (“transcript_id,gene_id”) into <code class="language-plaintext highlighter-rouge">-l</code>. <code class="language-plaintext highlighter-rouge">-t</code> stands for the feature type to use, and in our case we’re using “transcript”. Guess what <code class="language-plaintext highlighter-rouge">-o</code> is! Indeed, that’s the output annotation table - here we specify the file path of our transcript to gene map. We will also have another output denoted by <code class="language-plaintext highlighter-rouge">-e</code> and that’s the path to a filtered FASTA. Finally, we also put <code class="language-plaintext highlighter-rouge">-r</code> which is there only to suppress header on output. Summarising, output will be a an annotation table, and a FASTA-format cDNAs file with unannotated transcripts removed.</p>
+
+<p>Why filtered FASTA?
+Sometimes it’s important that there are no transcripts in a FASTA-format transcriptome that cannot be matched to a transcript/gene mapping. Salmon, for example,  used to produce errors when this mismatch was present. We can synchronise the cDNA file by removing mismatches as we have done above.</p>
+
+<h1 id="generate-a-transcriptome-index">Generate a transcriptome index</h1>
+
+<p>We will use Salmon in mapping-based mode, so first we have to build a Salmon index for our transcriptome. We will run the Salmon indexer as so:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>salmon-latest_linux_x86_64/bin/salmon index <span class="nt">-t</span> filtered_fasta <span class="nt">-i</span> salmon_index <span class="nt">-k</span> 31
+</code></pre></div></div>
+
+<p>Where <code class="language-plaintext highlighter-rouge">-t</code> stands for our filtered FASTA file, and <code class="language-plaintext highlighter-rouge">-i</code> is the output of the mapping-based index. To build it, the function is using an auxiliary k-mer hash over k-mers of length 31. While the mapping algorithms will make use of arbitrarily long matches between the query and reference, the k size selected here will act as the minimum acceptable length for a valid match. Thus, a smaller value of k may slightly improve sensitivity. We find that a k of 31 seems to work well for reads of 75bp or longer, but you might consider a smaller k if you plan to deal with shorter reads. Also, a shorter value of k may improve sensitivity even more when using selective alignment (enabled via the –validateMappings flag). So, if you are seeing a smaller mapping rate than you might expect, consider building the index with a slightly smaller k.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-what-is-the-index-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-the-index-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: What is the index?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>To be able to search a transcriptome quickly, Salmon needs to convert the text (FASTA) format sequences into something it can search quickly, called an ‘index’. The index is in a binary rather than human-readable format, but allows fast lookup by Alevin. Because the types of biological and technical sequences we need to include in the index can vary between experiments, and because we often want to use the most up-to-date reference sequences from Ensembl or NCBI, we can end up re-making the indices quite often.</p>
+
+</blockquote>
+
+<h1 id="use-alevin">Use Alevin</h1>
+
+<p>Time to use Alevin now! Alevin works under the same indexing scheme (as Salmon) for the reference, and consumes the set of FASTA/Q files(s) containing the Cellular Barcode(CB) + Unique Molecule identifier (UMI) in one read file and the read sequence in the other. Given just the transcriptome and the raw read files, Alevin generates a cell-by-gene count matrix (in a fraction of the time compared to other tools).</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-how-does-alevin-work-in-detail-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-how-does-alevin-work-in-detail-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: How does Alevin work in detail?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Alevin works in two phases. In the first phase it quickly parses the read file containing the CB and UMI information to generate the frequency distribution of all the observed CBs, and creates a lightweight data-structure for fast-look up and correction of the CB. In the second round, Alevin utilizes the read-sequences contained in the files to map the reads to the transcriptome, identify potential PCR/sequencing errors in the UMIs, and performs hybrid de-duplication while accounting for UMI collisions. Finally, a post-abundance estimation CB whitelisting procedure is done and a cell-by-gene count matrix is generated.</p>
+
+</blockquote>
+
+<p>Alevin can be run using the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>salmon-latest_linux_x86_64/bin/salmon alevin <span class="nt">-l</span> ISR <span class="nt">-1</span> barcodes_701.fastq <span class="nt">-2</span> transcript_701.fastq <span class="nt">--dropseq</span>  <span class="nt">-i</span> salmon_index <span class="nt">-p</span> 10 <span class="nt">-o</span> alevin_output <span class="nt">--tgMap</span> map <span class="nt">--freqThreshold</span> 3 <span class="nt">--keepCBFraction</span> 1 <span class="nt">--dumpFeatures</span>
+</code></pre></div></div>
+
+<p>All the required input parameters are described in <a href="https://salmon.readthedocs.io/en/latest/alevin.html">the documentation</a>, but for the ease of use, they are presented below as well:</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-alevin-input-parameters-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-alevin-input-parameters-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Alevin input parameters</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">-l</code>: library type (same as Salmon), we recommend using ISR for both Drop-seq and 10x-v2 chemistry.</p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">-1</code>: CB+UMI file(s), alevin requires the path to the FASTQ file containing CB+UMI raw sequences to be given under this command line flag. Alevin also supports parsing of data from multiple files as long as the order is the same as in -2 flag. That’s our barcodes_701.fastq file.</p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">-2</code>: Read-sequence file(s), alevin requires the path to the FASTQ file containing raw read-sequences to be given under this command line flag. Alevin also supports parsing of data from multiple files as long as the order is the same as in -1 flag. That’s our transcript_701.fastq file.</p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">--dropseq</code> / <code class="language-plaintext highlighter-rouge">--chromium</code> / <code class="language-plaintext highlighter-rouge">--chromiumV3</code>: the protocol, this flag tells the type of single-cell protocol of the input sequencing-library. This is a study using the Drop-seq chemistry, so we specify that in the flag.</p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">-i</code>: index, file containing the salmon index of the reference transcriptome, as generated by salmon index command.</p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">-p</code>: number of threads, the number of threads which can be used by alevin to perform the quantification, by default alevin utilizes all the available threads in the system, although we recommend using ~10 threads which in our testing gave the best memory-time trade-off.</p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">-o</code>: output, path to folder where the output gene-count matrix (along with other meta-data) would be dumped. We simply call it alevin_output</p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">--tgMap</code>: transcript to gene map file, a tsv (tab-separated) file — with no header, containing two columns mapping of each transcript present in the reference to the corresponding gene (the first column is a transcript and the second is the corresponding gene). In our case, that’s map_code generated by using gtf2featureAnnotation.R function.</p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">--freqThreshold</code> - minimum frequency for a barcode to be considered. We’ve chosen 3 as this will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes.</p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">--keepCBFraction</code> - fraction of cellular barcodes to keep. We’re using 1 to quantify all!</p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">--dumpFeatures</code> - if activated, alevin dumps all the features used by the CB classification and their counts at each cell level. It’s generally used in pair with other command line flags.</p>
+    </li>
+  </ul>
+
+</blockquote>
+
+<p>We have also added some additional parameters (<code class="language-plaintext highlighter-rouge">--freqThreshold</code>, <code class="language-plaintext highlighter-rouge">--keepCBFraction</code>) and their values are derived from the <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">Alevin Galaxy tutorial</a> after QC to stop Alevin from applying its own thresholds. However, if you’re not sure what value to pick, you can simply allow Alevin to make its own calls on what constitutes empty droplets.</p>
+
+<p>This tool will take a while to run. Alevin produces many file outputs, not all of which we’ll use. You can refer to the <a href="https://salmon.readthedocs.io/en/latest/alevin.html">Alevin documentation</a> if you’re curious what they all are, you can look through all the different files to find information such as the mapping rate, but we’ll just pass the whole output folder directory for downstream analysis.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Can you find the information what was the mapping rate?</li>
+    <li>How many transcripts did Alevin find?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>As mentioned above, in <em>alevin_output</em> folder there will be many different files, including the log files. To check the mapping rate, go to <em>alevin_output</em> -&gt; <em>logs</em> and open <em>salmon_quant</em> file. There you will find not only information about mapping rate, but also many more, calculated at salmon indexing step.</li>
+      <li>Alevin log can be found in <em>alevin_output</em> -&gt; <em>alevin</em> and the file name is also <em>alevin</em>. You can find many details about the alevin process there, including the number of transcripts found.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-process-stopping-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Process stopping</div>
+
+  <p>The command above will display the log of the process and will say “Analyzed X cells (Y% of all)”. For some reason, running Alevin may sometimes cause problems in Jupyter Notebook and this process will stop and not go to completion. This is the reason why we use hugely subsampled dataset here - bigger ones couldn’t be fully analysed (they worked fine locally though). The dataset used in this tutorial shouldn’t make any issues when you’re using Jupyter notebook through galaxy.eu, however might not work properly on galaxy.org. If you’re accessing Jupyter notebook via galaxy.eu and alevin process stopped, just restart the kernel and that should help.</p>
+
+</blockquote>
+
+<!---
+check if we can get alevinQC to work - and paste the info from the first Alevin tutorial?
+-->
+
+<h1 id="alevin-output-to-summarizedexperiment">Alevin output to SummarizedExperiment</h1>
+
+<p>Let’s change gear a little bit. We’ve done the work in bash, and now we’re switching to R to complete the processing. To do so, you have to change Kernel to R (either click on <code class="language-plaintext highlighter-rouge">Kernel</code> -&gt; <code class="language-plaintext highlighter-rouge">Change Kernel...</code> in the upper left corner of your JupyterLab or click on the displayed current kernel in the upper right corner and change it).</p>
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/scrna-pre-processing/switch_kernel.jpg" alt="Figure showing the JupyterLab interface with an arrow pointing to the left corner, showing the option 'Kernel' -&gt; 'Change Kernel...' and another arrow pointing to the right corner, showing the icon of the current kernel. The pop-up window asks which kernel should be chosen instead." width="1760" height="580" loading="lazy" /><a target="_blank" href="../../images/scrna-pre-processing/switch_kernel.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Two ways of switching kernel.</figcaption></figure>
+
+<p>Now load the library that we have previously installed in terminal:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library<span class="o">(</span>tximeta<span class="o">)</span>
+</code></pre></div></div>
+
+<p>The <a href="https://bioconductor.org/packages/devel/bioc/vignettes/tximeta/inst/doc/tximeta.html">tximeta package</a> created by <span class="citation"><a href="#Love2020">Love <i>et al.</i> 2020</a></span> is used for import of transcript-level quantification data into R/Bioconductor and requires that the entire output of alevin is present and unmodified.</p>
+
+<p>In the <em>alevin_output</em> -&gt; <em>alevin</em> folder you can find the following files:</p>
+<ul>
+  <li><em>quants_mat.gz</em>- Compressed count matrix</li>
+  <li><em>quants_mat_rows.txt</em>- Row Index (CB-ids) of the matrix.</li>
+  <li><em>quants_mat_cols.txt</em> - Column Header (Gene-ids) of the matrix.</li>
+  <li><em>quants_tier_mat.gz</em> – Tier categorization of the matrix.</li>
+</ul>
+
+<p>We will only focus on <em>quants_mat.gz</em> though. First, let’s specify the path to that file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>path &lt;- <span class="s1">'alevin_output/alevin/quants_mat.gz'</span>
+</code></pre></div></div>
+
+<p>We will specify the following arguments when running <em>tximeta</em>:</p>
+<ul>
+  <li>‘coldata’ a data.frame with at least two columns:
+    <ul>
+      <li>files - character, paths of quantification files</li>
+      <li>names - character, sample names</li>
+    </ul>
+  </li>
+  <li>‘type’ - what quantifier was used (can be ‘salomon’, ‘alevin’, etc.)</li>
+</ul>
+
+<p>With that we can create a dataframe and pass it to tximeta to create SummarizedExperiment object.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coldata &lt;- data.frame<span class="o">(</span>files <span class="o">=</span> path, <span class="nv">names</span><span class="o">=</span><span class="s2">"sample701"</span><span class="o">)</span>
+alevin_se &lt;- tximeta<span class="o">(</span>coldata, <span class="nb">type</span> <span class="o">=</span> <span class="s2">"alevin"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Inspect the created object:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alevin_se
+</code></pre></div></div>
+
+<p>As you can see, <em>rowData names</em> and <em>colData names</em> are still empty. Before we add some metadata,  we will first identify barcodes that correspond to non-empty droplets.</p>
+
+<h1 id="identify-barcodes-that-correspond-to-non-empty-droplets">Identify barcodes that correspond to non-empty droplets</h1>
+
+<p>Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html#basic-qc">Alevin Galaxy tutorial</a> for multiple sub-populations. The <code class="language-plaintext highlighter-rouge">emptyDrops</code> method (<span class="citation"><a href="#Lun2019">Lun <i>et al.</i> 2019</a></span>) has become a popular way of dealing with this. <code class="language-plaintext highlighter-rouge">emptyDrops</code> still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library<span class="o">(</span>DropletUtils<span class="o">)</span>               <span class="c"># load the library and required packages</span>
+</code></pre></div></div>
+
+<p>emptyDrops takes multiple arguments that you can read about in the <a href="https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html">documentation</a>. However, in this case, we will only specify the following arguments:</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-emptydrops-input-parameters-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-emptydrops-input-parameters-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: emptyDrops input parameters</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">m</code> -	A numeric matrix-like object - usually a dgTMatrix or dgCMatrix - containing droplet data prior to any filtering or cell calling. Columns represent barcoded droplets, rows represent genes.</li>
+    <li><code class="language-plaintext highlighter-rouge">lower</code> - A numeric scalar specifying the lower bound on the total UMI count, at or below which all barcodes are assumed to correspond to empty droplets.</li>
+    <li><code class="language-plaintext highlighter-rouge">niters</code> - An integer scalar specifying the number of iterations to use for the Monte Carlo p-value calculations.</li>
+    <li><code class="language-plaintext highlighter-rouge">retain</code> - A numeric scalar specifying the threshold for the total UMI count above which all barcodes are assumed to contain cells.</li>
+  </ul>
+
+</blockquote>
+
+<p>Let’s then extract the matrix from our <code class="language-plaintext highlighter-rouge">alevin_se</code> object. It’s stored in <em>assays</em> -&gt; <em>counts</em>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>matrix_alevin &lt;- assays<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv">$counts</span>
+</code></pre></div></div>
+
+<p>And now run emptyDrops:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Identify likely cell-containing droplets</span>
+out &lt;- emptyDrops<span class="o">(</span>matrix_alevin, lower <span class="o">=</span> 100, niters <span class="o">=</span> 1000, retain <span class="o">=</span> 20<span class="o">)</span>
+out
+</code></pre></div></div>
+
+<p>We also correct for multiple testing by controlling the false discovery rate (FDR) using the Benjamini-Hochberg (BH) method (<span class="citation"><a href="#Benjamini1995">Benjamini and Hochberg 1995</a></span>). Putative cells are defined as those barcodes that have significantly poor fits to the ambient model at a specified FDR threshold. Here, we will use an FDR threshold of 0.01. This means that the expected proportion of empty droplets in the set of retained barcodes is no greater than 1%, which we consider to be acceptably low for downstream analyses.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>is.cell &lt;- out<span class="nv">$FDR</span> &lt;<span class="o">=</span> 0.01                           
+<span class="nb">sum</span><span class="o">(</span>is.cell, na.rm<span class="o">=</span>TRUE<span class="o">)</span>                              <span class="c"># check how many cells left after filtering</span>
+</code></pre></div></div>
+
+<p>We got rid of the background droplets containing no cells, so now we will filter the matrix that we passed on to emptyDrops, so that it corresponds to the remaining cells.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emptied_matrix &lt;- matrix_alevin[,which<span class="o">(</span>is.cell<span class="o">)</span>,drop<span class="o">=</span>FALSE]          <span class="c"># filter the matrix</span>
+</code></pre></div></div>
+
+<p>From here, we can move on to adding metadata and we’ll return to <code class="language-plaintext highlighter-rouge">emptied_matrix</code> soon.</p>
+
+<h1 id="adding-cell-metadata">Adding cell metadata</h1>
+
+<p>The cells barcodes are stored in <em>colnames</em>. Let’s exctract them into a separate object:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>barcode &lt;- colnames<span class="o">(</span>alevin_se<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Now, we can simply add those barcodes into <em>colData names</em> where we will keep the cell metadata. To do this, we will create a column called <code class="language-plaintext highlighter-rouge">barcode</code> in <em>colData</em> and pass the stored values into there.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>colData<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv">$barcode</span> &lt;- barcode
+colData<span class="o">(</span>alevin_se<span class="o">)</span>
+</code></pre></div></div>
+
+<p>That’s only cell barcodes for now! However, after running <em>emptyDrops</em>, we generated lots of cell information that is currently stored in <code class="language-plaintext highlighter-rouge">out</code> object (Total, LogProb, PValue, Limited, FDR). Let’s add those values to cell metadata! Since we already have <em>barcodes</em> in there, we will simply bind the emptyDrops output to the existing dataframe:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>colData<span class="o">(</span>alevin_se<span class="o">)</span> &lt;- cbind<span class="o">(</span>colData<span class="o">(</span>alevin_se<span class="o">)</span>,out<span class="o">)</span>
+colData<span class="o">(</span>alevin_se<span class="o">)</span>
+</code></pre></div></div>
+
+<p>As you can see, the new columns were appended successfully and now the dataframe has 6 columns.</p>
+
+<p>If you have a look at the Experimental Design from that study, you might notice that there is actually more information about the cells. The most important for us would be batch, genotype and sex, summarised in the small table below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Index</th>
+      <th>Batch</th>
+      <th>Genotype</th>
+      <th>Sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>N701</td>
+      <td>0</td>
+      <td>wildtype</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <td>N702</td>
+      <td>1</td>
+      <td>knockout</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <td>N703</td>
+      <td>2</td>
+      <td>knockout</td>
+      <td>female</td>
+    </tr>
+    <tr>
+      <td>N704</td>
+      <td>3</td>
+      <td>wildtype</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <td>N705</td>
+      <td>4</td>
+      <td>wildtype</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <td>N706</td>
+      <td>5</td>
+      <td>wildtype</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <td>N707</td>
+      <td>6</td>
+      <td>knockout</td>
+      <td>male</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We are currently analysing sample N701, so let’s add its information from the table.</p>
+
+<h2 id="batch">Batch</h2>
+
+<p>We will label batch as an integer - “0” for sample N701, “1” for N702 etc. The way to do it is creating a list with zeros of the length corresponding to the number of cells that we have in our SummarizedExperiment object, like so:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>batch &lt;- rep<span class="o">(</span><span class="s2">"0"</span>, length<span class="o">(</span>colnames<span class="o">(</span>alevin_se<span class="o">)))</span>
+</code></pre></div></div>
+
+<p>And now create a batch slot in the <em>colData names</em> and append the <code class="language-plaintext highlighter-rouge">batch</code> list in the same way as we did with barcodes:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>colData<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv">$batch</span> &lt;- batch
+colData<span class="o">(</span>alevin_se<span class="o">)</span>
+</code></pre></div></div>
+
+<p>A new column appeared, full of zeros - as expected!</p>
+
+<h2 id="genotype">Genotype</h2>
+
+<p>It’s all the same for genotype, but instead creating a list with zeros, we’ll create a list with string “wildtype” and append it into genotype slot:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>genotype &lt;- rep<span class="o">(</span><span class="s2">"wildtype"</span>, length<span class="o">(</span>colnames<span class="o">(</span>alevin_se<span class="o">)))</span>
+colData<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv">$genotype</span> &lt;- genotype
+</code></pre></div></div>
+
+<h2 id="sex">Sex</h2>
+
+<p>You already know what to do, right? A list with string “male” and then adding it into a new slot!</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sex &lt;- rep<span class="o">(</span><span class="s2">"male"</span>, length<span class="o">(</span>colnames<span class="o">(</span>alevin_se<span class="o">)))</span>
+colData<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv">$sex</span> &lt;- sex
+</code></pre></div></div>
+
+<p>Check if all looks fine:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>colData<span class="o">(</span>alevin_se<span class="o">)</span>
+</code></pre></div></div>
+
+<p>3 new columns appeared with the information that we’ve just added - perfect! You can add any information you need in this way, as long as it’s the same for all the cells from one sample.</p>
+
+<h1 id="adding-gene-metadata">Adding gene metadata</h1>
+
+<p>The genes IDs are stored in <em>rownames</em>. Let’s exctract them into a separate object:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gene_ID &lt;- rownames<span class="o">(</span>alevin_se<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Analogically, we will add those genes IDs into <em>rowData names</em> which stores gene metadata. To do this, we will create a column called <code class="language-plaintext highlighter-rouge">gene_ID</code> in <em>rowData</em> and pass the stored values into there.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rowData<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv">$gene_ID</span> &lt;- gene_ID
+</code></pre></div></div>
+
+<h2 id="adding-genes-symbols-based-on-their-ids">Adding genes symbols based on their IDs</h2>
+
+<p>Since gene symbols are much more informative than only gene IDs, we will add them to our metadata. We will base this annotation on Ensembl - the genome database – with the use of the library BioMart. We will use the archive Genome assembly GRCm38 to get the gene names. Please note that the updated version (GRCm39) is available, but some of the gene IDs are not in that EnsEMBL database. The code below is written in a way that it will work for the updated dataset too, but will produce ‘NA’ where the corresponding gene name couldn’t be found.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># get relevant gene names</span>
+library<span class="o">(</span><span class="s2">"biomaRt"</span><span class="o">)</span>                                      <span class="c"># load the BioMart library</span>
+ensembl.ids &lt;- gene_ID                               
+mart &lt;- useEnsembl<span class="o">(</span>biomart <span class="o">=</span> <span class="s2">"ENSEMBL_MART_ENSEMBL"</span><span class="o">)</span>    <span class="c"># connect to a specified BioMart database and dataset hosted by Ensembl</span>
+ensembl_m <span class="o">=</span> useMart<span class="o">(</span><span class="s2">"ensembl"</span>, <span class="nv">dataset</span><span class="o">=</span><span class="s2">"mmusculus_gene_ensembl"</span>, <span class="nv">version</span><span class="o">=</span>100<span class="o">)</span>
+
+<span class="c"># The line above connects to a specified BioMart database and dataset within this database.</span>
+<span class="c"># In our case we choose the mus musculus database and to get the desired Genome assembly GRCm38,</span>
+<span class="c"># we specify the host with this archive. If you want to use the most recent version of the dataset, just run:</span>
+<span class="c"># ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl")</span>
+</code></pre></div></div>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-ensembl-connection-problems-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Ensembl connection problems</div>
+  <p>Sometimes you may encounter some connection issues with Ensembl. To improve performance Ensembl provides several mirrors of their site distributed around the globe. When you use the default settings for useEnsembl() your queries will be directed to your closest mirror geographically. In theory this should give you the best performance, however this is not always the case in practice. For example, if the nearest mirror is experiencing many queries from other users it may perform poorly for you. In such cases, the other mirrors should be chosen automatically.</p>
+
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>genes &lt;- getBM<span class="o">(</span><span class="nv">attributes</span><span class="o">=</span>c<span class="o">(</span><span class="s1">'ensembl_gene_id'</span>,<span class="s1">'external_gene_name'</span><span class="o">)</span>,
+               filters <span class="o">=</span> <span class="s1">'ensembl_gene_id'</span>,
+               values <span class="o">=</span> ensembl.ids,
+               mart <span class="o">=</span> ensembl_m<span class="o">)</span>
+
+<span class="c"># The line above retrieves the specified attributes from the connected BioMart database;</span>
+<span class="c"># 'ensembl_gene_id' are genes IDs,</span>
+<span class="c"># 'external_gene_name' are the genes symbols that we want to get for our values stored in ‘ensembl.ids’.</span>
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># see the resulting data</span>
+<span class="nb">head</span><span class="o">(</span>genes<span class="o">)</span>                          
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># replace IDs for gene names</span>
+gene_names &lt;- ensembl.ids	 
+count <span class="o">=</span> 1 	 
+<span class="k">for</span> <span class="o">(</span>geneID <span class="k">in </span>gene_names<span class="o">)</span>
+<span class="o">{</span>
+ index &lt;- which<span class="o">(</span><span class="nv">genes</span><span class="o">==</span>geneID<span class="o">)</span>    <span class="c"># finds an index of geneID in the genes object created by getBM()</span>
+ <span class="k">if</span> <span class="o">(</span>length<span class="o">(</span>index<span class="o">)==</span>0<span class="o">)</span>            <span class="c"># condition in case if there is no corresponding gene name in the chosen dataset</span>
+  <span class="o">{</span>
+    gene_names[count] &lt;- <span class="s1">'NA'</span>
+  <span class="o">}</span>
+  <span class="k">else</span>
+  <span class="o">{</span>
+    gene_names[count] &lt;- genes<span class="nv">$external_gene_name</span><span class="o">[</span>index] 	<span class="c"># replaces gene ID by the corresponding gene name based on the found geneID’s index</span>
+  <span class="o">}</span>
+ count <span class="o">=</span> count + 1                <span class="c"># increased count so that every element in gene_names is replaced</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># add the gene names into rowData in a new column gene_name</span>
+rowData<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv">$gene_name</span> &lt;- gene_names
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># see the changes</span>
+rowData<span class="o">(</span>alevin_se<span class="o">)</span>                  
+</code></pre></div></div>
+
+<p>If you are working on your own data and it’s not mouse data, you can check available datasets for other species and just use relevant dataset in <code class="language-plaintext highlighter-rouge">useMart()</code> function.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>listDatasets<span class="o">(</span>mart<span class="o">)</span>                <span class="c"># available datasets</span>
+</code></pre></div></div>
+
+<h2 id="flag-mitochondrial-genes">Flag mitochondrial genes</h2>
+
+<p>We can also flag mitochondrial genes. Usually those are the genes whose name starts with ‘mt-‘ or ‘MT-‘. Therefore, we will store those characters in <code class="language-plaintext highlighter-rouge">mito_genes_names</code> and then use <em>grepl()</em> to find those genes stored in <em>gene_name</em> slot.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mito_genes_names &lt;- <span class="s1">'^mt-|^MT-'</span>                                    <span class="c"># how mitochondrial gene names can start</span>
+mito &lt;- grepl<span class="o">(</span>mito_genes_names, rowData<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv">$gene_name</span><span class="o">)</span>      <span class="c"># find mito genes </span>
+mito                                                               <span class="c"># see the resulting boolean list</span>
+</code></pre></div></div>
+
+<p>Now we can add another slot in <em>rowData</em> and call it <em>mito</em> that will keep boolean values (true/false) to indicate which genes are mitochondrial.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rowData<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv">$mito</span> &lt;- mito
+rowData<span class="o">(</span>alevin_se<span class="o">)</span>
+</code></pre></div></div>
+
+<h1 id="subsetting-the-object">Subsetting the object</h1>
+
+<p>Let’s go back to the <code class="language-plaintext highlighter-rouge">emptied_matrix</code> object. Do you remember how many cells were left after filtering? We can check that by looking at the matrix’ dimensions:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dim<span class="o">(</span>matrix_alevin<span class="o">)</span>                                                  <span class="c"># check the dimension of the unfiltered matrix</span>
+dim<span class="o">(</span>emptied_matrix<span class="o">)</span>                                                 <span class="c"># check the dimension of the filtered matrix</span>
+</code></pre></div></div>
+
+<p>We’ve gone from 3608 to 35 cells. We’ve filtered the matrix, but not our SummarizedExperiment. We can subset <code class="language-plaintext highlighter-rouge">alevin_se</code> based on the cells that were left after filtering. We will store them in a separate list, as we did with the barcodes:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>retained_cells &lt;- colnames<span class="o">(</span>emptied_matrix<span class="o">)</span>
+retained_cells
+</code></pre></div></div>
+
+<p>And now we can subset our SummarizedExperiment based on the barcodes that are in the <code class="language-plaintext highlighter-rouge">retained_cells</code> list:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alevin_subset &lt;- alevin_se[, colData<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv">$barcode</span> %in% retained_cells]
+alevin_701 &lt;- alevin_subset
+alevin_701
+</code></pre></div></div>
+
+<p>And that’s our subset, ready for downstream analysis!</p>
+
+<h1 id="more-datasets">More datasets</h1>
+
+<p>We’ve done the analysis for one sample. But there are 7 samples in this experiment and it would be very handy to have all the information in one place. Therefore, you would need to repeat all the steps for the subsequent samples (that’s when you’ll appreciate wrapped tools and automation in Galaxy workflows!). To make your life easier, we will show you how to combine the datasets on smaller scale. Also, to save you some time, we’ve already run Alevin on sample 702 (also subsampled to 50k reads). Let’s quickly repeat the steps we performed in R to complete the analysis of sample 702 in the same way as we did with 701.</p>
+
+<p>But first, we have to save the results of our hard work on sample 701!</p>
+
+<h2 id="saving-sample-701-data">Saving sample 701 data</h2>
+
+<p>Saving files is quite straightforward. Just specify which object you want to save and how you want the file to be named. Don’t forget the extension!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>save<span class="o">(</span>alevin_701, file <span class="o">=</span> <span class="s2">"alevin_701.rdata"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>You will see the new file in the panel on the left.</p>
+
+<h2 id="analysis-of-sample-702">Analysis of sample 702</h2>
+
+<p>Normally, at this point you would switch kernel to bash to run alevin, and then back to R to complete the analysis of another sample. Here, we are providing you with the alevin output for the next sample, but to give you some practise in switching kernels and saving data, we will use bash to unzip the folder with that output data.</p>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-switching-kernels-amp-losing-variables-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Switching kernels &amp; losing variables</div>
+
+  <p>Be aware that every time when you switch kernel, you will lose variables you store in the objects that you’ve created, unless you save them. Therefore, if you want to switch from R to bash, make sure you save your R objects! You can then load them anytime.</p>
+
+</blockquote>
+
+<p>Let’s <strong>switch the kernel back to bash</strong> and run the following code to unzip the alevin output for sample 702:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># we're in bash again!</span>
+wget https://zenodo.org/records/10116786/files/alevin_output_702.zip
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unzip alevin_output_702.zip
+</code></pre></div></div>
+
+<p>The files are there! Now <strong>back to R - switch kernel again</strong>.</p>
+
+<p>Above we described all the steps done in R and explained what each bit of code does. Below all those steps are in one block of code, so read carefully and make sure you understand everything!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># we're in R now!</span>
+
+<span class="c">## load libraries again ##</span>
+library<span class="o">(</span>tximeta<span class="o">)</span>
+library<span class="o">(</span>DropletUtils<span class="o">)</span>
+library<span class="o">(</span>biomaRt<span class="o">)</span>
+
+<span class="c">## running tximeta ##</span>
+path2 &lt;- <span class="s1">'alevin_output_702/alevin/quants_mat.gz'</span>                                                    <span class="c"># path to alevin output for N702</span>
+alevin2 &lt;- tximeta<span class="o">(</span>coldata <span class="o">=</span> data.frame<span class="o">(</span>files <span class="o">=</span> path2, names <span class="o">=</span> <span class="s2">"sample702"</span><span class="o">)</span>, <span class="nb">type</span> <span class="o">=</span> <span class="s2">"alevin"</span><span class="o">)</span>        <span class="c"># create SummarizedExperiment from Alevin output</span>
+
+<span class="c">## running emptyDrops ##</span>
+matrix_alevin2 &lt;- assays<span class="o">(</span>alevin2<span class="o">)</span><span class="nv">$counts</span>                                                             <span class="c"># extract matrix from SummarizedExperiment</span>
+out2 &lt;- emptyDrops<span class="o">(</span>matrix_alevin2, lower <span class="o">=</span> 100, niters <span class="o">=</span> 1000, retain <span class="o">=</span> 20<span class="o">)</span>                          <span class="c"># apply emptyDrops</span>
+is.cell2 &lt;- out2<span class="nv">$FDR</span> &lt;<span class="o">=</span> 0.01                                                                         <span class="c"># apply FDR threshold</span>
+emptied_matrix2 &lt;- matrix_alevin2[,which<span class="o">(</span>is.cell2<span class="o">)</span>,drop<span class="o">=</span>FALSE]                                       <span class="c"># subset the matrix to the cell-containing droplets</span>
+
+<span class="c">## adding cell metadata ##</span>
+barcode2 &lt;- colnames<span class="o">(</span>alevin2<span class="o">)</span>
+colData<span class="o">(</span>alevin2<span class="o">)</span><span class="nv">$barcode</span> &lt;- barcode2                                             <span class="c"># add barcodes</span>
+
+colData<span class="o">(</span>alevin2<span class="o">)</span> &lt;- cbind<span class="o">(</span>colData<span class="o">(</span>alevin2<span class="o">)</span>,out2<span class="o">)</span>                                 <span class="c"># add emptyDrops info</span>
+
+batch2 &lt;- rep<span class="o">(</span><span class="s2">"1"</span>, length<span class="o">(</span>colnames<span class="o">(</span>alevin2<span class="o">)))</span>
+colData<span class="o">(</span>alevin2<span class="o">)</span><span class="nv">$batch</span> &lt;- batch2                                                <span class="c"># add batch info</span>
+
+genotype2 &lt;- rep<span class="o">(</span><span class="s2">"wildtype"</span>, length<span class="o">(</span>colnames<span class="o">(</span>alevin2<span class="o">)))</span>
+colData<span class="o">(</span>alevin2<span class="o">)</span><span class="nv">$genotype</span> &lt;- genotype2                                          <span class="c"># add genotype info</span>
+
+sex2 &lt;- rep<span class="o">(</span><span class="s2">"male"</span>, length<span class="o">(</span>colnames<span class="o">(</span>alevin2<span class="o">)))</span>
+colData<span class="o">(</span>alevin2<span class="o">)</span><span class="nv">$sex</span> &lt;- sex2                                                    <span class="c"># add sex info</span>
+
+<span class="c">## adding gene metadata ##</span>
+gene_ID2 &lt;- rownames<span class="o">(</span>alevin2<span class="o">)</span>
+rowData<span class="o">(</span>alevin2<span class="o">)</span><span class="nv">$gene_ID</span> &lt;- gene_ID2
+
+<span class="c"># get relevant gene names</span>
+ensembl.ids2 &lt;- gene_ID2               
+mart &lt;- useEnsembl<span class="o">(</span>biomart <span class="o">=</span> <span class="s2">"ENSEMBL_MART_ENSEMBL"</span><span class="o">)</span>    <span class="c"># connect to a specified BioMart database and dataset hosted by Ensembl</span>
+ensembl_m2 <span class="o">=</span> useMart<span class="o">(</span><span class="s2">"ensembl"</span>, <span class="nv">dataset</span><span class="o">=</span><span class="s2">"mmusculus_gene_ensembl"</span>, <span class="nv">version</span><span class="o">=</span>100<span class="o">)</span> 	
+
+genes2 &lt;- getBM<span class="o">(</span><span class="nv">attributes</span><span class="o">=</span>c<span class="o">(</span><span class="s1">'ensembl_gene_id'</span>,<span class="s1">'external_gene_name'</span><span class="o">)</span>,
+               filters <span class="o">=</span> <span class="s1">'ensembl_gene_id'</span>,
+               values <span class="o">=</span> ensembl.ids2,
+               mart <span class="o">=</span> ensembl_m2<span class="o">)</span>
+
+<span class="c"># replace IDs for gene names</span>
+gene_names2 &lt;- ensembl.ids2
+count <span class="o">=</span> 1 	 
+<span class="k">for</span> <span class="o">(</span>geneID <span class="k">in </span>gene_names2<span class="o">)</span>
+<span class="o">{</span>
+ index &lt;- which<span class="o">(</span><span class="nv">genes2</span><span class="o">==</span>geneID<span class="o">)</span>    <span class="c"># finds an index of geneID in the genes object created by getBM()</span>
+ <span class="k">if</span> <span class="o">(</span>length<span class="o">(</span>index<span class="o">)==</span>0<span class="o">)</span>            <span class="c"># condition in case if there is no corresponding gene name in the chosen dataset</span>
+  <span class="o">{</span>
+    gene_names2[count] &lt;- <span class="s1">'NA'</span>
+  <span class="o">}</span>
+  <span class="k">else</span>
+  <span class="o">{</span>
+    gene_names2[count] &lt;- genes2<span class="nv">$external_gene_name</span><span class="o">[</span>index] 	<span class="c"># replaces gene ID by the corresponding gene name based on the found geneID’s index</span>
+  <span class="o">}</span>
+ count <span class="o">=</span> count + 1                <span class="c"># increased count so that every element in gene_names is replaced</span>
+<span class="o">}</span>
+
+rowData<span class="o">(</span>alevin2<span class="o">)</span><span class="nv">$gene_name</span> &lt;- gene_names2                              <span class="c"># add gene names to gene metadata</span>
+
+mito_genes_names &lt;- <span class="s1">'^mt-|^MT-'</span>                                        <span class="c"># how mitochondrial gene names can start</span>
+mito2 &lt;- grepl<span class="o">(</span>mito_genes_names, rowData<span class="o">(</span>alevin2<span class="o">)</span><span class="nv">$gene_name</span><span class="o">)</span>           <span class="c"># find mito genes </span>
+rowData<span class="o">(</span>alevin2<span class="o">)</span><span class="nv">$mito</span> &lt;- mito2                                         <span class="c"># add mitochondrial information to gene metadata</span>
+
+<span class="c">## create a subset of filtered object ##</span>
+retained_cells2 &lt;- colnames<span class="o">(</span>emptied_matrix2<span class="o">)</span>
+alevin_subset2 &lt;- alevin2[, colData<span class="o">(</span>alevin2<span class="o">)</span><span class="nv">$barcode</span> %in% retained_cells2]
+
+alevin_702 &lt;- alevin_subset2
+alevin_702
+</code></pre></div></div>
+
+<p>Alright, another sample pre-processed!</p>
+
+<h1 id="combining-datasets">Combining datasets</h1>
+
+<p>Pre-processed sample 702 is there, but we still need to load sample 701 that we saved before switching kernels. It’s equally easy as saving the object:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>load<span class="o">(</span><span class="s2">"alevin_701.rdata"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Check if it was loaded ok:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alevin_701
+</code></pre></div></div>
+
+<p>Now we can combine those two objects into one using one simple command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alevin_combined &lt;- cbind<span class="o">(</span>alevin_701, alevin_702<span class="o">)</span>
+alevin_combined
+</code></pre></div></div>
+
+<p>If you have more samples, just append them in the same way. We won’t process another sample here, but pretending that we have third sample, we would combine it like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alevin_subset3 &lt;- alevin_702                        <span class="c"># copy dataset for demonstration purposes</span>
+alevin_combined_demo &lt;- cbind<span class="o">(</span>alevin_combined, alevin_subset3<span class="o">)</span>
+alevin_combined_demo
+</code></pre></div></div>
+
+<p>You get the point, right? It’s important though that the rowData names and colData names are the same in each sample.</p>
+
+<h1 id="saving-and-exporting-the-files">Saving and exporting the files</h1>
+
+<p>It is generally more common to use SingleCellExperiment format rather than SummarizedExperiment. The conversion is quick and easy, and goes like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library<span class="o">(</span>SingleCellExperiment<span class="o">)</span>                                 <span class="c"># might need to load this library</span>
+alevin_sce &lt;- as<span class="o">(</span>alevin_combined, <span class="s2">"SingleCellExperiment"</span><span class="o">)</span>
+alevin_sce
+</code></pre></div></div>
+<p>As you can see, all the embeddings have been successfully transfered during this conversion and believe me, sce object will be more useful for you!</p>
+
+<p>You’ve already learned how to save and load objects in Jupyter notebook, let’s then save the SCE file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>save<span class="o">(</span>alevin_sce, file <span class="o">=</span> <span class="s2">"alevin_sce.rdata"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>The last thing that might be useful is exporting the files into your Galaxy history. To do it… guess what! Yes - <strong>switching kernels again</strong>! But this time we choose <strong>Python 3</strong> kernel and run the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># that's Python now! </span>
+put<span class="o">(</span><span class="s2">"alevin_sce.rdata"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Well done! In this tutorial we have:</p>
+<ul>
+  <li>examined raw read data, annotations and necessary input files for quantification</li>
+  <li>created an index in Salmon and run Alevin</li>
+  <li>identified barcodes that correspond to non-empty droplets</li>
+  <li>added gene and cell metadata</li>
+  <li>applied the necessary conversion to pass these data to downstream processes.</li>
+</ul>
+
+<p>As you might now appreciate, some tasks are much quicker and easier when run in the code, but the reproducibility and automation of Galaxy workflows is a huge advantage that helps in dealing with many samples more quickly and efficiently.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Create a SCE object from FASTQ files, including relevant gene and cell metadata, and do it all in Jupyter Notebook!</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/single-cell/faqs/">FAQ page for the Single Cell topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/single-cell#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Benjamini1995">Benjamini, Y., and Y. Hochberg, 1995 <b>Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing</b>. Journal of the Royal Statistical Society: Series B (Methodological) 57: 289–300. <a href="https://doi.org/10.1111/j.2517-6161.1995.tb02031.x">10.1111/j.2517-6161.1995.tb02031.x</a></li>
+<li id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9: <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a></li>
+<li id="Lun2019">Lun, A. T. L., and Samantha Riesenfeld, T. Andrews, T. P. Dao, T. Gomes <i>et al.</i>, 2019 <b>EmptyDrops: distinguishing cells from empty droplets in droplet-based single-cell RNA sequencing data</b>. Genome Biology 20: <a href="https://doi.org/10.1186/s13059-019-1662-y">10.1186/s13059-019-1662-y</a></li>
+<li id="srivastava2019alevin">Srivastava, A., L. Malik, T. Smith, I. Sudbery, and R. Patro, 2019 <b>Alevin efficiently estimates accurate gene abundances from dscRNA-seq data</b>. Genome Biology 20: <a href="https://doi.org/10.1186/s13059-019-1670-y">10.1186/s13059-019-1670-y</a></li>
+<li id="Love2020">Love, M. I., C. Soneson, P. F. Hickey, L. K. Johnson, N. T. Pierce <i>et al.</i>, 2020 <b>Tximeta: Reference sequence checksums for provenance identification in RNA-seq</b> (M. Pertea, Ed.). PLOS Computational Biology 16: e1007664. <a href="https://doi.org/10.1371/journal.pcbi.1007664">10.1371/journal.pcbi.1007664</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Generating a single cell matrix using Alevin and combining datasets (bash + R) (Single Cell)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Julia Jakiela, Wendi Bacon,  <b>Generating a single cell matrix using Alevin and combining datasets (bash + R) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/alevin-commandline/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/alevin-commandline/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{single-cell-alevin-commandline,
+author = "Julia Jakiela and Wendi Bacon",
+	title = "Generating a single cell matrix using Alevin and combining datasets (bash + R) (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/alevin-commandline/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/eosc-life" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/eosc-life/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <div class="box-title">Go Further</div>
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/single-cell">Single Cell</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Combining single cell datasets after pre-processing:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+                    </ul>
+                </blockquote>
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/alevin-commandline/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5c4f29500474814d08883ef5f8fb236fe4a6c378">5c4f295</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/alevin-commandline/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702047148'></script>
+        
+    </body>
+</html>
