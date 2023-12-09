@@ -131,7 +131,7 @@
       "name": "Copy Of GTN Training - Antibiotic Resistance Detection",
       "title": "Copy Of GTN Training - Antibiotic Resistance Detection",
       "test_results": null,
-      "modified": "2023-12-08 14:52:32 +0000",
+      "modified": "2023-12-09 00:09:57 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"NanoPlot\"];\n  10[\"NanoPlot\"];\n  11[\"Map with minimap2\"];\n  12[\"Racon\"];\n  2[\"Map with minimap2\"];\n  3[\"Create assemblies with Unicycler\"];\n  4[\"miniasm\"];\n  5[\"Bandage Image\"];\n  6[\"PlasFlow\"];\n  7[\"staramr\"];\n  8[\"Bandage Image\"];\n  9[\"GFA to FASTA\"];\n  0 -->|output| 1;\n  9 -->|out_fa| 10;\n  0 -->|output| 11;\n  9 -->|out_fa| 11;\n  9 -->|out_fa| 12;\n  11 -->|alignment_output| 12;\n  0 -->|output| 12;\n  0 -->|output| 2;\n  0 -->|output| 2;\n  0 -->|output| 3;\n  2 -->|alignment_output| 4;\n  0 -->|output| 4;\n  3 -->|assembly_graph| 5;\n  3 -->|assembly| 6;\n  3 -->|assembly| 7;\n  4 -->|gfa| 8;\n  4 -->|gfa| 9;\n"
     }
   ],
