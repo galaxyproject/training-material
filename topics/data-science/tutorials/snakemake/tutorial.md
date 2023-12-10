@@ -288,8 +288,8 @@ This also how we can really easily parallelise workflows: because we know the de
 
 # Snakemake
 
-> The Snakemake workflow management system is a tool to create reproducible and scalable data analyses. Workflows are described via a human readable, Python based language. They can be seamlessly scaled to server, cluster, grid and cloud environments, without the need to modify the workflow definition. Finally, Snakemake workflows can entail a description of required software, which will be automatically deployed to any execution environment. [source](https://snakemake.readthedocs.io/en/stable/index.html)
-{: .quote}
+> The Snakemake workflow management system is a tool to create reproducible and scalable data analyses. Workflows are described via a human readable, Python based language. They can be seamlessly scaled to server, cluster, grid and cloud environments, without the need to modify the workflow definition. Finally, Snakemake workflows can entail a description of required software, which will be automatically deployed to any execution environment.
+{: .quote cite="https://snakemake.readthedocs.io/en/stable/index.html"}
 
 Snakemake addresses a lot of the issues with make for use in scientific contexts: clearer pipelines and dependencies. We did not talk about it in the previous section, but where did `bowtie2` and `bowtie2-build` come from? How did those get installed? What versions are they? None of that information is included in the Makefile
 

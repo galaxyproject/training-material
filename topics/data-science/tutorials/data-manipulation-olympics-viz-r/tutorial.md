@@ -28,7 +28,7 @@ contributions:
   testing:
     - shiltemann
   funding:
-    - erasmusplus
+    - gallantries
 level: Introductory
 notebook:
   language: r

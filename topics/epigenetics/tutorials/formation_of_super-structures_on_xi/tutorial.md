@@ -33,8 +33,6 @@ contributors:
     - pavanvidem
 ---
 
-# Introduction
-
 
 Within a cell nucleus, the DNA is tightly-packed and the chromatin is spatially distributed with different levels and scales of organizations.
 

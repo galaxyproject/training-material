@@ -29,8 +29,6 @@ tags: [DIA]
 ---
 
 
-# Introduction
-
 
 This training covers data independent acquisition (DIA) mass spectrometry (MS) applying spectral libraries for peptide identification and quantification.
 You can learn how to prepare and optimize a spectral library for the analysis of DIA data in the[DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html).

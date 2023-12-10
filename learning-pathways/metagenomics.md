@@ -7,7 +7,7 @@ cover-image-alt: "microgalaxy logo"
 editorial_board:
 - bebatut
 funding:
-- erasmusplus
+- gallantries
 
 title: Metagenomics data processing and analysis for microbiome
 description: |

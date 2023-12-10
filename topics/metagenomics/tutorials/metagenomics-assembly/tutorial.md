@@ -31,13 +31,13 @@ contributions:
     - plushz
     - bebatut
   funding:
-    - erasmusplus
+    - gallantries
 tags:
   - assembly
   - metagenomics
+  - microgalaxy
 ---
 
-# Introduction
 
 Metagenomics involves the extraction, sequencing and analysis of combined genomic DNA from **entire microbiome** samples. It includes then DNA from **many different organisms**, with different taxonomic background.
 

@@ -52,15 +52,6 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 >
 {: .hands_on}
 
-# Important tips for easier analysis
-
-{% snippet faqs/galaxy/tutorial_mode.md %}
-
-> <comment-title></comment-title>
-> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
-> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
-{: .comment}
-
 ## Filtering for T-cells
 
 One problem with our current dataset is that it's not just T-cells: we found in the previous tutorial that it also contains macrophages. This is a problem, because trajectory analysis will generally try to find relationships between all the cells in the sample. We need to remove those cell types to analyse the trajectory.
@@ -120,7 +111,7 @@ You have two options for how to proceed with this tutorial - either you download
 >
 > 1. Open a Terminal in JupyterLab with File -> New -> Terminal
 >
-> 2. Run 
+> 2. Run
 >    ```
 >    wget {{ ipynbpath }}
 >    ```

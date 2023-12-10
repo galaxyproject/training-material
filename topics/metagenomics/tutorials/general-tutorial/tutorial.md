@@ -21,9 +21,9 @@ key_points:
 contributors:
   - shiltemann
   - bebatut
+tags:
+  - microgalaxy
 ---
-
-# Introduction
 
 
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:

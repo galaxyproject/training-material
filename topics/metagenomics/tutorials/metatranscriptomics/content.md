@@ -6,8 +6,6 @@
   {% assign other_tutorial_name = "short"%}
 {% endif %}
 
-# Overview
-
 In this tutorial we will perform a metatranscriptomics analysis based on the ASAIM workflow ({% cite batut2018asaim %}), using data from {% cite kunath2018proteins %}.
 
 > <comment-title>Two versions of this tutorial</comment-title>

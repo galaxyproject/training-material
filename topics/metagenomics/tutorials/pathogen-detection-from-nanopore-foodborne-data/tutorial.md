@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition"
 tags:
+    - microgalaxy
     - Nanopore data analysis
     - Pathogens detection
     - Phylogenetic tree
@@ -31,11 +32,10 @@ contributions:
     - hrhotz
     - wm75
    funding:
-    - erasmusplus
+    - gallantries
     - eosc-life
 ---
 
-# Introduction
 
 Food contamination with pathogens is a major burden on our society. In the year 2019, foodborne pathogens caused 137 hospitalisations in Germany [(BVL 2019)](https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&v=4). Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to _Salmonella spp._ followed by _Campylobacter spp._ and Noroviruses, as studied by the [__Food safety - World Health Organization (WHO)__](https://www.who.int/publications/i/item/9789241565165).
 

@@ -36,7 +36,6 @@ contributors:
 ---
 
 
-# Introduction
 
 When sequencing genomic material from a human tumor, the underlying clinical or
 research question typically is **what spectrum of mutations distinguishes this

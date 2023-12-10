@@ -18,8 +18,6 @@ contributors:
   - mblue9
 ---
 
-# Introduction
-
 
 When we have a large list of genes of interest, such as a list of differentially expressed genes obtained from an RNA-Seq experiment, how do we extract biological meaning from it?
 

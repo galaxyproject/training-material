@@ -36,6 +36,9 @@ abbreviations:
   GIL: Global Interpreter Lock
 ---
 
+This tutorial will introduce you to the basics of Threads and Processes in
+Python and how you can use them to parallelise your code.
+
 
 > <agenda-title></agenda-title>
 >

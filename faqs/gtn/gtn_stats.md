@@ -9,7 +9,7 @@ contributors: [hexylena]
 <!-- tutorial stats -->
 {% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.enable != false" %}
 {% assign faqs = site.pages | where:"layout", "faq" %}
-{% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.enable != false" %}
+{% assign topics = site | list_topics_by_category: "science-technical" | to_keys %}
 {% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}
 
 

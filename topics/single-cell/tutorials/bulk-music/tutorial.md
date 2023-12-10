@@ -41,12 +41,10 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
 
-# Introduction
-
-
-<!-- using info from here: https://xuranw.github.io/MuSiC/articles/MuSiC.html -->
 
 Bulk RNA-seq data contains a mixture of transcript signatures from several types of cells. We wish to deconvolve this mixture to obtain estimates of the proportions of cell types within the bulk sample. To do this, we can use single cell RNA-seq data as a reference for estimating the cell type proportions within the bulk data.
+
+<!-- using info from here: https://xuranw.github.io/MuSiC/articles/MuSiC.html -->
 
 In this tutorial, we will use bulk and single-cell RNA-seq data, including matrices of similar tissues from different sources, to illustrate how to infer cell type abundances from bulk RNA-seq.
 

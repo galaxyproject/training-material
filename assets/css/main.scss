@@ -275,7 +275,7 @@ body {
 // boxes visible, no matter what their collapse state.
 @media screen {
 	.box-collapsed {
-		display: none;
+		display: none !important; // important Overrides specifically one case of a learning pathway FAQ where we use some custom display already to get objects floating correctly in the snippet.
 	}
 }
 
@@ -338,6 +338,21 @@ img {
     margin: 2.5%;
 }
 
+ol.toots {
+	li.toot {
+		display: flex;
+		flex-direction: column;
+	}
+	img {
+		width: 46px !important;
+		height: 46px !important;
+	}
+	a.user.boost img {
+		width: 23px !important;
+		height: 23px !important;
+	}
+}
+
 div.main-content {
 	img {
 		height: auto;
@@ -347,7 +362,9 @@ div.main-content {
 
 figure {
   text-align: center;
-  margin: 1rem 2rem;
+  margin: 2rem;
+  border: thin silver solid;
+  padding: 1rem;
 
   & > img {
       margin-bottom: 1rem;
@@ -359,6 +376,11 @@ figure {
   }
 }
 
+@media (max-width:992px) {
+  figure {
+  margin: 1rem;
+ }
+}
 
 :not(pre) > code {
     color: var(--code-foreground);
@@ -397,9 +419,12 @@ div.language-diff .p {
 	padding-right: 1em;
 }
 
-footer {
+body > footer {
     margin-top: 5em;
     text-align: center;
+}
+
+footer {
     color: var(--text-color-muted);
     font-size: $font-size - 2;
 }
@@ -673,10 +698,13 @@ blockquote {
 		border-bottom: 1px solid var(--border-light);
 		padding: 1.25rem;
 		color: var(--brand-color-contrast);
+		margin-left: -15px; // BS has a 15px margin on cards, this makes the card title fill the card.
+		margin-right: -15px;
 	}
 
 	.card-body {
 		padding: 0em;
+		flex: 0 1 auto; // Override BS for the workflow listing.
 	}
 }
 
@@ -830,6 +858,15 @@ blockquote {
     justify-content: space-around;
 }
 
+.contributor-page {
+	img.avatar {
+		background-color: white;
+		border-radius: 20px;
+		// border: 1px solid var(--border-light);
+		// padding: 5px;
+		width: 100%;
+	}
+}
 .hall-of-fame-hero {
     width: 140px;
     margin: 1rem;
@@ -852,9 +889,6 @@ blockquote {
             border: 1px solid var(--border-light);
             padding: 5px;
             width: 100%;
-            -webkit-transition: border 0.2s ease-in-out;
-            -o-transition: border 0.2s ease-in-out;
-            transition: border 0.2s ease-in-out;
         }
     }
 
@@ -881,22 +915,28 @@ blockquote {
 
 // This applies a "dark" style to the dropdown menus on small devices since
 // Bootstrap v4 does not do that by default.
+
+.dropdown-menu {
+	background-color: var(--color-background);
+	border-color: var(--border);
+}
+.dropdown-item {
+	color: var(--text-color);
+
+	&:hover, &:focus, &:active {
+		background-color: var(--brand-color);
+		color:  var(--text-color);
+	}
+}
+
+.dropdown-divider {
+	border-top-color: var(--border);
+}
+
 @media (max-width: 768px) {
     .navbar {
         .dropdown-menu {
-		background-color: var(--color-background);
             border-color: transparent;
-        }
-
-        .dropdown-item {
-		color: var(--text-color);
-
-            &:hover,
-            &:focus,
-            &:active {
-                background-color: var(--brand-color);
-                color:  var(--text-color);
-            }
         }
 
         .nav-item,
@@ -1000,14 +1040,6 @@ a {
         color: var(--hyperlink-hover);
         border-bottom: 1px solid var(--hyperlink-hover);
         text-decoration: none;
-    }
-
-    // Unset this for logos on the homepage
-    &.logo {
-	border: none;
-	img {
-		max-height: 5em;
-	}
     }
 
     &.btn-info {
@@ -1567,6 +1599,10 @@ ul.text-list, ol.text-list {
 .dropdown-item:focus-visible {
 }
 
+.dropdown-header {
+	color: var(--text-color-muted);
+}
+
 ol.breadcrumb {
 	background: var(--secondary-color);
 
@@ -1582,6 +1618,11 @@ a[target="_blank"]::after {
   display: inline-block;
   margin-left: 0.2em;
   height: 1em;
+}
+
+/* Not for figures where it's duplicated */
+figure > a[target="_blank"]::after {
+	content: unset;
 }
 
 .tutorials-list {
@@ -1639,3 +1680,31 @@ a[target="_blank"]::after {
     align-self: center;
 }
 
+
+.logosoup {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-end;
+	row-gap: 1em;
+
+	figure {
+		max-width: 20em;
+		margin: 0rem 0.5rem;
+		border: 0px transparent;
+
+		img {
+			max-height: 5em;
+		}
+
+		figcaption {
+			text-align: left;
+		}
+	}
+
+	// Unset this for logos on the homepage
+	.logo {
+		border: none;
+	}
+}

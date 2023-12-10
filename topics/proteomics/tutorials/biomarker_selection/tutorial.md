@@ -29,8 +29,6 @@ tags: [DDA, human]
 ---
 
 
-# Introduction
-
 
 A biomarker is a measurable biological component that can be routinely detected in clinical practice and reflects a disease state,
 response to therapeutic treatment, or other relevant biological state.

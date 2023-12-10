@@ -44,6 +44,7 @@ jobs:
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
+          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config # for node
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
@@ -66,4 +67,4 @@ jobs:
 
           echo "Software Versions"
           $FFMPEG_PATH/ffmpeg -version
-          $(npm bin)/editly --version
+          ./node_modules/.bin/editly --version

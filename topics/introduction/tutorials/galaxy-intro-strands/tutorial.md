@@ -22,9 +22,6 @@ contributors:
   - gallardoalba
 ---
 
-# Introduction to Galaxy
-
-
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
 > ###  {% icon comment %} Audience

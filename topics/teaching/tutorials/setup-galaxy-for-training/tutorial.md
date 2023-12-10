@@ -22,9 +22,6 @@ contributors:
   - bebatut
 ---
 
-# Introduction
-
-
 In this tutorial, you will learn how to provision your Galaxy instance to support training modules from the GTN repository.
 
 Tutorials in this repository are all supplemented with files describing the technical requirements to run them. This makes it easy to automate installation of tutorial requirements.

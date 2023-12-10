@@ -18,14 +18,11 @@ contributors:
 - gallardoalba
 tags:
   - nanopore
+  - microgalaxy
 
 ---
 
 
-# Introduction
-
-
-<!-- This is a comment. -->
 
 
 __Healthy soils__ are an essential element in maintaining the planet’s ecological balance. That is why their protection must be considered a priority in order to guarantee the well-being of humanity. The alteration of microbial populations often precedes changes in the physical and chemical properties of soils, so monitoring their condition can serve to predict their future evolution, allowing to develop strategies to __mitigate ecosystem damage__.

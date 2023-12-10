@@ -21,10 +21,6 @@ contributors:
 
 ---
 
-
-# Introduction
-
-
 Progress in synthetic biology is enabled by powerful bioinformatics tools such as those aimed to design metabolic pathways for the production of chemicals. These tools are available in SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}).
 
 In this tutorial, we will use a set of tools from the **Pathway Analysis workflow** which will enable you to evaluate a set of heterelogous pathways previously produced by the RetroSynthesis workflow in a chassis organism (_E. coli_ iML1515). These workflows are available in the [Galaxy SynbioCAD platform](https://galaxy-synbiocad.org). The goal is to inform the user of the theoretically best performing pathways by ranking them based on the four following criteria: target product flux, thermodynamic feasibility, pathway length and enzyme availability.
@@ -70,16 +66,16 @@ First we need to upload and prepare the following inputs to analyze:
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) :
 >
 >    ```
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0001.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0006.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0011.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0001.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0006.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0011.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0001.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0116.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0231.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/SBML_Model_iML1515.xml
+>    https://zenodo.org/record/6628296/files/rp_001_0001.xml
+>    https://zenodo.org/record/6628296/files/rp_001_0006.xml
+>    https://zenodo.org/record/6628296/files/rp_001_0011.xml
+>    https://zenodo.org/record/6628296/files/rp_002_0001.xml
+>    https://zenodo.org/record/6628296/files/rp_002_0006.xml
+>    https://zenodo.org/record/6628296/files/rp_002_0011.xml
+>    https://zenodo.org/record/6628296/files/rp_003_0001.xml
+>    https://zenodo.org/record/6628296/files/rp_003_0116.xml
+>    https://zenodo.org/record/6628296/files/rp_003_0231.xml
+>    https://zenodo.org/record/6628296/files/SBML_Model_iML1515.xml
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

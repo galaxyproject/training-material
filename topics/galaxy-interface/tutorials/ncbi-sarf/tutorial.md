@@ -28,8 +28,6 @@ requirements:
       - upload-rules
 ---
 
-# Background
-
 Traditionally, after a list of run accessions has been filtered on the NCBI website, the accessions are used to download and extract fastq using the SRA toolkit to enter into the next steps of the workflow. A newer compressed data type, generated from raw submitted data containing SARS-CoV-2 sequence, is also accessible to Galaxy users from SRA in the Cloud.
 
 SRA Aligned Read Format (SARF) provides further output options beyond basic fastq format, for example:

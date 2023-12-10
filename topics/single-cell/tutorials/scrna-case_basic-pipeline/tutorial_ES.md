@@ -581,7 +581,7 @@ En este punto seguimos enfocándonos en aproximadamente 20 dimensiones. Necesita
 >
 > 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4) %} utilizando los siguientes parámetros:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (salida de **Scanpy RunPCA** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Maximum number of neighbours used"*: `15`
 >    - *"Number of PCs to use"*: `20`
 {: .hands_on}
@@ -601,12 +601,12 @@ Dos visualizaciones importantes en estos datos son tSNE y UMAP. Debemos calcular
 >
 > 1. {% tool [Scanpy RunTSNE](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2) %} utilizando los siguientes parámetros:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (salida de **Scanpy ComputeGraph** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
 >
 > 2. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1) %} utilizando los siguientes parámetros:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (salida de **Scanpy RunTSNE** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `Yes`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `Yes`
 {: .hands_on}
 
 {% icon congratulations %} ¡Felicitaciones! Has preparado tu objeto y creado las coordenadas de la vecindad. ¡Ahora podemos utilizarlos para ver algunos clusters!
@@ -640,7 +640,7 @@ Por fin, ¡identifiquemos clusters! Por desgracia, esto no es tan “majestuoso�
 >
 > 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4) %} utilizando los siguientes parámetros:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (salida de **Scanpy RunUMAP** {% icon tool %})
->    - *"Utilizar los valores por defecto del programa"*: {% icon history-share %} `No`
+>    - *"Utilizar los valores por defecto del programa"*: {% icon param-toggle %} `No`
 >    - *"Resolución, valores altos para mayor cantidad de clusters de menor tamaño"*: `0.6`
 {: .hands_on}
 
@@ -652,7 +652,7 @@ Por fin, ¡identifiquemos clusters! Por desgracia, esto no es tan “majestuoso�
 >
 > 1. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3) %}  con los siguientes parámetros:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (salida de **Scanpy FindClusters** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No` <--- Confía en mí, hay un fallo extraño en algunas versiones de la herramienta que se soluciona simplemente marcando `No` aquí >
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No` <--- Confía en mí, hay un fallo extraño en algunas versiones de la herramienta que se soluciona simplemente marcando `No` aquí >
 > 2. **Cambiar nombre** {% icon galaxy-pencil %} tabla de salida (not h5ad) `Markers - cluster`
 >
 > 3. **Cambiar nombre**  {% icon galaxy-pencil %} del documento de salida h5ad `Final object`
@@ -662,7 +662,7 @@ Por fin, ¡identifiquemos clusters! Por desgracia, esto no es tan “majestuoso�
 > 3. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"The sample grouping/clustering to use"*: `genotype`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >
 > 4. **Cambiar nombre** {% icon galaxy-pencil %} de la tabla de salida (no h5ad) a `Markers - genotype`
 >
@@ -782,7 +782,7 @@ Los autores no estaban interesados en seguir anotando las células DP, así que 
 >
 > 2. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
->    - *"Copy observations (such as clusters)"*: {% icon history-share %} *Yes*
+>    - *"Copy observations (such as clusters)"*: {% icon param-toggle %} *Yes*
 >    - **"Keys from obs to copy"**
 >    - *"Keys from obs to copy"*
 >    - *"Key contains"*: `louvain`

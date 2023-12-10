@@ -155,7 +155,7 @@ module Gtn
       [box_id, %(
         <div class="box-title #{box_type}-title" id="#{box_id}">
         <button class="gtn-boxify-button #{box_type}" type="button" aria-controls="#{box_id}#{refers_to_contents}" aria-expanded="true">
-          #{get_icon(box_type)} #{box_title}
+          #{get_icon(box_type)} <span>#{box_title}</span>
           <span class="fold-unfold fa fa-minus-square"></span>
         </button>
         </div>

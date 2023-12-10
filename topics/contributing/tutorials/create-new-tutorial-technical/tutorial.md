@@ -264,7 +264,7 @@ items:
       description: latest
       items:
       - info: https://doi.org/10.5281/zenodo....
-        url: https://zenodo.org/api/files/URL/to/the/input/file
+        url: https://zenodo.org/records/URL/files/path/to/input
         ext: galaxy-datatype
         src: url
 ```

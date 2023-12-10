@@ -39,8 +39,6 @@ tags:
 ---
 
 
-# Introduction
-
 Pox viruses (*Poxviridae*) are a large family of viruses, and members of it have various vertebrate and arthropod species as their natural hosts. The most widely known species in the family are the now extinct variola virus from the genus *orthopoxvirus* as the cause of smallpox, and vaccinia virus, a related, likely horsepox virus, which served as the source for the smallpox vaccine that allowed eradication of that disease.
 
 However, various other pox viruses infect mammalian hosts and cause often severe diseases, and some of them have the ability to jump to humans. Mpox, caused by monkeypox virus, is the most recent and prominent example demonstrating the zoonotic potential of *orthopoxviruses*. The sister genus *capripoxvirus* is a major concern in livestock farming with all its three species - sheeppox virus (SPPV), goatpox virus (GTPV), and lumpy skin disease virus (LSDV) causing severe disease [in sheep and goats](https://www.woah.org/en/disease/sheep-pox-and-goat-pox/) (SPPV, GTPV) and [in cattle](https://www.woah.org/en/disease/lumpy-skin-disease/) (LSDV).

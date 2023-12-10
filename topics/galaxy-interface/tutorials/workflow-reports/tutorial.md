@@ -30,13 +30,11 @@ contributions:
     - guerler
     - mvdbeek
   funding:
-    - erasmusplus
+    - gallantries
 level: Intermediate
 subtopic: workflows
 ---
 
-
-# Introduction
 
 
 Workflows are a powerful Galaxy feature that allows you to scale up your analysis by performing an end-to-end analysis with a single click of a button. In order to aid interpretation of workflow results, *workflow reports* may be configured to combine and display the most important analysis results in a single, customizable view.

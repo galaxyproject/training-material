@@ -23,8 +23,6 @@ tags: [DDA, TMT]
 ---
 
 
-# Introduction
-
 
 In this training we will cover the full analysis workflow from tandem mass tag (TMT) labeled samples using MaxQuant in conjunction with MSstatsTMT. 
 

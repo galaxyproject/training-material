@@ -3,7 +3,7 @@
 {% assign coverimage = path.coverimage | default: "/assets/images/GTNLogo1000.png" %}
 {% assign coverimagealt = path.coverimagealt | default: "GTN logo with a multi-coloured star and the words Galaxy Training Network"%}
 
-
+{% if path.draft != true or jekyll.environment != "production" %}
   <div class="pathwayitem col-md-4">
     <a href="{{site.baseurl}}{{path.url}}">
     <div class="card d-flex">
@@ -21,6 +21,11 @@
         </p>
       </div>
       <div class="card-footer">
+
+        {% if path.draft %}
+        <span class="label label-default tutorial_tag" style="{{ 'Draft' | colour_tag }}">Draft</span>
+        {% endif %}
+
         {% for tag in path.tags %}
         <span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag }}</span>
         {% endfor %}
@@ -28,5 +33,4 @@
     </div>
     </a>
   </div>
-
-
+{% endif %}
