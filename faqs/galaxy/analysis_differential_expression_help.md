@@ -51,7 +51,7 @@ Reference genome (fasta)
 - Can be a server reference genome (hosted index in the pull down menu) or a custom reference genome (fasta from the history).
 - Custom reference genomes must be [formatted correctly]({% link faqs/galaxy/reference_genomes_custom_genomes.md %}).
 - If you are using **Salmon**, you probably don't need a reference genome but a reference transcriptome instead!
-- More about understanding and [working with large fasta datasets]({% link faqs/galaxy/datasets_working_with_fasta.md %})
+- More about understanding and [working with large fasta datasets]({% link faqs/galaxy/datasets_working_with_fasta.md %}).
 
 Reference transcriptome (fasta)
 
