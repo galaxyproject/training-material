@@ -10,6 +10,7 @@ level: Introductory
 questions:
 - What information can I get from a phylogenetic tree?
 - How do I estimate a phylogeny?
+- How can I tell whether the phylogeny is reliable?
 objectives:
 - Understand the basic concepts behind phylogenetic trees and how they are made
 - Be able to read and interrogate a phylogeny encountered in the literature
@@ -33,11 +34,11 @@ Phylogenetics is essential for comparing biological species and understanding bi
 
 Using real-life data and standard tools that are (mostly) available in Galaxy, the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data. 
 
-This is not a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of phylogenetics and how the methods work.
+This is not just a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of phylogenetics and how the methods work.
 
 The exercises are beginner level, but you should know how molecular sequence data is produced and what it looks like. Maybe you've even built phylogenetic trees before but want to know more about the principles behind the tools.
 
-This tutorial does not cover workflows for taking read data to phylogeny, multiple sequence alignment or Bayesian methods. We’ve included recommended reading and tutorials on these topics in the resources section.
+This tutorial does not cover workflows for taking read data to phylogeny or Bayesian methods. We’ve included recommended reading and tutorials on these topics in the resources section.
 
 This tutorial is adapted from a 2019 workshop that was run by Australian BioCommons and Michael Charleston from the University of Tasmania.
 
@@ -81,7 +82,7 @@ This tutorial is adapted from a 2019 workshop that was run by Australian BioComm
 * Comparing phylogenies --- what to do when they aren't all the same
 * Analysing robustness using bootstrapping
 * A little on what can possibly (probably) go wrong?
-* A overview of a workflow
+* An overview of a workflow
 
 **We will not cover:**
 
@@ -110,7 +111,7 @@ This tutorial has the following structure:
 
 
 ## What is a Phylogeny?
-![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](./images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. [Wikimedia commons](https://en.m.wikipedia.org/wiki/File:Darwins_first_tree.jpg)"){:align="center", width="400px"}
+![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](./images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. [Wikimedia commons](https://en.m.wikipedia.org/wiki/File:Darwins_first_tree.jpg)"){: align="center"}
 
 A *phylogenetic tree*, also called a *phylogeny*, is usually a tree-like structure, like [Darwin's famous sketch](#figure-1). The leaves or tips of the tree represent extant (living/existing) taxonomic entities like species, genera, or strains (in general called "taxa"). The lines connecting taxa describe the evolutionary relationships between them.
 The intersections of lines correspond to hypothetical ancestral taxa. They represent branching events when species split into two new species, or a strain developed a phylogenetic important offshoot strain, etc.
@@ -131,13 +132,15 @@ to families:
 
 and much bigger projects across all of life:
 
-![Phylogenetic tree of life based on sequenced genomes](./images/nmicrobiol201648-f1.jpg "A modern view of the tree of life based on sequenced genomes. {% cite PMID:27572647 %} reproduced under Creative Commons Attribution 4.0 International License"){:align="center", width="500"}
+![Phylogenetic tree of life based on sequenced genomes](./images/nmicrobiol201648_Fig1_HTML.webp "A modern view of the tree of life based on sequenced genomes. {% cite PMID:27572647 %} reproduced under Creative Commons Attribution 4.0 International License"){:align="center" width="800"}
+
+<!-- topics/evolution/tutorials/abc_intro_phylo/images/nmicrobiol201648_Fig1_HTML.webp -->
 
 Aside from gaining a fundamental understanding of biology, other reasons for inferring phylogenetic relationships include:
 
 - Designing vaccines, for example for SARS-CoV2 and influenza
 - Measuring phylogenetic diversity for guiding conservation efforts
-- Understanding coevolution, for example around 70% of emergent human diseases have come from other species
+- Understanding coevolution; for example around 70% of emergent human diseases have come from other species
 - Dating major evolutionary events to study the effects of environmental change on different species.
 
 > <comment-title>Gene trees, species trees reconcilitation problem</comment-title>
@@ -263,7 +266,7 @@ Building a tree begins with a set of *distances*, which record how different the
 Distances have very desirable properties, that can be summarised as follows: for any objects $$ x $$, $$y$$, $$z$$, writing $$d(x,y)$$ means the distance from $$x$$ to $$y$$ etc.  These properties are:
  * *non-negativity* -- distances can never be negative, and in fact we treat two things as identical if they have a distance of 0 between them.
  * *symmetry* -- the distance from $$x$$ to $$y$$ is the same as the distance from $$y$$ to $$x$$; that is, $$d(x,y) = d(y,x)$$.
- * the *triangle inequality* -- there are no short-cuts!  The distance from $$x$$ to $$z$$ is always *at most* the distance from $$x$$ to $$y$$ plus that from $$y$$ to $$y$$; that is, $$ d(x,y) + d(y,z) \leq d(x,z)$$.
+ * the *triangle inequality* -- there are no short-cuts!  The distance from $$x$$ to $$z$$ is always *at most* the distance from $$x$$ to $$y$$ plus that from $$y$$ to $$z$$; that is, $$ d(x,y) + d(y,z) \leq d(x,z)$$.
 
  In phylogenetics terms, we like distances to represent something like time and we can assign lengths to branches (see the [Tree Anatomy diagram](#figure-4) above).
 
@@ -285,7 +288,7 @@ Distance-based methods (orange boxes) use algorithms to select a pair of taxa, o
 
 ## Let's build our first tree
 
-In this tutorial we will use a set of *Anolis* lizard DNA sequences, from Jackman, Larson, de Queiroz & Losos {% cite 10.1080/106351599260283 %} to trial some phylogenetic methods.
+In this tutorial we will use a set of *Anolis* lizard DNA sequences, from {% cite 10.1080/106351599260283 %} to trial some phylogenetic methods.
 The sequences are from the mitochondrial NADH dehydrogenase subunit 2 gene (ND2) and five transfer RNA (tRNA) genes, with an average sequence length of 1419.109 and a range of [1329,1727].
 
 
@@ -328,12 +331,6 @@ In the real world, a phylogenetic analyses often span hundreds, or even thousand
 
 The example below has four sequences in it named Taxon_1, Taxon_2, etc, each with a short set of characters representing DNA sequences.
 
-<!-- ```
->SEQUENCE_1
-GAGCTATACGACGT
->SEQUENCE_2
-TTACTAGCTACTACT
-``` -->
 
 ```
 >Taxon_1
@@ -577,7 +574,7 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 
 *If you are in a hurry to do the phylogenetic analysis you can skip this section and go to the next [Hands-on: running IQ Tree](#estimating-a-maximum-likelihood-tree).*
 
-> <details-title>More details on likelihood models</details-title>
+> <details-title>Likelihood models</details-title>
 > Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
 > The simplest model for DNA is that each nucleotide has the same rate of change, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC69) model published in 1969, and this model has just one parameter.
 > 
@@ -586,13 +583,13 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 > A next level of sophistication is the Hasegawa-Kishino-Yano model (HKY85) published in 1985, which acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
 > Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
 > 
-> ![HKY85 Formula](./images/HKY85RateMatrix.png "HKY85 formula"){: align="center", width="300px"}
+> ![HKY85 Formula](./images/HKY85RateMatrix.png "HKY85 rate matrix"){: align="center" width="300px"}
 > 
 > In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "the sum of everything else in the row."
 > 
 > A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the "reversible" property) but otherwise all rates are independent of each other:
 > 
-> ![GTR](./images/GTRRateMatrix.png){: align="center", width="300px"}
+> ![GTR](./images/GTRRateMatrix.png "GTR rate matrix"){: align="center" width="300px"}
 >
 > A further level of sophistication is the recognition that some sites may be constrained from changing at all. For example, there may be some that have a critical role in fixing the correct amino acid for a protein to function. This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
 > 
@@ -635,7 +632,7 @@ An unresolved node *may* be a true representation of the branching pattern of a 
 
 In phylogenetics unresolved nodes are more often due to a lack of resolving power in the data, so the phylogenetic method cannot choose the branch ordering:
 
-![Schematic trees showing unresolved nodes](./images/Unresolved.png "Unresolved nodes"){: align="center", width="400px"}
+![Schematic trees showing unresolved nodes](./images/Unresolved.png "Unresolved nodes"){: align="center" width="400px"}
 
 If there are many unresolved branches in the phylogeny, this is an indication that there is not enough information in your data: you'll need to obtain more.
 
@@ -666,31 +663,354 @@ While this is running you might use your time to read the [Models of sequence ev
 > <hands-on-title>Estimating a Maximum Likelihood tree with IQTree</hands-on-title>
 >
 > 1. Find the {% tool IQTree %} program in the tool finder.
-> 2. Load your alignmed sequence data, i.e. the alignment from MAFFT.
+> 1. Load your aligned sequence data, i.e., the alignment from MAFFT.
 > 3. Leave the selection of data type as DNA.
 > 4. Ignore the Time Tree Reconstruciton settings and Likelihood Mapping analysis settings.
-> 5. Under the **Modelling Parameters**, leave Automatic model selection ON, and the other parameters as they are except the last: Set **"Write maximum likelihood site ratios to .mlrate file"** to "Yes".
-> 6. Leave all the Tree Parameters as they are. (Have a look at them and see if you can work out what they do).
-> 7. For **Bootstrap Parameters** select "Ultrafast bootstrap parameters" and enter "1000" bootstrap replicates.
-> 8. Click "Run tool"
+> 5. Under the **Modelling Parameters**, click **Automatic model selection** and select "Standard model selection" in the drop-down menu for *Perform standard model selection like jModelTest (for DNA) and ProtTest (for protein)*, and click the **Automatic model selection** menu title again to close it.
+> 6. Open the **Rate heterogeneity** menu and set the last option, **"Write maximum likelihood site ratios to .mlrate file"** to "Yes".
+> 7. Close the **Modelling Parameters** menu and open the **Bootstrap Parameters** menu, then *Ultrafast bootstrap parameters*. Enter 1000 in the field "Specify number of bootstrap replicates (>=1000)"
+> 8. Open the *Nonparametric bootstrappingLeave all the Tree Parameters as they are. (Have a look at them and see if you can work out what they do).
+> 9. For **Bootstrap Parameters** select "Ultrafast bootstrap parameters" and enter "1000" bootstrap replicates.
+> 11. Click "Run tool"
 >
 {: .hands_on}
 
 
 
 
-> <question-title>Bootstrapping with IQ-Tree</question-title>
-> Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree
+> <question-title>How well supported is your tree?</question-title>
+> Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree.
 > ![IQTreePhylovis](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis."){:align="center"}
->  1. What are the bootrap values near the root of the tree? Do you think those branches are well supported?
+>  1. What are the bootstrap values near the root of the tree? Do you think those branches are well supported?
 > 2. Which do you think is the biggest well-supported clade?
+> 2. Are there some nodes that would be better left unresolved?
+> 3. Is your tree "probably right"? -- or 80% right?
  {: .question}
 
 
-Observe the bootstrap values in the IQTree output for deep branches are not as high.
+Observe that the bootstrap values in the IQTree output for deep branches are not as high.
 
 Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates of the probability that the branch is correct, so are not quite the same as traditional "naive" bootstrap values.
 
+
+### Report on the final tree
+
+Look at the IQTree Report file.
+
+In that you will see a *long* list of models that have been tested, with the favoured one at the top.
+
+You will also see the Newick Format of the best tree found.  When I ran it, the best model was "GTR+F+R6", which means the General Time-Reversible 
+
+> <question-title>Understanding the IQ-Tree report</question-title>
+> 1. What is the second-most favoured model?
+> 2. How many the relative rates of evolution have been estimated, and what are these rates?
+{: .question}
+
+> <details-title>Guide to the report</details-title>
+> The report below shows a long list of models that have been tested, and these are sorted by their AIC score.
+> The columns comprise the name of the model, the log-likelihood (that is, the log of the likelihood), of the best-fit tree using that model, then six more columns that are the penalised according to the number of parameters each model has, and an overall weighting of the posterior probability of each model.  In the table below, the GTR+F+R6 model has approximately 81.7% of the probability mass based on AIC, but in terms of BIC, it is about 2.37% (guide at the bottom of the table).
+> 
+> It next shows details of the model selected, with relative rate parameters for the various substitutions (A-C is from A to C, etc.); estimated nucleotide frequencies, and then the rate categories.
+> In this analysis the best-fit model is GTR+F+R6:
+> "Model of rate heterogeneity: FreeRate with 6 categories"
+> ... which allows for six categories of relative rates, and shows the proportion of sites estimated to be in each category.
+> 
+> The last thing in the report is the tree!  First in the nostalgic ASCII-format "drawing," and then the same tree in Newick format.
+>
+> <pre>
+> IQ-TREE 2.1.2 COVID-edition built Mar 30 2021
+> 
+> Input file name: /mnt/pulsar/files/staging/7756321/inputs/dataset_6092bb0e-7934-473c-8e8f-77054b0192c5.dat
+> Type of analysis: ModelFinder + tree reconstruction
+> Random seed number: 204403
+> 
+> REFERENCES
+> ----------
+> 
+> To cite IQ-TREE please use:
+> 
+> Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
+> Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
+> IQ-TREE 2: New models and efficient methods for phylogenetic inference
+> in the genomic era. Mol. Biol. Evol., in press.
+> https://doi.org/10.1093/molbev/msaa015
+> 
+> To cite ModelFinder please use: 
+> 
+> Subha Kalyaanamoorthy, Bui Quang Minh, Thomas KF Wong, Arndt von Haeseler,
+> and Lars S Jermiin (2017) ModelFinder: Fast model selection for
+> accurate phylogenetic estimates. Nature Methods, 14:587–589.
+> https://doi.org/10.1038/nmeth.4285
+> 
+> SEQUENCE ALIGNMENT
+> ------------------
+> 
+> Input data: 55 sequences with 1462 nucleotide sites
+> Number of constant sites: 377 (= 25.7866% of all sites)
+> Number of invariant (constant or ambiguous constant) sites: 377 (= 25.7866% of all sites)
+> Number of parsimony informative sites: 913
+> Number of distinct site patterns: 1138
+> 
+> ModelFinder
+> -----------
+> 
+> Best-fit model according to AIC: GTR+F+R6
+> 
+> List of models sorted by AIC scores: 
+> 
+> Model                  LogL         AIC      w-AIC        AICc     w-AICc         BIC      w-BIC
+> GTR+F+R6         -37031.233   74312.465 +    0.817   74336.043 +    0.832   74973.410 -   0.0237
+> GTR+F+R7         -37031.088   74316.176 +    0.128   74340.548 +   0.0875   74987.696 - 1.88e-05
+> TIM2+F+R6        -37036.403   74318.806 -   0.0343   74341.604 +   0.0516   74969.176 +    0.197
+> GTR+F+R5         -37037.210   74320.421 -   0.0153   74343.219 -    0.023   74970.791 +    0.088
+> TIM2+F+R7        -37036.374   74322.749 -  0.00478   74346.327 -  0.00486   74983.694 - 0.000139
+> TIM2+F+R5        -37042.437   74326.875 - 0.000607   74348.907 -  0.00134   74966.669 +    0.691
+> TIM3+F+R6        -37070.405   74386.811 - 5.87e-17   74409.609 - 8.82e-17   75037.180 - 3.37e-16
+> TIM3+F+R7        -37070.201   74390.401 - 9.74e-18   74413.979 - 9.92e-18   75051.346 - 2.83e-19
+> GTR+F+R4         -37074.898   74391.795 - 4.85e-18   74413.828 - 1.07e-17   75031.590 - 5.52e-15
+> TN+F+R6          -37075.376   74394.752 - 1.11e-18   74417.166 - 2.02e-18   75039.835 - 8.95e-17
+> TIM+F+R6         -37074.693   74395.386 - 8.06e-19   74418.184 - 1.21e-18   75045.756 - 4.63e-18
+> TIM3+F+R5        -37076.845   74395.690 - 6.92e-19   74417.723 - 1.53e-18   75035.485 - 7.88e-16
+> TN+F+R7          -37075.196   74398.393 - 1.79e-19   74421.579 - 2.22e-19   75054.050 - 7.33e-20
+> TIM+F+R7         -37074.525   74399.049 - 1.29e-19   74422.627 - 1.31e-19   75059.994 - 3.75e-21
+> TN+F+R5          -37081.842   74403.685 - 1.27e-20   74425.340 - 3.38e-20   75038.192 - 2.03e-16
+> TIM+F+R5         -37081.073   74404.146 - 1.01e-20   74426.179 - 2.22e-20   75043.941 - 1.15e-17
+> GTR+F+I+G4       -37096.959   74427.917 - 6.95e-26   74448.462 - 3.23e-25   75046.562 -  3.1e-18
+> TVM+F+R6         -37095.385   74438.769 - 3.06e-28   74461.955 - 3.79e-28   75094.427 - 1.25e-28
+> TVM+F+R5         -37097.648   74439.297 - 2.35e-28   74461.711 - 4.28e-28   75084.379 -  1.9e-26
+> TVM+F+R7         -37095.426   74442.853 - 3.97e-29   74466.826 - 3.32e-29   75109.085 - 8.21e-32
+> TPM2+F+R6        -37100.987   74445.973 - 8.35e-30   74468.387 - 1.52e-29   75091.056 - 6.75e-28
+> TPM2u+F+R6       -37100.987   74445.973 - 8.35e-30   74468.387 - 1.52e-29   75091.056 - 6.75e-28
+> TPM2+F+R5        -37103.564   74447.128 - 4.68e-30   74468.784 - 1.25e-29   75081.636 - 7.49e-26
+> TPM2u+F+R5       -37103.564   74447.128 - 4.68e-30   74468.784 - 1.25e-29   75081.636 - 7.49e-26
+> TPM2+F+R7        -37100.997   74449.993 - 1.12e-30   74473.179 - 1.38e-30   75105.651 - 4.57e-31
+> TPM2u+F+R7       -37100.997   74449.994 - 1.12e-30   74473.180 - 1.38e-30   75105.651 - 4.57e-31
+> TPM3u+F+R6       -37126.615   74497.230 - 6.18e-41   74519.644 - 1.13e-40   75142.312 -    5e-39
+> TPM3+F+R6        -37126.615   74497.230 - 6.18e-41   74519.644 - 1.13e-40   75142.312 -    5e-39
+> TPM3u+F+R5       -37129.065   74498.131 - 3.94e-41   74519.786 - 1.05e-40   75132.638 - 6.31e-37
+> TPM3+F+R5        -37129.065   74498.131 - 3.94e-41   74519.786 - 1.05e-40   75132.638 - 6.31e-37
+> TPM3+F+R7        -37126.341   74500.682 -  1.1e-41   74523.868 - 1.36e-41   75156.340 -  4.5e-42
+> TPM3u+F+R7       -37126.342   74500.683 -  1.1e-41   74523.869 - 1.36e-41   75156.341 -  4.5e-42
+> HKY+F+R6         -37131.953   74505.906 - 8.08e-43   74527.938 - 1.78e-42   75145.700 - 9.19e-40
+> K3Pu+F+R6        -37131.054   74506.107 -  7.3e-43   74528.521 - 1.33e-42   75151.190 - 5.91e-41
+> HKY+F+R5         -37134.629   74507.258 - 4.11e-43   74528.540 - 1.32e-42   75136.478 - 9.25e-38
+> K3Pu+F+R5        -37133.634   74507.269 - 4.09e-43   74528.924 - 1.09e-42   75141.776 - 6.54e-39
+> HKY+F+R7         -37131.734   74509.468 - 1.36e-43   74532.266 - 2.05e-43   75159.838 - 7.82e-43
+> K3Pu+F+R7        -37130.809   74509.619 - 1.26e-43   74532.805 - 1.56e-43   75165.276 - 5.16e-44
+> GTR+F+G4         -37164.452   74560.904 - 9.22e-55   74581.085 - 5.13e-54   75174.261 - 5.77e-46
+> GTR+F+R3         -37179.249   74596.499 - 1.72e-62   74617.780 - 5.51e-62   75225.718 - 3.87e-57
+> SYM+R5           -37262.490   74764.980 - 4.47e-99   74786.635 - 1.19e-98   75399.487 - 7.15e-95
+> SYM+R6           -37261.122   74766.244 - 2.37e-99   74788.658 - 4.33e-99   75411.326 - 1.92e-97
+> TIM2e+R5         -37274.321   74784.641 - 2.4e-103   74805.553 - 9.27e-103   75408.573 - 7.61e-97
+> TIM2e+R6         -37273.043   74786.086 - 1.17e-103   74807.741 - 3.1e-103   75420.593 - 1.87e-99
+> GTR+F+R2         -37597.901   75429.802 - 1.93e-243   75450.347 - 8.95e-243   76048.447 - 8.6e-236
+> TIM3e+R6         -37740.342   75720.684 - 1.32e-306   75742.339 - 3.52e-306   76355.191 - 2.12e-302
+> TIM3e+R7         -37740.126   75724.252 - 2.22e-307   75746.665 - 4.05e-307   76369.334 - 1.8e-305
+> TVMe+R6          -37741.704   75725.408 - 1.25e-307   75747.441 - 2.75e-307   76365.203 - 1.42e-304
+> TVMe+R5          -37745.621   75729.242 - 1.83e-308   75750.524 - 5.88e-308   76358.462 - 4.13e-303
+> TVMe+R7          -37741.937   75729.875 - 1.34e-308   75752.673 - 2.01e-308   76380.245 - 7.68e-308
+> TIM3e+R5         -37747.544   75731.088 - 7.28e-309   75751.999 - 2.81e-308   76355.020 - 2.31e-302
+> TIMe+R6          -37750.759   75741.518 - 3.96e-311   75763.173 - 1.05e-310   76376.025 - 6.33e-307
+> TNe+R6           -37752.489   75742.978 - 1.91e-311   75764.260 - 6.12e-311   76372.198 - 4.29e-306
+> TIMe+R7          -37750.536   75745.072 - 6.69e-312   75767.486 - 1.22e-311   76390.154 - 5.41e-310
+> TNe+R7           -37752.255   75746.511 - 3.26e-312   75768.544 - 7.19e-312   76386.306 - 3.71e-309
+> TIMe+R5          -37757.450   75750.900 - 3.63e-313   75771.811 - 1.4e-312   76374.832 - 1.15e-306
+> TNe+R5           -37759.321   75752.642 - 1.52e-313   75773.187 - 7.05e-313   76371.287 - 6.77e-306
+> K3P+R5           -38328.664   76891.327 -        0   76911.872 -        0   77509.972 -        0
+> K2P+R5           -38330.281   76892.562 -        0   76912.744 -        0   77505.919 -        0
+> K3P+R6           -38327.530   76893.060 -        0   76914.341 -        0   77522.279 -        0
+> K2P+R6           -38329.207   76894.414 -        0   76915.326 -        0   77518.347 -        0
+> F81+F+R5         -38740.095   77716.191 -        0   77737.102 -        0   78340.123 -        0
+> F81+F+R6         -38739.434   77718.868 -        0   77740.523 -        0   78353.375 -        0
+> GTR+F+I          -39252.699   78737.399 -        0   78757.580 -        0   79350.756 -        0
+> JC+R5            -39408.095   79046.191 -        0   79066.012 -        0   79654.260 -        0
+> JC+R6            -39407.610   79049.220 -        0   79069.765 -        0   79667.865 -        0
+> GTR+F            -41407.684   83045.369 -        0   83065.190 -        0   83653.438 -        0
+> 
+> AIC, w-AIC   : Akaike information criterion scores and weights.
+> AICc, w-AICc : Corrected AIC scores and weights.
+> BIC, w-BIC   : Bayesian information criterion scores and weights.
+> 
+> Plus signs denote the 95% confidence sets.
+> Minus signs denote significant exclusion.
+> 
+> SUBSTITUTION PROCESS
+> --------------------
+> 
+> Model of substitution: GTR+F+R6
+> 
+> Rate parameter R:
+> 
+>   A-C: 1.4045
+>   A-G: 4.3329
+>   A-T: 1.6165
+>   C-G: 0.7046
+>   C-T: 7.4429
+>   G-T: 1.0000
+> 
+> State frequencies: (empirical counts from alignment)
+> 
+>   pi(A) = 0.3392
+>   pi(C) = 0.2607
+>   pi(G) = 0.1184
+>   pi(T) = 0.2817
+> 
+> Rate matrix Q:
+> 
+>   A   -0.6328    0.1737    0.2432    0.2159
+>   C    0.2259     -1.26   0.03954    0.9942
+>   G     0.697   0.08712   -0.9177    0.1336
+>   T      0.26    0.9203   0.05613    -1.236
+> 
+> Model of rate heterogeneity: FreeRate with 6 categories
+> Site proportion and rates:  (0.2697,0.01936) (0.1987,0.1952) (0.1537,0.6315) (0.1929,1.365) (0.1619,2.662) (0.02305,7.146)
+> 
+>  Category  Relative_rate  Proportion
+>   1         0.01936        0.2697
+>   2         0.1952         0.1987
+>   3         0.6315         0.1537
+>   4         1.365          0.1929
+>   5         2.662          0.1619
+>   6         7.146          0.02305
+> 
+> MAXIMUM LIKELIHOOD TREE
+> -----------------------
+> 
+> Log-likelihood of the tree: -37024.7700 (s.e. 781.9510)
+> Unconstrained log-likelihood (without tree): -9373.5747
+> Number of free parameters (#branches + #model parameters): 125
+> Akaike information criterion (AIC) score: 74299.5399
+> Corrected Akaike information criterion (AICc) score: 74323.1178
+> Bayesian information criterion (BIC) score: 74960.4850
+> 
+> Total tree length (sum of branch lengths): 10.7102
+> Sum of internal branch lengths: 2.7107 (25.3096% of tree length)
+> 
+> NOTE: Tree is UNROOTED although outgroup taxon 'Anolis.acutus' is drawn at root
+> 
+> +------Anolis.acutus
+> |
+> |                                              +-----A.aeneus
+> |                                        +-----|
+> |                                        |     +----A.richardi
+> |                                     +--|
+> |                                     |  +---------A.luciae
+> |                                  +--|
+> |                                  |  |      +------A.agassizi
+> |                                  |  |   +--|
+> |                                  |  |   |  +--------A.microtus
+> |                                  |  +---|
+> |                                  |      +--------------P.nicefori
+> |                               +--|
+> |                               |  |          +----------------------Diplolaemus.darwinii
+> |                               |  +----------|
+> |                               |             +----------------------Phenacosaurus.acutirostrus
+> |                            +--|
+> |                            |  |               +---------A.aliniger
+> |                            |  |           +---|
+> |                            |  |           |   +----------A.coelestinus
+> |                            |  |        +--|
+> |                            |  |        |  +-------------A.bahorucoensis
+> |                            |  |     +--|
+> |                            |  |     |  |    +---------A.bartschi
+> |                            |  |     |  +----|
+> |                            |  |     |       +------A.vermiculatus
+> |                            |  |  +--|
+> |                            |  |  |  +-----------A.equestris
+> |                            |  +--|
+> |                            |     +-----------------------A.occulatus
+> |                         +--|
+> |                         |  |        +------A.etheridgei
+> |                         |  |     +--|
+> |                         |  |     |  +---------A.insolitus
+> |                         |  |  +--|
+> |                         |  |  |  +-------------A.olssoni
+> |                         |  +--|
+> |                         |     +--------------Chamaeleolis.barbouri
+> |                      +--|
+> |                      |  |           +--------A.barahonae
+> |                      |  |        +--|
+> |                      |  |        |  +--------A.christophei
+> |                      |  |     +--|
+> |                      |  |     |  +--------A.cuvieri
+> |                      |  |  +--|
+> |                      |  |  |  |            +--C.guamuhaya
+> |                      |  |  |  +------------|
+> |                      |  |  |               +--C.chamaeleonides
+> |                      |  +--|
+> |                      |     +--------------A.lucius
+> |                   +--|
+> |                   |  |         +-------------A.marcanoi
+> |                   |  +---------|
+> |                   |            +-----------A.strahmi
+> |                +--|
+> |                |  |       +---------------A.ahli
+> |                |  |    +--|
+> |                |  |    |  |         +-----A.ophiolepis
+> |                |  |    |  +---------|
+> |                |  |    |            +----A.sagrei
+> |                |  +----|
+> |                |       |             +-----A.garmani
+> |                |       |        +----|
+> |                |       |        |    +-----A.grahami
+> |                |       |     +--|
+> |                |       |     |  +--------A.equestris2
+> |                |       |  +--|
+> |                |       |  |  +------------A.lineatopus
+> |                |       +--|
+> |                |          |          +-------------A.humilis
+> |                |          |  +-------|
+> |                |          |  |       +------------A.limifrons
+> |                |          +--|
+> |                |             +-------------A.lineatus
+> |             +--|
+> |             |  |           +--------A.alutaceous
+> |             |  |  +--------|
+> |             |  |  |        +-----------A.vanidicus
+> |             |  +--|
+> |             |     |                +----A.angusticeps
+> |             |     |        +-------|
+> |             |     |        |       |  +--A.paternus
+> |             |     |        |       +--|
+> |             |     |        |          +--A.paternus2
+> |             |     |     +--|
+> |             |     |     |  +----------------A.sheplani
+> |             |     |  +--|
+> |             |     |  |  |    +---A.carolinensis
+> |             |     |  |  +----|
+> |             |     |  |       +----A.maynardi
+> |             |     +--|
+> |             |        |  +------A.loysiana
+> |             |        +--|
+> |             |           +----------A.pumilis
+> |          +--|
+> |          |  |   +-----------A.bimaculatus
+> |          |  +---|
+> |          |      +------------A.wattsi
+> |       +--|
+> |       |  |     +---------A.brevirostrus
+> |       |  +-----|
+> |       |        +------A.distichus
+> |    +--|
+> |    |  +----------A.krugi
+> +----|
+> |    +------------A.cristatellus
+> |
+> +-----A.stratulus
+> 
+> Tree in newick format:
+> 
+> (Anolis.acutus:0.1010470578,((((((((((((((A.aeneus:0.0894217579,A.richardi:0.0771663752):0.0905009536,A.luciae:0.1452269292):0.0505637895,((A.agassizi:0.1016958548,A.microtus:0.1274705993):0.0466408653,P.nicefori:0.2174577338):0.0678983736):0.0434625375,(Diplolaemus.darwinii:0.3250757059,Phenacosaurus.acutirostrus:0.3269305219):0.1596746115):0.0466548353,(((((A.aliniger:0.1391142437,A.coelestinus:0.1557602669):0.0598840477,A.bahorucoensis:0.1976626377):0.0075156245,(A.bartschi:0.1398068405,A.vermiculatus:0.1026256093):0.0701730721):0.0088445438,A.equestris:0.1698075932):0.0120788802,A.occulatus:0.3404603086):0.0198461252):0.0251152781,(((A.etheridgei:0.0991665297,A.insolitus:0.1482517520):0.0540499255,A.olssoni:0.1910514865):0.0088098284,Chamaeleolis.barbouri:0.2095740155):0.0188459879):0.0077203037,((((A.barahonae:0.1260843543,A.christophei:0.1262731407):0.0348296954,A.cuvieri:0.1361832093):0.0309217949,(C.guamuhaya:0.0431099935,C.chamaeleonides:0.0257796446):0.1779877789):0.0345206566,A.lucius:0.2146844398):0.0147942476):0.0193880895,(A.marcanoi:0.1954668346,A.strahmi:0.1658659731):0.1384272979):0.0071850401,((A.ahli:0.2194974552,(A.ophiolepis:0.0874380486,A.sagrei:0.0746247231):0.1427321115):0.0307428243,((((A.garmani:0.0905499626,A.grahami:0.0943764186):0.0703118985,A.equestris2:0.1314905403):0.0198447353,A.lineatopus:0.1838950754):0.0232334317,((A.humilis:0.2006656769,A.limifrons:0.1903931082):0.1159932105,A.lineatus:0.2020567025):0.0284469354):0.0386892413):0.0788578675):0.0071420002,((A.alutaceous:0.1299690048,A.vanidicus:0.1769083322):0.1269197421,((((A.angusticeps:0.0766354706,(A.paternus:0.0125693305,A.paternus2:0.0058013518):0.0519908238):0.1128275458,A.sheplani:0.2418794624):0.0228102911,(A.carolinensis:0.0645999975,A.maynardi:0.0760546166):0.0733086724):0.0301309147,(A.loysiana:0.0985169696,A.pumilis:0.1631220132):0.0511013731):0.0207983825):0.0498971029):0.0462944857,(A.bimaculatus:0.1713426754,A.wattsi:0.1884789044):0.0574997330):0.0334141164,(A.brevirostrus:0.1442087439,A.distichus:0.1088311847):0.0833172684):0.0398851829,A.krugi:0.1583953901):0.0256700857,A.cristatellus:0.1827036810):0.0725247864,A.stratulus:0.0863000570);
+> 
+> TIME STAMP
+> ----------
+> 
+> Date and time: Fri Dec  8 00:36:23 2023
+> Total CPU time used: 243.654 seconds (0h:4m:3s)
+> Total wall-clock time used: 56.1638 seconds (0h:0m:56s)
+> </pre>
+> 
+{: .details}
 
 
 # Phylogenetic Networks
@@ -698,11 +1018,11 @@ Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates 
 <!-- Intro to phylogenetic networks as an alternative to trees -->
 
 
-Perhaps surprisingly, phylogenetic estimation doesn't have to start with a tree. Instead you can start with *phylogenetic networks*.
+Perhaps surprisingly, phylogenetic estimation doesn't have to start with a tree. Instead you can start with a *phylogenetic network*.
 
 Phylogenetic networks have two purposes: 
 
-(i) to show an estimate of the evolutonary history that is not strictly branching, so, involving horizontal gene transfer or hybridisation events.
+(i) to show an estimate of the evolutionary history that is not strictly branching, so, involving horizontal gene transfer or hybridisation events.
  
  or 
 
@@ -781,18 +1101,6 @@ The beauty of the network is that both thes pieces of information can be shown o
 {: .hands_on}
 
 
-<!-- ### Report on the final tree
-
-Look at the IQTree Report file.
-
-In that you will see a long list of models that have been tested, with the favoured one at the top.
-
-You will also see the Newick Format of the best tree found.
-
-
-XXX More to go here.
- -->
-
 
 
 # Troubleshooting
@@ -807,12 +1115,12 @@ Here are a few things that can catch us out:
   - **Very “Gappy” Sequences:** 
     Sequences that are hard to align might contain many gaps and many equally “good” alignments.
   
-    **Fix:** Try different multiple alignment programs; consider using “alignment-free” methods such as k-mer distances; remove very problematic regions using programs such as GBlocks.
+    **Fix:** Try different multiple alignment programs; consider using “alignment-free” methods such as k-mer distances; remove very problematic regions using programs such as GBlocks (also available on Galaxy).
 
   - **Low resolution:** 
     Low bootstrap support or lots of conflict in a network.
     
-    **Fix:** Look at which sites support which splits (internal branches); consider sliding window approaches or check that your sequences don’t span regions with different selection pressures; consider using PartitionFinder or similar methods to work out which sets of sites have similar evolutionary dynamics.
+    **Fix:** Look at which sites support which splits (internal branches); consider sliding window approaches to identify recombination, or check that your sequences don’t span regions with different selection pressures; consider using PartitionFinder or similar methods to work out which sets of sites have similar evolutionary dynamics.
 
   - **The gene trees are different!**
     
@@ -826,7 +1134,7 @@ Here are a few things that can catch us out:
 
 Phylogenetics provides the statistical framework that is essential for comparing biological organisms. A phylogenetic tree provides a best estimate of the evolutionary relationships between species (taxa) of interest, which is the framework we need to compare them.
 
-A key component of molecular phylogenetics is creating an alignment -- this is a complex process that can have different outcomes using different methods.  It is always a good idea to look at the alignment to see if it makes sense: that the insertion/deletion events have been included by the alignment program are consitent with a phylogenetic relationship between the species.
+A key component of molecular phylogenetics is creating an alignment -- this is a complex process that can have different outcomes using different methods.  It is always a good idea to look at the alignment to see if it makes sense: that the insertion/deletion events have been included by the alignment program are consistent with a phylogenetic relationship between the species.
 
 While the estimation of phylogenetic trees is computationally challenging, there are a range of well-validated methods to use, constructing them based on distances, molecular sequences, and other data; these can also be used to create phylogenetic networks that represent the complexities in the data. There is a big range of score functions by which we can compare trees: based on minimum total distance (minimum evolution), on the maximum number of evolutionary "work" to account for the data (maximum parsimony), and on finding the model that has the highest probability of giving us the data we saw (maximum likelihood).
 It's important to remember that these are all statistical estimates, so may differ, and it is good advice to use multiple methods to confirm general phylogenetic relationships, rather than choose a single method.
@@ -834,6 +1142,9 @@ It's important to remember that these are all statistical estimates, so may diff
 Phylogenetic trees based on molecular sequences can be analysed by bootstrapping, where representative independent re-samples of the input alignment are analysed again using the same methods, 100s ot 1000s of times, to gauge how reliable each branch is, in the sense of how often the branch is part of the best tree found for each re-sample.  This isn't a measure of confidence in the statistical sense, but a rule of thumb of 80% or more being "good support" is common in the literature -- remembering that as sequences get longer and longer, bootstrap support values go up, no matter how poor the data are!
 
 It's worth noting that this tutorial is only focusing on the estimation of individual best trees, rather than taking a Bayesian approach in which a posterior probability of trees is created, using programs like <a href="https://nbisweden.github.io/MrBayes/index.html">MrBayes</a> or <a href="http://www.beast2.org/">BEAST</a>.  These programs use even more computational resources and can run for many days or weeks as they wander around "tree space" building up a representative distribution of the probability that each tree is "right".  This computational burden is one of the main reasons we have not gone into Bayesian methods in this tutorial, but there are many good ones available on line at the web pages for the above programs.
+
+We hope that this tutorial and accompanying videos have given you a better understanding of the principles of phylogenetics and how these methods work, and to help you make informed decisions about the phylogenetic analyses you perform.
+See the resources below to learn more about phylogenetics.
 
 # Resources
 To develop a deeper understanding of phylogenetic trees, there is no better way than estimating phylogenies yourself --- and work through a book on the topic at your own pace.
@@ -848,6 +1159,8 @@ To develop a deeper understanding of phylogenetic trees, there is no better way 
 - [Tutorial on how to read a tree, with a virus example](https://artic.network/how-to-read-a-tree.html)
 - [Tree Of Life web project](http://tolweb.org)
 - [Phylogenetic Inference in the Stanford Encyclopedia](https://plato.stanford.edu/entries/phylogenetic-inference/)
+- [MrBayes](https://nbisweden.github.io/MrBayes/index.html)
+- [BEAST](http://www.beast2.org/)
 
 ## How to cite the tools used in this tutorial
 
@@ -857,7 +1170,7 @@ To cite IQ-TREE please use:
 Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
 Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
 IQ-TREE 2: New models and efficient methods for phylogenetic inference
-in the genomic era. Mol. Biol. Evol., in press.
+in the genomic era. Mol. Biol. Evol.
 https://doi.org/10.1093/molbev/msaa015
 
 To cite ModelFinder please use: 
