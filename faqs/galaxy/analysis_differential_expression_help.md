@@ -62,7 +62,7 @@ Reference transcriptome (fasta)
   
 Reference annotation (tabular, GTF, GFF3)
 
-- Reference annotation [in GTF format]({% link faqs/galaxy/datasets_working_with_reference_annotation.md & %}) works best.
+- Reference annotation [in GTF format]({% link faqs/galaxy/datasets_working_with_reference_annotation.md %}) works best.
 - If a GTF dataset is not available for your genome, a two-column tabular dataset containing `transcript <tab> gene` can be used instead with most of these tools. 
 - **HTseq-count** requires GTF attributes. Featurecounts is an alternative tool choice.
 - Sometimes the tool **gffread** is used to transform GFF3 data to GTF. 
