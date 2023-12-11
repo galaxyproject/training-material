@@ -23,5 +23,5 @@ Need more disk space?
 Other tips:
   - Forgot your password? You can request a reset link in on the login page.
   - If you want to associate your account with a different email address, you can do so under **User -> Preferences** in the top menu bar
-  - To start over with a new account, first delete your account(s) first before creating a new account. This can be done in **User -> Preferences** menu in the top bar.
+  - To start over with a new account, first delete your existing account(s) before creating a new account. This can be done in **User -> Preferences** menu in the top bar.
 
