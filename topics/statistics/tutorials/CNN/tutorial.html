@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9008d11b581c94bdfa384b451281439572d74a07",
+		release: "galaxy-training-network@78c0d6ddc135ad08b2ea3dbd8423b6f123c7792a",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -59,8 +59,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702262099' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702262099' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702291075' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702291075' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -69,7 +69,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Deep Learning (Part 3) - Convolutional neural networks (CNN)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
+<meta name="DC.date" content="2023-11-08 15:52:10 +0000">
 <meta name="DC.creator" content="Kaivan Kamali">
 
         
@@ -111,7 +111,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-11-03 14:30:27 +0000",
+  "dateModified": "2023-11-08 15:52:10 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Deep Learning (Part 3) - Convolutional neural networks (CNN)",
   "interactivityType": "mixed",
@@ -170,7 +170,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Deep Learning (Part 3) - Convolutional neural networks (CNN)",
   "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/CNN/tutorial.html",
-  "version": 37,
+  "version": 38,
   "timeRequired": "PT2H",
   "teaches": "Understand the inspiration behind CNN and learn the CNN architecture\n - Learn the convolution operation and its parameters\n - Learn how to create a CNN using Galaxy's deep learning tools\n - Solve an image classification problem on MNIST digit classification dataset using CNN in Galaxy",
   "keywords": [
@@ -327,7 +327,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702262099'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702291075'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -881,7 +881,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 8, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -894,7 +894,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00257">https://gxy.io/GTN:T00257</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 37 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 38 </div>
 
     </blockquote>
     </section>
@@ -1169,13 +1169,13 @@ rest are 0’s); And for Banana with label 3, the third element of the array is 
 We have 10 digits in our dataset and we would just have an array of size 10, where only one
 element is 1, corresponding to the digit, and the rest are 0’s.</p>
 
-<h3 id="create-one-hot-encoding-ohe-representation-of-training-labels"><strong>Create One-Hot Encoding (OHE) representation of training labels</strong></h3>
+<h3 id="create-one-hot-encoding-ohe-representation-of-training-labels">Create One-Hot Encoding (OHE) representation of training labels</h3>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-one-hot-encoding"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: One-Hot Encoding</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3" title="To categorical tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>To categorical</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.8.3)</span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.10.0" title="To categorical tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>To categorical</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</span>
       <ul>
         <li><em>“Input file”</em> : Select <code class="language-plaintext highlighter-rouge">y_train</code></li>
         <li><em>“Does the dataset contain header?”</em> : Select <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1187,13 +1187,13 @@ element is 1, corresponding to the digit, and the rest are 0’s.</p>
 
 </blockquote>
 
-<h3 id="create-a-deep-learning-model-architecture"><strong>Create a deep learning model architecture</strong></h3>
+<h3 id="create-a-deep-learning-model-architecture">Create a deep learning model architecture</h3>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-model-config"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Model config</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0" title="Create a deep learning model architecture tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create a deep learning model architecture</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.5.0)</span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/1.0.10.0" title="Create a deep learning model architecture tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create a deep learning model architecture</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</span>
       <ul>
         <li><em>“Select keras model type”</em>: <code class="language-plaintext highlighter-rouge">sequential</code></li>
         <li><em>“input_shape”</em>: <code class="language-plaintext highlighter-rouge">(784,)</code></li>
@@ -1280,13 +1280,13 @@ MaxPool layers with pool size of 2 by 2. Afterwards, we flatten the previous lay
 we add a fully connected layer with 10 nodes and use a softmax activation function to get the probability of each digit. Digit with the highest
 probability is predicted by CNN. The model config can be downloaded as a JSON file.</p>
 
-<h3 id="create-a-deep-learning-model"><strong>Create a deep learning model</strong></h3>
+<h3 id="create-a-deep-learning-model">Create a deep learning model</h3>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-model-builder-optimizer-loss-function-and-fit-parameters"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Model builder (Optimizer, loss function, and fit parameters)</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0" title="Create deep learning model tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create deep learning model</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.5.0)</span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/1.0.10.0" title="Create deep learning model tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create deep learning model</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</span>
       <ul>
         <li><em>“Choose a building mode”</em>: <code class="language-plaintext highlighter-rouge">Build a training model</code></li>
         <li><em>“Select the dataset containing model configuration”</em>: Select the <em>Keras Model Config</em> from the previous step.</li>
@@ -1317,13 +1317,13 @@ feed to the network, the training will be very slow (as we have 60000 training e
 only a subset of the training examples to the network, after which we update the weights/biases. <em>batch_size</em> decides the size of this subset.
 The model builder can be downloaded as a zip file.</p>
 
-<h3 id="deep-learning-training-and-evaluation"><strong>Deep learning training and evaluation</strong></h3>
+<h3 id="deep-learning-training-and-evaluation">Deep learning training and evaluation</h3>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-training-the-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Training the model</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3" title="Deep learning training and evaluation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Deep learning training and evaluation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.8.3)</span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.11.0" title="Deep learning training and evaluation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Deep learning training and evaluation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.11.0)</span>
       <ul>
         <li><em>“Select a scheme”</em>: <code class="language-plaintext highlighter-rouge">Train and Validate</code></li>
         <li><em>“Choose the dataset containing pipeline/estimator object”</em>: Select the <em>Keras Model Builder</em> from the previous step.</li>
@@ -1345,13 +1345,13 @@ The model builder can be downloaded as a zip file.</p>
 <p>The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 3) the trained
 model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step.</p>
 
-<h3 id="model-prediction"><strong>Model Prediction</strong></h3>
+<h3 id="model-prediction">Model Prediction</h3>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-testing-the-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Testing the model</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3" title="Model Prediction tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Model Prediction</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.8.3)</span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.11.0" title="Model Prediction tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Model Prediction</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.11.0)</span>
       <ul>
         <li><em>“Choose the dataset containing pipeline/estimator object”</em> : Select the trained model from the previous step.</li>
         <li><em>“Choose the dataset containing weights for the estimator above”</em> : Select the trained model weights from the previous step.</li>
@@ -1368,13 +1368,13 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 <p>The prediction step generates 1 dataset. It’s a file that has predictions (0 to 9 for the predicted digits) for every image in the test dataset.</p>
 
-<h3 id="machine-learning-visualization-extension"><strong>Machine Learning Visualization Extension</strong></h3>
+<h3 id="machine-learning-visualization-extension">Machine Learning Visualization Extension</h3>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-creating-the-confusion-matrix"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating the confusion matrix</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.3" title="Machine Learning Visualization Extension tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Machine Learning Visualization Extension</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.8.3)</span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.11.0" title="Machine Learning Visualization Extension tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Machine Learning Visualization Extension</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.11.0)</span>
       <ul>
         <li><em>“Select a plotting type”</em>: <code class="language-plaintext highlighter-rouge">Confusion matrix for classes</code></li>
         <li><em>“Select dataset containing the true labels”</em>”: <code class="language-plaintext highlighter-rouge">y_test</code></li>
@@ -1561,32 +1561,32 @@ install_resolver_dependencies: true
 tools:
 - name: keras_model_builder
   owner: bgruening
-  revisions: 772e0e89fc68
+  revisions: 66d7efc06000
   tool_panel_section_label: Machine Learning
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: keras_model_config
   owner: bgruening
-  revisions: 8a794e6d3388
+  revisions: f22a9297440f
   tool_panel_section_label: Machine Learning
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: keras_train_and_eval
   owner: bgruening
-  revisions: b6ef6d0cb6b7
+  revisions: 2af1346e68c9
   tool_panel_section_label: Machine Learning
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: ml_visualization_ex
   owner: bgruening
-  revisions: 947c2eacccb8
+  revisions: 8334dc98c48e
   tool_panel_section_label: Machine Learning
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: model_prediction
   owner: bgruening
-  revisions: 1552b8cb4a94
+  revisions: 25b46af53232
   tool_panel_section_label: Machine Learning
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: sklearn_to_categorical
   owner: bgruening
-  revisions: ec69cbe34b73
+  revisions: 61634a87efc7
   tool_panel_section_label: Machine Learning
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
@@ -1618,7 +1618,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9008d11b581c94bdfa384b451281439572d74a07">9008d11</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/78c0d6ddc135ad08b2ea3dbd8423b6f123c7792a">78c0d6d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1646,7 +1646,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702262099'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702291075'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         
