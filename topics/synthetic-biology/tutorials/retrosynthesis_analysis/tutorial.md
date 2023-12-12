@@ -71,7 +71,7 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
 
 > <hands-on-title>Select a model.</hands-on-title>
 >
-> 1. Run {% tool [Pick SBML Model](toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1) %} with the following parameters:
+> 1. Run {% tool [Pick SBML Model](toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.3) %} with the following parameters:
 >    - {% icon galaxy-dropdown %} *"Strain"*: `Escherichia coli str. K-12 substr. MG1655 (iML1515)`
 >
 >    > <comment-title>What does this tool do?</comment-title>
@@ -93,11 +93,11 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
 >
 {: .question}
 
-## Create a sink file from the SBML model
-
+## Crate a sink file from the SBML model
+e
 > <hands-on-title>Generate a sink file.</hands-on-title>
 >
-> 1. Run {% tool [Sink from SBML](toolshed.g2.bx.psu.edu/repos/tduigou/rpextractsink/rpextractsink/5.12.1) %} with the following parameters:
+> 1. Run {% tool [Sink from SBML](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpextractsink/rptools_rpextractsink/6.5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Strain"*: `sbml_model` (output of **Pick SBML Model** {% icon tool %})
 >    - *"SBML compartment ID"*: `c`
 >
@@ -127,7 +127,7 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
 
 > <hands-on-title>Generate a file with all reactions.</hands-on-title>
 >
-> 1. Run {% tool [RRules Parser ](toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6) %} with the following parameters:
+> 1. Run {% tool [RRules Parser ](toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.5.2+galaxy0) %} with the following parameters:
 >    - *"Rule Type"*: `retro`
 >    - *"Select the diameters of the reactions rules"*: `2`, `4`, `6`, `8`, `10`, `12`, `14` and `16`
 >    - {% icon galaxy-toggle %} *"Compress output"*: `no`
@@ -222,7 +222,7 @@ We need to split the network and perform some adjustments to these pathways.
 
 > <hands-on-title>Refine reactions</hands-on-title>
 >
-> 1. Run {% tool [Complete Reactions](toolshed.g2.bx.psu.edu/repos/tduigou/rpcompletion/rpcompletion/5.12.2) %} with the following parameters:
+> 1. Run {% tool [Complete Reactions](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpcompletion/rptools_rpcompletion/6.5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RP2paths pathways"*: `master_pathways` (output of **RP2paths** {% icon tool %})
 >    - {% icon param-file %} *"RP2paths compounds"*: `compounds` (output of **RP2paths** {% icon tool %})
 >    - {% icon param-file %} *"RetroPath2.0 metabolic network"*: `Reaction_Network` (output of **RetroPath2.0** {% icon tool %})
@@ -259,7 +259,7 @@ In this section, you can run the RetroSynthesis Workflow more easily and fastly 
 >
 > 1. Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/RetroSynthesis.ga" title="RetroSynthesis workflow" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/synthetic-biology/tutorials/retrosynthesis_analysis/workflows/retrosynthesis.ga" title="RetroSynthesis workflow" %}
 >
 > 2. Click on *Workflow* on the top menu bar of Galaxy. You will see **RetroSynthesis** workflow.
 > 3. Click on the {% icon workflow-run %} (*Run workflow*) button next to your workflow

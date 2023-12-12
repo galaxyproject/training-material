@@ -112,7 +112,7 @@ We first perform an FBA (with COBRApy) optimizing the biomass reaction and recor
 
 > <hands-on-title>Calculating the flux of a target using Flux Balance Analysis (FBA)</hands-on-title>
 >
-> 1. Run {% tool [Flux balance analysis](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpfba/rptools_rpfba/6.3.2+galaxy0) %} with the following parameters:
+> 1. Run {% tool [Flux balance analysis](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpfba/rptools_rpfba/6.5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Pathway (rpSBML)"*: Select `Heterologous pathways` (Input dataset collection) from your current history.
 >    - {% icon param-file %} *"Model (SBML)"*: Select `SBML_Model_iML1515.xml` (Input dataset) from your current history.
 >    - *"SBML compartment ID"*: Leave the default value `c`.
@@ -160,8 +160,8 @@ Secondly, we will use the _Thermo_ tool to estimate thermodynamics values (based
 
 > <hands-on-title>Compute thermodynamics values for each pathway using rpThermo tool</hands-on-title>
 >
-> 1. {% tool [Thermo](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpthermo/rptools_rpthermo/6.3.2) %} with the following parameters:
->    - {% icon param-file %} *"SBML Input File"*: `Flux balance accross collection` (output of **Flux balance analysis** {% icon tool %})
+> 1. {% tool [Thermo](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpthermo/rptools_rpthermo/6.5.0) %} with the following parameters:
+>    - {% icon param-file %} *"Input File"*: `pathway_with_fba` (output of **Flux balance analysis** {% icon tool %})
 >
 >    > <comment-title></comment-title>
 >    >
@@ -188,8 +188,8 @@ The _Pathway Score_ tool provides a global score for a given pathway previously 
 
 > <hands-on-title>Compute the global score using the _Pathway Score_ tool</hands-on-title>
 >
-> 1. {% tool [Score Pathway](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpscore/rptools_rpscore/6.3.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Pathway (rpSBML)"*: `Thermo - Flux balance analysis accross collection` (output of **Thermo** {% icon tool %})
+> 1. {% tool [Score Pathway](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpscore/rptools_rpscore/6.5.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Pathway (rpSBML)"*: `pathway_with_thermo` (output of **Thermo** {% icon tool %})
 >
 >    > <comment-title></comment-title>
 >    >
@@ -216,8 +216,8 @@ Finally, _Rank Pathways_ ranks the previous set of heterologous pathways, based 
 
 > <hands-on-title>Rank annotated pathways using rpRanker tool</hands-on-title>
 >
-> 1. {% tool [Rank Pathways](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpranker/rptools_rpranker/6.3.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Pathways"*: `Score - Thermo - Flux balance analysis accross collection` (output of **Score Pathway** {% icon tool %})
+> 1. {% tool [Rank Pathways](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpranker/rptools_rpranker/6.5.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Pathways"*: `scored_pathway` (output of **Score Pathway** {% icon tool %})
 >
 >    > <comment-title></comment-title>
 >    >
@@ -247,7 +247,7 @@ In this section, you can run the Pathway Analysis Workflow more easily and fastl
 >
 > 1. Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/synthetic-biology/tutorials/pathway_analysis/workflows/main_workflow.ga" title="Pathway Analysis Workflow" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/synthetic-biology/tutorials/pathway_analysis/workflows/pathways-analysis.ga" title="Pathway Analysis Workflow" %}
 >
 > 2. Click on *Workflow* on the top menu bar of Galaxy. You will see **Pathway Analysis Workflow**
 > 3. Click on the {% icon workflow-run %} (*Run workflow*) button next to your workflow
