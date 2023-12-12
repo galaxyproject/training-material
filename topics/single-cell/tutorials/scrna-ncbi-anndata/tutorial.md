@@ -149,7 +149,7 @@ Unfortunately, the names of the files don't exactly match the data in our excel 
 - **MAY_PB2A** ---> **PA_PB2A**
 - **MAY_PB2B** ---> **PA_PB2B**
 
-You may also notice that we have multiple sample files with the same name suffixed with `_Pool_X`. These are replications where multiple samples are taken of the same tumor area in order to get a more comprehensive view of the gene data of the tumor. We will need to combine these replication files during processing.
+You may also notice that we have multiple sample files with the same name suffixed with `_Pool_X`. These are *replicates*, where multiple samples are taken of the same tumor area in order to get a more comprehensive view of the gene data of the tumor. We will need to combine these replicates during processing.
 
 <div class="Manual" markdown="1">
 
