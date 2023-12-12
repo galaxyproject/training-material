@@ -162,6 +162,11 @@ Unfortunately, the names of the files don't exactly match the data in our excel 
 
 You may also notice that we have multiple sample files with the same name suffixed with `_Pool_X`. These are *replicates*, where multiple samples are taken of the same tumor area in order to get a more comprehensive view of the gene data of the tumor. We will need to combine these replicates during processing.
 
+These replicate files can be confirmed by looking under the **Methods** section of the paper where it states that one to four arrays were used per sample.
+
+![Snippet of paper about sample arrays](../../images/scrna-ncbi-anndata/replicates_paper.png "Snippet of paper about sample arrays")
+
+
 <div class="Manual" markdown="1">
 
 We now need to find the files relating to each patient. Selecting the output {% icon param-file %} **Unzip** tool shows you 53 files in a {% icon param-collection %} dataset collection. We will work with the 10 files associated with our target patients.
