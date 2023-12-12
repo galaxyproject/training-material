@@ -130,7 +130,7 @@ If we look at that excel file `41467_2021_27322_MOESM2_ESM.xlsx`, we can see mul
 For this tutorial, we are only going to process the first 3 patients. A summary of the relevant data can be seen below:
 
 | PatientID | Biopsy samples | Tumor Specimen |
-|-----------|----------------|----------------|
+|:----------|:---------------|:---------------|
 | Patient 1 | AUG_PB1A       | left-mid       |
 |           | AUG_PB1B       | right-mid      |
 | Patient 2 | MAY_PB1A       | right-mid      |
