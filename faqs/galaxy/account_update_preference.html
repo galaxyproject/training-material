@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@610e5d214a0c80f27c30c79eb8b5fac90d147415",
+		release: "galaxy-training-network@672268ec86086561446c3873ba0e1aba01aec9a8",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702373169' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702373169' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702373318' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702373318' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="How to update account preferences?">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-12-12 09:03:47 +0000">
+<meta name="DC.date" content="2022-05-31 10:14:47 +0000">
 <meta name="DC.creator" content="Jennifer Hillman-Jackson">
 <meta name="DC.creator" content="Alouzeh Brandone">
 
@@ -85,7 +85,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702373169'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702373318'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -262,23 +262,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <ol>
   <li>Log in to Galaxy</li>
-  <li>Navigate to <a href="https://my.galaxy.training/?path=/user"><strong>User -&gt; Preferences</strong></a> on the top menu bar</li>
+  <li>Navigate to <strong>User &gt; Preferences</strong> on the top menu bar.</li>
   <li>Here you can update various preferences, such as:
     <ul>
-      <li><i class="fas fa-user" aria-hidden="true"></i><span class="visually-hidden">pref-info</span> Manage Information (change your registered email addresses or public name)</li>
-      <li><i class="fas fa-unlock-alt" aria-hidden="true"></i><span class="visually-hidden">pref-password</span> Change Password (change your login credentials)</li>
-      <li><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">pref-permissions</span> Set Dataset Permissions for New Histories (grant others default access to newly created histories)</li>
-      <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">pref-toolboxfilters</span> Manage Toolbox Filters (customize your Toolbox by displaying or omitting sets of Tools)</li>
-      <li><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">pref-apikey</span> Manage API Key (access your current API key or create a new one)</li>
-      <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">pref-notifications</span> Manage Notifications (allow push and tab notifcations on job completion)</li>
-      <li><i class="fas fa-cloud" aria-hidden="true"></i><span class="visually-hidden">pref-cloud</span> Manage Cloud Authorization (grants Galaxy to access your cloud-based resources)</li>
+      <li><i class="fas fa-user" aria-hidden="true"></i><span class="visually-hidden">pref-info</span> Manage Information (edit your email addresses, custom parameters, or change your public name)</li>
+      <li><i class="fas fa-unlock-alt" aria-hidden="true"></i><span class="visually-hidden">pref-password</span> Change Password</li>
       <li><i class="far fa-id-card-o" aria-hidden="true"></i><span class="visually-hidden">pref-identities</span> Manage Third-Party Identities (connect or disconnect access to your third-party identities)</li>
-      <li><i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">pref-custombuilds</span> Manage Custom Builds (custom databases based on fasta datasets)</li>
-      <li><i class="fas fa-list" aria-hidden="true"></i><span class="visually-hidden">pref-list</span> Manage Activity Bar (a bonus navigation bar)</li>
-      <li><i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">pref-palette</span> Pick a Color Theme (interface color theme)</li>
-      <li><i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Make All Data Private (disable all data sharing)</li>
-      <li><i class="fas fa-radiation" aria-hidden="true"></i><span class="visually-hidden">pref-delete</span> Delete Account (on this Galaxy server)</li>
+      <li><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">pref-permissions</span> Set Dataset Permissions for New Histories (grant others default access to newly created histories. Changes made here will only affect histories created after these settings have been stored.</li>
+      <li><i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Make All Data Private</li>
+      <li><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">pref-apikey</span> Manage API Key (access your current API key or create a new one)</li>
+      <li><i class="fas fa-cloud" aria-hidden="true"></i><span class="visually-hidden">pref-cloud</span> Manage Cloud Authorization (add or modify the configuration that grants Galaxy to access your cloud-based resources)</li>
+      <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">pref-toolboxfilters</span> Manage Toolbox Filters (customize your Toolbox by displaying or omitting sets of Tools)</li>
+      <li><i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">pref-custombuilds</span> Manage Custom Builds (add or remove custom builds using history datasets)</li>
       <li><i class="fa fa-sign-out" aria-hidden="true"></i><span class="visually-hidden">pref-signout</span> Sign out of Galaxy (signs you out of all sessions)</li>
+      <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">pref-notifications</span> Enable notifications (allow push and tab notifcations on job completion)</li>
+      <li><i class="fas fa-radiation" aria-hidden="true"></i><span class="visually-hidden">pref-delete</span> Delete Account (on this Galaxy server)</li>
     </ul>
   </li>
 </ol>
@@ -354,7 +352,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/610e5d214a0c80f27c30c79eb8b5fac90d147415">610e5d2</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/672268ec86086561446c3873ba0e1aba01aec9a8">672268e</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -382,7 +380,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702373169'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702373318'></script>
         
     </body>
 </html>
