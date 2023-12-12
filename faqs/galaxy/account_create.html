@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@5515b54a5e8954c73a6a37317994a50e0e98296a",
+		release: "galaxy-training-network@5994b5d665c353e9c4010bc4b38adaebaba877fe",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702371614' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702371614' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702372354' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702372354' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="How do I create an account on a public Galaxy instance?">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-02-15 10:36:58 +0000">
+<meta name="DC.date" content="2023-12-11 20:43:41 +0000">
 <meta name="DC.creator" content="Jennifer Hillman-Jackson">
 <meta name="DC.creator" content="Alouzeh Brandone">
 <meta name="DC.creator" content="Samantha Anjei">
@@ -87,7 +87,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702371614'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702372354'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -268,14 +268,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li>
     <p>To create an account at any public Galaxy instance, choose your server from the available <a href="https://galaxyproject.org/use/">list of Galaxy Platforms</a>.</p>
 
-    <p>There are 3 main public Galaxy servers: <a href="https://usegalaxy.org/">UseGalaxy.org</a>, <a href="https://usegalaxy.eu/">UseGalaxy.eu</a>, and <a href="https://usegalaxy.org.au/">UseGalaxy.org.au</a>.</p>
+    <p>There are 3 main public Galaxy servers: <a href="https://usegalaxy.org/">UseGalaxy.org</a> (<strong>US</strong>), <a href="https://usegalaxy.eu/">UseGalaxy.eu</a> (<strong>EU</strong>), and <a href="https://usegalaxy.org.au/">UseGalaxy.org.au</a> (<strong>AU</strong>).</p>
   </li>
   <li>
     <p>Click on <strong>“Login or Register”</strong> in the masthead on the server.</p>
 
     <p><img src="/training-material/faqs/galaxy/images/login_register.png" alt="Login or Register on the top panel" /></p>
   </li>
-  <li>On the login page, find the <strong>Register here</strong> link and click on it.</li>
+  <li>
+    <p>On the login page, find the <strong>Register here</strong> link and click on it.</p>
+  </li>
   <li>
     <p>Fill in the the registration form, then click on <strong>Create</strong>.</p>
 
@@ -283,13 +285,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <p><img src="/training-material/faqs/galaxy/images/unverified_account.png" alt="Banner warning about account with unverified email address" /></p>
   </li>
-  <li>Check for a <strong>Confirmation Email</strong> in the email you used for account creation.</li>
+  <li>
+    <p>Check for a <strong>Confirmation Email</strong> in the email you used for account creation.</p>
+
+    <p>Missing? Check your <strong>Trash</strong> and <strong>Spam</strong> folders.</p>
+  </li>
   <li>
     <p>Click on the <strong>Email confirmation link</strong> to fully activate your account.</p>
 
     <p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> Delivery of the confimation email is blocked by your email provider or you mistyped the email address in the registration form?</p>
 
     <p>Please do <strong>not</strong> register again, but follow the <a href="/training-material/faqs/galaxy/user_preferences_manage_information.html">instructions to change the email address</a> registered with your account! The confirmation email will be resent to your new address once you have changed it.</p>
+
+    <p>Trouble logging in later? Account email addresses and public names are caSe-sensiTive. Check your activation email for formats.</p>
   </li>
 </ol>
 
@@ -364,7 +372,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/5515b54a5e8954c73a6a37317994a50e0e98296a">5515b54</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5994b5d665c353e9c4010bc4b38adaebaba877fe">5994b5d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -392,7 +400,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702371614'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702372354'></script>
         
     </body>
 </html>
