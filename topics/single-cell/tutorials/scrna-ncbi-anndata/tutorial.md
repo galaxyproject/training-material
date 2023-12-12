@@ -102,13 +102,22 @@ The first step is the obtain the data. For this tutorial, we will use data from 
 
 We now have the raw gene expression data that we will process. However, we will need to manually add some metadata, which requires finding out some more information about our files.
 
+
+
 > <hands-on-title>Finding the metadata</hands-on-title>
 >
-> 1. Follow  the link for the paper ([https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/)), where you can see a link for accessing the full text.
+> 1. Follow  the link for the paper ([https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/)), where you can see a link for accessing the full text. Accessing the full text takes us the following page [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/)
 >
-> 1. Select that link to access the full text ([https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/)) which contains more supplementary materials. Under this section we should see various `.xlsx` files (Excel spreadsheets).
+> 2. Downloading the paper and looking under **Methods** we can see that there are 2 biopsy samples for patients 1-3. For this tutorial we will be processing the first 3 patient's data, therefore we will need to find more information about the biopsy samples.
+> ![Snippet of paper about patient biopsies](../../images/scrna-ncbi-anndata/patient_samples_paper.png "Snippet of paper about patient biopsies")
 >
-> 3. Download Supplementary Dataset 1 (```41467_2021_27322_MOESM2_ESM.xlsx```).
+> 3. On the NCBI page containing the paper we can scroll down to see a **Supplementary Materials** section. Under this section we should see various `.xlsx` files (Excel spreadsheets). These will contain metadata about the work done in the paper.
+>
+> 4. Looking through each file we can eventually find the spreadsheet ```41467_2021_27322_MOESM2_ESM.xlsx``` which contains information about each patient including the biopsy sample IDs and tumor specimens. So we will want to download this in order to extract out the required information!
+>
+> ![Snippet of clinical info](../../images/scrna-ncbi-anndata/clinical_info_spreadsheet.png "Snippet of clinical info")
+>
+> 5. Download Supplementary Dataset 1 (```41467_2021_27322_MOESM2_ESM.xlsx```).
 >
 {: .hands_on}
 
