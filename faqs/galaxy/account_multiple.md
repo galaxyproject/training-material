@@ -17,8 +17,8 @@ For example, you are allowed to have 1 account on Galaxy US, and another account
 
 <br>
 Need more disk space?
-  - Review your **User -> Preferences -> Storage Dashboard** to find and manage all of your data.
-  - See [this tip]({% link faqs/galaxy/account_reduce_quota_usage.md %}) for more ways to free up space in your account
+  - Review your [**User -> Preferences -> Storage Dashboard**](https://my.galaxy.training/?path=/storage) to find and manage all of your data.
+  - Read about [more ways to free up space in your account]({% link faqs/galaxy/account_reduce_quota_usage.md %})
   - [Contact the admins of your Galaxy server]({% link faqs/galaxy/support_admins.md %}) to ask about possibilities for temporarily increasing your quota.
 
 <br>
