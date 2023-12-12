@@ -346,7 +346,7 @@ module GtnLinter
     find_matching_texts(contents, /{%\s*icon\s+([^%]*)\s*%}/i)
       .map do |idx, _text, selected|
       icon_key = selected[1].strip
-      if self.jekyll_config['icon-tag'][icon_key].nil?
+      if jekyll_config['icon-tag'][icon_key].nil?
         ReviewDogEmitter.error(
           path: @path,
           idx: idx,
