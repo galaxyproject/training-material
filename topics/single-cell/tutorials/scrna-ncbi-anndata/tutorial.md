@@ -461,7 +461,11 @@ With all the individual metadata columns created, we can now combine them togeth
 >
 {: .hands_on}
 
-With the metadata table ready, the last step is to add it to our original combined object!
+After processing the ```Cell Metadata``` table should look like the following:
+
+![Cell Metadata Table](../../images/scrna-ncbi-anndata/cell_metadata.png "Cell Metadata Table")
+
+With the metadata table ready, we can add it to our original combined object!
 
 > <hands-on-title>Add metadata to AnnData object</hands-on-title>
 >
