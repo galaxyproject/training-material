@@ -501,7 +501,7 @@ The final tool, {% icon tool %} **AnnData Operations**, will add the rest of our
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Output of Scanpy FilterCells`
 >    - **+ Insert Flag genes that start with these names**
 >    - *"1: Parameters to select cells to keep"*
->         - *"starts withn"*: `MT-`
+>         - *"starts with"*: `MT-`
 >         - *"Var name"*: `mito`
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `Final Object`
