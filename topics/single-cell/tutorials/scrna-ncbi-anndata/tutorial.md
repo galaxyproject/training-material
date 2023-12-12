@@ -205,7 +205,7 @@ We now need to find the files relating to each patient. Selecting the output {% 
 
 # Creating the AnnData object
 
-The next step is to convert all of the raw files into AnnData objects, this can be done one at a time or all at once by selecting ```multiple datasets``` when chosing the input and highlighting all the raw data files.
+The next step is to convert all of the raw files into AnnData objects, this can be done one at a time or all at once by selecting ```multiple datasets``` when choosing the input and highlighting all the raw data files.
 
 > <tip-title>Tag your datasets</tip-title>
 > Before starting to process the data, it is generally a good idea to add tags to each sample in order to keep track of what data is being processed. Below is some of the imported data with added tags for the patient and sample id. We suggest you replicate this in your history.
@@ -493,7 +493,7 @@ With the metadata table ready, we can add it to our original combined object!
 >
 {: .hands_on}
 
-{% icon congratulations %} Congratulations! You have successfully interpreted the milieu of files in a published dataset, transformed the data into a usable format, and added all the relevant annotations to the AnnData object! All thats left to do is to add some quality control metrics using automated tools!
+{% icon congratulations %} Congratulations! You have successfully interpreted the milieu of files in a published dataset, transformed the data into a usable format, and added all the relevant annotations to the AnnData object! All that's left to do is to add some quality control metrics using automated tools!
 
 # Adding quality control metrics
 
