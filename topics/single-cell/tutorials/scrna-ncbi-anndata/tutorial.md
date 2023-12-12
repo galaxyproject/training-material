@@ -38,9 +38,11 @@ follow_up_training:
 
 The goal of this tutorial is to take raw NCBI data from some published research, convert the raw data into the AnnData format then add metadata to the object so that it can be used for further processing / analysis. Here we will look at the steps to obtain, understand, and manipulate the data in order for it to be properly processed.
 
+The [NCBI Database](https://www.ncbi.nlm.nih.gov/) is a large repository for storing and accessing various types of biological data such as genome sequences, protein sequences, academic literature, etc. NCBI is a invaluable tool used for researchers and scientists, as a result it is important to know how to understand and utilise NCBI's data resources.
+
 # Obtaining the Data
 
-The first step is the obtain the data. For this tutorial, we will use data from the paper {% cite Song2022 %}. The data for this research is stored in the Gene Expression Omnibus (GEO) which is a public repository storing public genomics data.
+The first step is the obtain the data. For this tutorial, we will use data from the paper {% cite Song2022 %}. The data for this research is stored in the Gene Expression Omnibus (GEO).
 
 {% include _includes/cyoa-choices.html option1="Manual" option2="Zenodo" default="Zenodo"
        text="If you have experience finding and downloading data from GEO then you can use the Zenodo link to load the data directly into Galaxy, if you don't have experience with GEO then you can manually download, prepare, and load the data into Galaxy." %}
