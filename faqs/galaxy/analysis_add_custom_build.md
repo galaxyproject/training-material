@@ -7,9 +7,11 @@ layout: faq
 contributors: [shiltemann]
 ---
 
-- In the top menu bar, go to the *User*, and select *Custom Builds*
-- Choose a name for your reference build {% if include.name %}`{{ include.name }}`{% endif %}
-- Choose a dbkey for your reference build {% if include.dbkey %}`{{ include.dbkey }}`{% endif %}
+- Navigate to the History that contains your fasta for the reference genome
+- Standarize the [fasta format]({% link faqs/galaxy/reference_genomes_custom_genomes.md %})
+- In the top menu bar, go to **User -> Preferences -> Manage Custom Builds**
+- Create a unique **Name** for your reference build {% if include.name %}`{{ include.name }}`{% endif %}
+- Create a unique **Database** (dbkey) for your reference build {% if include.dbkey %}`{{ include.dbkey }}`{% endif %}
 - Under **Definition**, select the option `FASTA-file from history`
 - Under **FASTA-file**, select your fasta file {% if include.fasta %}`{{ include.fasta }}`{% endif %}
 - Click the **Save** button
