@@ -218,7 +218,7 @@ The next step is to convert all of the raw files into AnnData objects, this can 
 Examine {% icon galaxy-eye %} the {% icon param-file %} *"Inspect AnnData"* output. You will find a list of genes - however, the `obs` (observations) layer in the AnnData object should store cell data. The `var` (variables) should store the genes data. We need to transpose all of our AnnData objects. We will speed up the process by selecting all of the AnnData objects and processing them at once.
 
 > <comment-title>Check your data</comment-title>
-> Whilst for this specific data, the object needed to be transposed, this won't always be the case! The easiest way is to check the `obs` data of the AnnData object using the {% icon tool %} **Inspect AnnData** tool. The {% icon param-file %} `obs` file should have a column containing short nucleotide sequences (something like **CGGAAGTGATAC**). If thats the case, then the data doesn't need to be transposed, because those are the cell barcodes!
+> Whilst for this specific data, the object needed to be transposed, this won't always be the case! The easiest way is to check the `obs` data of the AnnData object using the {% icon tool %} **Inspect AnnData** tool. The {% icon param-file %} `obs` file should have a column containing short nucleotide sequences (something like **CGGAAGTGATAC**). If that's the case, then the data doesn't need to be transposed, because those are the cell barcodes!
 {: .comment}
 
 > <hands-on-title>Transpose AnnData objects</hands-on-title>
