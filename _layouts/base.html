@@ -31,7 +31,7 @@
         {% if page.title %}
             {% assign og_title = page.title %}
         {% endif %}
-        {% assign og_desc = page.description | default:topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
+        {% assign og_desc = page.description | default: page.excerpt | default:topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
         <meta name="description" content="{{ og_desc | strip_html | truncate: 120}}">
         <meta property="og:site_name" content="Galaxy Training Network">
         <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}">
