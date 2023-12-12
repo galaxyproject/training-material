@@ -127,6 +127,9 @@ At this point you might want to do some modifications in the files before downst
 
 </div>
 
+<!---
+HCA doesn't work well for other datasets...
+-->
 ## Human Cell Atlas Matrix Downloader
 
 Matrix market format:  matrix mtx, genes tsv, barcodes tsv, exp design tsv
@@ -321,6 +324,9 @@ Finally, let's combine those files that we have just generated and turn them int
 > 2. Rename {% icon galaxy-pencil %} the output `Converted Seurat object`.
 >    
 {: .hands_on}
+
+As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata---seurat) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata---seurat-conversion).
+
 
 ## AnnData -> SCE
 
