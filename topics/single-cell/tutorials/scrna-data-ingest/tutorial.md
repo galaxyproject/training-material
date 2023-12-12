@@ -328,48 +328,97 @@ Finally, let's combine those files that we have just generated and turn them int
 As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata---seurat) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata---seurat-conversion).
 
 
-## AnnData -> SCE
+## AnnData -> SingleCellExperiment (SCE)
 
-> <hands-on-title> Task description </hands-on-title>
+We will work on the same AnnData object so if you create a new history for this exercise, you can either get this file from Zenodo again or just copy this dataset from the previous history. 
+
+> <hands-on-title>Get toy data</hands-on-title>
 >
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+> You can simply download the files by pasting the links below into "Upload Data" searchbox.
+>
+>    ```
+>    https://zenodo.org/record/7053673/files/Mito-counted_AnnData
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
-> <hands-on-title> Task description </hands-on-title>
+{% snippet faqs/galaxy/histories_copy_dataset.md %}
+
+First, we will extract observations and the full matrix from our AnnData.
+
+> <hands-on-title> Inspect AnnData </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>   
+> 2. Rename {% icon galaxy-pencil %} the output `Observations`.
+>
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - *"Annotated data matrix"*: `Mito-counted_AnnData`
 >    - *"What to inspect?"*: `The full data matrix`
 >
+> 4. Rename {% icon galaxy-pencil %} the output `Matrix`.
+>    
 {: .hands_on}
 
+> <question-title></question-title>
+>
+> What are the rows, and what are the columns in the retrieved Matrix?
+>
+> > <solution-title></solution-title>
+> >
+> > If you just click on the `Matrix` dataset, you will see a preview, showing barcodes in the first column, while genes in the first row.
+> > 
+> {: .solution}
+>
+{: .question}
 
-> <hands-on-title> Task description </hands-on-title>
+To proceed with the conversion, we must have the matrix where the genes are listed in the first column while all the barcodes should be in the first row. Therefore, we need to transpose the current matrix.
+
+> <hands-on-title> Transpose the matrix </hands-on-title>
 >
 > 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0) %} with the following parameters:
+>    - *"Input tabular dataset"*: `Matrix`
 >
 {: .hands_on}
 
+And now we are ready to input that data to **DropletUtils** tool.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> DropletUtils </hands-on-title>
 >
 > 1. {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %} with the following parameters:
 >    - *"Format for the input matrix"*: `Tabular`
+>    - *"Count Data"*: output of **Transpose** {% icon tool %}
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `DefaultDrops`
 >            - *"Expected Number of Cells"*: `31178`
 >            - *"Upper Quantile"*: `1.0`
 >            - *"Lower Proportion"*: `0.0`
 >        - *"Format for output matrices"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
+>        - *"Random Seed"*: `100`
 >
 {: .hands_on}
 
-> <hands-on-title> Task description </hands-on-title>
+Finally, let's combine those files that we have just generated and turn them into the SingleCellExperiment!
+
+> <hands-on-title> Create SCE object </hands-on-title>
 >
 > 1. {% tool [DropletUtils Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0) %} with the following parameters:
->    - *"Should metadata file be added?"*: `Yes`
+>    - *"Expression matrix in sparse matrix format (.mtx)"*: `DropletUtils 10X Matrices`
+>    - *"Gene table"*: `DropletUtils 10X Genes`
+>    - *"Barcode/cell table"*: `DropletUtils 10X Barcodes`
+>    - *"Should metadata file be added?"*: {% icon param-toggle %} `Yes`
+>        - *"Metadata file"*: `Observations`
+>        - *"Cell ID column"*: `index`
+>     
+> 2. Rename {% icon galaxy-pencil %} the output `Converted SCE object`.
 >
 {: .hands_on}
 
-## Anndata -> CDS
+As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata---singlecellexperiment-sce) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata-to-singlecellexperiment-sce-conversion).
+
+
+## Anndata -> Cell Data Set (CDS)
