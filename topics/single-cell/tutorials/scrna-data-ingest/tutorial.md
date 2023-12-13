@@ -224,7 +224,7 @@ Now we will convert the FASTQ files to tabular:
 > 1. {% tool [FASTQ to Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_tabular/fastq_to_tabular/1.1.5) %} with the following parameters:
 >    - {% icon param-file %} *"FASTQ file to convert"*: `Barcodes` 
 >
-> 3. Rename {% icon galaxy-pencil %} the dataset `Barcodes tabular`.
+> 3. **Rename**  {% icon galaxy-pencil %} the dataset `Barcodes tabular`.
 >    
 > 4. Repeat the same with `Transcripts` file and rename it as `Transcripts tabular`.
 > 
@@ -239,7 +239,7 @@ Now let's select the number of the reads we would like to keep. It's totally up 
 >    - *"Operation"*: `Keep last lines`
 >    - *"Number of lines"*: `100000`
 >
-> 2. Rename {% icon galaxy-pencil %} the dataset `Barcodes cut`.
+> 2. **Rename** {% icon galaxy-pencil %} the dataset `Barcodes cut`.
 >    
 > 3. Repeat the same with `Transcripts tabular` file and rename it as `Transcripts cut`
 > 
@@ -256,7 +256,7 @@ All done, now we just need to go back to FASTQ from Tabular again!
 >    - *"Sequence column"*: `c2`
 >    - *"Quality column"*: `c3`
 >
-> 2. Rename {% icon galaxy-pencil %} the dataset `Downsampled barcode/UMI read`.
+> 2. **Rename** {% icon galaxy-pencil %} the dataset `Downsampled barcode/UMI read`.
 >    
 > 3. Repeat the same with `Transcripts cut` file and rename it as `Downsampled transcript read`
 > 
@@ -310,13 +310,13 @@ First, we will extract observations and the full matrix from our AnnData.
 >    - *"Annotated data matrix"*: `Mito-counted_AnnData`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >   
-> 2. Rename {% icon galaxy-pencil %} the output `Observations`.
+> 2. **Rename** {% icon galaxy-pencil %} the output `Observations`.
 >
 > 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix"*: `Mito-counted_AnnData`
 >    - *"What to inspect?"*: `The full data matrix`
 >
-> 4. Rename {% icon galaxy-pencil %} the output `Matrix`.
+> 4. **Rename** {% icon galaxy-pencil %} the output `Matrix`.
 >    
 {: .hands_on}
 
@@ -370,7 +370,7 @@ Finally, let's combine those files that we have just generated and turn them int
 >    - *"Cell Metadata"*: `Observations`
 >    - *"Choose the format of the output"*: `RDS with a Seurat object`
 >
-> 2. Rename {% icon galaxy-pencil %} the output `Converted Seurat object`.
+> 2. **Rename** {% icon galaxy-pencil %} the output `Converted Seurat object`.
 >    
 {: .hands_on}
 
@@ -403,13 +403,13 @@ First, we will extract observations and the full matrix from our AnnData.
 >    - *"Annotated data matrix"*: `Mito-counted_AnnData`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >   
-> 2. Rename {% icon galaxy-pencil %} the output `Observations`.
+> 2. **Rename** {% icon galaxy-pencil %} the output `Observations`.
 >
 > 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix"*: `Mito-counted_AnnData`
 >    - *"What to inspect?"*: `The full data matrix`
 >
-> 4. Rename {% icon galaxy-pencil %} the output `Matrix`.
+> 4. **Rename** {% icon galaxy-pencil %} the output `Matrix`.
 >    
 {: .hands_on}
 
@@ -463,7 +463,7 @@ Finally, let's combine those files that we have just generated and turn them int
 >        - *"Metadata file"*: `Observations`
 >        - *"Cell ID column"*: `index`
 >     
-> 2. Rename {% icon galaxy-pencil %} the output `Converted SCE object`.
+> 2. **Rename** {% icon galaxy-pencil %} the output `Converted SCE object`.
 >
 {: .hands_on}
 
@@ -489,3 +489,74 @@ Cell Data Set (CDS) format is usually used when working with a package called Mo
 
 {% snippet faqs/galaxy/histories_copy_dataset.md %}
 
+
+Now we just need to extract information about cells, genes and an expression matrix. 
+
+
+> <hands-on-title> Inspect AnnData </hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>
+> **Rename**  {% icon galaxy-pencil %} the output `Cell barcodes (obs)`.
+>
+> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
+>
+> **Rename**  {% icon galaxy-pencil %} the output `Genes (var)`.
+>
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `output` (Input dataset)
+>    - *"What to inspect?"*: `The full data matrix`
+>   
+> **Rename**  {% icon galaxy-pencil %} the output `Expression matrix`.
+>      
+{: .hands_on}
+
+
+Hold on here! As mentioned, if you're converting your files to CDS, you'll probably be working with Monocle. There is one function in downstream analysis in Monocle that requires a specific name of the column containing gene symbols, and that is `gene_short_name`. If you use Galaxy buttons for the analysis, you won't be able to change that name after you create CDS file, so a good piece of advice is to rename it at this stage. There is no harm in doing this, and it might save you some time and frustration later on. You only need to check which column contains the gene symbols and what is its header - you can check that in the preview window, simply by clicking on the `Genes` dataset. In our case, that's column 3 and its name is `Symbol`. Let's change that!
+
+
+> <hands-on-title>Changing the column name</hands-on-title>
+>
+> 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2) %} with the following parameters:
+>    - {% icon param-file %} *"Select cells from"*: `Genes`
+>    - *"using column"*: `c3` or `Column: 3`
+>    - In *"Check"*:
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Symbol`
+>            - *"Replacement"*: `gene_short_name`
+> 2. Check that the datatype is `tabular`. If not, change it. 
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>     
+> 3. **Rename** {% icon galaxy-pencil %} the output: `Genes renamed`
+>
+{: .hands_on}
+
+We're almost there, but there is one last modification we have to do - transpose the matrix to have the genes as rows and cells as columns.
+
+> <hands-on-title> Transpose the matrix </hands-on-title>
+>
+> 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input tabular dataset"*: `Expression matrix` 
+{: .hands_on}
+
+And the final step is to create the CDS file using Monocle tool!
+ 
+> <hands-on-title> Create Cell Data Set </hands-on-title>
+>
+> 1. {% tool [Monocle3 create](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Expression matrix, genes as rows, cells as columns. Required input. Provide as TSV, CSV or RDS."*: output of **Transpose** {% icon tool %}
+>    - *"Format of expression matrix"*: `TSV`
+>    - {% icon param-file %} *"Per-cell annotation, optional. Row names must match the column names of the expression matrix. Provide as TSV, CSV or RDS."*: `Cell barcodes (obs)` 
+>    - *"Format of cell metadata"*: `TSV`
+>    - {% icon param-file %} *"Per-gene annotation, optional. Row names must match the row names of the expression matrix. Provide as TSV, CSV or RDS."*: `Genes renamed` 
+>    - *"Format of gene annotation"*: `TSV`
+>
+> 2. **Rename** {% icon galaxy-pencil %} the output: `CDS Monocle file`
+{: .hands_on}
+
+As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata---cell-data-set-cds) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata-to-cell-data-set-cds-conversion) (it doesn't include the renaming step though). 
