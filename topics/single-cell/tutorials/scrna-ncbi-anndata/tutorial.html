@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Converting NCBI Data to the AnnData Format</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@9db8751038a437c4fe2f4490eb8632b5908f36f0",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702493424' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702493424' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Converting NCBI Data to the AnnData Format">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-12-13 18:16:09 +0000">
+<meta name="DC.creator" content="Morgan Howells">
+
+        
+        
+        
+        
+        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Converting NCBI Data to the AnnData Format">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "dateModified": "2023-12-13 18:16:09 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Converting NCBI Data to the AnnData Format",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Converting NCBI Data to the AnnData Format",
+  "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html",
+  "version": 49,
+  "timeRequired": "PT1H",
+  "teaches": "Analyse gene data from NCBI.\n - Convert raw gene expression data into the AnnData format.\n - Add metadata to the AnnData object to prepare it for analysis.",
+  "keywords": [
+    "Single Cell",
+    "data management",
+    "data import"
+  ],
+  "description": "The questions this  addresses are:\n - How do I understand NCBI data?\n - How can I convert raw gene data to the AnnData format?\n - How do I manually and automatically add metadata to my AnnData object?\n\n\nThe objectives are:\n - Analyse gene data from NCBI.\n - Convert raw gene expression data into the AnnData format.\n - Add metadata to the AnnData object to prepare it for analysis.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/",
+      "name": "Morgan Howells",
+      "image": "https://avatars.githubusercontent.com/hexhowells",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0008-9422-6380",
+      "orcid": "https://orcid.org/0009-0008-9422-6380"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "orcid": "https://orcid.org/0000-0002-8170-8806"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "name": "Pavankumar Videm",
+      "image": "https://avatars.githubusercontent.com/pavanvidem",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5192-126X",
+      "orcid": "https://orcid.org/0000-0002-5192-126X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "name": "Mehmet Tekman",
+      "image": "https://avatars.githubusercontent.com/mtekman",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "data management"
+    },
+    {
+      "@type": "Thing",
+      "name": "data import"
+    }
+  ],
+  "abstract": "The goal of this tutorial is to take raw NCBI data from some published research, convert the raw data into the AnnData format then add metadata to the object so that it can be used for further processing / analysis. Here we will look at the steps to obtain, understand, and manipulate the data in order for it to be properly processed."
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702493424'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/single-cell" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Single Cell
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/single-cell/faqs/" title="Check our FAQs for the Single Cell topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-11-01/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html">2023-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-single-cell">
+    <h1 data-toc-skip>Converting NCBI Data to the AnnData Format</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexhowells/" class="contributor-badge contributor-hexhowells"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexhowells?s=36" alt="Morgan Howells avatar" width="36" class="avatar" />
+    Morgan Howells</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" />
+    Pavankumar Videm</a><a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=36" alt="Mehmet Tekman avatar" width="36" class="avatar" />
+    Mehmet Tekman</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a></td>
+	</tr>
+	
+
+	
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" />
+    Pavankumar Videm</a></td>
+	</tr>
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How do I understand NCBI data?</p>
+</li>
+        
+        <li><p>How can I convert raw gene data to the AnnData format?</p>
+</li>
+        
+        <li><p>How do I manually and automatically add metadata to my AnnData object?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Analyse gene data from NCBI.</p>
+</li>
+        
+        <li><p>Convert raw gene expression data into the AnnData format.</p>
+</li>
+        
+        <li><p>Add metadata to the AnnData object to prepare it for analysis.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/10101768">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/workflows/" title="Converting NCBI Data to the AnnData Format workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+    
+
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 13, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 49 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>The goal of this tutorial is to take raw NCBI data from some published research, convert the raw data into the AnnData format then add metadata to the object so that it can be used for further processing / analysis. Here we will look at the steps to obtain, understand, and manipulate the data in order for it to be properly processed.</p>
+
+<p>The <a href="https://www.ncbi.nlm.nih.gov/">NCBI Database</a> is a large repository for storing and accessing various types of biological data such as genome sequences, protein sequences, academic literature, etc. NCBI is a invaluable tool used for researchers and scientists, as a result it is important to know how to understand and utilise NCBI’s data resources.</p>
+
+<h1 id="obtaining-the-data">Obtaining the Data</h1>
+
+<p>The first step is the obtain the data. For this tutorial, we will use data from the paper <span class="citation"><a href="#Song2022">Song <i>et al.</i> 2022</a></span>. The data for this research is stored in the Gene Expression Omnibus (GEO).</p>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		If you have experience finding and downloading data from GEO then you can use the Zenodo link to load the data directly into Galaxy, if you don't have experience with GEO then you can manually download, prepare, and load the data into Galaxy.
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Manual" onclick="cyoaChoice('Manual')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Manual</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Zenodo" onclick="cyoaChoice('Zenodo')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Zenodo</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Zenodo");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Manual">
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-download-and-extract-the-data-from-geo"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Download and extract the data from GEO</div>
+
+    <ol>
+      <li>Using a web browser navigate to the GEO repository for the paper
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Copy the <code class="language-plaintext highlighter-rouge">(http)</code> link located in the supplemental materials section of the page</p>
+      </li>
+      <li>
+        <p>Import the data into Galaxy</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Change the datatype to <code class="language-plaintext highlighter-rouge">tar</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">tar</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0" title="Unzip tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unzip</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input_file”</em>: <code class="language-plaintext highlighter-rouge">tar</code> file you just imported</li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+</div>
+
+<div class="Zenodo">
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-downloading-the-data-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Downloading the data from Zenodo</div>
+
+    <ol>
+      <li>Create a new history for this tutorial</li>
+      <li>
+        <p>Import the following files from <a href="https://zenodo.org/record/10101768">Zenodo</a></p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/10101768/files/GSM5353214_PA_AUG_PB_1A_S1_dge.txt
+https://zenodo.org/record/10101768/files/GSM5353215_PA_AUG_PB_1B_S2_dge.txt
+https://zenodo.org/record/10101768/files/GSM5353216_PA_PB1A_Pool_1_3_S50_L002_dge.txt
+https://zenodo.org/record/10101768/files/GSM5353217_PA_PB1A_Pool_2_S107_L004_dge.txt
+https://zenodo.org/record/10101768/files/GSM5353218_PA_PB1B_Pool_1_2_S74_L003_dge.txt
+https://zenodo.org/record/10101768/files/GSM5353219_PA_PB1B_Pool_2_S24_L001_dge.txt
+https://zenodo.org/record/10101768/files/GSM5353220_PA_PB1B_Pool_3_S51_L002_dge.txt
+https://zenodo.org/record/10101768/files/GSM5353221_PA_PB2A_Pool_1_3_S25_L001_dge.txt
+https://zenodo.org/record/10101768/files/GSM5353222_PA_PB2B_Pool_1_3_S52_L002_dge.txt
+https://zenodo.org/record/10101768/files/GSM5353223_PA_PB2B_Pool_2_S26_L001_dge.txt
+</code></pre></div>        </div>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
+
+  </blockquote>
+</div>
+
+<p>We now have the raw gene expression data that we will process. However, we will need to manually add some metadata, which requires finding out some more information about our files.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-finding-the-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Finding the metadata</div>
+
+  <ol>
+    <li>
+      <p>Follow  the link for the paper (<a href="https://pubmed.ncbi.nlm.nih.gov/35013146/">https://pubmed.ncbi.nlm.nih.gov/35013146/</a>), where you can see a link for accessing the full text. Accessing the full text takes us the following page <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/</a></p>
+    </li>
+    <li>
+      <p>Downloading the paper and looking under <strong>Methods</strong> we can see that there are 2 biopsy samples for patients 1-3. For this tutorial we will be processing the first 3 patient’s data, therefore we will need to find more information about the biopsy samples.</p>
+    </li>
+  </ol>
+  <figure id="figure-1" style="max-width: 90%;"><img src="../../images/scrna-ncbi-anndata/patient_samples_paper.png" alt="Snippet of paper about patient biopsies. " width="587" height="225" loading="lazy" /><a target="_blank" href="../../images/scrna-ncbi-anndata/patient_samples_paper.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Snippet of paper about patient biopsies</figcaption></figure>
+
+  <ol>
+    <li>
+      <p>On the NCBI page containing the paper we can scroll down to see a <strong>Supplementary Materials</strong> section. Under this section we should see various <code class="language-plaintext highlighter-rouge">.xlsx</code> files (Excel spreadsheets). These will contain metadata about the work done in the paper.</p>
+    </li>
+    <li>
+      <p>Looking through each file we can eventually find the spreadsheet <code class="language-plaintext highlighter-rouge">41467_2021_27322_MOESM2_ESM.xlsx</code> which contains information about each patient including the biopsy sample IDs and tumor specimens. So we will want to download this in order to extract out the required information!</p>
+    </li>
+  </ol>
+
+  <figure id="figure-2" style="max-width: 90%;"><img src="../../images/scrna-ncbi-anndata/clinical_info_spreadsheet.png" alt="Snippet of clinical info. " width="1206" height="205" loading="lazy" /><a target="_blank" href="../../images/scrna-ncbi-anndata/clinical_info_spreadsheet.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Snippet of clinical info</figcaption></figure>
+
+  <ol>
+    <li>Download Supplementary Dataset 1 (<code class="language-plaintext highlighter-rouge">41467_2021_27322_MOESM2_ESM.xlsx</code>).</li>
+  </ol>
+
+</blockquote>
+
+<p>This one spreadsheet contains all the information we need to further understand our data.</p>
+
+<h2 id="understanding-the-data">Understanding the Data</h2>
+
+<p>If we look at that excel file <code class="language-plaintext highlighter-rouge">41467_2021_27322_MOESM2_ESM.xlsx</code>, we can see multiple sheets.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many different patients are in this study?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Navigating to <code class="language-plaintext highlighter-rouge">Clinical_info</code> shows us that the data consists of 11 different patients, with some patients having multiple different samples of different tumor specimens.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>For this tutorial, we are only going to process the first 3 patients. A summary of the relevant data can be seen below:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">PatientID</th>
+      <th style="text-align: left">Biopsy samples</th>
+      <th style="text-align: left">Tumor Specimen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Patient 1</td>
+      <td style="text-align: left">AUG_PB1A</td>
+      <td style="text-align: left">left-mid</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">AUG_PB1B</td>
+      <td style="text-align: left">right-mid</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Patient 2</td>
+      <td style="text-align: left">MAY_PB1A</td>
+      <td style="text-align: left">right-mid</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">MAY_PB1B</td>
+      <td style="text-align: left">right-apex</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Patient 3</td>
+      <td style="text-align: left">MAY_PB2A</td>
+      <td style="text-align: left">right-anterior</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">MAY_PB2B</td>
+      <td style="text-align: left">right-mid</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We can see that each patient has 2 different samples from different tumor locations. This is important information that needs to be added to our dataset so that we can separate it during analysis, if needed.</p>
+
+<p>Unfortunately, the names of the files don’t exactly match the data in our excel sheet. This can make finding the right samples a bit difficult! A summary of which samples match which file can be found below:</p>
+
+<ul>
+  <li><strong>AUG_PB1A</strong> —&gt; <strong>PA_AUG_PB_1A</strong></li>
+  <li><strong>AUG_PB1B</strong> —&gt; <strong>PA_AUG_PB_1B</strong></li>
+  <li><strong>MAY_PB1A</strong> —&gt; <strong>PA_PB1A</strong></li>
+  <li><strong>MAY_PB1B</strong> —&gt; <strong>PA_PB1B</strong></li>
+  <li><strong>MAY_PB2A</strong> —&gt; <strong>PA_PB2A</strong></li>
+  <li><strong>MAY_PB2B</strong> —&gt; <strong>PA_PB2B</strong></li>
+</ul>
+
+<p>You may also notice that we have multiple sample files with the same name suffixed with <code class="language-plaintext highlighter-rouge">_Pool_X</code>. These are <em>replicates</em>, where multiple samples are taken of the same tumor area in order to get a more comprehensive view of the gene data of the tumor. We will need to combine these replicates during processing.</p>
+
+<p>These replicate files can be confirmed by looking under the <strong>Methods</strong> section of the paper where it states that one to four arrays were used per sample.</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/scrna-ncbi-anndata/replicates_paper.png" alt="Snippet of paper about sample arrays. " width="483" height="100" loading="lazy" /><a target="_blank" href="../../images/scrna-ncbi-anndata/replicates_paper.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Snippet of paper about sample arrays</figcaption></figure>
+
+<div class="Manual">
+
+  <p>We now need to find the files relating to each patient. Selecting the output <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <strong>Unzip</strong> tool shows you 53 files in a <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> dataset collection. We will work with the 10 files associated with our target patients.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-unhiding-10-target-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Unhiding 10 target files</div>
+
+    <ol>
+      <li>
+        <p>In the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-history</span> Galaxy history panel, select the <em>Include hidden</em> icon <i class="fas fa-eye-slash" aria-hidden="true"></i><span class="visually-hidden">galaxy-show-hidden</span> to see the 53 files in your dataset collection.</p>
+      </li>
+      <li>Scroll down to visualise the following 10 samples (likely in opposite order to this!):
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GSM5353214_PA_AUG_PB_1A_S1_dge.txt
+GSM5353215_PA_AUG_PB_1B_S2_dge.txt
+GSM5353216_PA_PB1A_Pool_1_3_S50_L002_dge.txt
+GSM5353217_PA_PB1A_Pool_2_S107_L004_dge.txt
+GSM5353218_PA_PB1B_Pool_1_2_S74_L003_dge.txt
+GSM5353219_PA_PB1B_Pool_2_S24_L001_dge.txt
+GSM5353220_PA_PB1B_Pool_3_S51_L002_dge.txt
+GSM5353221_PA_PB2A_Pool_1_3_S25_L001_dge.txt
+GSM5353222_PA_PB2B_Pool_1_3_S52_L002_dge.txt
+GSM5353223_PA_PB2B_Pool_2_S26_L001_dge.txt
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>For each of those 10 samples, select the <em>Unhide</em> icon <i class="fas fa-eye-slash" aria-hidden="true"></i><span class="visually-hidden">galaxy-show-hidden</span>. This will move them from <i class="fas fa-eye-slash" aria-hidden="true"></i><span class="visually-hidden">galaxy-show-hidden</span> <em>Hidden</em> to <em>Active</em>.</p>
+      </li>
+      <li>
+        <p>Navigate back to the <i class="fa fa-map-marker" aria-hidden="true"></i><span class="visually-hidden">galaxy-show-active</span> <em>Active</em> datasets list, where you will now see your 10 target samples.</p>
+      </li>
+      <li>
+        <p>In the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-history</span> Galaxy history panel, click the <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <em>Select items</em> to allow you to select multiple datasets from your history</p>
+      </li>
+      <li>
+        <p>Select all 10 samples</p>
+      </li>
+      <li>
+        <p>Select the highlighted rectangle <code class="language-plaintext highlighter-rouge">10 of X</code> (the X may be different depending on what you’ve imported!) to give you a menu, from which you select <code class="language-plaintext highlighter-rouge">Change data type</code></p>
+      </li>
+      <li>Select the dropdown menu and either type in or scroll to find <code class="language-plaintext highlighter-rouge">tabular.gz</code></li>
+    </ol>
+
+  </blockquote>
+</div>
+
+<h1 id="creating-the-anndata-object">Creating the AnnData object</h1>
+
+<p>The next step is to convert all of the raw files into AnnData objects, this can be done one at a time or all at once by selecting <code class="language-plaintext highlighter-rouge">multiple datasets</code> when choosing the input and highlighting all the raw data files.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-tag-your-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tag-your-datasets" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Tag your datasets</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Before starting to process the data, it is generally a good idea to add tags to each sample in order to keep track of what data is being processed. Below is some of the imported data with added tags for the patient and sample id. We suggest you replicate this in your history.</p>
+
+  <figure id="figure-4" style="max-width: 90%;"><img src="../../images/scrna-ncbi-anndata/metadata.png" alt="Imported data with tags. " width="498" height="793" loading="lazy" /><a target="_blank" href="../../images/scrna-ncbi-anndata/metadata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Imported data with tags</figcaption></figure>
+
+</blockquote>
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add a tag  starting with <code class="language-plaintext highlighter-rouge">#</code>     <ul>       <li>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>     </ul>   </li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-convert-raw-data-to-anndata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert raw data to AnnData</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1" title="Import AnnData and loom tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import AnnData and loom</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><em>“hd5 format to be created”</em>: <code class="language-plaintext highlighter-rouge">Anndata file</code>
+          <ul>
+            <li><em>“Format for the annotated data matrix?”</em>: <code class="language-plaintext highlighter-rouge">Tabular, CSV, TSV</code></li>
+            <li><em>“Annotated data matrix”</em>
+              <ul>
+                <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>Multiple datasets</em>: <code class="language-plaintext highlighter-rouge">Select all imported files</code></li>
+              </ul>
+            </li>
+            <li><em>“Does the first column store the row names?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">select any one of the AnnData files</code></li>
+        <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Inspect AnnData”</em> output. You will find a list of genes - however, the <code class="language-plaintext highlighter-rouge">obs</code> (observations) layer in the AnnData object should store cell data. The <code class="language-plaintext highlighter-rouge">var</code> (variables) should store the genes data. We need to transpose all of our AnnData objects. We will speed up the process by selecting all of the AnnData objects and processing them at once.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-check-your-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Check your data</div>
+  <p>Whilst for this specific data, the object needed to be transposed, this won’t always be the case! The easiest way is to check the <code class="language-plaintext highlighter-rouge">obs</code> data of the AnnData object using the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Inspect AnnData</strong> tool. The <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">obs</code> file should have a column containing short nucleotide sequences (something like <strong>CGGAAGTGATAC</strong>). If that’s the case, then the data doesn’t need to be transposed, because those are the cell barcodes!</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-transpose-anndata-objects"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Transpose AnnData objects</div>
+
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Manipulate AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy1)</span> with the following parameters:</p>
+
+      <ul>
+        <li><em>“Annotated data matrix”</em>
+          <ul>
+            <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>Multiple datasets</em>: <code class="language-plaintext highlighter-rouge">Select all AnnData files</code></li>
+          </ul>
+        </li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Transpose the data matrix, leaving observations and variables interchanged</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now, we have all the AnnData objects with the data in the correct orientation. We can combine them into a single AnnData object, which will make the data easier to work with. This combination operation will add an additional column called <code class="language-plaintext highlighter-rouge">batch</code> which tells us which AnnData object each bit of data came from. This will be useful for further processing!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-combine-anndata-objects"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Combine AnnData objects</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Manipulate AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Select first Manipulate AnnData (transpose) output</code></li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Concatenate along the observations axis</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix to add”</em>: <code class="language-plaintext highlighter-rouge">Select all other Manipulate AnnData (transpose) outputs</code></li>
+            <li><em>“Join method”</em>: <code class="language-plaintext highlighter-rouge">Intersection of variables</code></li>
+            <li><em>“Key to add the batch annotation to obs”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+            <li><em>“Separator to join the existing index names with the batch category”</em>: <code class="language-plaintext highlighter-rouge">-</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Combined Object</code></li>
+  </ol>
+
+</blockquote>
+
+<p>Now we have all of our gene expression data stored in a single AnnData object! We just need to add our metadata!</p>
+
+<h1 id="annotating-the-data">Annotating the data</h1>
+
+<p>The next step is to annotate our data using the information gathered from the excel sheet earlier. We will do this by leveraging the <code class="language-plaintext highlighter-rouge">batch</code> column generated when the objects were combined for each individual patient/sample (indicated by the batch number). We will add in the relevant annotations. First, let’s extract the observation data so we can manipulate it.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Combined Object</code></li>
+        <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Observation data</code></li>
+  </ol>
+
+</blockquote>
+
+<p>For each new column, we need to replace the relevant batch numbers with the appropriate metadata. After that, we can cut the modified column out so it is separated. We will repeat this process for each piece of metadata we want to add. All the relevant data can be found in the first table of this tutorial.</p>
+
+<p>Let’s now add the replicate column which tells us which cells are part of pools of the same patient and tumor location.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-replicate-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create replicate metadata</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> <em>in a specific column</em> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Observation data</code></li>
+        <li><em>“1: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">2|4|7|8</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">poolA</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“2: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">3|5|9</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">poolB</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“3: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">poolC</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“4: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">0|1</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">NA</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“5: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">replicate</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">output of Replace Text</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Replicate Metadata</code></li>
+  </ol>
+
+</blockquote>
+
+<p>Next we will add the metadata indicating which patient each row came from.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-patient-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create patient data</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Observation data</code></li>
+        <li><em>“1: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">0|1</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">patient1</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“2: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">2|3|4|5|6</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">patient2</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“3: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">7|8|9</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">patient3</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“5: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">patient</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">output of Replace Text</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Patient Metadata</code></li>
+  </ol>
+
+</blockquote>
+
+<p>We will now add a column to indicate which sample each row came from using the sample ID’s described earlier.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-sample-id-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create sample ID metadata</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Observation data</code></li>
+        <li><em>“1: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">AUG_PB1A</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“2: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">1$</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">AUG_PB1B</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“3: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">(2$)|3</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">MAY_PB1A</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“4: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">4|5|6</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">MAY_PB1B</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“5: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">7</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">MAY_PB2A</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“6: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">8|9</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">MAY_PB2B</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“7: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">specimenID</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">output of Replace Text</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Specimen Metadata</code></li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-parameter"><button class="gtn-boxify-button details" type="button" aria-controls="details-parameter" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: $ parameter</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>You may have noticed that some of the parameters in the previous tool used the $ symbol. This is due to how the <span><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> tool works. The tool will replace and <strong>update</strong> the data for every insert operation, meaning that lines that have already been updated could be updated again.</p>
+
+  <p>Since we are replacing our batch ID’s with identifiers that include numbers, we want to prevent them from being updated again. Appending the pattern with the <code class="language-plaintext highlighter-rouge">$</code> symbol tells the tool to only replace the pattern if it is not followed by any other character (so the 1 in <code class="language-plaintext highlighter-rouge">AUG_PB1A</code> won’t be replaced as it is followed by an ‘A’).</p>
+</blockquote>
+
+<p>Finally we will add the tumor column which indicates which tumor sample each row belongs to.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-tumor-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create tumor metadata</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Observation data</code></li>
+        <li><em>“1: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">left-mid</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“2: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">1|2|3|8|9</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">right-mid</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“3: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">4|5|6</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">right-apex</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“4: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">7</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">right-anterior</code></li>
+          </ul>
+        </li>
+        <li><strong>+ Insert Replacement</strong></li>
+        <li><em>“5: Replacement”</em>
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">tumorSpecimen</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">output of Replace Text</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Tumor Metadata</code></li>
+  </ol>
+
+</blockquote>
+
+<p>With all the individual metadata columns created, we can now combine them together to make a single tabular file containing our metadata. Since the <code class="language-plaintext highlighter-rouge">Paste</code> operation only allows us to combine two columns at once we will need to run the tool a few times to add all the columns together.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-combine-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Combine metadata</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Paste1" title="Paste tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paste</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Paste”</em>: <code class="language-plaintext highlighter-rouge">Replicate Metadata</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“and”</em>: <code class="language-plaintext highlighter-rouge">Patient Metadata</code></li>
+        <li><em>“Delimit by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Paste1" title="Paste tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paste</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Paste”</em>: <code class="language-plaintext highlighter-rouge">Output of previous Paste</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“and”</em>: <code class="language-plaintext highlighter-rouge">Specimen Metadata</code></li>
+        <li><em>“Delimit by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Paste1" title="Paste tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paste</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Paste”</em>: <code class="language-plaintext highlighter-rouge">Output of previous Paste</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“and”</em>: <code class="language-plaintext highlighter-rouge">Tumor Metadata</code></li>
+        <li><em>“Delimit by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Cell Metadata</code></li>
+  </ol>
+
+</blockquote>
+
+<p>After processing the <code class="language-plaintext highlighter-rouge">Cell Metadata</code> table should look like the following:</p>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/scrna-ncbi-anndata/cell_metadata.png" alt="Cell Metadata Table. " width="1157" height="525" loading="lazy" /><a target="_blank" href="../../images/scrna-ncbi-anndata/cell_metadata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Cell Metadata Table</figcaption></figure>
+
+<p>With the metadata table ready, we can add it to our original combined object!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-metadata-to-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add metadata to AnnData object</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Manipulate AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Combined Object</code></li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Add new annotation(s) for observations of variables</code>
+          <ul>
+            <li><em>“What to annotate?”</em>: <code class="language-plaintext highlighter-rouge">Observations (obs)</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table with new annotations”</em>: <code class="language-plaintext highlighter-rouge">Cell Metadata</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Annotated Object</code></li>
+  </ol>
+
+</blockquote>
+
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations! You have successfully interpreted the milieu of files in a published dataset, transformed the data into a usable format, and added all the relevant annotations to the AnnData object! All that’s left to do is to add some quality control metrics using automated tools!</p>
+
+<h1 id="adding-quality-control-metrics">Adding quality control metrics</h1>
+
+<p>With the manual annotations added, we need to do some further processing to add some statistical metadata about the genes. This is done automatically by running two different tools.</p>
+
+<p>First, we will run the <code class="language-plaintext highlighter-rouge">Scanpy FilterCells</code> tool without actually filtering. This tool will add some metadata about the counts and numbers of expressed genes.</p>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-scanpy-filtercells-version-issue"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Scanpy FilterCells version issue</div>
+  <p>The <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy9" title="Scanpy FilterCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FilterCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy9)</span> tool (used below) does not work in the latest version (<strong>1.8.1+galaxy93</strong>), switch to version <strong>1.8.1+galaxy9</strong> in order to run the tool without error.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-initial-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add initial metadata</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy9" title="Scanpy FilterCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FilterCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy9)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Annotated Object</code></li>
+        <li><em>“Name of the column in <code class="language-plaintext highlighter-rouge">anndata.var</code> that contains gene name”</em>: <code class="language-plaintext highlighter-rouge">_index</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The final tool, <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>AnnData Operations</strong>, will add the rest of our metadata. This is mostly information about the mitochondrial genes present in the object, roughly counted by flagging genes that start with <strong>MT-</strong>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-final-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add final metadata</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy9" title="AnnData Operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AnnData Operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy9)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in hdf5 AnnData format”</em>: <code class="language-plaintext highlighter-rouge">Output of Scanpy FilterCells</code></li>
+        <li><strong>+ Insert Flag genes that start with these names</strong></li>
+        <li><em>“1: Parameters to select cells to keep”</em>
+          <ul>
+            <li><em>“starts with”</em>: <code class="language-plaintext highlighter-rouge">MT-</code></li>
+            <li><em>“Var name”</em>: <code class="language-plaintext highlighter-rouge">mito</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Final Object</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Final Object</code></li>
+        <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>With that run we should be finished! Check the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">obs</code> file to see all the metadata that we’ve added in throughout the tutorial.</p>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-check-your-final-object"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Check your final object!</div>
+  <p>The above tools will sometimes run without error but not produce the correct results - just because they run doesn’t mean all the parameters and inputs were set properly! When <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> inspecting the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">obs</code> file of the final AnnData object, you should see that all the columns contain data. If any of the columns are blank, then something has gone wrong!</p>
+</blockquote>
+
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations! Now your data is ready for further processing or analysis! You can compare your analysis results with this <a href="https://usegalaxy.eu/u/videmp/h/ncbi-to-anndata">example history</a> and redo the whole analysis with a single click using this <a href="https://usegalaxy.eu/u/videmp/w/ncbi-to-anndata">workflow</a>.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Single cell data often requires additional processing and conversion before it is able to be analysed.</p>
+</li>
+                        
+                        <li><p>Metadata and annotations can be added in both manually and automatically with various tools and resources.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/single-cell/faqs/">FAQ page for the Single Cell topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/single-cell#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Song2022">Song, H., H. N. W. Weinstein, P. Allegakoen, M. H. Wadsworth, J. Xie <i>et al.</i>, 2022 <b>Single-cell analysis of human primary prostate cancer reveals the heterogeneity of tumor-associated epithelial cell states</b>. Nature Communications 13: <a href="https://doi.org/10.1038/s41467-021-27322-4">10.1038/s41467-021-27322-4</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Converting NCBI Data to the AnnData Format (Single Cell)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Morgan Howells,  <b>Converting NCBI Data to the AnnData Format (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{single-cell-scrna-ncbi-anndata,
+author = "Morgan Howells",
+	title = "Converting NCBI Data to the AnnData Format (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <div class="box-title">Go Further</div>
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/single-cell">Single Cell</a>
+        
+    
+    </li>
+
+                    </ul>
+                </blockquote>
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: anndata_ops
+  owner: ebi-gxa
+  revisions: 890fb06a2893
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: anndata_ops
+  owner: ebi-gxa
+  revisions: 825dfd66e3fb
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_filter_cells
+  owner: ebi-gxa
+  revisions: e9283529cba1
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: unzip
+  owner: imgteam
+  revisions: 57f0914ddb7b
+  tool_panel_section_label: Collection Operations
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: anndata_import
+  owner: iuc
+  revisions: fb9e030ffae4
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: anndata_inspect
+  owner: iuc
+  revisions: ee98d611afc6
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: anndata_manipulate
+  owner: iuc
+  revisions: 3d748954434b
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/9db8751038a437c4fe2f4490eb8632b5908f36f0">9db8751</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702493424'></script>
+        
+    </body>
+</html>

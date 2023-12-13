@@ -245,7 +245,7 @@
           "name": "MakeAFakeInput",
           "title": "MakeAFakeInput",
           "test_results": null,
-          "modified": "2023-12-13 00:16:39 +0000",
+          "modified": "2023-12-13 18:50:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"Unique\"];\n  11[\"Text transformation\"];\n  12[\"Concatenate datasets\"];\n  13[\"Unique\"];\n  14[\"seqtk_subseq\"];\n  15[\"Text transformation\"];\n  16[\"seqtk_subseq\"];\n  2[\"FASTQ to Tabular\"];\n  3[\"Cutadapt\"];\n  4[\"Cut\"];\n  5[\"Bowtie2\"];\n  6[\"Select random lines\"];\n  7[\"BAM-to-SAM\"];\n  8[\"Filter\"];\n  9[\"Cut\"];\n  9 -->|out_file1| 10;\n  10 -->|outfile| 11;\n  6 -->|out_file1| 12;\n  11 -->|output| 12;\n  12 -->|out_file1| 13;\n  0 -->|output| 14;\n  13 -->|outfile| 14;\n  13 -->|outfile| 15;\n  1 -->|output| 16;\n  15 -->|output| 16;\n  0 -->|output| 2;\n  0 -->|output| 3;\n  1 -->|output| 3;\n  2 -->|output_file| 4;\n  3 -->|out1| 5;\n  3 -->|out2| 5;\n  4 -->|output| 6;\n  5 -->|output| 7;\n  7 -->|output1| 8;\n  8 -->|out_file1| 9;\n"
         },
         {
@@ -263,7 +263,7 @@
           "name": "Retrieve climate data from Copernicus",
           "title": "Retrieve climate data from Copernicus",
           "test_results": null,
-          "modified": "2023-12-13 00:16:39 +0000",
+          "modified": "2023-12-13 18:50:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Copernicus Climate Data Store\"];\n  0 -->|output| 1;\n"
         }
       ],
@@ -380,184 +380,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_slides",
-      "logo": "GTN",
-      "title": "Creating Slides",
-      "video": true,
-      "questions": [
-        "How to format slides?",
-        "How do we add presenter notes?",
-        "How to use the features of the slide show tool?",
-        "What sort of content should be included in slides?"
-      ],
-      "objectives": [
-        "Create a new set of slides",
-        "Add presenter comments"
-      ],
-      "time_estimation": null,
-      "subtopic": "writing",
-      "key_points": [
-        "Slides are often presented before the hands-on portion, provide relevant background information",
-        "Provide examples that are relevant to your audience"
-      ],
-      "contributors": [
-        {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
-          "affiliations": [
-            "gallantries",
-            "erasmusmc",
-            "avans-atgm"
-          ],
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        },
-        {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "matrix": "bebatut:matrix.org",
-          "orcid": "0000-0001-9852-1987",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 45.77,
-            "lon": 3.08
-          },
-          "fediverse": "https://piaille.fr/@bebatut",
-          "fediverse_flavor": "mastodon",
-          "affiliations": [
-            "gallantries",
-            "uni-freiburg"
-          ],
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
-        },
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "twitter": "shiltemann",
-          "linkedin": "shiltemann",
-          "matrix": "shiltemann:matrix.org",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "contact_for_training": true,
-          "affiliations": [
-            "CINECA-Project",
-            "gallantries",
-            "erasmusmc"
-          ],
-          "location": {
-            "country": "NL",
-            "lat": 51.912,
-            "lon": 4.462
-          },
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
-        }
-      ],
-      "mathjax": null,
-      "short_id": "S00040",
-      "url": "/topics/contributing/tutorials/create-new-tutorial-slides/slides.html",
-      "topic_name": "contributing",
-      "tutorial_name": "create-new-tutorial-slides",
-      "dir": "topics/contributing/tutorials/create-new-tutorial-slides",
-      "id": "contributing/create-new-tutorial-slides",
-      "video_library": {
-        "tutorial": null,
-        "slides": {
-          "description": "This lecture goes through the process of how to create a slide deck, common things you should bear in mind while you're writing them, and how to enable the amazing slides-to-video features for your slide decks! This video itself was produced automatically from the GTN's slide decks, anyone making edits to these slides will cause them to be rebuilt, making organising videos for events easier than ever.\n",
-          "materials": [
-            {
-              "link": "topics/contributing/tutorials/create-new-tutorial-slides/slides.html",
-              "title": "Creating Slides for the GTN",
-              "type": "Slides"
-            }
-          ],
-          "tags": [
-            "contributing"
-          ],
-          "type": "Lecture",
-          "versions": [
-            {
-              "captions": [
-                "galaxycommunity"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "5M",
-              "link": "Gm1MKAwuLxg",
-              "speakers": [
-                "awspolly"
-              ]
-            }
-          ],
-          "gtn_id": "contributing/create-new-tutorial-slides",
-          "title": "Creating Slides",
-          "captioned": true
-        },
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": false,
-      "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-slides/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": [
-
-      ],
-      "topic_name_human": "Contributing to the Galaxy Training Material",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": true
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-slides/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-slides/slides.json"
       }
     },
     {
@@ -757,30 +579,52 @@
       }
     },
     {
-      "layout": "tutorial_hands_on",
-      "title": "Tools, Data, and Workflows for tutorials",
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Creating Slides",
+      "video": true,
       "questions": [
-        "How can we define the technical infrastructure for a tutorial?",
-        "How to define the tools needed for a tutorial?",
-        "How to add the needed data directly in an instance?",
-        "How to add the workflows related to a tutorial?",
-        "How can we check the technical infrastructure is working?",
-        "How can we make an existing Galaxy instance able to run a tutorial?"
+        "How to format slides?",
+        "How do we add presenter notes?",
+        "How to use the features of the slide show tool?",
+        "What sort of content should be included in slides?"
       ],
       "objectives": [
-        "Extracting the technical description for a tutorial",
-        "Populating an existing instance with the needed tools, data and workflows for a tutorial",
-        "Creating a Galaxy Docker flavor with the needed tools, data and workflows for a tutorial",
-        "Testing the Galaxy Docker flavor of a tutorial"
+        "Create a new set of slides",
+        "Add presenter comments"
       ],
-      "time_estimation": "30m",
+      "time_estimation": null,
       "subtopic": "writing",
       "key_points": [
-        "Tools, data and workflows can be easily integrated in a Docker flavor to have a useful technical support for a tutorial",
-        "A Galaxy Docker flavor is a great support for training",
-        "A Galaxy Docker flavor can be deployed 'anywhere' and is scalable"
+        "Slides are often presented before the hands-on portion, provide relevant background information",
+        "Provide examples that are relevant to your audience"
       ],
       "contributors": [
+        {
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "affiliations": [
+            "gallantries",
+            "erasmusmc",
+            "avans-atgm"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
         {
           "name": "Bérénice Batut",
           "email": "berenice.batut@gmail.com",
@@ -807,21 +651,6 @@
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
         },
         {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "fediverse": "https://fosstodon.org/@bgruening",
-          "fediverse_flavor": "mastodon",
-          "matrix": "bgruening:matrix.org",
-          "orcid": "0000-0002-3079-6586",
-          "linkedin": "bgruening",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
-        },
-        {
           "name": "Saskia Hiltemann",
           "maintainer_contact": "gitter",
           "email": "saskia.hiltemann@gmail.com",
@@ -846,7 +675,104 @@
           "id": "shiltemann",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        }
+      ],
+      "mathjax": null,
+      "short_id": "S00040",
+      "url": "/topics/contributing/tutorials/create-new-tutorial-slides/slides.html",
+      "topic_name": "contributing",
+      "tutorial_name": "create-new-tutorial-slides",
+      "dir": "topics/contributing/tutorials/create-new-tutorial-slides",
+      "id": "contributing/create-new-tutorial-slides",
+      "video_library": {
+        "tutorial": null,
+        "slides": {
+          "description": "This lecture goes through the process of how to create a slide deck, common things you should bear in mind while you're writing them, and how to enable the amazing slides-to-video features for your slide decks! This video itself was produced automatically from the GTN's slide decks, anyone making edits to these slides will cause them to be rebuilt, making organising videos for events easier than ever.\n",
+          "materials": [
+            {
+              "link": "topics/contributing/tutorials/create-new-tutorial-slides/slides.html",
+              "title": "Creating Slides for the GTN",
+              "type": "Slides"
+            }
+          ],
+          "tags": [
+            "contributing"
+          ],
+          "type": "Lecture",
+          "versions": [
+            {
+              "captions": [
+                "galaxycommunity"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "5M",
+              "link": "Gm1MKAwuLxg",
+              "speakers": [
+                "awspolly"
+              ]
+            }
+          ],
+          "gtn_id": "contributing/create-new-tutorial-slides",
+          "title": "Creating Slides",
+          "captioned": true
         },
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-slides/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": [
+
+      ],
+      "topic_name_human": "Contributing to the Galaxy Training Material",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": true
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-slides/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-slides/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Updating diffs in admin training",
+      "questions": [
+        "How does it work?"
+      ],
+      "objectives": [
+        "Update some text in an earlier commit"
+      ],
+      "time_estimation": "5m",
+      "key_points": [
+        "The knitting script works OK?",
+        "Learn to rebase now, if you haven't yet",
+        "git am is not fun",
+        "If you have issues, ping me."
+      ],
+      "contributors": [
         {
           "name": "Helena Rasche",
           "email": "hexylena@galaxians.org",
@@ -874,12 +800,12 @@
         }
       ],
       "mathjax": null,
-      "short_id": "T00060",
-      "url": "/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html",
+      "short_id": "T00055",
+      "url": "/topics/contributing/tutorials/admin-knitting/tutorial.html",
       "topic_name": "contributing",
-      "tutorial_name": "create-new-tutorial-technical",
-      "dir": "topics/contributing/tutorials/create-new-tutorial-technical",
-      "id": "contributing/create-new-tutorial-technical",
+      "tutorial_name": "admin-knitting",
+      "dir": "topics/contributing/tutorials/admin-knitting",
+      "id": "contributing/admin-knitting",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -889,7 +815,7 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/admin-knitting/tutorial.json",
       "tools": [
 
       ],
@@ -919,8 +845,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/admin-knitting/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/admin-knitting/tutorial.json"
       }
     },
     {
@@ -1151,55 +1077,51 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Adding auto-generated video to your slides",
+      "title": "Generating PDF artefacts of the website",
       "questions": [
-        "How can we add auto-generated video?",
-        "How does it work?",
-        "What do I need to do to make it optimal for viewers?"
+        "How to generate PDF of the different tutorials and slides?"
       ],
       "objectives": [
-        "Adding a video to a set of slides"
+        "Generating PDFs"
       ],
-      "time_estimation": "20m",
-      "subtopic": "writing",
+      "time_estimation": "10m",
       "key_points": [
-        "Thanks to the GTN, videos are easy to add",
-        "Be mindful of your captions. Short sentences are good!"
+        "PDFs can be easily generated for the different tutorials to share with learnees or to keep a fixed version of a tutorial"
       ],
       "contributors": [
         {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "matrix": "bebatut:matrix.org",
+          "orcid": "0000-0001-9852-1987",
           "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
+          "elixir_node": "de",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 45.77,
+            "lon": 3.08
+          },
+          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse_flavor": "mastodon",
           "affiliations": [
             "gallantries",
-            "erasmusmc",
-            "avans-atgm"
+            "uni-freiburg"
           ],
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
         }
       ],
       "mathjax": null,
-      "short_id": "T00071",
-      "url": "/topics/contributing/tutorials/slides-with-video/tutorial.html",
+      "short_id": "T00063",
+      "url": "/topics/contributing/tutorials/generating-pdf/tutorial.html",
       "topic_name": "contributing",
-      "tutorial_name": "slides-with-video",
-      "dir": "topics/contributing/tutorials/slides-with-video",
-      "id": "contributing/slides-with-video",
+      "tutorial_name": "generating-pdf",
+      "dir": "topics/contributing/tutorials/generating-pdf",
+      "id": "contributing/generating-pdf",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -1209,7 +1131,7 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/slides-with-video/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/generating-pdf/tutorial.json",
       "tools": [
 
       ],
@@ -1239,25 +1161,33 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/slides-with-video/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/slides-with-video/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/generating-pdf/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/generating-pdf/tutorial.json"
       }
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Creating Interactive Galaxy Tours",
+      "title": "Tools, Data, and Workflows for tutorials",
       "questions": [
-        "What is a Interactive Galaxy Tour?",
-        "How can we create an Interactive Tour?"
+        "How can we define the technical infrastructure for a tutorial?",
+        "How to define the tools needed for a tutorial?",
+        "How to add the needed data directly in an instance?",
+        "How to add the workflows related to a tutorial?",
+        "How can we check the technical infrastructure is working?",
+        "How can we make an existing Galaxy instance able to run a tutorial?"
       ],
       "objectives": [
-        "Creating a Galaxy tour from scratch",
-        "Deploying and running a tour"
+        "Extracting the technical description for a tutorial",
+        "Populating an existing instance with the needed tools, data and workflows for a tutorial",
+        "Creating a Galaxy Docker flavor with the needed tools, data and workflows for a tutorial",
+        "Testing the Galaxy Docker flavor of a tutorial"
       ],
-      "time_estimation": "15m",
+      "time_estimation": "30m",
+      "subtopic": "writing",
       "key_points": [
-        "The Interactive Tours are a good training object for self-learning at its own speed",
-        "It is now easy to create an Interactive Tour and test it"
+        "Tools, data and workflows can be easily integrated in a Docker flavor to have a useful technical support for a tutorial",
+        "A Galaxy Docker flavor is a great support for training",
+        "A Galaxy Docker flavor can be deployed 'anywhere' and is scalable"
       ],
       "contributors": [
         {
@@ -1325,15 +1255,40 @@
           "id": "shiltemann",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "affiliations": [
+            "gallantries",
+            "erasmusmc",
+            "avans-atgm"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
         }
       ],
       "mathjax": null,
-      "short_id": "T00061",
-      "url": "/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html",
+      "short_id": "T00060",
+      "url": "/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html",
       "topic_name": "contributing",
-      "tutorial_name": "create-new-tutorial-tours",
-      "dir": "topics/contributing/tutorials/create-new-tutorial-tours",
-      "id": "contributing/create-new-tutorial-tours",
+      "tutorial_name": "create-new-tutorial-technical",
+      "dir": "topics/contributing/tutorials/create-new-tutorial-technical",
+      "id": "contributing/create-new-tutorial-technical",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -1343,7 +1298,7 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.json",
       "tools": [
 
       ],
@@ -1373,8 +1328,132 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Teaching Python",
+      "questions": [
+        "What methods can I incorporate to improve student material uptake within my python courses?",
+        "How do I write problems that use these methodologies"
+      ],
+      "objectives": [
+        "Learn about four different problem design ideas, and one teaching methodology."
+      ],
+      "key_points": [
+        "Debugging code is an absolutely critical skill for students that they need ot become familiar with early on.",
+        "There are a lot of strategies you can teach students to give them the necessary skills for this, such as Wolf Fence debugging.",
+        "Or simply adding print statements so they can trace the code's execution.",
+        "Fading examples helps students become more independent as they work onwards through problems.",
+        "Conversely compounding problems are sometimes a good fit for homework to give numerous \"easy\" problems followed by some \"stretch\" goals that students can reach for, combining their previous work.",
+        "Pair progarmming is proven to improve student learning outcomes, when applied correctly."
+      ],
+      "time_estimation": "2h",
+      "subtopic": "writing",
+      "contributions": {
+        "authorship": [
+          "hexylena"
+        ],
+        "editing": [
+          "bazante1"
+        ],
+        "testing": [
+          "dirowa"
+        ]
+      },
+      "mathjax": null,
+      "short_id": "T00068",
+      "url": "/topics/contributing/tutorials/python/tutorial.html",
+      "topic_name": "contributing",
+      "tutorial_name": "python",
+      "dir": "topics/contributing/tutorials/python",
+      "id": "contributing/python",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/python/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": [
+
+      ],
+      "topic_name_human": "Contributing to the Galaxy Training Material",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "affiliations": [
+            "gallantries",
+            "erasmusmc",
+            "avans-atgm"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Bazante Sanders",
+          "joined": "2020-12",
+          "id": "bazante1",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/"
+        },
+        {
+          "name": "Donny Vrins",
+          "joined": "2021-10",
+          "linkedin": "Donny Vrins",
+          "email": "D.vrins@live.nl",
+          "id": "dirowa",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/dirowa.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/dirowa/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/python/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/python/tutorial.json"
       }
     },
     {
@@ -1475,189 +1554,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Generating PDF artefacts of the website",
-      "questions": [
-        "How to generate PDF of the different tutorials and slides?"
-      ],
-      "objectives": [
-        "Generating PDFs"
-      ],
-      "time_estimation": "10m",
-      "key_points": [
-        "PDFs can be easily generated for the different tutorials to share with learnees or to keep a fixed version of a tutorial"
-      ],
-      "contributors": [
-        {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "matrix": "bebatut:matrix.org",
-          "orcid": "0000-0001-9852-1987",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 45.77,
-            "lon": 3.08
-          },
-          "fediverse": "https://piaille.fr/@bebatut",
-          "fediverse_flavor": "mastodon",
-          "affiliations": [
-            "gallantries",
-            "uni-freiburg"
-          ],
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
-        }
-      ],
-      "mathjax": null,
-      "short_id": "T00063",
-      "url": "/topics/contributing/tutorials/generating-pdf/tutorial.html",
-      "topic_name": "contributing",
-      "tutorial_name": "generating-pdf",
-      "dir": "topics/contributing/tutorials/generating-pdf",
-      "id": "contributing/generating-pdf",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/generating-pdf/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": [
-
-      ],
-      "topic_name_human": "Contributing to the Galaxy Training Material",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/generating-pdf/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/generating-pdf/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Updating diffs in admin training",
-      "questions": [
-        "How does it work?"
-      ],
-      "objectives": [
-        "Update some text in an earlier commit"
-      ],
-      "time_estimation": "5m",
-      "key_points": [
-        "The knitting script works OK?",
-        "Learn to rebase now, if you haven't yet",
-        "git am is not fun",
-        "If you have issues, ping me."
-      ],
-      "contributors": [
-        {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
-          "affiliations": [
-            "gallantries",
-            "erasmusmc",
-            "avans-atgm"
-          ],
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        }
-      ],
-      "mathjax": null,
-      "short_id": "T00055",
-      "url": "/topics/contributing/tutorials/admin-knitting/tutorial.html",
-      "topic_name": "contributing",
-      "tutorial_name": "admin-knitting",
-      "dir": "topics/contributing/tutorials/admin-knitting",
-      "id": "contributing/admin-knitting",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/admin-knitting/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": [
-
-      ],
-      "topic_name_human": "Contributing to the Galaxy Training Material",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/admin-knitting/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/admin-knitting/tutorial.json"
       }
     },
     {
@@ -1796,34 +1692,48 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Including a new topic",
       "questions": [
-        "How to include a new topic?",
-        "What kinds of Topics are possible?"
+        "What metadata is required or possible to set in a Tutorial, Slide, Topic, or FAQ"
       ],
       "objectives": [
-        "Create a new topic",
-        "Set up the metadata for a topic"
+        "Know where to find all of the available metadata, so you can reference it later."
       ],
-      "time_estimation": "30m",
-      "key_points": [
-        "A new topic can be easily added for new tutorials"
+      "title": "GTN Metadata",
+      "time_estimation": "10m",
+      "contributors": [
+        {
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "affiliations": [
+            "gallantries",
+            "erasmusmc",
+            "avans-atgm"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        }
       ],
-      "contributions": {
-        "authorship": [
-          "bebatut"
-        ],
-        "editing": [
-          "hexylena"
-        ]
-      },
       "mathjax": null,
-      "short_id": "T00056",
-      "url": "/topics/contributing/tutorials/create-new-topic/tutorial.html",
+      "short_id": "T00070",
+      "url": "/topics/contributing/tutorials/schemas/tutorial.html",
       "topic_name": "contributing",
-      "tutorial_name": "create-new-topic",
-      "dir": "topics/contributing/tutorials/create-new-topic",
-      "id": "contributing/create-new-topic",
+      "tutorial_name": "schemas",
+      "dir": "topics/contributing/tutorials/schemas",
+      "id": "contributing/schemas",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -1833,7 +1743,7 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-topic/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/schemas/tutorial.json",
       "tools": [
 
       ],
@@ -1862,103 +1772,93 @@
         "video": false
       },
       "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "matrix": "bebatut:matrix.org",
-          "orcid": "0000-0001-9852-1987",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 45.77,
-            "lon": 3.08
-          },
-          "fediverse": "https://piaille.fr/@bebatut",
-          "fediverse_flavor": "mastodon",
-          "affiliations": [
-            "gallantries",
-            "uni-freiburg"
-          ],
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
-        },
-        {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
-          "affiliations": [
-            "gallantries",
-            "erasmusmc",
-            "avans-atgm"
-          ],
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        }
-      ],
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-topic/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-topic/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/schemas/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/schemas/tutorial.json"
       }
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Teaching Python",
+      "title": "Running the GTN website online using GitPod",
       "questions": [
-        "What methods can I incorporate to improve student material uptake within my python courses?",
-        "How do I write problems that use these methodologies"
+        "How can I get a preview of the GTN website using GitPod?"
       ],
       "objectives": [
-        "Learn about four different problem design ideas, and one teaching methodology."
+        "Preview the GTN website online via GitPod",
+        "Make changes to the GTN website and preview those changes"
       ],
-      "key_points": [
-        "Debugging code is an absolutely critical skill for students that they need ot become familiar with early on.",
-        "There are a lot of strategies you can teach students to give them the necessary skills for this, such as Wolf Fence debugging.",
-        "Or simply adding print statements so they can trace the code's execution.",
-        "Fading examples helps students become more independent as they work onwards through problems.",
-        "Conversely compounding problems are sometimes a good fit for homework to give numerous \"easy\" problems followed by some \"stretch\" goals that students can reach for, combining their previous work.",
-        "Pair progarmming is proven to improve student learning outcomes, when applied correctly."
-      ],
-      "time_estimation": "2h",
+      "time_estimation": "15m",
       "subtopic": "writing",
-      "contributions": {
-        "authorship": [
-          "hexylena"
-        ],
-        "editing": [
-          "bazante1"
-        ],
-        "testing": [
-          "dirowa"
-        ]
-      },
+      "key_points": [
+        "GitPod can be used to serve the GTN training materials"
+      ],
+      "contributors": [
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        }
+      ],
       "mathjax": null,
-      "short_id": "T00068",
-      "url": "/topics/contributing/tutorials/python/tutorial.html",
+      "short_id": "T00066",
+      "url": "/topics/contributing/tutorials/gitpod/tutorial.html",
       "topic_name": "contributing",
-      "tutorial_name": "python",
-      "dir": "topics/contributing/tutorials/python",
-      "id": "contributing/python",
+      "tutorial_name": "gitpod",
+      "dir": "topics/contributing/tutorials/gitpod",
+      "id": "contributing/gitpod",
       "video_library": {
-        "tutorial": null,
+        "tutorial": {
+          "description": "This tutorial will show you how you can preview your contributions to the GTN online using GitPod.",
+          "materials": [
+            {
+              "link": "topics/contributing/tutorials/gitpod/tutorial.html",
+              "title": "Running the GTN website online using GitPod",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "contributing"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "shiltemann"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "20M",
+              "link": "_-wnsPttBCo",
+              "speakers": [
+                "shiltemann"
+              ]
+            }
+          ],
+          "gtn_id": "contributing/gitpod",
+          "title": "Running the GTN website online using GitPod",
+          "captioned": true
+        },
         "slides": null,
         "demo": null,
         "both": null,
@@ -1966,7 +1866,7 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/python/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/gitpod/tutorial.json",
       "tools": [
 
       ],
@@ -1995,6 +1895,28 @@
         "video": false
       },
       "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/gitpod/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/gitpod/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Adding auto-generated video to your slides",
+      "questions": [
+        "How can we add auto-generated video?",
+        "How does it work?",
+        "What do I need to do to make it optimal for viewers?"
+      ],
+      "objectives": [
+        "Adding a video to a set of slides"
+      ],
+      "time_estimation": "20m",
+      "subtopic": "writing",
+      "key_points": [
+        "Thanks to the GTN, videos are easy to add",
+        "Be mindful of your captions. Short sentences are good!"
+      ],
       "contributors": [
         {
           "name": "Helena Rasche",
@@ -2020,27 +1942,56 @@
           "id": "hexylena",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        },
-        {
-          "name": "Bazante Sanders",
-          "joined": "2020-12",
-          "id": "bazante1",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/"
-        },
-        {
-          "name": "Donny Vrins",
-          "joined": "2021-10",
-          "linkedin": "Donny Vrins",
-          "email": "D.vrins@live.nl",
-          "id": "dirowa",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/dirowa.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/dirowa/"
         }
       ],
+      "mathjax": null,
+      "short_id": "T00071",
+      "url": "/topics/contributing/tutorials/slides-with-video/tutorial.html",
+      "topic_name": "contributing",
+      "tutorial_name": "slides-with-video",
+      "dir": "topics/contributing/tutorials/slides-with-video",
+      "id": "contributing/slides-with-video",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/slides-with-video/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": [
+
+      ],
+      "topic_name_human": "Contributing to the Galaxy Training Material",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/python/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/python/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/slides-with-video/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/slides-with-video/tutorial.json"
       }
     },
     {
@@ -2271,86 +2222,36 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Running the GTN website online using GitPod",
+      "title": "Including a new topic",
       "questions": [
-        "How can I get a preview of the GTN website using GitPod?"
+        "How to include a new topic?",
+        "What kinds of Topics are possible?"
       ],
       "objectives": [
-        "Preview the GTN website online via GitPod",
-        "Make changes to the GTN website and preview those changes"
+        "Create a new topic",
+        "Set up the metadata for a topic"
       ],
-      "time_estimation": "15m",
-      "subtopic": "writing",
+      "time_estimation": "30m",
       "key_points": [
-        "GitPod can be used to serve the GTN training materials"
+        "A new topic can be easily added for new tutorials"
       ],
-      "contributors": [
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "twitter": "shiltemann",
-          "linkedin": "shiltemann",
-          "matrix": "shiltemann:matrix.org",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "contact_for_training": true,
-          "affiliations": [
-            "CINECA-Project",
-            "gallantries",
-            "erasmusmc"
-          ],
-          "location": {
-            "country": "NL",
-            "lat": 51.912,
-            "lon": 4.462
-          },
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
-        }
-      ],
+      "contributions": {
+        "authorship": [
+          "bebatut"
+        ],
+        "editing": [
+          "hexylena"
+        ]
+      },
       "mathjax": null,
-      "short_id": "T00066",
-      "url": "/topics/contributing/tutorials/gitpod/tutorial.html",
+      "short_id": "T00056",
+      "url": "/topics/contributing/tutorials/create-new-topic/tutorial.html",
       "topic_name": "contributing",
-      "tutorial_name": "gitpod",
-      "dir": "topics/contributing/tutorials/gitpod",
-      "id": "contributing/gitpod",
+      "tutorial_name": "create-new-topic",
+      "dir": "topics/contributing/tutorials/create-new-topic",
+      "id": "contributing/create-new-topic",
       "video_library": {
-        "tutorial": {
-          "description": "This tutorial will show you how you can preview your contributions to the GTN online using GitPod.",
-          "materials": [
-            {
-              "link": "topics/contributing/tutorials/gitpod/tutorial.html",
-              "title": "Running the GTN website online using GitPod",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "contributing"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "shiltemann"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "20M",
-              "link": "_-wnsPttBCo",
-              "speakers": [
-                "shiltemann"
-              ]
-            }
-          ],
-          "gtn_id": "contributing/gitpod",
-          "title": "Running the GTN website online using GitPod",
-          "captioned": true
-        },
+        "tutorial": null,
         "slides": null,
         "demo": null,
         "both": null,
@@ -2358,7 +2259,7 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/gitpod/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-topic/tutorial.json",
       "tools": [
 
       ],
@@ -2387,22 +2288,32 @@
         "video": false
       },
       "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/gitpod/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/gitpod/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "questions": [
-        "What metadata is required or possible to set in a Tutorial, Slide, Topic, or FAQ"
-      ],
-      "objectives": [
-        "Know where to find all of the available metadata, so you can reference it later."
-      ],
-      "title": "GTN Metadata",
-      "time_estimation": "10m",
       "contributors": [
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "matrix": "bebatut:matrix.org",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 45.77,
+            "lon": 3.08
+          },
+          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse_flavor": "mastodon",
+          "affiliations": [
+            "gallantries",
+            "uni-freiburg"
+          ],
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+        },
         {
           "name": "Helena Rasche",
           "email": "hexylena@galaxians.org",
@@ -2429,54 +2340,9 @@
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
         }
       ],
-      "mathjax": null,
-      "short_id": "T00070",
-      "url": "/topics/contributing/tutorials/schemas/tutorial.html",
-      "topic_name": "contributing",
-      "tutorial_name": "schemas",
-      "dir": "topics/contributing/tutorials/schemas",
-      "id": "contributing/schemas",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/schemas/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": [
-
-      ],
-      "topic_name_human": "Contributing to the Galaxy Training Material",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/schemas/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/schemas/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-topic/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-topic/tutorial.json"
       }
     },
     {
@@ -2687,6 +2553,140 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-content/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-content/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Creating Interactive Galaxy Tours",
+      "questions": [
+        "What is a Interactive Galaxy Tour?",
+        "How can we create an Interactive Tour?"
+      ],
+      "objectives": [
+        "Creating a Galaxy tour from scratch",
+        "Deploying and running a tour"
+      ],
+      "time_estimation": "15m",
+      "key_points": [
+        "The Interactive Tours are a good training object for self-learning at its own speed",
+        "It is now easy to create an Interactive Tour and test it"
+      ],
+      "contributors": [
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "matrix": "bebatut:matrix.org",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 45.77,
+            "lon": 3.08
+          },
+          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse_flavor": "mastodon",
+          "affiliations": [
+            "gallantries",
+            "uni-freiburg"
+          ],
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "linkedin": "bgruening",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        }
+      ],
+      "mathjax": null,
+      "short_id": "T00061",
+      "url": "/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html",
+      "topic_name": "contributing",
+      "tutorial_name": "create-new-tutorial-tours",
+      "dir": "topics/contributing/tutorials/create-new-tutorial-tours",
+      "id": "contributing/create-new-tutorial-tours",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": [
+
+      ],
+      "topic_name_human": "Contributing to the Galaxy Training Material",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.json"
       }
     },
     {
