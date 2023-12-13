@@ -212,7 +212,6 @@ The next step is to convert all of the raw files into AnnData objects, this can 
 >
 > ![Imported data with tags](../../images/scrna-ncbi-anndata/metadata.png "Imported data with tags")
 >
->   {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .tip}
 
