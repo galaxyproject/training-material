@@ -238,7 +238,7 @@ However, sometimes it is useful to know how to do this conversion manually or at
 
 ## AnnData -> Seurat
 
-Let's get an AnnData object that we can further work on. It's the object used in previous tutorials ({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), so check it out if you're curious. 
+Let's get an AnnData object that we can further work on. It's the object used in [previous tutorials]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), so check it out if you're curious. 
 
 > <hands-on-title>Get toy data</hands-on-title>
 >
@@ -422,3 +422,21 @@ As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h
 
 
 ## Anndata -> Cell Data Set (CDS)
+
+Cell Data Set (CDS) format is usually used when working with a package called Monocle3 and in the [corresponding tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) it was shown how to transform annotated AnnData to CDS object. Please note that depending on your dataset and pre-processing, you might need to refer to the method used in the mentioned tutorial which uses both annotated and unprocessed matrices. However, here we will just show the main principle of that conversion, so we will continue working on previously used dataset, so you can copy it from your history.
+
+
+> <hands-on-title>Get toy data</hands-on-title>
+>
+> You can simply download the files by pasting the links below into "Upload Data" searchbox.
+>
+>    ```
+>    https://zenodo.org/record/7053673/files/Mito-counted_AnnData
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+{: .hands_on}
+
+{% snippet faqs/galaxy/histories_copy_dataset.md %}
+
