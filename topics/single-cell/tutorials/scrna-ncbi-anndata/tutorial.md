@@ -214,7 +214,7 @@ The next step is to convert all of the raw files into AnnData objects, this can 
 >
 >
 {: .tip}
-
+{% snippet faqs/galaxy/datasets_add_tag.md %}
 > <hands-on-title>Convert raw data to AnnData</hands-on-title>
 >
 > 1. {% tool [Import AnnData and loom](toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1) %} with the following parameters:
