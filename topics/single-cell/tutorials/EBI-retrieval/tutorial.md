@@ -154,22 +154,21 @@ While we're renaming things, let's also fix our titles.
 
 > <hands-on-title> Change cell metadata titles </hands-on-title>
 >
-> 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3) %} with the following parameters:
+> 1. {% tool [Replace
+parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: output from **Column Regex and Replace** {% icon tool %}
->    - *"using column"*: `Column: 12`
->    - In *"Check"*:
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `"Sample Characteristic[genotype]"`
->            - *"Replacement"*: `genotype`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `"Sample Characteristic[individual]"`
->            - *"Replacement"*: `batch`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `"Sample Characteristic[sex]"`
->            - *"Replacement"*: `sex`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `"Sample Characteristic[cell type]"`
->            - *"Replacement"*: `cell_type`
+>    - In *"Find and Replace"*:
+>        - *"Find pattern"*: `"Sample Characteristic[genotype]"`
+>        - *"Replace with"*: `genotype`
+>    - {% icon param-repeat %} *"Insert Find and Replace"*
+>        - *"Find pattern"*: `"Sample Characteristic[individual]"`
+>        - *"Replace with"*: `batch`
+>    - {% icon param-repeat %} *"Insert Find and Replace"*
+>        - *"Find pattern"*: `"Sample Characteristic[sex]"`
+>        - *"Replace with"*: `sex`
+>    - {% icon param-repeat %} *"Insert Find and Replace"*
+>        - *"Find pattern"*: `"Sample Characteristic[cell type]"`
+>        - *"Replace with"*: `cell_type`
 > 2. Rename {% icon galaxy-pencil %} output `Cell metadata`
 >
 {: .hands_on}
