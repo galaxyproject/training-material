@@ -81,7 +81,7 @@ As you can see above, there are multiple ways to store single cell data. Therefo
 
 If you want to use publicly available data, then EBI's [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) is a great place to get resources from. You can search datasets according to various criteria either using search box in **Home** tab or choosing kingdom, experiment collection, technology type (and others) in **Browse experiments** tab. When you find the experiment you are interested in, just click on it and the experiment ID will be displayed in the website URL, as shown below.
 
-![Arrow pointing to the website URL where you can find experiment ID.](../../images/path/exp_id.jpg "Where to find experiment ID on the EBI Single Cell Expression Atlas website.")
+![Arrow pointing to the website URL where you can find experiment ID.](../../images/scrna-data/exp_id.jpg "Where to find experiment ID on the EBI Single Cell Expression Atlas website.")
 
 Once you know the experiment ID, you can use EBI SCXA Data Retrieval tool in Galaxy! 
 
@@ -129,15 +129,64 @@ At this point you might want to do some modifications in the files before downst
 
 <!---
 HCA doesn't work well for other datasets...
+https://github.com/galaxyproject/training-material/issues/4567 
 -->
+
 ## Human Cell Atlas Matrix Downloader
 
-Matrix market format:  matrix mtx, genes tsv, barcodes tsv, exp design tsv
-Scnapy read10x to transform those to AnnData object
-Flagging by using AnnData Operations works well (only need to check name of the column with gene symbols):
-Case sensitive
-No parentheses 
-Dash important 
+This tool allows to retrieve expression matrices and metadata for any public experiment available at [Human Cell Atlas data portal](https://data.humancellatlas.org/). 
+
+To use it, simply set the project title, project label or project UUID, which can be found at the [HCA data browser](https://data.humancellatlas.org/explore/projects), and select the desired matrix format (Matrix Market or Loom).
+
+![Image showing project UUID as a final fragment of link address, project title (self-explanatory) and project label as an entry in the box on the right side of the page.](../../images/scrna-data/HCA.jpg "Where to find project title, project label and project UUID")
+
+For projects that have more than one organism, one needs to be specified. Otherwise, there is no need to set the species.
+
+Let's use the suggested example of the project *Single cell transcriptome analysis of human pancreas*. If you check this project in HCA, you'll find out that it's actually its label. But it will work the same if you enter the title or UUID! 
+
+> <hands-on-title>Create AnnData object</hands-on-title>
+>
+> {% tool [Human Cell Atlas Matrix Downloader](toolshed.g2.bx.psu.edu/repos/ebi-gxa/hca_matrix_downloader/hca_matrix_downloader/v0.0.4+galaxy0) %} with the following parameters:
+>    - *"Human Cell Atlas project name/label/UUID"*: `Single cell transcriptome analysis of human pancreas`
+>    - *"Choose the format of matrix to download"*:  `Matrix Market`
+{: .hands_on}
+
+> <details-title>What will be the output?</details-title>
+>
+> When "Matrix Market" is seleted, outputs are in 10X-compatible Matrix Market format:
+> - Matrix (txt): Contains the expression values for genes (rows) and cells (columns) in raw counts. This text file is formatted as a Matrix Market file, and as such it is accompanied by separate files for the gene identifiers and the cells identifiers.
+> - Genes (tsv): Identifiers (column repeated) for the genes present in the matrix of expression, in the same order as the matrix rows.
+> - Barcodes (tsv): Identifiers for the cells of the data matrix. The file is ordered to match the columns of the matrix.
+> - Experiment Design file (tsv): Contains metadata for the different cells of the experiment.
+>
+> When "Loom" is selected, output is a single Loom HDF5 file:
+> - Loom (h5): Contains expression values for genes (rows) and cells (columns) in raw counts, cell metadata table and gene metadata table, in a [single HDF5 file](http://linnarssonlab.org/loompy/format/index.html).
+>
+{: .details}
+
+If you chose *Loom* format and you need to convert your file to other datatype, you can use {% tool [SCEasy](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy1) %} (more details in the next section). If you chose *Matrix Market* format, you can then transform the output to AnnData or Seurat, as shown in the EBI SCXA example above. Below you find an example of transforming the output to AnnData object. 
+
+
+> <hands-on-title>Create AnnData object</hands-on-title>
+>
+> {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0) %} with the following parameters:
+>    - *"Expression matrix in sparse matrix format (.mtx)"*: `Human Cell Atlas Matrix Downloader on matrix.mtx`
+>    - *"Gene table"*:  `Human Cell Atlas Matrix Downloader on genes.tsv`
+>    - *"Barcode/cell table"*: `Human Cell Atlas Matrix Downloader on barcodes.tsv`
+>    - *"Cell metadata table"*: `Human Cell Atlas Matrix Downloader on exp_design.tsv`
+{: .hands_on}
+
+
+> <tip-title>Flagging by using AnnData Operations</tip-title>
+>
+> After you create AnnData file, you can additionally use {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92) %} tool before downstream analysis. It's quite a useful tool since not only does it flag mitochondrial genes, but also automatically calculates a bunch of metrics, such as log1p_mean_counts, log1p_total_counts, mean_counts, n_cells, n_cells_by_counts, n_counts, pct_dropout_by_counts, and total_counts.
+>
+> When you use it to flag mitochondrial genes, here are some formatting tips:
+> - Remember to check the name of the column with gene symbols
+> - This tool is case sensitive
+> - No parentheses needed when typing in the values
+> - Including a dash is important to identify mitochondrial genes (eg. **MT-**)
+{: .tip}
 
 
 # Downsampling FASTQ files
@@ -238,7 +287,7 @@ However, sometimes it is useful to know how to do this conversion manually or at
 
 ## AnnData -> Seurat
 
-Let's get an AnnData object that we can further work on. It's the object used in [previous tutorials]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), so check it out if you're curious. 
+Let's get an AnnData object that we can further work on. It's the object used in previous tutorials ({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), so check it out if you're curious. 
 
 > <hands-on-title>Get toy data</hands-on-title>
 >
