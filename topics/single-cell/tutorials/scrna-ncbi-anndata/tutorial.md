@@ -28,6 +28,11 @@ contributions:
     - hexhowells
   editing:
     - nomadscientist
+    - pavanvidem
+    - mtekman
+    - hexylena
+  testing:
+    - pavanvidem
 
 follow_up_training:
   -
@@ -79,8 +84,8 @@ The first step is the obtain the data. For this tutorial, we will use data from 
 > 2. Import the following files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->    {{ page.zenodo_link }}/files/GSM5353214_PA_AUG_PB_1A_S1.dge.txt
->    {{ page.zenodo_link }}/files/GSM5353215_PA_AUG_PB_1B_S2.dge.txt
+>    {{ page.zenodo_link }}/files/GSM5353214_PA_AUG_PB_1A_S1_dge.txt
+>    {{ page.zenodo_link }}/files/GSM5353215_PA_AUG_PB_1B_S2_dge.txt
 >    {{ page.zenodo_link }}/files/GSM5353216_PA_PB1A_Pool_1_3_S50_L002_dge.txt
 >    {{ page.zenodo_link }}/files/GSM5353217_PA_PB1A_Pool_2_S107_L004_dge.txt
 >    {{ page.zenodo_link }}/files/GSM5353218_PA_PB1B_Pool_1_2_S74_L003_dge.txt
@@ -101,7 +106,6 @@ The first step is the obtain the data. For this tutorial, we will use data from 
 </div>
 
 We now have the raw gene expression data that we will process. However, we will need to manually add some metadata, which requires finding out some more information about our files.
-
 
 
 > <hands-on-title>Finding the metadata</hands-on-title>
@@ -537,4 +541,4 @@ With that run we should be finished! Check the {% icon param-file %} `obs` file 
 > The above tools will sometimes run without error but not produce the correct results - just because they run doesn't mean all the parameters and inputs were set properly! When {% icon galaxy-eye %} inspecting the {% icon param-file %} `obs` file of the final AnnData object, you should see that all the columns contain data. If any of the columns are blank, then something has gone wrong!
 {: .warning}
 
-{% icon congratulations %} Congratulations! Now your data is ready for further processing or analysis!
+{% icon congratulations %} Congratulations! Now your data is ready for further processing or analysis! You can compare your analysis results with this [example history](https://usegalaxy.eu/u/videmp/h/ncbi-to-anndata) and redo the whole analysis with a single click using this [workflow](https://usegalaxy.eu/u/videmp/w/ncbi-to-anndata).
