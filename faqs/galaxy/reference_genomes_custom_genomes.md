@@ -31,4 +31,4 @@ There are five basic steps to use a **Custom Reference Genome**, plus one option
 
 {% icon tip %} TIP 1: Avoid [assigning a native database]({% link faqs/galaxy/datasets_change_dbkey.md %}) to uploaded data unless you confirmed the data are based on the [same exact genome assembly]({% link faqs/galaxy/datasets_chromosome_identifiers.md %}) or you [adjusted the data to be a match]({% link topics/introduction/tutorials/data-manipulation-olympics/tutorial.html %}) **first**!
 
-{% icon tip %} TIP 2: When choosing your reference genome, consider [choosing your reference annotation]{% link faqs/galaxy/analysis_differential_expression_help %}) at the same time. Standardize the format of both as a preparation step. Put the files in a dedicated "reference data" history for easy resuse.
+{% icon tip %} TIP 2: When choosing your reference genome, consider [choosing your reference annotation]{% link faqs/galaxy/analysis_differential_expression_help.md %}) at the same time. Standardize the format of both as a preparation step. Put the files in a dedicated "reference data" history for easy resuse.
