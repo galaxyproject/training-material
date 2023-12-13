@@ -24,7 +24,7 @@ There are two options for reference genomes in Galaxy.
 There are five basic steps to use a **Custom Reference Genome**, plus one optional.
 1. Obtain a FASTA copy of the target genome. See tip 2.
 2. Upload the genome to Galaxy and to add it as a dataset in your history.
-3. [Clean up the format0({% link faqs/galaxy/datasets_working_with_fasta.md %}) with the tool **NormalizeFasta** using the options to wrap sequence lines at 80 bases and to trim the title line at the first whitespace.
+3. [Clean up the format]({% link faqs/galaxy/datasets_working_with_fasta.md %}) with the tool **NormalizeFasta** using the options to wrap sequence lines at 80 bases and to trim the title line at the first whitespace.
 4. Make sure the [chromosome identifiers]({% link faqs/galaxy/datasets_chromosome_identifiers.md %}) are a match for other inputs.
 5. Set a tool form's options to use a custom reference genome from the history and select the loaded genome FASTA.
 6. (Optional) Create a [custom genome build's database]{% link faqs/galaxy/analysis_add_custom_build.md %}) that you can [assign to datasets]({% link faqs/galaxy/datasets_change_dbkey.md %}).
