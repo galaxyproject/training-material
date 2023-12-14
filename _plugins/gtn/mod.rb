@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Gtn
-
   # Module for obtaining modification times of files.
   # It walks the git history to record the last time a file was modified.
   # This is faster than talking to the file system.
@@ -86,7 +85,7 @@ module Gtn
         .map { |x| x.split("\n\n") }
         .select { |x| x.length > 1 }
         .each do |date, files|
-        files.split(/\n/).select{|x| x =~ /\.(md|html)$/}.each do |f|
+        files.split(/\n/).grep(/\.(md|html)$/).each do |f|
           modification_type, path = f.split("\t")
           if modification_type == 'A'
             # Chase the renames.
@@ -120,7 +119,6 @@ module Gtn
       end
     end
   end
-
 end
 
 if $PROGRAM_NAME == __FILE__

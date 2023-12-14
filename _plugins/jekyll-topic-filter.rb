@@ -373,13 +373,9 @@ module TopicFilter
     #     B -- No ----> E[End]
 
     output = "flowchart TD\n"
-    wf['steps'].keys.each do |id|
+    wf['steps'].each_key do |id|
       step = wf['steps'][id]
       output += "  #{id}[\"#{step['name']}\"];\n"
-    end
-
-    wf['steps'].keys.each do |id|
-      # Look at the 'input connections' to this step
       step = wf['steps'][id]
       step['input_connections'].each do |_, v|
         # if v is a list

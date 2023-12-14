@@ -131,9 +131,7 @@ module Jekyll
     #
     def gtn_pub_date(path)
       # if it's not a string then log a warning
-      if !path.is_a?(String)
-        path = path['path']
-      end
+      path = path['path'] if !path.is_a?(String)
       # Automatically strips any leading slashes.
       Gtn::PublicationTimes.obtain_time(path.gsub(%r{^/}, ''))
     end
