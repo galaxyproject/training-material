@@ -126,8 +126,8 @@ if $PROGRAM_NAME == __FILE__
   # pp Gtn::ModificationTimes.commit_count_cache
 
   Gtn::PublicationTimes.init_cache
-  Gtn::PublicationTimes.time_cache.select { |_, v| 
+  Gtn::PublicationTimes.time_cache.select do |_, v|
     # Things in last 6 months
-    v > Time.now - 6 * 30 * 24 * 60 * 60
-  }.map{|k,v| puts "#{v} #{k}"}
+    v > Time.now - (6 * 30 * 24 * 60 * 60)
+  end.map { |k, v| puts "#{v} #{k}" }
 end
