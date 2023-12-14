@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 subtopic: datamanipulation
-priority: 3
+priority: 1
 title: Single cell data ingestion and formats conversion
 questions:
 - What are the most popular single cell datatypes?
@@ -33,9 +33,8 @@ follow_up_training:
     topic_name: single-cell
 
 tags:
-  - single-cell
-  - data-management
-  - transcriptomics
+  - data management
+  - data import
 ---
 
 # Introduction 
