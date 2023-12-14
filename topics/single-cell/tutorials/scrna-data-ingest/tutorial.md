@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 subtopic: datamanipulation
 priority: 1
-title: Single cell data ingestion and formats conversion
+title: Converting between common single cell data formats
 questions:
 - What are the most popular single cell datatypes?
 - What if the format of my files is different than that used in the tutorial I want to follow?
