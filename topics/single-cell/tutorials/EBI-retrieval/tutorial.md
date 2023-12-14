@@ -248,7 +248,7 @@ And that's all! What's even more exciting about the {% icon tool %}) **AnnData O
 # Conclusion
 Now you can use this object as input for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) and its associated workflow!
 
-Even though this tutorial was designed specifically to modify the AnnData object to be compatible with the subsequent tutorial, it also shows useful tools that you can use for your own, independent data analysis. You can find the [workflow](https://singlecell.usegalaxy.eu/u/j.jakiela/w/ebi-single-cell-expression-atlas-files-to-anndata) and the [answer key history](https://singlecell.usegalaxy.eu/u/j.jakiela/h/ebi-single-cell-expression-atlas-files-to-anndata-1). However, if you want to use the workflow from this tutorial, you have to keep in mind that different datasets may have different column names. So you have to check them first, and only then you can modify them.
+Even though this tutorial was designed specifically to modify the AnnData object to be compatible with the subsequent tutorial, it also shows useful tools that you can use for your own, independent data analysis. You can find the [workflow](https://singlecell.usegalaxy.eu/u/j.jakiela/w/workflow-constructed-from-history-ebi-workflow) and the [answer key history](https://singlecell.usegalaxy.eu/u/j.jakiela/h/ebi-scxa---anndata-scanpy-or-seurat-object-1). However, if you want to use the workflow from this tutorial, you have to keep in mind that different datasets may have different column names. So you have to check them first, and only then you can modify them.
 
 </div>
 
