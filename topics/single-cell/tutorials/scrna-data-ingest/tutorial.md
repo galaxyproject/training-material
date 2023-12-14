@@ -204,7 +204,7 @@ In Galaxy Toolshed there is a wonderful tool called {% tool [SCEasy](toolshed.g2
 
 > <warning-title>Two SCEasy tools</warning-title>
 >  
-> The updated SCEasy tool is called [**SCEasy Converter**](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy1) and it's only available on usegalaxy.eu. The second tool is called [**SCEasy convert**](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1) and it works on usegalaxy.org, however has limited conversion options.
+> As of the writing of this tutorial, the updated SCEasy tool is called [**SCEasy Converter**](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy1) and it's only available on *usegalaxy.eu*. The second tool is called [**SCEasy convert**](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1) and it works on *usegalaxy.org*, however has limited conversion options.
 > 
 {: .warning}
 
