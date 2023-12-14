@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -75,7 +75,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Statistics and machine learning">
+	<meta property="og:title" content="[Statistics and machine learning]Statistics and machine learning Workflows">
         <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">ml_classification</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,71 +278,72 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
   10["Generalized linear models"];
-  11["Nearest Neighbors Classification"];
-  12["Support vector machines (SVMs)"];
-  13["Ensemble methods"];
-  14["Hyperparameter Search"];
-  15["Plot confusion matrix, precision, recall and ROC and AUC curves"];
-  16["Plot confusion matrix, precision, recall and ROC and AUC curves"];
-  17["Plot confusion matrix, precision, recall and ROC and AUC curves"];
-  18["Plot confusion matrix, precision, recall and ROC and AUC curves"];
-  19["Ensemble methods"];
-  2["Input dataset"];
-  20["Plot confusion matrix, precision, recall and ROC and AUC curves"];
-  3["Pipeline Builder"];
-  4["Generalized linear models"];
-  5["Nearest Neighbors Classification"];
-  6["Support vector machines (SVMs)"];
-  7["Ensemble methods"];
-  8["Remove beginning"];
-  9["Estimator attributes"];
   2 -->|output| 10;
   4 -->|outfile_fit| 10;
+  11["Nearest Neighbors Classification"];
   2 -->|output| 11;
   5 -->|outfile_fit| 11;
+  12["Support vector machines (SVMs)"];
   2 -->|output| 12;
   6 -->|outfile_fit| 12;
+  13["Ensemble methods"];
   2 -->|output| 13;
   7 -->|outfile_fit| 13;
+  14["Hyperparameter Search"];
   0 -->|output| 14;
   0 -->|output| 14;
   3 -->|outfile| 14;
   9 -->|outfile| 14;
+  15["Plot confusion matrix, precision, recall and ROC and AUC curves"];
   8 -->|out_file1| 15;
   10 -->|outfile_predict| 15;
   4 -->|outfile_fit| 15;
+  16["Plot confusion matrix, precision, recall and ROC and AUC curves"];
   1 -->|output| 16;
   11 -->|outfile_predict| 16;
   5 -->|outfile_fit| 16;
+  17["Plot confusion matrix, precision, recall and ROC and AUC curves"];
   1 -->|output| 17;
   12 -->|outfile_predict| 17;
   6 -->|outfile_fit| 17;
+  18["Plot confusion matrix, precision, recall and ROC and AUC curves"];
   1 -->|output| 18;
   13 -->|outfile_predict| 18;
   7 -->|outfile_fit| 18;
+  19["Ensemble methods"];
   2 -->|output| 19;
   14 -->|outfile_object| 19;
+  2["Input dataset"];
+  20["Plot confusion matrix, precision, recall and ROC and AUC curves"];
   1 -->|output| 20;
   19 -->|outfile_predict| 20;
   14 -->|outfile_object| 20;
+  3["Pipeline Builder"];
+  4["Generalized linear models"];
   0 -->|output| 4;
   0 -->|output| 4;
+  5["Nearest Neighbors Classification"];
   0 -->|output| 5;
   0 -->|output| 5;
+  6["Support vector machines (SVMs)"];
   0 -->|output| 6;
   0 -->|output| 6;
+  7["Ensemble methods"];
   0 -->|output| 7;
   0 -->|output| 7;
+  8["Remove beginning"];
   1 -->|output| 8;
+  9["Estimator attributes"];
   3 -->|outfile| 9;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -367,7 +369,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -391,7 +393,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

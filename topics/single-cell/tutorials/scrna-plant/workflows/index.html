@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -73,17 +73,25 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         
-        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
+
+What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
+ {: .alert.alert-success}
+">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Single Cell">
-        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+	<meta property="og:title" content="[Single Cell]Single Cell Workflows">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
+
+What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
+ {: .alert.alert-success}
+">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +246,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">scRNA Plant Analysis</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,7 +286,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input parameter"];
   1["Input dataset"];
@@ -287,66 +295,68 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   5["Input parameter"];
   6["Input parameter"];
   7["Import Anndata and loom"];
-  8["Import Anndata and loom"];
-  9["Manipulate AnnData"];
-  10["Manipulate AnnData"];
-  11["Inspect and manipulate"];
-  12["Filter"];
-  13["Plot"];
-  14["Filter"];
-  15["Manipulate AnnData"];
-  16["Manipulate AnnData"];
-  17["Manipulate AnnData"];
-  18["Normalize"];
-  19["Inspect and manipulate"];
-  20["Remove confounders"];
-  21["Inspect and manipulate"];
-  22["Cluster, infer trajectories and embed"];
-  23["Inspect and manipulate"];
-  24["Cluster, infer trajectories and embed"];
-  25["Cluster, infer trajectories and embed"];
-  26["Plot"];
-  27["Plot"];
-  28["Plot"];
-  29["Manipulate AnnData"];
-  30["Plot"];
-  31["Plot"];
-  32["Plot"];
   1 -->|output| 7;
+  8["Import Anndata and loom"];
   2 -->|output| 8;
+  9["Manipulate AnnData"];
   7 -->|anndata| 9;
   8 -->|anndata| 9;
+  10["Manipulate AnnData"];
   9 -->|anndata| 10;
+  11["Inspect and manipulate"];
   10 -->|anndata| 11;
+  12["Filter"];
   11 -->|anndata_out| 12;
   3 -->|output| 12;
+  13["Plot"];
   11 -->|anndata_out| 13;
+  14["Filter"];
   12 -->|anndata_out| 14;
   4 -->|output| 14;
+  15["Manipulate AnnData"];
   14 -->|anndata_out| 15;
   5 -->|output| 15;
+  16["Manipulate AnnData"];
   15 -->|anndata| 16;
   6 -->|output| 16;
+  17["Manipulate AnnData"];
   16 -->|anndata| 17;
+  18["Normalize"];
   17 -->|anndata| 18;
+  19["Inspect and manipulate"];
   18 -->|anndata_out| 19;
+  20["Remove confounders"];
   19 -->|anndata_out| 20;
+  21["Inspect and manipulate"];
   20 -->|anndata_out| 21;
+  22["Cluster, infer trajectories and embed"];
   21 -->|anndata_out| 22;
+  23["Inspect and manipulate"];
   22 -->|anndata_out| 23;
+  24["Cluster, infer trajectories and embed"];
   23 -->|anndata_out| 24;
+  25["Cluster, infer trajectories and embed"];
   24 -->|anndata_out| 25;
   0 -->|output| 25;
+  26["Plot"];
   24 -->|anndata_out| 26;
+  27["Plot"];
   24 -->|anndata_out| 27;
+  28["Plot"];
   25 -->|anndata_out| 28;
+  29["Manipulate AnnData"];
   25 -->|anndata_out| 29;
+  30["Plot"];
   25 -->|anndata_out| 30;
+  31["Plot"];
   29 -->|anndata| 31;
+  32["Plot"];
   29 -->|anndata| 32;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -372,7 +382,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -396,7 +406,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

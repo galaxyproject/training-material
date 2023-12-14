@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,18 +74,24 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         <meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding
-genes, as well as other functio...">
+genes, as well as other functional genome units such as structural RNAs, tRNAs,
+small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion
+sequences, transposons and other mobile elements.
+">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Genome Annotation">
+	<meta property="og:title" content="[Genome Annotation]Genome Annotation Workflows">
         <meta property="og:description" content="Genome annotation is a multi-level process that includes prediction of protein-coding
-genes, as well as other functio...">
+genes, as well as other functional genome units such as structural RNAs, tRNAs,
+small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion
+sequences, transposons and other mobile elements.
+">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -240,7 +246,8 @@ genes, as well as other functio...">
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Genome annotation with Maker </h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -282,63 +289,59 @@ genes, as well as other functio...">
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
   2["Input dataset"];
   3["Maker"];
-  4["Fasta Statistics"];
-  5["Busco"];
-  6["Train Augustus"];
-  7["Genome annotation statistics"];
-  8["gffread"];
-  9["Train SNAP"];
-  10["Busco"];
-  11["Maker"];
-  12["gffread"];
-  13["Train Augustus"];
-  14["Genome annotation statistics"];
-  15["Train SNAP"];
-  16["Busco"];
-  17["Maker"];
-  18["Map annotation ids"];
-  19["JBrowse"];
-  20["gffread"];
-  21["Genome annotation statistics"];
-  22["Busco"];
   0 -->|output| 3;
   2 -->|output| 3;
   1 -->|output| 3;
+  4["Fasta Statistics"];
   2 -->|output| 4;
+  5["Busco"];
   2 -->|output| 5;
+  6["Train Augustus"];
   2 -->|output| 6;
   3 -->|output_gff| 6;
+  7["Genome annotation statistics"];
   3 -->|output_gff| 7;
   2 -->|output| 7;
+  8["gffread"];
   3 -->|output_gff| 8;
   2 -->|output| 8;
+  9["Train SNAP"];
   2 -->|output| 9;
   3 -->|output_gff| 9;
+  10["Busco"];
   8 -->|output_exons| 10;
+  11["Maker"];
   6 -->|output_tar| 11;
   9 -->|output| 11;
   2 -->|output| 11;
   3 -->|output_full| 11;
+  12["gffread"];
   11 -->|output_gff| 12;
   2 -->|output| 12;
+  13["Train Augustus"];
   2 -->|output| 13;
   11 -->|output_gff| 13;
+  14["Genome annotation statistics"];
   11 -->|output_gff| 14;
   2 -->|output| 14;
+  15["Train SNAP"];
   2 -->|output| 15;
   11 -->|output_gff| 15;
+  16["Busco"];
   12 -->|output_exons| 16;
+  17["Maker"];
   13 -->|output_tar| 17;
   15 -->|output| 17;
   2 -->|output| 17;
   11 -->|output_full| 17;
+  18["Map annotation ids"];
   17 -->|output_gff| 18;
+  19["JBrowse"];
   2 -->|output| 19;
   3 -->|output_gff| 19;
   18 -->|renamed| 19;
@@ -346,14 +349,19 @@ genes, as well as other functio...">
   3 -->|output_evidences| 19;
   11 -->|output_evidences| 19;
   17 -->|output_evidences| 19;
+  20["gffread"];
   18 -->|renamed| 20;
   2 -->|output| 20;
+  21["Genome annotation statistics"];
   18 -->|renamed| 21;
   2 -->|output| 21;
+  22["Busco"];
   20 -->|output_exons| 22;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -379,7 +387,7 @@ genes, as well as other functio...">
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -403,7 +411,7 @@ genes, as well as other functio...">
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

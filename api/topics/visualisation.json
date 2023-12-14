@@ -62,6 +62,246 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
+      "title": "Ploting a Microbial Genome with Circos",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.3591856",
+      "questions": [
+        "How can I visualise common genomic datasets like GFF3, BigWig, and VCF"
+      ],
+      "objectives": [
+        "Plot an *E. coli* genome in Galaxy",
+        "With tracks for the annotations, sequencing data, and variants."
+      ],
+      "time_estimation": "30m",
+      "key_points": [
+        "Circos is incredibly customisable",
+        "Not all customisations have to be done with rules, but they can be a useful method"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "visualisation",
+          "tutorials": [
+            "circos"
+          ]
+        }
+      ],
+      "contributions": {
+        "authorship": [
+          "hexylena"
+        ],
+        "funding": [
+          "gallantries"
+        ]
+      },
+      "mathjax": null,
+      "short_id": "T00373",
+      "url": "/topics/visualisation/tutorials/circos-microbial/tutorial.html",
+      "topic_name": "visualisation",
+      "tutorial_name": "circos-microbial",
+      "dir": "topics/visualisation/tutorials/circos-microbial",
+      "id": "visualisation/circos-microbial",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos-microbial/workflows/main_workflow.ga",
+          "path": "topics/visualisation/tutorials/circos-microbial/workflows/main_workflow.ga",
+          "wfid": "visualisation-circos-microbial",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/visualisation-circos-microbial/versions/main_workflow",
+          "license": "AGPL-3.0-or-later",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0000-0001-9760-8992",
+              "name": "Helena Rasche"
+            }
+          ],
+          "name": "Circos for E. Coli",
+          "title": "Circos for E. Coli",
+          "test_results": null,
+          "modified": "2023-12-14 16:19:02 +0000",
+          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"Circos: bigWig to Scatter\"];\n  3 -->|output| 10;\n  11[\"Circos: bigWig to Scatter\"];\n  4 -->|output| 11;\n  12[\"Cut\"];\n  5 -->|output| 12;\n  13[\"Circos: bigWig to Scatter\"];\n  6 -->|output| 13;\n  14[\"Circos: Interval to Tiles\"];\n  8 -->|out_file1| 14;\n  15[\"Circos\"];\n  0 -->|output| 15;\n  10 -->|output| 15;\n  12 -->|out_file1| 15;\n  9 -->|output| 15;\n  11 -->|output| 15;\n  7 -->|output| 15;\n  14 -->|output| 15;\n  14 -->|output| 15;\n  13 -->|output| 15;\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"GC Skew\"];\n  0 -->|output| 6;\n  7[\"Circos: Interval to Circos Text Labels\"];\n  1 -->|output| 7;\n  8[\"GFF-to-BED\"];\n  1 -->|output| 8;\n  9[\"Circos: bigWig to Scatter\"];\n  2 -->|output| 9;\n"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/circos-microbial/tutorial.json",
+      "tools": [
+        "Cut1",
+        "gff2bed1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.5.4+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy9",
+        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_gc_skew/0.69.8+galaxy9",
+        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_text/0.69.8+galaxy9",
+        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tile/0.69.8+galaxy9",
+        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_wiggle_to_scatter/0.69.8+galaxy9"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Visualisation",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "deeptools_bam_coverage",
+            "owner": "bgruening",
+            "revisions": "0e49b109abc2",
+            "tool_panel_section_label": "deepTools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "circos",
+            "owner": "iuc",
+            "revisions": "31a35811dda6",
+            "tool_panel_section_label": "Graph/Display Data",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "circos",
+            "owner": "iuc",
+            "revisions": "31a35811dda6",
+            "tool_panel_section_label": "Graph/Display Data",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "circos",
+            "owner": "iuc",
+            "revisions": "31a35811dda6",
+            "tool_panel_section_label": "Graph/Display Data",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "circos",
+            "owner": "iuc",
+            "revisions": "31a35811dda6",
+            "tool_panel_section_label": "Graph/Display Data",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "circos",
+            "owner": "iuc",
+            "revisions": "31a35811dda6",
+            "tool_panel_section_label": "Graph/Display Data",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: deeptools_bam_coverage\n  owner: bgruening\n  revisions: 0e49b109abc2\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: circos\n  owner: iuc\n  revisions: 31a35811dda6\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: circos\n  owner: iuc\n  revisions: 31a35811dda6\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: circos\n  owner: iuc\n  revisions: 31a35811dda6\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: circos\n  owner: iuc\n  revisions: 31a35811dda6\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: circos\n  owner: iuc\n  revisions: 31a35811dda6\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "affiliations": [
+            "gallantries",
+            "erasmusmc",
+            "avans-atgm"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "short_name": "Gallantries",
+          "start_date": "2020-09-01",
+          "end_date": "2023-09-30",
+          "joined": "2020-09",
+          "avatar": "https://gallantries.github.io/assets/images/gallantries-logo.png",
+          "github": false,
+          "funder": true,
+          "url": "https://training.galaxyproject.org/training-material/api/funders/gallantries.json",
+          "funder_name": "Erasmus+ Programme",
+          "funding_id": "2020-1-NL01-KA203-064717",
+          "funding_system": "erasmusplus",
+          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />\n<img src=\"https://www.erasmusplus.nl/assets/images/logo.png\" alt=\"erasmus plus logo\" />",
+          "members": [
+            "abretaud",
+            "bebatut",
+            "fpsom",
+            "hexylena",
+            "shiltemann",
+            "yvanlebras"
+          ],
+          "id": "gallantries",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/circos-microbial/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/circos-microbial/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Visualisation with Circos",
       "zenodo_link": "https://zenodo.org/record/4494146",
       "questions": [
@@ -254,8 +494,8 @@
           "name": "Circos tutorial",
           "title": "Circos tutorial",
           "test_results": null,
-          "modified": "2023-12-14 08:41:32 +0000",
-          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Remove beginning\"];\n  2[\"Remove beginning\"];\n  3[\"Select\"];\n  4[\"Circos\"];\n  5[\"Cut\"];\n  6[\"Select random lines\"];\n  7[\"Cut\"];\n  8[\"Select random lines\"];\n  9[\"Circos\"];\n  10[\"Circos\"];\n  11[\"Circos\"];\n  12[\"Circos\"];\n  13[\"Circos\"];\n  14[\"Circos\"];\n  15[\"Circos\"];\n  16[\"Circos\"];\n  1 -->|out_file1| 5;\n  2 -->|out_file1| 6;\n  3 -->|out_file1| 7;\n  5 -->|out_file1| 8;\n  0 -->|output| 9;\n  7 -->|out_file1| 9;\n  0 -->|output| 10;\n  7 -->|out_file1| 10;\n  0 -->|output| 11;\n  7 -->|out_file1| 11;\n  8 -->|out_file1| 11;\n  0 -->|output| 12;\n  7 -->|out_file1| 12;\n  8 -->|out_file1| 12;\n  0 -->|output| 13;\n  7 -->|out_file1| 13;\n  8 -->|out_file1| 13;\n  0 -->|output| 14;\n  7 -->|out_file1| 14;\n  8 -->|out_file1| 14;\n  0 -->|output| 15;\n  7 -->|out_file1| 15;\n  8 -->|out_file1| 15;\n  6 -->|out_file1| 15;\n  0 -->|output| 16;\n  7 -->|out_file1| 16;\n  8 -->|out_file1| 16;\n  6 -->|out_file1| 16;\n"
+          "modified": "2023-12-14 16:19:02 +0000",
+          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Remove beginning\"];\n  2[\"Remove beginning\"];\n  3[\"Select\"];\n  4[\"Circos\"];\n  5[\"Cut\"];\n  1 -->|out_file1| 5;\n  6[\"Select random lines\"];\n  2 -->|out_file1| 6;\n  7[\"Cut\"];\n  3 -->|out_file1| 7;\n  8[\"Select random lines\"];\n  5 -->|out_file1| 8;\n  9[\"Circos\"];\n  0 -->|output| 9;\n  7 -->|out_file1| 9;\n  10[\"Circos\"];\n  0 -->|output| 10;\n  7 -->|out_file1| 10;\n  11[\"Circos\"];\n  0 -->|output| 11;\n  7 -->|out_file1| 11;\n  8 -->|out_file1| 11;\n  12[\"Circos\"];\n  0 -->|output| 12;\n  7 -->|out_file1| 12;\n  8 -->|out_file1| 12;\n  13[\"Circos\"];\n  0 -->|output| 13;\n  7 -->|out_file1| 13;\n  8 -->|out_file1| 13;\n  14[\"Circos\"];\n  0 -->|output| 14;\n  7 -->|out_file1| 14;\n  8 -->|out_file1| 14;\n  15[\"Circos\"];\n  0 -->|output| 15;\n  7 -->|out_file1| 15;\n  8 -->|out_file1| 15;\n  6 -->|out_file1| 15;\n  16[\"Circos\"];\n  0 -->|output| 16;\n  7 -->|out_file1| 16;\n  8 -->|out_file1| 16;\n  6 -->|out_file1| 16;\n"
         },
         {
           "workflow": "nature_workflow.ga",
@@ -281,8 +521,8 @@
           "name": "Circos: Nature workflow",
           "title": "Circos: Nature workflow",
           "test_results": null,
-          "modified": "2023-12-14 08:41:32 +0000",
-          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Circos\"];\n  3[\"Circos\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  1 -->|output| 2;\n  1 -->|output| 2;\n  0 -->|output| 3;\n  1 -->|output| 3;\n  1 -->|output| 3;\n  1 -->|output| 3;\n"
+          "modified": "2023-12-14 16:19:02 +0000",
+          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Circos\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  1 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Circos\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  1 -->|output| 3;\n  1 -->|output| 3;\n"
         }
       ],
       "api": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/circos/tutorial.json",
@@ -356,441 +596,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/circos/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/circos/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Ploting a Microbial Genome with Circos",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.3591856",
-      "questions": [
-        "How can I visualise common genomic datasets like GFF3, BigWig, and VCF"
-      ],
-      "objectives": [
-        "Plot an *E. coli* genome in Galaxy",
-        "With tracks for the annotations, sequencing data, and variants."
-      ],
-      "time_estimation": "30m",
-      "key_points": [
-        "Circos is incredibly customisable",
-        "Not all customisations have to be done with rules, but they can be a useful method"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "visualisation",
-          "tutorials": [
-            "circos"
-          ]
-        }
-      ],
-      "contributions": {
-        "authorship": [
-          "hexylena"
-        ],
-        "funding": [
-          "gallantries"
-        ]
-      },
-      "mathjax": null,
-      "short_id": "T00373",
-      "url": "/topics/visualisation/tutorials/circos-microbial/tutorial.html",
-      "topic_name": "visualisation",
-      "tutorial_name": "circos-microbial",
-      "dir": "topics/visualisation/tutorials/circos-microbial",
-      "id": "visualisation/circos-microbial",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos-microbial/workflows/main_workflow.ga",
-          "path": "topics/visualisation/tutorials/circos-microbial/workflows/main_workflow.ga",
-          "wfid": "visualisation-circos-microbial",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/visualisation-circos-microbial/versions/main_workflow",
-          "license": "AGPL-3.0-or-later",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "0000-0001-9760-8992",
-              "name": "Helena Rasche"
-            }
-          ],
-          "name": "Circos for E. Coli",
-          "title": "Circos for E. Coli",
-          "test_results": null,
-          "modified": "2023-12-14 08:41:32 +0000",
-          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"Circos: bigWig to Scatter\"];\n  11[\"Circos: bigWig to Scatter\"];\n  12[\"Cut\"];\n  13[\"Circos: bigWig to Scatter\"];\n  14[\"Circos: Interval to Tiles\"];\n  15[\"Circos\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"GC Skew\"];\n  7[\"Circos: Interval to Circos Text Labels\"];\n  8[\"GFF-to-BED\"];\n  9[\"Circos: bigWig to Scatter\"];\n  3 -->|output| 10;\n  4 -->|output| 11;\n  5 -->|output| 12;\n  6 -->|output| 13;\n  8 -->|out_file1| 14;\n  0 -->|output| 15;\n  10 -->|output| 15;\n  12 -->|out_file1| 15;\n  9 -->|output| 15;\n  11 -->|output| 15;\n  7 -->|output| 15;\n  14 -->|output| 15;\n  14 -->|output| 15;\n  13 -->|output| 15;\n  0 -->|output| 6;\n  1 -->|output| 7;\n  1 -->|output| 8;\n  2 -->|output| 9;\n"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/circos-microbial/tutorial.json",
-      "tools": [
-        "Cut1",
-        "gff2bed1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.5.4+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy9",
-        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_gc_skew/0.69.8+galaxy9",
-        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_text/0.69.8+galaxy9",
-        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tile/0.69.8+galaxy9",
-        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_wiggle_to_scatter/0.69.8+galaxy9"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Visualisation",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "deeptools_bam_coverage",
-            "owner": "bgruening",
-            "revisions": "0e49b109abc2",
-            "tool_panel_section_label": "deepTools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "circos",
-            "owner": "iuc",
-            "revisions": "31a35811dda6",
-            "tool_panel_section_label": "Graph/Display Data",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "circos",
-            "owner": "iuc",
-            "revisions": "31a35811dda6",
-            "tool_panel_section_label": "Graph/Display Data",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "circos",
-            "owner": "iuc",
-            "revisions": "31a35811dda6",
-            "tool_panel_section_label": "Graph/Display Data",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "circos",
-            "owner": "iuc",
-            "revisions": "31a35811dda6",
-            "tool_panel_section_label": "Graph/Display Data",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "circos",
-            "owner": "iuc",
-            "revisions": "31a35811dda6",
-            "tool_panel_section_label": "Graph/Display Data",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: deeptools_bam_coverage\n  owner: bgruening\n  revisions: 0e49b109abc2\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: circos\n  owner: iuc\n  revisions: 31a35811dda6\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: circos\n  owner: iuc\n  revisions: 31a35811dda6\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: circos\n  owner: iuc\n  revisions: 31a35811dda6\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: circos\n  owner: iuc\n  revisions: 31a35811dda6\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: circos\n  owner: iuc\n  revisions: 31a35811dda6\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
-          "affiliations": [
-            "gallantries",
-            "erasmusmc",
-            "avans-atgm"
-          ],
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        },
-        {
-          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
-          "short_name": "Gallantries",
-          "start_date": "2020-09-01",
-          "end_date": "2023-09-30",
-          "joined": "2020-09",
-          "avatar": "https://gallantries.github.io/assets/images/gallantries-logo.png",
-          "github": false,
-          "funder": true,
-          "url": "https://training.galaxyproject.org/training-material/api/funders/gallantries.json",
-          "funder_name": "Erasmus+ Programme",
-          "funding_id": "2020-1-NL01-KA203-064717",
-          "funding_system": "erasmusplus",
-          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />\n<img src=\"https://www.erasmusplus.nl/assets/images/logo.png\" alt=\"erasmus plus logo\" />",
-          "members": [
-            "abretaud",
-            "bebatut",
-            "fpsom",
-            "hexylena",
-            "shiltemann",
-            "yvanlebras"
-          ],
-          "id": "gallantries",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/circos-microbial/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/circos-microbial/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Genomic Data Visualisation with JBrowse",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.3591856",
-      "questions": [
-        "How can I visualise features or blast data?",
-        "How can I visualise sequencing data in a workflow"
-      ],
-      "objectives": [
-        "Build several visualisations in JBrowse",
-        "Have basic familiarity with moving around JBrowse, and loading several data tracks"
-      ],
-      "time_estimation": "1h",
-      "key_points": [
-        "This tutorial can not exhaustively cover every data type, but maybe it provides inspiration for your own analyses",
-        "JBrowse is a great, workflow-compatible alternative to other genome browsers",
-        "You can build visualisations that summarise dozens of analyses in one visualisation"
-      ],
-      "contributors": [
-        {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
-          "affiliations": [
-            "gallantries",
-            "erasmusmc",
-            "avans-atgm"
-          ],
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        },
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "twitter": "shiltemann",
-          "linkedin": "shiltemann",
-          "matrix": "shiltemann:matrix.org",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "contact_for_training": true,
-          "affiliations": [
-            "CINECA-Project",
-            "gallantries",
-            "erasmusmc"
-          ],
-          "location": {
-            "country": "NL",
-            "lat": 51.912,
-            "lon": 4.462
-          },
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
-        },
-        {
-          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
-          "short_name": "Gallantries",
-          "start_date": "2020-09-01",
-          "end_date": "2023-09-30",
-          "joined": "2020-09",
-          "avatar": "https://gallantries.github.io/assets/images/gallantries-logo.png",
-          "github": false,
-          "funder": true,
-          "url": "https://training.galaxyproject.org/training-material/api/funders/gallantries.json",
-          "funder_name": "Erasmus+ Programme",
-          "funding_id": "2020-1-NL01-KA203-064717",
-          "funding_system": "erasmusplus",
-          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />\n<img src=\"https://www.erasmusplus.nl/assets/images/logo.png\" alt=\"erasmus plus logo\" />",
-          "members": [
-            "abretaud",
-            "bebatut",
-            "fpsom",
-            "hexylena",
-            "shiltemann",
-            "yvanlebras"
-          ],
-          "id": "gallantries",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/"
-        }
-      ],
-      "mathjax": null,
-      "short_id": "T00322",
-      "url": "/topics/visualisation/tutorials/jbrowse/tutorial.html",
-      "topic_name": "visualisation",
-      "tutorial_name": "jbrowse",
-      "dir": "topics/visualisation/tutorials/jbrowse",
-      "id": "visualisation/jbrowse",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/jbrowse/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.mesocentre.uca.fr",
-            "name": "Galaxy@AuBi",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://galaxytrakr.org/",
-            "name": "GalaxyTrakr",
-            "usegalaxy": "false"
-          }
-        ]
-      },
-      "topic_name_human": "Visualisation",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "jbrowse",
-            "owner": "iuc",
-            "revisions": "17359b808b01",
-            "tool_panel_section_label": "Graph/Display Data",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: jbrowse\n  owner: iuc\n  revisions: 17359b808b01\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/jbrowse/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/jbrowse/tutorial.json"
       }
     },
     {
@@ -1049,6 +854,201 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/bad-graphs/slides.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/bad-graphs/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Genomic Data Visualisation with JBrowse",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.3591856",
+      "questions": [
+        "How can I visualise features or blast data?",
+        "How can I visualise sequencing data in a workflow"
+      ],
+      "objectives": [
+        "Build several visualisations in JBrowse",
+        "Have basic familiarity with moving around JBrowse, and loading several data tracks"
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "This tutorial can not exhaustively cover every data type, but maybe it provides inspiration for your own analyses",
+        "JBrowse is a great, workflow-compatible alternative to other genome browsers",
+        "You can build visualisations that summarise dozens of analyses in one visualisation"
+      ],
+      "contributors": [
+        {
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "affiliations": [
+            "gallantries",
+            "erasmusmc",
+            "avans-atgm"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "short_name": "Gallantries",
+          "start_date": "2020-09-01",
+          "end_date": "2023-09-30",
+          "joined": "2020-09",
+          "avatar": "https://gallantries.github.io/assets/images/gallantries-logo.png",
+          "github": false,
+          "funder": true,
+          "url": "https://training.galaxyproject.org/training-material/api/funders/gallantries.json",
+          "funder_name": "Erasmus+ Programme",
+          "funding_id": "2020-1-NL01-KA203-064717",
+          "funding_system": "erasmusplus",
+          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />\n<img src=\"https://www.erasmusplus.nl/assets/images/logo.png\" alt=\"erasmus plus logo\" />",
+          "members": [
+            "abretaud",
+            "bebatut",
+            "fpsom",
+            "hexylena",
+            "shiltemann",
+            "yvanlebras"
+          ],
+          "id": "gallantries",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/"
+        }
+      ],
+      "mathjax": null,
+      "short_id": "T00322",
+      "url": "/topics/visualisation/tutorials/jbrowse/tutorial.html",
+      "topic_name": "visualisation",
+      "tutorial_name": "jbrowse",
+      "dir": "topics/visualisation/tutorials/jbrowse",
+      "id": "visualisation/jbrowse",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/jbrowse/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.mesocentre.uca.fr",
+            "name": "Galaxy@AuBi",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://galaxytrakr.org/",
+            "name": "GalaxyTrakr",
+            "usegalaxy": "false"
+          }
+        ]
+      },
+      "topic_name_human": "Visualisation",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "jbrowse",
+            "owner": "iuc",
+            "revisions": "17359b808b01",
+            "tool_panel_section_label": "Graph/Display Data",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: jbrowse\n  owner: iuc\n  revisions: 17359b808b01\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/jbrowse/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/jbrowse/tutorial.json"
       }
     }
   ]

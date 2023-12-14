@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -73,17 +73,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         
-        <meta name="description" content="DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromoso...">
+        <meta name="description" content="DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromosome inactivating, imprinting, and gene silencing of germline specific gene and repetitive elements.">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Epigenetics">
-        <meta property="og:description" content="DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromoso...">
+	<meta property="og:title" content="[Epigenetics]Epigenetics Workflows">
+        <meta property="og:description" content="DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromosome inactivating, imprinting, and gene silencing of germline specific gene and repetitive elements.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">GTN - ChIP Seq - Formation Of Super Structures On Xi</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -290,7 +291,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
@@ -303,76 +303,62 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   8["Input dataset"];
   9["Input dataset"];
   10["FastQC"];
-  11["Trim Galore!"];
-  12["FastQC"];
-  13["Samtools idxstats"];
-  14["bamCoverage"];
-  15["bamCoverage"];
-  16["bamCoverage"];
-  17["Samtools idxstats"];
-  18["plotFingerprint"];
-  19["bamCompare"];
-  20["MACS2 callpeak"];
-  21["bamCompare"];
-  22["bamCompare"];
-  23["MACS2 callpeak"];
-  24["bamCompare"];
-  25["bamCompare"];
-  26["MACS2 callpeak"];
-  27["bamCompare"];
-  28["MACS2 callpeak"];
-  29["bamCompare"];
-  30["MACS2 callpeak"];
-  31["multiBamSummary"];
-  32["bamCompare"];
-  33["MACS2 callpeak"];
-  34["Bowtie2"];
-  35["Concatenate datasets"];
-  36["plotCorrelation"];
-  37["Concatenate datasets"];
-  38["bedtools SortBED"];
-  39["bedtools SortBED"];
-  40["bedtools MergeBED"];
-  41["bedtools MergeBED"];
-  42["computeMatrix"];
-  43["computeMatrix"];
-  44["plotHeatmap"];
-  45["plotHeatmap"];
   0 -->|output| 10;
+  11["Trim Galore!"];
   1 -->|output| 11;
   0 -->|output| 11;
+  12["FastQC"];
   1 -->|output| 12;
+  13["Samtools idxstats"];
   2 -->|output| 13;
+  14["bamCoverage"];
   2 -->|output| 14;
+  15["bamCoverage"];
   3 -->|output| 15;
+  16["bamCoverage"];
   3 -->|output| 16;
+  17["Samtools idxstats"];
   3 -->|output| 17;
+  18["plotFingerprint"];
   3 -->|output| 18;
   2 -->|output| 18;
+  19["bamCompare"];
   3 -->|output| 19;
   2 -->|output| 19;
+  20["MACS2 callpeak"];
   2 -->|output| 20;
   3 -->|output| 20;
+  21["bamCompare"];
   3 -->|output| 21;
   2 -->|output| 21;
+  22["bamCompare"];
   4 -->|output| 22;
   2 -->|output| 22;
+  23["MACS2 callpeak"];
   2 -->|output| 23;
   4 -->|output| 23;
+  24["bamCompare"];
   4 -->|output| 24;
   2 -->|output| 24;
+  25["bamCompare"];
   5 -->|output| 25;
   2 -->|output| 25;
+  26["MACS2 callpeak"];
   2 -->|output| 26;
   5 -->|output| 26;
+  27["bamCompare"];
   7 -->|output| 27;
   6 -->|output| 27;
+  28["MACS2 callpeak"];
   6 -->|output| 28;
   7 -->|output| 28;
+  29["bamCompare"];
   8 -->|output| 29;
   6 -->|output| 29;
+  30["MACS2 callpeak"];
   6 -->|output| 30;
   8 -->|output| 30;
+  31["multiBamSummary"];
   2 -->|output| 31;
   3 -->|output| 31;
   4 -->|output| 31;
@@ -381,28 +367,40 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   7 -->|output| 31;
   8 -->|output| 31;
   9 -->|output| 31;
+  32["bamCompare"];
   9 -->|output| 32;
   6 -->|output| 32;
+  33["MACS2 callpeak"];
   6 -->|output| 33;
   9 -->|output| 33;
+  34["Bowtie2"];
   11 -->|trimmed_reads_pair1| 34;
   11 -->|trimmed_reads_pair2| 34;
+  35["Concatenate datasets"];
   20 -->|output_narrowpeaks| 35;
   23 -->|output_narrowpeaks| 35;
+  36["plotCorrelation"];
   31 -->|outFile| 36;
+  37["Concatenate datasets"];
   20 -->|output_narrowpeaks| 37;
   23 -->|output_narrowpeaks| 37;
   26 -->|output_narrowpeaks| 37;
   28 -->|output_narrowpeaks| 37;
   30 -->|output_narrowpeaks| 37;
   33 -->|output_narrowpeaks| 37;
+  38["bedtools SortBED"];
   35 -->|out_file1| 38;
+  39["bedtools SortBED"];
   37 -->|out_file1| 39;
+  40["bedtools MergeBED"];
   38 -->|output| 40;
+  41["bedtools MergeBED"];
   39 -->|output| 41;
+  42["computeMatrix"];
   19 -->|outFileName| 42;
   22 -->|outFileName| 42;
   40 -->|output| 42;
+  43["computeMatrix"];
   19 -->|outFileName| 43;
   22 -->|outFileName| 43;
   25 -->|outFileName| 43;
@@ -410,11 +408,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   29 -->|outFileName| 43;
   32 -->|outFileName| 43;
   41 -->|output| 43;
+  44["plotHeatmap"];
   42 -->|outFileName| 44;
+  45["plotHeatmap"];
   43 -->|outFileName| 45;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -440,7 +442,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -464,7 +466,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

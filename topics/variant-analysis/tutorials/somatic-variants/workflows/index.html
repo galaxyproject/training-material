@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,18 +74,46 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         <meta name="description" content="Genetic differences (variants) between healthy and diseased tissue,
-between individuals of a population, or between s...">
+between individuals of a population, or between strains of an organism
+can provide mechanistic insight into disease processes and the natural
+function of affected genes.
+
+The tutorials in this section show how to detect evidence for
+genetic variants in next-generation sequencing data, a process termed
+variant calling.
+
+Of equal importance, they also demonstrate how you can interpret, for
+a range of different organisms, the resulting sets of variants by
+predicting their molecular effects on genes and proteins, by
+annotating previously observed variants with published knowledge, and
+by trying to link phenotypes of the sequenced samples to their variant
+genotypes.
+">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Variant Analysis">
+	<meta property="og:title" content="[Variant Analysis]Variant Analysis Workflows">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseased tissue,
-between individuals of a population, or between s...">
+between individuals of a population, or between strains of an organism
+can provide mechanistic insight into disease processes and the natural
+function of affected genes.
+
+The tutorials in this section show how to detect evidence for
+genetic variants in next-generation sequencing data, a process termed
+variant calling.
+
+Of equal importance, they also demonstrate how you can interpret, for
+a range of different organisms, the resulting sets of variants by
+predicting their molecular effects on genes and proteins, by
+annotating previously observed variants with published knowledge, and
+by trying to link phenotypes of the sequenced samples to their variant
+genotypes.
+">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -240,7 +268,8 @@ between individuals of a population, or between s...">
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Identification of somatic and germline variants from tumor and normal sample pairs tutorial</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -279,7 +308,6 @@ between individuals of a population, or between s...">
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["SLGFSK-N_231335_r1_chr5_12_17.fastq"];
   1["SLGFSK-N_231335_r2_chr5_12_17.fastq"];
@@ -294,107 +322,109 @@ between individuals of a population, or between s...">
   10["cgi_genes.txt"];
   11["01-Feb-2019-GeneSummaries.tsv"];
   12["FastQC"];
-  13["FastQC"];
-  14["Trimmomatic"];
-  15["FastQC"];
-  16["FastQC"];
-  17["Trimmomatic"];
-  18["FastQC"];
-  19["FastQC"];
-  20["Map with BWA-MEM"];
-  21["MultiQC"];
-  22["FastQC"];
-  23["FastQC"];
-  24["Map with BWA-MEM"];
-  25["Filter"];
-  26["MultiQC"];
-  27["Filter"];
-  28["RmDup"];
-  29["RmDup"];
-  30["BamLeftAlign"];
-  31["BamLeftAlign"];
-  32["CalMD"];
-  33["CalMD"];
-  34["Filter"];
-  35["Filter"];
-  36["VarScan somatic"];
-  37["SnpEff eff:"];
-  38["GEMINI load"];
-  39["GEMINI annotate"];
-  40["GEMINI annotate"];
-  41["GEMINI annotate"];
-  42["GEMINI annotate"];
-  43["GEMINI annotate"];
-  44["GEMINI query"];
-  45["GEMINI query"];
-  46["GEMINI query"];
-  47["GEMINI query"];
-  48["Join"];
-  49["Join"];
-  50["Join"];
-  51["Column arrange"];
   0 -->|output| 12;
+  13["FastQC"];
   1 -->|output| 13;
+  14["Trimmomatic"];
   0 -->|output| 14;
   1 -->|output| 14;
+  15["FastQC"];
   2 -->|output| 15;
+  16["FastQC"];
   3 -->|output| 16;
+  17["Trimmomatic"];
   2 -->|output| 17;
   3 -->|output| 17;
+  18["FastQC"];
   14 -->|fastq_out_r2_paired| 18;
+  19["FastQC"];
   14 -->|fastq_out_r1_paired| 19;
+  20["Map with BWA-MEM"];
   14 -->|fastq_out_r1_paired| 20;
   14 -->|fastq_out_r2_paired| 20;
+  21["MultiQC"];
   13 -->|text_file| 21;
   15 -->|text_file| 21;
   16 -->|text_file| 21;
   12 -->|text_file| 21;
+  22["FastQC"];
   17 -->|fastq_out_r1_paired| 22;
+  23["FastQC"];
   17 -->|fastq_out_r2_paired| 23;
+  24["Map with BWA-MEM"];
   17 -->|fastq_out_r1_paired| 24;
   17 -->|fastq_out_r2_paired| 24;
+  25["Filter"];
   20 -->|bam_output| 25;
+  26["MultiQC"];
   19 -->|text_file| 26;
   22 -->|text_file| 26;
   23 -->|text_file| 26;
   18 -->|text_file| 26;
+  27["Filter"];
   24 -->|bam_output| 27;
+  28["RmDup"];
   25 -->|out_file1| 28;
+  29["RmDup"];
   27 -->|out_file1| 29;
+  30["BamLeftAlign"];
   28 -->|output1| 30;
+  31["BamLeftAlign"];
   29 -->|output1| 31;
+  32["CalMD"];
   30 -->|output_bam| 32;
+  33["CalMD"];
   31 -->|output_bam| 33;
+  34["Filter"];
   32 -->|calmd_output| 34;
+  35["Filter"];
   33 -->|calmd_output| 35;
+  36["VarScan somatic"];
   34 -->|out_file1| 36;
   35 -->|out_file1| 36;
+  37["SnpEff eff:"];
   36 -->|output| 37;
+  38["GEMINI load"];
   37 -->|snpeff_output| 38;
+  39["GEMINI annotate"];
   36 -->|output| 39;
   38 -->|outfile| 39;
+  40["GEMINI annotate"];
   8 -->|output| 40;
   39 -->|outfile| 40;
+  41["GEMINI annotate"];
   5 -->|output| 41;
   40 -->|outfile| 41;
+  42["GEMINI annotate"];
   7 -->|output| 42;
   41 -->|outfile| 42;
+  43["GEMINI annotate"];
   6 -->|output| 43;
   42 -->|outfile| 43;
+  44["GEMINI query"];
   43 -->|outfile| 44;
+  45["GEMINI query"];
   43 -->|outfile| 45;
+  46["GEMINI query"];
   43 -->|outfile| 46;
+  47["GEMINI query"];
   43 -->|outfile| 47;
+  48["Join"];
   47 -->|outfile| 48;
   9 -->|output| 48;
+  49["Join"];
   48 -->|output| 49;
   10 -->|output| 49;
+  50["Join"];
   49 -->|output| 50;
   11 -->|output| 50;
+  51["Column arrange"];
   50 -->|output| 51;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -420,7 +450,7 @@ between individuals of a population, or between s...">
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -444,7 +474,7 @@ between individuals of a population, or between s...">
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

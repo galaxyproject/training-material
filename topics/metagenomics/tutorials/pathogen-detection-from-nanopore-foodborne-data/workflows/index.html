@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -75,7 +75,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta name="description" content="Metagenomics is a discipline that enables the genomic study of uncultured microorganisms">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Metagenomics">
+	<meta property="og:title" content="[Metagenomics]Metagenomics Workflows">
         <meta property="og:description" content="Metagenomics is a discipline that enables the genomic study of uncultured microorganisms">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Pathogen-Detection-Nanopore-Gene-based-pathogenic-Identification-collection</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -280,67 +281,69 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Input dataset"];
   2["Build list"];
-  3["Extract element identifiers"];
-  4["Flye"];
-  5["Split file"];
-  6["Bandage Image"];
-  7["medaka consensus pipeline"];
-  8["Parse parameter value"];
-  9["Build list"];
-  10["ABRicate"];
-  11["FASTA-to-Tabular"];
-  12["ABRicate"];
-  13["Compose text parameter value"];
-  14["MLST"];
-  15["Cut"];
-  16["Cut"];
-  17["Replace"];
-  18["Replace"];
-  19["Replace Text"];
-  20["Add line to file"];
-  21["Add line to file"];
-  22["Tabular-to-FASTA"];
-  23["Concatenate datasets"];
   0 -->|output| 2;
+  3["Extract element identifiers"];
   0 -->|output| 3;
+  4["Flye"];
   2 -->|output| 4;
+  5["Split file"];
   3 -->|output| 5;
+  6["Bandage Image"];
   4 -->|assembly_gfa| 6;
+  7["medaka consensus pipeline"];
   4 -->|consensus| 7;
   0 -->|output| 7;
+  8["Parse parameter value"];
   5 -->|list_output_txt| 8;
+  9["Build list"];
   7 -->|out_consensus| 9;
+  10["ABRicate"];
   7 -->|out_consensus| 10;
+  11["FASTA-to-Tabular"];
   7 -->|out_consensus| 11;
+  12["ABRicate"];
   7 -->|out_consensus| 12;
+  13["Compose text parameter value"];
   8 -->|text_param| 13;
+  14["MLST"];
   9 -->|output| 14;
+  15["Cut"];
   10 -->|report| 15;
+  16["Cut"];
   12 -->|report| 16;
+  17["Replace"];
   8 -->|text_param| 17;
   13 -->|out1| 17;
   10 -->|report| 17;
+  18["Replace"];
   13 -->|out1| 18;
   11 -->|output| 18;
+  19["Replace Text"];
   14 -->|report| 19;
   8 -->|text_param| 19;
+  20["Add line to file"];
   15 -->|out_file1| 20;
   8 -->|text_param| 20;
+  21["Add line to file"];
   16 -->|out_file1| 21;
   8 -->|text_param| 21;
+  22["Tabular-to-FASTA"];
   18 -->|outfile| 22;
+  23["Concatenate datasets"];
   1 -->|output| 23;
   19 -->|outfile| 23;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Pathogen-Detection-Nanopore-All-Samples-Analysis</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -382,67 +385,69 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Input dataset collection"];
   2["Input dataset collection"];
   3["Input dataset collection"];
   4["Collapse Collection"];
-  5["Collapse Collection"];
-  6["Collapse Collection"];
-  7["Split by group"];
-  8["Add line to file"];
-  9["Cut"];
-  10["Filter sequences by ID"];
-  11["Multi-Join"];
-  12["Remove beginning"];
-  13["Replace"];
-  14["Advanced Cut"];
-  15["bedtools getfasta"];
-  16["Replace"];
-  17["ClustalW"];
-  18["Replace"];
-  19["Filter empty datasets"];
-  20["Advanced Cut"];
-  21["FASTTREE"];
-  22["Paste"];
-  23["Newick Display"];
-  24["Transpose"];
-  25["Replace"];
-  26["Heatmap w ggplot"];
   0 -->|output| 4;
+  5["Collapse Collection"];
   1 -->|output| 5;
+  6["Collapse Collection"];
   2 -->|output| 6;
+  7["Split by group"];
   4 -->|output| 7;
+  8["Add line to file"];
   6 -->|output| 8;
+  9["Cut"];
   7 -->|split_output| 9;
+  10["Filter sequences by ID"];
   7 -->|split_output| 10;
   5 -->|output| 10;
+  11["Multi-Join"];
   3 -->|output| 11;
   8 -->|outfile| 11;
+  12["Remove beginning"];
   9 -->|out_file1| 12;
+  13["Replace"];
   11 -->|outfile| 13;
+  14["Advanced Cut"];
   11 -->|outfile| 14;
+  15["bedtools getfasta"];
   10 -->|output_pos| 15;
   12 -->|out_file1| 15;
+  16["Replace"];
   13 -->|outfile| 16;
+  17["ClustalW"];
   15 -->|output| 17;
+  18["Replace"];
   16 -->|outfile| 18;
+  19["Filter empty datasets"];
   17 -->|output| 19;
+  20["Advanced Cut"];
   18 -->|outfile| 20;
+  21["FASTTREE"];
   19 -->|output| 21;
+  22["Paste"];
   14 -->|output| 22;
   20 -->|output| 22;
+  23["Newick Display"];
   21 -->|output| 23;
+  24["Transpose"];
   22 -->|out_file1| 24;
+  25["Replace"];
   22 -->|out_file1| 25;
+  26["Heatmap w ggplot"];
   24 -->|out_file| 26;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Pathogen-Detection-Nanopore-Pre-Processing-collection</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -484,39 +489,41 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Porechop"];
-  2["NanoPlot"];
-  3["FastQC"];
-  4["fastp"];
-  5["NanoPlot"];
-  6["Kraken2"];
-  7["FastQC"];
-  8["Filter failed datasets"];
-  9["Filter failed datasets"];
-  10["MultiQC"];
-  11["Krakentools: Extract Kraken Reads By ID"];
   0 -->|output| 1;
+  2["NanoPlot"];
   0 -->|output| 2;
+  3["FastQC"];
   0 -->|output| 3;
+  4["fastp"];
   1 -->|outfile| 4;
+  5["NanoPlot"];
   4 -->|out1| 5;
+  6["Kraken2"];
   4 -->|out1| 6;
+  7["FastQC"];
   4 -->|out1| 7;
+  8["Filter failed datasets"];
   6 -->|output| 8;
+  9["Filter failed datasets"];
   6 -->|report_output| 9;
+  10["MultiQC"];
   3 -->|text_file| 10;
   7 -->|text_file| 10;
+  11["Krakentools: Extract Kraken Reads By ID"];
   4 -->|out1| 11;
   9 -->|output| 11;
   8 -->|output| 11;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Pathogen-Detection-Nanopore-SNP-based-pathogenetic-Identification-collection</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -558,33 +565,35 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Input dataset"];
   2["Convert compressed file to uncompressed."];
-  3["Map with minimap2"];
-  4["Clair3"];
-  5["bcftools norm"];
-  6["SnpSift Filter"];
-  7["SnpSift Extract Fields"];
-  8["bcftools consensus"];
   1 -->|output| 2;
+  3["Map with minimap2"];
   0 -->|output| 3;
   2 -->|output1| 3;
+  4["Clair3"];
   3 -->|alignment_output| 4;
   2 -->|output1| 4;
+  5["bcftools norm"];
   4 -->|merge_output| 5;
   2 -->|output1| 5;
+  6["SnpSift Filter"];
   5 -->|output_file| 6;
+  7["SnpSift Extract Fields"];
   6 -->|output| 7;
+  8["bcftools consensus"];
   6 -->|output| 8;
   2 -->|output1| 8;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Pathogen Detection-Nanopore-Taxonomy-Profiling-and-Visualization-collection</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -626,20 +635,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Input dataset"];
   2["Kraken2"];
-  3["Kraken-biom"];
-  4["Phinch Visualisation"];
   0 -->|output| 2;
+  3["Kraken-biom"];
   2 -->|report_output| 3;
   1 -->|output| 3;
+  4["Phinch Visualisation"];
   3 -->|biomOutput| 4;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -665,7 +675,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -689,7 +699,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

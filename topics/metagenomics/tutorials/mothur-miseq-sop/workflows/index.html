@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -75,7 +75,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta name="description" content="Metagenomics is a discipline that enables the genomic study of uncultured microorganisms">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Metagenomics">
+	<meta property="og:title" content="[Metagenomics]Metagenomics Workflows">
         <meta property="og:description" content="Metagenomics is a discipline that enables the genomic study of uncultured microorganisms">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Training: 16S rRNA Sequencing With Mothur: Main Tutorial</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,122 +278,123 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Input dataset"];
   10["Count.seqs"];
-  11["Align.seqs"];
-  12["Summary.seqs"];
-  13["Screen.seqs"];
-  14["Filter.seqs"];
-  15["Unique.seqs"];
-  16["Pre.cluster"];
-  17["Chimera.vsearch"];
-  18["Remove.seqs"];
-  19["Classify.seqs"];
-  2["Input dataset"];
-  20["Remove.lineage"];
-  21["Get.groups"];
-  22["Remove.groups"];
-  23["Seq.error"];
-  24["Dist.seqs"];
-  25["Cluster.split"];
-  26["Cluster"];
-  27["Make.shared"];
-  28["Classify.otu"];
-  29["Make.shared"];
-  3["Input dataset"];
-  30["Summary.single"];
-  31["Count.groups"];
-  32["Dist.shared"];
-  33["Rarefaction.single"];
-  34["Sub.sample"];
-  35["Taxonomy-to-Krona"];
-  36["Rarefaction.single"];
-  37["Tree.shared"];
-  38["Heatmap.sim"];
-  39["Plotting tool"];
-  4["Input dataset"];
-  40["Venn"];
-  41["Make.biom"];
-  42["Krona pie chart"];
-  43["Newick Display"];
-  5["Input dataset"];
-  6["Make.contigs"];
-  7["Summary.seqs"];
-  8["Screen.seqs"];
-  9["Unique.seqs"];
   8 -->|groups_out| 10;
   9 -->|out_names| 10;
+  11["Align.seqs"];
   1 -->|output| 11;
   9 -->|out_fasta| 11;
+  12["Summary.seqs"];
   10 -->|seq_count| 12;
   11 -->|out_align| 12;
+  13["Screen.seqs"];
   10 -->|seq_count| 13;
   11 -->|out_align| 13;
+  14["Filter.seqs"];
   13 -->|fasta_out| 14;
+  15["Unique.seqs"];
   14 -->|filteredfasta| 15;
   13 -->|count_out| 15;
+  16["Pre.cluster"];
   15 -->|out_fasta| 16;
   15 -->|out_count| 16;
+  17["Chimera.vsearch"];
   16 -->|fasta_out| 17;
   16 -->|count_out| 17;
+  18["Remove.seqs"];
   17 -->|out_accnos| 18;
   17 -->|out_count| 18;
   16 -->|fasta_out| 18;
+  19["Classify.seqs"];
   2 -->|output| 19;
   18 -->|count_out| 19;
   18 -->|fasta_out| 19;
   3 -->|output| 19;
+  2["Input dataset"];
+  20["Remove.lineage"];
   18 -->|count_out| 20;
   18 -->|fasta_out| 20;
   19 -->|taxonomy_out| 20;
+  21["Get.groups"];
   20 -->|fasta_out| 21;
   20 -->|count_out| 21;
+  22["Remove.groups"];
   20 -->|fasta_out| 22;
   20 -->|count_out| 22;
   20 -->|taxonomy_out| 22;
+  23["Seq.error"];
   4 -->|output| 23;
   21 -->|count_out| 23;
   21 -->|fasta_out| 23;
+  24["Dist.seqs"];
   21 -->|fasta_out| 24;
+  25["Cluster.split"];
   22 -->|fasta_out| 25;
   22 -->|count_out| 25;
   22 -->|taxonomy_out| 25;
+  26["Cluster"];
   21 -->|count_out| 26;
   24 -->|out_dist| 26;
+  27["Make.shared"];
   22 -->|count_out| 27;
   25 -->|otulist| 27;
+  28["Classify.otu"];
   22 -->|count_out| 28;
   25 -->|otulist| 28;
   22 -->|taxonomy_out| 28;
+  29["Make.shared"];
   21 -->|count_out| 29;
   26 -->|otulist| 29;
+  3["Input dataset"];
+  30["Summary.single"];
   27 -->|shared| 30;
+  31["Count.groups"];
   27 -->|shared| 31;
+  32["Dist.shared"];
   27 -->|shared| 32;
+  33["Rarefaction.single"];
   27 -->|shared| 33;
+  34["Sub.sample"];
   27 -->|shared| 34;
+  35["Taxonomy-to-Krona"];
   28 -->|taxonomies| 35;
+  36["Rarefaction.single"];
   29 -->|shared| 36;
+  37["Tree.shared"];
   32 -->|distfiles| 37;
+  38["Heatmap.sim"];
   32 -->|distfiles| 38;
+  39["Plotting tool"];
   33 -->|rarefactioncurves| 39;
+  4["Input dataset"];
+  40["Venn"];
   34 -->|shared_out| 40;
+  41["Make.biom"];
   28 -->|taxonomies| 41;
   5 -->|output| 41;
   34 -->|shared_out| 41;
+  42["Krona pie chart"];
   35 -->|outputfile| 42;
+  43["Newick Display"];
   37 -->|tre| 43;
+  5["Input dataset"];
+  6["Make.contigs"];
   0 -->|output| 6;
+  7["Summary.seqs"];
   6 -->|fasta| 7;
+  8["Screen.seqs"];
   6 -->|fasta| 8;
   6 -->|group| 8;
+  9["Unique.seqs"];
   8 -->|fasta_out| 9;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -418,7 +420,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -442,7 +444,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

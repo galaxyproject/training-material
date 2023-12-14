@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -73,17 +73,25 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         
-        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
+
+What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
+ {: .alert.alert-success}
+">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Single Cell">
-        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+	<meta property="og:title" content="[Single Cell]Single Cell Workflows">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
+
+What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
+ {: .alert.alert-success}
+">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +246,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">AnnData object to Monocle input files</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,41 +286,43 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
   2["Inspect AnnData"];
-  3["Inspect AnnData"];
-  4["Inspect AnnData"];
-  5["Filter"];
-  6["Column Regex Find And Replace"];
-  7["Cut"];
-  8["Cut"];
-  9["Join two Datasets"];
-  10["Advanced Cut"];
-  11["Transpose"];
-  12["Join two Datasets"];
-  13["Advanced Cut"];
   0 -->|output| 2;
+  3["Inspect AnnData"];
   0 -->|output| 3;
+  4["Inspect AnnData"];
   1 -->|output| 4;
+  5["Filter"];
   2 -->|obs| 5;
+  6["Column Regex Find And Replace"];
   3 -->|var| 6;
+  7["Cut"];
   5 -->|out_file1| 7;
+  8["Cut"];
   6 -->|out_file1| 8;
+  9["Join two Datasets"];
   7 -->|out_file1| 9;
   4 -->|X| 9;
+  10["Advanced Cut"];
   9 -->|out_file1| 10;
+  11["Transpose"];
   10 -->|output| 11;
+  12["Join two Datasets"];
   8 -->|out_file1| 12;
   11 -->|out_file| 12;
+  13["Advanced Cut"];
   12 -->|out_file1| 13;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Monocle3 workflow</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -350,52 +361,54 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
   2["Input dataset"];
   3["Monocle3 create"];
-  4["Monocle3 preprocess"];
-  5["Monocle3 reduceDim"];
-  6["Monocle3 partition"];
-  7["Monocle3 plotCells"];
-  8["Monocle3 plotCells"];
-  9["Monocle3 plotCells"];
-  10["Monocle3 plotCells"];
-  11["Monocle3 top markers"];
-  12["Monocle3 plotCells"];
-  13["Monocle3 plotCells"];
-  14["Monocle3 plotCells"];
-  15["Monocle3 learnGraph"];
-  16["Monocle3 plotCells"];
-  17["Monocle3 orderCells"];
-  18["Monocle3 diffExp"];
-  19["Monocle3 plotCells"];
   1 -->|output| 3;
   0 -->|output| 3;
   2 -->|output| 3;
+  4["Monocle3 preprocess"];
   3 -->|output_rds| 4;
+  5["Monocle3 reduceDim"];
   4 -->|output_rds| 5;
+  6["Monocle3 partition"];
   5 -->|output_rds| 6;
+  7["Monocle3 plotCells"];
   5 -->|output_rds| 7;
+  8["Monocle3 plotCells"];
   5 -->|output_rds| 8;
+  9["Monocle3 plotCells"];
   5 -->|output_rds| 9;
+  10["Monocle3 plotCells"];
   5 -->|output_rds| 10;
+  11["Monocle3 top markers"];
   6 -->|output_rds| 11;
+  12["Monocle3 plotCells"];
   6 -->|output_rds| 12;
+  13["Monocle3 plotCells"];
   6 -->|output_rds| 13;
+  14["Monocle3 plotCells"];
   6 -->|output_rds| 14;
+  15["Monocle3 learnGraph"];
   6 -->|output_rds| 15;
+  16["Monocle3 plotCells"];
   15 -->|output_rds| 16;
+  17["Monocle3 orderCells"];
   15 -->|output_rds| 17;
+  18["Monocle3 diffExp"];
   17 -->|output_rds| 18;
+  19["Monocle3 plotCells"];
   17 -->|output_rds| 19;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Trajectory analysis using Monocle3 - full tutorial workflow</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -435,75 +448,76 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
   2["Inspect AnnData"];
-  3["Inspect AnnData"];
-  4["Inspect AnnData"];
-  5["Filter"];
-  6["Column Regex Find And Replace"];
-  7["Cut"];
-  8["Cut"];
-  9["Join two Datasets"];
-  10["Advanced Cut"];
-  11["Transpose"];
-  12["Join two Datasets"];
-  13["Advanced Cut"];
-  14["Monocle3 create"];
-  15["Monocle3 preprocess"];
-  16["Monocle3 reduceDim"];
-  17["Monocle3 partition"];
-  18["Monocle3 plotCells"];
-  19["Monocle3 plotCells"];
-  20["Monocle3 plotCells"];
-  21["Monocle3 plotCells"];
-  22["Monocle3 top markers"];
-  23["Monocle3 plotCells"];
-  24["Monocle3 plotCells"];
-  25["Monocle3 plotCells"];
-  26["Monocle3 learnGraph"];
-  27["Monocle3 plotCells"];
-  28["Monocle3 orderCells"];
-  29["Monocle3 diffExp"];
-  30["Monocle3 plotCells"];
   0 -->|output| 2;
+  3["Inspect AnnData"];
   0 -->|output| 3;
+  4["Inspect AnnData"];
   1 -->|output| 4;
+  5["Filter"];
   2 -->|obs| 5;
+  6["Column Regex Find And Replace"];
   3 -->|var| 6;
+  7["Cut"];
   5 -->|out_file1| 7;
+  8["Cut"];
   6 -->|out_file1| 8;
+  9["Join two Datasets"];
   7 -->|out_file1| 9;
   4 -->|X| 9;
+  10["Advanced Cut"];
   9 -->|out_file1| 10;
+  11["Transpose"];
   10 -->|output| 11;
+  12["Join two Datasets"];
   8 -->|out_file1| 12;
   11 -->|out_file| 12;
+  13["Advanced Cut"];
   12 -->|out_file1| 13;
+  14["Monocle3 create"];
   5 -->|out_file1| 14;
   13 -->|output| 14;
   6 -->|out_file1| 14;
+  15["Monocle3 preprocess"];
   14 -->|output_rds| 15;
+  16["Monocle3 reduceDim"];
   15 -->|output_rds| 16;
+  17["Monocle3 partition"];
   16 -->|output_rds| 17;
+  18["Monocle3 plotCells"];
   16 -->|output_rds| 18;
+  19["Monocle3 plotCells"];
   16 -->|output_rds| 19;
+  20["Monocle3 plotCells"];
   16 -->|output_rds| 20;
+  21["Monocle3 plotCells"];
   16 -->|output_rds| 21;
+  22["Monocle3 top markers"];
   17 -->|output_rds| 22;
+  23["Monocle3 plotCells"];
   17 -->|output_rds| 23;
+  24["Monocle3 plotCells"];
   17 -->|output_rds| 24;
+  25["Monocle3 plotCells"];
   17 -->|output_rds| 25;
+  26["Monocle3 learnGraph"];
   17 -->|output_rds| 26;
+  27["Monocle3 plotCells"];
   26 -->|output_rds| 27;
+  28["Monocle3 orderCells"];
   26 -->|output_rds| 28;
+  29["Monocle3 diffExp"];
   28 -->|output_rds| 29;
+  30["Monocle3 plotCells"];
   28 -->|output_rds| 30;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -529,7 +543,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -553,7 +567,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

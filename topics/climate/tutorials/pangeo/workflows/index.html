@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -75,7 +75,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta name="description" content="Learn to analyze climate data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Climate">
+	<meta property="og:title" content="[Climate]Climate Workflows">
         <meta property="og:description" content="Learn to analyze climate data through Galaxy.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">GTN 'Pangeo 101 for everyone - Xarray'</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -278,7 +279,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input parameter"];
   1["Input dataset"];
@@ -292,148 +292,145 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   9["Input parameter"];
   10["Input parameter"];
   11["NetCDF xarray Coordinate Info"];
-  12["NetCDF xarray Metadata Info"];
-  13["Extract dataset"];
-  14["Extract dataset"];
-  15["Extract dataset"];
-  16["NetCDF xarray operations"];
-  17["NetCDF xarray operations"];
-  18["NetCDF xarray operations"];
-  19["NetCDF xarray map plotting"];
-  20["NetCDF xarray map plotting"];
-  21["NetCDF xarray Selection"];
-  22["NetCDF xarray Coordinate Info"];
-  23["NetCDF xarray Coordinate Info"];
-  24["NetCDF xarray Metadata Info"];
-  25["Column Regex Find And Replace"];
-  26["Scatterplot with ggplot2"];
-  27["Extract dataset"];
-  28["Extract dataset"];
-  29["climate stripes"];
-  30["NetCDF xarray map plotting"];
-  31["NetCDF xarray map plotting"];
-  32["NetCDF xarray map plotting"];
-  33["NetCDF xarray map plotting"];
-  34["NetCDF xarray map plotting"];
-  35["NetCDF xarray map plotting"];
-  36["NetCDF xarray map plotting"];
-  37["NetCDF xarray map plotting"];
-  38["NetCDF xarray map plotting"];
-  39["NetCDF xarray map plotting"];
-  40["NetCDF xarray map plotting"];
-  41["NetCDF xarray map plotting"];
-  42["NetCDF xarray map plotting"];
-  43["NetCDF xarray map plotting"];
-  44["NetCDF xarray map plotting"];
-  45["NetCDF xarray map plotting"];
-  46["NetCDF xarray map plotting"];
-  47["Merge collections"];
-  48["Merge collections"];
-  49["Image Montage"];
-  50["Image Montage"];
   1 -->|output| 11;
+  12["NetCDF xarray Metadata Info"];
   1 -->|output| 12;
+  13["Extract dataset"];
   11 -->|output_dir| 13;
+  14["Extract dataset"];
   11 -->|output_dir| 14;
+  15["Extract dataset"];
   11 -->|output_dir| 15;
+  16["NetCDF xarray operations"];
   1 -->|output| 16;
   14 -->|output| 16;
   13 -->|output| 16;
   12 -->|output| 16;
+  17["NetCDF xarray operations"];
   1 -->|output| 17;
   15 -->|output| 17;
   12 -->|output| 17;
+  18["NetCDF xarray operations"];
   1 -->|output| 18;
   15 -->|output| 18;
   14 -->|output| 18;
   13 -->|output| 18;
   12 -->|output| 18;
+  19["NetCDF xarray map plotting"];
   15 -->|output| 19;
   0 -->|output| 19;
   1 -->|output| 19;
   12 -->|output| 19;
+  20["NetCDF xarray map plotting"];
   15 -->|output| 20;
   2 -->|output| 20;
   1 -->|output| 20;
   12 -->|output| 20;
+  21["NetCDF xarray Selection"];
   16 -->|output_netcdf| 21;
   12 -->|output| 21;
+  22["NetCDF xarray Coordinate Info"];
   17 -->|output_netcdf| 22;
+  23["NetCDF xarray Coordinate Info"];
   18 -->|output_netcdf| 23;
+  24["NetCDF xarray Metadata Info"];
   18 -->|output_netcdf| 24;
+  25["Column Regex Find And Replace"];
   21 -->|simpleoutput| 25;
+  26["Scatterplot with ggplot2"];
   21 -->|simpleoutput| 26;
+  27["Extract dataset"];
   22 -->|output_dir| 27;
+  28["Extract dataset"];
   23 -->|output_dir| 28;
+  29["climate stripes"];
   25 -->|out_file1| 29;
+  30["NetCDF xarray map plotting"];
   27 -->|output| 30;
   0 -->|output| 30;
   18 -->|output_netcdf| 30;
   24 -->|output| 30;
+  31["NetCDF xarray map plotting"];
   28 -->|output| 31;
   6 -->|output| 31;
   18 -->|output_netcdf| 31;
   24 -->|output| 31;
+  32["NetCDF xarray map plotting"];
   28 -->|output| 32;
   8 -->|output| 32;
   18 -->|output_netcdf| 32;
   24 -->|output| 32;
+  33["NetCDF xarray map plotting"];
   28 -->|output| 33;
   5 -->|output| 33;
   18 -->|output_netcdf| 33;
   24 -->|output| 33;
+  34["NetCDF xarray map plotting"];
   28 -->|output| 34;
   9 -->|output| 34;
   18 -->|output_netcdf| 34;
   24 -->|output| 34;
+  35["NetCDF xarray map plotting"];
   28 -->|output| 35;
   4 -->|output| 35;
   18 -->|output_netcdf| 35;
   24 -->|output| 35;
+  36["NetCDF xarray map plotting"];
   28 -->|output| 36;
   7 -->|output| 36;
   18 -->|output_netcdf| 36;
   24 -->|output| 36;
+  37["NetCDF xarray map plotting"];
   28 -->|output| 37;
   3 -->|output| 37;
   18 -->|output_netcdf| 37;
   24 -->|output| 37;
+  38["NetCDF xarray map plotting"];
   28 -->|output| 38;
   3 -->|output| 38;
   18 -->|output_netcdf| 38;
   24 -->|output| 38;
+  39["NetCDF xarray map plotting"];
   28 -->|output| 39;
   4 -->|output| 39;
   18 -->|output_netcdf| 39;
   24 -->|output| 39;
+  40["NetCDF xarray map plotting"];
   28 -->|output| 40;
   10 -->|output| 40;
   18 -->|output_netcdf| 40;
   24 -->|output| 40;
+  41["NetCDF xarray map plotting"];
   28 -->|output| 41;
   5 -->|output| 41;
   18 -->|output_netcdf| 41;
   24 -->|output| 41;
+  42["NetCDF xarray map plotting"];
   28 -->|output| 42;
   6 -->|output| 42;
   18 -->|output_netcdf| 42;
   24 -->|output| 42;
+  43["NetCDF xarray map plotting"];
   28 -->|output| 43;
   10 -->|output| 43;
   18 -->|output_netcdf| 43;
   24 -->|output| 43;
+  44["NetCDF xarray map plotting"];
   28 -->|output| 44;
   7 -->|output| 44;
   18 -->|output_netcdf| 44;
   24 -->|output| 44;
+  45["NetCDF xarray map plotting"];
   28 -->|output| 45;
   9 -->|output| 45;
   18 -->|output_netcdf| 45;
   24 -->|output| 45;
+  46["NetCDF xarray map plotting"];
   28 -->|output| 46;
   8 -->|output| 46;
   18 -->|output_netcdf| 46;
   24 -->|output| 46;
+  47["Merge collections"];
   30 -->|output_dir| 47;
   32 -->|output_dir| 47;
   31 -->|output_dir| 47;
@@ -442,6 +439,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   37 -->|output_dir| 47;
   35 -->|output_dir| 47;
   36 -->|output_dir| 47;
+  48["Merge collections"];
   43 -->|output_dir| 48;
   46 -->|output_dir| 48;
   42 -->|output_dir| 48;
@@ -450,11 +448,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   38 -->|output_dir| 48;
   39 -->|output_dir| 48;
   44 -->|output_dir| 48;
+  49["Image Montage"];
   47 -->|output| 49;
+  50["Image Montage"];
   48 -->|output| 50;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -480,7 +482,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -504,7 +506,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

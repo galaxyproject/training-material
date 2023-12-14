@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,18 +74,46 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         <meta name="description" content="Genetic differences (variants) between healthy and diseased tissue,
-between individuals of a population, or between s...">
+between individuals of a population, or between strains of an organism
+can provide mechanistic insight into disease processes and the natural
+function of affected genes.
+
+The tutorials in this section show how to detect evidence for
+genetic variants in next-generation sequencing data, a process termed
+variant calling.
+
+Of equal importance, they also demonstrate how you can interpret, for
+a range of different organisms, the resulting sets of variants by
+predicting their molecular effects on genes and proteins, by
+annotating previously observed variants with published knowledge, and
+by trying to link phenotypes of the sequenced samples to their variant
+genotypes.
+">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Variant Analysis">
+	<meta property="og:title" content="[Variant Analysis]Variant Analysis Workflows">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseased tissue,
-between individuals of a population, or between s...">
+between individuals of a population, or between strains of an organism
+can provide mechanistic insight into disease processes and the natural
+function of affected genes.
+
+The tutorials in this section show how to detect evidence for
+genetic variants in next-generation sequencing data, a process termed
+variant calling.
+
+Of equal importance, they also demonstrate how you can interpret, for
+a range of different organisms, the resulting sets of variants by
+predicting their molecular effects on genes and proteins, by
+annotating previously observed variants with published knowledge, and
+by trying to link phenotypes of the sequenced samples to their variant
+genotypes.
+">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -240,7 +268,8 @@ between individuals of a population, or between s...">
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Trio Analysis Tutorial</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -280,41 +309,42 @@ between individuals of a population, or between s...">
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["EGA Download Client"];
   1["EGA Download Client"];
   2["Input dataset"];
   3["Search in textfiles"];
-  4["EGA Download Client"];
-  5["Convert compressed file to uncompressed."];
-  6["Column Regex Find And Replace"];
-  7["bcftools norm"];
-  8["Filter"];
-  9["bcftools merge"];
-  10["SnpEff eff:"];
-  11["Convert uncompressed file to compressed"];
-  12["gene.iobio visualisation"];
-  13["GEMINI load"];
-  14["GEMINI inheritance pattern"];
   1 -->|dataset_file_list| 3;
+  4["EGA Download Client"];
   3 -->|output| 4;
+  5["Convert compressed file to uncompressed."];
   4 -->|downloaded_file_collection| 5;
+  6["Column Regex Find And Replace"];
   5 -->|output1| 6;
+  7["bcftools norm"];
   6 -->|out_file1| 7;
+  8["Filter"];
   7 -->|output_file| 8;
+  9["bcftools merge"];
   8 -->|out_file1| 9;
+  10["SnpEff eff:"];
   9 -->|output_file| 10;
+  11["Convert uncompressed file to compressed"];
   10 -->|snpeff_output| 11;
+  12["gene.iobio visualisation"];
   11 -->|output1| 12;
   11 -->|output1| 12;
   11 -->|output1| 12;
+  13["GEMINI load"];
   11 -->|output1| 13;
   2 -->|output| 13;
+  14["GEMINI inheritance pattern"];
   13 -->|outfile| 14;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -340,7 +370,7 @@ between individuals of a population, or between s...">
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -364,7 +394,7 @@ between individuals of a population, or between s...">
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

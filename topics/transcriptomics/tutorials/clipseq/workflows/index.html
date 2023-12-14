@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -75,7 +75,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta name="description" content="Training material for all kinds of transcriptomics analysis.">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Transcriptomics">
+	<meta property="og:title" content="[Transcriptomics]Transcriptomics Workflows">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Tutorial CLIPseq Explorer Demultiplexed PEAKachu eCLIP Hg38 </h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,85 +278,86 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Input dataset collection"];
   2["Input dataset"];
   3["Input dataset"];
   4["FastQC"];
-  5["Cutadapt"];
-  6["FastQC"];
-  7["Cutadapt"];
-  8["UMI-tools extract"];
-  9["UMI-tools extract"];
-  10["RNA STAR"];
-  11["RNA STAR"];
-  12["UMI-tools deduplicate"];
-  13["UMI-tools deduplicate"];
-  14["Extract alignment ends"];
-  15["FastQC"];
-  16["PEAKachu"];
-  17["Merge collections"];
-  18["Extract alignment ends"];
-  19["FastQC"];
-  20["Sort"];
-  21["Text reformatting"];
-  22["Sort collection"];
-  23["Sort"];
-  24["Create a BedGraph of genome coverage"];
-  25["bedtools SlopBed"];
-  26["plotFingerprint"];
-  27["multiBamSummary"];
-  28["Create a BedGraph of genome coverage"];
-  29["Wig/BedGraph-to-bigWig"];
-  30["Extract Genomic DNA"];
-  31["Text reformatting"];
-  32["plotCorrelation"];
-  33["Wig/BedGraph-to-bigWig"];
-  34["MEME-ChIP"];
-  35["RCAS"];
   0 -->|output| 4;
+  5["Cutadapt"];
   0 -->|output| 5;
+  6["FastQC"];
   1 -->|output| 6;
+  7["Cutadapt"];
   1 -->|output| 7;
+  8["UMI-tools extract"];
   5 -->|out_pairs| 8;
+  9["UMI-tools extract"];
   7 -->|out_pairs| 9;
+  10["RNA STAR"];
   2 -->|output| 10;
   8 -->|out_paired_collection| 10;
+  11["RNA STAR"];
   2 -->|output| 11;
   9 -->|out_paired_collection| 11;
+  12["UMI-tools deduplicate"];
   10 -->|mapped_reads| 12;
+  13["UMI-tools deduplicate"];
   11 -->|mapped_reads| 13;
+  14["Extract alignment ends"];
   12 -->|output| 14;
+  15["FastQC"];
   12 -->|output| 15;
+  16["PEAKachu"];
   12 -->|output| 16;
   13 -->|output| 16;
+  17["Merge collections"];
   12 -->|output| 17;
   13 -->|output| 17;
+  18["Extract alignment ends"];
   13 -->|output| 18;
+  19["FastQC"];
   13 -->|output| 19;
+  20["Sort"];
   14 -->|alignment_ends| 20;
+  21["Text reformatting"];
   16 -->|peak_tables| 21;
+  22["Sort collection"];
   17 -->|output| 22;
+  23["Sort"];
   18 -->|alignment_ends| 23;
+  24["Create a BedGraph of genome coverage"];
   20 -->|out_file1| 24;
+  25["bedtools SlopBed"];
   3 -->|output| 25;
   21 -->|outfile| 25;
+  26["plotFingerprint"];
   22 -->|output| 26;
+  27["multiBamSummary"];
   22 -->|output| 27;
+  28["Create a BedGraph of genome coverage"];
   23 -->|out_file1| 28;
+  29["Wig/BedGraph-to-bigWig"];
   24 -->|output| 29;
+  30["Extract Genomic DNA"];
   25 -->|output| 30;
+  31["Text reformatting"];
   25 -->|output| 31;
+  32["plotCorrelation"];
   27 -->|outFile| 32;
+  33["Wig/BedGraph-to-bigWig"];
   28 -->|output| 33;
+  34["MEME-ChIP"];
   30 -->|output| 34;
+  35["RCAS"];
   31 -->|outfile| 35;
   2 -->|output| 35;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -381,7 +383,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -405,7 +407,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -73,17 +73,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         
-        <meta name="description" content="Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aim...">
+        <meta name="description" content="Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Introduction to Galaxy Analyses">
-        <meta property="og:description" content="Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aim...">
+	<meta property="og:title" content="[Introduction to Galaxy Analyses]Introduction to Galaxy Analyses Workflows">
+        <meta property="og:description" content="Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">GTN Tutorial: Data manipulation Olympics - all steps and exercises</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,136 +278,137 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
   2["Input dataset"];
   3["Line/Word/Character count"];
-  4["tabular-to-csv"];
-  5["Sort"];
-  6["Sort"];
-  7["Sort"];
-  8["Sort"];
-  9["Sort"];
-  10["Sort"];
-  11["Filter"];
-  12["Filter"];
-  13["Count"];
-  14["Count"];
-  15["Count"];
-  16["Count"];
-  17["Datamash"];
-  18["Count"];
-  19["Datamash"];
-  20["Filter"];
-  21["Filter"];
-  22["Filter"];
-  23["Filter"];
-  24["Filter"];
-  25["Filter"];
-  26["Filter"];
-  27["Compute"];
-  28["Compute"];
-  29["Cut"];
-  30["Column Regex Find And Replace"];
-  31["Column Regex Find And Replace"];
-  32["Column Regex Find And Replace"];
-  33["Cut"];
-  34["Cut"];
-  35["Datamash"];
-  36["Datamash"];
-  37["Datamash"];
-  38["Datamash"];
-  39["Datamash"];
-  40["Count"];
-  41["Column Regex Find And Replace"];
-  42["Split file"];
-  43["Join two Datasets"];
-  44["Remove beginning"];
-  45["Sort"];
-  46["Filter"];
-  47["Cut"];
-  48["Unique"];
-  49["Count"];
-  50["Datamash"];
-  51["Concatenate datasets"];
-  52["Filter"];
-  53["Sort"];
-  54["Remove beginning"];
-  55["Select first"];
-  56["Sort"];
-  57["Unique"];
-  58["Concatenate datasets"];
-  59["Join two Datasets"];
-  60["Cut"];
-  61["Line/Word/Character count"];
   0 -->|output| 3;
+  4["tabular-to-csv"];
   0 -->|output| 4;
+  5["Sort"];
   0 -->|output| 5;
+  6["Sort"];
   0 -->|output| 6;
+  7["Sort"];
   0 -->|output| 7;
+  8["Sort"];
   0 -->|output| 8;
+  9["Sort"];
   0 -->|output| 9;
+  10["Sort"];
   0 -->|output| 10;
+  11["Filter"];
   0 -->|output| 11;
+  12["Filter"];
   0 -->|output| 12;
+  13["Count"];
   0 -->|output| 13;
+  14["Count"];
   0 -->|output| 14;
+  15["Count"];
   0 -->|output| 15;
+  16["Count"];
   0 -->|output| 16;
+  17["Datamash"];
   0 -->|output| 17;
+  18["Count"];
   0 -->|output| 18;
+  19["Datamash"];
   0 -->|output| 19;
+  20["Filter"];
   0 -->|output| 20;
+  21["Filter"];
   0 -->|output| 21;
+  22["Filter"];
   0 -->|output| 22;
+  23["Filter"];
   0 -->|output| 23;
+  24["Filter"];
   0 -->|output| 24;
+  25["Filter"];
   0 -->|output| 25;
+  26["Filter"];
   0 -->|output| 26;
+  27["Compute"];
   0 -->|output| 27;
+  28["Compute"];
   0 -->|output| 28;
+  29["Cut"];
   0 -->|output| 29;
+  30["Column Regex Find And Replace"];
   0 -->|output| 30;
+  31["Column Regex Find And Replace"];
   0 -->|output| 31;
+  32["Column Regex Find And Replace"];
   0 -->|output| 32;
+  33["Cut"];
   0 -->|output| 33;
+  34["Cut"];
   0 -->|output| 34;
+  35["Datamash"];
   0 -->|output| 35;
+  36["Datamash"];
   0 -->|output| 36;
+  37["Datamash"];
   0 -->|output| 37;
+  38["Datamash"];
   0 -->|output| 38;
+  39["Datamash"];
   0 -->|output| 39;
+  40["Count"];
   0 -->|output| 40;
+  41["Column Regex Find And Replace"];
   0 -->|output| 41;
+  42["Split file"];
   0 -->|output| 42;
+  43["Join two Datasets"];
   0 -->|output| 43;
   1 -->|output| 43;
+  44["Remove beginning"];
   2 -->|output| 44;
+  45["Sort"];
   11 -->|out_file1| 45;
+  46["Filter"];
   12 -->|out_file1| 46;
+  47["Cut"];
   28 -->|out_file1| 47;
+  48["Unique"];
   29 -->|out_file1| 48;
+  49["Count"];
   41 -->|out_file1| 49;
+  50["Datamash"];
   41 -->|out_file1| 50;
+  51["Concatenate datasets"];
   0 -->|output| 51;
   44 -->|out_file1| 51;
+  52["Filter"];
   45 -->|outfile| 52;
+  53["Sort"];
   46 -->|out_file1| 53;
+  54["Remove beginning"];
   47 -->|out_file1| 54;
+  55["Select first"];
   47 -->|out_file1| 55;
+  56["Sort"];
   48 -->|outfile| 56;
+  57["Unique"];
   54 -->|out_file1| 57;
+  58["Concatenate datasets"];
   55 -->|out_file1| 58;
   57 -->|outfile| 58;
+  59["Join two Datasets"];
   0 -->|output| 59;
   58 -->|out_file1| 59;
+  60["Cut"];
   59 -->|out_file1| 60;
+  61["Line/Word/Character count"];
   60 -->|out_file1| 61;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -432,7 +434,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -456,7 +458,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

@@ -91,8 +91,8 @@
       "name": "MD NAMD",
       "title": "MD NAMD",
       "test_results": null,
-      "modified": "2023-12-14 08:41:28 +0000",
-      "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"System Setup\"];\n  3[\"Energy Minimizer\"];\n  4[\"NAMD MD Simulator (NVT)\"];\n  5[\"NAMD MD Simulator (NPT)\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  2 -->|setup_crd| 3;\n  2 -->|setup_psf| 3;\n  2 -->|structure_prm| 3;\n  3 -->|pdbout| 4;\n  3 -->|pmespec| 4;\n  3 -->|xplorpsfout| 4;\n  3 -->|bbrmsd| 4;\n  3 -->|scrmsd| 4;\n  3 -->|subsrmsd| 4;\n  2 -->|structure_prm| 4;\n  3 -->|pdbout| 5;\n  3 -->|pmespec| 5;\n  3 -->|xplorpsfout| 5;\n  4 -->|coorout| 5;\n  4 -->|velout| 5;\n  4 -->|xscout| 5;\n  2 -->|structure_prm| 5;\n"
+      "modified": "2023-12-14 16:18:58 +0000",
+      "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"System Setup\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Energy Minimizer\"];\n  2 -->|setup_crd| 3;\n  2 -->|setup_psf| 3;\n  2 -->|structure_prm| 3;\n  4[\"NAMD MD Simulator (NVT)\"];\n  3 -->|pdbout| 4;\n  3 -->|pmespec| 4;\n  3 -->|xplorpsfout| 4;\n  3 -->|bbrmsd| 4;\n  3 -->|scrmsd| 4;\n  3 -->|subsrmsd| 4;\n  2 -->|structure_prm| 4;\n  5[\"NAMD MD Simulator (NPT)\"];\n  3 -->|pdbout| 5;\n  3 -->|pmespec| 5;\n  3 -->|xplorpsfout| 5;\n  4 -->|coorout| 5;\n  4 -->|velout| 5;\n  4 -->|xscout| 5;\n  2 -->|structure_prm| 5;\n"
     },
     {
       "workflow": "main_workflow_charmmgui.ga",
@@ -109,8 +109,8 @@
       "name": "NAMD MD From CHARMM GUI",
       "title": "NAMD MD From CHARMM GUI",
       "test_results": null,
-      "modified": "2023-12-14 08:41:28 +0000",
-      "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"NAMD MD Simulator (NVT)\"];\n  5[\"NAMD MD Simulator (NPT)\"];\n  0 -->|output| 4;\n  2 -->|output| 4;\n  1 -->|output| 4;\n  3 -->|output| 4;\n  0 -->|output| 5;\n  2 -->|output| 5;\n  1 -->|output| 5;\n  4 -->|coorout| 5;\n  4 -->|velout| 5;\n  4 -->|xscout| 5;\n  3 -->|output| 5;\n"
+      "modified": "2023-12-14 16:18:58 +0000",
+      "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"NAMD MD Simulator (NVT)\"];\n  0 -->|output| 4;\n  2 -->|output| 4;\n  1 -->|output| 4;\n  3 -->|output| 4;\n  5[\"NAMD MD Simulator (NPT)\"];\n  0 -->|output| 5;\n  2 -->|output| 5;\n  1 -->|output| 5;\n  4 -->|coorout| 5;\n  4 -->|velout| 5;\n  4 -->|xscout| 5;\n  3 -->|output| 5;\n"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.json",

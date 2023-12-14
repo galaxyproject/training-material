@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -75,7 +75,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta name="description" content="Training material for all kinds of transcriptomics analysis.">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Transcriptomics">
+	<meta property="og:title" content="[Transcriptomics]Transcriptomics Workflows">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">De novo transcriptome reconstruction with RNA-Seq</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,7 +278,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
@@ -289,120 +289,122 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   7["Input dataset"];
   8["Input dataset"];
   9["FastQC"];
-  10["FastQC"];
-  11["Trimmomatic"];
-  12["FastQC"];
-  13["FastQC"];
-  14["Trimmomatic"];
-  15["FastQC"];
-  16["FastQC"];
-  17["Trimmomatic"];
-  18["FastQC"];
-  19["FastQC"];
-  20["Trimmomatic"];
-  21["HISAT2"];
-  22["FastQC"];
-  23["FastQC"];
-  24["HISAT2"];
-  25["FastQC"];
-  26["FastQC"];
-  27["HISAT2"];
-  28["FastQC"];
-  29["FastQC"];
-  30["HISAT2"];
-  31["FastQC"];
-  32["FastQC"];
-  33["StringTie"];
-  34["bamCoverage"];
-  35["bamCoverage"];
-  36["StringTie"];
-  37["bamCoverage"];
-  38["bamCoverage"];
-  39["StringTie"];
-  40["bamCoverage"];
-  41["bamCoverage"];
-  42["StringTie"];
-  43["bamCoverage"];
-  44["bamCoverage"];
-  45["StringTie merge"];
-  46["GffCompare"];
-  47["featureCounts"];
-  48["featureCounts"];
-  49["featureCounts"];
-  50["featureCounts"];
-  51["DESeq2"];
-  52["Filter"];
-  53["Filter"];
-  54["Filter"];
   0 -->|output| 9;
+  10["FastQC"];
   1 -->|output| 10;
+  11["Trimmomatic"];
   0 -->|output| 11;
   1 -->|output| 11;
+  12["FastQC"];
   2 -->|output| 12;
+  13["FastQC"];
   3 -->|output| 13;
+  14["Trimmomatic"];
   2 -->|output| 14;
   3 -->|output| 14;
+  15["FastQC"];
   4 -->|output| 15;
+  16["FastQC"];
   5 -->|output| 16;
+  17["Trimmomatic"];
   4 -->|output| 17;
   5 -->|output| 17;
+  18["FastQC"];
   6 -->|output| 18;
+  19["FastQC"];
   7 -->|output| 19;
+  20["Trimmomatic"];
   6 -->|output| 20;
   7 -->|output| 20;
+  21["HISAT2"];
   11 -->|fastq_out_r1_paired| 21;
   11 -->|fastq_out_r2_paired| 21;
+  22["FastQC"];
   11 -->|fastq_out_r1_paired| 22;
+  23["FastQC"];
   11 -->|fastq_out_r2_paired| 23;
+  24["HISAT2"];
   14 -->|fastq_out_r1_paired| 24;
   14 -->|fastq_out_r2_paired| 24;
+  25["FastQC"];
   14 -->|fastq_out_r1_paired| 25;
+  26["FastQC"];
   14 -->|fastq_out_r2_paired| 26;
+  27["HISAT2"];
   17 -->|fastq_out_r1_paired| 27;
   17 -->|fastq_out_r2_paired| 27;
+  28["FastQC"];
   17 -->|fastq_out_r1_paired| 28;
+  29["FastQC"];
   17 -->|fastq_out_r2_paired| 29;
+  30["HISAT2"];
   20 -->|fastq_out_r1_paired| 30;
   20 -->|fastq_out_r2_paired| 30;
+  31["FastQC"];
   20 -->|fastq_out_r1_paired| 31;
+  32["FastQC"];
   20 -->|fastq_out_r2_paired| 32;
+  33["StringTie"];
   21 -->|output_alignments| 33;
+  34["bamCoverage"];
   21 -->|output_alignments| 34;
+  35["bamCoverage"];
   21 -->|output_alignments| 35;
+  36["StringTie"];
   24 -->|output_alignments| 36;
+  37["bamCoverage"];
   24 -->|output_alignments| 37;
+  38["bamCoverage"];
   24 -->|output_alignments| 38;
+  39["StringTie"];
   27 -->|output_alignments| 39;
+  40["bamCoverage"];
   27 -->|output_alignments| 40;
+  41["bamCoverage"];
   27 -->|output_alignments| 41;
+  42["StringTie"];
   30 -->|output_alignments| 42;
+  43["bamCoverage"];
   30 -->|output_alignments| 43;
+  44["bamCoverage"];
   30 -->|output_alignments| 44;
+  45["StringTie merge"];
   8 -->|output| 45;
   33 -->|output_gtf| 45;
   36 -->|output_gtf| 45;
   42 -->|output_gtf| 45;
   39 -->|output_gtf| 45;
+  46["GffCompare"];
   8 -->|output| 46;
   45 -->|out_gtf| 46;
+  47["featureCounts"];
   21 -->|output_alignments| 47;
   46 -->|transcripts_annotated| 47;
+  48["featureCounts"];
   24 -->|output_alignments| 48;
   46 -->|transcripts_annotated| 48;
+  49["featureCounts"];
   27 -->|output_alignments| 49;
   46 -->|transcripts_annotated| 49;
+  50["featureCounts"];
   30 -->|output_alignments| 50;
   46 -->|transcripts_annotated| 50;
+  51["DESeq2"];
   47 -->|output_short| 51;
   48 -->|output_short| 51;
   49 -->|output_short| 51;
   50 -->|output_short| 51;
+  52["Filter"];
   51 -->|deseq_out| 52;
+  53["Filter"];
   52 -->|out_file1| 53;
+  54["Filter"];
   52 -->|out_file1| 54;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -428,7 +430,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -452,7 +454,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

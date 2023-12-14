@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -73,17 +73,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         
-        <meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these field...">
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Assembly">
-        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these field...">
+	<meta property="og:title" content="[Assembly]Assembly Workflows">
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">VGP assembly: training workflow</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,7 +278,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
@@ -286,146 +286,148 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   4["GFA to FASTA"];
   5["GFA to FASTA"];
   6["Cutadapt"];
-  7["Busco"];
-  8["Busco"];
-  9["Purge overlaps"];
-  10["Collapse Collection"];
-  11["Meryl"];
-  12["Map with minimap2"];
-  13["Quast"];
-  14["Map with minimap2"];
-  15["Meryl"];
-  16["Purge overlaps"];
-  17["Meryl"];
-  18["Merqury"];
-  19["Purge overlaps"];
-  20["GenomeScope"];
-  21["Purge overlaps"];
-  22["Replace"];
-  23["Compute"];
-  24["Bionano Hybrid Scaffold"];
-  25["Concatenate datasets"];
-  26["Busco"];
-  27["Replace"];
-  28["Compute"];
-  29["Concatenate datasets"];
-  30["Purge overlaps"];
-  31["Map with minimap2"];
-  32["Search in textfiles"];
-  33["Advanced Cut"];
-  34["Advanced Cut"];
-  35["BWA-MEM2"];
-  36["BWA-MEM2"];
-  37["Replace"];
-  38["Quast"];
-  39["Busco"];
-  40["Map with minimap2"];
-  41["Purge overlaps"];
-  42["Convert"];
-  43["Filter and merge"];
-  44["Purge overlaps"];
-  45["Advanced Cut"];
-  46["bedtools BAM to BED"];
-  47["PretextMap"];
-  48["Purge overlaps"];
-  49["Sort"];
-  50["Pretext Snapshot"];
-  51["Busco"];
-  52["Quast"];
-  53["SALSA"];
-  54["BWA-MEM2"];
-  55["BWA-MEM2"];
-  56["Busco"];
-  57["Quast"];
-  58["Filter and merge"];
-  59["PretextMap"];
-  60["Pretext Snapshot"];
   3 -->|output| 6;
+  7["Busco"];
   4 -->|out_fa| 7;
+  8["Busco"];
   5 -->|out_fa| 8;
+  9["Purge overlaps"];
   5 -->|out_fa| 9;
+  10["Collapse Collection"];
   6 -->|out1| 10;
+  11["Meryl"];
   6 -->|out1| 11;
+  12["Map with minimap2"];
   6 -->|out1| 12;
   5 -->|out_fa| 12;
+  13["Quast"];
   5 -->|out_fa| 13;
   4 -->|out_fa| 13;
   6 -->|out1| 13;
+  14["Map with minimap2"];
   9 -->|split_fasta| 14;
   9 -->|split_fasta| 14;
+  15["Meryl"];
   11 -->|read_db| 15;
+  16["Purge overlaps"];
   12 -->|alignment_output| 16;
+  17["Meryl"];
   15 -->|read_db| 17;
+  18["Merqury"];
   5 -->|out_fa| 18;
   4 -->|out_fa| 18;
   15 -->|read_db| 18;
+  19["Purge overlaps"];
   16 -->|pbcstat_cov| 19;
   16 -->|calcuts_cutoff| 19;
   14 -->|alignment_output| 19;
+  20["GenomeScope"];
   17 -->|read_db_hist| 20;
+  21["Purge overlaps"];
   19 -->|purge_dups_bed| 21;
   5 -->|out_fa| 21;
+  22["Replace"];
   20 -->|summary| 22;
+  23["Compute"];
   20 -->|model_params| 23;
+  24["Bionano Hybrid Scaffold"];
   0 -->|output| 24;
   21 -->|get_seqs_purged| 24;
+  25["Concatenate datasets"];
   21 -->|get_seqs_hap| 25;
   4 -->|out_fa| 25;
+  26["Busco"];
   21 -->|get_seqs_purged| 26;
+  27["Replace"];
   22 -->|outfile| 27;
+  28["Compute"];
   23 -->|out_file1| 28;
+  29["Concatenate datasets"];
   24 -->|ngs_contigs_scaffold_trimmed| 29;
   24 -->|ngs_contigs_not_scaffolded_trimmed| 29;
+  30["Purge overlaps"];
   25 -->|out_file1| 30;
+  31["Map with minimap2"];
   10 -->|output| 31;
   25 -->|out_file1| 31;
+  32["Search in textfiles"];
   27 -->|outfile| 32;
+  33["Advanced Cut"];
   28 -->|out_file1| 33;
+  34["Advanced Cut"];
   28 -->|out_file1| 34;
+  35["BWA-MEM2"];
   1 -->|output| 35;
   29 -->|out_file1| 35;
+  36["BWA-MEM2"];
   2 -->|output| 36;
   29 -->|out_file1| 36;
+  37["Replace"];
   29 -->|out_file1| 37;
+  38["Quast"];
   29 -->|out_file1| 38;
   10 -->|output| 38;
+  39["Busco"];
   29 -->|out_file1| 39;
+  40["Map with minimap2"];
   30 -->|split_fasta| 40;
   30 -->|split_fasta| 40;
+  41["Purge overlaps"];
   31 -->|alignment_output| 41;
+  42["Convert"];
   32 -->|output| 42;
+  43["Filter and merge"];
   36 -->|bam_output| 43;
   35 -->|bam_output| 43;
+  44["Purge overlaps"];
   41 -->|pbcstat_cov| 44;
   41 -->|calcuts_cutoff| 44;
   40 -->|alignment_output| 44;
+  45["Advanced Cut"];
   42 -->|out_file1| 45;
+  46["bedtools BAM to BED"];
   43 -->|outfile| 46;
+  47["PretextMap"];
   43 -->|outfile| 47;
+  48["Purge overlaps"];
   44 -->|purge_dups_bed| 48;
   25 -->|out_file1| 48;
+  49["Sort"];
   46 -->|output| 49;
+  50["Pretext Snapshot"];
   47 -->|pretext_map_out| 50;
+  51["Busco"];
   48 -->|get_seqs_purged| 51;
+  52["Quast"];
   21 -->|get_seqs_purged| 52;
   48 -->|get_seqs_purged| 52;
   10 -->|output| 52;
+  53["SALSA"];
   49 -->|out_file1| 53;
   37 -->|outfile| 53;
+  54["BWA-MEM2"];
   1 -->|output| 54;
   53 -->|scaffolds_fasta| 54;
+  55["BWA-MEM2"];
   2 -->|output| 55;
   53 -->|scaffolds_fasta| 55;
+  56["Busco"];
   53 -->|scaffolds_fasta| 56;
+  57["Quast"];
   53 -->|scaffolds_fasta| 57;
   10 -->|output| 57;
+  58["Filter and merge"];
   55 -->|bam_output| 58;
   54 -->|bam_output| 58;
+  59["PretextMap"];
   58 -->|outfile| 59;
+  60["Pretext Snapshot"];
   59 -->|pretext_map_out| 60;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -451,7 +453,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -475,7 +477,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -73,17 +73,25 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         
-        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
+
+What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
+ {: .alert.alert-success}
+">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Single Cell">
-        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+	<meta property="og:title" content="[Single Cell]Single Cell Workflows">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
+
+What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
+ {: .alert.alert-success}
+">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +246,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">CS3_Filter, Plot and Explore Single-cell RNA-seq Data</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,103 +286,105 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Inspect AnnData"];
-  2["Scanpy FilterCells"];
-  3["Plot"];
-  4["Plot"];
-  5["Plot"];
-  6["Plot"];
-  7["Inspect AnnData"];
-  8["Plot"];
-  9["Inspect AnnData"];
-  10["Plot"];
-  11["Plot"];
-  12["Scanpy FilterCells"];
-  13["Inspect AnnData"];
-  14["Inspect AnnData"];
-  15["Scanpy FilterCells"];
-  16["Plot"];
-  17["Inspect AnnData"];
-  18["Scanpy FilterGenes"];
-  19["Plot"];
-  20["Inspect AnnData"];
-  21["Scanpy NormaliseData"];
-  22["Scanpy FindVariableGenes"];
-  23["Scanpy ScaleData"];
-  24["Scanpy RunPCA"];
-  25["Plot"];
-  26["Scanpy ComputeGraph"];
-  27["Scanpy RunTSNE"];
-  28["Scanpy RunUMAP"];
-  29["Scanpy FindCluster"];
-  30["Scanpy FindMarkers"];
-  31["Scanpy FindMarkers"];
-  32["Scanpy PlotEmbed"];
-  33["Scanpy PlotEmbed"];
-  34["Manipulate AnnData"];
-  35["Scanpy PlotEmbed"];
-  36["Inspect AnnData"];
-  37["AnnData Operations"];
-  38["Join two Datasets"];
-  39["Join two Datasets"];
-  40["AnnData Operations"];
-  41["Cut"];
-  42["Cut"];
-  43["Scanpy PlotEmbed"];
   0 -->|output| 1;
+  2["Scanpy FilterCells"];
   0 -->|output| 2;
+  3["Plot"];
   0 -->|output| 3;
+  4["Plot"];
   0 -->|output| 4;
+  5["Plot"];
   0 -->|output| 5;
+  6["Plot"];
   0 -->|output| 6;
+  7["Inspect AnnData"];
   0 -->|output| 7;
+  8["Plot"];
   0 -->|output| 8;
+  9["Inspect AnnData"];
   0 -->|output| 9;
+  10["Plot"];
   0 -->|output| 10;
+  11["Plot"];
   2 -->|output_h5ad| 11;
+  12["Scanpy FilterCells"];
   2 -->|output_h5ad| 12;
+  13["Inspect AnnData"];
   2 -->|output_h5ad| 13;
+  14["Inspect AnnData"];
   12 -->|output_h5ad| 14;
+  15["Scanpy FilterCells"];
   12 -->|output_h5ad| 15;
+  16["Plot"];
   12 -->|output_h5ad| 16;
+  17["Inspect AnnData"];
   15 -->|output_h5ad| 17;
+  18["Scanpy FilterGenes"];
   15 -->|output_h5ad| 18;
+  19["Plot"];
   15 -->|output_h5ad| 19;
+  20["Inspect AnnData"];
   18 -->|output_h5ad| 20;
+  21["Scanpy NormaliseData"];
   18 -->|output_h5ad| 21;
+  22["Scanpy FindVariableGenes"];
   21 -->|output_h5ad| 22;
+  23["Scanpy ScaleData"];
   22 -->|output_h5ad| 23;
+  24["Scanpy RunPCA"];
   23 -->|output_h5ad| 24;
+  25["Plot"];
   24 -->|output_h5ad| 25;
+  26["Scanpy ComputeGraph"];
   24 -->|output_h5ad| 26;
+  27["Scanpy RunTSNE"];
   26 -->|output_h5ad| 27;
+  28["Scanpy RunUMAP"];
   27 -->|output_h5ad| 28;
+  29["Scanpy FindCluster"];
   28 -->|output_h5ad| 29;
+  30["Scanpy FindMarkers"];
   29 -->|output_h5ad| 30;
+  31["Scanpy FindMarkers"];
   29 -->|output_h5ad| 31;
+  32["Scanpy PlotEmbed"];
   30 -->|output_h5ad| 32;
+  33["Scanpy PlotEmbed"];
   30 -->|output_h5ad| 33;
+  34["Manipulate AnnData"];
   30 -->|output_h5ad| 34;
+  35["Scanpy PlotEmbed"];
   30 -->|output_h5ad| 35;
+  36["Inspect AnnData"];
   30 -->|output_h5ad| 36;
+  37["AnnData Operations"];
   34 -->|anndata| 37;
   30 -->|output_h5ad| 37;
+  38["Join two Datasets"];
   30 -->|output_tsv| 38;
   36 -->|var| 38;
+  39["Join two Datasets"];
   31 -->|output_tsv| 39;
   36 -->|var| 39;
+  40["AnnData Operations"];
   37 -->|output_h5ad| 40;
+  41["Cut"];
   38 -->|out_file1| 41;
+  42["Cut"];
   39 -->|out_file1| 42;
+  43["Scanpy PlotEmbed"];
   40 -->|output_h5ad| 43;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Filter, Plot and Explore Single-cell RNA-seq Data updated</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -415,101 +426,102 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Inspect AnnData"];
-  2["Scanpy FilterCells"];
-  3["Plot"];
-  4["Plot"];
-  5["Plot"];
-  6["Plot"];
-  7["Inspect AnnData"];
-  8["Plot"];
-  9["Inspect AnnData"];
-  10["Plot"];
-  11["Plot"];
-  12["Scanpy FilterCells"];
-  13["Inspect AnnData"];
-  14["Inspect AnnData"];
-  15["Scanpy FilterCells"];
-  16["Plot"];
-  17["Inspect AnnData"];
-  18["Scanpy FilterGenes"];
-  19["Plot"];
-  20["Inspect AnnData"];
-  21["Scanpy NormaliseData"];
-  22["Scanpy FindVariableGenes"];
-  23["Scanpy ScaleData"];
-  24["Scanpy RunPCA"];
-  25["Plot"];
-  26["Scanpy ComputeGraph"];
-  27["Scanpy RunTSNE"];
-  28["Scanpy RunUMAP"];
-  29["Scanpy FindCluster"];
-  30["Scanpy FindMarkers"];
-  31["Scanpy FindMarkers"];
-  32["Scanpy PlotEmbed"];
-  33["Scanpy PlotEmbed"];
-  34["Manipulate AnnData"];
-  35["Scanpy PlotEmbed"];
-  36["Inspect AnnData"];
-  37["AnnData Operations"];
-  38["Join two Datasets"];
-  39["Join two Datasets"];
-  40["AnnData Operations"];
-  41["Cut"];
-  42["Cut"];
-  43["Scanpy PlotEmbed"];
   0 -->|output| 1;
+  2["Scanpy FilterCells"];
   0 -->|output| 2;
+  3["Plot"];
   0 -->|output| 3;
+  4["Plot"];
   0 -->|output| 4;
+  5["Plot"];
   0 -->|output| 5;
+  6["Plot"];
   0 -->|output| 6;
+  7["Inspect AnnData"];
   0 -->|output| 7;
+  8["Plot"];
   0 -->|output| 8;
+  9["Inspect AnnData"];
   0 -->|output| 9;
+  10["Plot"];
   0 -->|output| 10;
+  11["Plot"];
   2 -->|output_h5ad| 11;
+  12["Scanpy FilterCells"];
   2 -->|output_h5ad| 12;
+  13["Inspect AnnData"];
   2 -->|output_h5ad| 13;
+  14["Inspect AnnData"];
   12 -->|output_h5ad| 14;
+  15["Scanpy FilterCells"];
   12 -->|output_h5ad| 15;
+  16["Plot"];
   12 -->|output_h5ad| 16;
+  17["Inspect AnnData"];
   15 -->|output_h5ad| 17;
+  18["Scanpy FilterGenes"];
   15 -->|output_h5ad| 18;
+  19["Plot"];
   15 -->|output_h5ad| 19;
+  20["Inspect AnnData"];
   18 -->|output_h5ad| 20;
+  21["Scanpy NormaliseData"];
   18 -->|output_h5ad| 21;
+  22["Scanpy FindVariableGenes"];
   21 -->|output_h5ad| 22;
+  23["Scanpy ScaleData"];
   22 -->|output_h5ad| 23;
+  24["Scanpy RunPCA"];
   23 -->|output_h5ad| 24;
+  25["Plot"];
   24 -->|output_h5ad| 25;
+  26["Scanpy ComputeGraph"];
   24 -->|output_h5ad| 26;
+  27["Scanpy RunTSNE"];
   26 -->|output_h5ad| 27;
+  28["Scanpy RunUMAP"];
   27 -->|output_h5ad| 28;
+  29["Scanpy FindCluster"];
   28 -->|output_h5ad| 29;
+  30["Scanpy FindMarkers"];
   29 -->|output_h5ad| 30;
+  31["Scanpy FindMarkers"];
   29 -->|output_h5ad| 31;
+  32["Scanpy PlotEmbed"];
   30 -->|output_h5ad| 32;
+  33["Scanpy PlotEmbed"];
   30 -->|output_h5ad| 33;
+  34["Manipulate AnnData"];
   30 -->|output_h5ad| 34;
+  35["Scanpy PlotEmbed"];
   30 -->|output_h5ad| 35;
+  36["Inspect AnnData"];
   30 -->|output_h5ad| 36;
+  37["AnnData Operations"];
   34 -->|anndata| 37;
   30 -->|output_h5ad| 37;
+  38["Join two Datasets"];
   30 -->|output_tsv| 38;
   36 -->|var| 38;
+  39["Join two Datasets"];
   31 -->|output_tsv| 39;
   36 -->|var| 39;
+  40["AnnData Operations"];
   37 -->|output_h5ad| 40;
+  41["Cut"];
   38 -->|out_file1| 41;
+  42["Cut"];
   39 -->|out_file1| 42;
+  43["Scanpy PlotEmbed"];
   40 -->|output_h5ad| 43;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -535,7 +547,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -559,7 +571,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

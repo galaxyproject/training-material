@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -73,17 +73,25 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         
-        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
+
+What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
+ {: .alert.alert-success}
+">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Single Cell">
-        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate y...">
+	<meta property="og:title" content="[Single Cell]Single Cell Workflows">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
+
+What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
+ {: .alert.alert-success}
+">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +246,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">NCBI to Anndata</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -280,7 +289,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
@@ -293,62 +301,46 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   8["Input dataset"];
   9["Input dataset"];
   10["Import Anndata and loom"];
-  11["Import Anndata and loom"];
-  12["Import Anndata and loom"];
-  13["Import Anndata and loom"];
-  14["Import Anndata and loom"];
-  15["Import Anndata and loom"];
-  16["Import Anndata and loom"];
-  17["Import Anndata and loom"];
-  18["Import Anndata and loom"];
-  19["Import Anndata and loom"];
-  20["Manipulate AnnData"];
-  21["Manipulate AnnData"];
-  22["Manipulate AnnData"];
-  23["Manipulate AnnData"];
-  24["Manipulate AnnData"];
-  25["Manipulate AnnData"];
-  26["Manipulate AnnData"];
-  27["Manipulate AnnData"];
-  28["Manipulate AnnData"];
-  29["Manipulate AnnData"];
-  30["Manipulate AnnData"];
-  31["Inspect AnnData"];
-  32["Replace Text"];
-  33["Replace Text"];
-  34["Replace Text"];
-  35["Replace Text"];
-  36["Cut"];
-  37["Cut"];
-  38["Cut"];
-  39["Cut"];
-  40["Paste"];
-  41["Paste"];
-  42["Paste"];
-  43["Manipulate AnnData"];
-  44["Scanpy FilterCells"];
-  45["AnnData Operations"];
-  46["Inspect AnnData"];
   0 -->|output| 10;
+  11["Import Anndata and loom"];
   1 -->|output| 11;
+  12["Import Anndata and loom"];
   2 -->|output| 12;
+  13["Import Anndata and loom"];
   3 -->|output| 13;
+  14["Import Anndata and loom"];
   4 -->|output| 14;
+  15["Import Anndata and loom"];
   5 -->|output| 15;
+  16["Import Anndata and loom"];
   6 -->|output| 16;
+  17["Import Anndata and loom"];
   7 -->|output| 17;
+  18["Import Anndata and loom"];
   8 -->|output| 18;
+  19["Import Anndata and loom"];
   9 -->|output| 19;
+  20["Manipulate AnnData"];
   10 -->|anndata| 20;
+  21["Manipulate AnnData"];
   11 -->|anndata| 21;
+  22["Manipulate AnnData"];
   12 -->|anndata| 22;
+  23["Manipulate AnnData"];
   13 -->|anndata| 23;
+  24["Manipulate AnnData"];
   14 -->|anndata| 24;
+  25["Manipulate AnnData"];
   15 -->|anndata| 25;
+  26["Manipulate AnnData"];
   16 -->|anndata| 26;
+  27["Manipulate AnnData"];
   17 -->|anndata| 27;
+  28["Manipulate AnnData"];
   18 -->|anndata| 28;
+  29["Manipulate AnnData"];
   19 -->|anndata| 29;
+  30["Manipulate AnnData"];
   29 -->|anndata| 30;
   23 -->|anndata| 30;
   24 -->|anndata| 30;
@@ -359,29 +351,47 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   28 -->|anndata| 30;
   26 -->|anndata| 30;
   20 -->|anndata| 30;
+  31["Inspect AnnData"];
   30 -->|anndata| 31;
+  32["Replace Text"];
   31 -->|obs| 32;
+  33["Replace Text"];
   31 -->|obs| 33;
+  34["Replace Text"];
   31 -->|obs| 34;
+  35["Replace Text"];
   31 -->|obs| 35;
+  36["Cut"];
   32 -->|outfile| 36;
+  37["Cut"];
   33 -->|outfile| 37;
+  38["Cut"];
   34 -->|outfile| 38;
+  39["Cut"];
   35 -->|outfile| 39;
+  40["Paste"];
   37 -->|out_file1| 40;
   36 -->|out_file1| 40;
+  41["Paste"];
   40 -->|out_file1| 41;
   38 -->|out_file1| 41;
+  42["Paste"];
   41 -->|out_file1| 42;
   39 -->|out_file1| 42;
+  43["Manipulate AnnData"];
   30 -->|anndata| 43;
   42 -->|out_file1| 43;
+  44["Scanpy FilterCells"];
   43 -->|anndata| 44;
+  45["AnnData Operations"];
   44 -->|output_h5ad| 45;
+  46["Inspect AnnData"];
   45 -->|output_h5ad| 46;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -407,7 +417,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -431,7 +441,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

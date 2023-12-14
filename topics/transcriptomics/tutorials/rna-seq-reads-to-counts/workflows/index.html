@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -75,7 +75,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta name="description" content="Training material for all kinds of transcriptomics analysis.">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Transcriptomics">
+	<meta property="og:title" content="[Transcriptomics]Transcriptomics Workflows">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">QC report</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,26 +278,28 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset collection"];
   2["Infer Experiment"];
-  3["MarkDuplicates"];
-  4["Samtools idxstats"];
-  5["MultiQC"];
   1 -->|output| 2;
   0 -->|output| 2;
+  3["MarkDuplicates"];
   1 -->|output| 3;
+  4["Samtools idxstats"];
   1 -->|output| 4;
+  5["MultiQC"];
   2 -->|output| 5;
   3 -->|metrics_file| 5;
   4 -->|output| 5;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">RNA Seq Reads To Counts</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -335,27 +338,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Input dataset"];
   10["Infer Experiment"];
-  11["Read Distribution"];
-  12["Column Join"];
-  13["MultiQC"];
-  2["FastQC"];
-  3["Cutadapt"];
-  4["FastQC"];
-  5["HISAT2"];
-  6["featureCounts"];
-  7["MarkDuplicates"];
-  8["Samtools idxstats"];
-  9["Gene Body Coverage (BAM)"];
   5 -->|output_alignments| 10;
   1 -->|output| 10;
+  11["Read Distribution"];
   5 -->|output_alignments| 11;
   1 -->|output| 11;
+  12["Column Join"];
   6 -->|output_short| 12;
+  13["MultiQC"];
   4 -->|text_file| 13;
   3 -->|report| 13;
   10 -->|output| 13;
@@ -365,18 +359,28 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   11 -->|output| 13;
   6 -->|output_summary| 13;
   5 -->|summary_file| 13;
+  2["FastQC"];
   0 -->|output| 2;
+  3["Cutadapt"];
   0 -->|output| 3;
+  4["FastQC"];
   3 -->|out1| 4;
+  5["HISAT2"];
   3 -->|out1| 5;
+  6["featureCounts"];
   5 -->|output_alignments| 6;
+  7["MarkDuplicates"];
   5 -->|output_alignments| 7;
+  8["Samtools idxstats"];
   5 -->|output_alignments| 8;
+  9["Gene Body Coverage (BAM)"];
   5 -->|output_alignments| 9;
   1 -->|output| 9;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -402,7 +406,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -426,7 +430,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -75,7 +75,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta name="description" content="Learn to analyse Ecological data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Ecology">
+	<meta property="og:title" content="[Ecology]Ecology Workflows">
         <meta property="og:description" content="Learn to analyse Ecological data through Galaxy.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Workflow Constructed From History 'STACKS RAD: Population Genomics With Reference Genome'</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,80 +278,82 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
   10["FastQC"];
-  11["Map with BWA"];
-  12["Select"];
-  13["Select"];
-  14["Replace Text"];
-  15["Replace Text"];
-  16["Replace Text"];
-  17["MultiQC"];
-  18["Replace Text"];
-  19["Replace Text"];
-  2["Input dataset"];
-  20["Add column"];
-  21["Concatenate datasets"];
-  22["Cut"];
-  23["Convert"];
-  24["Regex Replace"];
-  25["Stacks: reference map"];
-  26["Stacks: populations"];
-  27["Summary Statistics"];
-  28["Sort"];
-  29["Count"];
-  3["Input dataset"];
-  30["Filter"];
-  4["Stacks: process radtags"];
-  5["Stacks: process radtags"];
-  6["Stacks: process radtags"];
-  7["Replace Text"];
-  8["Select"];
-  9["Select"];
   5 -->|demultiplexed| 10;
+  11["Map with BWA"];
   5 -->|demultiplexed| 11;
   3 -->|output| 11;
+  12["Select"];
   6 -->|output_log| 12;
+  13["Select"];
   6 -->|output_log| 13;
+  14["Replace Text"];
   7 -->|outfile| 14;
+  15["Replace Text"];
   8 -->|out_file1| 15;
+  16["Replace Text"];
   9 -->|out_file1| 16;
+  17["MultiQC"];
   10 -->|text_file| 17;
+  18["Replace Text"];
   12 -->|out_file1| 18;
+  19["Replace Text"];
   13 -->|out_file1| 19;
+  2["Input dataset"];
+  20["Add column"];
   14 -->|outfile| 20;
+  21["Concatenate datasets"];
   19 -->|outfile| 21;
   15 -->|outfile| 21;
   16 -->|outfile| 21;
   18 -->|outfile| 21;
+  22["Cut"];
   20 -->|out_file1| 22;
+  23["Convert"];
   21 -->|out_file1| 23;
+  24["Regex Replace"];
   22 -->|out_file1| 24;
+  25["Stacks: reference map"];
   11 -->|bam_output| 25;
   24 -->|outfile| 25;
+  26["Stacks: populations"];
   25 -->|all_output| 26;
   24 -->|outfile| 26;
+  27["Summary Statistics"];
   26 -->|out_fstats| 27;
+  28["Sort"];
   26 -->|out_fstats| 28;
+  29["Count"];
   26 -->|out_fstats| 29;
+  3["Input dataset"];
+  30["Filter"];
   26 -->|out_fstats| 30;
+  4["Stacks: process radtags"];
   1 -->|output| 4;
   0 -->|output| 4;
+  5["Stacks: process radtags"];
   1 -->|output| 5;
   0 -->|output| 5;
+  6["Stacks: process radtags"];
   1 -->|output| 6;
   0 -->|output| 6;
+  7["Replace Text"];
   2 -->|output| 7;
+  8["Select"];
   4 -->|output_log| 8;
+  9["Select"];
   5 -->|output_log| 9;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Ref Based Rad Seq</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -389,33 +392,34 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
   2["Input dataset"];
   3["Input dataset"];
   4["Stacks: process radtags"];
-  5["Stacks: process radtags"];
-  6["Stacks: process radtags"];
-  7["Map with BWA for Illumina"];
-  8["Stacks: reference map"];
-  9["Stacks: populations"];
   2 -->|output| 4;
   3 -->|output| 4;
+  5["Stacks: process radtags"];
   2 -->|output| 5;
   3 -->|output| 5;
+  6["Stacks: process radtags"];
   2 -->|output| 6;
   3 -->|output| 6;
+  7["Map with BWA for Illumina"];
   0 -->|output| 7;
   4 -->|demultiplexed| 7;
+  8["Stacks: reference map"];
   7 -->|output| 8;
   1 -->|output| 8;
+  9["Stacks: populations"];
   8 -->|all_output| 9;
   1 -->|output| 9;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -441,7 +445,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -465,7 +469,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

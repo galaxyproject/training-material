@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -73,17 +73,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         
-        <meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these field...">
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Assembly">
-        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these field...">
+	<meta property="og:title" content="[Assembly]Assembly Workflows">
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">assembly_with_preprocessing</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,58 +278,60 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Input dataset collection"];
   10["Samtools fastx"];
-  11["Samtools fastx"];
-  12["Collapse Collection"];
-  13["Zip Collection"];
-  14["Collapse Collection"];
-  15["Collapse Collection"];
-  16["seqtk_sample"];
-  17["seqtk_sample"];
-  18["Create assemblies with Unicycler"];
-  19["Bandage Info"];
-  2["fastp"];
-  20["Filter sequences by length"];
-  21["Bandage Image"];
-  3["NanoPlot"];
-  4["Map with minimap2"];
-  5["MultiQC"];
-  6["Bowtie2"];
-  7["Samtools view"];
-  8["Samtools stats"];
-  9["Samtools view"];
   7 -->|outputsam| 10;
+  11["Samtools fastx"];
   9 -->|outputsam| 11;
+  12["Collapse Collection"];
   10 -->|nonspecific| 12;
+  13["Zip Collection"];
   11 -->|forward| 13;
   11 -->|reverse| 13;
+  14["Collapse Collection"];
   11 -->|forward| 14;
+  15["Collapse Collection"];
   11 -->|reverse| 15;
+  16["seqtk_sample"];
   14 -->|output| 16;
+  17["seqtk_sample"];
   15 -->|output| 17;
+  18["Create assemblies with Unicycler"];
   12 -->|output| 18;
   16 -->|default| 18;
   17 -->|default| 18;
+  19["Bandage Info"];
   18 -->|assembly_graph| 19;
+  2["fastp"];
   0 -->|output| 2;
+  20["Filter sequences by length"];
   18 -->|assembly| 20;
+  21["Bandage Image"];
   18 -->|assembly_graph| 21;
+  3["NanoPlot"];
   1 -->|output| 3;
+  4["Map with minimap2"];
   1 -->|output| 4;
+  5["MultiQC"];
   2 -->|report_json| 5;
+  6["Bowtie2"];
   2 -->|output_paired_coll| 6;
+  7["Samtools view"];
   4 -->|alignment_output| 7;
+  8["Samtools stats"];
   4 -->|alignment_output| 8;
+  9["Samtools view"];
   6 -->|output| 9;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">assembly_with_preprocessing_and_sra_download</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -367,60 +370,61 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
   10["Samtools stats"];
-  11["Samtools view"];
-  12["Samtools fastx"];
-  13["Samtools fastx"];
-  14["Collapse Collection"];
-  15["Zip Collection"];
-  16["Collapse Collection"];
-  17["Collapse Collection"];
-  18["seqtk_sample"];
-  19["seqtk_sample"];
-  2["Faster Download and Extract Reads in FASTQ"];
-  20["Create assemblies with Unicycler"];
-  21["Bandage Info"];
-  22["Bandage Image"];
-  23["Filter sequences by length"];
-  3["Faster Download and Extract Reads in FASTQ"];
-  4["fastp"];
-  5["NanoPlot"];
-  6["Map with minimap2"];
-  7["MultiQC"];
-  8["Bowtie2"];
-  9["Samtools view"];
   6 -->|alignment_output| 10;
+  11["Samtools view"];
   8 -->|output| 11;
+  12["Samtools fastx"];
   9 -->|outputsam| 12;
+  13["Samtools fastx"];
   11 -->|outputsam| 13;
+  14["Collapse Collection"];
   12 -->|nonspecific| 14;
+  15["Zip Collection"];
   13 -->|forward| 15;
   13 -->|reverse| 15;
+  16["Collapse Collection"];
   13 -->|forward| 16;
+  17["Collapse Collection"];
   13 -->|reverse| 17;
+  18["seqtk_sample"];
   16 -->|output| 18;
+  19["seqtk_sample"];
   17 -->|output| 19;
+  2["Faster Download and Extract Reads in FASTQ"];
   0 -->|output| 2;
+  20["Create assemblies with Unicycler"];
   14 -->|output| 20;
   18 -->|default| 20;
   19 -->|default| 20;
+  21["Bandage Info"];
   20 -->|assembly_graph| 21;
+  22["Bandage Image"];
   20 -->|assembly_graph| 22;
+  23["Filter sequences by length"];
   20 -->|assembly| 23;
+  3["Faster Download and Extract Reads in FASTQ"];
   1 -->|output| 3;
+  4["fastp"];
   2 -->|list_paired| 4;
+  5["NanoPlot"];
   3 -->|output_collection| 5;
+  6["Map with minimap2"];
   3 -->|output_collection| 6;
+  7["MultiQC"];
   4 -->|report_json| 7;
+  8["Bowtie2"];
   4 -->|output_paired_coll| 8;
+  9["Samtools view"];
   6 -->|alignment_output| 9;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -446,7 +450,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -470,7 +474,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -75,7 +75,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta name="description" content="Image analysis using Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Imaging">
+	<meta property="og:title" content="[Imaging]Imaging Workflows">
         <meta property="og:description" content="Image analysis using Galaxy">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">CP_pipeline_IDR_training</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,60 +278,61 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Starting Modules"];
   1["IDR Download"];
   2["IdentifyPrimaryObjects"];
-  3["ConvertObjectsToImage"];
-  4["DisplayDataOnImage"];
-  5["SaveImages"];
-  6["EnhanceOrSuppressFeatures"];
-  7["MaskImage"];
-  8["IdentifyPrimaryObjects"];
-  9["ConvertObjectsToImage"];
-  10["GrayToColor"];
-  11["SaveImages"];
-  12["IdentifyPrimaryObjects"];
-  13["ConvertObjectsToImage"];
-  14["ImageMath"];
-  15["MeasureGranularity"];
-  16["MeasureTexture"];
-  17["MeasureObjectIntensity"];
-  18["MeasureObjectSizeShape"];
-  19["RelateObjects"];
-  20["MeasureImageQuality"];
-  21["MeasureImageAreaOccupied"];
-  22["MeasureImageIntensity"];
-  23["ExportToSpreadsheet"];
-  24["CellProfiler"];
   0 -->|output_pipeline| 2;
+  3["ConvertObjectsToImage"];
   2 -->|output_pipeline| 3;
+  4["DisplayDataOnImage"];
   3 -->|output_pipeline| 4;
+  5["SaveImages"];
   4 -->|output_pipeline| 5;
+  6["EnhanceOrSuppressFeatures"];
   5 -->|output_pipeline| 6;
+  7["MaskImage"];
   6 -->|output_pipeline| 7;
+  8["IdentifyPrimaryObjects"];
   7 -->|output_pipeline| 8;
+  9["ConvertObjectsToImage"];
   8 -->|output_pipeline| 9;
+  10["GrayToColor"];
   9 -->|output_pipeline| 10;
+  11["SaveImages"];
   10 -->|output_pipeline| 11;
+  12["IdentifyPrimaryObjects"];
   11 -->|output_pipeline| 12;
+  13["ConvertObjectsToImage"];
   12 -->|output_pipeline| 13;
+  14["ImageMath"];
   13 -->|output_pipeline| 14;
+  15["MeasureGranularity"];
   14 -->|output_pipeline| 15;
+  16["MeasureTexture"];
   15 -->|output_pipeline| 16;
+  17["MeasureObjectIntensity"];
   16 -->|output_pipeline| 17;
+  18["MeasureObjectSizeShape"];
   17 -->|output_pipeline| 18;
+  19["RelateObjects"];
   18 -->|output_pipeline| 19;
+  20["MeasureImageQuality"];
   19 -->|output_pipeline| 20;
+  21["MeasureImageAreaOccupied"];
   20 -->|output_pipeline| 21;
+  22["MeasureImageIntensity"];
   21 -->|output_pipeline| 22;
+  23["ExportToSpreadsheet"];
   22 -->|output_pipeline| 23;
+  24["CellProfiler"];
   1 -->|output_tar| 24;
   23 -->|output_pipeline| 24;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -356,7 +358,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -380,7 +382,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

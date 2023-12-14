@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -75,7 +75,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta name="description" content="Training material for all kinds of transcriptomics analysis.">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Transcriptomics">
+	<meta property="og:title" content="[Transcriptomics]Transcriptomics Workflows">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
@@ -83,7 +83,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">DEG Part - Ref Based RNA Seq - Transcriptomics - GTN</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -296,83 +297,85 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Input dataset"];
   2["Input dataset"];
   3["Input dataset"];
   4["Extract element identifiers"];
-  5["Gene length and GC content"];
-  6["Replace Text"];
-  7["Change Case"];
-  8["Tag elements"];
-  9["DESeq2"];
-  10["Compute"];
-  11["Annotate DESeq2/DEXSeq output tables"];
-  12["Table Compute"];
-  13["Cut"];
-  14["Concatenate datasets"];
-  15["Table Compute"];
-  16["Change Case"];
-  17["Filter"];
-  18["goseq"];
-  19["goseq"];
-  20["Cut"];
-  21["Filter"];
-  22["Filter"];
-  23["Filter"];
-  24["Filter"];
-  25["Filter"];
-  26["Pathview"];
-  27["Join two Datasets"];
-  28["Group"];
-  29["Group"];
-  30["Cut"];
-  31["heatmap2"];
-  32["heatmap2"];
   0 -->|output| 4;
+  5["Gene length and GC content"];
   1 -->|output| 5;
+  6["Replace Text"];
   4 -->|output| 6;
+  7["Change Case"];
   5 -->|length| 7;
+  8["Tag elements"];
   0 -->|output| 8;
   6 -->|outfile| 8;
+  9["DESeq2"];
   8 -->|output| 9;
+  10["Compute"];
   9 -->|deseq_out| 10;
+  11["Annotate DESeq2/DEXSeq output tables"];
   1 -->|output| 11;
   9 -->|deseq_out| 11;
+  12["Table Compute"];
   9 -->|counts_out| 12;
+  13["Cut"];
   10 -->|out_file1| 13;
+  14["Concatenate datasets"];
   2 -->|output| 14;
   11 -->|output| 14;
+  15["Table Compute"];
   9 -->|counts_out| 15;
   12 -->|table| 15;
+  16["Change Case"];
   13 -->|out_file1| 16;
+  17["Filter"];
   14 -->|out_file1| 17;
+  18["goseq"];
   16 -->|out_file1| 18;
   7 -->|out_file1| 18;
+  19["goseq"];
   16 -->|out_file1| 19;
   7 -->|out_file1| 19;
+  20["Cut"];
   17 -->|out_file1| 20;
+  21["Filter"];
   17 -->|out_file1| 21;
+  22["Filter"];
   18 -->|wallenius_tab| 22;
+  23["Filter"];
   18 -->|wallenius_tab| 23;
+  24["Filter"];
   19 -->|wallenius_tab| 24;
+  25["Filter"];
   19 -->|wallenius_tab| 25;
+  26["Pathview"];
   20 -->|out_file1| 26;
   3 -->|output| 26;
+  27["Join two Datasets"];
   9 -->|counts_out| 27;
   21 -->|out_file1| 27;
+  28["Group"];
   22 -->|out_file1| 28;
+  29["Group"];
   23 -->|out_file1| 29;
+  30["Cut"];
   27 -->|out_file1| 30;
+  31["heatmap2"];
   30 -->|out_file1| 31;
+  32["heatmap2"];
   30 -->|out_file1| 32;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">QC + Mapping + Counting (single+paired) - Ref Based RNA Seq - Transcriptomics - GTN</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -430,115 +433,117 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Input dataset collection"];
   2["Input dataset"];
   3["Cutadapt"];
-  4["Flatten collection"];
-  5["Cutadapt"];
-  6["Gene length and GC content"];
-  7["Convert GTF to BED12"];
-  8["RNA STAR"];
-  9["Merge collections"];
-  10["Merge collections"];
-  11["RNA STAR"];
-  12["featureCounts"];
-  13["FastQC"];
-  14["MultiQC"];
-  15["Merge collections"];
-  16["Merge collections"];
-  17["featureCounts"];
-  18["Merge collections"];
-  19["Merge collections"];
-  20["Merge collections"];
-  21["MultiQC"];
-  22["MultiQC"];
-  23["Select last"];
-  24["MultiQC"];
-  25["Merge collections"];
-  26["Merge collections"];
-  27["Infer Experiment"];
-  28["Read Distribution"];
-  29["Read Distribution"];
-  30["Samtools view"];
-  31["Samtools idxstats"];
-  32["MarkDuplicates"];
-  33["pyGenomeTracks"];
-  34["Cut"];
-  35["Sort"];
-  36["MultiQC"];
-  37["MultiQC"];
-  38["Gene Body Coverage (BAM)"];
-  39["MultiQC"];
-  40["MultiQC"];
-  41["Sort"];
-  42["MultiQC"];
   0 -->|output| 3;
+  4["Flatten collection"];
   1 -->|output| 4;
+  5["Cutadapt"];
   1 -->|output| 5;
+  6["Gene length and GC content"];
   2 -->|output| 6;
+  7["Convert GTF to BED12"];
   2 -->|output| 7;
+  8["RNA STAR"];
   2 -->|output| 8;
   3 -->|out1| 8;
+  9["Merge collections"];
   4 -->|output| 9;
   0 -->|output| 9;
+  10["Merge collections"];
   5 -->|report| 10;
   3 -->|report| 10;
+  11["RNA STAR"];
   2 -->|output| 11;
   5 -->|out_pairs| 11;
+  12["featureCounts"];
   8 -->|mapped_reads| 12;
   2 -->|output| 12;
+  13["FastQC"];
   9 -->|output| 13;
+  14["MultiQC"];
   10 -->|output| 14;
+  15["Merge collections"];
   11 -->|output_log| 15;
   8 -->|output_log| 15;
+  16["Merge collections"];
   8 -->|reads_per_gene| 16;
   11 -->|reads_per_gene| 16;
+  17["featureCounts"];
   11 -->|mapped_reads| 17;
   2 -->|output| 17;
+  18["Merge collections"];
   11 -->|mapped_reads| 18;
   8 -->|mapped_reads| 18;
+  19["Merge collections"];
   8 -->|signal_unique_str1| 19;
   11 -->|signal_unique_str1| 19;
+  20["Merge collections"];
   8 -->|signal_unique_str2| 20;
   11 -->|signal_unique_str2| 20;
+  21["MultiQC"];
   13 -->|text_file| 21;
+  22["MultiQC"];
   15 -->|output| 22;
+  23["Select last"];
   16 -->|output| 23;
+  24["MultiQC"];
   16 -->|output| 24;
+  25["Merge collections"];
   12 -->|output_short| 25;
   17 -->|output_short| 25;
+  26["Merge collections"];
   12 -->|output_summary| 26;
   17 -->|output_summary| 26;
+  27["Infer Experiment"];
   18 -->|output| 27;
   7 -->|bed_file| 27;
+  28["Read Distribution"];
   18 -->|output| 28;
   7 -->|bed_file| 28;
+  29["Read Distribution"];
   18 -->|output| 29;
   7 -->|bed_file| 29;
+  30["Samtools view"];
   18 -->|output| 30;
+  31["Samtools idxstats"];
   18 -->|output| 31;
+  32["MarkDuplicates"];
   18 -->|output| 32;
+  33["pyGenomeTracks"];
   19 -->|output| 33;
   20 -->|output| 33;
   2 -->|output| 33;
+  34["Cut"];
   23 -->|outfile| 34;
+  35["Sort"];
   25 -->|output| 35;
+  36["MultiQC"];
   26 -->|output| 36;
+  37["MultiQC"];
   29 -->|output| 37;
+  38["Gene Body Coverage (BAM)"];
   30 -->|outputsam| 38;
   7 -->|bed_file| 38;
+  39["MultiQC"];
   31 -->|output| 39;
+  40["MultiQC"];
   32 -->|metrics_file| 40;
+  41["Sort"];
   34 -->|out_file1| 41;
+  42["MultiQC"];
   38 -->|outputtxt| 42;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">QC + Mapping + Counting - Ref Based RNA Seq - Transcriptomics - GTN - subworkflows</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -596,35 +601,36 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["Input dataset"];
   2["FastQC"];
-  3["cutadapt"];
-  4["STAR + multiQC"];
-  5["more QC"];
-  6["Determine strandness"];
-  7["count STAR"];
-  8["count featureCount"];
   0 -->|output| 2;
+  3["cutadapt"];
   0 -->|output| 3;
+  4["STAR + multiQC"];
   1 -->|output| 4;
   3 -->|out_pairs| 4;
+  5["more QC"];
   1 -->|output| 5;
   4 -->|STAR_BAM| 5;
+  6["Determine strandness"];
   4 -->|STAR_BAM| 6;
   1 -->|output| 6;
   4 -->|signal_unique_str1| 6;
   4 -->|signal_unique_str2| 6;
   4 -->|reads_per_gene| 6;
+  7["count STAR"];
   1 -->|output| 7;
   4 -->|reads_per_gene| 7;
+  8["count featureCount"];
   1 -->|output| 8;
   4 -->|STAR_BAM| 8;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -650,7 +656,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -674,7 +680,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

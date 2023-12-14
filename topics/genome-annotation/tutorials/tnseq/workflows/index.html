@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,18 +74,24 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         
         <meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding
-genes, as well as other functio...">
+genes, as well as other functional genome units such as structural RNAs, tRNAs,
+small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion
+sequences, transposons and other mobile elements.
+">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Genome Annotation">
+	<meta property="og:title" content="[Genome Annotation]Genome Annotation Workflows">
         <meta property="og:description" content="Genome annotation is a multi-level process that includes prediction of protein-coding
-genes, as well as other functio...">
+genes, as well as other functional genome units such as structural RNAs, tRNAs,
+small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion
+sequences, transposons and other mobile elements.
+">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -240,7 +246,8 @@ genes, as well as other functio...">
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Essential genes detection with Transposon insertion sequencing</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -279,7 +286,6 @@ genes, as well as other functio...">
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Tnseq-Tutorial-reads.fastqsanger.gz"];
   1["condition_barcodes.fasta"];
@@ -287,82 +293,84 @@ genes, as well as other functio...">
   3["staph_aur.fasta"];
   4["staph_aur.gff3"];
   5["Cutadapt"];
-  6["Nucleotide subsequence search"];
-  7["Convert GFF3"];
-  8["Cutadapt"];
-  9["Cut"];
-  10["Cut"];
-  11["Cutadapt"];
-  12["Compute"];
-  13["Cutadapt"];
-  14["Cut"];
-  15["Cutadapt"];
-  16["Map with Bowtie for Illumina"];
-  17["bamCoverage"];
-  18["Join"];
-  19["Join"];
-  20["Cut"];
-  21["Cut"];
-  22["Sort"];
-  23["Compute"];
-  24["Cut"];
-  25["Sort"];
-  26["Join"];
-  27["Compute"];
-  28["Cut"];
-  29["Sort"];
-  30["Gumbel"];
-  31["Filter"];
-  32["Extract Dataset"];
-  33["Extract Dataset"];
-  34["Join"];
-  35["Join"];
-  36["Join"];
   0 -->|output| 5;
   1 -->|output| 5;
+  6["Nucleotide subsequence search"];
   3 -->|output| 6;
+  7["Convert GFF3"];
   4 -->|output| 7;
+  8["Cutadapt"];
   5 -->|split_output| 8;
+  9["Cut"];
   6 -->|output| 9;
+  10["Cut"];
   6 -->|output| 10;
+  11["Cutadapt"];
   8 -->|out1| 11;
+  12["Compute"];
   10 -->|out_file1| 12;
+  13["Cutadapt"];
   11 -->|out1| 13;
   2 -->|output| 13;
+  14["Cut"];
   12 -->|out_file1| 14;
+  15["Cutadapt"];
   13 -->|split_output| 15;
+  16["Map with Bowtie for Illumina"];
   3 -->|output| 16;
   15 -->|out1| 16;
+  17["bamCoverage"];
   16 -->|output| 17;
+  18["Join"];
   17 -->|outFileName| 18;
   9 -->|out_file1| 18;
+  19["Join"];
   17 -->|outFileName| 19;
   14 -->|out_file1| 19;
+  20["Cut"];
   18 -->|output| 20;
+  21["Cut"];
   19 -->|output| 21;
+  22["Sort"];
   20 -->|out_file1| 22;
+  23["Compute"];
   21 -->|out_file1| 23;
+  24["Cut"];
   23 -->|out_file1| 24;
+  25["Sort"];
   24 -->|out_file1| 25;
+  26["Join"];
   22 -->|outfile| 26;
   25 -->|outfile| 26;
+  27["Compute"];
   26 -->|output| 27;
+  28["Cut"];
   27 -->|out_file1| 28;
+  29["Sort"];
   28 -->|out_file1| 29;
+  30["Gumbel"];
   7 -->|output| 30;
   29 -->|outfile| 30;
+  31["Filter"];
   30 -->|sites| 31;
+  32["Extract Dataset"];
   31 -->|out_file1| 32;
+  33["Extract Dataset"];
   31 -->|out_file1| 33;
+  34["Join"];
   32 -->|output| 34;
   33 -->|output| 34;
+  35["Join"];
   32 -->|output| 35;
   33 -->|output| 35;
+  36["Join"];
   32 -->|output| 36;
   33 -->|output| 36;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -388,7 +396,7 @@ genes, as well as other functio...">
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -412,7 +420,7 @@ genes, as well as other functio...">
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>

@@ -173,14 +173,14 @@
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;citation_cache&#39;</span>][<span class="ruby-identifier">source_page</span>].<span class="ruby-identifier">push</span>(<span class="ruby-ivar">@text</span>)
 
   <span class="ruby-keyword">begin</span>
-      <span class="ruby-identifier">doi</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;cached_citeproc&#39;</span>].<span class="ruby-identifier">items</span>[<span class="ruby-ivar">@text</span>].<span class="ruby-identifier">doi</span>
-      <span class="ruby-identifier">url</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;cached_citeproc&#39;</span>].<span class="ruby-identifier">items</span>[<span class="ruby-ivar">@text</span>].<span class="ruby-identifier">url</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">doi</span>.<span class="ruby-identifier">nil?</span>
-        <span class="ruby-node">&quot;https://doi.org/#{doi}&quot;</span>
-      <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">url</span>.<span class="ruby-identifier">nil?</span>
-        <span class="ruby-identifier">url</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">res</span> = <span class="ruby-identifier">url</span>
+    <span class="ruby-identifier">doi</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;cached_citeproc&#39;</span>].<span class="ruby-identifier">items</span>[<span class="ruby-ivar">@text</span>].<span class="ruby-identifier">doi</span>
+    <span class="ruby-identifier">url</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;cached_citeproc&#39;</span>].<span class="ruby-identifier">items</span>[<span class="ruby-ivar">@text</span>].<span class="ruby-identifier">url</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">doi</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-node">&quot;https://doi.org/#{doi}&quot;</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">url</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">url</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">res</span> = <span class="ruby-identifier">url</span>
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})&quot;</span>
     <span class="ruby-identifier">res</span> = <span class="ruby-node">%(&lt;span&gt;https://example.com/ERROR+INVALID+CITATION+#{@text}&lt;/span&gt;)</span>

@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@362458b244e38dc17d8b4f90d0db594719d1619a",
+		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702543287' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,23 +67,23 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-12-14 08:41:30 +0000">
+<meta name="DC.date" content="2023-12-14 16:19:00 +0000">
 
         
         
         
         
-        <meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these field...">
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Assembly">
-        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these field...">
+	<meta property="og:title" content="[Assembly]Assembly Workflows">
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -238,7 +238,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     <div class="row">
     
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Metagenomics assembly tutorial workflow</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -277,32 +278,34 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset collection"];
   1["metaSPAdes"];
-  2["MEGAHIT"];
-  3["Bowtie2"];
-  4["megahit contig2fastg"];
-  5["Quast"];
-  6["Bandage Image"];
-  7["Bandage Info"];
-  8["Column join"];
   0 -->|output| 1;
+  2["MEGAHIT"];
   0 -->|output| 2;
+  3["Bowtie2"];
   0 -->|output| 3;
   2 -->|output| 3;
+  4["megahit contig2fastg"];
   2 -->|output| 4;
+  5["Quast"];
   2 -->|output| 5;
   0 -->|output| 5;
+  6["Bandage Image"];
   4 -->|fastg| 6;
+  7["Bandage Info"];
   4 -->|fastg| 7;
+  8["Column join"];
   7 -->|outfile| 8;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">workflow-generate-dataset-for-assembly-tutorial</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -341,56 +344,57 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">flowchart TD
   0["Input dataset"];
   1["Input dataset"];
   2["Cutadapt"];
-  3["MEGAHIT"];
-  4["Bowtie2"];
-  5["BAM filter"];
-  6["BAM filter"];
-  7["Convert, Merge, Randomize"];
-  8["Convert, Merge, Randomize"];
-  9["Select random lines"];
-  10["Select random lines"];
-  11["Filter Tabular"];
-  12["Filter Tabular"];
-  13["Unique"];
-  14["Unique"];
-  15["Concatenate datasets"];
-  16["seqtk_subseq"];
-  17["seqtk_subseq"];
-  18["FastQC"];
-  19["FastQC"];
   0 -->|output| 2;
   1 -->|output| 2;
+  3["MEGAHIT"];
   2 -->|out1| 3;
   2 -->|out2| 3;
+  4["Bowtie2"];
   2 -->|out1| 4;
   2 -->|out2| 4;
   3 -->|output| 4;
+  5["BAM filter"];
   4 -->|output| 5;
+  6["BAM filter"];
   4 -->|output| 6;
+  7["Convert, Merge, Randomize"];
   5 -->|outfile| 7;
+  8["Convert, Merge, Randomize"];
   6 -->|outfile| 8;
+  9["Select random lines"];
   7 -->|out_file1| 9;
+  10["Select random lines"];
   8 -->|out_file1| 10;
+  11["Filter Tabular"];
   9 -->|out_file1| 11;
+  12["Filter Tabular"];
   10 -->|out_file1| 12;
+  13["Unique"];
   11 -->|output| 13;
+  14["Unique"];
   12 -->|output| 14;
+  15["Concatenate datasets"];
   13 -->|outfile| 15;
   14 -->|outfile| 15;
+  16["seqtk_subseq"];
   2 -->|out1| 16;
   15 -->|out_file1| 16;
+  17["seqtk_subseq"];
   2 -->|out2| 17;
   15 -->|out_file1| 17;
+  18["FastQC"];
   16 -->|default| 18;
+  19["FastQC"];
   17 -->|default| 19;
 
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 
 
 </div>
@@ -416,7 +420,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/362458b244e38dc17d8b4f90d0db594719d1619a">362458b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -440,7 +444,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702543287'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
         
     </body>
 </html>
