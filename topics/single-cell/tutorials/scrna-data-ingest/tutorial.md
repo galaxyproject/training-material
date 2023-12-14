@@ -23,8 +23,7 @@ contributions:
     - wee-snufkin
     - hexhowells
     - nomadscientist
-  
-funding: 
+  funding: 
     - elixir-fair-data
 
 follow_up_training:
