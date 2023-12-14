@@ -265,7 +265,7 @@ First, we will extract observations (cell metadata) and the full matrix from our
 >
 {: .question}
 
-However, to proceed with this conversion, we need a matrix where the genes are listed in the first column and the barcodes in the first row. Therefore, we need to transpose the current matrix.
+However, the next tool we need expects a matrix wherein the genes are listed in the first column and the barcodes are listed in the first row. Therefore, we need to transpose the current matrix.
 
 > <hands-on-title> Transpose the matrix </hands-on-title>
 >
@@ -274,7 +274,7 @@ However, to proceed with this conversion, we need a matrix where the genes are l
 >
 {: .hands_on}
 
-And now we are ready to input that data into **DropletUtils** tool.
+And now we are ready to input that data into **DropletUtils** tool, which will separate this matrix into the cells, genes, and matrix tabular files needed to build a Seurat object. 
 
 > <hands-on-title> DropletUtils </hands-on-title>
 >
