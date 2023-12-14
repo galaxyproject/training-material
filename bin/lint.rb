@@ -984,8 +984,8 @@ module GtnLinter
       # Check if there's a missing workflow test
       folder = File.dirname(path)
       basename = File.basename(path).gsub(/.ga$/, '')
-      possible_tests = Dir.glob("#{folder}/#{basename}*ym*")
-      possible_tests = possible_tests.grep(/#{basename}[_-]tests?.ya?ml/)
+      possible_tests = Dir.glob("#{folder}/#{Regexp.escape(basename)}*ym*")
+      possible_tests = possible_tests.grep(/#{Regexp.escape(basename)}[_-]tests?.ya?ml/)
 
       if possible_tests.empty?
         results += [
@@ -999,10 +999,11 @@ module GtnLinter
       else
         # Load tests and run some quick checks:
         possible_tests.each do |test_file|
-          if !test_file.match(/-test.yml/)
+          if !test_file.match(/-tests?.yml/)
             results += [
               ReviewDogEmitter.file_error(path: path,
-                                          message: 'Please use the extension -test.yml for this test file.',
+                                          message: 'Please use the extension -test.yml ' \
+                                                   'or -tests.yml for this test file.',
                                           code: 'GTN:032')
             ]
           end
