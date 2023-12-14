@@ -332,9 +332,9 @@ We will work on the same AnnData object so if you create a new history for this 
 
 First, we will extract observations and the full matrix from our AnnData.
 
-> <tip-title>Skip a step!</tip-title>
+> <tip-title>Skip some steps!</tip-title>
 >
-> If you stay in the your previous history, you can just reuse the `Barcodes` and `Transcripts` datasets from earlier on!
+> If you are following this entire tutorial (rather than using a specific section necessary!), you can stay in the your previous history and just reuse outputs to build different single cell objects!
 {: .tip}
 
 > <hands-on-title> Inspect AnnData </hands-on-title>
@@ -359,13 +359,13 @@ First, we will extract observations and the full matrix from our AnnData.
 >
 > > <solution-title></solution-title>
 > >
-> > If you just click on the `Matrix` dataset, you will see a preview, showing barcodes in the first column, while genes in the first row.
+> > If you just click on the `Matrix` dataset, you will see a preview, showing barcodes in the first column, while genes are in the first row.
 > > 
 > {: .solution}
 >
 {: .question}
 
-To proceed with the conversion, we must have the matrix where the genes are listed in the first column while all the barcodes should be in the first row. Therefore, we need to transpose the current matrix.
+However, the next tool we need expects a matrix wherein the genes are listed in the first column and the barcodes are listed in the first row. Therefore, we need to transpose the current matrix.
 
 > <hands-on-title> Transpose the matrix </hands-on-title>
 >
