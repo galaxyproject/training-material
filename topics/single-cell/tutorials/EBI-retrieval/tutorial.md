@@ -1,8 +1,8 @@
 ---
 layout: tutorial_hands_on
 subtopic: datamanipulation
-priority: 3
-title: EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial
+priority: 2
+title: Importing files from public atlases
 questions:
 - How do I use the EBI Single Cell Expression Atlas?
 - How can I reformat and manipulate the downloaded files to create the correct input for downstream analysis?

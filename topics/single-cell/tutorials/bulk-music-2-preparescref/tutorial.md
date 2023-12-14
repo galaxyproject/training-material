@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 subtopic: datamanipulation
-priority: 1
+priority: 4
 title: Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution
 questions:
 - Where can I find good quality scRNA-seq reference datasets?
