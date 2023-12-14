@@ -73,7 +73,7 @@ include images showing the structure of those files
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
 
-# Data ingestion
+# Data import
 As you can see above, there are multiple ways to store single cell data. Therefore, there are also many ways how you can get that data! 
 
 ## EBI SCXA Data Retrieval
