@@ -154,8 +154,7 @@ While we're renaming things, let's also fix our titles.
 
 > <hands-on-title> Change cell metadata titles </hands-on-title>
 >
-> 1. {% tool [Replace
-parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
+> 1. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: output from **Column Regex and Replace** {% icon tool %}
 >    - In *"Find and Replace"*:
 >        - *"Find pattern"*: `"Sample Characteristic[genotype]"`
@@ -170,7 +169,6 @@ parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_an
 >        - *"Find pattern"*: `"Sample Characteristic[cell type]"`
 >        - *"Replace with"*: `cell_type`
 > 2. Rename {% icon galaxy-pencil %} output `Cell metadata`
->
 {: .hands_on}
 
 # Check mitochondrial gene name format
