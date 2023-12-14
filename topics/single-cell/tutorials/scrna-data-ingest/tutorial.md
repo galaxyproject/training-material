@@ -525,26 +525,22 @@ Now we will convert the FASTQ files to tabular:
 > <hands-on-title> FASTQ to tabular </hands-on-title>
 >
 > 1. {% tool [FASTQ to Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_tabular/fastq_to_tabular/1.1.5) %} with the following parameters:
->    - {% icon param-file %} *"FASTQ file to convert"*: `Barcodes` 
+>    - {% icon param-file %} *"FASTQ file to convert"*: {% icon param-files %} Select multiple files: `Barcodes` and `Transcripts` 
 >
-> 3. **Rename**  {% icon galaxy-pencil %} the dataset `Barcodes tabular`.
->    
-> 4. Repeat the same with `Transcripts` file and rename it as `Transcripts tabular`.
+> 3. **Rename**  {% icon galaxy-pencil %} the datasets `Barcodes tabular` and `Transcripts tabular`
 > 
 {: .hands_on}
 
-Now let's select the number of the reads we would like to keep. It's totally up to you, we choose 100000 here.
+Now let's select the number of the reads we would like to keep. It's totally up to you, we choose `100000` here.
 
 > <hands-on-title> Downsampling </hands-on-title>
 >
 > 1. {% tool [Select last](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Text file"*:  `Barcodes tabular` (output of **FASTQ to Tabular** {% icon tool %})
+>    - {% icon param-file %} *"Text file"*: {% icon param-files %} Select multiple files:   `Barcodes tabular` and `Transcripts tabular`
 >    - *"Operation"*: `Keep last lines`
 >    - *"Number of lines"*: `100000`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the dataset `Barcodes cut`.
->    
-> 3. Repeat the same with `Transcripts tabular` file and rename it as `Transcripts cut`
+> 2. **Rename** {% icon galaxy-pencil %} the dataset `Barcodes cut` and `Transcripts cut`
 > 
 {: .hands_on}
 
