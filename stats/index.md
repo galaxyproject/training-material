@@ -98,9 +98,40 @@ redirect_from:
  </div>
 </div>
 
+<!-- Latest Added Tutorials -->
+<div class="col-md-6">
+ <div class="card">
+  <div class="card-body">
+   <h5 class="card-title">New Tutorials</h5>
+   {% assign latest_tutorials_published = site | recently_published_tutorials %}
+   <table class="table table-striped">
+    <thead>
+      <tr><th>Date</th><th>Topic</th><th>Title</th></tr>
+    </thead>
+    <tbody>
+    {% for tuto in latest_tutorials_published %}
+            {% assign topic_id = tuto | get_topic %}
+            {% assign topic = site.data[topic_id] %}
+      <tr>
+        <td>{{ tuto.path | gtn_pub_date | date: "%b %-d, %Y"  }}</td>
+        <td style="text-align:right">
+            <a href="{{ site.baseurl }}/topics/{{ topic_id }}">
+                {{ topic.title }}
+            </a>
+</td>
+        <td><a href="{{ site.baseurl }}/{{ tuto.url }}">
+            {{ tuto.title }}
+            </a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+   </table>
+   </div>
+ </div>
+</div>
 
 <!-- Latest modified Tutorials -->
-<div class="col-md-12">
+<div class="col-md-6">
  <div class="card">
   <div class="card-body">
    <h5 class="card-title">Recently Updated Tutorials</h5>
@@ -114,7 +145,7 @@ redirect_from:
             {% assign topic_id = tuto | get_topic %}
             {% assign topic = site.data[topic_id] %}
       <tr>
-        <td>{{ tuto.last_modified_at | date: "%b %-d, %Y"  }}</td>
+        <td>{{ tuto.path | gtn_mod_date | date: "%b %-d, %Y"  }}</td>
         <td style="text-align:right">
             <a href="{{ site.baseurl }}/topics/{{ topic_id }}">
                 {{ topic.title }}
@@ -127,12 +158,9 @@ redirect_from:
     {% endfor %}
     </tbody>
    </table>
-    <p class="card-text">Thanks a lot for your contributions!</p>
-
    </div>
  </div>
 </div>
-
 
 <!-- Plausible Graphs -->
 <div class="col-md-12">

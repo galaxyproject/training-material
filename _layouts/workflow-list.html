@@ -12,7 +12,8 @@ layout: base
 
     <div class="row">
     {% for workflow in material.workflows %}
-	<div class="card col-md-6">
+	<div class="col-md-6">
+		<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">{{ workflow.title }}</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
@@ -55,10 +56,11 @@ layout: base
   </div>
 </div>
 
-	</div>
 	<pre class="mermaid">{{ workflow.mermaid }}
 	</pre>
-</div>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
 {% endfor %}
 
 </div>
