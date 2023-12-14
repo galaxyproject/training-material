@@ -778,7 +778,7 @@
           
 
           <div class="method-source-code" id="enumerate_all-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1086</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1087</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_all</span>
   <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/.*/</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -799,7 +799,7 @@
           
 
           <div class="method-source-code" id="enumerate_lintable-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1082</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1083</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_lintable</span>
   <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/bib$/</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/md$/</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/md$/</span>, <span class="ruby-value">root_dir:</span> <span class="ruby-string">&#39;faqs&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -820,7 +820,7 @@
           
 
           <div class="method-source-code" id="enumerate_symlinks-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1067</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1068</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_symlinks</span>
   <span class="ruby-identifier">paths</span> = []
   <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-string">&#39;./topics&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
@@ -852,7 +852,7 @@
           
 
           <div class="method-source-code" id="enumerate_type-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1052</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1053</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_type</span>(<span class="ruby-identifier">filter</span>, <span class="ruby-value">root_dir:</span> <span class="ruby-string">&#39;topics&#39;</span>)
   <span class="ruby-identifier">paths</span> = []
   <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-node">&quot;./#{root_dir}&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
@@ -1031,8 +1031,8 @@
     <span class="ruby-comment"># Check if there&#39;s a missing workflow test</span>
     <span class="ruby-identifier">folder</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">path</span>)
     <span class="ruby-identifier">basename</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/.ga$/</span>, <span class="ruby-string">&#39;&#39;</span>)
-    <span class="ruby-identifier">possible_tests</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{folder}/#{basename}*ym*&quot;</span>)
-    <span class="ruby-identifier">possible_tests</span> = <span class="ruby-identifier">possible_tests</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-regexp">/#{basename}[_-]tests?.ya?ml/</span>)
+    <span class="ruby-identifier">possible_tests</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{folder}/#{Regexp.escape(basename)}*ym*&quot;</span>)
+    <span class="ruby-identifier">possible_tests</span> = <span class="ruby-identifier">possible_tests</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-regexp">/#{Regexp.escape(basename)}[_-]tests?.ya?ml/</span>)
 
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">possible_tests</span>.<span class="ruby-identifier">empty?</span>
       <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> [
@@ -1046,10 +1046,11 @@
     <span class="ruby-keyword">else</span>
       <span class="ruby-comment"># Load tests and run some quick checks:</span>
       <span class="ruby-identifier">possible_tests</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">test_file</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">test_file</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/-test.yml/</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">test_file</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/-tests?.yml/</span>)
           <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> [
             <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>,
-                                        <span class="ruby-value">message:</span> <span class="ruby-string">&#39;Please use the extension -test.yml for this test file.&#39;</span>,
+                                        <span class="ruby-value">message:</span> <span class="ruby-string">&#39;Please use the extension -test.yml &#39;</span> \
+                                                 <span class="ruby-string">&#39;or -tests.yml for this test file.&#39;</span>,
                                         <span class="ruby-value">code:</span> <span class="ruby-string">&#39;GTN:032&#39;</span>)
           ]
         <span class="ruby-keyword">end</span>
@@ -1611,7 +1612,7 @@
           
 
           <div class="method-source-code" id="run_linter_global-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1090</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1091</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">run_linter_global</span>
   <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/:/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format_reviewdog_output</span>(

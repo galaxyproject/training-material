@@ -69,13 +69,13 @@
   "slides": false,
   "workflows": [
     {
-      "workflow": "EBI-Single-Cell-Expression-Atlas-files-to-AnnData.ga",
+      "workflow": "EBI-SCXA-to-AnnData-(Scanpy)-or-Seurat-Object.ga",
       "tests": true,
-      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/workflows/EBI-Single-Cell-Expression-Atlas-files-to-AnnData.ga",
-      "path": "topics/single-cell/tutorials/EBI-retrieval/workflows/EBI-Single-Cell-Expression-Atlas-files-to-AnnData.ga",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/workflows/EBI-SCXA-to-AnnData-(Scanpy)-or-Seurat-Object.ga",
+      "path": "topics/single-cell/tutorials/EBI-retrieval/workflows/EBI-SCXA-to-AnnData-(Scanpy)-or-Seurat-Object.ga",
       "wfid": "single-cell-EBI-retrieval",
-      "wfname": "ebi-single-cell-expression-atlas-files-to-anndata",
-      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-EBI-retrieval/versions/ebi-single-cell-expression-atlas-files-to-anndata",
+      "wfname": "ebi-scxa-to-anndata-(scanpy)-or-seurat-object",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-EBI-retrieval/versions/ebi-scxa-to-anndata-(scanpy)-or-seurat-object",
       "license": "CC-BY-4.0",
       "creators": [
         {
@@ -84,21 +84,21 @@
           "name": "Julia Jakiela"
         }
       ],
-      "name": "EBI Single Cell Expression Atlas files to AnnData",
-      "title": "EBI Single Cell Expression Atlas files to AnnData",
+      "name": "EBI SCXA to AnnData (Scanpy) or Seurat Object",
+      "title": "EBI SCXA to AnnData (Scanpy) or Seurat Object",
       "test_results": null,
-      "modified": "2023-12-14 16:19:01 +0000",
-      "mermaid": "flowchart TD\n  0[\"EBI SCXA Data Retrieval\"];\n  1[\"Column Regex Find And Replace\"];\n  0 -->|design_tsv| 1;\n  2[\"Search in textfiles\"];\n  0 -->|genes_tsv| 2;\n  3[\"Scanpy Read10x\"];\n  0 -->|barcode_tsv| 3;\n  1 -->|out_file1| 3;\n  0 -->|genes_tsv| 3;\n  0 -->|matrix_mtx| 3;\n  4[\"AnnData Operations\"];\n  3 -->|output_h5ad| 4;\n"
+      "modified": "2023-12-14 16:40:54 +0000",
+      "mermaid": "flowchart TD\n  0[\"Input parameter\"];\n  1[\"EBI SCXA Data Retrieval\"];\n  0 -->|output| 1;\n  2[\"Column Regex Find And Replace\"];\n  1 -->|design_tsv| 2;\n  3[\"Search in textfiles\"];\n  1 -->|genes_tsv| 3;\n  4[\"Replace\"];\n  2 -->|out_file1| 4;\n  5[\"Scanpy Read10x\"];\n  1 -->|barcode_tsv| 5;\n  4 -->|outfile| 5;\n  1 -->|genes_tsv| 5;\n  1 -->|matrix_mtx| 5;\n  6[\"Seurat Read10x\"];\n  1 -->|barcode_tsv| 6;\n  1 -->|genes_tsv| 6;\n  1 -->|matrix_mtx| 6;\n  4 -->|outfile| 6;\n  7[\"AnnData Operations\"];\n  5 -->|output_h5ad| 7;\n"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/EBI-retrieval/tutorial.json",
   "tools": [
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4",
     "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
     "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92",
     "toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2",
     "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy9",
     "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/3.2.3+galaxy0",
-    "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3",
     "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3"
   ],
   "supported_servers": {
@@ -119,6 +119,13 @@
     "install_repository_dependencies": true,
     "install_resolver_dependencies": true,
     "tools": [
+      {
+        "name": "text_processing",
+        "owner": "bgruening",
+        "revisions": "d698c222f354",
+        "tool_panel_section_label": "Text Manipulation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
       {
         "name": "text_processing",
         "owner": "bgruening",
@@ -160,17 +167,10 @@
         "revisions": "503bcd6ebe4b",
         "tool_panel_section_label": "Text Manipulation",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "regex_find_replace",
-        "owner": "galaxyp",
-        "revisions": "503bcd6ebe4b",
-        "tool_panel_section_label": "Text Manipulation",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: anndata_ops\n  owner: ebi-gxa\n  revisions: a0274bc43b7e\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: retrieve_scxa\n  owner: ebi-gxa\n  revisions: 72b6e1747e37\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scanpy_read_10x\n  owner: ebi-gxa\n  revisions: 9afcfcd1d215\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seurat_read10x\n  owner: ebi-gxa\n  revisions: 301cf1b4b43d\n  tool_panel_section_label: Single Cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 503bcd6ebe4b\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 503bcd6ebe4b\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: anndata_ops\n  owner: ebi-gxa\n  revisions: a0274bc43b7e\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: retrieve_scxa\n  owner: ebi-gxa\n  revisions: 72b6e1747e37\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scanpy_read_10x\n  owner: ebi-gxa\n  revisions: 9afcfcd1d215\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seurat_read10x\n  owner: ebi-gxa\n  revisions: 301cf1b4b43d\n  tool_panel_section_label: Single Cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 503bcd6ebe4b\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {

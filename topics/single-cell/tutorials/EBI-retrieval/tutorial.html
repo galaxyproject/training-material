@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@5677f0fb36ed2aeeed6790000a6a179aa06e9434",
+		release: "galaxy-training-network@91a37084daa89606eb38a2b721ed20f746e79d79",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702570737' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702572050' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702572050' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-14 17:08:40 +0000">
+<meta name="DC.date" content="2023-12-14 10:22:34 +0000">
 <meta name="DC.creator" content="Julia Jakiela">
 <meta name="DC.creator" content="Wendi Bacon">
 
@@ -118,7 +118,7 @@ What else do you want to see? You can submit tool and/or tutorial request on our
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-11-14 17:08:40 +0000",
+  "dateModified": "2023-12-14 10:22:34 +0000",
   "datePublished": "2023-11-14 17:16:58 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial",
@@ -178,7 +178,7 @@ What else do you want to see? You can submit tool and/or tutorial request on our
   "learningResourceType": "hands-on tutorial",
   "name": "EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html",
-  "version": 21,
+  "version": 25,
   "timeRequired": "PT15M",
   "teaches": "You will retrieve raw data from the EBI Single Cell Expression Atlas.\n - You will manipulate the metadata and matrix files.\n - You will combine the metadata and matrix files into an AnnData or Seurat object for downstream analysis.",
   "keywords": [
@@ -316,7 +316,7 @@ What else do you want to see? You can submit tool and/or tutorial request on our
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702570737'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702572050'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -824,7 +824,7 @@ What else do you want to see? You can submit tool and/or tutorial request on our
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 14, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 14, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 14, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -837,7 +837,7 @@ What else do you want to see? You can submit tool and/or tutorial request on our
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00374">https://gxy.io/GTN:T00374</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 21 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 25 </div>
 
     </blockquote>
     </section>
@@ -1022,43 +1022,37 @@ What else do you want to see? You can submit tool and/or tutorial request on our
   <div class="box-title hands-on-title" id="hands-on-change-cell-metadata-titles"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Change cell metadata titles</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3" title="Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace parts of text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace parts of text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.4)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: output from <strong>Column Regex and Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 12</code></li>
-        <li>In <em>“Check”</em>:
+        <li>In <em>“Find and Replace”</em>:
           <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
-              <ul>
-                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">"Sample Characteristic[genotype]"</code></li>
-                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">genotype</code></li>
-              </ul>
-            </li>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
-              <ul>
-                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">"Sample Characteristic[individual]"</code></li>
-                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
-              </ul>
-            </li>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
-              <ul>
-                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">"Sample Characteristic[sex]"</code></li>
-                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">sex</code></li>
-              </ul>
-            </li>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
-              <ul>
-                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">"Sample Characteristic[cell type]"</code></li>
-                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
-              </ul>
-            </li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">"Sample Characteristic[genotype]"</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">genotype</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Find and Replace”</em>
+          <ul>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">"Sample Characteristic[individual]"</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Find and Replace”</em>
+          <ul>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">"Sample Characteristic[sex]"</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">sex</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Find and Replace”</em>
+          <ul>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">"Sample Characteristic[cell type]"</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Cell metadata</code></li>
   </ol>
-
 </blockquote>
 
 <h1 id="check-mitochondrial-gene-name-format">Check mitochondrial gene name format</h1>
@@ -1199,7 +1193,7 @@ What else do you want to see? You can submit tool and/or tutorial request on our
   <h1 id="conclusion">Conclusion</h1>
   <p>Now you can use this object as input for the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot, Explore tutorial</a> and its associated workflow!</p>
 
-  <p>Even though this tutorial was designed specifically to modify the AnnData object to be compatible with the subsequent tutorial, it also shows useful tools that you can use for your own, independent data analysis. You can find the <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/w/ebi-single-cell-expression-atlas-files-to-anndata">workflow</a> and the <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/h/ebi-single-cell-expression-atlas-files-to-anndata-1">answer key history</a>. However, if you want to use the workflow from this tutorial, you have to keep in mind that different datasets may have different column names. So you have to check them first, and only then you can modify them.</p>
+  <p>Even though this tutorial was designed specifically to modify the AnnData object to be compatible with the subsequent tutorial, it also shows useful tools that you can use for your own, independent data analysis. You can find the <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/w/workflow-constructed-from-history-ebi-workflow">workflow</a> and the <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/h/ebi-scxa---anndata-scanpy-or-seurat-object-1">answer key history</a>. However, if you want to use the workflow from this tutorial, you have to keep in mind that different datasets may have different column names. So you have to check them first, and only then you can modify them.</p>
 
 </div>
 
@@ -1488,6 +1482,11 @@ tools:
   revisions: d698c222f354
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: anndata_ops
   owner: ebi-gxa
   revisions: a0274bc43b7e
@@ -1507,11 +1506,6 @@ tools:
   owner: ebi-gxa
   revisions: 301cf1b4b43d
   tool_panel_section_label: Single Cell
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: regex_find_replace
-  owner: galaxyp
-  revisions: 503bcd6ebe4b
-  tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: regex_find_replace
   owner: galaxyp
@@ -1547,7 +1541,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/5677f0fb36ed2aeeed6790000a6a179aa06e9434">5677f0f</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/91a37084daa89606eb38a2b721ed20f746e79d79">91a3708</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1575,7 +1569,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702570737'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702572050'></script>
         
     </body>
 </html>
