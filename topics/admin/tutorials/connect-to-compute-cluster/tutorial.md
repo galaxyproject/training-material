@@ -385,7 +385,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    +        env:
 >    +        - name: LC_ALL
 >    +          value: C
->    +        - name: SINGULARITY_CACHEDIR
+>    +        - name: APPTAINER_CACHEDIR
 >    +          value: /tmp/singularity
 >    +        - name: APPTAINER_TMPDIR
 >    +          value: /tmp

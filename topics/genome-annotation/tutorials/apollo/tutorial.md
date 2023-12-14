@@ -5,6 +5,7 @@ title: Refining Genome Annotations with Apollo (prokaryotes)
 zenodo_link: https://zenodo.org/record/4889110
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - How to visualize your genome after automated annotations have been performed?
   - How to manually annotate genome after automated annotations have been performed?

@@ -6,6 +6,7 @@ subtopic: introduction
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "How do we detect differences between a set of reads from a microorganism and a reference genome"
 objectives:

@@ -19,6 +19,8 @@ contributors:
   - shiltemann
   - bebatut
   - tnabtaf
+tags:
+  - microgalaxy
 ---
 
 {% include topics/metagenomics/tutorials/mothur-miseq-sop/content.md short=true %}
