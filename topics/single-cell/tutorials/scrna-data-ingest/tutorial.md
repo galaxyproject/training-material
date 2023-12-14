@@ -235,18 +235,18 @@ Let's get an **AnnData object** that we can further work on. It's the object use
 {: .hands_on}
 
 
-First, we will extract observations and the full matrix from our AnnData.
+First, we will extract observations (cell metadata) and the full matrix from our AnnData.
 
 > <hands-on-title> Inspect AnnData </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >   
 > 2. **Rename** {% icon galaxy-pencil %} the output `Observations`.
 >
 > 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
 >    - *"What to inspect?"*: `The full data matrix`
 >
 > 4. **Rename** {% icon galaxy-pencil %} the output `Matrix`.
@@ -259,28 +259,28 @@ First, we will extract observations and the full matrix from our AnnData.
 >
 > > <solution-title></solution-title>
 > >
-> > If you just click on the `Matrix` dataset, you will see a preview, showing barcodes in the first column, while genes in the first row.
+> > If you just click on the `Matrix` dataset, you will see a preview showing barcodes in the first column, and genes in the first row.
 > > 
 > {: .solution}
 >
 {: .question}
 
-To proceed with the conversion, we must have the matrix where the genes are listed in the first column while all the barcodes should be in the first row. Therefore, we need to transpose the current matrix.
+However, to proceed with this conversion, we need a matrix where the genes are listed in the first column and the barcodes in the first row. Therefore, we need to transpose the current matrix.
 
 > <hands-on-title> Transpose the matrix </hands-on-title>
 >
 > 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0) %} with the following parameters:
->    - *"Input tabular dataset"*: `Matrix`
+>    - {% icon param-file %} *"Input tabular dataset"*: `Matrix`
 >
 {: .hands_on}
 
-And now we are ready to input that data to **DropletUtils** tool.
+And now we are ready to input that data into **DropletUtils** tool.
 
 > <hands-on-title> DropletUtils </hands-on-title>
 >
 > 1. {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %} with the following parameters:
 >    - *"Format for the input matrix"*: `Tabular`
->    - *"Count Data"*: output of **Transpose** {% icon tool %}
+>    - {% icon param-file %} *"Count Data"*: output of **Transpose** {% icon tool %}
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `DefaultDrops`
 >            - *"Expected Number of Cells"*: `31178`
@@ -297,7 +297,7 @@ Finally, let's combine those files that we have just generated and turn them int
 >
 > 1. {% tool [Seurat Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/3.2.3+galaxy0) %} with the following parameters:
 >    - *"Choose the format of the input"*: `10X-type MTX`
->    - *"Expression matrix in sparse matrix format (.mtx)"*: `DropletUtils 10X Matrices`
+>    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `DropletUtils 10X Matrices`
 >    - *"Gene table"*: `DropletUtils 10X Genes`
 >    - *"Barcode/cell table"*: `DropletUtils 10X Barcodes`
 >    - *"Cell Metadata"*: `Observations`
@@ -334,13 +334,13 @@ First, we will extract observations and the full matrix from our AnnData.
 > <hands-on-title> Inspect AnnData </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >   
 > 2. **Rename** {% icon galaxy-pencil %} the output `Observations`.
 >
 > 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
 >    - *"What to inspect?"*: `The full data matrix`
 >
 > 4. **Rename** {% icon galaxy-pencil %} the output `Matrix`.
@@ -364,7 +364,7 @@ To proceed with the conversion, we must have the matrix where the genes are list
 > <hands-on-title> Transpose the matrix </hands-on-title>
 >
 > 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0) %} with the following parameters:
->    - *"Input tabular dataset"*: `Matrix`
+>    - {% icon param-file %} *"Input tabular dataset"*: `Matrix`
 >
 {: .hands_on}
 
@@ -374,7 +374,7 @@ And now we are ready to input that data to **DropletUtils** tool.
 >
 > 1. {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %} with the following parameters:
 >    - *"Format for the input matrix"*: `Tabular`
->    - *"Count Data"*: output of **Transpose** {% icon tool %}
+>    - {% icon param-file %} *"Count Data"*: output of **Transpose** {% icon tool %}
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `DefaultDrops`
 >            - *"Expected Number of Cells"*: `31178`
@@ -390,11 +390,11 @@ Finally, let's combine those files that we have just generated and turn them int
 > <hands-on-title> Create SCE object </hands-on-title>
 >
 > 1. {% tool [DropletUtils Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0) %} with the following parameters:
->    - *"Expression matrix in sparse matrix format (.mtx)"*: `DropletUtils 10X Matrices`
->    - *"Gene table"*: `DropletUtils 10X Genes`
->    - *"Barcode/cell table"*: `DropletUtils 10X Barcodes`
+>    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `DropletUtils 10X Matrices`
+>    - {% icon param-file %} *"Gene table"*: `DropletUtils 10X Genes`
+>    - {% icon param-file %} *"Barcode/cell table"*: `DropletUtils 10X Barcodes`
 >    - *"Should metadata file be added?"*: {% icon param-toggle %} `Yes`
->        - *"Metadata file"*: `Observations`
+>        - {% icon param-file %} *"Metadata file"*: `Observations`
 >        - *"Cell ID column"*: `index`
 >     
 > 2. **Rename** {% icon galaxy-pencil %} the output `Converted SCE object`.
