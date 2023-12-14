@@ -496,8 +496,6 @@ First, let's get some toy data. We just need two FASTQ files - one containing ba
 > 1. Create a new history for this section *"Downsampling FASTQ Files"*
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
->    * Human single cell RNA ESet objects (tag: `#singlecell`)
->
 >      ```
 >    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
 >    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
@@ -508,9 +506,9 @@ First, let's get some toy data. We just need two FASTQ files - one containing ba
 {: .hands_on}
 
 
-Funnily enough, those files are already downsampled so that you don't have to wait for too long to download them. We are not going to analyse that data today anyway, it's just for demonstration purposes.
+Funnily enough, those files are already downsampled, so you won't have to wait for too long to download them. We are not going to analyse that data anyway, it's just for demonstration purposes.
 
-Quick check now which file contains barcodes and which transcripts. If you click on the two datasets, you will see that one has shorter sequences, while the other has longer. It's quite straight-forward to deduce that shorter sequences are barcodes, so let's rename the file `s_1.r_1` as `Barcodes` and file `s_1.r_2` as `Transcripts`.
+Quickly check which file contains barcodes and which file contains transcripts. If you click on the two datasets, you will see that one has shorter sequences, while the other has longer. It's quite straight-forward to deduce that shorter sequences are barcodes, so let's rename the file `s_1.r_1` as `Barcodes` and file `s_1.r_2` as `Transcripts`.
 
 > <hands-on-title>Rename the files</hands-on-title>
 >
