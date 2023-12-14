@@ -332,6 +332,11 @@ We will work on the same AnnData object so if you create a new history for this 
 
 First, we will extract observations and the full matrix from our AnnData.
 
+> <tip-title>Skip a step!</tip-title>
+>
+> If you stay in the your previous history, you can just reuse the `Barcodes` and `Transcripts` datasets from earlier on!
+{: .tip}
+
 > <hands-on-title> Inspect AnnData </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
@@ -411,7 +416,7 @@ Cell Data Set (CDS) format is usually used when working with a package called Mo
 
 {% snippet faqs/galaxy/histories_copy_dataset.md %}
 
-> <hands-on-title>Get toy data</hands-on-title>
+> <hands-on-title>Get toy data again</hands-on-title>
 >
 > 1. Create a new history for this tutorial 
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
