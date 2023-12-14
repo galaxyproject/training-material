@@ -552,9 +552,9 @@ All done, now we just need to go back to FASTQ from Tabular again!
 >
 > 1. {% tool [Tabular to FASTQ](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fastq/tabular_to_fastq/1.1.5) %} with the following parameters:
 >    - {% icon param-file %} *"Tabular file to convert"*: `Barcodes cut` (output of **Select last** {% icon tool %})
->    - *"Identifier column"*: `c1`
->    - *"Sequence column"*: `c2`
->    - *"Quality column"*: `c3`
+>    - *"Identifier column"*: `c1` or `Column 1`
+>    - *"Sequence column"*: `c2` or `Column 2`
+>    - *"Quality column"*: `c3` or `Column 3`
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset `Downsampled barcode/UMI read`.
 >    
