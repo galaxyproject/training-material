@@ -14,6 +14,7 @@ objectives:
 - You will import single cell data into Galaxy using different methods.
 - You will manipulate the metadata and matrix files.
 - You will perform conversions between the most common single cell formats.
+- You will downsample FASTQ files.
 time_estimation: 1H
 key_points:
 - Single cell data from different sources may have unfamiliar formatting and thus may require different ways of ingesting it into Galaxy.
