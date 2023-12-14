@@ -244,7 +244,7 @@ And the good news is that we can do both those steps using only one tool!
 >
 {: .hands_on}
 
-And that's all! What's even more exciting about the {% icon tool %}) **AnnData Operations** tool is that it automatically calculates a bunch of metrics, such as `log1p_mean_counts`, `log1p_total_counts`, `mean_counts`, `n_cells`, `n_cells_by_counts`, `n_counts`, `pct_dropout_by_counts`, and `total_counts`. Amazing, isn't it?
+And that's all! What's even more exciting about the {% icon tool %} **AnnData Operations** tool is that it automatically calculates a bunch of metrics, such as `log1p_mean_counts`, `log1p_total_counts`, `mean_counts`, `n_cells`, `n_cells_by_counts`, `n_counts`, `pct_dropout_by_counts`, and `total_counts`. Amazing, isn't it?
 
 # Conclusion
 Now you can use this object as input for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) and its associated workflow!
