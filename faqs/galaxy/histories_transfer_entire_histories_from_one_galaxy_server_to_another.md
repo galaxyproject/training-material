@@ -8,7 +8,7 @@ contributors: [jennaj, AnomalyCodes]
 
 **Transfer a Single Dataset**
 
-At the **sender** Galaxy server, [set the history to a shared state]({% link faqs/galaxy/histories_sharing.md %}), then directly capture the {% icon fa-link %} link for a dataset and paste the URL into the **Upload** tool at the **receiver** server. 
+At the **sender** Galaxy server, [set the history to a shared state]({% link faqs/galaxy/histories_sharing.md %}), then directly capture the {% icon fa-link %} link for a dataset and paste the URL into the **Upload** tool at the **receiver** Galaxy server. 
 
 **Transfer an Entire History**
 
