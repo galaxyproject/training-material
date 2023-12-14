@@ -192,9 +192,9 @@ If you chose **Loom** format and you need to convert your file to other datatype
 {: .tip}
 
 
-# Format conversion
+# SCEasy Tool
 
-In Galaxy Toolshed there is a wonderful tool called {% tool [SCEasy](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy1) %} which allows to convert between common single cell formats, such as:
+In Galaxy Toolshed there is a wonderful tool called {% tool [SCEasy](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy1) %} which allows you to convert between common single cell formats, such as:
 - AnnData to CellDataSet (CDS)
 - AnnData to Seurat
 - Loom to AnnData
@@ -212,7 +212,7 @@ In Galaxy Toolshed there is a wonderful tool called {% tool [SCEasy](toolshed.g2
 
 However, sometimes it is useful to know how to do this conversion manually or at least to know how it all works. Therefore, below are some examples showing how to do it. 
 
-## AnnData -> Seurat
+# AnnData -> Seurat
 
 Let's get an **AnnData object** that we can further work on. It's the object used in [many tutorials]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), so check it out if you're curious. 
 
@@ -234,6 +234,7 @@ Let's get an **AnnData object** that we can further work on. It's the object use
 >
 {: .hands_on}
 
+Most of our conversions involve extracting tables from different data objects and importing them into the target object.
 
 First, we will extract observations (cell metadata) and the full matrix from our AnnData.
 
@@ -310,7 +311,7 @@ Finally, let's combine those files that we have just generated and turn them int
 As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata---seurat) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata---seurat-conversion).
 
 
-## AnnData -> SingleCellExperiment (SCE)
+# AnnData -> SingleCellExperiment (SCE)
 
 We will work on the same AnnData object so if you create a new history for this exercise, you can either get this file from Zenodo again or just copy this dataset from the previous history. 
 
@@ -404,14 +405,16 @@ Finally, let's combine those files that we have just generated and turn them int
 As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata---singlecellexperiment-sce) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata-to-singlecellexperiment-sce-conversion).
 
 
-## Anndata -> Cell Data Set (CDS)
+# Anndata -> Cell Data Set (CDS)
 
 Cell Data Set (CDS) format is usually used when working with a package called Monocle3 and in the [corresponding tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) it was shown how to transform annotated AnnData to CDS object. Please note that depending on your dataset and pre-processing, you might need to refer to the method used in the mentioned tutorial which uses both annotated and unprocessed matrices. However, here we will just show the main principle of that conversion, so we will continue working on previously used dataset, so you can copy it from your history.
 
+{% snippet faqs/galaxy/histories_copy_dataset.md %}
 
 > <hands-on-title>Get toy data</hands-on-title>
 >
-> You can simply download the files by pasting the links below into "Upload Data" searchbox.
+> 1. Create a new history for this tutorial 
+> 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
 >    https://zenodo.org/record/7053673/files/Mito-counted_AnnData
@@ -419,9 +422,13 @@ Cell Data Set (CDS) format is usually used when working with a package called Mo
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
+> 3. **Rename** {% icon galaxy-pencil %} the datasets `Mito-counted AnnData`
+> 4. Check that the datatype is `h5ad`
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
+>
 {: .hands_on}
 
-{% snippet faqs/galaxy/histories_copy_dataset.md %}
 
 
 Now we just need to extract information about cells, genes and an expression matrix. 
