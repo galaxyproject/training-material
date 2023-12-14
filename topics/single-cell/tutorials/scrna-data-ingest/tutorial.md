@@ -28,6 +28,8 @@ contributions:
     - elixir-fair-data
 
 zenodo_link: https://zenodo.org/record/4574153
+extra:
+  zenodo_link_end: https://zenodo.org/record/7053673
 
 follow_up_training:
   -
@@ -308,11 +310,12 @@ We will work on the same AnnData object so if you create a new history for this 
 
 > <hands-on-title>Get toy data</hands-on-title>
 >
-> You can simply download the files by pasting the links below into "Upload Data" searchbox.
+> 1. Create a new history for this section *"Downsampling FASTQ Files"*
+> 2. Import the files from [Zenodo]({{ page.zenodo_link_end }})
 >
->    ```
->    https://zenodo.org/record/7053673/files/Mito-counted_AnnData
->    ```
+>      ```
+>    {{ page.zenodo_link }}/files/Mito-counted_AnnData
+>      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
