@@ -26,6 +26,8 @@ contributions:
   funding: 
     - elixir-fair-data
 
+zenodo_link: https://zenodo.org/record/4574153
+
 follow_up_training:
   -
     type: "internal"
@@ -487,21 +489,24 @@ As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h
 
 Sometimes, it is useful to work on smaller subsets of data (especially for teaching / learning purposes). Here is an example of how you can downsample your FASTQ files.
 
-
 First, let's get some toy data. We just need two FASTQ files - one containing barcodes, the other with transcripts. 
 
 > <hands-on-title>Get toy data</hands-on-title>
 >
-> You can simply download the files by pasting the links below into "Upload Data" searchbox.
+> 1. Create a new history for this section *"Downsampling FASTQ Files"*
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
->    ```
->    https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
->    https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
->    ```
+>    * Human single cell RNA ESet objects (tag: `#singlecell`)
+>
+>      ```
+>    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
+>    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
+>      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
+
 
 Funnily enough, those files are already downsampled so that you don't have to wait for too long to download them. We are not going to analyse that data today anyway, it's just for demonstration purposes.
 
