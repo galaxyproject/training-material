@@ -22,7 +22,7 @@ contributions:
     - wee-snufkin
     - nomadscientist
   funding:
-  - elixir-fair-data
+    - elixir-fair-data
 
 requirements:
   -
