@@ -366,7 +366,7 @@
           "name": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
           "title": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
           "test_results": null,
-          "modified": "2023-12-13 18:50:28 +0000",
+          "modified": "2023-12-14 00:10:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Trimmomatic\"];\n  2[\"Unzip Collection\"];\n  3[\"Map with BWA-MEM\"];\n  4[\"Samtools fastx\"];\n  5[\"Select\"];\n  6[\"Replace Text\"];\n  7[\"seqtk_subseq\"];\n  8[\"seqtk_subseq\"];\n  9[\"Zip Collection\"];\n  0 -->|output| 1;\n  0 -->|output| 2;\n  1 -->|fastq_out_paired| 3;\n  3 -->|bam_output| 4;\n  4 -->|forward| 5;\n  5 -->|out_file1| 6;\n  2 -->|forward| 7;\n  6 -->|outfile| 7;\n  2 -->|reverse| 8;\n  6 -->|outfile| 8;\n  7 -->|default| 9;\n  8 -->|default| 9;\n"
         }
       ],
@@ -700,7 +700,7 @@
           "name": "GTN - Sequence Analyses - Mapping - Jbrowse (imported from uploaded file)",
           "title": "GTN - Sequence Analyses - Mapping - Jbrowse (imported from uploaded file)",
           "test_results": null,
-          "modified": "2023-12-13 18:50:28 +0000",
+          "modified": "2023-12-14 00:10:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"FastQC\"];\n  3[\"FastQC\"];\n  4[\"Trim Galore!\"];\n  5[\"MultiQC\"];\n  6[\"Bowtie2\"];\n  7[\"Samtools stats\"];\n  8[\"JBrowse\"];\n  0 -->|output| 2;\n  1 -->|output| 3;\n  0 -->|output| 4;\n  1 -->|output| 4;\n  3 -->|text_file| 5;\n  2 -->|text_file| 5;\n  4 -->|trimmed_reads_pair1| 6;\n  4 -->|trimmed_reads_pair2| 6;\n  6 -->|output| 7;\n  6 -->|output| 8;\n"
         },
         {
@@ -2493,7 +2493,7 @@
               "version": "0.1"
             }
           },
-          "modified": "2023-12-13 18:50:28 +0000",
+          "modified": "2023-12-14 00:10:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"FastQC\"];\n  3[\"FastQC\"];\n  4[\"Trim Galore!\"];\n  5[\"MultiQC\"];\n  6[\"Bowtie2\"];\n  7[\"Stats\"];\n  8[\"Filter\"];\n  9[\"Stats\"];\n  0 -->|output| 2;\n  1 -->|output| 3;\n  0 -->|output| 4;\n  1 -->|output| 4;\n  3 -->|text_file| 5;\n  2 -->|text_file| 5;\n  4 -->|trimmed_reads_pair1| 6;\n  4 -->|trimmed_reads_pair2| 6;\n  6 -->|output| 7;\n  6 -->|output| 8;\n  8 -->|out_file1| 9;\n"
         }
       ],
@@ -4125,7 +4125,7 @@
               "version": "0.1"
             }
           },
-          "modified": "2023-12-13 18:50:28 +0000",
+          "modified": "2023-12-14 00:10:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"FastQC\"];\n  3[\"Cutadapt\"];\n  4[\"FastQC\"];\n  5[\"Cutadapt\"];\n  6[\"MultiQC\"];\n  0 -->|output| 2;\n  1 -->|output| 3;\n  1 -->|output| 4;\n  1 -->|output| 5;\n  0 -->|output| 5;\n  4 -->|text_file| 6;\n  2 -->|text_file| 6;\n"
         }
       ],
