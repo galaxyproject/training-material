@@ -218,13 +218,19 @@ Let's get an **AnnData object** that we can further work on. It's the object use
 
 > <hands-on-title>Get toy data</hands-on-title>
 >
-> You can simply download the files by pasting the links below into "Upload Data" searchbox.
+> 1. Create a new history for this tutorial 
+> 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
 >    https://zenodo.org/record/7053673/files/Mito-counted_AnnData
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. **Rename** {% icon galaxy-pencil %} the datasets `Mito-counted AnnData`
+> 4. Check that the datatype is `h5ad`
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
 >
 {: .hands_on}
 
