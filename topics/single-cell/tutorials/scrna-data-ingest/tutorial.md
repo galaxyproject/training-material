@@ -212,7 +212,7 @@ However, sometimes it is useful to know how to do this conversion manually or at
 
 ## AnnData -> Seurat
 
-Let's get an AnnData object that we can further work on. It's the object used in previous tutorials ({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), so check it out if you're curious. 
+Let's get an **AnnData object** that we can further work on. It's the object used in [many tutorials]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), so check it out if you're curious. 
 
 > <hands-on-title>Get toy data</hands-on-title>
 >
