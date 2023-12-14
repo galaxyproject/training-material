@@ -300,7 +300,7 @@ Finally, let's combine those files that we have just generated and turn them int
 >    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `DropletUtils 10X Matrices`
 >    - *"Gene table"*: `DropletUtils 10X Genes`
 >    - *"Barcode/cell table"*: `DropletUtils 10X Barcodes`
->    - *"Cell Metadata"*: `Observations`
+>    - {% icon param-file %} *"Cell Metadata"*: `Observations`
 >    - *"Choose the format of the output"*: `RDS with a Seurat object`
 >
 > 2. **Rename** {% icon galaxy-pencil %} the output `Converted Seurat object`.
