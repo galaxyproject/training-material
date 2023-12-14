@@ -556,9 +556,7 @@ All done, now we just need to go back to FASTQ from Tabular again!
 >    - *"Sequence column"*: `c2` or `Column 2`
 >    - *"Quality column"*: `c3` or `Column 3`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the dataset `Downsampled barcode/UMI read`.
->    
-> 3. Repeat the same with `Transcripts cut` file and rename it as `Downsampled transcript read`
+> 2. **Rename** {% icon galaxy-pencil %} the dataset `Downsampled barcode read` and `Downsampled transcript read`
 > 
 {: .hands_on}
 
