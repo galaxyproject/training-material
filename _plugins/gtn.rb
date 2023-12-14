@@ -123,6 +123,22 @@ module Jekyll
     end
 
     ##
+    # Returns the publication date of a page, when it was merged into `main`
+    # Params:
+    # +page+:: The page to get the publication date of
+    # Returns:
+    # +String+:: The publication date of the page
+    #
+    def gtn_pub_date(path)
+      # if it's not a string then log a warning
+      if !path.is_a?(String)
+        path = path['path']
+      end
+      # Automatically strips any leading slashes.
+      Gtn::PublicationTimes.obtain_time(path.gsub(%r{^/}, ''))
+    end
+
+    ##
     # Returns the last modified date of a page
     # Params:
     # +page+:: The page to get the last modified date of

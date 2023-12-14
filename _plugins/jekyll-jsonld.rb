@@ -307,6 +307,7 @@ module Jekyll
         # "creator":,
         # "dateCreated":,
         dateModified: Gtn::ModificationTimes.obtain_time(material['path']),
+        datePublished: Gtn::PublicationTimes.obtain_time(material['path']),
         # "datePublished":,
         discussionUrl: site['gitter_url'],
         # "editor":,

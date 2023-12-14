@@ -66,27 +66,46 @@ module Gtn
   module PublicationTimes
     @@TIME_CACHE = nil
 
+    def self.chase_rename(renames, path)
+      if renames.key? path
+        chase_rename(renames, renames[path])
+      else
+        path
+      end
+    end
+
     def self.init_cache
       return unless @@TIME_CACHE.nil?
 
       @@TIME_CACHE = {}
+      renames = {}
+
       puts '[GTN/Time/Pub] Filling Publication Time Cache'
-      `git log --first-parent --name-only --diff-filter=A --pretty='GTN_GTN:%ct' main`
+      `git log --first-parent --name-status --diff-filter=AR --pretty='GTN_GTN:%ct' main`
         .split('GTN_GTN:')
         .map { |x| x.split("\n\n") }
         .select { |x| x.length > 1 }
         .each do |date, files|
         files.split(/\n/).select{|x| x =~ /\.(md|html)$/}.each do |f|
-          @@TIME_CACHE[f] = Time.at(date.to_i) if !@@TIME_CACHE.key? f
+          modification_type, path = f.split("\t")
+          if modification_type == 'A'
+            # Chase the renames.
+            final_filename = chase_rename(renames, path)
+            @@TIME_CACHE[final_filename] = Time.at(date.to_i)
+          elsif modification_type[0] == 'R'
+            _, moved_from, moved_to = f.split("\t")
+            renames[moved_from] = moved_to # Point from the 'older' version to the newer.
+          end
         end
       end
+      # pp renames
     end
 
     def self.time_cache
       @@TIME_CACHE
     end
 
-    def self.obtain_publication_time(f)
+    def self.obtain_time(f)
       init_cache
       if @@TIME_CACHE.key? f
         @@TIME_CACHE[f]
