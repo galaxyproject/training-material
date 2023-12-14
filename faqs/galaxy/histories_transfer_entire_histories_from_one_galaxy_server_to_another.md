@@ -35,7 +35,7 @@ At the **receiver** Galaxy server
 14. The transfered history will be uncompressed and added to your **Saved Histories**.
 
 
-\* For steps 6 and 13: It is Ok to navigate away for other tasks during processing. If enabled, Galaxy will send you [status notifications]({ link faqs/galaxy/account_update_preference.md %}).
+\* For steps 6 and 13: It is Ok to navigate away for other tasks during processing. If enabled, Galaxy will send you [status notifications]({% link faqs/galaxy/account_update_preference.md %}).
 
 
 {% icon fa-info-circle %} If the history to transfer is large, you may [copy just your important datasets into a new history]({% link faqs/galaxy/histories_copy_dataset.md % }), and create the archive from that new smaller history. Clearing away deleted and purged datasets will make *all* histories smaller and faster to archive and transfer!
