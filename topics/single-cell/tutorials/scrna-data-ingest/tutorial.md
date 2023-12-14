@@ -508,9 +508,13 @@ First, let's get some toy data. We just need two FASTQ files - one containing ba
 
 Funnily enough, those files are already downsampled, so you won't have to wait for too long to download them. We are not going to analyse that data anyway, it's just for demonstration purposes.
 
-Quickly check which file contains barcodes and which file contains transcripts. If you click on the two datasets, you will see that one has shorter sequences, while the other has longer. It's quite straight-forward to deduce that shorter sequences are barcodes, so let's rename the file `s_1.r_1` as `Barcodes` and file `s_1.r_2` as `Transcripts`.
+Quickly check which file contains barcodes and which file contains transcripts. If you click on the two datasets, you will see that one has shorter sequences, while the other has longer. It's quite straight-forward to deduce that shorter sequences are barcodes.
 
 > <hands-on-title>Rename the files</hands-on-title>
+>
+> 1. Rename file `s_1.r_1` as `Barcodes` 
+>
+> 2. Rename file `s_1.r_2` as `Transcripts`
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
