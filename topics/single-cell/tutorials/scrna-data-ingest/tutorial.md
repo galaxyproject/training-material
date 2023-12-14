@@ -485,7 +485,9 @@ As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h
 
 # Downsampling FASTQ files
 
-Sometimes, it is useful to work on smaller subset of data (especially for teaching / learning purposes). Here is an example of how you can downsample your FASTQ files.
+Sometimes, it is useful to work on smaller subsets of data (especially for teaching / learning purposes). Here is an example of how you can downsample your FASTQ files.
+
+
 First, let's get some toy data. We just need two FASTQ files - one containing barcodes, the other with transcripts. 
 
 > <hands-on-title>Get toy data</hands-on-title>
