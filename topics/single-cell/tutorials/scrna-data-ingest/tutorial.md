@@ -25,7 +25,7 @@ contributions:
     - nomadscientist
   
 funding: 
-  - elixir-fair-data
+    - elixir-fair-data
 
 follow_up_training:
   -
