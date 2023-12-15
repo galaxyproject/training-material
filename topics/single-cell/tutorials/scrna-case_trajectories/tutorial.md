@@ -241,11 +241,11 @@ Now that we've re-calculated the nearest neighbours, we can use these new neighb
 
 > <details-title>Working in a group? Decision-time!</details-title>
 > If you are working in a group, you can now divide up a decision here with one *control* and the rest can vary in numbers so that you can compare results throughout the tutorials.
-- Control
-   - Go straight to the [Partition-based Graph Abstraction (PAGA) section](#partition-based-graph-abstraction-paga)
-- Everyone else:
-   - you could recluster your cells using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} at a different resolution, perhaps lower than the 0.6 we used before (Take a look at the Cell clusters step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial if you need help with this.
-        - Please note that in this case, you will want to change the PAGA step `sc.pl.paga` to group by `louvain` rather than `cell_type`. You can certainly still plot both, we only didn't because with using our old Louvain calls, the cell_type and louvain categories are identical.
+> - Control
+>   - Go straight to the [Partition-based Graph Abstraction (PAGA) section](#partition-based-graph-abstraction-paga)
+> - Everyone else:
+>   - you could recluster your cells using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} at a different resolution, perhaps lower than the 0.6 we used before (Take a look at the Cell clusters step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial if you need help with this.
+> - Please note that in this case, you will want to change the PAGA step `sc.pl.paga` to group by `louvain` rather than `cell_type`. You can certainly still plot both, we only didn't because with using our old Louvain calls, the cell_type and louvain categories are identical.
    - you could undo the optional diffusion map step by recalculating the neighbours again using `X_pca` instead of `X_diffmap`
    - you could also try changing the number of neighbors used in that step
 
