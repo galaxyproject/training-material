@@ -23,7 +23,6 @@ requirements:
         - scrna-case_alevin-combine-datasets
         - scrna-case_basic-pipeline
 tags:
-- single-cell
 - 10x
 
 contributions:
