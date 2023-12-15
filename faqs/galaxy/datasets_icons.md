@@ -19,4 +19,4 @@ Dataset icons and their usage:
 - {% icon fa-bar-chart-o %} **"Visualize icon"**: External display links (UCSC, IGV, NPL, PV); Charts and graphing; Editor (manually edit text).
 - {% icon fa-sitemap %} **"Dataset Map icon"**: Filter the history for related Input/Output Datasets.
 - {% icon fa-sitemap %} **"Selected Dataset Map icon"**: The "root dataset" for Input/Output Map. Click to clear filter.
-- {% icon galaxy-bug %} **"Bug icon"**: Review logs, optionally submit a bug report.
+- {% icon galaxy-bug %} **"Bug icon"**: Review subset of logs (review all under {% icon galaxy-info %}), and optionally submit a bug report.
