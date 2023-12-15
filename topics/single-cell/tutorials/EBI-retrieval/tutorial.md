@@ -46,7 +46,7 @@ tags:
 
 # Introduction
 
-Public single cell datasets seem to accumulate by the second. Well annotated, quality datasets are slightly trickier to find. which is why projects like the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) (SCXA) exist - to curate datasets for public use. Here, we will guide you through transforming data imported from the SCXA repository into the input file required for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}).
+Public single cell datasets seem to accumulate by the second. Well annotated, quality datasets are slightly trickier to find. which is why projects like the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) (SCXA) exist - to curate datasets for public use. Here, we will guide you through transforming data imported from the SCXA repository into the input file required for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) and we will also show how to use the public atlases for your own research. 
 
 > <agenda-title></agenda-title>
 >
@@ -60,6 +60,17 @@ Public single cell datasets seem to accumulate by the second. Well annotated, qu
 # Getting data from the Single Cell Expression Atlas
 
 Galaxy has a specific tool for importing data from the SCXA ({% cite Moreno2020.04.08.032698 %}), which combines all the preprocessing steps shown in [the previous tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) into one! For this tutorial, the dataset can be seen [at the EBI](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment ID of `E-MTAB-6945`.
+
+> <details-title> How to access other experiments? </details-title>
+>
+> You can search datasets according to various criteria either using search box in **Home** tab or choosing kingdom, experiment collection, technology type (and others) in **Browse experiments** tab. When you find the experiment you are interested in, just click on it and the experiment ID will be displayed in the website URL, as shown below.
+>
+> ![Arrow pointing to the website URL where you can find experiment ID.](../../images/scrna-data/exp_id.jpg "Where to find experiment ID on the EBI Single Cell Expression Atlas website.")
+>
+> Once you know the experiment ID, you can use EBI SCXA Data Retrieval tool in Galaxy!
+> 
+{: .details}
+
 
 > <hands-on-title>Retrieving data from Single Cell Expression Atlas</hands-on-title>
 >
@@ -105,6 +116,8 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 
 
 # Metadata manipulation
+
+At this point you might want to do some modifications in the files before downstream analysis. That can include re-formating the cell metadata or changing the names of the column headers, it all depends on your dataset and how you want to perfrom your analysis. It's also fine to transform those files straight away. Here, we will show an extended version of metadata manipulation which allows us to create an input file consistent with [the next tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) workflow.
 
 Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about the 7 experimental samples (N701 – N707). However, in the {% icon param-file %} `exp_design.tsv` dataset, which contains the cell metadata, these samples are just numbered from 1 to 7.
 
@@ -264,6 +277,8 @@ Even though this tutorial was designed specifically to modify the AnnData object
 >    - *"Cell metadata"*: `Cell metadata`
 > 3. Rename {% icon galaxy-pencil %} output `Seurat object`
 >
+> You can also choose if you want to create Seurat object, Loom or Single Cell Experiment by selecting your option in *"Choose the format of the output"*.
+> 
 {: .hands_on}
 
 # Conclusion
