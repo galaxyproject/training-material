@@ -29,7 +29,7 @@ contributions:
 
 zenodo_link: https://zenodo.org/record/4574153
 extra:
-  zenodo_link_end: https://zenodo.org/record/7053673
+  zenodo_link_end: https://zenodo.org/record/10391629
 
 follow_up_training:
   -
@@ -111,13 +111,20 @@ Let's get an **AnnData object** that we can further work on. It's the object use
 > 1. Create a new history for this tutorial 
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
 >
+> If you do this tutorial just for learning purposes, you can download the downsampled dataset which will be much quicker to process:
+>    ```
+>    https://zenodo.org/record/10391629/files/Downsampled_annotated_AnnData.h5ad
+>    ```
+>    
+> If you want to use the full dataset used in the other single-cell case study tutorials, here it is! Please note, it will take much longer to process it, so we will only show the conversions on the downsampled objects.  
 >    ```
 >    https://zenodo.org/record/7053673/files/Mito-counted_AnnData
 >    ```
 >
+> 
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. **Rename** {% icon galaxy-pencil %} the datasets `Mito-counted AnnData`
+> 3. **Rename** {% icon galaxy-pencil %} the datasets `Downsampled AnnData object`
 > 4. Check that the datatype is `h5ad`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
@@ -131,13 +138,13 @@ First, we will extract observations (cell metadata) and the full matrix from our
 > <hands-on-title> Inspect AnnData </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Downsampled AnnData object`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >   
 > 2. **Rename** {% icon galaxy-pencil %} the output `Observations`.
 >
 > 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Downsampled AnnData object`
 >    - *"What to inspect?"*: `The full data matrix`
 >
 > 4. **Rename** {% icon galaxy-pencil %} the output `Matrix`.
@@ -174,7 +181,7 @@ And now we are ready to input that data into **DropletUtils** tool, which will s
 >    - {% icon param-file %} *"Count Data"*: output of **Transpose** {% icon tool %}
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `DefaultDrops`
->            - *"Expected Number of Cells"*: `31178`
+>            - *"Expected Number of Cells"*: `338`
 >            - *"Upper Quantile"*: `1.0`
 >            - *"Lower Proportion"*: `0.0`
 >        - *"Format for output matrices"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
@@ -210,9 +217,9 @@ We will work on the same AnnData object so if you create a new history for this 
 > 1. Create a new history for this section *"Downsampling FASTQ Files"*
 > 2. Import the files from [Zenodo]({{ page.zenodo_link_end }})
 >
->      ```
->    {{ page.zenodo_link }}/files/Mito-counted_AnnData
->      ```
+>    ```
+>    https://zenodo.org/record/10391629/files/Downsampled_annotated_AnnData.h5ad
+>    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -230,13 +237,13 @@ First, we will extract observations and the full matrix from our AnnData.
 > <hands-on-title> Inspect AnnData </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Downsampled AnnData object`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >   
 > 2. **Rename** {% icon galaxy-pencil %} the output `Observations`.
 >
 > 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Downsampled AnnData object`
 >    - *"What to inspect?"*: `The full data matrix`
 >
 > 4. **Rename** {% icon galaxy-pencil %} the output `Matrix`.
@@ -273,7 +280,7 @@ And now we are ready to input that data to **DropletUtils** tool.
 >    - {% icon param-file %} *"Count Data"*: output of **Transpose** {% icon tool %}
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `DefaultDrops`
->            - *"Expected Number of Cells"*: `31178`
+>            - *"Expected Number of Cells"*: `338`
 >            - *"Upper Quantile"*: `1.0`
 >            - *"Lower Proportion"*: `0.0`
 >        - *"Format for output matrices"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
@@ -312,12 +319,12 @@ Cell Data Set (CDS) format is usually used when working with a package called Mo
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->    https://zenodo.org/record/7053673/files/Mito-counted_AnnData
+>    https://zenodo.org/record/10391629/files/Downsampled_annotated_AnnData.h5ad
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. **Rename** {% icon galaxy-pencil %} the datasets `Mito-counted AnnData`
+> 3. **Rename** {% icon galaxy-pencil %} the datasets `Downsampled AnnData object`
 > 4. Check that the datatype is `h5ad`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
@@ -332,13 +339,13 @@ Now we just need to extract information about cells, genes and an expression mat
 > <hands-on-title> Inspect AnnData </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Downsampled AnnData object`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >
 > **Rename**  {% icon galaxy-pencil %} the output `Cell barcodes (obs)`.
 >
 > 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted_AnnData`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Downsampled AnnData object`
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >
 > **Rename**  {% icon galaxy-pencil %} the output `Genes (var)`.
