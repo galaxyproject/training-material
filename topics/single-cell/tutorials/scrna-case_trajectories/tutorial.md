@@ -46,7 +46,7 @@ Traditionally, we thought that differentiating or changing cells jumped between 
 
 We will use the same sample from the previous three tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cells. Now it's time to look further!
 
-# Citation
+## Citation
 
 Please note, this tutorial is largely based on the trajectories tutorial found [on the Scanpy site itself](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
 
@@ -59,11 +59,13 @@ Please note, this tutorial is largely based on the trajectories tutorial found [
 >
 {: .agenda}
 
-# Important tips for easier analysis
+## Important tips for easier analysis
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
+
+# Prepare datasets
 
 ## Get data
 
@@ -123,15 +125,17 @@ One problem with our current dataset is that it's not just T-cells: we found in 
 
 You should now have `8569` cells, as opposed to the `8605` you started with. You've only removed a few cells (the contaminants!), but it makes a big difference in the next steps.
 
-## Draw force-directed graph
+# Force-directed graph
 
 First, we will calculate a [force-directed graph](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.draw_graph.html) (FDG), as an alternate to tSNE, which will likely work better for trajectory analysis.
+
+## Calculate force-directed graph
 
 > <hands-on-title> Draw FDG </hands-on-title>
 >
 > 1. {% tool [Scanpy RunFDG](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_fdg/scanpy_run_fdg/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `T-cell_object.h5ad` (output of **Manipulate AnnData** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon galaxy-toggle %} `No`
 >    - *"Graph layout"*: `fa`
 >
 >    > <comment-title> Graph Layout </comment-title>
@@ -151,7 +155,7 @@ And now time to plot it!
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type`
->    - *"Use raw attributes if present"*: `No`
+>    - *"Use raw attributes if present"*: {% icon galaxy-toggle %} `No`
 >    - *"Location of legend"*: `On data`
 {: .hands_on}
 
@@ -169,9 +173,11 @@ And now time to plot it!
 >
 {: .question}
 
-## Diffusion maps
+# Diffusion maps
 
 We'll now perform an *optional step*, that basically takes the place of the standard Principle Component Analysis (PCA). Instead of using PCs, we can use [diffusion maps](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.diffmap.html).
+
+## Draw diffusion map
 
 > <hands-on-title> Draw the Diffusion Map </hands-on-title>
 >
@@ -226,15 +232,15 @@ Now that we've re-calculated the nearest neighbours, we can use these new neighb
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Oh dear! This doesn't look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn't seem right. Saying that this spreads out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you've changed the neighborhood graph on which the clusterisation depends). However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let's stick with our known cell types and move from there.
+> > 1. Oh dear! This doesn't look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn't seem right. Saying that, this does spread out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you've changed the neighborhood graph on which the clusterisation depends). However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let's stick with our known cell types and move from there.
 > >
 > > ![The T mature and DP L clusters have been stretched out](../../images/scrna-case_trajectories/TrajectoriesFDG2.png "FDG Plot after recalculating neighbours from the diffusion map")
 > {: .solution}
 >
 {: .question}
 
-## Working in a group? Decision-time!
-If you are working in a group, you can now divide up a decision here with one *control* and the rest can vary in numbers so that you can compare results throughout the tutorials.
+> <details-title>Working in a group? Decision-time!</details-title>
+> If you are working in a group, you can now divide up a decision here with one *control* and the rest can vary in numbers so that you can compare results throughout the tutorials.
 - Control
    - Go straight to the [Partition-based Graph Abstraction (PAGA) section](#partition-based-graph-abstraction-paga)
 - Everyone else:
