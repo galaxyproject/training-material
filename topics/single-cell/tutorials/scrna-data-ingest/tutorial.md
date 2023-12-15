@@ -205,7 +205,7 @@ Finally, let's combine those files that we have just generated and turn them int
 >    
 {: .hands_on}
 
-As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata---seurat) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata---seurat-conversion).
+As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata-to-seurat-conversion) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata---seurat-conversion).
 
 
 # AnnData -> SingleCellExperiment (SCE)
@@ -304,7 +304,7 @@ Finally, let's combine those files that we have just generated and turn them int
 >
 {: .hands_on}
 
-As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata---singlecellexperiment-sce) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata-to-singlecellexperiment-sce-conversion).
+As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata-to-singlecellexperiment-sce-conversion) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata-to-singlecellexperiment-sce-conversion).
 
 
 # Anndata -> Cell Data Set (CDS)
@@ -402,7 +402,7 @@ And the final step is to create the CDS file using Monocle tool!
 > 2. **Rename** {% icon galaxy-pencil %} the output: `CDS Monocle file`
 {: .hands_on}
 
-As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata---cell-data-set-cds) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata-to-cell-data-set-cds-conversion) (it doesn't include the renaming step though). 
+As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata-to-cell-data-set-cds-conversion) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata-to-cell-data-set-cds-conversion) (it doesn't include the renaming step though). 
 
 # Downsampling FASTQ files
 
