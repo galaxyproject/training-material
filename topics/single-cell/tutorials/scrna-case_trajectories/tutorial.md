@@ -252,7 +252,7 @@ Now that we've re-calculated the nearest neighbours, we can use these new neighb
 > - Everyone else: You will want to compare FREQUENTLY with your control team member.
 {: .details}
 
-## Partition-based Graph Abstraction (PAGA)
+# Partition-based Graph Abstraction (PAGA)
 
 [PAGA](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.paga.html) is used to generalise relationships between groups, or likely clusters, in this case. It will make it much easier to see the trajectories between our clusters of T-cells.
 
@@ -331,9 +331,11 @@ Force-directed graphs can be initialised randomly, or we can prod it in the righ
 >
 {: .question}
 
-## Plotting by Genotype
+# Exploring the results
 
-The experiment that produced this data used two different groups of mice - the control or wildtype group and the knockout mice that were missing a gene involved in the maturation of the thymus gland. Since we know the genotype of the mice from which each sample was collected, we can colour in our plots to see if there are any differences in the cells present in wildtype and knockout mice.
+The experiment that produced this data used two different groups of mice - the control or wildtype group and the knockout mice that were missing a gene involved in placental development, which impacted thymus development. Since we know the genotype of the mice from which each sample was collected, we can colour in our plots to see if there are any differences in the cells present in wildtype and knockout mice.
+
+## Plotting by Genotype
 
 The easiest way to do this is just to rerun {% icon galaxy-refresh %} the previous step, but change the attribute we want to use to colour the FDG plot.
 
@@ -363,7 +365,7 @@ The easiest way to do this is just to rerun {% icon galaxy-refresh %} the previo
 
 ## Plotting Gene Expression
 
-We're also interested in the expression of the two genes that are known to be markers of the two different types of mature T-cells, Cd4 and Cd8. We can colour in our plot to show which cells are expressing these genes.
+We're also interested in the expression of the two genes that are known to be markers of the two different types of mature T-cells: Cd4 and Cd8. We can colour in our plot to show which cells are expressing these genes.
 
 > <hands-on-title> Plot for gene expression </hands-on-title>
 >
@@ -376,7 +378,7 @@ We're also interested in the expression of the two genes that are known to be ma
 >
 >    > <comment-title> Gene Symbols </comment-title>
 >    >
->    > We're using the EnsemblIDs during this tutorial, as discussed above. If you like, you could change the names of these plots to the gene symbols by filling in the optional Figure title field with `Cd4,Cd8`. Make sure that the order of your figure titles matches the order of the EnsemblIDs in the colour by field. ENSMUSG00000023274 is Cd4 and ENSMUSG00000053977 is Cd8.
+>    > We're using the EnsemblIDs during this tutorial, as discussed above. If you like, you could change the names of these plots to the gene symbols by filling in the optional *"Figure title"* field with `Cd4,Cd8`. Make sure that the order of your figure titles matches the order of the EnsemblIDs in the colour by field. ENSMUSG00000023274 is Cd4 and ENSMUSG00000053977 is Cd8.
 >    {: .comment}
 >
 {: .hands_on}
@@ -394,16 +396,18 @@ We're also interested in the expression of the two genes that are known to be ma
 >
 {: .question}
 
-## Diffusion pseudotime
+# Diffusion pseudotime
 
 Now that we have a reasonable FDG plot for our cells, based on the diffusion map (if used) and PAGA plot, we can place our cells into pseudotime. Pseudotime lets us imagine that instead of looking at a sample of cells taken at a single timepoint, we are looking at cells moving through time. Our sample included cells at different stages of their development, but we can use pseudotime to think of these as different timepoints in the journey of individual cells.
 
 We know that our cells are initialising at DN. We can feed that information into our algorithms by naming DN as the root cell type to then calculate a trajectory starting from these cells.
 
-### Working in a group? Decision-time!
-If you called new clusters using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %}, you might want to choose one of those clusters to be your root cell instead, so change the `cell_type` for `louvain` and then name the cluster number. Use the plots you created to help you pick the number!
+> <details-title>Working in a group? Decision-time!</details-title>
+>
+> If you called new clusters using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %}, you might want to choose one of those clusters to be your root cell instead, so change the `cell_type` for `louvain` and then name the cluster number. Use the plots you created to help you pick the number!
+{: .details}
 
-Onto the [diffusion pseudotime](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.dpt.html), where we are infer multiple time points within the same piece of data!
+Onto the [diffusion pseudotime](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.dpt.html), where we infer multiple time points within the same piece of data!
 
 > <hands-on-title> DPT Plot </hands-on-title>
 >
@@ -439,11 +443,12 @@ This is nice, as it supports our conclusions thus far on the trajectory of the T
 
 Where might we go from here? We might consider playing with our louvain resolutions, to see if we can get the two groups of Cd4+ and Cd8+ cells to be called as different clusters, and then comparing them to each other for gene differences or genotype differences. We might also use different objects (for instance, what if we regressed out cell cycle genes?) and see if that changes the results. What would you do?
 
-## Working in a group? The finale!
-Look at each others images! How do yours differ, what decisions were made? Previously, when calling clusters in the [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial, the interpretation at the end is largely consistent, no matter what decisions are made throughout (mostly!). Is this the case with your trajectory analyses? You may find that it is not, which is why pseudotime analysis even more crucially depends on your understanding of the underlying biology (we have to choose the root cells, for instance, or recognise that DN cells should not be found in the middle of the DPs) as well as choosing the right analysis. That's why it is a huge field! With analysing scRNA-seq data, it's almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information.
+> <details-title>Working in a group? The Finale!</details-title>
+> Look at each others images! How do yours differ, what decisions were made? Previously, when calling clusters in the [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial, the interpretation at the end is largely consistent, no matter what decisions are made throughout (mostly!). Is this the case with your trajectory analyses? You may find that it is not, which is why pseudotime analysis even more crucially depends on your understanding of the underlying biology (we have to choose the root cells, for instance, or recognise that DN cells should not be found in the middle of the DPs) as well as choosing the right analysis. That's why it is a huge field! With analysing scRNA-seq data, it's almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information.
+{: .details}
 
 # Conclusion
 
-Congratulations! You've made it to the end! You might be interested in the [workflow](https://humancellatlas.usegalaxy.eu/u/marisa_jl/w/workflow-constructed-from-history-inferring-trajectories-with-scanpy-tutorial-1) for this tutorial or this [Example History](https://humancellatlas.usegalaxy.eu/u/marisa_jl/h/inferring-trajectories-using-scanpy---example-history) which shows the results you should expect to see if you follow this tutorial.
+Congratulations! You've made it to the end! You might be interested in the {% icon workflow %}[workflow](https://humancellatlas.usegalaxy.eu/u/marisa_jl/w/workflow-constructed-from-history-inferring-trajectories-with-scanpy-tutorial-1) for this tutorial or this {% icon galaxy-history %}[Example History](https://humancellatlas.usegalaxy.eu/u/marisa_jl/h/inferring-trajectories-using-scanpy---example-history) which shows the results you should expect to see if you follow this tutorial.
 
 In this tutorial, you moved from called clusters to inferred relationships and trajectories using pseudotime analysis. You found an alternative to PCA (diffusion map), an alternative to tSNE (force-directed graph), a means of identifying cluster relationships (PAGA), and a metric for pseudotime (diffusion pseudotime) to identify early and late cells. If you were working in a group, you found that such analysis is slightly more sensitive to your decisions than the simpler filtering/plotting/clustering is. We are inferring and assuming relationships and time, so that makes sense!
