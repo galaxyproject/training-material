@@ -25,7 +25,7 @@ requirements:
 tags:
 - single-cell
 - 10x
-- transcriptomics
+
 contributions:
   authorship:
     - MarisaJL
