@@ -174,7 +174,7 @@ This following hands-on is to be applied only on the sequence of the antisense (
 > > How many files is there in the ZIP archive ?
 > >
 > > > ### {% icon solution %} Solution
-> > > 12 (if you have a different number of files something likely went srong)
+> > > 12 (if you have a different number of files something likely went wrong)
 > > >
 > > {: .solution}
 > >
@@ -193,7 +193,7 @@ As for primers, sense and antisense sequences will be subjected to slightly diff
 > <hands-on-title> Filter </hands-on-title>
 >
 > 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
->    - {% icon param-collection %} *"Dataset collection*: `output collection` (output of **Unzip** {% icon tool %})
+>    - {% icon param-collection %} *"Dataset collection"*: `output collection` (output of **Unzip** {% icon tool %})
 >
 > 2. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output` (output of **Extract element identifiers** {% icon tool %})
@@ -332,7 +332,7 @@ See in the introduction for explanations on the Reverse-Complement.
 >    > 
 >    {: .comment}
 >
-> 1. {% tool [FASTQ to FASTA](toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_tabular/fastq_to_tabular/1.1.5) %} with the following parameters:
+> 1. {% tool [FASTQ to FASTA](toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_fasta/cshl_fastq_to_fasta/1.0.2+galaxy2) %} with the following parameters:
 >    - {% icon param-collection %} *"FASTQ file to convert"*: `output collection` (output of **FASTQ Groomer** {% icon tool %})
 >    - *"Discard sequences with unknown (N) bases"*: `no`
 >    - *"Rename sequence names in output file (reduces file size)"*: `no`
@@ -350,7 +350,7 @@ See in the introduction for explanations on the Reverse-Complement.
 > <hands-on-title> Align and consensus </hands-on-title>
 >
 > 1. {% tool [Align sequences](toolshed.g2.bx.psu.edu/repos/iuc/qiime_align_seqs/qiime_align_seqs/1.9.1.0) %} with the following parameters:
->    - {% icon param-collection %} *"Input fasta file"*: `output collection` (output of **Tabular-to-FASTA** {% icon tool %})
+>    - {% icon param-collection %} *"Input fasta file"*: `output collection` (output of **FASTQ-to-FASTA** {% icon tool %})
 >    - *"Method for aligning sequences"*: `clustalw`
 >    - *"Minimum percent sequence identity to closest blast hit to include sequence in alignment"*: `0.1`
 >
