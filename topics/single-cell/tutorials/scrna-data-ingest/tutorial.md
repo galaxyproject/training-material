@@ -96,7 +96,7 @@ In Galaxy Toolshed there is a wonderful tool called {% tool [SCEasy](toolshed.g2
 
 > <warning-title>Two SCEasy tools</warning-title>
 >  
-> As of the writing of this tutorial, the updated SCEasy tool is called [**SCEasy Converter**](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy1) and it's only available on *usegalaxy.eu*. The second tool is called [**SCEasy convert**](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1) and it works on *usegalaxy.org*, however has limited conversion options.
+> As of the writing of this tutorial, the updated SCEasy tool is called {% tool [SCEasy Converter](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy1) %} and it's only available on *usegalaxy.eu*. The second tool is called {% tool [SCEasy convert](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1) %} and it works on *usegalaxy.org*, however has limited conversion options.
 > 
 {: .warning}
 
@@ -309,7 +309,7 @@ As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h
 
 # Anndata -> Cell Data Set (CDS)
 
-Cell Data Set (CDS) format is usually used when working with a package called Monocle3 {% cite monocle3 %}. Below we show two methods on how to transform AnnData to CDS object, one of which creates an input file for [Monocle 3 tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}).
+Cell Data Set (CDS) format is usually used when working with a package called Monocle3 ({% cite monocle3 %}). Below we show two methods on how to transform AnnData to CDS object, one of which creates an input file for [Monocle 3 tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}).
 
 {% include _includes/cyoa-choices.html option1="CDS input for Monocle3 tutorial (use for pre-processed data)" option2="General AnnData → CDS conversion" default="Create CDS input for Monocle3 tutorial"
        text="You can choose whether you want just to transform AnnData to CDS or to create CDS input file for Monocle3 tutorial to proceed with the downstream analysis described in that tutorial. Please note that depending on your dataset, you might need to refer to the first method which uses both annotated and unprocessed matrices. If you did some pre-processing on your AnnData object, then you might need to choose the first method anyway since Monocle3 performs its own pre-processing, so we would also need an unprocessed expression matrix alongside annotated (pre-processed) AnnData. That method is more expanded and specific, while the general one just shows the main principle of the conversion." %}
@@ -317,7 +317,7 @@ Cell Data Set (CDS) format is usually used when working with a package called Mo
 
 <div class="General AnnData → CDS conversion" markdown="1">
 
-# General AnnData → CDS conversion
+## General AnnData → CDS conversion
 
 Here we will just show the main principle of the conversion, and we will continue working on previously used dataset, so you can copy it from your history. 
 
@@ -418,7 +418,7 @@ As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h
 
 <div class="CDS input for Monocle3 tutorial (use for pre-processed data)" markdown="1">
 
-# CDS input for Monocle3 tutorial (use for pre-processed data)
+## CDS input for Monocle3 tutorial (use for pre-processed data)
 
 The [dedicated tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) shows how to perform trajectory analysis using Monocle3 which is the next step in the single-cell case study tutorial series, right after [pre-processing tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) and [analysing the metadata]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). To keep the continuity of the series, we will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). After successfully completing this section with the mentioned dataset, you can use it directly in the [Monocle3 tutorial workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3-1).
 
@@ -677,9 +677,9 @@ Now we will perform the same steps, but for gene IDs. But gene IDs are currently
 >
 {: .hands_on}
 
-{% icon congratulations %} Finally! We have prepared all the files to pass them onto the Monocle3 workflow!
+{% icon congratulations %} Finally! We have prepared all the files to pass them onto the Monocle3 workflow! 
 
-# Creating CDS object
+## Creating CDS object
 
 Monocle3 turns the expression matrix, cell and gene annotations into an object called cell_data_set (CDS), which holds single-cell expression data.
 
@@ -692,11 +692,6 @@ Monocle3 turns the expression matrix, cell and gene annotations into an object c
 >
 {: .details}
 
-The Monocle3 workflow looks like the following, which should seem pretty similar to what you've done throughout the case study.
-
-![Monocle workflow: scRNA-seq dataset, pre-process data (normalise, remove batch effects), non-linear dimensionality reduction (t-SNE, UMAP), cluster cells, compare clusters (identify top markers, targeted contrasts), trajectory analysis](../../images/scrna-casestudy-monocle/monocle3_new_workflow.png "Workflow provided by Monocle3 documentation")
-
-We will follow those steps and see how it all works in practice.
 
 > <hands-on-title>Create CDS object</hands-on-title>
 >
