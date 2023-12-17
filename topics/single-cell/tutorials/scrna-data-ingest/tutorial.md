@@ -309,7 +309,7 @@ As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h
 
 # Anndata -> Cell Data Set (CDS)
 
-Cell Data Set (CDS) format is usually used when working with a package called Monocle3. Below we show two methods on how to transform AnnData to CDS object, one of which creates an input file for [Monocle 3 tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}).
+Cell Data Set (CDS) format is usually used when working with a package called Monocle3 {% cite monocle3 %}. Below we show two methods on how to transform AnnData to CDS object, one of which creates an input file for [Monocle 3 tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}).
 
 {% include _includes/cyoa-choices.html option1="CDS input for Monocle3 tutorial (use for pre-processed data)" option2="General AnnData → CDS conversion" default="Create CDS input for Monocle3 tutorial"
        text="You can choose whether you want just to transform AnnData to CDS or to create CDS input file for Monocle3 tutorial to proceed with the downstream analysis described in that tutorial. Please note that depending on your dataset, you might need to refer to the first method which uses both annotated and unprocessed matrices. If you did some pre-processing on your AnnData object, then you might need to choose the first method anyway since Monocle3 performs its own pre-processing, so we would also need an unprocessed expression matrix alongside annotated (pre-processed) AnnData. That method is more expanded and specific, while the general one just shows the main principle of the conversion." %}
