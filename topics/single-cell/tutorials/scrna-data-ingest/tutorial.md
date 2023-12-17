@@ -309,7 +309,17 @@ As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h
 
 # Anndata -> Cell Data Set (CDS)
 
-Cell Data Set (CDS) format is usually used when working with a package called Monocle3 and in the [corresponding tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) it was shown how to transform annotated AnnData to CDS object. Please note that depending on your dataset and pre-processing, you might need to refer to the method used in the mentioned tutorial which uses both annotated and unprocessed matrices. However, here we will just show the main principle of that conversion, so we will continue working on previously used dataset, so you can copy it from your history.
+Cell Data Set (CDS) format is usually used when working with a package called Monocle3. Below we show two methods on how to transform AnnData to CDS object, one of which creates an input file for [Monocle 3 tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}).
+
+{% include _includes/cyoa-choices.html option1="CDS input for Monocle3 tutorial (use for pre-processed data)" option2="General AnnData → CDS conversion" default="Create CDS input for Monocle3 tutorial"
+       text="You can choose whether you want just to transform AnnData to CDS or to create CDS input file for Monocle3 tutorial to proceed with the downstream analysis described in that tutorial. Please note that depending on your dataset, you might need to refer to the first method which uses both annotated and unprocessed matrices. If you did some pre-processing on your AnnData object, then you might need to choose the first method anyway since Monocle3 performs its own pre-processing, so we would also need an unprocessed expression matrix alongside annotated (pre-processed) AnnData. That method is more expanded and specific, while the general one just shows the main principle of the conversion." %}
+
+
+<div class="General AnnData → CDS conversion" markdown="1">
+
+# General AnnData → CDS conversion
+
+Here we will just show the main principle of the conversion, and we will continue working on previously used dataset, so you can copy it from your history. 
 
 {% snippet faqs/galaxy/histories_copy_dataset.md %}
 
@@ -402,7 +412,328 @@ And the final step is to create the CDS file using Monocle tool!
 > 2. **Rename** {% icon galaxy-pencil %} the output: `CDS Monocle file`
 {: .hands_on}
 
-As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata-to-cell-data-set-cds-conversion) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata-to-cell-data-set-cds-conversion) (it doesn't include the renaming step though). 
+As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h/anndata-to-cell-data-set-cds-conversion) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/anndata-to-cell-data-set-cds-conversion) (it doesn't include the step on renaming the column header though). 
+
+</div>
+
+<div class="CDS input for Monocle3 tutorial (use for pre-processed data)" markdown="1">
+
+# CDS input for Monocle3 tutorial (use for pre-processed data)
+
+The [dedicated tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) shows how to perform trajectory analysis using Monocle3 which is the next step in the single-cell case study tutorial series, right after [pre-processing tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) and [analysing the metadata]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). To keep the continuity of the series, we will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). After successfully completing this section with the mentioned dataset, you can use it directly in the [Monocle3 tutorial workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3-1).
+
+If you work on your own data, you might also need to follow this method since it shows how to deal with already pre-processed datasets. Since Monocle3 performs its own pre-processing, you will need both annotated and unprocessed matrices. 
+
+## Get data
+
+Monocle3 works great with annotated data, so we will make use of our annotated AnnData object, generated in the [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). We will also need a ‘clean’ expression matrix, extracted from the AnnData object just before we started the processing.
+You have two options for uploading these datasets. Importing via history is often faster.
+
+> <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
+>
+> 1. Import history from: [input history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files)
+>
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
+>
+{: .hands_on}
+
+><hands-on-title>Option 2: Data upload - Add to history</hands-on-title>
+>
+> 1. Create a new history for this tutorial
+> 2. Import the AnnData object from [Zenodo](https://zenodo.org/records/7078524)
+>
+>    ```
+>    https://zenodo.org/records/7078524/files/AnnData_before_processing.h5ad
+>    https://zenodo.org/records/7078524/files/Annotated_AnnData.h5ad
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. Check that the datatype is `h5ad`
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
+>
+{: .hands_on}
+
+
+## Extracting annotations
+
+To run Monocle, we need cell metadata, gene metadata, and an expression matrix file of genes by cells. (In theory, the expression matrix alone could do, but then we wouldn’t have all those useful annotations that we worked on so hard in the previous tutorials!). In order to get these files, we will extract the gene and cell annotations from our AnnData object.
+
+ > <question-title></question-title>
+>
+> How many lines do you expect to be in the gene and cell metadata files?
+>
+> > <solution-title></solution-title>
+> >
+> > If you click on the step with uploaded annotated AnnData file, you will see on a small preview that this object has 8605 observations and 15395 variables, so we expect to get a cell metadata file with 8605 lines and gene metadata file with 15395 lines (without headers of course!).
+> >
+> {: .solution}
+>
+{: .question}
+
+> <hands-on-title>Extracting annotations</hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Annotated_AnnData`
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+> 2. Rename {% icon galaxy-pencil %} the observations annotation `Extracted cell annotations (obs)`
+>
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Annotated_AnnData`
+>    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
+>
+> 4. Rename {% icon galaxy-pencil %} the annotation of variables `Extracted gene annotations (var)`
+>
+>
+{: .hands_on}
+
+Quick and easy, isn’t it? However, we need to make some minor changes before we can input these files into the Monocle toolsuite.
+
+## Cell metadata
+Our current dataset is not just T-cells: as you might remember from the last tutorial, we identified a cluster of macrophages as well. This might be a problem, because the trajectory algorithm will try to find relationships between all the cells (even if they are not necessarily related!), rather than only the T-cells that we are interested in. We need to remove those unwanted cell types to make the analysis more accurate.
+
+The Manipulate AnnData tool allows you to filter observations or variables, and that would be the most obvious way to remove those cells. However, given that we don't need an AnnData object, it's a lot quicker to edit a table rather than manipulate an AnnData object. Ultimately, we need cell metadata, gene metadata and expression matrix files that have macrophages removed, and that have the correct metadata that Monocle looks for. With some table manipulation, we’ll end up with three separate files, ready to be passed onto Monocle3.
+
+ > <question-title></question-title>
+>
+> Where is the information about cell types stored?
+>
+> > <solution-title></solution-title>
+> >
+> > We have already extracted the cell annotations file - in one of the columns you can find the information about cell type, assigned to each cell.
+> > ![Cell annotations along the top, n_genes, n_counts, louvain, cell_type with a cell barcode and subsequent metadata as each row](../../images/scrna-casestudy-monocle/example_cell_annotations.png "Example cell annotations")
+> >
+> {: .solution}
+>
+{: .question}
+
+Click on `Extracted cell annotations (obs)` file to see a small preview window. This shows you that the column containing the cell types has number 22.  We’ll need that to filter out unwanted cell types!
+
+> <warning-title>Check the column number!</warning-title>
+> If you are working on a different dataset, the number of the ‘cell_type’ column might be different, so make sure you check it on a preview and use the correct number!
+{: .warning}
+
+> <hands-on-title>Filter out macrophages</hands-on-title>
+>
+> 1. {% tool [Filter](Filter1) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `Extracted cell annotations (obs)`
+>    - *"With following condition"*: `c22!='Macrophages'`
+>    - *"Number of header lines to skip"*: `1`
+>    - That’s it - our cell annotation file is ready for Monocle! Let’s rename it accordingly.
+> 2. **Rename** {% icon galaxy-pencil %} the output: `Cells input data for Monocle3`
+>
+>    > <details-title>Parameters</details-title>
+>    >
+>    > - `c22` means column no. 22 - that's the column with cell types, and it will be filtered for the macrophages
+>    > - `!=` means 'not equal to' - we want to keep the cell types which ARE NOT macrophages
+>    {: .details}
+>
+>    > <tip-title>Other unwanted cell types</tip-title>
+>    >
+>    > It might happen that during clustering you’ll find another cell type that you want to get rid of for the trajectory analysis. Then simply re-run this tool on already filtered file and change ‘Macrophages’ to another unwanted cell type.
+>    {: .tip}
+{: .hands_on}
+
+## Gene annotations
+Sometimes certain functionalities require a specific indication of where the data should be taken from. Monocle3 tools expect that the genes column is named ‘gene_short_name’. Let's check what the name of that column is in our dataset currently.
+
+> <question-title></question-title>
+>
+> 1. Where can you check the header of a column containing genes names?
+> 2. What is the name of this column?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Our extracted gene annotations file! Either by clicking on the eye icon {% icon solution %} or having a look at the small preview window.
+> > 2. In our dataset the gene names are stored in a column called ‘Symbol’ - we need to change that!
+> > ![The dataset in the history has a preview window showing the columns of the extracted gene annotation with each gene as a row and the metadata - index, ID, symbol - as the column names](../../images/scrna-casestudy-monocle/window_in_history.png "Preview window in the history")
+> >
+> {: .solution}
+>
+{: .question}
+
+Let’s click on the `Extracted gene annotations (var)` file to see a small preview. We can see that the gene names are in the third column with a header `Symbol`. Keep that in mind - we’ll use that in a second!
+
+> <hands-on-title>Changing the column name</hands-on-title>
+>
+> 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2) %} with the following parameters:
+>    - {% icon param-file %} *"Select cells from"*: `Extracted gene annotations (var)`
+>    - *"using column"*: `c3` or `Column: 3`
+>    - In *"Check"*:
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Symbol`
+>            - *"Replacement"*: `gene_short_name`
+> 2. Check that the datatype is `tabular`
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>     - Voila! That’s the gene input for Monocle! Just a quick rename...
+> 3. **Rename** {% icon galaxy-pencil %} the output: `Genes input data for Monocle3`
+>
+{: .hands_on}
+
+## Expression matrix
+Last, but not least! And in fact, the most important! The expression matrix contains all the values representing the expression level of a particular gene in a cell. This is why in theory the expression matrix is the only input file required by Monocle3. Without annotation files the CDS data can still be generated - it will be quite bare and rather unhelpful for interpretation, but it's possible to process.
+
+So, the values in the expression matrix are just numbers. But do you remember that we have already done some processing such as normalisation and the calculation of principal components in the AnnData object in the previous tutorial? That affected our expression matrix. Preprocessing is one of the steps in the Monocle3 workflow, so we want to make sure that the calculations are done on a ‘clean’ expression matrix. If we apply too many operations on our raw data, it will be too ‘deformed’ to be reliable. The point of the analysis is to use algorithms that make the enormous amount of data understandable in order to draw meaningful conclusions in accordance with biology.
+
+So how do we do that?
+> <question-title></question-title>
+>
+> 1. How many cells and genes are there in the `Anndata_before_processing` file?
+> 2. How many lines are there in `Cells input data for Monocle3`?
+> 3. How many lines are there in `Genes input data for Monocle3`?
+>
+> > <solution-title></solution-title>
+> > You can answer all the questions just by clicking on the given file and looking at the preview window.
+> > 1. [n_obs x n_vars] = 31178 x 35734, so there are 31178 cells and 35734 genes.
+> > 2. 8570 lines, including a header, which makes 8569 cells.
+> > 3. 15396 lines, including a header, which makes 15395 genes.
+> >
+> {: .solution}
+>
+{: .question}
+
+As you can see, there are way more genes and cells in the unprocessed AnnData file, so the expression matrix is much bigger than we need it to be. If the genes and cells we prepared for Monocle3 are not the same as in the expression matrix, Monocle3 will crash. Therefore, we have to filter that big, clean matrix and adjust it to our already prepared genes and cells files. But first, let’s extract the matrix from the unprocessed AnnData object.
+
+> <hands-on-title>Extracting matrix</hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_before_processing`
+>    - *"What to inspect?"*: `The full data matrix`
+> 2. **Rename** {% icon galaxy-pencil %} the output: `Unprocessed expression matrix`
+>
+{: .hands_on}
+
+If you have a look at the preview of `Unprocessed expression matrix`, you’ll see that the first column contains the cell barcodes, while the first row - the gene IDs. We would like to keep only the values corresponding to the cells and genes that are included in `Cells input data for Monocle3` and `Genes input data for Monocle3`. How do we do it? First, we compare the cell barcodes from `Cells input data for Monocle3` to those in `Unprocessed expression matrix` and ask Galaxy to keep the values of the matrix for which the barcodes in both files are the same. Then, we’ll do the same for gene IDs. We will cut the first columns from `Cells input data for Monocle3` and `Genes input data for Monocle3` to be able to compare those columns side by side with the matrix file.
+
+> <hands-on-title>Cutting out the columns</hands-on-title>
+>
+> 1. {% tool [Cut](Cut1) %} with the following parameters:
+>    - *"Cut columns"*: `c1`
+>    - {% icon param-file %} *"From"*: `Cells input data for Monocle3`
+> 2. **Rename** {% icon galaxy-pencil %} the output: `Cells IDs`
+> 3. {% tool [Cut](Cut1) %} with the following parameters:
+>    - *"Cut columns"*: `c1`
+>    - {% icon param-file %} *"From"*: `Genes input data for Monocle3`
+> 4. **Rename** {% icon galaxy-pencil %} the output: `Genes IDs`
+>
+{: .hands_on}
+
+> <hands-on-title> Filter matrix values by cell barcodes</hands-on-title>
+>
+> 1. {% tool [Join two Datasets](join1) %} with the following parameters:
+>    - {% icon param-file %} *"Join"*: `Cells IDs`
+>    - *"using column"*: `c1`or `Column: 1`
+>    - {% icon param-file %} *"with"*: `Unprocessed expression matrix`
+>    - *"and column"*: `c1`or `Column: 1`
+>    - *"Keep lines of first input that do not join with second input"*: `Yes`
+>    - *"Keep lines of first input that are incomplete"*: `Yes`
+>    - *"Fill empty columns"*: `No`
+>    - *"Keep the header lines"*: `Yes`
+> 2. **Rename** {% icon galaxy-pencil %} the output: `Pre-filtered matrix (by cells)`
+>
+{: .hands_on}
+
+Look at the preview of the output file. First of all, you can see that there are 8570 lines (8569 cells) instead of 31178 cells that were present in the matrix. That’s exactly what we wanted to achieve - now we have raw information for the T-cells that we have filtered. However, the step that we have already performed left us with the matrix whose first and second columns are the same - let’s get rid of one of those!
+
+> <hands-on-title>Remove duplicate column (cells IDs)</hands-on-title>
+>
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `Pre-filtered matrix (by cells)`
+>    - *"Operation"*: `Discard`
+>    - *"Cut by"*: `fields`
+>        - *"List of Fields"*: `c1`
+> 2. **Rename** {% icon galaxy-pencil %} the output: `Filtered matrix (by cells)`
+>
+{: .hands_on}
+
+Now we will perform the same steps, but for gene IDs. But gene IDs are currently in the first row, so we need to transpose the matrix, and from there we can repeat the same steps as above for Gene IDs.
+
+> <hands-on-title>Filter matrix by gene IDs</hands-on-title>
+>
+> 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Input tabular dataset"*: `Filtered matrix (by cells)`
+>    - The matrix is now ready to be filtered by gene IDs!
+> 2. {% tool [Join two Datasets](join1) %} with the following parameters:
+>    - {% icon param-file %} *"Join"*: `Genes IDs`
+>    - *"using column"*: `c1` or `Column: 1`
+>    - {% icon param-file %} *"with"*: output of **Transpose** {% icon tool %}
+>    - *"and column"*: `c1` or `Column: 1`
+>    - *"Keep lines of first input that do not join with second input"*: `Yes`
+>    - *"Keep lines of first input that are incomplete"*: `Yes`
+>    - *"Fill empty columns"*: `No`
+>    - *"Keep the header lines"*: `Yes`
+> 3. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: output of **Join two Datasets** {% icon tool %}
+>    - *"Operation"*: `Discard`
+>    - *"Cut by"*: `fields`
+>        - *"List of Fields"*: `c1`
+>    -  Monocle3 requires that in the matrix rows are genes, and columns are cells - that is what we've got, so there is no need to transpose matrix again. The expression matrix is ready! Let's just rename it...
+> 4. **Rename** {% icon galaxy-pencil %} the output: `Expression matrix for Monocle3`
+>
+{: .hands_on}
+
+{% icon congratulations %} Finally! We have prepared all the files to pass them onto the Monocle3 workflow!
+
+# Creating CDS object
+
+Monocle3 turns the expression matrix, cell and gene annotations into an object called cell_data_set (CDS), which holds single-cell expression data.
+
+> <details-title>Input files</details-title>
+>
+> Here is what [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/) says about the required three input files:
+>    - **expression_matrix**: a numeric matrix of expression values, where rows are genes, and columns are cells. Must have the same number of columns as the cell_metadata has rows and the same number of rows as the gene_metadata has rows.
+>    - **cell_metadata**: a data frame, where rows are cells, and columns are cell attributes (such as cell type, culture condition, day captured, etc.)
+>    - **gene_metadata**: a data frame, where rows are features (e.g. genes), and columns are gene attributes, such as biotype, gc content, etc. One of its columns should be named "gene_short_name", which represents the gene symbol or simple name (generally used for plotting) for each gene.
+>
+{: .details}
+
+The Monocle3 workflow looks like the following, which should seem pretty similar to what you've done throughout the case study.
+
+![Monocle workflow: scRNA-seq dataset, pre-process data (normalise, remove batch effects), non-linear dimensionality reduction (t-SNE, UMAP), cluster cells, compare clusters (identify top markers, targeted contrasts), trajectory analysis](../../images/scrna-casestudy-monocle/monocle3_new_workflow.png "Workflow provided by Monocle3 documentation")
+
+We will follow those steps and see how it all works in practice.
+
+> <hands-on-title>Create CDS object</hands-on-title>
+>
+>    > <details-title>Data format</details-title>
+>    >
+>    > You can provide expression matrix as TSV, CSV, MTX or RDS file, while genes and cells metadata as TSV, CSV or RDS files. In our case all three files are tabular, so we will set the format to TSV.
+>    {: .details}
+> 1. {% tool [Monocle3 create](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Expression matrix, genes as rows, cells as columns. Required input. Provide as TSV, CSV or RDS."*: `Expression matrix for Monocle3`
+>    - *"Format of expression matrix"*: `TSV`
+>    - {% icon param-file %} *"Per-cell annotation, optional. Row names must match the column names of the expression matrix. Provide as TSV, CSV or RDS."*: `Cells input data for Monocle3`
+>    - *"Format of cell metadata"*: `TSV`
+>    - {% icon param-file %} *"Per-gene annotation, optional. Row names must match the row names of the expression matrix. Provide as TSV, CSV or RDS."*: `Genes input data for Monocle3`
+>    - *"Format of gene annotation"*: `TSV`
+>
+> 2. **Rename** {% icon galaxy-pencil %} the output: `CDS input for Monocle3 tutorial`
+{: .hands_on}
+
+It was quite a long conversion, but we did it! If you're interested, the "Tip" below describes how we could possibly speed up the process using alternative tools. 
+
+> <tip-title> Alternative tools </tip-title>
+>
+> Generally in coding you can use different ways to achieve the same result. Similarly, in Galaxy you can use different tools but the outcome will be the same.
+> For example, we could have used some tools on our starting AnnData object to remove macrophages and rename the column header, and afterwards extract observations and variables. It is a good practice to use methods from the libraries (such as Scanpy below) rather than dealing with text files rows and columns. The shown approach works well, but it might be problematic with much bigger datasets sizes. Then, you can use the following route: 
+> 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy93) %} on annotated Anndata to remove macrophages.
+> 2. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92) %} to change the genes name from *Symbol* to *gene_short_name*.
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} to extract genes and cells (to be used for Monocle).
+> 4. Follow further steps to filter unprocessed matrix.
+>
+> You've probably used the mentioned tools before, so **challenge yourself** and try to replicate the process using the tools above!
+{: .tip}
+
+You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/j.jakiela/h/anndata---cds-conversion-for-monocle3-tutorial), or check out the [workflow](https://singlecell.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3). 
+
+And now you have your input file ready to start the [Monocle3 tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %})!
+
+</div>
 
 # Downsampling FASTQ files
 
@@ -416,8 +747,8 @@ First, let's get some toy data. We just need two FASTQ files - one containing ba
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >      ```
->    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
->    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
+>      https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
+>      https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
 >      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
