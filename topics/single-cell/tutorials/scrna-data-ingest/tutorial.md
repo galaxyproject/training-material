@@ -309,7 +309,7 @@ As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h
 
 # Anndata -> Cell Data Set (CDS)
 
-Cell Data Set (CDS) format is usually used when working with a package called Monocle3 ({% cite monocle3 %}). Below we show two methods on how to transform AnnData to CDS object, one of which creates an input file for [Monocle 3 tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}).
+Cell Data Set (CDS) format is usually used when working with a package called Monocle3 ({% cite monocle3 %}). Below we show two methods on how to transform AnnData to CDS object, one of which creates an input file for [Monocle 3 tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}).
 
 {% include _includes/cyoa-choices.html option1="CDS input for Monocle3 tutorial (use for pre-processed data)" option2="General AnnData → CDS conversion" default="Create CDS input for Monocle3 tutorial"
        text="You can choose whether you want just to transform AnnData to CDS or to create CDS input file for Monocle3 tutorial to proceed with the downstream analysis described in that tutorial. Please note that depending on your dataset, you might need to refer to the first method which uses both annotated and unprocessed matrices. If you did some pre-processing on your AnnData object, then you might need to choose the first method anyway since Monocle3 performs its own pre-processing, so we would also need an unprocessed expression matrix alongside annotated (pre-processed) AnnData. That method is more expanded and specific, while the general one just shows the main principle of the conversion." %}
@@ -420,7 +420,7 @@ As usual, you can check the [example history](https://usegalaxy.eu/u/j.jakiela/h
 
 ## CDS input for Monocle3 tutorial (use for pre-processed data)
 
-The [dedicated tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) shows how to perform trajectory analysis using Monocle3 which is the next step in the single-cell case study tutorial series, right after [pre-processing tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) and [analysing the metadata]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). To keep the continuity of the series, we will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). After successfully completing this section with the mentioned dataset, you can use it directly in the [Monocle3 tutorial workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3-1).
+The [dedicated tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) shows how to perform trajectory analysis using Monocle3 which is the next step in the single-cell case study tutorial series, right after [pre-processing tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) and [analysing the metadata]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). To keep the continuity of the series, we will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). After successfully completing this section with the mentioned dataset, you can use it directly in the [Monocle3 tutorial workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3-1).
 
 If you work on your own data, you might also need to follow this method since it shows how to deal with already pre-processed datasets. Since Monocle3 performs its own pre-processing, you will need both annotated and unprocessed matrices. 
 
@@ -726,7 +726,7 @@ It was quite a long conversion, but we did it! If you're interested, the "Tip" b
 
 You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/j.jakiela/h/anndata---cds-conversion-for-monocle3-tutorial), or check out the [workflow](https://singlecell.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3). 
 
-And now you have your input file ready to start the [Monocle3 tutorial]({% link /topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %})!
+And now you have your input file ready to start the [Monocle3 tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %})!
 
 </div>
 
