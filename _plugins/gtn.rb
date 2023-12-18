@@ -417,6 +417,10 @@ module Jekyll
 
       url
     end
+
+    def group_icons(icons)
+      icons.group_by{|k, v| v}.map{|k, v| [k, v.map{|z|z[0]} ]}.to_h.invert
+    end
   end
 end
 
