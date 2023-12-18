@@ -17,7 +17,7 @@ module Jekyll
     # Params:
     # +site+:: The +Jekyll::Site+ object
     def generate(site)
-      puts '[GTN/Sitemap] Generating'
+      Jekyll.logger.info '[GTN/Sitemap] Generating'
       result = '<?xml version="1.0" encoding="UTF-8"?>'
       result += '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' \
                 'xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 ' \

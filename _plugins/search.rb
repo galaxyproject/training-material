@@ -18,7 +18,7 @@ module Jekyll
     end
 
     def render(context)
-      puts '[GTN/Search]'
+      Jekyll.logger.info '[GTN/Search]'
 
       site = context.registers[:site]
       topics = TopicFilter.list_topics_h(site)

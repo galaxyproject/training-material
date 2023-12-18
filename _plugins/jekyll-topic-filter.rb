@@ -39,14 +39,14 @@ module TopicFilter
   def self.fill_cache(site)
     return if site.data.key?('cache_topic_filter')
 
-    puts '[GTN/TopicFilter] Begin Cache Prefill'
+    Jekyll.logger.debug '[GTN/TopicFilter] Begin Cache Prefill'
     site.data['cache_topic_filter'] = {}
 
     # For each topic
     list_topics(site).each do |topic|
       site.data['cache_topic_filter'][topic] = filter_by_topic(site, topic)
     end
-    puts '[GTN/TopicFilter] End Cache Prefill'
+    Jekyll.logger.debug '[GTN/TopicFilter] End Cache Prefill'
   end
 
   ##
@@ -583,7 +583,7 @@ module TopicFilter
     return site.data['cache_processed_pages'] if site.data.key?('cache_processed_pages')
 
     materials = collate_materials(site, pages).map { |_k, v| resolve_material(site, v) }
-    puts '[GTN/TopicFilter] Filling Materials Cache'
+    Jekyll.logger.info '[GTN/TopicFilter] Filling Materials Cache'
     site.data['cache_processed_pages'] = materials
 
     # Prepare short URLs
@@ -875,7 +875,6 @@ module Jekyll
         Gtn::PublicationTimes.obtain_time(y.path) <=> Gtn::PublicationTimes.obtain_time(x.path)
       end
 
-      latest.each { |x| puts [x.path, Gtn::PublicationTimes.obtain_time(x.path)] }
       latest.slice(0, 10)
     end
 
