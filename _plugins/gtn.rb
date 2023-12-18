@@ -397,13 +397,11 @@ module Jekyll
       page['path'].split('/')[1]
     end
 
-    def get_og_title(site, page)
-      # {%- if topic.title %}[{{ topic.title }}] {% endif -%}
-      # {%- if page.layout == "topic" %}Tutorial List {% endif -%}
-      # {%- if page.layout == "faq" or page.layout == "faq-page" -%}
-      # 	{%- unless og_title %}Topic {% endunless -%}
-      # 	FAQ{% unless og_title %}s{% endunless %} {% elsif page.layout == "workflow-list" %}Workflows {% endif -%}
-      # {%- if og_title %}{{ og_title }}{% endif -%}
+
+    def get_og_desc(site, page)
+    end
+
+    def get_og_title(site, page, reverse)
       og_title = []
       topic_id = page['path'].gsub(/^\.\//, '').split('/')[1]
 
@@ -433,7 +431,13 @@ module Jekyll
       if page['layout'] == "workflow-list"
         og_title.push "Workflows"
       elsif page['layout'] == "faq-page" or page['layout'] == "faqs"
-        og_title.push "FAQs"
+        if page['path'] =~/faqs\/gtn/
+          og_title.push "GTN FAQs"
+        elsif page['path'] =~/faqs\/galaxy/
+          og_title.push "Galaxy FAQs"
+        else
+          og_title.push "FAQs"
+        end
       elsif page['layout'] == "faq"
         og_title.push "FAQ: #{page['title']}"
       elsif page['layout'] == "learning-pathway"
@@ -448,7 +452,11 @@ module Jekyll
 
       Jekyll.logger.debug "Material #{page['layout']} :: #{page['path']} => #{topic_id}/#{material_id} => #{og_title}"
 
-      og_title.compact.join(" / ")
+      if reverse.to_s == "true"
+        og_title.compact.reverse.join(" / ")
+      else
+        og_title.compact.join(" / ")
+      end
     end
 
     ##
