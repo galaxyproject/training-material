@@ -397,6 +397,57 @@ module Jekyll
       page['path'].split('/')[1]
     end
 
+    def get_og_title(site, page)
+      # {%- if topic.title %}[{{ topic.title }}] {% endif -%}
+      # {%- if page.layout == "topic" %}Tutorial List {% endif -%}
+      # {%- if page.layout == "faq" or page.layout == "faq-page" -%}
+      # 	{%- unless og_title %}Topic {% endunless -%}
+      # 	FAQ{% unless og_title %}s{% endunless %} {% elsif page.layout == "workflow-list" %}Workflows {% endif -%}
+      # {%- if og_title %}{{ og_title }}{% endif -%}
+      og_title = []
+      topic_id = page['path'].gsub(/^\.\//, '').split('/')[1]
+
+      if site.data.key?(topic_id)
+        if site.data[topic_id].is_a?(Hash) && site.data[topic_id].key?('title')
+          og_title = [site.data[topic_id]['title']]
+        else
+          Jekyll.logger.warn "Missing title for #{topic_id}"
+        end
+      end
+
+      if page['layout'] == "topic"
+        og_title.push "Tutorial List"
+        return og_title.join(' / ')
+      end
+
+      material_id = page['path'].gsub(/^\.\//, '').split('/')[3]
+      material = fetch_tutorial_material(site, topic_id, material_id)
+
+      if ! material.nil?
+        og_title.push material['title']
+      end
+
+      if page['layout'] == "workflow-list"
+        og_title.push "Workflows"
+      elsif page['layout'] == "faq-page" or page['layout'] == "faqs"
+        og_title.push "FAQs"
+      elsif page['layout'] == "faq"
+        og_title.push "FAQ: #{page['title']}"
+      elsif page['layout'] == "learning-pathway"
+        og_title.push "Learning Pathway: #{page['title']}"
+      elsif page['layout'] == "tutorial_hands_on"
+        og_title[-1].prepend "Hands-on: " if og_title[-1]
+      elsif page['layout'] =~ /slides/
+        og_title[-1].prepend "Slide Deck: " if og_title[-1]
+      else
+        og_title.push page['title']
+      end
+
+      Jekyll.logger.debug "Material #{page['layout']} :: #{page['path']} => #{topic_id}/#{material_id} => #{og_title}"
+
+      og_title.compact.join(" / ")
+    end
+
     ##
     # Gets the 'default' link for a material, hands on if it exists, otherwise slides.
     # Params:

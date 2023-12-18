@@ -183,7 +183,8 @@ module TopicFilter
   def self.fetch_tutorial_material(site, topic_name, tutorial_name)
     fill_cache(site)
     if site.data['cache_topic_filter'][topic_name].nil?
-      Jekyll.logger.warn "Topic cache not filled, cannot fetch tutorial material for #{topic_name}"
+      Jekyll.logger.warn "Cannot fetch tutorial material for #{topic_name}"
+      nil
     else
       site.data['cache_topic_filter'][topic_name].select { |p| p['tutorial_name'] == tutorial_name }[0]
     end

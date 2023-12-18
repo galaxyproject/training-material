@@ -22,7 +22,7 @@ module Jekyll
           'hidden' => true,
         }
 
-        topic_index = PageWithoutAFile.new(site, '', "tags/#{tag}", 'index.md')
+        topic_index = PageWithoutAFile.new(site, '', "tags/#{Jekyll::Utils.slugify(tag)}", 'index.md')
         topic_index.content = ''
         topic_index.data['layout'] = 'topic'
         topic_index.data['topic_name'] = "by_tag_#{tag}"
@@ -33,7 +33,7 @@ module Jekyll
 
       Jekyll.logger.info '[GTN/SyntheticTopics] Generating By-Tag Embeds'
       TopicFilter.list_all_tags(site).map do |tag|
-        topic_index = PageWithoutAFile.new(site, '', "tags/#{tag}", 'embed.html')
+        topic_index = PageWithoutAFile.new(site, '', "tags/#{Jekyll::Utils.slugify(tag)}", 'embed.html')
         topic_index.content = ''
         topic_index.data['layout'] = 'topic-embed'
         topic_index.data['topic_name'] = "by_tag_#{tag}"
