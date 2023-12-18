@@ -421,7 +421,10 @@ module Jekyll
       end
 
       material_id = page['path'].gsub(/^\.\//, '').split('/')[3]
-      material = fetch_tutorial_material(site, topic_id, material_id)
+      material = nil
+      if site.data.key? topic_id 
+        material = fetch_tutorial_material(site, topic_id, material_id)
+      end
 
       if ! material.nil?
         og_title.push material['title']

@@ -26,14 +26,12 @@
 
         {{ page | generate_dublin_core: site }}
 
-	{% assign topic_id = page | get_topic %}
-        {% assign topic = site.data[topic_id] %}
-
-	{% assign og_title = site | get_og_title:page %}
-
+	{%- assign topic_id = page | get_topic -%}
+	{%- assign topic = site.data[topic_id] -%}
+	{%- assign og_title = site | get_og_title:page -%}
         <meta name="description" content="{{ og_desc | strip_html}}">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="{{ og_title }}">
+	<meta property="og:title" content="{{ og_title | default: page.title }}">
         <meta property="og:description" content="{{ og_desc | strip_html}}">
 
         {%- if page.cover %}{% assign coverimage = page.cover %}
