@@ -125,7 +125,7 @@ if $PROGRAM_NAME == __FILE__
   # Gtn::ModificationTimes.init_cache
   # pp Gtn::ModificationTimes.commit_count_cache
 
-  # Moved to "bin/list-recently-modified.rb"
+  puts ' Moved tobin/list-recently-modified.rb'
   # Gtn::PublicationTimes.init_cache
   # Gtn::PublicationTimes.time_cache.select do |_, v|
   #   # Things in last 6 months

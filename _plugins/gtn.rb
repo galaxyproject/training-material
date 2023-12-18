@@ -397,13 +397,11 @@ module Jekyll
       page['path'].split('/')[1]
     end
 
-
-    def get_og_desc(site, page)
-    end
+    def get_og_desc(site, page); end
 
     def get_og_title(site, page, reverse)
       og_title = []
-      topic_id = page['path'].gsub(/^\.\//, '').split('/')[1]
+      topic_id = page['path'].gsub(%r{^\./}, '').split('/')[1]
 
       if site.data.key?(topic_id)
         if site.data[topic_id].is_a?(Hash) && site.data[topic_id].key?('title')
@@ -413,49 +411,46 @@ module Jekyll
         end
       end
 
-      if page['layout'] == "topic"
-        og_title.push "Tutorial List"
+      if page['layout'] == 'topic'
+        og_title.push 'Tutorial List'
         return og_title.join(' / ')
       end
 
-      material_id = page['path'].gsub(/^\.\//, '').split('/')[3]
+      material_id = page['path'].gsub(%r{^\./}, '').split('/')[3]
       material = nil
-      if site.data.key? topic_id 
-        material = fetch_tutorial_material(site, topic_id, material_id)
-      end
+      material = fetch_tutorial_material(site, topic_id, material_id) if site.data.key? topic_id
 
-      if ! material.nil?
-        og_title.push material['title']
-      end
+      og_title.push material['title'] if !material.nil?
 
-      if page['layout'] == "workflow-list"
-        og_title.push "Workflows"
-      elsif page['layout'] == "faq-page" or page['layout'] == "faqs"
-        if page['path'] =~/faqs\/gtn/
-          og_title.push "GTN FAQs"
-        elsif page['path'] =~/faqs\/galaxy/
-          og_title.push "Galaxy FAQs"
+      case page['layout']
+      when 'workflow-list'
+        og_title.push 'Workflows'
+      when 'faq-page', 'faqs'
+        if page['path'] =~ %r{faqs/gtn}
+          og_title.push 'GTN FAQs'
+        elsif page['path'] =~ %r{faqs/galaxy}
+          og_title.push 'Galaxy FAQs'
         else
-          og_title.push "FAQs"
+          og_title.push 'FAQs'
         end
-      elsif page['layout'] == "faq"
+      when 'faq'
         og_title.push "FAQ: #{page['title']}"
-      elsif page['layout'] == "learning-pathway"
+      when 'learning-pathway'
         og_title.push "Learning Pathway: #{page['title']}"
-      elsif page['layout'] == "tutorial_hands_on"
-        og_title[-1].prepend "Hands-on: " if og_title[-1]
-      elsif page['layout'] =~ /slides/
-        og_title[-1].prepend "Slide Deck: " if og_title[-1]
+      when 'tutorial_hands_on'
+        og_title[-1]&.prepend 'Hands-on: '
+      when /slides/
+        og_title[-1]&.prepend 'Slide Deck: '
       else
         og_title.push page['title']
       end
 
       Jekyll.logger.debug "Material #{page['layout']} :: #{page['path']} => #{topic_id}/#{material_id} => #{og_title}"
 
-      if reverse.to_s == "true"
-        og_title.compact.reverse.join(" / ")
+      if reverse.to_s == 'true'
+        og_title.compact.reverse.join(' / ')
       else
-        og_title.compact.join(" / ")
+        og_title.compact.join(' / ')
       end
     end
 

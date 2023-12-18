@@ -123,7 +123,7 @@ module Jekyll
       # TODO:
       # generateLibrary(site)
 
-      Jekyll.logger.info "[GTN/API] Generating API"
+      Jekyll.logger.info '[GTN/API] Generating API'
       # Full Bibliography
       Gtn::Scholar.load_bib(site)
       Jekyll.logger.debug '[GTN/API] Bibliography'
