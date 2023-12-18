@@ -8,7 +8,7 @@ contributors: [jennaj, AnomalyCodes]
 
 **Transfer a Single Dataset**
 
-At the **sender** Galaxy server, [set the history to a shared state]({% link faqs/galaxy/histories_sharing.md %}), then directly capture the {% icon link %} link for a dataset and paste the URL into the **Upload** tool at the **receiver** Galaxy server. 
+At the **sender** Galaxy server, [set the history to a shared state]({% link faqs/galaxy/histories_sharing.md %}), then directly capture the {% icon galaxy-link %} link for a dataset and paste the URL into the **Upload** tool at the **receiver** Galaxy server. 
 
 **Transfer an Entire History**
 
@@ -18,11 +18,11 @@ At the **sender** Galaxy server
 
 1. Navigate to the history you want to transfer, and [set the history to a shared state]({% link faqs/galaxy/histories_sharing.md %}).
 2. Click into the **History Options** menu in the history panel.
-3. Select from the menu {% icon fa-file-arch %} **Export History to File**.
+3. Select from the menu {% icon galaxy-history-archive %} **Export History to File**.
 4. Choose the option for **How do you want to export this History?** as **to direct download**.
 5. Click on **Generate direct download**.
 6. Allow the archive generation process to complete. \*
-7. Copy the {% icon fa-link %} link for your new archive.
+7. Copy the {% icon galaxy-link %} link for your new archive.
 
 At the **receiver** Galaxy server
 
@@ -38,4 +38,4 @@ At the **receiver** Galaxy server
 \* For steps 6 and 13: It is Ok to navigate away for other tasks during processing. If enabled, Galaxy will send you [status notifications]({% link faqs/galaxy/account_update_preference.md %}).
 
 
-{% icon fa-info-circle %} If the history to transfer is large, you may [copy just your important datasets into a new history]({% link faqs/galaxy/histories_copy_dataset.md %}), and create the archive from that new smaller history. Clearing away deleted and purged datasets will make *all* histories smaller and faster to archive and transfer!
+{% icon tip %} If the history to transfer is large, you may [copy just your important datasets into a new history]({% link faqs/galaxy/histories_copy_dataset.md %}), and create the archive from that new smaller history. Clearing away deleted and purged datasets will make *all* histories smaller and faster to archive and transfer!
