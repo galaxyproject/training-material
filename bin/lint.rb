@@ -314,6 +314,16 @@ module GtnLinter
     @CITATION_LIBRARY
   end
 
+  @JEKYLL_CONFIG = nil
+
+  def self.jekyll_config
+    if @JEKYLL_CONFIG.nil?
+      # Load
+      @JEKYLL_CONFIG = YAML.load_file('_config.yml')
+    end
+    @JEKYLL_CONFIG
+  end
+
   def self.check_bad_cite(contents)
     find_matching_texts(contents, /{%\s*cite\s+([^%]*)\s*%}/i)
       .map do |idx, _text, selected|
@@ -327,6 +337,24 @@ module GtnLinter
           replacement: nil,
           message: "The citation (#{citation_key}) could not be found.",
           code: 'GTN:007'
+        )
+      end
+    end
+  end
+
+  def self.check_bad_icon(contents)
+    find_matching_texts(contents, /{%\s*icon\s+([^%]*)\s*%}/i)
+      .map do |idx, _text, selected|
+      icon_key = selected[1].strip
+      if jekyll_config['icon-tag'][icon_key].nil?
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0),
+          replacement: nil,
+          message: "The icon (#{icon_key}) could not be found, please add it to _config.yml.",
+          code: 'GTN:033'
         )
       end
     end
@@ -719,6 +747,7 @@ module GtnLinter
       *new_more_accessible_boxes_agenda(contents),
       *no_target_blank(contents),
       *check_bad_link(contents),
+      *check_bad_icon(contents),
       *check_looks_like_heading(contents),
       *check_bad_tag(contents),
       *check_useless_box_prefix(contents),
