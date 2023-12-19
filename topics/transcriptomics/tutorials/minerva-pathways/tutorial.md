@@ -142,8 +142,6 @@ work.
 >
 {: .hands_on}
 
-## Data Download
-
 ## Analysis
 
 We have split this workflow into two parts, based only on how long the first portion of the workflow takes to execute. The rough runtime of the workflow portions when this was being developed can be broken down as follows:
@@ -161,7 +159,7 @@ As such we recommend you skip to [Limma](#limma) to progress to the efficient
 portion. The data provided in the Zenodo record is from the entire analysis,
 analysed with the Counts step that can be skipped:
 
-### Counts
+### Data Download
 
 We'll start by downloading our fastq files from the [GEO Dataset GSE182152](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE182152)
 
@@ -182,13 +180,16 @@ We'll start by downloading our fastq files from the [GEO Dataset GSE182152](http
 >
 {: .hands_on}
 
+### Counts
+
+
 With that done, we can start to analyse the data using HISAT2 and featureCounts
 
 > <hands-on-title>Run the Workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="688" %}
+>    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="688" box_type="none" %}
 >
 {: .hands_on}
 
@@ -273,9 +274,9 @@ MultiQC report. Looking at the report we see generally reasonable quality data.
 >    - Click `Build`
 >
 > 1. From **Rules** menu, select `Add / Modify Column Definitions`
->     - `Add Definition`, `Collection Name`, Select Column `C`
->     - `Add Definition`, `List Identifier(s)`, Select Column `B`
->     - `Add Definition`, `URL`, Column `A`
+>     - `Add Definition` → `Collection Name` → Select Column `C`
+>     - `Add Definition` → `List Identifier(s)` → Select Column `B`
+>     - `Add Definition` → `URL` → Column `A`
 >
 {: .hands_on}
 
@@ -284,7 +285,7 @@ MultiQC report. Looking at the report we see generally reasonable quality data.
 >
 > 1. Run the workflow with the Factor Data from the first Hands on, and the datasets from the workflow or Zenodo download, depending on your path:
 >
->    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="689" %}
+>    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="689" box_type="none" %}
 >
 {: .hands_on}
 
