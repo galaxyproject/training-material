@@ -170,10 +170,10 @@ This following hands-on is to be applied only on the sequence of the antisense (
 >    - {% icon param-file %} *"input_file"*: `AOPEP_and_CHD8_sequences_20220907.zip?download=1`
 >    - *"Extract single file"*: `All files`
 >
-> > ### {% icon question %} Question
+> > <question-title>Question</question-title>
 > > How many files is there in the ZIP archive ?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title>Solution</solution-title>
 > > > 12 (if you have a different number of files something likely went wrong)
 > > >
 > > {: .solution}
@@ -507,10 +507,10 @@ Now, one can align its sequences with primers. Ultimately, it is common to cut s
 >        - *"Maximum hits to consider/show"*: `10`
 >        - *"Restrict search of database to a given set of ID's"*: `No restriction, search the entire database`
 >
-> > ### {% icon question %} Question
+> > <question-title>Question</question-title>
 > > The sequences we cleaned belong to what species?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title>Solution</solution-title>
 > > > *Homo sapiens*
 > > >
 > > {: .solution}
@@ -527,4 +527,4 @@ We successfully cleaned AB1 sequence files !
 
 # AOPEP Sanger files
 
-The history following the same steps but for AOPEP marker files is available [here](https://usegalaxy.fr/u/coline_royaux/h/tuto-sanger-w-aopep)
+The history following the same steps but for AOPEP marker files is available: [Clean AOPEP sequences](https://usegalaxy.fr/u/coline_royaux/h/tuto-sanger-w-aopep)
