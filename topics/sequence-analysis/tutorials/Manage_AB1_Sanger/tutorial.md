@@ -374,7 +374,7 @@ See in the introduction for explanations on the Reverse-Complement.
 >    - *"Merge"*: `fasta files`
 >        - {% icon param-files %} *"inputs - fasta"*: `consensus sequences` (output of **Merge.files** {% icon tool %}), `Reverse primer` (output of **Reverse-Complement** {% icon tool %}), `Forward primer` (output of **Degap.seqs** {% icon tool %})
 > 
->    {% snippet tools_select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 > 
 >    - Remove tags "#Forward" and "#Reverse"
 >
