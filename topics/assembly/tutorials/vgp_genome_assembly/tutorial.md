@@ -355,6 +355,9 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 >
 {: .hands_on}
 
+<div id="genomescope">
+<!-- Anchor for linking -->
+</div>
 
 ## Genome profiling with **GenomeScope2**
 
@@ -451,12 +454,21 @@ There are several tools for assessing various aspects of assembly quality:
 - **{BUSCO}**: assesses completeness of a genome from an evolutionarily informed functional point of view. BUSCO genes are genes that are expected to be present at single-copy in one haplotype for a certain clade, so their presence, absence, or duplication can inform scientists about if an assembly is likely missing important regions, or if it has multiple copies of them, which can indicate a need for purging ({% cite Simo2015 %}).
 - **Merqury**: reference-free assessment of assembly completeness and phasing based on *k*-mers. Merqury compares *k*-mers in the reads to the *k*-mers found in the assemblies, as well as the {CN} of each *k*-mer in the assemblies ({% cite Rhie_merqury %}).
 
+<div id="solo_hic_switch">
+<!-- For use as an anchor -->
+</div>
 
 {% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
        text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click <b><i>solo</i></b>. If you have HiC reads for the same indiviudal, then click <b><i>hic</i></b>. <b>NOTE: If you want to learn more about purging, then <u>please check out the <i>solo</i> tutorial for details on purging false duplications.</u></b>" %}
 
 
 <div class = "hic" markdown="1">
+
+<!---- BEGINNING OF HiC SECTION --->
+<!---- BEGINNING OF HiC SECTION --->
+<!---- BEGINNING OF HiC SECTION --->
+<!---- BEGINNING OF HiC SECTION --->
+<!---- BEGINNING OF HiC SECTION --->
 
 ## HiC-phased assembly with **hifiasm**
 
@@ -664,6 +676,11 @@ The large green peak is centered at 50✕ coverage (remember that's our diploid 
 
 </div>
 
+<!---- BEGINNING OF SOLO SECTION --->
+<!---- BEGINNING OF SOLO SECTION --->
+<!---- BEGINNING OF SOLO SECTION --->
+<!---- BEGINNING OF SOLO SECTION --->
+<!---- BEGINNING OF SOLO SECTION --->
 
 <div class="solo" markdown="1">
 
@@ -694,6 +711,10 @@ When hifiasm is run without any additional phasing data, it will do its best to 
 {: .hands_on}
 
 We have obtained the primary and alternate contig graphs (as {GFA} files), but these must be converted to FASTA format for subsequent steps. We will use a tool developed from the VGP: **gfastats**. gfastats is a tool suite that allows for manipulation and evaluation of FASTA and GFA files, but in this instance we will use it to convert our GFAs to FASTA files. Later on we will use it to generate standard summary statistics for our assemblies.
+
+<div id ='gfa2fasta_solo'>
+<!--- this is for linking --->
+</div>
 
 > <hands-on-title>convert GFA to FASTA</hands-on-title>
 >
@@ -735,45 +756,47 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 > **Step 1**: Run assembly statistics generation with {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} using the following parameters:
 >
-> 1. {% icon param-files %} *"Input file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
+> 1. {% icon param-files %} *"Input file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
 > 2. *"Tool mode": `Summary statistics generation`
 > 3. *"Expected genome size"*: `11747160` (remember we calculated this value earlier using `GenomeScope2` [here](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
 > 4. *"Thousands separator in output"*: Set to "No"
+> 5. *"Generates the initial set of paths*": toggle to `yes`
 >
 > <br>
 >
-> **Step 2**: Rename outputs of `gfastats` step to as `Hap1 stats` and `Hap2 stats`
+> **Step 2**: Rename outputs of `gfastats` step to as `Primary stats` and `Alternate stats`
 >
 > This would generate summary files that look like this (only first six rows are shown):
 >
 > ```
-> Expected genome size    11747160
-> # scaffolds                    0
-> Total scaffold length          0
-> Average scaffold length      nan
-> Scaffold N50                   0
-> Scaffold auN                0.00
+> Expected genome size     11747160
+> # scaffolds                    25
+> Total scaffold length    18519764
+> Average scaffold length    740790.56
+> Scaffold N50               813311
+> Scaffold auN               913050.77
 > ```
 > 
-> Because we ran `gfastats` on hap1 and hap2 outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
+> Because we ran `gfastats` on Primary and Alternate outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
 > 
 > <br>
 >
 > **Step 3**: Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
 >
-> {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets. Keep all other setting as they are.
+> {% icon param-files %} *"Input file"*: select `Primary stats` and the `Alternate stats` datasets (these are from **Step 2** above). Keep all other setting as they are.
 >
 > <br>
 >
-> **Step 4**: Rename the output as `gfastats on hap1 and hap2 (full)`
+> **Step 4**: Rename the output as `gfastats on Pri and Alt (full)`
 >
-> This would generate a joined summary file that looks like this (only first five rows are shown):
+> This would generate a joined summary file that looks like this (only  five rows are shown):
 >
 > ```
-> # gaps               0  0
-> # gaps in scaffolds  0  0
-> # paths              0  0
-> # segments          17 16
+> # contigs                 25  10
+> # dead ends                .  16
+> # disconnected components  .   7
+> # edges                    .   6
+> # gaps                     0   0
 > ```
 >
 > Now let's extract only relevant information by excluding all lines containing word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs): 
@@ -781,7 +804,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 > <br>
 >
 > **Step 5**: Run {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
-> 1. {% icon param-files %} *"Input file"*: select `gfastats on hap1 and hap2 (full)`
+> 1. {% icon param-files %} *"Input file"*: select `gfastats on Pri and Alt (full)`
 > 2. *"that"*: `Don't Match`
 > 3. *"Type of regex"*: `Basic`
 > 4. *"Regular Expression"*: enter the word `scaffold`
@@ -789,54 +812,17 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 > <br>
 >
-> **Step 6**: Rename the output as `gfastats on hap1 and hap2 contigs`
+> **Step 6**: Rename the output as `gfastats on Pri and Alt contigs`
 >
 {: .hands_on}
 
-Take a look at the `gfastats on hap1 and hap2 contigs` output — it has three columns: 
+Take a look at the `gfastats on Pri and Alt contigs` output — it has three columns: 
 
   1. Name of statistic
-  2. Value for haplotype 1 (hap1)
-  2. Value for haplotype 2 (hap2)
+  2. Value for haplotype 1 (Pri)
+  3. Value for haplotype 2 (Alt)
 
-According to the report, both assemblies are quite similar; the hap1 assembly includes 16 contigs, totalling ~11.3Mbp of sequence (the `Total contig length` statistic), while the hap2 assembly includes 17 contigs, whose total length is ~12.2Mbp. (**NB**: Your values may differ slightly, or be reversed between the two haplotypes!)
-
-> <question-title></question-title>
->
-> 1. What is the length of the longest contigs in the assemblies?
-> 2. What are the N50 values of the two assemblies? Are they very different from each other?
->
-> > <solution-title></solution-title>
-> >
-> > 1. One assembly's longest contig is 1,532,843 bp, and the other one's is 1,531,728 bp.
-> > 2. One assembly has a N50 of 922,430 and the other's is 923,452. These are pretty close to each other!
-> >
-> {: .solution}
->
-{: .question}
-
-
-
-> <hands-on-title>Assembly evaluation with gfastats</hands-on-title>
->
-> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Input file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
->    - *"Expected genome size"*: `11747160` (remember we calculated this value earlier, so it should be in your history!)
->    - *"Generates the initial set of paths*": toggle to `yes`
-> 2. Rename the outputs as `Primary stats` and `Alternate stats`
-> 3. {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
->    - {% icon param-files %} *"Input file"*: select `Primary stats` and the `Alternate stats` datasets
-> 4. Rename the output as `gfastats on pri and alt (full)`
-> 5. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->    - {% icon param-files %} *"Input file"*: select `gfastats on pri and alt (full)`
->    - *"that"*: `Don't Match`
->    - *"Type of regex"*: `Basic`
->    - *"Regular Expression"*: `[Ss]caffold`
-> 6. Rename the output as `gfastats on pri and alt contigs`
->
-{: .hands_on}
-
-Take a look at the _gfastats on pri and alt contigs_ output — it should have three columns: 1) name of statistic, 2) primary assembly value, and 3) alternate assembly value. The report makes it clear that the two assemblies are markedly uneven: the primary assembly has 25 contigs totalling ~18.5 Mbp, while the alternate assembly has 8 contigs totalling only about 4.95 Mbp. If you'll remember that our estimated genome size is ~11.7 Mbp, then you'll see that the primary assembly has almost 2/3 more sequence than expected for a haploid representation of the genome! This is because a lot of heterozygous regions have had *both* copies of those loci placed into the primary assembly, as a result of incomplete purging. The presence of false duplications can be confirmed by looking at {BUSCO} and Merqury results.
+The report makes it clear that the two assemblies are markedly uneven: the primary assembly has 25 contigs totalling ~18.5 Mbp, while the alternate assembly has 8 contigs totalling only about 4.95 Mbp. If you'll remember that our estimated genome size is ~11.7 Mbp, then you'll see that the primary assembly has almost 2/3 more sequence than expected for a haploid representation of the genome! This is because a lot of heterozygous regions have had *both* copies of those loci placed into the primary assembly, as a result of incomplete purging. The presence of false duplications can be confirmed by looking at {BUSCO} and Merqury results.
 
 > <question-title></question-title>
 >
@@ -855,26 +841,31 @@ Take a look at the _gfastats on pri and alt contigs_ output — it should have t
 Next, we will use {BUSCO}, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
 
 > <hands-on-title>Assessing assembly completeness with BUSCO</hands-on-title>
+> 
+> **Step 1**: Run {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0) %} with the following parameters:
+> 1. {% icon param-files %} *"Sequences to analyze"*: `Primary contigs FASTA` and `Alternate contigs FASTA`
+> 2. *"Lineage data source"*: `Use cached lineage data`
+> 3. *"Cached database with lineage"*: `Busco v5 Lineage Datasets`
+> 4. *"Mode"*: `Genome assemblies (DNA)`
+> 5. *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+> 6. *"Auto-detect or select lineage?"*: `Select lineage`
+> 7. *"Lineage"*: `Saccharomycetes`
+> 8. *"Which outputs should be generated"*: `short summary text` and `summary image`
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Sequences to analyze"*: `Primary contigs FASTA`
->    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Auto-detect or select lineage?"*: `Select lineage`
->       - *"Lineage"*: `Saccharomycetes`
->    - *"Which outputs should be generated"*: `short summary text` and `summary image`
+>> <comment-title></comment-title>
+>>
+>> Remember to modify the *"Lineage"* option if you are working with vertebrate genomes.
+> {: .comment}
 >
->    > <comment-title></comment-title>
->    >
->    > Remember to modify the lineage option if you are working with vertebrate genomes.
->    {: .comment}
+> <br>
 >
-> 2. Rename the outputs as `BUSCO primary contigs`.
+> **Step 2**: Rename the outputs as `BUSCO Pri` and `BUSCO Alt`.
 >
 {: .hands_on}
 
 We have asked {BUSCO} to generate two particular outputs: the short summary, and a summary image.
-![BUSCO for primary contigs.](../../images/vgp_assembly/busco_pri_unpurged.png "BUSCO results for the primary contigs. The summary image (left) gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary (right) lists these as percentages as well. In this case, this primary assembly seems to have a large amount of duplicated BUSCO genes, but is otherwise complete (<i>i.e.</i>, not much missing content).")
+
+![BUSCO for primary contigs.](../../images/vgp_assembly/busco_pri_alt_solo.svg "BUSCO results for primary and alternate contigs. The summary image (left) gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary (right) lists these as percentages as well. In this case, this primary assembly seems to have a large amount of duplicated BUSCO genes, but is otherwise complete (<i>i.e.</i>, not much missing content).")
 
 The BUSCO results support our hypothesis that the primary assembly is so much larger than expected due to improper purging, resulting in false duplications.
 
@@ -898,32 +889,35 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 
 > <hands-on-title><i>k</i>-mer based evaluation with Merqury</hands-on-title>
 >
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
->        - *"Number of assemblies"*: `Two assemblies
->            - {% icon param-file %} *"First genome assembly"*: `Primary contigs FASTA`
->            - {% icon param-file %} *"Second genome assembly"*: `Alternate contigs FASTA`
+> Run {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3) %} with the following parameters:
+>
+> 1. *"Evaluation mode"*: `Default mode`
+> 2. {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
+> 3. *"Number of assemblies"*: `Two assemblies`
+> 4. {% icon param-file %} *"First genome assembly"*: `Primary contigs FASTA`
+> 5. {% icon param-file %} *"Second genome assembly"*: `Alternate contigs FASTA`
+> <br>
+>(REMINDER: `Primary contigs FASTA` and `Alternate contigs FASTA` were generated [here](#gfa2fasta_solo))
 >
 {: .hands_on}
 
-By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn* plot (fig. 7).
+By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn* plot:
 
-![Merqury spectra-cn plot for the pri/alt assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each *k*-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
+![Merqury spectra-cn plot for the pri/alt assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each <i>k</i>-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
 
-The black region in the left side corresponds to *k*-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50x, which we also know from the GenomeScope2 plot we looked at earlier.
+The black region in the left side corresponds to *k*-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50✕, which we also know from the GenomeScope2 plot we looked at earlier.
 
-To get an idea of how the *k*-mers have been distributed between our hap1 and hap2 assemblies, we should look at the *spectra-asm* output of Merqury.
+To get an idea of how the *k*-mers have been distributed between our Primary and Alternate assemblies, we should look at the *spectra-asm* output of Merqury.
 
-![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_prialt_asm_prepurge.png "Merqury ASM plot. This plot tracks the multiplicity of each *k*-mer found in the Hi-Fi read set and colors it according to which assemblies contain those *k*-mers. This can tell you which *k*-mers are found in only one assembly or shared between them."){:width="65%"}
+![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_prialt_asm_prepurge.png "Merqury ASM plot. This plot tracks the multiplicity of each <i>k</i>-mer found in the HiFi read set and colors it according to which assemblies contain those <i>k</i>-mers. This can tell you which <i>k</i>-mers are found in only one assembly or shared between them."){:width="65%"}
 
-For an idea of what a properly phased spectra-asm plot would look like, **please click over to the Hi-C phasing version of this tutorial**. A properly phased spectra-asm plot should have a large green peak centered around the point of diploid coverage (here ~50X), and the two assembly-specific peaks should be centered around the point of haploid coverage (here ~25X) and resembling each other in size.
+For an idea of what a properly phased spectra-asm plot would look like, **please [go over](#solo_hic_switch) to the Hi-C phasing version of this tutorial**. A properly phased spectra-asm plot should have a large green peak centered around the point of diploid coverage (here ~50✕), and the two assembly-specific peaks should be centered around the point of haploid coverage (here ~25✕) and resembling each other in size.
 
 The spectra-asm plot we have for our primary & alternate assemblies here does not resemble one that is properly phased. There is a peak of green (shared) *k*-mers around diploid coverage, indicating that some homozygous regions have been properly split between the primary and alternate assemblies; however, there is still a large red peak of primary-assembly-only *k*-mers at that coverage value, too, which means that some homozygous regions are being represented twice in the primary assembly, instead of once in the primary and once in the alternate. Additionally, for the haploid peaks, the primary-only peak (in red) is much larger than the alternate-only peak (in blue), indicating that a lot of heterozygous regions might have both their alternate alleles represented in the primary assembly, which is false duplication.
 
-For further confirmation, we can also look at the individual, assembly-specific {CN} plots. In the Merqury outputs, the `output_merqury.assembly_01.spectra-cn.fl` is a {CN} spectra with *k*-mers colored according to their copy number in the primary assembly.
+For further confirmation, we can also look at the individual, assembly-specific {CN} plots. In the Merqury outputs, the `output_merqury.assembly_01.spectra-cn.fl` is a {CN} spectra with *k*-mers colored according to their copy number in the primary assembly:
 
-![Merqury spectra-cn plot for the pri assembly only.](../../images/vgp_assembly/merqury_prialt_priCN_prepurge.png "Merqury CN plot <i>for the primary assembly only</i>. This plot colors *k*-mers according to their copy number in the primary assembly. *K*-mers that are present in the reads but not the primary assembly are labelled 'read-only'."){:width="65%"}
+![Merqury spectra-cn plot for the pri assembly only.](../../images/vgp_assembly/merqury_prialt_priCN_prepurge.png "Merqury CN plot <i>for the primary assembly only</i>. This plot colors <i>k</i>-mers according to their copy number in the primary assembly. <i>k</i>-mers that are present in the reads but not the primary assembly are labelled 'read-only'."){:width="65%"}
 
 In the primary-only {CN} plot, we observe a large 2-copy (colored blue) peak at diploid coverage. Ideally, this would not be here, beacause these diploid regions would be *1-copy in both assemblies*. Purging this assembly should reconcile this by removing one copy of false duplicates, making these 2-copy *k*-mers 1-copy. You might notice the 'read-only' peak at haploid coverage — this is actually expected, because 'read-only' here just means that the *k*-mer in question is not seen in this specific assembly while it was in the original readset. **Often, these 'read-only' _k_-mers are actually present as alternate loci in the other assembly.**
 
@@ -940,34 +934,44 @@ The first relevant parameter is the `estimated genome size`.
 
 > <hands-on-title>Get estimated genome size</hands-on-title>
 >
-> 1. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `summary` (output of **GenomeScope** {% icon tool %})
->    - *"Find pattern"*: `bp`
->    - *"Replace with*": leave this field empty (as it is)
->    - *"Replace all occurrences of the pattern"*: `Yes`
->    - *"Find and Replace text in"*: `entire line`
+>**Step 1**: Open {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %}
+><br>
+>**Step 2**: Scroll down to find *"+ Insert Find and Replace"* button and click it.
+><br>
+>**Step 3**: Scroll down again to find *"+ Insert Find and Replace"* button and click it again. After this you should have *"Find and Replace"* panel repeated three times: *"1: Find and Replace"*, *"2: Find and Replace"*, and *"3: Find and Replace"*. 
+><br>
+>**Step 4**: In {% icon param-file %} *"File to process"*: Select `GenomeScope summary` output (generated [here](#genomescope)). The input file should have content that looks like this (it may not be exactly like this):
+> ```
+> GenomeScope version 2.0
+> input file = ....
+> output directory = .
+> p = 2
+> k = 31
+> TESTING set to TRUE
 >
-> 2. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: output file of **Replace** {% icon tool %}
->    - *"Find pattern"*: `,`
->    - *"Replace with*": leave this field empty (as it is)
->    - *"Replace all occurrences of the pattern"*: `Yes`
->    - *"Find and Replace text in"*: `entire line`
+> property                      min               max               
+> Homozygous (aa)               99.4165%          99.4241%          
+> Heterozygous (ab)             0.575891%         0.583546%         
+> Genome Haploid Length         11,739,321 bp     11,747,160 bp     
+> Genome Repeat Length          722,921 bp        723,404 bp        
+> Genome Unique Length          11,016,399 bp     11,023,755 bp     
+> Model Fit                     92.5159%          96.5191%          
+> Read Error Rate               0.000943206%      0.000943206%   
+>``` 
 >
-> 3. {% tool [Search in textfiles (grep)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: output file of the previous step.
->    - *"Type of regex"*: `Basic`
->    - *"Regular Expression"*: `Haploid`
->
-> 4. {% tool [Convert delimiters to TAB](Convert characters1) %} with the following parameters:
->    - {% icon param-file %} *"in Dataset"*: output of **Search in textfiles** {% icon tool %}
->
-> 5. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: output of **Convert delimiters to TAB** {% icon tool %}
->    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `Column: 5`
->
-> 6. Rename the output as `Estimated genome size`.
+>**Step 5**: In the first Find and Replace panel *"1: Find and Replace"* set the following parameters:  
+> 1. *"Find pattern"*: `^(?!Genome Haploid Length).*\n`
+> 2. *"Find-Pattern is a regular expression"*: Toggle to `Yes`
+> <br>
+>**Step 6**: In the second Find and Replace panel *"2: Find and Replace"* set the following parameters:  
+> 1. *"Find pattern"*: `Genome Haploid Length\s+(\d{1,3}(?:,\d{3})*\s+bp)\s+(\d{1,3}(?:,\d{3})*)\s+bp`
+> 2. *"Replace with"*: `$2`
+> 3. *"Find-Pattern is a regular expression"*: Toggle to `Yes`
+> <br>
+>**Step 7**: In the third Find and Replace panel *"3: Find and Replace"* set the following parameters:  
+>*"Find pattern"*: `,` (Yes, just a comma)
+><br>
+>**Step 8**: Rename the output as `Estimated genome size`.
 >
 > > <question-title></question-title>
 > >
