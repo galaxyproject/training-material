@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Tutorial Feature: Easier launching of WorkflowHub & Dockstore Workflows</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c92a444e3eaeade4c58d7fad5ab9c822c3c1154c",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2023/12/12/tutorial-run-wfh-ds.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703004314' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703004314' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Tutorial Feature: Easier launching of WorkflowHub & Dockstore Workflows">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-12-12 14:30:28 +0000">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="While most GTN tutorials include their associated workflow directly in the GTN, some may wish to write a tutorial about running workflows from WorkflowHub, e.g. leveraging the IWC workflow collection. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Tutorial Feature: Easier launching of WorkflowHub & Dockstore Workflows">
+        <meta property="og:description" content="While most GTN tutorials include their associated workflow directly in the GTN, some may wish to write a tutorial about running workflows from WorkflowHub, e.g. leveraging the IWC workflow collection. ">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703004314'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2023-12-12-tutorial-run-wfh-ds.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2023/12/12/tutorial-run-wfh-ds.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/news/2023/12/12/tutorial-run-wfh-ds.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/news/2023/12/12/tutorial-run-wfh-ds.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-11-01/news/2023/12/12/tutorial-run-wfh-ds.html">2023-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  <h1>Tutorial Feature: Easier launching of WorkflowHub & Dockstore Workflows</h1>
+
+  <article>
+
+
+<div class="newsitem">
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+
+<span class="label label-default tutorial_tag" id="feature update" style="--color-primary: #bfe5ff; --color-darker: #7cd0ff; --color-dimmed: #a1daff;">feature update</span>
+
+<span class="label label-default tutorial_tag" id="gtn" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+
+<span class="label label-default tutorial_tag" id="tutorials" style="--color-primary: #ffd6d8; --color-darker: #ffb3b8; --color-dimmed: #ffc4c8;">tutorials</span>
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: 12 December 2023</span>
+      <span>
+        
+      </span>
+    </p>
+
+    <p>While most GTN tutorials include their associated workflow directly in the GTN, some may wish to write a tutorial about running workflows from WorkflowHub, e.g. leveraging the <a href="https://workflowhub.eu/projects/33">IWC workflow collection</a>.</p>
+
+<p>We’ve added two snippets which make that easier than ever:</p>
+
+<!--SNIPPET-->
+<blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflowhub-eu-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a WorkflowHub.eu Workflow</div>   <div class="show-when-galaxy-proxy-active"> Click here to run <span class="workflow" data-workflow="https://workflowhub.eu/ga4gh/trs/v2/tools/248/versions/1"><strong>gromacs-mmgbsa/main</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> </div>   <div class="hide-when-galaxy-proxy-active"> Click here to run <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id=248%26trs_version=1"><strong>gromacs-mmgbsa/main</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a> </div> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<p>And one for Dockstore:</p>
+
+<!--SNIPPET-->
+<blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-dockstore-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a Dockstore workflow</div>   <div class="show-when-galaxy-proxy-active"> Click here to run <span class="workflow" data-workflow="https://dockstore.org/api/ga4gh/trs/v2/tools/#workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow"><strong>My Cool Workflow</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> </div>   <div class="hide-when-galaxy-proxy-active"> Click here to run <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow"><strong>My Cool Workflow</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a> </div> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<p>You can read more about these snippets and how to use them yourself in your tutorials in the <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html#workflows">GTN Contribution Guide section on Workflows</a>.</p>
+
+
+    
+
+    
+
+    
+
+    
+    
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/by-covid" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/by-covid/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+    
+  </div>
+
+  <div class="col-md-4">
+    <img alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" src="/training-material//assets/images/GTNLogo1000.png" width="300"/>
+  </div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "url": "https://training.galaxyproject.org/training-material/news/2023/12/12/tutorial-run-wfh-ds.html",
+  "name": "Tutorial Feature: Easier launching of WorkflowHub & Dockstore Workflows",
+  "headline": "<p>While most GTN tutorials include their associated workflow directly in the GTN, some may wish to w",
+  "keywords": [
+    "feature update",
+    "gtn",
+    "tutorials"
+  ],
+  "description": "<p>While most GTN tutorials include their associated workflow directly in the GTN, some may wish to w",
+  "articleBody": "<p>While most GTN tutorials include their associated workflow directly in the GTN, some may wish to write a tutorial about running workflows from WorkflowHub, e.g. leveraging the <a href=\"https://workflowhub.eu/projects/33\">IWC workflow collection</a>.</p>\n\n<p>We’ve added two snippets which make that easier than ever:</p>\n\n<!--SNIPPET-->\n<blockquote class=\"hands_on\">   <div class=\"box-title hands_on-title\" id=\"hands-on-importing-and-launching-a-workflowhub-eu-workflow\"><i class=\"fas fa-pencil-alt\" aria-hidden=\"true\"></i> Hands-on: Importing and Launching a WorkflowHub.eu Workflow</div>   <div class=\"show-when-galaxy-proxy-active\"> Click here to run <span class=\"workflow\" data-workflow=\"https://workflowhub.eu/ga4gh/trs/v2/tools/248/versions/1\"><strong>gromacs-mmgbsa/main</strong> <i class=\"fas fa-share-alt\" aria-hidden=\"true\"></i></span> </div>   <div class=\"hide-when-galaxy-proxy-active\"> Click here to run <a href=\"https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id=248%26trs_version=1\"><strong>gromacs-mmgbsa/main</strong> <i class=\"fas fa-share-alt\" aria-hidden=\"true\"></i></a> </div> </blockquote>\n<p><!--END_SNIPPET--></p>\n\n<p>And one for Dockstore:</p>\n\n<!--SNIPPET-->\n<blockquote class=\"hands_on\">   <div class=\"box-title hands_on-title\" id=\"hands-on-importing-and-launching-a-dockstore-workflow\"><i class=\"fas fa-pencil-alt\" aria-hidden=\"true\"></i> Hands-on: Importing and Launching a Dockstore workflow</div>   <div class=\"show-when-galaxy-proxy-active\"> Click here to run <span class=\"workflow\" data-workflow=\"https://dockstore.org/api/ga4gh/trs/v2/tools/#workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow\"><strong>My Cool Workflow</strong> <i class=\"fas fa-share-alt\" aria-hidden=\"true\"></i></span> </div>   <div class=\"hide-when-galaxy-proxy-active\"> Click here to run <a href=\"https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow\"><strong>My Cool Workflow</strong> <i class=\"fas fa-share-alt\" aria-hidden=\"true\"></i></a> </div> </blockquote>\n<p><!--END_SNIPPET--></p>\n\n<p>You can read more about these snippets and how to use them yourself in your tutorials in the <a href=\"/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html#workflows\">GTN Contribution Guide section on Workflows</a>.</p>\n",
+  "datePublished": "2023-12-12 00:00:00 +0000",
+  "dateModified": "2023-12-12 14:30:28 +0000",
+  "author": [
+    "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"http://purl.org/dc/terms/conformsTo\": {\n    \"@id\": \"https://bioschemas.org/profiles/Person/0.3-DRAFT\",\n    \"@type\": \"CreativeWork\"\n  },\n  \"url\": \"https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/\",\n  \"mainEntityOfPage\": \"https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/\",\n  \"name\": \"Helena Rasche\",\n  \"image\": \"https://avatars.githubusercontent.com/hexylena\",\n  \"description\": \"A contributor to the GTN project.\",\n  \"memberOf\": [\n    {\n      \"@type\": \"Organization\",\n      \"email\": \"galaxytrainingnetwork@gmail.com\",\n      \"name\": \"Galaxy Training Network\",\n      \"url\": \"https://training.galaxyproject.org\",\n      \"logo\": \"https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png\"\n    }\n  ],\n  \"identifier\": \"https://orcid.org/0000-0001-9760-8992\",\n  \"orcid\": \"https://orcid.org/0000-0001-9760-8992\"\n}"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://training.galaxyproject.org/news/2023/12/12/tutorial-run-wfh-ds.html"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "width": 60,
+    "height": 60,
+    "url": "/training-material/assets/images/GTN-60px.png"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
+}
+</script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div>
+
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/12/18/medchem-user.html">User story: Where Galaxy meets medicinal chemistry</a>
+	</h3>
+	<p>
+	18 December 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #f4ff9b; --color-darker: #d6e600; --color-dimmed: #e4f500;">computational chemistry</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #f8d4ff; --color-darker: #f3afff; --color-dimmed: #f6c2ff;">user story</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		As a medicinal chemistry student, I undertook a semester project on natural products isolation and derivatisation. One of the compounds my group was working on was piperine, extracted from black pepper. Inspired by literature findings, we found out that the derivatives of piperine can inhibit monoamine oxidase-B and thus can be possibly used in Parkinson’s disease. As a novelty element in our project, we came up with new structures of derivatives that could act as inhibitors.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/11/21/video.html">Feedback: Easy slide recordings</a>
+	</h3>
+	<p>
+	21 November 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #f6d4ff; --color-darker: #f0b0ff; --color-dimmed: #f3c3ff;">feedback</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #d1e0ff; --color-darker: #a8c8ff; --color-dimmed: #bdd4ff;">testimonial</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		I recently imported Friends Don’t Let Friends Make Bad Graphs, a fantastic and educational github repository showcasing some common visualisation mistakes, that was available under an open license, to the GTN. Then the GTN automatically made a video for me.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/11/21/mastodon.html">GTN has left Twitter/X as of October</a>
+	</h3>
+	<p>
+	21 November 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00feb9; --color-darker: #00e2a4; --color-dimmed: #00efaf;">communications</span>
+	
+	</p>
+	<p class="card-text">
+		
+		We did not formally announce it at the time, but the Galaxy Training Network
+has migrated from Twitter/X to Mastodon, as that platform no longer aligns with
+the Galaxy Project Code of Conduct nor our community values.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/11/20/workflow-search.html">Update: Workflow List now searches WorkflowHub.eu, advanced query syntax</a>
+	</h3>
+	<p>
+	20 November 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #bfe5ff; --color-darker: #7cd0ff; --color-dimmed: #a1daff;">feature update</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		WorkflowHub
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/10/12/sc_subdomain.html">Single cell subdomain re-launch: Unified and feedback-driven</a>
+	</h3>
+	<p>
+	12 October 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #3fff81; --color-darker: #00e568; --color-dimmed: #00f36f;">singlecell</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The European Galaxy Days 2023 CoFest combined the forces of administrator, developer and trainer to update and re-launch the single cell Galaxy instance. Where previously there were two subdomains each with their own sets of tools, there is now a unified subdomain with re-categorized tools that makes sense for users.
+
+		
+	</p>
+</article>
+
+
+</div>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c92a444e3eaeade4c58d7fad5ab9c822c3c1154c">c92a444</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2023-12-12-tutorial-run-wfh-ds.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703004314'></script>
+        
+    </body>
+</html>

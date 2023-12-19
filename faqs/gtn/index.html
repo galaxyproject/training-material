@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9731cb312fb57afd06429062bd63c959cd786c2d",
+		release: "galaxy-training-network@c92a444e3eaeade4c58d7fad5ab9c822c3c1154c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001703' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703004314' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703004314' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -73,7 +73,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703004314'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -330,6 +330,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
+<h4 class="faq-area"> What is my.galaxy.training <a href="/training-material/faqs/gtn/my-galaxy-training.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-what-is-my-galaxy-training"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-my-galaxy-training" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: What is my.galaxy.training</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>The <a href="https://my.galaxy.training"><code class="language-plaintext highlighter-rouge">my.galaxy.training</code></a> is part of the GTN. We found that often need to direct our learners to specific pages within Galaxy, but which Galaxy? Should we add three links, one for each of the current bigger UseGalaxy.* servers? That would be really annoying for users who aren’t using one of those servers.</p>   <p>E.g. how do we link to <a href="https://my.galaxy.training/?path=/user">/user</a>, the user preferences page which is available on every Galaxy Instance? This service handles that in a private and user-friendly manner.</p>   <h2 id="learners-how-to-use-it">(Learners) How to Use It</h2>   <p>When you access a my.galaxy.training page you’ll be prompted to select a server, simply select one and you’re good to go!</p>   <p>If you want to enter a private Galaxy instance, perhaps, behind a firewall, that’s also an option! Just select the ‘other’ option and provide your domain. Since the redirection happens in your browser with no servers involved, as long as <em>you</em> can access the server, you’ll get redirected to the right location.</p>   <h2 id="tutorial-authors-how-to-use-it">(Tutorial Authors) How to use it</h2>   <p>If you want to link to a specific page within Galaxy, simple construct the URL: <code class="language-plaintext highlighter-rouge">https://my.galaxy.training/?path=/user</code> where everything after <code class="language-plaintext highlighter-rouge">?path</code> is the location they should be redirected to on Galaxy. That example link will eventually redirect the learner to something like <code class="language-plaintext highlighter-rouge">https://usegalaxy.eu/user</code>.</p>   <h2 id="technical-background">Technical Background</h2>   <p>So we took inspiration from <a href="https://my.home-assistant.io/">Home Assistant</a> which had the same problem, how to redirect users to pages on their own servers. The <code class="language-plaintext highlighter-rouge">my.galaxy.training</code> service is a very simple static page which looks in the user’s <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"><code class="language-plaintext highlighter-rouge">localStorage</code></a> for their preferred server. If it’s not set, the user can click one of the common domains, and be redirected. When they access another link, they’ll be prompted to use a button that remembers which server they chose.</p>   <h2 id="data-privacy">Data Privacy</h2>   <p>Any domain selected is not tracked nor communicated to any third party. Your preferred server is stored in your browser, and never transmitted to the GTN. That’s why we use localStorage instead of cookies.</p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
 <h4 class="faq-area"> What is a Learning Pathway? <a href="/training-material/faqs/gtn/what-is-a-learning-pathway.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="comment">   <div class="box-title comment-title" id="comment-what-is-a-learning-pathway"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What is a Learning Pathway?</div>   <div style="display:inline-block;vertical-align:top;width:10%"> <img src="/training-material/assets/images/learning-pathway.png" alt="A graphic depicting a winding path from a start symbol to a trophy, with tutorials along the way" /> </div>   <div style="display:inline-block; margin-left: 2em; width:70%"> We recommend you follow the tutorials in the order presented on this page. They have been selected to fit together and build up your knowledge step by step. If a lesson has both slides and a tutorial, we recommend you start with the slides, then proceed with the tutorial. </div> </blockquote> <!--END_SNIPPET-->
@@ -542,7 +549,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h4 class="faq-area"> GTN Stats <a href="/training-material/faqs/gtn/gtn_stats.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--> <!-- tutorial stats --> <div class="row" style="color: var(--text-color-boxtitle)"> <div class="col-md-4">  <div class="gtn-card color-agenda">    <div class="card-title">29</div>    <div class="card-text">Topics</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-tip">    <div class="card-title">383</div>    <div class="card-text">Tutorials</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-details">    <div class="card-title">408</div>    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-comment">    <div class="card-title">317</div>    <div class="card-text">Contributors</div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-handson">    <div class="card-title">8.5</div>    <div class="card-text">Years</div>  </div> </div> </div> <!--END_SNIPPET-->
+<!--SNIPPET--> <!-- tutorial stats --> <div class="row" style="color: var(--text-color-boxtitle)"> <div class="col-md-4">  <div class="gtn-card color-agenda">    <div class="card-title">29</div>    <div class="card-text">Topics</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-tip">    <div class="card-title">383</div>    <div class="card-text">Tutorials</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-details">    <div class="card-title">411</div>    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-comment">    <div class="card-title">317</div>    <div class="card-text">Contributors</div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-handson">    <div class="card-title">8.5</div>    <div class="card-text">Years</div>  </div> </div> </div> <!--END_SNIPPET-->
 
 
 
@@ -620,7 +627,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9731cb312fb57afd06429062bd63c959cd786c2d">9731cb3</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c92a444e3eaeade4c58d7fad5ab9c822c3c1154c">c92a444</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -644,7 +651,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001703'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703004314'></script>
         
     </body>
 </html>
