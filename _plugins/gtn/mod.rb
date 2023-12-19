@@ -13,7 +13,7 @@ module Gtn
 
       @@TIME_CACHE = {}
       @@COMMIT_COUNT_CACHE = Hash.new(0)
-      puts '[GTN/Time/Mod] Filling Time Cache'
+      Jekyll.logger.info '[GTN/Time/Mod] Filling Time Cache'
       `git log --name-only --pretty='GTN_GTN:%ct'`
         .split('GTN_GTN:')
         .map { |x| x.split("\n\n") }
@@ -79,7 +79,7 @@ module Gtn
       @@TIME_CACHE = {}
       renames = {}
 
-      puts '[GTN/Time/Pub] Filling Publication Time Cache'
+      Jekyll.logger.info '[GTN/Time/Pub] Filling Publication Time Cache'
       `git log --first-parent --name-status --diff-filter=AR --pretty='GTN_GTN:%ct' main`
         .split('GTN_GTN:')
         .map { |x| x.split("\n\n") }
@@ -125,9 +125,10 @@ if $PROGRAM_NAME == __FILE__
   # Gtn::ModificationTimes.init_cache
   # pp Gtn::ModificationTimes.commit_count_cache
 
-  Gtn::PublicationTimes.init_cache
-  Gtn::PublicationTimes.time_cache.select do |_, v|
-    # Things in last 6 months
-    v > Time.now - (6 * 30 * 24 * 60 * 60)
-  end.map { |k, v| puts "#{v} #{k}" }
+  puts ' Moved tobin/list-recently-modified.rb'
+  # Gtn::PublicationTimes.init_cache
+  # Gtn::PublicationTimes.time_cache.select do |_, v|
+  #   # Things in last 6 months
+  #   v > Time.now - (6 * 30 * 24 * 60 * 60)
+  # end.map { |k, v| puts "#{v} #{k}" }
 end

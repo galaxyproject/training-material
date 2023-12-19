@@ -1,5 +1,6 @@
 ---
 layout: base
+title: GTN Statistics
 redirect_from:
 - /stats
 ---
@@ -42,7 +43,6 @@ redirect_from:
 
 <section>
 <h1>GTN Statistics</h1>
-
 <div class="stats">
 
 {% snippet faqs/gtn/gtn_stats.md %}

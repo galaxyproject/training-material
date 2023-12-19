@@ -1110,7 +1110,7 @@ module GtnLinter
   end
 
   def self.enumerate_lintable
-    enumerate_type(/bib$/) + enumerate_type(/md$/) + enumerate_type(/md$/, root_dir: 'faqs')
+    enumerate_type(/bib$/) + enumerate_type(/md$/) + enumerate_type(/md$/, root_dir: 'faqs') + enumerate_type(/md$/, root_dir: 'news')
   end
 
   def self.enumerate_all
