@@ -237,7 +237,7 @@ One of the things that make it hard is the sheer number of possible trees that c
 
 The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact the formula for this number for $$n$$ taxa (we use `taxa' in general, since not all phylogenetic inference is at the species level) is $$(2n-3)!! = (2n-3)(2n-5)...(3)(1),$$ which grows as fast as $$2^{n}n!$$.
 
-THe table below gives you an idea of the scale we are dealing with.
+The table below gives you an idea of the scale we are dealing with.
 
 **The Number of Unrooted Binary Trees**
 
