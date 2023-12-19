@@ -111,7 +111,7 @@
           <div class="method-source-code" id="discover_bib-source">
             <pre><span class="ruby-comment"># File _plugins/gtn/scholar.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">discover_bib</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;[GTN/scholar] Creating global bib cache&#39;</span>
+  <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-string">&#39;[GTN/scholar] Creating global bib cache&#39;</span>
   <span class="ruby-identifier">global_bib</span> = <span class="ruby-constant">BibTeX</span><span class="ruby-operator">::</span><span class="ruby-constant">Bibliography</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">bib_paths</span> = [<span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-string">&#39;./topics&#39;</span>), <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-string">&#39;./faqs&#39;</span>), <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-string">&#39;./news&#39;</span>)].<span class="ruby-identifier">lazy</span>.<span class="ruby-identifier">flat_map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:lazy</span>).<span class="ruby-identifier">grep</span>(<span class="ruby-regexp">/bib$/</span>)
   <span class="ruby-identifier">bib_paths</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
@@ -120,7 +120,7 @@
       <span class="ruby-identifier">global_bib</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[GTN/scholar] Done: #{global_bib.length}&quot;</span>
+  <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;[GTN/scholar] Done: #{global_bib.length}&quot;</span>
   <span class="ruby-identifier">style</span> = <span class="ruby-constant">CSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Style</span>.<span class="ruby-identifier">load</span>(<span class="ruby-string">&#39;_layouts/g3.csl&#39;</span>)
   <span class="ruby-identifier">cp</span> = <span class="ruby-constant">CiteProc</span><span class="ruby-operator">::</span><span class="ruby-constant">Processor</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">style:</span> <span class="ruby-identifier">style</span>,
                                <span class="ruby-value">format:</span> <span class="ruby-string">&#39;html&#39;</span>, <span class="ruby-value">locale:</span> <span class="ruby-string">&#39;en&#39;</span>

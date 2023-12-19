@@ -141,7 +141,7 @@
   <span class="ruby-identifier">@@TIME_CACHE</span> = {}
   <span class="ruby-identifier">renames</span> = {}
 
-  <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;[GTN/Time/Pub] Filling Publication Time Cache&#39;</span>
+  <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-string">&#39;[GTN/Time/Pub] Filling Publication Time Cache&#39;</span>
   <span class="ruby-string">`git log --first-parent --name-status --diff-filter=AR --pretty=&#39;GTN_GTN:%ct&#39; main`</span>
     .<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;GTN_GTN:&#39;</span>)
     .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n\n&quot;</span>) }

@@ -137,7 +137,7 @@
 
   <span class="ruby-identifier">@@TIME_CACHE</span> = {}
   <span class="ruby-identifier">@@COMMIT_COUNT_CACHE</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
-  <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;[GTN/Time/Mod] Filling Time Cache&#39;</span>
+  <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-string">&#39;[GTN/Time/Mod] Filling Time Cache&#39;</span>
   <span class="ruby-string">`git log --name-only --pretty=&#39;GTN_GTN:%ct&#39;`</span>
     .<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;GTN_GTN:&#39;</span>)
     .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n\n&quot;</span>) }

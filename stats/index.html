@@ -3,8 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Galaxy Training!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>GTN Statistics</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -19,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e8eb1b05cc9809a5c295251b886f2540159f57eb",
+		release: "galaxy-training-network@9731cb312fb57afd06429062bd63c959cd786c2d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,33 +56,24 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001413' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001703' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="">
+<meta name="DC.title" content="GTN Statistics">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-12-14 14:51:48 +0000">
-
-        
-        
-        
-        
-        <meta name="description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+<meta name="DC.date" content="2023-12-19 14:55:06 +0000"><meta name="description" content=" {% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.enable != false" %}   {% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.enable != false" %} {% assign topics_science = site | list_topics_by_category: "science" | to_vals %} {% assign topics_technical = site | list_topics_by_category: "technical" | to_vals %}   {% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %} {% assign contributors_by_month = contributors | group_by: "joined" %} {% assign contributors_over_time = "" | split: ',' %} {% assign contributors_over_time_labels = "" | split: ',' %} {% assign contributors_count = 0 %} {% for m in contributors_by_month %}       {% assign new_contributors = m.items | size %}       {% assign contributors_count = contributors_count | plus: new_contributors%}       {% assign contributors_over_time = contributors_over_time | push: contributors_cou...">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="[] ">
-        <meta property="og:description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+	<meta property="og:title" content="GTN Statistics">
+        <meta property="og:description" content=" {% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.enable != false" %}   {% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.enable != false" %} {% assign topics_science = site | list_topics_by_category: "science" | to_vals %} {% assign topics_technical = site | list_topics_by_category: "technical" | to_vals %}   {% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %} {% assign contributors_by_month = contributors | group_by: "joined" %} {% assign contributors_over_time = "" | split: ',' %} {% assign contributors_over_time_labels = "" | split: ',' %} {% assign contributors_count = 0 %} {% for m in contributors_by_month %}       {% assign new_contributors = m.items | size %}       {% assign contributors_count = contributors_count | plus: new_contributors%}       {% assign contributors_over_time = contributors_over_time | push: contributors_cou...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
-
-        
-    </head>
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -243,7 +233,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <section>
 <h1>GTN Statistics</h1>
-
 <div class="stats">
 
 <!--SNIPPET--> <!-- tutorial stats --> <div class="row" style="color: var(--text-color-boxtitle)"> <div class="col-md-4">  <div class="gtn-card color-agenda">    <div class="card-title">29</div>    <div class="card-text">Topics</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-tip">    <div class="card-title">383</div>    <div class="card-text">Tutorials</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-details">    <div class="card-title">408</div>    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-comment">    <div class="card-title">317</div>    <div class="card-text">Contributors</div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-handson">    <div class="card-title">8.5</div>    <div class="card-text">Years</div>  </div> </div> </div> <!--END_SNIPPET-->
@@ -829,7 +818,7 @@ var contributorsBar = new Chart('contributorsGraph', {
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e8eb1b05cc9809a5c295251b886f2540159f57eb">e8eb1b0</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/9731cb312fb57afd06429062bd63c959cd786c2d">9731cb3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -853,7 +842,7 @@ var contributorsBar = new Chart('contributorsGraph', {
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001703'></script>
         
     </body>
 </html>

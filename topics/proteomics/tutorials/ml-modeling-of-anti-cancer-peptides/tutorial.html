@@ -3,8 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Machine Learning Modeling of Anticancer Peptides</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Machine Learning Modeling of Anticancer Peptides / Proteomics</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -19,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e8eb1b05cc9809a5c295251b886f2540159f57eb",
+		release: "galaxy-training-network@9731cb312fb57afd06429062bd63c959cd786c2d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,34 +56,24 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001413' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001703' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Machine Learning Modeling of Anticancer Peptides">
+<meta name="DC.title" content="Hands-on: Hands-on: Machine Learning Modeling of Anticancer Peptides">
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="2023-11-03 14:30:27 +0000">
 <meta name="DC.creator" content="Jayadev Joshi">
-<meta name="DC.creator" content="Daniel Blankenberg">
-
-        
-        
-        
-        
-        <meta name="description" content="Training material for proteomics workflows in Galaxy">
+<meta name="DC.creator" content="Daniel Blankenberg"><meta name="description" content="Training material for proteomics workflows in Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="[Proteomics]Machine Learning Modeling of Anticancer Peptides ">
+	<meta property="og:title" content="Proteomics / Hands-on: Machine Learning Modeling of Anticancer Peptides">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
-
-        
-        <script type="application/ld+json">
-            
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
 
 
 {
@@ -113,7 +102,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "dateModified": "2023-11-03 14:30:27 +0000",
   "datePublished": "2021-01-22 18:29:07 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Machine Learning Modeling of Anticancer Peptides",
+  "headline": "Hands-on: Hands-on: Machine Learning Modeling of Anticancer Peptides",
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
   "isFamilyFriendly": true,
@@ -168,7 +157,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org/training-material/topics/proteomics/"
   },
   "learningResourceType": "hands-on tutorial",
-  "name": "Machine Learning Modeling of Anticancer Peptides",
+  "name": "Hands-on: Hands-on: Machine Learning Modeling of Anticancer Peptides",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.html",
   "version": 9,
   "timeRequired": "PT30M",
@@ -277,12 +266,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     }
   ],
   "abstract": "Biological molecules such as proteins, peptides, DNA, and RNA can be represented by their biochemical or sequence-based properties. These properties can be utilized to deduce biological meanings using ML modeling. A descriptor or feature is the quantitative or qualitative measure of a property that is associated with a sequence. For example, a chemical compound can be described via its charge chemical formula, molecular weight, number of rotatable bonds, etc. Similarly, several properties can be deduced from the biological sequence that can be utilized to describe a biological activity such as anticancer property. Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to build an ML model and this model can be used to predict biological properties of unknown peptides. Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches. Finding ACPs through wet-lab methods is costly and time-consuming; thus, the development of an efficient computational approach is useful to predict potential ACP peptides before wet-lab experimentation. In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to predict the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors and use these descriptors for ML modeling. We will use CTD (composition, transition, and distribution) descriptor to define peptide sequences in the training set and will test 6 different ML algorithms. We will also assess the effect of normalization on the accuracy of ML models."
-}
-        </script>
-        
-    </head>
+}</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -330,9 +316,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </a>
         
         
+        
         <a class="dropdown-item" href="/training-material/topics/proteomics/faqs/" title="Check our FAQs for the Proteomics topic">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
         </a>
+        
         
         
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
@@ -1134,7 +1122,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e8eb1b05cc9809a5c295251b886f2540159f57eb">e8eb1b0</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/9731cb312fb57afd06429062bd63c959cd786c2d">9731cb3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1162,7 +1150,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001703'></script>
         
     </body>
 </html>

@@ -3,8 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>New Feature: Persistent URLs (PURLs) / Shortlinks</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>New Feature: Persistent URLs (PURLs) / Shortlinks</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -19,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e8eb1b05cc9809a5c295251b886f2540159f57eb",
+		release: "galaxy-training-network@9731cb312fb57afd06429062bd63c959cd786c2d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001413' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001703' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,24 +66,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="New Feature: Persistent URLs (PURLs) / Shortlinks">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-18 11:55:15 +0000">
-<meta name="DC.creator" content="Helena Rasche">
-
-        
-        
-        
-        
-        <meta name="description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+<meta name="DC.date" content="2023-12-19 15:24:35 +0000">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="The GTN has added persistent URL identifiers for our tutorials, slides, and FAQs. Using the gxy.io service, we have reserved GTN namespace for our persistent URLs. These work similarly to DOIs in that they will always point to a specific training material. ">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="[]New Feature: Persistent URLs (PURLs) / Shortlinks ">
-        <meta property="og:description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+	<meta property="og:title" content="New Feature: Persistent URLs (PURLs) / Shortlinks">
+        <meta property="og:description" content="The GTN has added persistent URL identifiers for our tutorials, slides, and FAQs. Using the gxy.io service, we have reserved GTN namespace for our persistent URLs. These work similarly to DOIs in that they will always point to a specific training material. ">
         
-        <meta property="og:image" content="/training-materialassets/images/purl.png">
-
-        
-    </head>
+        <meta property="og:image" content="/training-materialassets/images/purl.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -264,9 +254,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-<span class="label label-default tutorial_tag" id="new feature" style="--color-primary: #dcddff; --color-darker: #c0c2ff; --color-dimmed: #cecfff;">new feature</span>
+<span class="label label-default tutorial_tag" id="new feature" style="--color-primary: #b3b5ff; --color-darker: #9b9eff; --color-dimmed: #a7a9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" id="gtn" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+<span class="label label-default tutorial_tag" id="gtn" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
 
 
 <hr/>
@@ -290,7 +280,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="how-do-i-use-them">How do I use them?</h2>
 
-<p>The PURLs are in the form <code class="language-plaintext highlighter-rouge">gxy.io/GTN:[id]</code>, where <code class="language-plaintext highlighter-rouge">[id]</code> is the identifier of the tutorial, slide, or FAQ. For example, the identifier for the <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial is <code class="language-plaintext highlighter-rouge">GTN:T00001</code>. The PURL for this tutorial is thus <a href="https://gxy.io/GTN:T00001">gxy.io/GTN:T00001</a>. This will always point to the Ansible Galaxy tutorial, no matter what changes are made to the tutorial in the future.</p>
+<p>The PURLs are in the form <code class="language-plaintext highlighter-rouge">gxy.io/GTN:[id]</code>, where <code class="language-plaintext highlighter-rouge">[id]</code> is the identifier of the tutorial, slide, or FAQ. For example, the identifier for the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial is <code class="language-plaintext highlighter-rouge">GTN:T00001</code>. The PURL for this tutorial is thus <a href="https://gxy.io/GTN:T00001">gxy.io/GTN:T00001</a>. This will always point to the Ansible Galaxy tutorial, no matter what changes are made to the tutorial in the future.</p>
 
 <h2 id="how-do-i-find-the-purl-for-a-tutorial">How do I find the PURL for a tutorial?</h2>
 
@@ -328,9 +318,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "gtn"
   ],
   "description": "<p>The GTN has added persistent URL identifiers for our tutorials, slides, and FAQs. Using the <code ",
-  "articleBody": "<p>The GTN has added persistent URL identifiers for our tutorials, slides, and FAQs. Using the <code class=\"language-plaintext highlighter-rouge\">gxy.io</code> service, we have reserved <code class=\"language-plaintext highlighter-rouge\">GTN</code> namespace for our persistent URLs. These work similarly to DOIs in that they will always point to a specific training material.</p>\n\n<h2 id=\"what-are-purls\">What are PURLs?</h2>\n\n<p>PURLs are persistent URLs, and can be used to link to a specific version of a tutorial.</p>\n\n<h2 id=\"how-do-i-use-them\">How do I use them?</h2>\n\n<p>The PURLs are in the form <code class=\"language-plaintext highlighter-rouge\">gxy.io/GTN:[id]</code>, where <code class=\"language-plaintext highlighter-rouge\">[id]</code> is the identifier of the tutorial, slide, or FAQ. For example, the identifier for the <a href=\"https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html\">Galaxy Installation with Ansible</a> tutorial is <code class=\"language-plaintext highlighter-rouge\">GTN:T00001</code>. The PURL for this tutorial is thus <a href=\"https://gxy.io/GTN:T00001\">gxy.io/GTN:T00001</a>. This will always point to the Ansible Galaxy tutorial, no matter what changes are made to the tutorial in the future.</p>\n\n<h2 id=\"how-do-i-find-the-purl-for-a-tutorial\">How do I find the PURL for a tutorial?</h2>\n\n<p>You’ll find these in the bottom of the “Overview” box of tutorials.</p>\n\n",
+  "articleBody": "<p>The GTN has added persistent URL identifiers for our tutorials, slides, and FAQs. Using the <code class=\"language-plaintext highlighter-rouge\">gxy.io</code> service, we have reserved <code class=\"language-plaintext highlighter-rouge\">GTN</code> namespace for our persistent URLs. These work similarly to DOIs in that they will always point to a specific training material.</p>\n\n<h2 id=\"what-are-purls\">What are PURLs?</h2>\n\n<p>PURLs are persistent URLs, and can be used to link to a specific version of a tutorial.</p>\n\n<h2 id=\"how-do-i-use-them\">How do I use them?</h2>\n\n<p>The PURLs are in the form <code class=\"language-plaintext highlighter-rouge\">gxy.io/GTN:[id]</code>, where <code class=\"language-plaintext highlighter-rouge\">[id]</code> is the identifier of the tutorial, slide, or FAQ. For example, the identifier for the <a href=\"/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html\">Galaxy Installation with Ansible</a> tutorial is <code class=\"language-plaintext highlighter-rouge\">GTN:T00001</code>. The PURL for this tutorial is thus <a href=\"https://gxy.io/GTN:T00001\">gxy.io/GTN:T00001</a>. This will always point to the Ansible Galaxy tutorial, no matter what changes are made to the tutorial in the future.</p>\n\n<h2 id=\"how-do-i-find-the-purl-for-a-tutorial\">How do I find the PURL for a tutorial?</h2>\n\n<p>You’ll find these in the bottom of the “Overview” box of tutorials.</p>\n\n",
   "datePublished": "2023-04-19 00:00:00 +0000",
-  "dateModified": "2023-05-18 11:55:15 +0000",
+  "dateModified": "2023-12-19 15:24:35 +0000",
   "author": [
     "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"http://purl.org/dc/terms/conformsTo\": {\n    \"@id\": \"https://bioschemas.org/profiles/Person/0.3-DRAFT\",\n    \"@type\": \"CreativeWork\"\n  },\n  \"url\": \"https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/\",\n  \"mainEntityOfPage\": \"https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/\",\n  \"name\": \"Helena Rasche\",\n  \"image\": \"https://avatars.githubusercontent.com/hexylena\",\n  \"description\": \"A contributor to the GTN project.\",\n  \"memberOf\": [\n    {\n      \"@type\": \"Organization\",\n      \"email\": \"galaxytrainingnetwork@gmail.com\",\n      \"name\": \"Galaxy Training Network\",\n      \"url\": \"https://training.galaxyproject.org\",\n      \"logo\": \"https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png\"\n    }\n  ],\n  \"identifier\": \"https://orcid.org/0000-0001-9760-8992\",\n  \"orcid\": \"https://orcid.org/0000-0001-9760-8992\"\n}"
   ],
@@ -387,11 +377,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>
 	18 December 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #f4ff9b; --color-darker: #d6e600; --color-dimmed: #e4f500;">computational chemistry</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #e9f900; --color-darker: #cfde00; --color-dimmed: #dceb00;">computational chemistry</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #f8d4ff; --color-darker: #f3afff; --color-dimmed: #f6c2ff;">user story</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #f19cff; --color-darker: #ee77ff; --color-dimmed: #ef8aff;">user story</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -410,11 +400,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>
 	21 November 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #f6d4ff; --color-darker: #f0b0ff; --color-dimmed: #f3c3ff;">feedback</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ed9eff; --color-darker: #e97aff; --color-dimmed: #eb8dff;">feedback</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #d1e0ff; --color-darker: #a8c8ff; --color-dimmed: #bdd4ff;">testimonial</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #94bdff; --color-darker: #67a9ff; --color-dimmed: #7fb3ff;">testimonial</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -433,9 +423,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>
 	21 November 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00feb9; --color-darker: #00e2a4; --color-dimmed: #00efaf;">communications</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00d59b; --color-darker: #00be8a; --color-dimmed: #00c992;">communications</span>
 	
 	</p>
 	<p class="card-text">
@@ -456,9 +446,9 @@ the Galaxy Project Code of Conduct nor our community values.
 	<p>
 	20 November 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #bfe5ff; --color-darker: #7cd0ff; --color-dimmed: #a1daff;">feature update</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #4dc8ff; --color-darker: #00b4ec; --color-dimmed: #00befa;">feature update</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -477,9 +467,9 @@ the Galaxy Project Code of Conduct nor our community values.
 	<p>
 	12 October 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #3fff81; --color-darker: #00e568; --color-dimmed: #00f36f;">singlecell</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00d862; --color-darker: #00c057; --color-dimmed: #00cc5c;">singlecell</span>
 	
 	</p>
 	<p class="card-text">
@@ -510,7 +500,7 @@ the Galaxy Project Code of Conduct nor our community values.
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e8eb1b05cc9809a5c295251b886f2540159f57eb">e8eb1b0</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/9731cb312fb57afd06429062bd63c959cd786c2d">9731cb3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -538,7 +528,7 @@ the Galaxy Project Code of Conduct nor our community values.
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001703'></script>
         
     </body>
 </html>

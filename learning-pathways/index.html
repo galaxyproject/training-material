@@ -3,8 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Galaxy Training!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Learning Pathways</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -19,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e8eb1b05cc9809a5c295251b886f2540159f57eb",
+		release: "galaxy-training-network@9731cb312fb57afd06429062bd63c959cd786c2d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,33 +56,24 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001413' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001703' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="">
+<meta name="DC.title" content="Learning Pathways">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-07-13 01:28:38 +0000">
-
-        
-        
-        
-        
-        <meta name="description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+<meta name="DC.date" content="2023-12-19 14:55:03 +0000"><meta name="description" content="{% assign pathways_science = site.pages | where: "layout", "learning-pathway" | where: "type", "use" | sort: "priority", "last" %}  {% assign pathways_other = site.pages | where: "layout", "learning-pathway" | where_exp: "item", "item.type != 'use'" | sort: "priority", "last" %}   Learning pathways are sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building up knowledge as you go. We always recommend to follow the tutorials in the order they are listed in the pathway.  ## For Scientists       {% for path in pathways_science %}  {% include _includes/pathway-card.html path=path %}  {% endfor %}     ## For Teachers, Developers and System Administrators     {% for path in pathways_other %}  {% include _includes/pathway-card.html path=path %}  {% endfor %}   ">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="[] ">
-        <meta property="og:description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+	<meta property="og:title" content="Learning Pathways">
+        <meta property="og:description" content="{% assign pathways_science = site.pages | where: "layout", "learning-pathway" | where: "type", "use" | sort: "priority", "last" %}  {% assign pathways_other = site.pages | where: "layout", "learning-pathway" | where_exp: "item", "item.type != 'use'" | sort: "priority", "last" %}   Learning pathways are sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building up knowledge as you go. We always recommend to follow the tutorials in the order they are listed in the pathway.  ## For Scientists       {% for path in pathways_science %}  {% include _includes/pathway-card.html path=path %}  {% endfor %}     ## For Teachers, Developers and System Administrators     {% for path in pathways_other %}  {% include _includes/pathway-card.html path=path %}  {% endfor %}   ">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
-
-        
-    </head>
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -223,11 +213,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <div class="container main-content" role="main">
         <section>
-  
+  <h1>Learning Pathways</h1>
 
   
-<h1 id="learning-pathways">Learning Pathways</h1>
-
 <p>Learning pathways are sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building up knowledge as you go. We always recommend to follow the tutorials in the order they are listed in the pathway.</p>
 
 <h2 id="for-scientists">For Scientists</h2>
@@ -267,7 +255,7 @@ sequences.
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #fff7e1; --color-darker: #fdda00; --color-dimmed: #ffe89d;">beginner</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffedb7; --color-darker: #f4d200; --color-dimmed: #ffdf57;">beginner</span>
         
       </div>
     </div>
@@ -353,7 +341,7 @@ sequences.
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #fff7e1; --color-darker: #fdda00; --color-dimmed: #ffe89d;">beginner</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffedb7; --color-darker: #f4d200; --color-dimmed: #ffdf57;">beginner</span>
         
       </div>
     </div>
@@ -390,9 +378,9 @@ sequences.
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffd6d9; --color-darker: #ffb3b9; --color-dimmed: #ffc4c9;">Climate</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffa2aa; --color-darker: #ff808d; --color-dimmed: #ff919c;">Climate</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffdaa8; --color-darker: #febc00; --color-dimmed: #ffcb75;">Overview</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #efb100; --color-darker: #d69e00; --color-dimmed: #e2a700;">Overview</span>
         
       </div>
     </div>
@@ -429,9 +417,9 @@ sequences.
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffd3f1; --color-darker: #ffade8; --color-dimmed: #ffc0ec;">genome annotation</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ff9ae4; --color-darker: #ff72dd; --color-dimmed: #ff87e0;">genome annotation</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #60ff26; --color-darker: #4fe300; --color-dimmed: #54f100;">eukaryote</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #4ad700; --color-darker: #41bf00; --color-dimmed: #45cb00;">eukaryote</span>
         
       </div>
     </div>
@@ -468,9 +456,9 @@ sequences.
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffd3f1; --color-darker: #ffade8; --color-dimmed: #ffc0ec;">genome annotation</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ff9ae4; --color-darker: #ff72dd; --color-dimmed: #ff87e0;">genome annotation</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #e0dcff; --color-darker: #c8bfff; --color-dimmed: #d4ceff;">prokaryote</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #beb2ff; --color-darker: #aa99ff; --color-dimmed: #b4a5ff;">prokaryote</span>
         
       </div>
     </div>
@@ -509,7 +497,7 @@ steps of biodiversity data analysis: download, check, filter and explore biodive
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #fff7e1; --color-darker: #fdda00; --color-dimmed: #ffe89d;">beginner</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffedb7; --color-darker: #f4d200; --color-dimmed: #ffdf57;">beginner</span>
         
       </div>
     </div>
@@ -549,7 +537,7 @@ the various types of Machine Learning techniques, developing some simple models 
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #fff7e1; --color-darker: #fdda00; --color-dimmed: #ffe89d;">beginner</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffedb7; --color-darker: #f4d200; --color-dimmed: #ffdf57;">beginner</span>
         
       </div>
     </div>
@@ -588,7 +576,7 @@ steps of microbiome data analysis: quality control, taxonomic profiling, taxonom
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffd7cd; --color-darker: #ffb5a0; --color-dimmed: #ffc6b8;">microbiome</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffa588; --color-darker: #ff854e; --color-dimmed: #ff956f;">microbiome</span>
         
       </div>
     </div>
@@ -625,9 +613,9 @@ steps of microbiome data analysis: quality control, taxonomic profiling, taxonom
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #d4dfff; --color-darker: #afc6ff; --color-dimmed: #c2d3ff;">python</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #9dbbff; --color-darker: #78a6ff; --color-dimmed: #8bb0ff;">python</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #fcd2ff; --color-darker: #faabff; --color-dimmed: #fbbfff;">real-course</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #f998ff; --color-darker: #f86fff; --color-dimmed: #f985ff;">real-course</span>
         
       </div>
     </div>
@@ -664,9 +652,9 @@ steps of microbiome data analysis: quality control, taxonomic profiling, taxonom
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #d4dfff; --color-darker: #afc6ff; --color-dimmed: #c2d3ff;">python</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #9dbbff; --color-darker: #78a6ff; --color-dimmed: #8bb0ff;">python</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #fcd2ff; --color-darker: #faabff; --color-dimmed: #fbbfff;">real-course</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #f998ff; --color-darker: #f86fff; --color-dimmed: #f985ff;">real-course</span>
         
       </div>
     </div>
@@ -714,9 +702,9 @@ configuring it, and making it production ready.
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffd4e7; --color-darker: #ffafd5; --color-dimmed: #ffc2de;">Galaxy administrators</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ff9dcd; --color-darker: #ff78bf; --color-dimmed: #ff8bc6;">Galaxy administrators</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffd8bf; --color-darker: #ffb87c; --color-dimmed: #ffc8a0;">5-day course</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffa84b; --color-darker: #ec9300; --color-dimmed: #fa9c00;">5-day course</span>
         
       </div>
     </div>
@@ -753,9 +741,9 @@ configuring it, and making it production ready.
         
 
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffd2f8; --color-darker: #ffabf3; --color-dimmed: #ffbff5;">training</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ff97f1; --color-darker: #ff6eed; --color-dimmed: #ff84ef;">training</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffd3f2; --color-darker: #ffade9; --color-dimmed: #ffc0ed;">trainers</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ff9ae5; --color-darker: #ff71df; --color-dimmed: #ff87e2;">trainers</span>
         
       </div>
     </div>
@@ -785,7 +773,7 @@ configuring it, and making it production ready.
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e8eb1b05cc9809a5c295251b886f2540159f57eb">e8eb1b0</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/9731cb312fb57afd06429062bd63c959cd786c2d">9731cb3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -809,7 +797,7 @@ configuring it, and making it production ready.
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001703'></script>
         
     </body>
 </html>

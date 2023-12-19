@@ -182,7 +182,7 @@
     <span class="ruby-keyword">end</span>
     <span class="ruby-identifier">res</span> = <span class="ruby-identifier">url</span>
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})&quot;</span>
+    <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})&quot;</span>
     <span class="ruby-identifier">res</span> = <span class="ruby-node">%(&lt;span&gt;https://example.com/ERROR+INVALID+CITATION+#{@text}&lt;/span&gt;)</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">res</span>

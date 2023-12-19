@@ -3,8 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>New Tutorial: Visualization of RNA-Seq results with Volcano Plot in R</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>New Tutorial: Visualization of RNA-Seq results with Volcano Plot in R</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -19,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e8eb1b05cc9809a5c295251b886f2540159f57eb",
+		release: "galaxy-training-network@9731cb312fb57afd06429062bd63c959cd786c2d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001413' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001703' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -68,23 +67,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.title" content="New Tutorial: Visualization of RNA-Seq results with Volcano Plot in R">
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="2023-05-18 11:55:15 +0000">
-<meta name="DC.creator" content="Maria Doyle">
-
-        
-        
-        
-        
-        <meta name="description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+<meta name="DC.creator" content="Maria Doyle"><meta name="description" content="The Volcano plot tutorial introduced volcano plots and showed how they can be easily generated with the Galaxy Volcano plot tool. This new tutorial shows how you can customise a plot using the R script output from the tool and RStudio in Galaxy. A short video for the tutorial is also available on YouTube, created for the GCC2021 Training week.  Happy plotting!  ">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="[]New Tutorial: Visualization of RNA-Seq results with Volcano Plot in R ">
-        <meta property="og:description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+	<meta property="og:title" content="New Tutorial: Visualization of RNA-Seq results with Volcano Plot in R">
+        <meta property="og:description" content="The Volcano plot tutorial introduced volcano plots and showed how they can be easily generated with the Galaxy Volcano plot tool. This new tutorial shows how you can customise a plot using the R script output from the tool and RStudio in Galaxy. A short video for the tutorial is also available on YouTube, created for the GCC2021 Training week.  Happy plotting!  ">
         
-        <meta property="og:image" content="/training-materialtopics/transcriptomics/images/rna-seq-viz-with-volcanoplot-r/volcano_categories.png">
-
-        
-    </head>
+        <meta property="og:image" content="/training-materialtopics/transcriptomics/images/rna-seq-viz-with-volcanoplot-r/volcano_categories.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -264,9 +254,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-<span class="label label-default tutorial_tag" id="new tutorial" style="--color-primary: #ffd8ba; --color-darker: #ffb96c; --color-dimmed: #ffc998;">new tutorial</span>
+<span class="label label-default tutorial_tag" id="new tutorial" style="--color-primary: #ffa91e; --color-darker: #e59600; --color-dimmed: #f39f00;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" id="visualization" style="--color-primary: #ffd4e5; --color-darker: #ffb0d2; --color-dimmed: #ffc2db;">visualization</span>
+<span class="label label-default tutorial_tag" id="visualization" style="--color-primary: #ff9ec9; --color-darker: #ff79ba; --color-dimmed: #ff8cc1;">visualization</span>
 
 
 <hr/>
@@ -378,11 +368,11 @@ Happy plotting!</p>
 	<p>
 	18 December 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #f4ff9b; --color-darker: #d6e600; --color-dimmed: #e4f500;">computational chemistry</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #e9f900; --color-darker: #cfde00; --color-dimmed: #dceb00;">computational chemistry</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #f8d4ff; --color-darker: #f3afff; --color-dimmed: #f6c2ff;">user story</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #f19cff; --color-darker: #ee77ff; --color-dimmed: #ef8aff;">user story</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -401,11 +391,11 @@ Happy plotting!</p>
 	<p>
 	21 November 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #f6d4ff; --color-darker: #f0b0ff; --color-dimmed: #f3c3ff;">feedback</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ed9eff; --color-darker: #e97aff; --color-dimmed: #eb8dff;">feedback</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #d1e0ff; --color-darker: #a8c8ff; --color-dimmed: #bdd4ff;">testimonial</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #94bdff; --color-darker: #67a9ff; --color-dimmed: #7fb3ff;">testimonial</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -424,9 +414,9 @@ Happy plotting!</p>
 	<p>
 	21 November 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00feb9; --color-darker: #00e2a4; --color-dimmed: #00efaf;">communications</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00d59b; --color-darker: #00be8a; --color-dimmed: #00c992;">communications</span>
 	
 	</p>
 	<p class="card-text">
@@ -447,9 +437,9 @@ the Galaxy Project Code of Conduct nor our community values.
 	<p>
 	20 November 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #bfe5ff; --color-darker: #7cd0ff; --color-dimmed: #a1daff;">feature update</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #4dc8ff; --color-darker: #00b4ec; --color-dimmed: #00befa;">feature update</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -468,9 +458,9 @@ the Galaxy Project Code of Conduct nor our community values.
 	<p>
 	12 October 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #3fff81; --color-darker: #00e568; --color-dimmed: #00f36f;">singlecell</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00d862; --color-darker: #00c057; --color-dimmed: #00cc5c;">singlecell</span>
 	
 	</p>
 	<p class="card-text">
@@ -501,7 +491,7 @@ the Galaxy Project Code of Conduct nor our community values.
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e8eb1b05cc9809a5c295251b886f2540159f57eb">e8eb1b0</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/9731cb312fb57afd06429062bd63c959cd786c2d">9731cb3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -529,7 +519,7 @@ the Galaxy Project Code of Conduct nor our community values.
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001703'></script>
         
     </body>
 </html>

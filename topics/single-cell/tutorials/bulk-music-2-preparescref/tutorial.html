@@ -3,8 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution / Single Cell</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -19,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e8eb1b05cc9809a5c295251b886f2540159f57eb",
+		release: "galaxy-training-network@9731cb312fb57afd06429062bd63c959cd786c2d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,42 +56,24 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001413' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703001703' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution">
+<meta name="DC.title" content="Hands-on: Hands-on: Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution">
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="2023-11-14 17:31:49 +0000">
 <meta name="DC.creator" content="Wendi Bacon">
-<meta name="DC.creator" content="Mehmet Tekman">
-
-        
-        
-        
-        
-        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
-
-What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
- {: .alert.alert-success}
-">
+<meta name="DC.creator" content="Mehmet Tekman"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="[Single Cell]Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution ">
-        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
-
-What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
- {: .alert.alert-success}
-">
+	<meta property="og:title" content="Single Cell / Hands-on: Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
-
-        
-        <script type="application/ld+json">
-            
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
 
 
 {
@@ -121,7 +102,7 @@ What else do you want to see? You can submit tool and/or tutorial request on our
   "dateModified": "2023-11-14 17:31:49 +0000",
   "datePublished": "2023-01-20 10:58:39 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution",
+  "headline": "Hands-on: Hands-on: Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution",
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
   "isFamilyFriendly": true,
@@ -176,7 +157,7 @@ What else do you want to see? You can submit tool and/or tutorial request on our
     "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
   },
   "learningResourceType": "hands-on tutorial",
-  "name": "Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution",
+  "name": "Hands-on: Hands-on: Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.html",
   "version": 34,
   "timeRequired": "PT1H",
@@ -210,8 +191,8 @@ What else do you want to see? You can submit tool and/or tutorial request on our
       "@context": "http://schema.org",
       "@type": "LearningResource",
       "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html",
-      "name": "Bulk RNA Deconvolution with MuSiC",
-      "description": "Hands-on for 'Bulk RNA Deconvolution with MuSiC' tutorial",
+      "name": "Hands-on: Hands-on: Bulk RNA Deconvolution with MuSiC",
+      "description": "Hands-on for 'Hands-on: Hands-on: Bulk RNA Deconvolution with MuSiC' tutorial",
       "learningResourceType": "hands-on tutorial",
       "interactivityType": "expositive",
       "provider": {
@@ -313,12 +294,9 @@ What else do you want to see? You can submit tool and/or tutorial request on our
     }
   ],
   "abstract": "After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw scRNA-seq dataset pulled from a public resource (the EMBL-EBI single cell expression atlas {% cite Moreno2021 %}. Let's get started!"
-}
-        </script>
-        
-    </head>
+}</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703001703'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -366,9 +344,11 @@ What else do you want to see? You can submit tool and/or tutorial request on our
         </a>
         
         
+        
         <a class="dropdown-item" href="/training-material/topics/single-cell/faqs/" title="Check our FAQs for the Single Cell topic">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
         </a>
+        
         
         
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
@@ -601,7 +581,7 @@ What else do you want to see? You can submit tool and/or tutorial request on our
                     
                         
                             
-                            <li> Bulk RNA Deconvolution with MuSiC:
+                            <li> Hands-on: Hands-on: Bulk RNA Deconvolution with MuSiC:
                             
                             
                                 
@@ -1734,7 +1714,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e8eb1b05cc9809a5c295251b886f2540159f57eb">e8eb1b0</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/9731cb312fb57afd06429062bd63c959cd786c2d">9731cb3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1762,7 +1742,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001413'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703001703'></script>
         
     </body>
 </html>
