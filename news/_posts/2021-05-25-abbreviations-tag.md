@@ -25,13 +25,13 @@ abbreviations:
 
 And in your text you can use braces to refer to the term
 
-> > ### {% icon code-in %} Input: Markdown
+> > <code-in-title>Markdown</code-in-title>
 > > <code>
 > > The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call the &lbrace;API&rbrace; we'll get back this result &lbrace;JSON&rbrace;.
 > > </code>
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > >
 > > The `/jobs` Application Programming Interface (API) will return JavaScript Object Notation (JSON). When we call the <abbr title="Application Programming Interface">API</abbr> we'll get back this result <abbr title="JavaScript Object Notation">JSON</abbr>.
 > >
