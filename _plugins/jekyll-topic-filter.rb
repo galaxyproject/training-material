@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'json'
 require 'yaml'
 require './_plugins/gtn'
@@ -1052,8 +1053,8 @@ module Jekyll
     end
 
     def get_workflow(site, page, workflow)
-      mat = self.to_material(site, page)
-      mat['workflows'].select{|w| w['workflow'] == workflow }[0]
+      mat = to_material(site, page)
+      mat['workflows'].select { |w| w['workflow'] == workflow }[0]
     end
   end
 end
