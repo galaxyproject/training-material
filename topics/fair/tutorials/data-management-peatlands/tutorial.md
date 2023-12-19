@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Introduction to Data Management Plan (DMP) for Peatland Research and PeatDataHub
+level: Introductory
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
 zenodo_link: ''
@@ -40,7 +41,7 @@ This tutorial is a short introduction to writing a Data Management Plan (DMP) wi
 
 You can find more information on DMPs in the Research Data Management Toolkit for Life Sciences ( https://rdmkit.elixir-europe.org/)
 
-> <agenda-title></agenda-title>
+> <agenda-title>Agenda</agenda-title>
 >
 > In this tutorial we will deal with:
 >
