@@ -30,15 +30,15 @@ contributors:
 
 # Introduction
 
-Phylogenetics is essential for comparing biological species and understanding biodiversity for conservation. This tutorial discusses the basic principles and methods of phylogenetic inference and what you can learn from phylogenetic estimation. You will learn to make informed decisions about which methods to use in your research. 
+Phylogenetics is essential for comparing biological species and understanding biodiversity for conservation. This tutorial discusses the basic principles and methods of phylogenetic inference and what you can learn from phylogenetic estimation. It is intended to help you make informed decisions about which methods to use in your research. 
 
-Using real-life data and standard tools that are (mostly) available in Galaxy, the tutorial demonstrates the principles behind various methods used to estimate phylogenetic trees from aligned sequence data or distance data.
+Using real-life data and standard tools that are (mostly) available in Galaxy, the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data.
 
-This lesson is not just a "how to" tutorial but also aims to give you a better understanding of the principles of phylogenetics and how the methods work.
+This is not just a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of phylogenetics and how the methods work.
 
-The exercises are beginner-level, but you should know how molecular sequence data is produced and what it looks like. You may have even built phylogenetic trees before, but you want to learn more about the principles behind the tools.
+The exercises are beginner level, but you should know how molecular sequence data is produced and what it looks like. Maybe you've even built phylogenetic trees before but want to know more about the principles behind the tools.
 
-This tutorial does not cover workflows for processing read data or Bayesian phylogenetic methods. We've included recommended reading and tutorials on these topics in the resources section.
+This tutorial does not cover workflows for taking read data to phylogeny or Bayesian methods. We've included recommended reading and tutorials on these topics in the resources section.
 
 This tutorial is adapted from a 2019 workshop run by the Australian BioCommons and Prof. Michael Charleston (University of Tasmania).
 
@@ -137,7 +137,7 @@ and much bigger projects across all of life:
 
 Aside from gaining a fundamental understanding of biology, other reasons for inferring phylogenetic relationships include:
 
-- Designing vaccines, for example, for SARS-CoV2 and influenza
+- Designing vaccines, for example for SARS-CoV2 and influenza
 - Measuring phylogenetic diversity for guiding conservation efforts
 - Understanding coevolution; for example, around 70% of emergent human diseases have come from other species
 - Dating major evolutionary events to study the effects of environmental change on different species.
@@ -165,33 +165,33 @@ Before we start building trees, let's define some terms.
 
 It's common to call **phylogenetic tree** a **phylogeny**.
 
-Mathematically, a **tree** is a kind of **graph** that has objects called **nodes** or **vertices** (lavender, white, and blue boxes in the figure above), connected in pairs by things called **edges** (green and orange lines in the figure above).  
+Mathematically, a **tree** is a kind of **graph**, which has objects called **nodes** or **vertices** (lavender, white, and blue boxes in the figure above), connected in pairs by things called **edges** (green and orange lines in the figure above).  
 
-Trees are a natural way to think about phylogenetic relationships. The nodes correspond to **taxa**, and the edges, also called **branches**, show the relationships between them, where taxa could be species, lineages, genera, populations, or even individuals if we consider something like a genealogy.
+Trees are a natural way to think about phylogenetic relationships. The nodes correspond to **taxa**, and the edges, also called **branches**, show the relationships between them, where taxa could be species, or lineages, genera, populations, or even individuals if we are considering something like a genealogy.
 
-Nodes with only one edge attached to them are called **leaves** (or **tips**; in white above) and correspond to taxa with no descendant taxa in the tree. These taxa might be from fossils or are currently living, in which case they’re referred to as **extant**.
+Nodes with only one edge attached to them are called **leaves** (or **tips**; in white above) and correspond to taxa with no descendant taxa in the tree. These taxa might be from fossils, or, be currently living, in which case they’re referred to as **extant**.
 
 Internal nodes (in lavender above) correspond to hypothetical common ancestors of the extant taxa: the set of descendants that each one has determines the tree. 
 
-Many phylogenies have a particular node assigned as the common ancestor of all the taxa represented by the leaves in the tree. This node is called the **root** (in blue above). When this is the case, a natural direction is implied from the root to the tips, going forward in time. We call such trees and phylogenies **rooted**; if there is no root, they are called **unrooted**. 
+Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree. This node is called the **root** (in blue above). When this is the case, a natural direction is implied from the root to the tips, going forward in time. We call such trees and phylogenies **rooted**; if there is no root, they are called **unrooted**. 
 
 *The majority of phylogenetic inference methods produce unrooted trees, but rooted trees are more useful.*
 
 In a rooted phylogeny, all the leaves that are descendant from any given node form a **monophyletic clade**, or often just “**clade**” (monophyletic means “one tribe (of) origin” from the Greek).
 
-One way to determine where the root of a tree belongs is to include an **outgroup** in the data, which is a set of taxa that are definitely not within the clade of interest (which is then called our **ingroup**) but which share a common ancestor with that clade. A good outgroup won’t be too distantly related to our ingroup because if it’s too distant, choosing where it should connect to the ingroup will be hard, ultimately resulting in a guess. 
+One way to determine where the root of a tree belongs is to include an **outgroup** in the data, which is a set of taxa that are definitely not within the clade of interest (which is then called our **ingroup**) but which share a common ancestor with that clade. A good outgroup won’t be too distantly related to our ingroup, because if it’s too distant, choosing where it should connect to the ingroup will be hard, ultimately resulting in a guess. 
 
 You can see in the diagram above that the connection of the ingroup to the outgroup could be from multiple locations. Once the unrooted tree is created, using combined data from ingroup and outgroup taxa, we can confidently say that the root is on the branch connecting our ingroup to our outgroup:
 
 ![Schematic showing connection between an in group and outgroup to root a tree](images/TreeAnatomyUnrooted.png "Rooting a tree"){:align="center" width="100%"}
 
-We can then imagine picking up the unrooted tree at the branch connecting our outgroup and ingroup -- that is our best guess at the hypothetical ancestor of all our taxa and gives us a good indication of the branching order of our ingroup (and the outgroup):
+We can then imagine lifting up the unrooted tree at the branch connecting our outgroup and ingroup -- that is our best guess at the hypothetical ancestor of all our taxa and gives us a good indication of the branching order of our ingroup (and the outgroup):
 
 ![Schematic showing how inclusion of an outgroup can be used to lift a tree to create a best guess at the location of the hypothetical ancestor](./images/TreeAnatomyLiftHere.png "'Lifted' tree demonstrating hypothetical ancestor and branching order){:align="center"}
 
 Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about **monophyly** -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
 
-The tree above is called a **binary tree** because each internal node branches into *two* descendants. It is a common assumption that trees are binary, and we make that assumption in this tutorial. In fact, it is often very hard to come to a means by which a phylogeny could be truly *non*-binary: in most cases, this is just due to our inability to resolve the tree completely.
+The tree above is called a **binary tree**, because each internal node branches into *two* descendants. It is a very common assumption that trees are binary, and we make that assumption in this tutorial. In fact, it is often very hard to come to a means by which a phylogeny could be truly *non*-binary: in most cases, this is just due to our inability to resolve the tree completely.
 
 # Building a tree
 ## Basic Methodology
@@ -221,7 +221,7 @@ It is generally not possible to prove that any tree inferred is *correct* -- sin
 > 
 >  We will (mostly) make these assumptions in this tutorial!
 >
-> 1. Evolution is "memoryless". This assumption is that the future evolutionary trajectory of an organism is not affected by its past. This means we can use the powerful mathematics of Markov processes.
+> 1. Evolution is “memoryless.” This assumption is that the future evolutionary trajectory of an organism is not affected by its past. This means we can use the powerful mathematics of Markov processes.
 > 
 > 2. Phylogenetic relationships can be correctly represented by a tree! This isn't *always* assumed, but it is very common. Trees are a very attractive representation of evolution, and it is part of our language: "The tree of life" is a common phrase.  However evolution is not always explained by a tree-like, "branching" process as other events such as hybridisation and sharing of genetic material can influence envolutionary processes.
 > 3. The molecular clock assumption is that sequences in a clade evolve at about the same rate. This is known to be wrong, but is useful. For instance, there is variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information in the data.
@@ -368,7 +368,7 @@ ACTTGGCGTAGCCGGAGGCC
 > <question-title>Understanding the FASTA file</question-title>
 > 1. How many sequences are there in your data?
 > 2. How long is the longest sequence, and what is it?
-> 3. What about the shortest sequence? 
+> 3. What about the shortest sequence?
 >
 > > <solution-title></solution-title>
 > > There are 55 sequences.  The longest is from <i>Anolis paternus</i> with length 1729 nucleotides; the shortest is <i>A. luciae</i> with length 1252.
@@ -549,11 +549,11 @@ We do not use the Maximum Parsimony method in this tutorial.
 ## Maximum Likelihood (ML) 
 
 Likelihood is the most statistically defensible phylogenetic inference method.
-It is based on the idea that the tree with the highest probability of producing the sequences at the tips of the tree is the tree that is the "most likely" to be correct: the Maximum Likelihood (ML) Tree.
+It is based on the idea that the tree that has the highest probability of producing the sequences at the tips of the tree is the tree that is the "most likely" to be correct: this is called the Maximum Likelihood (ML) Tree.
 
-Likelihood is *not* the same as probability, though they are often confused. However, it is *proportional* to the probability that the tree is correct out of the set of possible trees and models you are considering.
+Likelihood is *not* the same as probability, though they are often confused with each other. However, it is *proportional* to the probability that the tree is correct, out of the set of possible trees and models you are considering.
 
-One major assumption about molecular sequence data is that each site evolves independently of all other sites. Biologically, this isn't always the case, but in practice, this makes things much more tractable, and we still have a good chance of getting the tree(s) right.
+One major, almost ubiquitous, assumption about molecular sequence data is that each site evolves independently of all other sites. Biologically, this isn't always the case, but in practice, this makes things much more tractable, and we still have a good chance of getting the tree(s) right.
 
 Another assumption we make is that the substitution rate -- the rate at which changes of nucleotide at a given position in the sequence happen -- is only dependent on the current state, i.e., we do not care about how a sequence came to be what it is, only what the sequence is now, to determine what are the probable evolutions of it.
 This seems much more biologically reasonable and makes this into a Markov process, which in turn enables a lot of calculations to be made simply.
@@ -663,7 +663,7 @@ While this is running you might use your time to read the [Models of sequence ev
 > 1. Find the {% tool IQTree %} program in the tool finder.
 > 1. Load your aligned sequence data, i.e., the alignment from MAFFT.
 > 3. Leave the selection of data type as DNA.
-> 4. Ignore the Time Tree Reconstruciton settings and Likelihood Mapping analysis settings.
+> 4. Ignore the Time Tree Reconstruction settings and Likelihood Mapping analysis settings.
 > 5. Under the **Modelling Parameters**, click **Automatic model selection** and select "Standard model selection" in the drop-down menu for *Perform standard model selection like jModelTest (for DNA) and ProtTest (for protein)*, and click the **Automatic model selection** menu title again to close it.
 > 6. Open the **Rate heterogeneity** menu and set the last option, **"Write maximum likelihood site ratios to .mlrate file"** to "Yes".
 > 7. Close the **Modelling Parameters** menu and open the **Bootstrap Parameters** menu, then *Ultrafast bootstrap parameters*. Enter 1000 in the field "Specify number of bootstrap replicates (>=1000)"
@@ -679,7 +679,7 @@ While this is running you might use your time to read the [Models of sequence ev
 > <question-title>How well supported is your tree?</question-title>
 > Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree.
 > ![IQTreePhylovis](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis."){:align="center"}
->  1. What are the bootstrap values near the root of the tree? Do you think those branches are well supported?
+> 1. What are the bootstrap values near the root of the tree? Do you think those branches are well supported?
 > 2. Which do you think is the biggest well-supported clade?
 > 2. Are there some nodes that would be better left unresolved?
 > 3. Is your tree "probably right"? -- or 80% right?
