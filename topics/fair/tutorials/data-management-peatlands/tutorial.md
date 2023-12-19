@@ -34,13 +34,7 @@ subtopic: fair-data
 
 # Introduction
 
-The FAIR (Findable, Accessible, Interoperable, Reusable) principles emphasize machine-actionability. The main objective of FAIR is to increase data reuse by researchers. The core concepts of the FAIR principles are based on good scientific practice and intuitively grounded. 
-
-This tutorial is a short introduction to the FAIR principles and their origin. You can find out more at the [FAIR Pointers](https://elixir-uk-dash.github.io/FAIR-Pointers/ep1/index.html) online course.
-
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will cover:
+Peatland monitoring and research generates data that is used for management, conservation and policy related to these ecosystems. To ensure that your project data is collected systematically and can be analysed, shared, and re-used it is important to have a data management plan.
 >
 > 1. TOC
 > {:toc}
