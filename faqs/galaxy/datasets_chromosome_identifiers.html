@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@3a37af9924ce5908a27dbd9a9e7ba6a4298a7c5c",
+		release: "galaxy-training-network@21f60d3baa91b9524cf7beab4fcab71c85882cec",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702896633' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702896633' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702987903' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702987903' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mismatched Chromosome identifiers and how to avoid them">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-09-28 11:56:59 +0000">
+<meta name="DC.date" content="2023-12-13 19:25:05 +0000">
 <meta name="DC.creator" content="Jennifer Hillman-Jackson">
 <meta name="DC.creator" content="Melkeberhan Berhanu Degefa">
 
@@ -85,7 +85,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702896633'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702987903'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -260,36 +260,56 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
            
 
-<ul>
-  <li>
-    <p>The methods listed here help to identify and correct errors or unexpected results linked to inputs having non-identical chromosome identifiers and/or different chromosome sequence content.</p>
-  </li>
-  <li>
-    <p><strong>If using a Custom Reference genome</strong>, the methods below also apply, but the first step is to make certain that the Custom Genome is formatted correctly. Improper formatting is the most common root cause of CG related errors.</p>
-  </li>
-</ul>
+<p>Reference data mismatches are similiar to bad reagents in a wet lab experiment: all sorts of odd problems can come up!</p>
 
-<p>Method 1: <a href="/training-material/faqs/galaxy/datasets_BAM_dataset_identifiers.html">Finding BAM dataset identifiers</a></p>
+<p>You inputs must be all based on an identical genome assembly build to achieve correct scientific results.</p>
 
-<p>Method 2: <a href="/training-material/faqs/galaxy/datasets_UCSC_sourced_genome.html">Directly obtaining UCSC sourced <em>genome</em> identifiers</a></p>
-
-<p>Method 3: <a href="https://galaxyproject.org/support/chrom-identifiers/#adjusting-identifiers-or-input-source">Adjusting identifiers for UCSC sourced data used with other sourced data</a></p>
-
-<p>Method 4: <a href="https://galaxyproject.org/support/chrom-identifiers/#any-mixed-sourced-data">Adjusting identifiers or input source for any mixed sourced data</a></p>
-
-<p><strong>A Note on Built-in Reference Genomes</strong></p>
-
-<ul>
-  <li>The default variant for all genomes is “Full”, defined as all primary chromosomes (or scaffolds/contigs) including mitochondrial plus associated unmapped, plasmid, and other segments.</li>
-  <li>When only one version of a genome is available for a tool, it represents the default “Full” variant.</li>
-  <li>
-    <p>Some genomes will have more than one variant available.</p>
-
+<p>There are two areas to review for data to be considered <strong>identical</strong>.</p>
+<ol>
+  <li>The data are based on the same exact genome <strong>assembly</strong> (or “assembly release”).
     <ul>
-      <li>The “Canonical Male” or sometimes simply “Canonical” variant contains the primary chromosomes for a genome. For example a human “Canonical” variant contains chr1-chr22, chrX, chrY, and chrM.</li>
-      <li>The “Canonical Female” variant contains the primary chromosomes excluding chrY.</li>
+      <li>The “assembly” refers to the nucleotide sequence of the genome.</li>
+      <li>If the base order and length of the chromosomes are not the same, then your coordinates will have scientific problems.</li>
+      <li>Converting coordinates between assemblies may be possible. Search tool panel with <code class="language-plaintext highlighter-rouge">CrossMap</code>.</li>
     </ul>
   </li>
+  <li>The data are based on the same exact genome assembly <strong>build</strong>.
+    <ul>
+      <li>The “build” refers to the labels used inside the file. In this context, pay attention to the chromosome identifiers.</li>
+      <li>These all may mean the same thing to a person but not to a computer or tool: chr1, Chr1, 1, chr1.1</li>
+      <li>Converting identifiers between builds may be possible. Search tool panel with <code class="language-plaintext highlighter-rouge">Replace</code>.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>The methods listed below help to identify and correct errors or unexpected results when the underlying genome assembly build for all inputs are <strong>not identical</strong>.</p>
+
+<p><strong>Method 1</strong>: <a href="/training-material/faqs/galaxy/datasets_BAM_dataset_identifiers.html">Finding BAM dataset identifiers</a></p>
+
+<p><strong>Method 2</strong>: <a href="/training-material/faqs/galaxy/datasets_UCSC_sourced_genome.html">Directly obtaining UCSC sourced <em>genome</em> identifiers</a></p>
+
+<p><strong>Method 3</strong>: <a href="https://galaxyproject.org/support/chrom-identifiers/#adjusting-identifiers-or-input-source">Adjusting identifiers for UCSC sourced data used with other sourced data</a></p>
+
+<p><strong>Method 4</strong>: <a href="https://galaxyproject.org/support/chrom-identifiers/#any-mixed-sourced-data">Adjusting identifiers or input source for any mixed sourced data</a></p>
+
+<p><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Reference data is self referential. <a href="/training-material/faqs/galaxy/analysis_differential_expression_help.html">More help for your genome, transcriptome, and annotation</a></p>
+
+<p><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Genome not available as a native index? <a href="/training-material/faqs/galaxy/reference_genomes_custom_genomes.html">Use a custom genome fasta</a> and <a href="/training-material/faqs/galaxy/analysis_add_custom_build.html">create a custom build database</a> instead.</p>
+
+<p><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> More notes on Native Reference Genomes</p>
+
+<ul>
+  <li>Native <strong>reference genomes</strong> (FASTA) are built as pre-computed indexes on the Galaxy server where you are working.</li>
+  <li>Different servers host both common <em>and</em> different reference genome data.</li>
+  <li>Most <strong>reference annotation</strong> (tabular, GTF, GFF3) is supplied from the history by the user, even when the genome is indexed.</li>
+  <li>Public Galaxy servers source reference genomes preferentially from <a href="https://hgdownload.soe.ucsc.edu/downloads.html">UCSC</a>.</li>
+  <li>A <strong>reference transcriptome</strong> (FASTA) is supplied from the history by the user.</li>
+  <li>Many experiements use a combination of all three types of reference data. Consider pre-preparing your files at the start!</li>
+  <li>The default variant for a native genome index is “Full”. Defined as: all primary chromosomes (or scaffolds/contigs) including mitochondrial plus associated unmapped, plasmid, and other segments.</li>
+  <li>When only one version of a genome is available for a tool, it represents the default “Full” variant.</li>
+  <li>Some genomes will have more than one variant available.</li>
+  <li>The “Canonical Male” or sometimes simply “Canonical” variant contains the primary chromosomes for a genome. For example a human “Canonical” variant contains chr1-chr22, chrX, chrY, and chrM.</li>
+  <li>The “Canonical Female” variant contains the primary chromosomes excluding chrY.</li>
 </ul>
 
         </div>
@@ -363,7 +383,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/3a37af9924ce5908a27dbd9a9e7ba6a4298a7c5c">3a37af9</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/21f60d3baa91b9524cf7beab4fcab71c85882cec">21f60d3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -391,7 +411,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702896633'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702987903'></script>
         
     </body>
 </html>

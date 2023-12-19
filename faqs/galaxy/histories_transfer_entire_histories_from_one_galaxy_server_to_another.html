@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@3a37af9924ce5908a27dbd9a9e7ba6a4298a7c5c",
+		release: "galaxy-training-network@21f60d3baa91b9524cf7beab4fcab71c85882cec",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702896633' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702896633' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1702987903' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1702987903' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Transfer entire histories from one Galaxy server to another">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-04-06 12:15:24 +0000">
+<meta name="DC.date" content="2023-12-19 11:27:55 +0000">
 <meta name="DC.creator" content="Jennifer Hillman-Jackson">
 <meta name="DC.creator" content="Adaora Okwo">
 
@@ -85,7 +85,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702896633'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1702987903'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -259,32 +259,42 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
            
+
+<p><strong>Transfer a Single Dataset</strong></p>
+
+<p>At the <strong>sender</strong> Galaxy server, <a href="/training-material/faqs/galaxy/histories_sharing.html">set the history to a shared state</a>, then directly capture the <i class="fas fa-link" aria-hidden="true"></i><span class="visually-hidden">galaxy-link</span> link for a dataset and paste the URL into the <strong>Upload</strong> tool at the <strong>receiver</strong> Galaxy server.</p>
+
+<p><strong>Transfer an Entire History</strong></p>
+
+<p><a href="/training-material/faqs/galaxy/account_create.html">Have an account</a> at two different Galaxy servers, and be logged into both.</p>
+
+<p>At the <strong>sender</strong> Galaxy server</p>
+
 <ol>
-  <li>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> in the history panel of the <em>sender</em> Galaxy server</li>
-  <li>Click on <strong>Export to File</strong></li>
-  <li>Select either exporting history <strong>to a link</strong> or <strong>to a remote file</strong></li>
-  <li>Click on the link text to generate a new archive for the history <em>if</em> exporting to a link</li>
-  <li>Wait for the link to generate</li>
-  <li>Copy the link address or click on the generated link to download the history archive</li>
-  <li>Click on <strong>User</strong> on the top menu of the <em>receiver</em> Galaxy server</li>
-  <li>Click on <strong>Histories</strong> to view saved histories</li>
-  <li>Click on <strong>Import history</strong> in the grey button on the top right</li>
-  <li>Select the appropriate importing method based on the choices made in steps 3 and 6
-    <ul>
-      <li>Choose <strong>Export URL from another galaxy instance</strong> if link address was copied in step 6</li>
-      <li>Select <strong>Upload local file from your computer</strong> if history archive was downloaded in step 6</li>
-      <li>Choose <strong>Select a remote file</strong> if history was exported to a remote file in step 3</li>
-    </ul>
-  </li>
-  <li>Click the link text to check out your histories if import is successful</li>
+  <li>Navigate to the history you want to transfer, and <a href="/training-material/faqs/galaxy/histories_sharing.html">set the history to a shared state</a>.</li>
+  <li>Click into the <strong>History Options</strong> menu in the history panel.</li>
+  <li>Select from the menu <i class="fas fa-archive" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-archive</span> <strong>Export History to File</strong>.</li>
+  <li>Choose the option for <strong>How do you want to export this History?</strong> as <strong>to direct download</strong>.</li>
+  <li>Click on <strong>Generate direct download</strong>.</li>
+  <li>Allow the archive generation process to complete. *</li>
+  <li>Copy the <i class="fas fa-link" aria-hidden="true"></i><span class="visually-hidden">galaxy-link</span> link for your new archive.</li>
 </ol>
 
-<p>If history being transferred is too large, you may:</p>
+<p>At the <strong>receiver</strong> Galaxy server</p>
+
 <ol>
-  <li>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> in the history panel of the <em>sender</em> Galaxy server</li>
-  <li>Click <strong>Copy Datasets</strong> to move just the important datasets into a new history</li>
-  <li>Create the archive from that smaller history</li>
+  <li>Confirm that you are logged into your account.</li>
+  <li>Click on <strong>User</strong> in the top menu, and choose <strong>Histories</strong> to reach your <strong>Saved Histories</strong>.</li>
+  <li>Click on <strong>Import history</strong> in the grey button on the top right.</li>
+  <li>Paste in your link’s URL from step 7.</li>
+  <li>Click on <strong>Import History</strong>.</li>
+  <li>Allow the archive import process to complete. *</li>
+  <li>The transfered history will be uncompressed and added to your <strong>Saved Histories</strong>.</li>
 </ol>
+
+<p>* For steps 6 and 13: It is Ok to navigate away for other tasks during processing. If enabled, Galaxy will send you <a href="/training-material/faqs/galaxy/account_update_preference.html">status notifications</a>.</p>
+
+<p><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> If the history to transfer is large, you may <a href="/training-material/faqs/galaxy/histories_copy_dataset.html">copy just your important datasets into a new history</a>, and create the archive from that new smaller history. Clearing away deleted and purged datasets will make <em>all</em> histories smaller and faster to archive and transfer!</p>
 
         </div>
         <div class="col-md-4">
@@ -357,7 +367,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/3a37af9924ce5908a27dbd9a9e7ba6a4298a7c5c">3a37af9</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/21f60d3baa91b9524cf7beab4fcab71c85882cec">21f60d3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -385,7 +395,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702896633'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1702987903'></script>
         
     </body>
 </html>
