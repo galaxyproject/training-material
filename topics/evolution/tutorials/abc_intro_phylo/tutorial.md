@@ -111,7 +111,7 @@ This tutorial has the following structure:
 
 
 ## What is a Phylogeny?
-![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](./images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. [Wikimedia commons](https://en.m.wikipedia.org/wiki/File:Darwins_first_tree.jpg)"){: align="center"}
+![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. Source: Wikimedia commons"){: align="center" width="40%"}
 
 A *phylogenetic tree*, also called a *phylogeny*, is usually a tree-like structure, like [Darwin's famous sketch](#figure-1). The leaves or tips of the tree represent extant (living/existing) taxonomic entities like species, genera, or strains (in general called "taxa"). The lines connecting taxa describe the evolutionary relationships between them.
 The intersections of lines correspond to hypothetical ancestral taxa. They represent branching events when species split into two new species, or a strain developed a phylogenetic important offshoot strain, etc.
@@ -161,7 +161,7 @@ Aside from gaining a fundamental understanding of biology, other reasons for inf
 
 Before we start building trees, let's define some terms.
 
-![Schematic of a phylogenetic tree where features such as nodes/taxa, edges/branches are annotated](./images/TreeAnatomyWithOutgroup.png "Anatomy of a phylogenetic tree."){:align="center"}
+![Schematic of a phylogenetic tree where features such as nodes/taxa, edges/branches are annotated](images/TreeAnatomyWithOutgroup.png "Anatomy of a phylogenetic tree."){:align="center" width="100%"}
 
 It's common to call **phylogenetic tree** a **phylogeny**.
 
@@ -183,7 +183,7 @@ One way to determine where the root of a tree belongs is to include an **outgrou
 
 You can see in the diagram above that the connection of the ingroup to the outgroup could be from multiple locations. Once the unrooted tree is created, using combined data from ingroup and outgroup taxa, we can confidently say that the root is on the branch connecting our ingroup to our outgroup:
 
-![Schematic showing connection between an in group and outgroup to root a tree](./images/TreeAnatomyUnrooted.png "Rooting a tree"){:align="center"}
+![Schematic showing connection between an in group and outgroup to root a tree](images/TreeAnatomyUnrooted.png "Rooting a tree"){:align="center" width="100%"}
 
 We can then imagine picking up the unrooted tree at the branch connecting our outgroup and ingroup -- that is our best guess at the hypothetical ancestor of all our taxa and gives us a good indication of the branching order of our ingroup (and the outgroup):
 
@@ -200,7 +200,7 @@ So, how do we estimate phylogenetic trees?
 
 We start with the leaves of the tree which can be living (extant) or older taxa:
 
-![Leaves of a tree are represented as separate rectangles containing the words Extant taxon = living species](./images/WeJustHaveLeaves.png "The 'leaves' of a tree (extant or older taxa) are the starting point for buidling phylogenies"){:align="center"}
+![Leaves of a tree are represented as separate rectangles containing the words Extant taxon = living species](images/WeJustHaveLeaves.png "The 'leaves' of a tree (extant or older taxa) are the starting point for buidling phylogenies"){:align="center" width="100%"}
 
 There are several ways to estimate a tree, such as:
 
@@ -270,7 +270,7 @@ Distances have very desirable properties, that can be summarised as follows: for
 
 Distances can be calculated based on a variety of data. Here is a flow-chart of the process:
 
-![Flow chart illustrating how sequence alignment data or dis/similarity measures can be used to calculate phylogentic distances](./images/TreeConstruction.drawio.png "Tree construction flow-chart){:align="center"}
+![Flow chart illustrating how sequence alignment data or dis/similarity measures can be used to calculate phylogentic distances](images/TreeConstruction.drawio.png "Tree construction flow-chart"){:align="center" width="100%"}
 
 The blue boxes on the left show some of the input data forms. The most commonly used kind of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the species of interest. We focus on this form of molecular phylogenetics in this tutorial.
 
@@ -281,7 +281,7 @@ These distances can be expressed as a matrix _D_, which becomes the input for di
 
 Distance-based methods (orange boxes) use algorithms to select a pair of taxa, or clades, to join together to make a new clade. Once that decision is made, the two taxa / clades that have been joined are replaced with the clade that the two of them make together as seen in the [figure below](#figure-7).
 
-![Joining Clades](./images/JoiningCladesForTreeConstruction.png "Joining clades for tree construction"){: align="center"}
+![Joining Clades](images/JoiningCladesForTreeConstruction.png "Joining clades for tree construction"){: align="center" width="100%"}
 
 
 ## Let's build our first tree
