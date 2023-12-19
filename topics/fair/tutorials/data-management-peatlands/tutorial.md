@@ -39,6 +39,10 @@ Peatland monitoring and research generates data that is used for management, con
 This tutorial is a short introduction to writing a Data Management Plan (DMP) with examples for peatland monitoring projects and initiatives.
 
 You can find more information on DMPs in the Research Data Management Toolkit for Life Sciences ( https://rdmkit.elixir-europe.org/)
+
+> <agenda-title></agenda-title>
+>
+> In this tutorial we will deal with:
 >
 > 1. TOC
 > {:toc}
