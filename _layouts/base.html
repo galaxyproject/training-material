@@ -31,8 +31,7 @@
         <meta name="theme-color" content="#2c3143"/>
 
         {{ page | generate_dublin_core: site }}
-	{%- assign og_desc = page.description | default: page.excerpt | default:topic.summary | default: page.content | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" -%}
-
+    	  {%- assign og_desc = page.description | default: page.excerpt | default:topic.summary | default: page.content | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" -%}
         <meta name="description" content="{{ og_desc | strip_html | regex_replace:'[\n\r\s]',' ' | truncate: 1000 }}">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="{{ og_title | default: page.title }}">

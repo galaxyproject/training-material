@@ -7,7 +7,7 @@ contributors: [hexylena]
 ---
 
 <div class="show-when-galaxy-proxy-active">
-Click here to run the 
+Click here to run 
 <span class="workflow" data-workflow="{{ site.url }}{{ site.baseurl }}{{ include.path | convert_workflow_path_to_trs }}"><strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span>
 workflow.
 </div>
