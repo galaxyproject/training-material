@@ -1,5 +1,6 @@
 ---
 layout: base
+title: GTN Videos
 ---
 
 <div class="row">

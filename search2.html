@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Search GTN Materials
+title: GTN Materials Search
 ---
 
 <p>
@@ -120,6 +120,8 @@ function search(){
 		return
 	}
 
+	// Include search term in page title
+	document.getElementsByTagName("title")[0].innerText = `${textQuery} | GTN Materials Search`
 	console.log(`Searching! ${textQuery} ${typeFilter} ${levelFilter}`)
 
 	// Which should be hidden

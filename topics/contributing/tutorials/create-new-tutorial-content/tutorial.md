@@ -1287,7 +1287,7 @@ To use this system, you need to take care of a few things:
 
 - Do **not** use hands-on boxes for segments that should be executed (code needs to be left aligned!)
 - Do **not** use snippets
-- Do **not** use icons `{% raw %}{% icon X %}{% endraw %}`
+- Do **not** use icons `{% raw %}{% icon galaxy-eye %}{% endraw %}`
 - Do not use a terminal or prompt character (that would be included in the execution.)
 - Avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
 

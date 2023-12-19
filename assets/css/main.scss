@@ -698,13 +698,22 @@ blockquote {
 		border-bottom: 1px solid var(--border-light);
 		padding: 1.25rem;
 		color: var(--brand-color-contrast);
-		margin-left: -15px; // BS has a 15px margin on cards, this makes the card title fill the card.
-		margin-right: -15px;
+		// margin-left: -15px; // BS has a 15px margin on cards, this makes the card title fill the card.
+		// margin-right: -15px;
 	}
 
 	.card-body {
 		padding: 0em;
 		flex: 0 1 auto; // Override BS for the workflow listing.
+
+		// We stripped the padding from the card body in the above line
+		// Thus we need to add it back via margins to each element.
+		// We have to manually exclude the card titles
+		// And also canvases because they apparently calculate their area before the CSS has finished.
+		& > :not(.card-title,canvas){
+			margin-left: 1em;
+			margin-right: 1em;
+		}
 	}
 }
 
@@ -915,22 +924,28 @@ blockquote {
 
 // This applies a "dark" style to the dropdown menus on small devices since
 // Bootstrap v4 does not do that by default.
+
+.dropdown-menu {
+	background-color: var(--color-background);
+	border-color: var(--border);
+}
+.dropdown-item {
+	color: var(--text-color);
+
+	&:hover, &:focus, &:active {
+		background-color: var(--brand-color);
+		color:  var(--text-color);
+	}
+}
+
+.dropdown-divider {
+	border-top-color: var(--border);
+}
+
 @media (max-width: 768px) {
     .navbar {
         .dropdown-menu {
-		background-color: var(--color-background);
             border-color: transparent;
-        }
-
-        .dropdown-item {
-		color: var(--text-color);
-
-            &:hover,
-            &:focus,
-            &:active {
-                background-color: var(--brand-color);
-                color:  var(--text-color);
-            }
         }
 
         .nav-item,
@@ -1594,6 +1609,10 @@ ul.text-list, ol.text-list {
 .dropdown-item:focus-visible {
 }
 
+.dropdown-header {
+	color: var(--text-color-muted);
+}
+
 ol.breadcrumb {
 	background: var(--secondary-color);
 
@@ -1683,6 +1702,7 @@ figure > a[target="_blank"]::after {
 	figure {
 		max-width: 20em;
 		margin: 0rem 0.5rem;
+		border: 0px transparent;
 
 		img {
 			max-height: 5em;
