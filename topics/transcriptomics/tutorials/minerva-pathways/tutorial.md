@@ -10,7 +10,7 @@ tags:
     - rna-seq
     - viz
 level: Intermediate
-zenodo_link:
+zenodo_link: https://zenodo.org/records/10405036
 questions:
     - TODO
 objectives:
@@ -60,9 +60,7 @@ that precludes the slowest and most data intensive parts of this tutorial.
 However, the entire process is documented in case you want to reproduce our
 work.
 
-# Data upload
-
-TODO
+## Study Design
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -144,20 +142,154 @@ TODO
 >
 {: .hands_on}
 
+## Data Download
 
-# Analysis
+## Analysis
 
-## limma
+We have split this workflow into two parts, based only on how long the first portion of the workflow takes to execute. The rough runtime of the workflow portions when this was being developed can be broken down as follows:
 
-With the
+Step                     | Time
+---                      | ---
+Data Download            | ~6h
+Processing Counts        | ~8h
+Analysis & Visualisation | 15m
 
-> <hands-on-title>Run the Workflow</hands-on-title>
-> 1. **Import the workflow** into Galaxy
+These numbers were generated on UseGalaxy.eu and may not represent the most
+efficient possible computation, as they are executed on a shared cluster that can, at times, be more or less busy.
+
+As such we recommend you skip to [Limma](#limma) to progress to the efficient
+portion. The data provided in the Zenodo record is from the entire analysis,
+analysed with the Counts step that can be skipped:
+
+### Counts
+
+We'll start by downloading our fastq files from the [GEO Dataset GSE182152](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE182152)
+
+> <hands-on-title>Download the data from GEO (ETA: 6 Hours)</hands-on-title>
 >
->    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" %}
+> 1. {% tool [Cut](Cut1) %} with the following parameters:
+>    - *"Cut columns"*: `c1`
+>    - {% icon param-file %} *"Select lines from"*: `factordata`
 >
->    Provide the factor data, RNA Sequencing data, and annotations files to the appropriate fields.
+> 1. {% tool [Select](Grep1) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `out_file1` (output of **Cut** {% icon tool %})
+>    - *"that"*: `NOT Matching`
+>    - *"the pattern"*: `Run`
+>
+> 1. {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/3.0.8+galaxy1) %} with the following parameters:
+>    - *"select input type"*: `List of SRA accession, one per line`
+>        - {% icon param-file %} *"sra accession list"*: `out_file1` (output of **Select** {% icon tool %})
 >
 {: .hands_on}
 
+With that done, we can start to analyse the data using HISAT2 and featureCounts
+
+> <hands-on-title>Run the Workflow</hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy
+>
+>    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="688" %}
+>
+{: .hands_on}
+
+This workflow produces a handful of outputs: the featureCounts results, and a
+MultiQC report. Looking at the report we see generally reasonable quality data.
+
+### limma
+
+> <hands-on-title>Only If You Skipped Here: Download the Counts Files</hands-on-title>
+>
+> 1. Open the Rule Builder
+>    - *"Upload data as"*: `Collection(s)`
+>    - *"Load tabular data from"*: `Pasted Table`
+>    - **Paste** the following table:
+>
+>      ```
+>      https://zenodo.org/records/10405036/files/gene_lengths.tabular	gene_lengths	Gene Lengths
+>      https://zenodo.org/records/10405036/files/SRR15462516.featureCounts.tabular	SRR15462516	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462517.featureCounts.tabular	SRR15462517	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462518.featureCounts.tabular	SRR15462518	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462519.featureCounts.tabular	SRR15462519	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462520.featureCounts.tabular	SRR15462520	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462521.featureCounts.tabular	SRR15462521	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462522.featureCounts.tabular	SRR15462522	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462523.featureCounts.tabular	SRR15462523	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462524.featureCounts.tabular	SRR15462524	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462525.featureCounts.tabular	SRR15462525	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462526.featureCounts.tabular	SRR15462526	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462527.featureCounts.tabular	SRR15462527	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462528.featureCounts.tabular	SRR15462528	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462529.featureCounts.tabular	SRR15462529	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR15462530.featureCounts.tabular	SRR15462530	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681520.featureCounts.tabular	SRR16681520	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681521.featureCounts.tabular	SRR16681521	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681522.featureCounts.tabular	SRR16681522	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681523.featureCounts.tabular	SRR16681523	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681524.featureCounts.tabular	SRR16681524	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681525.featureCounts.tabular	SRR16681525	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681526.featureCounts.tabular	SRR16681526	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681527.featureCounts.tabular	SRR16681527	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681528.featureCounts.tabular	SRR16681528	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681529.featureCounts.tabular	SRR16681529	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681530.featureCounts.tabular	SRR16681530	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681531.featureCounts.tabular	SRR16681531	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681532.featureCounts.tabular	SRR16681532	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681533.featureCounts.tabular	SRR16681533	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681534.featureCounts.tabular	SRR16681534	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681535.featureCounts.tabular	SRR16681535	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681536.featureCounts.tabular	SRR16681536	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681537.featureCounts.tabular	SRR16681537	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681538.featureCounts.tabular	SRR16681538	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681539.featureCounts.tabular	SRR16681539	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681540.featureCounts.tabular	SRR16681540	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681541.featureCounts.tabular	SRR16681541	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681542.featureCounts.tabular	SRR16681542	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681543.featureCounts.tabular	SRR16681543	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681544.featureCounts.tabular	SRR16681544	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681545.featureCounts.tabular	SRR16681545	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681546.featureCounts.tabular	SRR16681546	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681547.featureCounts.tabular	SRR16681547	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681548.featureCounts.tabular	SRR16681548	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681549.featureCounts.tabular	SRR16681549	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681550.featureCounts.tabular	SRR16681550	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681551.featureCounts.tabular	SRR16681551	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681552.featureCounts.tabular	SRR16681552	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681553.featureCounts.tabular	SRR16681553	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681554.featureCounts.tabular	SRR16681554	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681555.featureCounts.tabular	SRR16681555	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681556.featureCounts.tabular	SRR16681556	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681557.featureCounts.tabular	SRR16681557	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681558.featureCounts.tabular	SRR16681558	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681559.featureCounts.tabular	SRR16681559	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681560.featureCounts.tabular	SRR16681560	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681561.featureCounts.tabular	SRR16681561	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681562.featureCounts.tabular	SRR16681562	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681563.featureCounts.tabular	SRR16681563	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681564.featureCounts.tabular	SRR16681564	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681565.featureCounts.tabular	SRR16681565	featureCounts
+>      https://zenodo.org/records/10405036/files/SRR16681566.featureCounts.tabular	SRR16681566	featureCounts
+>      ```
+>
+>    - Click `Build`
+>
+> 1. From **Rules** menu, select `Add / Modify Column Definitions`
+>     - `Add Definition`, `Collection Name`, Select Column `C`
+>     - `Add Definition`, `List Identifier(s)`, Select Column `B`
+>     - `Add Definition`, `URL`, Column `A`
+>
+{: .hands_on}
+
+
+> <hands-on-title>Analyse the Counts</hands-on-title>
+>
+> 1. Run the workflow with the Factor Data from the first Hands on, and the datasets from the workflow or Zenodo download, depending on your path:
+>
+>    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="689" %}
+>
+{: .hands_on}
+
+You should have a few outputs, namely the `goseq` outputs, and a table ready for visualisation in MINERVA!
+
 ## MINERVA
+
+TODO
