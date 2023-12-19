@@ -13,13 +13,13 @@ objectives:
 - Create a first draft of a data management plan for peatland research
 time_estimation: "30M"
 key_points:
+- A Data Management Plan (DMP) is a live document that provides a framework for managing data material during and after the research project.
 - FAIR data are data which meet principles of findability, accessibility, interoperability, and reusability (FAIR).
-- FAIR data are as open as possible, and as closed as necessary.
-- The main objective of FAIR data is to increase data reuse by researchers. 
+
 tags:
 - fair
 - open
-- data stewardship
+- data management plan
 priority: 1
 contributions:
   authorship:
