@@ -4,6 +4,7 @@ MATRIX_SERVER=${MATRIX_SERVER:-"https://matrix.org"}
 ROOM_ID=${ROOM_ID:-'!TJRLNvfcbWbSRoUNpl:matrix.org'}  ## GTN Single Cell Maintainers
 WANTED_TAGS=${WANTED_TAGS:-"scrna scrna-seq"}
 MAX_REPLIES=${MAX_REPLIES:-1}
+HTML_TYPE=${HTML_TYPE:-"bullets"}  ## "table"
 
 ## Result filters
 OPTS=${OPTS:-"?ascending=true&order=activity"}
@@ -20,6 +21,7 @@ Example Usage:
      ROOM_ID='!123_132_123:matrix.org' \\
      WANTED_TAGS='tag1 tag2' \\
      MAX_REPLIES=1 \\
+     HTML_TYPE='bullets' \\
      bash $0
 
 Where:
@@ -40,6 +42,10 @@ Where:
 
   MAX_REPLIES          Filter for posts that have less than or equal to
                        this many replies. Default is \"$MAX_REPLIES\"
+
+  HTML_TYPE            Render either a 'table' or 'bullets'. HTML tables
+                       look great in the browser but don't render well on
+                       mobile. Default is \"$HTML_TYPE\"
 
   OPTS                 Extra arguments to append to help.galaxyproject.org
                        URL. Default is \"$OPTS\"
@@ -93,17 +99,25 @@ function filter_tsv {
 function tsv_to_html {
     ## Convert a TSV table into HTML text that can be fed into a JSON
     local tsv="$1"
-    awk -F$'\t' -v subtitle="Recent posts matching: <b>$WANTED_TAGS</b>, with replies &le; $MAX_REPLIES" '\
+    if [ "$HTML_TYPE" = "table" ]; then
+        awk -F$'\t' -v subtitle="Recent posts matching: <b>${WANTED_TAGS}</b>, with replies &le; ${MAX_REPLIES}" '\
 BEGIN { print "<h1>Updates from Galaxy Help</h1>"subtitle"\n<table>\n<thead><tr><th>Topic</th><th>Replies</th><th>Views</th></tr></thead>\n<tbody>"} \
 END { print "</tbody>\n</table>"} \
 NR > 0 {print "<tr><td><a href=\""$1"\">"$2"</a></td><td>"$3"</td><td>"$4"</td></tr>"}' \
-        "${tsv}" | tr '\n' ' ' | sed 's|"|\\"|g'
+            "${tsv}" | tr '\n' ' ' | sed 's|"|\\"|g'
+    else  ## bullets
+        awk -F$'\t' -v subtitle="Recent posts matching: <b>${WANTED_TAGS}</b>, with replies &le; ${MAX_REPLIES}" '\
+BEGIN { print "<h1>Updates from Galaxy Help</h1><br/><p>"subtitle"</p><ol>\n"} \
+END { print "\n</ol>"} \
+NR > 0 {print "<li><a href=\""$1"\">"$2"</a><ul><li>Replies: "$3" and Views: "$4"</li></ul></li>"}' \
+            "${tsv}" | tr '\n' ' ' | sed 's|"|\\"|g'
+    fi
 }
 
 function tsv_to_markdown {
     ## Convert a TSV table into Markdown text that can be fed into a JSON
     local tsv="$1"
-    awk -F$'\t' -v subtitle="Recent posts matching: $WANTED_TAGS, with replies ≤ $MAX_REPLIES" '\
+    awk -F$'\t' -v subtitle="Recent posts matching: **${WANTED_TAGS}**, with replies ≤ ${MAX_REPLIES}" '\
 BEGIN { print "## Updates from Galaxy Help\\n***"subtitle"***\\n"} \
 NR > 0 {print "* ["$2"]("$1")\\n   * "$3" replies and "$4" views\\n"}' \
         "${tsv}" | tr '\n' ' ' | sed 's|"|\\"|g'
