@@ -142,7 +142,7 @@ Aside from gaining a fundamental understanding of biology, other reasons for inf
 - Understanding coevolution; for example, around 70% of emergent human diseases have come from other species
 - Dating major evolutionary events to study the effects of environmental change on different species.
 
-> <comment-title>Gene trees, species trees reconcilitation problem</comment-title>
+> <comment-title>Gene trees, species trees reconciliation problem</comment-title>
 > It's worth noting that getting the phylogeny from a set of genes – what we often call a **gene tree** – might *not* give us the true phylogeny of the species that house those genes, *even if we get everything right!*
 >
 > This happens because there are other processes that can influence the so-called "gene tree" such as:
@@ -281,7 +281,7 @@ These distances can be expressed as a matrix _D_, which becomes the input for di
 
 Distance-based methods (orange boxes) use algorithms to select a pair of taxa, or clades, to join together to make a new clade. Once that decision is made, the two taxa / clades that have been joined are replaced with the clade that the two of them make together as seen in the [figure below](#figure-7).
 
-![Joining Clades](images/JoiningCladesForTreeConstruction.png "Joining clades for tree construction"){: align="center" width="100%"}
+![Joining Clades](images/JoiningCladesForTreeConstruction.png "Joining clades for tree construction"){: align="center" width="60%"}
 
 
 ## Let's build our first tree
@@ -683,7 +683,11 @@ While this is running you might use your time to read the [Models of sequence ev
 > 2. Which do you think is the biggest well-supported clade?
 > 2. Are there some nodes that would be better left unresolved?
 > 3. Is your tree "probably right"? -- or 80% right?
- {: .question}
+> > <solution-title></solution-title>
+> > Near the base of the tree the bootstrap values are high: mostly around 100%.  These appear to be well supported. Since they're near the root, there are some very large well-supported clades, e.g., all the way from _A. disticus_ near the top, down to _A. lineatus_ near the bottom.  There are a number of poorly supported clades _within_ this clade though, with some low bootstrap values; the smallest of these is just 29% for the clade from _C. barbouri_ to _Diplolaemus darwinii_.
+> > Overall the tree looks well supported, but it's probably wrong _somewhere_. It would be worth seeking more data, molecular or morphological, to resolve those poorly supported clades.
+> {: .solution} 
+{: .question}
 
 
 Observe that the bootstrap values in the IQTree output for deep branches are not as high.
@@ -701,7 +705,13 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 
 > <question-title>Understanding the IQ-Tree report</question-title>
 > 1. What is the second-most favoured model?
-> 2. How many the relative rates of evolution have been estimated, and what are these rates?
+> 2. How many relative rates of evolution have been estimated, and what are these rates?
+> > <solution-title>1</solution-title>
+> > The second-best supported model is GTR + F + R7: it's almost identical to the first model, but with one more rate category.
+> {: .solution}
+> > <solution-title>2</solution-title>
+> > There are 6 relative rates, in the table with columns Category, Relative_rate and Proportion: the rates are 0.01936 (very slow), 0.1952, 0.6315, 1.365, 2.662, and the fastest, 7.146.  Very few sites are estimated to be in this category - about 2.3% - whereas about 27% of the sites are deemed to be in the slowest category.
+> {: .solution}
 {: .question}
 
 > <details-title>Guide to the report</details-title>
