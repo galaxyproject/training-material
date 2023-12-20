@@ -1,8 +1,6 @@
 #!/bin/bash
 
-MATRIX_ACCESS_TOKEN=${MATRIX_ACCESS_TOKEN}
 ROOM_ID=${ROOM_ID:-'!TJRLNvfcbWbSRoUNpl:matrix.org'}  ## GTN Single Cell Maintainers
-
 WANTED_TAGS=${WANTED_TAGS:-"scrna scrna-seq"}
 MAX_REPLIES=${MAX_REPLIES:-1}
 
@@ -62,27 +60,29 @@ function alltags_to_tsv {
     ## For all wanted tags, populate a 4-column TSV output of Link,
     ## Title, Replies, Views, and return the path of the table.
     local fetch_tags=$WANTED_TAGS
-    local tmp_tsv=$(mktemp --suffix=".tsv")
+    local tmp_tsv
+    tmp_tsv=$(mktemp --suffix=".tsv")
     for tag in ${fetch_tags}; do
-        tag_to_tsv $tag >> $tmp_tsv;
+        tag_to_tsv "$tag" >> "$tmp_tsv";
     done
     ## No duplicates, no blanks, no duplicate delimiters,
     ## and sort by ascending reply count
-    cat ${tmp_tsv} | grep -v "^\s*$" | sed 's|\t\t|\t|g' \
-        | sort | uniq | sort -t $'\t' -nk 3 > ${tmp_tsv}.temp
-    echo -e "Link\tTitle\tReplies\tViews" > ${tmp_tsv}
-    cat ${tmp_tsv}.temp  >> ${tmp_tsv}
-    rm ${tmp_tsv}.temp
-    echo ${tmp_tsv}
+    grep -v "^\s*$" "${tmp_tsv}" | sed 's|\t\t|\t|g' \
+        | sort | uniq | sort -t $'\t' -nk 3 > "${tmp_tsv}".temp
+    echo -e "Link\tTitle\tReplies\tViews" > "${tmp_tsv}"
+    cat "${tmp_tsv}".temp  >> "${tmp_tsv}"
+    rm "${tmp_tsv}".temp
+    echo "${tmp_tsv}"
 }
 
 function filter_tsv {
     ## Filter a TSV file for maximum replies and then return the path
     ## of the new filtered table
     local tsv="$1"
-    local tmp_tsv=$(mktemp --suffix=".tsv")
-    awk -F$'\t' -v replies="$MAX_REPLIES" '$3 <= replies' ${tsv} > ${tmp_tsv}
-    echo ${tmp_tsv}
+    local tmp_tsv
+    tmp_tsv=$(mktemp --suffix=".tsv")
+    awk -F$'\t' -v replies="$MAX_REPLIES" '$3 <= replies' "${tsv}" > "${tmp_tsv}"
+    echo "${tmp_tsv}"
 }
 
 function tsv_to_html {
@@ -92,7 +92,7 @@ function tsv_to_html {
 BEGIN { print "<h1>Updates from Galaxy Help</h1>"subtitle"\n<table>\n<thead><tr><th>Topic</th><th>Replies</th><th>Views</th></tr></thead>\n<tbody>"} \
 END { print "</tbody>\n</table>"} \
 NR > 0 {print "<tr><td><a href=\""$1"\">"$2"</a></td><td>"$3"</td><td>"$4"</td></tr>"}' \
-        ${tsv} | tr '\n' ' ' | sed 's|"|\\"|g'
+        "${tsv}" | tr '\n' ' ' | sed 's|"|\\"|g'
 }
 
 function tsv_to_markdown {
@@ -101,7 +101,7 @@ function tsv_to_markdown {
     awk -F$'\t' -v subtitle="Recent posts matching: $WANTED_TAGS, with replies ≤ $MAX_REPLIES" '\
 BEGIN { print "## Updates from Galaxy Help\\n***"subtitle"***\\n"} \
 NR > 0 {print "* ["$2"]("$1")\\n   * "$3" replies and "$4" views\\n"}' \
-        ${tsv} | tr '\n' ' ' | sed 's|"|\\"|g'
+        "${tsv}" | tr '\n' ' ' | sed 's|"|\\"|g'
 }
 
 function post_md_and_html {
@@ -129,25 +129,27 @@ function sanity_check {
     ## Assert that required binaries are in PATH
     local required_progs="cat curl xmllint awk sed grep tr"
     local miss=""
-    for prog in $required_progs; do
-        if ! which $prog 2>/dev/null >&2; then
+    for prog in "${required_progs[@]}"; do
+        if ! which "${prog}" 2>/dev/null >&2; then
             miss="$miss $prog"
         fi
     done
     if [ "$miss" != "" ]; then
-        echo "Cannot run without: $miss"
-        exit -1
+        echo "Cannot run without:$miss"
+        exit 255
     fi
 }
 
+## MAIN ##
 sanity_check
-main_tsv=$(filter_tsv $(alltags_to_tsv) )
-if [ "$(wc -l < ${main_tsv})" = "0" ]; then
+
+main_tsv=$(filter_tsv "$(alltags_to_tsv)" )
+if [[ $(wc -l < "${main_tsv}") == 0 ]]; then
     echo "Nothing new to post, aborting."  >&2
     exit 0
 fi
 
-main_mdwn=$(tsv_to_markdown $main_tsv)
-main_html=$(tsv_to_html $main_tsv)
+main_mdwn_text=$(tsv_to_markdown "${main_tsv}")
+main_html_text=$(tsv_to_html "${main_tsv}")
 
 post_md_and_html "$main_mdwn" "$main_html"
