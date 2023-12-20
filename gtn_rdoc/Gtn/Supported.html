@@ -128,17 +128,17 @@
 }</pre>
 
           <div class="method-source-code" id="calculate-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/supported.rb, line 19</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/supported.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">calculate</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">tool_list</span>)
   <span class="ruby-comment"># p &quot;Calculating supported servers for this tool list&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">tool_list</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">tool_list</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-keyword">return</span> {
       <span class="ruby-string">&#39;exact&#39;</span> <span class="ruby-operator">=&gt;</span> [],
-      <span class="ruby-string">&#39;inexact&#39;</span> <span class="ruby-operator">=&gt;</span> [
-        { <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;UseGalaxy.eu&#39;</span>, <span class="ruby-string">&#39;url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;https://usegalaxy.eu&#39;</span>, <span class="ruby-string">&#39;usegalaxy&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> },
-        { <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;UseGalaxy.org&#39;</span>, <span class="ruby-string">&#39;url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;https://usegalaxy.org&#39;</span>, <span class="ruby-string">&#39;usegalaxy&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> },
-        { <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;UseGalaxy.org.au&#39;</span>, <span class="ruby-string">&#39;url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;https://usegalaxy.org.au&#39;</span>, <span class="ruby-string">&#39;usegalaxy&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> }
-      ],
+      <span class="ruby-string">&#39;inexact&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Usegalaxy</span>.<span class="ruby-identifier">servers</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+                     <span class="ruby-identifier">x</span> = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">transform_keys</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>)
+                     <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;usegalaxy&#39;</span>] = <span class="ruby-keyword">true</span>
+                     <span class="ruby-identifier">x</span>
+                   <span class="ruby-keyword">end</span>
     }
   <span class="ruby-keyword">end</span>
 
@@ -183,13 +183,19 @@
   <span class="ruby-comment"># generate a &#39;false&#39; value when merging sets.</span>
   <span class="ruby-identifier">inexact_support</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">exact_support</span>
 
+  <span class="ruby-identifier">usegalaxy_server_urls</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Usegalaxy</span>.<span class="ruby-identifier">servers</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">:url</span>] }
+
   {
     <span class="ruby-string">&#39;exact&#39;</span> <span class="ruby-operator">=&gt;</span> (<span class="ruby-identifier">exact_support</span> <span class="ruby-operator">||</span> []).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;servers&#39;</span>][<span class="ruby-identifier">id</span>].<span class="ruby-identifier">update</span>(
-        { <span class="ruby-string">&#39;usegalaxy&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;servers&#39;</span>][<span class="ruby-identifier">id</span>][<span class="ruby-string">&#39;url&#39;</span>].<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;usegalaxy.&#39;</span>).<span class="ruby-identifier">to_s</span> }
+        { <span class="ruby-string">&#39;usegalaxy&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">usegalaxy_server_urls</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;servers&#39;</span>][<span class="ruby-identifier">id</span>][<span class="ruby-string">&#39;url&#39;</span>]) }
       )
     <span class="ruby-keyword">end</span>,
-    <span class="ruby-string">&#39;inexact&#39;</span> <span class="ruby-operator">=&gt;</span> (<span class="ruby-identifier">inexact_support</span> <span class="ruby-operator">||</span> []).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;servers&#39;</span>][<span class="ruby-identifier">id</span>] }
+    <span class="ruby-string">&#39;inexact&#39;</span> <span class="ruby-operator">=&gt;</span> (<span class="ruby-identifier">inexact_support</span> <span class="ruby-operator">||</span> []).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">id</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;servers&#39;</span>][<span class="ruby-identifier">id</span>].<span class="ruby-identifier">update</span>(
+        { <span class="ruby-string">&#39;usegalaxy&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">usegalaxy_server_urls</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;servers&#39;</span>][<span class="ruby-identifier">id</span>][<span class="ruby-string">&#39;url&#39;</span>]) }
+      )
+    <span class="ruby-keyword">end</span>
   }
 <span class="ruby-keyword">end</span></pre>
           </div>

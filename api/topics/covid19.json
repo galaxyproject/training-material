@@ -147,7 +147,7 @@
           "name": "vcf2lineage",
           "title": "vcf2lineage",
           "test_results": null,
-          "modified": "2023-12-20 15:44:49 +0000",
+          "modified": "2023-12-20 15:52:55 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input parameter\"];\n  2[\"Input dataset\"];\n  3[\"Compose text parameter value\"];\n  1 -->|output| 3;\n  4[\"SnpSift Filter\"];\n  3 -->|out1| 4;\n  0 -->|output| 4;\n  5[\"bcftools consensus\"];\n  4 -->|output| 5;\n  2 -->|output| 5;\n  6[\"Collapse Collection\"];\n  5 -->|output_file| 6;\n  7[\"Pangolin\"];\n  6 -->|output| 7;\n"
         }
       ],
@@ -164,29 +164,29 @@
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
+            "usegalaxy": true
           },
           {
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
+            "usegalaxy": true
           },
           {
             "url": "https://usegalaxy.org.au",
             "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
+            "usegalaxy": true
           }
         ],
         "inexact": [
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
+            "usegalaxy": false
           }
         ]
       },
@@ -343,7 +343,7 @@
           "name": "GTN_ENA_upload_workflow",
           "title": "GTN_ENA_upload_workflow",
           "test_results": null,
-          "modified": "2023-12-20 15:44:49 +0000",
+          "modified": "2023-12-20 15:52:55 +0000",
           "mermaid": "flowchart TD\n  0[\"ENA Upload tool\"];\n  1[\"ENA Upload tool\"];\n"
         }
       ],
@@ -526,12 +526,12 @@
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
+            "usegalaxy": true
           },
           {
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
+            "usegalaxy": true
           }
         ],
         "inexact": [
@@ -754,7 +754,7 @@
           "name": "Simple COVID-19 - PE Variation",
           "title": "Simple COVID-19 - PE Variation",
           "test_results": null,
-          "modified": "2023-12-20 15:44:51 +0000",
+          "modified": "2023-12-20 15:52:58 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  1 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|list_paired| 3;\n  4[\"Map with BWA-MEM\"];\n  3 -->|output_paired_coll| 4;\n  0 -->|output| 4;\n  5[\"MarkDuplicates\"];\n  4 -->|bam_output| 5;\n  6[\"Realign reads\"];\n  5 -->|outFile| 6;\n  0 -->|output| 6;\n  7[\"Samtools stats\"];\n  5 -->|outFile| 7;\n  8[\"Insert indel qualities\"];\n  6 -->|realigned| 8;\n  0 -->|output| 8;\n  9[\"Call variants\"];\n  8 -->|output| 9;\n  0 -->|output| 9;\n  10[\"SnpEff eff:\"];\n  9 -->|variants| 10;\n  11[\"SnpSift Extract Fields\"];\n  10 -->|snpeff_output| 11;\n  12[\"MultiQC\"];\n  3 -->|report_json| 12;\n  7 -->|output| 12;\n  5 -->|metrics_file| 12;\n  10 -->|csvFile| 12;\n"
         }
       ],
@@ -781,34 +781,34 @@
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
+            "usegalaxy": true
           },
           {
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
+            "usegalaxy": true
           }
         ],
         "inexact": [
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.no/",
             "name": "UseGalaxy.no",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.org.au",
             "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
+            "usegalaxy": true
           }
         ]
       },
@@ -1101,7 +1101,7 @@
           "name": "assembly_with_preprocessing",
           "title": "assembly_with_preprocessing",
           "test_results": null,
-          "modified": "2023-12-20 15:44:47 +0000",
+          "modified": "2023-12-20 15:52:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset collection\"];\n  10[\"Samtools fastx\"];\n  7 -->|outputsam| 10;\n  11[\"Samtools fastx\"];\n  9 -->|outputsam| 11;\n  12[\"Collapse Collection\"];\n  10 -->|nonspecific| 12;\n  13[\"Zip Collection\"];\n  11 -->|forward| 13;\n  11 -->|reverse| 13;\n  14[\"Collapse Collection\"];\n  11 -->|forward| 14;\n  15[\"Collapse Collection\"];\n  11 -->|reverse| 15;\n  16[\"seqtk_sample\"];\n  14 -->|output| 16;\n  17[\"seqtk_sample\"];\n  15 -->|output| 17;\n  18[\"Create assemblies with Unicycler\"];\n  12 -->|output| 18;\n  16 -->|default| 18;\n  17 -->|default| 18;\n  19[\"Bandage Info\"];\n  18 -->|assembly_graph| 19;\n  2[\"fastp\"];\n  0 -->|output| 2;\n  20[\"Filter sequences by length\"];\n  18 -->|assembly| 20;\n  21[\"Bandage Image\"];\n  18 -->|assembly_graph| 21;\n  3[\"NanoPlot\"];\n  1 -->|output| 3;\n  4[\"Map with minimap2\"];\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  2 -->|report_json| 5;\n  6[\"Bowtie2\"];\n  2 -->|output_paired_coll| 6;\n  7[\"Samtools view\"];\n  4 -->|alignment_output| 7;\n  8[\"Samtools stats\"];\n  4 -->|alignment_output| 8;\n  9[\"Samtools view\"];\n  6 -->|output| 9;\n"
         },
         {
@@ -1119,7 +1119,7 @@
           "name": "assembly_with_preprocessing_and_sra_download",
           "title": "assembly_with_preprocessing_and_sra_download",
           "test_results": null,
-          "modified": "2023-12-20 15:44:47 +0000",
+          "modified": "2023-12-20 15:52:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"Samtools stats\"];\n  6 -->|alignment_output| 10;\n  11[\"Samtools view\"];\n  8 -->|output| 11;\n  12[\"Samtools fastx\"];\n  9 -->|outputsam| 12;\n  13[\"Samtools fastx\"];\n  11 -->|outputsam| 13;\n  14[\"Collapse Collection\"];\n  12 -->|nonspecific| 14;\n  15[\"Zip Collection\"];\n  13 -->|forward| 15;\n  13 -->|reverse| 15;\n  16[\"Collapse Collection\"];\n  13 -->|forward| 16;\n  17[\"Collapse Collection\"];\n  13 -->|reverse| 17;\n  18[\"seqtk_sample\"];\n  16 -->|output| 18;\n  19[\"seqtk_sample\"];\n  17 -->|output| 19;\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  0 -->|output| 2;\n  20[\"Create assemblies with Unicycler\"];\n  14 -->|output| 20;\n  18 -->|default| 20;\n  19 -->|default| 20;\n  21[\"Bandage Info\"];\n  20 -->|assembly_graph| 21;\n  22[\"Bandage Image\"];\n  20 -->|assembly_graph| 22;\n  23[\"Filter sequences by length\"];\n  20 -->|assembly| 23;\n  3[\"Faster Download and Extract Reads in FASTQ\"];\n  1 -->|output| 3;\n  4[\"fastp\"];\n  2 -->|list_paired| 4;\n  5[\"NanoPlot\"];\n  3 -->|output_collection| 5;\n  6[\"Map with minimap2\"];\n  3 -->|output_collection| 6;\n  7[\"MultiQC\"];\n  4 -->|report_json| 7;\n  8[\"Bowtie2\"];\n  4 -->|output_paired_coll| 8;\n  9[\"Samtools view\"];\n  6 -->|alignment_output| 9;\n"
         }
       ],
@@ -1147,34 +1147,34 @@
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
+            "usegalaxy": true
           },
           {
             "url": "https://usegalaxy.org.au",
             "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
+            "usegalaxy": true
           }
         ],
         "inexact": [
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.no/",
             "name": "UseGalaxy.no",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
+            "usegalaxy": true
           }
         ]
       },
@@ -1384,7 +1384,7 @@
           "name": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
           "title": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
           "test_results": null,
-          "modified": "2023-12-20 15:44:47 +0000",
+          "modified": "2023-12-20 15:52:54 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Enumerate changes\"];\n  0 -->|output| 3;\n  4[\"Compound conversion\"];\n  1 -->|output| 4;\n  5[\"Create Frankenstein ligand\"];\n  2 -->|output| 5;\n  6[\"Compound conversion\"];\n  3 -->|output| 6;\n  7[\"rDock cavity definition\"];\n  4 -->|outfile| 7;\n  5 -->|outfile| 7;\n  8[\"Split file\"];\n  6 -->|outfile| 8;\n  9[\"rDock docking\"];\n  4 -->|outfile| 9;\n  8 -->|list_output_sdf| 9;\n  7 -->|activesite| 9;\n  10[\"Collapse Collection\"];\n  9 -->|output| 10;\n  11[\"XChem TransFS pose scoring\"];\n  1 -->|output| 11;\n  10 -->|output| 11;\n  12[\"Max SuCOS score\"];\n  11 -->|output| 12;\n  2 -->|output| 12;\n"
         }
       ],
@@ -1660,7 +1660,7 @@
           "name": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
           "title": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
           "test_results": null,
-          "modified": "2023-12-20 15:44:50 +0000",
+          "modified": "2023-12-20 15:52:56 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Trimmomatic\"];\n  0 -->|output| 1;\n  2[\"Unzip Collection\"];\n  0 -->|output| 2;\n  3[\"Map with BWA-MEM\"];\n  1 -->|fastq_out_paired| 3;\n  4[\"Samtools fastx\"];\n  3 -->|bam_output| 4;\n  5[\"Select\"];\n  4 -->|forward| 5;\n  6[\"Replace Text\"];\n  5 -->|out_file1| 6;\n  7[\"seqtk_subseq\"];\n  2 -->|forward| 7;\n  6 -->|outfile| 7;\n  8[\"seqtk_subseq\"];\n  2 -->|reverse| 8;\n  6 -->|outfile| 8;\n  9[\"Zip Collection\"];\n  7 -->|default| 9;\n  8 -->|default| 9;\n"
         }
       ],
@@ -1681,44 +1681,44 @@
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
+            "usegalaxy": true
           }
         ],
         "inexact": [
           {
             "url": "https://galaxy.mesocentre.uca.fr",
             "name": "Galaxy@AuBi",
-            "usegalaxy": "false"
+            "usegalaxy": false
           },
           {
             "url": "https://galaxytrakr.org/",
             "name": "GalaxyTrakr",
-            "usegalaxy": "false"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
+            "usegalaxy": true
           },
           {
             "url": "https://usegalaxy.no/",
             "name": "UseGalaxy.no",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.org.au",
             "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
+            "usegalaxy": true
           }
         ]
       },
@@ -1941,29 +1941,29 @@
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
+            "usegalaxy": true
           },
           {
             "url": "https://usegalaxy.org.au",
             "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
+            "usegalaxy": true
           }
         ],
         "inexact": [
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
+            "usegalaxy": true
           },
           {
             "url": "https://usegalaxy.no/",
             "name": "UseGalaxy.no",
-            "usegalaxy": "true"
+            "usegalaxy": false
           }
         ]
       },
@@ -2115,44 +2115,44 @@
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
+            "usegalaxy": true
           },
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.no/",
             "name": "UseGalaxy.no",
-            "usegalaxy": "true"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
+            "usegalaxy": true
           },
           {
             "url": "https://usegalaxy.org.au",
             "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
+            "usegalaxy": true
           }
         ],
         "inexact": [
           {
             "url": "https://galaxy.mesocentre.uca.fr",
             "name": "Galaxy@AuBi",
-            "usegalaxy": "false"
+            "usegalaxy": false
           },
           {
             "url": "https://galaxytrakr.org/",
             "name": "GalaxyTrakr",
-            "usegalaxy": "false"
+            "usegalaxy": false
           },
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
-            "usegalaxy": "true"
+            "usegalaxy": false
           }
         ]
       },

@@ -411,7 +411,7 @@
           <div class="method-source-code" id="fetch_toolcats-source">
             <pre><span class="ruby-comment"># File bin/fetch-categories.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_toolcats</span>(<span class="ruby-identifier">server</span>)
-  <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;#{server}&quot;</span>)
+  <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">server</span>.<span class="ruby-identifier">to_s</span>)
   <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">uri</span>)
   <span class="ruby-identifier">req_options</span> = {
     <span class="ruby-value">use_ssl:</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">scheme</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;https&#39;</span>,
@@ -446,34 +446,32 @@
 
           <div class="method-source-code" id="fetch_workflowhub-source">
             <pre><span class="ruby-comment"># File bin/workflows-fetch.rb, line 34</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_workflowhub</span>()
-  <span class="ruby-identifier">projects</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">request</span>(<span class="ruby-string">&quot;https://workflowhub.eu/projects&quot;</span>).<span class="ruby-identifier">body</span>)
-  <span class="ruby-identifier">project_mapping</span> = <span class="ruby-identifier">projects</span>[<span class="ruby-string">&#39;data&#39;</span>].<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;attributes&#39;</span>][<span class="ruby-string">&#39;title&#39;</span>]]}.<span class="ruby-identifier">to_h</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_workflowhub</span>
+  <span class="ruby-identifier">projects</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">request</span>(<span class="ruby-string">&#39;https://workflowhub.eu/projects&#39;</span>).<span class="ruby-identifier">body</span>)
+  <span class="ruby-identifier">project_mapping</span> = <span class="ruby-identifier">projects</span>[<span class="ruby-string">&#39;data&#39;</span>].<span class="ruby-identifier">to_h</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;attributes&#39;</span>][<span class="ruby-string">&#39;title&#39;</span>]] }
 
-  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">request</span>(<span class="ruby-string">&quot;https://workflowhub.eu/workflows?filter[workflow_type]=galaxy&quot;</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">request</span>(<span class="ruby-string">&#39;https://workflowhub.eu/workflows?filter[workflow_type]=galaxy&#39;</span>)
   <span class="ruby-identifier">data</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;links&#39;</span>][<span class="ruby-string">&#39;next&#39;</span>].<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;ERROR: Cannot yet handle multiple pages&quot;</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;ERROR: Cannot yet handle multiple pages&#39;</span>
     <span class="ruby-identifier">exit</span> <span class="ruby-value">42</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INFO: Fetching #{data[&#39;data&#39;].length} workflows from WorkflowHub&quot;</span>
-  <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;data&#39;</span>].<span class="ruby-identifier">map</span>.<span class="ruby-identifier">with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;data&#39;</span>].<span class="ruby-identifier">map</span>.<span class="ruby-identifier">with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span>, <span class="ruby-identifier">_i</span><span class="ruby-operator">|</span>
     <span class="ruby-comment"># {&quot;id&quot;=&gt;&quot;14&quot;, &quot;type&quot;=&gt;&quot;workflows&quot;, &quot;attributes&quot;=&gt;{&quot;title&quot;=&gt;&quot;Cheminformatics - Docking&quot;}, &quot;links&quot;=&gt;{&quot;self&quot;=&gt;&quot;/workflows/14&quot;}}</span>
     <span class="ruby-identifier">wf_info</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">request</span>(<span class="ruby-node">&quot;https://workflowhub.eu#{w[&#39;links&#39;][&#39;self&#39;]}&quot;</span>).<span class="ruby-identifier">body</span>)
     <span class="ruby-identifier">creator_list</span> = []
 
     <span class="ruby-identifier">creator0</span> = <span class="ruby-identifier">wf_info</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;attributes&#39;</span>][<span class="ruby-string">&#39;creators&#39;</span>][<span class="ruby-value">0</span>]
-    <span class="ruby-identifier">owner</span> = <span class="ruby-string">&quot;&quot;</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">creator0</span>.<span class="ruby-identifier">nil?</span>
-      <span class="ruby-comment"># Primary</span>
-      <span class="ruby-identifier">creator_list</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">creator0</span>[<span class="ruby-string">&#39;given_name&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">creator0</span>[<span class="ruby-string">&#39;family_name&#39;</span>])
-    <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">creator0</span>.<span class="ruby-identifier">nil?</span>
       <span class="ruby-comment"># Other creators</span>
       <span class="ruby-identifier">other</span> = <span class="ruby-identifier">wf_info</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;attributes&#39;</span>][<span class="ruby-string">&#39;other_creators&#39;</span>]
       <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">other</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
-        <span class="ruby-identifier">creator_list</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">wf_info</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;attributes&#39;</span>][<span class="ruby-string">&#39;other_creators&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">strip</span>})
-      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">creator_list</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">wf_info</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;attributes&#39;</span>][<span class="ruby-string">&#39;other_creators&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:strip</span>))
       <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># Primary</span>
+      <span class="ruby-identifier">creator_list</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{creator0[&#39;given_name&#39;]} #{creator0[&#39;family_name&#39;]}&quot;</span>)
     <span class="ruby-keyword">end</span>
     <span class="ruby-comment"># Projects</span>
     <span class="ruby-identifier">wf_info</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;relationships&#39;</span>][<span class="ruby-string">&#39;projects&#39;</span>][<span class="ruby-string">&#39;data&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
@@ -489,14 +487,14 @@
         <span class="ruby-string">&#39;number_of_steps&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">wf_info</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;attributes&#39;</span>][<span class="ruby-string">&#39;internals&#39;</span>][<span class="ruby-string">&#39;steps&#39;</span>].<span class="ruby-identifier">length</span>,
         <span class="ruby-string">&#39;server&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;https://workflowhub.eu&#39;</span>,
         <span class="ruby-string">&#39;id&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">wf_info</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;id&#39;</span>],
-        <span class="ruby-string">&#39;tags&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">wf_info</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;attributes&#39;</span>][<span class="ruby-string">&#39;tags&#39;</span>].<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^name:/</span>, <span class="ruby-string">&#39;&#39;</span>)},
+        <span class="ruby-string">&#39;tags&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">wf_info</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;attributes&#39;</span>][<span class="ruby-string">&#39;tags&#39;</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^name:/</span>, <span class="ruby-string">&#39;&#39;</span>) },
         <span class="ruby-string">&#39;update_time&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">wf_info</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;attributes&#39;</span>][<span class="ruby-string">&#39;updated_at&#39;</span>],
       }
-    <span class="ruby-keyword">rescue</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
       <span class="ruby-identifier">r</span> = <span class="ruby-keyword">nil</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-identifier">r</span>
-  }.<span class="ruby-identifier">reject</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">nil?</span> }
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">compact</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -1105,7 +1103,7 @@
           
 
           <div class="method-source-code" id="request-source">
-            <pre><span class="ruby-comment"># File bin/workflows-fetch.rb, line 7</span>
+            <pre><span class="ruby-comment"># File bin/workflows-fetch.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">request</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">uri</span>)
@@ -1113,10 +1111,9 @@
   <span class="ruby-identifier">req_options</span> = {
     <span class="ruby-value">use_ssl:</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">scheme</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;https&#39;</span>,
   }
-  <span class="ruby-identifier">response</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">start</span>(<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">hostname</span>, <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">port</span>, <span class="ruby-identifier">req_options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span>
+  <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">start</span>(<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">hostname</span>, <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">port</span>, <span class="ruby-identifier">req_options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">response</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -1332,7 +1329,7 @@
           
 
           <div class="method-source-code" id="test_workflow-source">
-            <pre><span class="ruby-comment"># File bin/workflow-test.rb, line 11</span>
+            <pre><span class="ruby-comment"># File bin/workflow-test.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_workflow</span>(<span class="ruby-identifier">workflow_file</span>, <span class="ruby-identifier">galaxy_id</span>)
   <span class="ruby-identifier">directory</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">workflow_file</span>)
   <span class="ruby-identifier">workflow_base</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">workflow_file</span>, <span class="ruby-string">&#39;.ga&#39;</span>)

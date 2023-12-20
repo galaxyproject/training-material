@@ -90,6 +90,8 @@
     <li ><a href="#method-i-humanize_types">#humanize_types</a>
     <li ><a href="#method-i-last_modified_at">#last_modified_at</a>
     <li ><a href="#method-i-layout_to_human">#layout_to_human</a>
+    <li ><a href="#method-i-list_usegalaxy_servers">#list_usegalaxy_servers</a>
+    <li ><a href="#method-i-list_usegalaxy_servers_shuffle">#list_usegalaxy_servers_shuffle</a>
     <li ><a href="#method-i-load_svg">#load_svg</a>
     <li ><a href="#method-i-regex_replace">#regex_replace</a>
     <li ><a href="#method-i-regex_replace_once">#regex_replace_once</a>
@@ -145,7 +147,7 @@
           
 
           <div class="method-source-code" id="cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 26</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">cache</span>
   <span class="ruby-identifier">@@cache</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Cache</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;GtnFunctions&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -173,7 +175,7 @@
           
 
           <div class="method-source-code" id="convert_to_material_list-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 318</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 319</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_to_material_list</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">materials</span>)
   <span class="ruby-comment"># [{&quot;name&quot;=&gt;&quot;introduction&quot;, &quot;topic&quot;=&gt;&quot;admin&quot;}]</span>
   <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">if</span> <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">nil?</span>
@@ -229,7 +231,7 @@
 =&gt; &quot;/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control&quot;</pre>
 
           <div class="method-source-code" id="convert_workflow_path_to_trs-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 352</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 353</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_workflow_path_to_trs</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;GTN_TRS_ERROR_NIL&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">nil?</span>
 
@@ -265,7 +267,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="elixirnode2name-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 63</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">elixirnode2name</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-constant">ELIXIR_NODES</span>[<span class="ruby-identifier">name</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -302,7 +304,7 @@
 fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.garden/@hexylena&quot;</pre>
 
           <div class="method-source-code" id="fedi2link-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 285</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 286</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fedi2link</span>(<span class="ruby-identifier">fedi_address</span>)
   <span class="ruby-identifier">fedi_address</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^@?(?&lt;user&gt;.*)@(?&lt;host&gt;.*)$/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">_m</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;https://#{$LAST_MATCH_INFO[:host]}/@#{$LAST_MATCH_INFO[:user]}&quot;</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -340,7 +342,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{% assign contrib = site | fetch_contributor: page.contributor -%}</pre>
 
           <div class="method-source-code" id="fetch_contributor-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 218</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 219</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">id</span>)
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">id</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -375,7 +377,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{{ entity | fetch_entity_avatar: &#39;alice&#39;, 120 }}</pre>
 
           <div class="method-source-code" id="fetch_entity_avatar-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 264</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 265</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_entity_avatar</span>(<span class="ruby-identifier">entity</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">width</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&lt;img src=&quot;/training-material/assets/images/avatar.png&quot; alt=&quot;ERROR_NO_ENTITY avatar&quot; class=&quot;avatar&quot;/&gt;&#39;</span>
@@ -416,7 +418,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{{ entity | fetch_entity_avatar: &#39;alice&#39;, 120 }}</pre>
 
           <div class="method-source-code" id="fetch_entity_avatar_url-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 242</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 243</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_entity_avatar_url</span>(<span class="ruby-identifier">entity</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">width</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;ERROR_NO_ENTITY&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">entity</span>.<span class="ruby-identifier">nil?</span>
 
@@ -461,7 +463,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{{ entity | fetch_funding_url }}</pre>
 
           <div class="method-source-code" id="fetch_funding_url-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 230</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_funding_url</span>(<span class="ruby-identifier">entity</span>)
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_funding_url</span>(<span class="ruby-identifier">entity</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -496,7 +498,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{% assign authors = page | filter_authors -%}</pre>
 
           <div class="method-source-code" id="filter_authors-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 205</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 206</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_authors</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_authors</span>(<span class="ruby-identifier">data</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -533,7 +535,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="fix_box_titles-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 193</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fix_box_titles</span>(<span class="ruby-identifier">content</span>, <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">key</span>)
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Boxify</span>.<span class="ruby-identifier">replace_elements</span>(<span class="ruby-identifier">content</span>, <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">key</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -564,7 +566,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="get_default_link-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 463</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 472</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_default_link</span>(<span class="ruby-identifier">material</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;NO LINK&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;NO LINK&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
@@ -596,7 +598,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           
 
           <div class="method-source-code" id="get_og_desc-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 400</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 409</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_og_desc</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">page</span>); <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -615,7 +617,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           
 
           <div class="method-source-code" id="get_og_title-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 402</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 411</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_og_title</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">page</span>, <span class="ruby-identifier">reverse</span>)
   <span class="ruby-identifier">og_title</span> = []
   <span class="ruby-identifier">topic_id</span> = <span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{^\./}</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">1</span>]
@@ -701,7 +703,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{{ page | get_topic }}</pre>
 
           <div class="method-source-code" id="get_topic-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 395</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 404</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_topic</span>(<span class="ruby-identifier">page</span>)
   <span class="ruby-comment"># Arrays that will store all introduction slides and tutorials we discover.</span>
   <span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">1</span>]
@@ -723,7 +725,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           
 
           <div class="method-source-code" id="get_version_number-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 374</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 375</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_version_number</span>(<span class="ruby-identifier">page</span>)
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_modification_count</span>(<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -744,7 +746,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           
 
           <div class="method-source-code" id="group_icons-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 478</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 487</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">group_icons</span>(<span class="ruby-identifier">icons</span>)
   <span class="ruby-identifier">icons</span>.<span class="ruby-identifier">group_by</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>}.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">z</span><span class="ruby-operator">|</span><span class="ruby-identifier">z</span>[<span class="ruby-value">0</span>]} ]}.<span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">invert</span>
 <span class="ruby-keyword">end</span></pre>
@@ -775,7 +777,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="gtn_mod_date-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 158</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gtn_mod_date</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-comment"># Automatically strips any leading slashes.</span>
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{^/}</span>, <span class="ruby-string">&#39;&#39;</span>))
@@ -807,7 +809,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="gtn_pub_date-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 132</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gtn_pub_date</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-comment"># if it&#39;s not a string then log a warning</span>
   <span class="ruby-identifier">path</span> = <span class="ruby-identifier">path</span>[<span class="ruby-string">&#39;path&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">path</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
@@ -844,7 +846,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="how_many_topic_feedbacks-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 170</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">how_many_topic_feedbacks</span>(<span class="ruby-identifier">feedback</span>, <span class="ruby-identifier">name</span>)
   <span class="ruby-identifier">feedback</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;topic&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> }.<span class="ruby-identifier">length</span>
 <span class="ruby-keyword">end</span></pre>
@@ -878,7 +880,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="how_many_tutorial_feedbacks-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 181</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 182</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">how_many_tutorial_feedbacks</span>(<span class="ruby-identifier">feedback</span>, <span class="ruby-identifier">name</span>)
   <span class="ruby-identifier">feedback</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;tutorial&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> }.<span class="ruby-identifier">length</span>
 <span class="ruby-keyword">end</span></pre>
@@ -914,7 +916,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </pre>
 
           <div class="method-source-code" id="humanize_types-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 107</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">humanize_types</span>(<span class="ruby-identifier">type</span>)
   <span class="ruby-identifier">data</span> = {
     <span class="ruby-string">&#39;seq&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;List of Items&#39;</span>,
@@ -955,7 +957,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <p>TODO: These two could be unified tbh</p>
 
           <div class="method-source-code" id="last_modified_at-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 147</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">last_modified_at</span>(<span class="ruby-identifier">page</span>)
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -976,7 +978,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           
 
           <div class="method-source-code" id="layout_to_human-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 361</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 362</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">layout_to_human</span>(<span class="ruby-identifier">layout</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">layout</span>
   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/slides/</span>
@@ -988,6 +990,48 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;news&#39;</span>
     <span class="ruby-string">&#39;News&#39;</span>
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-list_usegalaxy_servers" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">list_usegalaxy_servers</span><span
+            class="method-args">(_site)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="list_usegalaxy_servers-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 379</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_usegalaxy_servers</span>(<span class="ruby-identifier">_site</span>)
+  <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Usegalaxy</span>.<span class="ruby-identifier">servers</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">transform_keys</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-list_usegalaxy_servers_shuffle" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">list_usegalaxy_servers_shuffle</span><span
+            class="method-args">(_site)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="list_usegalaxy_servers_shuffle-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 383</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_usegalaxy_servers_shuffle</span>(<span class="ruby-identifier">_site</span>)
+  <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Usegalaxy</span>.<span class="ruby-identifier">servers</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">transform_keys</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>) }.<span class="ruby-identifier">shuffle</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -1020,7 +1064,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{{ &quot;assets/images/mastodon.svg&quot; | load_svg }}</pre>
 
           <div class="method-source-code" id="load_svg-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 298</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 299</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_svg</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\R+/</span>, <span class="ruby-string">&#39;&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1041,7 +1085,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           
 
           <div class="method-source-code" id="regex_replace-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 302</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 303</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">regex_replace</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">regex_search</span>, <span class="ruby-identifier">value_replace</span>)
   <span class="ruby-identifier">regex</span> = <span class="ruby-regexp">/#{regex_search}/m</span>
   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">regex</span>, <span class="ruby-identifier">value_replace</span>)
@@ -1067,7 +1111,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{{ content | regex_replace: &#39;&lt;hr&gt;&#39;, &#39;&#39; }}</pre>
 
           <div class="method-source-code" id="regex_replace_once-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 313</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 314</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">regex_replace_once</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">regex_search</span>, <span class="ruby-identifier">value_replace</span>)
   <span class="ruby-identifier">regex</span> = <span class="ruby-regexp">/#{regex_search}/m</span>
   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-identifier">regex</span>, <span class="ruby-identifier">value_replace</span>)
@@ -1089,7 +1133,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           <p>Replaces newlines with newline + two spaces</p>
 
           <div class="method-source-code" id="replace_newline_doublespace-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 121</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace_newline_doublespace</span>(<span class="ruby-identifier">text</span>)
   <span class="ruby-identifier">text</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\n/</span>, <span class="ruby-string">&quot;\n  &quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1125,7 +1169,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </pre>
 
           <div class="method-source-code" id="slugify_unsafe-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 93</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">slugify_unsafe</span>(<span class="ruby-identifier">text</span>)
   <span class="ruby-comment"># Gets rid of *most* things without making it completely unusable?</span>
   <span class="ruby-identifier">text</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{[&quot;&#39;\\/;:,.!@#$%^&amp;*()]}</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;-&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/-+/</span>, <span class="ruby-string">&#39;-&#39;</span>)
@@ -1157,7 +1201,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="top_citations-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 74</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">top_citations</span>(<span class="ruby-identifier">citations</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">citations</span>.<span class="ruby-identifier">nil?</span>
     {}
@@ -1184,7 +1228,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           
 
           <div class="method-source-code" id="topic_name_from_page-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 378</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 387</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">topic_name_from_page</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">key?</span> <span class="ruby-string">&#39;topic_name&#39;</span>
     <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;topic_name&#39;</span>]][<span class="ruby-string">&#39;title&#39;</span>]

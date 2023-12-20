@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4995efee267fe64e5f8743f95bc3dbf5301e4acc",
+		release: "galaxy-training-network@4b9d087194fd81659c181c7b4f21d69157c39dd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703087087' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703087087' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703087573' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703087573' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -66,16 +66,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="How can I get started with contributing?">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-03-20 11:29:00 +0000">
+<meta name="DC.date" content="2023-12-20 11:53:42 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
-<meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="If you would like to get involved in the project but are unsure where to start, there are some easy ways to contribute which will also help you familiarize yourself with the project!  A great way to help out the project is to test/edit existing tutorials. Pick a tutorial and check the contents. Does everything work as expected? Are there things that could be improved?  Below is a checklist of things to look out for to help you get started. If you feel confident in making changes yourself, please open a pull request, otherwise please file an issue with any problems you run into or suggestions for improvements.  Basic:  - **Test** the tutorial on a running Galaxy instance    - For example [Galaxy Main](https://usegalaxy.org), [Galaxy Europe](https://usegalaxy.eu), or [Galaxy Australia](https://usegalaxy.org.au)    - Report any issues you run into - **Language** editing   - Fix spelling and grammar mistakes   - Simplify the English (to make it more accessible)  Intermediate:  - **Metad...">
+<meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="If you would like to get involved in the project but are unsure where to start, there are some easy ways to contribute which will also help you familiarize yourself with the project!  A great way to help out the project is to test/edit existing tutorials. Pick a tutorial and check the contents. Does everything work as expected? Are there things that could be improved?  Below is a checklist of things to look out for to help you get started. If you feel confident in making changes yourself, please open a pull request, otherwise please file an issue with any problems you run into or suggestions for improvements.  Basic:  - **Test** the tutorial on a running Galaxy instance    - For example {% assign servers = list_usegalaxy_servers_shuffle %}{% for server in servers %}[{{ server.name }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}    - Report any issues you run into - **Language** editing   - Fix spelling and grammar mistakes   - Simplify the English (to m...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAQ: How can I get started with contributing?">
-        <meta property="og:description" content="If you would like to get involved in the project but are unsure where to start, there are some easy ways to contribute which will also help you familiarize yourself with the project!  A great way to help out the project is to test/edit existing tutorials. Pick a tutorial and check the contents. Does everything work as expected? Are there things that could be improved?  Below is a checklist of things to look out for to help you get started. If you feel confident in making changes yourself, please open a pull request, otherwise please file an issue with any problems you run into or suggestions for improvements.  Basic:  - **Test** the tutorial on a running Galaxy instance    - For example [Galaxy Main](https://usegalaxy.org), [Galaxy Europe](https://usegalaxy.eu), or [Galaxy Australia](https://usegalaxy.org.au)    - Report any issues you run into - **Language** editing   - Fix spelling and grammar mistakes   - Simplify the English (to make it more accessible)  Intermediate:  - **Metad...">
+        <meta property="og:description" content="If you would like to get involved in the project but are unsure where to start, there are some easy ways to contribute which will also help you familiarize yourself with the project!  A great way to help out the project is to test/edit existing tutorials. Pick a tutorial and check the contents. Does everything work as expected? Are there things that could be improved?  Below is a checklist of things to look out for to help you get started. If you feel confident in making changes yourself, please open a pull request, otherwise please file an issue with any problems you run into or suggestions for improvements.  Basic:  - **Test** the tutorial on a running Galaxy instance    - For example {% assign servers = list_usegalaxy_servers_shuffle %}{% for server in servers %}[{{ server.name }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}    - Report any issues you run into - **Language** editing   - Fix spelling and grammar mistakes   - Simplify the English (to m...">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703087087'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703087573'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -258,7 +258,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <ul>
   <li><strong>Test</strong> the tutorial on a running Galaxy instance
     <ul>
-      <li>For example <a href="https://usegalaxy.org">Galaxy Main</a>, <a href="https://usegalaxy.eu">Galaxy Europe</a>, or <a href="https://usegalaxy.org.au">Galaxy Australia</a></li>
+      <li>For example</li>
       <li>Report any issues you run into</li>
     </ul>
   </li>
@@ -395,7 +395,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4995efee267fe64e5f8743f95bc3dbf5301e4acc">4995efe</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/4b9d087194fd81659c181c7b4f21d69157c39dd0">4b9d087</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -423,7 +423,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703087087'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703087573'></script>
         
     </body>
 </html>
