@@ -139,7 +139,7 @@
 =&gt; &lt;meta name=&quot;DC.identifier&quot; content=&quot;...&quot; /&gt;</pre>
 
           <div class="method-source-code" id="generate_dublin_core-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 48</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_dublin_core</span>(<span class="ruby-identifier">material</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;data&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;data&#39;</span>].<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;type&#39;</span>, <span class="ruby-string">&#39;none&#39;</span>) <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;tutorial_hands_on&#39;</span>
 
@@ -174,7 +174,7 @@
           
 
           <div class="method-source-code" id="generate_funder_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 142</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_funder_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">organization</span> = [
     {
@@ -239,7 +239,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="generate_news_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 203</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 219</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_news_jsonld</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">authors</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_authors</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">to_h</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">to_pfo_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>)
@@ -290,7 +290,7 @@
           
 
           <div class="method-source-code" id="generate_org_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 125</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_org_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">organization</span> = {
     <span class="ruby-value">&#39;@context&#39;:</span> <span class="ruby-string">&#39;https://schema.org&#39;</span>,
@@ -361,7 +361,7 @@
 }</pre>
 
           <div class="method-source-code" id="generate_person_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 95</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_person_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">person</span> = {
     <span class="ruby-value">&#39;@context&#39;:</span> <span class="ruby-string">&#39;https://schema.org&#39;</span>,
@@ -424,7 +424,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="to_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 246</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 262</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_jsonld</span>(<span class="ruby-identifier">material</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">langCodeMap</span> = {
     <span class="ruby-value">en:</span> <span class="ruby-string">&#39;English&#39;</span>,
@@ -791,7 +791,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="to_pfo_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 185</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 201</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_pfo_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">contributor</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">id</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">person?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">id</span>)
