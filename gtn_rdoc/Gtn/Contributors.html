@@ -218,7 +218,7 @@
 <p>Returns: <code>Boolean</code> of whether the contributor is a funder or not</p>
 
           <div class="method-source-code" id="fetch_funding_url-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 151</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 154</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fetch_funding_url</span>(<span class="ruby-identifier">contributor</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">contributor</span>[<span class="ruby-string">&#39;funding_id&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">contributor</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;funding_system&#39;</span>)
 
@@ -287,7 +287,7 @@
 <p>Returns: <code>Boolean</code> of whether the contributor is a funder or not</p>
 
           <div class="method-source-code" id="funder-3F-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 141</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">funder?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funders&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">c</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -418,7 +418,10 @@
           <div class="method-source-code" id="list-source">
             <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list</span>(<span class="ruby-identifier">site</span>)
-  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funders&#39;</span>]).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;organisations&#39;</span>])
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
+      .<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funders&#39;</span>])
+      .<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;organisations&#39;</span>])
+      .<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>[<span class="ruby-string">&#39;halloffame&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;no&#39;</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -443,7 +446,7 @@
 <p>Returns: <code>Boolean</code> of whether the contributor is a contributor or not</p>
 
           <div class="method-source-code" id="person-3F-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 131</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">person?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">c</span>)
 <span class="ruby-keyword">end</span></pre>

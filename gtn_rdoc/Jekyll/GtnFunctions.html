@@ -82,6 +82,7 @@
     <li ><a href="#method-i-get_og_title">#get_og_title</a>
     <li ><a href="#method-i-get_topic">#get_topic</a>
     <li ><a href="#method-i-get_version_number">#get_version_number</a>
+    <li ><a href="#method-i-group_icons">#group_icons</a>
     <li ><a href="#method-i-gtn_mod_date">#gtn_mod_date</a>
     <li ><a href="#method-i-gtn_pub_date">#gtn_pub_date</a>
     <li ><a href="#method-i-how_many_topic_feedbacks">#how_many_topic_feedbacks</a>
@@ -725,6 +726,27 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
             <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 374</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_version_number</span>(<span class="ruby-identifier">page</span>)
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_modification_count</span>(<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-group_icons" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">group_icons</span><span
+            class="method-args">(icons)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="group_icons-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 478</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">group_icons</span>(<span class="ruby-identifier">icons</span>)
+  <span class="ruby-identifier">icons</span>.<span class="ruby-identifier">group_by</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>}.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">z</span><span class="ruby-operator">|</span><span class="ruby-identifier">z</span>[<span class="ruby-value">0</span>]} ]}.<span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">invert</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
