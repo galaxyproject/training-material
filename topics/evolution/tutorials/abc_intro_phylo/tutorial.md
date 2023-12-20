@@ -6,7 +6,7 @@ enable: false
 tags:
   - phylogenetics
   - evolution
-level: Introductory
+level: Intermediate
 questions:
 - What information can I get from a phylogenetic tree?
 - How do I estimate a phylogeny?
