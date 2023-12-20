@@ -1,16 +1,17 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
+
 require './_plugins/gtn/usegalaxy'
 
 require 'open3'
 require 'json'
 
-GALAXIES = Gtn::Usegalaxy.servers.select{|s| s[:id] == "eu"}.map do |server|
+GALAXIES = Gtn::Usegalaxy.servers.select { |s| s[:id] == 'eu' }.to_h do |server|
   [
     server[:id],
     { url: server[:url], key: ENV.fetch("GALAXY_#{server[:id].upcase}_KEY", 'NONE') }
   ]
-end.to_h
+end
 
 def test_workflow(workflow_file, galaxy_id)
   directory = File.dirname(workflow_file)
