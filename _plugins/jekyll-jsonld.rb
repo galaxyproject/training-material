@@ -2,16 +2,32 @@
 
 require 'json'
 require './_plugins/gtn'
+require './_plugins/gtn/git'
 
 module Jekyll
   # Generate JSON-LD metadata for the GTN.
   module JsonldFilter
     GTN = {
       '@type': 'Organization',
+      'http://purl.org/dc/terms/conformsTo': {
+        # Bioschemas profile
+        '@id': 'https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19',
+        '@type': 'Organization'
+      },
       email: 'galaxytrainingnetwork@gmail.com',
       name: 'Galaxy Training Network',
+      legalName: 'Galaxy Training Network',
+      alternateName: 'GTN',
       url: 'https://training.galaxyproject.org',
       logo: 'https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png',
+      fundingModel: "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. " \
+                    'There are no full time paid staff members of the GTN. Individuals are occasionally funded on ' \
+                    'GTN-adjacent projects.',
+      keywords: %w[galaxy bioinformatics training fair accessible],
+      status: 'active',
+      foundingDate: Gtn::Git.discover['founding_date'].to_s,
+      socialMedia: 'https://mstdn.science/@gtn',
+      type: 'project',
     }.freeze
 
     A11Y = {
