@@ -376,12 +376,12 @@ module Jekyll
       Gtn::ModificationTimes.obtain_modification_count(page['path'])
     end
 
-    def list_usegalaxy_servers(site)
-      Gtn::Usegalaxy.servers.map{|x| x.transform_keys(&:to_s)}
+    def list_usegalaxy_servers(_site)
+      Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }
     end
 
-    def list_usegalaxy_servers_shuffle(site)
-      Gtn::Usegalaxy.servers.map{|x| x.transform_keys(&:to_s)}.shuffle
+    def list_usegalaxy_servers_shuffle(_site)
+      Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }.shuffle
     end
 
     def topic_name_from_page(page, site)

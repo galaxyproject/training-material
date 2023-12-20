@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require './_plugins/gtn/usegalaxy'
 
 module Gtn
@@ -22,7 +23,7 @@ module Gtn
       if data.nil? || data.empty? || tool_list.empty? || tool_list.nil?
         return {
           'exact' => [],
-          'inexact' => Gtn::Usegalaxy.servers.map{|x| x['usegalaxy'] = true },
+          'inexact' => Gtn::Usegalaxy.servers.map { |x| x['usegalaxy'] = true },
         }
       end
 
