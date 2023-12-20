@@ -27,6 +27,6 @@ jobs:
       - name: Send announcements to single-cell matrix for unanswered posts
         run: |
             wget https://raw.githubusercontent.com/galaxyproject/training-material/main/bin/galaxy-help-news.sh
-            MATRIX_ACCESS_TOKEN="${MATRIX_ACCESS_TOKEN}" HTML_TYPE="bullets" MAX_REPLIES="0" WANTED_TAGS="scrna scrna-seq" ROOM_ID='!TJRLNvfcbWbSRoUNpl:matrix.org' bash ./galaxy-help-news.sh
+            HTML_TYPE="bullets" MAX_REPLIES="0" WANTED_TAGS="scrna scrna-seq" ROOM_ID='!TJRLNvfcbWbSRoUNpl:matrix.org' bash ./galaxy-help-news.sh
         env:
             MATRIX_ACCESS_TOKEN: ${{ secrets.matrix_access_token }}
