@@ -122,7 +122,7 @@ module Gtn
       site.data['contributors']
           .merge(site.data['funders'])
           .merge(site.data['organisations'])
-          .reject {|c| c['halloffame'] == 'no' }
+          .reject { |c| c['halloffame'] == 'no' }
     end
 
     ##
