@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c92a444e3eaeade4c58d7fad5ab9c822c3c1154c",
+		release: "galaxy-training-network@f92093e2ab0de1bd71bfe1c849de41cc663ea7cc",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703031204' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703031204' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1703071043' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1703071043' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -66,7 +66,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Galaxy Interactive Tools">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-10-03 08:17:48 +0000">
+<meta name="DC.date" content="2023-12-07 02:40:53 +0000">
 <meta name="DC.creator" content="Estelle Ancelet">
 <meta name="DC.creator" content="Yvan Le Bras">
 <meta name="DC.creator" content="Cameron Hyde">
@@ -103,7 +103,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2023-10-03 08:17:48 +0000",
+  "dateModified": "2023-12-07 02:40:53 +0000",
   "datePublished": "2022-03-02 09:20:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Galaxy Interactive Tools",
@@ -163,7 +163,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Galaxy Interactive Tools",
   "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/interactive-tools/tutorial.html",
-  "version": 67,
+  "version": 68,
   "timeRequired": "PT3H",
   "teaches": "Discover what Galaxy Interactive Tools (GxIT) are\n - Understand how GxITs are structured\n - Understand how GxITs work\n - Be able to dockerise a basic web application\n - Be able to wrap a dockerised application as a GxIT\n - Be able to test and debug a new GxIT locally and on a Galaxy server\n - Be able to distribute a new GxIT for others to use",
   "keywords": [
@@ -381,7 +381,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "<!--"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703031204'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1703071043'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -805,7 +805,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 2, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 7, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -818,7 +818,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00116">https://gxy.io/GTN:T00116</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 67 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 68 </div>
 
     </blockquote>
     </section>
@@ -1114,22 +1114,37 @@ container registry in the cloud, ready for consumption by our Galaxy instance:</
 <span class="c"># inside we will find our Shiny app log file:</span>
 <span class="c">#     docker run -p 8888:8888 -e LOG_PATH=/tmp/shiny/gxit.log -v $PWD/log:/tmp/shiny &lt;container_name&gt;</span>
 
-<span class="k">ARG</span><span class="s"> PORT=8888</span>
-<span class="k">ARG</span><span class="s"> LOG_PATH=/tmp/gxit/gxit.log</span>
+<span class="k">ARG</span><span class="s"> PORT=8765</span>
+<span class="k">ARG</span><span class="s"> LOG_PATH=/tmp/gxit.log</span>
 
 <span class="k">ENV</span><span class="s"> LOG_PATH=$LOG_PATH</span>
 <span class="k">ENV</span><span class="s"> PORT=$PORT</span>
 
 <span class="c"># ------------------------------------------------------------------------------</span>
 
+<span class="c"># Edit shiny-server config to use our port</span>
+<span class="k">RUN </span><span class="nb">cat</span> /etc/shiny-server/shiny-server.conf <span class="se">\
+</span>    | <span class="nb">sed</span> <span class="s2">"s/3838/</span><span class="k">${</span><span class="nv">PORT</span><span class="k">}</span><span class="s2">/"</span> <span class="o">&gt;</span> /etc/shiny-server/shiny-server.conf.1
+<span class="k">RUN </span><span class="nb">mv</span> /etc/shiny-server/shiny-server.conf.1 /etc/shiny-server/shiny-server.conf
+
+<span class="c"># ------------------------------------------------------------------------------</span>
+
 <span class="k">RUN </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="si">$(</span><span class="nb">dirname</span> <span class="s2">"</span><span class="k">${</span><span class="nv">LOG_PATH</span><span class="k">}</span><span class="s2">"</span><span class="si">)</span>
 <span class="k">EXPOSE</span><span class="s"> $PORT</span>
-<span class="k">COPY</span><span class="s"> ./gxit /gxit</span>
+<span class="k">COPY</span><span class="s"> ./gxit/app.R /srv/shiny-server/</span>
 
-<span class="c"># This is the command that will be run when the Docker container is launched.</span>
-<span class="c"># In this case it will launch the R Shiny app within the container.</span>
-<span class="k">CMD</span><span class="s"> R -e "shiny::runApp('/gxit', host='0.0.0.0', port=${PORT})" 2&gt;&amp;1 &gt; "${LOG_PATH}"</span>
+<span class="k">CMD</span><span class="s"> ["/bin/sh", "-c", "shiny-server &gt; ${LOG_PATH} 2&gt;&amp;1"]</span>
 </code></pre></div></div>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-shiny-based-interactive-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-shiny-based-interactive-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Shiny-based interactive tools</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>In a previous version of this tutorial, we ran the Shiny App with <code class="language-plaintext highlighter-rouge">R -e "shiny:runApp()"</code>
+rather than using <code class="language-plaintext highlighter-rouge">shiny-server</code>. The latter is better practice, because it ensures that
+ports are mapped correctly for websocket functionality. With <code class="language-plaintext highlighter-rouge">shiny::runApp()</code> you will
+probably notice a websocket timeout in the app when run as a GxIT - the UI often greys
+out and becomes unresponsive after 20-30 seconds.</p>
+
+</blockquote>
 
 <p>This image is already hosted on <a href="https://hub.docker.com/r/ancelete/first-gxit">Docker Hub</a>
 , but anyone can use this Dockerfile to rebuild the image if necessary.
@@ -1318,8 +1333,8 @@ our new Docker container as a Galaxy tool.</p>
         ## onto the Docker container at runtime - enabling access to
         ## '$infile' and '$outfile' from inside the container.
 
-        R -e "shiny::runApp('/gxit', host='0.0.0.0', port=8765)" 2&gt;</span><span class="err">&amp;</span>1 &gt; "/var/log/tuto-gxit-01.log"
-        ## The log file can be found inside the container, for debbuging purposes
+        shiny-server 2&gt;</span><span class="err">&amp;</span>1 &gt; /var/log/tuto-gxit-01.log
+        ## The log file can be found inside the container, for debugging purposes
 
     ]]&gt;
     <span class="nt">&lt;/command&gt;</span>
@@ -1349,8 +1364,8 @@ our new Docker container as a Galaxy tool.</p>
     <span class="nt">&lt;citations&gt;</span>
        <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"bibtex"</span><span class="nt">&gt;</span>
        @misc{
-            author       = {Lain Pavot - lain.pavot@inrae.fr },
-            title        = {{first-gxit -  A tool to visualise tsv/csv files }},
+            author       = {Lain Pavot - lain.pavot@inrae.fr},
+            title        = {first-gxit -  A tool to visualise tsv/csv files},
             publisher    = {INRAE},
             url          = {}
         }
@@ -1848,7 +1863,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c92a444e3eaeade4c58d7fad5ab9c822c3c1154c">c92a444</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/f92093e2ab0de1bd71bfe1c849de41cc663ea7cc">f92093e</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1876,7 +1891,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703031204'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1703071043'></script>
         
     </body>
 </html>
