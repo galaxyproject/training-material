@@ -1,5 +1,6 @@
 #!/bin/bash
 
+MATRIX_SERVER=${MATRIX_SERVER:-"https://matrix.org"}
 ROOM_ID=${ROOM_ID:-'!TJRLNvfcbWbSRoUNpl:matrix.org'}  ## GTN Single Cell Maintainers
 WANTED_TAGS=${WANTED_TAGS:-"scrna scrna-seq"}
 MAX_REPLIES=${MAX_REPLIES:-1}
@@ -15,6 +16,7 @@ a Room for topics that have less than X replies. Run this maybe once a month.
 Example Usage:
 
    MATRIX_ACCESS_TOKEN='123_123_123' \\
+     MATRIX_SERVER='https://matrix.org' \\
      ROOM_ID='!123_132_123:matrix.org' \\
      WANTED_TAGS='tag1 tag2' \\
      MAX_REPLIES=1 \\
@@ -23,6 +25,9 @@ Example Usage:
 Where:
   MATRIX_ACCESS_TOKEN  Can be found in your Matrix profile under
                        'All settings' -> 'Help & About' -> 'Access Token'
+
+  MATRIX_SERVER        The name or base address of the Matrix server to
+                       post to. Default is '$MATRIX_SERVER'
 
   ROOM_ID              The Room ID can be found in the URL of the room
                        usually following format '!123123123:matrix.org'.
