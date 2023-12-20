@@ -12,8 +12,8 @@ questions:
 - How do I estimate a phylogeny?
 - How can I tell whether the phylogeny is reliable?
 objectives:
-- Understand the basic concepts behind phylogenetic trees and how they are made
-- Be able to read and interrogate a phylogeny encountered in the literature
+- Describe the basic concepts behind phylogenetic trees and how they are made
+- Read and interrogate a phylogeny encountered in the literature
 - Use standard tools to align a set of molecular sequences
 - Assess the quality of a molecular sequence alignment and be able to modify it appropriately for phylogenetic analysis
 - Use standard tools to estimate a phylogenetic tree based on a set of aligned molecular sequences
