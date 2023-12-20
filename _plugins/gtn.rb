@@ -10,6 +10,7 @@ require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
 require './_plugins/gtn/supported'
 require './_plugins/gtn/toolshed'
+require './_plugins/gtn/usegalaxy'
 require './_plugins/jekyll-topic-filter'
 require 'time'
 
@@ -373,6 +374,14 @@ module Jekyll
 
     def get_version_number(page)
       Gtn::ModificationTimes.obtain_modification_count(page['path'])
+    end
+
+    def list_usegalaxy_servers(_site)
+      Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }
+    end
+
+    def list_usegalaxy_servers_shuffle(_site)
+      Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }.shuffle
     end
 
     def topic_name_from_page(page, site)
