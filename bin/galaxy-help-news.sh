@@ -122,9 +122,12 @@ function md_and_html_to_json {
 
 function post_json_to_matrix {
     local json_file="$1"
-    local random_token=$RANDOM
-    local post_url="https://matrix.org/_matrix/client/r0/rooms/"
-    post_url="${post_url}"${ROOM_ID}"/send/m.room.message/${random_token}"
+    local txnid post_url
+    txnid=$(date "+%Y%m%d%H%M${RANDOM:1:3}")   ## date-specific transaction ID
+    MATRIX_SERVER=${MATRIX_SERVER%/}           ## remove trailing slash, if any
+    ## Build curl
+    post_url="${MATRIX_SERVER}/_matrix/client/r0/rooms/"
+    post_url="${post_url}"${ROOM_ID}"/send/m.room.message/${txnid}"
     post_url="${post_url}?access_token=${MATRIX_ACCESS_TOKEN}"
     ## DEBUG:
     ## - curl "$post_url" -X PUT --data '{"msgtype":"m.text","body":"hello"}'
