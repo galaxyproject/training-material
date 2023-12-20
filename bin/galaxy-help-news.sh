@@ -104,30 +104,36 @@ NR > 0 {print "* ["$2"]("$1")\\n   * "$3" replies and "$4" views\\n"}' \
         "${tsv}" | tr '\n' ' ' | sed 's|"|\\"|g'
 }
 
-function post_md_and_html {
-    ## Post a string of Markdown into body and a string of HTML into
-    ## formatted body into a Matrix Room of choice
+function md_and_html_to_json {
+    ## Stuff the Markdown and HTML text content into a JSON.
     local md_text="$1"
     local html_text="$2"
-    local tmp_json=$(mktemp --suffix=".json")
+    local tmp_json;
+    tmp_json=$(mktemp --suffix=".json")
+    ## See: https://spec.matrix.org/legacy/r0.0.0/client_server.html
+    ##      "put-matrix-client-r0-rooms-roomid-send-eventtype-txnid"
+    echo "{\
+\"msgtype\":\"m.notice\", \
+\"format\":\"org.matrix.custom.html\", \
+\"body\": \"${md_text}\", \
+\"formatted_body\": \"${html_text}\"}" > "${tmp_json}"
+    echo "${tmp_json}"
+}
+
+function post_json_to_matrix {
+    local json_file="$1"
     local random_token=$RANDOM
     local post_url="https://matrix.org/_matrix/client/r0/rooms/"
     post_url="${post_url}"${ROOM_ID}"/send/m.room.message/${random_token}"
     post_url="${post_url}?access_token=${MATRIX_ACCESS_TOKEN}"
-
-    ## DEBUG: curl "$post_url" -X PUT --data '{"msgtype":"m.text","body":"hello"}'
-    local json_content="{\
-\"msgtype\":\"m.notice\", \
-\"format\":\"org.matrix.custom.html\", \
-\"body\": \"${md_text}\", \
-\"formatted_body\": \"${html_text}\"}"
-    echo "$json_content" > $tmp_json
-    curl "$post_url" -X PUT --data "$(cat $tmp_json)"
+    ## DEBUG:
+    ## - curl "$post_url" -X PUT --data '{"msgtype":"m.text","body":"hello"}'
+    curl "$post_url" -X PUT --data "$(cat ${json_file})"
 }
 
 function sanity_check {
     ## Assert that required binaries are in PATH
-    local required_progs="cat curl xmllint awk sed grep tr"
+    local required_progs=( cat curl xmllint awk sed grep tr jq )
     local miss=""
     for prog in "${required_progs[@]}"; do
         if ! which "${prog}" 2>/dev/null >&2; then
@@ -152,4 +158,11 @@ fi
 main_mdwn_text=$(tsv_to_markdown "${main_tsv}")
 main_html_text=$(tsv_to_html "${main_tsv}")
 
-post_md_and_html "$main_mdwn" "$main_html"
+main_json_file=$(md_and_html_to_json "${main_mdwn_text}" "${main_html_text}")
+if ! jq < "${main_json_file}" 2> /dev/null >&2; then
+    echo "This is not a valid JSON, aborting." >&2
+    echo "See: ${main_json_file}"  >&2
+    exit 255
+fi
+
+post_json_to_matrix "${main_json_file}"
