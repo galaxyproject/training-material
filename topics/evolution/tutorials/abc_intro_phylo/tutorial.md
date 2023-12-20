@@ -34,13 +34,13 @@ Phylogenetics is essential for comparing biological species and understanding bi
 
 Using real-life data and standard tools that are (mostly) available in Galaxy, the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data.
 
-This is not just a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of phylogenetics and how the methods work.
-
-The exercises are beginner level, but you should know how molecular sequence data is produced and what it looks like. Maybe you've even built phylogenetic trees before but want to know more about the principles behind the tools.
+This is not just a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of phylogenetics and how the methods work. Maybe you've even built phylogenetic trees before but want to know more about the principles behind the tools.
 
 This tutorial does not cover workflows for taking read data to phylogeny or Bayesian methods. We've included recommended reading and tutorials on these topics in the resources section.
 
-This tutorial is adapted from a 2019 workshop run by the Australian BioCommons and Prof. Michael Charleston (University of Tasmania).
+We’ve designed this tutorial with flexibility in mind and so that you can focus on the sections that are relevant to you. It includes videos that explore key concepts, written descriptions of each concept, and exercises that demonstrate the methods in action using tools (mostly) available in Galaxy. The exercises are beginner level, but you should know how molecular sequence data is produced and what it looks like. Depending on how you like to learn, you can choose to watch the videos, read the text, work through the exercises, or a combination of the three!
+
+This tutorial is adapted from a 2019 workshop run by the Australian BioCommons and Professor Michael Charleston (University of Tasmania).
 
 > <agenda-title></agenda-title>
 >
