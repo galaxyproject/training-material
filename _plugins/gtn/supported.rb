@@ -23,7 +23,11 @@ module Gtn
       if data.nil? || data.empty? || tool_list.empty? || tool_list.nil?
         return {
           'exact' => [],
-          'inexact' => Gtn::Usegalaxy.servers.map{|x| x = x.map{|k, v| [k.to_s, v]}.to_h; x['usegalaxy'] = true; x }
+          'inexact' => Gtn::Usegalaxy.servers.map do |x|
+                         x = x.transform_keys(&:to_s)
+                         x['usegalaxy'] = true
+                         x
+                       end
         }
       end
 
@@ -68,7 +72,7 @@ module Gtn
       # generate a 'false' value when merging sets.
       inexact_support -= exact_support
 
-      usegalaxy_server_urls = Gtn::Usegalaxy.servers.map{|x| x[:url]}
+      usegalaxy_server_urls = Gtn::Usegalaxy.servers.map { |x| x[:url] }
 
       {
         'exact' => (exact_support || []).map do |id|
@@ -76,11 +80,11 @@ module Gtn
             { 'usegalaxy' => usegalaxy_server_urls.include?(data['servers'][id]['url']) }
           )
         end,
-        'inexact' => (inexact_support || []).map { |id| 
+        'inexact' => (inexact_support || []).map do |id|
           data['servers'][id].update(
             { 'usegalaxy' => usegalaxy_server_urls.include?(data['servers'][id]['url']) }
           )
-        }
+        end
       }
     end
   end
