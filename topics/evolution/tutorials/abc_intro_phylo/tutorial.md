@@ -11,6 +11,7 @@ questions:
 - What information can I get from a phylogenetic tree?
 - How do I estimate a phylogeny?
 - How can I tell whether the phylogeny is reliable?
+- How do phylogenetic models work?
 objectives:
 - Describe the basic concepts behind phylogenetic trees and how they are made
 - Read and interrogate a phylogeny encountered in the literature
@@ -19,7 +20,7 @@ objectives:
 - Use standard tools to estimate a phylogenetic tree based on a set of aligned molecular sequences
 - Assess the reliability of estimated phylogenies with bootstrapping
 - Explore phylogenetic signal using phylogenetic networks
-time_estimation: 3H
+time_estimation: 4H
 contributors:
 - mcharleston
 - adamtaranto
