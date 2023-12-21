@@ -137,9 +137,9 @@ and much bigger projects across all of life:
 
 Aside from gaining a fundamental understanding of biology, other reasons for inferring phylogenetic relationships include:
 
-- Designing vaccines, for example for SARS-CoV2 and influenza
-- Measuring phylogenetic diversity for guiding conservation efforts
-- Understanding coevolution; for example, around 70% of emergent human diseases have come from other species
+- Designing vaccines, for example for SARS-CoV2 and influenza;
+- Measuring phylogenetic diversity for guiding conservation efforts;
+- Understanding coevolution; for example, around 70% of emergent human diseases have come from other species;
 - Dating major evolutionary events to study the effects of environmental change on different species.
 
 > <comment-title>Gene trees, species trees reconciliation problem</comment-title>
@@ -304,6 +304,10 @@ In the real world, a phylogenetic analyses often span hundreds, or even thousand
 
 ### Get the data
 
+<!-- 
+* Does it auto-detect ok? 
+* 
+ -->
 <!-- One sequence is here: https://www.ncbi.nlm.nih.gov/nucleotide/AF055943.2?report=genbank&log$=nuclalign&blast_rank=1&RID=JEX49T9G013 -->
 
 > <hands-on-title>Obtain your data</hands-on-title>
@@ -316,7 +320,8 @@ In the real world, a phylogenetic analyses often span hundreds, or even thousand
 >    ```
 >    anolis-raw.fst
 >    ```
->
+>    You may need to refresh your history to show the data.  
+>    If the paste/fetch link does not work for you, you can download it to your own computer and then upload it using the "Upload" button at the top of the left panel in Galaxy.
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 > 
 {: .hands_on} 
@@ -401,24 +406,24 @@ Today you will be aligning sequences using a modern multiple alignment program c
 >
 > 1. In Galaxy, search for and select the {% tool MAFFT %} from the tool finder on the left.
 > 2. In the MAFFT tool, the **Sequences to align** field should already be filled with your unaligned data.  If it isn't, select it using the drop-down menu.
-> 3. In the **Data type** field select "Auto detection".
-> 4. Leave the **MAFFT flavour** as "fftns". This is a good default.
-> 5. In the **Matrix selection** select "No matrix".
-> 6. Click "Run tool".
+> 3. In the **Data type** field select "_Auto detection_".
+> 4. Leave the **MAFFT flavour** as "_fftns_". This is a good default.
+> 5. In the **Matrix selection** select "_No matrix_".
+> 6. Click "**Run tool**".
 {: .hands_on}
 
 Here is a visualisation of the resulting alignment. Note that the colours are now vertically aligned:
 
-![Screenshot of aligned sequences. Vertical columns of purle, blue, gred and green indicate alignment of nucleotides across sequences.](./images/MEGA_alignment.png "Algined sequences"){:width="600px"}
+![Screenshot of aligned sequences. Vertical columns of purle, blue, gred and green indicate alignment of nucleotides across sequences.](./images/MEGA_alignment.png "Aligned sequences"){:width="600px"}
 
 > <hands-on-title>Inspecting your alignment</hands-on-title>
 >
 > 1. Click on the title of the completed MAFFT job to show the row of small icons for saving, linking etc. 
 > ![LittleIcons](./images/LittleJobIcons.png){:align="center"} 
 > 2. Click the "Visualisation" icon that looks like a little bar chart.
-> 3. You will be presented with a couple of options. Select "Multiple Sequence Alignment".
+> 3. You will be presented with a couple of options. Select "**Multiple Sequence Alignment**".
 > *Your alignment is displayed!*
-> The colour scheme is horrible to start with because it's not automatically detecting the data as DNA sequences.  Click on the "Color scheme" button and select "Clustal2" for a nicer picture.
+> The colour scheme is horrible to start with because it's not automatically detecting the data as DNA sequences.  Click on the "Color scheme" button and select "**Clustal2**" for a nicer picture.
 > 4. You can click and drag the display of nucleotides in the upper panel, and when you go far enough to the right you'll see some gaps have been introduced by MAFFT.  On either side of each gap you should see that the nucleotides match up pretty well.  This is because the MAFFT algorithm has identified that these site are homologous, and that either an insertion event has happened for a group of sequences, or a deletion happened in the others.
 > 5. You may be tempted to play around with "Vis. elements" and show the scale slider - don't! It's currently broken and will crash your browser tab :(.
 {: .hands_on}
@@ -446,10 +451,10 @@ The FastTree2 program that we are using does this. First it creates a "rough" NJ
 >
 > 1. Search for the {% tool FastTree %} in the tool finder on the left.
 > 2. Load your MAFFT output file as the input data for FastTree.
-> 3. Under **protein or nucleotide alignment** select "Nucleotide" as it is DNA data
-> 3. For **Nucleotide evolution model** select Jukes-Cantor + CAT
-> 3. Select "Show Advanced Options"
-> 4. Select "Use Constant Rates"
+> 3. Under **protein or nucleotide alignment** select "_Nucleotide_" as it is DNA data
+> 3. For **Nucleotide evolution model** select _Jukes-Cantor + CAT_
+> 3. Select "**Show Advanced Options**"
+> 4. Select "_Use Constant Rates_"
 > 4. Turn **off** the Maximum Likelihood: we are not up to that bit yet.
 > 5. Click on "Run tool".
 >
@@ -473,7 +478,7 @@ The FastTree2 program that we are using does this. First it creates a "rough" NJ
 It won't take very long for FastTree to build your tree.
 But when it's done, how can you see it?
 
-Clicking on the output doesn't at first appear to be very illuminating: it's just a parenthesised list of taxon names and numbers.
+Clicking on the 'eye' icon  {% icon galaxy-eye %} of the output doesn't at first appear to be very illuminating: it's just a parenthesised list of taxon names and numbers.
 This is **Newick Format**, and it's worth knowing at least a little of what it means.  
 
 * Each matched pair of parentheses denotes a **cluster** or **subtree**: "(A,B)" means that A and B are each others' closest relatives (also called _sister taxa_).
@@ -481,7 +486,7 @@ This is **Newick Format**, and it's worth knowing at least a little of what it m
 * If there is a colon ':' followed by a number, then this is the **branch length** for the subtree.
 
 
-![Schematic showing how the paraenthesised list of taxon names and numbers corresponds to a tree structure](./images/NewickExplained.png "Newick Format"){:align="center"}
+![Schematic showing how the parenthesised list of taxon names and numbers corresponds to a tree structure](./images/NewickExplained.png "Newick Format"){:align="center"}
 
 The rooted, 3-taxon trees above have three taxa, labelled A, B and C.  Two of the internal nodes have been labelled (x and y), but it isn't necessary to do so in general (for example, if you wanted to use the label for something like support of each branch, as does FastTree).
 
@@ -514,8 +519,9 @@ That is why methods like FastTree are employed to find a tree with the best poss
 > 5. Find the angle brackets at the top right of the central panel. Click on these to reveal the settings and display options. Try out "Circular" and "Radial".
 >   Notice that there are quite a lot of long branches adjacent to the extant taxa (leaves) and that these branches are much shorter near the centre of the tree.
 > Note: **Short branches are much harder to get right.**
->
+> 6. (If you wish you may of course re-run FastTree and allow it to seek a Maximum Likelihood tree -- maybe once you've learned more about Maximum Likelihood.)
 {: .hands_on}
+
 
 # Searching for the "best" tree
 
@@ -663,13 +669,13 @@ While this is running you might use your time to read the [Models of sequence ev
 > 1. Find the {% tool IQTree %} program in the tool finder.
 > 1. Load your aligned sequence data, i.e., the alignment from MAFFT.
 > 3. Leave the selection of data type as DNA.
-> 4. Ignore the Time Tree Reconstruction settings and Likelihood Mapping analysis settings.
-> 5. Under the **Modelling Parameters**, click **Automatic model selection** and select "Standard model selection" in the drop-down menu for *Perform standard model selection like jModelTest (for DNA) and ProtTest (for protein)*, and click the **Automatic model selection** menu title again to close it.
+<!-- > 4. Ignore the Time Tree Reconstruction settings and Likelihood Mapping analysis settings. -->
+> 5. Under the **Modelling Parameters**, click **Automatic model selection**_ and then under **Use Custom Model** select "_(none))_" in the drop-down menu, and click the **Automatic model selection** menu title again to close it.
 > 6. Open the **Rate heterogeneity** menu and set the last option, **"Write maximum likelihood site ratios to .mlrate file"** to "Yes".
 > 7. Close the **Modelling Parameters** menu and open the **Bootstrap Parameters** menu, then *Ultrafast bootstrap parameters*. Enter 1000 in the field "Specify number of bootstrap replicates (>=1000)"
-> 8. Open the *Nonparametric bootstrappingLeave all the Tree Parameters as they are. (Have a look at them and see if you can work out what they do).
-> 9. For **Bootstrap Parameters** select "Ultrafast bootstrap parameters" and enter "1000" bootstrap replicates.
-> 11. Click "Run tool"
+<!-- > 8. Open the *Nonparametric bootstrapping* Leave all the Tree Parameters as they are. (Have a look at them and see if you can work out what they do). -->
+<!-- > 9. For **Bootstrap Parameters** select "Ultrafast bootstrap parameters" and enter "1000" bootstrap replicates. -->
+> 11. Click "Run tool".
 >
 {: .hands_on}
 
