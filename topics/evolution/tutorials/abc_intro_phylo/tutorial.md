@@ -329,7 +329,8 @@ In the real world, a phylogenetic analyses often span hundreds, or even thousand
 >    ```
 >    You may need to refresh your history to show the data.  
 >    If the paste/fetch link does not work for you, you can download it to your own computer and then upload it using the "Upload" button at the top of the left panel in Galaxy.
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    
+>   {% snippet faqs/galaxy/datasets_import_via_link.md %}
 > 
 {: .hands_on} 
 > You can click on the 'eye' icon {% icon galaxy-eye %} on the right to see the unaligned data (go ahead!) but the view isn't very informative. This is the raw FASTA file, with the symbols A, C, G, T representing nucleotides. You can see that the sequences are different lengths.
