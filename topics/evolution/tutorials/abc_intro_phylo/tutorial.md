@@ -540,6 +540,11 @@ That is why methods like FastTree are employed to find a tree with the best poss
 
 # Searching for the "best" tree
 
+{% icon video %} Watch the video to learn about [0:00] the concept of likelihood and how it lends statistic rigour to phylogenetic analysis as well as [26:45] how it is applied in models like Jukes-Cantor, HKY85 and GTR models to select the “best tree” from your data. [34:16] Wander through tree space to find the best tree using Nearest Neighbour Interchange, Subtree Pruning and Regrafting, and Tree Bisection and Reconnection tree perturbations and [45:40] go “hill climbing” with tree-search algorithms. [48:52] Finally, explore the output of IQTree for the Anolis dataset used in the tutorial.
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0WzQLAl9h8Q?si=XaWu5Do_xi02ewyY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 The other way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching the entire set of possible trees for the tree (or trees) that optimises this score.
 Note that such scores are "surrogates for truth" in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case. In many analyses we therefore use *multiple* methods, in the hope that they will give us the same answer. Minimum Evolution (ME), Maximum Parsimony (MP), and Maximum Likelihood (ML) are common such score functions.
 
@@ -568,6 +573,9 @@ The Maximum Parsimony method for finding the "best" tree is to search tree space
 We do not use the Maximum Parsimony method in this tutorial.
 
 ## Maximum Likelihood (ML) 
+{% icon video %} Watch the video to learn about [0:00] the concept of likelihood and how it lends statistic rigour to phylogenetic analysis as well as [26:45] how it is applied in models like Jukes-Cantor, HKY85 and GTR models to select the “best tree” from your data. [34:16] Wander through tree space to find the best tree using Nearest Neighbour Interchange, Subtree Pruning and Regrafting, and Tree Bisection and Reconnection tree perturbations and [45:40] go “hill climbing” with tree-search algorithms. [48:52] Finally, explore the output of IQTree for the Anolis dataset used in the tutorial.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0WzQLAl9h8Q?si=XaWu5Do_xi02ewyY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Likelihood is the most statistically defensible phylogenetic inference method.
 It is based on the idea that the tree that has the highest probability of producing the sequences at the tips of the tree is the tree that is the "most likely" to be correct: this is called the Maximum Likelihood (ML) Tree.
@@ -1204,6 +1212,7 @@ If you use, extend or reference Galaxy in your published work, please acknowledg
 
 The Galaxy Community. The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2022 update, Nucleic Acids Research, Volume 50, Issue W1, 5 July 2022, Pages W345–W351, https//:doi.org/10.1093/nar/gkac247
 
+Citations for tools used in a Galaxy workflow can be downloaded from the {%icon galaxy-history-options%} dropdown in your Galaxy history.
 
 To cite IQ-TREE please use:
 
