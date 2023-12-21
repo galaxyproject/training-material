@@ -704,10 +704,12 @@ While this is running you might use your time to read the [Models of sequence ev
 > 2. Which do you think is the biggest well-supported clade?
 > 2. Are there some nodes that would be better left unresolved?
 > 3. Is your tree "probably right"? -- or 80% right?
+>
 > > <solution-title></solution-title>
 > > Near the base of the tree the bootstrap values are high: mostly around 100%.  These appear to be well supported. Since they're near the root, there are some very large well-supported clades, e.g., all the way from _A. disticus_ near the top, down to _A. lineatus_ near the bottom.  There are a number of poorly supported clades _within_ this clade though, with some low bootstrap values; the smallest of these is just 29% for the clade from _C. barbouri_ to _Diplolaemus darwinii_.
 > > Overall the tree looks well supported, but it's probably wrong _somewhere_. It would be worth seeking more data, molecular or morphological, to resolve those poorly supported clades.
-> {: .solution} 
+> >
+> {: .solution}
 {: .question}
 
 
@@ -727,11 +729,10 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 > <question-title>Understanding the IQ-Tree report</question-title>
 > 1. What is the second-most favoured model?
 > 2. How many relative rates of evolution have been estimated, and what are these rates?
-> > <solution-title>1</solution-title>
-> > The second-best supported model is GTR + F + R7: it's almost identical to the first model, but with one more rate category.
-> {: .solution}
-> > <solution-title>2</solution-title>
-> > There are 6 relative rates, in the table with columns Category, Relative_rate and Proportion: the rates are 0.01936 (very slow), 0.1952, 0.6315, 1.365, 2.662, and the fastest, 7.146.  Very few sites are estimated to be in this category - about 2.3% - whereas about 27% of the sites are deemed to be in the slowest category.
+>
+> > <solution-title></solution-title>
+> > 1. The second-best supported model is GTR + F + R7: it's almost identical to the first model, but with one more rate category.
+> > 2. There are 6 relative rates, in the table with columns Category, Relative_rate and Proportion: the rates are 0.01936 (very slow), 0.1952, 0.6315, 1.365, 2.662, and the fastest, 7.146.  Very few sites are estimated to be in this category - about 2.3% - whereas about 27% of the sites are deemed to be in the slowest category.
 > {: .solution}
 {: .question}
 
