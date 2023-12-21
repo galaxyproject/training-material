@@ -25,9 +25,6 @@ subtopic: workflows
 ---
 
 
-# Introduction
-
-
 
 Workflows are a powerful feature in Galaxy that allow you to link multiple steps of complex analysis.
 In this tutorial we will demonstrate how to use the Workflow Editor to construct multiple variants of a simple workflow. Note that these workflows are meant to illustrate different concepts. Not all workflows require using all of the features described below, but we hope this tutorial will inspire you to make your analysis tasks more efficient.
@@ -162,7 +159,7 @@ a test dataset and run our workflow.
 
 > <hands-on-title>Running the workflow</hands-on-title>
 >
-> 1. Return to the analysis are by clicking the Home button {% icon galaxy-home %} (or *Analyze Data* on older versions of Galaxy) on the top
+> 1. Return to the analysis page by clicking the Home button {% icon galaxy-home %} (or *Analyze Data* on older versions of Galaxy) on the top
 > 2. Upload a dataset using "Paste/Fetch data" with the contents
 >
 >    ```

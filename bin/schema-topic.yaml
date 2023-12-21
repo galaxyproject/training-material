@@ -97,7 +97,7 @@ mapping:
                       description: |
                         `false` to hide your topic from the production GTN. This is useful if you need a topic for a workshop, but have not finished making it up to GTN standards.
 
-    maintainers:
+    editorial_board:
         type: seq
         required: true
         sequence:
@@ -107,12 +107,14 @@ mapping:
               enum:
               - CONTRIBUTORS
     edam_ontology:
-        type: str
-        pattern: /^topic_[0-9]+$/
-        description: |
-            An edam ontology id that describes the topic.
-        examples:
-            - topic_3173
+        type: seq
+        sequence:
+          - type: str
+            pattern: /^topic_[0-9]+$/
+            description: |
+                An edam ontology id that describes the resource
+            examples:
+                - topic_3173
     requirements:
         type: seq
         description: List of resources that the reader of the material should be familiar with before starting this training. The structure is identical to `follow_up_training`.
@@ -174,11 +176,10 @@ mapping:
         examples:
             - Galaxy-Training-Network/galaxy-single-cell
             - galaxy-genome-annotation/Lobby
-    enable:
+    draft:
         type: bool
-        required: false
         description: |
-            `false` to hide your topic from the production GTN. This is useful if you need a topic for a workshop, but have not finished making it up to GTN standards.
+            `true` to hide your tutorial from the topic page (optional). This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.
     tag_based:
         type: bool
         required: false
@@ -186,3 +187,27 @@ mapping:
             If this is a synthetic tag based topic (no tutorials of it's own)
             then you must set this flag to indicate it as such, otherwise you
             will find yourself with an empty topic page.
+    og_image:
+        type: str
+        description: |
+            A custom image to show on the link preview in external applications (e.g. when the URL is pasted into Twitter)
+        pattern: /^\/.*/
+        examples:
+            - /assets/images/gat.png
+    custom_css:
+        type: str
+        description: |
+          Any custom CSS you might want to apply to a specific topic. This could be overriding e.g. the masthead colour (beware, will potentially conflict with themes.)
+
+          This is generally not a recommended property to set on topics, and something that is only used as part of outreach efforts to import content into the GTN.
+        examples: |
+          - :root { --brand-color: red; }
+
+    logo:
+        type: str
+        description: |
+            A logo identifier (e.g. GTN) should be used by default, but may be swapped out for special logos from the assets folder.
+    logo_alt:
+        type: str
+        description: |
+          The alt text for the logo (MANDATORY).

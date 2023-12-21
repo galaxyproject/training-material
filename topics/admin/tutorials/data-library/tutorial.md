@@ -60,16 +60,16 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -8,6 +8,9 @@
->         - name: Install Dependencies
+>    @@ -29,6 +29,9 @@
 >           package:
->             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+>             name: ['tmpreaper']
+>           when: ansible_os_family == 'Debian'
 >    +    - git:
 >    +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >    +        dest: /libraries/
 >       roles:
->         - galaxyproject.postgresql
->         - role: galaxyproject.postgresql_objects
+>         - galaxyproject.tusd
+>         - usegalaxy_eu.apptainer
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the git repository to the pre-tasks"}
@@ -84,15 +84,16 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
+>    @@ -88,6 +88,9 @@ galaxy_config:
+>         # Tool Dependencies
+>         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>         container_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
+>    +    # Data Library Directories
 >    +    library_import_dir: /libraries/admin
 >    +    user_library_import_dir: /libraries/user
->         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
->         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the library import directories"}
@@ -205,18 +206,18 @@ We've included this file in the example data libraries repository we cloned at t
 >   description: some data
 >   synopsis: samples collected from somewhere
 > items:
-> - url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/wildtype.fna
+> - url: https://zenodo.org/records/582600/files/wildtype.fna
 >   src: url
 >   ext: fasta
 >   info: https://doi.org/10.5281/zenodo.582600
 > - name: A directory
 >   description: Exome sequencing means that all protein-coding genes in a genome are
 >   items:
->   - url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R1.fastq
+>   - url: https://zenodo.org/records/582600/files/mutant_R1.fastq
 >     src: url
 >     ext: fastqsanger
 >     info: https://doi.org/10.5281/zenodo.582600
->   - url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R2.fastq
+>   - url: https://zenodo.org/records/582600/files/mutant_R2.fastq
 >     src: url
 >     ext: fastqsanger
 >     info: https://doi.org/10.5281/zenodo.582600
@@ -242,7 +243,7 @@ Let's try setting that up in our Galaxy!
 >    > then you might need to re-run the steps:
 >    >
 >    > ```bash
->    > virtualenv -p python3 ~/ephemeris_venv
+>    > python3 -m venv ~/ephemeris_venv
 >    > . ~/ephemeris_venv/bin/activate
 >    > pip install ephemeris
 >    > ```
@@ -252,7 +253,7 @@ Let's try setting that up in our Galaxy!
 >
 >    > <code-in-title>input: bash</code-in-title>
 >    > ```bash
->    > setup-data-libraries -g https://your-galaxy -a <api-key> --training -i /libraries/example-library.yaml --legacy
+>    > setup-data-libraries -g https://galaxy.example.org -a <api-key> --training -i /libraries/example-library.yaml --legacy
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
@@ -274,7 +275,7 @@ Let's try setting that up in our Galaxy!
 
 ![Screenshot of data libraries, we're in a library folder named "Mouse sequencing project" and a directory and single file are shown. The file has an ugly URL as its name](../../images/data/imported.png)
 
-That's it! You should be able to see your newly created data library in your Galaxy.
+That's it! You should be able to [see your newly created data library in your Galaxy.](https://my.gat.galaxy.training/?path=/libraries)
 
 > ```bash
 > 2.sh
@@ -282,11 +283,15 @@ That's it! You should be able to see your newly created data library in your Gal
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=6 %}
+{% snippet topics/admin/faqs/library-permissions.md %}
+
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=8 %}
 
 Note that we've used some special flags here, `--training` and `--legacy`. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)
 
-### `--legacy`
+## `--legacy`
 
 This enables the use of legacy APIs even for newer Galaxies that should have a batch upload API enabled. Unfortunately the new batch upload API is not able to update existing data libraries in place and will always create new libraries with the same name. So currently `--legacy` is quite useful for maintaining a YAML file, and running `setup-data-libraries` regularly whenever that file has updates.
 
@@ -313,3 +318,5 @@ Users can then choose from datasets in their history, or browse through the data
 Here users can see every file accessible to them in the data library to begin analysing.
 
 ![Same popup as previous image, but the file listing now shows the contents of the data library we created during the hands-on step with Mouse data](../../images/data/select-from-lib2.png)
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="data-library" %}

@@ -33,8 +33,6 @@ subtopic: id-quant
 tags: [DDA, SILAC]
 ---
 
-# Introduction
-
 
 To compare protein amounts in different samples from MS/MS data, two different experiment setups exist. Firstly, unmodified proteins can be measured in separate runs at one sample per MS-run. Secondly, proteins of samples to compare can be labelled with small chemical tags, mixed, and measured side-by-side in a single MS-run.
 There are two types of chemical tags:
@@ -94,6 +92,7 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > <comment-title></comment-title>

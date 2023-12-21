@@ -22,8 +22,6 @@ contributors:
   - yvanlebras
 ---
 
-# Introduction
-
 
 This tutorial is based on the analysis described in [publication](http://www.genetics.org/content/188/4/799).
 Further information about the pipeline is available from [the official STACKS website](http://catchenlab.life.illinois.edu/stacks).
@@ -53,6 +51,7 @@ The original data is available at [STACKS website](http://catchenlab.life.illino
 > 1. Create a new history for this RAD-seq exercise.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import Fasta files from parents and 20 progeny.

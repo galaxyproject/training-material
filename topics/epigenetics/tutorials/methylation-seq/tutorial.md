@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "DNA Methylation data analysis"
 zenodo_link: "https://zenodo.org/record/557099"
-edam_ontology: "topic_3173"
+edam_ontology: ["topic_3173"]
 questions:
   - "What is methylation and why it cannot be recognised by a normal NGS procedure?"
   - "Can a different methylation influence the expression of a gene? How?"
@@ -23,41 +23,54 @@ contributors:
 
 > <agenda-title></agenda-title>
 >
-> In this tutorial we will do:
+> In this tutorial, we will deal with:
 >
-> 1. quality control
-> 2. alignment
-> 3. methylation extraction
-> 4. visualization of methylation levels
-> 5. differentially methylated regions analysis
->
-> We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).
->
+> 1. TOC
+> {:toc}
 >
 {: .agenda}
 
+We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).
+
 This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
 
-# Load data and quality control
-> <hands-on-title>Get the data and look at the quality</hands-on-title>
+
+# Data upload
+
+We will start by loading the example dataset which will be used for the tutorial into Galaxy
+
+
+> <hands-on-title>Get the data into Galaxy</hands-on-title>
 >
-> We load now the example dataset which will be used for the tutorial.
 >
-> 1. Load the two example datasets from our data library: subset_1.fastq.gz and subset_2.fastq.gz.
+> 1. Create a new history
 >
->    > <tip-title>Get data from the library</tip-title>
->    >
->    > * Click on `Shared Data` --> `Data Libraries` and here `MethylSeq_2017`
->    > * Select the uploaded datasets `subset_1.fastq.gz` and `subset_2.fastq.gz` as the fastq files
->    {: .tip}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Quality control
+> 2. Import the two example datasets from Zenodo or the shared data library:
 >
->    > <tip-title>Search for tools</tip-title>
->    >
->    > * **FastQC** {% icon tool %} with the following parameters:
->    > - Select the uploaded datasets `subset_1.fastq.gz` and `subset_2.fastq.gz` as the fastq files
->    {: .tip}
+>    ```
+>    https://zenodo.org/record/557099/files/subset_1.fastq
+>    https://zenodo.org/record/557099/files/subset_2.fastq
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+{: .hands_on}
+
+
+# Quality Control
+
+The first step in any analysis should always be quality control. We will use the FastQC tool to asses the quality of our reads and determine if we need to perform any data cleaning before proceeding with our analysis.
+
+> <hands-on-title>Quality Control</hands-on-title>
+>
+> 2. **FastQC** {% icon tool %} with the following parameters:
+>    - {% icon param-files %} *"Raw read data from your current history"*:  `subset_1.fastq.gz` and `subset_2.fastq.gz`
+>
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 > 3. Go to the web page result page and have a closer look at 'Per base sequence content'
 >
@@ -76,6 +89,7 @@ This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutori
 >    {: .question}
 >
 {: .hands_on}
+
 
 # Alignment
 
@@ -98,6 +112,8 @@ This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutori
 >    {: .question}
 >
 {: .hands_on}
+
+
 
 # Methylation bias and metric extraction
 

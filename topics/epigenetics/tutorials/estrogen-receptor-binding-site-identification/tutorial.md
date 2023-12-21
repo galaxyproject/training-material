@@ -5,7 +5,7 @@ redirect_from:
 
 title: "Identification of the binding sites of the Estrogen receptor"
 zenodo_link: "https://doi.org/10.5281/zenodo.892432"
-enable: false
+draft: true
 tags:
   - ChIP-seq
 questions:
@@ -29,8 +29,6 @@ contributors:
   - vivekbhr
   - fidelram
 ---
-
-# Introduction
 
 
 This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22217937).

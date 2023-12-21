@@ -41,11 +41,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
-<!-- This is a comment. -->
-
 Raw reads contain valuable information, such as coverage depth and quality scores, that is lost in a consensus sequence.
 Submission of raw reads to public repositories allows reuse of data and reproducibility of analysis and enables discovery of minor allelic variants and intrahost variation, for example during the recent COVID-19 pandemic ({% cite Maier2021 %}).
 
@@ -263,15 +258,15 @@ We will link it to the reads submitted in the first step using the accession num
 >    - *"Submit to test ENA server?"*: `yes`
 >    - *"Validate files and metadata but do not submit"*: `no`
 >    - Fill the assembly metadata. For our assembly:
->    > - *"Assembly type"*: `Clone`
->    > - *"Assembly program"*: `BWA-MEM`
->    > - *"Molecule type"*: `genomic RNA`
->    > - *"Coverage"*: `1000`
->    > - *"Select the method to load study and sample metadata"*: `Fill in required metadata`
->    > - *"Assembly name"*: give a name to your assembly.
->    > - *"Study accession"*: `ERP139884` (you can find the Study accession number from your raw data submission metadata ticket)
->    > - *"Sample accession"*: `ERS12519941` (you can find the Sample accession number from your raw data submission metadata ticket)
->    > - *"Sequencing platform"*: `Illumina`
+>      - *"Assembly type"*: `Clone`
+>      - *"Assembly program"*: `BWA-MEM`
+>      - *"Molecule type"*: `genomic RNA`
+>      - *"Coverage"*: `1000`
+>      - *"Select the method to load study and sample metadata"*: `Fill in required metadata`
+>      - *"Assembly name"*: give a name to your assembly.
+>      - *"Study accession"*: `ERP139884` (you can find the Study accession number from your raw data submission metadata ticket)
+>      - *"Sample accession"*: `ERS12519941` (you can find the Sample accession number from your raw data submission metadata ticket)
+>      - *"Sequencing platform"*: `Illumina`
 >    - Select the consensus sequence assembly file from your history: `SRR10903401.fasta`
 >
 {: .hands_on}

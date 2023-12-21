@@ -25,11 +25,12 @@ contributions:
   - martenson
   - jmchilton
   - davebx
-  - nsoranzo
   - lecorguille
   - abretaud
+  - lldelisle
   testing:
   - mira-miracoli
+  - edmontosaurus
 tags:
   - ansible
   - deploying
@@ -41,19 +42,20 @@ requirements:
     tutorials:
       - ansible
   - type: "none"
-    title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
+    title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 20.04 - 22.04."
 abbreviations:
     DVCS: Distributed Version Control System
----
 
-> <warning-title>22.05 not yet released</warning-title>
-> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
-{: .warning}
+edam_ontology:
+- topic_3489 # Database Management
+- topic_0605 # Informatics
+- topic_3071 # Data Management
+---
 
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
-> An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems (Source: [Wikipedia](https://en.wikipedia.org/wiki/Ansible))
-{: .quote}
+> An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems
+{: .quote cite="https://en.wikipedia.org/wiki/Ansible"}
 
 We want to give you a comprehensive understanding of how the Galaxy installation occurs, but we want to avoid you having to write a "custom" Galaxy installation playbook which you would eventually throw away, in order to use the official playbooks. Given these goals, we will go through the playbook in depth first, and then move to a hands-on portion later. If you are not interested in the inner workings, you can [skip to that section now](#installing-galaxy).
 
@@ -86,7 +88,7 @@ The important variables for this tutorial are:
 
 These are largely self explanatory: a directory for all of Galaxy's code and configuration, which commit should be installed, and the Galaxy configuration. We will not explain Galaxy configuration variables in detail as they are covered sufficiently in the `galaxy.yml` sample file or the [online documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options).
 
-The official recommendation is that you should have a variables file such as a `group_vars/galaxyservers.yml` for storing all of the Galaxy configuration.
+The official recommendation is that you should have a variables file such as `group_vars/galaxyservers.yml` for storing all of the Galaxy configuration.
 
 ## Tasks
 
@@ -121,7 +123,7 @@ The [static configuration setup](https://github.com/galaxyproject/ansible-galaxy
 1. The directories for Galaxy configuration data and for the shed tools are created
 2. Any config files are copied over
 3. Any templates are copied over
-4. The `galaxy.yml` (or `.ini`) is deployed
+4. The `galaxy.yml` is deployed
 
 The setup for deploying extra Galaxy configuration templates and files is a little bit non-standard by Ansible best practices. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.
 
@@ -175,10 +177,10 @@ Now that Galaxy is available on disk, Ansible is ready to start processing [depe
 
 The [database management tasks](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/database.yml) are extremely convenient; any time you run the playbook to update Galaxy, this will automatically run the database schema migration as needed.
 
-1. Galaxy first obtains the current DB version and the maximum possible DB version based on the codebase.
+1. The role first obtains the current DB version and the maximum possible DB version based on the codebase.
 2. If needed, the database is created.
-3. Both numbers are reported for the runner of the playbook.
-4. If the numbers are different, then Ansible runs the command to upgrade the database to the latest version.
+3. Both versions are reported for the runner of the playbook.
+4. If the versions are different, then Ansible runs the command to upgrade the database to the latest version.
 
 As an administrator who often forgot to run the upgrade, and would only notice it once Galaxy crashed during startup, having this process completely automated is extremely nice.
 
@@ -192,7 +194,7 @@ The client lives in the Galaxy code under the [client/](https://github.com/galax
 
 ## Handlers
 
-A number of the tasks that are executed will trigger a restart of Galaxy. Currently the only auto-magic implementation of this restart [handler](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html#handlers-running-operations-on-change) is when Galaxy is started and run using systemd. Thankfully, this tutorial uses systemd, but if systemd is not an option wherever you're deploying Galaxy, you will have to do something custom that fits for your setup. If this is the case for you, the role provides a way to reference your own handler by setting `galaxy_restart_handler_name`.
+A number of the tasks that are executed will trigger a restart of Galaxy. The auto-magic implementation of this restart [handler](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_handlers.html) should work for most cases, but it is possible to define your own custom handlers if necessary. If this is the case for you, the role provides a way to do this by notifying handlers that ["listen"](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_handlers.html#naming-handlers) to certain notifications. See the [role handlers](https://github.com/galaxyproject/ansible-galaxy/tree/main/handlers) for details.
 
 ## Defaults
 
@@ -228,7 +230,7 @@ To proceed from here it is expected that:
 >    {: .comment}
 >
 > 2. Your `ansible` version is `>=2.10`, you can check this by running `ansible --version`
-> 3. You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers."
+> 3. You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy and Galaxy's database. We will refer to these group of hosts as "galaxyservers" and "dbservers," respectively.
 > 4. Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.
 > 5. Your VM has `python3` installed.
 >
@@ -251,15 +253,11 @@ To proceed from here it is expected that:
 >
 > There are known issues with CentOS7 and python3, which is used in this tutorial. If you use this setup, you should have python2 and python3 coexisting, and use python2 for Ansible (i.e. do not set `interpreter_python` in your `ansible.cfg`) and python3 for Galaxy. This setup requires numerous changes that you will need to discover, which are not covered in this tutorial.
 >
-> Both `python-psycopg2` and `python3-psycopg2` need to be installed.
+> On older versions, both `python-psycopg2` and `python3-psycopg2` may need to be installed.
 >
 > CentOS8 (and RHEL in general) have significantly different package names for some modules, beware!
 {: .comment}
 
-
-> <warning-title>22.05 not yet released</warning-title>
-> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
-{: .warning}
 
 ## Requirements
 
@@ -275,21 +273,20 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    ```diff
 >    --- /dev/null
 >    +++ b/requirements.yml
->    @@ -0,0 +1,14 @@
+>    @@ -0,0 +1,13 @@
+>    +# Galaxy, Postgres, Nginx
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.4
+>    +  version: 0.10.14
 >    +- src: galaxyproject.nginx
->    +  version: 0.7.0
+>    +  version: 0.7.1
 >    +- src: galaxyproject.postgresql
->    +  version: 1.0.3
+>    +  version: 1.1.2
 >    +- src: galaxyproject.postgresql_objects
->    +  version: 1.1.0
->    +- src: geerlingguy.pip
->    +  version: 2.0.0
->    +- src: uchida.miniconda
->    +  version: 0.3.0
+>    +  version: 1.2.0
+>    +- src: galaxyproject.miniconda
+>    +  version: 0.3.1
 >    +- src: usegalaxy_eu.certbot
->    +  version: 0.1.5
+>    +  version: 0.1.11
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
@@ -305,14 +302,13 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    >  |`galaxyproject.nginx` | Sets up a webserver|
 >    >  |`galaxyproject.postgresql` | Installs our database, PostgreSQL|
 >    >  |`galaxyproject.postgresql_objects` | Creates users and databases within PostgreSQL|
->    >  |`geerlingguy.pip` | Ensures that pip is available|
->    >  |`uchida.miniconda` | Installs miniconda, which is used by Galaxy|
+>    >  |`galaxyproject.miniconda` | Installs miniconda, which is used by Galaxy|
 >    >  |`usegalaxy_eu.certbot` | Installs certbot and requests SSL certificates|
 >    {: .details}
 >
 >    > <details-title>Role version vs Galaxy version?</details-title>
 >    > Q: Is there a correspondence between galaxy role versions and galaxy versions?
->    > A: They  are correlated (because generally new Galaxy versions could introduce e.g. new configuration options that the galaxy role would then need to adopt), but the Galaxy role can install older versions of Galaxy.
+>    > A: They are correlated (because generally new Galaxy versions could introduce e.g. new configuration options that the galaxy role would then need to adopt), but the Galaxy role can install older versions of Galaxy.
 >    {: .details}
 >
 > 3. In the same directory, run:
@@ -326,24 +322,28 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
->    > <tip-title>Using `git`?</tip-title>
->    > If you're using git, it can make sense to tell git to ignore the `roles`
->    > directory, as all of that data can be perfectly recreated from our
->    > variables in the requirements.yml file.
->    >
->    > Simply create a file `.gitignore` with the following content:
->    >
->    > ```console
->    > roles/
->    > .vault-password.txt
->    > ```
->    >
->    > When you run `git status` you'll notice that the `roles/` folder is not listed among the other "Untracked files". We're adding the `.vault-password.txt` file as well, ahead of time, because this should *never* ever be committed to the repository.
->    >
->    > Now you can do `git add .` to add all of the files in the current directory, and not worry about committing generated artifacts!
->    {: .tip}
+> 4. Inspect the contents of the newly created `roles/` directory in your working directory.
 >
-> 4. Inspect the contents of the newly created `roles` directory in your working directory.
+> 5. It's good practice to put your playbooks and configuration files under version control (usually in a git repository), but there is no need to keep track of the content of the `roles/` directory, as all of that data can be perfectly recreated from the `requirements.yml` file.
+>
+>    If you plan to put this git repository online (e.g. on GitHub), any file containing clear-text passwords should *never* ever be committed to the repository, even if the repository is private. For this reason, we should tell git, ahead of time, to ignore one such file, `.vault-password.txt` , which will use later on in this lesson.
+>
+>    To configure git to ignore certain files and directories, they need to be listed in a file called `.gitignore` , which should be instead tracked as part of your git repository. You can now create the `.gitignore` file with the following content:
+>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/.gitignore
+>    @@ -0,0 +1,2 @@
+>    +roles/
+>    +.vault-password.txt
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add .gitignore"}
+>
+>    When you run `git status` you'll notice that the `roles/` folder is not listed among the other "Untracked files".
+>
+>    Now you can do `git add .` to add all of the files in the current directory to your repository, and not worry about committing these files and directories by mistake!
 {: .hands_on}
 
 > <hands-on-title>Configuration files</hands-on-title>
@@ -354,13 +354,18 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    ```diff
 >    --- /dev/null
 >    +++ b/ansible.cfg
->    @@ -0,0 +1,6 @@
+>    @@ -0,0 +1,11 @@
 >    +[defaults]
 >    +interpreter_python = /usr/bin/python3
 >    +inventory = hosts
->    +retry_files_enabled = false
->    +stdout_callback = yaml # Use the YAML callback plugin.
->    +bin_ansible_callbacks = True # Use the stdout_callback when running ad-hoc commands.
+>    +# Use the YAML callback plugin.
+>    +stdout_callback = yaml
+>    +# Use the stdout_callback when running ad-hoc commands.
+>    +bin_ansible_callbacks = True
+>    +
+>    +# Show diffs of changes
+>    +[diff]
+>    +always = True
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add ansible.cfg"}
@@ -380,6 +385,8 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 > 2. Create the `hosts` inventory file if you have not done so yet, defining a `[galaxyservers]` group with the address of the host where you want to install Galaxy. If you are running Ansible on the same machine where Galaxy will be installed to, you should set the `ansible_connection=local` variable. Lastly, you should explicitly set the `ansible_user` variable to the username to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not `ansible_user` is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.
 >
+>    You should also define a `[dbservers]` group for the hosts that will run Galaxy's database. In many cases (and in the case of the Galaxy Admin Training), these will be the same host, but the tutorial is designed to support either scenario, and helps to strengthen understanding of the purpose of host groupings in Ansible for more advanced real-world deployments. Here however we suggest using `[dbservers:children]` and adding `galaxyservers` as the child of that.
+>
 >    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > cat hosts
@@ -394,12 +401,51 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > > ```diff
 >    > > --- /dev/null
 >    > > +++ b/hosts
->    > > @@ -0,0 +1,2 @@
+>    > > @@ -0,0 +1,4 @@
 >    > > +[galaxyservers]
->    > > +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    > > +gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
+>    > > +[dbservers:children]
+>    > > +galaxyservers
 >    > > {% endraw %}
 >    > > ```
 >    > > {: data-commit="Add hosts"}
+>    > {: .code-out}
+>    {: .code-2col}
+>
+>    > <tip-title>Separate database server</tip-title>
+>    > In the hosts file above, we have defined the `galaxyservers` group to be a "child" of the `dbservers` group. This means that the host defined in `[galaxyservers]` is also a member of `[dbservers]`. If we instead wanted to define a separate host as the Galaxy database server, we would replace the `[dbservers:children]` section with something like:
+>    >
+>    > ```ini
+>    > [dbservers]
+>    > galaxy-db.example.org
+>    > ```
+>    {: .tip}
+>
+> 3. Create the `group_vars` directory and create the file `group_vars/all.yml`. These variables are applied to *all* hosts, regardless of group membership. The variables we set will be used to ensure Python 3 is always used on older systems where Python 2 might also still be installed. We will also set a few variables that must be known by both the Galaxy server and the database server: Galaxy's system/database username, as well as the database name.
+>
+>    > > <code-in-title>Bash</code-in-title>
+>    > > ```bash
+>    > > cat group_vars/all.yml
+>    > > ```
+>    > {: .code-in}
+>    >
+>    > > <code-out-title>Bash</code-out-title>
+>    > >
+>    > > {% raw %}
+>    > > ```diff
+>    > > --- /dev/null
+>    > > +++ b/group_vars/all.yml
+>    > > @@ -0,0 +1,7 @@
+>    > > +---
+>    > > +# Python 3 support
+>    > > +pip_virtualenv_command: /usr/bin/python3 -m venv  # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
+>    > > +
+>    > > +# Common variables needed by all hosts
+>    > > +galaxy_user_name: galaxy
+>    > > +galaxy_db_name: galaxy
+>    > > {% endraw %}
+>    > > ```
+>    > > {: data-commit="Add initial all hosts variables file"}
 >    > {: .code-out}
 >    {: .code-2col}
 >
@@ -411,35 +457,28 @@ Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. S
 
 PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the "peer" authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the [PostgreSQL Client Authentication documentation](https://www.postgresql.org/docs/current/static/client-authentication.html).
 
-For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `galaxyproject.postgresql_objects` role to handle this step. Additionally we're setting a couple of variables to control the automatic backups, they'll be placed in the `/data/backups` folder next to our user uploaded Galaxy data.
-
+For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `galaxyproject.postgresql_objects` role to handle this step.
 > <hands-on-title>Installing PostgreSQL</hands-on-title>
 >
-> 1. Create and edit `group_vars/galaxyservers.yml` and add some variables to configure PostgreSQL:
+> 1. Create and edit `group_vars/dbservers.yml` and add some variables to configure PostgreSQL:
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/group_vars/galaxyservers.yml
->    @@ -0,0 +1,15 @@
+>    +++ b/group_vars/dbservers.yml
+>    @@ -0,0 +1,7 @@
 >    +---
->    +# Python 3 support
->    +pip_virtualenv_command: /usr/bin/python3 -m virtualenv # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
->    +certbot_virtualenv_package_name: python3-virtualenv    # usegalaxy_eu.certbot
->    +pip_package: python3-pip                               # geerlingguy.pip
->    +
 >    +# PostgreSQL
 >    +postgresql_objects_users:
->    +  - name: galaxy
+>    +  - name: "{{ galaxy_user_name }}"
 >    +postgresql_objects_databases:
->    +  - name: galaxy
->    +    owner: galaxy
->    +# PostgreSQL Backups
->    +postgresql_backup_dir: /data/backups
->    +postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+>    +  - name: "{{ galaxy_db_name }}"
+>    +    owner: "{{ galaxy_user_name }}"
 >    {% endraw %}
 >    ```
->    {: data-commit="Add initial group variables file"}
+>    {: data-commit="Add initial dbservers group variables file"}
+>
+>    Notice that we have used the variables we defined in `group_vars/all.yml` for the Galaxy user and database names in the previous section, implementing the principle of "define once, reference many times."
 >
 >    > <tip-title>Using postgres via the network</tip-title>
 >    > To use postgres via another machine, or via the network, you can add lines like the following:
@@ -456,15 +495,16 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```yaml
 >    > postgresql_objects_users:
 >    >   - name: galaxy
->    >     password: super-secret-password-that-should-be-in-vault
+>    >     password: "{{ vault_postgres_galaxy_password }}"
 >    > ```
 >    {: .tip}
 >
-> 2. Create and open `galaxy.yml` which will be our playbook. Add the following:
+> 2. Create and open `galaxy.yml` which will be our playbook. Write the following:
 >
->    - Add a pre-task to install the necessary dependencies: `python3-psycopg2`, `acl`
->    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
->    - A role for `galaxyproject.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
+>    - Create a play that will run on the `dbservers` group, as the root user (you will need `become`/`become_user`)
+>    - Add a pre-task to install the necessary dependency at this stage: `acl`
+>    - Use the role `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
+>    - Use the role `galaxyproject.postgresql_objects`, run as the postgres user. This role allows for managing users and databases within PostgreSQL.
 >
 >    {% raw %}
 >    ```diff
@@ -472,13 +512,13 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +++ b/galaxy.yml
 >    @@ -0,0 +1,13 @@
 >    +---
->    +- hosts: galaxyservers
+>    +- hosts: dbservers
 >    +  become: true
 >    +  become_user: root
 >    +  pre_tasks:
 >    +    - name: Install Dependencies
 >    +      package:
->    +        name: ['acl', 'python3-psycopg2']
+>    +        name: 'acl'
 >    +  roles:
 >    +    - galaxyproject.postgresql
 >    +    - role: galaxyproject.postgresql_objects
@@ -497,7 +537,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > - a playbook
 >    > > - a hosts file
 >    > > - a requirements file
->    > > - Some group variables
+>    > > - some group variables
 >    > > - all of our roles
 >    > >
 >    > > > <code-in-title>Bash</code-in-title>
@@ -516,19 +556,19 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > > ├── ansible.cfg
 >    > > > ├── galaxy.yml
 >    > > > ├── group_vars
->    > > > │   └── galaxyservers.yml
+>    > > > │   ├── all.yml
+>    > > > │   └── dbservers.yml
 >    > > > ├── hosts
 >    > > > ├── requirements.yml
 >    > > > └── roles
 >    > > >     ├── galaxyproject.galaxy
+>    > > >     ├── galaxyproject.miniconda
 >    > > >     ├── galaxyproject.nginx
 >    > > >     ├── galaxyproject.postgresql
->    > > >     ├── geerlingguy.pip
 >    > > >     ├── galaxyproject.postgresql_objects
->    > > >     ├── uchida.miniconda
 >    > > >     └── usegalaxy_eu.certbot
 >    > > >
->    > > > 9 directories, 5 files
+>    > > > 8 directories, 6 files
 >    > > > ```
 >    > > {: .code-out.code-max-300}
 >    > >
@@ -551,101 +591,143 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 >    > <code-out-title>Bash</code-out-title>
 >    >
+>    > Note: we have stripped out the "diff" output for compactness, your output will be more verbose.
+>    >
 >    > ```ini
->    > PLAY [galaxyservers] ************************************************************************************
+>    > PLAY [dbservers] ***************************************************************
 >    >
->    > TASK [Gathering Facts] **********************************************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [Gathering Facts] *********************************************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [Install Dependencies] *****************************************************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [Install Dependencies] ****************************************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : include_tasks] *********************************************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/debian.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.postgresql : include_tasks] ********************************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/debian.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.postgresql : Install pgdg package signing key (Debian/pgdg)] ************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : APT keyrings directory] ***********************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Install pgdg repository (Debian/pgdg)] *********************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Install pgdg package signing key (Debian/pgdg)] ***
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Install PostgreSQL (Debian)] *******************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Install pgdg repository (Debian/pgdg)] ********
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Get installed version] *************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Install PostgreSQL (Debian)] ******************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Set version fact] ******************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Get installed version] ************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Set version fact] ******************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Set version fact] *****************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Set OS-specific variables] *********************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Install psycopg2] *****************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Set pgdata fact] *******************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Set version fact] *****************************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Set conf dir fact] *****************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Set OS-specific variables] ********************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : include_tasks] *********************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Set pgdata fact] ******************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Create conf.d] *********************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Set conf dir fact] ****************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Check for conf.d include in postgresql.conf] ***************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : include_tasks] ********************************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Set conf.d include in postgresql.conf] *********************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Create conf.d] ********************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Include 25ansible_postgresql.conf in postgresql.conf] ******************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Check for conf.d include in postgresql.conf] ***
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Set config options] ****************************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Set conf.d include in postgresql.conf] ********
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Install pg_hba.conf] ***************************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Include 25ansible_postgresql.conf in postgresql.conf] ***
+>    > [WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
+>    > with a mode of 0700, this may cause issues when running as another user. To
+>    > avoid this, create the remote_tmp dir with the correct permissions manually
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : include_tasks] *********************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Set config options] ***************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Ensure PostgreSQL is running] ******************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql : Install pg_hba.conf] **************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql_objects : Revoke extra privileges] *********************************************
+>    > TASK [galaxyproject.postgresql : include_tasks] ********************************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/backup.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.postgresql_objects : Drop databases] ******************************************************
->    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
+>    > TASK [galaxyproject.postgresql : Create backup directories] ********************
+>    > changed: [gat-0.eu.galaxy.training] => (item=/var/lib/postgresql/backups)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/var/lib/postgresql/backups/bin)
 >    >
->    > TASK [galaxyproject.postgresql_objects : Create and drop users] ***********************************************
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
->    > [WARNING]: Module did not set no_log for no_password_changes
+>    > TASK [galaxyproject.postgresql : Create backup output directory] ***************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql_objects : Create groups] *******************************************************
+>    > TASK [galaxyproject.postgresql : Install backup script templates] **************
+>    > changed: [gat-0.eu.galaxy.training] => (item=archive_wal.sh)
 >    >
->    > TASK [galaxyproject.postgresql_objects : Add or remove users from groups] *************************************
+>    > TASK [galaxyproject.postgresql : Install backup script files] ******************
+>    > changed: [gat-0.eu.galaxy.training] => (item=backup.py)
 >    >
->    > TASK [galaxyproject.postgresql_objects : Drop groups] *********************************************************
+>    > TASK [galaxyproject.postgresql : Set WAL archive config options] ***************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql_objects : Create databases] ****************************************************
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
+>    > TASK [galaxyproject.postgresql : Schedule backups] *****************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql_objects : Grant user database privileges] **************************************
->    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
+>    > TASK [galaxyproject.postgresql : Remove PostgreSQL working WAL backup cron job] ***
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql_objects : Grant extra privileges] **********************************************
+>    > TASK [galaxyproject.postgresql : Ensure PostgreSQL is running] *****************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > RUNNING HANDLER [galaxyproject.postgresql : Reload PostgreSQL] ******************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.postgresql_objects : Warn if deprecated user priv param is set] ***
+>    > skipping: [gat-0.eu.galaxy.training] => (item=galaxy)
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > PLAY RECAP **********************************************************************************************
->    > gat-0.training.galaxyproject.eu : ok=17   changed=7    unreachable=0    failed=0    skipped=14   rescued=0    ignored=0
+>    > TASK [galaxyproject.postgresql_objects : Revoke extra privileges] **************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
+>    > TASK [galaxyproject.postgresql_objects : Drop databases] ***********************
+>    > skipping: [gat-0.eu.galaxy.training] => (item={'name': 'galaxy', 'owner': 'galaxy'})
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > TASK [galaxyproject.postgresql_objects : Create and drop users] ****************
+>    > [WARNING]: Module remote_tmp /var/lib/postgresql/.ansible/tmp did not exist and
+>    > was created with a mode of 0700, this may cause issues when running as another
+>    > user. To avoid this, create the remote_tmp dir with the correct permissions
+>    > manually
+>    > changed: [gat-0.eu.galaxy.training] => (item=galaxy)
+>    >
+>    > TASK [galaxyproject.postgresql_objects : Create groups] ************************
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > TASK [galaxyproject.postgresql_objects : Add or remove users from groups] ******
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > TASK [galaxyproject.postgresql_objects : Drop groups] **************************
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > TASK [galaxyproject.postgresql_objects : Create databases] *********************
+>    > changed: [gat-0.eu.galaxy.training] => (item=galaxy)
+>    >
+>    > TASK [galaxyproject.postgresql_objects : Grant extra privileges] ***************
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > RUNNING HANDLER [galaxyproject.postgresql : Reload PostgreSQL] *****************
+>    > changed: [gat-0.eu.galaxy.training]
+>    >
+>    > PLAY RECAP *********************************************************************
+>    > gat-0.eu.galaxy.training   : ok=27   changed=15   unreachable=0    failed=0    skipped=13   rescued=0    ignored=0
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -653,7 +735,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > You might see an error like this, if you're running with `--check` mode. Unfortunately here `--check` mode meets real life: not all modules support it because some rely on running command line tools to obtain version numbers, something that cannot be mocked with check mode. You can solve this by running it without `--check`.
 >    >
 >    > ```
->    > fatal: [gat-34.us.galaxy.training]: FAILED! => {"msg": "The conditional check 'postgresql_version is version_compare('9.3', '>=')' failed. The error was: Input version value cannot be empty\n\nThe error appears to be in '/home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/main.yml': line 42, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n# etc.). So check for a match first and then add if there's no match.\n- name: Check for conf.d include in postgresql.conf\n ^ here\n"}
+>    > fatal: [gat-0.eu.galaxy.training]: FAILED! => {"msg": "The conditional check 'postgresql_version is version_compare('9.3', '>=')' failed. The error was: Input version value cannot be empty\n\nThe error appears to be in '/home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/main.yml': line 42, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n# etc.). So check for a match first and then add if there's no match.\n- name: Check for conf.d include in postgresql.conf\n ^ here\n"}
 >    > ```
 >    {: .comment}
 >
@@ -755,64 +837,53 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 
 ## Galaxy
 
-Next we will dive right in to deploying a copy of Galaxy onto our server, but it will just be a static copy of the code without anything running.
+Next we will dive right in to deploying a copy of Galaxy onto our server.
 
 For a normal Galaxy instance there are a few configuration changes you make very early during deployment:
 
 - Changing the database connection
 - Configuring the admin user list
-- Changing the "brand"
 
-Additionally we'll go ahead and set up the production-ready Gunicorn which will handle processing Galaxy jobs. Gunicorn launches as many workers as you request, and then they take turns placing a lock, accepting a job, releasing that lock, and then going on to process that job.
+Additionally we'll go ahead and set up the production-ready [Gunicorn + Webless](https://docs.galaxyproject.org/en/master/admin/scaling.html#deployment-options) deployment, which separates Galaxy's web and job handling into separate processes. This is done by configuring Galaxy's process manager, [Gravity](https://gravity.readthedocs.io).
 
 Finally, best admin practices are to not run Galaxy as a user with `sudo` access, like your login user probably has. Additionally, it is best to install the Galaxy code and configs as a separate user, for security purposes. So we will instruct the `galaxyproject.galaxy` role to create a new user account specifically to run Galaxy under.
-
-> <details-title>Mules are not the only option</details-title>
->
-> Galaxy can be run in a [couple of other configurations](https://docs.galaxyproject.org/en/master/admin/scaling.html#deployment-options) depending on your needs. Mules are generally a good solution for most production needs.
->
-{: .details}
 
 The configuration is quite simple thanks to the many sensible defaults that are provided in the Ansible roles.
 
 > <hands-on-title>Minimal Galaxy Playbook</hands-on-title>
 >
-> 1. Open `galaxy.yml` with your text editor and set the following:
+> 1. Open `galaxy.yml` with your text editor and do the following:
 >
->    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `bzip2`, `git`, `make`, `tar`, and `virtualenv`.
->    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
+>    - Create a new play that will run on the `galaxyservers` group, as the root user (you will need `become`/`become_user`)
+>    - Add a pre-task to install the necessary dependencies for the Galaxy server: `acl`, `bzip2`, `git`, `make`, `tar`, `python3-venv`, and `python3-setuptools`
+>    - Use the roles `galaxyproject.galaxy` and `galaxyproject.miniconda` (in this order), with `galaxyproject.miniconda` run as the `galaxy` user.
 >
 >    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -5,9 +5,14 @@
->       pre_tasks:
->         - name: Install Dependencies
->           package:
->    -        name: ['acl', 'python3-psycopg2']
->    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
->       roles:
->         - galaxyproject.postgresql
+>    @@ -11,3 +11,16 @@
 >         - role: galaxyproject.postgresql_objects
 >           become: true
 >           become_user: postgres
->    +    - geerlingguy.pip
+>    +
+>    +- hosts: galaxyservers
+>    +  become: true
+>    +  become_user: root
+>    +  pre_tasks:
+>    +    - name: Install Dependencies
+>    +      package:
+>    +        name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-venv', 'python3-setuptools']
+>    +  roles:
 >    +    - galaxyproject.galaxy
->    +    - role: uchida.miniconda
+>    +    - role: galaxyproject.miniconda
 >    +      become: true
->    +      become_user: "{{ galaxy_user.name }}"
+>    +      become_user: "{{ galaxy_user_name }}"
 >    {% endraw %}
 >    ```
->    {: data-commit="Add pip, miniconda, galaxy to playbook"}
+>    {: data-commit="Add miniconda, galaxy to playbook"}
 >
->    > <tip-title>Miniconda fails to work</tip-title>
->    > The Galaxy user is created to separate privileges. Then we add `uchida.miniconda`, which is run as the Galaxy user.
->    >
->    > The miniconda role attempts to install tar and bzip2, even when the user doesn't have permissions to do this. This issue has been addressed in the codebase, but, the role has not seen a release which would address this. You do *not* need to run this role, Galaxy will attempt to install conda when it is missing. We added it to prevent a possible race condition between the two mules if both attempt to install conda at the same time. So, remove the role from your playbook, and carry on, if you have issues.
->     {: .tip}
->
-> 2. Edit your group variables file for your group (`group_vars/galaxyservers.yml`).
+> 2. Create and edit `group_vars/galaxyservers.yml` and add some variables to configure Galaxy:
 >
 >    We need to set the following variables at the top level:
 >
@@ -823,12 +894,12 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_manage_paths`           | `true`                                                           | Instruct the role to create the needed directories.
 >    `galaxy_layout`                 | `root-dir`                                                       | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, tools, and mutable-data (like caches, location files, etc.) folders will live by default beneath `galaxy_root`. User data is stored under `file_path`, a variable we will set later.
 >    `galaxy_root`                   | `/srv/galaxy`                                                    | This is the root of the Galaxy deployment.
->    `galaxy_user`                   | `{name: galaxy, shell: /bin/bash}`                               | The user that Galaxy will run as.
->    `galaxy_commit_id`              | `release_22.05`                                                  | The git reference to check out, which in this case is the branch for Galaxy Release 22.05
+>    `galaxy_user`                   | `{name: "{{ galaxy_user_name }}", shell: /bin/bash}`             | The user that Galaxy will run as.
+>    `galaxy_commit_id`              | `release_23.0`                                                   | The git reference to check out, which in this case is the branch for Galaxy Release 23.0
 >    `galaxy_force_checkout`         | `true`                                                           | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
->    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
->    `miniconda_version`             | `4.7.12`                                                         | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
->    `miniconda_manage_dependencies` | `false`                                                          | Specify whether to install the miniconda installer dependencies.
+>    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can become deadlocked.
+>    `miniconda_version`             | `23.9`                                                           | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
+>    `miniconda_channels`          ` | `['conda-forge', 'defaults']`                                    | Use the community-maintained conda-forge channel in addition to the standard defaults channel of Conda.
 >
 >    > <tip-title>Different Galaxy Releases!</tip-title>
 >    > In the time between this tutorial was last updated ({{ page.last_modified_at | date: "%Y-%m-%d" }}), and when you are now reading it, one or more new releases of Galaxy may have occured.
@@ -840,25 +911,21 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
+>    --- /dev/null
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -13,3 +13,16 @@ postgresql_objects_databases:
->     # PostgreSQL Backups
->     postgresql_backup_dir: /data/backups
->     postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
->    +
+>    @@ -0,0 +1,12 @@
 >    +# Galaxy
->    +galaxy_create_user: true
->    +galaxy_separate_privileges: true
->    +galaxy_manage_paths: true
+>    +galaxy_create_user: true # False by default, as e.g. you might have a 'galaxy' user provided by LDAP or AD.
+>    +galaxy_separate_privileges: true # Best practices for security, configuration is owned by 'root' (or a different user) than the processes
+>    +galaxy_manage_paths: true # False by default as your administrator might e.g. have root_squash enabled on NFS. Here we can create the directories so it's fine.
 >    +galaxy_layout: root-dir
 >    +galaxy_root: /srv/galaxy
->    +galaxy_user: {name: galaxy, shell: /bin/bash}
->    +galaxy_commit_id: release_22.05
+>    +galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
+>    +galaxy_commit_id: release_23.0
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->    +miniconda_version: 4.7.12
->    +miniconda_manage_dependencies: false
+>    +miniconda_version: 23.9
+>    +miniconda_channels: ['conda-forge', 'defaults']
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure miniconda and galaxy"}
@@ -867,44 +934,45 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > Consider updating the Galaxy Commit ID to the latest version of Galaxy available, this will probably give better results (given that dependencies are always updating) than using a potentially outdated version.
 >    {: .tip}
 >
-> 3. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
+> 3. Again edit the galaxyservers group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
 >    So the structure looks like:
 >    ```yaml
 >    galaxy_config:
->       galaxy:
->           key: value
+>      galaxy:
+>        key: value
 >    ```
 >
 >    Now you should set:
 >    1. `admin_users` to the email address you will use with this Galaxy.
->    2. `brand` to something fun! (E.g. 🧬🔬🚀)
 >    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`).
 >    4. `file_path` to a place to store data, `/data` is fine for this lesson which sets up a single-node Galaxy. If you have separate compute machines, this will normally need to be storage shared between the Galaxy node and compute nodes.
->    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
->    6. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
->    7. `object_store_store_by` to `uuid`, this is a better way of storing files that will ensure better filesystem balancing than the older system.
->    8. `id_secret` to {% raw %}`{{ vault_id_secret }}`{% endraw %}, we'll define this variable next but it will be used to encode the IDs used in Galaxy URLs and for securing session cookies.
+>    5. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
+>    6. `object_store_store_by` to `uuid`, this is a better way of storing files that will ensure better filesystem balancing than the older system.
+>    7. `id_secret` to {% raw %}`{{ vault_id_secret }}`{% endraw %}, we'll define this variable next but it will be used to encode the IDs used in Galaxy URLs and for securing session cookies.
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -26,3 +26,14 @@ galaxy_force_checkout: true
+>    @@ -10,3 +10,17 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->     miniconda_version: 4.7.12
->     miniconda_manage_dependencies: false
+>     miniconda_version: 23.9
+>     miniconda_channels: ['conda-forge', 'defaults']
 >    +
 >    +galaxy_config:
 >    +  galaxy:
->    +    brand: "🧬🔬🚀"
->    +    admin_users: admin@example.org
->    +    database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    +    file_path: /data
->    +    check_migrate_tools: false
->    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    +    # Main Configuration
+>    +    admin_users:
+>    +    - admin@example.org
+>    +    database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
+>    +    file_path: /data/datasets
+>    +    job_working_directory: /data/jobs
 >    +    object_store_store_by: uuid
 >    +    id_secret: "{{ vault_id_secret }}"
+>    +
+>    +galaxy_extra_dirs:
+>    +  - /data
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure galaxy config"}
@@ -920,7 +988,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    > ```
 >    > sqlite:///./database/universe.sqlite?isolation_level=IMMEDIATE
->    > postgres://<name>:<password>@localhost:5432/galaxy
+>    > postgresql://<name>:<password>@localhost:5432/galaxy
 >    > postgresql:///galaxy?host=/var/run/postgresql
 >    > ```
 >    >
@@ -948,44 +1016,54 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    {: .comment}
 >
-> 4. In order to enable the Gunicorn + Webless strategy, we need to edit the Gravity configuration of Galaxy. This has a default value, but we will have to override it. Add the following configuration as a child of the `galaxy_config` variable:
+> 4. In order to enable the Gunicorn + Webless strategy, we need to edit the Gravity configuration, which is (by default) configured in its own section of the Galaxy configuration. This has a default value, but we will have to override it. Add the following configuration as a child of the `galaxy_config` variable:
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -37,3 +37,23 @@ galaxy_config:
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    @@ -21,6 +21,32 @@ galaxy_config:
+>         job_working_directory: /data/jobs
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >    +  gravity:
+>    +    process_manager: systemd
 >    +    galaxy_root: "{{ galaxy_root }}/server"
->    +    app_server: gunicorn
+>    +    galaxy_user: "{{ galaxy_user_name }}"
+>    +    virtualenv: "{{ galaxy_venv_dir }}"
 >    +    gunicorn:
 >    +      # listening options
 >    +      bind: "unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock"
 >    +      # performance options
 >    +      workers: 2
 >    +      # Other options that will be passed to gunicorn
+>    +      # This permits setting of 'secure' headers like REMOTE_USER (and friends)
+>    +      # https://docs.gunicorn.org/en/stable/settings.html#forwarded-allow-ips
 >    +      extra_args: '--forwarded-allow-ips="*"'
+>    +      # This lets Gunicorn start Galaxy completely before forking which is faster.
+>    +      # https://docs.gunicorn.org/en/stable/settings.html#preload-app
 >    +      preload: true
 >    +    celery:
 >    +      concurrency: 2
 >    +      loglevel: DEBUG
 >    +    handlers:
 >    +      handler:
->    +        processes: 3
+>    +        processes: 2
 >    +        pools:
->    +          - job-handler
->    +          - workflow-scheduler
+>    +          - job-handlers
+>    +          - workflow-schedulers
+>     
+>     galaxy_extra_dirs:
+>       - /data
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure gravity"}
 >
 >
 >    > <tip-title>Options explanations.</tip-title>
->    > 1`workers`: Controls the number of Galaxy application processes Gunicorn will spawn. Increased web performance can be attained by increasing this value. If Gunicorn is the only application on the server, a good starting value is the number of CPUs * 2 + 1. 4-12 workers should be able to handle hundreds if not thousands of requests per second.
->    > 2 `extra_args`: You can specify additional arguments to pass to gunicorn here.
+>    > 1. `workers`: Controls the number of Galaxy application processes Gunicorn will spawn. Increased web performance can be attained by increasing this value. If Gunicorn is the only application on the server, a good starting value is the number of CPUs * 2 + 1. 4-12 workers should be able to handle hundreds if not thousands of requests per second.
+>    > 2. `extra_args`: You can specify additional arguments to pass to gunicorn here.
+>    > 3. `handlers`: Two dedicated "webless" job handler processes will be started. These processes also handle workflow invocations.
 >    {: .tip}
 >
 > 5. Let's set up our vault to store the secrets for these tutorials.
@@ -997,17 +1075,20 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 6. Tell Ansible where to find the decryption key. Edit your file `ansible.cfg` and add the `vault_password_file` variable.
+> 6. Tell Ansible where to find the decryption key. Edit your file `ansible.cfg` and add the `vault_password_file` variable to the `[defaults]` section.
 >
 >    {% raw %}
 >    ```diff
 >    --- a/ansible.cfg
 >    +++ b/ansible.cfg
->    @@ -4,3 +4,4 @@ inventory = hosts
->     retry_files_enabled = false
->     stdout_callback = yaml # Use the YAML callback plugin.
->     bin_ansible_callbacks = True # Use the stdout_callback when running ad-hoc commands.
+>    @@ -5,6 +5,7 @@ inventory = hosts
+>     stdout_callback = yaml
+>     # Use the stdout_callback when running ad-hoc commands.
+>     bin_ansible_callbacks = True
 >    +vault_password_file = .vault-password.txt
+>     
+>     # Show diffs of changes
+>     [diff]
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup the vault file"}
@@ -1023,7 +1104,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    This will open the editor. Within that file, define your `vault_id_secret` to be a long random value.
 >
 >    ```
->    vault_id_secret: BxI6zlQVhoHLPVf3gqQ
+>    vault_id_secret: secret # CHANGE ME NOW!!!
 >    ```
 >    > <tip-title>How to get a good random value?</tip-title>
 >    > You can use the same command we ran before: `openssl rand -base64 24` to get a good, secure `id_secret` for your Galaxy
@@ -1063,6 +1144,12 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > to ensure colleagues get a copy of the file too. Just **be sure**
 >    > `.vault-password.txt` is listed in your `.gitignore` file!
 >    >
+>    > You will also need to run this command to define how the `ansible-vault` differ should work:
+>    >
+>    > ```
+>    > git config --global diff.ansible-vault.textconv "ansible-vault view"
+>    > ```
+>    >
 >    > If you have more vault secrets, you can adjust this line (or add more,
 >    > wildcards are supported) to list all of your secret files. This tells
 >    > `git` to use `ansible-vault` to diff the two files, as you can see in
@@ -1098,7 +1185,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -2,6 +2,8 @@
+>    @@ -15,6 +15,8 @@
 >     - hosts: galaxyservers
 >       become: true
 >       become_user: root
@@ -1122,432 +1209,395 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    > <code-out-title>Bash</code-out-title>
 >    >
+>    > Note: we have only included the `galaxyservers` play output and have stripped out the "diff" output for compactness, your output will be more verbose.
+>    >
 >    > ```ini
->    > PLAY [galaxyservers] ***************************************************************************
+>    > PLAY [galaxyservers] ***********************************************************
 >    >
->    > TASK [Gathering Facts] *************************************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [Gathering Facts] *********************************************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [Install Dependencies] ********************************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [Install Dependencies] ****************************************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : include_tasks] ************************************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/debian.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Ensure that mutually exclusive options are not set] ***
+>    > ok: [gat-0.eu.galaxy.training] => changed=false
+>    >   msg: All assertions passed
 >    >
->    > TASK [galaxyproject.postgresql : Install pgdg package signing key (Debian/pgdg)] ***************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Set privilege separation default variables] *******
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Install pgdg repository (Debian/pgdg)] ************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include layout vars] ******************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.postgresql : Install PostgreSQL (Debian)] **********************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Get installed version] ****************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set version fact] *********************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set version fact] *********************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set OS-specific variables] ************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set pgdata fact] **********************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set conf dir fact] ********************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : include_tasks] ************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Create conf.d] ************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Check for conf.d include in postgresql.conf] ******************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set conf.d include in postgresql.conf] ************************
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    >
->    > TASK [galaxyproject.postgresql : Include 25ansible_postgresql.conf in postgresql.conf] *********
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set config options] *******************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Install pg_hba.conf] ******************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : include_tasks] ************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Ensure PostgreSQL is running] *********************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql_objects : Revoke extra privileges] ************************************
->    >
->    > TASK [galaxyproject.postgresql_objects : Drop databases] *********************************************
->    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
->    >
->    > TASK [galaxyproject.postgresql_objects : Create and drop users] **************************************
->    > ok: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
->    > [WARNING]: Module did not set no_log for no_password_changes
->    >
->    > TASK [galaxyproject.postgresql_objects : Create groups] **********************************************
->    >
->    > TASK [galaxyproject.postgresql_objects : Add or remove users from groups] ****************************
->    >
->    > TASK [galaxyproject.postgresql_objects : Drop groups] ************************************************
->    >
->    > TASK [galaxyproject.postgresql_objects : Create databases] *******************************************
->    > ok: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
->    >
->    > TASK [galaxyproject.postgresql_objects : Grant user database privileges] *****************************
->    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
->    >
->    > TASK [galaxyproject.postgresql_objects : Grant extra privileges] *************************************
->    >
->    > TASK [geerlingguy.pip : Ensure Pip is installed.] **********************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [geerlingguy.pip : Ensure pip_install_packages are installed.] ****************************
->    >
->    > TASK [galaxyproject.galaxy : Ensure that mutually exclusive options are not set] ***************
->    > ok: [gat-0.training.galaxyproject.eu] => {
->    >     "changed": false,
->    >     "msg": "All assertions passed"
->    > }
->    >
->    > TASK [galaxyproject.galaxy : Set privilege separation default variables] ***********************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.galaxy : Include layout vars] **********************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.galaxy : Set any unset variables from layout defaults] *********************
->    > ok: [gat-0.training.galaxyproject.eu] => (item=galaxy_venv_dir)
->    > ok: [gat-0.training.galaxyproject.eu] => (item=galaxy_server_dir)
->    > ok: [gat-0.training.galaxyproject.eu] => (item=galaxy_config_dir)
->    > ok: [gat-0.training.galaxyproject.eu] => (item=galaxy_mutable_data_dir)
->    > ok: [gat-0.training.galaxyproject.eu] => (item=galaxy_mutable_config_dir)
->    > ok: [gat-0.training.galaxyproject.eu] => (item=galaxy_shed_tools_dir)
->    > ok: [gat-0.training.galaxyproject.eu] => (item=galaxy_cache_dir)
->    > ok: [gat-0.training.galaxyproject.eu] => (item=galaxy_local_tools_dir)
+>    > TASK [galaxyproject.galaxy : Set any unset variables from layout defaults] *****
+>    > ok: [gat-0.eu.galaxy.training] => (item=galaxy_venv_dir)
+>    > ok: [gat-0.eu.galaxy.training] => (item=galaxy_server_dir)
+>    > ok: [gat-0.eu.galaxy.training] => (item=galaxy_config_dir)
+>    > ok: [gat-0.eu.galaxy.training] => (item=galaxy_mutable_data_dir)
+>    > ok: [gat-0.eu.galaxy.training] => (item=galaxy_mutable_config_dir)
+>    > ok: [gat-0.eu.galaxy.training] => (item=galaxy_shed_tools_dir)
+>    > ok: [gat-0.eu.galaxy.training] => (item=galaxy_cache_dir)
+>    > ok: [gat-0.eu.galaxy.training] => (item=galaxy_local_tools_dir)
+>    > ok: [gat-0.eu.galaxy.training] => (item=galaxy_tool_data_path)
 >    >
 >    > TASK [galaxyproject.galaxy : Check that any explicitly set Galaxy config options match the values of explicitly set variables] ***
->    > skipping: [gat-0.training.galaxyproject.eu] => (item=tool_dependency_dir)
->    > skipping: [gat-0.training.galaxyproject.eu] => (item=file_path)
->    > skipping: [gat-0.training.galaxyproject.eu] => (item=job_working_directory)
->    > skipping: [gat-0.training.galaxyproject.eu] => (item=shed_tool_config_file)
+>    > skipping: [gat-0.eu.galaxy.training] => (item=tool_dependency_dir)
+>    > skipping: [gat-0.eu.galaxy.training] => (item=file_path)
+>    > skipping: [gat-0.eu.galaxy.training] => (item=job_working_directory)
+>    > skipping: [gat-0.eu.galaxy.training] => (item=shed_tool_config_file)
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
 >    > TASK [galaxyproject.galaxy : Set any unset variables corresponding to Galaxy config options from galaxy_config or layout defaults] ***
->    > ok: [gat-0.training.galaxyproject.eu] => (item=tool_dependency_dir)
->    > ok: [gat-0.training.galaxyproject.eu] => (item=file_path)
->    > ok: [gat-0.training.galaxyproject.eu] => (item=job_working_directory)
+>    > ok: [gat-0.eu.galaxy.training] => (item=tool_dependency_dir)
+>    > ok: [gat-0.eu.galaxy.training] => (item=file_path)
+>    > ok: [gat-0.eu.galaxy.training] => (item=job_working_directory)
 >    >
->    > TASK [galaxyproject.galaxy : Include user creation tasks] **************************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/user.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Include user creation tasks] **********************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/user.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.galaxy : Create Galaxy group] **********************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Create Galaxy group] ******************************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Create Galaxy user] ***********************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Create Galaxy user] *******************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Create Galaxy privilege separation user] **************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Create Galaxy privilege separation user] **********
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Include path management tasks] ************************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/paths.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Get group IDs for Galaxy users] *******************
+>    > ok: [gat-0.eu.galaxy.training] => (item=galaxy)
+>    > ok: [gat-0.eu.galaxy.training] => (item=root)
 >    >
->    > TASK [galaxyproject.galaxy : Get group IDs for Galaxy users] ***********************************
->    > ok: [gat-0.training.galaxyproject.eu] => (item=galaxy)
->    > ok: [gat-0.training.galaxyproject.eu] => (item=root)
+>    > TASK [galaxyproject.galaxy : Get group names for Galaxy users] *****************
+>    > ok: [gat-0.eu.galaxy.training] => (item=galaxy)
+>    > ok: [gat-0.eu.galaxy.training] => (item=root)
 >    >
->    > TASK [galaxyproject.galaxy : Get group names for Galaxy users] *********************************
->    > ok: [gat-0.training.galaxyproject.eu] => (item=galaxy)
->    > ok: [gat-0.training.galaxyproject.eu] => (item=root)
+>    > TASK [galaxyproject.galaxy : Set Galaxy user facts] ****************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Set Galaxy user facts] ********************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Determine whether to restrict to group permissions] ***
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Determine whether to restrict to group permissions] ***************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include path management tasks] ********************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/paths.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.galaxy : Create galaxy_root] ***********************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Create galaxy_root] *******************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Create additional privilege separated directories] ****************
->    > changed: [gat-0.training.galaxyproject.eu] => (item=/srv/galaxy/venv)
->    > changed: [gat-0.training.galaxyproject.eu] => (item=/srv/galaxy/server)
->    > changed: [gat-0.training.galaxyproject.eu] => (item=/srv/galaxy/config)
->    > changed: [gat-0.training.galaxyproject.eu] => (item=/srv/galaxy/local_tools)
+>    > TASK [galaxyproject.galaxy : Create additional privilege separated directories] ***
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/venv)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/server)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/config)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/local_tools)
 >    >
->    > TASK [galaxyproject.galaxy : Create additional directories] ************************************
->    > changed: [gat-0.training.galaxyproject.eu] => (item=/srv/galaxy/var)
->    > changed: [gat-0.training.galaxyproject.eu] => (item=/srv/galaxy/var/config)
->    > changed: [gat-0.training.galaxyproject.eu] => (item=/srv/galaxy/var/cache)
->    > changed: [gat-0.training.galaxyproject.eu] => (item=/srv/galaxy/var/shed_tools)
->    > changed: [gat-0.training.galaxyproject.eu] => (item=/srv/galaxy/var/dependencies)
->    > changed: [gat-0.training.galaxyproject.eu] => (item=/data)
->    > changed: [gat-0.training.galaxyproject.eu] => (item=/srv/galaxy/jobs)
+>    > TASK [galaxyproject.galaxy : Create additional directories] ********************
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/var)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/var/config)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/var/cache)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/var/shed_tools)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/var/dependencies)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/data)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/jobs)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/var/tool_data)
+>    > changed: [gat-0.eu.galaxy.training] => (item=/srv/galaxy/var/log)
 >    >
->    > TASK [galaxyproject.galaxy : Include clone tasks] **********************************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/clone.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Include clone tasks] ******************************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/clone.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.galaxy : Update Galaxy to specified ref] ***********************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Update Galaxy to specified ref] *******************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Report Galaxy version change] *************************************
->    > changed: [gat-0.training.galaxyproject.eu] => {
->    >     "msg": "Galaxy version changed from '' to 'e75a792fc631ff216de6664d399f6bbe371086cd'"
->    > }
+>    > TASK [galaxyproject.galaxy : Report Galaxy version change] *********************
+>    > changed: [gat-0.eu.galaxy.training] =>
+>    >   msg: Galaxy version changed from '' to 'b338e10899e48a91eab0efca071a206620b13d9d'
 >    >
->    > TASK [galaxyproject.galaxy : Create Galaxy virtualenv] *****************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Create Galaxy virtualenv] *************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Ensure pip is the latest release] *********************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Ensure pip is the desired release] ****************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Remove orphaned .pyc files and compile bytecode] ******************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Remove orphaned .pyc files and compile bytecode] ***
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Include download tasks] *******************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include download tasks] ***************************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Include static config setup tasks] ********************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/static_setup.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Include manage existing galaxy tasks] *************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Ensure Galaxy version is set] *************************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/_inc_galaxy_version.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Include static config setup tasks] ****************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/static_setup.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.galaxy : Collect Galaxy version file] **************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Ensure Galaxy version is set] *********************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/_inc_galaxy_version.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.galaxy : Determine Galaxy version] *****************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Collect Galaxy version file] **********************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Install additional Galaxy config files (static)] ******************
+>    > TASK [galaxyproject.galaxy : Determine Galaxy version] *************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Install additional Galaxy config files (template)] ****************
+>    > TASK [galaxyproject.galaxy : Install additional Galaxy config files (static)] ***
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Install local tools] **********************************************
+>    > TASK [galaxyproject.galaxy : Install additional Galaxy config files (template)] ***
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Install local_tool_conf.xml] **************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Install local tools] ******************************
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > TASK [galaxyproject.galaxy : Install local_tool_conf.xml] **********************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
 >    > TASK [galaxyproject.galaxy : Append local_tool_conf.xml to tool_config_file Galaxy config option] ***
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
 >    > TASK [galaxyproject.galaxy : Append shed_tool_conf.xml to tool_config_file Galaxy config option] ***
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Ensure dynamic job rules paths exists] ****************************
+>    > TASK [galaxyproject.galaxy : Ensure dynamic job rules paths exists] ************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Install dynamic job rules] ****************************************
+>    > TASK [galaxyproject.galaxy : Install dynamic job rules (static)] ***************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Ensure dynamic rule __init__.py's exist] **************************
+>    > TASK [galaxyproject.galaxy : Install dynamic job rules (template)] *************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Create Galaxy configuration file] *********************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Ensure dynamic rule __init__.py's exist] **********
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Include dependency setup tasks] ***********************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/dependencies.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Create Galaxy job metrics configuration file] *****
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Create Galaxy virtualenv] *****************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Create Galaxy dependency resolvers configuration file] ***
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Ensure pip is the latest release] *********************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Create Galaxy container resolvers configuration file] ***
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Install Galaxy base dependencies] *********************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Create Galaxy configuration file] *****************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Collect Galaxy conditional dependency requirement strings] ********
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include dependency setup tasks] *******************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/dependencies.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.galaxy : Install Galaxy conditional dependencies] **************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Create Galaxy virtualenv] *************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Include mutable config setup tasks] *******************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/mutable_setup.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Ensure pip is the desired release] ****************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Ensure Galaxy version is set] *************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Install Galaxy base dependencies] *****************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Instantiate mutable configuration files] **************************
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'src': 'shed_data_manager_conf.xml', 'dest': '/srv/galaxy/var/config/shed_data_manager_conf.xml'})
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'src': 'shed_tool_data_table_conf.xml', 'dest': '/srv/galaxy/var/config/shed_tool_data_table_conf.xml'})
+>    > TASK [galaxyproject.galaxy : Collect Galaxy conditional dependency requirement strings] ***
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Instantiate mutable configuration templates] **********************
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'src': 'shed_tool_conf.xml.j2', 'dest': '/srv/galaxy/var/config/migrated_tools_conf.xml'})
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'src': 'shed_tool_conf.xml.j2', 'dest': '/srv/galaxy/var/config/shed_tool_conf.xml'})
+>    > TASK [galaxyproject.galaxy : Install Galaxy conditional dependencies] **********
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Include database management tasks] ********************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/database.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Install additional packages into galaxy's virtual environment] ***
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Get current Galaxy DB version] ************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include mutable config setup tasks] ***************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/mutable_setup.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.galaxy : Get maximum Galaxy DB version] ************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Ensure Galaxy version is set] *********************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Report current and max Galaxy database] ***************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Instantiate mutable configuration files] **********
+>    > changed: [gat-0.eu.galaxy.training] => (item={'src': 'shed_data_manager_conf.xml', 'dest': '/srv/galaxy/var/config/shed_data_manager_conf.xml'})
+>    > changed: [gat-0.eu.galaxy.training] => (item={'src': 'shed_tool_data_table_conf.xml', 'dest': '/srv/galaxy/var/config/shed_tool_data_table_conf.xml'})
 >    >
->    > TASK [galaxyproject.galaxy : Upgrade Galaxy DB] ************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Instantiate mutable configuration templates] ******
+>    > changed: [gat-0.eu.galaxy.training] => (item={'src': 'shed_tool_conf.xml.j2', 'dest': '/srv/galaxy/var/config/migrated_tools_conf.xml'})
+>    > changed: [gat-0.eu.galaxy.training] => (item={'src': 'shed_tool_conf.xml.j2', 'dest': '/srv/galaxy/var/config/shed_tool_conf.xml'})
 >    >
->    > TASK [galaxyproject.galaxy : Include client build tasks] ***************************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/client.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Include database management tasks] ****************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/database.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.galaxy : Ensure client_build_hash.txt exists] ******************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Get current Galaxy DB version] ********************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Get current client commit id] *************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Get maximum Galaxy DB version] ********************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Install Galaxy base dependencies] *********************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Report current and max Galaxy database] ***********
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Collect Galaxy conditional dependency requirement strings] ********
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Upgrade Galaxy DB] ********************************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Install Galaxy conditional dependencies] **************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include client build tasks] ***********************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/client.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.galaxy : Include mutable config setup tasks] *******************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/mutable_setup.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Ensure client_build_hash.txt exists] **************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Ensure Galaxy version is set] *************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Get current client commit id] *********************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Instantiate mutable configuration files] **************************
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'src': 'shed_data_manager_conf.xml', 'dest': '/srv/galaxy/var/config/shed_data_manager_conf.xml'})
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'src': 'shed_tool_data_table_conf.xml', 'dest': '/srv/galaxy/var/config/shed_tool_data_table_conf.xml'})
+>    > TASK [galaxyproject.galaxy : Check if Galaxy was checked out from git] *********
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Instantiate mutable configuration templates] **********************
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'src': 'shed_tool_conf.xml.j2', 'dest': '/srv/galaxy/var/config/migrated_tools_conf.xml'})
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'src': 'shed_tool_conf.xml.j2', 'dest': '/srv/galaxy/var/config/shed_tool_conf.xml'})
+>    > TASK [galaxyproject.galaxy : Get current Galaxy commit id] *********************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Include database management tasks] ********************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/database.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Set client build version fact] ********************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Get current Galaxy DB version] ************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Set client build version fact] ********************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Get maximum Galaxy DB version] ************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Report client version mismatch] *******************
+>    > changed: [gat-0.eu.galaxy.training] =>
+>    >   msg: 'Galaxy client is out of date: new-unbuilt != b338e10899e48a91eab0efca071a206620b13d9d'
 >    >
->    > TASK [galaxyproject.galaxy : Report current and max Galaxy database] ***************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Ensure galaxy_node_version is set] ****************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/_inc_node_version.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.galaxy : Upgrade Galaxy DB] ************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Collect Galaxy Node.js version file] **************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Include client build tasks] ***************************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/client.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Set Galaxy Node.js version fact] ******************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Ensure client_build_hash.txt exists] ******************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Report Node.js version file version] **************
+>    > ok: [gat-0.eu.galaxy.training] =>
+>    >   galaxy_node_version: 18.12.1
 >    >
->    > TASK [galaxyproject.galaxy : Get current client commit id] *************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Override Galaxy Node.js version] ******************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Set client build version fact] ************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Check whether nodeenv is available] ***************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Set client build version fact] ************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Create Galaxy virtualenv] *************************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Report client version mismatch] ***********************************
->    > changed: [gat-0.training.galaxyproject.eu] => {
->    >     "msg": "Galaxy client is out of date: new-unbuilt != e75a792fc631ff216de6664d399f6bbe371086cd"
+>    > TASK [galaxyproject.galaxy : Ensure pip is the desired release] ****************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > }
+>    > TASK [galaxyproject.galaxy : Install nodeenv if it doesn't exist] **************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Ensure galaxy_node_version is set] ********************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/_inc_node_version.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Report preferred Node.js version] *****************
+>    > ok: [gat-0.eu.galaxy.training] =>
+>    >   galaxy_node_version: 18.12.1
 >    >
->    > TASK [galaxyproject.galaxy : Collect Galaxy Node.js version file] ******************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Check if node is installed] ***********************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Set Galaxy Node.js version fact] **********************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Collect installed node version] *******************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Report preferred Node.js version] *********************************
->    > ok: [gat-0.training.galaxyproject.eu] => {
->    >     "galaxy_node_version": "10.15.3"
+>    > TASK [galaxyproject.galaxy : Remove node_modules directory when upgrading node] ***
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > }
+>    > TASK [galaxyproject.galaxy : Install or upgrade node] **************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Install node] *****************************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Install yarn] *************************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Install yarn] *****************************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include client build process] *********************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/_inc_client_build_make.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [galaxyproject.galaxy : Include client build process] *************************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/_inc_client_build_make.yml for gat-0.training.galaxyproject.eu
+>    > TASK [galaxyproject.galaxy : Build client] *************************************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Build client] ****************************************************************************************************************************************************************************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Fetch client version] *****************************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Fetch client version] ********************************************************************************************************************************************************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Set client build version fact] ********************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Set client build version fact] ***********************************************************************************************************************************************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Ensure that client update succeeded] **************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Ensure that client update succeeded] *****************************************************************************************************************************************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include error document setup tasks] ***************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [galaxyproject.galaxy : Include error document setup tasks] ******************************************************************************************************************************************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include Gravity setup tasks] **********************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.galaxy/tasks/gravity.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [uchida.miniconda : miniconda installer is downloaded] ***********************************************************************************************************************************************************************************
->    > [WARNING]: Module remote_tmp /home/galaxy/.ansible/tmp did not exist and was created with a mode of 0700, this may cause issues when running as another user. To avoid this, create the remote_tmp dir with the correct permissions manually
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Register Galaxy config with Gravity (Gravity < 1)] ***
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [uchida.miniconda : directory /srv/galaxy/var/dependencies exists] ***********************************************************************************************************************************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Deploy galaxyctl wrapper script] ******************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [uchida.miniconda : tar is installed] ****************************************************************************************************************************************************************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include systemd unit setup tasks (Galaxy)] ********
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [uchida.miniconda : bzip2 is installed] **************************************************************************************************************************************************************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include systemd unit setup tasks (Reports)] *******
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [uchida.miniconda : miniconda is installed] **********************************************************************************************************************************************************************************************
->    > changed: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.galaxy : Include cleanup scheduling tasks] *****************
+>    > skipping: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [uchida.miniconda : miniconda is up-to-date] *********************************************************************************************************************************************************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.miniconda : Check for miniconda existence] *****************
+>    > ok: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [uchida.miniconda : conda environment file /tmp/{{ miniconda_env.name }}-environment.yml is created] *************************************************************************************************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.miniconda : Include install tasks] *************************
+>    > included: /home/ubuntu/galaxy/roles/galaxyproject.miniconda/tasks/install.yml for gat-0.eu.galaxy.training
 >    >
->    > TASK [uchida.miniconda : conda environment {{ miniconda_env.name }} is created] ***************************************************************************************************************************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.miniconda : Create miniconda installer tempfile] ***********
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > TASK [uchida.miniconda : conda environment {{ miniconda_env.name }} is up-to-date] ************************************************************************************************************************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.miniconda : Collect miniconda installer] *******************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > RUNNING HANDLER [galaxyproject.galaxy : default restart galaxy handler] ***********************************************************************************************************************************************************************
->    > ok: [gat-0.training.galaxyproject.eu] => {
->    >     "msg": "RESTARTER NOT IMPLEMENTED - Please restart Galaxy manually. You can define your own handler and enable it with `galaxy_restart_handler_name`"
->    > }
+>    > TASK [galaxyproject.miniconda : Run miniconda installer] ***********************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > RUNNING HANDLER [galaxyproject.galaxy : email administrator with commit id] *******************************************************************************************************************************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
+>    > TASK [galaxyproject.miniconda : Remove minicoda installer] *********************
+>    > changed: [gat-0.eu.galaxy.training]
 >    >
->    > PLAY RECAP ************************************************************************************************************************************************************************************************************************************
->    > gat-0.training.galaxyproject.eu : ok=79   changed=20   unreachable=0    failed=0    skipped=38   rescued=0    ignored=0
+>    > TASK [galaxyproject.miniconda : Collect miniconda version] *********************
+>    > ok: [gat-0.eu.galaxy.training]
+>    >
+>    > TASK [galaxyproject.miniconda : Update miniconda version (exact)] **************
+>    > changed: [gat-0.eu.galaxy.training]
+>    >
+>    > TASK [galaxyproject.miniconda : Update miniconda version (latest)] *************
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > TASK [galaxyproject.miniconda : Install packages to conda base environment] ****
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > TASK [galaxyproject.miniconda : Create conda envs] *****************************
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > TASK [galaxyproject.miniconda : Update conda envs] *****************************
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > TASK [galaxyproject.miniconda : Create Galaxy conda env] ***********************
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > RUNNING HANDLER [galaxyproject.postgresql : Reload PostgreSQL] *****************
+>    > changed: [gat-0.eu.galaxy.training]
+>    >
+>    > RUNNING HANDLER [galaxyproject.galaxy : galaxy mule restart] *******************
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > RUNNING HANDLER [galaxyproject.galaxy : galaxy gravity restart] ****************
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > RUNNING HANDLER [galaxyproject.galaxy : galaxyctl update] **********************
+>    > skipping: [gat-0.eu.galaxy.training]
+>    >
+>    > RUNNING HANDLER [galaxyproject.galaxy : galaxyctl update] **********************
+>    > changed: [gat-0.eu.galaxy.training]
+>    >
+>    > RUNNING HANDLER [galaxyproject.galaxy : galaxy gravity restart] ****************
+>    > changed: [gat-0.eu.galaxy.training]
+>    >
+>    > PLAY RECAP *********************************************************************
+>    > gat-0.eu.galaxy.training : ok=101  changed=28   unreachable=0    failed=0    skipped=53   rescued=0    ignored=0
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -1603,13 +1653,14 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > ```ini
 >    > > /srv/galaxy/
 >    > > ├── config
+>    > > ├── datasets
 >    > > ├── jobs
 >    > > ├── local_tools
 >    > > ├── server
 >    > > ├── var
 >    > > └── venv
 >    > >
->    > > 6 directories, 0 files
+>    > > 7 directories, 0 files
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
@@ -1627,12 +1678,13 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > ##
 >    > ## This file is managed by Ansible.  ALL CHANGES WILL BE OVERWRITTEN.
 >    > ##
+>    >
 >    > gravity:
->    >     app_server: gunicorn
 >    >     celery:
 >    >         concurrency: 2
 >    >         loglevel: DEBUG
 >    >     galaxy_root: /srv/galaxy/server
+>    >     galaxy_user: galaxy
 >    >     gunicorn:
 >    >         bind: unix:/srv/galaxy/var/config/gunicorn.sock
 >    >         extra_args: --forwarded-allow-ips="*"
@@ -1641,173 +1693,111 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >     handlers:
 >    >         handler:
 >    >             pools:
->    >             - job-handler
->    >             - workflow-scheduler
->    >             processes: 3
->    >
->    > uwsgi:
->    >     buffer-size: 16384
->    >     die-on-term: true
->    >     enable-threads: true
->    >     farm: job-handlers:1,2
->    >     hook-master-start: unix_signal:2 gracefully_kill_them_all
->    >     hook-master-start: unix_signal:15 gracefully_kill_them_all
->    >     socket: 127.0.0.1:5000
->    >     master: true
->    >     module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
->    >     mule: lib/galaxy/main.py
->    >     mule: lib/galaxy/main.py
->    >     offload-threads: 2
->    >     processes: 1
->    >     py-call-osafterfork: true
->    >     pythonpath: /srv/galaxy/server/lib
->    >     static-map: /static=/srv/galaxy/server/static
->    >     static-map: /favicon.ico=/srv/galaxy/server/static/favicon.ico
->    >     static-safe: client/galaxy/images
->    >     threads: 4
->    >     thunder-lock: true
+>    >             - job-handlers
+>    >             - workflow-schedulers
+>    >             processes: 2
+>    >     process_manager: systemd
 >    >     virtualenv: /srv/galaxy/venv
+>    >
 >    >
 >    > galaxy:
 >    >     admin_users: admin@example.org
->    >     brand: 🧬🔬🚀
 >    >     builds_file_path: /srv/galaxy/server/tool-data/shared/ucsc/builds.txt.sample
->    >     citation_cache_data_dir: /srv/galaxy/var/cache/citations/data
->    >     citation_cache_lock_dir: /srv/galaxy/var/cache/citations/locks
+>    >     container_resolvers_config_file: ''
+>    >     data_dir: /srv/galaxy/var
 >    >     data_manager_config_file: /srv/galaxy/server/config/data_manager_conf.xml.sample
 >    >     database_connection: postgresql:///galaxy?host=/var/run/postgresql
 >    >     datatypes_config_file: /srv/galaxy/server/config/datatypes_conf.xml.sample
+>    >     dependency_resolvers_config_file: /srv/galaxy/config/dependency_resolvers_conf.xml
 >    >     external_service_type_config_file: /srv/galaxy/server/config/external_service_types_conf.xml.sample
 >    >     file_path: /data
+>    >     id_secret: BxI6zlQVhoHLPVf3gqQ
 >    >     integrated_tool_panel_config: /srv/galaxy/var/config/integrated_tool_panel.xml
+>    >     job_metrics_config_file: /srv/galaxy/config/job_metrics_conf.xml
 >    >     job_working_directory: /srv/galaxy/jobs
->    >     mulled_resolution_cache_data_dir: /srv/galaxy/var/mulled/data
->    >     mulled_resolution_cache_lock_dir: /srv/galaxy/var/mulled/lock
->    >     new_file_path: /srv/galaxy/var/tmp
->    >     object_store_cache_path: /srv/galaxy/var/cache/object_store_cache
+>    >     migrated_tools_config: /srv/galaxy/var/config/migrated_tools_conf.xml
+>    >     object_store_store_by: uuid
 >    >     openid_config_file: /srv/galaxy/server/config/openid_conf.xml.sample
->    >     openid_consumer_cache_path: /srv/galaxy/var/cache/openid_consumer_cache
 >    >     shed_data_manager_config_file: /srv/galaxy/var/config/shed_data_manager_conf.xml
 >    >     shed_tool_config_file: /srv/galaxy/var/config/shed_tool_conf.xml
 >    >     shed_tool_data_table_config: /srv/galaxy/var/config/shed_tool_data_table_conf.xml
->    >     template_cache_path: /srv/galaxy/var/cache/template_cache
->    >     tool_cache_data_dir: /srv/galaxy/var/cache/tool_cache
 >    >     tool_config_file: /srv/galaxy/server/config/tool_conf.xml.sample
 >    >     tool_data_path: /srv/galaxy/var/tool-data
 >    >     tool_data_table_config_path: /srv/galaxy/server/config/tool_data_table_conf.xml.sample
 >    >     tool_dependency_dir: /srv/galaxy/var/dependencies
->    >     tool_search_index_dir: /srv/galaxy/var/cache/tool_search_index
 >    >     tool_sheds_config_file: /srv/galaxy/server/config/tool_sheds_conf.xml.sample
 >    >     ucsc_build_sites: /srv/galaxy/server/tool-data/shared/ucsc/ucsc_build_sites.txt.sample
 >    >     visualization_plugins_directory: config/plugins/visualizations
->    >     whoosh_index_dir: /srv/galaxy/var/cache/whoosh_cache
 >    > ```
 >    {: .code-out.code-max-300}
 >
 {: .hands_on}
 
-Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up systemd which will manage the Galaxy processes! Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, [systemd](https://freedesktop.org/wiki/Software/systemd/).
+Galaxy is now configured with an admin user, a database, and a place to store data. We've immediately configured standalone Galaxy servers to handle jobs and workflow scheduling. Additionally, Galaxy's process manager, Gravity, has written out [systemd](https://freedesktop.org/wiki/Software/systemd/) configuration files called *service units* that are used to define how to start and stop Galaxy's various services. Your Galaxy server should now be running!
 
-> <hands-on-title>systemd</hands-on-title>
+> <hands-on-title>Status Check</hands-on-title>
 >
-> 1. Configure systemd in `group_vars/galaxyservers.yml` file:
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -57,3 +57,6 @@ galaxy_config:
->             pools:
->               - job-handler
->               - workflow-scheduler
->    +
->    +# systemd
->    +galaxy_manage_systemd: true
->    {% endraw %}
->    ```
->    {: data-commit="Setup systemd variables"}
->
->    > <tip-title>Using Galaxy 21.01?</tip-title>
->    > For versions of Galaxy older than 22.05, using `gravity` was not the default. There you'll need to set these additional variables:
->    > {% raw %}
->    > ```diff
->    > +galaxy_manage_gravity: "{{ false if __galaxy_major_version is version('22.01', '<') else true }}"
->    > +galaxy_systemd_mode: "{{ 'mule' if __galaxy_major_version is version('22.01', '<') else 'gravity' }}"
->    > ```
->    > {% endraw %}
->    {: .tip}
->
-> 2. Run the playbook
+> 1. Log in and check the status with `sudo galaxyctl status`
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
->    > ansible-playbook galaxy.yml
->    > ```
->    > {: data-cmd="true"}
->    {: .code-in}
->
-> 3. Log in and check the status with `sudo systemctl status galaxy`
->
->    > <code-in-title>Bash</code-in-title>
->    > ```bash
->    > sudo systemctl status galaxy
+>    > sudo galaxyctl status
 >    > ```
 >    {: .code-in}
 >
 >    > <code-out-title>Bash</code-out-title>
 >    >
->    > ```ini
->    > ● galaxy.service - Galaxy
->    >     Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabled)
->    >     Active: active (running) since Mon 2022-06-27 03:46:49 UTC; 11h ago
->    >   Main PID: 11778 (galaxyctl)
->    >      Tasks: 73 (limit: 9495)
->    >     Memory: 1.7G (limit: 16.0G)
->    >        CPU: 1h 11min 33.684s
->    >     CGroup: /system.slice/galaxy.service
->    >             ├─11778 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/galaxyctl start --foreground --quiet
->    >             ├─11791 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/supervisord -c /srv/galaxy/var/gravity/supervisor/supervisord.conf --nodaemon
->    >             ├─11801 /bin/tail -f /srv/galaxy/var/gravity/supervisor/supervisord.log
->    >             ├─11802 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/celery --app galaxy.celery worker --concurrency 2 --loglevel DEBUG --pool threads --queues celery,galaxy.internal,galaxy.external
->    >             ├─11827 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/celery --app galaxy.celery beat --loglevel DEBUG --schedule /srv/galaxy/var/gravity/celery-beat-schedule
->    >             ├─11840 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/gunicorn "galaxy.webapps.galaxy.fast_factory:factory()" --timeout 300 --pythonpath lib -k galaxy.webapps.galaxy.workers.Worker -b unix:/srv/>
->    >             ├─11891 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/gunicorn "galaxy.webapps.galaxy.fast_factory:factory()" --timeout 300 --pythonpath lib -k galaxy.webapps.galaxy.workers.Worker -b unix:/srv/>
->    >             ├─11898 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/gunicorn "galaxy.webapps.galaxy.fast_factory:factory()" --timeout 300 --pythonpath lib -k galaxy.webapps.galaxy.workers.Worker -b unix:/srv/>
->    >             ├─11929 python ./lib/galaxy/main.py -c /srv/galaxy/config/galaxy.yml --server-name=handler_0 --attach-to-pool=job-handler --attach-to-pool=workflow-scheduler --pid-file=/srv/galaxy/var/gravity/supe>
->    >             ├─11949 python ./lib/galaxy/main.py -c /srv/galaxy/config/galaxy.yml --server-name=handler_1 --attach-to-pool=job-handler --attach-to-pool=workflow-scheduler --pid-file=/srv/galaxy/var/gravity/supe>
->    >             └─11968 python ./lib/galaxy/main.py -c /srv/galaxy/config/galaxy.yml --server-name=handler_2 --attach-to-pool=job-handler --attach-to-pool=workflow-scheduler --pid-file=/srv/galaxy/var/gravity/supe>
+>    > ```
+>    >   UNIT                       LOAD   ACTIVE SUB     DESCRIPTION
+>    >   galaxy-celery-beat.service loaded active running Galaxy celery-beat
+>    >   galaxy-celery.service      loaded active running Galaxy celery
+>    >   galaxy-gunicorn.service    loaded active running Galaxy gunicorn
+>    >   galaxy-handler@0.service   loaded active running Galaxy handler (process 0)
+>    >   galaxy-handler@1.service   loaded active running Galaxy handler (process 1)
+>    >   galaxy.target              loaded active active  Galaxy
 >    >
->    > Jun 27 03:47:58 training-test galaxyctl[11791]: 2022-06-27 03:47:58,960 INFO success: handler_1 entered RUNNING state, process has stayed up for > than 20 seconds (startsecs)
->    > Jun 27  03:47:58 training-test galaxyctl[11801]: 2022-06-27 03:47:58,960 INFO success: handler_1 entered RUNNING state, process has stayed up for > than 20 seconds (startsecs)
->    > Jun 27 03:47:58 training-test galaxyctl[11791]: 2022-06-27 03:47:58,975 INFO waiting for handler_2 to stop
->    > Jun 27 03:47:58 training-test galaxyctl[11801]: 2022-06-27 03:47:58,975 INFO waiting for handler_2 to stop
->    > Jun 27 03:48:00 training-test galaxyctl[11791]: 2022-06-27 03:48:00,264 INFO stopped: handler_2 (exit status 0)
+>    > LOAD   = Reflects whether the unit definition was properly loaded.
+>    > ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+>    > SUB    = The low-level unit activation state, values depend on unit type.
+>    > 6 loaded units listed.
+>    > To show all installed unit files use 'systemctl list-unit-files'.
 >    > ```
 >    {: .code-out.code-max-300}
 >
+>    To inspect individual services in detail, use `sudo galaxyctl status <service>` where `<service>` is a service from the Gravity configuration such as `gunicorn` or `handler`. Alternatively, you can invoke `sudo systemctl status <service-unit>` where `<service-unit>` (such as `galaxy-gunicorn.service` and `galaxy-handler@0.service`) can be found in the output above (the `.service` suffix is implied and optional, so you can leave it off for convenience).
+>
 >    > <tip-title>Did this fail?</tip-title>
->    > ```
->    > ● galaxy.service - Galaxy
->    >      Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabl>
->    >      Active: failed (Result: exit-code) since Mon 2021-06-28 17:07:58 CEST; 18min ago
->    >     Process: 521705 ExecStart=/srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/gal>
->    >    Main PID: 521705 (code=exited, status=1/FAILURE)
->    >         CPU: 21ms
->    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Schedu>
->    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: Stopped Galaxy.
->    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Start >
->    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Failed>
->    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: Failed to start Galaxy.
+>    >
+>    > If any of the services show as failed, inspect them using one of the above methods, e.g.:
+>    >
+>    > ```console
+>    > $ sudo galaxyctl status gunicorn
+>    > × galaxy-gunicorn.service - Galaxy gunicorn
+>    >      Loaded: loaded (/etc/systemd/system/galaxy-gunicorn.service; disabled; vendor preset: enabled)
+>    >      Active: failed (Result: exit-code) since Thu 2023-03-16 01:15:15 UTC; 1s ago
+>    >     Process: 20306 ExecStart=/srv/galaxy/venv/bin/galaxyctl --config-file /srv/galaxy/config/galaxy.yml exec _default_ gunicorn (code=exited, status=1/FAILURE)
+>    >    Main PID: 20306 (code=exited, status=1/FAILURE)
+>    >         CPU: 3.381s
+>    >
+>    > Mar 16 01:15:14 gat galaxyctl[20306]:   File "/srv/galaxy/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1900, in _execute_context
+>    > Mar 16 01:15:14 gat galaxyctl[20306]:     self.dialect.do_execute(
+>    > Mar 16 01:15:14 gat galaxyctl[20306]:   File "/srv/galaxy/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+>    > Mar 16 01:15:14 gat galaxyctl[20306]:     cursor.execute(statement, parameters)
+>    > Mar 16 01:15:14 gat galaxyctl[20306]: sqlalchemy.exc.ProgrammingError: (psycopg2.errors.InsufficientPrivilege) permission denied to create database
+>    > Mar 16 01:15:14 gat galaxyctl[20306]: [SQL: CREATE DATABASE bork ENCODING 'utf8' TEMPLATE template1]
+>    > Mar 16 01:15:14 gat galaxyctl[20306]: (Background on this error at: https://sqlalche.me/e/14/f405)
+>    > Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+>    > Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Failed with result 'exit-code'.
+>    > Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Consumed 3.381s CPU time.
 >    > ```
 >    >
->    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect.
+>    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect. You might observe a warning that `Dynamic handlers are configured in Gravity but Galaxy is not configured to assign jobs to handlers dynamically`. We will address this [below](#job-configuration), and you can disregard it for now.
 >    {: .tip}
 >
 > 6. Some things to note:
 >
->    1. Although the playbook will restart Galaxy upon config changes, you will sometimes need to restart it by hand, which can be done with `systemctl restart galaxy`
->    2. You can use `journalctl -fu galaxy` to see the logs of Galaxy
->    3. You may have noticed after setting up Galaxy in the previous section, that Ansible printed the message "RESTARTER NOT IMPLEMENTED - Please restart Galaxy manually. You can define your own handler and enable it with `galaxy_restart_handler_name`." You should no longer see this message on future playbook runs, as enabling systemd has automatically set `galaxy_restart_handler_name` for us - the role now knows how to restart Galaxy!
+>    1. Although the playbook will restart Galaxy upon config changes, you will sometimes need to restart it by hand, which can be done with `sudo galaxyctl restart galaxy`
+>    2. You can use `sudo galaxyctl follow` or `journalctl -fu 'galaxy-*'` to see the logs of Galaxy. You can see the logs of indivudual services using `sudo galaxyctl follow <service>` or `journalctl -fu <service-unit>`.
 >
 {: .hands_on}
 
@@ -1817,7 +1807,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >
 > Let's say you're running a playbook that updates the `galaxy.yml`, which will in turn notify the handler `Restart Galaxy`. If this change is made, and notification triggered, but a failure occurs before Ansible can reach the step where it runs the handlers. The handlers will not run during this Ansible execution.
 >
-> The next time you run the playbook, Ansible will not observe any configuration files changing (because they were changed in the last run.) And so the `Restart Galaxy` handler will not run.
+> The next time you run the playbook, Ansible will not observe any configuration files changing (because they were changed in the last run), and so the handler that restarts Galaxy will not run.
 >
 > If you encounter this situation you just have to be mindful of the fact, and remember to manually run the handler. There is no general solution to this problem unfortunately. This applies mostly to development setups. In production you're probably running that playbook somewhat regularly and do not expect failures as everything is quite stable.
 >
@@ -1834,11 +1824,11 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 With this we have:
 
 - PostgreSQL running
-- Galaxy running (managed by systemd)
+- Galaxy running (managed by Gravity + systemd)
 
-Although Gunicorn can server HTTP for us directly, by moving to NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EKS) (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
+Although Gunicorn can serve HTTP for us directly, a reverse proxy in front of Gunicorn can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
 
-For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.
+For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EKS). It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.
 
 > <hands-on-title>NGINX</hands-on-title>
 >
@@ -1848,10 +1838,10 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -18,3 +18,4 @@
->         - role: uchida.miniconda
+>    @@ -26,3 +26,4 @@
+>         - role: galaxyproject.miniconda
 >           become: true
->           become_user: "{{ galaxy_user.name }}"
+>           become_user: "{{ galaxy_user_name }}"
 >    +    - galaxyproject.nginx
 >    {% endraw %}
 >    ```
@@ -1864,10 +1854,10 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -60,3 +60,55 @@ galaxy_config:
+>    @@ -50,3 +50,55 @@ galaxy_config:
 >     
->     # systemd
->     galaxy_manage_systemd: true
+>     galaxy_extra_dirs:
+>       - /data
 >    +
 >    +# Certbot
 >    +certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -1879,7 +1869,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +certbot_environment: staging
 >    +certbot_well_known_root: /srv/nginx/_well-known_root
 >    +certbot_share_key_users:
->    +  - nginx
+>    +  - www-data
 >    +certbot_post_renewal: |
 >    +    systemctl restart nginx || true
 >    +certbot_domains:
@@ -1919,7 +1909,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +      image/x-icon
 >    +nginx_ssl_role: usegalaxy_eu.certbot
 >    +nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
->    +nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+>    +nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure nginx, certbot"}
@@ -1988,10 +1978,10 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >    client_max_body_size: 1g
 >    > -nginx_ssl_role: usegalaxy_eu.certbot
 >    > -nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
->    > -nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+>    > -nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >    > ```
 >    > {% endraw %}
->    >
+>    > Please also see the changes in [the other SSL tip box](#details-running-this-tutorial-i-without-i-ssl-1)
 >    {: .details}
 >
 > 4. Create the directory `templates/nginx` (staying in galaxy directory, after which groups_vars, roles will be siblings of templates), where we will place our configuration files which should be templated out to the server.
@@ -2004,18 +1994,18 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +++ b/templates/nginx/redirect-ssl.j2
 >    @@ -0,0 +1,14 @@
 >    +server {
->    +    listen 80 default_server;
->    +    listen [::]:80 default_server;
+>    +	listen 80 default_server;
+>    +	listen [::]:80 default_server;
 >    +
->    +    server_name "{{ inventory_hostname }}";
+>    +	server_name "{{ inventory_hostname }}";
 >    +
->    +    location /.well-known/ {
->    +        root {{ certbot_well_known_root }};
->    +    }
+>    +	location /.well-known/ {
+>    +		root {{ certbot_well_known_root }};
+>    +	}
 >    +
->    +    location / {
->    +        return 302 https://$host$request_uri;
->    +    }
+>    +	location / {
+>    +		return 302 https://$host$request_uri;
+>    +	}
 >    +}
 >    {% endraw %}
 >    ```
@@ -2031,65 +2021,65 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -0,0 +1,61 @@
 >    +upstream galaxy {
->    +    server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock;
+>    +	server {{ galaxy_config.gravity.gunicorn.bind }};
 >    +
->    +    # Or if you serve galaxy at a path like http(s)://fqdn/galaxy
->    +    # Remember to set galaxy_url_prefix in the galaxy.yml file.
->    +    # server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock:/galaxy;
+>    +	# Or if you serve galaxy at a path like http(s)://fqdn/galaxy
+>    +	# Remember to set galaxy_url_prefix in the galaxy.yml file.
+>    +	# server {{ galaxy_config.gravity.gunicorn.bind }}:/galaxy;
 >    +}
 >    +
 >    +server {
->    +    # Listen on port 443
->    +    listen        *:443 ssl default_server;
->    +    # The virtualhost is our domain name
->    +    server_name   "{{ inventory_hostname }}";
+>    +	# Listen on port 443
+>    +	listen        *:443 ssl default_server;
+>    +	# The virtualhost is our domain name
+>    +	server_name   "{{ inventory_hostname }}";
 >    +
->    +    # Our log files will go here.
->    +    access_log  syslog:server=unix:/dev/log;
->    +    error_log   syslog:server=unix:/dev/log;
+>    +	# Our log files will go to journalctl
+>    +	access_log  syslog:server=unix:/dev/log;
+>    +	error_log   syslog:server=unix:/dev/log;
 >    +
->    +    # The most important location block, by default all requests are sent to gunicorn
->    +    # If you serve galaxy at a path like /galaxy, change that below (and all other locations!)
->    +    location / {
->    +        # This is the backend to send the requests to.
->    +        proxy_pass http://galaxy;
+>    +	# The most important location block, by default all requests are sent to gunicorn
+>    +	# If you serve galaxy at a path like /galaxy, change that below (and all other locations!)
+>    +	location / {
+>    +		# This is the backend to send the requests to.
+>    +		proxy_pass http://galaxy;
 >    +
->    +        proxy_set_header Host $http_host;
->    +        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
->    +        proxy_set_header X-Forwarded-Proto $scheme;
->    +        proxy_set_header Upgrade $http_upgrade;
->    +    }
+>    +		proxy_set_header Host $http_host;
+>    +		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+>    +		proxy_set_header X-Forwarded-Proto $scheme;
+>    +		proxy_set_header Upgrade $http_upgrade;
+>    +	}
 >    +
->    +    # Static files can be more efficiently served by Nginx. Why send the
->    +    # request to Gunicorn which should be spending its time doing more useful
->    +    # things like serving Galaxy!
->    +    location /static {
->    +        alias {{ galaxy_server_dir }}/static;
->    +        expires 24h;
->    +    }
+>    +	# Static files can be more efficiently served by Nginx. Why send the
+>    +	# request to Gunicorn which should be spending its time doing more useful
+>    +	# things like serving Galaxy!
+>    +	location /static {
+>    +		alias {{ galaxy_server_dir }}/static;
+>    +		expires 24h;
+>    +	}
 >    +
->    +    # In Galaxy instances started with run.sh, many config files are
->    +    # automatically copied around. The welcome page is one of them. In
->    +    # production, this step is skipped, so we will manually alias that.
->    +    location /static/welcome.html {
->    +        alias {{ galaxy_server_dir }}/static/welcome.html.sample;
->    +        expires 24h;
->    +    }
+>    +	# In Galaxy instances started with run.sh, many config files are
+>    +	# automatically copied around. The welcome page is one of them. In
+>    +	# production, this step is skipped, so we will manually alias that.
+>    +	location /static/welcome.html {
+>    +		alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+>    +		expires 24h;
+>    +	}
 >    +
->    +    # serve visualization and interactive environment plugin static content
->    +    location ~ ^/plugins/(?<plug_type>[^/]+?)/((?<vis_d>[^/_]*)_?)?(?<vis_name>[^/]*?)/static/(?<static_file>.*?)$ {
->    +        alias {{ galaxy_server_dir }}/config/plugins/$plug_type/;
->    +        try_files $vis_d/${vis_d}_${vis_name}/static/$static_file
->    +                  $vis_d/static/$static_file =404;
->    +    }
+>    +	# serve visualization and interactive environment plugin static content
+>    +	location ~ ^/plugins/(?<plug_type>[^/]+?)/((?<vis_d>[^/_]*)_?)?(?<vis_name>[^/]*?)/static/(?<static_file>.*?)$ {
+>    +		alias {{ galaxy_server_dir }}/config/plugins/$plug_type/;
+>    +		try_files $vis_d/${vis_d}_${vis_name}/static/$static_file
+>    +		          $vis_d/static/$static_file =404;
+>    +	}
 >    +
->    +    location /robots.txt {
->    +        alias {{ galaxy_server_dir }}/static/robots.txt;
->    +    }
+>    +	location /robots.txt {
+>    +		alias {{ galaxy_server_dir }}/static/robots.txt;
+>    +	}
 >    +
->    +    location /favicon.ico {
->    +        alias {{ galaxy_server_dir }}/static/favicon.ico;
->    +    }
+>    +	location /favicon.ico {
+>    +		alias {{ galaxy_server_dir }}/static/favicon.ico;
+>    +	}
 >    +}
 >    {% endraw %}
 >    ```
@@ -2099,6 +2089,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 >    > <details-title>Running this tutorial <i>without</i> SSL</details-title>
 >    >
+>    > Please be sure to also make the changes in [the other SSL box](#details-running-this-tutorial-i-without-i-ssl).
+>    > 
 >    > In your `galaxy.j2` in the above step, you should change the `listen` parameter:
 >    >
 >    > {% raw %}
@@ -2109,10 +2101,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > +listen        *:80 default_server;
 >    > ```
 >    > {% endraw %}
->    >
+>    > 
 >    {: .details}
->
->    {% snippet topics/admin/tutorials/ansible-galaxy/faqs/custom-welcome.md %}
 >
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
@@ -2126,7 +2116,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************
->    > > changed: [gat-0.training.galaxyproject.eu]
+>    > > changed: [gat-0.eu.galaxy.training]
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
@@ -2181,10 +2171,9 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  ----                         | ------------
 >  `galaxyproject.postgresql`   | None
 >  `galaxyproject.postgresql_objects` | None
->  `geerlingguy.pip`            | None
 >  `galaxyproject.galaxy`       | None
->  `uchida.miniconda`           | In our group variables, we define the path to {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %}, so Galaxy needs to have set those variables
->  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
+>  `galaxyproject.miniconda`    | In our group variables, we define the path of `miniconda_prefix` to {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %}, so Galaxy needs to have set those variables
+>  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets
 {: .comment}
 
 ## Log in to Galaxy
@@ -2195,23 +2184,25 @@ In order to be the administrator user, you will need to register an account with
 
 ## Job Configuration
 
-One of the most important configuration files for a large Galaxy server is the `job_conf.yml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, [`job_conf.sample_advanced.yml`](https://github.com/galaxyproject/galaxy/blob/fd8826904be3f3201f7e7a3b6ffbadd27f268896/test/unit/app/jobs/job_conf.sample_advanced.yml).
+One of the most important configuration files for a large Galaxy server is the job configuration. This tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or no job configuration has been specified inline in the `galaxy.yml` file, it will use a simple default configuration where all jobs are run on the Galaxy server and are handled by the web serving process, rather than the job handler(s). Galaxy's job running system is highly configurable, the full range of configuration can be found in the sample job configuration file, [`job_conf.sample.yml`](https://github.com/galaxyproject/galaxy/blob/release_23.0/lib/galaxy/config/sample/job_conf.sample.yml).
 
-The job configuration file allows Galaxy to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:
+The job configuration allows Galaxy to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:
 
 * Local - Galaxy runs jobs on the same computer that Galaxy itself is running on.
 * DRMAA - Galaxy can connect to a cluster and submit jobs via a distributed resource manager such as Slurm, Condor, PBS Torque or Sun Grid Engine.
 * Pulsar - Galaxy can also send jobs to remote compute hosts over the internet using Pulsar.
 
-### The job conf file - basics
+The job configuration can either be defined inline in the Galaxy configuration under `galaxy_config.galaxy.job_config`, or in its own file, the path to which is specified in `galaxy_config.galaxy.job_config_file`. The syntax of the configuration is the same in both cases.
 
-The `job_conf.yml` file has three basic sections:
+### The job configuration - basics
+
+The job configuration has three basic sections:
 
 * **runners** - This section lists the types of job management systems that this Galaxy server is configured to use, and tells Galaxy to load the drivers for each type.
-* **execution** - This section lists the different locations, queues, etc. that Galaxy can send jobs to. Each one has a name and uses a *plugin* to communicate with that location. They can specify things like the number of CPUs, amount of RAM to be allocated, etc. for DRMAA locations. Usually, one of the destinations is set to be the default.
+* **execution** - This section lists the different attributes such as locations, queues, etc. that Galaxy can send jobs to. Each set of attributes together are called an *environment* (formerly *destination*), has a name, and uses a *plugin* to communicate with that location. They can specify things like the number of CPUs, amount of RAM to be allocated, etc. for DRMAA locations. Usually, one of the destinations is set to be the default.
 * **tools** - This section lists the various tools that you would like to send to a non-default *destination*. Each line in this section pairs up a tool in Galaxy with a particular job *destination*. Every time Galaxy gets a job for that particular tool, it is always sent to that *destination*.
 
-The basic `job_conf.yml` file looks like this:
+A basic job configuration looks like this:
 
 {% raw %}
 ```yml
@@ -2220,104 +2211,81 @@ runners:
     load: galaxy.jobs.runners.local:LocalJobRunner
     workers: 4
 execution:
-  default: local_dest
+  default: local_env
   environments:
-    local_dest:
+    local_env:
       runner: local_runner
+      tmp_dir: true
 tools:
 - id: bwa
-  destination: local_dest
+  environment: local_env
 ```
 {% endraw %}
 
-The above `job_conf.yml` file defines a *runner* and an *execution* to allow Galaxy to run user jobs on the local computer (i.e. The computer that Galaxy is running on.)
+The above job configuration defines a *runner* and an *execution* to allow Galaxy to run user jobs on the local computer (i.e. The computer that Galaxy is running on.)
 
-Firstly, the plugins section contains a plugin called "local" which is of type "runner" and then loads the python code module for supporting local jobs. Next the destinations section contains a destination called "local" using the runner "local". As this is the only destination specified, it is also the default. So now everytime a user clicks "Execute" on a tool form, Galaxy will run the corresponding job locally using the python code specified.
+Firstly, the `runners` section contains a plugin called `local_runner` which loads the python code module for supporting local jobs. Next, the `execution` section contains an environment named `local_env` using the runner `local_runner`. It is also set as the default. So now everytime a user clicks "Execute" on a tool form, Galaxy will run the corresponding job locally using the python code specified.
+
+Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` environment. This is more useful once you begin defining additional environments (especially those that run on clusters).
 
 > <tip-title>Want to use something else?</tip-title>
-> There are a lot of other plugins available for Galaxy for using other resources such as docker containers, kubernetes hosts, Pulsar destinations and HPC clusters to name a few. See the Galaxy documentation on [job configuration](https://docs.galaxyproject.org/en/master/admin/jobs.html) for more details on these plugins and their configuration.
+> There are a lot of other plugins available for Galaxy for using other resources such as docker containers, kubernetes clusters, Pulsar servers, and HPC clusters to name a few. See the Galaxy documentation on [job configuration](https://docs.galaxyproject.org/en/master/admin/jobs.html) for more details on these plugins and their configuration.
 {: .tip}
 
 > <hands-on-title>Job Conf</hands-on-title>
 >
-> 1. If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook.
->
->    > <code-in-title>Bash</code-in-title>
->    > ```bash
->    > mkdir -p templates/galaxy/config/
->    > ```
->    > {: data-cmd="true"}
->    {: .code-in}
->
-> 2. Create `templates/galaxy/config/job_conf.yml.j2` with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):
+> 1. Add a new `job_config` section to the `galaxy` section of `galaxy_config` in `group_vars/galaxyservers.yml`. Note: placement and whitespace is important here - `job_config` should be a child of `galaxy_config.galaxy`, at the same level as other options like `id_secret`.
 >
 >    {% raw %}
 >    ```diff
->    --- /dev/null
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -0,0 +1,14 @@
->    +runners:
->    +  local_runner:
->    +    load: galaxy.jobs.runners.local:LocalJobRunner
->    +    workers: 4
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -11,6 +11,24 @@ miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+>     miniconda_version: 23.9
+>     miniconda_channels: ['conda-forge', 'defaults']
+>     
+>    +# Galaxy Job Configuration
+>    +galaxy_job_config:
+>    +  runners:
+>    +    local_runner:
+>    +      load: galaxy.jobs.runners.local:LocalJobRunner
+>    +      workers: 4
+>    +  handling:
+>    +    assign: ['db-skip-locked']
+>    +  execution:
+>    +    default: local_env
+>    +    environments:
+>    +      local_env:
+>    +        runner: local_runner
+>    +        tmp_dir: true
+>    +  tools:
+>    +    - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>    +      environment: local_env
 >    +
->    +execution:
->    +  default: local_dest
->    +  environments:
->    +    local_dest:
->    +      runner: local_runner
->    +
->    +tools:
->    +- class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->    +  environment: local_dest
+>     galaxy_config:
+>       galaxy:
+>         # Main Configuration
+>    @@ -21,6 +39,7 @@ galaxy_config:
+>         job_working_directory: /data/jobs
+>         object_store_store_by: uuid
+>         id_secret: "{{ vault_id_secret }}"
+>    +    job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add job conf"}
 >
->    > <tip-title>workers=4</tip-title>
->    > In the local runner, `workers: 4` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
+>    > <tip-title>workers: 4</tip-title>
+>    > In the local runner, `workers: 4` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to handle Galaxy's internal pre- and post-job tasks. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
 >    {: .tip}
 >
-> 3. Inform the `galaxyproject.galaxy` role of where you would like the `job_conf.yml` to reside, by setting it in your `group_vars/galaxyservers.yml`:
+>    > <tip-title>tmp_dir: true</tip-title>
+>    > In the environment local_env, `tmp_dir: true` means "create a temp directory in the job directory". By default, it is set to `false` and if the job uses a temp directory it will create one in the `/tmp/` partition and galaxy will not clean it at the end of the job. This can be problematic if the admin does not do regular cleanup of the `/tmp/` partition or if the `/tmp/` partition is rather small. That's why we recommand to set this option to `true` so the admin does not need to worry about the `/tmp/` partition for galaxy jobs.
+>    {: .tip}
 >
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -37,6 +37,7 @@ galaxy_config:
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
->         object_store_store_by: uuid
->         id_secret: "{{ vault_id_secret }}"
->    +    job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
->       gravity:
->         galaxy_root: "{{ galaxy_root }}/server"
->         app_server: gunicorn
->    {% endraw %}
->    ```
->    {: data-commit="Load job conf in galaxy config"}
->
->    And then deploy the new config file using the `galaxy_config_templates` var (also from the `galaxyproject.galaxy` role) in your group vars:
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -59,6 +59,10 @@ galaxy_config:
->               - job-handler
->               - workflow-scheduler
->     
->    +galaxy_config_templates:
->    +  - src: templates/galaxy/config/job_conf.yml.j2
->    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
->    +
->     # systemd
->     galaxy_manage_systemd: true
->     
->    {% endraw %}
->    ```
->    {: data-commit="Deploy job conf to config dir"}
->
-> 4. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
+> 2. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
 >    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
@@ -2328,35 +2296,17 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    > > <code-out-title>Output</code-out-title>
 >    > > ```
 >    > > ...
->    > > RUNNING HANDLER [restart galaxy] ****************************************
->    > > changed: [gat-0.training.galaxyproject.eu]
+>    > > RUNNING HANDLER [galaxyproject.galaxy : galaxy gravity restart] ****************
+>    > > changed: [gat-0.eu.galaxy.training]
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
 >
-> 5. Checkout the new job_conf.yml file.
->
->    > <code-in-title>Bash</code-in-title>
->    > ```bash
->    > cat /srv/galaxy/config/job_conf.yml
->    > ```
->    {: .code-in}
->
->    > <code-out-title>Bash</code-out-title>
->    > ```yml
->    > runners:
->    >   local_runner:
->    >     load: galaxy.jobs.runners.local:LocalJobRunner
->    >     workers: 4
->    > execution:
->    >   default: local_dest
->    >   environments:
->    >     local_dest:
->    >       runner: local_runner
->    > ```
->    {: .code-out.code-max-300}
->
 {: .hands_on}
+
+We have installed a fairly simple job configuration that does pretty much the same as the default, with one exception: the `handling` section contains an instruction for Galaxy to use the `db-skip-locked` method for assigning which process will handle Galaxy jobs. This causes Galaxy to use the job handler processes we defined earlier in the tutorial to handle jobs, rather than handling them in the (gunicorn) web server process. More details can be found in the [Scaling and Load Balancing](https://docs.galaxyproject.org/en/master/admin/scaling.html#job-handler-assignment-methods) section of the Galaxy documentation.
+
+Later tutorials will build on this simple job configuration.
 
 ## Productionising Galaxy
 
@@ -2370,12 +2320,11 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -38,6 +38,28 @@ galaxy_config:
+>    @@ -40,6 +40,28 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
->         job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
+>         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    # SQL Performance
->    +    database_engine_option_server_side_cursors: true
 >    +    slow_query_log_threshold: 5
 >    +    enable_per_request_sql_debugging: true
 >    +    # File serving Performance
@@ -2396,9 +2345,10 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    allow_user_impersonation: true
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
+>    +    new_user_dataset_access_role_default_private: true # Make datasets private by default
 >       gravity:
+>         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add production facing vars"}
@@ -2409,7 +2359,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    > - `enable_quotas`: You definitely want to set a default quota for your users!
 >    > - `expose_user_name`: This exposes usernames in the history and dataset sharing forms which makes life easier for your users.
 >    > - `expose_dataset_path`: This shares the entire dataset path and enable the user to have access to the command line that the wrapper launched.
->    > - `cleanup_job`: This prevents a job from being cleaned up if it failed, allowing you to debug and see what went wrong.
+>    > - `cleanup_job`: This prevents a job's files from being cleaned up from disk if it failed, allowing you to debug and see what went wrong.
 >    > - `allow_user_impersonation`: Users submit horrible bug reports (often screenshots of unrelated things), impersonation means you can just see their history and look at what went wrong.
 >    {: .tip}
 >
@@ -2420,19 +2370,19 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -58,4 +58,14 @@ server {
->         location /favicon.ico {
->             alias {{ galaxy_server_dir }}/static/favicon.ico;
->         }
+>     	location /favicon.ico {
+>     		alias {{ galaxy_server_dir }}/static/favicon.ico;
+>     	}
 >    +
->    +    location /_x_accel_redirect {
->    +        internal;
->    +        alias /;
->    +    }
+>    +	location /_x_accel_redirect {
+>    +		internal;
+>    +		alias /;
+>    +	}
 >    +
->    +    # Support click-to-run in the GTN-in-Galaxy Webhook
->    +    location /training-material/ {
->    +        proxy_pass https://training.galaxyproject.org/training-material/;
->    +    }
+>    +	# Support click-to-run in the GTN-in-Galaxy Webhook
+>    +	location /training-material/ {
+>    +		proxy_pass https://training.galaxyproject.org/training-material/;
+>    +	}
 >     }
 >    {% endraw %}
 >    ```
@@ -2523,7 +2473,7 @@ The time required to maintain a production Galaxy instance depends on the number
 
 ## Keeping Galaxy Updated
 
-If you have set your `galaxy_commit_id` group variable to a branch name like `release_22.05`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
+If you have set your `galaxy_commit_id` group variable to a branch name like `release_23.0`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
 
 ## Upgrading Galaxy (Optional)
 
@@ -2533,7 +2483,7 @@ With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a co
 --- a/group_vars/galaxyservers.yml
 +++ b/group_vars/galaxyservers.yml
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
- 
+
  galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
 -galaxy_commit_id: 'release_19.05'
 +galaxy_commit_id: 'release_19.09'
@@ -2609,6 +2559,47 @@ It's very possible to do this piecemeal, taking one component at a time to ansib
 
 If you've been following along you should have a production-ready Galaxy, secured, everything ready to go.
 
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+> <hands-on-title>Using Git with Ansible Vaults</hands-on-title>
+> When looking at `git log` to see what you changed, you cannot easily look into
+> Ansible Vault changes: you just see the changes in the encrypted versions, which
+> is unpleasant to read.
+> 
+> Instead we can use [`.gitattributes`](https://www.git-scm.com/docs/gitattributes) to tell `git` that we want to use a certain
+> program to convert some files before calculating their diffs,
+> in this case `ansible-vault view`.
+> 
+> 1. Check your `git log -p` and see how the Vault changes look (you can type `/vault` to search). Notice that they're just changed encoded content.
+> 1. Create the file `.gitattributes` in the same folder as your `galaxy.yml` playbook, with the following contents:
+> 
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/.gitattributes
+>    @@ -0,0 +1 @@
+>    +group_vars/secret.yml diff=ansible-vault merge=binary
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add git attributes"}
+>
+>    This set the `diff` attribute to `ansible-vault` for the `group_vars/secret.yml` file.
+>    Additionally, the `merge=binary` option tells git not to attempt to do a three-way merge of this file.
+> 
+> 1. Run the following command to configure git to convert the files having the `diff` attribute set to `ansible-vault`, using the `ansible-vault view` command, before diffing them:
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > git config --global diff.ansible-vault.textconv "ansible-vault view"
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+> 1. Try again to `git log -p` and look for the vault changes. Note that you can now see the decrypted content! Very useful.
+{: .hands_on}
+
 {% snippet topics/admin/faqs/missed-something.md step=1 %}
 
-![diagram of galaxy setup with postgres, galaxy, nginx, gunicorn, storage, and compute shown attached to each other.](../../images/ansible-galaxy-intro-2.png "This approximately represents what you have setup today, NGINX proxies requests to Gunicorn which runs the Galaxy App. That talks to Postgres, and Storage, and the Compute handlers which interact with the storage. As we setup mules, the compute handlers are the same processes which respond to web requests for nginx.")
+![diagram of galaxy setup with postgres, galaxy, nginx, gunicorn, and storage.](../../images/ansible-galaxy-3.png "This approximately represents what you have setup today, NGINX proxies requests to Gunicorn which runs the Galaxy App. That talks to Postgres, and Storage.")
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="ansible-galaxy" %}

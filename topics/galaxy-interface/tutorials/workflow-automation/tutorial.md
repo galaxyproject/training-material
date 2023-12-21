@@ -30,8 +30,6 @@ contributors:
 subtopic: workflows
 ---
 
-# Introduction
-
 
 Galaxy is well-known as a web-based data analysis platform which provides a graphical interface for executing common bioinformatics tools in a reproducible manner. However, Galaxy is not just a user-friendly interface for executing one tool at a time. It provides two very useful features which allow scaling data analyses up to a high-throughput level: dataset collections and workflows.
 
@@ -173,15 +171,16 @@ The `tutorial.ga` file defines the workflow in JSON format; if we are confident 
 >
 > 3. Replace the placeholder values in the job file, so that it looks like the following:
 >
->    > ```yaml
->    > Dataset 1:
->    >   class: File
->    >   path: dataset1.txt
->    > Dataset 2:
->    >   class: File
->    >   path: dataset2.txt
->    > Number of lines: 3
->    > ```
+>    ```yaml
+>    Dataset 1:
+>      class: File
+>      path: dataset1.txt
+>    Dataset 2:
+>      class: File
+>      path: dataset2.txt
+>    Number of lines: 3
+>    ```
+>
 > Now we are ready to execute the workflow with our chosen parameters!
 {: .hands_on}
 
@@ -225,17 +224,19 @@ Every object associated with Galaxy, including workflows, datasets and dataset c
 >    1. Click on the {% icon galaxy-info %} *View details* icon on the dataset in the history.
 >    2. Under the heading `Dataset Information`, find the row `History Content API ID` and copy the hexadecimal ID next to it.
 > 2. Modify `tutorial-init-job.yml` to look like the following:
->    > ```yaml
->    > Dataset 1:
->    >   class: File
->    >   # path: dataset1.txt
->    >   galaxy_id: <ID OF DATASET 1>
->    > Dataset 2:
->    >   class: File
->    >   # path: dataset2.txt
->    >   galaxy_id: <ID OF DATASET 2>
->    > Number of lines: 3
->    > ```
+>
+>    ```yaml
+>    Dataset 1:
+>      class: File
+>      # path: dataset1.txt
+>      galaxy_id: <ID OF DATASET 1>
+>    Dataset 2:
+>      class: File
+>      # path: dataset2.txt
+>      galaxy_id: <ID OF DATASET 2>
+>    Number of lines: 3
+>    ```
+>
 > 3. Now we need to get the workflow ID:
 >    1. Go to the workflows panel in Galaxy and find one of the workflows that have just been uploaded.
 >    2. From the dropdown menu, select `Edit`, to take you to the workflow editing interface.

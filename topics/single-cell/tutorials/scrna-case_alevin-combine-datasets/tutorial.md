@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Combining datasets after pre-processing"
+title: "Combining single cell datasets after pre-processing"
 subtopic: single-cell-CS
 priority: 2
 
@@ -24,11 +24,9 @@ key_points:
   - Retreive partially analysed data from a public repository
 
 tags:
-  - single-cell
   - 10x
   - paper-replication
-  - español
-  - transcriptomics
+
 
 contributions:
   authorship:
@@ -49,8 +47,6 @@ requirements:
         - scrna-umis
         - scrna-case_alevin
 
-translations:
-  - es
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
@@ -62,9 +58,6 @@ follow_up_training:
         - scrna-case_basic-pipeline
 ---
 
-# Introduction
-
-<!-- This is a comment. -->
 
 This tutorial will take you from the multiple AnnData outputs of the [previous tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html) to a single, combined  AnnData object, ready for all the fun downstream processing. We will also look at how to add in metadata (for instance, SEX or GENOTYPE) for analysis later on.
 
@@ -87,10 +80,14 @@ You can access the data for this tutorial in multiple ways:
 
    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 
-2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)
+2. **Importing from a history**
+    - You can import [this history for usegalaxy.eu](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)
+    - You can import [this history for usegalaxy.org](https://usegalaxy.org/u/hrukkudyr_us/h/cs2combining-datasets-after-pre-processing---input)
 
    {% snippet faqs/galaxy/histories_import.md %}
 
+
+<!--
 3. **Uploading from Zenodo** (see below)
 
 
@@ -110,20 +107,26 @@ You can access the data for this tutorial in multiple ways:
 >    {{ page.zenodo_link }}/files/N707-400k.h5ad
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    % snippet faqs/galaxy/datasets_import_via_link.md %
 >
 > 3. Rename the datasets
 > 4. Check that the datatype is `h5ad`, otherwise you will need to change each file to `h5ad`!
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>    % snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %
 >
 {: .hands_on}
+REMEMBER TO ADD THE CODE FOR SNIPPETS BACK IN
+-->
 
 Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata previously!
 
-## Concatenating objects
+# Important tips for easier analysis
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
+
+{% snippet topics/single-cell/faqs/single_cell_omics.md %}
+
+## Concatenating objects
 
 > <hands-on-title>Concatenating AnnData objects</hands-on-title>
 >
@@ -216,7 +219,9 @@ The two critical pieces of metadata in this experiment are **sex** and **genotyp
 >         - *"Find pattern"*: `batch`
 >         - *"Replace with"*: `sex`
 >
->    Now we want only the column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
+>    Run this tool - we will use the output in Step 2.
+>
+>    From the output of Step 1 we want only the single column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
 >
 > 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c8`
@@ -343,5 +348,4 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 You've reached the end of this session!
 You may be interested in seeing an [example history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-answerkey) and [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/cs2combining-datasets-after-pre-processing-1). Note that the workflow will require changing of the `column` containing the batch metadata depending on how you are running it. The final object containing the total the reads can be found in [this Galaxy History on UseGalaxy EU](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing--total-processed-to-single-object).
 
- To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
- [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+{% snippet topics/single-cell/faqs/user_community_join.md %}

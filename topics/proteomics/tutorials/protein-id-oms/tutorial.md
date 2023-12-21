@@ -32,10 +32,8 @@ contributors:
   - stortebecker
   - bgruening
 subtopic: id-quant
-tags: [DDA]
+tags: [DDA, HeLa]
 ---
-
-# Introduction
 
 
 Identifying the proteins contained in a sample is an important step in any proteomic experiment. However, in most settings, proteins are digested to peptides prior to LC-MS/MS analysis. In this so-called "bottom-up" procedure, only peptide masses are measured. Therefore, protein identification cannot be performed directly from raw data, but is a multi-step process:

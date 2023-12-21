@@ -1,0 +1,367 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-9906-0673",
+            "name": "Anna Syme"
+        }
+    ],
+    "format-version": "0.1",
+    "name": "Assembly with Flye",
+    "report": {
+        "markdown": "# Workflow Report for Assembly with Flye\n\n\n## Workflow steps\n\n```galaxy\nworkflow_display()\n```\n\n## Dataset - fasta stats. \n\n```galaxy\nhistory_dataset_display(output=\"Fasta Statistics on input dataset(s): Fasta summary stats\")\n```\n\n## Contig sizes\n\n```galaxy\nhistory_dataset_as_image(output=\"Bar chart showing contig sizes\")\n```\n\n\n## Bandage image\n\n```galaxy\nhistory_dataset_as_image(output=\"Bandage Image on input dataset(s): Assembly Graph Image\")\n```\n\n## Quast report\n\n\r\n```galaxy\nhistory_dataset_display(output=\"Quast on input dataset(s):  PDF report\")\n```\r\n\n\n\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "long reads"
+                }
+            ],
+            "label": "long reads",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 501.6875,
+                "height": 61.78125,
+                "left": 38.453125,
+                "right": 238.453125,
+                "top": 439.90625,
+                "width": 200,
+                "x": 38.453125,
+                "y": 439.90625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "501d7387-3bed-4510-891f-a4571a48d9ab",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.8.2+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "inputs": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Flye: assembly",
+            "name": "Flye assembly",
+            "outputs": [
+                {
+                    "name": "consensus",
+                    "type": "fasta"
+                },
+                {
+                    "name": "assembly_graph",
+                    "type": "graph_dot"
+                },
+                {
+                    "name": "assembly_gfa",
+                    "type": "txt"
+                },
+                {
+                    "name": "assembly_info",
+                    "type": "tabular"
+                },
+                {
+                    "name": "flye_log",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 817.90625,
+                "height": 439.03125,
+                "left": 333.953125,
+                "right": 533.953125,
+                "top": 378.875,
+                "width": 200,
+                "x": 333.953125,
+                "y": 378.875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.8.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "8d4f03b5fe9d",
+                "name": "flye",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"asm\": {\"asm_select\": \"false\", \"__current_case__\": 1}, \"i\": \"1\", \"inputs\": {\"__class__\": \"ConnectedValue\"}, \"m\": null, \"meta\": \"false\", \"mode\": \"--nano-raw\", \"no_trestle\": \"false\", \"plasmids\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8.2+galaxy0",
+            "type": "tool",
+            "uuid": "8bed3591-266a-41f1-91d3-11b3456e8609",
+            "workflow_outputs": [
+                {
+                    "label": "Flye assembly on input dataset(s) (consensus)",
+                    "output_name": "consensus",
+                    "uuid": "3960e31d-7a9e-400c-bb21-f6e47b75e649"
+                },
+                {
+                    "label": "Flye assembly on input dataset(s) (assembly_graph)",
+                    "output_name": "assembly_graph",
+                    "uuid": "e524f295-a957-4c91-838c-f8e98e809b6c"
+                },
+                {
+                    "label": "Flye assembly on input dataset(s) (Graphical Fragment Assembly)",
+                    "output_name": "assembly_gfa",
+                    "uuid": "48b854e2-dd6e-4345-8d05-09abca6659da"
+                },
+                {
+                    "label": "Flye assembly on input dataset(s) (assembly_info)",
+                    "output_name": "assembly_info",
+                    "uuid": "8672c172-71a7-432c-9679-a8e37f36cf53"
+                },
+                {
+                    "label": "Flye assembly on input dataset(s) (log)",
+                    "output_name": "flye_log",
+                    "uuid": "a7c03f68-3471-4d92-853c-417d702ff8de"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.3",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "dataset": {
+                    "id": 1,
+                    "output_name": "consensus"
+                }
+            },
+            "inputs": [],
+            "label": "Fasta statistics",
+            "name": "Fasta Statistics",
+            "outputs": [
+                {
+                    "name": "stats",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 195.84375,
+                "height": 154.34375,
+                "left": 623.921875,
+                "right": 823.921875,
+                "top": 41.5,
+                "width": 200,
+                "x": 623.921875,
+                "y": 41.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "56022eb50bbd",
+                "name": "fasta_stats",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dataset\": {\"__class__\": \"ConnectedValue\"}, \"genome_size\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "811b5756-e24e-4de3-a3d6-2ee4bf347c1b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "stats",
+                    "uuid": "d73dda1d-7ddb-4a6a-afad-c3931ee21f72"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy3",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 1,
+                    "output_name": "assembly_gfa"
+                }
+            },
+            "inputs": [],
+            "label": "Bandage image: Flye assembly",
+            "name": "Bandage Image",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "bottom": 683.03125,
+                "height": 195.125,
+                "left": 622,
+                "right": 822,
+                "top": 487.90625,
+                "width": 200,
+                "x": 622,
+                "y": 487.90625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "94fe43e75ddc",
+                "name": "bandage",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fontsize\": null, \"height\": \"1000\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"lengths\": \"false\", \"names\": \"false\", \"output_format\": \"jpg\", \"width\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.8.1+galaxy3",
+            "type": "tool",
+            "uuid": "395f2dfe-3fa5-4684-bf97-7dd12e970f78",
+            "workflow_outputs": [
+                {
+                    "label": "Bandage Image on input dataset(s): Assembly Graph Image",
+                    "output_name": "outfile",
+                    "uuid": "e66bd129-146f-48dc-95b8-39a2a1ffb68d"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "in|inputs": {
+                    "id": 1,
+                    "output_name": "consensus"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Quast",
+                    "name": "in"
+                }
+            ],
+            "label": "Quast genome report",
+            "name": "Quast",
+            "outputs": [
+                {
+                    "name": "quast_tabular",
+                    "type": "tabular"
+                },
+                {
+                    "name": "report_html",
+                    "type": "html"
+                },
+                {
+                    "name": "report_pdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "log",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 585.453125,
+                "height": 347.46875,
+                "left": 887.453125,
+                "right": 1087.453125,
+                "top": 237.984375,
+                "width": 200,
+                "x": 887.453125,
+                "y": 237.984375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "ebb0dcdb621a",
+                "name": "quast",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"al\": {\"use_all_alignments\": \"false\", \"min_alignment\": \"65\", \"min_identity\": \"95.0\", \"ambiguity_usage\": \"one\", \"ambiguity_score\": \"0.99\", \"fragmented\": \"false\", \"fragmented_max_indent\": \"50\", \"upper_bound_assembly\": \"false\", \"upper_bound_min_con\": \"2\"}, \"assembly\": {\"type\": \"genome\", \"__current_case__\": 0, \"ref\": {\"use_ref\": \"false\", \"__current_case__\": 1, \"est_ref_size\": null}, \"orga_type\": \"\"}, \"circos\": \"false\", \"contig_thresholds\": \"0,1000\", \"extensive_mis_size\": \"1000\", \"genes\": {\"gene_finding\": {\"tool\": \"none\", \"__current_case__\": 0}, \"rna_finding\": \"false\", \"conserved_genes_finding\": \"false\"}, \"in\": {\"custom\": \"false\", \"__current_case__\": 1, \"inputs\": {\"__class__\": \"RuntimeValue\"}}, \"k_mer\": {\"k_mer_stats\": \"\", \"__current_case__\": 1}, \"large\": \"true\", \"min_contig\": \"500\", \"scaffold_gap_max_size\": \"1000\", \"skip_unaligned_mis_contigs\": \"false\", \"split_scaffolds\": \"false\", \"strict_NA\": \"false\", \"unaligned_part_size\": \"500\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0.2+galaxy1",
+            "type": "tool",
+            "uuid": "5bc29646-ec4c-4eb3-af01-73d82fc690a2",
+            "workflow_outputs": [
+                {
+                    "label": "Quast on input dataset(s): Log",
+                    "output_name": "log",
+                    "uuid": "269df5ab-1a60-4ba3-a912-5d201293e1b5"
+                },
+                {
+                    "label": "Quast on input dataset(s):  PDF report",
+                    "output_name": "report_pdf",
+                    "uuid": "fd279e85-80c7-4073-abee-441b3f203113"
+                },
+                {
+                    "label": "Quast on input dataset(s): tabular report",
+                    "output_name": "quast_tabular",
+                    "uuid": "59745949-d965-44e3-9464-d219fb378e88"
+                },
+                {
+                    "label": "Quast on input dataset(s):  HTML report",
+                    "output_name": "report_html",
+                    "uuid": "17cdf8e0-8ad4-4570-afae-1861934fc678"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "barchart_gnuplot",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "assembly_info"
+                }
+            },
+            "inputs": [],
+            "label": "Bar chart: show contig sizes",
+            "name": "Bar chart",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "bottom": 864.4375,
+                "height": 133.953125,
+                "left": 633.875,
+                "right": 833.875,
+                "top": 730.484375,
+                "width": 200,
+                "x": 633.875,
+                "y": 730.484375
+            },
+            "post_job_actions": {},
+            "tool_id": "barchart_gnuplot",
+            "tool_state": "{\"colList\": \"2\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"pdf_size\": \"800,600\", \"title\": \"Assembly contig sizes\", \"xtic\": {\"userSpecified\": \"No\", \"__current_case__\": 1}, \"ylabel\": \"lengths\", \"ymax\": \"0\", \"ymin\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "cb9d5059-bf42-4a0e-8150-f5089e0d5b1b",
+            "workflow_outputs": [
+                {
+                    "label": "Bar chart showing contig sizes",
+                    "output_name": "out_file1",
+                    "uuid": "6d0a4e23-d631-4e37-8930-3d22fc91369b"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "LG-WF"
+    ],
+    "uuid": "51f00f47-5d2c-40f2-a237-a81ab658709b",
+    "version": 33
+}

@@ -18,8 +18,6 @@ contributors:
   - bebatut
 ---
 
-# Introduction
-
 
 All the training material which you find on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/) is stored on a [GitHub](https://github.com) repository ([{{ site.github_repository }}]({{ site.github_repository }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
 
@@ -125,13 +123,13 @@ The GitHub interface guides you through this process: after clicking on **Propos
 > <hands-on-title>Edit a file</hands-on-title>
 >
 > 1. Open and read the [CONTRIBUTING.md]({{ site.github_repository }}/blob/main/CONTRIBUTING.md) file
-> 1. Come back to the pull request
-> 2. Fill in the pull request description
+> 2. Come back to the pull request
+> 3. Fill in the pull request description
 >
 >    ![Pull request description](../../images/github_pr_form.png)
 >
 >    1. Add a title for the Pull Request
->    1. Add a message explaining the changes you made
+>    2. Add a message explaining the changes you made
 >
 >       This message is a good way to introduce yourself and to explain the message you made. Be kind and descriptive. It helps the reviewers to understand why you did your changes and if it should be intergrated into the `main` branch (and then website).
 >
@@ -139,12 +137,21 @@ The GitHub interface guides you through this process: after clicking on **Propos
 >       > GitHub uses [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet), a simple Markup language, to render the Pull request messages. You can then add bold test, lists, images, etc.
 >       {: .comment}
 >
-> 1. Scroll down and check the changes you made
+> 4. Scroll down and check the changes you made
 >
 >    - In green with `+`: what you added
 >    - In red with `-`: what you deleted
 >
-> 1. Click on **Create pull request**
+> 5. Click on **Create pull request** or switch to **Create draft pull request** from the dropdown menu
+>
+>    ![Create pull request dropdown in the GitHub interface is shown, the draft pull request button option is highlighted](../../images/PR_create_menu.png)
+>
+>    >  <details-title>"Draft pull requests"</details-title>
+>    >  [Creating a pull request as a draft](https://github.blog/2019-02-14-introducing-draft-pull-requests/#tag-your-work-in-progress) serves as an indication that you are still working on the content.
+>    >  Reviewers may comment on the current state and give general feedback, but they will know that they are not looking at the final version of your contribution.
+>    >
+>    >  In the Galaxy Training Material repository we have also disabled the computationally most expensive automated tests on draft pull requests, and we encourage you to use the draft stage as a small contribution to sustainable computing.
+>    {: .details}
 {: .hands_on}
 
 You have created your first pull request!

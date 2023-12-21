@@ -30,9 +30,8 @@ contributors:
     - vivekbhr
     - fidelram
     - LeilyR
+    - pavanvidem
 ---
-
-# Introduction
 
 
 Within a cell nucleus, the DNA is tightly-packed and the chromatin is spatially distributed with different levels and scales of organizations.
@@ -47,7 +46,7 @@ On a larger scale than nucleosomes, DNA is forming loops. DNA elements that woul
 
 In mammals, the X chromosome inactivation (XCI) balances the dosage of X-linked genes between females and males. The genes on the inactive X (Xi) chromosome are not expressed.
 
-Binding certain proteins to each of the eight histone proteins may modify the chromatin structure and may result in changes in transcription level. For example, the H3K4me3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
+Binding certain molecules to histone proteins can modify the chromatin structure and may result in changes in transcription level. For example, the H3K4me3 results from adding 3 methyl-group to the 4th lysine in the histone 3 protein. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
 
 ![Fadloun et al, 2013](../../images/formation_of_super-structures_on_xi/histone_modifications.jpg "Source: Fadloun et al, 2013")
 
@@ -95,6 +94,7 @@ To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` whi
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `wt_H3K4me3_read1.fastq.gz` and `wt_H3K4me3_read2.fastq.gz` from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
@@ -105,6 +105,7 @@ To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` whi
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
@@ -124,8 +125,8 @@ During sequencing, errors are introduced, such as incorrect nucleotides being ca
 Sequence quality control is therefore an essential first step in your analysis. We use here similar tools as described in ["Quality control" tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
 > <hands-on-title>Quality control</hands-on-title>
->
-> 1. Run **FastQC** {% icon tool %} with the following parameters
+> 
+> 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
 >    - {% icon param-files %} *"Short read data from your current history"*: `wt_H3K4me3_read1` and `wt_H3K4me3_read2` (Input datasets selected with **Multiple datasets**)
 >
 >    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
@@ -191,7 +192,7 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 
 > <hands-on-title>Trimming low quality bases</hands-on-title>
 >
-> 1. Run **Trim Galore!** {% icon tool %} with the following parameters
+> 1. Run {% tool [Trim Galore!](toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy0) %} with the following parameters:
 >    - *"Is this library paired- or single-end?"*: `Paired-end`
 >       - {% icon param-file %} *"Reads in FASTQ format"*: `wt_H3K4me3_read1` (Input dataset)
 >       - {% icon param-file %} *"Reads in FASTQ format"*: `wt_H3K4me3_read2` (Input dataset)
@@ -239,7 +240,7 @@ With ChiP sequencing, we obtain sequences corresponding to a portion of DNA link
 
 > <hands-on-title>Mapping</hands-on-title>
 >
-> 1. **Bowtie2** {% icon tool %} with
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
 >        - {% icon param-file %} *"FASTA/Q file #1"*: `trimmed reads pair 1` (output of **Trim Galore!** {% icon tool %})
 >        - {% icon param-file %} *"FASTA/Q file #2"*: `trimmed reads pair 2` (output of **Trim Galore!** {% icon tool %})
@@ -254,9 +255,9 @@ With ChiP sequencing, we obtain sequences corresponding to a portion of DNA link
 >    > How many reads where mapped? Uniquely or several times?
 >    >
 >    > > <solution-title></solution-title>
->    > > The overall alignment rate is 98.64%. This score is quite high. If you have less than 70-80%, you should investigate the cause: contamination, etc.
+>    > > The overall alignment rate is 98.57%. This score is quite high. If you have less than 70-80%, you should investigate the cause: contamination, etc.
 >    > >
->    > > 43719 (90.27%) reads have been aligned concordantly exactly 1 time and 3340 (6.90%) aligned concordantly >1 times. The latter ones correspond to multiple mapped reads. Allowing for multiple  mapped reads increases the number of usable reads and the sensitivity of peak detection;
+>    > > 41514 (85.72%) reads have been aligned concordantly exactly 1 time and 5190 (10.72%) aligned concordantly >1 times. The latter ones correspond to multiple mapped reads. Allowing for multiple  mapped reads increases the number of usable reads and the sensitivity of peak detection;
 >    > > however, the number of false positives may also increase.
 >    > {: .solution }
 >    {: .question}
@@ -304,7 +305,7 @@ Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF
 >    ```
 >
 > 3. Rename the files
-> 3. **multiBamSummary** {% icon tool %} with the following parameters
+> 3. {% tool [multiBamSummary](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.5.1.0.0) %} with the following parameters:
 >    - *"Sample order matters"*: `No`
 >       - {% icon param-files %} *"BAM/CRAM file"*: the 8 imported BAM files
 >    - *"Choose computation mode"*: `Bins`
@@ -320,7 +321,7 @@ Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF
 >
 >    Using these parameters, the tool will take bins of 1000 bp separated by 500 bp on the chromosome X. For each bin the overlapping reads in each sample will be computed and stored into a matrix.
 >
-> 4. **plotCorrelation** {% icon tool %} with the following parameters
+> 4. {% tool [plotCorrelation](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.5.1.0.0) %} with the following parameters:
 >    - {% icon param-files %} *"Matrix file from the multiBamSummary tool"*: `correlation matrix`(output of **multiBamSummary** {% icon tool %})
 >    - *"Correlation method"*: `Pearson`
 >
@@ -352,7 +353,7 @@ Similar to **multiBamSummary** {% icon tool %}, **plotFingerprint** {% icon tool
 
 > <hands-on-title>IP strength estimation</hands-on-title>
 >
-> 1. **plotFingerprint** {% icon tool %} with the following parameters
+> 1. {% tool [plotFingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.5.1.0.0) %} with the following parameters:
 >    - *"Sample order matters"*: `No`
 >       - {% icon param-files %} *"BAM/CRAM file"*: `wt_input_rep1` and `wt_H3K4me3_rep1`
 >    - *"Region of the genome to limit the operation to"*: `chrX`
@@ -399,19 +400,19 @@ To learn how to do the normalization, we will take the `wt_H3K4me3_rep1` sample 
 
 > <hands-on-title>Estimation of the sequencing depth</hands-on-title>
 >
-> 1. **IdxStats** {% icon tool %} with the following parameters
+> 1. {% tool [Samtools idxstats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4) %} with the following parameters:
 >    - {% icon param-files %} *"BAM file"*: `wt_H3K4me3_rep1.bam` and `wt_input_rep1.bam`
 >
 > > <question-title></question-title>
 > >
-> > 1. What is the output of **IdxStats** {% icon tool %}?
+> > 1. What is the output of **Samtools idxstats** {% icon tool %}?
 > > 2. How many reads has been mapped on chrX for the input and for the ChIP-seq samples?
 > > 3. Why are the number of reads different? And what could be the impact of this difference?
 > >
 > > > <solution-title></solution-title>
 > > > 1. This tool generates a table with 4 columns:  reference sequence identifier, reference sequence length, number of mapped reads and number of placed but unmapped reads. Here it estimates how many reads mapped to which chromosome. Furthermore, it tells the chromosome lengths and naming convention (with or without 'chr' in the beginning)
-> > 2. 1,204,821 for ChIP-seq samples and 1,893,595 for the input
-> > 3. The number of reads can be different because of  different sequencing depth. It can bias the interpretation of the number of reads mapped to a specific genome region and the identification of the H3K4me3 sites. Specially here, as the number of reads for the input is higher than the ChIP data less regions could be identified having a significantly higher read coverage for the ChIP data comparing to the corresponding input.
+> > > 2. 1,204,821 for ChIP-seq samples and 1,893,595 for the input
+> > > 3. The number of reads can be different because of  different sequencing depth. It can bias the interpretation of the number of reads mapped to a specific genome region and the identification of the H3K4me3 sites. Specially here, as the number of reads for the input is higher than the ChIP data less regions could be identified having a significantly higher read coverage for the ChIP data comparing to the corresponding input.
 > > {: .solution }
 > {: .question}
 {: .hands_on}
@@ -422,7 +423,7 @@ We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool genera
 
 > <hands-on-title>Coverage file normalization</hands-on-title>
 >
-> 1. **bamCoverage** {% icon tool %} with the following parameters
+> 1. {% tool [bamCoverage](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.5.1.0.0) %} with the following parameters:
 >    - {% icon param-files %} *"BAM file"*: `wt_H3K4me3_rep1.bam` and `wt_input_rep1.bam`
 >    - *"Bin size in bases"*: `25`
 >    - *"Scaling/Normalization method"*: `Normalize coverage to 1x`
@@ -441,7 +442,7 @@ We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool genera
 >    > {: .solution }
 >    {: .question}
 >
-> 2. **bamCoverage** {% icon tool %} with the same parameters but
+> 2. {% tool [bamCoverage](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.5.1.0.0) %} with the same parameters but
 >    - *"Coverage file format"*: `bigWig`
 >
 >    > <question-title></question-title>
@@ -453,7 +454,7 @@ We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool genera
 >    > {: .solution }
 >    {: .question}
 >
-> 3. **IGV** {% icon tool %} to inspect both signal coverages (input and ChIP samples) in IGV
+> 3. Use **IGV** {% icon tool %} to inspect both signal coverages (input and ChIP samples).
 >
 {: .hands_on}
 
@@ -474,7 +475,7 @@ To extract only the information induced by the immunoprecipitation, we normalize
 
 > <hands-on-title>Generation of input-normalized coverage files</hands-on-title>
 >
-> 1. **bamCompare** {% icon tool %} with the following parameters
+> 1. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"First BAM file (e.g. treated sample)"*: `wt_H3K4me3_rep1.bam`
 >    - {% icon param-file %} *"Second BAM file (e.g. control sample)"*: `wt_input_rep1.bam`
 >    - *"Bin size in bases"*: `50`
@@ -493,10 +494,10 @@ To extract only the information induced by the immunoprecipitation, we normalize
 >    > {: .solution }
 >    {: .question}
 >
-> 2. **bamCompare** {% icon tool %} with the same parameters but:
+> 2. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0) %} with the same parameters but:
 >    - *"Coverage file format"*: `bigWig`
 >
-> 3. **IGV** {% icon tool %} to inspect the log2 ratio
+> 3. Use **IGV** {% icon tool %} to inspect the log2 ratio.
 >
 {: .hands_on}
 
@@ -517,7 +518,7 @@ We could see in the ChIP data some enriched regions (peaks). We now would like t
 
 > <hands-on-title>Peak calling</hands-on-title>
 >
-> 1. **MACS2 callpeak** {% icon tool %} with the following parameters
+> 1. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0) %} with the following parameters:
 >    - *"Are you pooling Treatment Files?"*: `No`
 >       - {% icon param-file %} *"ChIP-Seq Treatment File"*: `wt_H3K4me3_rep1.bam`
 >    - *"Do you have a Control File?"*: `Yes`
@@ -559,7 +560,7 @@ We could see in the ChIP data some enriched regions (peaks). We now would like t
 >
 > > <solution-title></solution-title>
 > > 1. We can see 11 peaks (track below the genes).
-> > 2. Using **Filter** {% icon tool %} with `c2>151385260 and c3<152426526`, we found that the 11 peaks with fold changes between 3.81927 and 162.06572
+> > 2. Using {% tool [Filter](Filter1) %} with `c2>151385260 and c3<152426526`, we found that the 11 peaks with fold changes between 3.81927 and 162.06572
 > > 4. On the 656 peaks on the full chromosome (number of lines of the original BED file) there are 252 peaks with FC>50 (using **Filter** {% icon tool %} with `c7>50`)
 > {: .solution }
 {: .question}
@@ -574,7 +575,7 @@ Since we already generated the required files for the H3K4me3 sample, let's make
 
 > <hands-on-title>Prepare the peaks and data for CTCF</hands-on-title>
 >
-> 1. **bamCompare** {% icon tool %} with the following parameters
+> 1. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"First BAM file (e.g. treated sample)"*: `wt_CTCF_rep1.bam`
 >    - {% icon param-file %} *"Second BAM file (e.g. control sample)"*: `wt_input_rep1.bam`
 >    - *"Bin size in bases"*: `50`
@@ -582,7 +583,7 @@ Since we already generated the required files for the H3K4me3 sample, let's make
 >    - *"Coverage file format"*: `bigwig`
 >    - *"Region of the genome to limit the operation to"*: `chrX`
 > 2. Rename the output of **bamCompare** {% icon tool %} with the name of the sample
-> 3. **MACS2 callpeak** {% icon tool %} with the following parameters
+> 3. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0) %} with the following parameters
 >    - *"Are you pooling Treatment Files?"*: `No`
 >       - {% icon param-file %} *"ChIP-Seq Treatment File"*: `wt_CTCF_rep1.bam`
 >    - *"Do you have a Control File?"*: `Yes`
@@ -597,13 +598,14 @@ We can now concatenate the MACS2 outputs with the location of the peaks (concate
 
 > <hands-on-title>Prepare the peak coordinates</hands-on-title>
 >
-> 1. **Concatenate two datasets into one dataset** {% icon tool %} with the following parameters
->    - {% icon param-file %} *"Concatenate"*: output of **MACS2 callpeak** {% icon tool %} for `wt_CTCF_rep1`
->    - {% icon param-file %} *"with"*: output of **MACS2 callpeak** {% icon tool %} for `wt_H3K4me3_rep1`
-> 2. **SortBED** {% icon tool %} with the following parameters
->    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **Concatenate** {% icon tool %}
-> 3. **MergeBED** {% icon tool %} with the following parameters
->    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **SortBED** {% icon tool %}
+> 1. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+>    - {% icon param-file %} *"Concatenate Dataset"*: output of **MACS2 callpeak** {% icon tool %} for `wt_CTCF_rep1`
+>    - Click on *"Insert Dataset"*:
+>       - For *"Dataset"*: select the output of **MACS2 callpeak** {% icon tool %} for `wt_H3K4me3_rep1`
+> 2. {% tool [bedtools SortBED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Sort the following BED/bedGraph/GFF/VCF/EncodePeak file"*: output of **Concatenate** {% icon tool %}
+> 3. {% tool [bedtools MergeBED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.30.0) %} with the following parameters:
+>    - {% icon param-file %} *"Sort the following BAM/BED/bedGraph/GFF/VCF/EncodePeak file"*: output of **SortBED** {% icon tool %}
 >
 {: .hands_on}
 
@@ -615,7 +617,7 @@ Optionally, we can also use **plotProfile** {% icon tool %} to create a profile 
 
 > <hands-on-title>Plot the heatmap</hands-on-title>
 >
-> 1. **computeMatrix** {% icon tool %} with the following parameters:
+> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.1.0.0)%} with the following parameters:
 >    - *"Select regions"*:
 >       - {% icon param-file %} *"Regions to plot"*: output of **MergeBED** {% icon tool %}
 >    - *"Sample order matters"*: `No`
@@ -624,7 +626,7 @@ Optionally, we can also use **plotProfile** {% icon tool %} to create a profile 
 >       - *"The reference point for the plotting"*: `center of region`
 >       - *"Distance upstream of the start site of the regions defined in the region file"*: `3000`
 >       - *"Distance downstream of the end site of the given regions"*: `3000`
-> 2. **plotHeatmap** {% icon tool %} with the following parameters
+> 2. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.5.1.0.1) %} with the following parameters
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: `Matrix` (output of **computeMatrix** {% icon tool %})
 >    - *"Show advanced options"*: `yes`
 >       - *"Reference point label"*: select the right label
@@ -656,7 +658,7 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 
 > <hands-on-title>(Optional) Plot the heatmap for all the samples</hands-on-title>
 >
-> 1. **bamCompare** {% icon tool %} for each combination input - ChIP data:
+> 1. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0) %} for each combination input - ChIP data:
 >     1. `wt_CTCF_rep1` - `wt_input_rep1` (already done)
 >     2. `wt_H3K4me3_rep1` - `wt_input_rep1` (already done)
 >     3. `wt_H3K27me3_rep1` - `wt_input_rep1`
@@ -664,16 +666,17 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 >     5. `wt_H3K4me3_rep2` - `wt_input_rep2`
 >     6. `wt_H3K27me3_rep2` - `wt_input_rep2`
 > 2. Rename the outputs of **bamCompare** {% icon tool %} with the name of the ChIP data
-> 3. **MACS2 callpeak** {% icon tool %} for each combination input - ChIP data
-> 4. **Concatenate datasets tail-to-head** {% icon tool %} with the following parameters
->     - {% icon param-file %} *"Concatenate Dataset"*: one output of **MACS2 callpeak** {% icon tool %}
->     - Click *"Insert Dataset"* and {% icon param-file %} *"Select"* one other output of **MACS2 callpeak** {% icon tool %}
->     - Redo for the 6 outputs of **MACS2 callpeak** {% icon tool %}
-> 5. **SortBED** {% icon tool %} with the following parameters
+> 3. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0) %} for each combination input - ChIP data
+> 4. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+>    - {% icon param-file %} *"Concatenate Dataset"*: one output of **MACS2 callpeak** {% icon tool %}
+>    - Click on *"Insert Dataset"*:
+>       - In *"Select"*: one other output of **MACS2 callpeak** {% icon tool %}
+>    - Redo for the 6 outputs of **MACS2 callpeak** {% icon tool %}
+> 5. {% tool [bedtools SortBED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2) %} with the following parameters
 >    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **Concatenate** {% icon tool %}
-> 6. **MergeBED** {% icon tool %} with the following parameters
+> 6. {% tool [bedtools MergeBED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.30.0) %} with the following parameters
 >    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **SortBED** {% icon tool %}
-> 7. **computeMatrix** {% icon tool %} with the same parameters but:
+> 7. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.1.0.0)%} with the same parameters but:
 >    - *"Select regions"*:
 >       - {% icon param-file %} *"Regions to plot"*: output of **MergeBED** {% icon tool %}
 >    - *"Sample order matters"*: `No`
@@ -682,13 +685,13 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 >       - *"The reference point for the plotting"*: `center of region`
 >       - *"Distance upstream of the start site of the regions defined in the region file"*: `3000`
 >       - *"Distance downstream of the end site of the given regions"*: `3000`
-> 8. **plotHeatmap** {% icon tool %} with the following parameters
+> 8. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.5.1.0.1) %} with the following parameters
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: `Matrix` (output of **computeMatrix** {% icon tool %})
 >    - *"Show advanced options"*: `yes`
 >       - *"Reference point label"*: select the right label
 >       - *"Did you compute the matrix with more than one groups of regions?"*: `No, I used only one group`
 >           - *"Clustering algorithm"*: `Kmeans clustering`
->           - *"Number of clusters to compute"*: `2`
+>           - *"Number of clusters to compute"*: `6`
 {: .hands_on}
 
 > <question-title></question-title>
@@ -707,9 +710,9 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 > >
 > >     Target | Rep 1 | Rep 2
 > >     --- | --- | ---
-> >     CTCF | 2,688 | 2,062
-> >     H3K4me3 | 656 | 717
-> >     H3K27me3 | 221 | 76
+> >     CTCF | 2,672 | 2,061
+> >     H3K4me3 | 657 | 718
+> >     H3K27me3 | 220 | 73
 > >
 > >    The tendencies are similar for both replicates: more peaks for CTCF, less for H3K4me3 and only few for H3K27me3.
 > >

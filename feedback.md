@@ -1,5 +1,6 @@
 ---
 layout: base
+title: GTN Feedback
 ---
 
 {% assign fdbk= site.data['feedback'] %}
@@ -8,11 +9,11 @@ layout: base
 {% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" %}
 
 <!-- use chart.js for graphs -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+<script src="{% link assets/js/Chart.bundle.js %}"></script>
 <!-- plugin for adding data labels to charts -->
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+<script src="{% link assets/js/chartjs-plugin-datalabels@0.7.0.js %}"></script>
 <!-- plugin for palette -->
-<script src="https://github.com/nagix/chartjs-plugin-colorschemes/releases/download/v0.4.0/chartjs-plugin-colorschemes.js"></script>
+<script src="{% link assets/js/chartjs-plugin-colorschemes.js %}"></script>
 <!-- define the charts -->
 <script type="text/javascript">
     const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
@@ -193,8 +194,6 @@ layout: base
 
 <div class="container main-content">
     <section>
-        <h1>GTN Feedback</h1>
-
         <p>Aggregation of feedback submitted since {{ start.month }} using the embed feedback form
             at the bottom of tutorials. Thank you everyone who submitted feedback!
         </p>
@@ -237,6 +236,8 @@ layout: base
             {% for tn in fdbk_by_topic %}
                 {% assign t_metadata = topics | where: "title",tn.name | first %}
                 {% assign topic_name = t_metadata['name'] %}
+                {% if topic_name == '' or topic_name == nil %}
+                {% else %}
                 <h3 id="topic-{{ topic_name }}">{{ tn.name }}  <a href="{{ site.baseurl }}/topics/{{ topic_name }}">{% icon galaxy_instance %}</a></h3>
                 <div class="row">
                     <!-- feedback over time  -->
@@ -287,7 +288,7 @@ layout: base
                 {% for tun in fdbk_by_tutorial %}
                     {% assign tuto_metadata = tutorials | where: "title",tun.name | first %}
                     {% assign tuto_name = tuto_metadata['dir'] | split: "/" | last %}
-                    {% if tuto_name == '' %}
+                    {% if tuto_name == '' or tuto_name == nil %}
                         <div class="alert alert-warning" role="alert">
                             <p>Tutorial "{{ tun.name }}" is not available anymore.</p>
                         </div>
@@ -393,6 +394,7 @@ layout: base
                     {% endif %}
                 {% endfor %}
                 </div>
+                {% endif %}
             {% endfor %}
         </div>
 

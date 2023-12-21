@@ -37,8 +37,6 @@ requirements:
 ---
 
 
-# Introduction
-
 
 The [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial, introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool.
 
@@ -66,6 +64,7 @@ We will use one file for this analysis:
 > 1. Create a new history for this exercise e.g. `Volcano plot R`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the differentially results table.
@@ -75,6 +74,7 @@ We will use one file for this analysis:
 >    - Option 2: From [Zenodo](https://zenodo.org/record/2529117)
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    - You can paste the link below into the **Paste/Fetch** box:
@@ -298,9 +298,9 @@ We'll make the points a bit smaller. We'll change to 0.5.
 >    > <solution-title></solution-title>
 >    >
 >    > We could use `alpha =`. For example
->    ```R
->    geom_point(aes(colour = sig), alpha = 0.5)
->    ```
+>    > ```R
+>    > geom_point(aes(colour = sig), alpha = 0.5)
+>    > ```
 >    >
 >    {: .solution}
 {: .question}
@@ -336,9 +336,9 @@ We'll make the font size of the labels a bit smaller.
 >    > <solution-title></solution-title>
 >    >
 >    > We could change the 10 to 20 here
->    ```R
->    top <- slice_min(results, order_by = pvalue, n = 20)
->    ```
+>    > ```R
+>    > top <- slice_min(results, order_by = pvalue, n = 20)
+>    > ```
 >    >
 >    {: .solution}
 {: .question}

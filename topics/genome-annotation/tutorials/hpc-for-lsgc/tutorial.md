@@ -31,11 +31,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
-<!-- This is a comment. -->
-
 Sequence comparison is a core problem in bioinformatics. It is used widely in evolutionary studies, structural and functional analyses, assembly, metagenomics, etc. Despite its regular presence in everyday Life-sciences pipelines, it is still not a trivial step that can be overlooked. Therefore, understanding how sequence comparison works is key to developing efficient workflows that are central to so many other disciplines.
 
 In the following tutorial, we will learn how to compare both small and large sequences using both seed-based alignment methods and alignment-free methods, and how to post-process our comparisons to refine our results. Besides, we will also learn about the theoretical background of sequence comparison, including why some tools are suitable for some jobs and others are not.
@@ -67,6 +62,7 @@ First we will be uploading the data to Galaxy so that we can run our tools on it
 > 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Mycoplasma comparison hands-on")
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `mycoplasma-232.fasta` and `mycoplasma-7422.fasta` from [Zenodo](https://zenodo.org/record/4485547#.YBj8XHmCGUk).
@@ -83,6 +79,7 @@ First we will be uploading the data to Galaxy so that we can run our tools on it
 > 3. Rename the files to `232.fasta` and `7422.fasta` and change the datatype if needed to `fasta` (Galaxy will auto-discover the format of the files).
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 {: .hands_on}
@@ -170,6 +167,7 @@ Let's extract the repeats highlighted in red (Figure 1, right) which are aligned
 > 2. Change the name of the output file `Text reformatting on data ...` to `repeats` Change the datatype to `.fasta`.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 3. {% tool [ClustalW](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters
@@ -259,6 +257,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 > 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Chromosome comparison hands-on")
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `aegilops_tauschii_chr1.fasta` and `triticum_aestivum_chr1.fasta` from [Zenodo](https://zenodo.org/record/4485547#.YBj8XHmCGUk).
@@ -275,7 +274,9 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 > 3. Rename the files to `aegilops.fasta` and `triticum.fasta` and change the datatype to `fasta` if needed.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
+>
 >    > <comment-title>Note on the name of the chromosomes</comment-title>
 >    > Please notice that these chromosomes are not labelled as "chromosome 1" at their original sources. We have renamed them for simplicity.
 >    {: .comment}
@@ -322,7 +323,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 >   > 4. The *"Add grid to plot for multi-fasta data sets"* parameter adds grid lines to the plot to separate multiple sequences. This is useful when using multi-fasta inputs.
 >   > 5. The *"Generate image of detected events"* parameter will include, if enabled, a plot of the rearrangements detected with colors, one per type of rearrangement. More on that later!
 >    {: .comment}
->    >
+>
 >
 {: .hands_on}
 
@@ -339,7 +340,7 @@ Figure 3 shows the comparison plot for the plant chromosomes. Notice that the or
 - Blocks that are not in the main diagonal are "transposed", meaning that they have been rearranged in one of the sequences but not in the other. These can also be inverted.
 
 > <comment-title>Note on the comparison plot</comment-title>
-Notice that the comparison plot is only an approximation. It is aimed at showing the general location and direction of syntenies. For example, if `CHROMEISTER` was run with parameter **Output dotplot size** equal to `1000`, then each pixel in the plot contains the averaged information of nearly 500,000 base pairs! Thus, any block can contain lots of smaller rearrangements, mutations, inversions, etc., that are ignored for the sake of providing a clean overview of the general alignment direction in a pairwise comparison.
+> Notice that the comparison plot is only an approximation. It is aimed at showing the general location and direction of syntenies. For example, if `CHROMEISTER` was run with parameter **Output dotplot size** equal to `1000`, then each pixel in the plot contains the averaged information of nearly 500,000 base pairs! Thus, any block can contain lots of smaller rearrangements, mutations, inversions, etc., that are ignored for the sake of providing a clean overview of the general alignment direction in a pairwise comparison.
 {: .comment}
 
 Also note that a `score` value can be seen in the title of the plot (this value is also available in the **Comparison score** file). This value is calculated based on the alignment coverage and number of rearrangements and can be used to automatically filter out similar from dissimilar sequence comparisons. A value of `0` means that the sequences are nearly equal (rearrangement-wise), whereas a value closer to `1` means that the sequences are more dissimilar.

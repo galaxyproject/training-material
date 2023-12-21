@@ -29,6 +29,7 @@ contributors:
 priority: 8
 notebook:
   language: python
+  pyolite: true
 ---
 
 Try/except are a construct in Python used to catch a potential exception. Sometimes things go wrong in your code! Or in someone else's code in a module. Sometimes some errors might be expected like when you try and read a user supplied file, maybe it isn't available because they've specified the wrong path.

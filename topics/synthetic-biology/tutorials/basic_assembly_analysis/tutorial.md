@@ -27,9 +27,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
 Synthetic biology is a novel engineering discipline which requires computational tools for the design of metabolic pathways for the production of chemicals such as SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}). 
 
 In this tutorial, we will use a set of tools from the **Genetic Design - BASIC Assembly Workflow** (https://galaxy-synbiocad.org) which will enable you to design plasmids implementing metabolic pathways for the bioproduction of lycopene in _E.coli_ (one of the preferred host cell for microbial biochemicals production).
@@ -71,10 +68,10 @@ First we need to upload and prepare the following inputs to analyze:
 > 2. Import the input files from [Zenodo]({{ page.zenodo_link }}):
 >
 >    ```
->    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/dnabot_london_settings.yaml
->    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/dnabot_paris_settings.yaml
->    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/parts_for_lycopene.csv
->    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/rp_002_0011.xml
+>    https://zenodo.org/record/6123887/files/dnabot_london_settings.yaml
+>    https://zenodo.org/record/6123887/files/dnabot_paris_settings.yaml
+>    https://zenodo.org/record/6123887/files/parts_for_lycopene.csv
+>    https://zenodo.org/record/6123887/files/rp_002_0011.xml
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -199,9 +196,9 @@ In this section, you can run the Genetic Design - BASIC Assembly Workflow more e
 
 > <hands-on-title>Execute the entire workflow in one go.</hands-on-title>
 >
-> 1. Import your **Genetic Design - Basic Assembly Workflow** by uploading the [**workflow file**](https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga).
+> 1. Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga" title="Genetic Design - Basic Assembly Workflow" %}
 >
 > 2. Click on *Workflow* on the top menu bar of Galaxy. You will see **Genetic Design - Basic Assembly Workflow**
 > 3. Click on the {% icon workflow-run %} (*Run workflow*) button next to your workflow

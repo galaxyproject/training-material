@@ -61,12 +61,14 @@ mapping:
             - "The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy"
             - It can drastically simplify management of large numbers of VMs
     edam_ontology:
-        type: str
-        pattern: /^topic_[0-9]+$/
-        description: |
-            An edam ontology id that describes the topic or tutorial.
-        examples:
-            - topic_3173
+        type: seq
+        sequence:
+          - type: str
+            pattern: /^topic_[0-9]+$/
+            description: |
+                An edam ontology id that describes the resource
+            examples:
+                - topic_3173
     gitter:
         type: str
         description: |
@@ -81,6 +83,8 @@ mapping:
               required: true
               enum:
               - CONTRIBUTORS
+              - FUNDERS
+              - ORGANISATIONS
         description: |
             List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
         examples:
@@ -106,7 +110,7 @@ mapping:
                 translation:
                     - shiltemann
                 funding:
-                    - erasmusplus
+                    - gallantries
         type: map
         mapping:
             authorship:
@@ -116,6 +120,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             editing:
                 type: seq
                 description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
@@ -123,6 +128,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             testing:
                 type: seq
                 description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
@@ -130,6 +136,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             ux:
                 type: seq
                 description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
@@ -137,6 +144,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             infrastructure:
                 type: seq
                 description: These entities managed and provided infrastructure to the GTN or for training purposes
@@ -144,13 +152,16 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - FUNDERS
             funding:
                 type: seq
                 description: These entities provided funding support for the development of this resource
                 sequence:
                 - type: str
                   enum:
-                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - FUNDERS
             translation:
                 type: seq
                 description: These entities did translation and localisation work on this resource
@@ -158,6 +169,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
     subtopic:
         type: str
         description: |
@@ -175,6 +187,12 @@ mapping:
             link on Zenodo to the input data for the tutorial
         examples:
             - "https://zenodo.org/record/3706539"
+    extra:
+        type: map
+        description: |
+            Any additional variables you want to set on the page
+        mapping:
+          '=': {}
     tags:
         type: seq
         sequence:
@@ -279,11 +297,22 @@ mapping:
                     - bash
                     - r
                     - sql
+            packages:
+                type: seq
+                description: |
+                  A list of packages that must be installed before running this tutorial. This value is not currently used, but might be in the future.
+                required: false
+                examples:
+                  - tidyverse
+                sequence:
+                  - type: str
+                    required: true
     lang:
         type: str
         enum:
             - es
             - en
+            - fr
         description: |
             The document language.
     voice:
@@ -399,13 +428,27 @@ mapping:
                       type: str
                       description: |
                         URL of the external resource
+    copyright:
+        type: str
+        description: |
+          A copyright attribution string, as required by some licenses.
+        examples:
+            - © Copyright 2021-2023 University of Technology Sydney, The University of Manchester UK and RO-Crate contributors
     license:
         type: str
         description: |
             An [SPDX](https://spdx.org/) identifier for the alternative license that is used for that particular material. This is **only** relevant for materials which have been imported from an external source and were originally licensed under another license. For new materials we strongly encourage contributors to not use this key as materials are CC-BY, by default.
         examples:
             - MIT
-    enable:
+            - Apache-2.0
+    draft:
         type: bool
         description: |
-            `false` to hide your tutorial from the topic page (optional). This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.
+            `true` to hide your tutorial from the topic page (optional). This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.
+    og_image:
+        type: str
+        description: |
+            A custom image to show on the link preview in external applications (e.g. when the URL is pasted into Twitter)
+        pattern: /^\/.*/
+        examples:
+            - /assets/images/gat.png

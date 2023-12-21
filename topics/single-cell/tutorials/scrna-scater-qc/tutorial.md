@@ -8,7 +8,6 @@ redirect_from:
   - /topics/transcriptomics/tutorials/scrna-scater-qc/tutorial
 zenodo_link: 'https://zenodo.org/record/3386291'
 tags:
-  - single-cell
 questions:
 - How to ensure the quality of single-cell RNA-seq data?
 - What are the confounding factors that may affect the interpretation of downstream analyses?
@@ -40,8 +39,6 @@ contributors:
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
-
-# Introduction
 
 
 Single-cell RNA-seq (scRNA-seq) is emerging as a promising technology for analysing variability in cell populations. However, the combination of technical noise and intrinsic biological variability makes detecting technical artefacts particularly challenging. Removal of low-quality cells and detection of technical artefacts is critical for accurate downstream analysis.
@@ -90,6 +87,7 @@ We will use a pre-calculated expression matrix, along with some additional metad
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}

@@ -1,5 +1,5 @@
 ---
-layout: base_slides
+layout: tutorial_slides
 logo: "GTN"
 
 redirect_from:
@@ -245,9 +245,10 @@ name: setup
 
 - Training materials: https://training.galaxyproject.org
 - Galaxy (an instructor will tell you which Galaxy to use)
-  - Main: https://usegalaxy.org
-  - EU: https://usegalaxy.eu
-  - Australia: https://usegalaxy.org.au
+  {% assign servers = list_usegalaxy_servers_shuffle %}
+  {% for server in servers %}
+  - {{ server.name }} {{ server.url }}
+  {% endfor %}
   - [Other](https://galaxyproject.org/use/)
 - Register/log in
   - You may receive an e-mail with an activation link

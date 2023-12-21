@@ -48,7 +48,7 @@ contributions:
     - hexylena
   funding:
     - carpentries
-    - erasmusplus
+    - gallantries
 
 ---
 
@@ -170,7 +170,7 @@ Before diving in the tutorial, we need to open {% tool [RStudio](interactive_too
 > > $ conda create -n name_of_your_env nano git
 > > $ conda activate name_of_your_env
 > > ```
-> {: .code_in}
+> {: .code-in}
 >
 >
 > | Software | Version | Manual | Available for | Description |
@@ -359,10 +359,9 @@ same commands to choose another editor or update your email address.
 > More generally, you can get the list of available `git` commands and further resources of the Git manual typing:
 >
 > > <code-in-title>Access available commands</code-in-title>
-> >```bash
-> >$ git help
-> >```
->
+> > ```bash
+> > $ git help
+> > ```
 > {: .code-in}
 >
 {: .tip}
@@ -499,7 +498,6 @@ wording of the output might be slightly different.
 > > to the `suspects` directory.
 > >
 > {: .solution}
-
 {: .question}
 
 > <tip-title>"Nested" repositories</tip-title>
@@ -1143,7 +1141,7 @@ Let's save our changes:
 >    > ```
 >    {: .code-in}
 >
->    > Note, our newly created empty directory `mysteries` does not appear in
+>    Note, our newly created empty directory `mysteries` does not appear in
 >    the list of untracked files even if we explicitly add it (_via_ `git add`) to our
 >    repository. This is the reason why you will sometimes see `.gitkeep` files
 >    in otherwise empty directories. Unlike `.gitignore`, these files are not special

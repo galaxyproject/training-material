@@ -1,5 +1,5 @@
 ---
-username: tklingstrom
+username: TKlingstrom
 layout: training_philosophy
 redirect_from:
   - /topics/instructors/philosophies/2018-11-02-tklingstrom

@@ -1,27 +1,41 @@
-module Jekyll
-  class PlaintextSlidesGenerator < Generator
-    safe true
+# frozen_string_literal: true
 
+module Jekyll
+  # Convert our slides to plaintext
+  # It's not a great convesion, the CSS classes are retained which are ugly
+  # But there's no good way to parse those out since they use a wildly nonstandard syntax
+  class PlaintextSlidesGenerator < Generator
+    SLIDE_LAYOUTS = %w[
+      tutorial_slides
+      base_slides
+      introduction_slides
+      tutorial_slides_ai4life
+    ].freeze
+
+    ##
+    # Generate a plaintext version of the slides
+    # Params:
+    # +site+:: The +Jekyll::Site+ object
     def generate(site)
       # layout: tutorial_slides
       # layout: base_slides
 
-      site.pages.select{|page| page.data['layout'] == 'tutorial_slides' or page.data['layout'] == 'base_slides' or page.data['layout'] == 'introduction_slides'}.each do |page|
+      site.pages.select { |page| SLIDE_LAYOUTS.include? page.data['layout'] }.each do |page|
         dir = File.dirname(File.join('.', page.url))
         page2 = Jekyll::Page.new(site, site.source, dir, page.name)
         page2.data['layout'] = 'slides-plain'
-        if page2.data.has_key?('lang') then
-          page2.basename = "slides-plain_#{page2.data['lang'].upcase}"
-        else
-          page2.basename = 'slides-plain'
-        end
-        page2.content = page2.content.gsub(/^name:\s*([^ ]+)\s*$/) {
-          anchor = $1
+        page2.basename = if page2.data.key?('lang')
+                           "slides-plain_#{page2.data['lang'].upcase}"
+                         else
+                           'slides-plain'
+                         end
+        page2.content = page2.content.gsub(/^name:\s*([^ ]+)\s*$/) do
+          anchor = ::Regexp.last_match(1)
 
           "<span id=\"#{anchor.strip}\"><i class=\"fas fa-link\" aria-hidden=\"true\"></i> #{anchor}</span>"
-        }
-        if page2.data.has_key?('redirect_from')
-          page2.data['redirect_from'].map{|x| x.gsub!(/\/slides/, '/slides-plain') }
+        end
+        if page2.data.key?('redirect_from')
+          page2.data['redirect_from'].map { |x| x.gsub!(%r{/slides}, '/slides-plain') }
         end
 
         site.pages << page2

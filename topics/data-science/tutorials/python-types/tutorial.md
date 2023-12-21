@@ -35,6 +35,7 @@ contributors:
 priority: 3
 notebook:
   language: python
+  pyolite: true
 ---
 
 Python is a typed language, data has a type, and different types of data cannot always be connected immediately and might need some conversion step before they can be used together. For instance if you add a number to a number, what should happen? If you add a number to a message, what do you expect will happen?

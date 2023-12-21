@@ -21,6 +21,7 @@ tags:
   - ansible
   - monitoring
   - git-gat
+  - broken
 requirements:
   - type: "internal"
     topic_name: admin
@@ -28,6 +29,17 @@ requirements:
       - ansible
       - ansible-galaxy
 ---
+
+> <warning-title>Currently Broken, Requires Separate Domain</warning-title>
+> Reports does not work, under a path prefix (the default setup that most
+> people will use.) It is completely broken and the developers have no plans to fix it in the near term.
+> See
+> [galaxyproject/galaxy#15966](https://github.com/galaxyproject/galaxy/issues/15966) for more details.
+>
+> However, it should still function with a separate domain, if that is possible
+> for your setup. Otherwise, it **will not work.** If you wish to follow this
+> tutorial, please be aware of this.
+{: .warning}
 
 The reports application gives some pre-configured analytics screens. These are very easy to setup and can help with debugging issues in Galaxy.
 
@@ -53,84 +65,48 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- /dev/null
 >    +++ b/templates/galaxy/config/reports.yml
->    @@ -0,0 +1,26 @@
->    +uwsgi:
->    +    socket: 127.0.0.1:9001
->    +    buffer-size: 16384
->    +    processes: 1
->    +    threads: 4
->    +    offload-threads: 2
->    +    static-map: /static/style={{ galaxy_server_dir }}/static/style/blue
->    +    static-map: /static={{ galaxy_server_dir }}/static
->    +    static-map: /favicon.ico=static/favicon.ico
->    +    master: true
->    +    virtualenv: {{ galaxy_venv_dir }}
->    +    pythonpath: {{ galaxy_server_dir }}/lib
->    +    mount: /reports=galaxy.webapps.reports.buildapp:uwsgi_app()
->    +    manage-script-name: true
->    +    thunder-lock: false
->    +    die-on-term: true
->    +    hook-master-start: unix_signal:2 gracefully_kill_them_all
->    +    hook-master-start: unix_signal:15 gracefully_kill_them_all
->    +    py-call-osafterfork: true
->    +    enable-threads: true
+>    @@ -0,0 +1,4 @@
 >    +reports:
->    +    cookie-path: /reports
 >    +    database_connection: "{{ galaxy_config.galaxy.database_connection }}"
->    +    file_path: /data
->    +    filter-with: proxy-prefix
->    +    template_cache_path: "{{ galaxy_mutable_data_dir }}/compiled_templates"
+>    +    file_path: "{{ galaxy_config.galaxy.file_path }}"
+>    +    template_cache_path: "{{ galaxy_mutable_data_dir }}/compiled_templates/reports/"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup reports config file"}
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
 >
-> 2. In your `galaxyservers` group variables file, tell the playbook to deploy the reports configuration file:
+> 2. In your `galaxyservers` group variables file, tell the playbook to deploy the reports configuration file, and gravity to manage reports:
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -51,6 +51,7 @@ galaxy_root: /srv/galaxy
->     galaxy_user: {name: galaxy, shell: /bin/bash}
->     galaxy_commit_id: release_22.05
->     galaxy_force_checkout: true
->    +galaxy_reports_path: "{{ galaxy_config_dir }}/reports.yml"
->     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->     miniconda_version: 4.7.12
->     miniconda_manage_dependencies: false
->    @@ -131,6 +132,8 @@ galaxy_config_templates:
+>    @@ -148,6 +148,11 @@ galaxy_config:
+>             pools:
+>               - job-handlers
+>               - workflow-schedulers
+>    +    reports:
+>    +      enable: true
+>    +      url_prefix: /reports
+>    +      bind: "unix:{{ galaxy_mutable_config_dir }}/reports.sock"
+>    +      config_file: "{{ galaxy_config_dir }}/reports.yml"
+>     
+>     galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
+>     
+>    @@ -168,6 +173,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->       - src: templates/galaxy/config/tool_destinations.yml
->         dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
+>       - src: templates/galaxy/config/job_resource_params_conf.xml.j2
+>         dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
 >    +  - src: templates/galaxy/config/reports.yml
->    +    dest: "{{ galaxy_reports_path }}"
+>    +    dest: "{{ galaxy_config.gravity.reports.config_file }}"
 >     
->     galaxy_local_tools:
->     - testing.xml
+>     galaxy_extra_dirs:
+>       - /data
 >    {% endraw %}
 >    ```
->    {: data-commit="Deploy reports config to the config directory"}
+>    {: data-commit="Enable gravity to manage reports"}
 >
->
-> 3. Similar to Galaxy we will again use systemd to manage the Reports process.
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -144,6 +144,7 @@ galaxy_dynamic_job_rules:
->     
->     # systemd
->     galaxy_manage_systemd: true
->    +galaxy_manage_systemd_reports: yes
->     galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
->     
->     # Certbot
->    {% endraw %}
->    ```
->    {: data-commit="Enable the reports systemd unit"}
 >
 > 4. Then we need to tell NGINX it should serve our Reports app under `<server_url>/reports` url. Edit your `templates/nginx/galaxy.j2` file, and within the server block, add a block for proxying the reports application. It should look like:
 >
@@ -138,16 +114,15 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -91,4 +91,10 @@ server {
->         }
->     
->         {{ tiaas_nginx_routes }}
+>    @@ -103,4 +103,9 @@ server {
+>     		proxy_set_header Upgrade $http_upgrade;
+>     		proxy_set_header Connection "upgrade";
+>     	}
 >    +
->    +    location /reports/ {
->    +        uwsgi_pass           127.0.0.1:9001;
->    +        uwsgi_param          UWSGI_SCHEME $scheme;
->    +        include              uwsgi_params;
->    +    }
+>    +	location /reports/ {
+>    +		proxy_pass http://{{ galaxy_config.gravity.reports.bind }}:/;
+>    +	}
+>    +
 >     }
 >    {% endraw %}
 >    ```
@@ -162,7 +137,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 6. The reports application should be available, under `<server_url>/reports/`.>
+> 6. The reports application should be available, under [`/reports`](https://my.gat.galaxy.training/?path=/reports)
 {: .hands_on}
 
 > ```bash
@@ -175,4 +150,8 @@ The reports application is included with the Galaxy codebase and this tutorial a
 > But notice that your Reports server is not secured! Check out the [External Authentication]({% link topics/admin/tutorials/external-auth/tutorial.md %}) tutorial for information on securing Reports.
 {: .comment}
 
-{% snippet topics/admin/faqs/missed-something.md step=13 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=15 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="reports" %}

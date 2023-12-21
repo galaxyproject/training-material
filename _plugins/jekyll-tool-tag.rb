@@ -1,6 +1,8 @@
-module Jekyll
-  class ToolTag < Liquid::Tag
+# frozen_string_literal: true
 
+module Jekyll
+  # The tool tag which allows us to do fancy tool links
+  class ToolTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super
       @text = text.strip
@@ -19,19 +21,49 @@ module Jekyll
 
       if m
         # check if a variable was provided for the tool id
-        if context[m[2].tr('{}','')]
-          tool = context[m[2].tr('{}','')]
+        tool = context[m[2].tr('{}', '')] || m[2]
+        version = tool.split('/').last
+
+        if tool.count('/').zero?
+          "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" aria-role=\"button\">" \
+            '<i class="fas fa-wrench" aria-hidden="true"></i> ' \
+            "<strong>#{m[1]}</strong>" \
+            '</span>'
         else
-          tool = m[2]
+          "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" aria-role=\"button\">" \
+            '<i class="fas fa-wrench" aria-hidden="true"></i> ' \
+            "<strong>#{m[1]}</strong> " \
+            '(' \
+            '<i class="fas fa-cubes" aria-hidden="true"></i> ' \
+            "Galaxy version #{version}" \
+            ')' \
+            '</span>'
         end
-
-        %Q(<span class="tool" data-tool="#{tool}" title="Tested with #{tool}"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: #{tool}</span></span> )
       else
-        %Q(<span><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> )
+        %(<span><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>)
       end
+    end
+  end
 
+  # Same for the workflow tags
+  class WorkflowTag < Liquid::Tag
+    def initialize(tag_name, text, tokens)
+      super
+      @text = text.strip
+    end
+
+    def render(_context)
+      format = /\[(?<title>.*)\]\((?<url>.*)\)/
+      m = @text.match(format)
+      # puts "Found #{@text} => #{m[:title]}, #{m[:url]}"
+
+      # It MUST be this format:
+      # {% workflow [Main Workflow](topics/x/tutorials/y/material/workflows/main.ga) %}
+      "<span class=\"workflow\" data-workflow=\"#{m[:url]}\"><strong>#{m[:title]}</strong> " \
+        '<i class="fas fa-share-alt" aria-hidden="true"></i></span>'
     end
   end
 end
 
 Liquid::Template.register_tag('tool', Jekyll::ToolTag)
+Liquid::Template.register_tag('workflow', Jekyll::WorkflowTag)

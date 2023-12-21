@@ -1,0 +1,610 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-9906-0673",
+            "name": "Anna Syme"
+        }
+    ],
+    "format-version": "0.1",
+    "name": "Racon polish with long reads, x4",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Assembly to be polished"
+                }
+            ],
+            "label": "Assembly to be polished",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 202.109375,
+                "height": 81,
+                "left": -338,
+                "right": -138,
+                "top": 121.109375,
+                "width": 200,
+                "x": -338,
+                "y": 121.109375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c7796c36-adf8-49e4-a8e4-66e606d70311",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "long reads"
+                }
+            ],
+            "label": "long reads",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 325.71875,
+                "height": 61,
+                "left": -333.5,
+                "right": -133.5,
+                "top": 264.71875,
+                "width": 200,
+                "x": -333.5,
+                "y": 264.71875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e2e4a70b-6e36-4b8b-bdf6-12b97189a6bd",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "minimap setting (for long reads) "
+                }
+            ],
+            "label": "minimap setting (for long reads) ",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 501.34375,
+                "height": 101,
+                "left": -337.421875,
+                "right": -137.421875,
+                "top": 400.34375,
+                "width": 200,
+                "x": -337.421875,
+                "y": 400.34375
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": \"map-ont\", \"parameter_type\": \"text\", \"optional\": true}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "fb80c05c-08d4-4ac2-b4bf-81ed906e4d72",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "3a9f6995-2abf-4007-9a99-a0a22a202044"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "Map raw reads to assembly; output paf",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.20+galaxy2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "fastq_input|analysis_type_selector": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "fastq_input|fastq_input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Minimap2: map long reads to assembly",
+            "name": "Map with minimap2",
+            "outputs": [
+                {
+                    "name": "alignment_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 176.484375,
+                "height": 272,
+                "left": 39.640625,
+                "right": 239.640625,
+                "top": -95.515625,
+                "width": 200,
+                "x": 39.640625,
+                "y": -95.515625
+            },
+            "post_job_actions": {
+                "HideDatasetActionalignment_output": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "alignment_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.20+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "09b53c1d4ab1",
+                "name": "minimap2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": \"true\"}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": {\"__class__\": \"ConnectedValue\"}}, \"indexing_options\": {\"H\": \"false\", \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": \"false\", \"L\": \"false\", \"K\": null, \"cs\": null, \"c\": \"false\", \"eqx\": \"false\", \"Y\": \"false\"}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": \"false\", \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.20+galaxy2",
+            "type": "tool",
+            "uuid": "0c06144f-d1ac-4b45-9669-1ddf11fcb06b",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "corrected_reads": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "overlaps": {
+                    "id": 3,
+                    "output_name": "alignment_output"
+                },
+                "reads": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Racon: polish 1",
+            "name": "Racon",
+            "outputs": [
+                {
+                    "name": "consensus",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "bottom": 595.359375,
+                "height": 172,
+                "left": 120.640625,
+                "right": 320.640625,
+                "top": 423.359375,
+                "width": 200,
+                "x": 120.640625,
+                "y": 423.359375
+            },
+            "post_job_actions": {
+                "HideDatasetActionconsensus": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "consensus"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13",
+            "tool_shed_repository": {
+                "changeset_revision": "a199cd7ac344",
+                "name": "racon",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"corrected_reads\": {\"__class__\": \"ConnectedValue\"}, \"e\": \"0.3\", \"f\": \"false\", \"g\": \"-8\", \"m\": \"5\", \"overlaps\": {\"__class__\": \"ConnectedValue\"}, \"q\": \"10.0\", \"reads\": {\"__class__\": \"ConnectedValue\"}, \"u\": \"true\", \"w\": \"500\", \"x\": \"-4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.4.13",
+            "type": "tool",
+            "uuid": "6c144354-91f2-49dd-a1f5-7c4119859730",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "Map raw reads to assembly; output paf",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.20+galaxy2",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "fastq_input|analysis_type_selector": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "fastq_input|fastq_input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 4,
+                    "output_name": "consensus"
+                }
+            },
+            "inputs": [],
+            "label": "Minimap2: map long reads to polished assembly 1",
+            "name": "Map with minimap2",
+            "outputs": [
+                {
+                    "name": "alignment_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 209.875,
+                "height": 292,
+                "left": 360.859375,
+                "right": 560.859375,
+                "top": -82.125,
+                "width": 200,
+                "x": 360.859375,
+                "y": -82.125
+            },
+            "post_job_actions": {
+                "HideDatasetActionalignment_output": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "alignment_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.20+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "09b53c1d4ab1",
+                "name": "minimap2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": \"true\"}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": {\"__class__\": \"ConnectedValue\"}}, \"indexing_options\": {\"H\": \"false\", \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": \"false\", \"L\": \"false\", \"K\": null, \"cs\": null, \"c\": \"false\", \"eqx\": \"false\", \"Y\": \"false\"}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": \"false\", \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.20+galaxy2",
+            "type": "tool",
+            "uuid": "c1b83dad-a8ed-42cb-951f-73f59f2dfa92",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "corrected_reads": {
+                    "id": 4,
+                    "output_name": "consensus"
+                },
+                "overlaps": {
+                    "id": 5,
+                    "output_name": "alignment_output"
+                },
+                "reads": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Racon: polish 2",
+            "name": "Racon",
+            "outputs": [
+                {
+                    "name": "consensus",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "bottom": 562.203125,
+                "height": 172,
+                "left": 421.9375,
+                "right": 621.9375,
+                "top": 390.203125,
+                "width": 200,
+                "x": 421.9375,
+                "y": 390.203125
+            },
+            "post_job_actions": {
+                "HideDatasetActionconsensus": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "consensus"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13",
+            "tool_shed_repository": {
+                "changeset_revision": "a199cd7ac344",
+                "name": "racon",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"corrected_reads\": {\"__class__\": \"ConnectedValue\"}, \"e\": \"0.3\", \"f\": \"false\", \"g\": \"-8\", \"m\": \"5\", \"overlaps\": {\"__class__\": \"ConnectedValue\"}, \"q\": \"10.0\", \"reads\": {\"__class__\": \"ConnectedValue\"}, \"u\": \"true\", \"w\": \"500\", \"x\": \"-4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.4.13",
+            "type": "tool",
+            "uuid": "3208491e-b831-4238-957e-5b7388d7ff8d",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "Map raw reads to assembly; output paf",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.20+galaxy2",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "fastq_input|analysis_type_selector": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "fastq_input|fastq_input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 6,
+                    "output_name": "consensus"
+                }
+            },
+            "inputs": [],
+            "label": "Minimap2: map long reads to polished assembly 2",
+            "name": "Map with minimap2",
+            "outputs": [
+                {
+                    "name": "alignment_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 224.421875,
+                "height": 292,
+                "left": 660.75,
+                "right": 860.75,
+                "top": -67.578125,
+                "width": 200,
+                "x": 660.75,
+                "y": -67.578125
+            },
+            "post_job_actions": {
+                "HideDatasetActionalignment_output": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "alignment_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.20+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "09b53c1d4ab1",
+                "name": "minimap2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": \"true\"}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": {\"__class__\": \"ConnectedValue\"}}, \"indexing_options\": {\"H\": \"false\", \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": \"false\", \"L\": \"false\", \"K\": null, \"cs\": null, \"c\": \"false\", \"eqx\": \"false\", \"Y\": \"false\"}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": \"false\", \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.20+galaxy2",
+            "type": "tool",
+            "uuid": "42af524b-7f74-4c75-8d78-f6888078dd2e",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "corrected_reads": {
+                    "id": 6,
+                    "output_name": "consensus"
+                },
+                "overlaps": {
+                    "id": 7,
+                    "output_name": "alignment_output"
+                },
+                "reads": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Racon: polish 3",
+            "name": "Racon",
+            "outputs": [
+                {
+                    "name": "consensus",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "bottom": 532.015625,
+                "height": 172,
+                "left": 751.71875,
+                "right": 951.71875,
+                "top": 360.015625,
+                "width": 200,
+                "x": 751.71875,
+                "y": 360.015625
+            },
+            "post_job_actions": {
+                "HideDatasetActionconsensus": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "consensus"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13",
+            "tool_shed_repository": {
+                "changeset_revision": "a199cd7ac344",
+                "name": "racon",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"corrected_reads\": {\"__class__\": \"ConnectedValue\"}, \"e\": \"0.3\", \"f\": \"false\", \"g\": \"-8\", \"m\": \"5\", \"overlaps\": {\"__class__\": \"ConnectedValue\"}, \"q\": \"10.0\", \"reads\": {\"__class__\": \"ConnectedValue\"}, \"u\": \"true\", \"w\": \"500\", \"x\": \"-4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.4.13",
+            "type": "tool",
+            "uuid": "21f339bd-ebc1-4c73-a976-5d0b9ab2127a",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "Map raw reads to assembly; output paf",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.20+galaxy2",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "fastq_input|analysis_type_selector": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "fastq_input|fastq_input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 8,
+                    "output_name": "consensus"
+                }
+            },
+            "inputs": [],
+            "label": "Minimap2: map long reads to polished assembly 3",
+            "name": "Map with minimap2",
+            "outputs": [
+                {
+                    "name": "alignment_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 234.53125,
+                "height": 292,
+                "left": 978.53125,
+                "right": 1178.53125,
+                "top": -57.46875,
+                "width": 200,
+                "x": 978.53125,
+                "y": -57.46875
+            },
+            "post_job_actions": {
+                "HideDatasetActionalignment_output": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "alignment_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.20+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "09b53c1d4ab1",
+                "name": "minimap2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": \"true\"}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": {\"__class__\": \"ConnectedValue\"}}, \"indexing_options\": {\"H\": \"false\", \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": \"false\", \"L\": \"false\", \"K\": null, \"cs\": null, \"c\": \"false\", \"eqx\": \"false\", \"Y\": \"false\"}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": \"false\", \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.20+galaxy2",
+            "type": "tool",
+            "uuid": "7d36291e-aa76-4312-9943-b5e56d0e90c5",
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "corrected_reads": {
+                    "id": 8,
+                    "output_name": "consensus"
+                },
+                "overlaps": {
+                    "id": 9,
+                    "output_name": "alignment_output"
+                },
+                "reads": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Racon",
+                    "name": "corrected_reads"
+                },
+                {
+                    "description": "runtime parameter for tool Racon",
+                    "name": "overlaps"
+                },
+                {
+                    "description": "runtime parameter for tool Racon",
+                    "name": "reads"
+                }
+            ],
+            "label": "Racon: polish 4",
+            "name": "Racon",
+            "outputs": [
+                {
+                    "name": "consensus",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "bottom": 547.671875,
+                "height": 212,
+                "left": 1158.078125,
+                "right": 1358.078125,
+                "top": 335.671875,
+                "width": 200,
+                "x": 1158.078125,
+                "y": 335.671875
+            },
+            "post_job_actions": {
+                "RenameDatasetActionconsensus": {
+                    "action_arguments": {
+                        "newname": "Racon_long_reads_polished_assembly.fasta"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "consensus"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13",
+            "tool_shed_repository": {
+                "changeset_revision": "a199cd7ac344",
+                "name": "racon",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"corrected_reads\": {\"__class__\": \"RuntimeValue\"}, \"e\": \"0.3\", \"f\": \"false\", \"g\": \"-8\", \"m\": \"5\", \"overlaps\": {\"__class__\": \"RuntimeValue\"}, \"q\": \"10.0\", \"reads\": {\"__class__\": \"RuntimeValue\"}, \"u\": \"true\", \"w\": \"500\", \"x\": \"-4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.4.13",
+            "type": "tool",
+            "uuid": "53f4572e-3a4a-4585-89ab-9459f8a61720",
+            "workflow_outputs": [
+                {
+                    "label": "Assembly polished by long reads using Racon",
+                    "output_name": "consensus",
+                    "uuid": "bcf0f03c-5951-46a7-aa38-545aed9bc183"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "LG-WF"
+    ],
+    "uuid": "5e6c8930-7b57-4b16-a3c8-935ca7c08ebd",
+    "version": 18
+}

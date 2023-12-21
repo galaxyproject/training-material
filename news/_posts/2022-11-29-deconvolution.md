@@ -1,7 +1,8 @@
 ---
 title: "New Tutorial Suite: Deconvolution with MuSiC, from public data to disease interrogation!"
 tags: [new tutorial, single-cell, transcriptomics]
-contributors: [mtekman, nomadscientist]
+contributions:
+  authorship: [mtekman, nomadscientist]
 cover: "news/images/heatmap.png"
 coveralt: "Heatmap with columns of cell types vs rows of inferred and actual cell type proportions for A and B samples. Cell colours are similar between actual and inferred."
 layout: news

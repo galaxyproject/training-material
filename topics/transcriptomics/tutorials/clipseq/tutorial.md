@@ -26,7 +26,6 @@ contributors:
   - bebatut
 ---
 
-# Introduction
 
 
 The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* ({% cite VanNostrand2016 %}). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from *Nostrand et al.* ({% cite VanNostrand2016 %}). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from [Ensembl](http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
@@ -648,8 +647,8 @@ In order to use the workflow linked to this tutorial, you have to create two lis
 > * Click on the check box icon in the history.
 > ![builddatasetpairs1](../../images/transcriptomics_images/clipseq_build_list_data_set_pairs_1.png "Select data sets for your list of data set pairs.")
 > * Select the data files for your experiment (or control).
-> * Select **For all selected...** below the check box icon.
-> * Select **Build List of Dataset Paris**
+> * Select **n of N selected** right to the check box icon.
+> * Select **Build List of Dataset Pairs**
 > * In the new window, if you see no files and a warning, then select **Clear filters**. After that, organise the files into forward-reverse pairs.
 > ![builddatasetpairs2](../../images/transcriptomics_images/clipseq_build_list_data_set_pairs_2.png "Organise the data sets into pairs.")
 >

@@ -35,6 +35,7 @@ contributors:
 priority: 4
 notebook:
   language: python
+  pyolite: true
 ---
 
 
@@ -572,8 +573,9 @@ print(f'second time: {values}') # should print [3, 5]
 > > lithium
 > >
 > > ```
-> The first statement prints the whole string, since the slice goes beyond the total length of the string.
-> The second statement returns an empty string, because the slice goes "out of bounds" of the string.
+> >
+> > The first statement prints the whole string, since the slice goes beyond the total length of the string.
+> > The second statement returns an empty string, because the slice goes "out of bounds" of the string.
 > {: .solution}
 {: .question}
 

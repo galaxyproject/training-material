@@ -17,32 +17,33 @@
     ],
     "format-version": "0.1",
     "license": "MIT",
-    "name": "Nanopore Datasets - Taxonomy Profiling and Visualization",
+    "name": "Pathogen Detection-Nanopore-Taxonomy-Profiling-and-Visualization-collection",
     "steps": {
         "0": {
-            "annotation": "Output from Nanopore - Preprocessing workflow",
+            "annotation": "Output collection from Nanopore - Preprocessing workflow",
             "content_id": null,
             "errors": null,
             "id": 0,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "Output from Nanopore - Preprocessing workflow",
-                    "name": "Nanopore Preprocessed reads"
+                    "description": "Output collection from Nanopore - Preprocessing workflow",
+                    "name": "Nanopore Preprocessed reads collection"
                 }
             ],
-            "label": "Nanopore Preprocessed reads",
-            "name": "Input dataset",
+            "label": "Nanopore Preprocessed reads collection",
+            "name": "Input dataset collection",
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 28
+                "top": 61.5
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
             "tool_version": null,
-            "type": "data_input",
-            "uuid": "f0349c2a-f10e-4ba0-8b6b-b587e975a6e9",
+            "type": "data_collection_input",
+            "uuid": "7af334e3-a2d8-4aa9-918a-2d0b779eea7d",
+            "when": null,
             "workflow_outputs": []
         },
         "1": {
@@ -61,19 +62,20 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 259,
-                "top": 263
+                "left": 283,
+                "top": 222
             },
             "tool_id": null,
             "tool_state": "{\"optional\": true, \"tag\": \"\"}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "b6bb005c-d328-46c8-a26e-e0819fd6ec3c",
+            "uuid": "6eae4699-bf86-4c49-8017-5fc7fa0176ba",
+            "when": null,
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "output",
-                    "uuid": "b68495ad-e3d9-4178-b032-ffa08e766f4f"
+                    "uuid": "85ec04da-85bf-4cca-b23d-74c08d08480b"
                 }
             ]
         },
@@ -88,12 +90,7 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Kraken2",
-                    "name": "single_paired"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Kraken2",
             "outputs": [
@@ -107,8 +104,8 @@
                 }
             ],
             "position": {
-                "left": 258,
-                "top": 9
+                "left": 278,
+                "top": 4
             },
             "post_job_actions": {
                 "RenameDatasetActionoutput": {
@@ -133,20 +130,21 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"confidence\": \"0.0\", \"kraken2_database\": \"2022-09-04T165121Z_standard_prebuilt_pluspf_2022-06-07\", \"min_base_quality\": \"0\", \"minimum_hit_groups\": \"2\", \"quick\": \"false\", \"report\": {\"create_report\": \"true\", \"use_mpa_style\": \"false\", \"report_zero_counts\": \"false\", \"report_minimizer_data\": \"false\"}, \"single_paired\": {\"single_paired_selector\": \"no\", \"__current_case__\": 2, \"input_sequences\": {\"__class__\": \"RuntimeValue\"}}, \"split_reads\": \"false\", \"use_names\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.1.1+galaxy1",
+            "tool_state": "{\"confidence\": \"0.0\", \"kraken2_database\": \"2022-09-04T165121Z_standard_prebuilt_pluspf_2022-06-07\", \"min_base_quality\": \"0\", \"minimum_hit_groups\": \"2\", \"quick\": false, \"report\": {\"create_report\": true, \"use_mpa_style\": false, \"report_zero_counts\": false, \"report_minimizer_data\": false}, \"single_paired\": {\"single_paired_selector\": \"no\", \"__current_case__\": 2, \"input_sequences\": {\"__class__\": \"ConnectedValue\"}}, \"split_reads\": false, \"use_names\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
             "type": "tool",
-            "uuid": "fce99ee9-420e-4aa0-9e25-fec32febd376",
+            "uuid": "f7662c80-180a-4d06-8cad-85e4573852ff",
+            "when": null,
             "workflow_outputs": [
                 {
                     "label": "Kraken2 with PlusPF database output report",
                     "output_name": "report_output",
-                    "uuid": "b2950117-8b82-4ffd-b913-414936f02460"
+                    "uuid": "556fef83-c3d7-41eb-9843-674ed36d75be"
                 },
                 {
                     "label": "Kraken2 with PlusPF database output",
                     "output_name": "output",
-                    "uuid": "420588f3-938c-40d9-9118-7390b0883bc8"
+                    "uuid": "c11d1cab-2058-4e3f-a7e6-06ceb99dc67f"
                 }
             ]
         },
@@ -165,16 +163,7 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Kraken-biom",
-                    "name": "kraken_reports"
-                },
-                {
-                    "description": "runtime parameter for tool Kraken-biom",
-                    "name": "metadata"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Kraken-biom",
             "outputs": [
@@ -188,7 +177,7 @@
                 }
             ],
             "position": {
-                "left": 574,
+                "left": 583,
                 "top": 0
             },
             "post_job_actions": {
@@ -214,20 +203,21 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"fmt\": \"json\", \"kraken_reports\": {\"__class__\": \"RuntimeValue\"}, \"max\": \"O\", \"metadata\": {\"__class__\": \"RuntimeValue\"}, \"min\": \"S\", \"otu_fp\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.2.0+galaxy1",
+            "tool_state": "{\"fmt\": \"json\", \"kraken_reports\": {\"__class__\": \"ConnectedValue\"}, \"max\": \"O\", \"metadata\": {\"__class__\": \"ConnectedValue\"}, \"min\": \"S\", \"otu_fp\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
             "type": "tool",
-            "uuid": "cd889680-6a8e-412c-a41a-5aeea9bd72aa",
+            "uuid": "ccc200fa-cd06-47f6-b2b1-4299998bbb7c",
+            "when": null,
             "workflow_outputs": [
-                {
-                    "label": "Kraken-biom output JSON file",
-                    "output_name": "biomOutput",
-                    "uuid": "f29c6ab2-a90b-4f08-bd49-7713bacd8af3"
-                },
                 {
                     "label": "OTU mother.map output",
                     "output_name": "otuOutput",
-                    "uuid": "39f37493-f1ae-4e71-a2f4-0754afb56cbb"
+                    "uuid": "d0e1ffbd-ad44-49c3-ae37-2113f7634012"
+                },
+                {
+                    "label": "Kraken-biom output JSON file",
+                    "output_name": "biomOutput",
+                    "uuid": "355bdba9-97d2-4c09-b902-79f19219b7e8"
                 }
             ]
         },
@@ -252,8 +242,8 @@
                 }
             ],
             "position": {
-                "left": 896,
-                "top": 4
+                "left": 904,
+                "top": 3
             },
             "post_job_actions": {
                 "RenameDatasetActionoutfile": {
@@ -266,14 +256,15 @@
             },
             "tool_id": "interactive_tool_phinch",
             "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.1",
+            "tool_version": null,
             "type": "tool",
-            "uuid": "a924e11f-d344-4736-94aa-38f6e5a3d2eb",
+            "uuid": "07554896-1e38-47a3-9cc3-e8968b85fec7",
+            "when": null,
             "workflow_outputs": [
                 {
                     "label": "Taxonomy Visualization with Metadata, use Active interactive tools under User",
                     "output_name": "outfile",
-                    "uuid": "53750997-61d8-4f93-8220-68c1a1c633a6"
+                    "uuid": "1f7547ba-6fde-4f7f-b44e-2d4f75272fc2"
                 }
             ]
         }
@@ -282,6 +273,6 @@
         "microbiome",
         "nanopore"
     ],
-    "uuid": "06c9837e-0e3e-4e74-8370-2b873399c9c0",
-    "version": 21
+    "uuid": "c4d34a19-9130-4e81-803f-1db29345575e",
+    "version": 5
 }

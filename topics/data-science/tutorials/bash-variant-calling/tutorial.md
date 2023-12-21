@@ -12,12 +12,15 @@ key_points:
   - "Bioinformatic command line tools are collections of commands that can be used to carry out bioinformatic analyses."
   - "To use most powerful bioinformatic tools, you will need to use the command line."
   - "There are many different file formats for storing genomics data. It is important to understand what type of information is contained in each file, and how it was derived."
-contributors:
+contributions:
+  authorship:
   - Sofokli5
   - fpsom
   - shiltemann
   - hexylena
   - carpentries
+  funding:
+  - gallantries
 ---
 
 
@@ -124,7 +127,7 @@ The alignment process consists of two steps:
 > > $ mv sub/ ~/dc_workshop/data/trimmed_fastq_small
 > > ```
 > {: .code-in}
-> >
+>
 > You will also need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because `mkdir` can accept multiple new directory names as input.
 >
 > > <code-in-title>Create result directories</code-in-title>
@@ -351,7 +354,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 
 > <hands-on-title>Explore the VCF format:</hands-on-title>
 >
-> > {% icon code-in%}
+> > <code-in-title></code-in-title>
 > > ```bash
 > > $ less -S results/vcf/SRR2584866_final_variants.vcf
 > > ```
@@ -361,7 +364,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 > created, the version of bcftools that was used, the command line parameters used, and
 > some additional information:
 >
-> > {% icon code-out%} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > ##fileformat=VCFv4.2
 > > ##FILTER<ID=PASS,Description="All filters passed">

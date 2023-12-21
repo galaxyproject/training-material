@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Metaproteomics tutorial"
-edam_ontology: "topic_0121"
+edam_ontology: ["topic_0121"]
 zenodo_link: "https://doi.org/10.5281/zenodo.839701"
 questions:
   - "How can I match metaproteomic mass spectrometry data to peptide sequences derived from shotgun metagenomic data?"
@@ -22,11 +22,8 @@ contributors:
   - blankclemens
   - subinamehta
 subtopic: multi-omics
-tags: [microbiome]
+tags: [microgalaxy]
 ---
-
-# Introduction
-
 
 In this metaproteomics tutorial we will identify expressed proteins from a complex bacterial community sample.
 For this MS/MS data will be matched to peptide sequences provided through a FASTA file.
@@ -64,6 +61,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.
@@ -93,11 +91,9 @@ We have a choice to run all these steps using a single workflow, then discuss ea
 
 > <hands-on-title>Pretreatments</hands-on-title>
 >
-> 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow.ga) or download it to your computer.
->    - Import the workflow into Galaxy
+> 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/metaproteomics/workflows/workflow.ga" title="Pretreatments" %}
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -119,7 +115,7 @@ will be used to match MS/MS to peptide sequences via a sequence database search.
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.
 The created dataset collection of the three *MGF files* in the history is used as the MS/MS input.
 
-#### SearchGUI
+### SearchGUI
 
 > <hands-on-title>SearchGUI</hands-on-title>
 >
@@ -185,7 +181,7 @@ SearchGUI archive file) that will serve as an input for the next section, Peptid
 >
 {: .comment}
 
-#### PeptideShaker
+### PeptideShaker
 
 [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that
 processes data from the SearchGUI software tool. It serves to organize the Peptide-Spectral
@@ -264,7 +260,7 @@ proteins and provides a fast matching algorithm for peptides.
 > or operated on within Galaxy.
 {: .comment}
 
-#### Recieving the list of peptides: Query Tabular
+### Recieving the list of peptides: Query Tabular
 
 In order to use *Unipept*, a list containing the peptide sequences has to be generated.
 The tool **Query Tabular** can load tabular data (the PSM report in this case) into a SQLite data base.
@@ -366,7 +362,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 {: .hands_on}
 
 
-#### Retrieve taxonomy for peptides: Unipept
+### Retrieve taxonomy for peptides: Unipept
 
 The generated list of peptides can now be used to search via *Unipept*.
 We do a taxonomy analysis using the UniPept pept2lca function to return the taxonomic lowest common ancestor for each peptide:
@@ -498,7 +494,7 @@ This allows to get an insight of the **biological process**, the **molecular fun
 >
 {: .comment}
 
-#### Data upload
+### Data upload
 
 For this tutorial, a tabular file containing the relevant GO terms has been created. It contains the GO aspect, the ID and the name.
 It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839701.svg)](https://doi.org/10.5281/zenodo.839701).
@@ -535,7 +531,7 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 >
 {: .details}
 
-#### Retrieve GO IDs for peptides: Unipept
+### Retrieve GO IDs for peptides: Unipept
 
 The **UniPept** application `pept2prot` can be used to return the list of proteins containing each peptide.
 The option `retrieve extra information` option is set to `yes` so that we retrieve Gene Ontology assignments (`go_references`)
@@ -561,7 +557,7 @@ for each protein.
 {: .hands_on}
 
 
-#### Combine all information to quantify the GO results
+### Combine all information to quantify the GO results
 
 As a final step we will use **Query Tabular** in a more sophisticated way to combine all information to quantify the GO analysis. The three used file and the extracted information are:
 

@@ -27,8 +27,6 @@ contributors:
 
 ---
 
-# Introduction
-
 
 IWTomics ({% cite Cremona2018 %}) implements the Interval-Wise Testing (IWT; {% cite Pini2017 %}) for omics data. This
 inferential procedure tests for differences in "Omics" data between two groups
@@ -98,7 +96,7 @@ The first tool (IWTomics Load Smooth and Plot) imports a collection of genomic r
 
 # Step 2: Performing Interval-Wise Testing
 
-The second tool (IWTomics Test and Plot) statistically evaluates differences in genomic features between groups of regions along the genome. In particular, it implements the Interval-Wise Testing for omics data, an extended version of the Interval-Wise Testing for functional data presented in [Pini and Vantini (2017)](https://doi.org/10.1080/10485252.2017.1306627).
+The second tool (IWTomics Test and Plot) statistically evaluates differences in genomic features between groups of regions along the genome. In particular, it implements the Interval-Wise Testing for omics data, an extended version of the Interval-Wise Testing for functional data presented in {% cite Pini2017 %}.
 
 It allows to perform multiple two sample permutation tests between pairs of region datasets, on several features. It returns the adjusted p-value curves for every test and all possible scales. Moreover, it creates a graphical representation of the Interval-Wise Testing results and a summary plot (optional) with p-values at the maximum scale. The tool IWTomics Plot with Threshold on Test Scale permits to select the scale to be used in the plots.
 
@@ -128,5 +126,5 @@ The third tool (IWTomics Plot with Threshold on Test Scale) allows to select the
 
 > <details-title>Additional resources</details-title>
 >
-> Read more about **IWTomics** [here](https://bioconductor.org/packages/release/bioc/vignettes/IWTomics/inst/doc/IWTomics.pdf).
+> Read more about **IWTomics** [in the documentation (PDF)](https://bioconductor.org/packages/release/bioc/vignettes/IWTomics/inst/doc/IWTomics.pdf).
 {:.details}

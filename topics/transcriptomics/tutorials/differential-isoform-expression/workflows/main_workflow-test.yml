@@ -1,0 +1,107 @@
+- doc: Test for genome-wide alternative splicing analysis workflow
+  job:
+    Reference genome:
+      class: File
+      location: https://zenodo.org/record/7656544/files/GRCh38.p13.chrom5.fasta.gz
+    Genome annotation:
+      class: File
+      location: https://zenodo.org/record/7656544/files/GRCh38.p13.chrom5.gtf
+    RNA-seq data collection:
+      class: Collection
+      collection_type: "list:paired"
+      elements:
+        - class: Collection
+          type: paired
+          identifier: SRR9050437_Health
+          elements:
+            - identifier: forward
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050437F_health.fastq.gz"
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050437R_health.fastq.gz"
+              filetype: fastqsanger.gz
+        - class: Collection
+          type: paired
+          identifier: SRR9050438_Health
+          elements:
+            - identifier: forward
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050438F_health.fastq.gz"
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050438R_health.fastq.gz"
+              filetype: fastqsanger.gz
+        - class: Collection
+          type: paired
+          identifier: SRR9050439_Health
+          elements:
+            - identifier: forward
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050439F_health.fastq.gz"
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050439R_health.fastq.gz"
+              filetype: fastqsanger.gz
+        - class: Collection
+          type: paired
+          identifier: SRR9050440_Cancer
+          elements:
+            - identifier: forward
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050440F_cancer.fastq.gz"
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050440R_cancer.fastq.gz"
+              filetype: fastqsanger.gz
+        - class: Collection
+          type: paired
+          identifier: SRR9050441_Cancer
+          elements:
+            - identifier: forward
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050441F_cancer.fastq.gz"
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050441R_cancer.fastq.gz"
+              filetype: fastqsanger.gz
+        - class: Collection
+          type: paired
+          identifier: SRR9050442_Cancer
+          elements:
+            - identifier: forward
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050442F_cancer.fastq.gz"
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: "https://zenodo.org/record/7656544/files/SRR9050442R_cancer.fastq.gz"
+              filetype: fastqsanger.gz
+    CPAT header:
+      class: File
+      location: https://zenodo.org/record/7656544/files/CPAT_header.tab
+    Pfam-A HMM Stockholm file:
+      class: File
+      location: https://zenodo.org/record/7656544/files/Pfam-A.hmm.dat.gz
+    Active sites dataset:
+      class: File
+      location: https://zenodo.org/record/7656544/files/active_site.dat.gz
+    Pfam-A HMM library:
+      class: File
+      location: https://zenodo.org/record/7656544/files/Pfam-A.hmm.gz
+  outputs:
+      mostSwitching:
+        file: test-data/switching_gene_isoforms.tabular
+      consequencesSummary:
+        file: test-data/consequences_summary.tabular
+      consequencesEnrichment:
+        file: test-data/consequences_enrichment.tabular
+      splicingSummary:
+        file: test-data/splicing_summary.tabular
+      splicingEnrichment:
+        file: test-data/splicing_enrichment.tabular

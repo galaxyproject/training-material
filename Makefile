@@ -27,9 +27,12 @@ else
 	ENV_FILE=environment.yml
 endif
 
-CONDA=$(shell which conda)
+CONDA=$(shell which mamba)
 ifeq ($(CONDA),)
-	CONDA=${HOME}/miniconda3/bin/conda
+    CONDA=$(shell which conda)
+    ifeq ($(CONDA),)
+    	CONDA=${HOME}/miniconda3/bin/mamba
+    endif
 endif
 
 default: help
@@ -53,7 +56,7 @@ COND_ENV_DIR=$(shell dirname $(dir $(CONDA)))
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --no-document --system && \
-		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby && \
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby fastimage rubyzip && \
 		pushd ${COND_ENV_DIR}/envs/${CONDA_ENV}/share/rubygems/bin && \
 		ln -sf ../../../bin/ruby ruby
 .PHONY: install
@@ -97,6 +100,7 @@ build: clean api/swagger.json ## build files but do not run a server (You can sp
 check-frontmatter: ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
 		bundle exec ruby bin/validate-frontmatter.rb
+		bundle exec ruby bin/validate-other.rb
 .PHONY: check-frontmatter
 
 check-contributors: ## Validate the contributors.yaml file
@@ -170,7 +174,7 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 check: check-html-internal check-html check-broken-boxes check-slides ## run checks which require compiled HTML
 .PHONY: check
 
-lint: check-frontmatter ## run linting checks which do not require a built site
+lint: check-frontmatter check-contributors ## run linting checks which do not require a built site
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
@@ -213,26 +217,31 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 
 _site/%/slides.pdf: _site/%/slides.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
+	./node_modules/.bin/http-server _site -p 9876 & \
 	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_ES.pdf: _site/%/slides_ES.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
+	./node_modules/.bin/http-server _site -p 9876 & \
 	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
+	./node_modules/.bin/http-server _site -p 9876 & \
 	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 video: ## Build all videos
 	bash bin/ari-make.sh
 
+metadata/public-server-tools.json:
+	python ./bin/supported-fetch.py
+
 annotate: ## annotate the tutorials with usable Galaxy instances
 	${ACTIVATE_ENV} && \
-	bash bin/workflow_to_tool_yaml.sh && \
-	python bin/add_galaxy_instance_annotations.py
+	wget https://github.com/hexylena/toolshed-version-database/raw/main/guid-rev.json -O metadata/toolshed-revisions.json && \
+	python bin/supported-fetch.py
+	bin/workflows-fetch.rb
+	bin/fetch-categories.rb
 .PHONY: annotate
 
 rebuild-search-index: ## Rebuild search index

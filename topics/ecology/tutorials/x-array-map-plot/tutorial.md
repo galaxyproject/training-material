@@ -8,6 +8,7 @@ requirements:
     topic_name: climate
     tutorials:
         - climate-101
+level: Introductory
 questions:
 - What is xarray map plotting?
 - How to plot NetCDF data using xarray map plotting tool?
@@ -29,6 +30,9 @@ contributors:
 ---
 
 
+The data used in this tutorial is [ECMWF Reanalysis 5 hourly data on single levels](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview). We are interested in the following variables: air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool available in the Galaxy Europe (or your favourite Galaxy Instance) server.
+
+It will be a fun learning experience for anyone who loves visualization !
 
 ><comment-title></comment-title>
 >
@@ -36,7 +40,7 @@ contributors:
 >
 {: .comment}
 
- It is beginner friendly and does not require much knowledge about the tool.
+It is beginner friendly and does not require much knowledge about the tool.
 
 > <agenda-title></agenda-title>
 >
@@ -47,22 +51,17 @@ contributors:
 >
 {: .agenda}
 
-><comment-title>Background</comment-title>
+> <comment-title>Background</comment-title>
 >
->According to [UN](https://www.un.org/en/climatechange/what-is-climate-change) , Climate is the long term shift in temperature and weather patterns which may be due to natural or artificial causes. To learn more about climate, refer this [tutorial]({% link topics/climate/tutorials/climate-101/tutorial.md %}) from the GTN. Due to the frequently changing nature of the weather patterns, the size of the collected data is huge.
-The climate data is mainly represented in these three categories : [NetCDF](https://en.wikipedia.org/wiki/NetCDF) (Network Common Data Form), [HDF](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) (Hierarchical Data Format) , [GRIB](https://en.wikipedia.org/wiki/GRIB) (GRIdded Binary or General Regularly-distributed Information in Binary form).
+> According to [UN](https://www.un.org/en/climatechange/what-is-climate-change) , Climate is the long term shift in temperature and weather patterns which may be due to natural or artificial causes. To learn more about climate, refer this [tutorial]({% link topics/climate/tutorials/climate-101/tutorial.md %}) from the GTN. Due to the frequently changing nature of the weather patterns, the size of the collected data is huge.
+> The climate data is mainly represented in these three categories : [NetCDF](https://en.wikipedia.org/wiki/NetCDF) (Network Common Data Form), [HDF](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) (Hierarchical Data Format) , [GRIB](https://en.wikipedia.org/wiki/GRIB) (GRIdded Binary or General Regularly-distributed Information in Binary form).
 >
->The NetCDF file format is basically used for storing multidimensional data which generally consists of variables such as temperature, precipitation, wind direction, etc. The variation of climate variables over a period of time is suitably plotted using this dataset. The entire earth is divided into both horizontal as well as vertical coordinates which makes plotting of the variables such as the ocean temperatures possible.
+> The NetCDF file format is basically used for storing multidimensional data which generally consists of variables such as temperature, precipitation, wind direction, etc. The variation of climate variables over a period of time is suitably plotted using this dataset. The entire earth is divided into both horizontal as well as vertical coordinates which makes plotting of the variables such as the ocean temperatures possible.
 >
->The coordinate system, types of projections and colormaps are some of the very important considerations in achieving the most suitable visualization option.
+> The coordinate system, types of projections and colormaps are some of the very important considerations in achieving the most suitable visualization option.
 {: .comment}
 
 
-# Introduction
-
-The data used in this tutorial is [ECMWF Reanalysis 5 hourly data on single levels](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview). We are interested in the following variables: air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool available in the Galaxy Europe (or your favourite Galaxy Instance) server.
-
-It will be a fun learning experience for anyone who loves visualization !
 
 # Get data
 
@@ -116,7 +115,7 @@ After loading the required data, the following stage is to obtain the meta info 
 
 Follow the below steps:
 
-## **NetCDF xarray Metadata Info**
+## NetCDF xarray Metadata Info
 
 > <hands-on-title>netCDF dataset with xarray metadata Galaxy Tool</hands-on-title>
 >
@@ -257,13 +256,14 @@ We have hourly data. In order to plot it, we must first extract the hours from t
 > >
 > > The syntax of using the `seltimestep` is `(initial data number / final data entry)`. An important thing to pay attention to is how the data entries are numbered: are they numbered starting from 0 or 1. Accordingly we can add or skip adding 1 to the data number to achieve the desired result.
 > >
-Although we are not using `splithour` here, you can find below the syntax for future uses.
+> > Although we are not using `splithour` here, you can find below the syntax for future uses.
 > >
-> >1. {% tool [CDO Operations](toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0) %} with the following parameters:
-> >- In *"CDO Operators"*:
-> >- {% icon param-repeat %} *"Insert CDO Operators"*
-> >- *"Select cdo operator"*: `splithour (Split hours)`
-> >- {% icon param-file %} *"Additional input file"*: `outfile.netcdf` generated from the previous step.
+> > 1. {% tool [CDO Operations](toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0) %} with the following parameters:
+> >
+> >    - In *"CDO Operators"*:
+> >    - {% icon param-repeat %} *"Insert CDO Operators"*
+> >    - *"Select cdo operator"*: `splithour (Split hours)`
+> >    - {% icon param-file %} *"Additional input file"*: `outfile.netcdf` generated from the previous step.
 > >
 > > This step generates that `N` number of `outfiles.netcdf` files where `N` is the range of selection.
 > > Suppose your selected range was `744/744` for the `seltimestep` , then it will generate `2` files which can be plotted further.
@@ -522,295 +522,295 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 > **ACCENT**
 > ![Accent](../../images/x-array-map-plot/colormaps/Accent.png)
 >  **BLUES**
-> ![Blues]( ../../images/x-array-map-plot/colormaps/Blues.png )
+> ![Blues](../../images/x-array-map-plot/colormaps/Blues.png)
 >  **BrBg**
-> ![BrBg]( ../../images/x-array-map-plot/colormaps/BrBG.png )
+> ![BrBg](../../images/x-array-map-plot/colormaps/BrBG.png)
 >  **BuGn**
-> ![BuGn]( ../../images/x-array-map-plot/colormaps/BuGn.png )
+> ![BuGn](../../images/x-array-map-plot/colormaps/BuGn.png)
 >  **BuPu**
-> ![BuPu](../../images/x-array-map-plot/colormaps/BuPu.png  )
+> ![BuPu](../../images/x-array-map-plot/colormaps/BuPu.png)
 >  **CMRmap**
-> ![CMRmap]( ../../images/x-array-map-plot/colormaps/CMRmap.png )
+> ![CMRmap](../../images/x-array-map-plot/colormaps/CMRmap.png)
 >  **Dark2**
-> ![Dark2](../../images/x-array-map-plot/colormaps/Dark2.png  )
+> ![Dark2](../../images/x-array-map-plot/colormaps/Dark2.png)
 >  **Acton**
-> ![Acton](../../images/x-array-map-plot/colormaps/acton.png  )
+> ![Acton](../../images/x-array-map-plot/colormaps/acton.png)
 >  **Acton_r**
-> ![Acton_r]( ../../images/x-array-map-plot/colormaps/acton_r.png )
+> ![Acton_r](../../images/x-array-map-plot/colormaps/acton_r.png)
 >  **Afmhot**
-> ![Afmhot]( ../../images/x-array-map-plot/colormaps/afmhot.png )
+> ![Afmhot](../../images/x-array-map-plot/colormaps/afmhot.png)
 >  **Autumn**
-> ![Autumn]( ../../images/x-array-map-plot/colormaps/autumn.png )
+> ![Autumn](../../images/x-array-map-plot/colormaps/autumn.png)
 >  **Bam**
-> ![BamO]( ../../images/x-array-map-plot/colormaps/bam.png  )
+> ![BamO](../../images/x-array-map-plot/colormaps/bam.png)
 >  **BamO**
-> ![BamO]( ../../images/x-array-map-plot/colormaps/bam0.png )
+> ![BamO](../../images/x-array-map-plot/colormaps/bam0.png)
 >  **BamO_r**
-> ![bamO_r]( ../../images/x-array-map-plot/colormaps/bamO_r.png )
+> ![bamO_r](../../images/x-array-map-plot/colormaps/bamO_r.png)
 >  **Bamako**
-> ![Accent]( ../../images/x-array-map-plot/colormaps/bamako.png )
+> ![Accent](../../images/x-array-map-plot/colormaps/bamako.png)
 >  **Bamako_r**
-> ![bamako_r]( ../../images/x-array-map-plot/colormaps/bamako_r.png )
+> ![bamako_r](../../images/x-array-map-plot/colormaps/bamako_r.png)
 >  **Batlow**
-> ![Batlow]( ../../images/x-array-map-plot/colormaps/batlow.png  )
+> ![Batlow](../../images/x-array-map-plot/colormaps/batlow.png)
 >  **BatlowK**
-> ![BatlowK]( ../../images/x-array-map-plot/colormaps/batlowK.png )
+> ![BatlowK](../../images/x-array-map-plot/colormaps/batlowK.png)
 >  **BatlowK_r**
-> ![BatlowK_r]( ../../images/x-array-map-plot/colormaps/batlowK_r.png )
+> ![BatlowK_r](../../images/x-array-map-plot/colormaps/batlowK_r.png)
 >  **BatlowW**
-> ![batlowW]( ../../images/x-array-map-plot/colormaps/batlowW.png )
+> ![batlowW](../../images/x-array-map-plot/colormaps/batlowW.png)
 >  **BatlowW_r**
-> ![batlowW_r]( ../../images/x-array-map-plot/colormaps/batlowW_r.png )
+> ![batlowW_r](../../images/x-array-map-plot/colormaps/batlowW_r.png)
 >  **Batlow_r**
-> ![Batlow_r]( ../../images/x-array-map-plot/colormaps/batlow_r.png )
+> ![Batlow_r](../../images/x-array-map-plot/colormaps/batlow_r.png)
 >  **Berlin**
-> ![Berlin]( ../../images/x-array-map-plot/colormaps/berlin.png )
+> ![Berlin](../../images/x-array-map-plot/colormaps/berlin.png)
 >  **berlin_r**
-> ![Berlin_r]( ../../images/x-array-map-plot/colormaps/berlin_r.png )
+> ![Berlin_r](../../images/x-array-map-plot/colormaps/berlin_r.png)
 >  **Bilbao**
-> ![bilbao](  ../../images/x-array-map-plot/colormaps/bilbao.png)
+> ![bilbao](../../images/x-array-map-plot/colormaps/bilbao.png)
 >  **Bilbao_r**
-> ![Bilbao_r]( ../../images/x-array-map-plot/colormaps/bilbao_r.png )
+> ![Bilbao_r](../../images/x-array-map-plot/colormaps/bilbao_r.png)
 >  **Binary**
-> ![Binary]( ../../images/x-array-map-plot/colormaps/binary.png )
+> ![Binary](../../images/x-array-map-plot/colormaps/binary.png)
 >  **Bone**
-> ![Bone]( ../../images/x-array-map-plot/colormaps/bone.png )
+> ![Bone](../../images/x-array-map-plot/colormaps/bone.png)
 >  **Brg**
-> ![Brg]( ../../images/x-array-map-plot/colormaps/brg.png )
+> ![Brg](../../images/x-array-map-plot/colormaps/brg.png)
 >  **Broc**
-> ![Broc]( ../../images/x-array-map-plot/colormaps/broc.png )
+> ![Broc](../../images/x-array-map-plot/colormaps/broc.png)
 >  **BrocO**
-> ![BrocO]( ../../images/x-array-map-plot/colormaps/brocO.png )
+> ![BrocO](../../images/x-array-map-plot/colormaps/brocO.png)
 >  **BrocO_r**
-> ![BrocO_r]( ../../images/x-array-map-plot/colormaps/brocO_r.png )
+> ![BrocO_r](../../images/x-array-map-plot/colormaps/brocO_r.png)
 >  **Broc_r**
-> ![Broc_r]( ../../images/x-array-map-plot/colormaps/broc_r.png )
+> ![Broc_r](../../images/x-array-map-plot/colormaps/broc_r.png)
 >  **Buda**
-> ![Buda]( ../../images/x-array-map-plot/colormaps/buda.png )
+> ![Buda](../../images/x-array-map-plot/colormaps/buda.png)
 >  **Buda_r**
-> ![Buda_r]( ../../images/x-array-map-plot/colormaps/buda_r.png )
+> ![Buda_r](../../images/x-array-map-plot/colormaps/buda_r.png)
 >  **Bukavu**
-> ![Bukavu]( ../../images/x-array-map-plot/colormaps/bukavu.png )
+> ![Bukavu](../../images/x-array-map-plot/colormaps/bukavu.png)
 >  **Bukavu_r**
-> ![Bukavu_r]( ../../images/x-array-map-plot/colormaps/bukavu_r.png )
+> ![Bukavu_r](../../images/x-array-map-plot/colormaps/bukavu_r.png)
 >  **Bwr**
-> ![Bwr]( ../../images/x-array-map-plot/colormaps/bwr.png )
+> ![Bwr](../../images/x-array-map-plot/colormaps/bwr.png)
 >  **Cool**
-> ![Cool]( ../../images/x-array-map-plot/colormaps/cool.png )
+> ![Cool](../../images/x-array-map-plot/colormaps/cool.png)
 >  **Coolwarm**
-> ![Coolwarm]( ../../images/x-array-map-plot/colormaps/coolwarm.png )
+> ![Coolwarm](../../images/x-array-map-plot/colormaps/coolwarm.png)
 >  **Copper**
-> ![Copper]( ../../images/x-array-map-plot/colormaps/copper.png )
+> ![Copper](../../images/x-array-map-plot/colormaps/copper.png)
 >  **Cork**
-> ![Cork]( ../../images/x-array-map-plot/colormaps/cork.png )
+> ![Cork](../../images/x-array-map-plot/colormaps/cork.png)
 >  **CorkO**
-> ![CorkO]( ../../images/x-array-map-plot/colormaps/corkO.png )
+> ![CorkO](../../images/x-array-map-plot/colormaps/corkO.png)
 >  **CorkO_r**
-> ![CorkO_r]( ../../images/x-array-map-plot/colormaps/corkO_r.png )
+> ![CorkO_r](../../images/x-array-map-plot/colormaps/corkO_r.png)
 >  **Cork_r**
-> ![Cork_r]( ../../images/x-array-map-plot/colormaps/cork_r.png )
+> ![Cork_r](../../images/x-array-map-plot/colormaps/cork_r.png)
 >  **Cubehelix**
-> ![Cubehelix]( ../../images/x-array-map-plot/colormaps/cubehelix.png )
+> ![Cubehelix](../../images/x-array-map-plot/colormaps/cubehelix.png)
 >  **Davos**
-> ![Davos]( ../../images/x-array-map-plot/colormaps/davos.png )
+> ![Davos](../../images/x-array-map-plot/colormaps/davos.png)
 >  **GnBu**
-> ![GnBu]( ../../images/x-array-map-plot/colormaps/GnBu.png )
+> ![GnBu](../../images/x-array-map-plot/colormaps/GnBu.png)
 >  **Greens**
-> ![Greens]( ../../images/x-array-map-plot/colormaps/Greens.png )
+> ![Greens](../../images/x-array-map-plot/colormaps/Greens.png)
 >  **Greys**
-> ![Greys]( ../../images/x-array-map-plot/colormaps/Greys.png )
+> ![Greys](../../images/x-array-map-plot/colormaps/Greys.png)
 >  **Imola**
-> ![Imola]( ../../images/x-array-map-plot/colormaps/Imola.png )
+> ![Imola](../../images/x-array-map-plot/colormaps/Imola.png)
 >  **OrRd**
-> ![OrRd]( ../../images/x-array-map-plot/colormaps/OrRd.png )
+> ![OrRd](../../images/x-array-map-plot/colormaps/OrRd.png)
 >  **Oranges**
-> ![Oranges]( ../../images/x-array-map-plot/colormaps/Oranges.png )
+> ![Oranges](../../images/x-array-map-plot/colormaps/Oranges.png)
 >  **Paired**
-> ![Paired]( ../../images/x-array-map-plot/colormaps/Paired.png )
+> ![Paired](../../images/x-array-map-plot/colormaps/Paired.png)
 >  **Pastel1**
-> ![Pastel1]( ../../images/x-array-map-plot/colormaps/Pastel1.png )
+> ![Pastel1](../../images/x-array-map-plot/colormaps/Pastel1.png)
 >  **Pastel2**
-> ![Pastel2]( ../../images/x-array-map-plot/colormaps/Pastel2.png )
+> ![Pastel2](../../images/x-array-map-plot/colormaps/Pastel2.png)
 >  **Davos_r**
-> ![Davos_r]( ../../images/x-array-map-plot/colormaps/davos_r.png )
+> ![Davos_r](../../images/x-array-map-plot/colormaps/davos_r.png)
 >  **Devon_r**
-> ![Devon_r]( ../../images/x-array-map-plot/colormaps/devon_r.png )
+> ![Devon_r](../../images/x-array-map-plot/colormaps/devon_r.png)
 >  **Devon**
-> ![Devon]( ../../images/x-array-map-plot/colormaps/devon.png )
+> ![Devon](../../images/x-array-map-plot/colormaps/devon.png)
 >  **Fes**
-> ![Fes]( ../../images/x-array-map-plot/colormaps/fes.png )
+> ![Fes](../../images/x-array-map-plot/colormaps/fes.png)
 >  **Fes_r**
-> ![Fes_r]( ../../images/x-array-map-plot/colormaps/fes_r.png )
+> ![Fes_r](../../images/x-array-map-plot/colormaps/fes_r.png)
 >  **Flag**
-> ![Flag]( ../../images/x-array-map-plot/colormaps/flag.png )
+> ![Flag](../../images/x-array-map-plot/colormaps/flag.png)
 >  **Gist_earth**
-> ![Gist_earth]( ../../images/x-array-map-plot/colormaps/gist_earth.png )
+> ![Gist_earth](../../images/x-array-map-plot/colormaps/gist_earth.png)
 >  **Gist_gray**
-> ![Gist_gray]( ../../images/x-array-map-plot/colormaps/gist_gray.png )
+> ![Gist_gray](../../images/x-array-map-plot/colormaps/gist_gray.png)
 >  **Gist_heat**
-> ![Gist_heat]( ../../images/x-array-map-plot/colormaps/gist_heat.png )
+> ![Gist_heat](../../images/x-array-map-plot/colormaps/gist_heat.png)
 >  **Gist_ncar**
-> ![Gist_ncar]( ../../images/x-array-map-plot/colormaps/gist_ncar.png )
+> ![Gist_ncar](../../images/x-array-map-plot/colormaps/gist_ncar.png)
 >  **Gist_rainbow**
-> ![Gist_rainbow]( ../../images/x-array-map-plot/colormaps/gist_rainbow.png)
+> ![Gist_rainbow](../../images/x-array-map-plot/colormaps/gist_rainbow.png)
 >  **Gist_stern**
-> ![Gist_stern]( ../../images/x-array-map-plot/colormaps/gist_stern.png)
+> ![Gist_stern](../../images/x-array-map-plot/colormaps/gist_stern.png)
 >  **Gist_yarg**
-> ![Gist_yarg]( ../../images/x-array-map-plot/colormaps/gist_yarg.png)
+> ![Gist_yarg](../../images/x-array-map-plot/colormaps/gist_yarg.png)
 >  **Gnuplot**
-> ![Gnuplot]( ../../images/x-array-map-plot/colormaps/gnuplot.png)
+> ![Gnuplot](../../images/x-array-map-plot/colormaps/gnuplot.png)
 >  **Gnuplot2**
-> ![Gnuplot2]( ../../images/x-array-map-plot/colormaps/gnuplot2.png)
+> ![Gnuplot2](../../images/x-array-map-plot/colormaps/gnuplot2.png)
 >  **Gray**
-> ![Gray]( ../../images/x-array-map-plot/colormaps/gray.png)
+> ![Gray](../../images/x-array-map-plot/colormaps/gray.png)
 >  **GrayC**
-> ![GrayC](../../images/x-array-map-plot/colormaps/grayC.png )
+> ![GrayC](../../images/x-array-map-plot/colormaps/grayC.png)
 >  **GrayC_r**
-> ![GrayC_r]( ../../images/x-array-map-plot/colormaps/grayC_r.png)
+> ![GrayC_r](../../images/x-array-map-plot/colormaps/grayC_r.png)
 >  **Hawaii**
-> ![Hawaii]( ../../images/x-array-map-plot/colormaps/hawaii.png)
+> ![Hawaii](../../images/x-array-map-plot/colormaps/hawaii.png)
 >  **Hawaii_r**
-> ![Hawaii_r]( ../../images/x-array-map-plot/colormaps/hawaii_r.png)
+> ![Hawaii_r](../../images/x-array-map-plot/colormaps/hawaii_r.png)
 >  **Hot**
-> ![Hot]( ../../images/x-array-map-plot/colormaps/hot.png )
+> ![Hot](../../images/x-array-map-plot/colormaps/hot.png)
 >  **Hsv**
-> ![Hsv]( ../../images/x-array-map-plot/colormaps/hsv.png )
+> ![Hsv](../../images/x-array-map-plot/colormaps/hsv.png)
 >  **Imola_r**
-> ![Imola_r]( ../../images/x-array-map-plot/colormaps/imola_r.png )
+> ![Imola_r](../../images/x-array-map-plot/colormaps/imola_r.png)
 >  **Jet**
-> ![Jet]( ../../images/x-array-map-plot/colormaps/jet.png )
+> ![Jet](../../images/x-array-map-plot/colormaps/jet.png)
 >  **Lajolla**
-> ![Lajolla]( ../../images/x-array-map-plot/colormaps/lajolla.png )
+> ![Lajolla](../../images/x-array-map-plot/colormaps/lajolla.png)
 >  **Lajolla_r**
-> ![Lajolla_r]( ../../images/x-array-map-plot/colormaps/lajolla_r.png )
+> ![Lajolla_r](../../images/x-array-map-plot/colormaps/lajolla_r.png)
 >  **Lapaz**
-> ![Lapaz]( ../../images/x-array-map-plot/colormaps/lapaz.png )
+> ![Lapaz](../../images/x-array-map-plot/colormaps/lapaz.png)
 >  **Lapaz_r**
-> ![Lapaz_r]( ../../images/x-array-map-plot/colormaps/lapaz_r.png )
+> ![Lapaz_r](../../images/x-array-map-plot/colormaps/lapaz_r.png)
 >  **Lisbon**
-> ![Lisbon](  ../../images/x-array-map-plot/colormaps/lisbon.png)
+> ![Lisbon](../../images/x-array-map-plot/colormaps/lisbon.png)
 >  **Lisbon_r**
-> ![Lisbon_r]( ../../images/x-array-map-plot/colormaps/lisbon_r.png )
+> ![Lisbon_r](../../images/x-array-map-plot/colormaps/lisbon_r.png)
 >  **Nipy_spectral**
-> ![Nipy_spectral]( ../../images/x-array-map-plot/colormaps/nipy_spectral.png )
+> ![Nipy_spectral](../../images/x-array-map-plot/colormaps/nipy_spectral.png)
 >  **Nuuk**
-> ![Nuuk]( ../../images/x-array-map-plot/colormaps/nuuk.png )
+> ![Nuuk](../../images/x-array-map-plot/colormaps/nuuk.png)
 >  **Nuuk_r**
-> ![Nuuk_r]( ../../images/x-array-map-plot/colormaps/nuuk_r.png )
+> ![Nuuk_r](../../images/x-array-map-plot/colormaps/nuuk_r.png)
 >  **Ocean**
-> ![Ocean]( ../../images/x-array-map-plot/colormaps/ocean.png )
+> ![Ocean](../../images/x-array-map-plot/colormaps/ocean.png)
 >  **Oleron**
-> ![Oleron]( ../../images/x-array-map-plot/colormaps/oleron.png )
+> ![Oleron](../../images/x-array-map-plot/colormaps/oleron.png)
 >  **Oslo**
-> ![Oslo]( ../../images/x-array-map-plot/colormaps/oslo.png )
+> ![Oslo](../../images/x-array-map-plot/colormaps/oslo.png)
 >  **Oslo_r**
-> ![Oslo_r]( ../../images/x-array-map-plot/colormaps/oslo_r.png )
+> ![Oslo_r](../../images/x-array-map-plot/colormaps/oslo_r.png)
 >  **Pink**
-> ![Pink]( ../../images/x-array-map-plot/colormaps/pink.png )
+> ![Pink](../../images/x-array-map-plot/colormaps/pink.png)
 >  **PRGn**
-> ![PRGn]( ../../images/x-array-map-plot/colormaps/PRGn.png )
+> ![PRGn](../../images/x-array-map-plot/colormaps/PRGn.png)
 >  **PiYG**
-> ![PiYG]( ../../images/x-array-map-plot/colormaps/PiYG.png )
+> ![PiYG](../../images/x-array-map-plot/colormaps/PiYG.png)
 >  **PuBu**
-> ![PuBu]( ../../images/x-array-map-plot/colormaps/PuBu.png )
+> ![PuBu](../../images/x-array-map-plot/colormaps/PuBu.png)
 >  **PuBuGn**
-> ![PuBuGn](  ../../images/x-array-map-plot/colormaps/PuBuGn.png)
+> ![PuBuGn](../../images/x-array-map-plot/colormaps/PuBuGn.png)
 >  **PuOr**
-> ![PuOr]( ../../images/x-array-map-plot/colormaps/PuOr.png )
+> ![PuOr](../../images/x-array-map-plot/colormaps/PuOr.png)
 >  **PuRd**
-> ![PuRd]( ../../images/x-array-map-plot/colormaps/PuRd.png )
+> ![PuRd](../../images/x-array-map-plot/colormaps/PuRd.png)
 >  **Purples**
-> ![Purples]( ../../images/x-array-map-plot/colormaps/Purples.png )
+> ![Purples](../../images/x-array-map-plot/colormaps/Purples.png)
 >  **RdBu**
-> ![RdBu]( ../../images/x-array-map-plot/colormaps/RdBu.png )
+> ![RdBu](../../images/x-array-map-plot/colormaps/RdBu.png)
 >  **RdBu_r**
-> ![RdBu_r]( ../../images/x-array-map-plot/colormaps/RdBu_r.png )
+> ![RdBu_r](../../images/x-array-map-plot/colormaps/RdBu_r.png)
 >  **RdBu_r**
-> ![RdBu_r]( ../../images/x-array-map-plot/colormaps/RdBu_r.png)
+> ![RdBu_r](../../images/x-array-map-plot/colormaps/RdBu_r.png)
 >  **RdGy_r**
-> ![RdGy_r]( ../../images/x-array-map-plot/colormaps/RdGy_r.png )
+> ![RdGy_r](../../images/x-array-map-plot/colormaps/RdGy_r.png)
 >  **RdPu**
-> ![RdPu]( ../../images/x-array-map-plot/colormaps/RdPu.png)
+> ![RdPu](../../images/x-array-map-plot/colormaps/RdPu.png)
 > **RdPu_r**
-> ![RdPu_r](../../images/x-array-map-plot/colormaps/RdPu_r.png )
+> ![RdPu_r](../../images/x-array-map-plot/colormaps/RdPu_r.png)
 > **RdYIBu**
-> ![RdYIBu]( ../../images/x-array-map-plot/colormaps/RdYIBu.png)
+> ![RdYIBu](../../images/x-array-map-plot/colormaps/RdYIBu.png)
 > **RdYIGn**
-> ![RdYIGn]( ../../images/x-array-map-plot/colormaps/RdYIGn.png)
+> ![RdYIGn](../../images/x-array-map-plot/colormaps/RdYIGn.png)
 > **Reds**
-> ![Reds](../../images/x-array-map-plot/colormaps/Reds.png )
+> ![Reds](../../images/x-array-map-plot/colormaps/Reds.png)
 > **Set1**
-> ![Set1]( ../../images/x-array-map-plot/colormaps/Set1.png)
+> ![Set1](../../images/x-array-map-plot/colormaps/Set1.png)
 > **Set2**
-> ![Set2]( ../../images/x-array-map-plot/colormaps/Set2.png )
+> ![Set2](../../images/x-array-map-plot/colormaps/Set2.png)
 > **Set3**
-> ![Set3]( ../../images/x-array-map-plot/colormaps/Set3.png )
+> ![Set3](../../images/x-array-map-plot/colormaps/Set3.png)
 > **Spectral**
-> ![Spectral]( ../../images/x-array-map-plot/colormaps/Spectral.png )
+> ![Spectral](../../images/x-array-map-plot/colormaps/Spectral.png)
 > **Wistia**
-> ![Wistia]( ../../images/x-array-map-plot/colormaps/Wistia.png )
+> ![Wistia](../../images/x-array-map-plot/colormaps/Wistia.png)
 > **YIGn**
-> ![YIGn]( ../../images/x-array-map-plot/colormaps/YIGn.png )
+> ![YIGn](../../images/x-array-map-plot/colormaps/YIGn.png)
 > **YIGnBu**
-> ![YIGnBu]( ../../images/x-array-map-plot/colormaps/YIGnBu.png )
+> ![YIGnBu](../../images/x-array-map-plot/colormaps/YIGnBu.png)
 > **YIOrBr**
-> ![YIOrBr]( ../../images/x-array-map-plot/colormaps/YIOrBr.png )
+> ![YIOrBr](../../images/x-array-map-plot/colormaps/YIOrBr.png)
 > **YIOrRd**
-> ![YIOrRd]( ../../images/x-array-map-plot/colormaps/YIOrRd.png )
+> ![YIOrRd](../../images/x-array-map-plot/colormaps/YIOrRd.png)
 > **Prism**
-> ![Prism]( ../../images/x-array-map-plot/colormaps/prism.png )
+> ![Prism](../../images/x-array-map-plot/colormaps/prism.png)
 > **Rainbow**
-> ![Rainbow]( ../../images/x-array-map-plot/colormaps/rainbow.png )
+> ![Rainbow](../../images/x-array-map-plot/colormaps/rainbow.png)
 > **Roma**
-> ![Roma]( ../../images/x-array-map-plot/colormaps/roma.png )
+> ![Roma](../../images/x-array-map-plot/colormaps/roma.png)
 > **RomaO**
-> ![RomaO]( ../../images/x-array-map-plot/colormaps/romaO.png )
+> ![RomaO](../../images/x-array-map-plot/colormaps/romaO.png)
 > **RomaO_r**
-> ![RomaO_r]( ../../images/x-array-map-plot/colormaps/romaO_r.png )
+> ![RomaO_r](../../images/x-array-map-plot/colormaps/romaO_r.png)
 > **Roma_r**
-> ![Roma_r]( ../../images/x-array-map-plot/colormaps/roma_r.png )
+> ![Roma_r](../../images/x-array-map-plot/colormaps/roma_r.png)
 > **Seismic**
-> ![Seismic]( ../../images/x-array-map-plot/colormaps/seismic.png )
+> ![Seismic](../../images/x-array-map-plot/colormaps/seismic.png)
 > **Spring**
-> ![Spring]( ../../images/x-array-map-plot/colormaps/spring.png  )
+> ![Spring](../../images/x-array-map-plot/colormaps/spring.png)
 > **Summer**
-> ![Summer]( ../../images/x-array-map-plot/colormaps/summer.png )
+> ![Summer](../../images/x-array-map-plot/colormaps/summer.png)
 > **Tab10**
-> ![Tab10]( ../../images/x-array-map-plot/colormaps/tab10.png )
+> ![Tab10](../../images/x-array-map-plot/colormaps/tab10.png)
 > **Tab20**
-> ![Tab20]( ../../images/x-array-map-plot/colormaps/tab20.png )
+> ![Tab20](../../images/x-array-map-plot/colormaps/tab20.png)
 > **Tab20b**
-> ![Tab20b]( ../../images/x-array-map-plot/colormaps/tab20b.png )
+> ![Tab20b](../../images/x-array-map-plot/colormaps/tab20b.png)
 > **Tab20c**
-> ![Tab20c]( ../../images/x-array-map-plot/colormaps/tab20c.png )
+> ![Tab20c](../../images/x-array-map-plot/colormaps/tab20c.png)
 > **Terrain**
-> ![Terrain]( ../../images/x-array-map-plot/colormaps/terrain.png )
+> ![Terrain](../../images/x-array-map-plot/colormaps/terrain.png)
 > **Tofino**
-> ![Tofino]( ../../images/x-array-map-plot/colormaps/tofino.png)
+> ![Tofino](../../images/x-array-map-plot/colormaps/tofino.png)
 > **Tofino_r**
-> ![Tofino_r]( ../../images/x-array-map-plot/colormaps/tofino_r.png )
+> ![Tofino_r](../../images/x-array-map-plot/colormaps/tofino_r.png)
 > **Tokyo**
-> ![Tokyo]( ../../images/x-array-map-plot/colormaps/tokyo.png )
+> ![Tokyo](../../images/x-array-map-plot/colormaps/tokyo.png)
 > **Tokyo_r**
-> ![Tokyo_r]( ../../images/x-array-map-plot/colormaps/tokyo_r.png )
+> ![Tokyo_r](../../images/x-array-map-plot/colormaps/tokyo_r.png)
 > **Turku**
-> ![Turku]( ../../images/x-array-map-plot/colormaps/turku.png )
+> ![Turku](../../images/x-array-map-plot/colormaps/turku.png)
 > **Turku_r**
-> ![Turku_r]( ../../images/x-array-map-plot/colormaps/turku_r.png )
+> ![Turku_r](../../images/x-array-map-plot/colormaps/turku_r.png)
 > **Vanimo**
-> ![Vanimo]( ../../images/x-array-map-plot/colormaps/vanimo.png )
+> ![Vanimo](../../images/x-array-map-plot/colormaps/vanimo.png)
 > **Vanimo_r**
-> ![Vanimo_r]( ../../images/x-array-map-plot/colormaps/vanimo_r.png )
+> ![Vanimo_r](../../images/x-array-map-plot/colormaps/vanimo_r.png)
 > **Vik**
-> ![Vik]( ../../images/x-array-map-plot/colormaps/vik.png )
+> ![Vik](../../images/x-array-map-plot/colormaps/vik.png)
 > **VikO**
-> ![VikO]( ../../images/x-array-map-plot/colormaps/vikO.png )
+> ![VikO](../../images/x-array-map-plot/colormaps/vikO.png)
 > **VikO_r**
-> ![VikO_r]( ../../images/x-array-map-plot/colormaps/vikO_r.png )
+> ![VikO_r](../../images/x-array-map-plot/colormaps/vikO_r.png)
 > **Vik_r**
-> ![Vik_r]( ../../images/x-array-map-plot/colormaps/vik_r.png )
+> ![Vik_r](../../images/x-array-map-plot/colormaps/vik_r.png)
 > **Winter**
-> ![Winter]( ../../images/x-array-map-plot/colormaps/winter.png )
+> ![Winter](../../images/x-array-map-plot/colormaps/winter.png)
 >
 {: .details}
 
@@ -875,9 +875,10 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 > >
 > > 1. Every piece of data recites a story. The air temperature at a certain height has a lot of significance in major commercial and day to day activities. Read this data-blog on the above analysis. [Click Here](https://quickbeasts51429.github.io/Outreachy_Galaxy_Community_contributor/).
 > > 2. The tutorial has summed up a proper way of plotting data from a netcdf file. It has discussed everything from loading of data to its final display. Some other key points to keep in mind are :
-> > > 1. It may take some time while plotting the maps. It depends on traffic / load on the Galaxy server. It is suggested to have a 64-bit processor with 8GB RAM storage. Be patient.
-> > > 2.  You can view as well as download the generated plots to use further.
-> > > 3. Plotting over global maps is very convinient as you saw above. But many a times,  you want to plot a specific region, it becomes very easy using CDO tool. Refer to [this tutorial]({% link topics/climate/tutorials/pangeo/tutorial.md %}) for more info.
+> >
+> >    1. It may take some time while plotting the maps. It depends on traffic / load on the Galaxy server. It is suggested to have a 64-bit processor with 8GB RAM storage. Be patient.
+> >    2.  You can view as well as download the generated plots to use further.
+> >    3. Plotting over global maps is very convinient as you saw above. But many a times,  you want to plot a specific region, it becomes very easy using CDO tool. Refer to [this tutorial]({% link topics/climate/tutorials/pangeo/tutorial.md %}) for more info.
 > >
 > > 3. If you wish to present all the plotted maps at one place for comparision or analysis. It is a short and simple step and can be doe using the tool name `Image Montage`.
 > >

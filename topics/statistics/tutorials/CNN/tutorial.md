@@ -25,8 +25,6 @@ contributors:
 
 ---
 
-# Introduction
-
 
 Artificial neural networks are a machine learning discipline that have been successfully applied to problems
 in pattern classification, clustering, regression, association, time series prediction, optimiztion, and control {% cite JainEtAl %}.
@@ -257,11 +255,11 @@ rest are 0's); And for Banana with label 3, the third element of the array is 1 
 We have 10 digits in our dataset and we would just have an array of size 10, where only one
 element is 1, corresponding to the digit, and the rest are 0's.
 
-### **Create One-Hot Encoding (OHE) representation of training labels**
+### Create One-Hot Encoding (OHE) representation of training labels
 
 > <hands-on-title>One-Hot Encoding</hands-on-title>
 >
-> - {% tool [To categorical](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3) %}
+> - {% tool [To categorical](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.10.0) %}
 >    - *"Input file"* : Select `y_train`
 >    - *"Does the dataset contain header?"* : Select `No`
 >    - *"Total number of classes"*: Select `10`
@@ -269,11 +267,11 @@ element is 1, corresponding to the digit, and the rest are 0's.
 >
 {: .hands_on}
 
-### **Create a deep learning model architecture**
+### Create a deep learning model architecture
 
 > <hands-on-title>Model config</hands-on-title>
 >
-> - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
+> - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/1.0.10.0) %}
 >    - *"Select keras model type"*: `sequential`
 >    - *"input_shape"*: `(784,)`
 >    - In *"LAYER"*:
@@ -314,11 +312,11 @@ MaxPool layers with pool size of 2 by 2. Afterwards, we flatten the previous lay
 we add a fully connected layer with 10 nodes and use a softmax activation function to get the probability of each digit. Digit with the highest
 probability is predicted by CNN. The model config can be downloaded as a JSON file.
 
-### **Create a deep learning model**
+### Create a deep learning model
 
 > <hands-on-title>Model builder (Optimizer, loss function, and fit parameters)</hands-on-title>
 >
-> - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0) %}
+> - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/1.0.10.0) %}
 >    - *"Choose a building mode"*: `Build a training model`
 >    - *"Select the dataset containing model configuration"*: Select the *Keras Model Config* from the previous step.
 >    - *"Do classification or regression?"*: `KerasGClassifier`
@@ -339,11 +337,11 @@ feed to the network, the training will be very slow (as we have 60000 training e
 only a subset of the training examples to the network, after which we update the weights/biases. *batch_size* decides the size of this subset.
 The model builder can be downloaded as a zip file.
 
-### **Deep learning training and evaluation**
+### Deep learning training and evaluation
 
 > <hands-on-title>Training the model</hands-on-title>
 >
-> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3) %}
+> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.11.0) %}
 >    - *"Select a scheme"*: `Train and Validate`
 >    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step.
 >    - *"Select input type:"*: `tabular data`
@@ -359,11 +357,11 @@ The model builder can be downloaded as a zip file.
 The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 3) the trained
 model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step.
 
-### **Model Prediction**
+### Model Prediction
 
 > <hands-on-title>Testing the model</hands-on-title>
 >
-> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3) %}
+> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.11.0) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
 >    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step.
 >    - *"Select invocation method"*: `predict`
@@ -376,11 +374,11 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 The prediction step generates 1 dataset. It's a file that has predictions (0 to 9 for the predicted digits) for every image in the test dataset.
 
-### **Machine Learning Visualization Extension**
+### Machine Learning Visualization Extension
 
 > <hands-on-title>Creating the confusion matrix</hands-on-title>
 >
-> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.3) %}
+> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.11.0) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
 >    - *"Select dataset containing the true labels"*": `y_test`
 >    - *"Choose how to select data by column:"*: `All columns`

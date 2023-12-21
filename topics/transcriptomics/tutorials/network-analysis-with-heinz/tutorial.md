@@ -18,7 +18,7 @@ key_points:
     - "Heinz helps narrow down the scope to find the key pathways"
     - "Multiple CPUs will accelerate the computation especially for the complex datasets"
 contributors:
-    - cicozhang
+    - ChaoZhang123
 ---
 
 # Overview
@@ -98,6 +98,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > 1. Make sure we have an empty Galaxy history. Give it a sensible name.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. **Upload Disease Dataset**
@@ -187,15 +188,12 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > > 1. Click on the **checkmark icon** at top of your history.
 > >   ![Checkmark icon in history menu](../../../../shared/images/history_menu_buttons2.png)
 > >
-> > 2. Select all the files whose name contains `CP`, then click on **for all selected..** and select
+> > 2. Select all the files whose name contains `CP`, then click on **n of N selected** and select
 > >   **Build Dataset List** from the dropdown menu.
 > >
 > > 3. In the next dialog window, you need to give a name, here we just set it to `CP`, then click **Create list**.
 > >
-> > 4. Hidden these selected files by clicking on **for all selected..** and selecting **Hidden datasets**.
-> >   **Note:** This step is optional, we do it here to keep Galaxy history clean.
-> >
-> > 5. Redo the Step 2, 3, 4 for CN, set the name of the data list as 'CN'.
+> > 4. Redo the Step 2, 3 for CN, set the name of the data list as 'CN'.
 > {: .hands_on}
 {: .tip}
 

@@ -11,6 +11,7 @@ requirements:
       - unicycler-assembly
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "I just assembled a genome. How does it compare with already sequenced genomes?"
   - "How do I find rearranged, inserted, or deleted regions?"
@@ -815,8 +816,7 @@ Earlier we [downloaded](#hands-on-uploading-sequences-and-annotations) gene anno
 > 19     | product_length: length of the product corresponding to the accession.version in column 11. Protein product lengths are in amino acid units, and do not include the stop codon which is included in column 18. Additionally, product_length may differ from feature_interval_length if the product contains sequence differences vs. the genome, as found for some RefSeq transcript and protein products based on mRNA sequences and also for INSDC proteins that are submitted to correct genome discrepancies.
 > 20     | attributes: semi-colon delimited list of a controlled set of qualifiers. The list currently includes: partial, pseudo, pseudogene, ribosomal_slippage, trans_splicing, anticodon=NNN (for tRNAs), old_locus_tag=XXX
 >
-> *from [ftp.ncbi.nlm.nih.gov/genomes/genbank/README.txt](ftp://ftp.ncbi.nlm.nih.gov/genomes/genbank/README.txt)*
-{: .quote}
+{: .quote cite="https://ftp.ncbi.nlm.nih.gov/genomes/genbank/README.txt"}
 
 
 Our objective is to convert these data into BED. In this analysis we want to initially concentrate on protein coding regions. To do this let's select all lines from the annotation datasets that contain the term `CDS`, then

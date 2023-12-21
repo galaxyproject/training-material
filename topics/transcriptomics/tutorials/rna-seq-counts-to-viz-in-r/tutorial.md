@@ -37,11 +37,10 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  - gallantries
 ---
 
-# Introduction
-
+This tutorial will show you how to visualise RNA Sequencing Counts with R
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 

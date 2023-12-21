@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Protein FASTA Database Handling"
-edam_ontology: "topic_0121"
+edam_ontology: ["topic_0121"]
 zenodo_link: ""
 level: Introductory
 questions:
@@ -24,8 +24,6 @@ contributors:
 subtopic: id-quant
 tags: [DDA]
 ---
-
-# Introduction
 
 
 In mass spectrometry based proteomics experiments, peptides are assigned to experimentally acquired tandem mass spectra (MS2) by a method called peptide-spectral matching. Peptide spectral matching is commonly achieved by using search algorithms to match the acquired MS2 spectra to theoretical spectra. The theoretical spectra are generated from an in silico digestion and fragmentation of proteins in the FASTA database. Ideally, the protein FASTA databases will contain all proteins of the organism under investigation.

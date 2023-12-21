@@ -36,14 +36,12 @@ requirements:
 subtopic: features
 ---
 
-> <warning-title>Evolving Topic</warning-title>
-> Galaxy Interactive Tools are a **new feature** and there are some rough edges. Work to improve the experience of deploying and using them is ongoing.
-{: .warning}
-
-# Overview
-
 
 Galaxy Interactive Tools (GxITs) are a method to run containerized tools that are interactive in nature. Interactive Tools typically run a persistent service accessed on a specific port and run until terminated by the user. One common example of such a tool is [Jupyter Notebook][jupyter]. Galaxy Interactive Tools are similar in purpose to [Galaxy Interactive Environments][gie-docs] (GIEs), but are implemented in a significantly different manner. Most notably, instead of directly invoking containers on the Galaxy server, dedicated Docker node, or as a Docker Swarm service (as is done for GIEs), Interactive Tools are submitted through Galaxy's job management system and thus are scheduled the same as any other Galaxy tool - on a Slurm cluster, for instance. Galaxy Interactive Tools were introduced in Galaxy Release 19.09.
+
+> <warning-title>Evolving Topic, Not Updated for 23.0 + Gravity</warning-title>
+> Galaxy Interactive Tools are a **new feature** and there are some rough edges. Work to improve the experience of deploying and using them is ongoing.
+{: .warning}
 
 > <warning-title>Before You Continue</warning-title>
 > If you are *not* completing this tutorial as part of a [Galaxy Admin Training][gat] course, **you will need a wildcard DNS record for your Galaxy server and a method for obtaining a wildcard SSL certificate for your Galaxy server**.
@@ -94,7 +92,9 @@ There are two sections to this exercise. The first shows you how to use Ansible 
 
 If the terms "Ansible," "role," and "playbook" mean nothing to you, please checkout [the Ansible introduction slides]({% link topics/admin/tutorials/ansible/slides.html %}) and [the Ansible introduction tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %}).
 
-**This section of the tutorial builds upon the work in the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, please ensure that you have completed that tutorial first.**
+> <warning-title>Uses Ansible!</warning-title>
+> This section of the tutorial builds upon the work in the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, please ensure that you have completed that tutorial first.
+{: .warning}
 
 > <comment-title>Ansible Best Practices</comment-title>
 > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a `galaxyservers` group in your inventory file, `hosts`, and placed your variables in `group_vars/galaxyservers.yml`. Although for the purposes of this tutorial, the Galaxy server and cluster node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the `galaxyservers` group for simplicity, but in your own deployment you should consider creating an additional group for cluster nodes.
@@ -110,7 +110,7 @@ We will use several Ansible roles for this tutorial. In order to avoid repetetiv
 >
 >    ```yaml
 >    - src: geerlingguy.docker
->      version: 2.6.0
+>      version: 6.1.0
 >    - src: usegalaxy_eu.gie_proxy
 >      version: 0.0.2
 >    ```
@@ -407,7 +407,7 @@ As we use Let's Encrypt in staging mode, the wildcard certificates generated wit
 >      #certbot_auth_method: --webroot
 >      ```
 >
->        Although this is not explicitly required (setting `cerbot_dns_provider` as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the "webroot" method for Let's Encrypt WEB-01 challenges is no longer in use for this server.
+>        Although this is not explicitly required (setting `certbot_dns_provider` as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the "webroot" method for Let's Encrypt WEB-01 challenges is no longer in use for this server.
 >
 >    - Add the following lines to your `group_vars/galaxyservers.yml` file:
 >
@@ -513,7 +513,7 @@ As we use Let's Encrypt in staging mode, the wildcard certificates generated wit
 >      #certbot_auth_method: --webroot
 >      ```
 >
->        Although this is not explicitly required (setting `cerbot_dns_provider` as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the "webroot" method for Let's Encrypt WEB-01 challenges is no longer in use for this server.
+>        Although this is not explicitly required (setting `certbot_dns_provider` as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the "webroot" method for Let's Encrypt WEB-01 challenges is no longer in use for this server.
 >
 >    - Add the following lines to your `group_vars/galaxyservers.yml` file:
 >
@@ -584,7 +584,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >    </toolbox>
 >    ```
 >
-> 2. We need to modify `job_conf.xml` to instruct Galaxy on how run Interactive Tools (and specifically, how to run them in Docker). We will begin with a basic job conf:
+> 2. We need to modify `job_conf.xml` to instruct Galaxy on how to run Interactive Tools (and specifically, how to run them in Docker). We will begin with a basic job conf:
 >
 >    Create `templates/galaxy/config/job_conf.xml.j2` with the following contents:
 >
@@ -642,7 +642,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >    ```
 >    {% endraw %}
 >
->    Next, inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside, that GxITs should be enabled, and where the GxIT map database can be found:
+>    Next, inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside, that GxITs should be enabled, and where the GxIT map database can be found. Watch for other conflicting configurations from previous tutorials (e.g. `job_config: ...`):
 >
 >    {% raw %}
 >    ```yaml

@@ -16,16 +16,17 @@ key_points:
 tags:
   - taxonomic data
   - data quality
-contributors:
-- onorvez
-- Marie59
-- colineroyaux
-- yvanlebras
+contributions:
+  authorship:
+  - onorvez
+  - Marie59
+  - colineroyaux
+  - yvanlebras
+  funding:
+  - gallantries
 
 ---
 
-
-# Introduction
 
 
 This tutorial will guide you on the exploration of biodiversity data having taxonomic, spatial and temporal informations.

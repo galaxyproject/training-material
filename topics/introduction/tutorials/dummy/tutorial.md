@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Upload data to Galaxy"
 level: Introductory
-enable: false
+draft: true
 questions:
   - How to upload data to Galaxy
 objectives:
@@ -17,9 +17,6 @@ key_points:
 contributors:
   - bebatut
 ---
-
-
-# Introduction
 
 
 There are several ways to get data into Galaxy:

@@ -1,8 +1,8 @@
 ---
 layout: tutorial_hands_on
 
-title: Identification of somatic and germline variants from tumor and normal sample
-  pairs
+title: Identification of somatic and germline variants from tumor and normal sample pairs
+subtopic: human-genetics-cancer
 zenodo_link: https://doi.org/10.5281/zenodo.2582555
 questions:
 - What are the specific challenges in somatic variant calling that set it apart from
@@ -36,7 +36,6 @@ contributors:
 ---
 
 
-# Introduction
 
 When sequencing genomic material from a human tumor, the underlying clinical or
 research question typically is **what spectrum of mutations distinguishes this
@@ -97,6 +96,7 @@ downsampled though to include only the reads from human chromosomes 5, 12 and
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the following four files from
@@ -684,12 +684,12 @@ license.
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Import the following **variant annotation files** from
->    [Zenodo](https://zenodo.org/record/2581873):
+>    [Zenodo](https://zenodo.org/record/7962928):
 >
 >    ```
->    https://zenodo.org/record/2581873/files/hotspots.bed
->    https://zenodo.org/record/2581873/files/cgi_variant_positions.bed
->    https://zenodo.org/record/2581873/files/01-Feb-2019-CIVic.bed
+>    https://zenodo.org/record/7962928/files/hotspots.bed
+>    https://zenodo.org/record/7962928/files/cgi_variant_positions.bed
+>    https://zenodo.org/record/7962928/files/01-Feb-2019-CIVic.bed
 >    https://zenodo.org/record/2582555/files/dbsnp.b147.chr5_12_17.vcf.gz
 >    ```
 >

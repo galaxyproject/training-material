@@ -7,11 +7,10 @@ box_type: tip
 contributors: [bebatut,wm75,hexylena,shiltemann]
 ---
 
-* Click on the dataset
-* Click on {% icon galaxy-tags %} **Edit dataset tags**
-* Add a tag starting with `#`
-
-    Tags starting with `#` will be automatically propagated to the outputs of tools using this dataset.
-
-* Check that the tag is appearing below the dataset name
+1. Click on the dataset to expand it
+2. Click on **Add Tags** {% icon galaxy-tags %}
+3. Add a tag {% if include.tag %}named `{{include.tag}}` {% else %} starting with `#` {% endif %}
+   - Tags starting with `#` will be automatically propagated to the outputs of tools using this dataset.
+4. Press <kbd>Enter</kbd>
+5. Check that the tag appears below the dataset name
 

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "IGV Introduction"
-enable: false
+draft: true
 zenodo_link: ""
 questions:
 objectives:

@@ -74,7 +74,7 @@ contributors:
 
 - Admins can also manage:
   - data libraries
-  - Tool Shed repositories
+  - tools and dependencies
   - users, quotas, roles...
 
 - Source code lives at https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/webapps/galaxy/api/
@@ -206,7 +206,7 @@ contributors:
   - [RESTClient](https://addons.mozilla.org/firefox/addon/restclient/) add-on for Firefox
   - [Advanced REST Client](https://advancedrestclient.com/)
 - Software libraries:
-  - General HTTP libraries (e.g. *requests* for Python)
+  - General HTTP libraries (e.g. [requests](https://requests.readthedocs.io/) for Python)
   - Service-specific libraries (e.g. *BioBlend* to access Galaxy using Python)
 
 ???
@@ -260,14 +260,16 @@ contributors:
   # if you need to bootstrap Galaxy, in particular to create a real
   # admin user account via API. You should probably not set this on a
   # production server.
-  master_api_key: MASTERLOCK
+  bootstrap_admin_api_key: MASTERLOCK
   ```
+
+  This option was called ``master_api_key`` in Galaxy 22.05 and earlier.
 
 ???
 
 - There are 2 options in the Galaxy configuration file that are relevant for the API.
 - api_allow_run_as allows the specified user to impersonate any other user on the Galaxy instance.
-- master_api_key instead is an optional special API key that can be used to bootstrap a Galaxy instance, in particular to create an initial admin account.
+- bootstrap_admin_api_key instead is an optional special API key that can be used to bootstrap a Galaxy instance, in particular to create an initial admin account.
 
 ---
 
@@ -280,8 +282,7 @@ contributors:
   - Subscriptions via [websockets](https://fastapi.tiangolo.com/advanced/websockets/)
   - Integrated [OpenAPI](https://spec.openapis.org/oas/v3.1.0) interactive documentation, e.g. https://usegalaxy.org/api/docs
   - Reduce maintenance burden
-- Challenges:
-  - Need to refactor over 200 endpoints
+  - Simplify client code generation
 
 ???
 

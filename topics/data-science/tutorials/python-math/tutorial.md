@@ -27,6 +27,7 @@ contributors:
 priority: 1
 notebook:
   language: python
+  pyolite: true
 ---
 
 Here we'll learn some of the fundamentals of python and how to do basic maths in Python.

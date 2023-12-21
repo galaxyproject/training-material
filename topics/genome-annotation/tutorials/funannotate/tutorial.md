@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Funannotate
-zenodo_link: https://zenodo.org/record/5726818
+zenodo_link: https://zenodo.org/record/7867921
 tags:
   - eukaryote
 questions:
@@ -32,7 +32,7 @@ contributions:
     - r1corre
     - stephanierobin
   funding:
-    - erasmusplus
+    - gallantries
 
 abbreviations:
   NMDS: Non-metric multidimensional scaling
@@ -46,9 +46,6 @@ requirements:
 subtopic: eukaryote
 priority: 2
 ---
-
-
-# Introduction
 
 
 Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
@@ -95,52 +92,19 @@ To annotate our genome using Funannotate, we will use the following files:
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/genome_masked.fasta
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R1.fq.gz
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R2.fq.gz
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/SwissProt_subset.fasta
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gbk
->    https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gff3
+>    https://zenodo.org/record/7867921/files/genome_masked.fasta
+>    https://zenodo.org/record/7867921/files/rnaseq_R1.fq.gz
+>    https://zenodo.org/record/7867921/files/rnaseq_R2.fq.gz
+>    https://zenodo.org/record/7867921/files/SwissProt_subset.fasta
+>    https://zenodo.org/record/7867921/files/alternate_annotation.gbk
+>    https://zenodo.org/record/7867921/files/alternate_annotation.gff3
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
-
-# Preparing the genome sequence
-
-Before annotating the genome, we want to make sure that the fasta file is properly formatted. We do it now to make sure we will not encounter unexpected errors later in the annotation process.
-
-Funannotate provides two little tools to help us. Let's run the two tools, one after the other.
-
-The first one ({% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2) %}) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool also removes any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).
-
-The second tool will ensure that our fasta file is sorted, based on the length of the contigs (the longest ones first). It will also rename contigs to make sure the name are standard (they will all begin with `scaffold_`, then a number).
-
-> <hands-on-title>Polish the assembly</hands-on-title>
->
-> 1. {% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Assembly to clean"*: `genome_masked.fasta` (Input dataset)
->
-> 2. {% tool [Sort assembly](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Assembly to sort"*: `output` (output of **Funannotate assembly clean** {% icon tool %})
->
-{: .hands_on}
-
-After this step, the genome is clean, sorted, and ready for the structural annotation.
-
-> <question-title></question-title>
->
-> How many sequences are removed by this cleaning step ?
->
-> > <solution-title></solution-title>
-> >
-> > The repeat masked genome contains 1461 sequences, while the cleand one only contains 1425, so 36 were removed.
-> >
-> {: .solution}
->
-{: .question}
 
 # Preparing RNASeq data
 
@@ -157,7 +121,7 @@ To make use of this RNASeq data, we need to map it on the genome. We will use **
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: `rnaseq_R1.fq.gz` (Input dataset)
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: `rnaseq_R2.fq.gz` (Input dataset)
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
->        - {% icon param-file %} *"Select a reference genome"*: `genome` (output of **Sort assembly** {% icon tool %})
+>        - {% icon param-file %} *"Select a reference genome"*: `genome_masked.fasta` (Input dataset)
 >        - *"Length of the SA pre-indexing string"*: `11`
 >
 {: .hands_on}
@@ -196,8 +160,8 @@ Funannotate is also able to use GeneMark to predict new genes, but to due to lic
 
 > <hands-on-title></hands-on-title>
 >
-> 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Assembly to annotate"*: `genome` (output of **Sort assembly** {% icon tool %})
+> 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.15+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Assembly to annotate"*: `genome_masked.fasta` (Input dataset)
 >    - *"Funannotate database"*: select the latest version available
 >    - In *"Organism"*:
 >        - *"Name of the species to annotate"*: `Mucor mucedo`
@@ -274,7 +238,7 @@ Now we have a structural annotation, and the results of both **EggNOG Mapper** a
 
 > <hands-on-title></hands-on-title>
 >
-> 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2) %} with the following parameters:
+> 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.15+galaxy1) %} with the following parameters:
 >    - *"Input format"*: `GenBank (from 'Funannotate predict annotation' tool)`
 >        - {% icon param-file %} *"Genome annotation in genbank format"*: `annotation (genbank)` (output of **Funannotate predict annotation** {% icon tool %})
 >    - *"Funannotate database"*: select the latest version available
@@ -303,7 +267,7 @@ We now have a complete annotation, including functional annotation, but it's tim
 
 > <hands-on-title></hands-on-title>
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.6+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `protein sequences` (output of **Funannotate functional** {% icon tool %})
 >    - *"Mode"*: `annotated gene sets (protein)`
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
@@ -336,7 +300,7 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse g
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: `genome` (output of **Sort assembly** {% icon tool %})
+>        - {% icon param-file %} *"Select the reference genome"*: `genome_masked.fasta` (Input dataset)
 >    - In *"Track Group"*:
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `Annotation`
@@ -416,7 +380,7 @@ The output is a web page where you can see how many loci or genes are identical 
 
 > <hands-on-title></hands-on-title>
 >
-> 1. {% tool [Funannotate compare](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2) %} with the following parameters:
+> 1. {% tool [Funannotate compare](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.15+galaxy1) %} with the following parameters:
 >    - {% icon param-files %} *"Genome annotations in genbank format"*: `alternate_annotation.gbk` (Input dataset) and `gbk` (output of **Funannotate functional** {% icon tool %})
 >    - *"Funannotate database"*: select the latest version available
 >

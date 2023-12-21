@@ -17,17 +17,14 @@ key_points:
 contributors:
   - hexylena
   - shiltemann
-  - erasmusplus
+  - gallantries
 ---
-
-# Introduction
 
 
 > JBrowse ({% cite Buels_2016 %}) is a fast, embeddable genome browser built completely with JavaScript
 > and HTML5, with optional run-once data formatting tools written in Perl.
 >
-> *from [http://jbrowse.org/](http://jbrowse.org/)*
-{: .quote}
+{: .quote cite="https://jbrowse.org/jbrowse1.html"}
 
 The Galaxy tool accepts data in many formats:
 

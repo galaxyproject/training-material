@@ -42,7 +42,7 @@ We can upgrade our Galaxy version by modifying the Ansible var files and re-runn
 
 This tutorial will show you how and discuss some of the things you need to keep in mind whenever you are updating or upgrading your Galaxy server.
 
-**Some notes on Galaxy versioning and releases.**
+## Some notes on Galaxy versioning and releases.
 
 * As at June 2021, Galaxy has three new version releases per year - in each of January, May and September. The versions are denominated by the year and month - `YY.MM`. i.e. January 2021's Galaxy release is version *21.01*.
 * Official Galaxy versions are tagged on the [Galaxy Project's GitHub releases page](https://github.com/galaxyproject/galaxy/releases) as `vYY.MM`. e.g. *v21.01*
@@ -56,7 +56,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 >
 {: .agenda}
 
-**This tutorial assumes that:**
+## This tutorial assumes that:
 
 - You have a VM or machine where you you have Galaxy installed.
 - You have completed at least the "Galaxy Installation with Ansible" tutorial.
@@ -84,11 +84,11 @@ Once we know what our current version is, we can compare it with the latest avai
 >
 > **Method 2: Via the API**
 >
-> 1. In your browser - go to the following URL: `https://your-galaxy/api/version`. The version will be displayed as follows:
+> 1. In your browser - go to the following URL: [`https://galaxy.example.org/api/version`](https://my.gat.galaxy.training/?path=/api/version) (replacing `galaxy.example.org` with the hostname of your Galaxy server). The version will be displayed as follows:
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```shell
->    > curl https://your-galaxy/api/version
+>    > curl https://galaxy.example.org/api/version
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}

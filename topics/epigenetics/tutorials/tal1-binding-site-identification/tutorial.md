@@ -5,7 +5,7 @@ redirect_from:
 
 title: "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)"
 zenodo_link: "https://doi.org/10.5281/zenodo.197100"
-edam_ontology: "topic_3169"
+edam_ontology: ["topic_3169"]
 tags:
   - ChIP-seq
 questions:
@@ -38,8 +38,6 @@ contributors:
   - joachimwolff
   - erxleben
 ---
-
-# Introduction
 
 
 This tutorial uses ChIP-seq datasets from a study published by {% cite Wu_2014 %}. The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."

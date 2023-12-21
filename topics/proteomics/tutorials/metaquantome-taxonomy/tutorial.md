@@ -35,11 +35,9 @@ requirements:
        - metaquantome-data-creation
 
 subtopic: multi-omics
-tags: [microbiome]
+tags: [microgalaxy]
 ---
 
-
-# Introduction
 
 
 metaQuantome software suite {% cite Easterly2019 %} was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.
@@ -60,18 +58,19 @@ To demonstrate the use of this workflow, we have used a thermophilic biogas reac
 {: .agenda}
 
 
-# **Pretreatments**
+# Pretreatments
 
 The first step in this tutorial is to get the data from the Zenodo link provided and make sure that it is in the correct format.
 
 
-## *Get data*
+## Get data
 
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a meaningful name.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}): a Functional File and an Intensity file.
@@ -92,7 +91,7 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 >
 {: .hands_on}
 
-# **Download metaQuantome Databases**
+# Download metaQuantome Databases
 
 > <hands-on-title>Run metaQuantome databases</hands-on-title>
 >
@@ -133,7 +132,7 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 >
 {: .question}
 
-# **Create metaQuantome sample file**
+# Create metaQuantome sample file
 
 The create samples file module is used to generate the samples file input file for the metaQuantome workflow. This input file is used to specify the column names used for each experimental group. These column names are referenced when handling the input data and performing statistical analysis.
 
@@ -156,10 +155,10 @@ The create samples file module is used to generate the samples file input file f
 {: .hands_on}
 
 
-# **Run metaQuantome**
+# Run metaQuantome
 
 
-## *metaQuantome: expand*
+## metaQuantome: expand
 
 The expand module is the first analysis step in the metaQuantome analysis workflow, and can be run to analyze differently expressed Taxa in the samples.
 In taxonomy mode, the following information is required apart from metaQuantome databases and samples file: a tab-separated taxonomy annotation file, with a peptide column and a taxonomy annotation column. The taxonomic annotations should be the lowest common ancestor (LCA) for each peptide, preferably given as NCBI taxonomy IDs.
@@ -198,7 +197,7 @@ In taxonomy mode, the following information is required apart from metaQuantome 
 {: .hands_on}
 
 
-## *metaQuantome: filter*
+## metaQuantome: filter
 
 The filter module is the second step in the metaQuantome workflow. The filter module filters the expanded terms to those that are representative of the data according to the sample parameters the user has specified.
 
@@ -236,7 +235,7 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 >
 {: .question}
 
-## *metaQuantome: stat*
+## metaQuantome: stat
 
 > <hands-on-title>Statistical analysis of the filtered data on multiple conditions.</hands-on-title>
 >
@@ -260,13 +259,13 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 {: .hands_on}
 
 
-# **Visualize your Data**
+# Visualize your Data
 
 The  outputs of the visualization module of metaQuantome are high-quality, publication-ready visualizations: barplots for the analysis of a single sample or experimental condition and differential abundance analysis, volcano plots, heatmaps, and principal components analysis for comparisons between two or more experimental conditions.
 Here were are showing 2 visualizations: **Barplot and Volcano Plot**. The Heatmap and PCA plot for multiple conditions are under development.
 There are two outputs of the visualization tool : an **HTML file (figure) and a tabular output containing the plot data**.
 
-## *metaQuantome: visualize*
+## metaQuantome: visualize
 
 > <hands-on-title>Bar chart visualization of Taxonomy in T2 sample.</hands-on-title>
 >
@@ -337,7 +336,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 
 ![T4_taxa](../../images/T4_taxa.png "Bar Chart visualization of Top 5 genus present in T4 sample."){: width="85%"}
 
-## *metaQuantome: visualize* Volcano Plots
+## metaQuantome: visualize Volcano Plots
 
 > <hands-on-title>Volcano Plot visualization of the data T4 and T2.</hands-on-title>
 >

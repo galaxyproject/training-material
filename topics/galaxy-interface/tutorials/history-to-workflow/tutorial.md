@@ -88,13 +88,11 @@ By this time, you may have multiple histories under your Galaxy account.  You'll
 >
 >  1. Make sure you are *logged in*.
 >    - If you haven't yet created an account, now is an ideal time to that.  Your current history will be saved as your first history under your new account.
-> 2. *Click* on the **table icon** at the top-right of the history panel to switch to your *histories* view.
+> 2. *Click* on the **History options** at the top-right of the history panel and select **Show Histories Side-by-Side** to switch to *multiple history view*.
 >    - This lists your histories, from left to right in reverse chronological order, based on the last time each history was your current history.
 > 3. *Switch to* the history you want to extract a workflow from.
->    - If the history that you want to create a repeatable workflow for is *not* your *current* history (the left-most one), then find the history you want and then *click* the **Switch to** button at the top of the history.
->    - This makes that history the current history and moves it to the very left.
-> 4. *Click* on the Galaxy Icon or the {% icon galaxy-home %} Home Button  at the top upper left of your histories view.
->    - This returns you to the Galaxy home page with the selected history as your current history.
+>    - If the history that you want to create a repeatable workflow for is *not* your *current* history, then find the history you want and then *click* the **Switch to** button at the bottom of the history.
+>    - This makes that history the current history.
 {: .hands_on}
 
 > <tip-title>Always name your histories</tip-title>
@@ -111,8 +109,8 @@ Now that we have the history we want, let's use Galaxy to create a reusable work
 
 > <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. *Click* on the **gear icon** at the top of your history.
->    - This opens a pull-down menu showing lots of actions that you can perform on this history.  Right now, we are interested in only one of them:
+> 1. *Click* on the {% icon galaxy-history-options %} **History options** at the top-right of the history panel.
+>    - This opens a pull-down menu showing lots of actions that you can perform on the current history.  Right now, we are interested in only one of them:
 > 2. *Click* on **Extract Workflow**.  It's about half-way down the menu.
 >    - This launches a form to create a workflow.
 > 3. *Give* your workflow a meaningful name.
@@ -188,7 +186,7 @@ Now that our edits are done, let's save our work and run the workflow.
 
 > <hands-on-title>Save the workflow edits</hands-on-title>
 >
->  1. *Click* on the **gear icon** at the top right of the central panel, *select* **Save** from the pull-down menu.
+>  1. *Click* on the {% icon galaxy-save %} at the top right to save workflow.
 {: .hands_on}
 
 
@@ -198,7 +196,7 @@ Now that we have finished creating our workflow, it is time to test it.
 
 > <hands-on-title>Run the workflow</hands-on-title>
 >
-> 1. *Click* on the **gear icon** and this time select **Run**.
+> 1. *Click* on the {% icon workflow-run %} to run workflow.
 > 2. *Examine* the workflow run form.
 >
 >
@@ -220,7 +218,7 @@ And Galaxy launches the workflow, running in a new history.  It says (in a nice 
 
 You can check the status of queued jobs and view the resulting data *by refreshing the History pane.* When the job has been run the status will change from 'running' to 'finished' if completed successfully or 'error' if problems were encountered.
 
-But, *that's a lie*.  In our case we sent the results to a new history, and the history panel is still showing us the old history.  To get to the new history, open the histories view (*click* the **table icon** at top of history) and then make the newly created history be the current history.
+But, *that's a lie*.  In our case we sent the results to a new history, and the history panel is still showing us the old history.  To get to the new history, open the multiple history view (*click* the {% icon galaxy-history-options %} **History Options** at top of the history panel) and then make the newly created history be the current history.
 
 Depending on your workflow and datasets, your analysis may already be done by the time you make it the current history and go back to the standard view.
 

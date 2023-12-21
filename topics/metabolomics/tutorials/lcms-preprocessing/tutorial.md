@@ -25,8 +25,6 @@ contributors:
 ---
 
 
-# Introduction
-
 
 Metabolomics is a *-omic* science known for being one of the most closely related to phenotypes.
 It involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants.
@@ -50,23 +48,23 @@ the results obtained may not be reliable enough for biological interpretation du
 Nevertheless, the chosen diversity of sample will allow you to explore the basics of a preprocessing workflow.
 
 We chose a subset of 12 samples, composed of 6 biological samples, 3 quality-control pooled samples ('QC pools' - mix of all
-biological samples) and 3 blank samples ('blanks' - injection solvent).
+biological samples) and 3 blank samples ('blanks' - solvent injection).
 
 To analyze these data, we will then follow a Galaxy workflow
 developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/) ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}).
 
-[![The full tutorial workflow](../../images/lcmspreproc_wf.png)](../../images/lcmspreproc_wf.png)
+[![The full tutorial workflow represented as boxes linked with arrows, each box being labeled with the corresponding galaxy tool name](../../images/lcmspreproc_wf.png "The tutorial workflow")](../../images/lcmspreproc_wf.png)
 
 > <comment-title>Workflow4Metabolomics public history</comment-title>
 >
 > This training material can be followed running it on any Galaxy instance holding the Galaxy modules needed.
 > Nonetheless, if you happen to be a W4M user and do not want to run the hands-on yourself, please note that
 > you can find the entire history in the 'published histories' section:
-> [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing)
+> [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms)
 >
 {: .comment}
 
-**Preprocessing with XCMS**
+The preprocessing steps presented in this tutorial are built around the solutions provided through the R package **XCMS**.
 
 **XCMS** ({% cite Smith2006 %}) is a free and open source software dedicated to pre-processing of any type of mass spectrometry acquisition files from low to
 high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is
@@ -154,7 +152,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
 > > [GTN_LCMSpreprocessing_mzML](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingmzml).
 > > We highly recommend to get started by importing this history.
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 > > this step corresponds to the dataset collection number 13.
 > {: .tip}
 >
@@ -172,14 +170,14 @@ This first step is only meant to read your `mzXML` file and generate an object u
 
 > <hands-on-title>MSnbase readMSData</hands-on-title>
 >
-> 1. Run **MSnbase readMSData** {% icon tool %} with the following parameters:
+> 1. Run {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} with the following parameters:
 >    - *"File(s) from your history containing your chromatograms"*: the `mzML` dataset collection
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 >  > <tip-title>Comment to W4M users</tip-title>
 >  >
->  > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+>  > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 >  > this step corresponds to the dataset collection number 14.
 >  {: .tip}
 >
@@ -234,12 +232,12 @@ Note that you can either:
 >
 > > <hands-on-title>xcms get a sampleMetadata file</hands-on-title>
 > >
-> > **xcms get a sampleMetadata file** {% icon tool %} with the following parameters:
+> > {% tool [xcms get a sampleMetadata file](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_export_samplemetadata/xcms_export_samplemetadata/3.12.0+galaxy0) %} with the following parameters:
 > >    - {% icon param-collection %} *"RData file"*: the `mzML.raw.RData` collection output from **MSnbase readMSData** {% icon tool %}
 > >
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
-> > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+> > > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 > > > this step corresponds to the dataset number 27.
 > > {: .tip}
 > >
@@ -259,7 +257,7 @@ The sampleMetadata file is a tab-separated table, in text format. This table has
 software you find appropriate to construct your table, as long as you save your file in a compatible format. For example, you can
 use a spreadsheet software such as Microsoft Excel or LibreOffice.
 
-> <warning-title>Important: Save your table in the correct format</warning-title>
+> <warning-title> Save your table in the correct format</warning-title>
 >
 > The file has to be a `.txt` or a `.tsv` (tab-separated values). Neither `.xlsx` nor `.odt` are supported.
 > If you use a spreadsheet software, be sure to change the default format to **Text (Tab delimited)** or equivalent.
@@ -335,6 +333,14 @@ Once your sampleMetadata table is ready, you can proceed to the upload. In this 
 >
 {: .tip}
 
+> <warning-title> The class column </warning-title>
+>
+> Depending on further choices, the sampleMetadata file can be decisive.
+> It can be used to colour some plots, but also for ion selection (see further in the tutorial). 
+> Please note that the information needed for these steps **should be given as the second column of the sampleMetadata file**,
+> the first one being the samples' identifiers. 
+{: .warning}
+
 
 #### Upload the sampleMetada file with 'Get data'
 
@@ -369,7 +375,7 @@ Once your sampleMetadata table is ready, you can proceed to the upload. In this 
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 > > this step corresponds to the dataset number 28.
 > {: .tip}
 >
@@ -382,10 +388,10 @@ Once your sampleMetadata table is ready, you can proceed to the upload. In this 
 > > > <solution-title></solution-title>
 > > >
 > > > 1. At least 2, with the identifiers and the class column. But as many as you need to describe the potential variability of your samples
-> (*e.g.* the person in charge of the sample preparation, the temperature...). This will allow later statistical analysis to expose the relevant parameters.
+> > >    (*e.g.* the person in charge of the sample preparation, the temperature...). This will allow later statistical analysis to expose the relevant parameters.
 > > > 2. Sample, QC, blank... The class (the 2nd column) is useful for the preprocessing step with XCMS to detect the metabolite across the samples.
-> Thus, it can be important to separate very different types of samples, as biological ones and blank ones for example. If you don't have any specific class
-> that you want to consider in XCMS preprocessing, just fill everywhere with `sample` or a dot `.` for example.
+> > >    Thus, it can be important to separate very different types of samples, as biological ones and blank ones for example. If you don't have any specific class
+> > >    that you want to consider in XCMS preprocessing, just fill everywhere with `sample` or a dot `.` for example.
 > > >
 > > {: .solution}
 > >
@@ -407,7 +413,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 
 > <hands-on-title>xcms plot chromatogram</hands-on-title>
 >
-> 1. **xcms plot chromatogram** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms plot chromatogram](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy0) %} with the following parameters:
 >   - *"RData file"*: `mzML.raw.RData` (collection)
 >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv` that you uploaded previously
 >
@@ -419,7 +425,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 > > this step corresponds to the datasets number 29 and 30.
 > {: .tip}
 >
@@ -428,7 +434,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 This tool generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chromatograms (TICs). If you provide groups as we do here, you obtain two plots:
 one with colours based on provided groups, one with one colour per sample.
 
-![Base Peak Intensity Chromatograms](../../images/lcmspreproc_BPC12samp.png)
+![Screenshot of the PDF output corresponding to the Base Peak Intensity Chromatograms. It is composed of the layering of BPIs: one drawn line per sample.](../../images/lcmspreproc_BPC12samp.png "Base Peak Intensity Chromatograms")
 
 How BPIs and TICs look like is dependant of the kind of data you have: LC-MS technology used, study design, type of samples, events that may have occured during the analysis...
 It can vary a lot from one experiment to another due to these characteristics.
@@ -471,7 +477,7 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 
 > <hands-on-title>xcms findChromPeaks (xcmsSet)</hands-on-title>
 >
-> **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
+> {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %} with the following parameters:
 >   - *"RData file"*: `mzML.raw.RData` (collection)
 >   - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
 >     - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3`
@@ -491,7 +497,7 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the dataset collections number 31 and 32.
 > {: .tip}
 >
@@ -523,13 +529,13 @@ with the second column defining theses classes.
 
 > <hands-on-title>xcms findChromPeaks Merger</hands-on-title>
 >
-> 1. **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms findChromPeaks Merger](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0) %} with the following parameters:
 >   - *"RData file"*: `mzML.raw.xset.RData` (collection)
 >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the dataset number 57.
 > {: .tip}
 >
@@ -562,7 +568,7 @@ than a given number of samples. Either a percentage of the total number of sampl
 
 > <hands-on-title>xcms groupChromPeaks (group)</hands-on-title>
 >
-> **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
+> {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
 >   - *"RData file"*: `xset.merged.RData`
 >   - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >     - *"Bandwidth"*: `5.0`
@@ -574,7 +580,7 @@ than a given number of samples. Either a percentage of the total number of sampl
 > > <comment-title>Minimum fraction of samples</comment-title>
 > >
 > > This parameter sets the minimum proportion of samples in a class where a peak should be found to keep the corresponding ion in the peaktable.
-> > The idea is to look inside each class (*i.e.* each group of samples defined in the second column of the sampleMetadata file) and to keep
+> > The idea is to look inside **each class (*i.e.* each group of samples defined in the second column of the sampleMetadata file)** and to keep
 > > an ion if there is at least one class where the ion is found in at least the specified proportion of samples.
 > >
 > > The way to define what kind of classes would be relevant is not straightforward. It is a somehow complex combination of your study objectives,
@@ -597,7 +603,7 @@ than a given number of samples. Either a percentage of the total number of sampl
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the datasets number 58 to 61.
 > {: .tip}
 >
@@ -614,7 +620,7 @@ The grey areas' width is associated with the bandwidth parameter.
 
 Here is an example of two m/z slices obtained from the hands-on:
 
-![plotChromPeakDensity.pdf](../../images/lcmspreproc_group12samp.png)
+![Picture with two plots extracted from the plotChromPeakDensity.pdf output, one representing the 283.1127-283.1163 m/z slice and the other the 284.1198-284.1253 m/z slice](../../images/lcmspreproc_group12samp.png "Extract from plotChromPeakDensity.pdf")
 
 
 > <question-title></question-title>
@@ -662,7 +668,7 @@ using the **Intensity Check** {% icon tool %} module.
 >
 > > <hands-on-title>Intensity Check</hands-on-title>
 > >
-> > **Intensity Check** {% icon tool %} with the following parameters:
+> > {% tool [Intensity Check](toolshed.g2.bx.psu.edu/repos/melpetera/intensity_checks/intens_check/1.2.8) %} with the following parameters:
 > >   - *"Data matrix file"*: `xset.merged.group.dataMatrix.tsv`
 > >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
 > >   - *"Variable metadata file"*: `xset.merged.group.variableMetadata.tsv`
@@ -673,7 +679,7 @@ using the **Intensity Check** {% icon tool %} module.
 > >
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
-> > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > > the datasets number 62 and 63.
 > > {: .tip}
 > >
@@ -683,7 +689,7 @@ using the **Intensity Check** {% icon tool %} module.
 > With the example provided in this tutorial, you can notice that the blk class containing blanks has a high number of NA with 4394 ions
 > that have not been found, in any blank.
 >
-> ![IC_Graphs.pdf](../../images/lcmspreproc_ICgp1.png)
+> ![Picture representing the proportions of NA in the 3 groups of the class column (blk, QC and sample). It is displayed as number of ions having given proportions of NA - proportions being grouped from 0 to 100 percents by classes of 20 percents.](../../images/lcmspreproc_ICgp1.png "Content of IC_Graphs.pdf")
 >
 > > <question-title></question-title>
 > >
@@ -728,7 +734,7 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 
 > <hands-on-title>xcms adjustRtime (retcor)</hands-on-title>
 >
-> **xcms adjustRtime (retcor)** {% icon tool %} with the following parameters:
+> {% tool [xcms adjustRtime (retcor)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.RData`
 >    - *"Method to use for retention time correction"*: `PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.`
 >        - *"Minimum required fraction of samples in which peaks for the peak group were identified"*: `0.7`
@@ -738,15 +744,15 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 >    > <comment-title></comment-title>
 >    >
 >    > If you have a very large number of samples (*e.g.* a thousand), it might be impossible to find peaks that are present in 100% of your samples.
->    If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
->    time correction.
->    A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
->    (*e.g.* when dealing with some blank samples).
+>    > If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
+>    > time correction.
+>    > A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
+>    > (*e.g.* when dealing with some blank samples).
 >    {: .comment}
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the datasets number 64 and 65.
 > {: .tip}
 >
@@ -763,7 +769,7 @@ It also allows you to check whether the well behaved peaks were distributed homo
 >
 > > <hands-on-title>xcms plot chromatogram</hands-on-title>
 > >
-> > **xcms plot chromatogram** {% icon tool %} with the following parameters:
+> > {% tool [xcms plot chromatogram](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy0) %} with the following parameters:
 > >    - *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.RData`
 > >
 > >    > <comment-title></comment-title>
@@ -773,7 +779,7 @@ It also allows you to check whether the well behaved peaks were distributed homo
 > >
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
-> > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > > the datasets number 66 and 67.
 > > {: .tip}
 > >
@@ -796,7 +802,7 @@ to get an illustration of grouping before/after retention time correction.
 
 > <hands-on-title>second 'xcms groupChromPeaks (group)'</hands-on-title>
 >
-> **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
+> {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.RData`
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `5.0`
@@ -816,7 +822,7 @@ to get an illustration of grouping before/after retention time correction.
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the datasets from number 68 to number 71.
 > {: .tip}
 >
@@ -879,7 +885,7 @@ Once you are satisfied with the optimisation of previous extraction parameters, 
 
 > <hands-on-title>xcms fillChromPeaks (fillPeaks)</hands-on-title>
 >
-> **xcms fillChromPeaks (fillPeaks)** {% icon tool %} with the following parameters:
+> {% tool [xcms fillChromPeaks (fillPeaks)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.*.RData` (last step of your previous XCMS step)
 >    - In *"Peak List"*:
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
@@ -895,7 +901,7 @@ Once you are satisfied with the optimisation of previous extraction parameters, 
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the datasets number 72 to 74.
 > {: .tip}
 >
@@ -931,7 +937,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
 
 > <hands-on-title>CAMERA.annotate</hands-on-title>
 >
-> 1. **CAMERA.annotate** {% icon tool %} with the following parameters:
+> 1. {% tool [CAMERA.annotate](toolshed.g2.bx.psu.edu/repos/lecorguille/camera_annotate/abims_CAMERA_annotateDiffreport/2.2.6+camera1.48.0-galaxy0) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.*.fillChromPeaks.RData`
 >    - In *"Annotate Isotopes [findIsotopes]"*:
 >        - *"Max. ion charge"*: `2`
@@ -948,7 +954,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the datasets number 75 and 76.
 > {: .tip}
 >
@@ -967,7 +973,7 @@ With only one single HTML file generated, you have access to all this informatio
 
 > <hands-on-title>xcms process history</hands-on-title>
 >
-> 1. **xcms process history** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms process history](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_summary/abims_xcms_summary/3.12.0+galaxy0) %} with the following parameters:
 >    - *"xset RData file"*: `xset.merged.[...].fillChromPeaks.RData`
 >
 >    > <comment-title></comment-title>
@@ -977,7 +983,7 @@ With only one single HTML file generated, you have access to all this informatio
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the dataset number 77.
 > {: .tip}
 >
@@ -994,7 +1000,7 @@ this pre-processing workflow.
 >
 > > <hands-on-title>ID choice</hands-on-title>
 > >
-> > 1. **ID choice** {% icon tool %} with the following parameters:
+> > 1. {% tool [ID choice](toolshed.g2.bx.psu.edu/repos/melpetera/idchoice/idchoice/19.12) %} with the following parameters:
 > >    - *"Data matrix file"*: the `xset.merged[...].dataMatrix.tsv` dataset from your last XCMS step
 > >    - *"Metadata file containing your new IDs"*: the `xset.merged[...].variableMetadata.tsv` dataset from your last XCMS or CAMERA step
 > >    - *"Which ID do you want to change?"*: `Variables`
@@ -1002,7 +1008,7 @@ this pre-processing workflow.
 > >
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
-> > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+> > > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 > > > this step corresponds to the datasets number 78 and 79.
 > > {: .tip}
 > >

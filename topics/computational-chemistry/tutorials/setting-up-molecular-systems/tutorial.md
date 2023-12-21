@@ -34,14 +34,11 @@ contributors:
 
 ---
 
+In this tutorial, we'll cover the basics of molecular modelling by setting up a protein in complex with a ligand and uploading the structure to Galaxy. This tutorial will make use of CHARMM-GUI. Please note that the follow-up to this tutorial (located in [Running molecular dynamics simulations using NAMD]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %})) requires access to NAMD Galaxy tools, which can be accessed using the [Docker container](https://github.com/scientificomputing/BRIDGE) but are currently not available on any public Galaxy server.
+
 > <comment-title>Audience</comment-title>
 > This tutorial is intended for those who are new to the computational chemistry tools in Galaxy.
 {: .comment}
-
-# Introduction
-
-
-In this tutorial, we'll cover the basics of molecular modelling by setting up a protein in complex with a ligand and uploading the structure to Galaxy. This tutorial will make use of CHARMM-GUI. Please note that the follow-up to this tutorial (located [here]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %})) requires access to NAMD Galaxy tools, which can be accessed using the [Docker container](https://github.com/scientificomputing/BRIDGE) but are currently not available on any public Galaxy server.
 
 > <agenda-title></agenda-title>
 >
@@ -78,10 +75,10 @@ In this section we'll access the PDB, download the correct structure, import it 
 >
 > More resources:
 >
-  - [https://en.wikipedia.org/wiki/Cellulase](https://en.wikipedia.org/wiki/Cellulase)
-  - [https://en.wikipedia.org/wiki/Biofuel](https://en.wikipedia.org/wiki/Biofuel)
-  - [Fungal Cellulases](https://pubs.acs.org/doi/full/10.1021/cr500351c)
-  - [Cellobiohydrolase I Induced Conformational Stability and Glycosidic Bond Polarization ](https://pubs.acs.org/doi/10.1021/ja103766w)
+>  - [https://en.wikipedia.org/wiki/Cellulase](https://en.wikipedia.org/wiki/Cellulase)
+>  - [https://en.wikipedia.org/wiki/Biofuel](https://en.wikipedia.org/wiki/Biofuel)
+>  - {% cite Payne_2015 %}
+>  - {% cite Barnett_2010 %}
 {: .details}
 
 ## Get data
@@ -107,6 +104,7 @@ The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a comp
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets.
@@ -217,7 +215,7 @@ Go to the correct section depending on which MD engine you will be using.
 ### Generate the FFT automatically
 
 > <hands-on-title>Generate the FFT</hands-on-title>
-> Particle Mesh Ewald (PME) summation is the method being used to calculate long-range interactions in this system. To improve the computational time a Fast Fourier Transform (FFT) is used. A detailed discussion of FFT will not be presented here; there are many articles on the subject. Try [Wikipedia](https://en.wikipedia.org/wiki/Ewald_summation) and [Ewald summation techniques in perspective: a survey](https://doi.org/10.1016/0010-4655(96)00016-1).
+> Particle Mesh Ewald (PME) summation is the method being used to calculate long-range interactions in this system. To improve the computational time a Fast Fourier Transform (FFT) is used. A detailed discussion of FFT will not be presented here; there are many articles on the subject. Try [Wikipedia](https://en.wikipedia.org/wiki/Ewald_summation) and {% cite Toukmaji_1996 %}.
 > ![Snapshot of CHARMM-GUI FFT section]({% link topics/computational-chemistry/images/charmmgui-fft.png %} "Setting up a FFT in CHARMM-GUI")
 {: .hands_on}
 
@@ -237,11 +235,11 @@ Go to the correct section depending on which MD engine you will be using.
 
 ### Upload to Galaxy
 > <hands-on-title>Upload files to Galaxy</hands-on-title>
-Upload the following files to your Galaxy instance and ensure the correct datatype is selected:
- - step3_pbcsetup.psf -> xplor psf input (psf format)
- - step3_pbcsetup.pdb -> pdb input (pdb format)
- - Checkfft.str -> PME grid specs (txt format)
-- step2.1_waterbox.prm -> waterbox prm input (txt format)
+> Upload the following files to your Galaxy instance and ensure the correct datatype is selected:
+> - step3_pbcsetup.psf -> xplor psf input (psf format)
+> - step3_pbcsetup.pdb -> pdb input (pdb format)
+> - Checkfft.str -> PME grid specs (txt format)
+> - step2.1_waterbox.prm -> waterbox prm input (txt format)
 {: .hands_on}
 
 You are now ready to run the NAMD workflow, which is discussed in another [tutorial]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}).

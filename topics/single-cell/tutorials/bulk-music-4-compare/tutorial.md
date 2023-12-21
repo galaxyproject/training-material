@@ -5,11 +5,6 @@ priority: 4
 title: Comparing inferred cell compositions using MuSiC deconvolution
 zenodo_link: https://zenodo.org/record/7319925
 tags:
-  - single-cell
-  - mouse
-  - human
-  - deconvolution
-  - bulk
   - transcriptomics
 questions:
 - How do the cell type distributions vary in bulk RNA samples across my variable of interest?
@@ -20,9 +15,12 @@ objectives:
 time_estimation: 1H
 key_points:
 - Deconvolution can be used to compare cell type distributions from bulk RNA-seq datasets
-contributors:
-- nomadscientist
-- mtekman
+contributions:
+  authorship:
+    - nomadscientist
+    - mtekman
+  testing:
+    - MarisaJL
 requirements:
   -
     type: "internal"
@@ -35,12 +33,11 @@ requirements:
 ---
 
 
-# Introduction
 
 The goal of this tutorial is to apply bulk RNA deconvolution techniques to a problem with multiple variables - in this case, a model of diabetes is compared with its healthy counterparts. All you need to compare inferred cell compositions are well-annotated, high quality reference scRNA-seq datasets, transformed into MuSiC-friendly Expression Set objects, and your bulk RNA-samples of choice (also transformed into MuSiC-friendly Expression Set objects). For more information on how MuSiC works, you can check out their github site [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) or published article ({% cite wang2019bulk %}).
 
 > <comment-title>Research question</comment-title>
-> - How does <variable X> impact the cell distributions in my samples?
+> - How does variable X impact the cell distributions in my samples?
 > - Needs: scRNA-seq reference dataset; bulk RNA-seq samples of interest to compare
 {: .comment}
 
@@ -56,9 +53,13 @@ The goal of this tutorial is to apply bulk RNA deconvolution techniques to a pro
 
 # Data
 
-In the standard MuSiC tutorial, we used human pancreas data. We will now use the same single cell reference dataset {%cite segerstolpe2016single %} withits 10 samples of 6 healthy subjects and 4 with Type-II diabetes (T2D), as well as the bulk RNA-samples from the same lab (3 healthy, 4 diseased). Both of these datasets were accessed from the public EMBL-EBI repositories and transformed into Expression Set objects in the previous two tutorials. For both the single cell reference and the bulk samples of interest, you have generated Expression Set objects with only T2D samples, only healthy samples, and a final everything-combined sample for the scRNA reference. The plan is to analyse this data in three ways: using a combined reference (altogether); using only the healthy single cell reference (healthyscref); or using a healthy and combined reference separately (like4like), all to identify differences in cellular composition.
+In the standard MuSiC tutorial, we used human pancreas data. We will now use the same single cell reference dataset {%cite segerstolpe2016single %} with its 10 samples of 6 healthy subjects and 4 with Type-II diabetes (T2D), as well as the bulk RNA-samples from the same lab (3 healthy, 4 diseased). Both of these datasets were accessed from the public EMBL-EBI repositories and transformed into Expression Set objects in the previous two tutorials. For both the single cell reference and the bulk samples of interest, you have generated Expression Set objects with only T2D samples, only healthy samples, and a final everything-combined sample for the scRNA reference. We won't need the combined bulk RNA dataset. The plan is to analyse this data in three ways: using a combined reference (altogether); using only the healthy single cell reference (healthyscref); or using a healthy and combined reference separately (like4like), all to identify differences in cellular composition.
 
 ![Three colours of arrows connect bulk healthy & diseased data sets to a combined single cell (altogether); bulk healthy and single cell healthy & bulk diseased with single cell diseased (like4like); and bulk diseased and healthy with the single cell healthy reference (healthyscref).](../../images/bulk-music/comparison.png "Plan of analysis")
+
+If you have followed the previous tutorials, you will have built your [single cell ESet object]({% link topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.md %}) and your [bulk ESet object]({% link topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.md %}), then you can copy these into a new history now. Otherwise, follow the steps below to import the datasets you'll need.
+
+{% snippet  faqs/galaxy/histories_copy_dataset.md %}
 
 ## Get data
 
@@ -83,9 +84,9 @@ In the standard MuSiC tutorial, we used human pancreas data. We will now use the
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. Rename the datasets
+> 3. Rename the datasets as needed
 >
-> 5. Add to each file a tag corresponding to `#bulk` and `#scrna`
+> 4. Add to each file a tag corresponding to `#bulk` and `#scrna`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -213,7 +214,7 @@ Hopefully, this has been illuminating! Now let's try two other ways of inferring
 >
 > > <solution-title></solution-title>
 > >
-> > ![Two graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether and the bottom labelled #like4like. Differences are more pronounced in the top #altogether graph.](../../images/bulk-music/plot_altogether.png "Altogether vs like4like")
+> > ![Two graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether and the bottom labelled #like4like. Differences are more pronounced in the top #altogether graph.](../../images/bulk-music/compare_like.png "Altogether vs like4like")
 > > 1. Overall, our interpretation here is that the differences are less pronounced. It's interesting to conjecture whether this is an artefact of analysis, or whether - possibly - the beta cells in the diseased samples are not only fewer, but also contain fewer beta-cell specific transcripts (and thereby inhibited beta cell function), thereby lowering the bar for the inference of a beta cell and leading to a higher proportion of interred B-cells.
 > >
 > {: .solution}
@@ -255,7 +256,7 @@ Let's try one more inference - this time, we'll use only healthy cells as a refe
 >
 > > <solution-title></solution-title>
 > >
-> > > > ![Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph.](../../images/bulk-music/compare_3.png "The impact of the single cell reference")
+> > ![Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph.](../../images/bulk-music/compare_3.png "The impact of the single cell reference")
 > >
 > > 1. If using a like4like inference reduced the difference between the phenotype, aligning both phenotypes to the same (healthy) reference exacerbated them - there are even fewer beta cells in the output of this analysis.
 > >
@@ -274,3 +275,5 @@ Congrats! You've made it to the end of this suite of deconvolution tutorials! Yo
 ![Workflow editor showing 5 inputs and 3 runs of the MuSiC Compare tool](../../images/bulk-music/compare_workflow.png "MuSiC Compare Tutorial Workflow")
 
 This tutorial is part of the [https://singlecell.usegalaxy.eu](https://singlecell.usegalaxy.eu) portal ({% cite tekman2020single %}).
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}

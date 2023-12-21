@@ -24,6 +24,7 @@ contributors:
 priority: 11
 notebook:
   language: python
+  pyolite: true
 ---
 
 Globbing is the term used in computer science when we have a bunch of files and we want to list all of them matching some pattern.

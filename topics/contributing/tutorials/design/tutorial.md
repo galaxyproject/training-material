@@ -9,8 +9,7 @@ questions:
 - How to articulate learning outcomes commensurate with the cognitive
   complexity of the target learning?
 - How to devise learning experiences and course content?
-- What are the steps that can help trainers devise and deploy effective
-  courses?
+- What are the steps that can help trainers devise and deploy effective courses?
 objectives:
 - List five key phases of curriculum & course development
 - Explain the primary role of learning outcomes
@@ -50,11 +49,8 @@ contributions:
     - ppalagi
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
 ---
-
-# Introduction
-
 
 **Teaching and training**, core elements of academic life, can be enormously
 rewarding but also quite challenging. Instructors are often required to perform
@@ -146,7 +142,7 @@ used to inform the design of effective courses.
 >
 {: .comment}
 
-> <hands-on-title>Select a topic for a 3 minute training - _⏰ 1 min - Silent reflection_</hands-on-title>
+> <hands-on-title>Select a topic for a 3 minute training - {% icon time %} 1 min - Silent reflection</hands-on-title>
 >
 > - Choose a topic for a 3 minutes training related to Galaxy
 >
@@ -221,7 +217,7 @@ and courses.
 >
 {: .comment}
 
-> <hands-on-title>Define audience and teaching goal - _⏰ 10 min - Silent reflection_</hands-on-title>
+> <hands-on-title>Define audience and teaching goal - {% icon time %} 10 min - Silent reflection</hands-on-title>
 >
 > 1. Take the topic you chose before
 > 2. Define teaching objectives
@@ -296,6 +292,11 @@ as a continuum or spectrum of cognitive levels, where each merges into the next,
 providing a structured tool to help express measurable, assessable LOs, in which
 the cognitive levels are made explicit.
 
+Ultimately, we can use Bloom's taxonomy to **align instruction with learners' levels of complexity of thinking** (and experience). In practice, you can use the Bloom’s levels of cognitive complexity (and the [accompanied actionable verbs in the previous link](https://tips.uark.edu/blooms-taxonomy-verb-chart/)) to:
+* write Learning Outcomes
+* design instruction and learning experiences i.e. how you are to teach/train, which infrastructure and how to present the materials etc
+* assess learning (taking place during curricula or course and after)
+
 The cognitive aspects embodied in LOs are important. Teaching should promote
 more complex behaviours than just recall or recognition (unless remembering is
 the intended LO), and push learners to achieve greater cognitive complexity
@@ -314,7 +315,7 @@ will guarantee failure and frustration for learners and instructors alike).
 The backdrop for our considerations of course design is Nicholls' paradigm for
 curriculum development, illustrated in:
 
-![(in a clockwise direction) Phase 1: Learning Outcomes (Los) --> Simple, measurable, achievable, realistic, time-bound? --> Phase 2: Learning Experiences (LEs) --> LEs aligned with LOs? --> Phase 3: Content --> Support LEs? Promote LOs? --> Phase 4: Assessment --> Aligned with LEs? Support progress towards LOs? --> Phase 5: Evaluation --> LOs achievable by most learners? Content, LEs & assessments support LOs?](images/nicholl_paradigme.png "Nicholls’ phases of curriculum design & their dependencies. For each phase, key considerations are shown (diamonds). Where these are not satisfied, that or previous phases should be revisited (red arrows), otherwise it is safe to move to the next phase(s) (green arrows). When all considerations are satisfied, the curriculum or course can be characterised, with concrete evidence, as successful (star). Source: {% cite via2020course %}")
+![(in a clockwise direction) Phase 1: Learning Outcomes (Los) --> Simple, measurable, achievable, realistic, time-bound? --> Phase 2: Learning Experiences (LEs) --> LEs aligned with LOs? --> Phase 3: Content --> Support LEs? Promote LOs? --> Phase 4: Assessment --> Aligned with LEs? Support progress towards LOs? --> Phase 5: Evaluation --> LOs achievable by most learners? Content, LEs & assessments support LOs?](images/nicholl_paradigme.png "Nicholls’ phases of curriculum design & their dependencies. For each phase, key considerations are shown (diamonds). Where these are not satisfied, that or previous phases should be revisited (red arrows), otherwise it is safe to move to the next phase(s) (green arrows). When all considerations are satisfied, the curriculum or course can be characterised, with concrete evidence, as successful (star). By simplified we mean that here you only see the arrows going from one box to the following in line. However, usually we need to revise and go back one or several boxes if we have failed to specify or articulated Learning outcomes from the beginning. This is what we mean by Learning Outcomes drives the whole process. Source: {% cite via2020course %}")
 
 Its five-phase structure has been briefly summarised by
 {% cite tractenberg2020guidelines %}, as follows:
@@ -342,16 +343,7 @@ establishes a developmental trajectory, like that seen in Bloom's taxonomy. We
 reflect on this crucial point, and its relevance for course design, in the
 discussion of each of the five phases below.
 
-## Define intended LOs
-
-> <comment-title>What are Learning Outcomes (LOs)?</comment-title>
->
-> - Statements expressing which KSAs learners will be able to demonstrate upon
->   completion of a learning experience or a sequence of learning experiences
-> - What learners will be able to do for the end of a lesson and the teacher can
->   in principle evaluate
->
-{: .comment}
+## Define intended Learning Outcomes (LOs)
 
 Just as for curricula, Phase 1 of course design begins with stating the LOs. To
 help formulate LOs, it's important to take a step back and think about what you
@@ -371,6 +363,117 @@ tasks (to reveal the target KSAs) but also the rational development of
 **what to assess**. The questions can thus support all phases of course
 development, starting with the selection of intended KSAs stated in a set of
 LOs.
+
+The "Learning outcomes" (LOs) are essentially statements that tell what the learners will be to do at the end of the session. For this reason, every well-designed training should start with LOs.
+
+The first step of good instructional design consists is identifying the set of Knowledge, Skills, Abilities (KSAs) that learners are expected to acquire by the end of instruction.
+
+### Teaching objectives and Learning Outcomes
+
+**Objectives** are statements of what you are setting out to teach, although expressed as if the students were going to learn it. Despite Aims are usually intended to be more general and encompassing than Objectives, they are essential the same.
+
+**Outcomes** (more accurately "desired outcomes") are statements of what you might (in principle) assess. You may not end up assessing all of them, but they are statements of what a student will know or be able to do, if she or he has learned everything in the course or session.
+
+### Learning objectives and learning outcomes
+
+> <comment-title>Sources</comment-title>
+>
+> The following section is adapted from the webpage [http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes](http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes) and the [Operational definitions:](https://irds.stanford.edu/sites/g/files/sbiybj10071/f/clo.pdf) document from the [Rensselaer Polytechnic Institute Office of the Provost](http://provost.rpi.edu/institutional-research).
+{: .comment}
+
+The terms Learning Objectives and Learning Outcomes are often used interchangeably by the community. Even worse, they are often abbreviated by the acronym (LO), thus introducing even more ambiguity. In our opinion there is no need. Objectives (aims or goals) and Outcomes (results) may overlap, but are not genuinely the same.
+
+Furthermore, American educational psychologists tend to use "Learning Objectives" to mean "Learning Outcomes" and "Teaching aims, goals or objectives" to mean "Learning Objectives".
+
+In the attempt of removing ambiguities we will use the term **Teaching Objectives** to mean:
+
+* Objectives describe the goals and intentions of the instructor.
+* Objectives, often termed the input in the course, state the purpose and goals of the course.
+* Objectives focus on content and skills important within the classroom or programme.
+* Objectives may describe what the instructors will do.
+* Objectives can often be numerous, specific, and detailed.
+
+And the term **Learning Outcomes** to mean:
+
+* Student Learning Outcomes catalog the overarching "products" of the course and are the evidence that the goals or objectives were achieved.
+* Learning Outcomes are statements that describe or list measurable and essential mastered content-knowledge—reflecting skills, competencies, and knowledge that students have achieved and can demonstrate upon successfully completing a course.
+* Outcomes express higher-level thinking skills that integrate course content and activities and can be observed as a behavior, skill, or discrete useable knowledge upon completing the
+course.
+* Outcomes are exactly what assessments are intended to show – specifically what the student will be able to do upon completing the course.
+* An assessable outcome can be displayed or observed and evaluated against criteria.
+* Outcomes are clear and measurable criteria for guiding the teaching, learning, and assessment process in the course.
+* Statements expressing which KSAs learners will be able to demonstrate upon completion of a learning experience or a sequence of learning experiences
+* What learners will be able to do for the end of instruction and the teacher / instructor can in principle evaluate
+
+Going beyond the definition however, a learning outcome needs to be also practical, i.e. there is a need to assign observable actions in order to let teacher assess them.
+
+#### How to write learning outcomes using OBSERVABLE verbs
+
+In order to write learning outcomes, you can use the following scheme:
+
+1. Think about what learners will be able to do by the end of instruction
+2. Use the sentences:
+
+    *By the end of the lesson (session/course/instruction) the learner will be able to.........*
+
+    OR
+
+    *The successful learner will be able to......*
+
+3. Replace dots with a verb that you can assess (name, explain, solve, distinguish, etc.).
+4. Avoid verbs that are open to many interpretations: appreciate, have faith in, know, learn, understand, believe
+5. Keep in mind that learning outcomes can be as specific as you want. You may even think about a different learning outcome for each task you assign to learners.
+
+Identify observable and non observable actions (verbs)
+
+> <hands-on-title>Identify observable and non observable actions (verbs) - {% icon time %} 3 min</hands-on-title>
+>
+> Here is a list of verbs:
+> - Compare
+> - Classify
+> - Distinguish
+> - Explain
+> - Believe
+> - Give examples of
+> - Define
+> - Learn
+> - Describe
+> - List
+> - Recognize
+> - Know
+> - Connect
+> - Measure
+> - Identify
+> - Have faith in
+>
+> * Write in the shared notes which ones describe observable actions
+> * Write in the shared notes which ones are instead open to multiple interpretation
+>
+{: .hands_on}
+
+<!--{% include _includes/quiz.html id="verbs.yaml" %}-->
+
+> <tip-title>Observable and non observable actions (verbs)</tip-title>
+>
+> In classifying verbs, it may help to focus on how you would assess the corresponding action / behaviour.
+> Example: "identify"
+> - Q: What would I do to assess whether a learner is able to identify something?
+> - A: Ask them to do this challenge.
+{: .tip}
+
+
+<!--
+> <comment-title>What are Learning Outcomes (LOs)?</comment-title>
+>
+> - Statements expressing which KSAs learners will be able to demonstrate upon
+>   completion of a learning experience or a sequence of learning experiences
+> - What learners will be able to do for the end of a lesson and the teacher can
+>   in principle evaluate
+>
+{: .comment}
+-->
+
+
 
 > <question-title>Evaluate LOs</question-title>
 >
@@ -430,7 +533,7 @@ below.
 
 <!-- NILOA five principles for articulating LOs -->
 
-> <hands-on-title>Learning outcomes - _⏰ 2 min - Silent working_</hands-on-title>
+> <hands-on-title>Learning outcomes - {% icon time %} 2 min - Silent working</hands-on-title>
 >
 > 1. Take the small lesson you selected at the beginning
 > 2. Try to jot a few LOs down
@@ -446,26 +549,32 @@ target LOs meet, or are consistent with, the characteristics outlined in the box
 below helps to promote better alignment of instructional inputs and learner
 outcomes.
 
-{% include _includes/quiz.html id="evaluate_learning_outcomes.yaml" %}
+<!--{% include _includes/quiz.html id="evaluate_learning_outcomes.yaml" %}-->
 
-> <solution-title>Evaluate Learning outcomes - Solution</solution-title>
+> <question-title>Evaluate LOs</question-title>
 >
-> "By the end of the course learners will know the Pythagora's theorem"
+> "By the end of the course learners will know the Pythagora's theorem
+> 
+> What do you think about this LO?
 >
->  This LO is not good:
->
-> - How to assess whether learners know the Pythagora's theorem?
-> - What do we mean by "knowing" the Pythagorean theorem?
->   - They are able state it?
->   - They are able explain it?
->   - They are able apply it?
->   - They are able demonstrate it?
->   - They are able to use it in solving problem?
->
-> It would make more sense to ask: "What will learners be able to do to show
-> they know the Pythagorean theorem?"
->
-{: .solution}
+> > <solution-title>Evaluate Learning outcomes - Solution</solution-title>
+> >
+> > "By the end of the course learners will know the Pythagora's theorem"
+> >
+> >  This LO is not good:
+> >
+> > - How to assess whether learners know the Pythagora's theorem?
+> > - What do we mean by "knowing" the Pythagorean theorem?
+> >   - They are able state it?
+> >   - They are able explain it?
+> >   - They are able apply it?
+> >   - They are able demonstrate it?
+> >   - They are able to use it in solving problem?
+> >
+> > It would make more sense to ask: "What will learners be able to do to show they know the Pythagorean theorem?"
+> >
+> {: .solution}
+{: .question}
 
 In short, when defining LOs, the key question to ask is, are they SMART?
 
@@ -480,7 +589,7 @@ these criteria is it safe to progress to Phase 2, as shown in [Figure 2](#figure
 SMART LOs will be the roadmap as we plan out instructional strategies, write the
 content and **create assessments**.
 
-> <hands-on-title>Create SMART LOs - _⏰ 10 min - Silent working_</hands-on-title>
+> <hands-on-title>Create SMART LOs - {% icon time %} 10 min - Silent working</hands-on-title>
 >
 > 1. Take the LOs you created
 > 2. Consider if your LOs are SMART
@@ -612,7 +721,7 @@ then the LOs should be revised – i.e., LOs are still the most important featur
 to consider.**The key is to determine exactly what specific LEs can contribute
 to learning or how they will help move learners towards the LOs.**
 
-<!-- >> <question-title>Evaluate LEs in GTN tutorials</question-title>
+> <question-title>Evaluate LEs in GTN tutorials</question-title>
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
@@ -646,21 +755,20 @@ to learning or how they will help move learners towards the LOs.**
 >   >
 >   {: .solution}
 >
-{: .question} -->
+> > <solution-title>LEs in GTN tutorials</solution-title>
+> >
+> > Most of the GTN tutorials are using Practical and Exercises as LEs.
+> >
+> > They are most likely to show how to do things and give an idea of how a tool works.
+> >
+> > In the [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}),
+> > the LO "Determine the best strategy to get data into Galaxy" may not be achieved
+> > with only practical
+> >
+> {: .solution}
+{: .question} 
 
-{% include _includes/quiz.html id="LEs_GTN_tutorials.yaml" %}
-
-> <solution-title>LEs in GTN tutorials</solution-title>
->
-> Most of the GTN tutorials are using Practical and Exercises as LEs.
->
-> They are most likely to show how to do things and give an idea of how a tool works.
->
-> In the [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}),
-> the LO "Determine the best strategy to get data into Galaxy" may not be achieved
-> with only practical
->
-{: .solution}
+<!--{% include _includes/quiz.html id="LEs_GTN_tutorials.yaml" %}-->
 
 ## Select and develop content relevant to the LOs
 
@@ -790,7 +898,7 @@ learners and new concepts This helps in the teaching plan to measure how much
 can be covered, and the hierarchical organization suggests a sequence to cover
 material.
 
-> <hands-on-title>Draw a concept map - _⏰ 15 min - Silent working_</hands-on-title>
+> <hands-on-title>Draw a concept map - {% icon time %} 15 min - Silent working</hands-on-title>
 >
 > - Draw a concept map of your topic of interest
 > - Start with a question
@@ -800,7 +908,7 @@ material.
 > - Count the items (concepts and links)
 {: .hands_on}
 
-> <hands-on-title>Give / receive feedback on concept maps - _⏰ 10 min - Group of 2 persons_</hands-on-title>
+> <hands-on-title>Give / receive feedback on concept maps - {% icon time %} 10 min - Group of 2 persons</hands-on-title>
 >
 > - Pair with someone
 > - Check the concept name of your partner
@@ -824,7 +932,7 @@ material.
 - **Content reduction**: one of the biggest challenges in designing training
   courses is the reduction of content to the training format. key points!
 
-> <hands-on-title>Producing the content and the training material - _⏰ 15 min_</hands-on-title>
+> <hands-on-title>Producing the content and the training material - {% icon time %} 15 min</hands-on-title>
 >
 > - Prepare the content for your 3 min training
 >
@@ -952,7 +1060,7 @@ Using actionable formative and summative assessment can help to ensure that LOs,
 and progress towards them, are explicitly supported. **LOs clarify what
 specifically needs to be assessed and why.**
 
-<!-- >> <question-title>Evaluate assessment</question-title>
+> <question-title>Evaluate assessment</question-title>
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
@@ -962,11 +1070,11 @@ specifically needs to be assessed and why.**
 > - To what extent are the tests aligned with the KSAs & Bloom's levels
 >   expressed in the LOs?
 >
-{: .question} -->
+{: .question}
 
-{% include _includes/quiz.html id="assessments_GTN_tutorials.yaml" %}
+<!--{% include _includes/quiz.html id="assessments_GTN_tutorials.yaml" %}-->
 
-> <hands-on-title>Assessment in mini-training - _⏰ 5 min_</hands-on-title>
+> <hands-on-title>Assessment in mini-training - {% icon time %} 5 min</hands-on-title>
 >
 > - Take the content of your 3 min training
 > - Analyse the flow of the lesson, identify points where you could introduce
@@ -1057,10 +1165,9 @@ standards. **Ultimately, the evaluation should identify what works in a course,
 and what needs remediation, to better support the achievement of the intended
 LOs**.
 
-<!-- >> <question-title>Evaluate effectiveness</question-title>
+> <question-title>Evaluate effectiveness</question-title>
 >
-> - Think of the course or tutorial you selected before (*e.g.*, the
->   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
+> - Think of the course or tutorial you selected before (*e.g.*, the [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
 >
 > - Do you evaluate its effectiveness?
 >
@@ -1071,33 +1178,15 @@ LOs**.
 >   >
 >   {: .solution}
 >
->   If so, how do you do this? How do you determine its effectiveness in leading
->   learners to your intended LOs?
+>   If so, how do you do this? How do you determine its effectiveness in leading learners to your intended LOs?
 >
->   > <solution-title>for the dummy tutorial</solution-title>
->   >
->   >
->   {: .solution}
+> - Consider the Kirkpatrick-Katzell framework. What level(s) does your evaluation incorporate?
 >
-> - Consider the Kirkpatrick-Katzell framework. What level(s) does your
->   evaluation incorporate?
+> - What adjustments would you need to make, if any, in order to align your evaluation with the Kirkpatrick-Katzell strategy?
 >
->   > <solution-title>for the dummy tutorial</solution-title>
->   >
->   >
->   {: .solution}
->
-> - What adjustments would you need to make, if any, in order to align your
->   evaluation with the Kirkpatrick-Katzell strategy?
->
->   > <solution-title>for the dummy tutorial</solution-title>
->   >
->   >
->   {: .solution}
->
-{: .question}-->
+{: .question}
 
-{% include _includes/quiz.html id="effectiveness_GTN_tutorials.yaml" %}
+<!--{% include _includes/quiz.html id="effectiveness_GTN_tutorials.yaml" %}-->
 
 > <solution-title>Evaluate effectiveness in GTN tutorials</solution-title>
 >
@@ -1112,7 +1201,7 @@ LOs**.
 <!-- ELIXIR TtT -->
 # Testing the mini-training
 
-> <hands-on-title>Delivery planning - _⏰ 10 min - Silent working_</hands-on-title>
+> <hands-on-title>Delivery planning - {% icon time %} 10 min - Silent working</hands-on-title>
 >
 > - Think if you want to make your training interactive
 > - Think whether you need or want to use a visual support (images)
@@ -1122,10 +1211,9 @@ LOs**.
 >
 {: .hands_on}
 
-> <hands-on-title>Deliver mini-training and Give / receive feedback on its delivery - _⏰ 15 min - Groups of 2 persons_</hands-on-title>
+> <hands-on-title>Deliver mini-training and Give / receive feedback on its delivery - {% icon time %} 15 min - Groups of 2 persons</hands-on-title>
 >
-> - Deliver each one your 3 minute session to others with 1 person noting down
->   feedback in real-time
+> - Deliver each one your 3 minute session to others with 1 person noting down feedback in real-time
 >
 >    > <details-title>How to give feedback on training</details-title>
 >    >

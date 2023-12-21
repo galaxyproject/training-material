@@ -33,8 +33,10 @@ contributors:
 
 # Where can Galaxy run?
 
+{% assign servers = list_usegalaxy_servers_shuffle %}
+
 * Cloud (SaaS)
-  - A usegalaxy.* site [Main](https://usegalaxy.org) [Europe](https://usegalaxy.eu) [Australia](https://usegalaxy.org.au/)
+  - A usegalaxy.* site: {% for server in servers %}[{{ server.human }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}
   - [Public Galaxy Servers](https://galaxyproject.org/use)
   - [Amazon EC2 or MS Azure](https://launch.usegalaxy.org/)
   - Semi-private cloud (e.g.: [NeCTAR](https://nectar.org.au/), [Jetstream](http://jetstream-cloud.org/))
@@ -53,16 +55,16 @@ contributors:
 
 [Resource Directory](https://galaxyproject.org/use/)
 
-Supported                                         | Main | Local | Cloud | Appliance
----------                                         | ---- | ----- | ----- | ---------
-Your data sets are moderately sized               | yes  | yes   | yes   | yes
-Your computation requirements are moderate        | yes  | yes   | yes   | yes
-You want to share your Galaxy objects with others | yes  | yes   | yes   | yes
-All needed Tools are installed on Main            | yes  | ?     | yes   | yes
-Your data sets are very large                     | no   | ?     | yes   | yes
-Your computation requirements are very large      | no   | ?     | yes   | yes
-You have absolute data security requirements      | no   | yes   | yes   | yes
-No network transfer of data                       | no   | yes   | no    | yes
+Supported                                         | UseGalaxy.* | Local     | Cloud
+---------                                         | ----        | -----     | -----
+Moderate Data                                     | ✅          | ✅        | ✅
+Big Data                                          | ❌          | 🤷‍♀️ | ✅
+Moderate Computations                             | ✅          | ✅        | ✅
+Long/Expensive Computations                       | ❌          | 🤷‍  | ✅
+You want to share your Galaxy objects with others | ✅          | ✅        | ✅
+All needed Tools are pre-installed                | ✅          | 🤷‍♂️ | ✅
+Human Data / Proprietary Data                     | ❌          | ✅        | ✅
+No network transfer of data                       | ❌          | ✅        | ❌
 
 ---
 
@@ -145,7 +147,7 @@ An "average" 2018 NGS analysis (by Anton Nekrutenko): **66 GB**
 Solutions:
 
 - Quotas
-- Set job limits in `job_conf.yml`
+- Set job limits in the job conf
 - Clean up deleted data (with a cron job)
 - Forced removal based on age
 - Users can configure their workflows to delete intermediate tool outputs

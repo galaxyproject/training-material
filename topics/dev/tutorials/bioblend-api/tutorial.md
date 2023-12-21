@@ -30,9 +30,10 @@ contributions:
 
 notebook:
   language: python
+  #pyolite: true # Not possible due to https://pyodide.org/en/stable/project/roadmap.html#write-http-client-in-terms-of-web-apis
 ---
 
-
+BioBlend ({% cite Sloggett2013 %}) is a Python library to enable simple interaction with Galaxy ({% cite Afgan2018 %}) via the command line or scripts.
 
 > <agenda-title></agenda-title>
 >
@@ -210,7 +211,7 @@ print(r.status_code)
 
 
 > <question-title>Upload a dataset</question-title>
-> **Upload** the local file `1.txt` to the new history. You need to run the special `upload1` tool by making a `POST` request to `/api/tools`. You don't need to pass any inputs to it apart from attaching the file as `files_0|file_data`. Also, note that when attaching a file you need to drop `Content-Type` from the request headers.
+> **Upload** the local file `1.txt` to the new history. You need to run the special `upload1` tool by making a `POST` request to `/api/tools`. You don't need to pass any inputs to it apart from attaching the file as `files_0|file_data`. Also, note that when attaching a file the payload should **not** be serialized to a JSON string and you need to drop `Content-Type` from the request headers.
 >
 > You can obtain the `1.txt` file from the following URL, you'll need to download it first.
 >
@@ -257,7 +258,7 @@ print(r.status_code)
 ```
 
 > <question-title>Import a workflow</question-title>
-> **Import a workflow** from the local file `convert_to_tab.ga` by making a `POST` request to `/api/workflows`. The only needed data is `workflow`, which must be a deserialized JSON representation of the workflow.
+> **Import a workflow** from the local file `convert_to_tab.ga` by making a `POST` request to `/api/workflows`. The only needed data is `workflow`, which must be a deserialized JSON representation of the workflow `.ga` file.
 >
 > You can obtain the `convert_to_tab.ga` file from the following URL, you'll need to download it first.
 >
@@ -268,8 +269,8 @@ print(r.status_code)
 > >
 > > ```python
 > > with open("convert_to_tab.ga", "r") as f:
-> >     workflow_json = json.load(f)
-> > data = {'workflow': workflow_json}
+> >     workflow_dict = json.load(f)
+> > data = {"workflow": workflow_dict}
 > > r = requests.post(base_url + "/workflows", data=json.dumps(data), headers=headers)
 > > wf = r.json()
 > > pprint(wf)
@@ -325,6 +326,13 @@ print(r.status_code)
 {: .question}
 
 # Interacting with histories in BioBlend
+
+If you need to install BioBlend into your Jupyter environment, you can execute:
+
+``python
+import sys
+!{sys.executable} -m pip install bioblend
+``
 
 **You need to insert the API key for your Galaxy server in the cell below**:
 1. Open the Galaxy server in another browser tab
@@ -608,7 +616,7 @@ pprint(gi.histories.get_previews())
 
 ```python
 new_hist = gi.histories.create(name='BioBlend test')
-new_hist
+pprint(new_hist)
 ```
 
 As you can see, the `create()` methods in BioBlend.objects returns an object, not a dictionary.
@@ -629,7 +637,7 @@ https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.tx
 
 ```python
 hda = new_hist.upload_file("1.txt")
-hda
+pprint(hda)
 ```
 
 Please note that with BioBlend.objects there is no need to find the upload dataset, since `upload_file()` already returns a `HistoryDatasetAssociation` object.
@@ -702,7 +710,7 @@ new_hist.delete()
 > > <solution-title></solution-title>
 > > ```python
 > > new_hist = gi.histories.create(name='New history')
-> > new_hist
+> > pprint(new_hist)
 > > ```
 > {: .solution}
 {: .question}
@@ -723,7 +731,7 @@ new_hist.delete()
 > > <solution-title></solution-title>
 > > ```python
 > > hda = new_hist.upload_file("1.txt")
-> > hda
+> > pprint(hda)
 > > ```
 > {: .solution}
 {: .question}
@@ -746,7 +754,7 @@ new_hist.delete()
 > > with open("convert_to_tab.ga", "r") as f:
 > >     wf_string = f.read()
 > > wf = gi.workflows.import_new(wf_string)
-> > wf
+> > pprint(wf)
 > > ```
 > {: .solution}
 {: .question}
@@ -759,7 +767,7 @@ new_hist.delete()
 > <question-title>View the workflow inputs</question-title>
 > > <solution-title></solution-title>
 > > ```python
-> > wf.inputs
+> > pprint(wf.inputs)
 > > ```
 > {: .solution}
 {: .question}
@@ -795,3 +803,5 @@ If you have completed the exercise, you can try to perform these extra tasks wit
 
 1. Download the workflow result to your computer
 2. Publish your history
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="bioblend-api" %}
