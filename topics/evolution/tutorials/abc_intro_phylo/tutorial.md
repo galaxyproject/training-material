@@ -109,8 +109,7 @@ This tutorial has the following structure:
 - Maximum Likelihood with IQTree -->
 
 ## Welcome
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dmCCQRliEMk?si=iAmOuuO_x0OXkJ4q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen alt="Video: Welcome and why phylogenetics?"></iframe>
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dmCCQRliEMk?si=iAmOuuO_x0OXkJ4q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen alt="Video: Welcome and why phylogenetics?" align="center"></iframe>
 
 ## What is a Phylogeny?
 ![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. Source: Wikimedia commons"){: align="center" width="40%"}
@@ -1185,6 +1184,10 @@ To develop a deeper understanding of phylogenetic trees, there is no better way 
 - [BEAST](http://www.beast2.org/)
 
 ## How to cite the tools used in this tutorial
+
+If you use, extend or reference Galaxy in your published work, please acknowledge the public Galaxy platforms you use (e.g. Galaxy Australia) and cite this publication:
+
+The Galaxy Community. The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2022 update, Nucleic Acids Research, Volume 50, Issue W1, 5 July 2022, Pages W345–W351, https//:doi.org/10.1093/nar/gkac247
 
 
 To cite IQ-TREE please use:
