@@ -30,6 +30,8 @@ contributors:
 
 # Introduction
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dmCCQRliEMk?si=iAmOuuO_x0OXkJ4q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen alt="Video: Welcome and why phylogenetics?"></iframe>
+
 Phylogenetics is essential for comparing biological species and understanding biodiversity for conservation. This tutorial discusses the basic principles and methods of phylogenetic inference and what you can learn from phylogenetic estimation. It is intended to help you make informed decisions about which methods to use in your research. 
 
 Using real-life data and standard tools that are (mostly) available in Galaxy, the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data.
@@ -108,9 +110,6 @@ This tutorial has the following structure:
 - Assessing the quality of the tree(s): Bootstrapping, branch lengths; conflict in the networks
 - Maximum Likelihood with IQTree -->
 
-## Welcome
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dmCCQRliEMk?si=iAmOuuO_x0OXkJ4q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen alt="Video: Welcome and why phylogenetics?" align="center"></iframe>
-
 ## What is a Phylogeny?
 ![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. Source: Wikimedia commons"){: align="center" width="40%"}
 
@@ -159,6 +158,7 @@ Aside from gaining a fundamental understanding of biology, other reasons for inf
 {: .comment}
 
 ## Terminology
+{% icon video %} From the root to the tips, watch the video to explore common features of phylogenetic trees. See how these features relate to evolutionary patterns and how outgroups can be used to find the root or common ancestor of extant species.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gnWlMbGPYx8?si=eCOgJXSo-M5E6ZDK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -166,6 +166,8 @@ Aside from gaining a fundamental understanding of biology, other reasons for inf
 Before we start building trees, let's define some terms.
 
 ![Schematic of a phylogenetic tree where features such as nodes/taxa, edges/branches are annotated](images/TreeAnatomyWithOutgroup.png "Anatomy of a phylogenetic tree."){:align="center" width="100%"}
+
+
 
 It's common to call **phylogenetic tree** a **phylogeny**.
 
@@ -381,6 +383,10 @@ ACTTGGCGTAGCCGGAGGCC
 
 # Sequence Alignment
 
+{% icon video %} Watch the video to find out
+[0:00] What ‘alignment’ really means and why it is useful for phylogenetics; [6:22] What makes a good alignment; [12:15] How pairwise sequence alignment and dynamic programming work; [33:47] How the multiple sequence alignment algorithms work; and to 
+[40:00] explore multiple sequence alignment of the Anolis sequences with SeaView.
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FUc2A2r1LGY?si=eJolYh8_oAZ1IEDU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
@@ -436,6 +442,11 @@ A tool you can use on your own computer is [SeaView](https://doua.prabi.fr/softw
 
 
 # Distance-based phylogenetic inference
+{% icon video %} Watch the video to delve into the mathematics of building phylogenetic trees from distances. [0:00] Why use distances and how they relate to the structure of a phylogenetic tree
+[3:05] Types of distances and distance matrices
+[11:31] The mathematics behind the Jukes-Cantor/JC69 and HKY85 models [16:04] An example of building a tree from ultrametric distances [21:01] Building a tree from non-clocklike distances with the Neighbour-joining method [25:59] Real life data and limitations for building trees from distances.
+
+
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/t68H2Ilc4mI?si=7i6ZePO3_7CqN5H3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -1034,6 +1045,9 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 # Phylogenetic Networks
 
 <!-- Intro to phylogenetic networks as an alternative to trees -->
+
+{% icon video %} Watch the video to see how SplitsTree4 can be used to explore the evidence supporting different phylogenetic splits in data from Anolis species using networks built with uncorrected P, Jukes-Cantor and HKY85 models.
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MvZhj3cSVhA?si=fcFWkzQpIxm8Aa0v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
