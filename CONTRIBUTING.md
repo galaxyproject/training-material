@@ -20,7 +20,7 @@ By contributing, you agree that we may redistribute your work under [this reposi
 
 We will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community.
 
-If you have any questions, you can reach us using the [Gitter chat](https://gitter.im/Galaxy-Training-Network/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link).
+If you have any questions, you can reach us using the [Matrix chat](https://matrix.to/#/!Galaxy-Training-Network_Lobby:gitter.im).
 
 # How can I contribute?
 

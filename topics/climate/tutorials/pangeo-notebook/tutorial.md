@@ -57,16 +57,12 @@ key_points:
 tags:
   - pangeo
   - interactive-tools
-  - jupyter-notebook
 contributors:
 - annefou
 notebook:
   language: python
   snippet: topics/climate/tutorials/pangeo-notebook/preamble.md
 ---
-
-
-# Introduction
 
 
 In this tutorial, we will learn about [Xarray](https://xarray.pydata.org/), one of the most used Python library from the [Pangeo](https://pangeo.io/) ecosystem.
@@ -349,7 +345,6 @@ dset.sel(time=(np.timedelta64(2,'D') + np.timedelta64(12,'h')))['pm2p5_conc'].pl
 plt.title("Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts\n 24th December 2021 at 12:00 UTC", fontsize=18)
 plt.savefig("CAMS-PM2_5-fc-20211224.png")
 ```
->    {: .code-in}
 
 And you should get the following plot:
 

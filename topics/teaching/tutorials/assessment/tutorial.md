@@ -31,25 +31,16 @@ contributions:
     - ppalagi
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
 ---
 
-# Introduction
+**Assessment** is the evaluation or estimation of the nature, quality, or ability of someone or something, while **feedback** integrate the output of the assessment in the learning process.
 
-
-* **Assessment**: evaluation or estimation of the nature, quality, or ability of someone or something
-* **Feedback**: integrate the output of the assessment in the learning process
-
-Teaching goal for this session is to develop an understanding of **different types of feedback**,when to give and receive feedback, and for which **purpose**.
-By the end of this session, you will be able to:
-* **Describe** the differences between formative and summative assessment
-* **Tell** why frequent feedback is important
-* **List** and **describe** a few techniques for formative feedback
-
-The flowchart below highlights where the assessment and feedback phase falls in the overall Nicholls process ({% cite via2020course %} and {% cite nicholls2002developing %}):
+Assessment and feedback phase falls in the overall Nicholls process ({% cite via2020course %}, {% cite nicholls2002developing %}):
 
 ![A flow chart of the five phases of the instructional design. The 1st phase is to select the Learning Outcomes, followed by the selection of the corresponding Learning Experiences. The third phase is to select the content that is relevant to the LO. The fourth phase is the development of the necessary assessments for the learners, with the final phase being the evaluation of the effectiveness of the LE and the LO, at which point the flow connects back to the first phase for the refinement of the process.](images/NichollsPhases.png "5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. pp 51-75")
 
+Teaching goal for this session is to develop an understanding of **different types of feedback and assessments**, when to give and receive feedback, and for which **purpose**.
 
 # Assessments
 
@@ -63,47 +54,44 @@ Assessment | Timing | Objectives
 **Summative assessment** | Right after the course | measure and evaluate the knowledge and skills acquired
 **Strategic evaluation** | After the course, long time after the course | measure the adequacy, quality and impact of the course
 
-and different ways that we can categorise them:
+They can be categorised in different ways:
 
 ![A representation of the mental model for assessment, as a tree. It shows the various categories of assessment, as well as the optimal placement of them during the teaching process.](images/assessment-categories.png)
 
-<!-- 
-> <hands-on-title>Diagnostic Assessment - Break-out room discussion  - *⏰ 15 min*</hands-on-title>
+> <hands-on-title>Diagnostic Assessment - {% icon time %} 15 min - Groups of 4</hands-on-title>
 >
-> - Split into groups of 4, depending on the number of participants.
-> - Discuss how you could collect information from learners at the beginning of a course or lesson and how you can use it.
-> - Write it in a notebook and discuss with the rest of the group.
-{: .hands_on}-->
+> Discuss how you could collect information from learners at the beginning of a course or lesson and how you can use it
+{: .hands_on}
 
-{% include _includes/quiz.html id="diagnostic_assessment.yaml" %}
+<!--{% include _includes/quiz.html id="diagnostic_assessment.yaml" %}-->
 
 ## Formative vs summative assessment
 
-- **Formative** assessment takes place **during** teaching and learning. Its purpose is to help both instructors and learners to become aware of what the focus should be. Its purpose is to **improve the quality of students' learning**, not to provide evidence for evaluating or grading students.
+**Formative** assessment takes place **during** teaching and learning. Its purpose is to help both instructors and learners to become aware of what the focus should be. Its purpose is to **improve the quality of students' learning**, not to provide evidence for evaluating or grading students.
 
-- **Summative** assessment takes place **at the end** of teaching and learning. Its purpose is to evaluate learners' learning by comparing it against a standard or benchmark, and provide evidence for evaluating or grading students.
+**Summative** assessment takes place **at the end** of teaching and learning. Its purpose is to evaluate learners' learning by comparing it against a standard or benchmark, and provide evidence for evaluating or grading students.
 
-    > <comment-title>At the end of teaching</comment-title>
-    >
-    > For summative assessment, 'the end' does not necessarily mean the end of an entire course or module of study.
-    > Summative assessments may be distributed throughout a course, after a particular unit (or collection of topics) has been taught, but graded any how.
-    {: .comment}
+> <comment-title>At the end of teaching</comment-title>
+>
+> For summative assessment, 'the end' does not necessarily mean the end of an entire course or module of study.
+> Summative assessments may be distributed throughout a course, after a particular unit (or collection of topics) has been taught, but graded any how.
+{: .comment}
 
-    What are the methods for summative assessment? You do remember some of the methods used in summative assessment when you are a student (1-5) or from being a teacher:
-    - Questionnaires
-    - Interviews
-    - Observations
-    - Testing: specific test created by the teacher or establishment made to include all points of a unit or specific information taught in a given time frame
-    - Projects: a culminating project that synthesizes knowledge
+What are the methods for summative assessment? You do remember some of the methods used in summative assessment when you are a student or from being a teacher:
+- Questionnaires
+- Interviews
+- Observations
+- Testing: specific test created by the teacher or establishment made to include all points of a unit or specific information taught in a given time frame
+- Projects: a culminating project that synthesizes knowledge
 
-    Summative assessment should be
-    - Aligned to LOs (levels of complexity, what you taught, the level you taught it)
-    - Objective
-    - Feasible
+Summative assessment should be
+- Aligned to LOs (levels of complexity, what you taught, the level you taught it)
+- Objective
+- Feasible
 
-![A cartoon figure showing the main difference between formative and summative assessment, when making soup. When the chef tastes the soup while preparing, it's formative assessment. When the guests taste the soup after its done, it's summative asssessment.](images/FormativeSummativeAssessment.png "Allegorie to explain formative and summative assessment. When the chef tastes the soup and notices that there is not enough salt or spices, she can still add more. When the guests taste the soup, what's done is done (the chef can't change anything in the recipe for these guests). But she can still change the recipe for the future guests (future students). In formative assessment, the instructor can direct the learning on the fly, correct the direction, address mistakes/misconceptions/missing knowledged. In summative assessment, the learners have passed a test and they can't go back in time to do it better. The mark was decided. A summative assessment can indicate how the teaching was (if the instructor realises that the whole class of learners did poorly in the exam, this indicates that the teaching may be a cause), but in the best case scenario she can improve her course for the next cohort of learners (not for those who had finished the course/semester/year)")
+![A cartoon figure showing the main difference between formative and summative assessment, when making soup. When the chef tastes the soup while preparing, it's formative assessment. When the guests taste the soup after its done, it's summative asssessment.](images/FormativeSummativeAssessment.png "Allegorie to explain formative and summative assessment. When the chef tastes the soup and notices that there is not enough salt or spices, they can still add more. When the guests taste the soup, what's done is done (the chef can't change anything in the recipe for these guests). But they can still change the recipe for the future guests (future students). In formative assessment, the instructor can direct the learning on the fly, correct the direction, address mistakes/misconceptions/missing knowledged. In summative assessment, the learners have passed a test and they can't go back in time to do it better. The mark was decided. A summative assessment can indicate how the teaching was (if the instructor realises that the whole class of learners did poorly in the exam, this indicates that the teaching may be a cause), but in the best case scenario she can improve her course for the next cohort of learners (not for those who had finished the course/semester/year)")
 
-In training, the scope here,  the focus is on formative assessment (collect information / feedback on how learning is progressing). We will from now on only talk about formative assessment.
+In training, the scope here, the focus is on formative assessment (collect information / feedback on how learning is progressing). We will from now on only talk about formative assessment.
 
 Formative assessment takes place **during** teaching and learning. Its purpose is to help both instructors and learners to become aware of what the focus should be. Its purpose is to **improve the quality of student learning**, _not_ to provide evidence for evaluating or grading students.
 
@@ -114,19 +102,15 @@ Formative assessment collect feedback (information) from learners' on their lear
 - **Frequent mistakes**: which types of mistakes need special attention
 - **Ability to perform a task**
 
-<!-- 
-> <hands-on-title>Collecting formative assessment - Break-out room discussion  - *⏰ 10 min*</hands-on-title>
+> <hands-on-title>Collecting formative assessment - {% icon time %} 10 min - Groups of 4</hands-on-title>
 >
-> - Split into groups of 4, depending on the number of participants.
+> 1. Find an example on how to collect information on **learners' mental models**
+> 2. Find an example on how to collect information on **learners' goals and objectives**
+> 3. Find an example on how to collect information on **learners' frequent mistakes**
 >
-> - Discuss how you could collect information on learners’
->	* mental models
->   * goals and objectives
->   * frequent mistakes
-> - For each, write an example.
-{: .hands_on} -->
+{: .hands_on}
 
-{% include _includes/quiz.html id="formative_assessment.yaml" %}
+<!--{% include _includes/quiz.html id="formative_assessment.yaml" %}-->
 
 It should be highlighted that the **best practice** for teaching is to:
 - Constantly **monitor** what is happening to students' learning
@@ -147,11 +131,13 @@ Formative assessment & feedback can be done in many different ways:
 
 #### Questionnaires
 
-**Anonymous questionnaires** allow to have an idea of the level of knowledge of the whole group of learners.**Non-anonymous** and personal questionnaires allow to find out if the learner has a necessary pre-required knowledge. in the negative case indicate an appropriate teaching choice to palliate this lack.
+**Anonymous questionnaires** allow to have an idea of the level of knowledge of the whole group of learners. 
+
+**Non-anonymous** and personal questionnaires allow to find out if the learner has a necessary pre-required knowledge, in the negative case indicate an appropriate teaching choice to palliate this lack.
 
 #### Instant feedbacks or minute cards
 
-Before each long break, for example lunch or between days, we have learners complete **minute cards** to share anonymous feedback. At an in-person workshop, paper sticky notes double as minute cards, with the two different colors used for positive and constructive feedback. At an online workshop, this may be done by making a copy of the [Virtual Minute Card Template](https://docs.google.com/forms/d/1p7iOV5HNvy4POS4g6eottY8RSfKq4kaoKz1-jIFYTMI/template/preview) from the Carpentries on Google Forms. Other tools can work as well, but we do recommend making sure that feedback is private and anonymous. A public-facing sticky note board will receive different (and less useful) feedback.
+Before each long break, for example lunch or between days, we can have learners to complete **minute cards** to share anonymous feedback. At an in-person workshop, paper sticky notes double as minute cards, with the two different colors used for positive and constructive feedback. At an online workshop, this may be done by making a copy of the [Virtual Minute Card Template](https://docs.google.com/forms/d/1p7iOV5HNvy4POS4g6eottY8RSfKq4kaoKz1-jIFYTMI/template/preview) from the Carpentries on Google Forms. Other tools can work as well, but we do recommend making sure that feedback is private and anonymous. A public-facing sticky note board will receive different (and less useful) feedback.
 
 During long breaks, instructors read through the minute cards and look for patterns. At the start of each half day, the Instructors take a few minutes to address commonly raised issues with the whole class. The non-teaching Instructor can also type answers to the questions in the Etherpad.
 
@@ -209,21 +195,30 @@ Many group activities are possible
 
     Tools like Google docs, Etherpad or HackMD could be used
 
-{% include _includes/quiz.html id="integrate_formative_assessment.yaml" %}
+> <hands-on-title>How to integrate the result of formative assessment / feedback in your course? - {% icon time %} 5 min - Silent reflection</hands-on-title>
+>
+> 1. In this session, how did we assess your learning?
+> 2. Choose one of the techniques to collect feedback, and describe in the how you can integrate the result in your lesson, on the fly
+>
+{: .hands_on}
+
+<!--{% include _includes/quiz.html id="integrate_formative_assessment.yaml" %}-->
 
 ## How frequent should be formative feedback
 
-{% include _includes/quiz.html id="frequency_formative_assessment.yaml" %}
+<!--{% include _includes/quiz.html id="frequency_formative_assessment.yaml" %}-->
 
-<!-- 
-> <hands-on-title>Self-reflect  (5 min)</hands-on-title>
+> <hands-on-title>How frequent should formative feedback be? - {% icon time %} 5 min - Self-reflection</hands-on-title>
 >
-> - Think about this session: how many feedback opportunities have you had so far?
+> - In this session, how many feedback opportunities have you had so far?
 >
-> > <tip-title>Get feedback often</tip-title>
-> > In this tutorial so far, there were at least 3 feedback opportunities
-> {: .tip}
-{: .hands_on} -->
+>   > <solution-title>Get feedback often</solution-title>
+>    > In this tutorial so far, there were at least 3 feedback opportunities
+>    {: .solution}
+> 
+> - How frequent do you think formative feedback should be?
+>
+{: .hands_on}
 
 ![A figure with a line plot, showing that the learners' attention peaks at ~7-10' and then drastically drops after 15+ minutes.](images/AttentionCurve.jpg "Attention Curve")
 
@@ -232,6 +227,13 @@ Formative assessment should be frequent: ideally **every 5 min**, at least every
 # Dealing with feedback
 
 Feedback is hard.
+
+> <hands-on-title>How to deal with feedback - discuss experiences  - {% icon time %} 15 min - Groups of 4</hands-on-title>
+>
+> - Share one or two experiences that you have had in either offering or receiving feedback.
+> - Share your strategy in dealing with this feedback. What were the challenges, and what worked?
+> - Write it in the shared notes and discuss with the rest of the group.
+{: .hands_on}
 
 ![A cartoon showing that a single negative feedback among a lot of positive can still be the only one that one remembers eventually.](images/gettingFeedback.jpg "Getting feedback")
 

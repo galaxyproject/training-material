@@ -45,12 +45,10 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  - gallantries
 tags:
 - R
 ---
-
-# Introduction
 
 With HTS-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 
@@ -97,6 +95,10 @@ A substantial amount of the data we work with in science is tabular data, i.e. d
 {: .comment}
 
 ## Import tabular data into R
+
+As in the "R Basics" tutorial, we will continue in {% tool [RStudio](interactive_tool_rstudio) %}.
+
+{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
 There are several ways to import data into R. For our purpose here, we will focus on using the tools every R installation comes with (so called "base" R) to import a comma-delimited file containing the results of our variant calling workflow. We will need to load the sheet using a function called `read.csv()`.
 

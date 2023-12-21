@@ -28,9 +28,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
 Tools wrappers allow any command line runnable code or programs to be run inside a galaxy environment.
 Although Galaxy has thousands of tools readily available, new software and packages will always be useful.
 This tutorial is designed to allow anyone to create, run, and deploy new tools in a Galaxy environment.
@@ -761,7 +758,7 @@ It also defines the format of that file and the name shown to the user in the hi
 >
 > ```xml
 > <outputs>
->     <data name="outfile" label="${tool.name} on ${on_string}" format="bam">
+>     <data name="outfile" label="${tool.name} on ${on_string}" format="bam" />
 > </outputs>
 > ```
 {: .hands_on}

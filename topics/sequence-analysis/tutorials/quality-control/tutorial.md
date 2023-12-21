@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Quality Control"
-zenodo_link: "https://doi.org/10.5281/zenodo.61771"
+zenodo_link: "https://zenodo.org/records/61771"
 questions:
   - How to perform quality control of NGS raw data?
   - What are the quality parameters to check for a dataset?
@@ -35,11 +35,10 @@ contributors:
   - lleroi
   - r1corre
   - stephanierobin
-  - erasmusplus
+  - gallantries
+  - neoformit
 
 ---
-
-# Introduction
 
 
 During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a sequence is generated, also called a **read**, which is simply a succession of nucleotides.
@@ -65,6 +64,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the file `female_oral2.fastq-4143.gz` from [Zenodo](https://zenodo.org/record/3977236) or from the data library (ask your instructor)
@@ -75,6 +75,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the imported dataset to `Reads`.
@@ -110,22 +111,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGG
 
 It means that the fragment named `@M00970` corresponds to the DNA sequence `GTGCCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCCGAGCCCACGAGACCGAAGAACATCTCGTATGCCGTCTTCTGCTTGAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAGAAGCAAATGACGATTCAAGAAAGAAAAAAACACAGAATACTAACAATAAGTCATAAACATCATCAACATAAAAAAGGAAATACACTTACAACACATATCAATATCTAAAATAAATGATCAGCACACAACATGACGATTACCACACATGTGTACTACAAGTCAACTA` and this sequence has been sequenced with a quality `GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGGGGGGGGFGGGGGGGGGGGGGGFGGG+38+35*311*6,,31=******441+++0+0++0+*1*2++2++0*+*2*02*/***1*+++0+0++38++00++++++++++0+0+2++*+*+*+*+*****+0**+0**+***+)*.***1**//*)***)/)*)))*)))*),)0(((-((((-.(4(,,))).,(())))))).)))))))-))-(`.
 
-But what does this quality score mean?
-
-The quality score for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-identification of each base. The score is encoded using the ASCII character table (with [some historical differences](https://en.wikipedia.org/wiki/FASTQ_format#Encoding)):
-
-![Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina](../../../sequence-analysis/images/fastq-quality-encoding.png)
-
-So there is an ASCII character associated with each nucleotide, representing its [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score), the probability of an incorrect base call:
-
-Phred Quality Score | Probability of incorrect base call | Base call accuracy
---- | --- | ---
-10 | 1 in 10 | 90%
-20 | 1 in 100 | 99%
-30 | 1 in 1000 | 99.9%
-40 | 1 in 10,000 | 99.99%
-50 | 1 in 100,000 | 99.999%
-60 | 1 in 1,000,000 | 99.9999%
+{% snippet topics/sequence-analysis/faqs/quality_score.md %}
 
 > <question-title></question-title>
 >
@@ -166,7 +152,7 @@ Rather than looking at quality scores for each individual read, FASTQE looks at 
 
 ![FASTQE before](../../images/quality-control/fastqe-mean-before.png "FASTQE mean scores")
 
-You can see the score for each emoji [here](https://github.com/fastqe/fastqe#scale). The emojis below, with Phred scores less than 20, are the ones we hope we don't see much.
+You can see the score for each [emoji in fastqe's documentation](https://github.com/fastqe/fastqe#scale). The emojis below, with Phred scores less than 20, are the ones we hope we don't see much.
 
 Phred Quality Score | ASCII code | Emoji
 --- | --- | ---
@@ -308,7 +294,7 @@ It is normal with all Illumina sequencers for the median quality score to start 
 
 When the median quality is below a Phred score of ~20, we should consider trimming away bad quality bases from the sequence. We will explain that process in the Trim and filter section.
 
-#### Adapter Content
+### Adapter Content
 
 ![Adapter Content](../../images/quality-control/adapter_content-before.png "Adapter Content")
 
@@ -330,13 +316,13 @@ We can run an trimming tool such as Cutadapt to remove this adapter. We will exp
 > <tip-title>Take a shortcut</tip-title>
 >
 > The following sections go into detail about some of the other plots generated by FastQC. Note that some plots/modules may give warnings but be normal
-> for the type of data you're working with, as discussed below and [here](https://rtsf.natsci.msu.edu/genomics/tech-notes/fastqc-tutorial-and-faq/).
+> for the type of data you're working with, as discussed below and [in the FASTQC FAQ](https://rtsf.natsci.msu.edu/genomics/tech-notes/fastqc-tutorial-and-faq/).
 > The other plots give us information to more deeply understand the quality of the data, and to see if changes could be made in the lab to get higher-quality data in the future.
 > These sections are **optional**, and if you would like to skip these you can:
 >   - Jump straight to the [next section](#trim-and-filter---short-reads) to learn about trimming paired-end data
 {: .tip}
 
-#### Per tile sequence quality
+### Per tile sequence quality
 
 This plot enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell. The plot shows the deviation from the average quality for each flowcell tile. The hotter colours indicate that reads in the given tile have worse qualities for that position than reads in other tiles. With this sample, you can see that certain tiles show consistently poor quality, especially from ~100bp onwards. A good plot should be blue all over.
 
@@ -411,7 +397,7 @@ But there are also other situations in which an unusually-shaped distribution ma
 > {: .solution }
 {: .question}
 
-#### Sequence length distribution
+### Sequence length distribution
 
 This plot shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple plot showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment. Our plot shows variable length as we trimmed the data. The biggest peak is at 296bp but there is a second large peak at ~100bp. So even though our sequences range up to 296bp in length, a lot of the good-quality sequences are shorter. This corresponds with the drop we saw in the sequence quality at ~100bp and the red stripes starting at this position in the per tile sequence quality plot.
 
@@ -568,7 +554,7 @@ The quality drops in the middle of these sequences. This could cause bias in dow
 
 To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) {% cite marcel2011cutadapt %}, a tool that enhances sequence quality by automating adapter trimming as well as quality control.  We will:
 
-- Trim low-quality bases from the ends. Quality trimming is done before any adapter trimming. We will set the quality threshold as 20, a commonly used threshold, see more [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035531872-Phred-scaled-quality-scores).
+- Trim low-quality bases from the ends. Quality trimming is done before any adapter trimming. We will set the quality threshold as 20, a commonly used threshold, see more [in GATK's Phred Score FAQ](https://gatk.broadinstitute.org/hc/en-us/articles/360035531872-Phred-scaled-quality-scores).
 - Trim adapter with Cutadapt. For that we need to supply the sequence of the adapter. In this sample, Nextera is the adapter that was detected. We can find the sequence of the Nextera adapter on the [Illumina website here](https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html) `CTGTCTCTTATACACATCT`. We will trim that sequence from the 3' end of the reads.
 - Filter out sequences with length < 20 after trimming
 
@@ -888,10 +874,10 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 > 2. Import the PacBio HiFi reads `m64011_190830_220126.Q20.subsample.fastq.gz` from [Zenodo](https://zenodo.org/record/5730295)
 >
 >    ```
->    https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/m64011_190830_220126.Q20.subsample.fastq.gz
+>    https://zenodo.org/records/5730295/files/m64011_190830_220126.Q20.subsample.fastq.gz
 >    ```
 >
-> 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
+> 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0) %} with the following parameters
 >    - {% icon param-files %} *"files"*: `m64011_190830_220126.Q20.subsample.fastq.gz`
 >    - *"Options for customizing the plots created"*
 >        - {% icon param-select %} *"Specify the bivariate format of the plots."*: `dot`, `kde`
@@ -925,7 +911,7 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 
 This plot shows the distribution of fragment sizes in the file that was analyzed.
 Unlike most of Illumina runs, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
-In this example, the distribution of read length is centered near 15kbp but the results can be very different depending of your experiment.
+In this example, the distribution of read length is centered near 18kbp but the results can be very different depending of your experiment.
 
 ![Histogram of read lengths](../../images/quality-control/HistogramReadlength.png "Histogram of read length")
 
@@ -964,8 +950,8 @@ One of the strengths of PycoQC is that it is interactive and highly customizable
 > 2. Import the nanopore reads `nanopore_basecalled-guppy.fastq.gz` and `sequencing_summary.txt` from [Zenodo](https://zenodo.org/record/5730295)
 >
 >    ```
->    https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/nanopore_basecalled-guppy.fastq.gz
->    https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/sequencing_summary.txt
+>    https://zenodo.org/records/5730295/files/nanopore_basecalled-guppy.fastq.gz
+>    https://zenodo.org/records/5730295/files/sequencing_summary.txt
 >    ```
 >
 > 3. {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %} with the following parameters
@@ -1100,6 +1086,6 @@ Quality control steps are similar for any type of sequencing data:
 - Quality assessment with tools like:
   - *Short Reads*: {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2) %}
   - *Short+Long*: {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}
-  - *Long Reads*:  {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %}
+  - *Long Reads*:  {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0) %}
   - *Nanopore only*: {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %}
 - Trimming and filtering for **short reads** with a tool like **Cutadapt** {% icon tool %}

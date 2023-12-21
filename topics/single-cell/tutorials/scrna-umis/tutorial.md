@@ -8,7 +8,6 @@ redirect_from:
 
 zenodo_link: "https://zenodo.org/record/2573177"
 tags:
-  - single-cell
 questions:
   - "What are barcodes?"
   - "What is their purpose?"
@@ -30,8 +29,6 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
 
-# Introduction
-
 
 Barcodes are small oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:
 
@@ -42,7 +39,7 @@ When the sequence is mapped against a reference genome, we can then see which ge
 
 Barcodes come in a variety of formats, and in this tutorial we will be looking at the CEL-Seq2 protocol {% cite Hashimshony2016 %} used in droplet-based single-cell RNA-seq.
 
-### The CEL-Seq2 Protocol
+## The CEL-Seq2 Protocol
 
 <small>[Back to previous](javascript:window.history.back())</small>
 
@@ -151,7 +148,7 @@ This information is false, because it shows that Red has twice the expression th
 > |--|-------------|-----------------|
 > | Gene Red | Pink | 2 |
 > |          | Blue | 4 |
-> | Gene Blue | Brown | 1 |
+> | Gene Blue | Pink | 1 |
 > |           | Green | 2 |
 {: .matrix}
 
@@ -160,7 +157,7 @@ From this we can then make the decision to ignore the frequencies of these UMIs,
 > |  | Set of UMIs in Gene | UMIs in Cell 1 |
 > |--|---------------------|----------------|
 > | Gene Red | {Pink, Blue} | 2 |
-> | Gene Blue | {Brown, Green} | 2 |
+> | Gene Blue | {Pink, Green} | 2 |
 {: .matrix}
 
 This then provides us with the true count of the number of true transcripts for each gene as given by our original figure.
@@ -179,7 +176,7 @@ This then provides us with the true count of the number of true transcripts for 
 >
 > > <solution-title></solution-title>
 > >
-> 1. Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias.
+> > 1. Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias.
 > > 2. Yes, UMIs are not precise but operate probabilistically. In most cases, two transcripts of the same gene will be tagged by different UMIs. In rarer (but still prevalent) cases, the same UMI will capture different transcripts of the same gene.
 > >  * One helpful way to think about how quantification is performed is to observe the following hierarchy of data `Cell Barcode → Gene → UMI`
 > >
@@ -215,9 +212,9 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 >       {% snippet faqs/galaxy/datasets_import_via_link.md %} <br/>
 >
 >    1. Build a *Dataset pair* for the two FASTQ files <!-- cannot force this to count from 3 -->
->       - Click the *Operations on multiple datasets* check box at the top of the history panel
+>       - Click on {% icon galaxy-selector %} "Select Items" at the top of the history panel
 >       - Check the two boxes next to the R1 and R2 scRNA FASTQ samples
->       - Click *For all selected...* and choose *Build dataset pair*
+>       - Click *2 of N selected* and choose *Build dataset pair*
 >       - Ensure that the forward read is the `R1` sample, and the reverse read is the `R2` sample.
 >          - Click 'Swap' otherwise.
 >       - Set the name of the pair

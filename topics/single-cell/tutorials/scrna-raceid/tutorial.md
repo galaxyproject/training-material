@@ -7,7 +7,6 @@ redirect_from:
   - /topics/transcriptomics/tutorials/scrna-raceid/tutorial
 zenodo_link: 'https://zenodo.org/record/1511582'
 tags:
-  - single-cell
 questions:
   - What is normalisation and why is it necessary?
   - How many types of unwanted variation are there?
@@ -54,8 +53,6 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 <!-- TODO: Subset analysis to validate prior cell labelling -->
 <!-- TODO: Replace sort/unique with datamash -->
 
-# Introduction
-
 
 The data provided here as part of this tutorial analyses single-cell RNA-seq data from a study published by {% cite Gr_n_2016 %}. The data was used to cluster cells from *Lgr5*-positive intestinal stem cells of C57BL6/J mice, with the aim of discovering distinct cell sub-populations and deriving a lineage tree between them to find out how these sub-populations relate (or are derived from) one another.
 
@@ -96,6 +93,7 @@ First, let's setup our history and initial dataset.
 > 1. Create a new history for this tutorial and name it "RaceID on scRNA"
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the file from [Zenodo](https://zenodo.org/record/1511582) or from the shared data library
@@ -105,6 +103,7 @@ First, let's setup our history and initial dataset.
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the dataset to *"intestinal"*

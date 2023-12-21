@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Assembly of metagenomic sequencing data"
-zenodo_link: "https://zenodo.org/record/6958893"
+zenodo_link: "https://zenodo.org/record/7818827"
 level: Introductory
 questions:
   - "Why metagenomic data should be assembled?"
@@ -30,12 +30,14 @@ contributions:
   authorship:
     - plushz
     - bebatut
+  funding:
+    - gallantries
 tags:
   - assembly
   - metagenomics
+  - microgalaxy
 ---
 
-# Introduction
 
 Metagenomics involves the extraction, sequencing and analysis of combined genomic DNA from **entire microbiome** samples. It includes then DNA from **many different organisms**, with different taxonomic background.
 
@@ -107,21 +109,22 @@ In case of a not very large dataset it's more convenient to upload data directly
 > 2. Import the sequence read raw data (\*.fastqsanger.gz) from [Zenodo]({{ page.zenodo_link }}) or a data library:
 >
 >    ```text
->    {{ page.zenodo_link }}/files/ERR2231567_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231567_Read_2.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231568_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231568_Read_2.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231569_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231569_Read_2.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231570_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231570_Read_2.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231571_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231571_Read_2.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231572_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231572_Read_2.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231567_1.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231567_2.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231568_1.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231568_2.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231569_1.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231569_2.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231570_1.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231570_2.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231571_1.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231571_2.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231572_1.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/ERR2231572_2.fastqsanger.gz
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > <comment-title></comment-title>
@@ -219,12 +222,12 @@ Contrary to **MetaSPAdes**, **MEGAHIT** does not output **scaffolds**, i.e. segm
 > > 1. Import the six contig files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library:
 > >
 > >    ```text
-> >    {{ page.zenodo_link }}/files/ERR2231567_assembly.fasta
-> >    {{ page.zenodo_link }}/files/ERR2231568_assembly.fasta
-> >    {{ page.zenodo_link }}/files/ERR2231569_assembly.fasta
-> >    {{ page.zenodo_link }}/files/ERR2231570_assembly.fasta
-> >    {{ page.zenodo_link }}/files/ERR2231571_assembly.fasta
-> >    {{ page.zenodo_link }}/files/ERR2231572_assembly.fasta
+> >    {{ page.zenodo_link }}/files/contigs_ERR2231567.fasta
+> >    {{ page.zenodo_link }}/files/contigs_ERR2231568.fasta
+> >    {{ page.zenodo_link }}/files/contigs_ERR2231569.fasta
+> >    {{ page.zenodo_link }}/files/contigs_ERR2231570.fasta
+> >    {{ page.zenodo_link }}/files/contigs_ERR2231571.fasta
+> >    {{ page.zenodo_link }}/files/contigs_ERR2231572.fasta
 > >    ```
 > >
 > >
@@ -269,14 +272,15 @@ Assemblies can be evaluated with **metaQUAST** ({%cite mikheenko2016%}), the met
 
 > <hands-on-title>Evaluation assembly quality with metaQUAST</hands-on-title>
 >
-> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0) %} with parameters:
->    - *"Use customized names for the input files?"*: `No, use dataset names`
->      - {% icon param-collection %} *"Contigs/scaffolds file"*: output **MEGAHIT**
->    - *"Reads options"*: `Illumina paired-end reads in paired collection`
+> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1) %} with parameters:
+>    - *"Assembly mode?*": `Individual assembly (1 contig file per samples)`
+>      - *"Use customized names for the input files?"*: `No, use dataset names`
+>        - {% icon param-collection %} *"Contigs/scaffolds file"*: output **MEGAHIT**
+>      - *"Reads options"*: `Illumina paired-end reads in paired collection`
 >
->        > <comment-title></comment-title>
->        > To make the job quicker, you can select `Disabled` here. The raw reads will then not been mapped to the assembly to compute metrics, like the coverage.
->        {: .comment}
+>          > <comment-title></comment-title>
+>          > To make the job quicker, you can select `Disabled` here. The raw reads will then not been mapped to the assembly to compute metrics, like the coverage.
+>          {: .comment}
 >
 >      - {% icon param-collection %} *"FASTQ/FASTA files"*: `Raw reads`
 >    - *"Type of assembly"*: `Metagenome`
@@ -294,20 +298,22 @@ Assemblies can be evaluated with **metaQUAST** ({%cite mikheenko2016%}), the met
 > > 1. Import the metaQuast report file from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library:
 > >
 > >    ```text
-> >    {{ page.zenodo_link }}/files/ERR2231567_quast_report.html
-> >    {{ page.zenodo_link }}/files/ERR2231568_quast_report.html
-> >    {{ page.zenodo_link }}/files/ERR2231569_quast_report.html
-> >    {{ page.zenodo_link }}/files/ERR2231570_quast_report.html
-> >    {{ page.zenodo_link }}/files/ERR2231571_quast_report.html
-> >    {{ page.zenodo_link }}/files/ERR2231572_quast_report.html
+> >    {{ page.zenodo_link }}/files/quast_ERR2231567.html
+> >    {{ page.zenodo_link }}/files/quast_ERR2231568.html
+> >    {{ page.zenodo_link }}/files/quast_ERR2231569.html
+> >    {{ page.zenodo_link }}/files/quast_ERR2231570.html
+> >    {{ page.zenodo_link }}/files/quast_ERR2231571.html
+> >    {{ page.zenodo_link }}/files/quast_ERR2231572.html
 > >    ```
 > >
 > {: .hands_on}
 {: .comment}
 
-Quast main output is the HTML report which aggregate different metrics.
+Quast main output are HTML reports which aggregate different metrics.
 
-On the top of the report is a table with in rows statistics for contigs larger than 500 bp for the different sample assemblies (columns). Let's now look at the table and go from top to bottom:
+## Assembly statistics
+
+On the top of each report is a table with in rows statistics for contigs larger than 500 bp for the different sample assemblies (columns). Let's now look at the table and go from top to bottom:
 
 1. **Genome statistics**
 
@@ -326,8 +332,8 @@ On the top of the report is a table with in rows statistics for contigs larger t
       >
       > > <solution-title></solution-title>
       > >
-      > > 1. The genome fraction is 20.8% for ERR2231568 (column ERR2231568 in ERR2231568 report) and 24.8% for ERR2231572 (column ERR2231572 in ERR2231572 report)
-      > > 2. The highest genome fraction was found for *Leuconostoc pseudomesenteroides* for ERR2231568 (83.4%) and for *Lactobacillus* for ERR2231572 (91%). The genomes of *Leuconostoc pseudomesenteroides* and *Lactobacillus* could be then almost completely recovered from the assemblies of ERR2231568 and ERR2231572 respectively.
+      > > 1. The genome fraction is 30.22% for ERR2231568 and 58.73% for ERR2231572
+      > > 2. The highest genome fraction was found for *Leuconostoc pseudomesenteroides* for ERR2231568 (844%) and for *Lactobacillus* for ERR2231572 (91%). The genomes of *Leuconostoc pseudomesenteroides* and *Lactobacillus* could be then almost completely recovered from the assemblies of ERR2231568 and ERR2231572 respectively.
       > >
       > {: .solution}
       >
@@ -344,8 +350,8 @@ On the top of the report is a table with in rows statistics for contigs larger t
       >
       > > <solution-title></solution-title>
       > >
-      > > 1. The duplication ratio is 1.061% for ERR2231568 and 1.1% for ERR2231572 (column ERR2231572 in ERR2231572 report)
-      > > 2. The highest duplication ratio was found for *Gluconobacter kondonii* for ERR2231568 (1.163%) and for *Lactobacillus brevis* for ERR2231572 (1.122%).
+      > > 1. The duplication ratio is 1.068 for ERR2231568 and 1.1 for ERR2231572 (column ERR2231572 in ERR2231572 report)
+      > > 2. The highest duplication ratio was found for *Gluconobacter kondonii* for ERR2231568 (1.156) and for *Lactobacillus brevis KB290* for ERR2231572 (1.178).
       > >
       > {: .solution}
       >
@@ -353,21 +359,15 @@ On the top of the report is a table with in rows statistics for contigs larger t
 
 2. **Read mapping**: results of the mapping of the raw reads on the different assemblies (only if the *"Reads options"* is not disabled)
 
-    Here the reads for the selected sample are mapped to all assemblies
-
     > <question-title></question-title>
     >
-    > 1. By opening the report for ERR2231568, to which raw reads are the different sample assemblies compared to to extract information like percentage of mapped reads?
-    > 2. To get good information for each sample, which report and information should we look at?
-    > 3. What is the % of read mapped for ERR2231568 assembly to ERR2231568 raw reads? And for ERR2231572 assembly to ERR2231572 raw reads?
-    > 4. What is the percentage of reads used to build the assemblies for ERR2231568? and ERR2231572?
+    > 1. What is the % of read mapped for ERR2231568 assembly to ERR2231568 raw reads? And for ERR2231572 assembly to ERR2231572 raw reads?
+    > 2. What is the percentage of reads used to build the assemblies for ERR2231568? and ERR2231572?
     >
     > > <solution-title></solution-title>
     > >
-    > > 1. To ERR2231568. That is a bug in the Galaxy tool. We are working on fix it so each sample assembly is compared to its corresponding raw reads.
-    > > 2. To get the good information for ERR2231568, we should open the ERR2231568  and look only at column ERR2231568.
-    > > 3. ...% of ERR2231568 raw reads were mapped to ERR2231568 assembly (column ERR2231568 in ERR2231568 report) and 86.97% of ERR2231572 raw reads to ERR2231572 assembly (column ERR2231572 in ERR2231572 report).
-    > > 4. ...% of reads were used to the assemblies for ERR2231568 and  86.97% for ERR2231572.
+    > > 1. 79.47% of ERR2231568 raw reads were mapped to ERR2231568 assembly and 86.98% of ERR2231572 raw reads to ERR2231572 assembly.
+    > > 2. 79.47% of reads were used to the assemblies for ERR2231568 and  86.97% for ERR2231572.
     > {: .solution}
     >
     {: .question}
@@ -434,8 +434,8 @@ On the top of the report is a table with in rows statistics for contigs larger t
         >
         > > <solution-title></solution-title>
         > >
-        > > 1. 88 for ERR2231568 and 158 for ERR2231572
-        > > 2. *Pectobacterium carotovorum brasiliensis* for ERR2231568 and *Lactobacillus plantarum argentoratensis* for ERR2231572
+        > > 1. 78 for ERR2231568 and 151 for ERR2231572
+        > > 2. *Leuconostoc pseudomesenteroides* and *Tatumella morbirosei* for ERR2231568 and *Lactobacillus plantarum argentoratensis* for ERR2231572
         > {: .solution}
         >
         {: .question}
@@ -451,10 +451,10 @@ On the top of the report is a table with in rows statistics for contigs larger t
         >
         > > <solution-title></solution-title>
         > >
-        > > 1. 47 for ERR2231568 and 62 for ERR2231572.
-        > > 2. *Pectobacterium carotovorum brasiliensis* for ERR2231568 and *Lactobacillus vaccinostercus* for ERR2231572.
-        > > 3. Interspecies translocations are translocations where the a contif has mapped on different reference genomes.
-        > > 4. 160 for ERR2231568 and 203 for ERR2231572.
+        > > 1. 25 for ERR2231568 and 55 for ERR2231572.
+        > > 2. *Leuconostoc pseudomesenteroides* for ERR2231568 and *Lactobacillus vaccinostercus* for ERR2231572.
+        > > 3. Interspecies translocations are translocations where a contig has mapped on different reference genomes.
+        > > 4. 80 for ERR2231568 and 144 for ERR2231572.
         > {: .solution}
         >
         {: .question}
@@ -468,8 +468,8 @@ On the top of the report is a table with in rows statistics for contigs larger t
         >
         > > <solution-title></solution-title>
         > >
-        > > 1. 4 for ERR2231568 and 5 for ERR2231572.
-        > > 2. *Gluconobacter kondonii* and *Tatumella morbirosei* for ERR2231568 and *Lactobacillus hordei* for ERR2231572.
+        > > 1. 4 for ERR2231568 and 6 for ERR2231572.
+        > > 2. *Tatumella morbirosei* for ERR2231568 and *Lactobacillus sp* for ERR2231572.
         > {: .solution}
         >
         {: .question}
@@ -483,8 +483,8 @@ On the top of the report is a table with in rows statistics for contigs larger t
     >
     > > <solution-title></solution-title>
     > >
-    > > 1. 764,853 for ERR2231568 and 414,142 for ERR2231572.
-    > > 2. *Pantoea SM3* for ERR2231568 and *Leuconostoc pseudomesenteroides KCTC 3652* for ERR2231572.
+    > > 1. 503,352 for ERR2231568 and 287,270 for ERR2231572.
+    > > 2. *Pantoea rwandensis* for ERR2231568 and *Leuconostoc brevis KB290* for ERR2231572.
     > {: .solution}
     >
     {: .question}
@@ -507,7 +507,7 @@ On the top of the report is a table with in rows statistics for contigs larger t
         > > 2. In the outputs of MEGAHIT, there are 228,719 contigs for ERR2231568 and 122,526 contigs.
         > > 3. The numbers are lower in the metaQUAST results because metaQUAST reports there only the contigs longer than 500bp.
         > > 4. The **# contigs (>= 0 bp)**
-        > > 5. Except the non aligned contigs, *Tatumella morbirosei* for ERR2231568 and *Leuconostoc pseudomesenteroides KCTC 3652* for ERR2231572.
+        > > 5. Except the non aligned contigs, *Tatumella morbirosei* for ERR2231568 and *Leuconostoc brevis KB290* for ERR2231572.
         > {: .solution}
         >
         {: .question}
@@ -575,75 +575,135 @@ On the top of the report is a table with in rows statistics for contigs larger t
         >
         {: .question}
 
-# Visualization of the *de novo* assembly graph
+## Icarus contig browser
 
-Current metagenome assemblers like MEGAHIT and MetaSPAdes use **graphs**, most typically a de Bruijn graph to stich reads together. In an ideal case, the graph would contain one distinct path for each genome of each micro-organisms, but complexities such as repeated sequences usually prevent this.
+Icarus generates contig size viewer and one or more contig alignment viewers (if reference genome/genomes are provided) that are accessible from the HTML report, by clicking on `View on Icarus contig browser`.
 
-Assembly graphs contain then **branching structures**: one node may lead into multiple others. **Contigs** correspond to the longest sequences in the graph that can be determined unambiguously. They are the final results of most assembler. But the assembly graph contains more information. It can be useful for finding sections of the graph, such as rRNA, or to try to find parts of a genome.
+### Contig size viewer
 
-**Bandage** ({% cite wick2015bandage %}) is a tool creating interactive visualisations of assembly graphs.
-
-> <hands-on-title>Visualization the assembly graph</hands-on-title>
->
-> 1. {% tool [megahit contig2fastg](toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10) %} with parameters:
->    - {% icon param-collection %} *"Contig file"*: Output of **MEGAHIT**
->    - *"K-mer length"*: `91`
->
->      > <comment-title></comment-title>
->      > To get the value, you need to
->      > 1. Go into the **MEGAHIT** output collection
->      > 2. Expand one of the contig file by clicking on it in the history
->      > 3. Check in the dataset peek the name of the contig
->      > 4. Extract the value after the first `k` in the contig names
->      {: .comment}
->
-> 2. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4) %} with parameters:
->    - {% icon param-collection %} *"Graphical Fragment Assembly"*: Output of **megahit contig2fastg**
->
-> 3. Inspect the generated image for ERR2231571
-{: .hands_on}
-
-![Image shows the assembly graphs, with longer stretch on the top and many small contigs on the bottom](./images/ERR2231571_graph.jpg "Assembly graph for ERR2231571 sample")
-
-The graph is quite disconnected. On the top, we can see the longer stretches, that includes multiples contigs (each contig having a different color). On the bottom are the shortest stretches or single contigs.
-
-But it is really hard to read or extract any information from the graph. Let's inspect the information about the assembly graph
-
-> <hands-on-title>Visualization the *de novo* assembly graph</hands-on-title>
->
-> 1. {% tool [Bandage Info](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2) %} with parameters:
->    - {% icon param-collection %} *"Graphical Fragment Assembly"*: Output of **megahit contig2fastg**
->
-> 2. {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with parameters:
->    - {% icon param-collection %} *"Tabular files"*: Output of **Bandage Info**
->
-> 3. Inspect the generated output
-{: .hands_on}
+This viewer draws contigs ordered from longest to shortest. Let's inspect this viewer for ERR2231568.
 
 > <question-title></question-title>
 >
-> 1. How many nodes are in the graph for ERR2231568? And for ERR2231572? What does they correspond to?
-> 2. How many edges are in the graph for ERR2231568? And for ERR2231572? What is the impact of these numbers in relation to the number of nodes on the graph?
-> 3. How many connected components are there for ERR2231568? And for ERR2231572? What does they correspond to?
-> 4. What is the percentage of dead ends are there for ERR2231568? And for ERR2231572?
-> 5. What are the smallest and larges edge overlaps?
-> 6. What is the largest component? For which sample?
-> 7. What is the shortest node? What does they correspond to?
+> Open the Contig size viewer for ERR2231568 and define start as `0` and end as `500000`
+>
+> ![Image shows on the Icarus Contig size viewer for ERR2231568, with a zoom between 0 500000. Below the menu, the contigs are drawn from the longest on the left to the shortest on the right. Each contig is filled with a different color: green for correct, red for misassembled, etc. Below the contigs is dispayed a bar to navigate through the contigs](./images/ERR2231568-contig-size-viewer.png)
+>
+> 1. What is the color of the first contig? Why?
+> 2. What is the red contig?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. There are 228,719 nodes for ERR2231568 and 122,526 for ERR2231572. They correspond to the number of contigs
-> > 2. There are 16,580 edges for ERR2231568 and 13,993 for ERR2231572. There are less edges than nodes in the graph. It means that many nodes/contigs are disconnected
-> > 3. There are 212,598 connected components, i.e. number of regions of the graph which are disconnected from each other, for ERR2231568 and 109,044 for ERR2231572
-> > 4. There are 94.0702% dead ends, i.e. the end of a node not connected to any other nodes, for ERR2231568 and 90.7032% for ERR2231572. It confirms the previous observation
-> > 5. The smallest and larges edge overlaps are 91bp, i.e. the k-mer length
-> > 6. The largest component is 340,003 bp for ERR2231567
-> > 7. The shortest node is 200 bp, i.e. the minimal size for a contig
-> >
+> > 1. The first contig is white because >50% of the contigs is unaligned. By clicking on the contig, we see that only a small block is aligned: 223.41 – 223.65 kbp to Leuconostoc_pseudomesenteroides_KCTC_3652_NZ_BMBP01000002.1.
+> > 2. The red contig is a missamblied contig: it contains 2 blocks, with a translocation between them.
 > {: .solution}
 >
 {: .question}
 
+Click `Main menu` on the top left to go back to the main Icarus page.
+
+### Contig alignment viewer
+
+If a reference genome is provided, there should be a table on the main Icarus page that looks like:
+
+Genome | # fragments | Length, bp | Mean genome fraction, % | # misassembled blocks
+--- | --- | --- | --- | ---
+Gluconobacter oxydans H24 | 2 | 3 816 232 | 10.989 | 38
+Kosakonia cowanii | 5 | 4 806 998 | 28.224 | 60
+Lactococcus lactis subsp. lactis CV56 | 6 | 2 518 737 | 18.940 	23
+
+When clicking on the genome name, the contigs are displayed according to their mapping to the reference genome. The viewer can additionally visualize genes, operons, and read coverage distribution along the genome, if any of those were fed to QUAST.
+
+> <question-title></question-title>
+>
+> Open the Contig alignment viewer for ERR2231568 and *Leuconostoc pseudomesenteroides* KCTC 3652, the most covered by contigs
+>
+> ![Image shows on the Icarus alignment size viewer of ERR2231568 contigs for Leuconostoc pseudomesenteroides KCTC 3652. On the top are displayed the contigs aligend on the reference genome, with a zoom. Each contig is filled with a different color: green for correct, red for misassembled, etc. Below the contigs is dispayed a bar to navigate through the contigs. Below is a graph representing the GC percentage and coverage along the reference genome](./images/ERR2231568-contig-alignment-viewer-leuconostoc.png)
+>
+> 1. How are the organized the contigs on the top?
+> 2. What the different colors for the contigs?
+> 3. Why is there a big red block on the right?
+> 4. What is the graph on the bottom?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The contigs are displayed based on their mapping on the reference genome of *Leuconostoc pseudomesenteroides* KCTC 3652
+> > 2. The different colors represent the different status for the contig: correct contigs, correct contigs but with >50% of the contig unaligned, misassembled blocks. unchecked misassembled blocks, ambiguously mapped contigs, alternative blocks of misassembled contigs, etc.
+> > 3. The big red block on the right is contig k91_88833 with a misassembly on the left side, and overlap with 2 other contigs
+> > 4. The graph on the bottom represents the GC percentage and coverage by contigs along the reference genome
+> {: .solution}
+>
+{: .question}
+
+> <details-title>Visualization of the *de novo* assembly graph</details-title>
+>
+> Current metagenome assemblers like MEGAHIT and MetaSPAdes use **graphs**, most typically a de Bruijn graph to stich reads together. In an ideal case, the graph would contain one distinct path for each genome of each micro-organisms, but complexities such as repeated sequences usually prevent this.
+>
+> Assembly graphs contain then **branching structures**: one node may lead into multiple others. **Contigs** correspond to the longest sequences in the graph that can be determined unambiguously. They are the final results of most assembler. But the assembly graph contains more information. It can be useful for finding sections of the graph, such as rRNA, or to try to find parts of a genome.
+>
+> **Bandage** ({% cite wick2015bandage %}) is a tool creating interactive visualisations of assembly graphs.
+>
+> > <hands-on-title>Visualization the assembly graph</hands-on-title>
+> >
+> > 1. {% tool [megahit contig2fastg](toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10) %} with parameters:
+> >    - {% icon param-collection %} *"Contig file"*: Output of **MEGAHIT**
+> >    - *"K-mer length"*: `91`
+> >
+> >      > <comment-title></comment-title>
+> >      > To get the value, you need to
+> >      > 1. Go into the **MEGAHIT** output collection
+> >      > 2. Expand one of the contig file by clicking on it in the history
+> >      > 3. Check in the dataset peek the name of the contig
+> >      > 4. Extract the value after the first `k` in the contig names
+> >      {: .comment}
+> >
+> > 2. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4) %} with parameters:
+> >    - {% icon param-collection %} *"Graphical Fragment Assembly"*: Output of **megahit contig2fastg**
+> >
+> > 3. Inspect the generated image for ERR2231571
+> {: .hands_on}
+>
+> ![Image shows the assembly graphs, with longer stretch on the top and many small contigs on the bottom](./images/ERR2231571_graph.jpg "Assembly graph for ERR2231571 sample")
+>
+> The graph is quite disconnected. On the top, we can see the longer stretches, that includes multiples contigs (each contig having a different color). On the bottom are the shortest stretches or single contigs.
+>
+> But it is really hard to read or extract any information from the graph. Let's inspect the information about the assembly graph
+>
+> > <hands-on-title>Visualization the *de novo* assembly graph</hands-on-title>
+> >
+> > 1. {% tool [Bandage Info](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2) %} with parameters:
+> >    - {% icon param-collection %} *"Graphical Fragment Assembly"*: Output of **megahit contig2fastg**
+> >
+> > 2. {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with parameters:
+> >    - {% icon param-collection %} *"Tabular files"*: Output of **Bandage Info**
+> >
+> > 3. Inspect the generated output
+> {: .hands_on}
+>
+> > <question-title></question-title>
+> >
+> > 1. How many nodes are in the graph for ERR2231568? And for ERR2231572? What does they correspond to?
+> > 2. How many edges are in the graph for ERR2231568? And for ERR2231572? What is the impact of these numbers in relation to the number of nodes on the graph?
+> > 3. How many connected components are there for ERR2231568? And for ERR2231572? What does they correspond to?
+> > 4. What is the percentage of dead ends are there for ERR2231568? And for ERR2231572?
+> > 5. What are the smallest and larges edge overlaps?
+> > 6. What is the largest component? For which sample?
+> > 7. What is the shortest node? What does they correspond to?
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > 1. There are 228,719 nodes for ERR2231568 and 122,526 for ERR2231572. They correspond to the number of contigs
+> > > 2. There are 16,580 edges for ERR2231568 and 13,993 for ERR2231572. There are less edges than nodes in the graph. It means that many nodes/contigs are disconnected
+> > > 3. There are 212,598 connected components, i.e. number of regions of the graph which are disconnected from each other, for ERR2231568 and 109,044 for ERR2231572
+> > > 4. There are 94.0702% dead ends, i.e. the end of a node not connected to any other nodes, for ERR2231568 and 90.7032% for ERR2231572. It confirms the previous observation
+> > > 5. The smallest and larges edge overlaps are 91bp, i.e. the k-mer length
+> > > 6. The largest component is 340,003 bp for ERR2231567
+> > > 7. The shortest node is 200 bp, i.e. the minimal size for a contig
+> > >
+> > {: .solution}
+> >
+> {: .question}
+{: .details}
 <!--# De-replication
 
 De-replication is the process of identifying sets of genomes that are the "same" in a list of genomes, and removing all but the “best” genome from each redundant set. How similar genomes need to be to be considered “same”, how to determine which genome is “best”, and other important decisions are discussed in [Important Concepts](https://drep.readthedocs.io/en/latest/choosing_parameters.html).

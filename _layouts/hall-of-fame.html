@@ -1,8 +1,13 @@
 ---
 layout: base
+lang: en
+title: Hall of Fame
 ---
 
 {% assign contributors = site.data['contributors'] %}
+{% assign organisations = site.data['organisations'] %}
+{% assign funders = site.data['funders'] %}
+
 {% assign ckeys = "" | split: ',' %}
 {% for x in contributors %}
 	 {% assign ckeys = ckeys | push: x[0] %}
@@ -20,22 +25,24 @@ layout: base
         awesome contributors to the Galaxy training materials!
     </p>
 
+    {% snippet faqs/gtn/gtn_stats.md compact=true %}
+
+    <br/>
+
+    {% include _includes/map.html %}
+
+    <h2>Contributors</h2>
     <div class="hall-of-fame">
         {% for username in shuffled_contributors %}
-            {% unless contributors[username].halloffame == "no" %}
+            {% unless site.data['contributors'][username].halloffame == "no" %}
             <div class="hall-of-fame-hero" id="{{ username }}">
 
-                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail" title="{{ contributors[username].name | default: username }}">
-                {% if contributors[username].github != false %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true">
-                {% else %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true">
-                {% endif %}
+                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail">
+			{{ site.data['contributors'][username] | fetch_entity_avatar: username, 120 }}
+			<div class="name">
+				{{ site.data['contributors'][username].name | default: username }}
+			</div>
                 </a>
-
-                <div class="name" aria-hidden="true">
-                    {{ contributors[username].name | default: username }}
-                </div>
 
                 {% assign has_philosophy = false %}
                 {% for story in stories %}
@@ -56,4 +63,35 @@ layout: base
             {% endunless %}
         {% endfor %}
     </div>
+
+    <h2>Contributing Organizations</h2>
+    <div class="hall-of-fame">
+        {% for org in organisations %}
+            <div class="hall-of-fame-hero" id="{{ org[0] }}">
+
+                <a href="{{ site.baseurl }}/hall-of-fame/{{ org[0] }}/" class="thumbnail">
+			{{ org[1] | fetch_entity_avatar: org[0], 120 }}
+			<div class="name">
+				{{ org[1].short_name | default: org[1].name | default: username }}
+			</div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Funders</h2>
+    <div class="hall-of-fame">
+        {% for funder in funders %}
+            <div class="hall-of-fame-hero" id="{{ funder[0] }}">
+
+                <a href="{{ site.baseurl }}/hall-of-fame/{{ funder[0] }}/" class="thumbnail">
+			{{ funder[1] | fetch_entity_avatar: funder[0], 120 }}
+			<div class="name">
+				{{ funder[1].short_name | default: funder[1].name | default: username }}
+			</div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
 </section>

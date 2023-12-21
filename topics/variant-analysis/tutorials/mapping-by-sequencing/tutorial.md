@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Mapping and molecular identification of phenotype-causing mutations"
+subtopic: model-organisms
 zenodo_link: "https://doi.org/10.5281/zenodo.1098033"
 questions:
   - "What is mapping-by-sequencing?"
@@ -18,7 +19,6 @@ contributors:
   - wm75
 ---
 
-# Introduction
 
 
 In order to map and identify phenotype-causing mutations efficiently from a

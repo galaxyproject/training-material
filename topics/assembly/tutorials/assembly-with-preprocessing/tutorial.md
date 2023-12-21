@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads"
-zenodo_link: "https://doi.org/10.5281/zenodo.3732358"
+zenodo_link: 'https://zenodo.org/record/3732359'
 questions:
   - How can a genome of interest be assembled against a background of contaminating reads from other genomes?
   - How can sequencing data from public sources be turned into assembly-ready polished datasets?
@@ -40,7 +40,6 @@ contributors:
 
 ---
 
-# Introduction
 
 
 In some research or clinical contexts it is not possible, or very hard, to
@@ -127,6 +126,7 @@ steps are independent of the data source you choose.
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Create a new dataset listing the SRA accession numbers of the Illumina paired-end input data for this tutorial:
@@ -220,6 +220,7 @@ steps are independent of the data source you choose.
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import Illumina-sequenced reads data from [Zenodo](https://zenodo.org/record/3732359)

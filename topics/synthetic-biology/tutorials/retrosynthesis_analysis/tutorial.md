@@ -21,9 +21,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
 [Galaxy-SynBioCAD portal](https://galaxy-synbiocad.org/) is the first toolshed for synthetic biology, metabolic engineering, and industrial biotechnology ({% cite Hrisson2022 %}). It provides a set of Retrosynthesis tools aimed at finding pathways to synthesize heterologous compounds in chassis organisms (**RetroRules** ({% cite Duigou2018 %}), **RetroPath2.0** ({% cite Delpine2018 %}), **RP2Paths**, **rpCompletion**).
 
 Retrosynthesis is a concept originally proposed for synthetic chemistry where chemists have to work backwards, starting from a target product to reach precursors that are endogenous to the chassis (host organism).
@@ -257,9 +254,9 @@ In this section, you can run the RetroSynthesis Workflow more easily and fastly 
 
 > <hands-on-title>Execute the entire workflow in one go.</hands-on-title>
 >
-> 1. Import your **RetroSynthesis workflow** by uploading the [**workflow file**](https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/RetroSynthesis.ga).
+> 1. Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/RetroSynthesis.ga" title="RetroSynthesis workflow" %}
 >
 > 2. Click on *Workflow* on the top menu bar of Galaxy. You will see **RetroSynthesis** workflow.
 > 3. Click on the {% icon workflow-run %} (*Run workflow*) button next to your workflow

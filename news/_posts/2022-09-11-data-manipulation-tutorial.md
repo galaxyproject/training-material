@@ -1,7 +1,8 @@
 ---
 title: "New Tutorial: Data Manipulation"
 tags: [new tutorial]
-contributors: [shiltemann]
+contributions:
+  authorship: [shiltemann]
 cover: "topics/introduction/tutorials/data-manipulation-olympics/images/cover.jpg"
 tutorial: "topics/introduction/tutorials/data-manipulation-olympics/tutorial.html"
 coveralt: "screenshot from the data manipulation tutorial"

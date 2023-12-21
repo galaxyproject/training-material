@@ -1,6 +1,5 @@
 ---
-redirect_from:
-- /faqs/galaxy/analysis_job_failure_cluster_failure
+redirect_from: [/faqs/galaxy/analysis_job_failure_cluster_failure]
 title: Understanding 'canceled by admin' or cluster failure error messages
 area: troubleshooting
 box_type: tip
@@ -26,5 +25,5 @@ Remote job server indicated a problem running or monitoring this job.
 
 - Solutions:
     - Try at least one rerun. Server/cluster errors like this are usually transient.
-    - Review the Solutions section of the [Understanding input error messages](https://training.galaxyproject.org/training-material/faqs/galaxy/analysis_job_failure_input_problem.html) FAQ.
-    - If after any corrections, the job still fails, please report the technical issue [following the extended issue guidelines](https://training.galaxyproject.org/training-material/faqs/galaxy/analysis_reporting_issues.html).
+    - Review the Solutions section of the [Understanding input error messages]({% link faqs/galaxy/troubleshooting_input_problem.md %}) FAQ.
+    - If after any corrections, the job still fails, please report the technical issue [following the extended issue guidelines]({% link faqs/galaxy/analysis_reporting_issues.md %}).

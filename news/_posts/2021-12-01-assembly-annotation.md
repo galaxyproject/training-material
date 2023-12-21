@@ -1,7 +1,8 @@
 ---
 title: "New Tutorials: PacBio data QC and Genome Assembly, and Genome Annotation with Funannotate"
 tags: [new tutorial,assembly,genome-annotation]
-contributors: [abretaud,alexcorm,lleroi,r1corre,stephanierobin]
+contributions:
+  authorship: [abretaud,alexcorm,lleroi,r1corre,stephanierobin]
 cover: "news/images/funannotate_jbrowse.png"
 coveralt: "Screenshot of a Funannotate annotation displayed with JBrowse, within Galaxy."
 layout: news

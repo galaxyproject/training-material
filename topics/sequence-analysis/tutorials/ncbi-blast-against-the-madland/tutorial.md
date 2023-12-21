@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "NCBI BLAST+ against the MAdLand"
-zenodo_link: "https://doi.org/10.5281/zenodo.7524427"
+zenodo_link: "https://zenodo.org/records/7524427"
 questions:
   - "What is MAdLand DB?"
   - "How can we perform Blast analysis on Galaxy?"
@@ -10,7 +10,6 @@ objectives:
   - "Load FASTA sequence into Galaxy"
   - "Perform NCBI-Blast+ analysis against MAdLandDB"
 time_estimation: "15m"
-enable: false
 key_points:
   - Blast tool searches a database of sequences for similar sequences to a query sequence.
 
@@ -20,10 +19,6 @@ contributors:
   - deeptivarshney
 
 ---
-
-## Introduction
-
-<!-- This is a comment. -->
 
 
 MAdLandDB is a protein database comprising of a comprehensive collection of fully sequenced plant and algal genomes, with a particular emphasis on non-seed plants and streptophyte algae. Additionally, for comparative analysis, the database also includes genomes from various other organisms such as fungi, animals, the SAR group, bacteria, and archaea. The database is actively developed and maintained by the [Rensing lab](http://plantco.de) and released in the [MAdLand](https://madland.science/) setting. It employs a system of species abbreviation using a 5 letter code, which is constructed using the first three letters of the genus and the first two letters of the species name, for example, CHABR for *Chara braunii*. Furthermore, the database provides gene identification through the addition of gene ID’s and supplementary information such as the encoding source of the gene, whether it is plastome encoded (pt) or transcriptome-based (tr) in cases when a genome is not yet available. The key advantage of this database is its non-redundant nature, and the fact that all sequences are predominantly from genome projects, thereby increasing their reliability.
@@ -46,12 +41,13 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. Import the file `query.faa` from [Zenodo](https://doi.org/10.5281/zenodo.7524427) 
+> 2. Import the file `query.faa` from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->    https://zenodo.org/api/files/40445ead-6429-463c-bfa5-e1fb92095af8/query.faa
+>    https://zenodo.org/records/7524427/files/query.faa
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -59,11 +55,11 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 >
 {: .hands_on}
 
-> We just imported a FASTA file into Galaxy. Now, the next would be to perfrom the BLAST analysis against MAdLandDB. 
+We just imported a FASTA file into Galaxy. Now, the next would be to perfrom the BLAST analysis against MAdLandDB. 
 
 ## Perform NCBI Blast+ on Galaxy
 
->   Since MAdLandDB is the collection of protein sequences, You can perform {% tool [BLASTp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} and {% tool [BLASTx](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) %} tools.
+Since MAdLandDB is the collection of protein sequences, You can perform {% tool [BLASTp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} and {% tool [BLASTx](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) %} tools.
 
 > <hands-on-title> Similarity search against MAdLand Database </hands-on-title>
 >
@@ -81,9 +77,7 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 
 ## Blast output
 
-> {% icon tool %} The BLAST output will be in tabular format (you can select the desired output format from the drop down menu) and include the following fields : 
-
->
+{% icon tool %} The BLAST output will be in tabular format (you can select the desired output format from the drop down menu) and include the following fields : 
 
 | Column | NCBI name | Description |
 |-------|------------|-------------|
@@ -100,14 +94,13 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 | 11 | evalue | Expectation value (E-value) |
 | 12 | bitscore | Bit score |
 
-> The fields are separated by tabs, and each row represents a single hit. For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html#similarity-searches-blast) tutorial.
+The fields are separated by tabs, and each row represents a single hit. For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast]({% link topics/genome-annotation/tutorials/genome-annotation/tutorial.md %}#similarity-searches-blast) tutorial.
 
 
 > <details-title>Further Reading about BLAST Tools in Galaxy</details-title>
 >
-> See {% cite Cock2015 %}
-> {% cite Cock2013 %}
-> 
+> See {% cite Cock2015 %} and {% cite Cock2013 %}
+>
 {: .details}
 
 ## More Similarity Search Tools on Galaxy
@@ -118,5 +111,3 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 >
 > See {% cite Buchfink2014 %} for more discussion.
 {: .details}
-
-

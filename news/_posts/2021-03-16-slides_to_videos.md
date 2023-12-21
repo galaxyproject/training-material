@@ -1,6 +1,7 @@
 ---
 title: "New Feature: Automatic Slides-to-video conversion"
-contributors: [hexylena,delphine-l]
+contributions:
+  authorship: [hexylena,delphine-l]
 tags: [new feature, videos, gtn, pandemic, remote-teaching]
 layout: news
 ---

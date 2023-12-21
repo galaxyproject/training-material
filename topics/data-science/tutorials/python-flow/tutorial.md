@@ -36,6 +36,7 @@ contributors:
 priority: 5
 notebook:
   language: python
+  pyolite: true
 ---
 
 "Flow Control" is how we describe when we change the flow of code's execution, based on some conditions. Here we'll learn how to take different actions depending on what data out program sees, or how to run code only if some condition is true.

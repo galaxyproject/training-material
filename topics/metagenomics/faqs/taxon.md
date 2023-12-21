@@ -29,6 +29,8 @@ Family | Felidae
 Genus | *Felis*
 Species | *F. catus*
 
+From this classification, one can generate a tree of life, also known as a phylogenetic tree. It is a rooted tree that describes the relationship of all life on earth. At the root sits the "last universal common ancestor" and the three main branches (in taxonomy also called domains) are bacteria, archaea and eukaryotes. Most important for this is the idea that all life on earth is derived from a common ancestor and therefore when comparing two species, you will -sooner or later- find a common ancestor for all of them.
+
 Let's explore taxonomy in the Tree of Life, using [Lifemap](https://lifemap.univ-lyon1.fr/)
 
 <iframe id="Lifemap" src="https://lifemap.univ-lyon1.fr/explore.html" frameBorder="0" width="100%" height="600px"></iframe>

@@ -1,7 +1,8 @@
 ---
 title: "New Tutorial: Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition"
 tags: [new tutorial]
-contributors: [bebatut, EngyNasr]
+contributions:
+  authorship: [bebatut, EngyNasr]
 cover: "topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/images/FoodBorne-Workflow-updated.png"
 tutorial: "topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html"
 coveralt: "screenshot from the data manipulation tutorial"

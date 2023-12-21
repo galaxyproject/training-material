@@ -22,11 +22,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
-<!-- This is a comment. -->
-
 With the advances in the next-generation sequencing technologies, genome-wide RNA-RNA interaction predictions are now
 possible. The most recent line of development has been to ligate the microRNA to the site-specific interaction region of
  the target, selecting these interactions via cross-linking to one of the Argonaute proteins required for microRNA-based
@@ -82,6 +77,7 @@ results. `ChiRA` uses `BWA-MEM` or `CLAN` to map the reads. Subsequently, it als
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets

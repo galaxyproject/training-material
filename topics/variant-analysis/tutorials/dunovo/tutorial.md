@@ -2,8 +2,9 @@
 layout: tutorial_hands_on
 
 title: "Calling very rare variants"
+subtopic: introduction
 zenodo_link: ""
-enable: false
+draft: true
 questions:
   - "What frequency of variants is so low that it is obscured by sequencing error rate?"
   - "What are the different types of consensus sequences produced from duplex sequencing?"
@@ -19,7 +20,6 @@ contributors:
   - NickSto
 ---
 
-# Introduction
 
 This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the *ABL1* dataset published by [Schmitt and colleagues](https://www.ncbi.nlm.nih.gov/pubmed/25849638) (SRA accession [SRR1799908](https://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)).
 
@@ -120,7 +120,7 @@ We uploaded the [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/article
 > `https://usegalaxy.org/history/export_archive?id=7ac09d1db287dbba`
 {: .hands_on}
 
-This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc---short--long-reads).
+This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** in the dedicated [quality-control tutorial]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc---short--long-reads).
 
 This gave us the following plots:
 
@@ -390,13 +390,21 @@ Analysis of SSCS data follows the exact same trajectory:
 
 ## Re-running analyses with workflows
 
-Instead of manually re-running all the tools in the variant calling section, you can use a **workflow** to automatically run the same tools, but on the SSCS reads. Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows [here](../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data).
+Instead of manually re-running all the tools in the variant calling section, you can use a **workflow** to automatically run the same tools, but on the SSCS reads. Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows in the [Galaxy 101 introductory tutorial](../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data).
 
 We've prepared two workflows which split the above analysis into two steps:
 
-1. [Using Du Novo](https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial) to create consensus sequencs from raw reads.
+1. [Using Du Novo](https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial) to create consensus sequences from raw reads.
   - This will generate trimmed DCS and SSCS files from raw sequencing data.
   - This does not include the FastQC step. You should always run FastQC on your raw reads first, to check the quality of your sequencing run before proceeding with the analysis.
+
+   > <comment-title>Helping Du Novo</comment-title>
+   > The {% icon param-check %} *Send usage data* option is left off in the above workflow.
+   > This is because we want to make sure you only share data knowingly.
+   >
+   > But again, if you'd like to help improve Du Novo, consider turning it on.
+   {: .comment}
+
 2. [Calling variants](https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial) from consensus sequences.
   - This takes a pair of FASTQ files and calls variants using them.
   - If you'd like variants from both DCS and SSCS, you'll have to run this twice, once on each.
@@ -404,20 +412,9 @@ We've prepared two workflows which split the above analysis into two steps:
 
 You can use the variant calling workflow to call variants using the SSCS instead of the DCS.
 
-> <comment-title>Helping Du Novo</comment-title>
-> The {% icon param-check %} *Send usage data* option is left off in the above workflows.
-> - We want to make sure you only share data knowingly.
->
-> But again, if you'd like to help improve Du Novo, consider turning it on.
-{: .comment}
+![Du Novo workflow](../../images/workflow-dunovo.png "Workflow 1: Making consensus sequences")
 
-**Workflow: Making consensus sequences**
-
-[![Du Novo workflow](../../images/workflow-dunovo.png)](https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial)
-
-**Workflow: Variant calling**
-
-[![Variant calling workflow](../../images/workflow-dunovo-variant-calling.png)](https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial)
+![Variant calling workflow](../../images/workflow-dunovo-variant-calling.png "Workflow 2: Variant calling")
 
 # Conclusion
 

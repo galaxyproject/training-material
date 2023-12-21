@@ -2,9 +2,11 @@
 layout: tutorial_hands_on
 
 title: "Microbial Variant Calling"
+subtopic: introduction
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "How do we detect differences between a set of reads from a microorganism and a reference genome"
 objectives:
@@ -23,7 +25,6 @@ contributors:
   - tseemann
 ---
 
-# Introduction
 
 Variant calling is the process of identifying differences between two genome samples. Usually differences are limited to single nucleotide polymorphisms (SNPs) and small insertions and deletions (indels). Larger structural variation such as inversions, duplications and large deletions are not typically covered by “variant calling”.
 

@@ -107,7 +107,7 @@ By using wireguard, you can let services listen only on the wireguard interface,
 >    {: .code-2col}
 {: .hands_on}
 
-Wireguard can use any of the [private network](https://en.wikipedia.org/wiki/Private_network) blocks, here we use `192.168.0.0/16` for familiarity, Tailscale uses `10.0.0.0/8`.
+Wireguard can use any of the [private network](https://en.wikipedia.org/wiki/Private_network) blocks, here we use `192.168.0.0/16` for familiarity, Tailscale uses `100.0.0.0/8`, which is the [Carrier Grade NAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT) range, and behaves somewhat differently to classic Private Network prefixes.
 
 ## Writing the playbook
 

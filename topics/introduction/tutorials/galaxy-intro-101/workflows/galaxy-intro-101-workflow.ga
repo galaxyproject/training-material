@@ -1,352 +1,285 @@
 {
-    "a_galaxy_workflow": "true",
-    "annotation": "Galaxy 101",
-    "creator": [
-        {
-            "class": "Person",
-            "identifier": "0000-0002-5987-8032",
-            "name": "Anton Nekrutenko"
-        }
-    ],
-    "format-version": "0.1",
-    "name": "Find exons with the highest number of features",
-    "steps": {
-        "0": {
-            "annotation": "",
-            "content_id": null,
-            "errors": null,
-            "id": 0,
-            "input_connections": {},
-            "inputs": [
-                {
-                    "description": "",
-                    "name": "Exons"
-                }
-            ],
-            "label": "Exons",
-            "name": "Input dataset",
-            "outputs": [],
-            "position": {
-                "bottom": 481.28125,
-                "height": 61.78125,
-                "left": 24,
-                "right": 224,
-                "top": 419.5,
-                "width": 200,
-                "x": 24,
-                "y": 419.5
-            },
-            "tool_id": null,
-            "tool_state": "{\"optional\": false}",
-            "tool_version": null,
-            "type": "data_input",
-            "uuid": "bd3df190-bc2c-4432-a534-7b1b21cd58c9",
-            "workflow_outputs": []
-        },
-        "1": {
-            "annotation": "",
-            "content_id": null,
-            "errors": null,
-            "id": 1,
-            "input_connections": {},
-            "inputs": [
-                {
-                    "description": "",
-                    "name": "Features"
-                }
-            ],
-            "label": "Features",
-            "name": "Input dataset",
-            "outputs": [],
-            "position": {
-                "bottom": 736.28125,
-                "height": 61.78125,
-                "left": -4,
-                "right": 196,
-                "top": 674.5,
-                "width": 200,
-                "x": -4,
-                "y": 674.5
-            },
-            "tool_id": null,
-            "tool_state": "{\"optional\": false}",
-            "tool_version": null,
-            "type": "data_input",
-            "uuid": "b7b8e25f-8db4-4707-bfb9-9e5a527e28c3",
-            "workflow_outputs": []
-        },
-        "2": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0",
-            "errors": null,
-            "id": 2,
-            "input_connections": {
-                "inputA": {
-                    "id": 0,
-                    "output_name": "output"
-                },
-                "reduce_or_iterate|inputB": {
-                    "id": 1,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "bedtools Intersect intervals",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "input"
-                }
-            ],
-            "position": {
-                "bottom": 772.453125,
-                "height": 143.953125,
-                "left": 270,
-                "right": 470,
-                "top": 628.5,
-                "width": 200,
-                "x": 270,
-                "y": 628.5
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0",
-            "tool_shed_repository": {
-                "changeset_revision": "07e8b80f278c",
-                "name": "bedtools",
-                "owner": "iuc",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"bed\", \"bed\": \"false\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"count\": \"false\", \"fraction_cond\": {\"fraction_select\": \"default\", \"__current_case__\": 0}, \"genome_file_opts\": {\"genome_file_opts_selector\": \"loc\", \"__current_case__\": 0, \"genome\": null}, \"header\": \"false\", \"inputA\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"false\", \"once\": \"false\", \"overlap_mode\": [\"-wb\"], \"reduce_or_iterate\": {\"reduce_or_iterate_selector\": \"iterate\", \"__current_case__\": 0, \"inputB\": {\"__class__\": \"ConnectedValue\"}}, \"sorted\": \"false\", \"split\": \"false\", \"strand\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.30.0",
-            "type": "tool",
-            "uuid": "4fc2b17c-64d8-4c1c-a2d3-743f2ea9bcaf",
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output",
-                    "uuid": "3ac7fac2-60ab-4372-b6ac-50d4df536fb2"
-                }
-            ]
-        },
-        "3": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
-            "errors": null,
-            "id": 3,
-            "input_connections": {
-                "in_file": {
-                    "id": 2,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Datamash",
-            "outputs": [
-                {
-                    "name": "out_file",
-                    "type": "tabular"
-                }
-            ],
-            "position": {
-                "bottom": 802.0625,
-                "height": 113.5625,
-                "left": 565,
-                "right": 765,
-                "top": 688.5,
-                "width": 200,
-                "x": 565,
-                "y": 688.5
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
-            "tool_shed_repository": {
-                "changeset_revision": "562f3c677828",
-                "name": "datamash_ops",
-                "owner": "iuc",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"bed\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"grouping\": \"4\", \"header_in\": \"false\", \"header_out\": \"false\", \"ignore_case\": \"false\", \"in_file\": {\"__class__\": \"ConnectedValue\"}, \"need_sort\": \"false\", \"operations\": [{\"__index__\": 0, \"op_name\": \"countunique\", \"op_column\": \"10\"}], \"print_full_line\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.1.0",
-            "type": "tool",
-            "uuid": "d6710e24-dbfb-4aef-8a63-2836cdc831e4",
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file",
-                    "uuid": "5ac4094b-38a3-4a22-a4d6-a46db5697072"
-                }
-            ]
-        },
-        "4": {
-            "annotation": "",
-            "content_id": "sort1",
-            "errors": null,
-            "id": 4,
-            "input_connections": {
-                "input": {
-                    "id": 3,
-                    "output_name": "out_file"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Sort",
-            "outputs": [
-                {
-                    "name": "out_file1",
-                    "type": "input"
-                }
-            ],
-            "position": {
-                "bottom": 469.671875,
-                "height": 93.171875,
-                "left": 559,
-                "right": 759,
-                "top": 376.5,
-                "width": 200,
-                "x": 559,
-                "y": 376.5
-            },
-            "post_job_actions": {},
-            "tool_id": "sort1",
-            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"column\": \"2\", \"column_set\": [], \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"order\": \"DESC\", \"style\": \"num\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.2.0",
-            "type": "tool",
-            "uuid": "4dd35991-4996-4f7d-8690-bde783f6fa6a",
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "af03d482-4ced-47ad-9c5d-6fb9bd23cb88"
-                }
-            ]
-        },
-        "5": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0",
-            "errors": null,
-            "id": 5,
-            "input_connections": {
-                "infile": {
-                    "id": 4,
-                    "output_name": "out_file1"
-                }
-            },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Select first",
-                    "name": "infile"
-                }
-            ],
-            "label": null,
-            "name": "Select first",
-            "outputs": [
-                {
-                    "name": "outfile",
-                    "type": "input"
-                }
-            ],
-            "position": {
-                "bottom": 362.171875,
-                "height": 93.171875,
-                "left": 857,
-                "right": 1057,
-                "top": 269,
-                "width": 200,
-                "x": 857,
-                "y": 269
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0",
-            "tool_shed_repository": {
-                "changeset_revision": "ddf54b12c295",
-                "name": "text_processing",
-                "owner": "bgruening",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"complement\": \"\", \"count\": \"5\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.1.0",
-            "type": "tool",
-            "uuid": "820fd964-2460-4b50-8491-968d796500fc",
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "outfile",
-                    "uuid": "0bbe5146-9bb8-4238-b69e-a2bce85870f9"
-                }
-            ]
-        },
-        "6": {
-            "annotation": "",
-            "content_id": "comp1",
-            "errors": null,
-            "id": 6,
-            "input_connections": {
-                "input1": {
-                    "id": 0,
-                    "output_name": "output"
-                },
-                "input2": {
-                    "id": 5,
-                    "output_name": "outfile"
-                }
-            },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Compare two Datasets",
-                    "name": "input1"
-                },
-                {
-                    "description": "runtime parameter for tool Compare two Datasets",
-                    "name": "input2"
-                }
-            ],
-            "label": null,
-            "name": "Compare two Datasets",
-            "outputs": [
-                {
-                    "name": "out_file1",
-                    "type": "input"
-                }
-            ],
-            "position": {
-                "bottom": 596.453125,
-                "height": 143.953125,
-                "left": 1080,
-                "right": 1280,
-                "top": 452.5,
-                "width": 200,
-                "x": 1080,
-                "y": 452.5
-            },
-            "post_job_actions": {
-                "RenameDatasetActionout_file1": {
-                    "action_arguments": {
-                        "newname": "Top 5 exon IDs"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "out_file1"
-                }
-            },
-            "tool_id": "comp1",
-            "tool_state": "{\"field1\": \"4\", \"field2\": \"1\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}, \"mode\": \"N\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.0.2",
-            "type": "tool",
-            "uuid": "52698c72-b6cc-4ca4-84b0-c84dd018e389",
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "75319965-0531-4687-97d3-1af4dba9b34c"
-                }
-            ]
-        }
+  "a_galaxy_workflow": "true",
+  "annotation": "Galaxy 101",
+  "creator": [
+    {
+      "class": "Person",
+      "identifier": "0000-0002-5987-8032",
+      "name": "Anton Nekrutenko"
     },
-    "tags": [
-        "introduction"
-    ],
-    "uuid": "043045b9-a399-4c64-b18e-d50ba31ef96a",
-    "version": 1
+    {
+      "class": "Person",
+      "identifier": "0000-0001-9760-8992",
+      "name": "Helena Rasche"
+    }
+  ],
+  "format-version": "0.1",
+  "license": "CC-BY-4.0",
+  "name": "Find exons with the highest number of features",
+  "steps": {
+    "0": {
+      "annotation": "Input exons file",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "Input exons file",
+          "name": "Exons"
+        }
+      ],
+      "label": "Exons",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 0,
+        "top": 162.5
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "bd3df190-bc2c-4432-a534-7b1b21cd58c9",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "Input features file",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "Input features file",
+          "name": "Features"
+        }
+      ],
+      "label": "Features",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 49,
+        "top": 405.5
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "b7b8e25f-8db4-4707-bfb9-9e5a527e28c3",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "inputA": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "reduce_or_iterate|inputB": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "bedtools Intersect intervals",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 323,
+        "top": 359.5
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0",
+      "tool_shed_repository": {
+        "changeset_revision": "07e8b80f278c",
+        "name": "bedtools",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"bed\", \"bed\": false, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"count\": false, \"fraction_cond\": {\"fraction_select\": \"default\", \"__current_case__\": 0}, \"genome_file_opts\": {\"genome_file_opts_selector\": \"loc\", \"__current_case__\": 0, \"genome\": null}, \"header\": false, \"inputA\": {\"__class__\": \"ConnectedValue\"}, \"invert\": false, \"once\": false, \"overlap_mode\": [\"-wb\"], \"reduce_or_iterate\": {\"reduce_or_iterate_selector\": \"iterate\", \"__current_case__\": 0, \"inputB\": {\"__class__\": \"ConnectedValue\"}}, \"sorted\": false, \"split\": false, \"strand\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "2.30.0",
+      "type": "tool",
+      "uuid": "4fc2b17c-64d8-4c1c-a2d3-743f2ea9bcaf",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "in_file": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Datamash",
+      "outputs": [
+        {
+          "name": "out_file",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 618,
+        "top": 419.5
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "562f3c677828",
+        "name": "datamash_ops",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"bed\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"grouping\": \"4\", \"header_in\": false, \"header_out\": false, \"ignore_case\": false, \"in_file\": {\"__class__\": \"ConnectedValue\"}, \"need_sort\": false, \"operations\": [{\"__index__\": 0, \"op_name\": \"countunique\", \"op_column\": \"10\"}], \"print_full_line\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "d6710e24-dbfb-4aef-8a63-2836cdc831e4",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "sort1",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "input": {
+          "id": 3,
+          "output_name": "out_file"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Sort",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 612,
+        "top": 107.5
+      },
+      "post_job_actions": {},
+      "tool_id": "sort1",
+      "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"column\": \"2\", \"column_set\": [], \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"order\": \"DESC\", \"style\": \"num\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.2.0",
+      "type": "tool",
+      "uuid": "4dd35991-4996-4f7d-8690-bde783f6fa6a",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "infile": {
+          "id": 4,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Select first",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 910,
+        "top": 0
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "ddf54b12c295",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"complement\": \"\", \"count\": \"5\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "820fd964-2460-4b50-8491-968d796500fc",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "comp1",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "input1": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "input2": {
+          "id": 5,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Compare two Datasets",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1133,
+        "top": 183.5
+      },
+      "post_job_actions": {
+        "RenameDatasetActionout_file1": {
+          "action_arguments": {
+            "newname": "Top 5 exon IDs"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_id": "comp1",
+      "tool_state": "{\"field1\": \"4\", \"field2\": \"1\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"mode\": \"N\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.2",
+      "type": "tool",
+      "uuid": "52698c72-b6cc-4ca4-84b0-c84dd018e389",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "top_5_exons",
+          "output_name": "out_file1",
+          "uuid": "565e3d76-0230-4a5e-87c1-9c36ce0b7df8"
+        }
+      ]
+    }
+  },
+  "tags": [
+    "introduction"
+  ],
+  "uuid": "7e91dbde-2461-4786-b78f-e87f9e7de6d9",
+  "version": 5
 }

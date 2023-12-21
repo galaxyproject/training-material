@@ -24,9 +24,11 @@ key_points:
   - Apollo allows a group to view and manually refine predicted genome annotations
   - Use Apollo to edit annotations within your group.
   - Export manual annotations as GFF3.
-contributors:
-  - abretaud
-  - erasmusplus
+contributions:
+  authorship:
+    - abretaud
+  funding:
+    - gallantries
 
 requirements:
   - type: "internal"
@@ -44,14 +46,11 @@ abbreviations:
   OGS: Official Gene Set
 ---
 
+After automatically annotating your genome using [Funannotate](../funannotate/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
+
 > <warning-title>Only works on UseGalaxy.eu</warning-title>
 > Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.
 {: .warning}
-
-# Introduction
-
-
-After automatically annotating your genome using [Funannotate](../funannotate/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
 [Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this. It is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
 
@@ -108,12 +107,13 @@ In this tutorial we use the same data as in the [Funannotate](../funannotate/tut
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/genome.fasta
->    https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/annotation.gff3
->    https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/rnaseq.bam
+>    https://zenodo.org/record/3270822/files/genome.fasta
+>    https://zenodo.org/record/3270822/files/annotation.gff3
+>    https://zenodo.org/record/3270822/files/rnaseq.bam
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
@@ -197,7 +197,7 @@ Now that we have a good looking static JBrowse instance, it is time to load it i
 Viewing the output will open a view into Apollo in the main panel. Here you can interact with your genome and make annotations. This "Annotate" output is a quick link to that specific genome, and while Apollo allows you to manage and annotate multiple genomes, this dataset will always take you back to that specific genome. You can additionally access the Apollo server outside of Galaxy. While the URL will be different for each Galaxy server that supports Apollo, UseGalaxy.eu's Apollo server is available at [https://usegalaxy.eu/apollo](https://usegalaxy.eu/apollo).
 
 </div>
-<div class="Use-a-precreated-organism" markdown="1">
+<div class="Use-a-pre-created-organism" markdown="1">
 
 While the URL will be different for each Galaxy server that supports Apollo, to access UseGalaxy.eu's Apollo server:
 
@@ -214,7 +214,7 @@ Your instructor should give you the name of the organism you will work on, you n
 ![Screenshot of Apollo in Galaxy, apollo takes up most of the space in the center iframe with the history shown on the right.](../../images/apollo/ui.png "This is the Apollo interface, when viewed from inside Galaxy. The Annotate tool produces a special output which acts like a link to the Apollo server. It is <b>not</b> sufficient to download this file to save a copy of your annotations, unlike other datasets in Galaxy. In the main panel Apollo is displayed, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.")
 
 </div>
-<div class="Use-a-precreated-organism" markdown="1">
+<div class="Use-a-pre-created-organism" markdown="1">
 
 ![Screenshot of Apollo.](../../images/apollo/ui_apollo.png "This is the Apollo interface, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.")
 
@@ -299,7 +299,7 @@ The second track (`rnaseq.bam`) represent the alignment of each individual RNA-S
 
 Let's suppose you want to improve the annotation of one of the gene. To do it, you can either click on one of its intron and drag and drop it to the User-created Annotations track (yellow background, at the top), or if you prefer, right click on one of its intron and select **Create new annotation** > **gene**. It should appear shortly in the **User-created Annotation** track.
 
-<div class="Use-a-precreated-organism" markdown="1">
+<div class="Use-a-pre-created-organism" markdown="1">
 > <warning-title>Working with others</warning-title>
 > Maybe you're not doing this tutorial alone, if you see that other people have started working on this region of the genome, it is best to move to a different region to avoid disturbing them by modifying the same genes at the same time.
 {: .warning}
@@ -393,7 +393,7 @@ Sometimes you'll want to modify a gene that was predicted by FunAnnotate, just t
 <div class="Create-your-own-organism" markdown="1">
 {% include topics/genome-annotation/tutorials/apollo/collab.md eukaryote=true %}
 </div>
-<div class="Use-a-precreated-organism" markdown="1">
+<div class="Use-a-pre-created-organism" markdown="1">
 It is of course possible to export all your annotation from Apollo in standard formats, directly from its interface (`Ref Sequence` tab), or from Galaxy. If you create your own organism in Apollo, you can choose to make it open to the public, or to restrict it to only your collaborators.
 
 Click on **Create your own organism** at the beginning to learn more.
@@ -403,7 +403,7 @@ Click on **Create your own organism** at the beginning to learn more.
 # Conclusion
 
 
-Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations<span class="Create-your-own-organism"> and export them to Galaxy for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution</span><span class="Use-a-precreated-organism">. Although you use a pre-created organism, remember that you can use Galaxy to add your own organism to Apollo, and give access to your project at any other researcher, making it a real collaborative solution</span>.
+Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations<span class="Create-your-own-organism"> and export them to Galaxy for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution</span><span class="Use-a-pre-created-organism">. Although you use a pre-created organism, remember that you can use Galaxy to add your own organism to Apollo, and give access to your project at any other researcher, making it a real collaborative solution</span>.
 
 A [similar tutorial for prokaryote genomes]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) exists, using different types of evidence tracks, feel free to have a look at it to learn more.
 

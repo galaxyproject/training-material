@@ -6,20 +6,21 @@ enable: false
 tags:
   - phylogenetics
   - evolution
-level: Introductory
+level: Intermediate
 questions:
 - What information can I get from a phylogenetic tree?
 - How do I estimate a phylogeny?
 - How can I tell whether the phylogeny is reliable?
+- How do phylogenetic models work?
 objectives:
-- Understand the basic concepts behind phylogenetic trees and how they are made
-- Be able to read and interrogate a phylogeny encountered in the literature
+- Describe the basic concepts behind phylogenetic trees and how they are made
+- Read and interrogate a phylogeny encountered in the literature
 - Use standard tools to align a set of molecular sequences
 - Assess the quality of a molecular sequence alignment and be able to modify it appropriately for phylogenetic analysis
 - Use standard tools to estimate a phylogenetic tree based on a set of aligned molecular sequences
 - Assess the reliability of estimated phylogenies with bootstrapping
 - Explore phylogenetic signal using phylogenetic networks
-time_estimation: 3H
+time_estimation: 4H
 contributors:
 - mcharleston
 - adamtaranto
@@ -30,17 +31,19 @@ contributors:
 
 # Introduction
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dmCCQRliEMk?si=iAmOuuO_x0OXkJ4q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen alt="Video: Welcome and why phylogenetics?"></iframe>
+
 Phylogenetics is essential for comparing biological species and understanding biodiversity for conservation. This tutorial discusses the basic principles and methods of phylogenetic inference and what you can learn from phylogenetic estimation. It is intended to help you make informed decisions about which methods to use in your research. 
 
 Using real-life data and standard tools that are (mostly) available in Galaxy, the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data.
 
-This is not just a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of phylogenetics and how the methods work.
-
-The exercises are beginner level, but you should know how molecular sequence data is produced and what it looks like. Maybe you've even built phylogenetic trees before but want to know more about the principles behind the tools.
+This is not just a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of phylogenetics and how the methods work. Maybe you've even built phylogenetic trees before but want to know more about the principles behind the tools.
 
 This tutorial does not cover workflows for taking read data to phylogeny or Bayesian methods. We've included recommended reading and tutorials on these topics in the resources section.
 
-This tutorial is adapted from a 2019 workshop run by the Australian BioCommons and Prof. Michael Charleston (University of Tasmania).
+We’ve designed this tutorial with flexibility in mind and so that you can focus on the sections that are relevant to you. It includes videos that explore key concepts, written descriptions of each concept, and exercises that demonstrate the methods in action using tools (mostly) available in Galaxy. The exercises are beginner level, but you should know how molecular sequence data is produced and what it looks like. Depending on how you like to learn, you can choose to watch the videos, read the text, work through the exercises, or a combination of the three!
+
+This tutorial is adapted from a 2019 workshop run by the Australian BioCommons and Professor Michael Charleston (University of Tasmania).
 
 > <agenda-title></agenda-title>
 >
@@ -108,8 +111,6 @@ This tutorial has the following structure:
 - Assessing the quality of the tree(s): Bootstrapping, branch lengths; conflict in the networks
 - Maximum Likelihood with IQTree -->
 
-
-
 ## What is a Phylogeny?
 ![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. Source: Wikimedia commons"){: align="center" width="40%"}
 
@@ -158,10 +159,16 @@ Aside from gaining a fundamental understanding of biology, other reasons for inf
 {: .comment}
 
 ## Terminology
+{% icon video %} From the root to the tips, watch the video to explore common features of phylogenetic trees. See how these features relate to evolutionary patterns and how outgroups can be used to find the root or common ancestor of extant species.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gnWlMbGPYx8?si=eCOgJXSo-M5E6ZDK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 Before we start building trees, let's define some terms.
 
 ![Schematic of a phylogenetic tree where features such as nodes/taxa, edges/branches are annotated](images/TreeAnatomyWithOutgroup.png "Anatomy of a phylogenetic tree."){:align="center" width="100%"}
+
+
 
 It's common to call **phylogenetic tree** a **phylogeny**.
 
@@ -187,7 +194,7 @@ You can see in the diagram above that the connection of the ingroup to the outgr
 
 We can then imagine lifting up the unrooted tree at the branch connecting our outgroup and ingroup -- that is our best guess at the hypothetical ancestor of all our taxa and gives us a good indication of the branching order of our ingroup (and the outgroup):
 
-![Schematic showing how inclusion of an outgroup can be used to lift a tree to create a best guess at the location of the hypothetical ancestor](./images/TreeAnatomyLiftHere.png "'Lifted' tree demonstrating hypothetical ancestor and branching order){:align="center"}
+![Schematic showing how inclusion of an outgroup can be used to lift a tree to create a best guess at the location of the hypothetical ancestor](./images/TreeAnatomyLiftHere.png "'Lifted' tree demonstrating hypothetical ancestor and branching order"){:align="center"}
 
 Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about **monophyly** -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
 
@@ -382,6 +389,13 @@ ACTTGGCGTAGCCGGAGGCC
 
 # Sequence Alignment
 
+{% icon video %} Watch the video to find out
+[0:00] What ‘alignment’ really means and why it is useful for phylogenetics; [6:22] What makes a good alignment; [12:15] How pairwise sequence alignment and dynamic programming work; [33:47] How the multiple sequence alignment algorithms work; and to 
+[40:00] explore multiple sequence alignment of the Anolis sequences with SeaView.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FUc2A2r1LGY?si=eJolYh8_oAZ1IEDU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
 Molecular sequences must be aligned before they can be used to build phylogenies.
 
 Aligning sequences amounts to finding the nucleotide positions (sites) that we can be confident have the same evolutionary history: they correspond to each other across species and can be considered to have evolved from the same common ancestor.
@@ -434,6 +448,14 @@ A tool you can use on your own computer is [SeaView](https://doua.prabi.fr/softw
 
 
 # Distance-based phylogenetic inference
+{% icon video %} Watch the video to delve into the mathematics of building phylogenetic trees from distances. [0:00] Why use distances and how they relate to the structure of a phylogenetic tree
+[3:05] Types of distances and distance matrices
+[11:31] The mathematics behind the Jukes-Cantor/JC69 and HKY85 models [16:04] An example of building a tree from ultrametric distances [21:01] Building a tree from non-clocklike distances with the Neighbour-joining method [25:59] Real life data and limitations for building trees from distances.
+
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/t68H2Ilc4mI?si=7i6ZePO3_7CqN5H3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 We are going to build our first tree, using a very common method called _Neighbor-Joining_. This method was created in the 1980s by Saitou & Nei ({% cite 10.1093/oxfordjournals.molbev.a040454 %}). 
 
@@ -553,6 +575,9 @@ The Maximum Parsimony method for finding the "best" tree is to search tree space
 We do not use the Maximum Parsimony method in this tutorial.
 
 ## Maximum Likelihood (ML) 
+{% icon video %} Watch the video to learn about [0:00] the concept of likelihood and how it lends statistic rigour to phylogenetic analysis as well as [26:45] how it is applied in models like Jukes-Cantor, HKY85 and GTR models to select the “best tree” from your data. [34:16] Wander through tree space to find the best tree using Nearest Neighbour Interchange, Subtree Pruning and Regrafting, and Tree Bisection and Reconnection tree perturbations and [45:40] go “hill climbing” with tree-search algorithms. [48:52] Finally, explore the output of IQTree for the Anolis dataset used in the tutorial.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0WzQLAl9h8Q?si=XaWu5Do_xi02ewyY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Likelihood is the most statistically defensible phylogenetic inference method.
 It is based on the idea that the tree that has the highest probability of producing the sequences at the tips of the tree is the tree that is the "most likely" to be correct: this is called the Maximum Likelihood (ML) Tree.
@@ -689,10 +714,12 @@ While this is running you might use your time to read the [Models of sequence ev
 > 2. Which do you think is the biggest well-supported clade?
 > 2. Are there some nodes that would be better left unresolved?
 > 3. Is your tree "probably right"? -- or 80% right?
+>
 > > <solution-title></solution-title>
 > > Near the base of the tree the bootstrap values are high: mostly around 100%.  These appear to be well supported. Since they're near the root, there are some very large well-supported clades, e.g., all the way from _A. disticus_ near the top, down to _A. lineatus_ near the bottom.  There are a number of poorly supported clades _within_ this clade though, with some low bootstrap values; the smallest of these is just 29% for the clade from _C. barbouri_ to _Diplolaemus darwinii_.
 > > Overall the tree looks well supported, but it's probably wrong _somewhere_. It would be worth seeking more data, molecular or morphological, to resolve those poorly supported clades.
-> {: .solution} 
+> >
+> {: .solution}
 {: .question}
 
 
@@ -712,11 +739,10 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 > <question-title>Understanding the IQ-Tree report</question-title>
 > 1. What is the second-most favoured model?
 > 2. How many relative rates of evolution have been estimated, and what are these rates?
-> > <solution-title>1</solution-title>
-> > The second-best supported model is GTR + F + R7: it's almost identical to the first model, but with one more rate category.
-> {: .solution}
-> > <solution-title>2</solution-title>
-> > There are 6 relative rates, in the table with columns Category, Relative_rate and Proportion: the rates are 0.01936 (very slow), 0.1952, 0.6315, 1.365, 2.662, and the fastest, 7.146.  Very few sites are estimated to be in this category - about 2.3% - whereas about 27% of the sites are deemed to be in the slowest category.
+>
+> > <solution-title></solution-title>
+> > 1. The second-best supported model is GTR + F + R7: it's almost identical to the first model, but with one more rate category.
+> > 2. There are 6 relative rates, in the table with columns Category, Relative_rate and Proportion: the rates are 0.01936 (very slow), 0.1952, 0.6315, 1.365, 2.662, and the fastest, 7.146.  Very few sites are estimated to be in this category - about 2.3% - whereas about 27% of the sites are deemed to be in the slowest category.
 > {: .solution}
 {: .question}
 
@@ -1031,6 +1057,10 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 
 <!-- Intro to phylogenetic networks as an alternative to trees -->
 
+{% icon video %} Watch the video to see how SplitsTree4 can be used to explore the evidence supporting different phylogenetic splits in data from Anolis species using networks built with uncorrected P, Jukes-Cantor and HKY85 models.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MvZhj3cSVhA?si=fcFWkzQpIxm8Aa0v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 Perhaps surprisingly, phylogenetic estimation doesn't have to start with a tree. Instead you can start with a *phylogenetic network*.
 
@@ -1180,6 +1210,11 @@ To develop a deeper understanding of phylogenetic trees, there is no better way 
 
 ## How to cite the tools used in this tutorial
 
+If you use, extend or reference Galaxy in your published work, please acknowledge the public Galaxy platforms you use (e.g. Galaxy Australia) and cite this publication:
+
+The Galaxy Community. The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2022 update, Nucleic Acids Research, Volume 50, Issue W1, 5 July 2022, Pages W345–W351, https//:doi.org/10.1093/nar/gkac247
+
+Citations for tools used in a Galaxy workflow can be downloaded from the {%icon galaxy-history-options%} dropdown in your Galaxy history.
 
 To cite IQ-TREE please use:
 

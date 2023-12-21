@@ -1,0 +1,263 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-9906-0673",
+            "name": "Anna Syme"
+        }
+    ],
+    "format-version": "0.1",
+    "name": "Assess genome quality",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n\n## Busco results\n\n```galaxy\nhistory_dataset_as_image(output=\"Busco short summary\")\n```\n\n\n```galaxy\nhistory_dataset_as_image(output=\"Busco summary image\")\n```\n\n## Quast results\n\n\n```galaxy\nhistory_dataset_display(output=\"Quast on input dataset(s): tabular report\")\n```\n\n\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Polished assembly"
+                }
+            ],
+            "label": "Polished assembly",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 331.765625,
+                "height": 82.171875,
+                "left": 447.734375,
+                "right": 647.734375,
+                "top": 249.59375,
+                "width": 200,
+                "x": 447.734375,
+                "y": 249.59375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "2ed19084-9eaf-4efb-acdc-b81536e7c024",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference genome"
+                }
+            ],
+            "label": "Reference genome",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 230.671875,
+                "height": 82.171875,
+                "left": 694.5,
+                "right": 894.5,
+                "top": 148.5,
+                "width": 200,
+                "x": 694.5,
+                "y": 148.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "5b12a6af-13c3-4520-a549-280de6a3df17",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Busco: assess assembly",
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "busco_missing",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "bottom": 675.671875,
+                "height": 327.078125,
+                "left": 742.453125,
+                "right": 942.453125,
+                "top": 348.59375,
+                "width": 200,
+                "x": 742.453125,
+                "y": 348.59375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "0d243f458b53",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"auto_lineage\": null, \"outputs\": [\"short_summary\", \"missing\", \"image\"]}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineage_dataset\": \"eukaryota_odb10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.2.2+galaxy0",
+            "type": "tool",
+            "uuid": "8f5f17de-a21e-49f4-b55c-6eff5f4fa213",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "busco_table",
+                    "uuid": "fc06df63-3453-4303-80d1-c76823ba384a"
+                },
+                {
+                    "label": "Busco summary image",
+                    "output_name": "summary_image",
+                    "uuid": "56abe9ab-767c-442e-a247-870b923bd64f"
+                },
+                {
+                    "label": null,
+                    "output_name": "busco_missing",
+                    "uuid": "22db6108-60c6-4157-8b02-3be87c5fd251"
+                },
+                {
+                    "label": "Busco short summary",
+                    "output_name": "busco_sum",
+                    "uuid": "219e4952-36e0-4b01-a407-e774b5b02dca"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "assembly|ref|r": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "in|inputs": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Quast: assess assembly",
+            "name": "Quast",
+            "outputs": [
+                {
+                    "name": "quast_tabular",
+                    "type": "tabular"
+                },
+                {
+                    "name": "report_html",
+                    "type": "html"
+                },
+                {
+                    "name": "report_pdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "log",
+                    "type": "txt"
+                },
+                {
+                    "name": "mis_ass",
+                    "type": "tabular"
+                },
+                {
+                    "name": "unalign",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 764.734375,
+                "height": 621.765625,
+                "left": 1001.484375,
+                "right": 1201.484375,
+                "top": 142.96875,
+                "width": 200,
+                "x": 1001.484375,
+                "y": 142.96875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "ebb0dcdb621a",
+                "name": "quast",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"al\": {\"use_all_alignments\": \"false\", \"min_alignment\": \"65\", \"min_identity\": \"95.0\", \"ambiguity_usage\": \"one\", \"ambiguity_score\": \"0.99\", \"fragmented\": \"false\", \"fragmented_max_indent\": \"50\", \"upper_bound_assembly\": \"false\", \"upper_bound_min_con\": \"2\"}, \"assembly\": {\"type\": \"genome\", \"__current_case__\": 0, \"ref\": {\"use_ref\": \"true\", \"__current_case__\": 0, \"r\": {\"__class__\": \"ConnectedValue\"}, \"features\": {\"__class__\": \"RuntimeValue\"}, \"operons\": {\"__class__\": \"RuntimeValue\"}}, \"orga_type\": \"\"}, \"circos\": \"false\", \"contig_thresholds\": \"0,1000\", \"extensive_mis_size\": \"1000\", \"genes\": {\"gene_finding\": {\"tool\": \"none\", \"__current_case__\": 0}, \"rna_finding\": \"false\", \"conserved_genes_finding\": \"false\"}, \"in\": {\"custom\": \"false\", \"__current_case__\": 1, \"inputs\": {\"__class__\": \"ConnectedValue\"}}, \"k_mer\": {\"k_mer_stats\": \"\", \"__current_case__\": 1}, \"large\": \"true\", \"min_contig\": \"0\", \"scaffold_gap_max_size\": \"1000\", \"skip_unaligned_mis_contigs\": \"false\", \"split_scaffolds\": \"false\", \"strict_NA\": \"false\", \"unaligned_part_size\": \"500\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0.2+galaxy1",
+            "type": "tool",
+            "uuid": "6caef18b-b257-472d-b8d0-fac523a72d37",
+            "workflow_outputs": [
+                {
+                    "label": "Quast on input dataset(s): Log",
+                    "output_name": "log",
+                    "uuid": "d8f8191f-8f9f-4f97-99af-6a074c891e39"
+                },
+                {
+                    "label": null,
+                    "output_name": "unalign",
+                    "uuid": "cacbfa86-d555-4ab3-a403-6ce0d5d29e85"
+                },
+                {
+                    "label": "Quast on input dataset(s):  PDF report",
+                    "output_name": "report_pdf",
+                    "uuid": "e39bb54b-2f74-4ad4-ab05-7a2362e68fe5"
+                },
+                {
+                    "label": "Quast on input dataset(s): tabular report",
+                    "output_name": "quast_tabular",
+                    "uuid": "34fa3e81-0183-4ff1-a76e-47a50d2515d2"
+                },
+                {
+                    "label": "Quast on input dataset(s):  HTML report",
+                    "output_name": "report_html",
+                    "uuid": "77ab0186-4cfd-460f-b71e-39a923414ef4"
+                },
+                {
+                    "label": null,
+                    "output_name": "mis_ass",
+                    "uuid": "7f55d557-9116-4973-a76e-069717a1c01b"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "LG-WF"
+    ],
+    "uuid": "9816ca64-44c2-4d92-ab73-680cf431b2e2",
+    "version": 21
+}

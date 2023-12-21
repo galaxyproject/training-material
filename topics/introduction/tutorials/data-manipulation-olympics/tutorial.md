@@ -16,7 +16,7 @@ objectives:
 time_estimation: 1h
 key_points:
 - There are a lot of tools available in Galaxy for performing basic data manipulation tasks
-- Bacis data manipulation is often needed between steps in a larger scientific analysis in order to connect outputs from one tool to input of another.
+- Basic data manipulation is often needed between steps in a larger scientific analysis in order to connect outputs from one tool to input of another.
 - There are often multiple ways/tools to achieve the same end result
 - Having a basic understanding of data manipulation tools will make it easier to do exploratory data analysis
 - Always read the help text of the tool before using it to get a full understanding of its workings
@@ -27,11 +27,15 @@ contributions:
   editing:
     - hexylena
   funding:
-    - erasmusplus
+    - gallantries
 level: Introductory
 
 subtopic: next-steps
 ---
+
+Scientific analyses often consist of a number of tools that run one after the other, in order to go from the raw data to scientific insight. Between these specialized tools, simple data manipulation steps are often needed as a kind of "glue" between tools. For example, the output of tool A may produce a file that contains all the information needed as input for tool B, but tool B expects the columns in a different order. Or in genomic data analysis, some tools expect chromosome X to be listed as `chrX`, while others simply expect `X`. In these situations, extra data manipulation steps are needed to prepare files for input to analysis tools.
+
+Galaxy has a large collection of tools to perform such basic data manipulation tasks, and becoming familiar with these operations will allow to perform your analysis more easily in Galaxy (and outside).
 
 
 <!--
@@ -62,14 +66,6 @@ Also make sure to include many exercises (with answers) for your section!
 {% assign version_split="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" %}
 {% assign version_unique="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0" %}
 {% assign version_wc="wc_gnu" %}
-
-
-# Introduction
-
-
-Scientific analyses often consist of a number of tools that run one after the other, in order to go from the raw data to scientific insight. Between these specialized tools, simple data manipulation steps are often needed as a kind of "glue" between tools. For example, the output of tool A may produce a file that contains all the information needed as input for tool B, but tool B expects the columns in a different order. Or in genomic data analysis, some tools expect chromosome X to be listed as `chrX`, while others simply expect `X`. In these situations, extra data manipulation steps are needed to prepare files for input to analysis tools.
-
-Galaxy has a large collection of tools to perform such basic data manipulation tasks, and becoming familiar with these operations will allow to perform your analysis more easily in Galaxy (and outside).
 
 
 > <agenda-title></agenda-title>
@@ -155,7 +151,7 @@ Before we can do any manipulation, we will need some data. Let's upload our tabl
 >    > 3. How many lines are in the file? (Hint: {% tool [Line/Word/Character count](wc_gnu) %})
 >    > 4. How many columns?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. When you expand the `olympics.tsv` dataset in your history (see also screenshot below), you will see `format: tabular`, this is another term for a tab-separated (`tsv`) file.
 >    > > 2. Each row represents an athlete's participation in an event. If an athlete competes in multiple events, there is a line for each event.
@@ -231,7 +227,7 @@ Galaxy can convert these two formats into each other.
 >    > 1. What do you notice?
 >    > 2. Why are some values in quotes?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Galaxy does not display the table as nicely as before.
 >    > >    This is because Galaxy is optimized to work with `tsv` files. For most rows you now see commas separating the different columns.
@@ -270,7 +266,7 @@ When you upload a file to Galaxy, by default it will attempt to auto-detect the 
 >    > 1. What do you see?
 >    > 2. Why didn't this step create a new item in your history?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Since Galaxy now no longer know that this is a tabular file with rows and columns,
 >    > > it displays the data as-is, no longer arranging the view into neat columns.
@@ -302,7 +298,7 @@ We have a lot of data in this file, but it is ordered by the athlete ID number, 
 >    > 2. Do we want ascending or descending order if we want the oldest games at the top?
 >    > 3. What should we do with the very first row (the one with the header names?)
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Column 12
 >    > > 2. The file should be sorted in ascending (increasing) order
@@ -329,7 +325,7 @@ We have a lot of data in this file, but it is ordered by the athlete ID number, 
 >    >
 >    > Which athlete is listed at the top of the file now?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. J. Defert. Who competed in a Tennis event 1896 Summer Olympics in Athens.
 >    > >
@@ -358,7 +354,7 @@ So we want to sort twice, first by year, an then within each year, we sort again
 >    > 1. Which column contains athlete names?
 >    > 2. Do we want ascending or descending order if we want to sort alphabetically with A first?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Column 2
 >    > > 2. The file should be sorted in ascending (increasing) order
@@ -380,7 +376,7 @@ So we want to sort twice, first by year, an then within each year, we sort again
 >    >
 >    > Which athlete is listed at the top now? Which discipline (sport) did they compete in?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. A. Grigoriadis. He competed in the 500 meters freestyle swimming event.
 >    > >
@@ -395,11 +391,11 @@ So we want to sort twice, first by year, an then within each year, we sort again
 
 Ok, time to train! Let's see if you can use the sort tool to answer the following questions:
 
-> <question-title>Exercise: Reverse the sort</question-title>
+> <question-title noprefix>Exercise: Reverse the sort</question-title>
 >
 > Which athlete comes *last by alphabet*, in the *most recent* Olympics?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > `Žolt Peto` who competed in table tennis at the 2020 Summer Olympics in Tokyo.
 > > <br>
@@ -409,13 +405,13 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 {: .question}
 
 
-> <question-title>Exercise: sort by height</question-title>
+> <question-title noprefix>Exercise: sort by height</question-title>
 >
 > 1. What is the height of the tallest competing athlete? Which athlete(s) are of this height?
 > 2. What is the shortest?
 > 3. Who was the tallest athlete from the most recent Olympics? How tall were they?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. Height is listed in column 7. Since this is a simple number (no scientific notation), we can use *fast numerical sort*,
 > >    and because we want the tallest on top, we will need to sort in *descending* (decreasing) order.
@@ -424,7 +420,7 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. Adam Sandurski from Poland is the tallest athlete in the file, at 214 cm tall.
 > >  2. Here we don't get a clear answer. That is because not all athletes have height data available, and blank fields (`NA`) are being sorted to the top. We can filter out rows with missing data to get our answer (see [Filter](#filtering) section to learn how to do this). For now we cannot answer this question with just the sort tool. Some times multiple tools are required to perform such tasks. The [exercise section at the end of this tutorial](#exercises-putting-it-all-together) has many exercises that require a combination of different tools.
@@ -432,7 +428,7 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > >
 > {: .solution}
 >
-> > <solution-title>Full Solutions</solution-title>
+> > <solution-title noprefix>Full Solutions</solution-title>
 > >
 > > 1. {% tool [Sort - data in ascending or descending order]({{version_sort}}) %} with the following parameters:
 > >   - {% icon param-file %} *"Sort Query"*: `olympics.tsv`
@@ -483,7 +479,7 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >    > 1. Which column contains this information?
 >    > 2. Which values can this column have? (make sure to notice capitalisation, 'Winter' is not the same as 'winter' to these tools)
 >    >
->    > > <solution-title>Answers</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Column 13, the column with the *season* header
 >    > > 2. The values can be `Summer` or `Winter`
@@ -509,7 +505,7 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >    >    2. column 5 is larger than 2 and smaller than 10
 >    >    3. the sum of columns 4 and 6 is greater than or equal to 25,000
 >    >
->    > > <solution-title>Answers</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. The answers are:
 >    > >    1. `c6=='Yes'`
@@ -538,7 +534,7 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >    >
 >    > How many lines are in this file? (Hint: expand the dataset in your history or use {% tool [Line/Word/Character count]({{version_wc}}) %} )
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 44,681 (this is including the header line)
 >    > >
@@ -552,14 +548,14 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >    > 1. How many lines do you expect in the this file?
 >    > 2. How many lines are in this file? Were you right?
 >    >
->    > > <solution-title>Hints</solution-title>
+>    > > <solution-title noprefix>Hints</solution-title>
 >    > >
 >    > > 1. Use the {% tool [Line/Word/Character count]({{version_wc}}) %} to find the number of lines in the `olympics.tsv` file and subtract the number of rows in the Winter Olympics file
 >    > > 2. Be careful to consider whether these counts include the header line of the file or not
 >    > >
 >    > {: .solution}
 >    >
->    > > <solution-title>Answers</solution-title>
+>    > > <solution-title noprefix>Answers</solution-title>
 >    > >
 >    > > 1. The original file has 234,523 lines, and the Winter Olympics had 44,681 lines. So we would expect 234,523 - 44,681 = 189,842 rows of data. Since we have subtracted the header line in this equation as well, we expect the Summer Olympics file to have 1 more line that this, so 189,843 total lines.
 >    > > 2. 189,843. If you were off by one or two lines, it may have been that you counted the header lines double
@@ -579,7 +575,7 @@ This file contains a lot of data, but we may only be interested in a subset of t
 Ok, time to train! let's see if you can use the {% tool [Filter]({{version_filter}}) %} tool to answer the following questions:
 
 
-> <question-title>Exercise: Medal winners</question-title>
+> <question-title noprefix>Exercise: Medal winners</question-title>
 >
 > 1. How many gold medals were handed out?
 > 2. How many total medals?
@@ -587,7 +583,7 @@ Ok, time to train! let's see if you can use the {% tool [Filter]({{version_filte
 > 4. How many medals were won by individuals with a height between 170 and 180 cm?
 > 5. How many gold medals were won by individuals shorter than 160cm or taller than 190?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > - Column 17 contains information about medals
 > > - The possible values are `Gold`, `Silver`, `Bronze`, and `` (empty).
@@ -598,7 +594,7 @@ Ok, time to train! let's see if you can use the {% tool [Filter]({{version_filte
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. 8,110   (Expression: `c17=='Gold'`)
 > >  2. 24,633  (Expression: `c17=='Gold' or c17=='Silver' or c17=='Bronze'`, or `c17!='NA'`)
@@ -632,7 +628,7 @@ A common operation we might want to perform on tables of data, is simple countin
 >    > 1. How many different Olympic games are in our file?
 >    > 2. Which Olympic games had the most participations? (Tip: set the parameter *"How should the results be sorted?"* to `most common values first`)
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. 52; there are 53 lines in the resulting file, with one line containing the value of the column header (`games`).
 >    > >
@@ -673,7 +669,7 @@ A common operation we might want to perform on tables of data, is simple countin
 >    >
 >    > 2. Which Olympic games had the most women participants? (Tip: set the parameter *"How should the results be sorted?"* to `most common values first`)
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. 2 women participated in the 1896 Olympics. (note that we cannot be sure if this is two different women, or 1 woman participating twice).
 >    > >    The file looks something like this:
@@ -722,7 +718,7 @@ To answer these types of questions we can use a slightly more advanced tool, cal
 >    > 2. How many sport were in the first Olympics? How many in the latest?
 >    > 3. Which Olympics had the most different sports?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. This is for technical reasons; the tool assumes that your file is sorted (on the column that you supplied to the "Group by fields" parameter).
 >    > >    This assumption can greatly speed up the calculation, but will give incorrect results if the file was not actually sorted.
@@ -745,26 +741,26 @@ Note: Datamash can do a lot more than counting,  and we will showcase some of th
 
 Ok, let's practice!
 
-> <question-title>Exercise: Number of participations per country</question-title>
+> <question-title noprefix>Exercise: Number of participations per country</question-title>
 >
 > 1. Which country has had the most participations in the Olympics?
 > 2. How many countries participated in the first Olympics? How many in the last?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. Since we are counting participations (rows), we can use the simple {% tool [Count]({{version_count}})%} tool
 > > 2. Since we are counting a bit more complex question, we need the {% tool [Datamash]({{version_datamash}}) %} tool
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. The United States with 17,286 participations
 > >  2. 15 and 250.
 > >
 > {: .solution}
 >
-> > <solution-title>Full Solutions</solution-title>
+> > <solution-title noprefix>Full Solutions</solution-title>
 > >
 > >  1. {% tool [Count]({{version_count}}) %} with the following parameters:
 > >     - {% icon param-file %} *"from dataset"*: `olympics.tsv`
@@ -828,7 +824,7 @@ We can use the {% tool [Datamash]({{version_datamash}}) %} tool for this purpose
 >    >
 >    > Which settings do you think we need to provide to answer our question?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > - *"Group by fields"*: We want to group by sport (Column 15).
 >    > > - *"Sort"*: `Yes`. This may not be obvious, but because our file is currently not sorted by our chosen group (sport), we need to tell the tool to do this.
@@ -856,7 +852,7 @@ We can use the {% tool [Datamash]({{version_datamash}}) %} tool for this purpose
 >    > 1. How tall was the tallest athlete in basketball? And what about karate?
 >    > 2. Why do some sports have a value of `inf`?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Basketball's tallest athlete was 192cm. For Karate it is 163.
 >    > > 2. Our dataset had quite a number of `NA` (unknown) values in the height column, especially for the earlier Olympics. For sports that had only NA values, there is no maximum so the tool outputs `inf` instead.
@@ -902,7 +898,7 @@ You may have noticed that we could also provide multiple columns to group on. If
 >    > 4. Why do some sports not have a value for one of the sexes?
 >    > 5. Can you find a sport where women were taller than the men? (Hint: it starts with the letter A)
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. 167.25677031093 cm
 >    > > 2. 170 cm
@@ -932,13 +928,13 @@ You may have noticed that we could also provide multiple columns to group on. If
 
 ## Exercises
 
-> <question-title>Exercise: Grouping and computing</question-title>
+> <question-title noprefix>Exercise: Grouping and computing</question-title>
 >
 > 1. How tall is the shortest woman Badminton player to win a gold medal?
 > 2. What is the average height and standard deviation of athletes from Denmark (DEN) in the 1964 Olympics?
 > 3. Can you determine how heavy the heaviest tennis player in the 2020 Olympics is? Why not?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. We need to group on 3 columns: medals, sport and sex (note: the order you provide the columns determines the order they are listed in in the output)
 > > 2. We need to group on 2 columns: country (team) and year, then compute 2 things: the average (mean) and population standard deviation over column 7 (height).
@@ -948,7 +944,7 @@ You may have noticed that we could also provide multiple columns to group on. If
 > > TIP: You can use CTRL+F in your browser to search for values in the file (e.g. "Badminton")
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. 161 cm.
 > >  2. mean height: 175.91304347826, standard deviation: 7.0335410308672`
@@ -959,7 +955,7 @@ You may have noticed that we could also provide multiple columns to group on. If
 > >
 > {: .solution}
 >
-> > <solution-title>Full Solutions</solution-title>
+> > <solution-title noprefix>Full Solutions</solution-title>
 > >
 > > 1. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
 > >    - {% icon param-file %} *"Input tabular dataset"*: `olympics.tsv`
@@ -1067,7 +1063,7 @@ As an example, let's calculate the age of each athlete at the time of participat
 >    > 2. What changed in our file?
 >    > 3. How old was Arnaud Boetsch during his Olympic tennis participation?
 >    >
->    > > <solution-title>Answers</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Rationale behind Error handling settings
 >    > >    - We disabled column type autodetection because some of the numerical
@@ -1104,13 +1100,19 @@ $$ BMI = weight / (height^2) $$
 
 (with weight in kilograms and height in meters).
 
+> <tip-title>BMI is problematic</tip-title>
+> [Adolphe Quetelet](https://en.wikipedia.org/wiki/Adolphe_Quetelet), who invented [BMI](https://en.wikipedia.org/wiki/Body_mass_index), was not a doctor of medicine, instead he was a Belgian astronomer, mathematician, statistician, and sociologist. His data consisted probably entirely of cisgender, white, european men and women {% cite Eknoyan_2007 %}.
+> In his defense, he did argue it should not be used at individual levels, however it came to be used as such due to simplicity. (See [Wikipedia's History section](https://en.wikipedia.org/wiki/Body_mass_index#History)). BMI is a poor measure of health, especially for populations with high muscle content, and cannot be simply re-used as-is with anyone other than Anglo Saxons {% cite Caleyachetty_2021 %}, [Wikipedia:Limitations](https://en.wikipedia.org/wiki/Body_mass_index#Limitations).
+>
+> However as it is an easy to calculate metric, we include the calculation here.
+{:.tip}
 
 Let's use the {% tool [Compute on rows]({{version_compute}}) %} tool to compute this data for all athletes and add it as a new column directly after the existing height and weight columns.
 
 
 
 
-> <question-title>Exercise: Calculating BMI</question-title>
+> <question-title noprefix>Exercise: Calculating BMI</question-title>
 >
 > 1. How would you express this calculation in the tool?
 >    - Remember that our height is in cm, and the formula expects height in meters
@@ -1121,7 +1123,7 @@ Let's use the {% tool [Compute on rows]({{version_compute}}) %} tool to compute 
 > 3. What is the BMI for Arnaud Boetsch?
 >
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > - division is `/` and multiplication is ` * ` .
 > > - The tool does not recognize the `^` operation as exponentiation. You can use `height * height` or `pow(height,2)`, or replace `^` with `**`.
@@ -1133,14 +1135,14 @@ Let's use the {% tool [Compute on rows]({{version_compute}}) %} tool to compute 
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > > 1. `int(c8)/(int(c7)*int(c7))*10000` (other variations are possible)
 > > 2. You can choose `Insert mode` and specify column `9` as the insert position.
 > > 3. 22.69
 > {: .solution}
 >
-> > <solution-title>Full solution</solution-title>
+> > <solution-title noprefix>Full solution</solution-title>
 > >
 > > 2. {% tool [Compute on rows]({{version_compute}}) %} with the following parameters:
 > >    - {% icon param-file %} *"Input file"*: `olympics.tsv`
@@ -1198,7 +1200,7 @@ Let's start with a simple example:
 >    >
 >    > Why did we use the column replace tool, and not the general replace tool?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > It is safer to use the column replace tool in our case. We know the city name only occurs in one of the columns.
 >    > > If we had used the line replace tool, it would have replaced all occurrences of `Athina`, which may have unforeseen consequences (e.g. maybe somebody was named Athina, in that case we don't want to replace it)
@@ -1220,7 +1222,7 @@ Different tools may expect different ways of handling missing data. So you may h
 
 > <hands-on-title>Fill empty cells</hands-on-title>
 >
-> We will now replace empty cells in the `birth_place` column, do use `NA` instead
+> We will now replace empty cells in the `birth_place` column, to use `NA` instead
 >
 > 1. Open {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}
 >    - Read the help text at the bottom, what settings do you think we need to use?
@@ -1233,7 +1235,7 @@ Different tools may expect different ways of handling missing data. So you may h
 >    > 1. Should we use the column or line replace tool?
 >    > 2. What is the expression for an empty line? (hint: see regular expressions 101 box above)
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Since we only want to replace in one column, we will use the column replace tool
 >    > > 2. `^$` indicates an empty line (`^` indicated the beginning, and `$` the end). The value in the column is treated as the line, since we are looking only in 1 column.
@@ -1273,7 +1275,7 @@ Look at the `birth_day` column. It has values in a format like `12 December`. Su
 >    > 2. How do we captures both the day and the month?
 >    > 3. How do we refer to the values we captured (for the replacement value)
 >    >
->    > > <solution-title>Hints</solution-title>
+>    > > <solution-title noprefix>Hints</solution-title>
 >    > >
 >    > > 1. Birthday is one or more digits, followed by a space, followed by one or more letters.
 >    > > 2. Remember that you can capture values using parentheses `(..)`
@@ -1281,7 +1283,7 @@ Look at the `birth_day` column. It has values in a format like `12 December`. Su
 >    > >
 >    > {: .solution}
 >    >
->    > > <solution-title>Answers</solution-title>
+>    > > <solution-title noprefix>Answers</solution-title>
 >    > >
 >    > > 1. There are multiple solutions here, depending on how strict you want to be
 >    > >    - `\d+ ([a-zA-Z]+)` (not strict, would also match on `142 Septober`
@@ -1342,7 +1344,7 @@ To do the reverse, adding one or more columns, we can use the {% tool [Paste]({{
 >    >
 >    > 1. How many rows and columns do you expect the output to have?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. We expect the same number of rows as the original dataset, but now only the 4 columns we requested to keep.
 >    > >
@@ -1359,13 +1361,13 @@ Notice that during this step, we also changed the order of the columns. This too
 ## Exercises
 
 
-> <question-title>Exercise: Removing Columns</question-title>
+> <question-title noprefix>Exercise: Removing Columns</question-title>
 >
 > 1. Create a file with 4 columns: name, sport, games, medal (same task as the previous hands-on), but use the {% tool [Cut columns from a table]({{version_cut_columns}}) %} tool instead.
 > 2. Create a file that is similar to `olympics.tsv`, but without the first column (athlete_id column)
 > 3. You want to keep all the columns of `olympics.tsv`, but change the order so that `sport` and `event` come right after the athlete's name.
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. We need to determine the column numbers and provide these to the tool, rather than the column headers
 > > 2. Think about what the *"Keep named colums"* parameter does to simplify the settings here
@@ -1373,7 +1375,7 @@ Notice that during this step, we also changed the order of the columns. This too
 > >
 > {: .solution}
 >
-> > <solution-title>Full Solutions</solution-title>
+> > <solution-title noprefix>Full Solutions</solution-title>
 > >
 > > 1. {% tool [Cut columns from a table]({{version_cut_columns}}) %} using the following parameters:
 > >    - {% icon param-text %} *"Cut Columns"*: `c2,c15,c11,c17`
@@ -1425,7 +1427,7 @@ Let's say we would like to create a list of all unique athletes (id and name).
 >    >
 >    > 1. Do you see duplication? Why is that?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Yes. For all athletes who participated more than once, the row will be identical.
 >    > >
@@ -1442,7 +1444,7 @@ Let's say we would like to create a list of all unique athletes (id and name).
 >    > 1. What happened to our header line? How could we fix that?
 >    > 2. How many unique athletes do we have?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. The unique tool has done some sorting internally, so our header line is not longer at the top. We could fix this in several ways:
 >    > >    - sort the file again to get it back to the top (using natural sort in descending order will work).
@@ -1480,7 +1482,7 @@ We obtained country information data from [DataHub](https://datahub.io/core/coun
 >    > 1. How many columns does this file have?
 >    > 2. Which column(s) in this file are the same as in the `olympics.tsv` file?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. The country information file has 56 columns (see [DataHub](https://datahub.io/core/country-codes) for more details).
 >    > > 2. Both files have a `NOC` column with the 3-letter country code (`NOC` stands for National Olympic Committee). We can use this column to join the appropriate country data to each row in our `olympics.tsv` file.
@@ -1512,7 +1514,7 @@ We would now like to take our Olympics dataset as the basis, and add columns to 
 >    > 2. How many columns are in the resulting file? What about the NOC column?
 >    > 3. What is a possible downside to this approach?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. All the columns from the country information file are added to the end of each row of our olympics dataset
 >    > > 2. Our olympics datset had 17 columns, the country information file has 56 columns. Therefore we have 17+56=73 columns columns in our resulting file. This also means the NOC column
@@ -1536,7 +1538,7 @@ First, let's get this data for the 2022 Olympics
 
 > <hands-on-title>Get 2022 Olympics data</hands-on-title>
 >
-> 1. {% tool [Import](upload1) %} the file `country-information.tsv` via link
+> 1. {% tool [Import](upload1) %} the file `olympics_2022.tsv` via link
 >
 >    ```
 >    {{page.zenodo_link}}/files/olympics_2022.tsv
@@ -1551,7 +1553,7 @@ First, let's get this data for the 2022 Olympics
 >    > 1. Does the new file have the same structure?
 >    > 2. Can we simply add the lines of the new files to the end of our existing olympics dataset?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Yes, this file has all the same columns, in the same order, so concatenation should be relatively straightforward.
 >    > > 2. If we simply put the contents of this file after our existing dataset, we will have a second header line in the middle of our data rows. It is best to remove the header line from the second dataset after we have verified it is compatible. This way we will only add the real data rows to our dataset.
@@ -1587,7 +1589,7 @@ Since this new dataset has the exact same structure (number and order of columns
 >    > 1. How many lines do you expect in the new file? Were you correct? (Hint: use {% tool [Line/Word/Character count]({{version_wc}}) %} to count lines)
 >    > 2. Where are the lines of the 2022 Olympics?
 >    >
->    > > <solution-title>Answer</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. The `olympics.tsv` file had 234,523 lines, and the `olympics_2022.tsv` file had 4076 lines. Both of these numbers include a header line, which we removed for the second file, so we expect our concatenated file to contain 234,523 + 4076 - 1 = 238,598 lines (which it does).
 >    > > 2. The new file has the entire contents of `olympics.tsv` at the beginning of the file, followed by the contents of the `olympics_2022.tsv` file at the end.
@@ -1625,7 +1627,7 @@ Tip: use this tool only if you want a separate file for **all values** in a colu
 >    > 1. How many different files do we get?
 >    > 2. How many lines are in the file for the 1908 Summer Olympics?
 >    >
->    > > <solution-title>Answers</solution-title>
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. We get 1 collection with 52 files in it, one per Olympic games:
 >    > >    ![screenshot of the output collection of the split tool](./images/split-file.png)
@@ -1640,13 +1642,13 @@ Tip: use this tool only if you want a separate file for **all values** in a colu
 
 Let's practice this a bit more, see if you can use the split file to answer the following questions:
 
-> <question-title>Exercise: sort by height</question-title>
+> <question-title noprefix>Exercise: sort by height</question-title>
 >
 > 1. Create two files, one for Summer Olympics, one for Winter Olympics. Which has more lines?
 > 2. Split the file by sport, how many sports have there been at the Olympics?
 > 3. Split the file by medal, would you expect the output files to be equal sizes?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. Split on the `season` column (Column 13)
 > > 2. Split on the `sport` column (Column 15)
@@ -1654,7 +1656,7 @@ Let's practice this a bit more, see if you can use the split file to answer the 
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. The summer olympics file has more lines (~180,000) than the winter olympics file (~45,000) (the first winter Olympics wasn't held until 1924)
 > >  2. Each file in the resulting collection represents a sport, there are 91 datasets in the collection, representing 91 different sports in the history of the Olympics.
@@ -1676,7 +1678,7 @@ This section provides a number of exercises that require you to combine two or m
 
 
 
-> <question-title>Exercise 1: Finding shortest/lightest athlete</question-title>
+> <question-title noprefix>Exercise 1: Finding shortest/lightest athlete</question-title>
 >
 > If you have done exercises in the [sorting](#sorting) section, you noticed that finding the shortest athlete ever to compete was not easy,
 > because all the rows with missing height data (`NA`) in the column were sorted to the top. We need to filter out these values first, then
@@ -1686,7 +1688,7 @@ This section provides a number of exercises that require you to combine two or m
 > 2. Find the shortest athlete of the Winter Olympics
 > 2. Find the lightest athlete of the *most recent* Summer Olympics
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. You will need to filter out the columns with (`NA`) in the height column first
 > > 2. You will need to filter by season as well
@@ -1695,7 +1697,7 @@ This section provides a number of exercises that require you to combine two or m
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. Lyton Mphande and  Rosario Briones were both 127 cm tall, competing in boxing and gymnastics respectively
 > >  2. Carolyn Krau was a 137 cm tall figure skater.
@@ -1703,7 +1705,7 @@ This section provides a number of exercises that require you to combine two or m
 > >
 > {: .solution}
 >
-> > <solution-title>Full solution</solution-title>
+> > <solution-title noprefix>Full solution</solution-title>
 > >
 > > 1. First we filter out the NA values from the height column:
 > >
@@ -1771,13 +1773,13 @@ to perform computation on the weight column, because some of the values were wei
 tool could not handle such values. In this exercise, we will first clean up this weight column to avoid ranges (by taking the lower number in the range for every
 row a weight range is used), and then answering the question a couple of questions around the weight of athletes.
 
-> <question-title>Exercise 2: Data cleaning and computations of the weight column</question-title>
+> <question-title noprefix>Exercise 2: Data cleaning and computations of the weight column</question-title>
 >
 > 1. Get a list of all the values that occur in the weight column, take note of all the values that are not a single number or `NA`; anything else should be cleaned up
 > 2. Clean up the weight column (Colum 8) so that we only have single numbers; weight classes (e.g. `63-78`) should be replace by the lower bound (`63`) of that class
 > 3. How heavy was the lightest woman competing in the Biathlon? And the heaviest?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. You can use the {% tool [**Count**]({{version_count}}) %} tool to get a list of all the different values that appear in Column 8
 > > 2. You can use the {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %} tool to clean up the weight column.
@@ -1788,7 +1790,7 @@ row a weight range is used), and then answering the question a couple of questio
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > > 1. We see values such as `100-105`, but also `77,5`, `100, 104` (notice the space!) and even `76, 77, 79` to indicate weight ranges or other unexpected weight values.
 > >    All these variations must be converted to single numbers. For this example we will simply convert these ranges to their lower number, and remove the rest when we
@@ -1802,7 +1804,7 @@ row a weight range is used), and then answering the question a couple of questio
 > >
 > {: .solution}
 >
-> > <solution-title>Full Solutions</solution-title>
+> > <solution-title noprefix>Full Solutions</solution-title>
 > >
 > > 1. {% tool [**Count** occurrences of each record]({{version_count}}) %} with the following parameters
 > >    - {% icon param-file %} *"from dataset"*: `olympics.tsv`

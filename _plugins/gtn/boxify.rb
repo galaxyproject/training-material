@@ -1,25 +1,28 @@
+# frozen_string_literal: true
+
 require 'jekyll'
 
 module Gtn
+  # Generate boxes
   module Boxify
     @@ICONS = {
-      "agenda" => "",
-      "code-in" => "far fa-keyboard",
-      "code-out" => "fas fa-laptop-code",
-      "comment" => "far fa-comment-dots",
-      "details" => "fas fa-info-circle",
-      "feedback" => "far fa-comments",
-      "hands-on" => "fas fa-pencil-alt",
-      "hands_on" => "fas fa-pencil-alt",
-      "hidden" => "",
-      "matrix" => "",
-      "overview" => "",
-      "question" => "far fa-question-circle",
-      "quote" => "",
-      "solution" => "far fa-eye",
-      "spoken" => "",
-      "tip" => "far fa-lightbulb",
-      "warning" => "fas fa-exclamation-triangle",
+      'agenda' => '',
+      'code-in' => 'far fa-keyboard',
+      'code-out' => 'fas fa-laptop-code',
+      'comment' => 'far fa-comment-dots',
+      'details' => 'fas fa-info-circle',
+      'feedback' => 'far fa-comments',
+      'hands-on' => 'fas fa-pencil-alt',
+      'hands_on' => 'fas fa-pencil-alt',
+      'hidden' => '',
+      'matrix' => '',
+      'overview' => '',
+      'question' => 'far fa-question-circle',
+      'quote' => '',
+      'solution' => 'far fa-eye',
+      'spoken' => '',
+      'tip' => 'far fa-lightbulb',
+      'warning' => 'fas fa-exclamation-triangle',
     }
 
     @@ICONS_EMOJI = {
@@ -36,45 +39,58 @@ module Gtn
     }
 
     @@BOX_TITLES = {
-      "en" => {
-        "agenda" => "Agenda",
-        "code-in" => "Input",
-        "code-out" => "Output",
-        "comment" => "Comment",
-        "details" => "Details",
-        "hands-on" => "Hands-on",
-        "hands_on" => "Hands-on",
-        "question" => "Question",
-        "solution" => "Solution",
-        "tip" => "Tip",
-        "warning" => "Warning",
+      'en' => {
+        'agenda' => 'Agenda',
+        'code-in' => 'Input',
+        'code-out' => 'Output',
+        'comment' => 'Comment',
+        'details' => 'Details',
+        'hands-on' => 'Hands-on',
+        'hands_on' => 'Hands-on',
+        'question' => 'Question',
+        'solution' => 'Solution',
+        'tip' => 'Tip',
+        'warning' => 'Warning',
       },
-      "es" => {
+      'es' => {
         # Just google translated these.
-        "agenda" => "Agenda",
-        "code-in" => "Entrada",
-        "code-out" => "Salida",
-        "comment" => "Comentario",
-        "details" => "Detalles",
-        "solution" => "Solución",
-        "warning" => "¡Precaucion!",
+        'agenda' => 'Agenda',
+        'code-in' => 'Entrada',
+        'code-out' => 'Salida',
+        'comment' => 'Comentario',
+        'details' => 'Detalles',
+        'solution' => 'Solución',
+        'warning' => '¡Precaucion!',
 
         # The only ones we have translations for??
-        "hands-on" => "Práctica",
-        "hands_on" => "Práctica",
-        "question" => "Preguntas",
-        "tip" => "Consejo",
+        'hands-on' => 'Práctica',
+        'hands_on' => 'Práctica',
+        'question' => 'Preguntas',
+        'tip' => 'Consejo',
+      },
+      'fr' => {
+        'agenda' => 'Agenda',
+        'code-in' => 'Entrée',
+        'code-out' => 'Sortie',
+        'comment' => 'Commentaire',
+        'details' => 'Détails',
+        'hands-on' => 'En pratique',
+        'hands_on' => 'En pratique',
+        'question' => 'Question',
+        'solution' => 'Solution',
+        'tip' => 'Astuce',
+        'warning' => 'Attention',
       }
     }
 
-    @title_unique_offsets = Hash.new
+    @title_unique_offsets = {}
 
-    @@COLLAPSIBLE_BOXES = [
-      "details", "solution", "tip",
+    @@COLLAPSIBLE_BOXES = %w[
+      details solution tip
     ]
 
-    @@BOX_CLASSES = @@ICONS.keys.join "|"
-    @@TITLE_CLASSES = @@ICONS.keys.map{|x| "#{x}-title" }.join "|"
+    @@BOX_CLASSES = @@ICONS.keys.join '|'
+    @@TITLE_CLASSES = @@ICONS.keys.map { |x| "#{x}-title" }.join '|'
 
     def self.box_classes
       @@BOX_CLASSES
@@ -84,118 +100,139 @@ module Gtn
       @@TITLE_CLASSES
     end
 
-    def self.get_icon(icon_cls, emoji: false)
-      if emoji
-        return @@ICONS_EMOJI.fetch(icon_cls, '')
-      end
+    def self.get_icon(icon_cls, emoji: false, a11y: false)
+      return @@ICONS_EMOJI.fetch(icon_cls, '') if emoji
 
       icon = @@ICONS[icon_cls]
-      if !icon.nil?
-       if icon.start_with?("fa")
-        %Q(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
-       elsif icon.start_with?("ai")
-        %Q(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
-       end
-      else
-        %Q(<span class="visually-hidden"></span>)
+
+      # We support announcing the proper label of the box, e.g. 'hands on box',
+      # but default to hiding this, as the icons are *mostly* decorative.
+      icon_a11y_title = icon_cls.gsub(/[-_]/, ' ')
+      icon_aria_label = a11y ? "title=\"#{icon_a11y_title} box\"" : ''
+      accessible_addition = a11y ? %(<span class="sr-only">#{icon_a11y_title} box</span>) : ''
+
+      if icon.nil?
+        %(<span class="visually-hidden"></span>)
+      elsif icon.start_with?('fa')
+        %(<i class="#{icon}" aria-hidden="true" #{icon_aria_label}></i>#{accessible_addition})
+      elsif icon.start_with?('ai')
+        %(<i class="ai #{icon}" aria-hidden="true" #{icon_aria_label}></i>#{accessible_addition})
       end
     end
 
     def self.get_id(box_type, title, path)
       box_id = "#{box_type}-#{title}"
-      box_safe = Jekyll::Utils::slugify(box_id)
+      box_safe = Jekyll::Utils.slugify(box_id)
       key = "#{path}|#{box_type}|#{box_safe}"
 
-      if not @title_unique_offsets.has_key?(key)
+      if @title_unique_offsets.key?(key)
+        box_safe_final = "#{box_safe}-#{@title_unique_offsets[key]}"
+      else
         @title_unique_offsets[key] = 0
         box_safe_final = box_safe
-      else
-        box_safe_final = "#{box_safe}-#{@title_unique_offsets[key]}"
       end
       @title_unique_offsets[key] += 1
 
       box_safe_final
     end
 
-    def self.format_box_title(title, box_type, lang="en")
-      title_fmted = ((!title.nil?) && title.length > 0 ? ": #{title}" : "")
-      "#{@@BOX_TITLES[lang][box_type]}#{title_fmted}"
+    def self.format_box_title(title, box_type, lang = 'en', noprefix: false)
+      lang = 'en' if (lang == '') || lang.nil?
+      title_fmted = (!title.nil? && title.length.positive? ? ": #{title}" : '')
+      if noprefix && !title.nil?
+        title
+      else
+        "#{@@BOX_TITLES[lang][box_type]}#{title_fmted}"
+      end
     end
 
-    def self.generate_collapsible_title(box_type, title, lang="en", key)
-      box_id = self.get_id(box_type, title, key)
-      box_title = self.format_box_title(title, box_type, lang=lang)
-      return [box_id, %Q(
-        <div id="#{box_id}" class="box-title">
-        <button type="button" aria-controls="#{box_id}-contents" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
-          #{self.get_icon(box_type)} #{box_title}
-          <span role="button" class="fold-unfold fa fa-minus-square"></span>
+    def self.generate_collapsible_title(box_type, title, lang = 'en', key, contents: false, noprefix: false)
+      box_id = get_id(box_type, title, key)
+      box_title = format_box_title(title, box_type, lang, noprefix: noprefix)
+      refers_to_contents = contents ? '-contents' : ''
+      # These are all collapsed by default, details, tip, and solution.
+      # rubocop:disable Layout/LineLength
+      [box_id, %(
+        <div class="box-title #{box_type}-title" id="#{box_id}">
+        <button class="gtn-boxify-button #{box_type}" type="button" aria-controls="#{box_id}#{refers_to_contents}" aria-expanded="true">
+          #{get_icon(box_type)} <span>#{box_title}</span>
+          <span class="fold-unfold fa fa-minus-square"></span>
         </button>
         </div>
-      ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip]
+      ).split(/\n/).map(&:strip).join.strip]
+      # rubocop:enable Layout/LineLength
     end
 
-    def self.generate_static_title(box_type, title, lang="en", key)
-      box_id = self.get_id(box_type, title, key)
-      box_title = self.format_box_title(title, box_type, lang=lang)
+    def self.generate_static_title(box_type, title, lang = 'en', key, noprefix: false)
+      box_id = get_id(box_type, title, key)
+      box_title = format_box_title(title, box_type, lang, noprefix: noprefix)
 
-      if title.nil?
-        puts "Static | typ=#{box_type} | t=#{title} | l=#{lang} | k=#{key}"
-      end
+      Jekyll.logger.debug "Static | typ=#{box_type} | t=#{title} | l=#{lang} | k=#{key}" if title.nil?
 
-      return [box_id, %Q(
-        <div id="#{box_id}" class="box-title" aria-label="#{box_type} box: #{title}">
-          #{self.get_icon(box_type)} #{box_title}
+      [box_id, %(
+        <div class="box-title #{box_type}-title" id="#{box_id}">
+          #{get_icon(box_type)} #{box_title}
         </div>
-      ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip]
+      ).split(/\n/).map(&:strip).join.strip]
     end
 
     def self.safe_title(title)
-      if title.nil?
-        title = ""
-      end
+      title = '' if title.nil?
 
-      title = title.gsub(/"/, '&quot;')
-      title
+      title.gsub(/"/, '&quot;')
     end
 
-    def self.generate_title(box_type, title, lang="en", key)
-      title = self.safe_title(title)
+    def self.generate_title(box_type, title, lang = 'en', key, contents: false, noprefix: false)
+      title = safe_title(title)
       if @@COLLAPSIBLE_BOXES.include?(box_type)
-        self.generate_collapsible_title(box_type, title, lang, key)
+        generate_collapsible_title(box_type, title, lang, key, contents: contents, noprefix: noprefix)
       else
-        self.generate_static_title(box_type, title, lang, key)
+        generate_static_title(box_type, title, lang, key, noprefix: noprefix)
       end
     end
 
-    def self.generate_box(box_type, title, lang="en", key)
-      title = self.safe_title(title)
-      box_id, box_title = generate_title(box_type, title, lang, key)
-      return %Q(
+    def self.generate_box(box_type, title, lang = 'en', key)
+      title = safe_title(title)
+      box_id, box_title = generate_title(box_type, title, lang, key, contents: true)
+      %(
         <div class="box #{box_type}" markdown=0>
         #{box_title}
-        <div id=#{box_id}-contents class="box-content" markdown=1>
-      ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip
+        <div class="box-content" id="#{box_id}-contents" markdown=1>
+      ).split(/\n/).map(&:strip).join.strip
     end
 
-
+    def self.replace_elements(text, lang = 'en', key)
+      # We want to replace any `<x-title>(.*)</x-title>` bits
+      # And replace them one by one with "proper" boxes, based on generate_title.
+      #
+      # We're going to rely on never having two on one line
+      text.split("\n").map do |line|
+        line.gsub(%r{<(?<type>[a-z-]*)-title>(?<title>.*?)</[a-z-]*-title>}) do |_m|
+          title = Regexp.last_match[:title]
+          type = Regexp.last_match[:type]
+          _, box = generate_title(type, title, lang, key)
+          box
+        end
+      end.join("\n")
+    end
   end
 end
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
   require 'test/unit'
+  # Test the box ID algorithm
   class BoxIdTest < Test::Unit::TestCase
     def test_single_page
-      assert_equal(Gtn::Boxify::get_id('hands-on', 'a box', 'index.md'), 'hands-on-a-box')
-      assert_equal(Gtn::Boxify::get_id('hands-on', 'a box', 'index.md'), 'hands-on-a-box-1')
-      assert_equal(Gtn::Boxify::get_id('hands-on', 'a box', 'index.md'), 'hands-on-a-box-2')
-      assert_equal(Gtn::Boxify::get_id('hands-on', 'a box', 'index2.md'), 'hands-on-a-box')
-      assert_equal(Gtn::Boxify::get_id('hands-on', 'a box', 'index2.md'), 'hands-on-a-box-1')
-      assert_equal(Gtn::Boxify::get_id('hands-on', 'a box', 'index2.md'), 'hands-on-a-box-2')
+      assert_equal(Gtn::Boxify.get_id('hands-on', 'a box', 'index.md'), 'hands-on-a-box')
+      assert_equal(Gtn::Boxify.get_id('hands-on', 'a box', 'index.md'), 'hands-on-a-box-1')
+      assert_equal(Gtn::Boxify.get_id('hands-on', 'a box', 'index.md'), 'hands-on-a-box-2')
+      assert_equal(Gtn::Boxify.get_id('hands-on', 'a box', 'index2.md'), 'hands-on-a-box')
+      assert_equal(Gtn::Boxify.get_id('hands-on', 'a box', 'index2.md'), 'hands-on-a-box-1')
+      assert_equal(Gtn::Boxify.get_id('hands-on', 'a box', 'index2.md'), 'hands-on-a-box-2')
 
-      assert_equal(Gtn::Boxify::get_id('hands-on', 'z-w-e', 'index2.md'), 'hands-on-z-w-e')
-      assert_equal(Gtn::Boxify::get_id('hands-on', 'z-w-e', 'index2.md'), 'hands-on-z-w-e-1')
-      assert_equal(Gtn::Boxify::get_id('hands-on', 'z-w-e', 'index2.md'), 'hands-on-z-w-e-2')
+      assert_equal(Gtn::Boxify.get_id('hands-on', 'z-w-e', 'index2.md'), 'hands-on-z-w-e')
+      assert_equal(Gtn::Boxify.get_id('hands-on', 'z-w-e', 'index2.md'), 'hands-on-z-w-e-1')
+      assert_equal(Gtn::Boxify.get_id('hands-on', 'z-w-e', 'index2.md'), 'hands-on-z-w-e-2')
     end
   end
 end

@@ -67,7 +67,7 @@ contributors:
   - carpentries
   - hexylena
   - bazante1
-  - erasmusplus
+  - gallantries
   - avans-atgm
 tags:
 - bash

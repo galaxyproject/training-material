@@ -31,9 +31,6 @@ contributors:
   - hexylena
 ---
 
-# Introduction
-
-
 This tutorial aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
 {% snippet faqs/galaxy/analysis_results_may_vary.md %}
@@ -414,7 +411,11 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
-> 3. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
+> 3. Click on the dataset in your history to expand it, then click on the {% icon galaxy-barchart %} (**Visualize**) icon
+>
+>    ![visualize button on the expanded history item](../../images/101_ucsc_visualize.png)
+>
+> 4. To **visualize the data in UCSC genome browser**, click on `display at UCSC (main)` now visible at the top (blue box) of the Visualize menu.
 >
 >    ![`display at UCSC main` link](../../images/101_displayucsc.png)
 >
@@ -452,7 +453,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 > <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-delete %} button.
 >
 >    This will make the creation of the workflow easier.
 >
@@ -615,17 +616,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the {% icon galaxy-gear %} icon in the history panel and select `Share or Publish`. On this page you can do 3 things:
-
-1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
-2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
-3. **Share with a user**. This will share the history only with specific users on the Galaxy instance.
-
-> <comment-title>Permissions</comment-title>
-> Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.
->
-> Be sure to select **Also make all objects within the History accessible** whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.
-{: .comment}
+{% snippet faqs/galaxy/histories_sharing.md %}
 
 > <hands-on-title>Share history and workflow</hands-on-title>
 >

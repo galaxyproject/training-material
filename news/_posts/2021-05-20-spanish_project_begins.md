@@ -1,7 +1,8 @@
 ---
 title: "¿Hablas español?: The first curated tutorial in Spanish!"
 tags: [new tutorial, español]
-contributors: [nomadscientist, beatrizserrano, pclo, ales-ibt, shiltemann, hexylena]
+contributions:
+  authorship: [nomadscientist, beatrizserrano, pclo, ales-ibt, shiltemann, hexylena]
 cover: "topics/introduction/images/hello-languages.png"
 coveralt: "Hello in many languages"
 tutorial: "topics/introduction/tutorials/galaxy-intro-short/tutorial_ES.html"

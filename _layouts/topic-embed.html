@@ -1,0 +1,20 @@
+---
+layout: embed
+---
+
+<section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
+
+{% assign topic = site.data[page.topic_name] | default: page.topic %}
+{% assign topic_material = site | list_materials_structured:page.topic_name %}
+
+{% for subtopic in topic_material %}
+{% if subtopic[0] != "__FLAT__" %}
+<h3 id="st-{{ subtopic[0] | slugify }}">{{ subtopic[1].subtopic.title }}</h3>
+<p>{{ subtopic[1].subtopic.description }}</p>
+{% endif %}
+
+{% include _includes/tutorial_list.html sub=subtopic %}
+{% endfor %}
+
+{{ content }}
+</section>

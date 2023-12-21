@@ -31,13 +31,12 @@ contributions:
     - ppalagi
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
 ---
 
-# Introduction
-
-
 Effective training
+
+<!-- GTN:IGNORE:002 -->
 
 > <comment-title>Resources / Reading recommendation</comment-title>
 >
@@ -63,15 +62,14 @@ Effective training
 
 # Effective training & good trainer
 
-<!-- 
-> <hands-on-title>What makes training effective and a good trainer? (10 min - Discussion in groups of 2)</hands-on-title>
+> <hands-on-title>What makes training effective and a good trainer? - {% icon time %} 10 min - Discussion in groups of 2</hands-on-title>
 >
 > - Recall concrete examples of your past training experience
 > - Share with your colleague
 > - List 3 keywords for effective training
 > - List 3 keywords for a good trainer
 >
-{: .hands_on} -->
+{: .hands_on}
 
 {% include _includes/quiz.html id="effective_training_trainer.yaml" %}
 
@@ -99,16 +97,36 @@ This matrix is then a **tool for self evaluation**:
 - In which area(s) do you feel you would need improvement?
 - In which area(s) do you feel you are ok?
 
-<!-- 
-> <hands-on-title>Reflect on your skills as a trainer? (5 min - Silent reflection)</hands-on-title>
+
+> <hands-on-title>Reflect on your skills as a trainer? - {% icon time %} 5 min - Silent reflection</hands-on-title>
 >
 > - Look at the GOBLET Skill Matrix
-> - Reflect on which areas do you need to develop in
-> - Write in the shared notes which skills you need to improve in each area of the GOBLET matrix
+> - Reflect on the following questions
+>   - Which areas do you need to develop in?
+>     - Communication
+>     - Planning & management
+>     - Trainee engagement
+>     - Expertise & knowledge
+>   - Which skills do you need to improve in **communication**?
+>     - Written communication skills
+>     - Presentation skills
+>     - Verbal communication skills
+>   - Which skills do you need to improve in **planning & management**? 
+>     - Session planning
+>     - Curriculum planning
+>     - Event management
+>   - Which skills do you need to improve in **trainee engagement**?
+>     - Flexibility in delivery
+>     - Empathy with trainees
+>     - Understanding & knowledge of trainees
+>   - Which skills do you need to improve in **expertise & knowledge**?
+>     - Subject area knowledge
+>     - User application awareness
+>     - Knowledge of training methodology
 >
-{: .hands_on}-->
+{: .hands_on}
 
-{% include _includes/quiz.html id="trainer_skills.yaml" %}
+<!--{% include _includes/quiz.html id="trainer_skills.yaml" %}-->
 
 > <details-title>GOBLET</details-title>
 >
@@ -127,15 +145,15 @@ We are now going to watch a short video (13 min) from Eric Mazur, professor at t
 
 In this video, Eric Mazur discusses some of these teaching practices and a **paradigm change: from the traditional lecture to active learning-based approaches**. Can you recognise the main features of this change of paradigm?
 
-<!-- 
-> <hands-on-title>Reflect on Mazur's interview (5 min - Silent reflection)</hands-on-title>
+
+> <hands-on-title>Reflect on Mazur's interview - {% icon time %} 5 min - Silent reflection</hands-on-title>
 >
 > - Write something that really impressed you in Mazur’s interview
 >
 {: .hands_on}
--->
 
-{% include _includes/quiz.html id="mazur_interview.yaml" %}
+
+<!--{% include _includes/quiz.html id="mazur_interview.yaml" %}-->
 
 From the Eric Mazur's interview but also as Mitchell Waldrop pointed out in {% cite waldrop2015we %}, learners who **actively interact with the material, the teacher, and other learners**:
 - will **learn better and more**
@@ -167,7 +185,7 @@ With the help of Mazur, you hopefully started believing that active, interactive
 - which is the most effective technique I can incorporate in my teaching?
 - is there any "ideal" teaching technique I should absolutely learn?
 
-**There is not "the" ideal teaching technique nor the "most effective" teaching technique.**
+There is **not "the" ideal teaching technique nor the "most effective" teaching technique.**
 
 You may remember from the Nichols' steps of curriculum design, that it is **essential that you align learning experiences to the learning outcomes** of your course. In other words, for each LO, you should identify the learning experience(s) that will best support the achievement of the LO.
 
@@ -184,7 +202,7 @@ Inspired by Eric Mazur and the idea of active learning, {% cite via2020course %}
 | ------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | Lecture, webinar    | Remember, Comprehend             | Inspire learners, ignite learners' enthusiasm, clarify/explain a concept, provide an overview, give context, summarise content                                    | _list_ the key points of the lecture/webinar, _summarise_ take home message(s)                                              |
 | Exercise, practical | Apply, Analyse                   | Help learners digest course materials, solve typical problems, apply knowledge, show how to do things with appropriate guidance, give an idea of how a tool works | _follow_ a set of instructions or protocol, _calculate_ a set of results or outcomes from a given protocol                  |
-| Flipped class       | Apply, Analyse                   | Teach learners how to formulate questions, help learners to memorise new information & concepts, or analyse & understand course materials                         | _summarise_ the content material, \*ask\* appropriate questions                                                             |
+| Flipped class       | Apply, Analyse                   | Teach learners how to formulate questions, help learners to memorise new information & concepts, or analyse & understand course materials                         | _summarise_ the content material, *ask* appropriate questions                                                             |
 | Peer instruction    | Synthesise, Evaluate             | Prepare learners to defend an argument, give learners opportunities to explain things, thereby helping to develop critical thinking & awareness                   | _explain_ how they solved an exercise, _evaluate_ others' choices/decisions, _diagnose_ errors in the exercise-solving task |
 | Group discussion    | Synthesise, Evaluate             | Give learners opportunities to practice questioning, develop new ideas & critical thinking                                                                        | _communicate_ their own ideas, _defend_ their own opinions                                                                  |
 | Group work          | Synthesise, Evaluate             | Promote collaborative work & peer instruction, provide opportunities for giving/receiving feedback, & digesting course materials                                  | _provide_ feedback on their peers' work, _share_ ideas, _explain_ the advantages of team-work                               |
@@ -204,7 +222,7 @@ These two techniques can be implemented in many different ways and incorporated 
 
 Peer instruction is a 1-to-1 instruction done in a scalable way by **interleaving formative assessment with learner discussion**.
 
-> <details-title>Peer-to-peer or peer-learning: what is it? (2-min video)</details-title>
+> <details-title>Peer-to-peer or peer-learning: what is it? - {% icon time %} 2-min video</details-title>
 >
 > <iframe width="560" height="315" src="https://www.youtube.com/embed/MYa4hgcMRNc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 >
@@ -220,7 +238,7 @@ In its "traditional" form, the teacher
 
 You may also be creative and implement this technique in your own way.
 
-> <details-title>Concept Tests at Avanti's Learning Centre in Kanpur (2-min video)</details-title>
+> <details-title>Concept Tests at Avanti's Learning Centre in Kanpur - {% icon time %} 2-min video</details-title>
 >
 > <iframe width="560" height="315" src="https://www.youtube.com/embed/2LbuoxAy56o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 >
@@ -347,7 +365,24 @@ Don't start by flipping an entire course. Start small. Test. Add up.
 
 - **Build an artefact**, e.g. concept map
 
-{% include _includes/quiz.html id="active_learning_strategies.yaml" %}
+<!--{% include _includes/quiz.html id="active_learning_strategies.yaml" %}-->
+
+> <hands-on-title>Which strategies for active learning training did you use? - {% icon time %} 5 min - Silent reflection</hands-on-title>
+>
+> Which strategies for active learning training did you use? (Add +)
+> - Peer instruction 
+> - Flipped-classroom 
+> - Brief question-and-answer sessions
+> - Think, pair, share 
+> - Take notes together / shared notes 
+> - Work in groups
+> - Pair programming 
+> - Discussions
+> - Hands-on activities
+> - Have learners make predictions / presentations
+> - Build an artefact (e.g. concept map) 
+>
+{: .hands_on}
 
 # Practices and behaviors to improve delivery and learning
 
@@ -406,7 +441,7 @@ Here are some examples of practices to achieve goals above. None of the practice
 
 - **Never teach alone. Teach together**. Whenever possible: With two or more trainers in the classroom, the class can be observed from different angles, it is easier to detect learners who are not comfortable or struggling or lagging behind. It is possible to provide one-to-one support without stopping the lesson flow. It is also important that trainers teaching together provide feedback to each other.
 
-    > <details-title>Different models to teach together or **[co-teaching](https://teachtogether.tech/en/index.html#g:co-teaching)**</details-title>
+    > <details-title>Different models to teach together or co-teaching</details-title>
     >
     > - **Team teaching**: Both teachers deliver a single stream of content in tandem, taking turns like musicians taking solos.
     > - **Teach and assist**: Teacher A teaches while Teacher B moves around the classroom to help struggling learners.
@@ -440,5 +475,105 @@ Each of the techniques presented here will make your classes better, but **you s
 # Conclusion
 
 
-{% include _includes/quiz.html id="active_learning_strategies_bloom_levels.yaml" %}
+<!--{% include _includes/quiz.html id="active_learning_strategies_bloom_levels.yaml" %}-->
 
+> <question-title>What is the highest Bloom’s level supported by each teaching technique? - {% icon time %} 5 min - Silent reflection</question-title>
+>
+> 1. What is the highest Bloom's level supported by **Peer instruction**?
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+> 1. What is the highest Bloom's level supported by **Peer instruction**?
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+> 1. What is the highest Bloom's level supported by **Flipped-classroom**? 
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+> 1. What is the highest Bloom's level supported by **Brief question-and-answer sessions**?
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+> 1. What is the highest Bloom's level supported by **Think, pair, share**?
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+> 1. What is the highest Bloom's level supported by **Take notes together / shared notes**? 
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+> 1. What is the highest Bloom's level supported by **Work in groups**?
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+> 1. What is the highest Bloom's level supported by **Pair programming**? 
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+> 1. What is the highest Bloom's level supported by **Discussions**?
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+> 1. What is the highest Bloom's level supported by **Hands-on activities**?
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+> 1. What is the highest Bloom's level supported by **Have learners make predictions / presentations**?
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+> 1. What is the highest Bloom's level supported by **Build an artefact (e.g. concept map)**? 
+>    - Remember
+>    - Understand 
+>    - Apply
+>    - Analyze
+>    - Evaluate 
+>    - Create
+>
+>
+{: .question}

@@ -29,6 +29,7 @@ contributors:
 priority: 12
 notebook:
   language: python
+  pyolite: true
 ---
 
 Sometimes you need to run other tools in Python, like maybe you want to

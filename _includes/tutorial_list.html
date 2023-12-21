@@ -1,27 +1,27 @@
 <table class="table table-responsive table-striped">
   <thead>
     <tr>
-      <th>Lesson</th>
-      <th title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
-      <th title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
-      <th title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
 
       {% if topic.type == "use" %}
-      <th title="Datasets used in this tutorial, available from Zenodo.">Input dataset</th>
-      <th title="Galaxy workflows used in this tutorial.">Workflows</th>
+      <th scope="col" title="Datasets used in this tutorial, available from Zenodo.">Input dataset</th>
+      <th scope="col" title="Galaxy workflows used in this tutorial.">Workflows</th>
       {% endif %}
 
       {% if instances[topic.name].supported %}
-      <th title="List of public Galaxies on which this tutorial can be performed. ">Galaxy servers</th>
+      <th scope="col" title="List of public Galaxies on which this tutorial can be performed. ">Galaxy servers</th>
       {% endif %}
     </tr>
   </thead>
   <tbody class="list">
 
-  {% assign subtopic_materials = include.sub[1].materials %}
+  {% assign subtopic_materials = include.sub[1].materials | default: include.sub %}
   {% for material in subtopic_materials %}
         <!-- MAT: {{ material.id }} -->
-      {% if material.enable != false or jekyll.environment != "production" %}
+      {% if material.draft != true or jekyll.environment != "production" %}
 
         <tr>
           <td class="tutorial_title">
@@ -29,6 +29,10 @@
             {% if default_resource_url %}
             <a href="{{ site.baseurl }}/{{ default_resource_url }}">
                 {{ material.title }}
+            </a>
+            {% else if material.hands_on == 'external' %}
+            <a href="{{ material.hands_on_url }}">
+                {{ material.title }} {% icon external-link %}
             </a>
             {% else %}
                 {{ material.title }}
@@ -41,7 +45,7 @@
             {% endif %}
             {% if material.tags %}
               {% for tag in material.tags %}
-              <a href="{{site.baseurl}}/search?query={{ tag }}" class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="Click to show all tutorials tagged {{tag}}">{{ tag }}</a>
+              <a href="{{site.baseurl}}/search?query={{ tag }}" class="label label-default tutorial_tag" style="{{ tag | colour_tag }}" title="Click to show all tutorials tagged {{tag}}">{{ tag }}</a>
               {% endfor %}
             {% endif %}
             </div>

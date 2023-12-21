@@ -46,10 +46,6 @@ subtopic: eukaryote
 priority: 7
 ---
 
-
-# Introduction
-
-
 {mRNAs} are not the only type of RNAs present in organisms (like mammals, insects or plants) and represent only a small fraction of the transcripts. A vast repertoire of small (miRNAs, snRNAs) and {lncRNAs} are also present. {LncRNAs} are generally defined as transcripts longer than 200 nucleotides that are not translated into functional proteins. They are important because of their major roles in cellular machinery and their presence in large number. Indeed, they are notably involved in gene expression regulation, control of translation or imprinting. Statistics from the [GENCODE project](https://www.gencodegenes.org/human/stats_41.html) reveals that the human genome contains more than 19,095 lncRNA genes, almost as much as the 19,370 protein-coding genes.
 
 Using RNASeq data, we can reconstruct assembled transcripts (with ou without any reference genome) which can then be annotated and identified individually as {mRNAs} or {lncRNAs}.
@@ -93,12 +89,13 @@ To assemble transcriptome with StringTie and annotate {lncRNAs} with FEELnc, we 
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/genome_assembly.fasta
->    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/genome_annotation.gff3
->    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/all_RNA_mapped.bam
+>    https://zenodo.org/record/7107050/files/genome_assembly.fasta
+>    https://zenodo.org/record/7107050/files/genome_annotation.gff3
+>    https://zenodo.org/record/7107050/files/all_RNA_mapped.bam
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
@@ -119,7 +116,7 @@ A reference annotation file in GTF or GFF3 format can be provided to StringTie w
 >    - *"Use a reference file to guide assembly?"*: Use reference GTF/GFF3
 >    - *"Reference file"*: Use a file from history
 >        - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `genome_annotation.gff3`
->    - *"Use Reference transcripts only?"*: `No`
+>    - *"Use Reference transcripts only?"*: `No`
 >    - *"Output files for differential expression?"*: `No additional output`
 >    - *"Output coverage file"*: `No`
 >
@@ -189,7 +186,7 @@ For future analyses, it would be interesting to use an updated annotation contai
 
 > <hands-on-title>Merge the annotations</hands-on-title>
 >
-> {% tool [concatenate](https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/f46f0e4f75c4) %} with the following parameters:
+> {% tool [concatenate](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: `genome_annotation.gtf`
 >    - Insert Dataset
 >    - {% icon param-file %} *"Dataset"*: `lncRNA annotation with FEELnc`

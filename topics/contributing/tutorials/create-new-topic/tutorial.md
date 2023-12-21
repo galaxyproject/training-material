@@ -18,7 +18,6 @@ contributions:
   - hexylena
 ---
 
-# Introduction
 
 Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to exome sequencing analysis).
 
@@ -206,7 +205,7 @@ For tag based topics, first ensure that all of the relevant tutorials share a si
 
 ## Defining the topic
 
-Compare with other topic level metadata files in the `metadata/` directory of the training material. Then create a file of your own naming the topic and providing maintainers and so on. We will use the Covid-19 synthetic topic as an example:
+Compare with other topic level metadata files in the `metadata/` directory of the training material. Then create a file of your own naming the topic and providing editorial board members and so on. We will use the Covid-19 synthetic topic as an example:
 
 ```
 ---
@@ -216,7 +215,7 @@ title: "SARS-CoV-2"
 summary: "Tutorials covering analysis of SARS-CoV-2 (COVID 19)"
 tag_based: true
 
-maintainers:
+editorial_board:
   - wm75
 
 gitter: galaxyproject/sars-cov-2

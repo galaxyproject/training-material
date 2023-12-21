@@ -22,9 +22,6 @@ contributors:
   - annefou
 ---
 
-# Introduction
-
-
 This training will demonstrate how to reproduce analyses performed in the Galaxy framework. Before we start with the hands-on part, we would like to give you some information about Galaxy.
 
 Galaxy is a scientific workflow, data integration and data analysis and publishing platform. Galaxy is an open-source platform for accessible, reproducible, and transparent computational research. While Galaxy was started to allow non-bioinformaticians to analyze DNA sequencing data, it nowadays enables analysis tasks of many different domains including machine learning, ecology, climate science and  omics-type of analyses. Galaxy is easy to use because it is accessible via a web-browser and provides a graphical user interface which enables access to pre-installed tools and large computational resources. In Galaxy, all analyses are stored in so-called histories. The history keeps track of all the tools, tool versions and parameters that were used in the analysis. From such a history, a workflow can be extracted; this workflow can be used to easily repeat the analysis on different data. Both, histories and workflows, can either be shared privately with colleagues or publicly, for example as part of a published manuscript.
@@ -43,12 +40,13 @@ For more background information about Galaxy, have a look into the Galaxy public
 
 # What does Galaxy look like?
 
-Many different Galaxy servers exist. Some are public, some are private, some focus on a specific topic and others like the usegalaxy.\* servers cover a broad range of tools. To reproduce published results it is highly recommended to use the same Galaxy server that was used in the original study. In the case that this was a private server that is not accessible to you, you might want to use one of the main Galaxy servers: [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au). To learn more about the different Galaxy servers visit the [slides: options for using Galaxy]({{site.baseurl}}/topics/introduction/tutorials/options-for-using-galaxy/slides.html#1). The particular Galaxy server that you are using may look slightly different than the one shown in this training. Galaxy instance administrators can choose the exact version of Galaxy they would like to offer and can customize its look to some extent. The basic functionality will be rather similar across instances, so don’t worry! In this training we will use the European Galaxy server on which the original analysis was performed and shared.
+{% assign servers = list_usegalaxy_servers_shuffle %}
+Many different Galaxy servers exist. Some are public, some are private, some focus on a specific topic and others like the usegalaxy.\* servers cover a broad range of tools. To reproduce published results it is highly recommended to use the same Galaxy server that was used in the original study. In the case that this was a private server that is not accessible to you, you might want to use one of the main Galaxy servers: {% for server in servers %}[{{ server.name }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}. To learn more about the different Galaxy servers visit the [slides: options for using Galaxy]({% link /topics/introduction/tutorials/options-for-using-galaxy/slides.html %}). The particular Galaxy server that you are using may look slightly different than the one shown in this training. Galaxy instance administrators can choose the exact version of Galaxy they would like to offer and can customize its look to some extent. The basic functionality will be rather similar across instances, so don’t worry! In this training we will use the European Galaxy server on which the original analysis was performed and shared.
 
 
 > <hands-on-title>Log in or register</hands-on-title>
 > 1. Open your favorite browser (Chrome/Chromium, Safari or Firefox, but not Internet Explorer/Edge!)
-> 2. Browse to the [Galaxy Europe instance](https://usegalaxy.eu/) (recommended) or to a Galaxy instance of your choosing
+> 2. Browse to the [Galaxy Europe instance](https://usegalaxy.eu/) or to a Galaxy instance of your choosing
 > 3. Choose *Login or Register* from the navigation bar at the top of the page
 > 4. If you have previously registered an account with this particular instance of Galaxy (user accounts are *not* shared between public servers!), proceed by logging in with your registered *public name*, or email address, and your password.
 >
@@ -113,6 +111,7 @@ Each analysis in Galaxy starts by creating a new analysis history and loading da
 >      - Option 2: Datatypes can be **manually set**
 >
 >    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
 > 4. Add an `#iris` tag {% icon galaxy-tags %} to the dataset
@@ -191,7 +190,7 @@ This tutorial follows option 1, but options 2 and 3 are no more difficult
 {: .hands_on}
 
 > <comment-title>Hidden datasets in history</comment-title>
-> Some workflow outputs might be considered as not very important intermediate results and are thus marked as getting hidden in the analysis history after they turned green. This makes the history easier to navigate through the main results which are visible in the history. Hidden datasets can be made visible individually by clicking on "hidden" on top of the history and then clicking "unhide" for the individual datasets. To unhide many dataset at once, click "operations on multiple datasets" at the top right of the history; then select all hidden datasets that you would like to unhide, then click "For all selected... unhide dataset".
+> Some workflow outputs might be considered as not very important intermediate results and are thus marked as getting hidden in the analysis history after they turned green. This makes the history easier to navigate through the main results which are visible in the history. Hidden datasets can be made visible individually by clicking on the eye with a slash on top of the history and then clicking "Unhide" for the individual datasets. To unhide many dataset at once, click {% icon galaxy-selector %} "Select Items" at the top left of the history; then select all hidden datasets that you would like to unhide, then click "For n of N selected" and then "Unhide".
 {: .comment}
 
 By starting the workflow all jobs are sent to the Galaxy cluster for analysis. Sometimes it can take a bit until the datasets show up in your history. The jobs are processed one after the other or in parallel if the same input is used for several steps. Grey means waiting to run, yellow means running and green means finished. Red means there was an error.

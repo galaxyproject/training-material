@@ -289,7 +289,7 @@ Now we can setup the nodes
 >    > </div>
 >    {: .code-in}
 >
-> 3. Go check out your tailnet! Play around with the tailscale command and pinging other nodes with the suffix `.galaxy.example.com`{:.Headscale} `<username>.org.github.beta.tailscale.net`{:.Tailscale}
+> 3. Go check out your tailnet! Play around with the tailscale command and pinging other nodes with the suffix `.galaxy.example.org`{:.Headscale} `<username>.org.github.beta.tailscale.net`{:.Tailscale}
 >
 >    > Note that you'll need to enable [MagicDNS](https://login.tailscale.com/admin/dns) in your acount settings.
 >    {:.Tailscale}

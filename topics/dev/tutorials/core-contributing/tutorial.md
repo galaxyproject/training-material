@@ -30,9 +30,6 @@ requirements:
         - architecture
 ---
 
-# Introduction
-
-
 This tutorial walks you through developing an extension to Galaxy, and how to contribute back to the core project.
 
 To setup the proposed extension imagine you're running a specialized Galaxy server and each of your users only use a few of Galaxy datatypes. You'd like to tailor the UI experience by allowing users of Galaxy to select their favorite extensions for additional filtering in downstream applications, UI extensions, etc..

@@ -1,0 +1,183 @@
+---
+layout: page
+title: GTN Materials Search
+---
+
+<p>
+We are testing a new search experience. It does not do semantic ranking of results, but it's maybe a nicer and faster interface. In the future we might bring back the ranking of results. If you wish to access the old search interface, <a href="{{ site.baseurl}}/search">it will remain available here</a>.
+</p>
+<p>Tell us what you think!
+</p>
+
+<div class="row" id="search-form">
+	<div class="col-md-5">
+	<div class="form-group">
+	<label for="title">Search</label>
+	<input type="text" class="form-control" id="title" placeholder="Search Materials" oninput="onInputDebounced()">
+	</div>
+	</div>
+
+	<div class="col-md-3">
+	<div class="form-group">
+	<label for="type">Type</label>
+	<select class="form-control" id="type">
+		<option value="Any">Any</option>
+		<option value="Hands-on">Hands-on</option>
+		<option value="Slides">Slides</option>
+		<option value="FAQs">FAQs</option>
+		<option value="News">News</option>
+	</select>
+	</div>
+	</div>
+	
+	<div class="col-md-3">
+	<div class="form-group">
+	<label for="level">Level</label>
+	<select class="form-control" id="level">
+		<option value="Any">Any</option>
+		<option value="Introductory">Introductory</option>
+		<option value="Intermediate">Intermediate</option>
+		<option value="Advanced">Advanced</option>
+	</select>
+	</div>
+	</div>
+	<div class="col-md-1">
+		<button class="btn btn-primary" onclick="search()">Search</button>
+	</div>
+</div>
+
+<table class="table" id="results">
+	<thead>
+		<tr>
+			<th scope="col">Identifier</th>
+			<th scope="col">Type</th>
+			<th scope="col">Title</th>
+			<th scope="col">Topic</th>
+			<th scope="col">Level</th>
+			<th scope="col">Length</th>
+		</tr>
+	</thead>
+	<tbody>
+		{%- for post in site.posts -%}
+			<tr id="{{ post.short_id }}">
+				<td><a class="badge badge-info" href="https://gxy.io/GTN:{{ post.short_id }}">{%- icon purl -%} GTN:{{ post.short_id }}</a></td>
+				<td>{{ post.layout | layout_to_human }}</td>
+				<td><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a><br/>
+					{%- for tag in post.tags -%}
+					<span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag }}</span>
+					{%- endfor -%}
+				</td>
+				<td></td>
+				<td>{{ post.level }}</td>
+				<td>{{ post.time_estimation }}</td>
+			</tr>
+		{%- endfor -%}
+		{%- for page in site.pages -%}
+			{%- if page.short_id -%}
+			{%- if page.short_id != 'F00001' -%}
+			<tr id="{{ page.short_id }}">
+				<td><a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">{%- icon purl -%} GTN:{{ page.short_id }}</a></td>
+				<td>{{ page.layout | layout_to_human }}</td>
+				<td><a href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a><br/>
+					{%- for tag in page.tags -%}
+					<span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag }}</span>
+					{%- endfor -%}
+				</td>
+				<td>{{ page | topic_name_from_page: site }}</td>
+				<td>{{ page.level }}</td>
+				<td>{{ page.time_estimation }}</td>
+			</tr>
+			{%- endif -%}
+			{%- endif -%}
+		{%- endfor -%}
+	</tbody>
+</table>
+
+<script>
+HTMLCollection.prototype.forEach = Array.prototype.forEach;
+NodeList.prototype.forEach = Array.prototype.forEach;
+HTMLCollection.prototype.filter = Array.prototype.filter;
+NodeList.prototype.filter = Array.prototype.filter;
+HTMLCollection.prototype.map = Array.prototype.map;
+NodeList.prototype.map = Array.prototype.map;
+
+const textInput = document.getElementById("title")
+const otherInputs = document.querySelectorAll("#search-form select")
+const table  = document.getElementById('results'),
+      rows   = table.tBodies[0].rows;
+
+const DEBOUNCE_DURATION = 300; // in milliseconds
+
+var previousSearch = "";
+
+function search(){
+	const textQuery = document.getElementById("title").value
+	const typeFilter = document.getElementById("type").value
+	const levelFilter = document.getElementById("level").value
+
+	if (previousSearch == `${textQuery} ${typeFilter} ${levelFilter}`) {
+		console.log("Skipping search for the same query")
+		return
+	}
+
+	// Include search term in page title
+	document.getElementsByTagName("title")[0].innerText = `${textQuery} | GTN Materials Search`
+	console.log(`Searching! ${textQuery} ${typeFilter} ${levelFilter}`)
+
+	// Which should be hidden
+
+	var to_hide = rows.filter(row => {
+		if (typeFilter != "Any" && row.children[1].innerText != typeFilter) {
+			return true;
+		}
+		if (levelFilter != "Any" && row.children[4].innerText != levelFilter) {
+			return true;
+		}
+		if (textQuery != "" && (row.children[2].innerText.toLowerCase() + " " + row.children[2].innerText.toLowerCase()).indexOf(textQuery.toLowerCase()) == -1) {
+			return true;
+		}
+		return false;
+	});
+
+	// Display all
+	document.querySelectorAll("#results tr").forEach(r => r.style.display = "");
+	// Hide the rest
+	to_hide.map(r => r.style.display = "none");
+
+	previousSearch = `${textQuery} ${typeFilter} ${levelFilter}`
+}
+
+// Attribution: https://gist.github.com/beaucharman/1f93fdd7c72860736643d1ab274fee1a
+function debounce(callback, wait, context = this) {
+  let timeout = null;
+  let callbackArgs = null;
+
+  const later = () => callback.apply(context, callbackArgs);
+  return function() {
+    callbackArgs = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+const onInputDebounced = debounce(_ => {
+	search();
+}, DEBOUNCE_DURATION);
+
+otherInputs.forEach((input) => {
+	addEventListener("change", (event) => {
+		search()
+	})
+});
+
+// Get the q parameter from URL
+// This is a redeclaration of the `var params` in themes.js, not sure how we want to handle that long term.
+var params = (new URL(document.location)).searchParams;
+paramSearch = params.get('query')
+if (paramSearch) {
+	textInput.value = paramSearch
+	search()
+}
+
+
+</script>

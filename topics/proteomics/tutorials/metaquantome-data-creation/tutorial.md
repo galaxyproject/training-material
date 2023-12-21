@@ -31,15 +31,13 @@ follow_up_training:
             - metaproteomics
 
 subtopic: multi-omics
-tags: [microbiome]
+tags: [microgalaxy]
 ---
 
 
-# Introduction
-
 
 Metaproteomics {% cite Metaproteomics_video %} involves characterization of community level expression of microbial proteins from an environmental
-or clinical sample. Metaproteomics data {% cite Metaproteomics_community_effort %} {% cite Jagtap2015 %} is primarily used to determine the functional status of the microbiome under study along with its taxonomic composition. The [Galaxy-P](http://galaxyp.org/) {% cite Galaxy-P_Metaproteomics %} team published a software suite named metaQuantome { % cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional,
+or clinical sample. Metaproteomics data {% cite Metaproteomics_community_effort %} {% cite Jagtap2015 %} is primarily used to determine the functional status of the microbiome under study along with its taxonomic composition. The [Galaxy-P](http://galaxyp.org/) {% cite Galaxy-P_Metaproteomics %} team published a software suite named metaQuantome {% cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional,
 taxonomic expression as well as functional and taxonomy interaction. metaQuantome leverages peptide level quantitative information to analyze the taxonomic, functional expression within the microbial community in different conditions.
 
 ![Microbiome](../../images/microbiome.png){: width="75%"}
@@ -69,17 +67,18 @@ spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For t
 >
 {: .agenda}
 
-# **Pretreatments**
+# Pretreatments
 
 The first step in a tutorial is to get the data from the zenodo link provided and making sure that it is in the correct format.
 
-## *Get data*
+## Get data
 
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files: 6 MZML files, a Protein FASTA file, and an Experimental Design file from [Zenodo]({{ page.zenodo_link }})
@@ -93,7 +92,9 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    https://zenodo.org/record/4037137/files/T7A_1.mzml
 >    https://zenodo.org/record/4037137/files/T7B_1.mzml
 >    ```
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
@@ -105,7 +106,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >
 > 5. Add to each database a tag corresponding to the name of the input data (optional).
 > 6. Build a **Dataset list** for the four mzml files.
->    - Click the **Operations on multiple datasets** check box at the top of the history panel
+>    - Click the {% icon galaxy-selector %} **Select Items** check box at the top of the history panel
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
@@ -117,11 +118,10 @@ We have a choice to run all these steps using a single workflow, then discuss ea
 
 > <hands-on-title>Pretreatments</hands-on-title>
 >
-> 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/main_workflow.ga) or download it to your computer.
->    - Import the workflow into Galaxy
+> 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/metaquantome-data-creation/workflows/main_workflow.ga" title="Pretreatments" %}
+>
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -135,13 +135,13 @@ We have a choice to run all these steps using a single workflow, then discuss ea
 {: .hands_on}
 
 
-# **Match peptide sequences**
+# Match peptide sequences
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.
 The created dataset collection of the four *MZML files* in the history has to be first converted to MGF to be used as the MS/MS input.
 
 
-### *Convert mzml to MGF with msconvert*
+## Convert mzml to MGF with msconvert
 
 msconvert is used in order to convert the input file type, a mzml data collection, to a mgf file type.
 The mgf file type can then be used as the Input Peak Lists when running SearchGUI.
@@ -328,7 +328,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 {: .question}
 
 
-## *Removing file extensions for Quantification*
+## Removing file extensions for Quantification
 This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extension from the PSM report so that it can be used as an input for FlashLFQ.
 
 > <hands-on-title>Removing file extensions</hands-on-title>
@@ -352,7 +352,7 @@ This is a data manipulation step to make the data compatible with other downstre
 >
 {: .hands_on}
 
-## *Extracting Peptide list*
+## Extracting Peptide list
 
 > <hands-on-title>Selecting peptide list</hands-on-title>
 > This step selects the peptide column from the Select output ( where we have removed the contaminants)
@@ -364,11 +364,11 @@ This is a data manipulation step to make the data compatible with other downstre
 >2. Rename file as peptide_list.
 {: .hands_on}
 
-# **Peptide Quantification**
+# Peptide Quantification
 
 In this tutorial, we are using FlashLFQ as the quantitation tool. The user can choose to work with other quantitation tools, e.g. moFF and MaxQuant are available in Galaxy.
 
-### *FlashLFQ*
+## FlashLFQ
 [FlashLFQ](https://github.com/smith-chem-wisc/FlashLFQ) can quantify MS peaks in order to find the abundances of peptides. FlashLFQ is a fast label-free quantification algorithm. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.
 
 > <hands-on-title>Quantification</hands-on-title>
@@ -411,7 +411,7 @@ In this tutorial, we are using FlashLFQ as the quantitation tool. The user can c
 >
 {: .question}
 
-## *Filtering peptides that are less than 50 amino acids*
+## Filtering peptides that are less than 50 amino acids
 
 > <hands-on-title>Extracting peptides<50 amino acids</hands-on-title>
 > This is a data manipulation tool. Here, we select those peptides with less than 50 amino acids in length.
@@ -431,7 +431,7 @@ In this tutorial, we are using FlashLFQ as the quantitation tool. The user can c
 {: .hands_on}
 
 
-## *Manipulating text for metaQuantome*
+## Manipulating text for metaQuantome
 
 > <hands-on-title>Text manipulation for metaQuantome intensity file</hands-on-title>
 > Regex Find And Replace goes line by line through the input file and will remove any patterns specified by the user and replace them with expressions also specified by the user. In this case, Regex Find And Replace is being used on a FlashLFQ output file and manipulating the header to make it compatible with metaQuantome along with completely removing the N-terminus and C-terminus tag in the peptide sequences.
@@ -455,10 +455,10 @@ In this tutorial, we are using FlashLFQ as the quantitation tool. The user can c
 >
 {: .hands_on}
 
-# **Functional and Taxonomy annotation**
+# Functional and Taxonomy annotation
 
 
-## *Unipept* for taxonomy annotation
+## Unipept for taxonomy annotation
 
 Unipept {% cite Mesuere2018 %} is used again to match tryptic peptides and find the taxonomy and lowest common ancestor of each peptide.
 
@@ -506,7 +506,7 @@ The JSON output from the Taxonomy can be visualized using the visualize option a
 ![Output](../../images/UnipeptJSONoutput.png){: width="75%"}
 
 
-## *Unipept* for Functional annotation
+## Unipept for Functional annotation
 
 Unipept is used to match tryptic peptides and find the taxonomy and Functional annotation of the peptides. Unipept is used to match sample tryptic peptides to proteins using a fast-matching algorithm. Although Unipept can be accessed and used through the web page, the use of Unipept on Galaxy allows the production of output datasets including the peptide information to be used in sequential steps. Unipept requires a list containing the peptide sequences which was generated by Query Tabular.
 
@@ -534,7 +534,7 @@ Unipept is used to match tryptic peptides and find the taxonomy and Functional a
 >
 {: .hands_on}
 
-## *Extracting EC values*
+## Extracting EC values
 
 > <hands-on-title>Extract EC numbers</hands-on-title>
 > The cut tool cuts out specific columns from the dataset. In this case, the cut tool is being used to extract columns 1 (peptide) and 3 (EC number) from the dataset peptinfo EC.tsv output. This is a manipulation tool for metaQuantome's convenience.
@@ -546,7 +546,7 @@ Unipept is used to match tryptic peptides and find the taxonomy and Functional a
 {: .hands_on}
 
 
-## *Filtering confident peptides*
+## Filtering confident peptides
 
 Query Tabular is a tool that can load tabular data into a SQLite database. This step precedes UniPept, as a list containing the peptide sequences must be generated. In this step a list of gene ontology (GO) terms is being generated.
 
@@ -577,7 +577,7 @@ Query Tabular is a tool that can load tabular data into a SQLite database. This 
 {: .hands_on}
 
 
-## *Removing Hashtag from output*
+## Removing Hashtag from output
 
 This step is to remove the hashtag from the Peptide header in the Unipept output.
 
@@ -593,7 +593,7 @@ This step is to remove the hashtag from the Peptide header in the Unipept output
 {: .hands_on}
 
 
-## *Filter* - EC values
+## Filter - EC values
 
 We are using this Query tabular to rename the output that we obtained from the Cut column tool.
 
@@ -617,7 +617,7 @@ We are using this Query tabular to rename the output that we obtained from the C
 {: .hands_on}
 
 
-## *Filter* - Biological Functions
+## Filter - Biological Functions
 
 The filter tool allows restriction of the dataset using simple conditional statements. This step is used to filter out the GO terms with biological processes and the corresponding number of peptides associated with these terms.
 
@@ -635,7 +635,7 @@ The filter tool allows restriction of the dataset using simple conditional state
 
 ![Biological Processes](../../images/biologicalprocess.png){: width="60%"}
 
-## *Filter* - Cellular components
+## Filter - Cellular components
 
 This step is used to filter out the GO terms with cellular components and the corresponding number of peptides associated with these terms.
 
@@ -652,7 +652,7 @@ This step is used to filter out the GO terms with cellular components and the co
 
 ![Cellular-Component](../../images/cellularcomponent.png){: width="60%"}
 
-## *Filter* - Molecular Function
+## Filter - Molecular Function
 
 This step is used to filter out the GO terms with molecular function and the corresponding number of peptides associated with these terms.
 
@@ -668,7 +668,7 @@ This step is used to filter out the GO terms with molecular function and the cor
 
 ![Molecular-Function](../../images/molecularfunction.png){: width="60%"}
 
-# **Conclusion**
+# Conclusion
 
 
 This completes the walkthrough of the metaQuantome data creation workflow. This tutorial is a guide to have datasets that are metaQuantome ready/compatible and can be used for metaproteomics research. We have incorporated only two conditions in this workflow but users can use as many as they want. Researchers can use this workflow with their data also, please note that the tool parameters and the workflow will be needed to be modified accordingly.

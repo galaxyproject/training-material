@@ -28,8 +28,6 @@ contributors:
 ---
 
 
-# Introduction
-
 
 Data Independent Acquisition (DIA) was introduced as a method to provide reproducible quantitative information as an improvement over the Data Dependent Acquisition (DDA) {% cite Gillet2012 %}. Despite benefits of DIA, such as increased depth of coverage and lesser missing values, the computational analysis of the complicated and multiplexed data presents challenges. Therefore, with the rise of usage of this technique, rises a need for new and robust methods of data analysis.
 
@@ -99,6 +97,7 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. For all the datasets that you have just uploaded, please rename them as follows:

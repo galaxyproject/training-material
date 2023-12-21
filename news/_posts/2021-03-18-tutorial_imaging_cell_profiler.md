@@ -1,7 +1,8 @@
 ---
 title: "New Tutorial: Object tracking using CellProfiler"
 tags: [new tutorial,imaging]
-contributors: [beatrizserrano,sunyi000,jkh1]
+contributions:
+  authorship: [beatrizserrano,sunyi000,jkh1]
 tutorial: "topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html"
 cover: "topics/imaging/images/object-tracking-using-cell-profiler/Dividing_nuclei.gif"
 coveralt: "Video of green coloured cells dividing on a dark background."

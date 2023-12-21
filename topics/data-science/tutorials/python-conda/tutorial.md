@@ -135,7 +135,7 @@ They also enable you to use a specific older version of a package for your proje
 
 > <tip-title>A Specific Package Version is Only Ever Installed Once</tip-title>
 > Note that you will not have a separate package installations for each of your projects - they will only
-ever be installed once on your system (in `$CONDA/pkgs`) but will be referenced from different environments.
+> ever be installed once on your system (in `$CONDA/pkgs`) but will be referenced from different environments.
 {: .tip}
 
 ### Managing Conda Environments

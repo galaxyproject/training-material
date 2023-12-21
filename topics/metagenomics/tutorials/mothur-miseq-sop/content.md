@@ -81,13 +81,13 @@ weight observed during the first 10 dpw affected the stability microbiome compar
 
 ![Experiment setup](../../images/experiment_setup.png)
 
-To speed up analysis for this tutorial, we will use only a subset of this data. We will look at a single mouse at 10 different
-time points (5 early, 5 late). In order to assess the error rate of the analysis pipeline and experimental setup, the Schloss lab
+To speed up analysis for this tutorial, we will use only a subset of this data. We will look at a single mouse at 20 different
+time points (10 early, 10 late). In order to assess the error rate of the analysis pipeline and experimental setup, the Schloss lab
 additionally sequenced a mock community with a known composition (genomic DNA from 21 bacterial strains). The sequences used
 for this mock sample are contained in the file `HMP_MOCK.v35.fasta`
 
 > <comment-title>Dataset naming scheme</comment-title>
-> For this tutorial, you are given 10 pairs of files. For example, the following pair of files:<br />
+> For this tutorial, you are given 20 pairs of files. For example, the following pair of files:<br />
 >  `F3D0_S188_L001_R1_001.fastq`<br />
 >  `F3D0_S188_L001_R2_001.fastq`
 >
@@ -199,7 +199,7 @@ convention, so that our tools will know which files belong together. We do this 
 >
 > 2. Select all the FASTQ files (40 in total)
 >    - **Tip:** type `fastq` in the search bar at the top of your history to filter only the FASTQ files; you can now use the `All` button at the top instead of having to individually select all 40 input files.
->    - Click on **for all selected..**
+>    - Click on **All 40 selected**
 >    - Select **Build List of Dataset Pairs** from the dropdown menu
 >
 >    In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
@@ -301,10 +301,8 @@ Next, we want to improve the quality of our data. To this end we will run a work
 > <hands-on-title>Perform data cleaning</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow1_quality_control.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga" title="Quality Control" %}
 >
 > 2. Run **Workflow 1: Quality Control** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -701,10 +699,8 @@ this chimera removal using the `VSEARCH` algorithm {% cite Rognes2016 %} that is
 > <hands-on-title>Clean Aligned sequences and Chimera Removal</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow2_data_cleaning.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow2_data_cleaning.ga" title="Data Cleaning and Chimera Removal" %}
 >
 > 2. Run **Workflow 2: Data Cleaning and Chimera Removal** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -805,10 +801,8 @@ and want to remove them from our dataset.
 > <hands-on-title>Taxonomic Classification and removal of non-bacterial sequences</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_classification.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow3_classification.ga" title="Taxonomic Classification" %}
 >
 > 2. Run **Workflow 3: Classification** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -986,7 +980,7 @@ That is pretty good! The error rate is only 0.0065%! This gives us confidence th
 are also of high quality, and we can continue with our analysis.
 
 
-### Cluster mock sequences into OTUs
+## Cluster mock sequences into OTUs
 
 We will now estimate the accuracy of our sequencing and analysis pipeline by clustering the Mock sequences into OTUs,
 and comparing the results with the expected outcome.
@@ -1005,10 +999,8 @@ a clustering is derived using the OptiClust algorithm:
 > {% if include.short %}
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow4_mock_otu_clustering.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow4_mock_otu_clustering.ga" title="Mock OTU Clustering" %}
 >
 > 2. Run **Workflow 4: Mock OTU Clustering** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -1111,7 +1103,7 @@ We will now repeat the OTU clustering we performed on our mock community for our
 
 {% else %}
 
-### Remove Mock Sample
+## Remove Mock Sample
 
 Now that we have cleaned up our data set as best we can, and assured ourselves of the quality of our sequencing
 pipeline by considering a mock sample, we are almost ready to cluster and classify our real data. But
@@ -1129,7 +1121,7 @@ the **Remove.groups** tool:
 >
 {: .hands_on}
 
-### Cluster sequences into OTUs
+## Cluster sequences into OTUs
 
 There are several ways we can perform clustering. For the Mock community, we used the traditional approach of
 using the **Dist.seqs** and **Cluster** tools. Alternatively, we can also use the **Cluster.split** tool. With
@@ -1147,10 +1139,8 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 > {% if include.short %}
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow5_otu_clustering.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow5_otu_clustering.ga" title="OTU Clustering" %}
 >
 > 2. Run **Workflow 5: OTU Clustering** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -1337,10 +1327,8 @@ We will use a plotting tool to visualize the rarefaction curves, and use **Summa
 > <hands-on-title>Alpha Diversity</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow6_alpha_diversity.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow6_alpha_diversity.ga" title="Alpha Diversity Analysis" %}
 >
 > 2. Run **Workflow 6: Alpha Diversity** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -1479,10 +1467,8 @@ In the following workflow we will:
 > <hands-on-title>Beta Diversity</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow7_beta_diversity.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow7_beta_diversity.ga" title="Beta Diversity Analysis" %}
 >
 > 2. Run **Workflow 7: Beta Diversity** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -1661,13 +1647,13 @@ taxonomy files. In the following exercise, we will create a Krona plot with per-
 > >
 > > <br> The final result should look something like this (switch between samples via the list on the left): <br><br>
 > >
-> > <iframe id="krona" src="krona_multisample.html" frameBorder="0" width="100%" height="900px"> ![Krona](../../images/krona_multisample.png) </iframe>
+> > <iframe id="krona" src="krona_multisample.html" frameBorder="0" width="100%" height="900px"></iframe>
 > >
 > {: .solution }
 {: .question}
 
 
-
+<!--
 ## Phinch
 
 We may now wish to further visualize our results. We can convert our *shared* file to the more widely used `biom` format and
@@ -1702,7 +1688,7 @@ view it in a platform like [Phinch](http://www.phinch.org/).
 > > This file can also be visualized in Phinch2, but requires installation of Phinch to your local machine
 > {: .comment}
 {: .hands_on}
-
+-->
 
 # Conclusion
 

@@ -32,7 +32,7 @@ contributors:
 ---
 
 # Descripción General
-{:.no_toc}
+
 * Esta es una breve introducción a la interfaz de usuario de Galaxy -  La página web con la que vas a interactuar.
 * En este tutorial vamos a cubrir tareas clave en Galaxy: cargar archivos, uso de herramientas y visualización de historiales.
 
@@ -306,6 +306,5 @@ Tu ventana principal de Galaxy mostrará el historia actual como "Nuevo-Analisis
 Puedes regresar a la página "View all histories" en cualquier momento para cambiar de historial.
 
 # Conclusión
-{:.no_toc}
 
 {% icon trophy %} ¡Bien hecho! Has completado el tutorial de Breve introducción a Galaxy, donde aprendiste a nombrar un historial, cargar un archivo, utilizar una herramienta y visualizar los resultados. Hay tutoriales adicionales disponibles para una introducción más detallada a las funciones de Galaxy.

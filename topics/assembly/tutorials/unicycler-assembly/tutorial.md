@@ -6,6 +6,7 @@ zenodo_link: "https://doi.org/10.5281/zenodo.940733"
 level: Introductory
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "I have short reads and long reads. How do I assemble a genome?"
 objectives:
@@ -70,8 +71,7 @@ There are 12,738 [2d-reads](http://www.nature.com/nmeth/journal/v12/n4/fig_tab/n
 You can see that there many reads under the second peak with median of approximately 7.5 kb.
 
 > <warning-title>Oxford Nanopore Data Format</warning-title>
-> Oxford Nanopore machines output
- data in [fast5](http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/) format that contains additional information besides sequence data. In this tutorial we assume that this data is *already* converted into [fastq](https://en.wikipedia.org/wiki/FASTQ_format). An additional tutorial dedicated to handling fast5 datasets will be developed shortly.
+> Oxford Nanopore machines output data in [fast5](http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/) format that contains additional information besides sequence data. In this tutorial we assume that this data is *already* converted into [fastq](https://en.wikipedia.org/wiki/FASTQ_format). An additional tutorial dedicated to handling fast5 datasets will be developed shortly.
 {: .warning}
 
 
@@ -165,6 +165,7 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
@@ -268,7 +269,7 @@ Let's look at the entire assembly and its annotation in the genome browser. We c
 
 Visualization requires a local installation of IGV. If you have IGV installed - just start it. If you don't - read on.
 
-#### Starting IGV
+### Starting IGV
 
 Go to IGV [download page](http://software.broadinstitute.org/software/igv/download) and select one of the options. The one I would try first would be **Java Web Start**. Simply click the **Launch** button for 10 GB distribution.
 

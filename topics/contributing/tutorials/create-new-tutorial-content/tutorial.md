@@ -21,12 +21,13 @@ contributions:
   editing:
   - bgruening
   - shiltemann
+  funding:
+  - gallantries
 abbreviations:
   API: Application Programming Interface
   JSON: JavaScript Object Notation
 ---
 
-# Introduction
 
 Once we have set up the infrastructure, we are ready to write the tutorial.
 
@@ -192,15 +193,15 @@ All tutorials and slides must give credit to all contributors. This can be any t
    To define a funding body in the `CONTRIBUTORS.yaml` there are a few extra fields available:
 
    ```yaml
-   erasmusplus:
-     name: Erasmus+ Programme
+   gallantries:
+     name: Gallantries Project
      joined: 2020-09
      avatar: "https://www.erasmusplus.nl/assets/images/logo.png"
      github: false
      funder: true
      funding_id: 2020-1-NL01-KA203-064717
      funding_statement: |
-        This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+        This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
         ![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)
    ```
 
@@ -283,6 +284,18 @@ The generated tutorial is structured with:
 >
 {: .hands_on}
 
+## Self Study Tutorials
+
+By following all of the guidelines in this file you can be sure that your tutorial will be optimised for self-study.
+The GTN framework encourages the use of snippets, and PTDK ensures tutorials have fully detailed parameters learners should configure.
+If you make use of snippets in appropriate places, learners can easily follow a tutorial despite different skill levels with Galaxy.
+
+Additionally use of [Question and Solution boxes](#questions-and-solutions-boxes) can ensure that students can self-check their understanding and progress as they progress through the tutorial.
+Generally we recommend one or more questions (and associated correct solutions!) after every hands-on box (which might have a one or more steps to follow.)
+These questions will let students be sure their work is correct before they proceed too far.
+As such you should design your questions carefully in order to catch common and likely failure modes that learners may encounter.
+If a student might forget to select a less-common or deeply-nested parameter, be sure that your question following that hands on tests that properly, and if possible explain that in the solutions.
+
 ## Adding images with captions
 
 To add an image in Markdown file, we need to use the markdown syntax for this: {% raw %}`!​[proper alt text describing the image for visually impaired learners](../../images/image.png)`{% endraw %}.
@@ -308,8 +321,7 @@ We can also cross-reference images inside our Markdown with an anchor. For examp
 > should be functional; `figcaption` descriptions should be editorial or
 > illustrative.**
 >
-> [*via thoughtbot.com*](https://thoughtbot.com/blog/alt-vs-figcaption)
-{: .quote}
+{: .quote cite="https://thoughtbot.com/blog/alt-vs-figcaption" author="thoughtbot.com"}
 
 As an example for this image:
 
@@ -386,6 +398,27 @@ The rendered table is then given as a minimum-width and centred matrix:
 > | Feat2 | 1    | 2    | 3    |
 > | Feat3 | 2    | 3    | 4    |
 {: .matrix}
+
+## Internally linking to other training material
+
+If you want to link to other training material within your text, please use the {%raw%}`{​% link path/to/file.ext %​}`{%endraw%} tag:
+
+{%raw%}
+```markdown
+[link text]( {% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %} )
+```
+{%endraw%}
+
+(Note the `.md` extension, and not `.html`, always provide the file name here, it will automatically be converted to the correct link)
+
+If you want to link to a specific section in a tutorial using an anchor (e.g. `#getting-started`), place it outside of the {%raw%}`{​% link %​}`{%endraw%} tag:
+
+{%raw%}
+```markdown
+[link text]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}#section-name)
+```
+{%endraw%}
+
 
 # Improving the learning experience with Boxes
 
@@ -569,7 +602,7 @@ which, when rendered, look like:
 >      - *"param1"*: `42`
 {: .hands_on}
 
-## **Questions** and **solution** boxes
+## **Questions** and **Solutions** boxes
 
 Questions can be added to force trainees to think about what they are currently doing, and to put things in perspective.
 They can also help the instructors by exposing and clarifying common scenarios, errors, or applications.
@@ -610,6 +643,8 @@ Questions should be quick to answer. You can directly ask a question and expect 
 With well chosen wrong answers, MCQs can do much more than just measure how much someone knows, such as exposing common misconceptions and mistakes.
 
 In the box below, initially hidden, we add the correct answer and possibly any additional explanation. Self-trainees can then check the solution and its explanation.
+
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-selfstudy.md %}
 
 
 ## **Tips** box
@@ -818,6 +853,28 @@ Rendered:
 > ```
 {: .code-out}
 
+## **Quote** boxes
+
+{% raw %}
+```markdown
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra" author="Yogi Berra"}
+```
+{% endraw %}
+
+Rendered:
+
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra" author="Yogi Berra"}
+
+The citation and author parameters are both optional. If provided the `cite` key must be a URL.
+
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra"}
+
+> If you don't know where you're going, you might not get there.
+{: .quote author="Yogi Berra"}
+
 # Additional Features to Improve Learning
 
 Here we cover additional features you can use throughout your tutorials to improve the learning experience.
@@ -863,10 +920,48 @@ The alternative is to figure out the ID for the tool you want to use:
 ![Finding the tool ID](../../images/tool-id.png)
 
 
+## Workflows
+
+In some tutorials you aren't as interested in teaching users the individual steps for analysing data, but rather want to focus on some downstream aspects of analysis, or to showcase the best practice workflows that are already available for a user to use! In those cases it can be useful to have a nicer way of inviting the user to execute those steps.
+
+### WorkflowHub
+
+You can use a dedicated snippet to invite users to run a WorkflowHub workflow:
+
+{% raw %}
+```markdown
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" %}
+```
+{% endraw %}
+
+Rendered:
+
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" %}
+
+Note that it links to a specific workflow, on any Galaxy server. When this tutorial is opened from within the Tutorial Mode, that link will change to one on the current server, removing the intermediate step.
+
+### Dockstore
+
+Please note that the dockstore ID should be provided without the `#` character.
+
+{% raw %}
+```markdown
+{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+```
+{% endraw %}
+
+Rendered:
+
+{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+
+This snippet has the same behaviour, it will use my.galaxy.training links to make them server independent, but in Tutorial Mode it will open on the current server.
+
 
 ## FAQs (snippets)
 
 Many common questions or instructions may be useful to share between different tutorials. For example instructions on how to start a new history or importing data. To make these types of snippets easier to re-use and avoid duplication, they are available in the form of *snippets*.
+
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching.md %}
 
 ### Finding snippets
 These are available in folders named `faqs`, either at the project level, topic level, or tutorial level.
@@ -914,6 +1009,7 @@ or without a box altogether:
 {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 
 
+
 ### Creating new FAQs/snippets
 
 Do you want to include something in your tutorial that you think might be useful in other tutorials as well? Or are you answering a frequently asked question? Consider creating a snippet for it
@@ -940,6 +1036,8 @@ Here you can write the snippet / answer to the FAQ in Markdown
 {% assign kid_key = "FAQ Schema" %}
 {% assign kid_val = site.data['schema-faq'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-faqs.md %}
 
 ### FAQ pages
 
@@ -992,11 +1090,14 @@ To use these icons, take the name of the icon, 'details' in this example, and wr
 {% raw %}{% icon details %}{% endraw %}
 ```
 
+Some icons have multiple aliases, any may be used, but we'd suggest trying to choose the most semantically appropriate one in case Galaxy later decides to change the icon.
+
 <div class="row">
-{% for icon in site["icon-tag"] %}
+{% assign icon_groups = site['icon-tag'] | group_icons %}
+{% for icon in icon_groups %}
 	<div class="col-md-2 col-sm-3" style="text-align: center">
-		<div style="font-size: 400%">{% icon_var icon[0] %}</div>
-		<div>{{ icon[0] }}</div>
+		<div style="font-size: 400%">{% icon_var icon[0][0] %}</div>
+		<div>{% for z in icon[0] %}{{ z }}{%unless forloop.last%},{%endunless%} {% endfor %}</div>
 	</div>
 {% endfor %}
 </div>
@@ -1101,6 +1202,8 @@ The branch can be selected via URL parameter e.g. for courses, to prevent users 
 - [See this page with Ananas](?gtn-cyoa=Ananas#choose-your-own-tutorial)
 - [See this page with Avocados](?gtn-cyoa=Avocados#choose-your-own-tutorial)
 
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-cyoa.md %}
+
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
 
@@ -1187,7 +1290,7 @@ To use this system, you need to take care of a few things:
 
 - Do **not** use hands-on boxes for segments that should be executed (code needs to be left aligned!)
 - Do **not** use snippets
-- Do **not** use icons `{% raw %}{% icon X %}{% endraw %}`
+- Do **not** use icons `{% raw %}{% icon galaxy-eye %}{% endraw %}`
 - Do not use a terminal or prompt character (that would be included in the execution.)
 - Avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
 
@@ -1263,7 +1366,6 @@ If you have created a new tutorial, please also consider writing a [GTN news pos
 
 
 ## Footnotes (Rendered)
-
 
 <script type="text/javascript">
 // Replace all ZWSPs with nothing, to prevent users copying them and them not working.

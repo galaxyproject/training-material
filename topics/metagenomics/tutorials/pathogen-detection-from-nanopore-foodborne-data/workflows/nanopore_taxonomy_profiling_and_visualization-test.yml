@@ -1,0 +1,20 @@
+- doc: Test outline for nanopore_taxonomy_profiling_and_visualization
+  job:
+    Nanopore Preprocessed reads collection:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: Barcode11
+        location: https://zenodo.org/record/8109717/files/Nanopore Preprocessed reads collection_Barcode11.fastq.gz
+        filetype: fastq.gz
+      - class: File
+        identifier: Barcode10
+        location: https://zenodo.org/record/8109717/files/Nanopore Preprocessed reads collection_Barcode10.fastq.gz
+        filetype: fastq.gz
+    Sample Metadata: null
+  outputs:
+    Kraken2 with PlusPF database output report:
+      element_tests:
+        Barcode10:
+          path: test-data-taxonomy/Kraken2 with PlusPF database output report_Barcode10.tabular

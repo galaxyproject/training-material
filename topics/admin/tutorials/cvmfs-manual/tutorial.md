@@ -32,14 +32,11 @@ From the Cern website:
 
 > The CernVM File System provides a scalable, reliable and low-maintenance software distribution service. It was developed to assist High Energy Physics (HEP) collaborations to deploy software on the worldwide-distributed computing infrastructure used to run data processing applications. CernVM-FS is implemented as a POSIX read-only file system in user space (a FUSE module). Files and directories are hosted on standard web servers and mounted in the universal namespace /cvmfs."
 >
-> -- [https://cernvm.cern.ch/portal/filesystem](https://cernvm.cern.ch/portal/filesystem)
-{: .quote}
+{: .quote cite="https://cernvm.cern.ch/portal/filesystem"}
 
-A slideshow presentation on this subject can be found [here]({% link topics/admin/tutorials/cvmfs/slides.html %}). More details on the usegalaxy.org (Galaxy Main's) reference data setup and CVMFS system can be found [here](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data)
+[A slideshow presentation on this subject]({% link topics/admin/tutorials/cvmfs/slides.html %}) is available. More [details are available on usegalaxy.org (Galaxy Main's) reference data setup](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data) and CVMFS system.
 
-There are two sections to this exercise. The first shows you how to use Ansible to setup and configure CVMFS for Galaxy. The second shows you how to do everything manually. It is recommended that you use the Ansible method. The manual method is included here mainly for a more in depth understanding of what is happening.
-
-If you really want to perform all these tasks manually, go [here](#cvmfs-and-galaxy-without-ansible), otherwise just follow along.
+This exercise describes a manual process to install and configure CVMFS and Galaxy's access to CVMFS. For a tutorial that uses Ansible to perform these tasks, see [the Reference Data with CVMFS tutorial]({% link topics/admin/tutorials/cvmfs/tutorial.md %}).
 
 > <agenda-title></agenda-title>
 >
@@ -98,6 +95,10 @@ The configuration is not complex for CVMFS:
 >    ```
 >
 >    This tells CVMFS to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance's geo-location to choose the best CVMFS repo server to connect to. You can use the `cvmfs_quota_limit` role variable to control this setting.
+>
+> > <tip-title>What is a good size for CVMFS_QUOTA_LIMIT?</tip-title>
+> > In production UseGalaxy.org.au uses 100GB, different sites have different needs and you can make your cache smaller depending on your usage. E.g. if your users only use one dataset from the reference data (e.g. just hg38) then perhaps you don't need such a large cache.
+> {: .tip}
 >
 > 2. Create a `/etc/cvmfs/domain.d/galaxyproject.org.conf` file with the following contents:
 >

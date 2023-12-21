@@ -24,15 +24,14 @@ requirements:
         - cheminformatics
 tags:
 - covid19
+- one-health
 contributors:
 - simonbray
 
 ---
 
-# Introduction
 
-
-This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described [here](https://covid19.galaxyproject.org/cheminformatics).
+This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described [in our dedicated site](https://covid19.galaxyproject.org/cheminformatics).
 
 In this tutorial, you will perform protein-ligand docking to MPro using rxDock ({% cite rdock %}), a version of the popular rDock software, and score the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.
 
@@ -49,7 +48,7 @@ In this tutorial, you will perform protein-ligand docking to MPro using rxDock (
 
 Early in March 2020, the Diamond Light Source completed a successful fragment screen on MPro, which provided 55 fragment hits (see their [press release](https://www.diamond.ac.uk/covid-19/for-scientists/Main-protease-structure-and-XChem.html) here). In an effort to identify candidate molecules for binding, InformaticsMatters, the XChem group and the European Galaxy team joined forces to construct and execute a Galaxy workflow for performing and evaluating molecular docking on a massive scale.
 
-An initial list of 41,000 candidate molecules was assembled by using the Fragalysis fragment network to elaborate from the initial fragment hits, as described [here](https://diamondlightsource.atlassian.net/wiki/spaces/FRAG/pages/8323192/The+Astex+Fragment+network). These were used as inputs for the docking and scoring workflow. The workflow consists of the following steps, each of which was carried out using tools installed on the European Galaxy server:
+An initial list of 41,000 candidate molecules was assembled by using the Fragalysis fragment network to elaborate from the initial fragment hits, as described [in their documentation](https://diamondlightsource.atlassian.net/wiki/spaces/FRAG/pages/8323192/The+Astex+Fragment+network). These were used as inputs for the docking and scoring workflow. The workflow consists of the following steps, each of which was carried out using tools installed on the European Galaxy server:
 1. Charge enumeration of the 41,000 candidate molecules selected based on the fragment hits.
 2. Generation of 3D conformations based on SMILES strings of the candidate molecules.
 3. Docking of molecules into each of the MPro structures using rxDock.
@@ -114,7 +113,7 @@ Before docking, the candidate ligands need to be prepared for docking with the f
 
 > <details-title>Differences with the original study</details-title>
 >
-> This stage is carried out as described here, except of course with the full set of 42,000 compounds. See [here](https://covid19.galaxyproject.org/cheminformatics/1-DockingPrep/) for more details.
+> This stage is carried out as described here, except of course with the full set of 42,000 compounds. See [the docking prep workflow](https://covid19.galaxyproject.org/cheminformatics/1-DockingPrep/) for more details.
 {: .details}
 
 ## Charge enumeration
@@ -195,7 +194,7 @@ The active site also needs to be prepared for docking, using the following steps
 
 > <details-title>Differences with the original study</details-title>
 >
-> This stage was carried out as described here. However, it was repeated for each of the fragment hit structures, not just the `Mpro-x0195_0_apo-desolv.pdb` file used here. See [here](https://covid19.galaxyproject.org/cheminformatics/2-ActiveSitePrep/) for more details.
+> This stage was carried out as described here. However, it was repeated for each of the fragment hit structures, not just the `Mpro-x0195_0_apo-desolv.pdb` file used here. See [the active site prep workflow](https://covid19.galaxyproject.org/cheminformatics/2-ActiveSitePrep/) for more details.
 {: .details}
 
 ## Convert protein structure to MOL2 format
@@ -271,7 +270,7 @@ Docking and scoring are now performed, using the following steps: 1) docking usi
 > 2. 25 different poses were generated per candidate, rather than 5, as in this tutorial.
 > 3. Because of the large number of poses to score (more than a million), the scoring steps were parallelized by splitting into collections. This is skipped in the tutorial.
 > 4. The entire process was repeated 17 times, using a different fragment hit as the receptor structure each time.
-> See [here](https://covid19.galaxyproject.org/cheminformatics/3-Docking/) and [here](https://covid19.galaxyproject.org/cheminformatics/3-Docking/) for more details. A full list of Galaxy histories generated is listed [here](https://covid19.galaxyproject.org/cheminformatics/Histories/).
+> See [the Docking](https://covid19.galaxyproject.org/cheminformatics/3-Docking/) for more details. A full list of Galaxy histories generated is listed [the histories page](https://covid19.galaxyproject.org/cheminformatics/Histories/).
 {: .details}
 
 ## Docking with rxDock

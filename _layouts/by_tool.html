@@ -1,0 +1,36 @@
+---
+layout: base
+---
+
+<h1>Tutorials using {{ page.short_tool }}</h1>
+<section>
+	<div class="stats">
+		<div class="row">
+			<div class="col-md-3">
+				<h2>Servers Offering this Tool</h2>
+				<a href="https://usegalaxy.eu/?tool_id={{ page.observed_tool_ids[0][0] }}">UseGalaxy.eu ({{ page.observed_tool_ids[0][1] }})</a>
+				<p class="text-muted">This is a guess, we are not currently checking if that is actually present.</p>
+
+				<h2>Observed Tool Versions</h2>
+				<ul>
+					{% for tool in page.observed_tool_ids %}
+					<li>{{ tool[1] }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+
+			<div class="col-md-9">
+				<ul>
+					{% for tutorial in page.tutorial_list %}
+					<li>
+						{{ tutorial[2] }} /
+						<a href="{{ site.baseurl }}{{ tutorial[3] }}">
+						{{ tutorial[1] }}
+						</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>

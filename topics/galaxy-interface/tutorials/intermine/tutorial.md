@@ -16,8 +16,6 @@ contributors:
 subtopic: analyse
 ---
 
-# Introduction
-
 
 InterMine ({% cite Smith2012 %}) is a well-establish platform to integrate and access life sciences data.
 It provides the integrated data via a web interface and RESTful web services.
@@ -78,6 +76,7 @@ You have now exported your query results from InterMine to Galaxy.
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 2. Rename the dataset to `GenesLocatedOnChromosome4`

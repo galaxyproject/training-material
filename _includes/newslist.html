@@ -2,7 +2,7 @@
 {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
 <div class="newstable">
 <div class="list-group">
- {% assign newsitems = site.categories['news'] | sort: date | reverse %}
+ {% assign newsitems = site.categories['news'] | sort: date | reverse | where:"layout", "news" %}
  {% for post in newsitems limit: 5 %}
  <a class="list-group-item" href="{% if post.external %}{{post.link}}{% else %}{{ post.url | prepend: site.baseurl }}{% endif %}">
    <p class="list-group-item-text">{% if post.start %}{{post.start | date: data_format }}{% if post.end %} - {{post.end | date: date_format}}{% endif %}{% else %}{{ post.date | date: date_format }}{% endif %}</p>

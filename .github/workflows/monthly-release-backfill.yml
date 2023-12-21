@@ -1,0 +1,84 @@
+name: "[Archive] Backfill"
+
+on:
+  workflow_dispatch:
+    inputs:
+      selected_tag:
+        type: string
+        description: Target tag, this tag MUST ALREADY EXIST.
+        required: true
+
+jobs:
+  setup:
+    if: github.repository_owner == 'galaxyproject'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: "${{ github.event.inputs.selected_tag }}"
+          fetch-depth: 0
+
+      # BEGIN Dependencies
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+          architecture: 'x64'
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '19'
+      - uses: actions/cache@v2
+        with:
+          path: |
+            vendor/bundle
+            ~/.cache/pip
+            ~/.npm
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-
+            ${{ runner.os }}-gems-
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config # for node
+          gem install bundler
+          pip install pyyaml
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          npm install
+          bundle pristine ffi
+      # END Dependencies
+
+      - name: Configure AWS credentials from GTN account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Build Site
+        run: |
+          git tag -l
+          git checkout ${SOURCE_TAG}
+          gem install bundler
+          bundle config path vendor/bundle
+          sed -i s"|^baseurl: .*|baseurl: '/archive/${SOURCE_TAG}'|g" _config.yml
+          sed -i s"|^github_repository_branch: .*|github_repository_branch: '${SOURCE_TAG}'|g" _config.yml
+          sed -i s"|^title: .*|title: 'GTN Archive ${SOURCE_TAG}'|g" _config.yml
+          npm install
+          make rebuild-search-index ACTIVATE_ENV=pwd
+          cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
+          curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
+          curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
+          JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+        env:
+          SOURCE_TAG: ${{ github.event.inputs.selected_tag }}
+          GTN_FORK: ${{ github.repository_owner }}
+
+      - name: Deploy 🚀
+        run: |
+          pip install awscli
+          ./bin/publish-archive
+        env:
+          SOURCE_TAG: ${{ github.event.inputs.selected_tag }}

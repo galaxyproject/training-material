@@ -3,13 +3,14 @@ layout: tutorial_hands_on
 
 title: "Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition"
 tags:
+    - microgalaxy
     - Nanopore data analysis
     - Pathogens detection
     - Phylogenetic tree
     - Heatmap
     - cyoa
 level: Introductory
-zenodo_link: "https://zenodo.org/record/7567733"
+zenodo_link: "https://zenodo.org/record/7593928"
 questions:
     - What are the preprocessing steps to prepare ONT sequencing data for further analysis?
     - How to identify pathogens using sequencing data?
@@ -26,35 +27,38 @@ contributions:
    authorship:
     - bebatut
     - EngyNasr
+    - paulzierep
    editing:
     - hrhotz
     - wm75
+   funding:
+    - gallantries
+    - eosc-life
 ---
 
-# Introduction
 
-Food contamination with pathogens are a major burden on our society. In the year 2019, foodborne pathogens caused 137 hospitalisations in Germany [(BVL 2019)](https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&v=4). Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to _Salmonella spp._ followed by _Campylobacter spp._ and Noroviruses, as studied by the [__Food safety - World Health Organization (WHO)__](https://www.who.int/publications/i/item/9789241565165).
+Food contamination with pathogens is a major burden on our society. In the year 2019, foodborne pathogens caused 137 hospitalisations in Germany [(BVL 2019)](https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&v=4). Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to _Salmonella spp._ followed by _Campylobacter spp._ and Noroviruses, as studied by the [__Food safety - World Health Organization (WHO)__](https://www.who.int/publications/i/item/9789241565165).
 
-During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and track the contamination source. By default, the [__European Regulation (EC)__](https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2005:338:0001:0026:EN:PDF) follows ISO standards to detect bacterial pathogens in food: pathogens are detected and identified by **stepwise cultures** on selective media and/or **targeting specific genes with real-time PCRs**. The current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA) to characterize the detected strains. These techniques have some disadvantages.
+During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and identify the contamination source. By default, the [__European Regulation (EC)__](https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2005:338:0001:0026:EN:PDF) follows ISO standards to detect bacterial pathogens in food: pathogens are detected and identified by **stepwise cultures** on selective media and/or **targeting specific genes with real-time PCRs**. The current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA) to characterize the detected strains. These techniques have some disadvantages.
 
 **Whole Genome Sequencing** (WGS) has been proposed as an alternative. With just one sequencing run, we can:
 - detect all genes
 - run phylogenetic analysis to link cases
 - get information on antimicrobial resistance genes, virulence, serotype, resistance to sanitizers, root cause, and other critical factors in one assay, including historical reference to pathogen emergence.
 
-WGS is more than a surveillance tool and was recommended by the European Centre for Disease Prevention and Control (ECDC) and the European Food Safety Authority (EFSA) for surveillance and outbreak investigation. WGS still requires isolation of the targeted pathogen, which is a time-consuming, not always straightforward, or successful process. **Sequencing methods without prior isolation could solve this issue**.
+WGS is more than a surveillance tool and was recommended by the European Centre for Disease Prevention and Control (ECDC) and the European Food Safety Authority (EFSA) for surveillance and outbreak investigation. WGS still requires isolation of the targeted pathogen, which is a time-consuming process, the execution is not always straightforward, nor the success is guaranteed. **Sequencing methods without prior isolation could solve this issue**.
 
-The evolution of sequencing techniques in the last decades has made possible the development of shotgun metagenomic sequencing, *i.e.* the **direct sequencing of all DNA present in a sample**. This approach gives an overview of the genomic composition of all cells in the sample, including the food source itself, the microbial community, and any possible pathogens and their complete genetic information, without the need for prior isolation. Several studies have demonstrated the potential of shotgun metagenomics to identify and characterize pathogens and their functional characteristics (*e.g.* virulence genes) in naturally contaminated or spiked food samples.
+The evolution of sequencing techniques in the last decades has made the development of shotgun metagenomic sequencing possible, *i.e.* the **direct sequencing of all DNA present in a sample**. This approach gives an overview of the genomic composition of all cells in the sample, including the food source itself, the microbial community, and any possible pathogens and their complete genetic information without the need for prior isolation. Several studies have demonstrated the potential of shotgun metagenomics to identify and characterize pathogens and their functional characteristics (*e.g.* virulence genes) in naturally contaminated or purposefully spiked food samples.
 
 The currently available studies used Illumina sequencing, generating short reads. Longer read lengths, generated by third-generation sequencing platforms such as Pacific Biosciences (PacBio) and Oxford Nanopore Technologies (ONT), make it **easier and more practical to identify strains with fewer reads**. MinION (from Oxford Nanopore) is a portable, real-time device for ONT sequencing. Several proof-of-principle studies have shown the **utility of ONT long-read sequencing from metagenomic samples for pathogen identification** ({% cite CIUFFREDA20211497 %}).
 
 {% snippet faqs/galaxy/sequencing_nanopore.md %}
 
-To identify and track foodborne pathogens using long-read metagenomic sequencing, different samples of potentially contaminated food (at different time points or different locations) are prepared, DNA is extracted and sequenced using MinION (ONT). The generated sequencing data need then to be processed using bioinformatics tools.
+To identify and track foodborne pathogens using long-read metagenomic sequencing, different samples of potentially contaminated food (at different time points or different locations) are prepared, DNA is extracted and sequenced using MinION (ONT). The generated sequencing data then need to be processed using bioinformatics tools.
 
-In this tutorial, we will be presenting a series of Galaxy workflows whose main goals are to
-1. **agnostically detect pathogens** (what exactly is this pathogen and what virulence factors does it carry) from data extracted directly (without prior cultivation) from a potentially contaminated sample (e.g. food like chicken, cow, etc.,) and sequenced using Nanopore
-2. **compare different samples to track** the possible source of contamination
+In this tutorial, we will be presenting a series of Galaxy workflows whose main goals are to:
+1. **agnostically detect pathogens** (What exactly is this pathogen and what virulence factors does it carry?) from data extracted directly (without prior cultivation) from a potentially contaminated sample (e.g. food like chicken, beef, etc.) and sequenced using Nanopore
+2. **compare different samples to trace** the possible source of contamination
 
 To illustrate how to process such data, we will use datasets generated by [Biolytix](https://www.biolytix.ch/) with the following approach:
 
@@ -103,11 +107,16 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 2. Add a tag to each dataset (one with `#Barcode10` and the other `#Barcode11`)
+> 2. Rename the files to `Barcode10` and `Barcode11` respectively
 >
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+> 3. Create a collection named `Samples` that includes both datasets (`Barcode10` and `Barcode11`)
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 
@@ -127,7 +136,7 @@ Before starting any analysis, it is always a good idea to assess the quality of 
 In this section we will run a Galaxy workflow that performs the following tasks with the following tools:
 1. Assess the reads quality before and after preprocessing it using [__FastQC__](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [__NanoPlot__](https://github.com/wdecoster/NanoPlot) and  [__MultiQC__](https://multiqc.info/) ({% cite Ewels2016 %})
 2. Trimming and filtering reads by length and quality using [__Porechop__](https://github.com/rrwick/Porechop) and **Fastp** ({% cite Chen2018 %})
-3. Remove all possible hosts sequences e.g. chicken, cow, etc. using [__Kraken2__](https://ccb.jhu.edu/software/kraken2/) ({% cite Wood2014 %}) with the [__Kalamari__](https://github.com/lskatz/Kalamari) database, and table manipulation tools, which are **Filter Tabular** ({% cite Johnson2018 %}) and **Filter Sequence By ID** ({% cite Cock2013 %}) to separate the sequences into host and non-host sequences before moving on, in the next section, with the non-host sequences.
+3. Remove all possible hosts sequences e.g. chicken, cow, etc. using [__Kraken2__](https://ccb.jhu.edu/software/kraken2/) ({% cite Wood2014 %}) with the [__Kalamari__](https://github.com/lskatz/Kalamari) database, and [__Krakentools: Extract Kraken Reads By ID__](https://github.com/jenniferlu717/KrakenTools/blob/master/extract_kraken_reads.py) to remove all the hosts sequences before moving on to the next section with only the non-host sequences.
 
 We will run all these steps using a single workflow, then discuss each step and the results in more detail.
 
@@ -143,20 +152,7 @@ We will run all these steps using a single workflow, then discuss each step and 
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
->    - {% icon param-files %} *"1: Nanopore reads of a sample"*: FastQ files
->
->      {% snippet faqs/galaxy/tools_select_multiple_datasets.md  %}
->
->    - *"2: Host to Remove Specifier"*: `^.*Gallus|Homo|Bos.*$`
->
->      We specify here the taxonomic names of the hosts so we can filter reads assigned to these hosts. To be generic, we remove here:
->      - Human (`Homo`)
->      - Chicken (`Gallus`)
->      - Beef (`Bos`)
->
->      If the contaminated food would be known to come from a different source and may, thus, include other host genomes, you could change the value here.
->
->    - *"5: Porechop Output format for the reads"*: `fastq.qz`
+>    - {% icon param-files %} *"1: Collection of all samples"*: `Samples` collection created from the imported Fastq.qz files
 >
 >
 {: .hands_on}
@@ -180,14 +176,12 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 
     > <hands-on-title> Initial quality assessment </hands-on-title>
     > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
-    >    - {% icon param-files %} *"Raw read data from your current history"*: both FastQ file
-    >
-    >      {% snippet faqs/galaxy/tools_select_multiple_datasets.md  %}
+    >    - {% icon param-files %} *"Raw read data from your current history"*: `Samples` collection created from the imported Fastq.qz files
     >
     > 2. {% tool [NanoPlot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters:
     >    - *"Select multifile mode"*: `batch`
     >        - *"Type of the file(s) to work on"*: `fastq`
-    >            - {% icon param-files %} *"Data input files"*: both FastQ file
+    >            - {% icon param-files %} *"Data input files"*: `Samples` collection created from the imported Fastq.qz files
     >
     >    > <comment-title></comment-title>
     >    > This step, as it does not require the results of FastQC to run, can be launched even if FastQC is not ready
@@ -198,14 +192,14 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
     </div>
 
 
-- Read trimming and filtering with **Porechop** [__Porechop__](https://github.com/rrwick/Porechop) and **Fastp** ({% cite Chen2018 %})
+- Read trimming and filtering with [__Porechop__](https://github.com/rrwick/Porechop) and **Fastp** ({% cite Chen2018 %})
 
     <div class="Long-Version" markdown="1">
 
     > <hands-on-title> Read trimming and filtering </hands-on-title>
     >
     > 1. {% tool [Porechop](toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.4) %} with the following parameters:
-    >    - {% icon param-files %} *"Input FASTA/FASTQ"*: both FastQ file
+    >    - {% icon param-files %} *"Input FASTA/FASTQ"*: `Samples` collection created from the imported Fastq.qz files
     >    - *"Output format for the reads"*: `fastq.gz`
     >
     > 2. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0) %} with the following parameters:
@@ -232,7 +226,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
     > 2. {% tool [NanoPlot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters:
     >    - *"Select multifile mode"*: `batch`
     >        - *"Type of the file(s) to work on"*: `fastq`
-    >            - {% icon param-file %} *"Data input files"*: `out1` (output of **fastp** {% icon tool %}, Multiple Input dataset the files from each tag)
+    >            - {% icon param-files %} *"files"*: outputs of **fastp** {% icon tool %}
     >
     > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
     >    - In *"Results"*:
@@ -259,7 +253,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Before trimming the file has 114,986 sequences and After trimming the file has 91,434 sequences
+> > 1. Before trimming the file has 114,344 sequences and After trimming the file has 91,434 sequences
 > > 2. The "Per base sequence quality" is globally medium: the quality score stays above 20 over the entire length of reads after trimming, while quality below 20 could be seen before trimming specially at the beginning and the end of the reads.
 > >
 > >    ![Sequence Quality](./images/fastqc_per_base_sequence_quality_plot_barcode10.png)
@@ -274,12 +268,12 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 
 ## Host read filtering
 
-Generally, we are not interested in the food (host) sequences, rather only in the pathogen itself. It is an important step to get rid of all host sequences and to only retain sequences that might include a pathogen both in order to speed up further analysis and to avoid host sequences compromising the analysis.
+Generally, we are not interested in the food (host) sequences, rather only those originating from the pathogen itself. It is an important to get rid of all host sequences and to only retain sequences that might include a pathogen, both in order to speed up further steps and to avoid host sequences compromising the analysis.
 
-In this tutorial, we know the samples come from __chicken__ meat spiked with **_Salmonella_** so we already know what will we get as a host and as a main pathogen.
+In this tutorial, we know the samples come from __chicken__ meat spiked with **_Salmonella_** so we already know what will we get as the host and the main pathogen.
 
 In this tutorial we use:
-1. Assign reads to taxon using **Kraken2** ({% cite Wood2014 %}) and **Kalamari**, a database of completed assemblies for metagenomics-related tasks used widely in contamination and host filtering
+1. Assign reads to taxa using **Kraken2** ({% cite Wood2014 %}) and **Kalamari**, a database of completed assemblies for metagenomics-related tasks used widely in contamination and host filtering
 
     <div class="Long-Version" markdown="1">
 
@@ -287,12 +281,12 @@ In this tutorial we use:
     >
     > 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} with the following parameters:
     >    - *"Single or paired reads"*: `Single`
-    >        - {% icon param-files %} *"Input sequences"*: outputs of **fastp** {% icon tool %}
+    >        - {% icon param-files %} *"Input sequences"*: collection output of **fastp** {% icon tool %}
     >
     >    - *"Print scientific names instead of just taxids"*: `Yes`
     >    - In *"Create Report"*:
     >        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
-    >        - *"Format report output like Kraken 1's kraken-mpa-report"*: `Yes`
+    >        - *"Format report output like Kraken 1's kraken-mpa-report"*: `No`
     >        - *"Report counts for ALL taxa, even if counts are zero"*: `Yes`
     >        - *"Report minimizer data"*: `Yes`
     >    - *"Select a Kraken2 database"*: `kalamari`
@@ -303,10 +297,10 @@ In this tutorial we use:
 
     > <question-title></question-title>
     >
-    > Inspect the report of **Kraken2** for `Barcode10`
+    > Inspect the report of **Kraken2** collection for `Barcode10`
     >
     > 1. What is the species of the host?
-    > 2. How many sequences of this host is found?
+    > 2. How many sequences of this host was found?
     >
     > > <solution-title></solution-title>
     > >
@@ -316,37 +310,30 @@ In this tutorial we use:
     > {: .solution}
     {: .question}
 
-2. Filter host assigned reads based on **Kraken2** assignations
+2. Filter host assigned reads based on **Kraken2** assignments
     1. Manipulate **Kraken2** classification to extract the sequence ids of all hosts sequences identified with **Kraken2**
-    2. Filter the FASTQ files to get 1 ouput with the host assigned sequences and 1 output without the host assigned reads
+    2. Filter the FASTQ files to get 1 ouput with the host-assigned sequences and 1 output without the host-assigned reads
 
     <div class="Long-Version" markdown="1">
 
-    > <hands-on-title> Host read filtering </hands-on-title>
+    > <hands-on-title> Host read filtering </hands-on-title> 
     >
-    > 1. {% tool [Filter Tabular](toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/2.0.0) %} with the following parameters:
-    >    - {% icon param-files %} *"Tabular Dataset to filter"*: `Classification` outputs of **Kraken2** {% icon tool %}
-    >    - In *"Filter Tabular Input Lines"*:
-    >        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
-    >            - *"Filter By"*: `by regex expression matching`
-    >                - *"regex pattern"*: `^.*Gallus|Homo|Bos.*$`
+    > 1. {% tool [Krakentools: Extract Kraken Reads By ID](toolshed.g2.bx.psu.edu/repos/iuc/krakentools_extract_kraken_reads/krakentools_extract_kraken_reads/1.2+galaxy1) %} with the following parameters:
+    >    - *"Single or paired reads?"*: `Single`
+    >    - {% icon param-files %} *"Results"*: `Kraken2 with Kalamri database Results` outputs of **Kraken2** {% icon tool %}
+    >    - {% icon param-files %} *"Report"*: `Kraken2 with Kalamri database Report` outputs of **Kraken2** {% icon tool %}
+    >    - *"Taxonomix ID(s) to match"*:`9031 9606 9913`
     >
-    >                  We specify here the taxonomic names of the hosts so we can filter reads assigned to these hosts. To be generic, we remove here:
-    >                  - Human (`Homo`)
-    >                  - Chicken (`Gallus`)
-    >                  - Beef (`Bos`)
+    >       We specify here the taxonomic ID of the hosts so we can filter reads assigned to these hosts. Kraken2 uses taxonomic IDs from NCBI, the IDs for a specific taxa can be found at [ncbi](https://www.ncbi.nlm.nih.gov/taxonomy). To be generic, we remove here:
+    >         - Human (`9606`)
+    >         - Chicken (`9031`)
+    >         - Beef (`9913`)
     >
-    >                  If the contiminated food come from and may include other animals, you can change the value here.
-    >
-    >                - *"action for regex match"*: `include line if pattern found`
-    >
-    > 2. {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
-    >    - {% icon param-files %} *"Sequence file to be filtered"*: outputs of **fastp** {% icon tool %}
-    >    - *"Filter using the ID list from"*: `tabular file`
-    >        - {% icon param-files %} *"Tabular file containing sequence identifiers"*: outputs of **Filter Tabular** {% icon tool %}
-    >        - *"Column(s) containing sequence identifiers"*: `c2`
-    >    - *"Output positive matches, negative matches, or both?"*: `Both positive matches (ID on list) and negative matches (ID not on list), as two files`
-    >
+    >       If the contaminated food comes from and may include other animals, you can change the value here.
+    >    - *"Invert output"*: `Yes`
+    >    - *"Output as FASTQ"*: `Yes`
+    >    - *"Include parents"*: `Yes`
+    >    - *"Include children"*: `Yes`
     {: .hands_on}
 
     </div>
@@ -354,7 +341,7 @@ In this tutorial we use:
 
 > <comment-title></comment-title>
 >
-> We will need the outputs from this section in the next one.  If yours is still running or you get an error you can go on and upload it so you can start the next workflow, the next hands-on is optional
+> We will need the outputs from this section in the next one.  If yours is still running or you get an error you can go on and upload it so you can start the next workflow, the next hands-on is optional.
 >
 > > <hands-on-title>Optional Data upload</hands-on-title>
 > >
@@ -365,7 +352,9 @@ In this tutorial we use:
 > >    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode11_Spike2b.fastqsanger
 > >    ```
 > >
-> > 2. Add tags to the datasets
+> > 2. Rename datasets to `Barcode10` and `Barcode11` respectively
+> >
+> > 3. Create a collection named `Nanopore processed sequenced reads` from the two imported datasets
 > >
 > {: .hands_on}
 {: .comment}
@@ -377,17 +366,9 @@ In this section we would like to identify the different organisms found in our s
 
 {% snippet topics/metagenomics/faqs/taxon.md %}
 
-In the previous section we ran **Kraken2** along with the **Kalamari** database, which is also a kind of taxonomy profiling but the database used is designed to include all possible host sequences. In the following part, we run **Kraken2** again but this time with one of its built-in databases **Standard PlusPF**, which can give us more insight into pathogen candidate species than **Kalamari**. You can test this yourself by comparing reports of both **Kraken2** runs.
+In the previous section we ran **Kraken2** along with the **Kalamari** database, which is also a kind of taxonomy profiling but the database used is designed to include all possible host sequences. In the following part, we run **Kraken2** again; but this time with one of its built-in databases, **Standard PlusPF**, which can give us more insight into pathogen candidate species than **Kalamari**. You can test this yourself by comparing reports of both **Kraken2** runs.
 
-> <details-title>Kraken2 and the k-mer approach for taxonomy classification</details-title>
->
-> In the $$k$$-mer approach for taxonomy classification, we use a database containing DNA sequences of genomes whose taxonomy we already know. On a computer, the genome sequences are broken into short pieces of length $$k$$ (called $$k$$-mers), usually 30bp.
->
-> **Kraken** examines the $$k$$-mers within the query sequence, searches for them in the database, looks for where these are placed within the taxonomy tree inside the database, makes the classification with the most probable position, then maps $$k$$-mers to the lowest common ancestor (LCA) of all genomes known to contain the given $$k$$-mer.
->
-> ![Kraken2](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kraken sequence classification algorithm. To classify a sequence, each k-mer in the sequence is mapped to the lowest common ancestor (LCA, i.e. the lowest node) of the genomes that contain that k-mer in the database. The taxa associated with the sequence's k-mers, as well as the taxa's ancestors, form a pruned subtree of the general taxonomy tree, which is used for classification. In the classification tree, each node has a weight equal to the number of k-mers in the sequence associated with the node's taxon. Each root-to-leaf (RTL) path in the classification tree is scored by adding all weights in the path, and the maximal RTL path in the classification tree is the classification path (nodes highlighted in yellow). The leaf of this classification path (the orange, leftmost leaf in the classification tree) is the classification used for the query sequence. Source: {% cite Wood2014 %}")
->
-{: .details}
+{% snippet topics/metagenomics/faqs/kraken.md %}
 
 <div class="Short-Version" markdown="1">
 
@@ -399,7 +380,7 @@ In the previous section we ran **Kraken2** along with the **Kalamari** database,
 >
 > 2. Run **Workflow 2: Nanopore Datasets - Taxonomy Profiling and Visualization** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-files %} *"Nanopore preprocessed reads"*: `Nanopore processed sequenced reads` files for both tags
+>    - {% icon param-files %} *"Nanopore Sequenced Reads Collection"*: `Nanopore processed sequenced reads` collection, output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preproceesing workflow
 >    - *"Sample Metadata"*: Leave empty
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
@@ -416,7 +397,7 @@ To assign reads to taxons, we use **Kraken2** with **Standard PlusPF** database.
 >
 > 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} with the following parameters:
 >    - *"Single or paired reads"*: `Single`
->        - {% icon param-files %} *"Input sequences"*: Outputs without matched ID of **Filter sequences by ID** {% icon tool %}
+>        - {% icon param-files %} *"Input sequences"*: collection output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preprocessing section
 >    - In *"Create Report"*:
 >        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
 >    - *"Select a Kraken2 database"*: `Prebuilt Refseq indexes:  PlusPF (Standard plus protozoa and fungi) (Version:  2022-06-07 - Downloaded: 2022-09-04T165121Z)`
@@ -426,32 +407,32 @@ To assign reads to taxons, we use **Kraken2** with **Standard PlusPF** database.
 
 > <question-title></question-title>
 >
-> Inspect the **Kraken2** report for `Barcode10` tag
+> Inspect the **Kraken2** report for `Barcode10`
 >
-> 1. What is the most found species?
-> 2. What is the second most found species?
-> 3. How many sequences are classified and How many are unclassified?
-> 4. What are the difference between **Kraken2** tool's report with **Kalamari** database and **Kraken2** tool's report with **Standard PlusPF** database with regards to the previous 3 questions
+> 1. What is the most commonly found species?
+> 2. What is the second most commonly found species?
+> 3. How many sequences are classified and how many are unclassified?
+> 4. What are the differences between **Kraken2** tool's report with **Kalamari** database and **Kraken2** tool's report with **Standard PlusPF** database regarding the previous 3 questions?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. _Escherichia coli_ with 10,243 sequences
-> > 2. _Salmonella enterica_ with 7,458 sequences
-> > 3. 40,143 sequences are classified and 50,455 are unclassified
+> > 2. _Salmonella enterica_ with 7,457 sequences
+> > 3. 40,113 sequences are classified and 50,455 are unclassified
 > > 4. With **Kalamari** database the most found species is _Escherichia coli_ with 12,577 sequences and the second most found species is _Salmonella enterica_ with 10,632 sequences. The number of classified sequences are 32,020 sequences and the unclassified sequences are 59,414. In conclusion, both databases are able to show the same results of the most common species. However, the number of the classified sequences with **Standard PlusPF** database is higher than **Kalamari** database and it would be even higher since all chicken sequences were removed before testing the **Standard PlusPF** database.
 > {: .solution}
 {: .question}
 
-In order to view the taxonomy profiling produced by **Kraken2** tool there are a lot of tools to be used afterwards such as **Krona pie chart**, however the species classified are a lot to be shown by this tool. For that reason, we have chosen the **Phinch visualization** interactive tool as it contains multiple visualization plots, it's interactive you can choose between different parameters, you can visualize each taxonomic level on its own, you can have your metadata of the samples represented along with the taxonomic visualization, download all plots for publications and a lot of other benefits. For later, you can check out [__Pavian__](https://academic.oup.com/bioinformatics/article/36/4/1303/5573755) tool as well it can replace **Phinch visualization** with similar outputs.
+In order to view the taxonomy profiling produced by **Kraken2** tool, there are a lot of tools to be used afterwards such as **Krona pie chart**, however too many species were detected to be shown by this tool. For that reason, we have chosen the **Phinch visualization** interactive tool as it contains multiple visualization plots, it is interactive alowing you to choose between different parameters, you can visualize each taxonomic level on its own, you can have the metadata of the samples represented along with the taxonomic visualization, download all plots for publications and a lot of other benefits. For later, you can check out [__Pavian__](https://academic.oup.com/bioinformatics/article/36/4/1303/5573755) tool as well it can replace **Phinch visualization** with similar outputs.
 
-**Phinch visualization** needs a **BIOM** file format as an input for that we needed the [__Kraken-Biom__](https://github.com/smdabdoub/kraken-biom)  tool to convert the **Kraken2** tabular output into a Biom file.
+**Phinch visualization** needs a **BIOM** file format as an input, and for that we need the [__Kraken-Biom__](https://github.com/smdabdoub/kraken-biom)  tool to convert the **Kraken2** tabular output into a Biom file.
 
 <div class="Long-Version" markdown="1">
 
 > <hands-on-title> BIOM generation </hands-on-title>
 >
 > 1. {% tool [Kraken-biom](toolshed.g2.bx.psu.edu/repos/iuc/kraken_biom/kraken_biom/1.2.0+galaxy1) %} with the following parameters:
->    - {% icon param-files %} *"Input files to Kraken-biom: Kraken report output file(s)"*: Report outputs of **Kraken2** {% icon tool %}
+>    - {% icon param-files %} *"Input files to Kraken-biom: Kraken report output file(s)"*: Report collection output of **Kraken2** {% icon tool %}
 >    - {% icon param-file %} *"Sample metadata file"*: Leave empty
 >    - *"Do you want to create an OTU IDs file"*: `Yes`
 >    - *"Output Format"*: `JSON`
@@ -460,7 +441,7 @@ In order to view the taxonomy profiling produced by **Kraken2** tool there are a
 
 </div>
 
-Once the BIOM file has been generated, the visualisation interactive tool called [__Phinch visualization__](https://www.phinch.org/) is launched
+Once the BIOM file has been generated, we launch the interactive visualisation tool called [__Phinch visualization__](https://www.phinch.org/):
 
 <div class="Long-Version" markdown="1">
 
@@ -473,7 +454,7 @@ Once the BIOM file has been generated, the visualisation interactive tool called
 
 </div>
 
-Now let's now explore the **Phinch visulization** tool running for `Barcode11` tag
+Now let's explore the **Phinch visulization** tool running for `Barcode11` 
 
 > <hands-on-title>Explore data interactively</hands-on-title>
 >
@@ -487,15 +468,15 @@ Now let's now explore the **Phinch visulization** tool running for `Barcode11` t
 
 > <question-title></question-title>
 >
-> 1. What is the most found species?
-> 2. What is the second most found species?
+> 1. What is the most commonly found species?
+> 2. What is the second most commonly found species?
 > 3. What's your favorite visualization plot?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. *Salmonella enterica* with 17,309 sequences
 > > 2. *Pseudomonas lundensis* with 13,227 sequences
-> > 3. All of them are good visualization to the data but for us to answer these questions, we used **Taxonomy Bar chart**
+> > 3. All of them are good visualization of the data but for us to answer these questions, we used the **Taxonomy Bar Chart**
 > >
 > >    ![Taxonomy Bar Chart](./images/phinch_taxonomy_bar_chart.png)
 > >
@@ -503,14 +484,18 @@ Now let's now explore the **Phinch visulization** tool running for `Barcode11` t
 {: .question}
 
 > <comment-title></comment-title>
-> While the steps is running you can move on to the next section **Gene based pathogenic identification** and run the steps there as well, both analyses can work in parallel.
+> While these steps are running, you can move on to the next section **Gene based pathogenic identification** and run the steps there, as well. Both analyses can execute in parallel.
 {: .comment}
+
+You may have noticed some sequences have been assigned to the Human Genome (Homosapians) species, when we run **Kraken2** using the **Standard PlusPF** in this section. However, in the **pre-processing** section when we ran **Kraken2** with **Kalamari** no Human Genomes were found. The lab (data producers) has confirmed that these sequences assigned to human by **Standard PlusPF** database are not human and there should be no human sequences in the samples as **Kalamari** database result's confirmed. So these sequences were wrongly assigned to human by **Standard PlusPF**. That is due to resemblance between organisms and the limited species coverage of **Kraken2** databases sometimes do happen that reads corresponding to higher organisms get mapped to humans. It was a very severe problem for the **Standard PlusPF**, because yeast genes were mis-assigned to human.
+
+We decide to keep these sequences since we do not know what are they via the **taxonomy profiling** step, which could mean that they might be identified as pathogens in the coming steps, and if we delete them we are possibly losing important information and losing the main goal of the workflow to detect pathogens and track them.
 
 # Gene based pathogenic identification
 
 With taxonomy profiling, we identified some bacterial species. But we want to be sure they are pathogenic, by **looking for genes known to be linked to pathogenicity or to the pathogenecity character** of the organim:
 
-- [**Virulence Factor (VF)**](https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor): gene products, usually proteins, involved in pathogenicity by identifiying them we can call a pathogen and its severity level
+- [**Virulence Factor (VF)**](https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor): gene products, usually proteins, involved in pathogenicity. By identifiying them we can call a pathogen and its severity level
 - [**Antimicrobial Resistance genes (AMR)**](https://www.sciencedirect.com/topics/engineering/antibiotic-resistance-genes).
 
     These type of genes have three fundamental mechanisms of antimicrobial resistance that are enzymatic degradation of antibacterial drugs, alteration of bacterial proteins that are antimicrobial targets, and changes in membrane permeability to antibiotics, which will lead to not altering the target site and spread throughput the pathogenic bacteria decreasing the overall fitness of the host.
@@ -519,9 +504,9 @@ To look for these genes and determine the strain of the bacteria we are testing 
 
 1. Genome assembly to get contigs, i.e. longer sequences, using **metaflye** ({% cite flye %})  then assembly polishing using [__medaka consensus pipeline__](https://github.com/nanoporetech/medaka) and visualizing the assembly graph using **Bandage Image** ({% cite Wick2015 %})
 2. Generate an **MLST** report with **MLST** tool that scans genomes against PubMLST schemes
-3. Generate reports with **AMR** genes and **VF** using [__ABRicate__](https://github.com/tseemann/abricate) 
+3. Generate reports with **AMR** genes and **VF** using [__ABRicate__](https://github.com/tseemann/abricate)
 
-As outputs, we will get our **FASTA** and **Tabular** files to track genes and visualize our pathogenic identification. For that we will one more file needed to create a report and we can upload it directly:
+As outputs, we will get our **FASTA** and **Tabular** files to track genes and visualize our pathogenic identification. For that we will need one more file to create a report and we can upload it directly:
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -540,21 +525,13 @@ As outputs, we will get our **FASTA** and **Tabular** files to track genes and v
 > <hands-on-title>Gene based Pathogenic Identification</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/nanopore_gene_based_pathogenic_identification.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Nanopore_Datasets_Gene_based_pathogenic_Identification.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
 >
 > 2. Run **Workflow 3: Nanopore Datasets - Gene based Pathogenic Identification** {% icon workflow %} using the following parameters:
->    - {% icon param-file %} *"Nanopore Preprocessed reads"*: `Nanopore processed sequenced reads` for `Barcode10`
->    - *"Sample ID"*: `Barcode10_Spike2`
->    - {% icon param-file %} *"MLST Report Header"*: `MLST Report with Header`
->
->    {% snippet faqs/galaxy/workflows_run.md %}
->
-> 3. Repeat step 2 and run the same **workflow** again for the second tag
->    - {% icon param-file %} *"Nanopore Preprocessed reads"*: `Nanopore processed sequenced reads` for `Barcode11`
->    - *"Sample ID"*: `Barcode11_Spike2b`
+>    - {% icon param-file %} *"Nanopore Sequenced Reads Collection"*: `Nanopore processed sequenced reads` collection output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preprocessing workflow
 >    - {% icon param-file %} *"MLST Report Header"*: `MLST Report with Header`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
@@ -571,24 +548,19 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
 
     <div class="Long-Version" markdown="1">
 
-    > <hands-on-title> Assembly with metaFlye </hands-on-title>
+    > <hands-on-title> Assembly with Flye </hands-on-title>
     >
     > 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0) %} with the following parameters:
-    >    - {% icon param-file %} *"Input reads"*: Outputs without matched ID of **Filter sequences by ID** {% icon tool %} for `Barcode10`
+    >    - {% icon param-file %} *"Input reads"*: collection output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preprocessing section
     >
     >      > <comment-title></comment-title>
-    >      > We need to run **Flye** individually on each sample otherwise **Flye** runs by default a co-assembly mode, *i.e.* it combines read of both samples together before running the assembly.
+    >      > We need to run **Flye** individually on each sample otherwise **Flye** runs by default a co-assembly mode, *i.e.* it combines reads of both samples together before running the assembly.
     >      {: .comment}
     >
     >    - *"Mode"*: `Nanopore HQ (--nano-hq)`
     >    - *"Perform metagenomic assembly"*: `Yes`
     >    - *"Reduced contig assembly coverage"*: `Disable reduced coverage for initial disjointing assembly`
     >
-    > 2. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0) %} with the following parameters:
-    >    - {% icon param-file %} *"Input reads"*: Outputs without matched ID of **Filter sequences by ID** {% icon tool %} for `Barcode11`
-    >    - *"Mode"*: `Nanopore HQ (--nano-hq)`
-    >    - *"Perform metagenomic assembly"*: `Yes`
-    >    - *"Reduced contig assembly coverage"*: `Disable reduced coverage for initial disjointing assembly`
     {: .hands-on}
 
     </div>
@@ -599,7 +571,7 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
 
     > <hands-on-title> Visualization of the assembly grap </hands-on-title>
     > 4. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2) %} with the following parameters:
-    >    - {% icon param-files %} *"Graphical Fragment Assembly"*: Assembly graph outputs of **Flye** {% icon tool %}
+    >    - {% icon param-files %} *"Graphical Fragment Assembly"*: `assembly_graph` Assembly graph outputs of **Flye** {% icon tool %}
     {: .hands-on}
 
     </div>
@@ -611,54 +583,38 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
     > <hands-on-title> Contig polishing </hands-on-title>
     >
     > 3. {% tool [medaka consensus pipeline](toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy0) %} with the following parameters:
-    >    - {% icon param-files %} *"Select basecalls"*: Outputs without matched ID of **Filter sequences by ID** {% icon tool %}
-    >    - {% icon param-files %} *"Select assembly"*: Output of **Flye** {% icon tool %}
+    >    - {% icon param-files %} *"Select basecalls"*: collection output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preprocessing section
+    >    - {% icon param-files %} *"Select assembly"*: `consensus` collection output of **Flye** {% icon tool %}
     >    - *"Select model"*: `r941_min_hac_g507`
     >    - *"Select output file(s)"*: `select all`
     {: .hands-on}
 
-    To keep information about the provenance of the contigs, we can rename them to add contig information to them.
+    To keep information about the provenance of the contigs, we extract the sample names from the **Nanopore processed sequences reads** collection and add it to the contigs files.
 
     > <hands-on-title> Contig renaming to add sample names </hands-on-title>
     > 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the following parameters:
-    >    - {% icon param-files %} *"Convert these sequences"*: output of **medaka consensus pipeline** {% icon tool %}
+    >    - {% icon param-files %} *"Convert these sequences"*: collection output of **medaka consensus pipeline** {% icon tool %}
+    > 2. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
+    >    - {% icon param-files %} *"Dataset collection"*: collection output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preprocessing section
     >
-    > 2. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
-    >    - {% icon param-file %} *"File to process"*: output of **FASTA-to-Tabular** {% icon tool %} for `Barcode10`
+    > 3. {% tool [Split file](toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0) %} with the following parameters:
+    >    - {% icon param-files %} *"Text file to split"*: output from **Extract element identifiers** {% icon tool %}
+    >
+    > 4. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
+    >    - {% icon param-files %} *"Input file containing parameter to parse out of"*: output from **Split file** {% icon tool %}
+    >
+    > 5. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
+    >    - {% icon param-file %} *"File to process"*: collection output of **FASTA-to-Tabular** {% icon tool %}
     >    - In *"Find and Replace"*:
     >        - {% icon param-repeat %} *"Insert Find and Replace"*
     >            - *"Find pattern"*: `^(.+)$`
-    >            - *"Replace with"*: `Barcode10_$1`
+    >            - *"Replace with"*: output from **Parse parameter value** {% icon tool %}
     >            - *"Find-Pattern is a regular expression"*: `Yes`
     >            - *"Replace all occurences of the pattern"*: `Yes`
     >            - *"Find and Replace text in"*: `specific column`
     >                - *"in column"*: `Column: 1`
     >
-    > 3. Rename the output to `Contigs Table - Barcode10`
-    >
-    >    {% snippet faqs/galaxy/datasets_rename.md %}
-    >
-    > 4. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
-    >    - {% icon param-file %} *"File to process"*: output of **FASTA-to-Tabular** {% icon tool %} for `Barcode11`
-    >    - In *"Find and Replace"*:
-    >        - {% icon param-repeat %} *"Insert Find and Replace"*
-    >            - *"Find pattern"*: `^(.+)$`
-    >            - *"Replace with"*: `Barcode11_$1`
-    >            - *"Find-Pattern is a regular expression"*: `Yes`
-    >            - *"Replace all occurences of the pattern"*: `Yes`
-    >            - *"Find and Replace text in"*: `specific column`
-    >                - *"in column"*: `Column: 1`
-    >
-    > 5. Rename the output to `Contigs Table - Barcode11`
-    >
-    >    {% snippet faqs/galaxy/datasets_rename.md %}
-    >
-    > 8. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
-    >    - {% icon param-files %} *"Tab-delimited file"*: outputs of **Replace** {% icon tool %}
-    >    - *"Title column(s)"*: `Column: 1`
-    >    - *"Sequence column"*: `Column: 2`
-    >
-    > 9. Rename the outputs to `Contigs - Barcode10` and `Contigs - Barcode11`
+    > 6. Rename the output collection `Contigs`
     {: .hands-on}
 
     </div>
@@ -667,14 +623,14 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
 >
 > Inspect **Flye** and **Medaka consensus pipeline** output results for `Barcode10`
 >
-> 1. How many different contigs you got after **Flye**
-> 2. How many are left after **Medaka consensus pipeline**, and what does that mean?
-> 2. What is your result of the **Bandage Image**?
+> 1. How many different contigs did you get after **Flye**?
+> 2. How many were left after **Medaka consensus pipeline**, and what does that mean?
+> 2. What is the result of your **Bandage Image**?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. After **Flye** we have got 137 contigs
-> > 2. After **Medaka consensus pipeline** all 137 contigs were kept, which means that the quality of the **Flye** run was high that the polishing did not remove any of the contigs.
+> > 1. After **Flye** we have got 130 contigs
+> > 2. After **Medaka consensus pipeline** all 130 contigs were kept, which means that the quality of the **Flye** run was high, and as a result the polishing did not remove any of the contigs.
 > > 3. The graph looks like:
 > >
 > >    ![Bandage Image Barcode 10 Assembly Graph](./images/bandage_image_flye_graph.png)
@@ -684,14 +640,14 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
 
 ## Multilocus Sequence Typing
 
-**MLST** tool is used to scan the [pubMLST](https://pubmlst.org/) database against PubMLST typing schemes. It's one of the analysis that you can perform on your dataset to determine the allele IDs you can also detect novel alleles. For the further analysis of this tutorial, this step is not important to identify pathogens and track them, however we wanted to show some of the analysis that one can use Galaxy in to understand more about the dataset as well as identifying the strain that might be a pathogen or not.
+**MLST** tool is used to scan the [pubMLST](https://pubmlst.org/) database against PubMLST typing schemes. It's one of the analyses that you can perform on your dataset to determine the allele IDs, you can also detect novel alleles. This step is not essential to identify pathogens and track them in the remainder of this tutorial, however we wanted to show some of the analysis that one can use Galaxy in to understand more about the dataset, as well as identifying the strain that might be a pathogen or not.
 
 <div class="Long-Version" markdown="1">
 
 > <hands-on-title> Multilocus Sequence Typing </hands-on-title>
 >
 > 1. {% tool [MLST](toolshed.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.22.0) %} with the following parameters:
->    - {% icon param-files %} *""*: `Sample Specific Contigs FASTA file` files
+>    - {% icon param-files %} *"input_files"*:  collection output of **medaka consensus pipeline** {% icon tool %} FASTA files with contigs
 >    - *"Specify advanced parameters"*: `Yes, see full parameter list`
 >        - *"Output novel alleles"*: `Yes`
 >        - *"Automatically set MLST scheme"*: `Automatic MLST scheme detection`
@@ -722,17 +678,16 @@ The output file of the **MLST** tool is a tab-separated output file which contai
 
 ## Antimicrobial Resistance Genes
 
-Now, to search our samples' contigs for **AMR** genes, we run **ABRicate** and choose the [__NCBI Bacterial Antimicrobial Resistance Gene Database (AMRFinderPlus)__](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6811410/) from the advanced options of the tool. The tool identifies if there is an AMR found or not, if found then in which contig, in which location on the contig, what is the name of the exact product, what does it resist against and a lot of other information regarding the found **AMR**.
+Now, to search **AMR** genes among our samples' contigs, we run **ABRicate** and choose the [__NCBI Bacterial Antimicrobial Resistance Gene Database (AMRFinderPlus)__](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6811410/) from the advanced options of the tool. The tool checks if there is an AMR found or not, if found then in which contig it is, its location on the contig, what the name of the exact product is, what substance it provides resistance against and a lot of other information regarding the found **AMR**.
 
 <div class="Long-Version" markdown="1">
 
 > <hands-on-title> Antimicrobial Resistance Genes Identification </hands-on-title>
 >
 > 1. {% tool [ABRicate](toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1) %} with the following parameters:
->    - {% icon param-files %} *"Input file (Fasta, Genbank or EMBL file)"*: `Sample Specific Contigs FASTA file` files
+>    - {% icon param-files %} *"Input file (Fasta, Genbank or EMBL file)"*: collection output of **medaka consensus pipeline** {% icon tool %} FASTA files with contigs
 >    - In *"Advanced options"*:
 >        - *"Database to use - default is 'resfinder'"*: `NCBI Bacterial Antimicrobial Resistance Reference Gene Database`
-> 2. Rename the generated files `AMR - Barcode10` and `AMR - Barcode11`
 {: .hands-on}
 
 </div>
@@ -772,29 +727,29 @@ The outputs of **ABRicate** is a tabular file with different columns:
 >
 > Inspect **ABRicate** output files from `Barcode10`and `Barcode11` tags
 >
-> 1. How many **AMR** genes found in `Barcode10` sample, what are they, give more details about them?
-> 2. How many **AMR** genes found in `Barcode11` sample, what are they, give more details about them?
+> 1. How many **AMR** genes found in `Barcode10` sample, what are they? Give more details about them.
+> 2. How many **AMR** genes found in `Barcode11` sample, what are they? Give more details about them.
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 5 **AMR** genes are found:
-> >    1. Tet(C), which resists [TETRACYCLINE](https://medlineplus.gov/druginfo/meds/a682098.html). It's found in contig 158 from the position 1633 till 2808, with 100% coverage, so 100% of gene is covered in this contig.
+> > 1. 5 **AMR** genes were found:
+> >    1. Tet(C), which resists [TETRACYCLINE](https://medlineplus.gov/druginfo/meds/a682098.html). It was found in contig 158 from the position 1633 till 2808, with 100% coverage, so 100% of gene is covered in this contig.
 > >    2. 2 genes with sulfonamide-resistant dihydropteroate synthase Sul1 products
 > >    3. 2 genes with oxacillin-hydrolyzing class D beta-lactamase OXA-2 products
-> > 2. No **AMR** genes are found by the database in `Barcode11_Spike2b` sample.
+> > 2. No **AMR** genes were found by the database in `Barcode11` sample.
 > >
 > {: .solution}
 {: .question}
 
 ## Virulence Factor identification
 
-In this step we return back to the main goal of the tutorial where we want to identify the pathogens: **identify if the found bacteria in our samples is a bacteria pathogen or not**. One of the ways to do that is to identify if the sequences include genes with a [Virulence Facor](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2646308/) or not, such that if the samples include genes with a Virulence Factor then its for sure a pathogen.
+In this step we return back to the main goal of the tutorial where we want to identify the pathogens: **identify if the bacteria found in our samples are pathogenic bacteria or not**. One of the ways to do that is to identify if the sequences include genes with a [Virulence Facor](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2646308/) or not, such that if the samples include gene(s) with a Virulence Factor then it for sure is a pathogen.
 
 > <comment-title>Definitions</comment-title>
 >
-> **Bacteria Pathogen**: A bacterial pathogen is usually defined as any bacterium that has the capacity to cause disease. Its ability to cause disease is called pathogenicity.
+> **Bacterial Pathogen**: A bacterial pathogen is usually defined as any bacterium that has the capacity to cause disease. Its ability to cause disease is called pathogenicity.
 >
-> **Virulence**: Virulence provides a quantitative measure of the pathogenicity or the likelihood of causing disease.
+> **Virulence**: Virulence provides a quantitative measure of the pathogenicity or the likelihood of causing a disease.
 >
 > **Virulence Factors**: Virulence factors refer to the properties (i.e., gene products) that enable a microorganism to establish itself on or within a host of a particular species and enhance its potential to cause disease. Virulence factors include bacterial toxins, cell surface proteins that mediate bacterial attachment, cell surface carbohydrates and proteins that protect a bacterium, and hydrolytic enzymes that may contribute to the pathogenicity of the bacterium.
 >
@@ -807,49 +762,45 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 > <hands-on-title> Virulence Factor identification </hands-on-title>
 >
 > 1. {% tool [ABRicate](toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1) %} with the following parameters:
->    - {% icon param-files %} *"Input file (Fasta, Genbank or EMBL file)"*:  `Sample Specific Contigs FASTA file` files
+>    - {% icon param-files %} *"Input file (Fasta, Genbank or EMBL file)"*: collection output of **medaka consensus pipeline** {% icon tool %} FASTA files with contigs
 >    - In *"Advanced options"*:
 >        - *"Database to use - default is 'resfinder'"*: `VFDB`
-> 2. Rename the generated files `VFs - Barcode10` and `VFs - Barcode11`
+>
+> 3. Rename **ABRicate** the output collection `VFs`
 {: .hands-on}
 
 </div>
 
 > <question-title></question-title>
 >
-> Inspect **VFs of genes Identified by VFDB** output file from`Barcode10`and `Barcode11` tags
+> Inspect **VFs of genes Identified by VFDB** output file from`Barcode10`and `Barcode11`
 >
-> 1. How many different **VFs** gene products found in `Barcode10_Spike2` sample?
-> 2. How many different **VFs** gene products found in `Barcode11_Spike2b` sample?
+> 1. How many different **VFs** gene products were found in `Barcode10` sample?
+> 2. How many different **VFs** gene products were found in `Barcode11` sample?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 123
+> > 1. 107
 > > 2. 97
 > >
 > {: .solution}
 {: .question}
 
+To prepare the **ABRicate**{% icon tool %} output tabulars of both samples for further analysis in the **Pathogen Tracking among all samples** section, tabular manipulation tools such as **Cut**{% icon tool %} and **Add line to file**{% icon tool %} are used. We mainly use them to filter and keep only the columns of interest, e.g. the Accession IDs of the found genes with a Virulence Factor and the sample ID along with which contig at which exact location. 
 
 <div class="Long-Version" markdown="1">
 
 > <hands-on-title> Formatting </hands-on-title>
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c13`
->    - {% icon param-files %} *"From"*: outputs of **ABRicate** {% icon tool %}
-> 2. Rename the outputs `VFs accessions - Barcode10` and `VFs accessions - Barcode11`
+>    - {% icon param-files %} *"From"*: collection output of **ABRicate** {% icon tool %}
+> 2. Rename the outputs `VFs accessions`
 >
 > 2. {% tool [Add line to file](toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0) %} with the following parameters:
->    - *"text to add"*: `Barcode10`
->    - {% icon param-file %} *"input file"*: `VFs accessions - Barcode10`
+>    - *"text to add"*: collection output from **Parse parameter value** {% icon tool %}
+>    - {% icon param-file %} *"input file"*: `VFs accessions`
 >
-> 3. Rename the output `VFs accessions with SampleID as a header- Barcode10`
->
-> 4. {% tool [Add line to file](toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0) %} with the following parameters:
->    - *"text to add"*: `Barcode11`
->    - {% icon param-file %} *"input file"*: `VFs accessions - Barcode11`
->
-> 5. Rename the output `VFs accessions with SampleID as a header- Barcode11`
+> 3. Rename the output collection `VFs accessions with SampleID`
 {: .hands-on}
 
 </div>
@@ -857,15 +808,15 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 
 # SNP based pathogenic identification
 
-Now we would like to identify pathogen with a third approach based on variant and [single nucleotide polymorphisms (SNPs) calling](https://genome.sph.umich.edu/w/images/e/e6/Seqshop_may_2015_day2_snp_lecture_v2.pdf): comparison of sequences to a targeted reference genones, and call for differences between sample reads and reference genomes to identify variants.
+Now we would like to identify pathogens with a third approach based on variant and [single nucleotide polymorphisms (SNPs) calling](https://genome.sph.umich.edu/w/images/e/e6/Seqshop_may_2015_day2_snp_lecture_v2.pdf): comparison of reads to a targeted reference genome, and call the differences between sample reads and reference genomes to identify variants.
 
-For example, if we want to test our samples if they include [_Campylobacter_ pathogenic strains](https://www.cdc.gov/campylobacter/index.html) or not, we will map our samples against the reference genome of the _Campylobacter_ species. Variants in specific positions on the genome are looked to see if these variations would indicate a pathogen or not.
+For example, if we want to check whether our samples include [_Campylobacter_ pathogenic strains](https://www.cdc.gov/campylobacter/index.html) or not, we will map our samples against the reference genome of the _Campylobacter_ species. Variants in specific positions on the genome are queried to judge if these variations would indicate a pathogen or not.
 
-This approach allows also identification of novel alleles and so possible **new variant of the pathogen**.
+This approach also allows identification of novel alleles and possible **new variants of the pathogen**.
 
-Using this approach, we also build the consensus genome of each samples, so we can later build a phylogenetic tree of all samples' full genomes and have an insight into events that occurred during same or different species of our samples' evolution.
+Using this approach, we also build the consensus genome of each sample, so we can later build a phylogenetic tree of all samples' full genomes and have an insight into events that occurred during the evolution of same or different species in the samples.
 
-In this training, we are testing _Salmonella enterica_ , which our samples are spiked with its different strains. So we will now upload to our history the reference genome of [_S. enterica_](https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]) we got in prior from the [National Center for Biotechnology Information (NCBI) database](https://www.ncbi.nlm.nih.gov/).
+In this training, we are testing _Salmonella enterica_, with different strains of which our samples were spiked. So we will now upload to our history the reference genome of [_S. enterica_](https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]) we originally obtained from the [National Center for Biotechnology Information (NCBI) database](https://www.ncbi.nlm.nih.gov/).
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -890,8 +841,8 @@ In this training, we are testing _Salmonella enterica_ , which our samples are s
 >
 > 2. Run **Workflow 4: Nanopore Datasets - SNP based Pathogenic Identification** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-files %} *"Nanopore Preprocessed reads"*: `Nanopore processed sequenced reads`
->    - {% icon param-file %} *"Reference Genome of Tested Strain/Pathogen"*: `Salmonella_Ref_genome.fna.gz`
+>    - {% icon param-files %} *"Nanopore Sequenced Reads Collection"*: `Nanopore processed sequenced reads` collection output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preprocessing workflow
+>    - {% icon param-file %} *"Reference Genome of Tested Strain"*: `Salmonella_Ref_genome.fna.gz`
 >
 {: .hands_on}
 
@@ -901,7 +852,7 @@ In this training, we are testing _Salmonella enterica_ , which our samples are s
 
 To identify variants, we
 
-1. **Map reads to the reference genome** of the species of the pathogen we want to test our samples against using **Minimap2**({% cite Li2017Minimap2 %}) as our datasets are Nanopore
+1. **Map reads to the reference genome** of the species of the pathogen we want to test our samples against using **Minimap2** ({% cite Li2017Minimap2 %}) as our datasets are from a Nanopore:
 
     <div class="Long-Version" markdown="1">
 
@@ -910,22 +861,22 @@ To identify variants, we
     >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
     >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Salmonella_Ref_genome.fna.gz`
     >    - *"Single or Paired-end reads"*: `Single`
-    >        - {% icon param-files %} *"Select fastq dataset"*: Outputs without matched ID of **Filter sequences by ID** {% icon tool %} for `Barcode10` and `Barcode11`
+    >        - {% icon param-files %} *"Select fastq dataset"*: collection output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preprocessing section
     {: .hands-on}
 
     </div>
 
-2. **Identify variants and single nucleotide variants** using **Clair3** ({% cite Zheng2021 %}), which is designed specifically for Nanopore datasets giving better results than other variant calling tools as well as its new and up-to-date.
+2. **Identify variants and single nucleotide variants** using **Clair3** ({% cite Zheng2021 %}), which is designed specifically for Nanopore datasets and giving better results than other variant calling tools, as well as being new and up-to-date.
 
     > <comment-title></comment-title>
     > [__Medaka consensus tool__ and __medaka variant tool__](https://github.com/nanoporetech/medaka) can be also used instead of **Clair3**, they give similar results but they are much slower then **Clair3** and offer fewer options.
-    {: .comment-on}
+    {: .comment}
 
     <div class="Long-Version" markdown="1">
 
     > <hands-on-title> Variant or SNP Calling </hands-on-title>
     > 1. {% tool [Clair3](toolshed.g2.bx.psu.edu/repos/iuc/clair3/clair3/0.1.12+galaxy0) %} with the following parameters:
-    >    - {% icon param-files %} *"BAM/CRAM file input"*: Outputs of **Map with minimap2** {% icon tool %}
+    >    - {% icon param-files %} *"BAM/CRAM file input"*: collection output of **Map with minimap2** {% icon tool %}
     >    - *"Reference genome source"*: `History`
     >        - {% icon param-file %} *"Reference genome"*: `Salmonella_Ref_genome.fna.gz`
     >    - *"Clair3 model"*: `Built-in`
@@ -947,7 +898,7 @@ To identify variants, we
 
     > <hands-on-title>Left-align and normalize indels</hands-on-title>
     > 1. {% tool [bcftools norm](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1) %} with the following parameters:
-    >    - {% icon param-files %} *"VCF/BCF Data"*: Outputs of **Clair3** {% icon tool %}
+    >    - {% icon param-files %} *"VCF/BCF Data"*: collection output of **Clair3** {% icon tool %}
     >    - *"Choose the source for the reference genome"*: `Use a genome from the history`
     >        - {% icon param-file %} *"Reference genome"*: `Salmonella_Ref_genome.fna.gz`
     >    - *"output_type"*: `uncompressed VCF`
@@ -955,17 +906,17 @@ To identify variants, we
 
     </div>
 
-4. **Filter variants** to keep only the pass and good quality variants using **SnpSift Filter** ({% cite Cingolani2012 %}) 
+4. **Filter variants** to keep only the pass and good quality variants using **SnpSift Filter** ({% cite Cingolani2012 %})
 
     > <comment-title></comment-title>
     > [__LoFreq filter__](https://csb5.github.io/lofreq/) can be also used instead, both tools performs equal and fast results.
-    {: .comment-on}
+    {: .comment}
 
     <div class="Long-Version" markdown="1">
 
     > <hands-on-title>Filter variants</hands-on-title>
     > 1. {% tool [SnpSift Filter](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1) %} with the following parameters:
-    >    - {% icon param-files %} *"Input variant list in VCF format"*: Outputs of **bcftools norm** {% icon tool %}
+    >    - {% icon param-files %} *"Input variant list in VCF format"*: collection output of **bcftools norm** {% icon tool %}
     >    - *"Type of filter expression"*: `Simple expression`
     >        - *"Filter criteria"*: `(QUAL > 2)`
     >    - *"Filter mode"*: `Retain selected variants, remove others`
@@ -983,7 +934,7 @@ To identify variants, we
     - `FILTER`: Pass/fail - If it passed quality filters.
     - `INFO`: Further information - Allows you to provide further information on the variants. Keys in the INFO field can be defined in header lines above thetable.
     - `FORMAT`: Information about the following columns - The GT in the FORMAT column tells us to expect genotypes in the following columns.
-    - Individual identifier (optional) - The previous column told us to expect to see genotypes here. The genotype is in the form 0|1, where 0 indicates the reference allele and 1 indicates the alternative allele, i.e it is heterozygous. The vertical pipe | indicates that the genotype is phased, and is used to indicate which chromosome the alleles are on. If this is a slash / rather than a vertical pipe, it means we don’t know which chromosome they are on.
+    - `Individual identifier (optional)` - The previous column told us to expect to see genotypes here. The genotype is in the form "0\|1", where 0 indicates the reference allele and 1 indicates the alternative allele, i.e it is heterozygous. The vertical pipe "\|" indicates that the genotype is phased, and is used to indicate which chromosome the alleles are on. If this is a slash (/) rather than a vertical pipe, it means we don’t know which chromosome they are on.
 
 5. **Extract a tabular report** with Chromosome, Position, Identifier, Reference allele, Alternative allele and Filter from the VCF files using [__SnpSift Extract Fields__](http://pcingola.github.io/SnpEff/)
 
@@ -991,7 +942,7 @@ To identify variants, we
 
     > <hands-on-title>Extract a tabular report</hands-on-title>
     > 1. {% tool [SnpSift Extract Fields](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0) %} with the following parameters:
-    >    - {% icon param-files %} *"Variant input file in VCF format"*: Outputs of **SnpSift Filter**
+    >    - {% icon param-files %} *"Variant input file in VCF format"*: collection output of **SnpSift Filter**
     >    - *"Fields to extract"*: `CHROM POS ID REF ALT FILTER`
     {: .hands-on}
 
@@ -1000,17 +951,17 @@ To identify variants, we
 
 > <question-title></question-title>
 >
-> Now let's inspect the outputs for `Barcode10` tag
+> Now let's inspect the outputs for `Barcode10`:
 >
-> 1. How many variants are found by **Clair3**?
-> 2. How many variants are found after quality filtering?
-> 2. What is the Strain identified by the NCBI for the sample?
+> 1. How many variants were found by **Clair3**?
+> 2. How many variants were found after quality filtering?
+> 2. What is the Strain of the NCBI reference gemome used for identifying the SNPs in our samples?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. Before filtering: 2,652
 > > 2. After filtering 2,489
-> > 2. Strain [LT2](https://bacdive.dsmz.de/strain/5117), Known after we searched the Chroms. NCBI Reference Sequence: NC_003197.2
+> > 2. Strain [LT2](https://bacdive.dsmz.de/strain/5117), can be inferred searching the Chroms. NCBI Reference Sequence ID: NC_003197.2
 > {: .solution}
 {: .question}
 
@@ -1019,7 +970,7 @@ To identify variants, we
 
 For further anaylsis we have included one more step in this section, where we build the full genome of our samples.
 
-This consensus genome can be used later to compare and relate samples together based on their full genome. In cases such as SARS-COV2 its important to do so in order to discover new outbreaks. In this example of the training its not really important to draw a tree of the full genomes of the samples as _Salmonella_ does not have such a speedy outbreak as SARS-COV2 does. However, we decided to include it in the workflow for any further analysis of the users if needed.
+This consensus genome can be used later to compare and relate samples together based on their full genome. In cases such as SARS-CoV2, it is important to do so in order to discover new outbreaks. In this example of the training, it is not really important to draw a tree of the full genomes of the samples as _Salmonella_ does not have such a speedy outbreak as SARS-CoV2 does. However, we decided to include it in the workflow for any further analysis of the users, if needed.
 
 For this step we run [__bcftools consensus__](https://samtools.github.io/bcftools/bcftools.html) ({% cite Li20092 %}).
 
@@ -1027,7 +978,7 @@ For this step we run [__bcftools consensus__](https://samtools.github.io/bcftool
 
 > <hands-on-title> Consensus Genome Building </hands-on-title>
 > 1. {% tool [bcftools consensus](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3) %} with the following parameters:
->    - {% icon param-files %} *"VCF/BCF Data"*: Outputs of **SnpSift Filter** {% icon tool %}
+>    - {% icon param-files %} *"VCF/BCF Data"*: collection output of **SnpSift Filter** {% icon tool %}
 >    - *"Choose the source for the reference genome"*: `Use a genome from the history`
 >        - {% icon param-file %} *"Reference genome"*: `Salmonella_Ref_genome.fna.gz`
 {: .hands-on}
@@ -1037,15 +988,15 @@ For this step we run [__bcftools consensus__](https://samtools.github.io/bcftool
 
 > <question-title></question-title>
 >
-> Inspect the **bcftools consensus** output for `Barcode11` tag
+> Inspect the **bcftools consensus** output for `Barcode11`
 >
-> 1. How many sequences we got for the sample? What are they
+> 1. How many sequences did we get for the sample? What are they?
 > 2. Why?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. We got 2 sequences: the complete genome and the complete [plasmid](https://www.genome.gov/genetics-glossary/Plasmid) gemome.
-> > 2. The tool uses the reference genome and the variants found to build the consensus genome of the sample, and the reference genome FASTA file we use includes two sequences a complete one and a plasmid complete one, so the tool constructed both sequences for us to choose from based on our further analysis.
+> > 1. We got 2 sequences: the complete genome and the complete [plasmid](https://www.genome.gov/genetics-glossary/Plasmid) genome.
+> > 2. The tool uses the reference genome and the variants found to build the consensus genome of the sample, and the reference genome FASTA file we use includes two sequences a complete one and a plasmid complete one. So the tool constructed both sequences for us to choose from, based on our further analysis.
 > {: .solution}
 {: .question}
 
@@ -1053,21 +1004,21 @@ For this step we run [__bcftools consensus__](https://samtools.github.io/bcftool
 
 > <comment-title></comment-title>
 >
-> If you did not get your **Gene based pathogenic identification** section output files needed yet or you got an error with any, you can go on and upload them all or the ones missing from Zenodo so you can start this workflow, please don't forget to create the collections for them as explained in the pervious hands-on.
+> If you did not get your **Gene based pathogenic identification** section output files needed yet or you got an error for some reason, you can go on and download them all or the ones missing from Zenodo so you can start this workflow, please don't forget to create the collections for them as explained in the pervious hands-on.
 >
 > > <hands-on-title>Optional Data upload</hands-on-title>
 > >
 > > 1. Import all tabular and FASTA files needed for this section via link from [Zenodo]({{ page.zenodo_link }}) to the new created history:
 > >
 > >    ```text
-> >    {{ page.zenodo_link }}/files/VFDB_Accession_Barcode10_Spike2.tabular
-> >    {{ page.zenodo_link }}/files/VFDB_Accession_Barcode11_Spike2b.tabular
-> >    {{ page.zenodo_link }}/files/VFDB_Accession_Tabular_with_SampleID_as_a_header_Barcode10_Spike2.tabular
-> >    {{ page.zenodo_link }}/files/VFDB_Accession_Tabular_with_SampleID_as_a_header_Barcode11_Spike2b.tabular
-> >    {{ page.zenodo_link }}/files/VFs_ABRicate_Sample_Specific_Formated_Tabular_Barcode10_Spike2.tabular
-> >    {{ page.zenodo_link }}/files/VFs_ABRicate_Sample_Specific_Formated_Tabular_Barcode11_Spike2b.tabular
-> >    {{ page.zenodo_link }}/files/Sample_Specific_Contigs_FASTA_file_Barcode10_Spike2.fasta
-> >    {{ page.zenodo_link }}/files/Sample_Specific_Contigs_FASTA_file_Barcode11_Spike2b.fasta
+> >    {{ page.zenodo_link }}/files/VFs_Barcode10.tabular
+> >    {{ page.zenodo_link }}/files/VFs_Barcode11.tabular
+> >    {{ page.zenodo_link }}/files/VFs_accessions_with_SampleID_Barcode10.tabular
+> >    {{ page.zenodo_link }}/files/VFs_accessions_with_SampleID_Barcode11.tabular
+> >    {{ page.zenodo_link }}/files/VFs_accessions_Barcode10.tabular
+> >    {{ page.zenodo_link }}/files/VFs_accessions_Barcode11.tabular
+> >    {{ page.zenodo_link }}/files/Contigs_Barcode10.fasta
+> >    {{ page.zenodo_link }}/files/Contigs_Barcode11.fasta
 > >    ```
 > >
 > >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -1080,15 +1031,17 @@ In this last section, we would like to show how to aggregate results and use the
 1. Drawing a presence-absence heatmap of the identified **VF** genes within all samples to visualize in which samples these genes can be found.
 2. Drawing a [phylogenetic tree](https://www.sciencedirect.com/topics/medicine-and-dentistry/phylogenetic-tree) for each pathogenic gene detected, where we will relate the contigs of the samples together where this gene is found.
 
-With these two types of visualizations we can have an overview of all samples and the genes, but also how samples are related to each other, which common pathogenic genes they share. Given the time of the sampling and the location one can easy identify using these graphes where and when the contamination has occurred among the different samples.
+With these two types of visualizations we can have an overview of all samples and the genes, but also how samples are related to each other i.e. which common pathogenic genes they share. Given the time of the sampling and the location one can easily identify using these graphs, where and when the contamination has occurred among the different samples.
 
-> <hands-on-title>Organize data</hands-on-title>
+> <hands-on-title>Organize imported data</hands-on-title>
 >
-> 1. Create a collection named `VFs` with `VFs` files for both tags
+> Follow these steps only if you imported the datasets, but if your **Gene based Pathogentic Identification** part is already finished correctly then skip the following 4 steps.
+>
+> 1. Create a collection named `VFs` with `VFs` files 
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
-> 2. Create a collection named `VFs accessions` with `VFs accessions` files for both tags
+> 2. Create a collection named `VFs accessions` with `VFs accessions` files
 >
 > 3. Create a collection named `VFs accessions with SampleID` with `VFs accessions with SampleID` files
 >
@@ -1102,17 +1055,17 @@ With these two types of visualizations we can have an overview of all samples an
 > <hands-on-title>All Samples Analysis</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/nanopore_all_samples_phylogenetic_trees_and_heatmap.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Nanopore_Datasets_Pathogen_Tracking_among_all_samples.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
 >
 > 2. Run **Workflow 5: Nanopore Datasets - Reports of All Samples along with Full genomes and VF genes Phylogenetic trees** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-collection %} *"Contigs"*: `Contigs`
->    - {% icon param-collection %} *"VFs"*: `VFs`
->    - {% icon param-collection %} *"VFs accessions with SampleID"*: `VFs accessions with SampleID`
->    - {% icon param-collection %} *"VFs accessions"*: `VFs accessions`
+>    - {% icon param-collection %} *"Contigs"*: collection `Contigs` output from the **Gene based Pathogentic Identification** workflow
+>    - {% icon param-collection %} *"VFs"*: collection `VFs` output from the **Gene based Pathogentic Identification** workflow
+>    - {% icon param-collection %} *"VFs accessions with SampleID"*: collection `VFs accessions with SampleID` output from the **Gene based Pathogentic Identification** workflow
+>    - {% icon param-collection %} *"VFs accessions"*: collection `VFs accessions` output from the **Gene based Pathogentic Identification** workflow
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
@@ -1133,37 +1086,76 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
 
     > <hands-on-title> Heatmap </hands-on-title>
     >
-    > 1. {% tool [Multi-Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1) %} with the following parameters:
-    >    - {% icon param-file %} *"File to join"*: `VFs accessions with SampleID - Barcode10`
-    >    - {% icon param-file %} *"add additional file"*: `VFs accessions with SampleID - Barcode11`
+    > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
+    >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `VFs accessions` collection output of **cut** {% icon tool %} from the **Gene based Pathogentic Identification** section
+    >    - *"Prepend File name"*: `No`
+    > 2. {% tool [Add line to file](toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0) %} with the following parameters:
+    >    - {% icon param-file %} *"input file"*: `VFs accessions` output from **Collapse Collection** {% icon tool %}
+    >    - *"text to add"*: `All_VFs`
+    > 3. {% tool [Multi-Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1) %} with the following parameters:
+    >    - {% icon param-file %} *"File to join"*: `VFs accessions` output from **Add line to file** {% icon tool %}
+    >    - {% icon param-file %} *"add additional file"*: `VFs accessions with SampleID` collection output of **Add line to file** {% icon tool %} from the **Gene based Pathogentic Identification** section
     >    - *"Common key column"*: `1`
     >    - *"Column with values to preserve"*: `Column: 1`
     >    - *"Add header line to the output file"*: `Yes`
     >    - *"Input files contain a header line (as first line)"*: `Yes`
     >    - *"Ignore duplicated keys"*: `Yes`
-    >
-    > 2. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
+    > 4. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
     >    - {% icon param-file %} *"File to process"*: output of **Multi-Join** {% icon tool %}
     >    - In *"Find and Replace"*:
     >        - {% icon param-repeat %} *"Insert Find and Replace"*
-    >            - *"Find pattern"*: `^[^0]\w+`
-    >            - *"Replace with"*: `1`
+    >            - *"Find pattern"*: `dataset_(.*?)_`
+    >            - *"Replace with"*: `Sample_`
     >            - *"Find-Pattern is a regular expression"*: `Yes`
     >            - *"Replace all occurences of the pattern"*: `Yes`
+    >            - *"Ignore first line"*: `No`
+    >            - *"Find and Replace text in"*: `entire line`
+    >        - {% icon param-repeat %} *"Insert Find and Replace"*
+    >            - *"Find pattern"*: `(\S+)`
+    >            - *"Replace with"*: `Acc_$1`
+    >            - *"Find-Pattern is a regular expression"*: `Yes`
+    >            - *"Case-Insensitive search"*: `Yes`
+    >            - *"Replace all occurences of the pattern"*: `Yes`
     >            - *"Ignore first line"*: `Yes`
-    >            - *"Find and Replace text in"*: `specific column`
-    >              - *"in column*": `Column: 2`
-    > 3. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
+    >            - *"Find and Replace text in"*: `entire line`
+    > 5. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
     >    - {% icon param-file %} *"File to process"*: output of **Replace** {% icon tool %}
     >    - In *"Find and Replace"*:
     >        - {% icon param-repeat %} *"Insert Find and Replace"*
-    >            - *"Find pattern"*: `^[^0]\w+`
+    >            - *"Find pattern"*: `Acc_0`
+    >            - *"Replace with"*: `0`
+    >            - *"Find-Pattern is a regular expression"*: `No`
+    >            - *"Case-Insensitive search"*: `Yes`
+    >            - *"Replace all occurences of the pattern"*: `Yes`
+    >            - *"Ignore first line"*: `Yes`
+    >            - *"Find and Replace text in"*: `entire line`
+    > 6. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
+    >    - {% icon param-file %} *"File to process"*: output of **Replace** {% icon tool %}
+    >    - In *"Find and Replace"*:
+    >        - {% icon param-repeat %} *"Insert Find and Replace"*
+    >            - *"Find pattern"*: `Acc_\S*`
     >            - *"Replace with"*: `1`
     >            - *"Find-Pattern is a regular expression"*: `Yes`
     >            - *"Replace all occurences of the pattern"*: `Yes`
     >            - *"Ignore first line"*: `Yes`
-    >            - *"Find and Replace text in"*: `specific column`
-    >              - *"in column*": `Column: 3`
+    >            - *"Case-Insensitive search"*: `No`
+    >            - *"Find and Replace text in"*: `entire line`
+    > 7. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+    >    - {% icon param-file %} *"File to cut"*: output of **Multi-Join** {% icon tool %}
+    >    - *"Operation"*:`Keep`
+    >    - *"Delimited by"*:`Tab`
+    >    - *"Cut by"*:`fields`
+    >    - *"List of Fields"*:`1`
+    > 8. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+    >    - {% icon param-file %} *"File to cut"*: output of the last **Replace** {% icon tool %}
+    >    - *"Operation"*:`Discard`
+    >    - *"Delimited by"*:`Tab`
+    >    - *"Cut by"*:`fields`
+    >    - *"List of Fields"*:`1,2`
+    > 9. {% tool [Paste](Paste1) %} with the following parameters:
+    >    - {% icon param-file %} *"Paste"*: output of **Advanced Cut** (Tool N. 7) {% icon tool %}
+    >    - {% icon param-file %} *"and"*: output of **Advanced Cut** (Tool N. 8) {% icon tool %}
+    >    - *"Delimit by"*:`Tab`
     {: .hands_on}
 
 2. Draw heatmap
@@ -1191,26 +1183,27 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
 >
 > ![Heatmap](./images/heatmap.png)
 >
-> 1. Mention three of the common bacteria pathogen genes found in both samples
-> 2. Mention one that is only found in `Barcode10_Spike2` sample and one that is only found in `Barcode11_Spike2b`
+> 1. Mention three of the common bacterial pathogen genes found in both samples.
 > 3. How can the differences in the found **VF** bacteria pathogen genes between the two samples be interpreted?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. A lot of bacteria pathogen **VF** gene products identified by the **VFDB** are common in both samples, three of them are with the following accession number: **NP_461810**, **NP_461809** and **NP_459541**
 > > 2. **AAG03023** is only found in `Barcode10` sample and **NP_460360** is only found in `Barcode11` sample
-> > 3. Both samples are spiked with the same pathogen species, _S. enterica_, but not the same strain. 
-> > > - `Barcode10_Spike2` sample is spiked with _S. enterica subsp. enterica_ strain
-> > > - `Barcode11_Spike2b` sample is spiked with _S. enterica subsp. houtenae_ strain. 
-> > > > This can be the main cause of the big similarities and the few difference of the bacteria pathogen **VF** gene products found between both of the two samples. 
-> > > > > Other factors such as the **time** and **location** of the sampling may cause other differences. By knowing the metadata of the samples inputted for the workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
+> > 3. Both samples were spiked with the same pathogen species, _S. enterica_, but not the same strain:
+> >
+> >    - `Barcode10` sample is spiked with _S. enterica subsp. enterica_ strain
+> >    - `Barcode11` sample is spiked with _S. enterica subsp. houtenae_ strain. 
+> > 
+> >    This can be the main cause of the big similarities and the few differences of the bacteria pathogen **VF** gene products found between both of the two samples.
+> >    Other factors such as the **time** and **location** of the sampling may cause other differences. By knowing the metadata of the samples inputted for the workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
 > >
 > {: .solution}
 {: .question}
 
 ## Phylogenetic Tree building
 
-Phylogenetic trees are nice ways to track all the bacteria pathogen genes one by one in all samples. So we will have a tree for every found gene, this tree will indicate which contigs the gene is found in all samples and relating these contigs together based on their topology. With such trees we can identify on which location of the sequences sample genome the pathogentic gene is found and is it the same or different location as the other samples. We can also see how many samples have these genes in common and accordingly track our contamination.
+Phylogenetic trees can be used to track the evolution of the pathogen between the samples. Therefore, the VFs are used as a marker gene for the pathogen, similar to 16S marker genes for species profiling. We use the VFs since we know they are associated to the pathogenicity of the sample. By observing the created trees one can identify groups of related pathogens. If additional meta data of the samples would be available one could further identify groups that are associated to specific traits such as increase pathogenicity or faster transmission. Consequently, the tree could be used for phylogenetic placement of unknwon samples.
 
 For the phylogenetic trees, for each bacteria pathogen gene found in the samples we use **ClustalW** ({% cite Larkin2007 %}) for [Multiple Sequence Alignment (MSA)](https://www.sciencedirect.com/topics/medicine-and-dentistry/multiple-sequence-alignment) needed before constructing a phylogenetic tree, for the tree itself we use **FASTTREE** and **Newick Display** ({% cite Dress2008 %}) to visualize it.
 
@@ -1219,7 +1212,7 @@ For the phylogenetic trees, for each bacteria pathogen gene found in the samples
 To get the sequence to align, we need to extract the sequences of the VFs in the contigs:
 
 > <hands-on-title> Extract the sequences of the VFs </hands-on-title>
-> 1. {% tool [Collapse Collecction](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
+> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `Contigs`
 >    - *"Prepend File name"*: `Yes`
 >
@@ -1228,13 +1221,13 @@ To get the sequence to align, we need to extract the sequences of the VFs in the
 >    - *"Keep one header line"*: `Yes`
 >    - *"Prepend File name"*: `Yes`
 >
-> 3. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
->    - {% icon param-file %} *"from"*: output of 2nd **Collapse Collection** {% icon tool %}
->
-> 4. {% tool [Split by group](toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6) %} with the following parameters:
->    - {% icon param-file %} *"File to split"*: output of **Remove beginning** {% icon tool %}
+> 3. {% tool [Split by group](toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6) %} with the following parameters:
+>    - {% icon param-file %} *"File to split"*: output of 2nd **Collapse Collection** {% icon tool %}
 >    - *"on column"*: `Column: 13`
 >    - *"Include header in splits?"*: `Yes`
+>
+> 4. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+>    - {% icon param-file %} *"from"*: output of **Split by group** {% icon tool %}
 >
 > 5. {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence file to be filtered"*: output of 1st **Collapse Collection** {% icon tool %}
@@ -1272,26 +1265,21 @@ We can now run multiple sequence alignment, build the trees for each VF and disp
 
 > <question-title></question-title>
 >
-> Now let's see how your trees for the bacteria pathogen gene with accession IDs: **AAF98391**, **NP_249099** and **NP_460111** look like. To access that go to the output of Newick
+> Now let's see how your trees for the bacteria pathogen gene with accession IDs: **AAF37887** and **NP_459543** look like. To access that go to the output of Newick
 >
 >
-> 1. In which samples and contigs is gene **BAA94855** found?
-> 2. In which samples and contigs is gene **NP_249099** found?
-> 3. In which samples and contigs is gene **NP_461819** found?
+> 1. In which samples and contigs is gene **AAF37887** found?
+> 2. In which samples and contigs is gene **NP_459543** found?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. In the `Barcode10` sample only: Contigs 109 and 66
+> > 1. In the `Barcode10`: Contig 119 and `Barcode11`: Contig 1
 > >
-> >    ![BAA94855_Part_of_tree](./images/BAA94855_Part_of_tree.png)
+> >    ![AAF37887_tree](./images/AAF37887_tree.png)
 > >
-> > 2. In the `Barcode11` sample only: Contig 2
+> > 2. In the `Barcode10`: Contig 90 and `Barcode11`: Contig 1
 > >
-> >    ![NP_249099_Part_of_tree](./images/NP_249099_Part_of_tree.png)
-> >
-> > 3. In both samples; Contig 121 of `Barcode10` and Contig 1 of `Barcode11`
-> >
-> >    ![NP_461819_Part_of_tree](./images/NP_461819_Part_of_tree.png)
+> >    ![NP_459543_tree](./images/NP_459543_tree.png)
 > >
 > {: .solution}
 {: .question}

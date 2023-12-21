@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-enable: false
+draft: true
 
 title: De novo transcriptome assembly, annotation, and differential expression analysis
 zenodo_link: 'https://zenodo.org/record/3541678'
@@ -27,10 +27,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
-<!-- This is a comment. -->
 
 As a result of the development of novel sequencing technologies, the years between 2008 and 2012 saw a large drop in the cost of sequencing. Per megabase and genome, the cost dropped to 1/100,000th and 1/10,000th of the price, respectively. Prior to this, only transcriptomes of organisms that were of broad interest and utility to scientific research were sequenced; however, these developed in 2010s high-throughput sequencing (also called next-generation sequencing) technologies are both cost- and labor- effective, and the range of organisms studied via these methods is expanding.
 
@@ -88,6 +84,7 @@ Why do we need to correct those?
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true collection_type="List of Pairs" collection_name="fastq_raw" %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets

@@ -9,14 +9,14 @@ questions:
   - How can I configure job dependent resources, like cores, memory for my DRM?
 objectives:
   - Understand all components of the Galaxy job running stack
-  - Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem
+  - Understand how the job conf controls Galaxy's jobs subsystem
   - Know how to map tools to job destinations
   - The various ways in which tools can be mapped to destinations, both statically and dynamically
 key_points:
   - Galaxy supports a variety of different DRMs.
-  - Dynamic Tool Destinations are a convenient way to map
-  - Job resource parameters can allow you to give your users control over job resource requirements, if they are knowledgeable about the tools and compute resources available to them.
-contributors:
+  - Total Perspective Vortex is a convenient way to map
+contributions:
+  authorship:
   - natefoo
   - bgruening
   - nsoranzo
@@ -27,24 +27,23 @@ tags:
 
 # Galaxy Job Configuration
 
-- Configured in `config/job_conf.xml`
-- XML format with macro support
+- Configured in `job_config` in `galaxy.yml`, `group_vars/galaxyservers.yml`, and `files/galaxy/config/tpv*.yml`
 - Major components:
-  - **Plugins**: distributed resource manager (DRM) modules to load
-  - **Handlers**: job handler processes managing the lifecycle of jobs
-  - **Destinations**: where to send jobs, and what parameters to run those jobs with
+  - **Runners**: distributed resource manager (DRM) modules to load
+  - **Handlers**: dedicated Galaxy server processes managing the lifecycle of jobs
+  - **Environments** (aka "destinations"): where to send jobs, and what parameters to run those jobs with
   - **Tool** to destination/handler mappings
   - **Resource** selection mappings: give users job execution options on the tool form
   - **Limits**: job runtime limits, e.g. the max number of concurrent jobs
 
 ???
 
-- The job_conf file is a very powerul galaxy configuration piece critical to smooth cluster operation.
-- Written in XML it connects your server with the available cluster resources.
+- The job_conf file is a very powerful galaxy configuration piece critical to smooth cluster operation.
+- Written in YML, it connects your server with the available cluster resources.
 - You can configure it in myriad ways.
 - Study the advanced sample provided with codebase once you get a basic understanding.
 - There are several major components of the job conf file.
-- Plugins, handlers, destinations, tools, resources, and limits.
+- Plugins, handlers, environments (destinations), tools, resources, and limits.
 - We'll go into detail on each of these in the tutorial.
 
 ---
@@ -65,14 +64,18 @@ Can restart Galaxy without interrupting jobs
 
 ---
 
-# Plugins
+# Runners
 
 Correspond to job runner plugins in [lib/galaxy/jobs/runners](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/jobs/runners)
 
 .left[Plugins for:]
 - local
 - Slurm (DRMAA subclass)
-- DRMAA: SGE, PBS Pro, LSF, Torque
+- DRMAA (Distributed Resource Management Application API)
+  - SGE
+  - PBS Pro
+  - LSF
+  - Torque
 - HTCondor
 - Torque: Using the `pbs_python` library
 - Pulsar: Galaxy's own remote job management system
@@ -105,13 +108,9 @@ Correspond to job runner plugins in [lib/galaxy/jobs/runners](https://github.com
 
 # Handlers
 
-Define which Galaxy processes are job handlers
+Control how jobs are assigned to handlers (use `db-skip-locked`)
 
-- `id` attribute should match the `--server-name` param value of a process
-- Dedicated handlers can be reserved, e.g. for small, high throughput jobs
-- The list of plugins that are loaded by a job handler can be limited using `<plugin>` subelements (e.g. when the DRMAA plugin needs to be loaded with different library paths)
-- Not defined in `job_conf.xml` when using *job handler mules*
-- Defines how jobs are assigned to individual processes (use `db-skip-locked` !)
+Can statically define handler configuration (uncommon)
 
 ???
 
@@ -123,7 +122,9 @@ Define which Galaxy processes are job handlers
 
 ---
 
-# Destinations
+# Environments
+
+Formerly "Destinations"
 
 Define *how* jobs should be run
 
@@ -134,7 +135,7 @@ Define *how* jobs should be run
 
 ???
 
-- The destination section of the job configuration file is a map that defines which jobs go where.
+- The environments section of the job configuration is a map that defines which jobs go where.
 - Jobs from any destination, can be processed by any plugin.
 - Every job will find a path through this configuration and eventually get dispatched to the matching runner.
 - These destinations can specify things like environment variables or resource requirements.
@@ -143,17 +144,17 @@ Define *how* jobs should be run
 
 # The default job configuration
 
-.left[`config/job_conf.xml.sample_basic`:]
-```xml
-<?xml version="1.0"?>
-<job_conf>
-    <plugins>
-        <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner" workers="4"/>
-    </plugins>
-    <destinations>
-        <destination id="local" runner="local"/>
-    </destinations>
-</job_conf>
+```yml
+runners:
+  local:
+    load: galaxy.jobs.runners.local:LocalJobRunner
+    workers: 4
+
+execution:
+  default: local
+  environments:
+    local:
+      runner: local
 ```
 
 ???
@@ -166,28 +167,29 @@ Define *how* jobs should be run
 
 # Job Config - Tags
 
-Both destinations and handlers can be grouped by **tags**
+Both environments and handlers can be grouped by **tags**
 
 - Allows random selection from multiple resources
-- Allows concurrency limits at the destination group level
+- Allows concurrency limits at the environment group level
 
 ???
 
-- Tags can be applied to both destinations and handlers.
-- This permits selecting randomly amongst the handlers or destinations.
+- Tags can be applied to both environments and handlers.
+- This permits selecting randomly amongst the handlers or environments.
 - Tags can help the load distribution.
+- Tags can also be used for concurrency limits that apply across multiple environments.
 
 ---
 
 # Job Environment
 
-`<env>` tag in destinations: configure the job exec environment
+`env` key in environments: configure the job execution environment
 
-| tag syntax | function |
+| syntax | function |
 | ---- | ---- |
-| `<env id="NAME">VALUE</env>` | Set `$NAME` to `VALUE` |
-| `<env file="/path/to/file" />` | Source shell file at `/path/to/file` |
-| `<env exec="CMD" />` | Execute `CMD` |
+| `- {name: NAME, value: VALUE}` | Set `$NAME` to `VALUE` |
+| `- {file: /path/to/file}` | Source shell file at `/path/to/file` |
+| `- {execute: CMD}` | Execute `CMD` |
 
 Source and command execution will be handled on the remote destination, don't need to work on the Galaxy server
 
@@ -221,8 +223,8 @@ Available limits
 
 - Number of active jobs per registered user
 - Number of active jobs per unregistered user
-- Number of active jobs per registered user in a specified destination or destination tag
-- Number of total active jobs in a specified destination or destination tag
+- Number of active jobs per registered user in a specified environment or environment tag
+- Number of total active jobs in a specified environment or environment tag
 
 ???
 
@@ -236,7 +238,7 @@ Available limits
 
 Most job plugins require a **shared filesystem** between the Galaxy server and compute.
 
-The exception is **Pulsar**. More on this in *Using heterogeneous compute resources*
+The exception is **Pulsar**. More on this in *Running Jobs on Remote Resources with Pulsar*.
 
 ???
 
@@ -256,7 +258,7 @@ Our simple example works because of two important principles:
   - Job working directory
   - Input and output datasets
 
-The first can be worked around with symlinks or Pulsar embedded (later)
+The first can be worked around with symlinks, copies, or Pulsar embedded
 
 The second can be worked around with Pulsar REST/MQ (with a performance/throughput penalty)
 
@@ -291,16 +293,18 @@ Tool configs: Consume `\${GALAXY_SLOTS:-4}`
 
 # Memory requirements
 
-For **Slurm only**, Galaxy will set `$GALAXY_MEMORY_MB` and `$GALAXY_MEMORY_MB_PER_SLOT` as integers.
+For **Slurm and Gridengine only**, Galaxy will set `$GALAXY_MEMORY_MB` and `$GALAXY_MEMORY_MB_PER_SLOT` as integers.
 
 **Other DRMs:** Please PR the [appropriate code](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/jobs/runners/util/job_script/MEMORY_STATEMENT.sh).
 
 For Java tools, be sure to set `-Xmx`, e.g.:
 
-```xml
-<destination id="foo" ...>
-    <env id="_JAVA_OPTIONS">-Xmx4096m</env>
-</destination>
+```yml
+    java_cluster:
+      runner: drmaa
+      env:
+        - name: '_JAVA_OPTIONS'
+          value: '-Xmx6G'
 ```
 
 ???
@@ -327,7 +331,7 @@ See: [Cluster documentation](https://wiki.galaxyproject.org/Admin/Config/Perform
 
 ---
 
-## Job Config - Mapping Tools to Destinations
+## Job Config - Mapping Tools to Environments
 
 Problem: Tool A uses single core, Tool B uses multiple
 - Both submit to the same cluster
@@ -335,37 +339,40 @@ Problem: Tool A uses single core, Tool B uses multiple
 
 ???
 
-- Mapping tools to destinations is the heart of the job configuration.
+- Mapping tools to environments is the heart of the job configuration.
 - This permits you to define which tools go to which destinations, and what resources they need.
 
 ---
 
-## Job Config - Mapping Tools to Destinations
+## Job Config - Mapping Tools to Environments
 
 Solution:
 
-```xml
-    <destinations default="single">
-        <destination id="single" runner="slurm" />
-        <destination id="multi" runner="slurm">
-            <param id="nativeSpecification">--ntasks=4</param>
-        </destination>
-    </destinations>
-    <tools>
-        <tool id="hisat2" destination="multi"/>
-    </tools>
+```yml
+execution:
+  default: singlecore_slurm
+  environments:
+    singlecore_slurm:
+      runner: slurm
+
+    multicore_slurm:
+      runner: slurm
+      native_specification: '--ntasks=4'
+tools:
+- id: hisat2
+  handler: multicore_slurm
 ```
 
 ???
 
-- Here is an example mapping the hisat2 tool to a definition named multi.
-- The multi destination specifies that 4 cores should be allocated for each job, and uses the slurm plugin.
+- Here is an example mapping the hisat2 tool to an environment named multicore_slurm.
+- The multicore environment specifies that 4 cores should be allocated for each job, and uses the slurm plugin.
 
 ---
 
 # The Dynamic Job Runner
 
-For when basic tool-to-destination mapping isn't enough
+For when basic tool-to-environment mapping isn't enough
 
 ???
 
@@ -382,33 +389,24 @@ A special built-in job runner plugin
 Map jobs to destinations on more than just tool IDs
 
 .left[Two types:]
-- Dynamic Tool Destinations
-- Python function
+- Total Perspective Vortex (TPV)
+- Arbitrary Python function
 
 See: [Dynamic Destination Mapping](https://docs.galaxyproject.org/en/master/admin/jobs.html#dynamic-destination-mapping)
 
 ???
 
-- There are two built in ways to do this: dynamic tool destinations, and custom Python functions.
-- We will cover both of these in the tutorial.
+- There are two built in ways to do this: TPV and custom Python functions.
 
 ---
 
-## Dynamic Tool Destinations
+## Total Perspective Vortex (TPV)
 
-.left[Configurable mappings without programming:]
-- YAML format config file `tool_destinations.yml`
-- Map based on tool ID plus:
-  - Input dataset size(s)
-  - Input dataset number of records
-  - User
-- Maps to static destinations defined in job config
+Powerful, fully dynamic tool-to-environment mapping based on tool, user, resource requirements, tags, and more.
 
-???
+Discussed in detail in [its own tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html).
 
-- The Dynamic Tool Destinations are written as a yaml file.
-- You can easily write rules based on file input sizes or number of inputs or user information.
-- This can be used to determine memory and cpu allocations.
+See also: [TPV Documentation](https://total-perspective-vortex.readthedocs.io/).
 
 ---
 
@@ -429,7 +427,6 @@ See: [Dynamic Destination Mapping](https://docs.galaxyproject.org/en/master/admi
 
 ???
 
-- If Dynamic Tool Destinations are insufficiently flexible, then custom Python functions can be written.
 - These can use any arbitrary information you want.
 - They have full access to submitter information, job parameters, and any other resource you might want.
 - They can dynamically modify destination parameters during runtime.
