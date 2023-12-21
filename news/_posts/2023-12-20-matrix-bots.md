@@ -3,6 +3,7 @@ title: "GTN Helper Bots Connect the Galaxy"
 contributions:
   authorship: [mtekman]
   editing: [hexylena]
+  infrastructure: [mtekman, hexylena]
 tags: [gtn, communications]
 layout: news
 ---
