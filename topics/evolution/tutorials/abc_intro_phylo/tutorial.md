@@ -108,6 +108,8 @@ This tutorial has the following structure:
 - Assessing the quality of the tree(s): Bootstrapping, branch lengths; conflict in the networks
 - Maximum Likelihood with IQTree -->
 
+## Welcome
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dmCCQRliEMk?si=iAmOuuO_x0OXkJ4q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen alt="Video: Welcome and why phylogenetics?"></iframe>
 
 
 ## What is a Phylogeny?
@@ -158,6 +160,9 @@ Aside from gaining a fundamental understanding of biology, other reasons for inf
 {: .comment}
 
 ## Terminology
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gnWlMbGPYx8?si=eCOgJXSo-M5E6ZDK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 Before we start building trees, let's define some terms.
 
@@ -377,6 +382,9 @@ ACTTGGCGTAGCCGGAGGCC
 
 # Sequence Alignment
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FUc2A2r1LGY?si=eJolYh8_oAZ1IEDU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
 Molecular sequences must be aligned before they can be used to build phylogenies.
 
 Aligning sequences amounts to finding the nucleotide positions (sites) that we can be confident have the same evolutionary history: they correspond to each other across species and can be considered to have evolved from the same common ancestor.
@@ -429,6 +437,9 @@ A tool you can use on your own computer is [SeaView](https://doua.prabi.fr/softw
 
 
 # Distance-based phylogenetic inference
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/t68H2Ilc4mI?si=7i6ZePO3_7CqN5H3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 We are going to build our first tree, using a very common method called _Neighbor-Joining_. This method was created in the 1980s by Saitou & Nei ({% cite 10.1093/oxfordjournals.molbev.a040454 %}). 
 
@@ -1024,6 +1035,7 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 # Phylogenetic Networks
 
 <!-- Intro to phylogenetic networks as an alternative to trees -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MvZhj3cSVhA?si=fcFWkzQpIxm8Aa0v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 Perhaps surprisingly, phylogenetic estimation doesn't have to start with a tree. Instead you can start with a *phylogenetic network*.
