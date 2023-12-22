@@ -28,15 +28,15 @@ Down under, the Australian BioCommons launched their [Single Cell and Spatial Om
 
 ## Training
 
-Get ready for a thrilling journey through the [Single Cell Training](https://training.galaxyproject.org/training-material/topics/single-cell/)'s latest updates! The **Case Study Reloaded** tutorial, fueled by three remote-working undergrads, introduces parallel trajectory analysis in R, Python, and the Galaxy GUI.
+Get ready for a thrilling journey through the [Single Cell Training]({% link topics/single-cell %})'s latest updates! The **Case Study Reloaded** tutorial, fueled by three remote-working undergrads, introduces parallel trajectory analysis in R, Python, and the Galaxy GUI.
 
-Sustainability shines as we've revamped numerous tutorials with hands-on and video re-recordings. New tools bring new tutorials, such as [Pre-processing of 10X Single-Cell ATAC-seq Datasets](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html) and [Comparing inferred cell compositions using MuSiC deconvolution](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html).
+Sustainability shines as we've revamped numerous tutorials with hands-on and video re-recordings. New tools bring new tutorials, such as [Pre-processing of 10X Single-Cell ATAC-seq Datasets]({% link topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html %}) and [Comparing inferred cell compositions using MuSiC deconvolution]({% link topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html %}).
 
 Tackling user hurdles, our data ingest and conversion tutorials in the **Changing data formats & preparing objects** section await exploration.
 
-Dive into the unique **Tips, tricks & other hints** section, offering analysis options like [parameter iteration](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html) for swift optimization or [Removing the effects of the cell cycle](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html) for precise clustering analysis.
+Dive into the unique **Tips, tricks & other hints** section, offering analysis options like [parameter iteration]({% link topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html %) for swift optimization or [Removing the effects of the cell cycle]({% link topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html %}) for precise clustering analysis.
 
-And don't miss our inaugural [Learning Pathway](https://training.galaxyproject.org/training-material/learning-pathways/intro_single_cell.html), guiding Galaxy novices to becoming single-cell analysis experts!
+And don't miss our inaugural [Learning Pathway]({% link training-material/learning-pathways/intro_single_cell.html %), guiding Galaxy novices to becoming single-cell analysis experts!
 
 
 # Fighting Work Duplication
