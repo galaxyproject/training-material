@@ -4,6 +4,8 @@ contributions:
   authorship: [mtekman, nomadscientist, pavanvidem]
 tags: [gtn, communications, single-cell]
 layout: news
+cover: "news/images/2023_dec_sc.png"
+coveralt: "swirled cluster dots surround a circle of people all holding hands, looking towards the bright center (future)"
 ---
 
 🚀Embarking on a cosmic journey, the Galaxy Single-cell Community has clustered together to unveil a constellation of tools, making strides in RNA-stellar discoveries and creating out-of-this-world workflows. With a commitment to battling work duplication across the multiverse, this community is boldly charting a course for global domination, proving that when it comes to bioinformatics, the Galaxy is the limit!✨
