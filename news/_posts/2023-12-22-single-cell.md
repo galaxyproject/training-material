@@ -36,7 +36,7 @@ Tackling user hurdles, our data ingest and conversion tutorials in the **Changin
 
 Dive into the unique **Tips, tricks & other hints** section, offering analysis options like [parameter iteration]({% link topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.md %}) for swift optimization or [Removing the effects of the cell cycle]({% link topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.md %}) for precise clustering analysis.
 
-And don't miss our inaugural [Learning Pathway]({% link learning-pathways/intro_single_cell.md %), guiding Galaxy novices to becoming single-cell analysis experts!
+And don't miss our inaugural [Learning Pathway]({% link learning-pathways/intro_single_cell.md %}), guiding Galaxy novices to becoming single-cell analysis experts!
 
 
 # Fighting Work Duplication
