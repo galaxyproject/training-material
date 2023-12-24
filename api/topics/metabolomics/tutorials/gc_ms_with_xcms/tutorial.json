@@ -73,7 +73,7 @@
       "name": "GC MS using XCMS",
       "title": "GC MS using XCMS",
       "test_results": null,
-      "modified": "2023-12-24 00:11:09 +0000",
+      "modified": "2023-12-24 23:40:36 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset collection\"];\n  4[\"msconvert\"];\n  3 -->|output| 4;\n  5[\"MSnbase readMSData\"];\n  4 -->|output| 5;\n  6[\"xcms findChromPeaks (xcmsSet)\"];\n  5 -->|xsetRData| 6;\n  7[\"xcms findChromPeaks Merger\"];\n  6 -->|xsetRData| 7;\n  2 -->|output| 7;\n  8[\"xcms groupChromPeaks (group)\"];\n  7 -->|xsetRData| 8;\n  9[\"xcms adjustRtime (retcor)\"];\n  8 -->|xsetRData| 9;\n  10[\"xcms groupChromPeaks (group)\"];\n  9 -->|xsetRData| 10;\n  11[\"xcms fillChromPeaks (fillPeaks)\"];\n  10 -->|xsetRData| 11;\n  12[\"RAMClustR\"];\n  11 -->|xsetRData| 12;\n  13[\"RIAssigner\"];\n  12 -->|mass_spectra_merged| 13;\n  0 -->|output| 13;\n  14[\"matchms similarity\"];\n  13 -->|output| 14;\n  1 -->|output| 14;\n  15[\"matchms scores formatter\"];\n  14 -->|similarity_scores| 15;\n"
     }
   ],
