@@ -97,7 +97,7 @@ In addition to the rule of 5, there are also other criteria, one of which is the
 
 Have you ever wondered how new drugs are developed? It is actually quite a long and complex pathway and not only takes lots of time, but also resources. The scheme below will help you understand the scale of that process.
 
-![A scheme showing drug discovery pipeline: starting from target identification, hit, lead, lead optimisation, pre-clinical testing, clinical evaluation in phases I - III, and finaly regulatory approval. Lead optimisation also includes iterative steps of designing, making, testing and analysing the proposed compounds.](../../images/X.png "A scheme showing drug discovery pipeline")
+![A scheme showing drug discovery pipeline: starting from target identification, hit, lead, lead optimisation, pre-clinical testing, clinical evaluation in phases I - III, and finaly regulatory approval. Lead optimisation also includes iterative steps of designing, making, testing and analysing the proposed compounds.](../../images/medchem.png "A scheme showing drug discovery pipeline")
 
 As you can see, to get just one drug to the market, often thousands of structures are assessed to find the most effective and safe compound. That's lots of information being generated in the whole process! The information can be stored in repositories and databases so that subsequent drug discovery process in a similar area is easier, faster and cheaper. Managing big data and using machine learning and computational chemistry methods is crucial in lead optimisation step. By reviewing chemical databases and studying molecular docking simulations, we can save much time and resources to synthesise only those compounds that are the most promising based on *in-silico* methods. Even after synthesising the optimised 'leads', we still get lots of data from tests and analyses. By using appropriate cheminformatic tools and software, we can use the results to drive forward this iterative process of lead optimisation.
 
@@ -409,7 +409,7 @@ Let's repeat this step, but with applying Lipinski's Rule of Five that you learn
 > >
 > > If you click on the dataset, you will see a short summary how many molecules have been found.
 > > When we didn't apply any filters, the tool found 45 molecules. After applying Lipinski's Rule of Five filter, 36 molecules satisfied the rules. 
-> > ![Image showing the preview of the output datasets from searching benzenesulfonyl chloride substructures in the ChEMBL database, with and without Lipinski's Rule of Five filter.](../../images/X.png "Preview showing the number of molecules found in the ChEMBL database, before and after applying Lipinski's Rule of Five filter")
+> > ![Image showing the preview of the output datasets from searching benzenesulfonyl chloride substructures in the ChEMBL database, with and without Lipinski's Rule of Five filter.](../../images/substructures.png "Preview showing the number of molecules found in the ChEMBL database, before and after applying Lipinski's Rule of Five filter")
 > >
 > {: .solution}
 >
