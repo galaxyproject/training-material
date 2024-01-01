@@ -416,4 +416,8 @@ Let's repeat this step, but with applying Lipinski's Rule of Five that you learn
 {: .question}
 
 
+## Summary
+
+Those are just a few tools, but they offer many parameters that you can tune depending on your analysis. Additionally, we provide you with an [example history](https://usegalaxy.eu/u/j.jakiela/h/data-management-in-medicinal-chemistry-tutorial) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/data-management-in-medicinal-chemistry-workflow) corresponding to the tools we used in this small tutorial. You are more than welcome to explore other tools in the Galaxy Chemical Toolbox though!
+
 # Data-driven medicinal chemistry - yesterday, today and tomorrow
