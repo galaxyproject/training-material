@@ -119,7 +119,10 @@ module Gtn
     # Returns:
     # +Hash+ of contributors, funders, organisations merged together
     def self.list(site)
-      site.data['contributors'].merge(site.data['funders']).merge(site.data['organisations'])
+      site.data['contributors']
+          .merge(site.data['funders'])
+          .merge(site.data['organisations'])
+          .reject { |c| c['halloffame'] == 'no' }
     end
 
     ##

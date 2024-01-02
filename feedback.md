@@ -1,5 +1,6 @@
 ---
 layout: base
+title: GTN Feedback
 ---
 
 {% assign fdbk= site.data['feedback'] %}
@@ -193,8 +194,6 @@ layout: base
 
 <div class="container main-content">
     <section>
-        <h1>GTN Feedback</h1>
-
         <p>Aggregation of feedback submitted since {{ start.month }} using the embed feedback form
             at the bottom of tutorials. Thank you everyone who submitted feedback!
         </p>

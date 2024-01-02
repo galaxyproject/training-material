@@ -504,7 +504,7 @@ module GTNNotebooks
                                "<blockquote class=\"#{key}\" style=\"border: 2px solid #{val}; margin: 1em 0.2em\">")
         end
 
-        # Images are referenced in the GTN through relative URLs which is
+        # Images are referenced in the through relative URLs which is
         # fab, but in a notebook this doesn't make sense as it will live
         # outside of the GTN. We need real URLs.
         #
@@ -518,19 +518,15 @@ module GTNNotebooks
             image_path = File.join(dir, path)
 
             if img[-3..].downcase == 'png'
-              # puts "[GTN/Notebook/Images] Embedding png: #{img}"
               data = Base64.encode64(File.binread(image_path))
               %(<img src="data:image/png;base64,#{data}")
             elsif (img[-3..].downcase == 'jpg') || (img[-4..].downcase == 'jpeg')
-              # puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
               data = Base64.encode64(File.binread(image_path))
               %(<img src="data:image/jpeg;base64,#{data}")
             elsif img[-3..].downcase == 'svg'
-              # puts "[GTN/Notebook/Images] Embedding svg: #{img}"
               data = Base64.encode64(File.binread(image_path))
               %(<img src="data:image/svg+xml;base64,#{data}")
             else
-              # puts "[GTN/Notebook/Images] Fallback for #{img}"
               # Falling back to non-embedded images
               "<img src=\"https://training.galaxyproject.org/training-material/#{page_url.split('/')[0..-2].join('/')}/.."
             end

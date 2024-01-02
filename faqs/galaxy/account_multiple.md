@@ -5,6 +5,7 @@ box_type: tip
 layout: faq
 contributors: [shiltemann]
 ---
+
 The account registration form and activation email include a terms of service statement.
 
 - You ARE NOT allowed to create more than 1 account per Galaxy server.

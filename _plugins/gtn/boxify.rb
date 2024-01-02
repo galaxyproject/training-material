@@ -167,7 +167,7 @@ module Gtn
       box_id = get_id(box_type, title, key)
       box_title = format_box_title(title, box_type, lang, noprefix: noprefix)
 
-      puts "Static | typ=#{box_type} | t=#{title} | l=#{lang} | k=#{key}" if title.nil?
+      Jekyll.logger.debug "Static | typ=#{box_type} | t=#{title} | l=#{lang} | k=#{key}" if title.nil?
 
       [box_id, %(
         <div class="box-title #{box_type}-title" id="#{box_id}">
