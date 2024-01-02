@@ -507,10 +507,10 @@ Now, one can align its sequences with primers. Ultimately, it is common to cut s
 >        - *"Maximum hits to consider/show"*: `10`
 >        - *"Restrict search of database to a given set of ID's"*: `No restriction, search the entire database`
 >
-> > <question-title>Question</question-title>
+> > <question-title></question-title>
 > > The sequences we cleaned belong to what species?
 > >
-> > > <solution-title>Solution</solution-title>
+> > > <solution-title></solution-title>
 > > > *Homo sapiens*
 > > >
 > > {: .solution}
