@@ -170,7 +170,7 @@ This following hands-on is to be applied only on the sequence of the antisense (
 >    - {% icon param-file %} *"input_file"*: `AOPEP_and_CHD8_sequences_20220907.zip?download=1`
 >    - *"Extract single file"*: `All files`
 >
-> > <question-title>Question</question-title>
+> > <question-title></question-title>
 > > How many files is there in the ZIP archive ?
 > >
 > > > <solution-title>Solution</solution-title>
