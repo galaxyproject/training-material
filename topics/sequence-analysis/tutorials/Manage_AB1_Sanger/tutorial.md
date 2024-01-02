@@ -173,7 +173,7 @@ This following hands-on is to be applied only on the sequence of the antisense (
 > > <question-title></question-title>
 > > How many files is there in the ZIP archive ?
 > >
-> > > <solution-title>Solution</solution-title>
+> > > <solution-title></solution-title>
 > > > 12 (if you have a different number of files something likely went wrong)
 > > >
 > > {: .solution}
