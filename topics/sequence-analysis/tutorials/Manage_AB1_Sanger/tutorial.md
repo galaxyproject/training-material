@@ -416,7 +416,7 @@ When you have the consensus sequences, you can check if any ambiguous nucleotide
 >
 > 1. Click on output of **Regex Find and Replace** {% icon tool %} in the history to expand it
 >
-> 2. Click on {% icon galaxy-barchat %} Visualize
+> 2. Click on {% icon galaxy-barchart %} Visualize
 >
 > 3. Select **Multiple Sequence Alignment**
 > 
@@ -471,7 +471,7 @@ When you have the consensus sequences, you can check if any ambiguous nucleotide
 >
 > 11. You can now correct them by clicking on output of **Regex Find and Replace** {% icon tool %} in the history to expand it
 >
-> 12. Click on {% icon galaxy-barchat %} Visualize
+> 12. Click on {% icon galaxy-barchart %} Visualize
 >
 > 13. Select **Editor** and:
 >     - replace manually the `Y` with `T` in `consensus_B05_CHD8-III6brother-18`
