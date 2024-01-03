@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Data management in Medicinal Chemistry
+level: Introductory
 
 questions:
 - Why does the medicinal chemistry research produce so much data?
@@ -120,7 +121,7 @@ Hopefully now you have an idea of how the process of drug discovery looks like. 
 It is important that medicinal chemists keep in mind those features while both searching for data and publishing it. In this way we can focus on the main aspects of data management, try to improve the availability and normalisation of data, and be aware of limitations of repositories and inconsistencies in data quality. 
 
 ## FAIR MedChem
-Those are the properties that the compounds can be easily searched by if all the information is included in the database. There is a need of assessing other molecular properties. This is one of the reasons why new repositories are being developed – they are more specific and gather particular properties of interest [EXAMPLE?]. 
+Those are the properties that the compounds can be easily searched by if all the information is included in the database. There is a need of assessing other molecular properties. This is one of the reasons why new repositories are being developed – they are more specific and gather particular properties of interest. 
 How much easier the life of scientists could be if the relevant data was publicly available, well-ordered and contained the needed metadata? By submitting the data with necessary information to the repository is a good way to make the data FAIR. This will make it:
 - **F**indable, as the data will be given specific identifiers
 - **A**ccessible, as the data will be available online, open and free where possible
@@ -301,7 +302,7 @@ We intentionally chose to work on benzenesulfonyl chloride and ethylamine. Do yo
 >
 {: .hands_on}
 
-> <tip-title> {% icon tool %} **Reaction maker** works also with SMILES!</tip-title>
+> <tip-title> Reaction maker tool works also with SMILES!</tip-title>
 >
 > Above we converted the *.smi* file into *.sdf* to show how {% icon tool %} **Compound conversion** tool works. However, it is worth pointing out that {% icon tool %} **Reaction maker** works also with SMILES files and the conversion happens automaticaly so that your *.smi* dataset is imported as *.sdf* input.
 >
@@ -369,13 +370,13 @@ In medicinal chemistry we often base the new structures on scaffolds of existing
 {: .hands_on}
 
 
-> <tip-title> {% icon tool %} **Search ChEMBL database** works also with SDF!</tip-title>
+> <tip-title>Search ChEMBL database tool works also with SDF!</tip-title>
 >
 > Even though the input format of the above tool is SMILES, it can automatically interconvert between sdf and smi formats, so you don't have to use {% icon tool %} **Compound conversion** tool beforehand. 
 > 
 {: .tip} 
 
-> <details-title>Parameters of {% icon tool %} **Search ChEMBL database**</details-title>
+> <details-title>Parameters of Search ChEMBL database tool</details-title>
 >
 >  {% icon tool %} **Search ChEMBL database** tool allows for searching the ChEMBL database for compounds which resemble a SMILES string. Two search options are possible:
 > - similarity (searches for compounds which are similar to the input within a specified Tanimoto cutoff)
@@ -442,5 +443,5 @@ It is important to understand the limitations of the databases we use as chemist
 Given the huge number of the molecules in the various databases, there have been attempts to apply machine learning in cheminformatics and build predictive models of physiochemical properties of molecules. It helps to predict absorption, distribution, metabolism, excretion, toxicity (ADMET), likelihood of interaction with the drug targets as well as off-target effects. It can be useful in elucidating complex protein-protein or drug-drug interaction networks, in understanding structure-activity relationships (SARs) and when combined with data from ‘omics’ revolution. This approach also helps to identify bioisosteres and introduce the idea of scaffold hopping in molecular design ({% cite Brown2018 %}).
 
 ## Knowledge sharing
-It is not only about gathering and managing the data but also building a culture of knowledge sharing. We work in big, international teams with well-established methods and well-equipped labs. There are so many opportunities for knowledge capture and exchange! The challenge emerges here though – how to efficiently connect and help each other? This is the question that many pharmaceutical companies try to answer, such as Merck & Co. who describe their approach to knowledge management and report on the multiple enduring and complementary teams and initiatives to capture and share knowledge ( {% cite Beshore2022 %} ). 
+It is not only about gathering and managing the data but also building a culture of knowledge sharing. We work in big, international teams with well-established methods and well-equipped labs. There are so many opportunities for knowledge capture and exchange! The challenge emerges here though – how to efficiently connect and help each other? This is the question that many pharmaceutical companies try to answer, such as Merck & Co. who describe their approach to knowledge management and report on the multiple enduring and complementary teams and initiatives to capture and share knowledge ({% cite Beshore2022 %}). 
 
