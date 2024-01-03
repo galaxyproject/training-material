@@ -421,3 +421,26 @@ Let's repeat this step, but with applying Lipinski's Rule of Five that you learn
 Those are just a few tools, but they offer many parameters that you can tune depending on your analysis. Additionally, we provide you with an [example history](https://usegalaxy.eu/u/j.jakiela/h/data-management-in-medicinal-chemistry-tutorial) and the dedicated [workflow](https://usegalaxy.eu/u/j.jakiela/w/data-management-in-medicinal-chemistry-workflow) corresponding to the tools we used in this small tutorial. You are more than welcome to explore other tools in the Galaxy Chemical Toolbox though!
 
 # Data-driven medicinal chemistry - yesterday, today and tomorrow
+
+## Why do we need big data in med-chem?
+In the article by {% cite Lusher2014 %} the role of the medicinal chemist is to make decisions about which of the infinite possibilities of new compounds should be made next. As the amount and variety of data on which to base these decisions grows, so too must the data analysis skills of the medicinal chemist. The authors claim that modern medicinal chemists should be able to recognise sources of relevant information, prepare raw data, use statistical tools, extract meaningful information, interpret results, recognise potential problems and make visualisations to communicate their findings to improve the quality of compounds being produced in research. According to the authors, this situation will require improved education and increased access to data and information management tools. And this is where Galaxy comes in, offering not only a platform for data analysis with a plethora of most commonly used tools in the field, but also educational materials allowing anyone to learn and excel in analysis. 
+ 
+The privilege of applying computational methods in medicinal chemistry pipelines allows to focus on the most promising compounds and to remove unsuitable ones before the stage of chemical synthesis. Not only is this approach more efficient but also more sustainable and can reduce the costs of the synthetic stage of drug discovery ({% cite Brown2018 %}).
+Another important role that big data plays in drug discovery is target identification (and validation) which might be currently one the biggest challenges in medicinal chemistry. By introducing genomic data in drug discovery, we can produce more specific and effective medicines. Understanding the underlying causes of the disease and the biological targets are crucial in designing new drugs and hence should be inherently linked with this process, where possible. 
+
+## Data challenges 
+It is important to understand the limitations of the databases we use as chemists as data that is not well understood, the processing and analysis drawn may ultimately be flawed, following the ‘garbage in, garbage out’ principle. Here are some challenges mentioned in {% cite Brown2018 %} that you can explore more in depth by referring to that article.
+-	Errors
+-	Reproducibility
+-	Standardisation
+-	Formatting of data
+-	Information held in silos
+-	Loss of contextual information
+-	Limited and biased data
+
+## Machine learning in med-chem
+Given the huge number of the molecules in the various databases, there have been attempts to apply machine learning in cheminformatics and build predictive models of physiochemical properties of molecules. It helps to predict absorption, distribution, metabolism, excretion, toxicity (ADMET), likelihood of interaction with the drug targets as well as off-target effects. It can be useful in elucidating complex protein-protein or drug-drug interaction networks, in understanding structure-activity relationships (SARs) and when combined with data from ‘omics’ revolution. This approach also helps to identify bioisosteres and introduce the idea of scaffold hopping in molecular design ({% cite Brown2018 %}).
+
+## Knowledge sharing
+It is not only about gathering and managing the data but also building a culture of knowledge sharing. We work in big, international teams with well-established methods and well-equipped labs. There are so many opportunities for knowledge capture and exchange! The challenge emerges here though – how to efficiently connect and help each other? This is the question that many pharmaceutical companies try to answer, such as Merck & Co. who describe their approach to knowledge management and report on the multiple enduring and complementary teams and initiatives to capture and share knowledge ( {% cite Beshore2022 %} ). 
+
