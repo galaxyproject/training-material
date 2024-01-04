@@ -120,7 +120,7 @@
       "name": "Proteomics: MaxQuant and MSstats LFQ workflow",
       "title": "Proteomics: MaxQuant and MSstats LFQ workflow",
       "test_results": null,
-      "modified": "2024-01-03 00:10:36 +0000",
+      "modified": "2024-01-04 00:10:58 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset collection\"];\n  4[\"MaxQuant\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  5[\"Select\"];\n  4 -->|proteinGroups| 5;\n  6[\"Select\"];\n  4 -->|evidence| 6;\n  7[\"Replace Text\"];\n  5 -->|out_file1| 7;\n  8[\"Replace Text\"];\n  6 -->|out_file1| 8;\n  9[\"MSstats\"];\n  1 -->|output| 9;\n  0 -->|output| 9;\n  8 -->|outfile| 9;\n  7 -->|outfile| 9;\n  10[\"Datamash\"];\n  9 -->|runlevel_data| 10;\n  11[\"Summary Statistics\"];\n  9 -->|runlevel_data| 11;\n  12[\"Replace Text\"];\n  9 -->|comparison_result| 12;\n  13[\"Replace Text\"];\n  9 -->|quant_sample_matrix| 13;\n  14[\"Filter\"];\n  12 -->|outfile| 14;\n  15[\"Filter\"];\n  14 -->|out_file1| 15;\n  16[\"Filter\"];\n  14 -->|out_file1| 16;\n  17[\"Filter\"];\n  15 -->|out_file1| 17;\n  18[\"Filter\"];\n  16 -->|out_file1| 18;\n  19[\"Cut\"];\n  17 -->|out_file1| 19;\n  20[\"Cut\"];\n  18 -->|out_file1| 20;\n  21[\"Join\"];\n  13 -->|outfile| 21;\n  19 -->|out_file1| 21;\n  22[\"Join\"];\n  13 -->|outfile| 22;\n  20 -->|out_file1| 22;\n  23[\"heatmap2\"];\n  21 -->|output| 23;\n  24[\"UniProt\"];\n  21 -->|output| 24;\n  25[\"heatmap2\"];\n  22 -->|output| 25;\n  26[\"UniProt\"];\n  22 -->|output| 26;\n  27[\"FASTA-to-Tabular\"];\n  24 -->|outfile_retrieve_fasta| 27;\n  28[\"FASTA-to-Tabular\"];\n  26 -->|outfile_retrieve_fasta| 28;\n"
     }
   ],
