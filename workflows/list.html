@@ -9,7 +9,9 @@ We are testing a new search experience. Tell us what you think!
 <p>
 This site
 currently lists {{ site.data['workflows'] | size }} workflows from
-UseGalaxy.org, UseGalaxy.eu, UseGalaxy.org.au, and WorkflowHub.eu. It is updated weekly.
+{% assign servers = nil | list_usegalaxy_servers %}
+{% for server in servers %}{{ server.name }}, {% endfor %}
+and WorkflowHub.eu. It is updated weekly.
 </p>
 
 <label for="title">Search</label>

@@ -56,7 +56,7 @@ module Jekyll
           res = %(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
         end
       rescue StandardError => e
-        puts "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
+        Jekyll.logger.warn "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
         res = %(<span>ERROR INVALID CITATION #{@text}</span>)
       end
 
@@ -108,7 +108,7 @@ module Jekyll
         end
         res = url
       rescue StandardError => e
-        puts "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
+        Jekyll.logger.warn "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
         res = %(<span>https://example.com/ERROR+INVALID+CITATION+#{@text}</span>)
       end
       res

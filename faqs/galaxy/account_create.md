@@ -9,7 +9,11 @@ contributors: [jennaj, bernandez, samanthaanjei, wm75]
 
 1. To create an account at any public Galaxy instance, choose your server from the available [list of Galaxy Platforms](https://galaxyproject.org/use/).
 
-    There are 3 main public Galaxy servers: [UseGalaxy.org](https://usegalaxy.org/) (**US**), [UseGalaxy.eu](https://usegalaxy.eu/) (**EU**), and [UseGalaxy.org.au](https://usegalaxy.org.au/) (**AU**).
+    There are several UseGalaxy servers:
+    {% assign servers = nil | list_usegalaxy_servers_shuffle %}
+    {% for server in servers %}
+    - [{{ server.name }}]({{ server.url }}) (**{{ server.id | upcase }}**)
+    {% endfor %}
 
 2. Click on **"Login or Register"** in the masthead on the server.
 
