@@ -358,7 +358,7 @@ Since we spoke about the drug-likeness in the previous section, let's see how it
 >
 > 1. {% tool [Drug-likeness](toolshed.g2.bx.psu.edu/repos/bgruening/qed/ctb_silicos_qed/2021.03.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Molecule data in SDF or SMILES format"*: `SDF output for Reaction maker`
->    - *"Method"* - two possible methods to weigh the features are available - one based on max. weight (QEDw,max), and the other on mean weight (QEDw,mo). There is also an option to leave features unweighted (QEDw,u) and we'll choose this one: `unweighted (QEDw,u)`
+>    - *"Method"* - two possible methods to weight the features are available - one based on max. weight (QEDw,max), and the other on mean weight (QEDw,mo). There is also an option to leave features unweighted (QEDw,u) and we'll choose this one: `unweighted (QEDw,u)`
 >    - *"Include the descriptor names as header"*: {% icon param-toggle %} `Yes`
 >
 {: .hands_on}
