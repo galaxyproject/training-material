@@ -27,9 +27,8 @@ contributions:
   funding: 
     - elixir-fair-data
 
-zenodo_link: https://zenodo.org/record/4574153
-extra:
-  zenodo_link_end: https://zenodo.org/record/10391629
+zenodo_link: 'https://zenodo.org/record/4574153'
+
 
 follow_up_training:
   -
@@ -280,7 +279,7 @@ We will work on the same AnnData object so if you create a new history for this 
 > <hands-on-title>Get toy data</hands-on-title>
 >
 > 1. Create a new history for this section *"Downsampling FASTQ Files"*
-> 2. Import the files from [Zenodo]({{ page.zenodo_link_end }})
+> 2. Import the files from [Zenodo](https://zenodo.org/record/10391629)
 >
 >    ```
 >    https://zenodo.org/record/10391629/files/Downsampled_annotated_AnnData.h5ad
