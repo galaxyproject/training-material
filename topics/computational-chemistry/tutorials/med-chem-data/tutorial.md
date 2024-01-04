@@ -254,6 +254,8 @@ reconstruct a SYBYL molecule
 - PDB - the Protein Data Bank (PDB) file format is a textual file format describing the three-dimensional structures of molecules held in the [Protein Data Bank](https://www.rcsb.org/), now succeeded by the mmCIF format. It contains a description and annotation of protein and nucleic acid structures including atomic coordinates, secondary structure assignments, as well as atomic connectivity. In addition, experimental metadata is stored. ({% cite Berman2007 %})
 - GRO (.gro) - a plain text file storing spatial coordinates and velocities (if available) of atoms during a molecular dynamics simulation, utilised by [GROMACS](https://manual.gromacs.org/archive/5.0.3/online/gro.html)
 
+To visualise the structures held by the files with the positions of the individual atoms, you can use (NGL Viewer)[https://nglviewer.org/ngl/].
+
 If you plan to work with molecular dynamics simulations, there are also some MD trajectory file formats that you might want to get familiar with. In Galaxy, you can convert between xtc, trr, dcd and netcdf files using a tool called {% tool [MDTraj file converter](toolshed.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.6+galaxy0) %}.
 
 ## Galaxy tools 
