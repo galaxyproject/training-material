@@ -31,6 +31,8 @@ tags:
 contributions:
   authorship:
     - wee-snufkin
+  funding:
+    - elixir-fair-data
 
 requirements:
   - type: "internal"
@@ -39,8 +41,6 @@ requirements:
       - fair-intro
       - data-management
    
-funding: 
-  - elixir-fair-data
 
 follow_up_training:
   - type: "internal"
