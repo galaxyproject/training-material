@@ -3,12 +3,14 @@ layout: tutorial_hands_on
 title: Introduction to Data Management Plan (DMP) for Peatland Research and PeatDataHub
 level: Introductory
 abbreviations:
+  
+  DMP: Data Management Plan
   FAIR: Findable, Accessible, Interoperable, Reusable
 zenodo_link: ''
 questions:
 - Why create a DMP for peatland research?
 - How to apply FAIR data management solutions for peatland research?
-objectives:
+Objectives:
 - Understand the importance of data management in peatland research.
 - Learn how to create a data management plan (DMP) for peatland research
 - Create a first draft of a data management plan for peatland research
@@ -43,7 +45,7 @@ You can find more information on DMPs in the Research Data Management Toolkit fo
 
 > <agenda-title>Agenda</agenda-title>
 >
-> In this tutorial we will deal with:
+> In this tutorial we will cover:
 >
 > 1. TOC
 > {:toc}
@@ -53,17 +55,66 @@ You can find more information on DMPs in the Research Data Management Toolkit fo
 # What is a Data Management Plan?
 
 A Data Management Plan (DMP) is a live document that provides a framework for managing data material during and after the research project.
+
 A data management plan will facilitate the process of collecting and managing your peatland data and will allow you to discuss with your team how to share data, considering the requirements of your organisation and funders.
 
 # Key components of a DMP
-DMP templates vary by institution and funding agencies. Vasilis (cite Vasilis) has identified the common components of DMPs  from UKRI life-science councils (MRC, BBSRC and NERC).
+DMP templates vary by institution and funding agencies. 
+
+| DMP component  | What to include|
+| ------------- | ------------- |
+| Descriptions of the data  |    &bull; Project details <br> &bull; Types of data <br> collected and generated <br> &bull; Origin of data <br> &bull; Format and size of data |
+|Data collection/generation | &bull; Data collection methods <br> &bull; Data quality standards| 
+|Data management, documentation, and curation | &bull; Storage and accessibility </<br> &bull; Metadata standards and documentation <br> &bull; Curation and preservation |  
+|Data sharing and access | &bull; Where the data will be shared <br> &bull; When will the data be available |
+|Data security (where relevant)|&bull; Risks to data security<br> &bull; GDPR considerations|
+|Capabilities| &bull; Evaluation of institutional capabilities to preserve and manage data|
+|Maintaining and implementing the Data Management Plan|&bull; Actions to maintain and deliver the DMP |
+|Environmental considerations|&bull; Energy cost considerations related to data management|
+|Responsibilities|&bull; Agreement on the responsibilities of named individuals for data management|
+|Relevant institutional, departmental or study policies on data sharing and data security| &bull; Review of institutional policies for data management|
+
+## Hands-on: Create a DMP for peatland research
+* Download the DMP template for Peatland Research
+* Fill in the DMP template using the prompt questions.
+* Review your DMP with your team and collaborators.
 
 # FAIR data management solutions
 
 After you have filled in the DMP template, review how you can make your DMP FAIR.
+
 There are several ways to set up FAIR (Findable, Accessible, Interoperable, Reusable) data management plans (DMPs) 
 
-Findable (F): Data description and collection or reuse of existing data.  Using metadata and community recognised standards for curation that enable someone to find the data.
-Accessible (A): Standardised authentication or authorisation (e.g. HTTP, HTTPS) for open and restricted data access.
- Interoperable (I): Documentation and data quality, and community standards for data exchange (e.g. tab-delimited text).
-Reusable (R): Storage and backup supported by legal and ethical requirements, as well as data release policies.
+* Findable (F): Data description and collection or reuse of existing data.  Using metadata and community recognised standards for curation that enable someone to find the data.
+* Accessible (A): Standardised authentication or authorisation (e.g. HTTP, HTTPS) for open and restricted data access.
+* Interoperable (I): Documentation and data quality, and community standards for data exchange (e.g. tab-delimited text).
+* Reusable (R): Storage and backup supported by legal and ethical requirements, as well as data release policies.
+
+See FAIR data management solutions for more information   https://training.galaxyproject.org/training-material/topics/fair/tutorials/data-management/tutorial.html
+
+# Conclusion
+
+Creating a DMP will allow you and your institution to make the most of your peatland data. This introduction to DMP aims to highlight the usefulness of data management for peatland research and monitoring.
+
+# References (check referncing style)
+
+* Katarzyna Kamieniecka, Krzysztof Poterlowicz, FAIR in a nutshell (Galaxy Training Materials). https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html Online; accessed Fri Sep 29 2023
+* FAIR pointers https://elixir-uk-dash.github.io/FAIR-Pointers/
+
+
+##  Suggested reading
+* FAIR in a nutshell https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html 
+* The published FAIR Guiding Principles: Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and stewardship. Sci Data 3, 160018 (2016). https://doi.org/10.1038/sdata.2016.18.
+* Recipes for data FAIRification, written by domain experts giving real-world examples: FAIR Cookbook
+* Documentation and frameworks for data FAIRification. Each of the 15 FAIR principles is put into context with real data examples: GO FAIR
+* FAIR walkthrough using examples from across all academic disciplines: How to FAIR
+
+## Resources
+* How to write a data-sharing agreement between collaborators https://www.youtube.com/watch?v=iaZInoaHa04
+
+
+* DMP online https://dmponline.dcc.ac.uk
+* DSWizard: https://bio.tools/tool/Data_Stewardship_Wizard
+* https://tess.elixir-europe.org/materials/introduction-to-data-management-practices-datamanagement-plans
+
+WaterLands PeatDataHub
