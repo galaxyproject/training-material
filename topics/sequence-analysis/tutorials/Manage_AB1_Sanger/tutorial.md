@@ -298,7 +298,7 @@ See in the introduction for explanations on the Reverse-Complement.
 > 
 > Do this step twice !! One has to make sure sense (forward) and antisense (reverse) sequences collections are in the same order to get the right sense and the right antisense sequence to be merged together
 >
->  {% snippet faqs/galaxy/tools_rerun.md %}
+> {% snippet faqs/galaxy/tools_rerun.md %}
 >
 > 1. {% tool [Sort collection](__SORTLIST__) %} with the following parameters:
 >    - {% icon param-collection %} *"Input Collection"*: `Collection` (output of **seqtk_trimfq** {% icon tool %} & output of **Reverse-Complement** {% icon tool %})
