@@ -1,0 +1,217 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Data management in Medicinal Chemistry",
+  "level": "Introductory",
+  "questions": [
+    "Why does medicinal chemistry research produce so much data?",
+    "How can big data be useful for medicinal chemists?",
+    "What are the current publicly available databases that can be used for drug discovery and development?",
+    "How to use Galaxy for data management and analysis of chemical data?"
+  ],
+  "objectives": [
+    "Learn some terminology from the field of medicinal chemistry",
+    "Understand the idea of data-driven medicinal chemistry",
+    "Explore the databases used for drug discovery and development",
+    "Use Galaxy tools for data management, format conversion and simple analyses"
+  ],
+  "time_estimation": "1H",
+  "key_points": [
+    "The power of big data might be useful to shape innovations of the future in the pharmaceutical field.",
+    "There are many publicly available databases used for drug discovery and development and they might look at the same medicines from different angles and classify them based on various factors.",
+    "Galaxy provides tools and a platform for medicinal chemistry analyses."
+  ],
+  "tags": [
+    "fair",
+    "data-management",
+    "medicinal-chemistry",
+    "computational-chemistry"
+  ],
+  "contributions": {
+    "authorship": [
+      "wee-snufkin"
+    ],
+    "funding": [
+      "elixir-fair-data"
+    ]
+  },
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "fair",
+      "tutorials": [
+        "fair-intro",
+        "data-management"
+      ]
+    }
+  ],
+  "follow_up_training": [
+    {
+      "type": "internal",
+      "topic_name": "computational-chemistry"
+    }
+  ],
+  "mathjax": null,
+  "short_id": null,
+  "url": "/topics/computational-chemistry/tutorials/med-chem-data/tutorial.html",
+  "topic_name": "computational-chemistry",
+  "tutorial_name": "med-chem-data",
+  "dir": "topics/computational-chemistry/tutorials/med-chem-data",
+  "id": "computational-chemistry/med-chem-data",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "Data-management-in-Medicinal-Chemistry-workflow.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/workflows/Data-management-in-Medicinal-Chemistry-workflow.ga",
+      "path": "topics/computational-chemistry/tutorials/med-chem-data/workflows/Data-management-in-Medicinal-Chemistry-workflow.ga",
+      "wfid": "computational-chemistry-med-chem-data",
+      "wfname": "data-management-in-medicinal-chemistry-workflow",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-med-chem-data/versions/data-management-in-medicinal-chemistry-workflow",
+      "license": "CC-BY-4.0",
+      "creators": [
+        {
+          "class": "Person",
+          "identifier": "0009-0001-2017-8805",
+          "name": "Julia Jakiela"
+        }
+      ],
+      "name": "Data management in Medicinal Chemistry workflow",
+      "title": "Data management in Medicinal Chemistry workflow",
+      "test_results": null,
+      "modified": "2024-01-08 10:01:56 +0000",
+      "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Compound conversion\"];\n  0 -->|output| 2;\n  3[\"Search ChEMBL database\"];\n  0 -->|output| 3;\n  4[\"Search ChEMBL database\"];\n  0 -->|output| 4;\n  5[\"Compound conversion\"];\n  1 -->|output| 5;\n  6[\"Reaction maker\"];\n  2 -->|outfile| 6;\n  5 -->|outfile| 6;\n  7[\"Visualisation\"];\n  6 -->|outfile| 7;\n  8[\"Drug-likeness\"];\n  6 -->|outfile| 8;\n"
+    }
+  ],
+  "api": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/med-chem-data/tutorial.json",
+  "tools": [
+    "toolshed.g2.bx.psu.edu/repos/bgruening/chembl/chembl/0.10.1+galaxy4",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/ctb_im_rxn_maker/ctb_im_rxn_maker/1.1.4+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_svg_depiction/openbabel_svg_depiction/3.1.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/qed/ctb_silicos_qed/2021.03.4+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.6+galaxy0"
+  ],
+  "supported_servers": {
+    "exact": [
+      {
+        "url": "https://usegalaxy.eu",
+        "name": "UseGalaxy.eu",
+        "usegalaxy": true
+      },
+      {
+        "url": "https://usegalaxy.org",
+        "name": "UseGalaxy.org (Main)",
+        "usegalaxy": true
+      }
+    ],
+    "inexact": [
+      {
+        "url": "https://usegalaxy.no/",
+        "name": "UseGalaxy.no",
+        "usegalaxy": false
+      }
+    ]
+  },
+  "topic_name_human": "Computational chemistry",
+  "admin_install": {
+    "install_tool_dependencies": true,
+    "install_repository_dependencies": true,
+    "install_resolver_dependencies": true,
+    "tools": [
+      {
+        "name": "chembl",
+        "owner": "bgruening",
+        "revisions": "a446ea7e2bc1",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "ctb_im_rxn_maker",
+        "owner": "bgruening",
+        "revisions": "8ef5428fb809",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "get_pdb",
+        "owner": "bgruening",
+        "revisions": "538790c6c21b",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "openbabel_compound_convert",
+        "owner": "bgruening",
+        "revisions": "e2c36f62e22f",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "openbabel_svg_depiction",
+        "owner": "bgruening",
+        "revisions": "7672039a0bb0",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "qed",
+        "owner": "bgruening",
+        "revisions": "52a8d34dd08f",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "md_converter",
+        "owner": "chemteam",
+        "revisions": "ba83f0923369",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      }
+    ]
+  },
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: chembl\n  owner: bgruening\n  revisions: a446ea7e2bc1\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ctb_im_rxn_maker\n  owner: bgruening\n  revisions: 8ef5428fb809\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: get_pdb\n  owner: bgruening\n  revisions: 538790c6c21b\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: openbabel_compound_convert\n  owner: bgruening\n  revisions: e2c36f62e22f\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: openbabel_svg_depiction\n  owner: bgruening\n  revisions: 7672039a0bb0\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: qed\n  owner: bgruening\n  revisions: 52a8d34dd08f\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: md_converter\n  owner: chemteam\n  revisions: ba83f0923369\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial",
+  "contributors": [
+    {
+      "name": "Julia Jakiela",
+      "email": "juliajot36@gmail.com",
+      "joined": "2022-06",
+      "id": "wee-snufkin",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/wee-snufkin.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/"
+    },
+    {
+      "name": "ELIXIR-UK: FAIR Data Stewardship training",
+      "short_name": "ELIXIR Fair Data",
+      "github": false,
+      "joined": "2023-06",
+      "funder": true,
+      "funding_id": "MR/V038966/1",
+      "funding_system": "ukri",
+      "funding_statement": "This work has been funded by the ELIXIR-UK FAIR Data Stewardship training UKRI award (MR/V038966/1)",
+      "id": "elixir-fair-data",
+      "url": "https://training.galaxyproject.org/training-material/api/funders/elixir-fair-data.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-fair-data/"
+    }
+  ]
+}
