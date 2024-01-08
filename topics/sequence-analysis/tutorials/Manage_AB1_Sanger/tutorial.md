@@ -17,7 +17,6 @@ contributors:
 ---
 
 
-# Introduction
 
 The objective of this tutorial is to learn how to clean and manage AB1 data files freshly obtained from Sanger sequencing. 
 This kind of sequencing is targeting a specific sequence with short single DNA strands called primers. These primers are delimiting ends of the targeted marker.
