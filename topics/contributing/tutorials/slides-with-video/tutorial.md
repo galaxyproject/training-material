@@ -9,16 +9,19 @@ questions:
 objectives:
   - "Adding a video to a set of slides"
 time_estimation: "20m"
-subtopic: writing
+subtopic: slides
 key_points:
   - "Thanks to the GTN, videos are easy to add"
   - "Be mindful of your captions. Short sentences are good!"
-contributors:
+contributions:
+  authorship:
   - hexylena
+  infrastructure:
+  - delphine-l
+  - jxtx
 ---
 
 # Video Lectures
-
 
 Based on the work by Delphine Larivière and James Taylor with their [COVID-19 Lectures](https://github.com/galaxyproject/video-lectures/) we have implemented a similar feature in the Galaxy Training Network.
 
