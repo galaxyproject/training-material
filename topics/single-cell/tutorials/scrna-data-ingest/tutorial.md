@@ -805,10 +805,10 @@ First, let's get some toy data. We just need two FASTQ files - one containing ba
 > 1. Create a new history for this section *"Downsampling FASTQ Files"*
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
->      ```
->      https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
->      https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
->      ```
+>    ```
+>    https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
+>    https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
+>    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
