@@ -176,20 +176,22 @@ Let's get an **AnnData object** that we can further work on. It's the object use
 > 1. Create a new history for this tutorial 
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
 >
-> If you do this tutorial just for learning purposes, you can download the downsampled dataset which will be much quicker to process:
+>    If you do this tutorial just for learning purposes, you can download the downsampled dataset which will be much quicker to process:
+>    
 >    ```
 >    https://zenodo.org/record/10391629/files/Downsampled_annotated_AnnData.h5ad
 >    ```
 >    
-> If you want to use the full dataset used in the other single-cell case study tutorials, here it is! Please note, it will take much longer to process it, so we will only show the conversions on the downsampled objects.  
+>    If you want to use the full dataset used in the other single-cell case study tutorials, here it is! Please note, it will take much longer to process it, so we will only show the conversions on the downsampled objects.
+>    
 >    ```
 >    https://zenodo.org/record/7053673/files/Mito-counted_AnnData
 >    ```
 > 
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. **Rename** {% icon galaxy-pencil %} the datasets `Downsampled AnnData object`
-> 4. Check that the datatype is `h5ad`
+> 4. **Rename** {% icon galaxy-pencil %} the datasets `Downsampled AnnData object`
+> 5. Check that the datatype is `h5ad`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
 >
