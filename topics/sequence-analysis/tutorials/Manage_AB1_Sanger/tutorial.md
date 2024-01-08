@@ -129,7 +129,7 @@ Primers must be separated in distinct files because sense (forward) and antisens
 >      
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
->  {% snippet faqs/galaxy/tools_rerun.md %}
+>    {% snippet faqs/galaxy/tools_rerun.md %}
 >
 > 2. {% tool [Filter FASTA](toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3) %} with the following parameters:
 >    - {% icon param-file %} *"FASTA sequences"*: `Primer file`
@@ -208,7 +208,7 @@ As for primers, sense and antisense sequences will be subjected to slightly diff
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
->  {% snippet faqs/galaxy/tools_rerun.md %}
+>    {% snippet faqs/galaxy/tools_rerun.md %}
 >
 > 4. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output` (output of **Extract element identifiers** {% icon tool %})
@@ -256,7 +256,7 @@ In Sanger sequencing, ends tend to be of low trust levels (each nucleotide has a
 > 
 > Do these steps twice !! We have Froward and antisense (reverse) sequence data collections, do these steps starting with each "(filtered)" data collections, this could help:
 > 
->  {% snippet faqs/galaxy/tools_rerun.md %}
+> {% snippet faqs/galaxy/tools_rerun.md %}
 >
 > 1. {% tool [ab1 to FASTQ converter](toolshed.g2.bx.psu.edu/repos/ecology/ab1_fastq_converter/ab1_fastq_converter/1.20.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input ab1 file"*: `(filtered) output collection` (output of **Filter collection** {% icon tool %})
