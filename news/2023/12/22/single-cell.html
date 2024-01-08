@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Galaxy Single-cell Community: Year in Review</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@0378352ef9e32d1064d18456b43ae3d35cf14cfd",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2023/12/22/single-cell.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1704708217' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1704708217' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Galaxy Single-cell Community: Year in Review">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-12-22 15:12:57 +0000">
+<meta name="DC.creator" content="Mehmet Tekman">
+<meta name="DC.creator" content="Wendi Bacon">
+<meta name="DC.creator" content="Pavankumar Videm"><meta name="description" content="🚀Embarking on a cosmic journey, the Galaxy Single-cell Community has clustered together to unveil a constellation of tools, making strides in RNA-stellar discoveries and creating out-of-this-world workflows. With a commitment to battling work duplication across the multiverse, this community is boldly charting a course for global domination, proving that when it comes to bioinformatics, the Galaxy is the limit!✨ ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Galaxy Single-cell Community: Year in Review">
+        <meta property="og:description" content="🚀Embarking on a cosmic journey, the Galaxy Single-cell Community has clustered together to unveil a constellation of tools, making strides in RNA-stellar discoveries and creating out-of-this-world workflows. With a commitment to battling work duplication across the multiverse, this community is boldly charting a course for global domination, proving that when it comes to bioinformatics, the Galaxy is the limit!✨ ">
+        
+        <meta property="og:image" content="/training-materialnews/images/2023_dec_sc.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1704708217'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2023-12-22-single-cell.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2023/12/22/single-cell.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/news/2023/12/22/single-cell.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/news/2023/12/22/single-cell.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/news/2023/12/22/single-cell.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  <h1>Galaxy Single-cell Community: Year in Review</h1>
+
+  <article>
+
+
+<div class="newsitem">
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=36" alt="Mehmet Tekman avatar" width="36" class="avatar" />
+    Mehmet Tekman</a><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" />
+    Pavankumar Videm</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+
+<span class="label label-default tutorial_tag" id="gtn" style="--color-primary: #fff1a4; --color-darker: #ecd700; --color-dimmed: #fbe500;">gtn</span>
+
+<span class="label label-default tutorial_tag" id="communications" style="--color-primary: #00dea2; --color-darker: #00c690; --color-dimmed: #00d299;">communications</span>
+
+<span class="label label-default tutorial_tag" id="single-cell" style="--color-primary: #00dbca; --color-darker: #00c3b4; --color-dimmed: #00cfbe;">single-cell</span>
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: 22 December 2023</span>
+      <span>
+        
+      </span>
+    </p>
+
+    <p>🚀Embarking on a cosmic journey, the Galaxy Single-cell Community has clustered together to unveil a constellation of tools, making strides in RNA-stellar discoveries and creating out-of-this-world workflows. With a commitment to battling work duplication across the multiverse, this community is boldly charting a course for global domination, proving that when it comes to bioinformatics, the Galaxy is the limit!✨</p>
+
+<h1 id="tools--workflows">Tools &amp; Workflows</h1>
+
+<p>The past year has been a spectacular journey in advancing tools and workflows within the Galaxy Single-cell Community. Breaking free from the confines of scRNA-seq, we’ve expanded our horizons to include tools for analyzing data from other modalities such as single-cell ATAC-seq and CITE-Seq. Dive into our updated scRNA-seq analysis tools, now featuring more downstream analysis options for trajectory analysis. We’ve even thrown in advanced analysis tools for estimating cell type proportions from bulk RNA-seq data!</p>
+
+<p><strong>RNA STARSolo</strong> just got a makeover to version 2.7.10b, boasting a revamped UI, Velocyto-like UMI counting, and nifty alternatives for quantifying single nuclei data. Analyzing single-cell ATAC-seq data on Galaxy is now a breeze with the introduction of the <strong>EpiScanpy</strong> tool suite, built on the renowned <strong>Scanpy</strong> toolkit. Plus, we’ve added some powerful tools from the <strong>Sinto</strong> toolkit for preprocessing scATAC-seq data on Galaxy. And that’s not all! The <strong>MuSiC</strong> tool suite in Galaxy now unveils deconvolution tools for discovering cell type composition in bulk RNA-seq using cell types within scRNA-seq. Multi-faceted comparisons are now at your fingertips with the <strong>MuSiC Compare</strong> tool.</p>
+
+<p>Seurat fans, rejoice! Updates have rolled in, offering additional functionalities and optional CITE-seq capabilities at runtime.</p>
+
+<h1 id="community-infrastructure">Community Infrastructure</h1>
+
+<p>Our efforts in community building have seen the unification of single-cell subdomains into <a href="https://singlecell.usegalaxy.eu/">https://singlecell.usegalaxy.eu/</a>, the creation of the Single Cell Community of Practice hub page (<a href="https://galaxyproject.org/projects/singlecell/">https://galaxyproject.org/projects/singlecell/</a>), and a user-focused Matrix channel. Testing brilliant widgets, automated updates, and the latest addition of automated help request updates onto Matrix channels have made community collaboration a breeze.</p>
+
+<h1 id="global-connections">Global Connections</h1>
+
+<p>Down under, the Australian BioCommons launched their <a href="https://zenodo.org/records/10368976">Single Cell and Spatial Omics Analysis Infrastructure Roadmap for Australia</a>, complementing our endeavors to unite across timezones. Collaboration, including international tool adventures across three continents, proves that team work does, in fact, make the dream work.</p>
+
+<h2 id="training">Training</h2>
+
+<p>Get ready for a thrilling journey through the <a href="/training-material/topics/single-cell">Single Cell Training</a>’s latest updates! The <strong>Case Study Reloaded</strong> tutorial, fueled by three remote-working undergrads, introduces parallel trajectory analysis in R, Python, and the Galaxy GUI.</p>
+
+<p>Sustainability shines as we’ve revamped numerous tutorials with hands-on and video re-recordings. New tools bring new tutorials, such as <a href="/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html">Pre-processing of 10X Single-Cell ATAC-seq Datasets</a> and <a href="/training-material/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html">Comparing inferred cell compositions using MuSiC deconvolution</a>.</p>
+
+<p>Tackling user hurdles, our data ingest and conversion tutorials in the <strong>Changing data formats &amp; preparing objects</strong> section await exploration.</p>
+
+<p>Dive into the unique <strong>Tips, tricks &amp; other hints</strong> section, offering analysis options like <a href="/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html">parameter iteration</a> for swift optimization or <a href="/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html">Removing the effects of the cell cycle</a> for precise clustering analysis.</p>
+
+<p>And don’t miss our inaugural <a href="/training-material/learning-pathways/intro_single_cell.html">Learning Pathway</a>, guiding Galaxy novices to becoming single-cell analysis experts!</p>
+
+<h1 id="fighting-work-duplication">Fighting Work Duplication</h1>
+
+<p>Our mission: No more work duplication! We’ve consolidated single-cell instances and are diligently preventing tool and infrastructure duplication, creating smoother pathways across servers. We value efficiency here at single-cell, so we’d like to thank ChatGPT (free version) for adding in Galaxy puns to this post, as per our request.</p>
+
+<h1 id="what-a-year">What a Year!</h1>
+
+<p>What’s next on our list? World domination or global collaboration? You decide. Stay tuned for another exciting year with the Galaxy Single-cell Community!</p>
+
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+  </div>
+
+  <div class="col-md-4">
+    <img alt="swirled cluster dots surround a circle of people all holding hands, looking towards the bright center (future)" src="/training-material/news/images/2023_dec_sc.png" width="300"/>
+  </div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "url": "https://training.galaxyproject.org/training-material/news/2023/12/22/single-cell.html",
+  "name": "Galaxy Single-cell Community: Year in Review",
+  "headline": "<p>🚀Embarking on a cosmic journey, the Galaxy Single-cell Community has clustered together to unveil ",
+  "keywords": [
+    "gtn",
+    "communications",
+    "single-cell"
+  ],
+  "description": "<p>🚀Embarking on a cosmic journey, the Galaxy Single-cell Community has clustered together to unveil ",
+  "articleBody": "<p>🚀Embarking on a cosmic journey, the Galaxy Single-cell Community has clustered together to unveil a constellation of tools, making strides in RNA-stellar discoveries and creating out-of-this-world workflows. With a commitment to battling work duplication across the multiverse, this community is boldly charting a course for global domination, proving that when it comes to bioinformatics, the Galaxy is the limit!✨</p>\n\n<h1 id=\"tools--workflows\">Tools &amp; Workflows</h1>\n\n<p>The past year has been a spectacular journey in advancing tools and workflows within the Galaxy Single-cell Community. Breaking free from the confines of scRNA-seq, we’ve expanded our horizons to include tools for analyzing data from other modalities such as single-cell ATAC-seq and CITE-Seq. Dive into our updated scRNA-seq analysis tools, now featuring more downstream analysis options for trajectory analysis. We’ve even thrown in advanced analysis tools for estimating cell type proportions from bulk RNA-seq data!</p>\n\n<p><strong>RNA STARSolo</strong> just got a makeover to version 2.7.10b, boasting a revamped UI, Velocyto-like UMI counting, and nifty alternatives for quantifying single nuclei data. Analyzing single-cell ATAC-seq data on Galaxy is now a breeze with the introduction of the <strong>EpiScanpy</strong> tool suite, built on the renowned <strong>Scanpy</strong> toolkit. Plus, we’ve added some powerful tools from the <strong>Sinto</strong> toolkit for preprocessing scATAC-seq data on Galaxy. And that’s not all! The <strong>MuSiC</strong> tool suite in Galaxy now unveils deconvolution tools for discovering cell type composition in bulk RNA-seq using cell types within scRNA-seq. Multi-faceted comparisons are now at your fingertips with the <strong>MuSiC Compare</strong> tool.</p>\n\n<p>Seurat fans, rejoice! Updates have rolled in, offering additional functionalities and optional CITE-seq capabilities at runtime.</p>\n\n<h1 id=\"community-infrastructure\">Community Infrastructure</h1>\n\n<p>Our efforts in community building have seen the unification of single-cell subdomains into <a href=\"https://singlecell.usegalaxy.eu/\">https://singlecell.usegalaxy.eu/</a>, the creation of the Single Cell Community of Practice hub page (<a href=\"https://galaxyproject.org/projects/singlecell/\">https://galaxyproject.org/projects/singlecell/</a>), and a user-focused Matrix channel. Testing brilliant widgets, automated updates, and the latest addition of automated help request updates onto Matrix channels have made community collaboration a breeze.</p>\n\n<h1 id=\"global-connections\">Global Connections</h1>\n\n<p>Down under, the Australian BioCommons launched their <a href=\"https://zenodo.org/records/10368976\">Single Cell and Spatial Omics Analysis Infrastructure Roadmap for Australia</a>, complementing our endeavors to unite across timezones. Collaboration, including international tool adventures across three continents, proves that team work does, in fact, make the dream work.</p>\n\n<h2 id=\"training\">Training</h2>\n\n<p>Get ready for a thrilling journey through the <a href=\"/training-material/topics/single-cell\">Single Cell Training</a>’s latest updates! The <strong>Case Study Reloaded</strong> tutorial, fueled by three remote-working undergrads, introduces parallel trajectory analysis in R, Python, and the Galaxy GUI.</p>\n\n<p>Sustainability shines as we’ve revamped numerous tutorials with hands-on and video re-recordings. New tools bring new tutorials, such as <a href=\"/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html\">Pre-processing of 10X Single-Cell ATAC-seq Datasets</a> and <a href=\"/training-material/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html\">Comparing inferred cell compositions using MuSiC deconvolution</a>.</p>\n\n<p>Tackling user hurdles, our data ingest and conversion tutorials in the <strong>Changing data formats &amp; preparing objects</strong> section await exploration.</p>\n\n<p>Dive into the unique <strong>Tips, tricks &amp; other hints</strong> section, offering analysis options like <a href=\"/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html\">parameter iteration</a> for swift optimization or <a href=\"/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html\">Removing the effects of the cell cycle</a> for precise clustering analysis.</p>\n\n<p>And don’t miss our inaugural <a href=\"/training-material/learning-pathways/intro_single_cell.html\">Learning Pathway</a>, guiding Galaxy novices to becoming single-cell analysis experts!</p>\n\n<h1 id=\"fighting-work-duplication\">Fighting Work Duplication</h1>\n\n<p>Our mission: No more work duplication! We’ve consolidated single-cell instances and are diligently preventing tool and infrastructure duplication, creating smoother pathways across servers. We value efficiency here at single-cell, so we’d like to thank ChatGPT (free version) for adding in Galaxy puns to this post, as per our request.</p>\n\n<h1 id=\"what-a-year\">What a Year!</h1>\n\n<p>What’s next on our list? World domination or global collaboration? You decide. Stay tuned for another exciting year with the Galaxy Single-cell Community!</p>\n",
+  "datePublished": "2023-12-22 00:00:00 +0000",
+  "dateModified": "2023-12-22 15:12:57 +0000",
+  "author": [
+    "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"http://purl.org/dc/terms/conformsTo\": {\n    \"@id\": \"https://bioschemas.org/profiles/Person/0.3-DRAFT\",\n    \"@type\": \"CreativeWork\"\n  },\n  \"url\": \"https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/\",\n  \"mainEntityOfPage\": \"https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/\",\n  \"name\": \"Mehmet Tekman\",\n  \"image\": \"https://avatars.githubusercontent.com/mtekman\",\n  \"description\": \"A contributor to the GTN project.\",\n  \"memberOf\": [\n    {\n      \"@type\": \"Organization\",\n      \"http://purl.org/dc/terms/conformsTo\": {\n        \"@id\": \"https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19\",\n        \"@type\": \"Organization\"\n      },\n      \"email\": \"galaxytrainingnetwork@gmail.com\",\n      \"name\": \"Galaxy Training Network\",\n      \"legalName\": \"Galaxy Training Network\",\n      \"alternateName\": \"GTN\",\n      \"url\": \"https://training.galaxyproject.org\",\n      \"logo\": \"https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png\",\n      \"fundingModel\": \"The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.\",\n      \"keywords\": [\n        \"galaxy\",\n        \"bioinformatics\",\n        \"training\",\n        \"fair\",\n        \"accessible\"\n      ],\n      \"status\": \"active\",\n      \"foundingDate\": \"2015-06-29\",\n      \"socialMedia\": \"https://mstdn.science/@gtn\",\n      \"type\": \"project\"\n    }\n  ]\n}",
+    "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"http://purl.org/dc/terms/conformsTo\": {\n    \"@id\": \"https://bioschemas.org/profiles/Person/0.3-DRAFT\",\n    \"@type\": \"CreativeWork\"\n  },\n  \"url\": \"https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/\",\n  \"mainEntityOfPage\": \"https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/\",\n  \"name\": \"Wendi Bacon\",\n  \"image\": \"https://avatars.githubusercontent.com/nomadscientist\",\n  \"description\": \"Lecturer at The Open University\",\n  \"memberOf\": [\n    {\n      \"@type\": \"Organization\",\n      \"http://purl.org/dc/terms/conformsTo\": {\n        \"@id\": \"https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19\",\n        \"@type\": \"Organization\"\n      },\n      \"email\": \"galaxytrainingnetwork@gmail.com\",\n      \"name\": \"Galaxy Training Network\",\n      \"legalName\": \"Galaxy Training Network\",\n      \"alternateName\": \"GTN\",\n      \"url\": \"https://training.galaxyproject.org\",\n      \"logo\": \"https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png\",\n      \"fundingModel\": \"The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.\",\n      \"keywords\": [\n        \"galaxy\",\n        \"bioinformatics\",\n        \"training\",\n        \"fair\",\n        \"accessible\"\n      ],\n      \"status\": \"active\",\n      \"foundingDate\": \"2015-06-29\",\n      \"socialMedia\": \"https://mstdn.science/@gtn\",\n      \"type\": \"project\"\n    }\n  ],\n  \"identifier\": \"https://orcid.org/0000-0002-8170-8806\",\n  \"orcid\": \"https://orcid.org/0000-0002-8170-8806\"\n}",
+    "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"http://purl.org/dc/terms/conformsTo\": {\n    \"@id\": \"https://bioschemas.org/profiles/Person/0.3-DRAFT\",\n    \"@type\": \"CreativeWork\"\n  },\n  \"url\": \"https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/\",\n  \"mainEntityOfPage\": \"https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/\",\n  \"name\": \"Pavankumar Videm\",\n  \"image\": \"https://avatars.githubusercontent.com/pavanvidem\",\n  \"description\": \"A contributor to the GTN project.\",\n  \"memberOf\": [\n    {\n      \"@type\": \"Organization\",\n      \"http://purl.org/dc/terms/conformsTo\": {\n        \"@id\": \"https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19\",\n        \"@type\": \"Organization\"\n      },\n      \"email\": \"galaxytrainingnetwork@gmail.com\",\n      \"name\": \"Galaxy Training Network\",\n      \"legalName\": \"Galaxy Training Network\",\n      \"alternateName\": \"GTN\",\n      \"url\": \"https://training.galaxyproject.org\",\n      \"logo\": \"https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png\",\n      \"fundingModel\": \"The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.\",\n      \"keywords\": [\n        \"galaxy\",\n        \"bioinformatics\",\n        \"training\",\n        \"fair\",\n        \"accessible\"\n      ],\n      \"status\": \"active\",\n      \"foundingDate\": \"2015-06-29\",\n      \"socialMedia\": \"https://mstdn.science/@gtn\",\n      \"type\": \"project\"\n    }\n  ],\n  \"identifier\": \"https://orcid.org/0000-0002-5192-126X\",\n  \"orcid\": \"https://orcid.org/0000-0002-5192-126X\"\n}"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://training.galaxyproject.org/news/2023/12/22/single-cell.html"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "width": 60,
+    "height": 60,
+    "url": "/training-material/assets/images/GTN-60px.png"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
+}
+</script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div>
+
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/12/20/matrix-bots.html">GTN Helper Bots Connect the Galaxy</a>
+	</h3>
+	<p>
+	20 December 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff1a4; --color-darker: #ecd700; --color-dimmed: #fbe500;">gtn</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00dea2; --color-darker: #00c690; --color-dimmed: #00d299;">communications</span>
+	
+	</p>
+	<p class="card-text">
+		
+		🤖💬 Bleep bloop! Good news everyone! We have deployed some bots to enable our Matrix regulars
+to better engage with the contributions and questions of our users on
+the non-Matrix side of the Galaxy-verse.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/12/18/medchem-user.html">User story: Where Galaxy meets medicinal chemistry</a>
+	</h3>
+	<p>
+	18 December 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ebfc00; --color-darker: #d0e000; --color-dimmed: #ddee00;">computational chemistry</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #f3aaff; --color-darker: #ef85ff; --color-dimmed: #f198ff;">user story</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff1a4; --color-darker: #ecd700; --color-dimmed: #fbe500;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		As a medicinal chemistry student, I undertook a semester project on natural products isolation and derivatisation. One of the compounds my group was working on was piperine, extracted from black pepper. Inspired by literature findings, we found out that the derivatives of piperine can inhibit monoamine oxidase-B and thus can be possibly used in Parkinson’s disease. As a novelty element in our project, we came up with new structures of derivatives that could act as inhibitors.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/12/12/tutorial-run-wfh-ds.html">Tutorial Feature: Easier launching of WorkflowHub & Dockstore Workflows</a>
+	</h3>
+	<p>
+	12 December 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #72ceff; --color-darker: #00bbf6; --color-dimmed: #3cc6ff;">feature update</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff1a4; --color-darker: #ecd700; --color-dimmed: #fbe500;">gtn</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffaeb4; --color-darker: #ff8d96; --color-dimmed: #ff9ea5;">tutorials</span>
+	
+	</p>
+	<p class="card-text">
+		
+		While most GTN tutorials include their associated workflow directly in the GTN, some may wish to write a tutorial about running workflows from WorkflowHub, e.g. leveraging the IWC workflow collection.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/11/21/video.html">Feedback: Easy slide recordings</a>
+	</h3>
+	<p>
+	21 November 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #efabff; --color-darker: #eb88ff; --color-dimmed: #ed9aff;">feedback</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #a3c5ff; --color-darker: #78b0ff; --color-dimmed: #8fbaff;">testimonial</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff1a4; --color-darker: #ecd700; --color-dimmed: #fbe500;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		I recently imported Friends Don’t Let Friends Make Bad Graphs, a fantastic and educational github repository showcasing some common visualisation mistakes, that was available under an open license, to the GTN. Then the GTN automatically made a video for me.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/11/21/mastodon.html">GTN has left Twitter/X as of October</a>
+	</h3>
+	<p>
+	21 November 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff1a4; --color-darker: #ecd700; --color-dimmed: #fbe500;">gtn</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00dea2; --color-darker: #00c690; --color-dimmed: #00d299;">communications</span>
+	
+	</p>
+	<p class="card-text">
+		
+		We did not formally announce it at the time, but the Galaxy Training Network
+has migrated from Twitter/X to Mastodon, as that platform no longer aligns with
+the Galaxy Project Code of Conduct nor our community values.
+
+		
+	</p>
+</article>
+
+
+</div>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/0378352ef9e32d1064d18456b43ae3d35cf14cfd">0378352</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2023-12-22-single-cell.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1704708217'></script>
+        
+    </body>
+</html>
