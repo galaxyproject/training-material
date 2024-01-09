@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>A brief history of modern biology</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@8dd8a83a8f14fd83f0dcbdc0750a0b3688703c7c",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture1/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1704793044' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1704793044' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="A brief history of modern biology">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-09 09:01:14 +0000">
+<meta name="DC.creator" content="Anton Nekrutenko">
+
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: A brief history of modern biology">
+        <meta property="og:description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Data-Science Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-01-09 09:01:14 +0000",
+  "datePublished": "2024-01-09 09:30:55 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "A brief history of modern biology",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "learningResourceType": "slides",
+  "name": "A brief history of modern biology",
+  "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture1/slides.html",
+  "version": 3,
+  "keywords": [
+    "Foundations of Data Science"
+  ],
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "name": "Anton Nekrutenko",
+      "image": "https://avatars.githubusercontent.com/nekrut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+
+  ],
+  "abstract": "# Charles Darwin"
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1704793044'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/data-science" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/gnmx-lecture1/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+  
+<img src="/training-material/assets/images/genomics_intro.png" alt="page logo" style="height: 40px;"/>
+  
+
+</span></div>
+
+---
+
+
+
+  
+<img src="/training-material/assets/images/genomics_intro.png" alt="page logo" class="cover-logo" />
+  
+
+
+# A brief history of modern biology
+
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+	
+<ul class="text-list">
+			
+			<li>
+				<a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Anton Nekrutenko avatar" width="36" class="avatar" />
+    Anton Nekrutenko</a></li>
+</ul>
+	
+
+
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+# Charles Darwin
+.center[The fabric of biology: 1809 - 1882]
+
+![Darwin](./images/darwin.png)
+
+Provisional theory of pangenesis. All sperm, egg, buds consisted of multitude of gemmules given off by “ *each separate atom of the organism* ”.
+
+---
+
+# Francis Galton
+.center[Experimental validation: 1822 - 1911]
+
+![Galton](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Sir_Francis_Galton_by_Gustav_Graef.jpg/453px-Sir_Francis_Galton_by_Gustav_Graef.jpg)
+
+Blood transfusion in rabbits produces no evidence to support provisional theory of pangenesis.
+
+---
+
+# Darwin gets pissed
+
+![Darwin letter to Nature](./images/darwin_nature.png)
+
+---
+
+# Gregor Johann Mendel
+
+.center[Quantifiable heredity: 1822 - 1884]
+
+.pull-left[
+![Mendel](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Gregor_Mendel_2.jpg/442px-Gregor_Mendel_2.jpg)
+]
+
+.pull_right[
+- Born in Austro-Hungarian Empire (1822)
+- Admitted at the Augustinian monastery in Brno (1843)
+- Studies in Vienna with Doppler, Ettinghausen, Redtenbacher, Fenzl, and Unger (1851 - 1853)
+- Teaches at the Monastery (1853 - 1868)
+- Grows 28,000 plants and analyzed seven pairs of traits
+]
+
+---
+
+# Mendel gets lucky
+
+![Mendel results](./images/mendel_results.png)
+
+.footnote[(From [Magner 2002](https://isbnsearch.org/isbn/0824708245))]
+
+---
+
+![Mendel cartoon](./images/mendel_cartoon.png)
+
+.footnote[(From [Gonick Wheelis 1991](https://isbnsearch.org/isbn/9780062730992))]
+
+---
+
+# Perhaps too lucky
+
+![Mendel re-examination](./images/mendel_reexamination.png)
+
+.footnote[(From [Sturtevant 2001](https://isbnsearch.org/isbn/9780879696078))]
+
+---
+
+# deVreis/Correns/Tschemak
+
+.center[The Rediscovery]
+
+![DCT](./images/dct.png)
+
+---
+
+# Meanwhile chromosomal theory evolves
+
+.center[
+
+- Species have a constant number of chromosomes
+- Equal numbers come from egg and sperm
+- Reduction is accomplished by divisions
+- Chromosomes are bearers of hereditary material
+
+]
+
+---
+
+# The fly room
+
+.center[
+
+Morgan/Sturtevant/Bridges/Muller
+
+- Chromosomes contain hereditary information
+- Genes are linearly distributed along chromosome
+- Gene is a unit of information
+- Gene can define characteristics such as eye color, wing shape etc.
+
+]
+
+---
+
+# Academic competition!
+
+![Muller Scribble](./images/muller_scribble.png)
+
+.footnote[(From [Carson 2004](https://www.amazon.com/Elof-Axel-Carlson-Classical-2004-03-13/dp/B00DJ4VBXY))]
+
+---
+
+# But what is the carrier of information?
+
+- **Miescher** | nucleic acids
+- **Kossel** | DNA, RNA, histones
+- **Levene** | tetranucleotide theory
+- **Chargaff** | parity rules
+- **Griffith, Avery, MacLeod, McCarty** | nucleic acid is the transforming factor
+
+---
+
+# The Church of Phage
+
+- **Delbrück, Luria, Hershey** | replication and genetic structure of viruses
+- **Lwoff** | profage and lysogeny
+- **Lederberg, Hayes** | bacterial sex, plasmids
+- **Hershey, Chase** | DNA = heredity
+- **Watson** | ...
+
+---
+
+# Delbrück, Luria, Hershey
+
+![dlh](./images/dlh.png)
+
+NP 1969: &quot; *discoveries concerning the replication mechanism and genetic structure of viruses* &quot;
+
+---
+
+# Luria Delbrück Experiment
+
+![Fluctuation test](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Luria-delbruck_diagram.svg/459px-Luria-delbruck_diagram.svg.png)
+
+---
+
+# Hershey-Chase experiment
+
+.pull-left[
+![Hershey and Chase](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Scientist_Alfred_Hershey_and_Martha_Chase.jpg/754px-Scientist_Alfred_Hershey_and_Martha_Chase.jpg)
+]
+
+.pull-right[
+![Hershey-Chase experiment](https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Hershey_Chase_experiment.png/758px-Hershey_Chase_experiment.png)
+]
+
+---
+
+# Lederberg-Tatum experiment
+
+Genetic recombination in *E. coli*
+
+![Lederberg-Tatum Experiment](./images/lt.png)
+
+---
+
+# Blender again!
+
+![Genetic distance in bacteria](./images/blender.png)
+
+---
+
+# DNA
+
+- **Crick, Franklin, Watson, Wilkins** | the structure of DNA
+- **Meselson, Stahl** | semiconservative replication
+- **Ochoa, Kornberg** | enzymatic synthesis of nucleic acids
+- **Holley, Nirenberg, Khorana** | the code
+
+---
+
+# Crick, Franklin, Watson, Wilkins
+
+DNA is an antiparallel double helix
+
+![Crick, Franklin, Watson, Wilkins](./images/cfww.png)
+
+---
+
+![Three papers](./images/three_papers.png)
+
+---
+
+# Meselson, Stahl
+
+DNA replication is semiconservative
+
+![Meselson, Stahl](./images/ms.png)
+
+---
+
+# Meselson-Stahl experiment
+
+CsCl gradient centrifugation
+
+![Meselson, Stahl experiment 1](./images/ms1.png)
+
+---
+
+![Meselson, Stahl experiment 2](./images/ms2.png)
+
+---
+
+# Gene function
+
+- **Lwoff, Jacob, Monod** | genetic map and gene regulation
+- **Beadle, Tatum** | one gene = one protein
+- **Pauling, Ingram** | molecular disease
+
+---
+
+# Lwoff, Jacob, Monod
+
+Lysogeny, prophage, genetic maps, gene regulation
+
+![Lwoff, Jacob, Monod](./images/ljm.png)
+
+---
+
+![Regulation](./images/reg.png)
+
+---
+
+# Reverse Transcription, Recombinant Age
+
+- **Temin, Baltimore** | reverse transcription
+- **Cohen, Boyer** | recombinant methodologies
+- **Berg** | SV40
+- **Maxam, Gilbert, Sanger** | sequencing is here
+
+---
+
+# Berg experiment
+
+![Berg experiment](./images/berg.png)
+
+---
+
+# PCR
+
+.pull-left[
+![PCR1](./images/pcr1.png)
+]
+
+.pull-right[
+![PCR2](./images/pcr2.png)
+]
+
+---
+
+# DNA Sequencing is here!
+
+![Wu, Sanger, Gilbert, Mullis](./images/wsgm.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Anton Nekrutenko avatar" width="36" class="avatar" />
+    Anton Nekrutenko</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+  
+<img src="/training-material/assets/images/genomics_intro.png" alt="page logo" style="height: 100px;"/>
+  
+
+
+	
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1704793044'></script>
+        
+    </body>
+</html>

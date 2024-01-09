@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slide Deck: Slide Deck: Hands-on: Hands-on: A (very) brief history of genomics / Foundations of Data Science</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@8dd8a83a8f14fd83f0dcbdc0750a0b3688703c7c",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture1/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1704793044' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1704793044' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="A brief history of modern biology">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-09 09:37:25 +0000">
+<meta name="DC.creator" content="Anton Nekrutenko"><meta name="description" content="# Charles Darwin .center[The fabric of biology: 1809 - 1882]  ![Darwin](./images/darwin.png)  Provisional theory of pangenesis. All sperm, egg, buds consisted of multitude of gemmules given off by “ *each separate atom of the organism* ”.  ---  # Francis Galton .center[Experimental validation: 1822 - 1911]  ![Galton](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Sir_Francis_Galton_by_Gustav_Graef.jpg/453px-Sir_Francis_Galton_by_Gustav_Graef.jpg)  Blood transfusion in rabbits produces no evidence to support provisional theory of pangenesis.  ---  # Darwin gets pissed  ![Darwin letter to Nature](./images/darwin_nature.png)  ---  # Gregor Johann Mendel  .center[Quantifiable heredity: 1822 - 1884]  .pull-left[ ![Mendel](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Gregor_Mendel_2.jpg/442px-Gregor_Mendel_2.jpg) ]  .pull_right[ - Born in Austro-Hungarian Empire (1822) - Admitted at the Augustinian monastery in Brno (1843) - Studies in Vienna with Doppler, Ettingha...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Foundations of Data Science / Slide Deck: Hands-on: Hands-on: A (very) brief history of genomics">
+        <meta property="og:description" content="# Charles Darwin .center[The fabric of biology: 1809 - 1882]  ![Darwin](./images/darwin.png)  Provisional theory of pangenesis. All sperm, egg, buds consisted of multitude of gemmules given off by “ *each separate atom of the organism* ”.  ---  # Francis Galton .center[Experimental validation: 1822 - 1911]  ![Galton](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Sir_Francis_Galton_by_Gustav_Graef.jpg/453px-Sir_Francis_Galton_by_Gustav_Graef.jpg)  Blood transfusion in rabbits produces no evidence to support provisional theory of pangenesis.  ---  # Darwin gets pissed  ![Darwin letter to Nature](./images/darwin_nature.png)  ---  # Gregor Johann Mendel  .center[Quantifiable heredity: 1822 - 1884]  .pull-left[ ![Mendel](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Gregor_Mendel_2.jpg/442px-Gregor_Mendel_2.jpg) ]  .pull_right[ - Born in Austro-Hungarian Empire (1822) - Admitted at the Augustinian monastery in Brno (1843) - Studies in Vienna with Doppler, Ettingha...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1704793044'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/data-science/tutorials/gnmx-lecture1/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/gnmx-lecture1/slides-plain.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/data-science/tutorials/gnmx-lecture1/slides-plain.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/data-science/tutorials/gnmx-lecture1/slides-plain.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/topics/data-science/tutorials/gnmx-lecture1/slides-plain.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/data-science/tutorials/gnmx-lecture1/slides.html">View markdown source on GitHub</a>
+	<h1>A brief history of modern biology</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Anton Nekrutenko avatar" width="36" class="avatar" />
+    Anton Nekrutenko</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Jan 9, 2024 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Jan 9, 2024 </div>
+
+	<hr />
+
+
+	<h1 id="charles-darwin">Charles Darwin</h1>
+<p>.center[The fabric of biology: 1809 - 1882]</p>
+
+<p><img src="./images/darwin.png" alt="Darwin" /></p>
+
+<p>Provisional theory of pangenesis. All sperm, egg, buds consisted of multitude of gemmules given off by “ <em>each separate atom of the organism</em> ”.</p>
+
+<hr />
+
+<h1 id="francis-galton">Francis Galton</h1>
+<p>.center[Experimental validation: 1822 - 1911]</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Sir_Francis_Galton_by_Gustav_Graef.jpg/453px-Sir_Francis_Galton_by_Gustav_Graef.jpg" alt="Galton" /></p>
+
+<p>Blood transfusion in rabbits produces no evidence to support provisional theory of pangenesis.</p>
+
+<hr />
+
+<h1 id="darwin-gets-pissed">Darwin gets pissed</h1>
+
+<p><img src="./images/darwin_nature.png" alt="Darwin letter to Nature" /></p>
+
+<hr />
+
+<h1 id="gregor-johann-mendel">Gregor Johann Mendel</h1>
+
+<p>.center[Quantifiable heredity: 1822 - 1884]</p>
+
+<p>.pull-left[
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Gregor_Mendel_2.jpg/442px-Gregor_Mendel_2.jpg" alt="Mendel" />
+]</p>
+
+<p>.pull_right[</p>
+<ul>
+  <li>Born in Austro-Hungarian Empire (1822)</li>
+  <li>Admitted at the Augustinian monastery in Brno (1843)</li>
+  <li>Studies in Vienna with Doppler, Ettinghausen, Redtenbacher, Fenzl, and Unger (1851 - 1853)</li>
+  <li>Teaches at the Monastery (1853 - 1868)</li>
+  <li>Grows 28,000 plants and analyzed seven pairs of traits
+]</li>
+</ul>
+
+<hr />
+
+<h1 id="mendel-gets-lucky">Mendel gets lucky</h1>
+
+<p><img src="./images/mendel_results.png" alt="Mendel results" /></p>
+
+<p>.footnote[(From <a href="https://isbnsearch.org/isbn/0824708245">Magner 2002</a>)]</p>
+
+<hr />
+
+<p><img src="./images/mendel_cartoon.png" alt="Mendel cartoon" /></p>
+
+<p>.footnote[(From <a href="https://isbnsearch.org/isbn/9780062730992">Gonick Wheelis 1991</a>)]</p>
+
+<hr />
+
+<h1 id="perhaps-too-lucky">Perhaps too lucky</h1>
+
+<p><img src="./images/mendel_reexamination.png" alt="Mendel re-examination" /></p>
+
+<p>.footnote[(From <a href="https://isbnsearch.org/isbn/9780879696078">Sturtevant 2001</a>)]</p>
+
+<hr />
+
+<h1 id="devreiscorrenstschemak">deVreis/Correns/Tschemak</h1>
+
+<p>.center[The Rediscovery]</p>
+
+<p><img src="./images/dct.png" alt="DCT" /></p>
+
+<hr />
+
+<h1 id="meanwhile-chromosomal-theory-evolves">Meanwhile chromosomal theory evolves</h1>
+
+<p>.center[</p>
+
+<ul>
+  <li>Species have a constant number of chromosomes</li>
+  <li>Equal numbers come from egg and sperm</li>
+  <li>Reduction is accomplished by divisions</li>
+  <li>Chromosomes are bearers of hereditary material</li>
+</ul>
+
+<p>]</p>
+
+<hr />
+
+<h1 id="the-fly-room">The fly room</h1>
+
+<p>.center[</p>
+
+<p>Morgan/Sturtevant/Bridges/Muller</p>
+
+<ul>
+  <li>Chromosomes contain hereditary information</li>
+  <li>Genes are linearly distributed along chromosome</li>
+  <li>Gene is a unit of information</li>
+  <li>Gene can define characteristics such as eye color, wing shape etc.</li>
+</ul>
+
+<p>]</p>
+
+<hr />
+
+<h1 id="academic-competition">Academic competition!</h1>
+
+<p><img src="./images/muller_scribble.png" alt="Muller Scribble" /></p>
+
+<p>.footnote[(From <a href="https://www.amazon.com/Elof-Axel-Carlson-Classical-2004-03-13/dp/B00DJ4VBXY">Carson 2004</a>)]</p>
+
+<hr />
+
+<h1 id="but-what-is-the-carrier-of-information">But what is the carrier of information?</h1>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Miescher</strong></td>
+          <td>nucleic acids</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Kossel</strong></td>
+          <td>DNA, RNA, histones</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Levene</strong></td>
+          <td>tetranucleotide theory</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Chargaff</strong></td>
+          <td>parity rules</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Griffith, Avery, MacLeod, McCarty</strong></td>
+          <td>nucleic acid is the transforming factor</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="the-church-of-phage">The Church of Phage</h1>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Delbrück, Luria, Hershey</strong></td>
+          <td>replication and genetic structure of viruses</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Lwoff</strong></td>
+          <td>profage and lysogeny</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Lederberg, Hayes</strong></td>
+          <td>bacterial sex, plasmids</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Hershey, Chase</strong></td>
+          <td>DNA = heredity</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Watson</strong></td>
+          <td>…</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="delbrück-luria-hershey">Delbrück, Luria, Hershey</h1>
+
+<p><img src="./images/dlh.png" alt="dlh" /></p>
+
+<p>NP 1969: “ <em>discoveries concerning the replication mechanism and genetic structure of viruses</em> “</p>
+
+<hr />
+
+<h1 id="luria-delbrück-experiment">Luria Delbrück Experiment</h1>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Luria-delbruck_diagram.svg/459px-Luria-delbruck_diagram.svg.png" alt="Fluctuation test" /></p>
+
+<hr />
+
+<h1 id="hershey-chase-experiment">Hershey-Chase experiment</h1>
+
+<p>.pull-left[
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Scientist_Alfred_Hershey_and_Martha_Chase.jpg/754px-Scientist_Alfred_Hershey_and_Martha_Chase.jpg" alt="Hershey and Chase" />
+]</p>
+
+<p>.pull-right[
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Hershey_Chase_experiment.png/758px-Hershey_Chase_experiment.png" alt="Hershey-Chase experiment" />
+]</p>
+
+<hr />
+
+<h1 id="lederberg-tatum-experiment">Lederberg-Tatum experiment</h1>
+
+<p>Genetic recombination in <em>E. coli</em></p>
+
+<p><img src="./images/lt.png" alt="Lederberg-Tatum Experiment" /></p>
+
+<hr />
+
+<h1 id="blender-again">Blender again!</h1>
+
+<p><img src="./images/blender.png" alt="Genetic distance in bacteria" /></p>
+
+<hr />
+
+<h1 id="dna">DNA</h1>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Crick, Franklin, Watson, Wilkins</strong></td>
+          <td>the structure of DNA</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Meselson, Stahl</strong></td>
+          <td>semiconservative replication</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Ochoa, Kornberg</strong></td>
+          <td>enzymatic synthesis of nucleic acids</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Holley, Nirenberg, Khorana</strong></td>
+          <td>the code</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="crick-franklin-watson-wilkins">Crick, Franklin, Watson, Wilkins</h1>
+
+<p>DNA is an antiparallel double helix</p>
+
+<p><img src="./images/cfww.png" alt="Crick, Franklin, Watson, Wilkins" /></p>
+
+<hr />
+
+<p><img src="./images/three_papers.png" alt="Three papers" /></p>
+
+<hr />
+
+<h1 id="meselson-stahl">Meselson, Stahl</h1>
+
+<p>DNA replication is semiconservative</p>
+
+<p><img src="./images/ms.png" alt="Meselson, Stahl" /></p>
+
+<hr />
+
+<h1 id="meselson-stahl-experiment">Meselson-Stahl experiment</h1>
+
+<p>CsCl gradient centrifugation</p>
+
+<p><img src="./images/ms1.png" alt="Meselson, Stahl experiment 1" /></p>
+
+<hr />
+
+<p><img src="./images/ms2.png" alt="Meselson, Stahl experiment 2" /></p>
+
+<hr />
+
+<h1 id="gene-function">Gene function</h1>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Lwoff, Jacob, Monod</strong></td>
+          <td>genetic map and gene regulation</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Beadle, Tatum</strong></td>
+          <td>one gene = one protein</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Pauling, Ingram</strong></td>
+          <td>molecular disease</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="lwoff-jacob-monod">Lwoff, Jacob, Monod</h1>
+
+<p>Lysogeny, prophage, genetic maps, gene regulation</p>
+
+<p><img src="./images/ljm.png" alt="Lwoff, Jacob, Monod" /></p>
+
+<hr />
+
+<p><img src="./images/reg.png" alt="Regulation" /></p>
+
+<hr />
+
+<h1 id="reverse-transcription-recombinant-age">Reverse Transcription, Recombinant Age</h1>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Temin, Baltimore</strong></td>
+          <td>reverse transcription</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Cohen, Boyer</strong></td>
+          <td>recombinant methodologies</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Berg</strong></td>
+          <td>SV40</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Maxam, Gilbert, Sanger</strong></td>
+          <td>sequencing is here</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="berg-experiment">Berg experiment</h1>
+
+<p><img src="./images/berg.png" alt="Berg experiment" /></p>
+
+<hr />
+
+<h1 id="pcr">PCR</h1>
+
+<p>.pull-left[
+<img src="./images/pcr1.png" alt="PCR1" />
+]</p>
+
+<p>.pull-right[
+<img src="./images/pcr2.png" alt="PCR2" />
+]</p>
+
+<hr />
+
+<h1 id="dna-sequencing-is-here">DNA Sequencing is here!</h1>
+
+<p><img src="./images/wsgm.png" alt="Wu, Sanger, Gilbert, Mullis" /></p>
+
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+<img src="/training-material/assets/images/genomics_intro.png" alt="page logo" style="height: 100px;"/>
+
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/8dd8a83a8f14fd83f0dcbdc0750a0b3688703c7c">8dd8a83</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/data-science/tutorials/gnmx-lecture1/slides.html" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1704793044'></script>
+        
+    </body>
+</html>
