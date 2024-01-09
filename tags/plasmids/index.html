@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@8dd8a83a8f14fd83f0dcbdc0750a0b3688703c7c",
+		release: "galaxy-training-network@12c027af1e96c7be42c23759af2ad457ab2bd67e",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1704793044' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1704793044' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1704797932' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1704797932' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -73,7 +73,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1704793044'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1704797932'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -265,6 +265,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   
         <!-- MAT: metagenomics/plasmid-metagenomics-nanopore -->
       
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
 
         <tr>
           <td class="tutorial_title">
@@ -280,15 +281,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #b6dbff; --color-darker: #7dc6ff; --color-dimmed: #9cd1ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #b0d9ff; --color-darker: #76c4ff; --color-dimmed: #95cfff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
-              <a href="/training-material/search?query=plasmids" class="label label-default tutorial_tag" style="--color-primary: #00f4b9; --color-darker: #00d9a4; --color-dimmed: #00e6ae;" title="Click to show all tutorials tagged plasmids">plasmids</a>
+              <a href="/training-material/search?query=plasmids" class="label label-default tutorial_tag" style="--color-primary: #00f0b6; --color-darker: #00d6a2; --color-dimmed: #00e3ac;" title="Click to show all tutorials tagged plasmids">plasmids</a>
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffc7e5; --color-darker: #ffa3d7; --color-dimmed: #ffb6de;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffc3e3; --color-darker: #ff9fd5; --color-dimmed: #ffb1dc;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c9d6ff; --color-darker: #a5beff; --color-dimmed: #b7caff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c5d4ff; --color-darker: #a1bcff; --color-dimmed: #b4c8ff;" title="Click to show all tutorials tagged amr">amr</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e2d900; --color-darker: #c9c100; --color-dimmed: #d6cd00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -520,9 +521,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
     
-    <a href="/training-material/hall-of-fame/willemdek11/" class="contributor-badge contributor-willemdek11"><img src="https://avatars.githubusercontent.com/willemdek11?s=36" alt="Willem de Koning avatar" width="36" class="avatar" />
-    Willem de Koning</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
-    Saskia Hiltemann</a>
+    <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/willemdek11/" class="contributor-badge contributor-willemdek11"><img src="https://avatars.githubusercontent.com/willemdek11?s=36" alt="Willem de Koning avatar" width="36" class="avatar" />
+    Willem de Koning</a>
 
     <h2 id="funders">Funders</h2>
     <p>This material was funded by:</p>
@@ -546,7 +547,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/8dd8a83a8f14fd83f0dcbdc0750a0b3688703c7c">8dd8a83</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/12c027af1e96c7be42c23759af2ad457ab2bd67e">12c027a</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -570,7 +571,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1704793044'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1704797932'></script>
         
     </body>
 </html>
