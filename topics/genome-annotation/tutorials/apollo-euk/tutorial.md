@@ -29,6 +29,7 @@ contributions:
     - abretaud
   funding:
     - gallantries
+    - eurosciencegateway
 
 requirements:
   - type: "internal"

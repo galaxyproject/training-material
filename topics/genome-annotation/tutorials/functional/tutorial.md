@@ -19,6 +19,7 @@ contributions:
     - abretaud
   funding:
     - gallantries
+    - eurosciencegateway
 subtopic: eukaryote
 priority: 6
 ---
