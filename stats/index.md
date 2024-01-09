@@ -3,6 +3,7 @@ layout: base
 title: GTN Statistics
 redirect_from:
 - /stats
+description: Some useful statistics about the GTN. We're a growing community!
 ---
 
 <!-- tutorial stats -->

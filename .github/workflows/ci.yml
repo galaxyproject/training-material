@@ -76,6 +76,10 @@ jobs:
         run: |
           ! fgrep -R 'lt;blockquote' _site
 
+      - name: Ensure no unexpected jekyll in output
+        run: |
+          ! fgrep -R 'site.pages' _site
+
       - name: Run aXe accessibility testing on some representative URLs
         run: |
           node_modules/.bin/http-server _site/ &
