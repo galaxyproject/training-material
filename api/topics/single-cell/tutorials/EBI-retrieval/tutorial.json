@@ -87,7 +87,7 @@
       "name": "EBI SCXA to AnnData (Scanpy) or Seurat Object",
       "title": "EBI SCXA to AnnData (Scanpy) or Seurat Object",
       "test_results": null,
-      "modified": "2024-01-10 00:19:36 +0000",
+      "modified": "2024-01-10 09:11:20 +0000",
       "mermaid": "flowchart TD\n  0[\"Input parameter\"];\n  1[\"EBI SCXA Data Retrieval\"];\n  0 -->|output| 1;\n  2[\"Column Regex Find And Replace\"];\n  1 -->|design_tsv| 2;\n  3[\"Search in textfiles\"];\n  1 -->|genes_tsv| 3;\n  4[\"Replace\"];\n  2 -->|out_file1| 4;\n  5[\"Scanpy Read10x\"];\n  1 -->|barcode_tsv| 5;\n  4 -->|outfile| 5;\n  1 -->|genes_tsv| 5;\n  1 -->|matrix_mtx| 5;\n  6[\"Seurat Read10x\"];\n  1 -->|barcode_tsv| 6;\n  1 -->|genes_tsv| 6;\n  1 -->|matrix_mtx| 6;\n  4 -->|outfile| 6;\n  7[\"AnnData Operations\"];\n  5 -->|output_h5ad| 7;\n"
     }
   ],

@@ -93,7 +93,7 @@
       "name": "scATAC-seq Count Matrix Filtering",
       "title": "scATAC-seq Count Matrix Filtering",
       "test_results": null,
-      "modified": "2024-01-10 00:19:36 +0000",
+      "modified": "2024-01-10 09:11:21 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"scATAC-seq Preprocessing\"];\n  0 -->|output| 1;\n  2[\"scATAC-seq Preprocessing\"];\n  1 -->|anndata_out| 2;\n  3[\"scATAC-seq Preprocessing\"];\n  2 -->|anndata_out| 3;\n  4[\"Plot\"];\n  3 -->|anndata_out| 4;\n  5[\"scATAC-seq Preprocessing\"];\n  3 -->|anndata_out| 5;\n  6[\"scATAC-seq Preprocessing\"];\n  3 -->|anndata_out| 6;\n  7[\"scATAC-seq Preprocessing\"];\n  3 -->|anndata_out| 7;\n  8[\"scATAC-seq Preprocessing\"];\n  3 -->|anndata_out| 8;\n  9[\"scATAC-seq Preprocessing\"];\n  8 -->|anndata_out| 9;\n  10[\"scATAC-seq Preprocessing\"];\n  9 -->|anndata_out| 10;\n  11[\"scATAC-seq Preprocessing\"];\n  10 -->|anndata_out| 11;\n  12[\"Plot\"];\n  11 -->|anndata_out| 12;\n"
     },
     {
@@ -115,7 +115,7 @@
       "name": "scATAC-seq FASTQ to Count Matrix",
       "title": "scATAC-seq FASTQ to Count Matrix",
       "test_results": null,
-      "modified": "2024-01-10 00:19:36 +0000",
+      "modified": "2024-01-10 09:11:21 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Sinto barcode\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  2 -->|output| 3;\n  4[\"FastQC\"];\n  3 -->|read1_out| 4;\n  5[\"FastQC\"];\n  3 -->|read2_out| 5;\n  6[\"Map with BWA-MEM\"];\n  3 -->|read1_out| 6;\n  3 -->|read2_out| 6;\n  7[\"Sinto fragments\"];\n  6 -->|bam_output| 7;\n  8[\"bedtools SortBED\"];\n  7 -->|fragments| 8;\n  9[\"MACS2 callpeak\"];\n  8 -->|output| 9;\n  10[\"Unique\"];\n  9 -->|output_narrowpeaks| 10;\n  11[\"Build count matrix\"];\n  8 -->|output| 11;\n  10 -->|outfile| 11;\n  12[\"Inspect AnnData\"];\n  11 -->|anndata_out| 12;\n  13[\"Inspect AnnData\"];\n  11 -->|anndata_out| 13;\n  14[\"Inspect AnnData\"];\n  11 -->|anndata_out| 14;\n  15[\"Inspect AnnData\"];\n  11 -->|anndata_out| 15;\n"
     }
   ],
