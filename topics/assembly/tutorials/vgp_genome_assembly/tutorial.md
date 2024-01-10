@@ -171,11 +171,11 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 
 > <hands-on-title><b>Uploading <tt>FASTA</tt> datasets from Zenodo</b></hands-on-title>
 >
-> 1. Create a new history for this tutorial
+>**Step 1**: Create a new history for this tutorial
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Copy the following URLs into clipboard.
+>**Step 2**: Copy the following URLs into clipboard.
 >    - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
@@ -184,7 +184,7 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 >    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
 >    ```
 >
-> 3. Upload datasets into Galaxy.
+>**Step 3**: Upload datasets into Galaxy.
 >    - set the datatype to `fasta`
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
@@ -203,7 +203,7 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 > <hands-on-title><b>Uploading <tt>fastqsanger.gz</tt> datasets from Zenodo</b></hands-on-title>
 >
-> 1. Copy the following URLs into clipboard.
+>**Step 1**: Copy the following URLs into clipboard.
 >    - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
@@ -211,7 +211,7 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 >    https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 >    ```
 >
-> 2. Upload datasets into Galaxy.
+>**Step 2**: Upload datasets into Galaxy.
 >    - set the datatype to `fastqsanger.gz`
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
@@ -226,11 +226,13 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 ## Organizing the data
 
-If everything goes smoothly you history will look like shown in Fig. 4 below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes collection as an input (it does not access individual datasets). So let's create a collection using steps outlines in the Tip {% icon tip %} "Creating a dataset collection" that you can find below Fig. 4.
-
-![AfterUpload](../../images/vgp_assembly/making_list.svg "History after uploading HiFi and HiC data (left). Creation of a list (collection) combines all HiFi datasets into a single history item called 'HiFi data' (right). See below for instruction on how to make this collection.")
+If everything goes smoothly you history will look like shown in the figure below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes collection as an input (it does not access individual datasets). So let's create a collection using steps outlines in the Tip {% icon tip %} "Creating a dataset collection":
 
 {% snippet faqs/galaxy/collections_build_list.md %}
+
+The view of your history should transition from what is shown in the left pane below to what looks like the right pane:
+
+![AfterUpload](../../images/vgp_assembly/making_list.svg "History after uploading HiFi and HiC data (left). Creation of a list (collection) combines all HiFi datasets into a single history item called 'HiFi data' (right). See below for instruction on how to make this collection.")
 
 > <details-title>Other ways to upload the data</details-title>
 > You can obviously upload your own datasets via URLs as illustrated above or from your own computer. In addition, you can upload data from a major repository called [GenomeArk](https://genomeark.org). GenomeArk is integrated directly into Galaxy Upload. To use GenomeArk following the steps in the Tip {% icon tip %} below:
@@ -238,7 +240,7 @@ If everything goes smoothly you history will look like shown in Fig. 4 below. Th
 > {% snippet faqs/galaxy/datasets_upload_from_genomeark.md %}
 {: .details}
 
-### HiFi reads preprocessing with **cutadapt**
+# HiFi reads preprocessing with **cutadapt**
 
 Adapter trimming usually means trimming the adapter sequence off the ends of reads, which is where the adapter sequence is usually located in {NGS} reads. However, due to the nature of {SMRT} sequencing technology, adapters do not have a specific, predictable location in  {HiFi} reads. Additionally, the reads containing adapter sequence could be of generally lower quality compared to the rest of the reads. Thus, we will use **cutadapt** not to trim, but to remove the entire read if a read is found to have an adapter inside of it.
 
@@ -254,39 +256,40 @@ Adapter trimming usually means trimming the adapter sequence off the ends of rea
 
 > <hands-on-title>Primer removal with Cutadapt</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.4+galaxy0) %} with the following parameters:
->    - *"Single-end or Paired-end reads?"*: `Single-end`
->        - {% icon param-collection %} *"FASTQ/A file"*: `HiFi_collection`
->        - In *"Read 1 Options"*:
->            - In *"5' or 3' (Anywhere) Adapters"*:
->                - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
->                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 5' or 3' adapter name"*: `First adapter`
->                        - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCAACAACAACAACGGAGGAGGAGGAAAAGAGAGAGAT`
->                - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
->                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 5' or 3' adapter name"*: `Second adapter`
->                        - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCTTTTCCTCCTCCTCCGTTGTTGTTGTTGAGAGAGAT`
->    - In *"Adapter Options"*:
->        - *"Maximum error rate"*: `0.1`
->        - *"Minimum overlap length"*: `35`
->        - *"Look for adapters in the reverse complement"*: `Yes`
->    - In *"Filter Options"*:
->        - *"Discard Trimmed Reads"*: `Yes`
+>**Step 1**: Run {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.4+galaxy0) %} with the following parameters:
+> 1. *"Single-end or Paired-end reads?"*: `Single-end`
+> 2. {% icon param-collection %} *"FASTQ/A file"*: `HiFi_collection`
+> 3. In *"Read 1 Options"*:
+>    - In *"5' or 3' (Anywhere) Adapters"*:
+>       - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
+>          - *"Source"*: `Enter custom sequence`
+>             - *"Enter custom 5' or 3' adapter name"*: `First adapter`
+>             - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCAACAACAACAACGGAGGAGGAGGAAAAGAGAGAGAT`
+>       - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
+>          - *"Source"*: `Enter custom sequence`
+>             - *"Enter custom 5' or 3' adapter name"*: `Second adapter`
+>             - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCTTTTCCTCCTCCTCCGTTGTTGTTGTTGAGAGAGAT`
+> 4. In *"Adapter Options"*:
+>     - *"Maximum error rate"*: `0.1`
+>     - *"Minimum overlap length"*: `35`
+>     - *"Look for adapters in the reverse complement"*: `Yes`
+> 5. In *"Filter Options"*:
+>     - *"Discard Trimmed Reads"*: `Yes`
 >
->    > <tip-title>Select collection dataset</tip-title>
->    >
->    > 1. Click on {% icon param-collection %} **Dataset collection** in front of the input parameter you want to supply the collection to.
->    > 2. Select the collection you want to use from the list
->    >
->    {: .tip}
+> > <tip-title>Select collection dataset</tip-title>
+> >
+> > 1. Click on {% icon param-collection %} **Dataset collection** in front of the input parameter you want to supply the collection to.
+> > 2. Select the collection you want to use from the list
+> >
+> {: .tip}
 >
-> 2. Rename the output file as `HiFi_collection (trimmed)`.
+><br>
+>
+>**Step 2**: Rename the output file as `HiFi_collection (trimmed)`.
 >
 > {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
-
 
 # Genome profile analysis
 
@@ -324,32 +327,32 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 
 > <hands-on-title>Generate <i>k</i>-mers count distribution</hands-on-title>
 >
-> 1. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
->    - *"Operation type selector"*: `Count operations`
->        - *"Count operations"*: `Count: count the occurrences of canonical *k*-mers`
->        - {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
->        - *"k-mer size selector"*: `Set a k-mer size`
->            - "*k-mer size*": `31`
+>**Step 1**: Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
+>  1. *"Operation type selector"*: `Count operations`
+>  2. *"Count operations"*: `Count: count the occurrences of canonical *k*-mers`
+>  3. {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
+>  4. *"k-mer size selector"*: `Set a k-mer size`
+>  5. "*k-mer size*": `31`
 >
->    > <comment-title>Selection of <i>k</i>-mer size</comment-title>
->    >
->    > We used 31 as *k*-mer size, as this length has demonstrated to be sufficiently long that most *k*-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size > 10 Gb) and/or very repetitive genomes, larger *k*-mer length is recommended to increase the number of unique *k*-mers.
->    {: .comment}
+> > <comment-title>Selection of <i>k</i>-mer size</comment-title>
+> >
+> > We used 31 as *k*-mer size, as this length has demonstrated to be sufficiently long that most *k*-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size > 10 Gb) and/or very repetitive genomes, larger *k*-mer length is recommended to increase the number of unique *k*-mers.
+> {: .comment}
+><br>
+>**Step 2**: Rename output as `meryldb`
 >
-> 2. Rename it `meryldb`
+>**Step 3**: Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} again with the following parameters:
+>  1. *"Operation type selector"*: `Operations on sets of *k*-mers`
+>  2. *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
+>  3. {% icon param-file %} *"Input meryldb"*: `Collection meryldb`
 >
-> 3. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} again with the following parameters:
->    - *"Operation type selector"*: `Operations on sets of *k*-mers`
->        - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
->        - {% icon param-file %} *"Input meryldb"*: `Collection meryldb`
+>**Step 4**: Rename it as `Merged meryldb`
 >
-> 4. Rename it as `Merged meryldb`
->
-> 5. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} for the third time with the following parameters:
+>**Step 5**: Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} for the third time with the following parameters:
 >    - *"Operation type selector"*: `Generate histogram dataset`
 >        - {% icon param-file %} *"Input meryldb"*: `Merged meryldb`
 >
-> 6. Finally, rename it as `meryldb histogram`.
+>**Step 6**: Finally, rename it as `meryldb histogram`.
 >
 {: .hands_on}
 
@@ -363,16 +366,13 @@ The next step is to infer the genome properties from the *k*-mer histogram gener
 
 > <hands-on-title>Estimate genome properties</hands-on-title>
 >
-> 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Input histogram file"*: `meryldb histogram`
->    - *Ploidy for model to use*: `2`
->    - *"k-mer length used to calculate k-mer spectra"*: `31`
->
->   - In "*Output options*": mark `Summary of the analysis`
->   - In "*Advanced options*":
->       - *"Create testing.tsv file with model parameters"*: `Yes`
->
->    {: .comment}
+> Run {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2) %} with the following parameters:
+> 1. {% icon param-file %} *"Input histogram file"*: `meryldb histogram`
+> 2. *Ploidy for model to use*: `2`
+> 3. *"k-mer length used to calculate k-mer spectra"*: `31`
+> 4. In "*Output options*": mark `Summary of the analysis`
+> 5. In "*Advanced options*":
+> 6. *"Create testing.tsv file with model parameters"*: `Yes`
 >
 {: .hands_on}
 
@@ -386,11 +386,9 @@ Genomescope will generate six outputs:
 - **Model**: this file includes a detailed report about the model fitting.
 - **Summary**: it includes the properties inferred from the model, such as genome haploid length and the percentage of heterozygosity.
 
-Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters (Fig. 5).
+Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters shown below:
 
 ![Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 31-mer profile. The first peak located at coverage 25✕ corresponds to the heterozygous peak. The second peak at coverage 50✕, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes information about the inferred total genome length (len), genome unique length percent ('uniq'), overall heterozygosity rate ('ab'), mean *k*-mer coverage for heterozygous bases ('kcov'), read error rate ('err'), and average rate of read duplications ('dup'). It also reports the user-given parameters of *k*-mer size ('k') and ploidy ('p')."){:width="65%"}
-
-<br>
 
 This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the *k*-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.576%.
 
@@ -459,7 +457,6 @@ There are several tools for assessing various aspects of assembly quality:
 {% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
        text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click <b><i>solo</i></b>. If you have HiC reads for the same indiviudal, then click <b><i>hic</i></b>. <b>NOTE: If you want to learn more about purging, then <u>please check out the <i>solo</i> tutorial for details on purging false duplications.</u></b>" %}
 
-
 <div class = "hic" markdown="1">
 
 <!---- BEGINNING OF HiC SECTION --->
@@ -473,16 +470,16 @@ There are several tools for assessing various aspects of assembly quality:
 If you have the {Hi-C} data for the individual you are assembling with {HiFi} reads, then you can use that information to phase the {contigs}.
 
 > <hands-on-title>Hi-C-phased assembly with <b>hifiasm</b></hands-on-title>
-> 1. {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0) %} with the following parameters:
->    - *"Assembly mode"*: `Standard`
->        - {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
->       - In *"Options for Hi-C-partition*" select `Specify`
->         - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
->         - *"Hi-C R2 reads"*: `Hi-C_dataset_R`
+>**Step 1**: Run {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0) %} with the following parameters:
+> 1. *"Assembly mode"*: `Standard`
+> 2. {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
+> 3. In *"Options for Hi-C-partition*" select `Specify`
+>     - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
+>     - *"Hi-C R2 reads"*: `Hi-C_dataset_R`
 >
-> 2. After the tool has finished running, rename its outputs as follows:
->   - Rename the `Hi-C hap1 balanced contig graph` as `Hap1 contigs graph` and add a `#hap1` tag
->   - Rename the `Hi-C hap2 balanced contig graph` as `Hap2 contigs graph` and  add a `#hap2` tag
+>**Step 2**:. After the tool has finished running, rename its outputs as follows:
+>  1.  Rename the `Hi-C hap1 balanced contig graph` as `Hap1 contigs graph` and add a `#hap1` tag
+>  2.  Rename the `Hi-C hap2 balanced contig graph` as `Hap2 contigs graph` and  add a `#hap2` tag
 >
 {: .hands_on}
 
@@ -494,18 +491,19 @@ We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap
 
 > <hands-on-title>Convert GFA to FASTA</hands-on-title>
 >
-> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Input GFA file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
+>**Step 1**: Run {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
+>  1.  {% icon param-files %} *"Input GFA file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
 >
->    > <tip-title>Select multiple datasets</tip-title>
->    > 1. Click on {% icon param-files %} **Multiple datasets**
->    > 2. Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest
->    {: .tip}
+> > <tip-title>Select multiple datasets</tip-title>
+> > 1. Click on {% icon param-files %} **Multiple datasets**
+> > 2. Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest
+> {: .tip}
 >
->    - *"Tool mode"*: `Genome assembly manipulation`
->    - *"Output format"*: `FASTA`
->    - *"Generates the initial set of paths*": toggle to `yes`
-> 2. Rename the outputs as `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
+> 2.  *"Tool mode"*: `Genome assembly manipulation`
+> 3.  *"Output format"*: `FASTA`
+> 4.  *"Generates the initial set of paths*": toggle to `yes`
+>
+>**Step 2**: Rename the outputs as `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
 >
 {: .hands_on}
 
