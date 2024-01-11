@@ -203,20 +203,18 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 > <hands-on-title><b>Uploading <tt>fastqsanger.gz</tt> datasets from Zenodo</b></hands-on-title>
 >
->**Step 1**: Copy the following URLs into clipboard.
->    - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
+>**Step 1**: Copy the following URLs into clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
 >    https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
 >    https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 >    ```
 >
->**Step 2**: Upload datasets into Galaxy.
->    - set the datatype to `fastqsanger.gz`
+>**Step 2**: Upload datasets into Galaxy and set the datatype to `fastqsanger.gz`
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
+> {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
 >
->    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
+> {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
 >
 {: .hands_on}
 
@@ -329,7 +327,7 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 >
 >**Step 1**: Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
 >  1. *"Operation type selector"*: `Count operations`
->  2. *"Count operations"*: `Count: count the occurrences of canonical *k*-mers`
+>  2. *"Count operations"*: `Count: count the occurrences of canonical k-mers`
 >  3. {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
 >  4. *"k-mer size selector"*: `Set a k-mer size`
 >  5. "*k-mer size*": `31`
@@ -395,7 +393,7 @@ This distribution is the result of the Poisson process underlying the generation
 > <comment-title>Are you expecting to purge your assembly?</comment-title>
 > This tutorial covers purging using the program **purge_dups**. purge_dups has some default options and can try to detect coverage-based cutoffs automatically, but the VGP pipeline prefers to define these cutoffs using parameters derived from the GenomeScope2 output.
 >
-> _If you expect you need to purge your genome, please see the **solo** contigging section of the tutorial for details on parsing the GenomeScope2 output for purging cutoffs._
+> _If you expect you need to purge your genome, please see the [**solo** contigging section](#solo_hic_switch) of the tutorial for details on parsing the GenomeScope2 output for purging cutoffs._
 {: .comment}
 
 # Assembly with **hifiasm**
@@ -423,21 +421,21 @@ Hifiasm can be run in multiple modes depending on data availability
 **Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly.
 - _Input: PacBio HiFi reads_
 - _Output: scaffolded primary assembly, and alternate contigs_
-![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "The <b>solo</b> pipeline creates primary and alternate contigs, which then typically undergo purging with purge_dups to reconcile the haplotypes. During the purging process, haplotigs are removed from the primary assembly and added to the alternate assembly, which is then purged to generate the final alternate set of contigs. The purged primary contigs are then carried through scaffolding with Bionano and/or Hi-C data, resulting in one final draft primary assembly to be sent to manual curation.")
+![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "The <b>solo</b> pipeline creates <b>primary</b> and <b>alternate</b> contigs, which then typically undergo purging with purge_dups to reconcile the haplotypes. During the purging process, haplotigs are removed from the primary assembly and added to the alternate assembly, which is then purged to generate the final alternate set of contigs. The purged primary contigs are then carried through scaffolding with Bionano and/or Hi-C data, resulting in one final draft primary assembly to be sent to manual curation.")
 
 ### **Hi-C** phased mode
 
 **Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual.
 - _Input: PacBio HiFi & Illumina HiC reads_
 - _Output: scaffolded hap1 assembly, and scaffolded hap2 assembly (assuming you run the scaffolding on **both** haplotypes)_
-![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "The <b>Hi-C-phased</b> mode produces hap1 and hap2 contigs, which have been phased using the HiC information as described in {% cite Cheng2021 %}. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
+![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "The <b>Hi-C-phased</b> mode produces <b>hap1</b> and <b>hap2</b> contigs, which have been phased using the HiC information as described in {% cite Cheng2021 %}. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
 ### **Trio** mode
 
 **Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents.
 - _Input: PacBio HiFi reads from child, Illumina reads from both parents._
 - _Output: scaffolded maternal assembly, and scaffolded paternal assembly (assuming you run the scaffolding on **both** haplotypes)_
-![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "The <b>trio</b> mode produces maternal and paternal contigs, which have been phased using paternal short read data. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
+![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "The <b>trio</b> mode produces <b>maternal</b> and <b>paternal</b> contigs, which have been phased using paternal short read data. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
 No matter which way you run hifiasm, you will have to evaluate the assemblies' {QC} to ensure your genome is in good shape. The VGP pipeline features several reference-free ways of evaluating assembly quality, all of which are automatically generated with our workflows; however, we will run them manually in this tutorial so we can familiarize ourselves with how each QC metric captures a different aspect of assembly quality.
 
@@ -925,7 +923,6 @@ Now that we have looked at our primary assembly with multiple {QC} metrics, we k
 
 ## Purging the primary and alternate assemblies
 
-
 Before proceeding to purging, we need to carry out some text manipulation operations on the output generated by GenomeScope2 to make it compatible with downstream tools. The goal is to extract some parameters which at a later stage will be used by **purge_dups**.
 
 ### Parsing **purge_dups** cutoffs from **GenomeScope2** output
@@ -1089,7 +1086,7 @@ Now, we will map the reads against the primary assembly by using Minimap2 ({% ci
 Finally, we will use the `Reads mapped to contigs` pairwise mapping format (PAF) file for calculating some statistics required in a later stage. In this step, purge_dups (listed as **Purge overlaps** in Galaxy tool panel) initially produces a read-depth histogram from base-level coverages. This information is used for estimating the coverage cutoffs, taking into account that collapsed haplotype contigs will lead to reads from both alleles mapping to those contigs, whereas if the alleles have assembled as separate contigs, then the reads will be split over the two contigs, resulting in half the read-depth ({% cite Roach2018 %}).
 
 > <hands-on-title>Read-depth analisys</hands-on-title>
->**Step 1**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
+>**Step 1**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
 >  1. *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
 >  2. {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs`
 >  3. In *"Calcuts options"*:
@@ -1111,7 +1108,7 @@ Purge overlaps (purge_dups) generates three outputs:
 Now, we will segment the draft assembly into contigs by cutting at blocks of *N*s, and use minimap2 to generate an all by all self-alignment.
 
 > <hands-on-title>purge_dups pipeline    </hands-on-title>
->**Step 1**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+>**Step 1**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
 >  1. *"Function mode"*: `split assembly FASTA file by 'N's (split_fa)`
 >  2. {% icon param-file %} *"Assembly FASTA file"*: `Primary contigs FASTA`
 >
@@ -1152,7 +1149,7 @@ During the final step of the purge_dups pipeline, it will use the self alignment
 
 > <hands-on-title>Resolution of haplotigs and overlaps</hands-on-title>
 >
->**Step 1**: {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5) %} with the following parameters:
+>**Step 1**: {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
 >  1. *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
 >  2. {% icon param-file %} *"PAF input file"*: `Self-homology map primary`
 >  3. {% icon param-file %} *"Base-level coverage file"*: `PBCSTAT base coverage primary`
@@ -1160,7 +1157,7 @@ During the final step of the purge_dups pipeline, it will use the self alignment
 >
 >**Step 2**: Rename the output as `purge_dups BED`
 >
->**Step 3**: {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+>**Step 3**: {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
 >  1. *"Select the purge_dups function"*: `Obtain sequences after purging (get_seqs)`
 >  2. {% icon param-file %} *"Assembly FASTA file"*: `Primary contigs FASTA`
 >  3. {% icon param-file %} *"BED input file"*: `purge_dups BED` (output of the previous step)
@@ -1205,7 +1202,7 @@ Once we have merged the files, we should run the purge_dups pipeline again, but 
 >
 >**Step 2**: Rename the output as `Reads mapped to contigs alternate`
 >
->**Step 3**: {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3) %} with the following parameters:
+>**Step 3**: {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
 >  1. *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
 >  2. {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs alternate`
 >  3. In *"Calcuts options"*:
@@ -1214,7 +1211,7 @@ Once we have merged the files, we should run the purge_dups pipeline again, but 
 >
 >**Step 4**: Rename the outputs as `PBCSTAT base coverage alternate`, `Histogram plot alternate` and `Calcuts cutoff alternate`.
 >
->**Step 5**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+>**Step 5**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
 >  1. *"Function mode"*: `split assembly FASTA file by 'N's (split_fa)`
 >  2. {% icon param-file %} *"Assembly FASTA file"*: `Alternate contigs full`
 >
@@ -1230,7 +1227,7 @@ Once we have merged the files, we should run the purge_dups pipeline again, but 
 >
 >**Step 7**: Rename the output as `Self-homology map alternate`
 >
->**Step 8**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5) %} with the following parameters:
+>**Step 8**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
 >  1. *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
 >  2. {% icon param-file %} *"PAF input file"*: `Self-homology map alternate`
 >  3. {% icon param-file %} *"Base-level coverage file"*: `PBCSTAT base coverage alternate`
@@ -1238,7 +1235,7 @@ Once we have merged the files, we should run the purge_dups pipeline again, but 
 >
 >**Step 9**: Rename the output as `purge_dups BED alternate`
 >
->**Step 10**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+>**Step 10**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
 >  1. *"Select the purge_dups function"*: `Obtain sequences after purging (get_seqs)`
 >  2. {% icon param-file %} *"Assembly FASTA file"*: `Alternate contigs full`
 >  3. {% icon param-file %} *"BED input file"*: `purge_dups BED alternate`
@@ -1502,7 +1499,7 @@ In the contact generated from the Bionano-scaffolded assembly can be identified 
 
 Once we have evaluated the quality of the scaffolded genome assembly, the next step consists in integrating the information contained in the HiC reads into our assembly, so that any errors identified can be resolved. For this purpose we will use YaHS ({% cite Zhou2022 %}).
 
-## YaHS scaffolding
+## **YaHS** scaffolding
 
 YaHS is an open source software that makes use of Hi-C to linearly orient and order assembled contigs along entire chromosomes ({% cite Zhou2022 %}). One of the advantages of Yahs with respect to most existing Hi-C scaffolding tools is that it doesn't require the estimated number of chromosomes.
 
@@ -1593,10 +1590,10 @@ To sum up, it is worthwhile to compare the final assembly with the [S. cerevisia
 
 ![Table 1: Final stats](../../images/vgp_assembly/stats_conclusion.png "Comparison between the final assembly generating in this training and the reference genome. Contiguity plot using the reference genome size (a). Assembly statistics (b).")
 
-With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.16a,b). Regarding the number of scaffolds, the obtained value is similar to the reference assembly, which consist in 16 chromosomes plus the mitochondrial DNA, which consists of 85,779 bp. The remaining statistics exhibit very similar values (fig. 16b).
+With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (figure above). Regarding the number of scaffolds, the obtained value is similar to the reference assembly, which consist in 16 chromosomes plus the mitochondrial DNA, which consists of 85,779 bp. The remaining statistics exhibit very similar values (panel **b** above).
 
 ![Comparison reference genome](../../images/vgp_assembly/hi-c_pretext_conclusion.png "Comparison between contact maps generated by using the final assembly (a) and the reference genome (b).")
 
-If we compare the contact map of our assembled genome (fig. 17a) with the reference assembly (fig. 17b), we can see that the two are essentially identical. This means that we have achieved an almost perfect assembly at the chromosome level.
+If we compare the contact map of our assembled genome (panel **a** above) with the reference assembly (panel **b** above), we can see that the two are essentially identical. This means that we have achieved an almost perfect assembly at the chromosome level.
 
 
