@@ -18,6 +18,13 @@ pathway:
     tutorials:
       - name: gnmx-lecture1
         topic: data-science
+  - section: "Module 2: Data Processing Tooling"
+    description: Before jumping to Biology we need to review basic data processing machinery
+    tutorials:
+      - name: cli-basics
+        topic: data-science
+      - name: cli-advanced
+        topic: data-science
 
 
 ---
