@@ -756,7 +756,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 > 1. {% icon param-files %} *"Input file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
 > 2. *"Tool mode": `Summary statistics generation`
-> 3. *"Expected genome size"*: `11747160` (remember we calculated this value earlier using `GenomeScope2` [here](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
+> 3. *"Expected genome size"*: `11747160` (remember we calculated this value earlier using [`GenomeScope2`](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
 > 4. *"Thousands separator in output"*: Set to "No"
 > 5. *"Generates the initial set of paths*": toggle to `yes`
 >
