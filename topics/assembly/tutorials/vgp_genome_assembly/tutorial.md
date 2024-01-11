@@ -526,7 +526,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 > 1. {% icon param-files %} *"Input file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
 > 2. *"Tool mode": `Summary statistics generation`
-> 3. *"Expected genome size"*: `11747160` (remember we calculated this value earlier using `GenomeScope2` [here](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
+> 3. *"Expected genome size"*: `11747160` (remember we calculated this value [earlier using `GenomeScope2`](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
 > 4. *"Thousands separator in output"*: Set to "No"
 >
 > <br>
@@ -895,7 +895,7 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 > 4. {% icon param-file %} *"First genome assembly"*: `Primary contigs FASTA`
 > 5. {% icon param-file %} *"Second genome assembly"*: `Alternate contigs FASTA`
 > <br>
->(REMINDER: `Primary contigs FASTA` and `Alternate contigs FASTA` were generated [here](#gfa2fasta_solo))
+>(REMINDER: `Primary contigs FASTA` and `Alternate contigs FASTA` were generated [earlier](#gfa2fasta_solo))
 >
 {: .hands_on}
 
@@ -937,7 +937,7 @@ The first relevant parameter is the `estimated genome size`.
 ><br>
 >**Step 3**: Scroll down again to find *"+ Insert Find and Replace"* button and click it again. After this you should have *"Find and Replace"* panel repeated three times: *"1: Find and Replace"*, *"2: Find and Replace"*, and *"3: Find and Replace"*. 
 ><br>
->**Step 4**: In {% icon param-file %} *"File to process"*: Select `GenomeScope summary` output (generated [here](#genomescope)). The input file should have content that looks like this (it may not be exactly like this):
+>**Step 4**: In {% icon param-file %} *"File to process"*: Select `GenomeScope summary` output (generated during *k*-mer profiling [step](#genomescope)). The input file should have content that looks like this (it may not be exactly like this):
 > ```
 > GenomeScope version 2.0
 > input file = ....
@@ -1361,7 +1361,7 @@ Befoew we begin, we need to upload BioNano data:
 > <hands-on-title>Bionano hybrid scaffolding</hands-on-title>
 >
 >**Step1**: Run {% tool [Bionano Hybrid Scaffold](toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.7.0+galaxy3) %} with the following parameters:
-> 1. {% icon param-file %} *"NGS FASTA"*: `Hap1 contigs FASTA` generated [here](#hap1_contigs).
+> 1. {% icon param-file %} *"NGS FASTA"*: `Hap1 contigs FASTA` generated during [hifiasm contigging](#hap1_contigs).
 > 2. {% icon param-file %} *"BioNano CMAP"*: `Bionano_dataset` we just uploaded
 > 3. *"Configuration mode"*: `VGP mode`
 > 4. *"Genome maps conflict filter"*: `Cut contig at conflict`
