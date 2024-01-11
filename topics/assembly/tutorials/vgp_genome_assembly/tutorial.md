@@ -173,7 +173,7 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 >
 >**Step 1**: Create a new history for this tutorial
 >
->    {% snippet faqs/galaxy/histories_create_new.md %}
+> {% snippet faqs/galaxy/histories_create_new.md %}
 >
 >**Step 2**: Copy the following URLs into clipboard.
 >    - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
@@ -187,9 +187,9 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 >**Step 3**: Upload datasets into Galaxy.
 >    - set the datatype to `fasta`
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
+> {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
 >
->    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fasta_via_urls.md %}
+> {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fasta_via_urls.md %}
 >
 {: .hands_on}
 
