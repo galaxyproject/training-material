@@ -59,7 +59,7 @@
       "name": "sRNA Seq Step 1: Read Pre Processing And Removal Of Artifacts (no Grooming)",
       "title": "sRNA Seq Step 1: Read Pre Processing And Removal Of Artifacts (no Grooming)",
       "test_results": null,
-      "modified": "2024-01-11 00:10:53 +0000",
+      "modified": "2024-01-11 14:27:37 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"FastQC\"];\n  0 -->|output| 3;\n  4[\"Trim Galore!\"];\n  0 -->|output| 4;\n  5[\"FastQC\"];\n  4 -->|trimmed_reads_single| 5;\n  6[\"HISAT\"];\n  4 -->|trimmed_reads_single| 6;\n  1 -->|output| 6;\n  7[\"Filter SAM or BAM, output SAM or BAM\"];\n  6 -->|output_alignments| 7;\n  8[\"Convert from BAM to FastQ\"];\n  7 -->|output1| 8;\n  9[\"HISAT\"];\n  8 -->|output| 9;\n  2 -->|output| 9;\n  10[\"Filter SAM or BAM, output SAM or BAM\"];\n  9 -->|output_alignments| 10;\n  11[\"Convert from BAM to FastQ\"];\n  10 -->|output1| 11;\n  12[\"Manipulate FASTQ\"];\n  11 -->|output| 12;\n  13[\"Manipulate FASTQ\"];\n  11 -->|output| 13;\n  14[\"FastQC\"];\n  12 -->|output_file| 14;\n  15[\"FastQC\"];\n  13 -->|output_file| 15;\n"
     },
     {
@@ -77,7 +77,7 @@
       "name": "sRNA Seq Step 2: Salmon And DESeq2",
       "title": "sRNA Seq Step 2: Salmon And DESeq2",
       "test_results": null,
-      "modified": "2024-01-11 00:10:53 +0000",
+      "modified": "2024-01-11 14:27:37 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset collection\"];\n  3[\"Input dataset\"];\n  4[\"Salmon\"];\n  1 -->|output| 4;\n  0 -->|output| 4;\n  5[\"Salmon\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Salmon\"];\n  1 -->|output| 6;\n  2 -->|output| 6;\n  7[\"Salmon\"];\n  1 -->|output| 7;\n  2 -->|output| 7;\n  8[\"DESeq2\"];\n  6 -->|output_quant| 8;\n  4 -->|output_quant| 8;\n  3 -->|output| 8;\n  9[\"DESeq2\"];\n  7 -->|output_quant| 9;\n  5 -->|output_quant| 9;\n  3 -->|output| 9;\n  10[\"Filter\"];\n  8 -->|deseq_out| 10;\n  11[\"Filter\"];\n  9 -->|deseq_out| 11;\n"
     }
   ],
