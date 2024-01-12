@@ -16,7 +16,7 @@ objectives:
 time_estimation: '5h'
 key_points:
 - "The VGP pipeline allows users to generate error-free, near gapless reference-quality genome assemblies"
-- "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C scaffolding"
+- "The assembly can be divided into four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C scaffolding"
 contributors:
 - delphine-l
 - astrovsky01
@@ -56,7 +56,7 @@ The {G10K} launched the Vertebrate Genome Project ({VGP}), whose goal is generat
 
 > <warning-title>Your results may differ!</warning-title>
 >
-> Some of your results may slightly differ from results shown in this tutorial, depending on the versions of the tools used, since algorithms can change between versions.
+> Some of your results may slightly differ from the results shown in this tutorial, depending on the versions of the tools used, since algorithms can change between versions.
 >
 {: .warning}
 
@@ -73,7 +73,7 @@ The {G10K} launched the Vertebrate Genome Project ({VGP}), whose goal is generat
 
 Before getting into the thick of things, let's go over some terms you will often hear when learning about genome assembly. These concepts will be used often throughout this tutorial as well, so please refer to this section as necessary to help your understanding.
 
-**Pseudohaplotype assembly**: A genome assembly that consists of long phased haplotype blocks separated by regions where the haplotype cannot be distinguished (often homozygous regions). This can result in "switch errors", when the parental haplotypes alternate along the same sequence. These types of assemblies are usually represented by a _primary assembly_ and an _alternate assembly_. (This definition largely taken from the [NCBI's Genome Assembly Model](https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def).)
+**Pseudohaplotype assembly**: A genome assembly that consists of long-phased haplotype blocks separated by regions where the haplotype cannot be distinguished (often homozygous regions). This can result in "switch errors", when the parental haplotypes alternate along the same sequence. These types of assemblies are usually represented by a _primary assembly_ and an _alternate assembly_. (This definition is largely taken from the [NCBI's Genome Assembly Model](https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def).)
 
 **Primary assembly**: The primary assembly is traditionally the more complete representation of an individual's genome and consists of homozygous regions and one set of loci for heterozygous regions. Because the primary assembly contains both homo- and heterozygous regions, it is more complete than the _alternate assambly_ which often reports only the other set of loci for heterozygous regions. Thus, the primary assembly is usually what one would use for downstream analyses.
 
@@ -87,7 +87,7 @@ Before getting into the thick of things, let's go over some terms you will often
 
 **Contig**: A contiguous (*i.e.*, gapless) sequence in an assembly, usually inferred algorithmically from the unitig graph.
 
-**False duplications**: Assembly errors that result in one region of the genome being represented twice in the same assembly as two separate regions. Not to be confused with optical or technical duplicates from PCR from short read sequencing. False duplications can further be classified as either _haplotypic duplications_ or _overlaps_.
+**False duplications**: Assembly errors that result in one region of the genome being represented twice in the same assembly as two separate regions. Not to be confused with optical or technical duplicates from PCR from short-read sequencing. False duplications can further be classified as either _haplotypic duplications_ or _overlaps_.
 
 **Haplotypic duplication** can happen when a region that is heterozygous in the individual has the two haplotypes showing enough divergence that the assembler fails to interpret them as homologous. For example, say an individual is heterozygous in the region Chr1[1:100] and has Haplotype A from their mother and Haplotype B from their father; a false duplication can arise when the haplotypes are not recognized as being from the same region, and the assembler ends up placing both haplotypes in the same assembly, resulting in Chr1[1:100] being represented twice in one assembly. Ideally, a properly phased assembly would have Haplotype A in one assembly, *e.g.*, the primary, while Haplotype B is in the alternate.
 
@@ -101,7 +101,7 @@ False duplications via **overlaps** result from unresolved overlaps in the assem
 
 For more about the specific scaffolding technologies used in the VGP pipeline (currently Bionano optical maps and Hi-C chromatin conformation data), please refer to those specific sections within this tutorial.
 
-**HiFi reads**: PacBio {HiFi} reads are the focus of this tutorial. First described in 2019, they have revolutionized genome assembly by combining long (about 10-20 kbp) read lengths with high accuracy (>Q20) typically associated with short read sequencing ({% cite Wenger2019 %}). These higher read lengths enable HiFi reads to traverse some repeat regions that are problematic to assemble with short reads.
+**HiFi reads**: PacBio {HiFi} reads are the focus of this tutorial. First described in 2019, they have revolutionized genome assembly by combining long (about 10-20 kbp) read lengths with high accuracy (>Q20) typically associated with short-read sequencing ({% cite Wenger2019 %}). These higher read lengths enable HiFi reads to traverse some repeat regions that are problematic to assemble with short reads.
 
 **Ultra-long reads**: Ultra-long reads are typically defined as reads of over 100 kbp, and are usually generated using Oxford Nanopore Technology. Read quality is often lower than HiFi or Illumina (*i.e.*, have a higher error rate), but they are often significantly longer than any other current sequencing technology, and can help assembly algorithms walk complex repeat regions in the assembly graphs.
 
@@ -115,7 +115,7 @@ For more about the specific scaffolding technologies used in the VGP pipeline (c
 
 # VGP assembly pipeline overview
 
-The {VGP} assembly pipeline has a modular organization, consisting in ten workflows (Fig. 1). It can used with the following types of input data:
+The {VGP} assembly pipeline has a modular organization, consisting of ten workflows (Fig. 1). It can used with the following types of input data:
 
 |  Input data | Assembly quality  | Analysis trajectory <br>([Fig. 2)](#figure-2)|
 |------|---------------|-----|
@@ -128,7 +128,7 @@ The {VGP} assembly pipeline has a modular organization, consisting in ten workfl
 | HiFi + parental + BioNano | Better haplotype resolution and improved continuity | G |
 | HiFi + parental data + Hi-C + BioNano | Better haplotype resolution and ultimate continuity | H |
 
-If this table "HiFi" and "Hi-C" are derived from the individual whose genome is being assembled. "Parental data" is high coverage Illumina data derived from parents of the individual being assembled. Datasets containing parental data are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.
+If this table "HiFi" and "Hi-C" are derived from the individual whose genome is being assembled. "Parental data" is high-coverage Illumina data derived from the parents of the individual being assembled. Datasets containing parental data are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.
 
 ![The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
 <br>
@@ -137,7 +137,7 @@ The first stage of the pipeline is the generation of *k*-mer profiles of the raw
 > <comment-title>A note on data quality</comment-title>
 > We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.
 {: .comment}
-This training has been organized into four main sections: genome profile analysis, assembly of {HiFi} reads with hifiasm, scaffolding with Bionano optical maps, and scaffolding with {Hi-C} data. Additionally, the **assembly with hifiasm** section has two possible paths in this tutorial: solo contigging or solo w/HiC contigging.
+This training has been organized into four main sections: genome profile analysis, assembly of {HiFi} reads with hifiasm, scaffolding with Bionano optical maps, and scaffolding with {Hi-C} data. Additionally, the **assembly with hifiasm** section has two possible paths in this tutorial: solo contiging or solo w/HiC contiging.
 
 Throughout this tutorial, there will be **detail boxes** with additional background information on the science behind the sequencing technologies and software we use in the pipeline. These boxes are minimized by default, but please expand them to learn more about the data we utilize in this pipeline.
 
@@ -167,7 +167,7 @@ The first step is to get the datasets from Zenodo. Specifically, we will be uplo
 
 ## Uploading `fasta` datasets from Zenodo
 
-The following two steps demonstrate how to upload three PacBio {HiFi} datasets into you Galaxy history.
+The following two steps demonstrate how to upload three PacBio {HiFi} datasets into your Galaxy history.
 
 > <hands-on-title><b>Uploading <tt>FASTA</tt> datasets from Zenodo</b></hands-on-title>
 >
@@ -175,7 +175,7 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 >
 > {% snippet faqs/galaxy/histories_create_new.md %}
 >
->**Step 2**: Copy the following URLs into clipboard.
+>**Step 2**: Copy the following URLs into the clipboard.
 >    - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
@@ -197,13 +197,13 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 
 Illumina {Hi-C} data is uploaded in essentially the same way as shown in the following two steps.
 
-> <warning-title>DANGER: Make sure you choose correct format!</warning-title>
+> <warning-title>DANGER: Make sure you choose the correct format!</warning-title>
 > When selecting datatype in "**Type (set all)**" drop-down, make sure you select `fastaqsanger` or `fastqsanger.gz` BUT NOT `fastqcssanger` or anything else!
 {: .warning}
 
 > <hands-on-title><b>Uploading <tt>fastqsanger.gz</tt> datasets from Zenodo</b></hands-on-title>
 >
->**Step 1**: Copy the following URLs into clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
+>**Step 1**: Copy the following URLs into the clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
 >    https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
@@ -224,23 +224,24 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 ## Organizing the data
 
-If everything goes smoothly you history will look like shown in the figure below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes collection as an input (it does not access individual datasets). So let's create a collection using steps outlines in the Tip {% icon tip %} "Creating a dataset collection":
+If everything goes smoothly your history will look like shown in the figure below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly,
+the workflow we will be using for the analysis of our data takes collection as input (it does not access individual datasets). So let's create a collection using steps outlined in the Tip {% icon tip %} "Creating a dataset collection":
 
 {% snippet faqs/galaxy/collections_build_list.md %}
 
 The view of your history should transition from what is shown in the left pane below to what looks like the right pane:
 
-![AfterUpload](../../images/vgp_assembly/making_list.svg "History after uploading HiFi and HiC data (left). Creation of a list (collection) combines all HiFi datasets into a single history item called 'HiFi data' (right). See below for instruction on how to make this collection.")
+![AfterUpload](../../images/vgp_assembly/making_list.svg "History after uploading HiFi and HiC data (left). Creation of a list (collection) combines all HiFi datasets into a single history item called 'HiFi data' (right). See below for instructions on how to make this collection.")
 
 > <details-title>Other ways to upload the data</details-title>
-> You can obviously upload your own datasets via URLs as illustrated above or from your own computer. In addition, you can upload data from a major repository called [GenomeArk](https://genomeark.org). GenomeArk is integrated directly into Galaxy Upload. To use GenomeArk following the steps in the Tip {% icon tip %} below:
+> You can obviously upload your own datasets via URLs as illustrated above or from your own computer. In addition, you can upload data from a major repository called [GenomeArk](https://genomeark.org). GenomeArk is integrated directly into Galaxy Upload. To use GenomeArk follow the steps in the Tip {% icon tip %} below:
 >
 > {% snippet faqs/galaxy/datasets_upload_from_genomeark.md %}
 {: .details}
 
 # HiFi reads preprocessing with **cutadapt**
 
-Adapter trimming usually means trimming the adapter sequence off the ends of reads, which is where the adapter sequence is usually located in {NGS} reads. However, due to the nature of {SMRT} sequencing technology, adapters do not have a specific, predictable location in  {HiFi} reads. Additionally, the reads containing adapter sequence could be of generally lower quality compared to the rest of the reads. Thus, we will use **cutadapt** not to trim, but to remove the entire read if a read is found to have an adapter inside of it.
+Adapter trimming usually means trimming the adapter sequence off the ends of reads, which is where the adapter sequence is usually located in {NGS} reads. However, due to the nature of {SMRT} sequencing technology, adapters do not have a specific, predictable location in  {HiFi} reads. Additionally, the reads containing adapter sequences could be of generally lower quality compared to the rest of the reads. Thus, we will use **cutadapt** not to trim, but to remove the entire read if a read is found to have an adapter inside of it.
 
 > <details-title>Background on PacBio HiFi reads</details-title>
 >
@@ -389,7 +390,7 @@ This distribution is the result of the Poisson process underlying the generation
 > <comment-title>Are you expecting to purge your assembly?</comment-title>
 > This tutorial covers purging using the program **purge_dups**. purge_dups has some default options and can try to detect coverage-based cutoffs automatically, but the VGP pipeline prefers to define these cutoffs using parameters derived from the GenomeScope2 output.
 >
-> _If you expect you need to purge your genome, please see the [**solo** contigging section](#solo_hic_switch) of the tutorial for details on parsing the GenomeScope2 output for purging cutoffs._
+> _If you expect you need to purge your genome, please see the [**solo** contiging section](#solo_hic_switch) of the tutorial for details on parsing the GenomeScope2 output for purging cutoffs._
 {: .comment}
 
 # Assembly with **hifiasm**
@@ -477,7 +478,7 @@ If you have the {Hi-C} data for the individual you are assembling with {HiFi} re
 >
 {: .hands_on}
 
-We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap2, but these must be converted to FASTA format for subsequent steps. We will use a tool developed from the VGP: [`gfastats`](https://github.com/vgl-hub/gfastats). `gfastats` is a tool suite that allows for manipulation and evaluation of FASTA and GFA files, but in this instance we will use it to convert our GFAs to FASTA files. Later on we will use it to generate standard summary statistics for our assemblies.
+We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap2, but these must be converted to FASTA format for subsequent steps. We will use a tool developed from the VGP: [`gfastats`](https://github.com/vgl-hub/gfastats). `gfastats` is a tool suite that allows for manipulation and evaluation of FASTA and GFA files, but in this instance we will use it to convert our GFAs to FASTA files. Later on, we will use it to generate standard summary statistics for our assemblies.
 
 > <hands-on-title>GFA to FASTA conversion for hifiasm Hi-C assembly</hands-on-title>
 >
@@ -525,7 +526,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 > **Step 2**: Rename outputs of `gfastats` step to as `Hap1 stats` and `Hap2 stats`
 >
-> This would generate summary files that look like this (only first six rows are shown):
+> This would generate summary files that look like this (only the first six rows are shown):
 >
 > ```
 > Expected genome size    11747160
@@ -542,13 +543,13 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 > **Step 3**: Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
 >
-> {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets. Keep all other setting as they are.
+> {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets. Keep all other settings as they are.
 >
 > <br>
 >
 > **Step 4**: Rename the output as `gfastats on hap1 and hap2 (full)`
 >
-> This would generate a joined summary file that looks like this (only first five rows are shown):
+> This would generate a joined summary file that looks like this (only the first five rows are shown):
 >
 > ```
 > # gaps               0  0
@@ -557,7 +558,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 > # segments          17 16
 > ```
 >
-> Now let's extract only relevant information by excluding all lines containing word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs): 
+> Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs): 
 >
 > <br>
 >
@@ -638,7 +639,7 @@ We have asked {BUSCO} to generate two particular outputs: the short summary, and
 >
 {: .question}
 
-Despite BUSCO being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via *k*-mer copy number analysis. Let's run Merqury elaluation as shown below.
+Despite BUSCO being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via *k*-mer copy number analysis. Let's run Merqury evaluation as shown below.
 
 > <hands-on-title><i>k</i>-mer based evaluation with Merqury</hands-on-title>
 >
@@ -656,7 +657,7 @@ By default, Merqury generates three collections as output: stats, plots and {QV}
 
 ![Merqury spectra-cn plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each <i>k</i>-mer found in the HiFi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
 
-The grey region in the left side corresponds to *k*-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be a result of missing sequences in the assembly. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50✕, which we also know from the GenomeScope2 plot we looked at [earlier](#figure-5).
+The grey region in the left side corresponds to *k*-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be a result of missing sequences in the assembly. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers originating from homozygous sequences or haplotype-specific duplications. From this figure, we can state that the diploid sequencing coverage is around 50✕, which we also know from the GenomeScope2 plot we looked at [earlier](#figure-5).
 
 To get an idea of how the *k*-mers have been distributed between our hap1 and hap2 assemblies, we should look at the *spectra-asm.fl* output of Merqury.
 
@@ -696,7 +697,7 @@ When hifiasm is run without any additional phasing data, it will do its best to 
 >
 > **Step 2**: After the tool has finished running, rename its outputs as follows:
 > 1. Rename the `primary assembly contig graph for pseudohaplotype assembly` as `Primary contigs graph` and add a `#pri` tag
-> 2. Rename the `alternate assembly contig graph for pseudohaplotype assemblyh` as `Alternate contigs graph` and add a `#alt` tag
+> 2. Rename the `alternate assembly contig graph for pseudohaplotype assembly` as `Alternate contigs graph` and add a `#alt` tag
 >
 {: .hands_on}
 
@@ -756,7 +757,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 > **Step 2**: Rename outputs of `gfastats` step to as `Primary stats` and `Alternate stats`
 >
-> This would generate summary files that look like this (only first six rows are shown):
+> This would generate summary files that look like this (only the first six rows are shown):
 >
 > ```
 > Expected genome size     11747160
@@ -789,7 +790,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 > # gaps                     0   0
 > ```
 >
-> Now let's extract only relevant information by excluding all lines containing word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs): 
+> Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs): 
 >
 > <br>
 >
@@ -895,7 +896,7 @@ By default, Merqury generates three collections as output: stats, plots and {QV}
 
 ![Merqury spectra-cn plot for the pri/alt assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each <i>k</i>-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
 
-The black region in the left side corresponds to *k*-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50✕, which we also know from the GenomeScope2 plot we looked at earlier.
+The black region in the left side corresponds to *k*-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy *k*-mers in the genome, while the blue area represents two-copy *k*-mers originating from homozygous sequences or haplotype-specific duplications. From this figure, we can state that the diploid sequencing coverage is around 50✕, which we also know from the GenomeScope2 plot we looked at earlier.
 
 To get an idea of how the *k*-mers have been distributed between our Primary and Alternate assemblies, we should look at the *spectra-asm* output of Merqury.
 
@@ -909,7 +910,7 @@ For further confirmation, we can also look at the individual, assembly-specific 
 
 ![Merqury spectra-cn plot for the pri assembly only.](../../images/vgp_assembly/merqury_prialt_priCN_prepurge.png "Merqury CN plot <i>for the primary assembly only</i>. This plot colors <i>k</i>-mers according to their copy number in the primary assembly. <i>k</i>-mers that are present in the reads but not the primary assembly are labelled 'read-only'."){:width="65%"}
 
-In the primary-only {CN} plot, we observe a large 2-copy (colored blue) peak at diploid coverage. Ideally, this would not be here, beacause these diploid regions would be *1-copy in both assemblies*. Purging this assembly should reconcile this by removing one copy of false duplicates, making these 2-copy *k*-mers 1-copy. You might notice the 'read-only' peak at haploid coverage — this is actually expected, because 'read-only' here just means that the *k*-mer in question is not seen in this specific assembly while it was in the original readset. **Often, these 'read-only' _k_-mers are actually present as alternate loci in the other assembly.**
+In the primary-only {CN} plot, we observe a large 2-copy (colored blue) peak at diploid coverage. Ideally, this would not be here, because these diploid regions would be *1-copy in both assemblies*. Purging this assembly should reconcile this by removing one copy of false duplicates, making these 2-copy *k*-mers 1-copy. You might notice the 'read-only' peak at haploid coverage — this is actually expected, because 'read-only' here just means that the *k*-mer in question is not seen in this specific assembly while it was in the original readset. **Often, these 'read-only' _k_-mers are actually present as alternate loci in the other assembly.**
 
 Now that we have looked at our primary assembly with multiple {QC} metrics, we know that it should undergo purging. The VGP pipeline uses **purge_dups** to remove false duplications from the primary assembly and put them in the alternate assembly to reconcile the haplotypes. Additionally, purge_dups can also find collapsed repeats and regions of suspiciously low coverage.
 
@@ -1124,7 +1125,7 @@ During the final step of the purge_dups pipeline, it will use the self alignment
 
 > <details-title>Purge overlaps (purge_dups) algorithm details</details-title>
 >
-> In order to identify the haplotypic duplications, purge_dups uses the  base-level coverage information to flag the contigs according the following criteria:
+> In order to identify the haplotypic duplications, purge_dups uses the  base-level coverage information to flag the contigs according to the following criteria:
 > - If more than 80% bases of a contig are above the high read depth cutoff or below the noise cutoff, it is discarded.
 > - If more than 80% bases are in the diploid depth interval, it is labeled as a primary contig, otherwise it is considered further as a possible haplotig.
 >
@@ -1302,7 +1303,7 @@ At this point, we have a set of contigs, which may or may not be fully phased, d
 
 > <comment-title>What assembly am I scaffolding??</comment-title>
 >
->  For the purposes of this tutorial, the scaffolding hands-on exercises will be <b>referring to a Hap1 assembly</b> produced with Hi-C mode of hifiasm. If you have hap1 contigs or hap2 contigs, then you can also follow along just using Primary purged contigs or Alternate purged contigs. <b>Wherever the tutorial refers to primary contigs, just replace with whichever haplotype you are scaffolding.</b>
+>  For the purposes of this tutorial, the scaffolding hands-on exercises will be <b>referring to a Hap1 assembly</b> produced with Hi-C mode of hifiasm. If you have hap1 contigs or hap2 contigs, then you can also follow along just using Primary purged contigs or Alternate purged contigs. <b>Wherever the tutorial refers to primary contigs, just replace it with whichever haplotype you are scaffolding.</b>
 >
 {: .comment}
 
@@ -1330,7 +1331,7 @@ The *Bionano Hybrid Scaffold* tool automates the scaffolding process, which incl
 4. Align sequence maps to the hybrid scaffolds
 5. Generate AGP and FASTA files for the scaffolds.
 
-Befoew we begin, we need to upload BioNano data:
+Before we begin, we need to upload BioNano data:
 
 > <hands-on-title><b>Uploading BioNano datasets from Zenodo</b></hands-on-title>
 >
@@ -1343,7 +1344,7 @@ Befoew we begin, we need to upload BioNano data:
 >**Step 2**: Upload datasets into Galaxy
 >    - set the datatype to `cmap`
 >
->The box below explain how to upload data if you forgot. Just make sure you set dataset type to `cmap`.
+>The box below explains how to upload data if you forgot. Just make sure you set dataset type to `cmap`.
 >
 > {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
 >
@@ -1486,7 +1487,7 @@ Let's have a look at the Hi-C contact maps generated by Pretext Snapshot.
 
 ![Pretext optical map](../../images/vgp_assembly/hic_map_pretext.png "Hi-C map generated by Pretext. Primary assembly full contact map generated in this training (a) Hi-C map representative of a typical missasembly (b).")
 
-In the contact generated from the Bionano-scaffolded assembly can be identified 17 scaffolds, representing each of the haploid chromosomes of our genome (panel **a** above). The fact that all the contact signals are found around the diagonal suggest that the contigs were scaffolded in the right order. However, during the assembly of complex genomes, it is common to find in the contact maps indicators of errors during the scaffolding process, as shown in the panel **b**. In that case, a contig belonging to the second chromosome has been misplaced as part of the fourth chromosome. We can also note that the final portion of the second chromosome should be placed at the beginning, as the off-diagonal contact signal suggests.
+In the contact generated from the Bionano-scaffolded assembly can be identified 17 scaffolds, representing each of the haploid chromosomes of our genome (panel **a** above). The fact that all the contact signals are found around the diagonal suggest that the contigs were scaffolded in the right order. However, during the assembly of complex genomes, it is common to find in the contact maps indicators of errors during the scaffolding process, as shown in panel **b**. In that case, a contig belonging to the second chromosome has been misplaced as part of the fourth chromosome. We can also note that the final portion of the second chromosome should be placed at the beginning, as the off-diagonal contact signal suggests.
 
 Once we have evaluated the quality of the scaffolded genome assembly, the next step consists in integrating the information contained in the HiC reads into our assembly, so that any errors identified can be resolved. For this purpose we will use YaHS ({% cite Zhou2022 %}).
 
@@ -1579,9 +1580,9 @@ Among the most notable differences that can be identified between the contact ma
 
 To sum up, it is worthwhile to compare the final assembly with the [S. cerevisiae_ S288C reference genome](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_assembly_stats.txt).
 
-![Table 1: Final stats](../../images/vgp_assembly/stats_conclusion.png "Comparison between the final assembly generating in this training and the reference genome. Contiguity plot using the reference genome size (a). Assembly statistics (b).")
+![Table 1: Final stats](../../images/vgp_assembly/stats_conclusion.png "Comparison between the final assembly generated in this training and the reference genome. Contiguity plot using the reference genome size (a). Assembly statistics (b).")
 
-With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (figure above). Regarding the number of scaffolds, the obtained value is similar to the reference assembly, which consist in 16 chromosomes plus the mitochondrial DNA, which consists of 85,779 bp. The remaining statistics exhibit very similar values (panel **b** above).
+With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (figure above). Regarding the number of scaffolds, the obtained value is similar to the reference assembly, which consists of 16 chromosomes plus the mitochondrial DNA, which consists of 85,779 bp. The remaining statistics exhibit very similar values (panel **b** above).
 
 ![Comparison reference genome](../../images/vgp_assembly/hi-c_pretext_conclusion.png "Comparison between contact maps generated by using the final assembly (a) and the reference genome (b).")
 
