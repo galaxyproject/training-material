@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@3cb9e668122f8402101a019825d9e74a9557dade",
+		release: "galaxy-training-network@ed8de61c6e5296f4731b24407152c3e7128fc7e4",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1705018295' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1705018295' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1705075863' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1705075863' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -73,7 +73,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1705018295'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1705075863'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -469,18 +469,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     fdbk_over_month['tuto-assembly-with-preprocessing'] = [tuto_data];
     fdbk_over_month['topic-assembly'].push(tuto_data);
     data_notes['tuto-assembly-with-preprocessing'] = [0,0,0,0,0,7];
-</script>
-
-<script>
-    var tuto_data =
-    {
-        label: "VGP assembly pipeline",
-        data: [{x:"2022-02", y: 1 } ,{x:"2023-12", y: 2 } ],
-        fill: false,
-    };
-    fdbk_over_month['tuto-vgp_genome_assembly'] = [tuto_data];
-    fdbk_over_month['topic-assembly'].push(tuto_data);
-    data_notes['tuto-vgp_genome_assembly'] = [0,0,0,0,0,2];
 </script>
 
 <script>
@@ -4306,103 +4294,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     
                     
                     
-                        
-                        
-                        <div class="accordion-card card" id="tutorial-vgp_genome_assembly">
-                            <div class="card-header" id="heading-vgp_genome_assembly">
-                                <div class="mb-0">
-                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse-vgp_genome_assembly" aria-expanded="false" aria-controls="collapse-vgp_genome_assembly">
-                                        VGP assembly pipeline
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div id="collapse-vgp_genome_assembly" class="collapse" aria-labelledby="heading-vgp_genome_assembly" data-parent="#accordion-assembly">
-                                <div class="card-body">
-                                    
-                                    <div class="row">
-                                        <!-- feedback over time  -->
-                                        <div class="col-md-6">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">2 responses</h5>
-                                                    
-                                                    <canvas id="vgp_genome_assembly-tutorial-fdbkOverMonthGraph" width="400" height="400">
-<script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        drawFdbkOverMonthGraph("vgp_genome_assembly-tutorial-fdbkOverMonthGraph", fdbk_over_month['tuto-vgp_genome_assembly']);
-    });
-</script>
-                                                    </canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- feedback notes  -->
-                                        <div class="col-md-6">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Rating Distribution</h5>
-                                                    
-                                                    <canvas id="vgp_genome_assembly-tutorial-fdbkNoteGraph" width="400" height="400">
-<script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        drawFdbkNoteGraph("vgp_genome_assembly-tutorial-fdbkNoteGraph", data_notes['tuto-vgp_genome_assembly'], labels_notes);
-    });
-</script>
-                                                    </canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html">View this Tutorial</a>
-                                    
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card">
-                                                <div class="card-body">
-
-                                                    <h5 class="card-title">Detailed feedback</h5>
-                                                    <table class="table table-striped">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Date</th>
-                                                                <th>What did you like?</th>
-                                                                <th>What could be improved?</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            
-                                                            
-                                                                
-                                                                    
-                                                                    <tr>
-                                                                        <td>Dec 13, 2023</td>
-                                                                        <td>It is very well explained and it&apos;s in a easy way to understand all the commands and what they do.</td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    
-                                                                
-                                                            
-                                                                
-                                                                    
-                                                                    <tr>
-                                                                        <td>Feb 21, 2022</td>
-                                                                        <td>A clean flowchart of methods with an explanation for the purpose of each step.</td>
-                                                                        <td>As a case study, a bad genome assembly or an assembly with incorrect parameters in various steps could be shown</td>
-                                                                    </tr>
-                                                                    
-                                                                
-                                                            
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="alert alert-warning" role="alert">
+                            <p>Tutorial "VGP assembly pipeline" is not available anymore.</p>
                         </div>
                     
                 
@@ -39824,7 +39717,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/3cb9e668122f8402101a019825d9e74a9557dade">3cb9e66</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/ed8de61c6e5296f4731b24407152c3e7128fc7e4">ed8de61</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -39848,7 +39741,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1705018295'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1705075863'></script>
         
     </body>
 </html>
