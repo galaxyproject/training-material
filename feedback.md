@@ -1,6 +1,7 @@
 ---
 layout: base
 title: GTN Feedback
+description: The collected feedback of every tutorial and resource in the GTN
 ---
 
 {% assign fdbk= site.data['feedback'] %}

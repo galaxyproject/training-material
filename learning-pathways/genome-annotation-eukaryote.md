@@ -12,6 +12,7 @@ editorial_board:
 - abretaud
 funding:
 - gallantries
+- eurosciencegateway
 
 
 
