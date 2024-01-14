@@ -46,7 +46,7 @@ Traditionally, we thought that differentiating or changing cells jumped between 
 We will use the same sample from the previous three tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cells. Now it's time to look further!
 
 > <comment-title>Tutorial from Scanpy</comment-title>
-> Please note, this tutorial is largely based on the trajectories tutorial found [on the Scanpy site itself](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
+> Please note, this tutorial is largely based on the trajectories tutorial found [on the Scanpy site itself](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html) ({% cite scanpytutorialsTrajectoryInference %}).
 {: .comment}
 
 > <agenda-title></agenda-title>
@@ -260,7 +260,7 @@ Now that we've re-calculated the nearest neighbours, we can use these new neighb
 > 1. {% tool [Scanpy PAGA](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_paga/scanpy_run_paga/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"Name of the clustering"*: `cell_type`
->   
+>
 >    > <comment-title> Plotting gene expression </comment-title>
 >    >
 >    > We can now draw our PAGA plot and we might also be interested in colouring our plot by genes as well. In this case, remembering that we are dutifully counting our genes by their EnsemblIDs rather than Symbols (which do not exist for all EnsemblIDs), we have to look up our genes of interest (CD4, CD8a) and plot the corresponding IDs in the next step.
