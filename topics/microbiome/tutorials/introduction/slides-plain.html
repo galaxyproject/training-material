@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slide Deck: Slide Deck: Introduction to Microbiome Analysis / Microbiome</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@0ba04fe7c5e720af7177e398b7da11f7a650515e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/introduction/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1705351728' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1705351728' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Introduction to Microbiome Analysis">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-15 20:48:51 +0000">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="## Microbiome Analysis  ---  ## Overview  - Why study the microbiome? - 2 different approaches   - Amplicon sequencing   - Shotgun sequencing - Analysis pipelines - Visualisation options  ---  ## Why study the microbiome?  .pull-left[  - Health care research  - Humans are full of microorganisms  - Skin, gut, oral cavity, nasal cavity, eyes, ..  - Affects health, drug efficacy, etc  ] .pull-right[  .image-100[ ![image of a human with lines leading from various points on the body to pie charts of bacteria distribution](../../images/human_microbiome.png) ]  ]  - Sometimes referred to as your **second genome**  - ~10 times more cells than you  - ~100 times more genes than you  - ~1000s different species   --- ## Why study the microbiome?  - Environmental studies   - Microbes in the soil affect plants and animals   - Improve agriculture  .image-75[ ![Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes.](../../images/environmentalstudie...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Microbiome / Slide Deck: Introduction to Microbiome Analysis">
+        <meta property="og:description" content="## Microbiome Analysis  ---  ## Overview  - Why study the microbiome? - 2 different approaches   - Amplicon sequencing   - Shotgun sequencing - Analysis pipelines - Visualisation options  ---  ## Why study the microbiome?  .pull-left[  - Health care research  - Humans are full of microorganisms  - Skin, gut, oral cavity, nasal cavity, eyes, ..  - Affects health, drug efficacy, etc  ] .pull-right[  .image-100[ ![image of a human with lines leading from various points on the body to pie charts of bacteria distribution](../../images/human_microbiome.png) ]  ]  - Sometimes referred to as your **second genome**  - ~10 times more cells than you  - ~100 times more genes than you  - ~1000s different species   --- ## Why study the microbiome?  - Environmental studies   - Microbes in the soil affect plants and animals   - Improve agriculture  .image-75[ ![Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes.](../../images/environmentalstudie...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1705351728'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/microbiome/tutorials/introduction/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/microbiome/tutorials/introduction/slides-plain.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/microbiome/tutorials/introduction/slides-plain.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/microbiome/tutorials/introduction/slides-plain.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/topics/microbiome/tutorials/introduction/slides-plain.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/microbiome/tutorials/introduction/slides.html">View markdown source on GitHub</a>
+	<h1>Introduction to Microbiome Analysis</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a>
+	</div>
+
+</div>
+
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Jan 15, 2024 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Jan 15, 2024 </div>
+
+	<hr />
+
+
+	<h2 id="microbiome-analysis">Microbiome Analysis</h2>
+
+<hr />
+
+<h2 id="overview">Overview</h2>
+
+<ul>
+  <li>Why study the microbiome?</li>
+  <li>2 different approaches
+    <ul>
+      <li>Amplicon sequencing</li>
+      <li>Shotgun sequencing</li>
+    </ul>
+  </li>
+  <li>Analysis pipelines</li>
+  <li>Visualisation options</li>
+</ul>
+
+<hr />
+
+<h2 id="why-study-the-microbiome">Why study the microbiome?</h2>
+
+<p>.pull-left[</p>
+
+<ul>
+  <li>Health care research</li>
+  <li>Humans are full of microorganisms</li>
+  <li>Skin, gut, oral cavity, nasal cavity, eyes, ..</li>
+  <li>Affects health, drug efficacy, etc</li>
+</ul>
+
+<p>]
+.pull-right[</p>
+
+<p>.image-100[ <img src="../../images/human_microbiome.png" alt="image of a human with lines leading from various points on the body to pie charts of bacteria distribution" /> ]</p>
+
+<p>]</p>
+
+<ul>
+  <li>Sometimes referred to as your <strong>second genome</strong></li>
+  <li>~10 times more cells than you</li>
+  <li>~100 times more genes than you</li>
+  <li>~1000s different species</li>
+</ul>
+
+<hr />
+<h2 id="why-study-the-microbiome-1">Why study the microbiome?</h2>
+
+<ul>
+  <li>Environmental studies
+    <ul>
+      <li>Microbes in the soil affect plants and animals</li>
+      <li>Improve agriculture</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.image-75[ <img src="../../images/environmentalstudies.png" alt="Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes." /> ]</p>
+
+<hr />
+
+<h2 id="shotgun-vs-amplicon">Shotgun vs Amplicon</h2>
+
+<p>.pull-left[</p>
+
+<p>.image-75[ <img src="../../images/puzzles-shotgun.png" alt="jigsaw puzzle image illustrating shotgun sequencing approach" /> ]</p>
+
+<p><strong>Shotgun Sequencing</strong></p>
+<ul>
+  <li>Sequence all DNA</li>
+  <li>More information</li>
+  <li>Higher complexity</li>
+  <li>Higher cost
+]</li>
+</ul>
+
+<p>.pull-right[</p>
+
+<p>.image-75[ <img src="../../images/puzzles-amplicon.png" alt="jigsaw puzzle image illustrating amplicon sequencing approach" /> ]</p>
+
+<p><strong>Amplicon Sequencing</strong></p>
+<ul>
+  <li>Sequence only specific gene</li>
+  <li>No functional information</li>
+  <li>Less complex to analyse</li>
+  <li>Cheaper
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>puzzle analogy: think of each organism as a jigsaw puzzle</p>
+
+<ul>
+  <li>
+    <p>shotgun: we considers all pieces (DNA) from all puzzles (organisms); we throw the pieces in a big pile, and need to reconstruct each individual puzzle from this. It is more complex, but you get full details (functional information) about the picture on each puzzle.</p>
+  </li>
+  <li>
+    <p>amplicon: we only look at the corner pieces, these are easy to spot, and all puzzles have them. It will not tell us all the details (e.g. functional information) of the picture on the puzzle, but might be enough to tell us whether it is a landscape or a portrait or abstract art for instance (taxonomy).</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="amplicon">Amplicon</h2>
+
+<ul>
+  <li>Targetted approach, e.g. 16S (bacteria), 18S (eukaryotes), ITS (fungi)</li>
+  <li>Amplify gene of specific taxonomic group, i.e. not host or environment</li>
+</ul>
+
+<p><img src="../../images/16S_gene.png" alt="left is picture of e. coli ribosome with &quot;so much rna&quot; written, right is the RNA structure in a diagram" /></p>
+
+<hr />
+
+<h2 id="amplicon-1">Amplicon</h2>
+
+<ul>
+  <li>Highly conserved gene: easy to target across all bacteria</li>
+  <li>With variable regions: distinguish between genus</li>
+</ul>
+
+<p><img src="../../images/16S_variableregions.jpg" alt="line graph showing V regions as peaks along x axis of alignment position, and y index of shannon-index/alignment-index." /></p>
+
+<p><span>Speaker Notes</span>
+V1, V2 etc are the variable regions</p>
+
+<hr />
+
+<h2 id="amplicon-2">Amplicon</h2>
+
+<ul>
+  <li>Pros
+    <ul>
+      <li>Well-established</li>
+      <li>Inexpensive ($50-$100/sample)</li>
+    </ul>
+  </li>
+  <li>Cons</li>
+  <li>V-region choice can bias results</li>
+  <li>Is based on a very well conserved gene, making it hard to resolve species and strains</li>
+</ul>
+
+<p><span>Speaker Notes</span>
+18S gene also amplifies archaea</p>
+
+<hr />
+
+<h2 id="shotgun-metagenomics">Shotgun metagenomics</h2>
+
+<ul>
+  <li>
+    <p>Aims to sequence the “whole” metagenome</p>
+  </li>
+  <li>Pros:
+    <ul>
+      <li>Not biased by amplicon primer set</li>
+      <li>Not limited by conservation of the amplicon</li>
+      <li>Can also provide functional information</li>
+    </ul>
+  </li>
+  <li>Cons:
+    <ul>
+      <li>Environmental contamination, including host</li>
+      <li>More expensive ($1000+/sample)</li>
+      <li>Complex data analysis
+        <ul>
+          <li>Requires high performance computing, high memory, high compute capacity</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="end-to-end">End-to-End</h2>
+
+<p><img src="../../images/16S_end-to-end.png" alt="graphi with an arrow going from sampling (nose picture) to extraction to amplification to ngs to bioinformatics (computer picture)" /></p>
+
+<p>Every step in this process can have serious impact on the results</p>
+
+<hr />
+
+<h2 id="bioinformatics">Bioinformatics</h2>
+
+<p><img src="../../images/so_much_data.png" alt="cartoon titled drowned in NGS data with a man covered in messy data." /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Roche 454 GS:    ~ 100.000 reads
+Illumina MiSeq:  ~ 25.000.000 reads
+Shotgun:             ~ ? reads
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="analysis-pipelines">Analysis pipelines</h2>
+
+<p><img src="../../images/metagenomics_pipeline.png" alt="comparison of amplicon and shotgun pipelines. amplicon pipeline goes to community structure viz, shotgun pipeline goes to community structure in addition to functional assignment." /></p>
+
+<p>Amplicon analysis variants:</p>
+
+<ul>
+  <li>OTU: operational taxonomic units</li>
+  <li>ASV: amplicon sequence variants</li>
+</ul>
+
+<hr />
+
+<h2 id="pre-processing">Pre-processing</h2>
+
+<p><img src="../../images/preprocessing.png" alt="fastqc plot with regions labelled good, okay, and bad based on the plot's colour" /></p>
+
+<ul>
+  <li>There are a lot of ways to filter and trim your data</li>
+  <li>Trade-off between quality and amount of information retained</li>
+</ul>
+
+<hr />
+
+<h2 id="otu-clustering--denoising">OTU Clustering / Denoising</h2>
+
+<p>.pull-left[
+OTU clustering:</p>
+
+<ul>
+  <li>Cluster on 97% sequence similarity for genus-level differentiation</li>
+  <li>OTUs depend on the data set: no comparability of data sets</li>
+</ul>
+
+<p>.image-75[ <img src="../../images/otu.png" alt="tree with clusters around the leaves labelled OTUs and 97% identity threshold" /> ]</p>
+
+<p>]</p>
+
+<p>.pull-right[
+ASV Denoising:</p>
+
+<ul>
+  <li>Discriminate sequence variations from sequencing errors</li>
+  <li>Based on an error model and the assumption that sequences containing errors are less likely observed repeatedly</li>
+</ul>
+
+<p>.image-90[ <img src="../../images/clustering.png" alt="DNA sequences with hierarchical clustering shown" /> ]</p>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span>
+ASV stands for “Amplicon Sequence Variants”</p>
+
+<h2 id="todo-expand-on-otu-vs-asv-a-bit-more">TODO: expand on OTU vs ASV a bit more</h2>
+
+<h2 id="chimera-removal">Chimera Removal</h2>
+
+<ul>
+  <li>During PCR multiple sequences can combine to form a hybrid</li>
+  <li>Must be removed from your data for better results</li>
+</ul>
+
+<p><img src="../../images/chimeras.png" alt="aborted extension leads to mispriming, which gets extended with the wrong sequence, and results in a chimera" /></p>
+
+<hr />
+
+<h2 id="search-marker-database-and-taxonomy-assignment">Search marker database and taxonomy assignment</h2>
+
+<ul>
+  <li>Homology with reference databases
+    <ul>
+      <li>
+        <p>Amplicon</p>
+
+        <p><img src="../../images/silva-greengenes.png" alt="graphic with two databases green genes (berkely, 2013, 200k entries) and silva (max plank, 2015, 172k entries)" /></p>
+      </li>
+      <li>
+        <p>Shotgun: MetaPhlAn2 database</p>
+        <ul>
+          <li>~1M unique clade-specific marker genes</li>
+          <li>~17,000 reference genomes (bacterial and archaeal, viral and eukaryotic)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Accuracy depends on quality and completeness of database used</li>
+  <li>Databases are inevitable incomplete</li>
+</ul>
+
+<hr />
+
+<h2 id="search-functional-database">Search functional database</h2>
+
+<ul>
+  <li>Databases to identify gene families
+    <ul>
+      <li>UniRef50</li>
+      <li>UniRef90</li>
+    </ul>
+  </li>
+  <li>Grouping in other functional categories
+    <ul>
+      <li>MetaCyc Reactions</li>
+      <li>KEGG Orthogroups (KOs)</li>
+      <li>Pfam domains</li>
+      <li>Level-4 enzyme commission (EC) categories</li>
+      <li>EggNOG (including COGs)</li>
+      <li>Gene Ontology (GO)</li>
+      <li>Informative GO</li>
+    </ul>
+  </li>
+  <li>Pathway reconstruction</li>
+</ul>
+
+<hr />
+
+<h2 id="results-otu-table">Results: OTU table</h2>
+
+<p><img src="../../images/otutable.png" alt="screenshot of an excel table" /></p>
+
+<hr />
+
+<h2 id="results-visualizations">Results: Visualizations</h2>
+
+<ul>
+  <li><strong>Krona</strong>
+    <ul>
+      <li>interactive exploration of sample taxonomy</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="../../images/krona_lacto.png" alt="doughnut plot with bands for each kingdom, down to genus, species" /></p>
+
+<hr />
+
+<h2 id="results-visualizations-1">Results: Visualizations</h2>
+
+<ul>
+  <li><strong>Phinch</strong>
+    <ul>
+      <li>BIOM file input</li>
+      <li>various visualizations</li>
+      <li>multi-sample data</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="../../../../shared/images/phinch_overviewpage.png" alt="screenshot of phinch website showing multiple plot types" /></p>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/0ba04fe7c5e720af7177e398b7da11f7a650515e">0ba04fe</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/microbiome/tutorials/introduction/slides.html" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1705351728'></script>
+        
+    </body>
+</html>

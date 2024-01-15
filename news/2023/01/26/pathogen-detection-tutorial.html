@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@22b5a470c53e9be93e4fa445dba77f8227c24cf9",
+		release: "galaxy-training-network@0ba04fe7c5e720af7177e398b7da11f7a650515e",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1705350713' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1705350713' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1705351728' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1705351728' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -66,16 +66,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="New Tutorial: Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-18 11:55:15 +0000">
+<meta name="DC.date" content="2024-01-11 10:48:02 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Engy Nasr"><meta name="description" content="Food contamination with pathogens are a major burden on our society. Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to Salmonella spp. followed by Campylobacter spp. and Noroviruses. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="New Tutorial: Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition">
         <meta property="og:description" content="Food contamination with pathogens are a major burden on our society. Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to Salmonella spp. followed by Campylobacter spp. and Noroviruses. ">
         
-        <meta property="og:image" content="/training-materialtopics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/images/FoodBorne-Workflow-updated.png"></head>
+        <meta property="og:image" content="/training-materialtopics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/images/FoodBorne-Workflow-updated.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1705350713'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1705351728'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -256,7 +256,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-<span class="label label-default tutorial_tag" id="new tutorial" style="--color-primary: #ffa91e; --color-darker: #e59600; --color-dimmed: #f39f00;">new tutorial</span>
+<span class="label label-default tutorial_tag" id="new tutorial" style="--color-primary: #ffb86b; --color-darker: #f29f00; --color-dimmed: #ffa91e;">new tutorial</span>
 
 
 <hr/>
@@ -292,7 +292,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     
 
     
-    <a href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html" class="btn btn-primary">View Material</a>
+    <a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html" class="btn btn-primary">View Material</a>
     
 
     
@@ -304,7 +304,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </div>
 
   <div class="col-md-4">
-    <img alt="screenshot from the data manipulation tutorial" src="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/images/FoodBorne-Workflow-updated.png" width="300"/>
+    <img alt="screenshot from the data manipulation tutorial" src="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/images/FoodBorne-Workflow-updated.png" width="300"/>
   </div>
 </div>
 </div>
@@ -322,7 +322,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "description": "<p>Food contamination with pathogens are a major burden on our society. Globally, they affect an esti",
   "articleBody": "<p>Food contamination with pathogens are a major burden on our society. Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to <em>Salmonella spp.</em> followed by <em>Campylobacter spp.</em> and Noroviruses.</p>\n\n<p>The evolution of techniques in the last decades has made possible the development of methods to quickly identify responsible pathogen using their <strong>DNA and without prior isolation</strong>. Long-read sequencing tehcniques like ONT make these methods even <strong>easier and more practical to identify strains quicker and with fewer reads</strong>.</p>\n\n<p>In this tutorial, using direct Nanopore sequencing data, we show how to</p>\n<ol>\n  <li><strong>agnostically detect pathogens</strong> (what exactly is this pathogen and what is the degree of its severity (its virulence factors) from data extracted directly (without prior cultivation) from a potentially contaminated sample (e.g. food like chicken, cow, etc.,) and sequenced using Nanopore</li>\n  <li><strong>compare different samples to track</strong> the possible source of contamination</li>\n</ol>\n\n<p>This tutorial is offered in 2 different version:</p>\n<ul>\n  <li>A short version, running already build workflows</li>\n  <li>A long version, going step-by-step</li>\n</ul>\n",
   "datePublished": "2023-01-26 00:00:00 +0000",
-  "dateModified": "2023-05-18 11:55:15 +0000",
+  "dateModified": "2024-01-11 10:48:02 +0000",
   "author": [
     "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"http://purl.org/dc/terms/conformsTo\": {\n    \"@id\": \"https://bioschemas.org/profiles/Person/0.3-DRAFT\",\n    \"@type\": \"CreativeWork\"\n  },\n  \"url\": \"https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/\",\n  \"mainEntityOfPage\": \"https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/\",\n  \"name\": \"Bérénice Batut\",\n  \"image\": \"https://avatars.githubusercontent.com/bebatut\",\n  \"description\": \"A contributor to the GTN project.\",\n  \"memberOf\": [\n    {\n      \"@type\": \"Organization\",\n      \"http://purl.org/dc/terms/conformsTo\": {\n        \"@id\": \"https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19\",\n        \"@type\": \"Organization\"\n      },\n      \"email\": \"galaxytrainingnetwork@gmail.com\",\n      \"name\": \"Galaxy Training Network\",\n      \"legalName\": \"Galaxy Training Network\",\n      \"alternateName\": \"GTN\",\n      \"url\": \"https://training.galaxyproject.org\",\n      \"logo\": \"https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png\",\n      \"fundingModel\": \"The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.\",\n      \"keywords\": [\n        \"galaxy\",\n        \"bioinformatics\",\n        \"training\",\n        \"fair\",\n        \"accessible\"\n      ],\n      \"status\": \"active\",\n      \"foundingDate\": \"2015-06-29\",\n      \"socialMedia\": \"https://mstdn.science/@gtn\",\n      \"type\": \"project\"\n    }\n  ],\n  \"identifier\": \"https://orcid.org/0000-0001-9852-1987\",\n  \"orcid\": \"https://orcid.org/0000-0001-9852-1987\"\n}",
     "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"http://purl.org/dc/terms/conformsTo\": {\n    \"@id\": \"https://bioschemas.org/profiles/Person/0.3-DRAFT\",\n    \"@type\": \"CreativeWork\"\n  },\n  \"url\": \"https://training.galaxyproject.org/training-material/hall-of-fame/EngyNasr/\",\n  \"mainEntityOfPage\": \"https://training.galaxyproject.org/training-material/hall-of-fame/EngyNasr/\",\n  \"name\": \"Engy Nasr\",\n  \"image\": \"https://avatars.githubusercontent.com/EngyNasr\",\n  \"description\": \"A contributor to the GTN project.\",\n  \"memberOf\": [\n    {\n      \"@type\": \"Organization\",\n      \"http://purl.org/dc/terms/conformsTo\": {\n        \"@id\": \"https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19\",\n        \"@type\": \"Organization\"\n      },\n      \"email\": \"galaxytrainingnetwork@gmail.com\",\n      \"name\": \"Galaxy Training Network\",\n      \"legalName\": \"Galaxy Training Network\",\n      \"alternateName\": \"GTN\",\n      \"url\": \"https://training.galaxyproject.org\",\n      \"logo\": \"https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png\",\n      \"fundingModel\": \"The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.\",\n      \"keywords\": [\n        \"galaxy\",\n        \"bioinformatics\",\n        \"training\",\n        \"fair\",\n        \"accessible\"\n      ],\n      \"status\": \"active\",\n      \"foundingDate\": \"2015-06-29\",\n      \"socialMedia\": \"https://mstdn.science/@gtn\",\n      \"type\": \"project\"\n    }\n  ],\n  \"identifier\": \"https://orcid.org/0000-0001-9047-4215\",\n  \"orcid\": \"https://orcid.org/0000-0001-9047-4215\"\n}"
@@ -398,11 +398,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>
 	22 December 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00d59b; --color-darker: #00be8a; --color-dimmed: #00c992;">communications</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00e1a4; --color-darker: #00c992; --color-dimmed: #00d59b;">communications</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00d2c1; --color-darker: #00bbac; --color-dimmed: #00c6b7;">single-cell</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;">single-cell</span>
 	
 	</p>
 	<p class="card-text">
@@ -421,9 +421,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>
 	20 December 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00d59b; --color-darker: #00be8a; --color-dimmed: #00c992;">communications</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00e1a4; --color-darker: #00c992; --color-dimmed: #00d59b;">communications</span>
 	
 	</p>
 	<p class="card-text">
@@ -444,11 +444,11 @@ the non-Matrix side of the Galaxy-verse.
 	<p>
 	18 December 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #e9f900; --color-darker: #cfde00; --color-dimmed: #dceb00;">computational chemistry</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ebfc00; --color-darker: #d1e000; --color-dimmed: #deee00;">computational chemistry</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #f19cff; --color-darker: #ee77ff; --color-dimmed: #ef8aff;">user story</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #f3aeff; --color-darker: #ef89ff; --color-dimmed: #f19cff;">user story</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -467,11 +467,11 @@ the non-Matrix side of the Galaxy-verse.
 	<p>
 	12 December 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #4dc8ff; --color-darker: #00b4ec; --color-dimmed: #00befa;">feature update</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #7bd0ff; --color-darker: #00bef9; --color-dimmed: #4dc8ff;">feature update</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffa2a9; --color-darker: #ff808b; --color-dimmed: #ff919a;">tutorials</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffb2b8; --color-darker: #ff909a; --color-dimmed: #ffa2a9;">tutorials</span>
 	
 	</p>
 	<p class="card-text">
@@ -490,11 +490,11 @@ the non-Matrix side of the Galaxy-verse.
 	<p>
 	21 November 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ed9eff; --color-darker: #e97aff; --color-dimmed: #eb8dff;">feedback</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #f0b0ff; --color-darker: #eb8cff; --color-dimmed: #ed9eff;">feedback</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #94bdff; --color-darker: #67a9ff; --color-dimmed: #7fb3ff;">testimonial</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #a8c8ff; --color-darker: #7db3ff; --color-dimmed: #94bdff;">testimonial</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffef92; --color-darker: #ead500; --color-dimmed: #f8e300;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff2aa; --color-darker: #edd800; --color-dimmed: #fbe600;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -525,7 +525,7 @@ the non-Matrix side of the Galaxy-verse.
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/22b5a470c53e9be93e4fa445dba77f8227c24cf9">22b5a47</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/0ba04fe7c5e720af7177e398b7da11f7a650515e">0ba04fe</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -553,7 +553,7 @@ the non-Matrix side of the Galaxy-verse.
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1705350713'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1705351728'></script>
         
     </body>
 </html>

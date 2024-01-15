@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Introduction to metatranscriptomics</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@0ba04fe7c5e720af7177e398b7da11f7a650515e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metatranscriptomics/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1705351728' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1705351728' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Introduction to metatranscriptomics">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-11 10:48:02 +0000">
+<meta name="DC.creator" content="Subina Mehta">
+<meta name="DC.creator" content="Pratik Jagtap">
+<meta name="DC.creator" content="Saskia Hiltemann">
+
+        
+        
+        
+        
+        <meta name="description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Introduction to metatranscriptomics">
+        <meta property="og:description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-01-11 10:48:02 +0000",
+  "datePublished": "2020-02-26 21:34:24 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to metatranscriptomics",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Microbiome",
+    "description": "A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ",
+    "url": "https://training.galaxyproject.org/training-material/topics/microbiome/"
+  },
+  "learningResourceType": "slides",
+  "name": "Introduction to metatranscriptomics",
+  "url": "https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metatranscriptomics/slides.html",
+  "version": 1,
+  "keywords": [
+    "Microbiome"
+  ],
+  "description": "The questions this  addresses are:\n - How to analyze metatranscriptomics data?\n - What information can be extracted of metatranscriptomics data?\n - How to assign taxa and function to the identified sequences?\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/",
+      "name": "Subina Mehta",
+      "image": "https://avatars.githubusercontent.com/subinamehta",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9818-0537",
+      "orcid": "https://orcid.org/0000-0001-9818-0537"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/",
+      "name": "Pratik Jagtap",
+      "image": "https://avatars.githubusercontent.com/pratikdjagtap",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0984-0973",
+      "orcid": "https://orcid.org/0000-0003-0984-0973"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Microbiome",
+      "description": "A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ",
+      "url": "https://training.galaxyproject.org/training-material/topics/microbiome/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3174"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3697",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3697",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3697"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+
+  ],
+  "abstract": "## Why study the microbiome?"
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1705351728'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/microbiome" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/tutorials/metatranscriptomics/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Introduction to metatranscriptomics
+
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/subinamehta/" class="contributor-badge contributor-subinamehta"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/subinamehta?s=36" alt="Subina Mehta avatar" width="36" class="avatar" />
+    Subina Mehta</a><a href="/training-material/hall-of-fame/pratikdjagtap/" class="contributor-badge contributor-pratikdjagtap"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pratikdjagtap?s=36" alt="Pratik Jagtap avatar" width="36" class="avatar" />
+    Pratik Jagtap</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- How to analyze metatranscriptomics data?
+
+- What information can be extracted of metatranscriptomics data?
+
+- How to assign taxa and function to the identified sequences?
+
+
+---
+
+
+
+
+## Why study the microbiome?
+
+.pull-left[
+
+- Health care research
+ - Humans are full of microorganisms
+ - Skin, gut, oral cavity, nasal cavity, eyes, ..
+ - Affects health, drug efficacy, etc
+
+]
+.pull-right[
+
+.image-100[ ![Image of a human with various pie charts pointing to various regions of the body where microbe populations live](../../images/human_microbiome.png) ]
+
+]
+
+- Sometimes referred to as your **second genome**
+ - ~10 times more cells than you
+ - ~100 times more genes than you
+ - ~1000s different species
+
+
+---
+
+## Why study the microbiome?
+
+- Environmental studies
+  - Microbes in the soil affect plants and animals
+  - Improve agriculture
+
+.image-75[ ![Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes.](../../images/environmentalstudies.png) ]
+
+
+---
+
+## Meta- Omics
+
+![meta-momics diagram](../../images/metatranscriptomics/meta-omics.png)
+
+
+---
+
+## This Tutorial: ASaiM pipeline
+
+.pull-left[
+
+- Quality Control
+  - Assess Quality
+  - Trim and Filter raw reads
+  - Filter ribosomal RNA (rRNA)
+
+- Community profiling (Who?)
+  - Determine composition of sample
+  - Visualisation
+
+- Functional Analysis (What?)
+
+]
+
+.pull-right[
+.image-90[![ASiaiM diagram](../../images/asaim-wf.png)]
+]
+
+
+.footnote[Batut et al Gigascience. 2018 7(6) doi: 10.1093/gigascience/giy057]
+
+
+???
+
+For this short tutorial, while the workflow is running, these slides can be useful
+to explain the tools that are being run in that section. After explaining the tools,
+the workflows should be far enough along to start showing the results
+
+
+---
+
+## Input: Cellulose Degradation in a Biogas Reactor
+
+![Workflow graph showing biogas reactor extract being transferred to cellulose and incubated. Time series samples are taken and run through a mass spectrometer and genomic sequencer.](../../images/metatranscriptomics/experimental_setup.png)
+
+
+
+???
+
+A 100 µl aliquot of an enriched community from a biogas reactor was transferred to 27 anaerobic bottles containing a rich medium and 10g/L of cellulose as sole carbon source and incubated at 65 °C.
+
+Three bottles were collected at 9 different time points (0, 8, 13, 18, 23, 28, 33, 38 and 43 h) and processed in triplicates. Metatranscriptomic analysis was performed on all time points. Metaproteomics analysis on 4 data points.
+
+---
+
+
+## Input Format: FastQ Files
+
+
+- Four lines per read
+
+![Image of a fastq file with label on the first line, sequence on the second, + on the third, and quality scores on the fourth as ascii chars. A callout shows that Base=T, quality=colon, and that means a score of 25.](../../../sequence-analysis/images/quality-control/fastq_fig.jpg)
+
+???
+
+- Four lines per read
+  - `@` + identifier on first line, just like fasta
+  - sequence
+  - `+`
+  - quality score characters
+
+Segue: so what do the quality chars mean?
+
+---
+
+## FastQ: Quality score
+
+- Each character denotes a different Phred score
+
+  ![Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina](../../../sequence-analysis/images/quality_score_encoding.png)
+
+- Phred scores are logarithmic
+
+.small[
+Phred Quality Score | Probability of incorrect base call | Base call accuracy
+--- | --- | ---
+10 | 1 in 10 | 90%
+20 | 1 in 100 | 99%
+30 | 1 in 1000 | 99.9%
+40 | 1 in 10,000 | 99.99%
+...
+]
+
+???
+
+- Logarithmic scale
+- Different flavours of encoding exist
+
+---
+
+## Preprocessing
+
+In this tutorial we start with some preprocessing steps
+
+![preprocessing workflow](../../images/metatranscriptomics/workflow_qc.png)
+
+---
+
+## Preprocessing: Tools
+
+In this tutorial we start with some preprocessing steps
+
+
+![preprocessing workflow](../../images/metatranscriptomics/workflow_qc_tools.png)
+
+
+???
+| Step | Tools |
+|:------|-------|
+|Quality Control reports &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; | FastQC &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; and MultiQC &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; |
+|Trimming and Filtering | Cutadapt &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; |
+|Filter ribosomal RNA | SortMeRNA &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; |
+|Interlace FastQ files | FastQ interlacer &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; |
+
+---
+
+## Quality Reports: FastQC
+
+- Generate a web report with quality metrics of your FastQ file
+
+![Screenshot of FastQC report, showing the table of contents with green checks on nearly every result, and the base statistics and per-base sequence quality graphs shown.](../../../sequence-analysis/images/fastqc-report.png)
+
+.footnote[see also our [dedicated QC tutorial](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)  ]
+
+---
+
+## Quality Reports: FastQC
+
+- Many different QC plots
+- Example: Per-base sequence Quality plot
+
+![Fastqc quality score plot, most results are in the green region but the box portion of the box and whisker plot start to dip into the yellow, medium quality (less than 30) region near 34+ base position in read. The whiskers begin extending to the red region (less than 20) by base 31 and get progressively worse.](../../../sequence-analysis/images/per_base_sequence_quality_good.png)
+
+
+.footnote[explanation of different plots: [dedicated QC tutorial](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)  ]
+
+???
+- in the per-base sequence quality plot, a boxplot of the base quality (y-axis) per position in the read (x-axis) is drawn
+- often you might observe a drop in quality towards the end of the reads, and may consider trimming ends
+- this example is very good
+
+---
+
+## Quality Reports: FastQC
+
+- Many more plots
+- See [QC tutorial](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html) for more information
+
+![Montage of several different fastq reports showing sequence quality graphs, and a numb er of other line graphs.](../../../sequence-analysis/images/quality-control/all_plots.png)
+
+
+---
+
+## Quality Reports: MultiQC
+
+.pull-left[
+- Combine multiple FastQC reports into one report
+
+- Also for outputs of other tools
+
+- Great when sequencing large numbers of samples
+]
+
+.pull-right[
+![Multiqc&apos;s report showing an aggregation of multiple samples. An overview at the top provides context for the 4 samples, and a sequence quality histogram shows 4 samples with similarly behaving quality scores](../../images/metatranscriptomics/multiqc.png)
+]
+
+---
+
+## Read Trimming and Filtering: Cutadapt
+
+- Trim low-quality bases from reads
+- Filter reads based on length, mean quality score, ..
+- Remove adapters/primers
+
+  .image-75[![adapter trimming](../../../sequence-analysis/images/quality-control/trimming.png)]
+
+- Many tools: CutAdapt &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt;, TrimGalore &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt;, Trimmomatic &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; ..
+
+???
+These are some examples of ways to trim and filter data, but many more are possible and depend on your experiment what is necessary
+
+---
+
+## SortMeRNA
+
+.pull-left[
+
+- Most RNA sequences will be ribosomal RNA (rRNA)
+
+- Great for taxonomical assignment (who is there?)
+
+- Not informative for functional analysis (What are they doing?)
+
+- Filter out rRNA before doing functional analysis
+]
+
+.pull-right[
+.image-90[![SortMeRNA](../../images/metatranscriptomics/sortmerna.png)]
+]
+
+---
+
+## FastQ interlacer
+
+- Paired-end data often comes in two separate FastQ files
+- One file with *forward* reads, one with *reverse* reads
+
+&lt;br&gt;
+
+![paired end deinterlaced file](../../../sequence-analysis/images/mapping/pairedend_fastq.png)
+
+---
+
+## FastQ interlacer
+
+- Some tools require a single **interlaced** FastQ file
+- Galaxy has tools for **interlacing** and **deinterlacing** FastQ files
+
+&lt;br&gt;
+
+![paired end interlaced file](../../../sequence-analysis/images/mapping/pairedend_interlaced.png)
+
+
+???
+forward and reverse files are &apos;zipped&apos; together into a single file
+
+---
+
+## Community Profile
+
+- We want to identify which organisms are present in our sample, and their relative abundances
+
+![Cartoon of several differently coloured and shaped microbes in a circle.](../../images/microbial-community.png)
+
+- **MetaPhlan2** &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; for identification
+- **Krona** &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; and **Graphlan** &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; for visualisation
+
+---
+
+## MetaPhlan2 &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt;
+
+- Estimates the presence and relative abundance of microbial cells
+- Maps reads against a set of marker sequences
+- Caveat: this tool is designed for DNA-seq
+  - Be careful interpreting abundances when using this tool with transcriptomics data
+
+.footnote[Nat Methods. 2012 Jun 10;9(8):811-4. doi: 10.1038/nmeth.2066.]
+
+???
+
+About the caveat: The theoretical problem is that we quantify species abundance by averaging the coverage of marker genes. Marker genes are supposed to be at the same coverage as they are single copy genes from the same genome, but this is not true for their transcripts. So MetaPhlAn2 on metatranscriptomics gives an idea about the average transcriptional rate of a given species. So it _can_ be used with caution...
+
+
+---
+
+## Krona &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt;
+
+- Visualization of community composition, interactive plot
+
+&lt;iframe id=&quot;krona&quot; src=&quot;krona.html&quot; frameBorder=&quot;0&quot; width=&quot;80%&quot; height=&quot;600px&quot;&gt; ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png) &lt;/iframe&gt;
+
+---
+
+## Graphlan &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt;
+
+- *Cladogram* visualisation
+
+![Colourful cladogram which begins from the center and expands outward with the lineage of the samples. Each sector of the chart is coloured differently for each group of genus and spieces. E.g. streptococcus streptococcaceae has three different leafs of the cladogram tree.](../../images/metatranscriptomics/graphlan_general.png)
+
+---
+
+## Genus Abundance
+
+- Tutorial: one timepoint
+- Over multiple timepoints:
+
+![stacked bar chart with timepoints along the x axis and genus abundance as a percentage along the y axis. Each of the 7 time samples consists mostly of Coprothermobacter and Clostridium.](../../images/metatranscriptomics/genus_abundance.png)
+
+---
+
+## Functional Analysis
+
+- Pathways
+- Gene Ontology
+  - Biological process
+  - Molecular function
+  - Cellular component
+- Gene Family
+
+---
+
+## Workflow
+
+![functional analysis workflow schematic](../../images/metatranscriptomics/workflow_functional.png)
+
+???
+HUMAnN2
+- next generation
+- HMP Unified Metabolic Analysis Network
+- developed by Huttenhower lab
+- itself a workflow/pipeline
+- basically answering the question about what the microbial community is capable of?
+
+---
+
+## HUMAnN2 &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt;
+
+- Profiles presence/absence and abundance of microbial community
+- Efficiently characterizes microbial metabolic pathways
+
+
+- **Input**
+  - Interlaced non-rRNA reads
+  - Taxonomic profile (MetaPhlAn2 &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt;)
+
+- **Output**
+  - Gene families and their abundance
+  - Pathways and their coverage
+  - Pathways and their abundance
+
+???
+- contains 5 parts -&gt; non rRNA reads, MetaPhlAn taxonomy, NCBI nucleotide db, Uniref 50/90 protein db, MetaCyc/Unipathway.
+- Show the Galaxy wrapper
+
+---
+
+## HUMAnN2 Tiered Search
+
+
+---
+class: top
+
+.left-column70[
+
+&lt;br&gt;
+
+- Meta-omic sequences (DNA/RNA)
+
+]
+
+.right-column30[
+.image-60[![Cartoon of several reads coloured into four groups, Species 1, Species 2, Unclassified, Novel.](../../images/metatranscriptomics/humann2_tiered1.png)]
+]
+
+--
+
+
+.left-column70[
+
+&lt;br&gt;
+
+- Initial screen through **MetaPhlAn2** &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt;: known microbial species
+  - Database: merging pangenomes of identified species
+
+]
+
+.right-column30[
+.image-60[![Four bins labelled 1 (red), 2 (blue), 3, 4 with reads from the top cartoon show piles of 1 an 2 with NO signs over 3 and 4.](../../images/metatranscriptomics/humann2_tiered2.png)]
+]
+
+--
+
+.left-column70[
+
+&lt;br&gt;
+- Nucleotide-level mapping against database
+
+]
+
+.right-column30[
+.image-60[![Regions x 1 y in red and x 2 y in blue are shown, the pangenomes of each of the red and blue species are shown. Reads map to most segments of the pangenome.](../../images/metatranscriptomics/humann2_tiered3.png)]
+]
+
+--
+
+.left-column70[
+&lt;br&gt;
+- Unaligned reads searched against proteinDB (Uniref) through accelerated translated search
+
+]
+
+.right-column30[
+.image-75[![Reads are shown matching against portions of protein sequences of X, Y, Z](../../images/metatranscriptomics/humann2_tiered4.png)]
+]
+
+???
+Takes non rRNA reads + MetaPhlAn2 gives list of abundant organism, then it does Nucleotide level pangenome mapping with Bowtie and uses CHocophlAN db
+giving unmapped and organims specific gene hits, the unmapped reads are further searched against accelerated translated protein database
+the protein hits are tehn combined with gene hits and metacyc to give the output.
+
+---
+
+
+**Result:** Gene family and pathway abundances
+
+.image-40[![A table with two columns, Feature on left and RPK on right. GeneX has an RPK of 8. GeneX|Species1 has an RPK of 2, species2 and unclassified are listed with an RPK of 3.](../../images/metatranscriptomics/humann2_tiered5.png)]
+
+---
+
+## Gene Families Abundances
+
+![Screenshot of a table in Galaxy with Gene Family on left and humann2 abundance RPKs on right.](../../images/metatranscriptomics/gene_family_abundance.png)
+
+RPK (reads per kilobase) = sum of alignment scores
+
+???
+Gene families: groups of evolutionary related protein that perform similar function
+Pathway: sum over genes catalyzing the reaction
+Pathway coverage: presence/absence
+RPK relative gene copy number : is computed as the sum of all alignments scores over a particular gene family
+UNMAPPED: total number of reads that remained unmapped even after both alignment steps
+UNINTEGRATED: no pathway detected.
+
+---
+
+## Gene Families to Functional Annotation
+
+![Humann2 regroup table is the left node in a flow chart with UniRef50. Multiple lines are drawn to an unlabelled right node that lists metacyc, kegg, pfam, EC, GO, informative GO, slim GO.](../../images/metatranscriptomics/results_functional_annotation.png)
+
+???
+Gene familes are too large depending on the complexity thus to simplify users can regroup gene families using grouping tool, can download mapping files.
+HUMAnN2 regroups Uniref 50/90 values to Go terms to get a broad overview.
+
+---
+
+## Group Abundances
+
+![humann2 regroup table, lines from uniref50 to GO. group humann2 to GO slim terms shows a similar graphic, lines from uniref50 to slim GO.](../../images/metatranscriptomics/results_group_abundances.png)
+
+
+???
+Group abundances converts GO terms to Go slim (subset of GO terms) into Mol function, biological process and cellular components.
+
+---
+
+## Gene Families to Functional Annotation
+
+
+![Table from Galaxy shown with gene family and RPK](../../images/metatranscriptomics/results_gene_family.png)
+
+![group Human2 to GO slim terms with lines from uniref50 to slim GO and boxes of Molecular Function, biological process, and cellular component below Slim GO](../../images/metatranscriptomics/results_gene_family_function.png)
+
+![Another galaxy table screenshot with GO id, GO name, and abundance.](../../images/metatranscriptomics/results_go.png)
+
+---
+class: top
+
+## Output
+
+.left-column30[
+&lt;br&gt;
+Molecular Function
+
+]
+
+.right-column70[
+.image-90[![Table in Galaxy with GO ID, name, abundance.](../../images/metatranscriptomics/results_molecular_function.png)]
+]
+--
+
+.left-column70[
+.image-90[![Basically the same table as above.](../../images/metatranscriptomics/results_biological_process.png)]
+]
+
+.right-column30[
+&lt;br&gt;
+Biological Process
+
+]
+
+
+--
+
+
+.right-column70[
+.image-90[![Again the same columns in a table. None of the specific data is legible or important.](../../images/metatranscriptomics/results_cellular_component.png)]
+]
+
+.left-column30[
+
+&lt;br&gt;&lt;br&gt;
+Cellular Component
+
+]
+
+???
+g is genus
+s is species level
+---
+
+## Unpack pathway abundances to show genes included
+
+- Renormalize the gene and pathway abundances in copies per million or relative abundance
+- This tool unpacks the pathways abundance by including gene families
+
+![output file unpack pathway tool](../../images/metatranscriptomics/results_unpack.png)
+
+---
+
+## Function: Cellulose Degradation
+
+- Quantitative analysis of gene family outputs from HUMAnN2 shows upregulation of cellulase
+
+.image-75[![line chart shown cellulase abundance decreasing from 80 copies per million to 40 as time goes from 13 to 43. Cellulose 1,4 beta cellobiosidase starts at 140 cpm and dps at hour 23 to 120 before increasing to 200 by the end of the graph](../../images/metatranscriptomics/results_cellulose_degradation.png)]
+
+???
+explain about datasets first
+cellulose 1,4 beta-cellulobiosidase responsible for hydrolysis of cellulose
+Gene encoding for the cellulose-binding domain
+protein shows an initial decrease and subsequent
+increase during cellulose degradation.
+---
+
+## Functions associated with a selected taxon
+
+.image-75[![Stacked bar chart with a lot of organisms as left axis (abundance, copies per million) and time on the bottom. It is labelled Coprothermobacter: Functional Pathways](../../images/metatranscriptomics/results_functions_taxon.png)]
+
+???
+In gene abundance, Coprothermobacter and Clostridium were observed to be the
+most abundant.
+In this figure we are looking at Coprothermobacter only-&gt;Glycolysis is observed to be the most abundant functional pathway across time points in
+Coprothermobacter
+
+---
+
+## Taxa associated with a selected function
+
+.image-75[![Bar chart titled Adenosine ribonucleotides de novo biosynthesis with time in hours as x axis, and Genus abundance (copies per million). Coprothermobacter and Clostridium decrease from ~2000 combined copies per million to ~800, in approximately equal amounts.](../../images/metatranscriptomics/results_taxa_function.png)]
+
+???
+This figure shows the contribution of genera to adenosine ribonucleotides denovo biosynthesis across time points.
+it shows during ATP synthesis, we see clostridium and coprothermobacter in abundance.
+---
+
+# Tabular Outputs from ASaIM Workflow
+
+- Taxonomy (Who?)
+  - Kingdom, phylum, class, order, family, genus, species, strain
+
+- Function (What?)
+  - Pathways
+  - Gene Ontology
+    - Biological Process
+    - Molecular Function
+    - Cellular Component
+  - Gene Family
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/subinamehta/" class="contributor-badge contributor-subinamehta"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/subinamehta?s=36" alt="Subina Mehta avatar" width="36" class="avatar" />
+    Subina Mehta</a><a href="/training-material/hall-of-fame/pratikdjagtap/" class="contributor-badge contributor-pratikdjagtap"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pratikdjagtap?s=36" alt="Pratik Jagtap avatar" width="36" class="avatar" />
+    Pratik Jagtap</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1705351728'></script>
+        
+    </body>
+</html>
