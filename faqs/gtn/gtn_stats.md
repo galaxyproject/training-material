@@ -4,6 +4,7 @@ area: other
 layout: faq
 box_type: none
 contributors: [hexylena]
+description: Statistics over the GTN
 ---
 
 <!-- tutorial stats -->

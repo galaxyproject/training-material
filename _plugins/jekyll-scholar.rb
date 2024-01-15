@@ -56,7 +56,7 @@ module Jekyll
           res = %(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
         end
       rescue StandardError => e
-        puts "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
+        Jekyll.logger.warn "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
         res = %(<span>ERROR INVALID CITATION #{@text}</span>)
       end
 
@@ -99,16 +99,16 @@ module Jekyll
       site.config['citation_cache'][source_page].push(@text)
 
       begin
-          doi = site.config['cached_citeproc'].items[@text].doi
-          url = site.config['cached_citeproc'].items[@text].url
-          if !doi.nil?
-            "https://doi.org/#{doi}"
-          elsif !url.nil?
-            url
-          end
-          res = url
+        doi = site.config['cached_citeproc'].items[@text].doi
+        url = site.config['cached_citeproc'].items[@text].url
+        if !doi.nil?
+          "https://doi.org/#{doi}"
+        elsif !url.nil?
+          url
+        end
+        res = url
       rescue StandardError => e
-        puts "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
+        Jekyll.logger.warn "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
         res = %(<span>https://example.com/ERROR+INVALID+CITATION+#{@text}</span>)
       end
       res

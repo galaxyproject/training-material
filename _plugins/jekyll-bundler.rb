@@ -63,7 +63,7 @@ module Jekyll
         bundle['preload'] == true
       end
 
-      bundles.map do |name, bundle|
+      bundles.map do |_name, bundle|
         bundle_path = "#{baseurl}#{bundle['path']}?v=#{bundle['timestamp']}"
         "<link rel='preload' href='#{bundle_path}' as='script'>"
       end.join("\n")

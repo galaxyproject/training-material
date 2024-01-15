@@ -314,6 +314,16 @@ module GtnLinter
     @CITATION_LIBRARY
   end
 
+  @JEKYLL_CONFIG = nil
+
+  def self.jekyll_config
+    if @JEKYLL_CONFIG.nil?
+      # Load
+      @JEKYLL_CONFIG = YAML.load_file('_config.yml')
+    end
+    @JEKYLL_CONFIG
+  end
+
   def self.check_bad_cite(contents)
     find_matching_texts(contents, /{%\s*cite\s+([^%]*)\s*%}/i)
       .map do |idx, _text, selected|
@@ -327,6 +337,24 @@ module GtnLinter
           replacement: nil,
           message: "The citation (#{citation_key}) could not be found.",
           code: 'GTN:007'
+        )
+      end
+    end
+  end
+
+  def self.check_bad_icon(contents)
+    find_matching_texts(contents, /{%\s*icon\s+([^%]*)\s*%}/i)
+      .map do |idx, _text, selected|
+      icon_key = selected[1].strip
+      if jekyll_config['icon-tag'][icon_key].nil?
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0),
+          replacement: nil,
+          message: "The icon (#{icon_key}) could not be found, please add it to _config.yml.",
+          code: 'GTN:033'
         )
       end
     end
@@ -719,6 +747,7 @@ module GtnLinter
       *new_more_accessible_boxes_agenda(contents),
       *no_target_blank(contents),
       *check_bad_link(contents),
+      *check_bad_icon(contents),
       *check_looks_like_heading(contents),
       *check_bad_tag(contents),
       *check_useless_box_prefix(contents),
@@ -984,8 +1013,8 @@ module GtnLinter
       # Check if there's a missing workflow test
       folder = File.dirname(path)
       basename = File.basename(path).gsub(/.ga$/, '')
-      possible_tests = Dir.glob("#{folder}/#{basename}*ym*")
-      possible_tests = possible_tests.grep(/#{basename}[_-]tests?.ya?ml/)
+      possible_tests = Dir.glob("#{folder}/#{Regexp.escape(basename)}*ym*")
+      possible_tests = possible_tests.grep(/#{Regexp.escape(basename)}[_-]tests?.ya?ml/)
 
       if possible_tests.empty?
         results += [
@@ -999,10 +1028,11 @@ module GtnLinter
       else
         # Load tests and run some quick checks:
         possible_tests.each do |test_file|
-          if !test_file.match(/-test.yml/)
+          if !test_file.match(/-tests?.yml/)
             results += [
               ReviewDogEmitter.file_error(path: path,
-                                          message: 'Please use the extension -test.yml for this test file.',
+                                          message: 'Please use the extension -test.yml ' \
+                                                   'or -tests.yml for this test file.',
                                           code: 'GTN:032')
             ]
           end
@@ -1080,7 +1110,9 @@ module GtnLinter
   end
 
   def self.enumerate_lintable
-    enumerate_type(/bib$/) + enumerate_type(/md$/) + enumerate_type(/md$/, root_dir: 'faqs')
+    enumerate_type(/bib$/) + enumerate_type(/md$/) + enumerate_type(/md$/,
+                                                                    root_dir: 'faqs') + enumerate_type(/md$/,
+                                                                                                       root_dir: 'news')
   end
 
   def self.enumerate_all

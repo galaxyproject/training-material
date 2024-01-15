@@ -32,6 +32,7 @@ contributions:
     - mboudet
   funding:
     - gallantries
+    - eurosciencegateway
 
 requirements:
   - type: "internal"

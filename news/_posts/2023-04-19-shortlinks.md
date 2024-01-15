@@ -16,7 +16,7 @@ PURLs are persistent URLs, and can be used to link to a specific version of a tu
 
 ## How do I use them?
 
-The PURLs are in the form `gxy.io/GTN:[id]`, where `[id]` is the identifier of the tutorial, slide, or FAQ. For example, the identifier for the [Galaxy Installation with Ansible](https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html) tutorial is `GTN:T00001`. The PURL for this tutorial is thus [gxy.io/GTN:T00001](https://gxy.io/GTN:T00001). This will always point to the Ansible Galaxy tutorial, no matter what changes are made to the tutorial in the future.
+The PURLs are in the form `gxy.io/GTN:[id]`, where `[id]` is the identifier of the tutorial, slide, or FAQ. For example, the identifier for the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial is `GTN:T00001`. The PURL for this tutorial is thus [gxy.io/GTN:T00001](https://gxy.io/GTN:T00001). This will always point to the Ansible Galaxy tutorial, no matter what changes are made to the tutorial in the future.
 
 ## How do I find the PURL for a tutorial?
 

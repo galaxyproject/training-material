@@ -6,7 +6,7 @@ require 'yaml'
 
 # Get the list of toolcats
 def fetch_toolcats(server)
-  uri = URI.parse("#{server}")
+  uri = URI.parse(server.to_s)
   request = Net::HTTP::Get.new(uri)
   req_options = {
     use_ssl: uri.scheme == 'https',
@@ -45,16 +45,11 @@ tool_ids.each do |k|
   values = [eu, org, aus].compact
   # values = [org].compact
 
-
   # Majority answer wins
   # set that value to toolcats[k]
   # If there is no majority, pick one.
   # print("#{k} - #{values.length} => #{values.uniq.compact.length}\n")
-  if values.length.positive?
-    toolcats[k] = values.max_by { |v| v['count'] }
-  else
-    toolcats[k] = nil
-  end
+  toolcats[k] = (values.max_by { |v| v['count'] } if values.length.positive?)
 end
 
 # Write the list to a file

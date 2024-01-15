@@ -33,6 +33,7 @@ contributions:
     - stephanierobin
   funding:
     - gallantries
+    - eurosciencegateway
 
 abbreviations:
   NMDS: Non-metric multidimensional scaling

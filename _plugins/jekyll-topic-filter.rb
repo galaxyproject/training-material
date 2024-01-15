@@ -39,14 +39,14 @@ module TopicFilter
   def self.fill_cache(site)
     return if site.data.key?('cache_topic_filter')
 
-    puts '[GTN/TopicFilter] Begin Cache Prefill'
+    Jekyll.logger.debug '[GTN/TopicFilter] Begin Cache Prefill'
     site.data['cache_topic_filter'] = {}
 
     # For each topic
     list_topics(site).each do |topic|
       site.data['cache_topic_filter'][topic] = filter_by_topic(site, topic)
     end
-    puts '[GTN/TopicFilter] End Cache Prefill'
+    Jekyll.logger.debug '[GTN/TopicFilter] End Cache Prefill'
   end
 
   ##
@@ -183,7 +183,8 @@ module TopicFilter
   def self.fetch_tutorial_material(site, topic_name, tutorial_name)
     fill_cache(site)
     if site.data['cache_topic_filter'][topic_name].nil?
-      Jekyll.logger.warn "Topic cache not filled, cannot fetch tutorial material for #{topic_name}"
+      Jekyll.logger.warn "Cannot fetch tutorial material for #{topic_name}"
+      nil
     else
       site.data['cache_topic_filter'][topic_name].select { |p| p['tutorial_name'] == tutorial_name }[0]
     end
@@ -373,13 +374,9 @@ module TopicFilter
     #     B -- No ----> E[End]
 
     output = "flowchart TD\n"
-    wf['steps'].keys.each do |id|
+    wf['steps'].each_key do |id|
       step = wf['steps'][id]
       output += "  #{id}[\"#{step['name']}\"];\n"
-    end
-
-    wf['steps'].keys.each do |id|
-      # Look at the 'input connections' to this step
       step = wf['steps'][id]
       step['input_connections'].each do |_, v|
         # if v is a list
@@ -586,7 +583,7 @@ module TopicFilter
     return site.data['cache_processed_pages'] if site.data.key?('cache_processed_pages')
 
     materials = collate_materials(site, pages).map { |_k, v| resolve_material(site, v) }
-    puts '[GTN/TopicFilter] Filling Materials Cache'
+    Jekyll.logger.info '[GTN/TopicFilter] Filling Materials Cache'
     site.data['cache_processed_pages'] = materials
 
     # Prepare short URLs
@@ -844,16 +841,40 @@ module Jekyll
     # Find the most recently modified tutorials
     # Parameters:
     # +site+:: The +Jekyll::Site+ object, used to get the list of pages.
+    # +exclude_recently_published+:: Do not include ones that were recently
+    #                                published in the slice, to make it look a bit nicer.
     # Returns:
     # +Array+:: An array of the 10 most recently modified pages
     # Example:
     #  {% assign latest_tutorials = site | recently_modified_tutorials %}
-    def recently_modified_tutorials(site)
+    def recently_modified_tutorials(site, exclude_recently_published: true)
       tutorials = site.pages.select { |page| page.data['layout'] == 'tutorial_hands_on' }
 
       latest = tutorials.sort do |x, y|
         Gtn::ModificationTimes.obtain_time(y.path) <=> Gtn::ModificationTimes.obtain_time(x.path)
       end
+
+      latest_published = recently_published_tutorials(site)
+      latest = latest.reject { |x| latest_published.include?(x) } if exclude_recently_published
+
+      latest.slice(0, 10)
+    end
+
+    ##
+    # Find the most recently published tutorials
+    # Parameters:
+    # +site+:: The +Jekyll::Site+ object, used to get the list of pages.
+    # Returns:
+    # +Array+:: An array of the 10 most recently published modified pages
+    # Example:
+    #  {% assign latest_tutorials = site | recently_modified_tutorials %}
+    def recently_published_tutorials(site)
+      tutorials = site.pages.select { |page| page.data['layout'] == 'tutorial_hands_on' }
+
+      latest = tutorials.sort do |x, y|
+        Gtn::PublicationTimes.obtain_time(y.path) <=> Gtn::PublicationTimes.obtain_time(x.path)
+      end
+
       latest.slice(0, 10)
     end
 

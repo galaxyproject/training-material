@@ -10,6 +10,7 @@ require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
 require './_plugins/gtn/supported'
 require './_plugins/gtn/toolshed'
+require './_plugins/gtn/usegalaxy'
 require './_plugins/jekyll-topic-filter'
 require 'time'
 
@@ -120,6 +121,20 @@ module Jekyll
     # Replaces newlines with newline + two spaces
     def replace_newline_doublespace(text)
       text.gsub(/\n/, "\n  ")
+    end
+
+    ##
+    # Returns the publication date of a page, when it was merged into `main`
+    # Params:
+    # +page+:: The page to get the publication date of
+    # Returns:
+    # +String+:: The publication date of the page
+    #
+    def gtn_pub_date(path)
+      # if it's not a string then log a warning
+      path = path['path'] if !path.is_a?(String)
+      # Automatically strips any leading slashes.
+      Gtn::PublicationTimes.obtain_time(path.gsub(%r{^/}, ''))
     end
 
     ##
@@ -361,6 +376,14 @@ module Jekyll
       Gtn::ModificationTimes.obtain_modification_count(page['path'])
     end
 
+    def list_usegalaxy_servers(_site)
+      Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }
+    end
+
+    def list_usegalaxy_servers_shuffle(_site)
+      Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }.shuffle
+    end
+
     def topic_name_from_page(page, site)
       if page.key? 'topic_name'
         site.data[page['topic_name']]['title']
@@ -383,6 +406,63 @@ module Jekyll
       page['path'].split('/')[1]
     end
 
+    def get_og_desc(site, page); end
+
+    def get_og_title(site, page, reverse)
+      og_title = []
+      topic_id = page['path'].gsub(%r{^\./}, '').split('/')[1]
+
+      if site.data.key?(topic_id)
+        if site.data[topic_id].is_a?(Hash) && site.data[topic_id].key?('title')
+          og_title = [site.data[topic_id]['title']]
+        else
+          Jekyll.logger.warn "Missing title for #{topic_id}"
+        end
+      end
+
+      if page['layout'] == 'topic'
+        og_title.push 'Tutorial List'
+        return og_title.join(' / ')
+      end
+
+      material_id = page['path'].gsub(%r{^\./}, '').split('/')[3]
+      material = nil
+      material = fetch_tutorial_material(site, topic_id, material_id) if site.data.key? topic_id
+
+      og_title.push material['title'] if !material.nil?
+
+      case page['layout']
+      when 'workflow-list'
+        og_title.push 'Workflows'
+      when 'faq-page', 'faqs'
+        if page['path'] =~ %r{faqs/gtn}
+          og_title.push 'GTN FAQs'
+        elsif page['path'] =~ %r{faqs/galaxy}
+          og_title.push 'Galaxy FAQs'
+        else
+          og_title.push 'FAQs'
+        end
+      when 'faq'
+        og_title.push "FAQ: #{page['title']}"
+      when 'learning-pathway'
+        og_title.push "Learning Pathway: #{page['title']}"
+      when 'tutorial_hands_on'
+        og_title[-1]&.prepend 'Hands-on: '
+      when /slides/
+        og_title[-1]&.prepend 'Slide Deck: '
+      else
+        og_title.push page['title']
+      end
+
+      Jekyll.logger.debug "Material #{page['layout']} :: #{page['path']} => #{topic_id}/#{material_id} => #{og_title}"
+
+      if reverse.to_s == 'true'
+        og_title.compact.reverse.join(' / ')
+      else
+        og_title.compact.join(' / ')
+      end
+    end
+
     ##
     # Gets the 'default' link for a material, hands on if it exists, otherwise slides.
     # Params:
@@ -402,6 +482,10 @@ module Jekyll
       end
 
       url
+    end
+
+    def group_icons(icons)
+      icons.group_by{|k, v| v}.map{|k, v| [k, v.map{|z|z[0]} ]}.to_h.invert
     end
   end
 end
