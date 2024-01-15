@@ -30,7 +30,6 @@ contributions:
     - eurosciencegateway
 ---
 
-# Introduction
 
 
 Through this tutorial you will learn here how to access and download Copernicus Data Space Ecosystem (CDSE) data through a jupyterlab Galaxy interactive tool :
