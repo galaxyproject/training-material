@@ -23,12 +23,10 @@ contributions:
   - colineroyaux
   - yvanlebras
   funding:
-  - erasmusplus
+  - gallantries
 
 ---
 
-
-# Introduction
 
 
 This tutorial will guide you on the exploration of biodiversity data having taxonomic, spatial and temporal informations.

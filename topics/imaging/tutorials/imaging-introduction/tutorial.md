@@ -15,7 +15,7 @@ objectives:
   - "How to perform basic image processing in Galaxy."
 key_points:
 - The **Image Info** tool can provide valuable metadata information of an image.
-- TIFF files can not directly viewed in the browser, but have to be converted.
+- TIFF files cannot viewed directly in most web browser, but have to be converted.
 - For visualization, images with a bit-depth more than 8-bit have to be histogram equalized.
 time_estimation: "1H"
 follow_up_training:
@@ -27,12 +27,11 @@ follow_up_training:
 contributors:
   - thomaswollmann
   - shiltemann
+  - kostrykin
 tags:
   - HeLa
 
 ---
-
-# Introduction
 
 
 Image analysis is the extraction of meaningful information from images by means of digital image processing techniques. Imaging is an important component in a wide range of scientific fields of study, such as astronomy, medicine, physics, biology, geography, chemistry, robotics, and industrial manufacturing.
@@ -73,7 +72,7 @@ Our objective is to automatically count the number of cells contained in this im
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. **Unzip file** {% icon tool %} with the following parameters:
+> 3. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `Single file`
 >    - *"Filepath"*: `B2--W00026--P00001--Z00000--T00000--dapi.tif`
@@ -90,7 +89,7 @@ Now, we can extract metadata from an image.
 
 > <hands-on-title>Extract Image Metadata</hands-on-title>
 >
-> 1. **Image Info** {% icon tool %} with the following parameters to extract metadata from the image:
+> 1. {% tool [Show image info](toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/0.2) %} with the following parameters to extract metadata from the image:
 >    - {% icon param-file %} *"Input Image"*: `input.tif` file (output of the previous step)
 > 2. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and search for image acquisition information
 >
@@ -110,11 +109,11 @@ Now, we can extract metadata from an image.
 
 # Image Conversion
 
-Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). However, TIFF can not be displayed in the browser. Therefore, we convert `input.tif` to a PNG for visualization.
+Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). However, TIFF cannot be displayed in most web browsers. Therefore, we convert `input.tif` to a PNG for visualization.
 
 > <hands-on-title>Convert Image</hands-on-title>
 >
-> 1. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
+> 1. {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2) %} with the following parameters to convert the image to PNG:
 >    - {% icon param-file %} *"Input Image"*: `input.tif` file
 >    - *"Output data type"*: `PNG`
 > 2. Rename {% icon galaxy-pencil %} the generated file to `viz_input`
@@ -142,12 +141,12 @@ Next we will normalize the histogram to improve the contrast. We do this using a
 
 > <hands-on-title>Normalize Histogram and Convert Image</hands-on-title>
 >
-> 1. **Histogram equalization** {% icon tool %} with the following parameters to normalize the histogram of the image:
+> 1. {% tool [Perform histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2) %} with the following parameters to normalize the histogram of the image:
 >    - {% icon param-file %} *"Source file"*: `input.tif` file
 >    - *"Histogram Equalization Algorithm"*: `CLAHE`
 > 2. Rename {% icon galaxy-pencil %} the generated file to `input_normalized`
-> 3. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
->    - {% icon param-file %} *"Input Image"*: `input_normalized` file (output of **Histogram equalization** {% icon tool %})
+> 3. {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2) %} with the following parameters to convert the image to PNG:
+>    - {% icon param-file %} *"Input Image"*: `input_normalized` file (output of {% tool [Perform histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2) %})
 >    - *"Output data type"*: `PNG`
 > 4. Rename {% icon galaxy-pencil %} the generated file to `viz_normalized`
 > 5. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content
@@ -165,17 +164,17 @@ Specific features of interest (e.g., edges, noise) can be enhanced or suppressed
 
 > <hands-on-title>Filter image</hands-on-title>
 >
-> 1. **Filter Image** {% icon tool %} with the following parameters to smooth the image:
->    - *"Image type"*: `Gaussian Blur`
+> 1. {% tool [Filter 2D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3) %} with the following parameters to smooth the image:
+>    - *"Filter type"*: `Gaussian Blur`
 >    - *"Radius/Sigma"*: `3`
 >    - {% icon param-file %} *"Source file"*: `input.tif` file
 > 2. Rename {% icon galaxy-pencil %} the generated file to `input_smoothed`
-> 3. **Histogram equalization** {% icon tool %} with the following parameters to normalize the histogram of the image:
->    - {% icon param-file %} *"Source file"*: `input_smoothed` file (output of **Filter image** {% icon tool %})
+> 3. {% tool [Perform histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2) %} with the following parameters to normalize the histogram of the image:
+>    - {% icon param-file %} *"Source file"*: `input_smoothed` file (output of {% tool [Filter 2D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3) %})
 >    - *"Histogram Equalization Algorithm"*: `CLAHE`
 > 4. Rename {% icon galaxy-pencil %} the generated file to `input_smoothed_normalized`
-> 5. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
->    - {% icon param-file %} *"Input Image"*: `input_smoothed_normalized` file (output of **Histogram equalization** {% icon tool %})
+> 5. {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2) %} with the following parameters to convert the image to PNG:
+>    - {% icon param-file %} *"Input Image"*: `input_smoothed_normalized` file (output of {% tool [Perform histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2) %})
 >    - *"Output data type"*: `PNG`
 > 6. Rename {% icon galaxy-pencil %} the generated file to `viz_smoothed_normalized`
 > 7. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and compare the result with `viz_normalized`. You can observe that `viz_smoothed_normalized` has significant reduced noise.
@@ -192,41 +191,41 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 
 > <hands-on-title>Segment image</hands-on-title>
 >
-> 1. **Auto Threshold** {% icon tool %} with the following parameters to segment the image:
->    - {% icon param-file %} *"Source file"*: `input_smoothed` file (output of **Filter image** {% icon tool %})
+> 1. {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2) %} with the following parameters to segment the image:
+>    - {% icon param-file %} *"Source file"*: `input_smoothed` file (output of {% tool [Filter 2D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-2) %})
 >    - *"Threshold Algorithm"*: `Otsu`
 >    - *"Dark Background"*: `Yes`
 > 2. Rename {% icon galaxy-pencil %} the generated file to `input_segmented`
-> 3. **Binary 2 Label** {% icon tool %} with the following parameters to segment the image:
->    - {% icon param-file %} *"Binary Image File"*: `input_segmented` file (output of **Auto Threshold** {% icon tool %})
+> 3. {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2) %} with the following parameters to segment the image:
+>    - {% icon param-file %} *"Binary Image File"*: `input_segmented` file (output of {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2) %})
 > 4. Rename {% icon galaxy-pencil %} the generated file to `input_segmented_labeled`
-> 5. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
->    - {% icon param-file %} *"Input Image"*: `input_segmented_labeled` file (output of **Binary 2 Label** {% icon tool %})
+> 5. {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2) %} with the following parameters to convert the image to PNG:
+>    - {% icon param-file %} *"Input Image"*: `input_segmented_labeled` file (output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2) %})
 >    - *"Output data type"*: `PNG`
-> 6. Rename {% icon galaxy-pencil %} the converted image to `viz segmented`
+> 6. Rename {% icon galaxy-pencil %} the converted image to `viz_segmented`
 >
 >    > <question-title></question-title>
 >    >
->    > 1. What does **Binary 2 Label** {% icon tool %} do? (Hint: check the tool help section)
+>    > 1. What does {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2) %} do? (Hint: check the tool help section)
 >    > 2. View the `viz_segmented` image from the last step, what do you see?
 >    >      - Can you explain this result?
->    > 3. Exercise: Try to make the information in this image better visible (Hint: **Histogram Equalization** {% icon tool %})
+>    > 3. Exercise: Try to make the information in this image better visible (Hint: {% tool [Perform histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2) %})
 >    >
 >    > > <solution-title></solution-title>
 >    > > 1. The tool assigns each connected component (e.g., segmented cell) in the image an object id and stores it as the intensity value.
 >    > > 2. The image looks completely black.
->    > >    The object IDs generated by **Binary 2 Label** {% icon tool %} are relatively low.
+>    > >    The object IDs generated by {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2) %} are relatively low.
 >    > >    Since the IDs are stored as intensity values, these are too low to be visible in this case. Nevertheless, there is more
 >    > >    information in this image than meets the eye.
 >    > > 3. To make labeled objects visible, the values have to be stretched to a larger range of visible intensity values. We
 >    > >    can do that by equalizing the histogram again:
 >    > >
->    > >    - **Histogram equalization** {% icon tool %} with the following parameters to normalize the intensity values:
->    > >      - {% icon param-file %} *"Source file"*: `input_segmented_labeled` file (output of **Binary 2 Label** {% icon tool %})
+>    > >    - {% tool [Perform histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2) %} with the following parameters to normalize the intensity values:
+>    > >      - {% icon param-file %} *"Source file"*: `input_segmented_labeled` file (output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2) %})
 >    > >      - *"Histogram Equalization Algorithm"*: `CLAHE`
 >    > >
->    > >    - **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
->    > >      - {% icon param-file %} *"Input Image"*: output of **Histogram Equalization** {% icon tool %}
+>    > >    - {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2) %} with the following parameters to convert the image to PNG:
+>    > >      - {% icon param-file %} *"Input Image"*: output of {% tool [Perform histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2) %}
 >    > >      - *"Output data type"*: `PNG`
 >    > >
 >    > >     The information contained in the original image has now become visible to the human eye:
@@ -236,24 +235,24 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    {: .question}
 >
 >
-> 7. **Overlay Segmentation Mask** {% icon tool %} with the following parameters to convert the image to PNG:
->    - {% icon param-file %} *"Image Source File"*: `viz_normalized` file
->    - {% icon param-file %} *"Mask Source File"*: `viz_segmented` file
->    - *"Image Is Greyscale"*: `Yes`
->    - *"Thickness"*: `3`
->    - *"Stroke Color"*: `red`
->    - *"Plot Labels"*: `yes`
->    - *"Label Color"*: `yellow`
+> 7. {% tool [Overlay images](toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.3-3) %} with the following parameters to convert the image to PNG:
+>    - *"How to visualize the overlay?"*: `Segmentation mask over image`
+>    - {% icon param-file %} *"Image"*: `viz_normalized` file
+>    - {% icon param-file %} *"Label image"*: `input_segmented_labeled` file (output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2) %})
+>    - *"Contour thickness"*: `2`
+>    - *"Contour color"*: `red`
+>    - *"Show labels"*: `yes`
+>    - *"Label color"*: `yellow`
 > 8. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and assess the segmentation performance
-> 9. **Count Objects** {% icon tool %} with the following parameters to count the segmented objects in the image:
->    - {% icon param-file %} *"Source file"*: `input_segmented_labeled` file (output of **Binary 2 Label** {% icon tool %})
+> 9. {% tool [Count objects in label map](toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2) %} with the following parameters to count the segmented objects in the image:
+>    - {% icon param-file %} *"Source file"*: `input_segmented_labeled` file (output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2) %})
 >
 >    > <question-title></question-title>
 >    >
 >    > How many objects were segmented?
 >    >
 >    > > <solution-title></solution-title>
->    > >  The **Count Objects** {% icon tool %} tool counted 425 objects.
+>    > >  The {% tool [Count objects in label map](toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2) %} tool counted 425 objects.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}

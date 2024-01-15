@@ -3,7 +3,7 @@ redirect_from:
 - /topics/transcriptomics/faqs/gene_profile
 
 title: What exactly is a ‘Gene profile’?
-area: gene
+area: Interpretation
 box_type: tip
 layout: faq
 contributors: [rahmot]

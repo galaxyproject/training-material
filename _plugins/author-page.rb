@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require './_plugins/gtn'
+
 module Jekyll
   ##
   # This class generates the GTN's author pags
@@ -35,6 +37,10 @@ module Jekyll
           end
         end
       end
+
+      t.data['maintainers'].each { |c| datastructure[c].push([t, 'maintainer']) } if t.data.key?('maintainers')
+      t.data['funding'].each { |c| datastructure[c].push([t, 'funding']) } if t.data.key?('funding')
+
       datastructure
     end
 
@@ -50,6 +56,7 @@ module Jekyll
       # pre-calculating this hash saves about 4.9 seconds off the previous
       # build time of 5 seconds.
       tutorials_by_author = Hash.new { |hash, key| hash[key] = [] }
+      learning_pathways_by_author = Hash.new { |hash, key| hash[key] = [] }
       slides_by_author = Hash.new { |hash, key| hash[key] = [] }
       news_by_author = Hash.new { |hash, key| hash[key] = [] }
       has_philosophy = Hash.new { false }
@@ -63,6 +70,8 @@ module Jekyll
           pusher(t, slides_by_author, false)
         end
 
+        pusher(t, learning_pathways_by_author, false) if t['layout'] == 'learning-pathway'
+
         # Philosophies
         has_philosophy[t.data['username']] = true if t['layout'] == 'training_philosophy' && !t.data['username'].nil?
       end
@@ -72,13 +81,13 @@ module Jekyll
         pusher(t, news_by_author, true) if t['layout'] == 'news'
       end
 
-      site.data['contributors'].reject { |c| c['halloffame'] == 'no' }.each_key do |contributor|
+      Gtn::Contributors.list(site).each_key do |contributor|
         # Using PageWithoutAFile instead of a custom class which reads files
         # from disk each time, saves some time, but it is unclear how much
         # due to how the previous was accounted. But assuming 0.040s per page * 193 should be about 8 seconds.
         page2 = PageWithoutAFile.new(site, '', File.join(dir, contributor), 'index.html')
         page2.content = nil
-        name = site.data['contributors'][contributor].fetch('name', contributor)
+        name = Gtn::Contributors.fetch_contributor(site, contributor).fetch('name', contributor)
 
         # Their tutorials
         page2.data['contributor'] = contributor
@@ -89,10 +98,21 @@ module Jekyll
         page2.data['tutorials'] = tutorials_by_author[contributor]
         page2.data['slides'] = slides_by_author[contributor]
         page2.data['news'] = news_by_author[contributor]
+        page2.data['learning_pathways'] = learning_pathways_by_author[contributor]
 
         page2.data['tutorials_count'] = tutorials_by_author[contributor].length
         page2.data['slides_count'] = slides_by_author[contributor].length
         page2.data['news_count'] = news_by_author[contributor].length
+        page2.data['learning_pathways_count'] = learning_pathways_by_author[contributor].length
+
+        page2.data['editors'] = TopicFilter.enumerate_topics(site).select do |t|
+          t.fetch('editorial_board', []).include?(contributor)
+        end
+        # Also their learning pathways
+        page2.data['editors'] += site.pages.select do |t|
+          t['layout'] == 'learning-pathway' && t.data.fetch('editorial_board', []).include?(contributor)
+        end
+        page2.data['editor_count'] = page2.data['editors'].length
 
         page2.data['has_philosophy'] = has_philosophy[contributor]
 

@@ -28,8 +28,6 @@ tags:
 
 ---
 
-# Introduction
-
 To discover causal mutations of inherited diseases it’s common practice to do a trio analysis. In a trio analysis DNA is sequenced of both the patient and parents. Using this method, it’s possible to identify multiple inheritance patterns. Some examples of these patterns are autosomal recessive, autosomal dominant, and  de-novo variants, which are represented in the figure below. To elaborate, the most left tree shows an autosomal dominant inhertitance pattern where the offspring inherits a faulty copy of the gene from one of the parents. The center subfigure represents an autosomal recessive disease, here the offspring inherited a faulty copy of the same gene from both parents. In the right subfigure a de-novo mutation is shown, which is caused by a mutation during the offspring’s lifetime.
 
 ![Image of three family trees representing a different inheritance pattern each, from left to right the trees have a title on top with: autosomal dominant, autosomal recessive, and De-Novo. The families consists of a father, mother, and son. Under the trees there is a legend which shows, from left to right, a red diagonal line with the text 'Affected', a white square with a black border with the text 'Male Variant Absent', a white circle with a black border with the text 'Female Variant Absent', a half-blackened white square with a black border with the text 'Male Variant Present', and a half-blackened circle with a black border with the text 'Female Variant Present'.](../../images/trio-analysis/pedigree.svg "Three family trees representing autosomal dominant (left), autosomal recessive (center), and a de-novo inheritence pattern (right) from parents to son.")
@@ -312,12 +310,30 @@ Running SnpEff will produce the annotated VCF and an HTML summary file. The anno
 >
 {: .question}
 
+## Compress VCF
+Now that we have finished running all the tools which require the VCF format as input, they can be converted back to the **vcf_bgzip** format. To compress the VCF we will use a built-in tool from Galaxy, which can be accessed by manipulating the file itself in a similair fashion as changing its detected type.
 
-# GEMINI analyses
+> <hands-on-title> Compress **vcf** back to **vcf_bgzip** </hands-on-title>
+>
+> Execute the following steps for the SnpEff VCF.
+>
+> 1. Click on the **pencil** {% icon galaxy-pencil %} of the SnpEff VCF.
+>
+> 2. Click on the **convert tab** {% icon galaxy-gear %}.
+>
+> 3. Under **Target datatype** select `vcf_bgzip (using 'Convert uncompressed file to compressed.')`
+>
+> 4. Click {% icon exchange %} **Create Dataset**.
+>
+{: .hands_on}
+
+# Trio Analysis
+
+## GEMINI analyses
 Next, we will transform our VCF into a GEMINI database which makes it easier to query the VCFs and to determine different inheritence patterns between the mother, father, and offspring. In addition, GEMINI will add even more annotations to the variants. This allows us to filter the variants even more which gets us to closer to the real causative variant.
 All these steps are performed by the {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %} tool. However, before we can load the VCF we also need to define a pedigree file.
 
-## Create a pedigree file describing the family trio
+### Create a pedigree file describing the family trio
 A pedigree file is a file that informs GEMINI which family members are affected by the disease and which sample name corresponds to what individual. This information is saved as a table containing information about the phenotype of the family.
 
 1. **#family_id**: Which family a row belongs to.
@@ -343,20 +359,20 @@ A pedigree file is a file that informs GEMINI which family members are affected 
 
 For more information on the PED file you can read the help section of the {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %} tool in the description, which can be found at the bottom of the page when clicking on the tool.
 
-## Load GEMINI database
+### Load GEMINI database
 Now we can transform the subsampled VCF and PED file into a GEMINI database. Note that this can take a very long time depending on the size of the VCF. In our case it should take around 30-40 minutes.
 
 > <hands-on-title>Transform VCF and PED files into a GEMINI database</hands-on-title>
 >
 > 1. {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"VCF dataset to be loaded in the GEMINI database"*: `SNPeff annotated VCF` (output of **SnpEff eff** {% icon tool %})
+>    - {% icon param-file %} *"VCF dataset to be loaded in the GEMINI database"*: `SnpEff Annotated vcf_bgzip` (output of **Convert uncompressed file to compressed.** {% icon tool %})
 >    - {% icon param-file %} *"Sample and family information in PED format"*: the pedigree file prepared above
 >
 >
 {: .hands_on}
 
 
-## Find inheritance pattern
+### Find inheritance pattern
 With the GEMINI database it is now possible to identify the causative variant that could explain the breast cancer in the mother and daughter. The inheritance information makes it a bit easier to determine which tool to run to find the causative variant, instead of finding it by trying all the different inheritance patterns.
 
 > <question-title></question-title>
@@ -417,8 +433,54 @@ To find the most plausible causative variant we will use the {% tool [GEMINI inh
 {: .question}
 
 
+## Gene.iobio Analyses
+Alternatively, the trio analysis can be done using gene.iobio {% cite Di_Sera_2021 %}. The {% tool [gene.iobio visualisation](toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1) %} tool generates an html file which sends the VCFs to the iobio site using public URLs. Therefore, your history has to be shared, i.e. **everyone with a link can access your history!**
+
+
+> <hands-on-title> Make files accessible for gene.iobio </hands-on-title>
+>
+> 1. Open the **History Options menu** {% icon galaxy-dropdown %} at the topright corner of your history panel.
+> 2. select **Share or Publish** {% icon workflow %}.
+> 3. Then toggle the {% icon galaxy-toggle %} **Make History accessible**.
+>
+{: .hands_on}
+
+For this tool it is not required to set any filtering steps or determine the most plausible inheritence pattern. Since gene.iobio runs multiple default filtering steps for autosomal dominant, recessive, *De novo*, compound heterozygous, and X-linked recessive inheritance patterns. In addition, it prioritizes variants based on gene-disease association algorithms, which significantly reduces processing time.
+
+> <hands-on-title> Generate gene.iobio html </hands-on-title>
+>
+> 1. {% tool [gene.iobio visualisation](toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1) %} with the following parameters:
+>    - {% icon param-file %} *"Proband VCF file"*: `SnpEff Annotated vcf_bgzip` (output of **Convert compressed file to uncompressed.** {% icon tool %})
+>    - *"Proband sex"*: `Female`
+>    - *"Proband sample name"*: `Case6C`
+>    - *"Single/Trio analysis"*: `Trio`
+>        - In *"Father input"*:
+>            - {% icon param-file %} *"Father VCF file"*: `SnpEff Annotated vcf_bgzip` (output of **Convert compressed file to uncompressed.** {% icon tool %})
+>            - *"Father sample name"*: `Case6F`
+>        - In *"Mother input"*:
+>            - {% icon param-file %} *"Mother VCF file"*: `SnpEff Annotated vcf_bgzip` (output of **Convert compressed file to uncompressed.** {% icon tool %})
+>            - *"Is the mother affected?"*: `Yes`
+>            - *"Mother sample name"*: `Case6M`
+>    - *"Select reference genome version"*: `GRCh37`
+>
+>    > <tip-title> Using gene.iobio </tip-title>
+>    >
+>    > To open the generated html file click on the **eye** {% icon galaxy-eye %}, which will show the gene.iobio interface. Now a phenotype has to be added to generate a list of genes which likely contain causative variants, in this case it is breast cancer. Next, click on the **Hamburger icon** in the topleft corner of the gene.iobio interface. This will show 20 genes including the BRCA1 gene with the causative variant under the **Genes** tab. Click on the BRCA1 gene and gene.iobio starts analyzing the gene for causative variants. Then under the **Variants** tab you will find the causative variant listed. You can click on the variant block to see more information on it. A report will show with information on the type, location, and quality of the variant, the associated phenotype, the pathogenicity, the population frequency, conservation of the location of the variant, and the inheritence pattern (Autosomal dominant).
+>    {: .tip}
+>
+>    > <tip-title> Increase genes to analyze </tip-title>
+>    >
+>    > More genes can be analyzed in three ways 1) the generated list of genes associated with a phenotypm can be increased. 2) The list of genes associated with another phenotype can be combined with the current list of genes. 3) A gene can manually be added.
+>    >
+>    > 1. To increase the number of genes in the generated list of genes click on the **gear icon** {% icon galaxy-gear %} in gene.iobio and click on the drop down box under **Keep top n genes from phenotype search**.
+>    > 2. To add more genes to the analysis type and select another phenotype in the top bar. After finding your phenotype of interest press enter and click **Combine genes with current list** in the pop-up screen.
+>    > 3. To add a single gene to the analysis type and select a gene name in the top bar. After finding your gene of interest press enter.
+>    {: .tip}
+>
+{: .hands_on}
+
 # Conclusion
-In this tutorial we have illustrated how to easily download a dataset of interest savely and securely from the EGA using the HTSGET protocol. In addition, we performed a trio analysis to find the causative variant in an autosomal dominant inherited disease. We were able to find the causative variant by pre-processing and annotating our VCFs using the SnpEff and GEMINI annotations. With this workflow you can now easily analyse and find the causative variant(s) in many different family trios from any database which HTSGET can connect to.
+In this tutorial we have illustrated how to easily download a dataset of interest savely and securely from the EGA using the HTSGET protocol. In addition, we performed a trio analysis to find the causative variant in an autosomal dominant inherited disease. We pre-processed and annotated our VCFs using the SnpEff and found the causative variant using both the GEMINI and gene.iobio tool. With this workflow you can now easily analyse and find the causative variant(s) in many different family trios from any database which HTSGET can connect to.
 
 # Workflow
 Here is the final layout of the workflow. For more details you can download the workflow from the overview at the top of the page.

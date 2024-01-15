@@ -31,11 +31,9 @@ follow_up_training:
             - metaproteomics
 
 subtopic: multi-omics
-tags: [microbiome]
+tags: [microgalaxy]
 ---
 
-
-# Introduction
 
 
 Metaproteomics {% cite Metaproteomics_video %} involves characterization of community level expression of microbial proteins from an environmental

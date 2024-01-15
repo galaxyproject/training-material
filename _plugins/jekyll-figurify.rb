@@ -45,7 +45,6 @@ module Jekyll
             #{alt}
           </object>
           </div>
-          <small><a target="_blank" href="#{url}">Open image in new tab</a></small>
         )
       else
         %(
@@ -80,8 +79,9 @@ module Jekyll
           image = insert_image(url, alt, style, dimensions, actual_path)
 
           %(
-            <figure id="figure-#{num_figure}" style="max-width: 90%; margin:auto;">
+            <figure id="figure-#{num_figure}" style="max-width: 90%;">
               #{image}
+              <a target="_blank" href="#{url}" rel="noopener noreferrer"><small>Open image in new tab</small></a><br/><br/>
               <figcaption>
                 <span class="figcaption-prefix"><strong>#{prefix}#{num_figure}</strong>:</span> #{title}
               </figcaption>
@@ -103,7 +103,9 @@ module Jekyll
         end
 
         %(
+        <a href="#{url}" rel="noopener noreferrer">
           <img src="#{url}"  alt="#{alt}" #{style} #{dimensions} loading="lazy">
+        </a>
         ).split("\n").map(&:strip).join
       end
     end

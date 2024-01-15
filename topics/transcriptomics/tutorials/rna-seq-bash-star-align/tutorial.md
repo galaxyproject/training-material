@@ -23,9 +23,9 @@ contributions:
     - shiltemann
     - hexylena
     - carpentries
+  funding:
+    - gallantries
 ---
-
-# Introduction
 
 In recent years, RNA sequencing (in short RNA-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all RNA molecules in one cell or a population of cells. One of the most common aims of RNA-Seq is the profiling of gene expression by identifying genes or molecular pathways that are differentially expressed (DE) between two or more biological conditions. This tutorial demonstrates a computational workflow for counting and locating the genes in RNA sequences. The first and most critical step in an RNA-seq analysis.
 
@@ -66,7 +66,7 @@ The "Data Upload" process is the only one in this tutorial that takes place dire
 
 > <hands-on-title>Data upload</hands-on-title>
 >
->    Import the FASTQ file pairs from [Zenodo]({{ page.zenodo_link }}) or a data library:
+> 1. Import the FASTQ file pairs from [Zenodo]({{ page.zenodo_link }}) or a data library:
 >    - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
 >    - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
 >
@@ -77,9 +77,9 @@ The "Data Upload" process is the only one in this tutorial that takes place dire
 >    {{ page.zenodo_link }}/files/GSM461180_2.fastqsanger
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+> 2. {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+> 3. {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > <comment-title></comment-title>
 >    >
@@ -96,12 +96,11 @@ The "Data Upload" process is the only one in this tutorial that takes place dire
 >    >
 >    {: .comment}
 >
->    Change the datatype from `fastqsanger` to `fastq`.
+> 4. Change the datatype from `fastqsanger` to `fastq`.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastq" %}
 >
->
->    We also need to import two more files, essential for the alignment operation (and basically every alignment procedure): the organism's reference genome (here *D. melanogaster*) and the organism's gene annotation.
+> 5. We also need to import two more files, essential for the alignment operation (and basically every alignment procedure): the organism's reference genome (here *D. melanogaster*) and the organism's gene annotation.
 >    Those can be aquired directly via link and Galaxy's data library as described above. For this tutorial we are going to use the files [dm6.fa.gz](https://hgdownload.soe.ucsc.edu/goldenPath/dm6/bigZips/dm6.fa.gz) and [Drosophila_melanogaster.BDGP6.87.gtf (dm6)](https://usegalaxy.eu/libraries/folders/F30cab321d898d2fb/dataset/02c5f7fcdb6bf41f). Note that it is essential to convert genome's file from `*.fa.gz` to `*.fa`. That is easy now that we have already used the same method to convert `fastqsanger` to `fastq`. Remember to change the name of the file, too, in your working history as Galaxy will not do it automatically. Doing so will prevent any confusions later on.
 >
 > {% snippet faqs/galaxy/datasets_rename.md name="dm6.fa" %}
@@ -370,5 +369,3 @@ For the final step of this tutorial we will use featureCounts to count the numbe
 > The **featurecounts.txt** produced contains all the information needed for further downstream analysis of the sequences we aligned (e.g. Differential Expression).
 >
 {: .hands_on}
-
-

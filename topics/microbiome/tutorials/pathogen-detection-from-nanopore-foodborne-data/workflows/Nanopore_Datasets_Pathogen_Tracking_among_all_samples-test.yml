@@ -1,0 +1,47 @@
+- doc: Test outline for Nanopore_Datasets_Pathogen_Tracking_among_all_samples
+  job:
+    VFs:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: split_file_000000.txt
+        path: test-data-all-samples/VFs_split_file_000000.txt.tabular
+      - class: File
+        identifier: split_file_000001.txt
+        path: test-data-all-samples/VFs_split_file_000001.txt.tabular
+    Contigs:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: split_file_000000.txt
+        location: https://zenodo.org/record/8109717/files/Contigs_split_file_000000.txt.fasta
+        filetype: fasta
+      - class: File
+        identifier: split_file_000001.txt
+        location: https://zenodo.org/record/8109717/files/Contigs_split_file_000001.txt.fasta
+        filetype: fasta
+    VFs accessions:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: Barcode11
+        path: test-data-all-samples/VFs accessions_Barcode11.tabular
+      - class: File
+        identifier: Barcode10
+        path: test-data-all-samples/VFs accessions_Barcode10.tabular
+    VFs accessions with SampleID:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: Barcode11
+        path: test-data-all-samples/VFs accessions with SampleID_Barcode11.tabular
+      - class: File
+        identifier: Barcode10
+        path: test-data-all-samples/VFs accessions with SampleID_Barcode10.tabular
+  outputs:
+    All VFs in one Tabular:
+      path: test-data-all-samples/All VFs in one Tabular.tabular

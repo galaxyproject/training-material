@@ -21,9 +21,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
 [Galaxy-SynBioCAD portal](https://galaxy-synbiocad.org/) is the first toolshed for synthetic biology, metabolic engineering, and industrial biotechnology ({% cite Hrisson2022 %}). It provides a set of Retrosynthesis tools aimed at finding pathways to synthesize heterologous compounds in chassis organisms (**RetroRules** ({% cite Duigou2018 %}), **RetroPath2.0** ({% cite Delpine2018 %}), **RP2Paths**, **rpCompletion**).
 
 Retrosynthesis is a concept originally proposed for synthetic chemistry where chemists have to work backwards, starting from a target product to reach precursors that are endogenous to the chassis (host organism).

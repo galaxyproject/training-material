@@ -1,0 +1,23 @@
+- doc: Test outline for nanopore_snp_based_pathogenetic_identification
+  job:
+    Reference Genome of Tested Strain:
+      class: File
+      location: https://zenodo.org/record/8109717/files/Reference Genome of Tested Strain.fasta.gz
+      filetype: fasta.gz
+    Nanopore Preprocessed reads collection:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: Barcode11
+        location: https://zenodo.org/record/8109717/files/Nanopore Preprocessed reads collection_Barcode11.fastq.gz
+        filetype: fastq.gz
+      - class: File
+        identifier: Barcode10
+        location: https://zenodo.org/record/8109717/files/Nanopore Preprocessed reads collection_Barcode10.fastq.gz
+        filetype: fastq.gz
+  outputs:
+    Extracted Fields from the VCF output:
+      element_tests:
+        Barcode10:
+          path: test-data-snp-based/Extracted Fields from the VCF output_Barcode10.tabular

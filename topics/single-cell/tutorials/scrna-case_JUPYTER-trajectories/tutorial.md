@@ -1,9 +1,9 @@
 ---
 layout: tutorial_hands_on
 
-title: Inferring Trajectories using Scanpy (Python)
-subtopic: single-cell-CS
-priority: 4
+title: Inferring single cell trajectories (Scanpy, Python)
+subtopic: single-cell-CS-code
+priority: 3
 zenodo_link: 'https://zenodo.org/record/7075718'
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial
@@ -31,12 +31,9 @@ requirements:
     tutorials:
         - galaxy-intro-jupyter
 tags:
-- single-cell
 - 10x
 - paper-replication
-- interactive-tools
-- transcriptomics
-- jupyter-notebook
+- Python
 
 contributions:
   authorship:
@@ -56,6 +53,8 @@ notebook:
 
 From now on, you can view this tutorial in the Jupyter notebook, which will allow you to read the material and simultaneously execute the code cells! You may have to change certain numbers in the code blocks, so do read carefully. The tutorial is adapted from the [Scanpy Trajectory inference tutorial](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
 
+{% snippet topics/single-cell/faqs/notebook_warning.md %}
+
 ## Install modules & activate them
 
 ```python
@@ -65,7 +64,7 @@ pip install scanpy
 pip install fa2
 ```
 ```python
-pip install python-igraph
+pip install igraph
 ```
 ```python
 pip install louvain

@@ -26,26 +26,21 @@ contributions:
     - gallardoalba
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
 ---
 
-# Introduction
-
-
----
+In this tutorial we will discuss the principles of learning
 
 > *Learning results from what the student does and thinks and only from what the student does and thinks. The teacher can advance learning only by influencing what the student does to learn*
 >
 > [H.A. Simon](https://en.wikipedia.org/wiki/Herbert_A._Simon) (one of the founders of the field of [Cognitive Science](https://en.wikipedia.org/wiki/Cognitive_science) and Nobel Laureate)
 {: .quote}
 
----
-
 This quotation from Herbert A. Simon clearly indicates that we cannot talk about teaching, teaching practices or effective teaching techniques if we don't understand first how people learn.
 
 In this lesson, we want to share with you what we have collectively learnt about how learning works. Our knowledge in the field of cognition and learning comes from diving into pedagogical and cognitive research results, reading books such as ["How Learning Works"](https://www.amazon.it/How-Learning-Works-Research-Based-Principles/dp/0470484101) ({% cite ambrose2010learning %}) or ["Small Teaching"](https://www.wiley.com/en-gb/Small+Teaching%3A+Everyday+Lessons+from+the+Science+of+Learning%2C+2nd+Edition-p-9781119755555) ({% cite smallTeaching2021 %}) and many others, studying research articles published in the field of cognitive science and educational psychology, attending instructor training courses (like this one), and - last but not least - from our own experience as both instructors/teachers, learners, and passionate observers of learning processes and teaching practices.
 
-Since this material cannot cover the broad literature on the subject of learning we strongly invite you to commit to read at least one book on how learning works ({% cite ambrose2010learning %}, {% cite smallTeaching2021 %}), have a look at the [Software Carpentry Instructor training materials](http://swcarpentry.github.io/instructor-training/) and explore the material available through the [ELIXIR Train-the-Trainer course](https://elixir-europe.org/platforms/training/train-the-traine://elixir-europe.org/platforms/training/train-the-trainer).
+Since this material cannot cover the broad literature on the subject of learning we strongly invite you to commit to read at least one book on how learning works ({% cite ambrose2010learning %}, {% cite smallTeaching2021 %}), have a look at the [Software Carpentry Instructor training materials](http://swcarpentry.github.io/instructor-training/) and explore the material available through the [ELIXIR Train-the-Trainer course](https://elixir-europe.org/platforms/training/train-the-trainer).
 
 > <comment-title>Sources</comment-title>
 >
@@ -115,11 +110,11 @@ A metaphor is a word from one thematic domain that has been embedded in another 
 We can use metaphors to shape and reveal our way of thinking about learning and, therefore, shape our actions as teachers.
 
 ---
-> *A mind is a fire to be kindled, not a vessel to be filled*
+
+> A mind is a fire to be kindled, not a vessel to be filled
 >
-> Plutard
->
-{: .quote}
+{: .quote author="Plutard"}
+
 ---
 
 How the mind-as-a-vessel-to-be-filled metaphor may affect your way of teaching? You are likely to spend your time in the class at the blackboard, trying to 'transmit' to the students your own knowledge.

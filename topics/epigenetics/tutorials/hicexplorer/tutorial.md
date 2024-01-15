@@ -19,8 +19,6 @@ contributors:
   - polkhe
 ---
 
-# Introduction
-
 
 In this HiCExplorer tutorial we will generate and plot a Hi-C contact matrix.
 For this the following steps are necessary to be performed:

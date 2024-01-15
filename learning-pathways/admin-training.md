@@ -1,6 +1,7 @@
 ---
 layout: learning-pathway
 title: Admin Training Course
+type: admin-dev
 description: |
   Learn how to setup, configure, and maintain your own Galaxy server. This learning pathway
   will guide you through all the steps required to setup your own Galaxy server with Ansible,
@@ -8,6 +9,10 @@ description: |
 
 cover-image: assets/images/gat.png
 cover-image-alt: GTN Logo on a spiral galaxy background with text galaxy admin training
+editorial_board:
+- hexylena
+- natefoo
+- slugger70
 
 tags: [Galaxy administrators, 5-day course]
 

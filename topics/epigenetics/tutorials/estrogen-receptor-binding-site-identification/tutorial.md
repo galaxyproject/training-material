@@ -30,8 +30,6 @@ contributors:
   - fidelram
 ---
 
-# Introduction
-
 
 This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22217937).
 The goal of this article was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer.

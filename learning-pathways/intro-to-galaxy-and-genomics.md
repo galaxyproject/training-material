@@ -1,6 +1,12 @@
 ---
 layout: learning-pathway
 tags: [beginner]
+type: use
+
+editorial_board:
+- shiltemann
+funding:
+- gallantries
 
 title: Introduction to Galaxy and Sequence analysis
 description: |

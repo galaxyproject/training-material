@@ -26,12 +26,12 @@ contributions:
     - poterlowicz-lab
   editing:
     - hexylena
+  funding:
+      - ELIXIR-UK-DaSH
 subtopic: fair-data
 
 ---
 
-
-# Introduction
 
 The FAIR (Findable, Accessible, Interoperable, Reusable) principles emphasize machine-actionability. The main objective of FAIR is to increase data reuse by researchers. The core concepts of the FAIR principles are based on good scientific practice and intuitively grounded. 
 

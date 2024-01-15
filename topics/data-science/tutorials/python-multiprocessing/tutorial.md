@@ -36,6 +36,9 @@ abbreviations:
   GIL: Global Interpreter Lock
 ---
 
+This tutorial will introduce you to the basics of Threads and Processes in
+Python and how you can use them to parallelise your code.
+
 
 > <agenda-title></agenda-title>
 >
@@ -158,7 +161,7 @@ If we look at this, we can see one hot spot in the code, where it's quite slow, 
 ```python
 def fetch_version(server_url):
     try:
-        response = requests.get(url + "/api/version", timeout=2).json()
+        response = requests.get(server_url + "/api/version", timeout=2).json()
         return response['version_major']
     except requests.exceptions.ConnectTimeout:
         return None
@@ -229,21 +232,18 @@ You might see a result similar to the following:
 Let's convert our previous example from processes to threads, as processes aren't strictly necessary for such a light weight use case as fetching data from the internet where you're blocking on network rather than CPU resources.
 
 ```python
-import concurrent.futures
+import multiprocessing.pool
 import requests
 import time
 
 data = {}
 start = time.time()
-with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-    future_to_url = {executor.submit(fetch_version, url): url for url in servers}
-    for future in concurrent.futures.as_completed(future_to_url):
-        url = future_to_url[future]
-        try:
-            version = future.result()
-            data[url] = version
-        except Exception as exc:
-            print('%r generated an exception: %s' % (url, exc))
+
+pool = multiprocessing.pool.ThreadPool(processes=4)
+results = pool.map(fetch_version, servers, chunksize=1)
+data = {k: v for (k, v) in zip(servers, results)}
+pool.close()
+
 print(time.time() - start)
 
 for k, v in data.items():

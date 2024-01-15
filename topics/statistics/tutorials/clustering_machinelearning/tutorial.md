@@ -21,8 +21,6 @@ contributors:
 - anuprulez
 ---
 
-# Introduction
-
 
 The goal of [unsupervised learning](https://en.wikipedia.org/wiki/Unsupervised_learning) is to discover hidden patterns in any unlabeled data. One of the approaches to unsupervised learning is [clustering](https://en.wikipedia.org/wiki/Cluster_analysis). In this tutorial, we will discuss clustering, its types and a few algorithms to find clusters in data. Clustering groups data points based on their similarities. Each group is called a cluster and contains data points with high similarity and low similarity with data points in other clusters. In short, data points of a cluster are more similar to each other than they are to the data points of other clusters. The goal of clustering is to divide a set of data points in such a way that similar items fall into the same cluster, whereas dissimilar data points fall in different clusters. Further in this tutorial, we will discuss ideas on how to choose different metrics of similarity  between data points and use them in different clustering algorithms.
 

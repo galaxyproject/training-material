@@ -20,17 +20,14 @@ contributors:
 ---
 
 
-# Introduction
-
+The practical aims at familiarzing you with Climate Science and the terminology used by climate scientists. The target audience is not a climate scientist but
+anyone interested in learning about climate.
 
 > <comment-title></comment-title>
 >
 > This tutorial is significantly based on [Getting your hands-on Climate data](https://nordicesmhub.github.io/climate-data-tutorial/).
 >
 {: .comment}
-
-The practical aims at familiarzing you with Climate Science and the terminology used by climate scientists. The target audience is not a climate scientist but
-anyone interested in learning about climate.
 
 > <agenda-title></agenda-title>
 >

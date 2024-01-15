@@ -18,7 +18,7 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 	var parentBlockquote = button.parents("blockquote")[0];
 
 	// Collapse every child of the blockquote, that is NOT a box-title
-    $(">*:not(.box-title)", parentBlockquote).toggle();
+    $(">*:not(.box-title)", parentBlockquote).toggleClass("box-collapsed");
 	// And toggle our icon
     $(">span.fold-unfold", button).toggleClass("fa-plus-square fa-minus-square");
 
@@ -34,7 +34,7 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 // collapse some box types by default
 // LEGACY
  $(".solution>h3,.details>h3,.tip>h3").each(function() {
-    $(">*:not(h3)", $(this.parent)).toggle();
+    $(">*:not(h3)", $(this.parent)).toggle("box-collapsed");
     $(this).append("<span role='button' class='fold-unfold fa fa-plus-square'></span>");
 });
 
@@ -44,7 +44,7 @@ $("blockquote.solution,blockquote.details,blockquote.tip").each(function() {
     $(">.box-title>button", this).click();
 });
 
-$("section.tutorial .hands_on,section.tutorial .hands-on").each((idx, el) => {
+$("section#tutorial-content .hands_on,section#tutorial-content .hands-on").each((idx, el) => {
 	var box_id = $(".box-title", el).attr("id");
 	$(el).append(`
 		<p class="text-muted" style="text-align:right;font-size:0.9rem;">
@@ -171,18 +171,6 @@ function fixDiffPresentation(codeBlock){
 document.querySelectorAll("article.topic-admin section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 document.querySelectorAll("article.topic-data-science section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 
-$("#theme-selector button").click(function(evt){
-	var theme = $(evt.target).data('theme');
-	setTheme(theme);
-	if(theme === "straya"){
-		$("body").addClass('downunder');
-		setTimeout(function(){
-			$("body").removeClass('downunder');
-		}, 8000);
-	}
-})
-
-
 // Redirects
 if(window.location.hostname === "galaxyproject.github.io") {
 	// Redirect
@@ -207,3 +195,10 @@ document.querySelectorAll('div.highlight').forEach((snippet) => {
 var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
     target:function(trigger){return trigger.nextElementSibling;
 }});
+
+// Cited blockquotes
+document.querySelectorAll("blockquote[cite],blockquote[author]").forEach(bq => {
+	var url = bq.getAttribute("cite") ? `<cite class="text-muted"><a href="${url}"><i>Source</i></a></cite>` : "";
+	var author = bq.getAttribute("author") ? "— " + bq.getAttribute("author") + " " : "";
+	bq.insertAdjacentHTML("beforeend", `<footer>${author}${url}</footer>`)
+})

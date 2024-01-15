@@ -1,9 +1,13 @@
 ---
 layout: base
 lang: en
+title: Hall of Fame
 ---
 
 {% assign contributors = site.data['contributors'] %}
+{% assign organisations = site.data['organisations'] %}
+{% assign funders = site.data['funders'] %}
+
 {% assign ckeys = "" | split: ',' %}
 {% for x in contributors %}
 	 {% assign ckeys = ckeys | push: x[0] %}
@@ -31,19 +35,13 @@ lang: en
     <div class="hall-of-fame">
         {% for username in shuffled_contributors %}
             {% unless site.data['contributors'][username].halloffame == "no" %}
-            {% unless site.data['contributors'][username].funder %}
             <div class="hall-of-fame-hero" id="{{ username }}">
 
-                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail" title="{{ site.data['contributors'][username].name | default: username }}">
-                {% if site.data['contributors'][username].github != false %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true" height="120" width="120">
-                {% else %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true" height="120" width="120">
-                {% endif %}
-
-                <div class="name" aria-hidden="true">
-                    {{ site.data['contributors'][username].name | default: username }}
-                </div>
+                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail">
+			{{ site.data['contributors'][username] | fetch_entity_avatar: username, 120 }}
+			<div class="name">
+				{{ site.data['contributors'][username].name | default: username }}
+			</div>
                 </a>
 
                 {% assign has_philosophy = false %}
@@ -63,33 +61,37 @@ lang: en
 
             </div>
             {% endunless %}
-            {% endunless %}
         {% endfor %}
     </div>
-    <h2>Contributing Organizations & Funders</h2>
+
+    <h2>Contributing Organizations</h2>
     <div class="hall-of-fame">
-        {% for username in shuffled_contributors %}
-            {% unless site.data['contributors'][username].halloffame == "no" %}
-            {% if site.data['contributors'][username].funder %}
-            <div class="hall-of-fame-hero" id="{{ username }}">
+        {% for org in organisations %}
+            <div class="hall-of-fame-hero" id="{{ org[0] }}">
 
-                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail" title="{{ site.data['contributors'][username].name | default: username }}">
-                {% if site.data['contributors'][username].github != false %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true" height="120" width="120">
-		{% elsif site.data['contributors'][page.contributor].avatar %}
-			<img src="{{ site.data['contributors'][page.contributor].avatar }}" alt="avatar" aria-hidden="true" height="120" width="120">
-                {% else %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true" height="120" width="120">
-                {% endif %}
-
-                <div class="name" aria-hidden="true">
-                    {{ site.data['contributors'][username].name | default: username }}
-                </div>
+                <a href="{{ site.baseurl }}/hall-of-fame/{{ org[0] }}/" class="thumbnail">
+			{{ org[1] | fetch_entity_avatar: org[0], 120 }}
+			<div class="name">
+				{{ org[1].short_name | default: org[1].name | default: username }}
+			</div>
                 </a>
             </div>
-	    {% endif %}
-            {% endunless %}
         {% endfor %}
-
     </div>
+
+    <h2>Funders</h2>
+    <div class="hall-of-fame">
+        {% for funder in funders %}
+            <div class="hall-of-fame-hero" id="{{ funder[0] }}">
+
+                <a href="{{ site.baseurl }}/hall-of-fame/{{ funder[0] }}/" class="thumbnail">
+			{{ funder[1] | fetch_entity_avatar: funder[0], 120 }}
+			<div class="name">
+				{{ funder[1].short_name | default: funder[1].name | default: username }}
+			</div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
 </section>

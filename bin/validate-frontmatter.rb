@@ -227,7 +227,8 @@ module SchemaValidator
                 .grep_v(/schema-*/)
                 .select do |x|
       d = YAML.load_file(x)
-      d.key? 'maintainers' or d.key? 'summary' or d.key? 'type'
+      # Ignore non-hashes
+      d.is_a?(Hash) && (d.key? 'editorial_board' or d.key? 'summary' or d.key? 'type')
     end
 
     errors += materials.map { |x| [x, lint_topic(x)] }

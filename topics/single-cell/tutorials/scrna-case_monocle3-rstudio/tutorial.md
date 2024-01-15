@@ -1,9 +1,9 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Inferring Trajectories using Monocle3 (R)'
-subtopic: single-cell-CS
-priority: 6
+title: 'Inferring single cell trajectories (Monocle3, R)'
+subtopic: single-cell-CS-code
+priority: 4
 zenodo_link: 'https://zenodo.org/record/7455590'
 
 questions:
@@ -38,9 +38,9 @@ requirements:
 
 
 tags:
-- single-cell
-- trajectory-analysis
+- 10x
 - paper-replication
+- R
 
 contributions:
   authorship:
@@ -56,6 +56,8 @@ notebook:
   language: r
   snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md
 ---
+
+{% snippet topics/single-cell/faqs/notebook_warning.md %}
 
 ## Setting up the environment and file upload
 Once the installation is done, we should load the needed packages into our notebook. Navigate back to your `notebook`. If you are using our prepopulated notebook, you can follow the tutorial from there. Otherwise, input the following into your fresh notebook.
@@ -281,7 +283,7 @@ plot_pc_variance_explained(cds_preprocessing)
 
 ![Plot of variation in gene expression vs PCA components, decreasing exponentially.](../../images/scrna-casestudy-monocle/pca_plot.jpg " Plot of variation in gene expression vs PCA components.")
 
-The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to visualise how the `num_dim` actually affects the output. We will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset. 
+The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to visualise how the `num_dim` actually affects the output. We will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset.
 
 ![Six plots showing only the shaded shape of how the cells are clustered depending on the num_dim argument. The general trend is maintained though.](../../images/scrna-casestudy-monocle/num_dim.jpg "The "shape" of the plot showing how the cells are clustered depending on the 'num_dim' argument.")
 
@@ -601,7 +603,7 @@ plot_genes_by_group(cds_clustered,                    # our CDS object
 > top_specific_markers <- top_specific_markers %>%
 >                            dplyr::distinct(pseudo_R2, .keep_all=TRUE)     # select only one row if there are multiple rows with the same value in 'pseudo_R2' column
 > ```
-> Then you can execute `top_marker_names` again and see how the plot looks like now. Better, right? 
+> Then you can execute `top_marker_names` again and see how the plot looks like now. Better, right?
 > This problem may arise when several genes in one cluster have the same values of specific variable from 'marker_test' (in our case we chose `pseudo_R2`). It might likely happen in small and quite unsignificant clusters.
 {: .tip}
 
@@ -906,7 +908,7 @@ You can also visualise the modules using `plot_cells()` function. We've chosen s
 >
 > > <solution-title></solution-title>
 > >
-> > This is totally up to you! It might be the case that you got different numbering of modules, so then using the numbers specified in the code below won't make much sense. Just look at your heatmap, compare the differences between modules and think which ones would be the most interesing to visualise. 
+> > This is totally up to you! It might be the case that you got different numbering of modules, so then using the numbers specified in the code below won't make much sense. Just look at your heatmap, compare the differences between modules and think which ones would be the most interesing to visualise.
 > >
 > {: .solution}
 >
@@ -940,7 +942,7 @@ plot_cells_3d(cds_3d, color_cells_by="cell_type")
 
 # Export your data, figures, and notebook
 
-Don’t forget to save and export your data! First, we will get Jupyter to see those as files. 
+Don’t forget to save and export your data! First, we will get Jupyter to see those as files.
 
 ## Export plots
 If you want to export your plot, you have to make sure that you assigned it to an object. For example, if you want to save the plot of cells in pseudotime, simply assign the function you used to generate this plot to an object. Here we call this object `plot_pseudotime`, like so:
@@ -956,14 +958,14 @@ plot_pseudotime <- plot_cells(cds_order,
 Then, if you want to save the plot as PDF:
 
 ```r
-pdf("plot_pseudotime.pdf")             # open the graphical device and specify the directory and the name of the output pdf file 
+pdf("plot_pseudotime.pdf")             # open the graphical device and specify the directory and the name of the output pdf file
 plot_pseudotime                        # specify the object that your plot is assigned to
 dev.off()                              # close the graphical device
 ```
 
 The procedure is very similar if you want to export the file as PNG (or analogically JPEG – just replace png with jpeg):
 ```r
-png("plot_pseudotime.png",            # open the graphical device and specify the directory and the name of the output png file 
+png("plot_pseudotime.png",            # open the graphical device and specify the directory and the name of the output png file
 width=600, height=400)                # optionally you can specify the width and height of the final plot
 plot_pseudotime                       # specify the object that your plot is assigned to
 dev.off()                             # close the graphical device
@@ -971,12 +973,12 @@ dev.off()                             # close the graphical device
 
 However, it often happens that the quality of the exported PNG and JPEG files is not perfect. For best results, we recommend exporting to SVG:
 ```r
-svg("plot_pseudotime.svg")             # open the graphical device and specify the directory and the name of the output svg file 
+svg("plot_pseudotime.svg")             # open the graphical device and specify the directory and the name of the output svg file
 plot_pseudotime                        # specify the object that your plot is assigned to
 dev.off()                              # close the graphical device
 ```
 
-You can do the same with any plot that you want to save! You will find the saved figures in the left panel of your JupyterLab. You can right-click on them and download directly onto your computer. You can also push them into your Galaxy history. To do so, you have to change Kernel to Python3 (either click on `Kernel` -> `Change Kernel...` in the upper left corner of your JupyterLab or click on the displayed current kernel in the upper right corner and change it). 
+You can do the same with any plot that you want to save! You will find the saved figures in the left panel of your JupyterLab. You can right-click on them and download directly onto your computer. You can also push them into your Galaxy history. To do so, you have to change Kernel to Python3 (either click on `Kernel` -> `Change Kernel...` in the upper left corner of your JupyterLab or click on the displayed current kernel in the upper right corner and change it).
 ![Figure showing the JupyterLab interface with an arrow pointing to the left corner, showing the option `Kernel` -> `Change Kernel...` and another arrow pointing to the right corner, showing the icon of the current kernel. The pop-up window asks which kernel should be chosen instead.](../../images/scrna-casestudy-monocle/switch_kernel.jpg "Two ways of switching kernel.")
 
 Check in the upper right corner that selected kernel is Python3, and run the following:
@@ -988,10 +990,10 @@ put("plot_pseudotime.png")
 
 In this way you can push all the files you've saved into your Galaxy history. You can also do the same with this notebook. The cell below will only work if you haven’t changed the name of the notebook. If you renamed it, simply type its new name in the parenthesis.
 ```python
-put("single-cell-scrna-case_monocle3-rstudio.ipynb") 
+put("single-cell-scrna-case_monocle3-rstudio.ipynb")
 ```
 
-Now you can go check your Galaxy history to make sure your files have all made it back into your Galaxy history. 
+Now you can go check your Galaxy history to make sure your files have all made it back into your Galaxy history.
 
 
 # After Jupyter

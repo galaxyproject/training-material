@@ -23,8 +23,6 @@ contributors:
   - annasyme
 ---
 
-# Introduction
-
 *Note: We recommend running this tutorial on either the Galaxy Europe or Galaxy Australia servers. Other servers (such as Galaxy main) have not yet been configured fully for all the tools in this analysis.*
 
 ## What is genome assembly?
@@ -147,7 +145,9 @@ We are also using a reference genome *Arabidopsis thaliana* for a later comparis
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >    
 > 3. Check that the datatypes for the three files of sequencing reads are `fastq.gz`, not `fastqsanger.gz` and change datatype if needed.
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
 {: .hands_on}
 
 * This tutorial uses these input files and gives some examples from the results.

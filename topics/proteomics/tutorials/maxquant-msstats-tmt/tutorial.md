@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-draft: true
 
 title: MaxQuant and MSstats for the analysis of TMT data
 zenodo_link: 'https://zenodo.org/record/5195800'
@@ -23,8 +22,6 @@ tags: [DDA, TMT]
 
 ---
 
-
-# Introduction
 
 
 In this training we will cover the full analysis workflow from tandem mass tag (TMT) labeled samples using MaxQuant in conjunction with MSstatsTMT. 

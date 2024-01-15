@@ -1,78 +1,16 @@
-body.theme-night {
-	--color-background: #444;
-	--text-color: #eee;
-	--text-color-muted: #ccc;
-	--hyperlink: #7bf;
-	--hyperlink-hover: #fff;
-	--brand-color: #424a66;
-	--slide-heading-color: var(--text-color);
-
-	--secondary-color: #222;
-	--secondary-color-text: #fff;
-}
-
-body.theme-midnight {
-	--brand-color: #000;
-	--color-background: #000;
-	--hyperlink-hover: #fff;
-	--hyperlink: #7bf;
-	--navbar-border-size: 1px;
-	--text-color-muted: #ccc;
-	--text-color: #eee;
-	--slide-heading-color: #eee;
-	--slide-heading-color: var(--text-color);
-
-	--secondary-color: #222;
-	--secondary-color-text: var(--text-color);
-}
-
-body.theme-blm {
-	--brand-color: #462300;
-	--color-background: #000;
-
-	nav.navbar, .remark-slide .my-header {
-		background: repeating-linear-gradient(135deg, #731 0, #731 2em,#743 2em,#743 4em,#631 4em, #631 6em,#421 6em,#421 8em,#310 8em, #310 10em, #000 10em, #000 12em);
-	}
-	--navbar-item-hover: #000;
-
-	--hyperlink-hover: #fff;
-	--hyperlink: #fba870;
-	--navbar-border-size: 1px;
-	--text-color-muted: #ccc;
-	--text-color: #eee;
-	--slide-heading-color: #eee;
-	--slide-heading-color: var(--text-color);
-
-	--secondary-color: #222;
-	--secondary-color-text: var(--text-color);
-}
-
-body.theme-halloween {
-	--brand-color: orange;
-	--brand-color-contrast: black;
-	--color-background: #000;
-	--hyperlink-hover: #fff;
-	--hyperlink: #7bf;
-	--text-color-muted: #ccc;
-	--text-color: #eee;
-	--slide-heading-color: var(--brand-color);
-	--h1-theme-before: " 🎃 ";
-	--h1-theme-after: " 🎃 ";
-	--h2-theme-before: " 👻 ";
-	--h2-theme-after: " 👻 ";
-
-	--secondary-color: #402900;
-	--secondary-color-text: var(--text-color);
-}
-
-body.theme-progress, body.theme-rainbow {
-	--brand-color: black;
-	--brand-color-contrast: white;
+// Themes
+body[data-theme="rainbow"],
+body[data-theme="progress"] {
 	--navbar-item-background: #0008;
 	--navbar-item-hover: #000f;
+}
+
+body[data-theme="rainbow"],
+body[data-theme="trans"],
+body[data-theme="progress"] {
 
 	.contributor-hexylena {
-		background: repeating-linear-gradient(45deg, #cfe4f777 0em, #cfe4f777 2em, #f7d7dc77 2em, #f7d7dc77 4em, white 4em, white 6em, #f7d7dc77 6em, #f7d7dc77 8em, #cfe4f777 8em, #cfe4f777 10em);
+		background: repeating-linear-gradient(45deg, #cfe4f777 0em, #cfe4f777 2em, #f7d7dc77 2em, #f7d7dc77 4em, #ffffff77 4em, #ffffff77 6em, #f7d7dc77 6em, #f7d7dc77 8em, #cfe4f777 8em, #cfe4f777 10em);
 	}
 
 	.tutorials-list:not(.topic-type-use) table.table-striped {
@@ -94,11 +32,10 @@ body.theme-progress, body.theme-rainbow {
 		thead th:nth-of-type(6n+4) { color: green }
 		thead th:nth-of-type(6n+5) { color: blue }
 		thead th:nth-of-type(6n+6) { color: purple }
-
 	}
 }
 
-body.theme-rainbow {
+body[data-theme="rainbow"] {
 	.tutorial {
 		--h1-theme-before: " 🌈 ";
 		--h1-theme-after: " 🌈 ";
@@ -109,13 +46,17 @@ body.theme-rainbow {
 		}
 	}
 
-	nav.navbar, .remark-slide .my-header {
+	nav.navbar, .remark-slide .my-header, hr {
 		background: linear-gradient(to bottom,#e2453c 0,#e2453c 16%,#e07e39 16%,#e07e39 32%,#e5d667 32%,#e5d667 48%,#51b95b 48%,#51b95b 66%,#1e72b7 66%,#1e72b7 86%,#6f5ba7 86%) no-repeat !important;
+	}
+
+	hr {
+		height: 0.5em;
+		background: linear-gradient(135deg,#e2453c 0,#e2453c 16%,#e07e39 16%,#e07e39 32%,#e5d667 32%,#e5d667 48%,#51b95b 48%,#51b95b 66%,#1e72b7 66%,#1e72b7 86%,#6f5ba7 86%) no-repeat !important;
 	}
 }
 
-
-body.theme-progress {
+body[data-theme="progress"] {
 	.tutorial {
 		--h1-theme-before: "🏳️‍🌈";
 		--h1-theme-after: "🏳️‍⚧️ ";
@@ -123,6 +64,9 @@ body.theme-progress {
 
 	nav.navbar, .remark-slide .my-header {
 		background: linear-gradient(120deg,#2c3143 0px 130px,#fdda0f 131px 139px,#fff 140px 148px,#f4b0c9 149px 157px,#7ccee6 158px 166px,#93540c 167px 175px,#000 176px 184px,transparent 185px),linear-gradient(45deg,#2c3143 0px 110px,#2c314300 110px),linear-gradient(180deg,#FE0000 16.66%,#FD8C00 16.66% 33.32%,#FFE500 33.32% 49.98%,#119F0B 49.98% 66.64%,#0644B3 66.64% 83.3%,#C22EDC 83.3%);
+	}
+	hr {
+		height: 0.5em;
 	}
 
 	p:nth-child(8n+7)::selection {background: hsl(285,76%,57%)}
@@ -141,23 +85,80 @@ body.theme-progress {
 	li:nth-child(8n+4)::selection {background: hsl(150,76%,57%)}
 	li:nth-child(8n+5)::selection {background: hsl(195,76%,57%)}
 	li:nth-child(9n+6)::selection {background: hsl(240,76%,57%)}
+}
 
+body[data-theme="trans"] {
+	--brand-color: pink;
+	--brand-color-contrast: black;
+
+	.tutorial {
+		--h1-theme-before: "🏳️‍⚧️";
+		--h1-theme-after: "🏳️‍⚧️ ";
+	}
+
+	nav.navbar, .remark-slide .my-header, hr {
+		background: repeating-linear-gradient(135deg, rgba(148,187,233,1) 0, rgba(148,187,233,1) 2em, rgba(238,174,202,1) 2em, rgba(238,174,202,1) 4em, rgba(255,255,255,1) 4em, rgba(255,255,255,1) 6em);
+	}
+	
+	hr {
+		height: 0.5em;
+	}
+
+	blockquote.quote {
+		border-style: solid !important;
+		border-image: linear-gradient( to bottom, pink, white, aqua, pink, white, aqua ) 1 100% !important;
+		border-width: 0px 0px 0px 5px !important;
+	}
+
+
+	p:nth-child(3n+0)::selection {background: rgba(148,187,233,1); color: black}
+	p:nth-child(3n+1)::selection {background: rgba(238,174,202,1); color: black}
+	p:nth-child(3n+2)::selection {background: rgba(200,200,200,1); color: black}
+	li:nth-child(3n+0)::selection {background: rgba(148,187,233,1); color: black}
+	li:nth-child(3n+1)::selection {background: rgba(238,174,202,1); color: black}
+	li:nth-child(3n+2)::selection {background: rgba(200,200,200,1); color: black}
+
+	nav li {
+		li:nth-child(3n+0) {border-left: 3px solid rgb(148,187,233)}
+		li:nth-child(3n+1) {border-left: 3px solid rgb(238,174,202)}
+		li:nth-child(3n+2) {border-left: 3px solid rgb(255,255,255)}
+	}
+}
+
+body[data-theme="blm"] {
+	--brand-color: #462300;
+	nav.navbar, .remark-slide .my-header, hr {
+		background: repeating-linear-gradient(135deg, #731 0, #731 2em,#743 2em,#743 4em,#631 4em, #631 6em,#421 6em,#421 8em,#310 8em, #310 10em, #000 10em, #000 12em);
+	}
+
+	hr {
+		height: 0.5em;
+	}
+}
+
+body[data-theme="halloween"] {
+	--brand-color: orange;
+	--brand-color-contrast: black;
+	--h1-theme-before: " 🎃 ";
+	--h1-theme-after: " 🎃 ";
+	--h2-theme-before: " 👻 ";
+	--h2-theme-after: " 👻 ";
+}
+
+
+body[data-theme="straya"] {
+	--h1-theme-before: " 🦘 ";
+	--h1-theme-after: " 🦈 ";
+	--h2-theme-before: " 🐨 ";
+	--h2-theme-after: " 🐨 ";
+	--brand-color: #0d47a1;
+
+	hr {
+		height: 0.5em;
+		background: repeating-linear-gradient(135deg, #000 0, #000 2em,#ff0 2em,#ff0 3em,#f00 3em, #f00 5em);
+	}
 }
 
 body.downunder {
 	transform:rotate(180deg);
-}
-
-body.theme-straya {
-	h1::after {
-		content: " 🦘";
-	}
-
-	h2::after {
-		content: " 🐨";
-	}
-
-	h3::after {
-		content: " 🦈";
-	}
 }

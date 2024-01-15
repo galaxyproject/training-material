@@ -30,7 +30,6 @@ follow_up_training:
 
 ---
 
-# Introduction
 
 
 In this tutorial, we will assess the assembly quality of 2 assemblies generated with Hifiasm and Flye using PacBio HiFi reads of a species of fungi, *Saccharomyces cerevisiae* INSC1019 and compare the results with the actual reference genome [*Saccharomyces cerevisiae* S288C](https://www.ncbi.nlm.nih.gov/genome/?term=Saccharomyces%20cerevisiae).

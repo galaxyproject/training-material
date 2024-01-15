@@ -12,12 +12,15 @@ key_points:
   - "Bioinformatic command line tools are collections of commands that can be used to carry out bioinformatic analyses."
   - "To use most powerful bioinformatic tools, you will need to use the command line."
   - "There are many different file formats for storing genomics data. It is important to understand what type of information is contained in each file, and how it was derived."
-contributors:
+contributions:
+  authorship:
   - Sofokli5
   - fpsom
   - shiltemann
   - hexylena
   - carpentries
+  funding:
+  - gallantries
 ---
 
 
@@ -351,7 +354,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 
 > <hands-on-title>Explore the VCF format:</hands-on-title>
 >
-> > {% icon code-in%}
+> > <code-in-title></code-in-title>
 > > ```bash
 > > $ less -S results/vcf/SRR2584866_final_variants.vcf
 > > ```
@@ -361,7 +364,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 > created, the version of bcftools that was used, the command line parameters used, and
 > some additional information:
 >
-> > {% icon code-out%} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > ##fileformat=VCFv4.2
 > > ##FILTER<ID=PASS,Description="All filters passed">

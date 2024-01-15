@@ -3,7 +3,7 @@ redirect_from:
 - /topics/transcriptomics/faqs/variable_genes
 
 title: Why do we only consider highly variable genes?
-area: gene
+area: Analysis
 box_type: tip
 layout: faq
 contributors: [rahmot]

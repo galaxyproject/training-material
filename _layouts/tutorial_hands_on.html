@@ -10,7 +10,6 @@ We should ONLY be using new_material (if at all possible.)
 
 {% assign topic = site.data[page.topic_name] %}
 {% assign contributors = site.data['contributors'] %}
-{% assign instances = site.data['instances'] %}
 {% assign topic_material = site | topic_filter:page.topic_name %}
 {% assign language = site.other_languages  %}
 
@@ -64,7 +63,7 @@ We should ONLY be using new_material (if at all possible.)
     <blockquote class="overview">
         <div id="overview-box" class="box-title">{{ locale['overview'] | default: "Overview"}}</div>
         {% unless page.license %}
-        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="{% link assets/images/cc-by.png %}"/>
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="{% link assets/images/cc-by.png %}" width="88" height="31"/>
         {% endunless %}
         <strong>{% icon question aria=false %} {{ locale['questions'] | default: "Questions" }}:</strong>
         <ul>
@@ -97,16 +96,14 @@ We should ONLY be using new_material (if at all possible.)
         {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</div>
         {% endif %}
 
-        {% if instances[topic.name].supported or topic.docker_image %}
-            {% if instances[topic.name]['tutorials'][own_material.tutorial_name].supported or topic.docker_image %}
-                {% assign tuto_has_docker = true %}
-            {% endif %}
+        {% if own_material.supported_servers or topic.docker_image %}
+            {% assign tuto_has_docker = true %}
         {% endif %}
+
         {% if own_material.zenodo_link and own_material.zenodo_link != "" %}
             {% assign tuto_has_zenodo = true %}
         {% endif %}
 
-        {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker or own_material.notebook %}
         <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> {{ locale['supporting-materials'] | default: "Supporting Materials" }}:</strong></div>
         <ul class="supporting_material">
             {% if associated_slides %}
@@ -145,33 +142,40 @@ We should ONLY be using new_material (if at all possible.)
             {% include _includes/resource-video-library.html label=true wrapper=true %}
 
 
-            {% if tuto_has_docker and topic.name != 'admin' %}
+            {% if tuto_has_docker %}
+                {% if topic.type == 'use' or topic.type == 'basics' %}
                 <li class="btn btn-default supporting_material">{% include _includes/instance-dropdown.html material=own_material docker=topic.docker_image label=true %}</li>
+                {% endif %}
             {% endif %}
         </ul>
-        {% endif %}
 
+        <div><strong>{% icon last_modification aria=false %} {{ locale['published'] | default: "Published" }}:</strong> {{ page | gtn_pub_date | date: "%b %-d, %Y"}} </div>
         <div><strong>{% icon last_modification aria=false %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page | last_modified_at | date: "%b %-d, %Y"}} </div>
         <div><strong>{% icon license aria=false %} {{ locale['license'] | default: "License" }}:</strong>
 		{% if page.copyright %}
 		{{ page.copyright }}.
 		{% endif %}
+            {{ locale['license-framework'] | default: "Tutorial Content is licensed under" }}
             {% if page.license %}
-	    Tutorial Content is licensed under <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
+              <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
             {% else %}
-            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">{{ locale['license-framework'] | default: "Tutorial Content is licensed under Creative Commons Attribution 4.0 International License" }}</a>.
-            {% endif %} The GTN Framework is licensed under <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a>
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            {% endif %}
+            The GTN Framework is licensed under <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a>
         </div>
         {% if page.short_id %}
-        <div><strong>{% icon purl %}<abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
+        <div><strong>{% icon purl %} <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
         {% endif %}
+
+	<div><strong>{% icon version %} Revision:</strong> {{ page | get_version_number }} </div>
+
     </blockquote>
     </section>
 
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -208,7 +212,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                             </ol>
                             <p><b>Downloading the notebook</b></p>
                             <ol>
-                                <li>Right click this link: <a href="{{ site.url }}{{ site.baseurl }}/{{ page.url | replace: ".html", ".Rmd"}}">tutorial.Rmd</a></li>
+                                <li>Right click this link: <a href="{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", ""}}{{ page.topic_name }}-{{ own_material.tutorial_name }}.Rmd">tutorial.Rmd</a></li>
                                 <li>Save Link As...</li>
                             </ol>
                             <p><b>Alternative Formats</b></p>
@@ -358,7 +362,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 
 
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
-{% assign authors = page.contributors | filter_authors:page.contributions -%}
+{% assign authors = page | filter_authors -%}
 	author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
 	title = "{{ page.title }} (Galaxy Training Materials)",
 	year = "{{ page.last_modified_at | date: "%Y"}}",

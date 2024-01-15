@@ -10,17 +10,17 @@ contributors:
   - hexylena
 ---
 
+## Training Materials
+
 {% assign kid_key = "Tutorial Schema" %}
 {% assign kid_val = site.data['schema-tutorial'] %}
-{% include _includes/schema-render.html key=kid_key value=kid_val %}
-
-{% assign kid_key = "Contributor Schema" %}
-{% assign kid_val = site.data['schema-contributors'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 {% assign kid_key = "Slides Schema" %}
 {% assign kid_val = site.data['schema-slides'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+## GTN Resources
 
 {% assign kid_key = "FAQ Schema" %}
 {% assign kid_val = site.data['schema-faq'] %}
@@ -40,4 +40,18 @@ contributors:
 
 {% assign kid_key = "News" %}
 {% assign kid_val = site.data['schema-news'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+## Contributors
+
+{% assign kid_key = "Contributor Schema" %}
+{% assign kid_val = site.data['schema-contributors'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+{% assign kid_key = "Organisation Schema" %}
+{% assign kid_val = site.data['schema-organisations'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+{% assign kid_key = "Funder Schema" %}
+{% assign kid_val = site.data['schema-funders'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}

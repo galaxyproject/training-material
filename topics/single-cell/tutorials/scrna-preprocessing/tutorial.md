@@ -9,7 +9,6 @@ priority: 1
 
 zenodo_link: "https://zenodo.org/record/3253142"
 tags:
-  - single-cell
 questions:
   - "What is single-cell?"
   - "How do we process a batch?"
@@ -56,7 +55,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
 
-#### Why do Single Cell sequencing?
+## Why do Single Cell sequencing?
 
 
 Single-cell RNA (scRNA) sequencing is the technological successor to classical "bulk" RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. The bulk RNA-seq methods seen in [previous hands-on material]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) would give the average expression of genes in a sample, whilst overlooking the distinct expression profiles given by the cell sub-populations due to their heterogeneity.
@@ -116,7 +115,7 @@ The second part of this tutorial will deal with merging several output count mat
 
 # Single-Batch Processing
 
-### Data upload and organization
+## Data upload and organization
 
 In this tutorial we will be analysing scRNA-seq data of bone marrow cells taken from a single C57 mouse by *Herman et al.* ({% cite Herman2018 %}) and producing a count matrix that we can use for later analysis.
 
@@ -268,7 +267,7 @@ Before continuing let us first look back on some of the previous stages:
 >
 {: .comment}
 
-#### Confirming Reads in the BAM file
+### Confirming Reads in the BAM file
 
 We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded in the read headers. We also have the chromosome and base-pair positions of where these reads are aligned. The can be confirmed by peeking into the BAM file:
 
@@ -307,7 +306,7 @@ The fields of the BAM file can be better explained at section 1.4 of [the SAM sp
 * `nM`: The number of base mismatches in the alignment of this read to the reference (here `1`).
 
 
-#### Filtering the BAM File
+### Filtering the BAM File
 
 If we perform counting on the current BAM file we will be counting all reads, even the undesirable ones such as those that did not align so optimally.
 
@@ -530,7 +529,7 @@ Handling more than one batch of sequencing data is rather trivial when we take i
 The first step merely requires us to run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data. The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices.
 
 
-### Data upload and organisation
+## Data upload and organisation
 
 The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://zenodo.org/record/3253142).
 
@@ -730,7 +729,7 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 
 The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or 'Real' barcodes have been sequenced.
 
-#### Cross-contamination Plot
+### Cross-contamination Plot
 
 ![Contamination Plots]({% link topics/single-cell/images/scrna-pre-processing/scrna_crosscontamination.png %} "The Pre-filter and Post-filter plots")
 

@@ -28,7 +28,8 @@ contributions:
   authorship:
     - abretaud
   funding:
-    - erasmusplus
+    - gallantries
+    - eurosciencegateway
 
 requirements:
   - type: "internal"
@@ -46,14 +47,11 @@ abbreviations:
   OGS: Official Gene Set
 ---
 
+After automatically annotating your genome using [Funannotate](../funannotate/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
+
 > <warning-title>Only works on UseGalaxy.eu</warning-title>
 > Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.
 {: .warning}
-
-# Introduction
-
-
-After automatically annotating your genome using [Funannotate](../funannotate/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
 [Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this. It is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
 
@@ -110,9 +108,9 @@ In this tutorial we use the same data as in the [Funannotate](../funannotate/tut
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/genome.fasta
->    https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/annotation.gff3
->    https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/rnaseq.bam
+>    https://zenodo.org/record/3270822/files/genome.fasta
+>    https://zenodo.org/record/3270822/files/annotation.gff3
+>    https://zenodo.org/record/3270822/files/rnaseq.bam
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

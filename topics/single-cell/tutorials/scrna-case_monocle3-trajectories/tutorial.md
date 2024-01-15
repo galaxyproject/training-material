@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Inferring trajectories using Monocle3'
+title: 'Inferring single cell trajectories (Monocle3)'
 subtopic: single-cell-CS
 priority: 5
 zenodo_link: 'https://zenodo.org/record/7078524'
@@ -36,10 +36,9 @@ requirements:
         - scrna-case_basic-pipeline
         - scrna-case_JUPYTER-trajectories
 tags:
-- single-cell
 - 10x
 - paper-replication
-- transcriptomics
+- R
 
 contributions:
   authorship:
@@ -53,14 +52,21 @@ contributions:
     - epsrc-training-grant
 ---
 
-# Introduction
 
 This tutorial is a follow-up to the ['Single-cell RNA-seq: Case Study']({% link topics/single-cell/index.md %}). We will use the same sample from the previous tutorials. If you haven’t done them yet, it’s highly recommended that you go through them to get an idea how to [prepare a single cell matrix]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}), [combine datasets]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) and [filter, plot and process scRNA-seq data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) to get the data in the form we’ll be working on today.
 
-In this tutorial we will perform trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/). You can find out more about the theory behind trajectory analysis in our [slide deck]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html %}). We have already analysed the trajectory of our sample using the ScanPy toolkit in another tutorial: [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}). However, trajectory analysis is quite sensitive and some methods work better for specific datasets. In this tutorial, you will perform the same steps but using a different method for inferring trajectories. You will then compare the results, usability and outcomes! Sounds exciting, let’s dive into that!
+In this tutorial we will perform trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/). You can find out more about the theory behind trajectory analysis in our [slide deck]({% link topics/single-cell/tutorials/scrna-trajectories/slides.html %}). We have already analysed the trajectory of our sample using the ScanPy toolkit in another tutorial: [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}). However, trajectory analysis is quite sensitive and some methods work better for specific datasets. In this tutorial, you will perform the same steps but using a different method for inferring trajectories. You will then compare the results, usability and outcomes! Sounds exciting, let’s dive into that!
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 ## Get data
 We will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)).
@@ -95,15 +101,6 @@ You have two options for uploading these datasets. Importing via history is ofte
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
 >
 {: .hands_on}
-
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
 
 # Preparing the input files
 
@@ -424,25 +421,25 @@ Thanks to the fact that we provided Monocle3 with annotated data, we can now col
 > 1. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 reduceDim** {% icon tool %}
 >    - *"The cell attribute (e.g. the column of pData(cds)) to map to each cell's color, or one of {cluster, partition, pseudotime}."*: `cell_type`
->    - *"If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot."*: {% icon history-share %} `No`
+>    - *"If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot."*: {% icon param-toggle %} `No`
 > 2. Rename {% icon galaxy-pencil %} the output: `Cell type plot`
 >
 > 3. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 reduceDim** {% icon tool %}
 >    - *"The cell attribute (e.g. the column of pData(cds)) to map to each cell's color, or one of {cluster, partition, pseudotime}."*: `genotype`
->    - *"If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot."*: {% icon history-share %} `No`
+>    - *"If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot."*: {% icon param-toggle %} `No`
 > 4. Rename {% icon galaxy-pencil %} the output: `Genotype plot`
 >
 > 5. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 reduceDim** {% icon tool %}
 >    - *"The cell attribute (e.g. the column of pData(cds)) to map to each cell's color, or one of {cluster, partition, pseudotime}."*: `batch`
->    - *"If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot."*: {% icon history-share %} `No`
+>    - *"If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot."*: {% icon param-toggle %} `No`
 > 6. Rename {% icon galaxy-pencil %} the output: `Batch plot`
 >
 > 7. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 reduceDim** {% icon tool %}
 >    - *"The cell attribute (e.g. the column of pData(cds)) to map to each cell's color, or one of {cluster, partition, pseudotime}."*: `sex`
->    - *"If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot."*: {% icon history-share %} `No`
+>    - *"If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot."*: {% icon param-toggle %} `No`
 > 8. Rename {% icon galaxy-pencil %} the output: `Sex plot`
 >
 {: .hands_on}
@@ -621,7 +618,7 @@ Here we used a priori knowledge regarding the marker genes. If we wanted to appr
 >
 > > <solution-title></solution-title>
 > >
-> > By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! [You can do this yourself if you want by following this section of a previous tutorial that [uses the gene names in one object to add to a table of Ensembl IDs](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#findmarkers). These ribosomal differences might be due to housekeeping background, cell cycling, or even something more bioligically interesting...or all three!
+> > By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! [You can do this yourself if you want by following this section of a previous tutorial that [uses the gene names in one object to add to a table of Ensembl IDs]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}#findmarkers). These ribosomal differences might be due to housekeeping background, cell cycling, or even something more bioligically interesting...or all three!
 > > The plot also indicates other specifically expressed genes, such as Hmgb2, Pclaf, Rpl13, Rps19, Ybx1, Ncl, Hsp90ab1, Npm1.
 > >
 > > Whenever you want to explore what might be the function of a particular cluster or why it branches out from the trajectory, check the top markers for that cluster to draw biological conclusions. Thank you Maths!
@@ -649,7 +646,7 @@ We’re getting closer and closer! The next step is to learn the trajectory grap
 As you can see, the learned trajectory path is just a line connecting the clusters. However, there are some important points to understand here.
 If the resolution of the clusters is high, then the trajectory path will be very meticulous, strongly branched and curved. There's a danger here that we might start seeing things that don't really exist.
 You can set an option to learn a single tree structure for all the partitions or use the partitions calculated when clustering and identify disjoint graphs in each. To make the right decision, you have to understand how/if the partitions are related and what would make more biolgical sense. In our case, we were only interested in a big partition containing all the cells and we ignored the small 'dot' classified as another partition.
-There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. Those patterns might correspond to various biological processes: transition events for different phases, cell cycle, cell differentiation. Therefore, branching points are quite important on the trajectory path. You can always plot them, {% icon history-share %} checking the correct box in {% tool Monocle3 plotCells %}.
+There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. Those patterns might correspond to various biological processes: transition events for different phases, cell cycle, cell differentiation. Therefore, branching points are quite important on the trajectory path. You can always plot them, {% icon param-toggle %} checking the correct box in {% tool Monocle3 plotCells %}.
 
 
 ![A trajectory path, branching out to connect all the clusters and thus show their relationships.](../../images/scrna-casestudy-monocle/learned_trajectory.png "Learned trajectory path")
@@ -694,7 +691,7 @@ Finally, it's time to see our cells in pseudotime! We have already learned a tra
 >    -  fill *(--root-cells)* with the cell ID that you want to start ordering from
 > {% comment %}
 >   3. **Starting principal points**
->     - repeat the plotting step, find the parameter *label_principal_points* and set its value to {% icon history-share %} `Yes`
+>     - repeat the plotting step, find the parameter *label_principal_points* and set its value to {% icon param-toggle %} `Yes`
 >     - have a look at the plot and note which principal point best corresponds to the root cells
 >     - fill *(--root-pr-nodes)* with the noted value from *label_principal_points*
 > {% endcomment %}
@@ -723,3 +720,5 @@ Last but not least, you can now identify genes that define the inferred trajecto
 ![A scheme connecting all the tools used in this tutorial.](../../images/scrna-casestudy-monocle/workflow.jpg "Full workflow for this tutorial.")
 
 If you're following the Case Study tutorials from the beginning, you have already experienced what it’s like to analyse and question a dataset, potentially without clear cut-offs or clear answers. You now know that trajectory analysis is even more sensitive to parameter values, so it's often trying to find the best set of values that would give the most reasonable results and go in accordance with biology. Moreover, not all trajectory analysis methods are designed to infer all kinds of biological processes - due to the fact that they use different algorithms, some would work better for analysing your sample. Since Monocle is quite widely used for trajectory analysis, it might be a good practice to compare its results with other methods. The more evidence you have to confirm your findings, the more confident you can be about their reliability!
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}

@@ -28,8 +28,8 @@
                 }
             ],
             "position": {
-                "left": 9.124978066530579,
-                "top": 12.171892668878
+                "left": 4.293246161777436,
+                "top": 0
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0",
@@ -68,8 +68,8 @@
                 }
             ],
             "position": {
-                "left": 4.234352853396358,
-                "top": 182.34374816414407
+                "left": 4.293246161777436,
+                "top": 148.56248504578429
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0",
@@ -108,8 +108,8 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 560.9062505467731,
-                "top": 341.515625
+                "left": 563.1557760665268,
+                "top": 635.975477057033
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -140,8 +140,8 @@
                 }
             ],
             "position": {
-                "left": 2.062500546773094,
-                "top": 353.859375
+                "left": 1.4413503643385859,
+                "top": 307.6653714034882
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
@@ -185,8 +185,8 @@
                 }
             ],
             "position": {
-                "left": 0,
-                "top": 522.1718608604647
+                "left": 1.4348650983573101,
+                "top": 478.47790000624343
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0",
@@ -230,8 +230,8 @@
                 }
             ],
             "position": {
-                "left": 13.187500546773094,
-                "top": 739.421875
+                "left": 0,
+                "top": 620.6925527804436
             },
             "post_job_actions": {
                 "ChangeDatatypeActionoutput1": {
@@ -277,8 +277,8 @@
                 }
             ],
             "position": {
-                "left": 283.0937505467731,
-                "top": 0
+                "left": 285.74353593563336,
+                "top": 0.3954410820455898
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1",
@@ -322,8 +322,8 @@
                 }
             ],
             "position": {
-                "left": 274.0937505467731,
-                "top": 182.671875
+                "left": 269.93026650504567,
+                "top": 197.0992986309266
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1",
@@ -367,8 +367,8 @@
                 }
             ],
             "position": {
-                "left": 278.8437505467731,
-                "top": 364.25
+                "left": 281.1327747391346,
+                "top": 399.5494962135009
             },
             "post_job_actions": {},
             "tool_id": "Filter1",
@@ -411,8 +411,8 @@
                 }
             ],
             "position": {
-                "left": 273.8281255467731,
-                "top": 550.203125
+                "left": 287.16415974045077,
+                "top": 590.7331216507386
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10",
@@ -469,8 +469,8 @@
                 }
             ],
             "position": {
-                "left": 556.7812505467731,
-                "top": 3.296875
+                "left": 556.8129698338548,
+                "top": 8.0719203679202
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1",
@@ -487,26 +487,131 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "Case 5 SnpEff Annotated VCF",
-                    "output_name": "snpeff_output",
-                    "uuid": "1b9750cc-e0ab-4361-906e-306e97b243ad"
-                },
-                {
                     "label": null,
                     "output_name": "statsFile",
                     "uuid": "bb59ec32-10c8-4923-8f41-62e3ed1adf11"
+                },
+                {
+                    "label": "Case 5 SnpEff Annotated vcf",
+                    "output_name": "snpeff_output",
+                    "uuid": "cd7b4941-4f4c-4631-8ad5-3411e60fbbd9"
                 }
             ]
         },
         "11": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
+            "content_id": "CONVERTER_uncompressed_to_gz",
             "errors": null,
             "id": 11,
             "input_connections": {
-                "infile": {
+                "input1": {
                     "id": 10,
                     "output_name": "snpeff_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert uncompressed file to compressed",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "auto"
+                }
+            ],
+            "position": {
+                "left": 552.4385400335957,
+                "top": 373.4495808144635
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput1": {
+                    "action_arguments": {
+                        "newtype": "vcf_bgzip"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "CONVERTER_uncompressed_to_gz",
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.16+galaxy0",
+            "type": "tool",
+            "uuid": "2c959f43-8264-48d7-adf1-c12d5a2b3394",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "SnpEff Annotated vcf_bgzip",
+                    "output_name": "output1",
+                    "uuid": "6e5e1084-b5e1-4daf-8f3b-bd3868a52a25"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input_type|father|vcf": {
+                    "id": 11,
+                    "output_name": "output1"
+                },
+                "input_type|mother|vcf": {
+                    "id": 11,
+                    "output_name": "output1"
+                },
+                "proband_vcf": {
+                    "id": 11,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool gene.iobio visualisation",
+                    "name": "proband_bam"
+                }
+            ],
+            "label": null,
+            "name": "gene.iobio visualisation",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 866.6404599769689,
+                "top": 23.224599201146997
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1",
+            "tool_shed_repository": {
+                "changeset_revision": "c0af7b196a89",
+                "name": "geneiobio",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"genes\": \"\", \"input_type\": {\"input_type_selector\": \"trio\", \"__current_case__\": 0, \"father\": {\"vcf\": {\"__class__\": \"ConnectedValue\"}, \"bam\": {\"__class__\": \"RuntimeValue\"}, \"affected\": false, \"name\": \"Case6F\"}, \"mother\": {\"vcf\": {\"__class__\": \"ConnectedValue\"}, \"bam\": {\"__class__\": \"RuntimeValue\"}, \"affected\": true, \"name\": \"Case6M\"}}, \"proband_affected\": true, \"proband_bam\": {\"__class__\": \"RuntimeValue\"}, \"proband_name\": \"Case6C\", \"proband_sex\": \"female\", \"proband_vcf\": {\"__class__\": \"ConnectedValue\"}, \"refgen_version\": \"GRCh37\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.7.1",
+            "type": "tool",
+            "uuid": "63a20112-21fe-4046-9fdd-3b5e766b0d68",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Case 5 gene.iobio results",
+                    "output_name": "outfile",
+                    "uuid": "0b30f4e0-7328-4479-8a56-bbf828fcfdba"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "infile": {
+                    "id": 11,
+                    "output_name": "output1"
                 },
                 "ped": {
                     "id": 2,
@@ -523,8 +628,8 @@
                 }
             ],
             "position": {
-                "left": 819.7812505467731,
-                "top": 6.515625
+                "left": 867.1106984600971,
+                "top": 518.7461949332695
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
@@ -541,20 +646,20 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "GEMINI Database",
                     "output_name": "outfile",
-                    "uuid": "d996d59b-0892-4b62-9c48-809720105a08"
+                    "uuid": "8a1964d9-607c-4dd3-a2dc-0f9a68dbb681"
                 }
             ]
         },
-        "12": {
+        "14": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
             "errors": null,
-            "id": 12,
+            "id": 14,
             "input_connections": {
                 "infile": {
-                    "id": 11,
+                    "id": 13,
                     "output_name": "outfile"
                 }
             },
@@ -568,8 +673,8 @@
                 }
             ],
             "position": {
-                "left": 822.6250005467731,
-                "top": 260.4375
+                "left": 1132.4996805716235,
+                "top": 583.0393503253775
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
@@ -586,9 +691,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "Case 5 GEMINI results",
                     "output_name": "outfile",
-                    "uuid": "209d3124-656b-491f-b04d-80d2ecd8c510"
+                    "uuid": "960ef978-089c-4292-81b5-731965c72a0d"
                 }
             ]
         }
@@ -596,6 +701,6 @@
     "tags": [
         "variant-analysis"
     ],
-    "uuid": "1a9a123d-8308-4ee4-93c3-9f54cbebd827",
-    "version": 68
+    "uuid": "53d0425b-82b3-41e0-9aab-38b7ef51b6d0",
+    "version": 76
 }

@@ -3,7 +3,7 @@ redirect_from:
 - /topics/transcriptomics/faqs/umi
 
 title: Are UMIs not actually unique?
-area: Single-Cell RNA
+area: Analysis
 box_type: tip
 layout: faq
 contributors: [nomadscientist,mtekman]

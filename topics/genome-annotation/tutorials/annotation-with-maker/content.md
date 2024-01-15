@@ -4,8 +4,6 @@
   {% assign genome_name = "genome.fasta"%}
 {% endif %}
 
-# Introduction
-
 Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
 
 In this tutorial we will use a software tool called Maker {% cite Campbell2014 %} to annotate the genome sequence of a small eukaryote: *Schizosaccharomyces pombe* (a yeast).

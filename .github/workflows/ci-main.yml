@@ -12,6 +12,9 @@ on:
       - '**/tutorial*.md'
       - '**/slides.html'
       - '**/slides/*.html'
+      - 'learning-pathways/*'
+      - 'faqs/**'
+      - 'news/**'
 
 jobs:
   lint:
@@ -68,4 +71,5 @@ jobs:
         with:
           rubocop_version: gemfile
           reporter: github-pr-review
+          rubocop_flags: --except Layout/LineLength,Lint/RedundantCopDisableDirective
           fail_on_error: true

@@ -1,6 +1,12 @@
 ---
 layout: learning-pathway
 tags: [beginner]
+type: use
+
+editorial_board:
+- fpsom
+funding:
+- gallantries
 
 title: From R to Machine Learning; an introductory course
 description: |

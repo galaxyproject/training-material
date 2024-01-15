@@ -1,12 +1,23 @@
 ---
 layout: learning-pathway
-tags: [beginner]
+type: use
 
 title: Introduction to Galaxy and Ecological data analysis
 description: |
   This learning path aims to teach you the basics of Galaxy and analysis of ecological data.
   You will learn how to use Galaxy for analysis, and will be guided through the common
   steps of biodiversity data analysis: download, check, filter and explore biodiversity data and analyze abundance data through modeling.
+
+
+tags: [beginner]
+cover-image: assets/images/galaxy-e-logo.png
+cover-image-alt: "Drawing of an Ecological System"
+
+editorial_board:
+- yvanlebras
+funding:
+- gallantries
+
 
 pathway:
   - section: "Module 1: Introduction to Galaxy"

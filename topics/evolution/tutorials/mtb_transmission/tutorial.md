@@ -36,9 +36,9 @@ contributions:
 tags:
 - prokaryote
 - one-health
+- microgalaxy
 ---
 
-# Introduction
 
 In a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates.
 
@@ -735,7 +735,7 @@ In this step we will use a simple tool that searches and replaces text to remove
 > <hands-on-title>Removing redundant content</hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `Single file` (output of **Concatenate datasets** {% icon tool %})
+>    - {% icon param-file %} *"File to process"*: `Single file` (output of **Collapse Collection** {% icon tool %})
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >          - *"Find pattern"*: `Drug-resistance: `

@@ -1,13 +1,21 @@
+require 'digest'
+
 # While reading in all of the files for the site
 # load the bundles and find out their last modified time
 # so we can use that as a cache buster
 Jekyll::Hooks.register :site, :post_read do |site|
   site.config['javascript_bundles'].each do |name, resources|
-    Jekyll.logger.info "Analysing JS Bundle #{name}"
     # Get the maximum last file modified time to use as the bundle timestamp
     bundle_timestamp = resources['resources'].map { |f| File.mtime(f).to_i }.max
     site.config['javascript_bundles'][name]['timestamp'] = bundle_timestamp
-    Jekyll.logger.info "=> #{bundle_timestamp}"
+
+    # This is inefficient since we read twice but it's also not that expensive.
+    bundle = resources['resources'].map { |f| File.read(f) }.join("\n")
+    hash = Digest::MD5.hexdigest(bundle)[0..7]
+    site.config['javascript_bundles'][name]['hash'] = hash
+    site.config['javascript_bundles'][name]['path'] = "/assets/js/bundle.#{hash}.js"
+
+    Jekyll.logger.info "Analysing JS Bundle #{name} => #{bundle_timestamp} / #{hash}"
   end
 end
 
@@ -17,11 +25,12 @@ end
 # gzip probably does enough, everything else is pre-minified.
 Jekyll::Hooks.register :site, :post_write do |site|
   site.config['javascript_bundles'].each do |name, resources|
-    bundle_path = "#{site.dest}/assets/js/bundle.#{name}.js"
+    bundle_path = "#{site.dest}#{resources['path']}"
     Jekyll.logger.info "Building JS bundle #{name} => #{bundle_path}"
 
     # Just concatenate them all together
     bundle = resources['resources'].map { |f| File.read(f) }.join("\n")
+
     # Write the bundle to the output directory
     File.write(bundle_path, bundle)
   end
@@ -36,11 +45,11 @@ module Jekyll
     #
     # Example:
     # {{ 'load' | bundle_preloads }}
-    def bundle_preloads(test)
+    def bundle_preloads(_test)
       if Jekyll.env == 'production'
         bundle_preloads_prod
       else
-        ""
+        ''
       end
     end
 
@@ -54,8 +63,8 @@ module Jekyll
         bundle['preload'] == true
       end
 
-      bundles.map do |name, bundle|
-        bundle_path = "#{baseurl}/assets/js/bundle.#{name}.js?v=#{bundle['timestamp']}"
+      bundles.map do |_name, bundle|
+        bundle_path = "#{baseurl}#{bundle['path']}?v=#{bundle['timestamp']}"
         "<link rel='preload' href='#{bundle_path}' as='script'>"
       end.join("\n")
     end
@@ -76,9 +85,8 @@ module Jekyll
 
     def load_bundle_dev(name)
       bundle = @context.registers[:site].config['javascript_bundles'][name]
-      if bundle.nil?
-        raise "Bundle #{name} not found in site config"
-      end
+      raise "Bundle #{name} not found in site config" if bundle.nil?
+
       baseurl = @context.registers[:site].config['baseurl']
 
       bundle['resources'].map do |f|
@@ -88,11 +96,10 @@ module Jekyll
 
     def load_bundle_production(name)
       bundle = @context.registers[:site].config['javascript_bundles'][name]
-      if bundle.nil?
-        raise "Bundle #{name} not found in site config"
-      end
+      raise "Bundle #{name} not found in site config" if bundle.nil?
+
       baseurl = @context.registers[:site].config['baseurl']
-      bundle_path = "#{baseurl}/assets/js/bundle.#{name}.js?v=#{bundle['timestamp']}"
+      bundle_path = "#{baseurl}#{bundle['path']}?v=#{bundle['timestamp']}"
       "<script src='#{bundle_path}'></script>"
     end
   end
