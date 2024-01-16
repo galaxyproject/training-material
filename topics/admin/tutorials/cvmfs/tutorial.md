@@ -14,7 +14,6 @@ key_points:
 contributors:
   - slugger70
   - hexylena
-subtopic: features
 requirements:
   - type: "internal"
     topic_name: admin
@@ -25,6 +24,10 @@ voice:
   id: Olivia
   lang: en-AU
   neural: true
+subtopic: data
+tags:
+  - ansible
+  - git-gat
 ---
 
 > These words come from a transcript of Simon Gladman teaching this course. He
@@ -49,9 +52,9 @@ voice:
 {: .spoken data-visual="gtn" data-target="#top-navbar" }
 
 # Overview
-{:.no_toc}
 
-The CernVM-FS is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the [Galaxy Project](https://galaxyproject.org) for sharing things that a lot of Galaxy servers need. Namely:
+
+The CernVM-FS {% cite Blomer_2011 %} is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the [Galaxy Project](https://galaxyproject.org) for sharing things that a lot of Galaxy servers need. Namely:
 * **Reference Data**
     * Genome sequences for hundreds of useful species.
     * Indices for the genome sequences
@@ -64,8 +67,7 @@ From the Cern website:
 
 > The CernVM File System provides a scalable, reliable and low-maintenance software distribution service. It was developed to assist High Energy Physics (HEP) collaborations to deploy software on the worldwide-distributed computing infrastructure used to run data processing applications. CernVM-FS is implemented as a POSIX read-only file system in user space (a FUSE module). Files and directories are hosted on standard web servers and mounted in the universal namespace /cvmfs."
 >
-> -- [https://cernvm.cern.ch/portal/filesystem](https://cernvm.cern.ch/portal/filesystem)
-{: .quote id="cvmfs-quote"}
+{: .quote id="cvmfs-quote" cite="https://cernvm.cern.ch/portal/filesystem"}
 
 > All right, just a quick recap. CVMFS or
 > Cern-VMFS is a distributed file system perfectly
@@ -89,14 +91,18 @@ From the Cern website:
 > well. So we're just going to get on with things.
 {: .spoken data-visual="gtn" data-target="#cvmfs-quote"}
 
-A slideshow presentation on this subject can be found [here](slides.html). More details on the usegalaxy.org (Galaxy Main's) reference data setup and CVMFS system can be found [here](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data)
+[A slideshow presentation on this subject]({% link topics/admin/tutorials/cvmfs/slides.html %}) is available. More [details are available on usegalaxy.org (Galaxy Main's) reference data setup](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data) and CVMFS system.
 
-> ### Agenda
+This exercise uses Ansible to install and configure CVMFS and Galaxy's access to CVMFS. For a tutorial that does not use Ansible and gives a closer look at how reference data is configured in Galaxy, see [the Reference Data with CVMFS without Ansible tutorial]({% link topics/admin/tutorials/cvmfs-manual/tutorial.md %}).
+
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="cvmfs" %}
 
 > The agenda we're going to follow today is: We're going to install and
 > configure Galaxy CVMFS reference data using ansible. We're going to explore
@@ -159,9 +165,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > Okay, so let's get started. If we go back to our
 > tutorial here, it says that we need to install a CVMFS role into our
 > requirements.yml and then add it to our Ansible.
-{: .spoken data-visual="gtn" data-target="#hands_on-hands-on-installing-cvmfs-with-ansible"}
+{: .spoken data-visual="gtn" data-target="#hands-on-installing-cvmfs-with-ansible"}
 
-> ### {% icon hands_on %} Hands-on: Installing CVMFS with Ansible
+> <hands-on-title>Installing CVMFS with Ansible</hands-on-title>
 >
 > 1. In your working directory, add the CVMFS role to your `requirements.yml`
 >
@@ -176,15 +182,18 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -16,3 +16,5 @@
->       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
->     - src: gantsign.golang
->       version: 2.6.3
+>    @@ -17,3 +17,6 @@
+>     # TUS (uploads)
+>     - name: galaxyproject.tusd
+>       version: 0.0.1
+>    +# CVMFS Support
 >    +- src: galaxyproject.cvmfs
->    +  version: 0.2.13
+>    +  version: 0.2.21
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 >    > Okay, so the first thing I'm going to do is I'm going to add the CVMFS
 >    > role to the requirements.yml.
@@ -193,7 +202,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 > 2. Install the role with:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -236,7 +245,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    But, luckily for us, the Galaxy Project CVMFS role has a lot of defaults for these variables which we can use by just setting `galaxy_cvmfs_repos_enabled` to `config-repo`. We will also set the `cvmfs_quota_limit` to something sensible (500MB) as we have relatively small disks on our instances. In a production setup, you should size this appropriately for the client.
 >
->    > ### {% icon tip %} What is a good size for this?
+>    > <tip-title>What is a good size for this?</tip-title>
 >    > In production UseGalaxy.org.au uses 100GB, different sites have different needs and you can make your cache smaller depending on your usage. E.g. if your users only use one dataset from the reference data (e.g. just hg38) then perhaps you don't need such a large cache.
 >    {: .tip}
 >
@@ -262,9 +271,13 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    {% raw %}
 >    ```diff
->    --- /dev/null
+>    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -0,0 +1,4 @@
+>    @@ -5,3 +5,8 @@ pip_virtualenv_command: /usr/bin/python3 -m venv  # usegalaxy_eu.certbot, usegal
+>     # Common variables needed by all hosts
+>     galaxy_user_name: galaxy
+>     galaxy_db_name: galaxy
+>    +
 >    +# CVMFS vars
 >    +cvmfs_role: client
 >    +galaxy_cvmfs_repos_enabled: config-repo
@@ -286,7 +299,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    > disk of these machines. So I'll save that.
 >    {: .spoken data-visual="terminal" data-ref="vars-all"}
 >
->    > ### {% icon tip %} Why all.yml?
+>    > <tip-title>Why all.yml?</tip-title>
 >    > We've integrated the cvmfs and pulsar tutorials better, such that CVMFS will be used for Pulsar as well, this configuration will be needed on all of our machines. This mirrors real life where you want CVMFS on every node that does computation.
 >    {: .tip}
 >
@@ -296,11 +309,14 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -21,3 +21,4 @@
->           become: true
->           become_user: "{{ galaxy_user.name }}"
+>    @@ -37,6 +37,7 @@
+>           become_user: "{{ galaxy_user_name }}"
 >         - galaxyproject.nginx
+>         - galaxyproject.gxadmin
 >    +    - galaxyproject.cvmfs
+>       post_tasks:
+>         - name: Setup gxadmin cleanup task
+>           ansible.builtin.cron:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook" data-ref="pb"}
@@ -313,7 +329,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 > 5. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -377,17 +393,17 @@ Congratulations, you've set up CVMFS.
 > tell Galaxy to look at all of this data and use it as its reference data.
 {: .spoken data-visual="terminal" data-cmd="ls -al sacCer2/"}
 
-> ### {% icon hands_on %} Hands-on: Exploring CVMFS
+> <hands-on-title>Exploring CVMFS</hands-on-title>
 >
 > 1. SSH into your machine
 >
 > 2. Change directory into `/cvmfs/` and list the files in that folder
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What do you see?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > You should see nothing, as CVMFS uses `autofs` in order to mount paths only upon request.
 >    > >
 >    > {: .solution }
@@ -397,7 +413,7 @@ Congratulations, you've set up CVMFS.
 >
 > 3. Change directory into `/cvmfs/data.galaxyproject.org/`.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > cd /cvmfs/data.galaxyproject.org/
 >    > ls
@@ -406,11 +422,11 @@ Congratulations, you've set up CVMFS.
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What do you see now?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >  You'll see `.loc` files, genomes and indices.
 >    > > AutoFS only mounts the files when they're accessed, so it appears like there is no folder there.
 >    > {: .solution }
@@ -482,7 +498,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > Okay, so we'll go back to our Ansible directory.
 {: .spoken data-visual="terminal" data-cmd="cd ~/galaxy/"}
 
-> ### {% icon hands_on %} Hands-on: Configuring Galaxy to use CVMFS
+> <hands-on-title>Configuring Galaxy to use CVMFS</hands-on-title>
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add a `tool_data_table_config_path` entry under the `galaxy` key of the `galaxy_config` section in the `group_vars/galaxyservers.yml` file. This new entry should be a list containing the paths to both `tool_data_table_conf.xml` files referenced above.
 >
@@ -490,14 +506,15 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
+>    @@ -70,6 +70,8 @@ galaxy_config:
+>         # TUS
+>         galaxy_infrastructure_url: "https://{{ inventory_hostname }}"
+>         tus_upload_store: "{{ galaxy_tus_upload_store }}"
+>    +    # CVMFS
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
->         brand: "🧬🔬🚀"
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tool_data_table_config_path to group variables" data-ref="gvconf"}
@@ -516,7 +533,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 > 2. Re-run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -584,15 +601,17 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=4 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=5 %}
 
 # Common Production Questions
 
-> ### {% icon question %} For the most used datasets (for ex. hg38) could we have a local copy, or would that be irrelevant?
+> <question-title>For the most used datasets (for ex. hg38) could we have a local copy, or would that be irrelevant?</question-title>
 > This would be irrelevant, the most used datasets will stay in the cache. CVMFS uses a Least Recently Used (LRU) cache (see their [docs](https://cvmfs.readthedocs.io/en/latest/cpt-details.html#disk-cache)), so whenever it runs out of space, it will remove the least recently used file. If you have a file that is very commonly used, it will remain in the cache.
 {: .question}
 
-> ### {% icon question %} Could you explain how to calculate a good cache space?
+> <question-title>Could you explain how to calculate a good cache space?</question-title>
 > Here are two approaches, there are others:
 > 1. Allocate some cache, see how it is, make it larger if it is fully used + users complain of speed.
 > 2. Enable reference data, and collect a week or two of data, analyse which reference datasets are being used, and allocate enough space for all of them.
@@ -600,9 +619,59 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > Essentially you just need data on how your users will behave and what reference data they want, combined with "when will they accept a wait period" to determine how much space you must allocate.
 {: .question}
 
-> ### {% icon question %} If I use a cluster, will I need to configure this FS in each node (given that the folder is at / directly)?
+> <question-title>If I use a cluster, will I need to configure this FS in each node (given that the folder is at / directly)?</question-title>
 > Yes. Often admins with a cluster keep a smaller cache local to each compute node, and then setup a Squid proxy to hold the most commonly accessed data on a machine with more storage. E.g. each compute node could have 10-50GB of CVMFS storage while you might setup a Squid proxy with 200-300 GB of storage that will store everything your site uses.
 {: .question}
+
+> <tip-title>Debugging failed mounting</tip-title>
+>
+> Are you having issues mounting your CVMFS mount? Is it giving strange errors like "Endpoint not connected"
+> Try running this command as root:
+>
+> > > <code-in-title>Bash</code-in-title>
+> > > ```console
+> > > /usr/bin/cvmfs2 -d -o rw,system_mount,fsname=cvmfs2,allow_other,grab_mountpoint singularity.galaxyproject.org /mnt
+> > > ```
+> > {: .code-in}
+> >
+> > > <code-out-title>Consolue</code-out-title>
+> > > ```console
+> > > Debug: using library /usr/lib/libcvmfs_fuse3_stub.so
+> > > CernVM-FS: running in debug mode
+> > > CernVM-FS: loading Fuse module... (cvmfs) Parsing config file /etc/cvmfs/default.conf    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) execve'd /bin/sh (PID: 280373)    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) Parsing config file /etc/cvmfs/default.d/50-cern-debian.conf    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) execve'd /bin/sh (PID: 280375)    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) Parsing config file /etc/cvmfs/default.d/80-ansible-galaxyproject-cvmfs.conf    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) execve'd /bin/sh (PID: 280378)    [07-21-2022 11:11:20 UTC]
+> > > [...]
+> > > (dns) empty hostname    [07-21-2022 11:11:20 UTC]
+> > > (download) installed 1 proxies in 1 load-balance groups    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) DNS roaming is disabled for this repository.    [07-21-2022 11:11:20 UTC]
+> > > (catalog) constructing client catalog manager    [07-21-2022 11:11:20 UTC]
+> > > (catalog) Initialize catalog    [07-21-2022 11:11:20 UTC]
+> > > (cache) unable to read local checksum    [07-21-2022 11:11:20 UTC]
+> > > (download) escaped http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/.cvmfspublished to http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/.cvmfspublished    [07-21-2022 11:11:20 UTC]
+> > > (download) Verify downloaded url /.cvmfspublished, proxy DIRECT (curl error 0)    [07-21-2022 11:11:20 UTC]
+> > > (cache) miss ./e2/ab48b0984729d99951cb62c4312f501b3ddc6b (-2)    [07-21-2022 11:11:20 UTC]
+> > > (download) escaped http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/data/e2/ab48b0984729d99951cb62c4312f501b3ddc6bX to http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/data/e2/ab48b0984729d99951cb62c4312f501b3ddc6bX    [07-21-2022 11:11:20 UTC]
+> > > (download) Verify downloaded url /data/e2/ab48b0984729d99951cb62c4312f501b3ddc6bX, proxy DIRECT (curl error 0)    [07-21-2022 11:11:20 UTC]
+> > > (download) escaped http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/.cvmfswhitelist to http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/.cvmfswhitelist    [07-21-2022 11:11:20 UTC]
+> > > [...]
+> > > (download) escaped http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/data/c7/f1555f421b1868b979291dc23f34a83132eadbC to http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/data/c7/f1555f421b1868b979291dc23f34a83132eadbC    [07-21-2022 11:11:20 UTC]
+> > > (download) Verify downloaded url /data/c7/f1555f421b1868b979291dc23f34a83132eadbC, proxy DIRECT (curl error 0)    [07-21-2022 11:11:25 UTC]
+> > > (cache) finished downloading of /data/c7/f1555f421b1868b979291dc23f34a83132eadbC    [07-21-2022 11:11:25 UTC]
+> > > (cache) commit ./c7/f1555f421b1868b979291dc23f34a83132eadb ./txn/fetchJWcwtt    [07-21-2022 11:11:25 UTC]
+> > > (quota) pin into lru c7f1555f421b1868b979291dc23f34a83132eadb, path file catalog at singularity.galaxyproject.org:/ (c7f1555f421b1868b979291dc23f34a83132eadb)    [07-21-2022 11:11:25 UTC]
+> > > (cache) commit failed: cannot pin c7f1555f421b1868b979291dc23f34a83132eadb    [07-21-2022 11:11:25 UTC]
+> > > (catalog) failed to load catalog '' (2 - not enough space to load catalog)    [07-21-2022 11:11:25 UTC]
+> > > (catalog) failed to initialize root catalog    [07-21-2022 11:11:25 UTC]
+> > > Failed to initialize root file catalog (16 - file catalog failure)
+> > > (cache) unpinning / unloading all catalogs    [07-21-2022 11:11:25 UTC]
+> > > ```
+> > {: .code-out}
+> {: .code-2col}
+{: .tip}
 
 # Other Aspects
 
@@ -654,3 +723,5 @@ If you are working with plants, you can find separate reference data here: [fred
 > hope you enjoyed it and hopefully I'll get to meet some of you in person one
 > day soon at a Galaxy conference. Thank you and goodbye.
 {: .spoken data-visual="gtn" data-target="#feedback"}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="cvmfs" %}

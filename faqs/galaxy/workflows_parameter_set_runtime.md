@@ -3,6 +3,7 @@ title: Setting parameters at run-time
 area: workflows
 box_type: tip
 layout: faq
+contributors: [shiltemann,hexylena]
 ---
 
 1. Open the workflow editor

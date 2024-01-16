@@ -3,6 +3,7 @@ title: Hiding intermediate steps
 area: workflows
 box_type: tip
 layout: faq
+contributors: [shiltemann,hexylena]
 ---
 
 When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps.

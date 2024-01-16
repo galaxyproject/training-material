@@ -18,7 +18,7 @@ contributors:
 subtopic: manage
 ---
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -33,14 +33,13 @@ Here we will show Galaxy features designed to help with the analysis of large nu
 
 #### In this tutorial we assume the following:
 
-- you already have basic understanding of how Galaxy works (if you don't see [Galaxy 101](https://usegalaxy.org/galaxy101) tutorial;
-- you have an account in Galaxy ([see this](https://github.com/nekrut/galaxy/wiki/Galaxy101-1#01-setting-up-galaxy-account) if you don't);
-- you have your browser configured as described [here](https://github.com/nekrut/galaxy/wiki/Galaxy101-1#00-getting-your-display-sorted-out).
+- you already have basic understanding of how Galaxy works
+- you have an account in Galaxy
 
 {% icon warning %} *At this time this tutorial is using Galaxy's test server at https://test.galaxyproject.org. Once the main site is updated this tutorial will be edited.*
 
 # Getting data
-[Here](https://test.galaxyproject.org/u/anton/h/collections-1) is a history containing a few datasets we will be practicing with (as always with Galaxy tutorial you can upload your own data and play with it instead of the provided datasets):
+[In this history](https://test.galaxyproject.org/u/anton/h/collections-1) are a few datasets we will be practicing with (as always with Galaxy tutorial you can upload your own data and play with it instead of the provided datasets):
 
 - `M117-bl_1` - family 117, mother, 1-st (**F**) read from **blood**
 - `M117-bl_2` - family 117, mother, 2-nd (**R**) read from **blood**
@@ -135,7 +134,7 @@ If you look at the picture above carefully, you will see that the **Select SAM/B
 
 ![cleanSam_closeup](https://galaxyproject.org/tutorials/collections/cleanSam_closeup.png)
 
-Click **Execute**. As an output this tool will produce a collection contained cleaned data.
+Click **Run Tool**. As an output this tool will produce a collection contained cleaned data.
 
 ## Retaining 'proper pairs'
 

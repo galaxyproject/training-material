@@ -1,0 +1,27 @@
+- doc: Test for RepeatMasker
+  job:
+    Raw genome sequence:
+      class: File
+      location: https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/genome_raw.fasta
+      filetype: fasta
+  outputs:
+    RepeatMasker repeat catalogue on input dataset(s):
+      asserts:
+        has_text:
+          text: 'CCTCCCTCCCTCCCTCCCTCCCTCC'
+    RepeatMasker repeat statistics on input dataset(s):
+      asserts:
+        has_text:
+          text: '1173324 bp'
+    RepeatMasker output log on input dataset(s):
+      asserts:
+        has_text:
+          text: 'SW score'
+        has_text:
+          text: 'contig_1001'
+        has_text:
+          text: 'Simple_repeat'
+    RepeatMasker masked sequence on input dataset(s):
+      asserts:
+        has_text:
+          text: 'AAGATTCTTGcccccctccctctttccctcc'

@@ -4,6 +4,7 @@ description: You can tell Galaxy which dbkey (e.g. reference genome) your datase
 area: datasets
 box_type: tip
 layout: faq
+contributors: [shiltemann,hexylena]
 ---
 
 - Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes

@@ -1,11 +1,41 @@
 <footer>
-    <div class="container">
-        <br><br>
-        <p>
-            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
-            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
-        </p>
-        {% include _includes/license.html %}
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/{{ site.git_revision }}">{{ site.git_revision }}</a></p>
-    </div>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/{{ site.git_revision }}">{{ site.git_revision_short }}</a>, built with Jekyll ({{ jekyll.version }} | {{ jekyll.environment }})
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				{% if page.short_id %}
+				<p>
+					Resource {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>
+				</p>
+				{% endif %}
+				<p>
+					<i>This Material</i>:
+					{% if page.copyright %}
+						is {{ page.copyright }}.
+					{% endif %}
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
+						{% if page.license %}{{ page.license }}{% else %}Creative Commons Attribution 4.0 International License{% endif %}
+					</a>
+				</p>
+				<p>
+					<a href="{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/{{ page.path }}" title="Edit on GitHub">
+					{% icon github %} Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
 </footer>

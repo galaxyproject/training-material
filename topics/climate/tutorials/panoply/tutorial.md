@@ -14,24 +14,23 @@ objectives:
 - Learn how Panoply plots are exported to Galaxy
 time_estimation: 1H
 key_points:
-- Inspect and view netCDF data with netCDF
+- Inspect and view netCDF data with Panoply
 - Interact with Galaxy to save your plots
+tags:
+- interactive-tools
 contributors:
 - annefou
 
 ---
 
 
-# Introduction
-{:.no_toc}
+The practical aims at familiarzing you with the [Panoply](https://www.giss.nasa.gov/tools/panoply/) Galaxy interactive environment. Panoply is among the most popular tool to visualize geo-referenced data stored in [Network Common Data Form](https://en.wikipedia.org/wiki/NetCDF) (netCDF). It provides a graphical interface for inspecting (show metadata) and visualizing netCDF data. It supports many features to customize your plots and we will introduce some of them in this lesson.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > This tutorial is significantly based on [the Panoply documentation](https://www.giss.nasa.gov/tools/panoply/help/) ["Quick View Data with Panoply"](https://disc.gsfc.nasa.gov/information/howto?title=Quick%20View%20Data%20with%20Panoply) section.
 >
 {: .comment}
-
-The practical aims at familiarzing you with the [Panoply](https://www.giss.nasa.gov/tools/panoply/) Galaxy interactive environment. Panoply is among the most popular tool to visualize geo-referenced data stored in [Network Common Data Form](https://en.wikipedia.org/wiki/NetCDF) (netCDF). It provides a graphical interface for inspecting (show metadata) and visualizing netCDF data. It supports many features to customize your plots and we will introduce some of them in this lesson.
 
 In this tutorial, you will learn to:
 - Plot geo-referenced latitude-longitude, latitude-vertical, longitude-vertical, time-latitude or time-vertical arrays.
@@ -40,7 +39,7 @@ In this tutorial, you will learn to:
 - Export animations as MOV or AVI videos
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -49,7 +48,7 @@ In this tutorial, you will learn to:
 >
 {: .agenda}
 
-> ### {% icon comment %} Background
+> <comment-title>Background</comment-title>
 >
 >There are many online services to get climate data, and it is often difficult to know which ones are up-to date and which resources to trust.
 > Different services provide different Application Programming Interfaces (API), use different terminologies, different file formats etc., which make it difficult for new users to master them all.
@@ -67,7 +66,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *Panoply* for example...
 >
@@ -86,7 +85,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 > 3. Check that the datatype is **netcdf**
 >
->    Files you uploaded are in netcdf format. In Galaxy, Datatypes are, by default, automatically guessed. Here, as necdf is a derivative of the h5 format, Galaxy automatically affect the h5 datatype to netcdf files. To cope with that, one can change the datatype manually, once datasets uploaded (as shown below) OR you can directly specify datatype on the upload tool form so Galaxy will not try to automatically guess it.
+>    Files you uploaded are in netcdf format. In Galaxy, Datatypes are, by default, automatically guessed. Here, as netcdf is a derivative of the h5 format, Galaxy automatically affect the h5 datatype to netcdf files. To cope with that, one can change the datatype manually, once datasets uploaded (as shown below) OR you can directly specify datatype on the upload tool form so Galaxy will not try to automatically guess it.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
@@ -106,16 +105,16 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 
 ## Opening up Panoply
 
-> ### {% icon hands_on %} Hands-on: Launch Panoply
+> <hands-on-title>Launch Panoply</hands-on-title>
 >
 >  Panoply is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
 >
-> > ### {% icon tip %} Tip: Launch Panoply in Galaxy
+> > <tip-title>Launch Panoply in Galaxy</tip-title>
 > > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
 > >
-> > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply){:target="_blank"}
+> > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} [on UseGalaxy.eu](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
 > > 2. Check **ecv_1979.nc** dataset selected in the netcdf input field
-> > 3. Click Execute
+> > 3. Click Run Tool
 > > 4. The tool will start running and will stay running permanently
 > > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
 > > 6. Click on your Panoply instance
@@ -126,17 +125,17 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 
 ## Inspect metadata
 
-> ### {% icon hands_on %} Hands-on: Inspect dataset
+> <hands-on-title>Inspect dataset</hands-on-title>
 >
 > 1. Inspect dataset content
 >
 >    Here you can look at the dataset (ecv_1979.nc) and related variables (`latitude`, `longitude`, `number`, `siconc`, etc)
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > what is the unit of the `sea ice area fraction` variable (**siconc**) variable?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > The unit of **siconc** is (0-1) e.g. a real value between 0 (no ice) and 1 (fully coverted by ice).
 >    > {: .solution}
@@ -145,11 +144,11 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 > 2. Inspect the surface temperature (**t2m**) variable
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > what is the unit of this variable and its shape?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > The unit of **t2m** is Kelvin (K). **t2m** is a 3D array (time, latitude, longitude).
 >    > {: .solution}
@@ -159,18 +158,18 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 
 ## Create Geo-referenced Longitude-Latitude plot
 
-> ### {% icon hands_on %} Hands-on: geographical map
+> <hands-on-title>geographical map</hands-on-title>
 >
 > 1. Double click on the variable **t2m** and click on **Create**
 >    ![Panoply create Latitude longitude map](../../images/panoply_t2m_map_default.png "Create map")
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > 1. What does it show?
 >    > 2. What is the date of the generated plot?
 >    > 3. Can you plot other dates?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. The plot represent the surface temperature over the entire world.
 >    > >    ![Panoply Latitude longitude map](../../images/panoply_geomap.png "Plot map")
@@ -190,7 +189,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 > 3. Change colormap
 >    **Always make sure you use color blind friendly palettes.**
->    - To change the default colormap, click on tab "**Scale**" (bottom of your plot wind) and select another "**Color Table**" (you can scroll down to go through all the different available colormap).
+>    - To change the default colormap, click on tab "**Scale**" (bottom of your plot window) and select another "**Color Table**" (you can scroll down to go through all the different available colormap).
 >    - Save your plot using **Save Image As** and make sure to choose another name to avoid overwritting your preceding plot.
 >    ![Panoply colormap](../../images/panoply_colormap.png "Plot colormap")
 {: .hands_on}
@@ -198,7 +197,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 
 ## Changing map projection
 
-> ### {% icon hands_on %} Hands-on: Change projection
+> <hands-on-title>Change projection</hands-on-title>
 >
 > 1. From your previous plot window, click on Tab **Map** and change **Projection**. Try a few of them and save each of your plot with **File** --> **Save Image As**.
 >
@@ -206,12 +205,12 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 > 2. Create another plot window for sea ice area fraction (**siconc**) and make a new geo-referenced map
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > 1. What kind of colormap could you use to highlight the extent of sea-ice?
 >    > 2. What projection would be best to use for showing the extent of sea-ice over the two poles?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Any colormap that shows low values (close to 0) in light color so we can focus on values that are close to 1. For instance, **CP_PuBu_08.cpt**.
 >    > >    ![Panoply sea-ice colormap](../../images/panoply_sea-ice_colormap.png "Sea-ice colormap")
@@ -224,7 +223,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 
 ## Export Animation
 
-> ### {% icon hands_on %} Hands-on: Export animation
+> <hands-on-title>Export animation</hands-on-title>
 >
 > 1. From your previous plot window, click on **File** and select **Export Animation**. Save your plot using either **MOV** or **AVI** format.
 >  It goes through each plot e.g. for each month and create an animation where you can see the evolution of sea-ice extent from January 1979 to December 1979.
@@ -233,17 +232,17 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 
 ## Create timeseries
 
-> ### {% icon hands_on %} Hands-on: Create 1D plot
+> <hands-on-title>Create 1D plot</hands-on-title>
 >
 > 1. Double click on the variable **t2m**, click on **Create** and select **Create horizontal line plot along time axis** (make sure to switch to **time**).
 > ![Panoply create 1D plot](../../images/panoply_create_1D.png "Create 1D plot")
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > 1. What was the maximum temperature in Oslo (latitude: 60 degrees North, longitude: 10.75 East) in 1979?
 >    > 2. Which month was the warmest in Oslo?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. The maximum temperature is about 288 K so about 15 degrees Celsius (`288 - 273.15`).
 >    > > 2. The warmest month in 1979 was July.
@@ -255,7 +254,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 ## Quit Panoply
 
 
-> ### {% icon hands_on %} Hands-on: Quit Panoply to keep your plots
+> <hands-on-title>Quit Panoply to keep your plots</hands-on-title>
 >
 > 1. To make sure all your plots stored in **outputs** folder get exported to Galaxy, you need to quit panoply:
 >  **File** --> **Quit Panoply**.
@@ -265,7 +264,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 We have now learnt how to analyze climate data using Panoply. We only use one of the two datasets so we strongly encourage you to do the same exercises with the second dataset **ecv_2018.nc**. Please note that when comparing surface temperature or sea-ice area fraction from 1979 and 2018, you would not be able to conclude anything regarding climate change. For any climate studies, long term timeseries (between 20 to 30 years) are necessary to establish climate trends.
 

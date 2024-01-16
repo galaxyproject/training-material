@@ -1,9 +1,14 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark">
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="{{ site.baseurl }}/">
                 <img src="{{ site.baseurl }}/{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
-                {{ site.title }}
+                {% if topic.logo %}
+                    <img src="{{ topic.logo }}" height="30" alt="{{ topic.logo_alt }}">
+                    {{ topic.logo_text }}
+                {% else %}
+                    {{ site.title }}
+                {% endif %}
             </a>
 
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,19 +17,35 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                         <a class="nav-link" href="{{ site.baseurl }}/hall-of-fame" title="Hall of Fame">
-                            {% icon hall-of-fame %} Contributors
+                        {% if page.layout == "tutorial_hands_on" %}
+                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Go back to list of tutorials">
+                            {% icon topic aria=false %} {{ topic.title }}
+                        </a>
+                        {% else %}
+			{% if page.path == 'index.md' %}
+                        <a class="nav-link" href="{{ site.baseurl }}/hall-of-fame" title="Hall of Fame">
+                           {% icon hall-of-fame %} Contributors
+                        </a>
+			{% endif %}
+
+                        {% endif %}
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.baseurl }}/learning-pathways" title="Learning Pathways">
+                           {% icon curriculum %} Learning Pathways
                         </a>
                     </li>
+
                     {% include _includes/help.html %}
 
                     {% include _includes/extras.html %}
 
                     <!-- Search bar-->
                     <li class="nav-item">
-                      <div id="navbarSupportedContent">
+                      <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="{{site.baseurl}}/search">
+                        <form class="form-inline mr-auto" method="GET" action="{{site.baseurl}}/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">

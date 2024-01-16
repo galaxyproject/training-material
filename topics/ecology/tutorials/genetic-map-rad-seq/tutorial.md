@@ -7,6 +7,9 @@ title: "RAD-Seq to construct genetic maps"
 zenodo_link: "https://doi.org/10.5281/zenodo.1219888"
 tags:
   - RAD-seq
+  - Genetic composition EBV class
+  - EBV dataset
+  - EBV workflow
 questions:
   - "How to analyze RAD sequencing data for a genetic map study?"
 objectives:
@@ -19,8 +22,6 @@ contributors:
   - yvanlebras
 ---
 
-# Introduction
-{:.no_toc}
 
 This tutorial is based on the analysis described in [publication](http://www.genetics.org/content/188/4/799).
 Further information about the pipeline is available from [the official STACKS website](http://catchenlab.life.illinois.edu/stacks).
@@ -30,7 +31,7 @@ appeared in one of the linkage groups and worked backwards to provide the raw re
 
 This tutorial re-analyzes these data through to genotype determination. These data do not require demultiplexing and do not need processing though `Process Radtags tool`.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -45,16 +46,17 @@ This tutorial re-analyzes these data through to genotype determination. These da
 
 The original data is available at [STACKS website](http://catchenlab.life.illinois.edu/stacks/) and the subset used here is findable on [Zenodo](https://zenodo.org/record/1219888#.WtZlK5c6-00).
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this RAD-seq exercise.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import Fasta files from parents and 20 progeny.
 >
->    > ### {% icon comment %} Comments
+>    > <comment-title></comment-title>
 >    > If you are using the [GenOuest Galaxy instance](https://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Genetic map'
 >    {: .comment}
 >
@@ -95,13 +97,13 @@ The original data is available at [STACKS website](http://catchenlab.life.illino
 
 Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks`, and `sstacks` on each individual, accounting for the alignments of each read.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > Information on `denovo_map.pl` and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/denovo_map.php.
 {: .comment}
 
 
-> ### {% icon hands_on %} Hands-On: Stacks: De novo map
+> <hands-on-title>Stacks: De novo map</hands-on-title>
 > **Stacks: De novo map** {% icon tool %}: Run Stacks selecting the Genetic map usage.
 >  - *"Select your usage"*: `Genetic map`
 >  - *"Files containing parent sequences"*: `female` and `male`
@@ -134,12 +136,12 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >    ![De novo map: cstacks](../../images/RAD2_Genetic_Map/denovo_map_log_cstacks.png)
 >
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > 1. Can you identify the meanning of the number 425?
 >    > 2. Looking at the catalog.tags file, identify specific and shared loci from each individual. Count the number of catalog loci coming from the first individual, from the second, and find on both parents.
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. Here, the catalog is made with 459 tags, 425 coming from the "reference individual", a female. Some of these 425 can be shared with the other parent.
 >    > > 2. 35 / 34 / 390
 >    > {: .solution }
@@ -194,7 +196,7 @@ We can then see that Stack_ID 330 for female corresponds to the 39 for male:
 
 # Genotypes determination
 
-> ### {% icon hands_on %} Hands-on: Stacks: Genotypes
+> <hands-on-title>Stacks: Genotypes</hands-on-title>
 > **Stacks: genotypes** {% icon tool %}: Re-Run the last step of `Stacks: De novo map` pipeline specifying more options as:
 >
 >    1. The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the cross of pure homozygous parents))
@@ -234,12 +236,12 @@ One line by locus, one column by individual (aa, ab, AB if automatic correction 
 
 ![Haplotypes.tsv file overview](../../images/RAD2_Genetic_Map/haplotypes_tsv.png)
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. The use of the deleverage algorithm allows to not consider loci obtained from merging more than 3 stacks. Why 3 if biologically, you are waiting something related to 2 for diploid organisms?
 > 2. Re-execute **Stacks: De novo map** pipeline modifying the p-value treshold for the SNP model. What is the difference regarding to unverified haplotypes ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. This value of 3 is important to use if we don't want to blacklist loci for whom 99.9% of individuals have one and/or the alt allele and 0.01% have a third one, resulting of a sequencing error.
 > > 2. We see a moficiation of the number of unverified haplotypes
 > {: .solution }
@@ -247,7 +249,7 @@ One line by locus, one column by individual (aa, ab, AB if automatic correction 
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as genotypes and haplotypes to generate input files for downstream genetic map creation. This approach can be summarized with the following scheme:
 

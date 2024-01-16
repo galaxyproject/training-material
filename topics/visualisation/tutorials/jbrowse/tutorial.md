@@ -17,16 +17,14 @@ key_points:
 contributors:
   - hexylena
   - shiltemann
+  - gallantries
 ---
 
-# Introduction
-{:.no_toc}
 
 > JBrowse ({% cite Buels_2016 %}) is a fast, embeddable genome browser built completely with JavaScript
 > and HTML5, with optional run-once data formatting tools written in Perl.
 >
-> *from [http://jbrowse.org/](http://jbrowse.org/)*
-{: .quote}
+{: .quote cite="https://jbrowse.org/jbrowse1.html"}
 
 The Galaxy tool accepts data in many formats:
 
@@ -40,7 +38,7 @@ and executes the "run-once data formatting tools" mentioned in its description. 
 
 This tutorial covers version 1.16.5+ of the JBrowse tool, earlier versions will have different behaviour and tool layout.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -51,7 +49,7 @@ This tutorial covers version 1.16.5+ of the JBrowse tool, earlier versions will 
 
 # Data Upload
 
-> ### {% icon hands_on %} Hands-on: Getting the data
+> <hands-on-title>Getting the data</hands-on-title>
 >
 > 1. Create and name a new history for this tutorial.
 >
@@ -82,7 +80,7 @@ The data for today is a subset of real datasets from *E. coli MG1655 strain K-12
 
 We will start by adding a couple of gene call tracks. In our case these are genes and gene predictions, but they don't have to be. In the general case this can be any interesting region from an analysis, where a tool has pointed out some region for further inspection for some reason, then this data can be visualised with the "gene" track type.
 
-> ### {% icon hands_on %} Hands-on: Build the JBrowse
+> <hands-on-title>Build the JBrowse</hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -101,7 +99,7 @@ We will start by adding a couple of gene call tracks. In our case these are gene
 >
 >    ![Screenshot of JBrowse](../../images/jbrowse-gff-track.png "Screenshot of JBrowse")
 >
->    > ### {% icon tip %} Error reading from name store
+>    > <tip-title>Error reading from name store</tip-title>
 >    > ![error message](../../images/jbrowse/error.png)
 >    >
 >    > If you see this error message, click OK, this is a known bug.
@@ -115,7 +113,7 @@ If you are not familiar with the operation of JBrowse there are some important p
 - You can use your mouse scrollwheel to move around the genome view area, or you can click and drag to move.
 - Double clicking will zoom in on the genome, or you can use the magnifying glass icons to zoom in our out
 
-> ### {% icon tip %} Tip: Naming Tracks
+> <tip-title>Naming Tracks</tip-title>
 >
 > * The JBrowse tool takes track names directly from file names
 > * If you want to rename tracks: **Click** on the **pencil** icon, edit the **Name** and click **Save**.
@@ -126,7 +124,7 @@ If you are not familiar with the operation of JBrowse there are some important p
 
 All of the track types in the JBrowse tool support a wide array of features. We've only looked at a simple track with default options, however there are more tools available to us to help create user-friendly JBrowse instances that can embed rich data.
 
-> ### {% icon hands_on %} Hands-on: Build a JBrowse for viewing Genes
+> <hands-on-title>Build a JBrowse for viewing Genes</hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -151,7 +149,7 @@ All of the track types in the JBrowse tool support a wide array of features. We'
 >                        - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
 >                        - In *"JBrowse Contextual Menu options [Advanced]"*:
 >
->                          > ### {% icon tip %} Tip: Contextual Menus
+>                          > <tip-title>Contextual Menus</tip-title>
 >                          >
 >                          > We're going to add a "Contextual Menu" which deserves a little explanation first. In JBrowse
 >                          > terminology the right click menu of some features is called the contextual menus. You can customize
@@ -196,7 +194,7 @@ This is the next major category of data that people wish to visualize: sequencin
 
 Next we will add a sequencing dataset, a BAM file which maps some sequencing reads against various locations along the genome. JBrowse helpfully highlights which reads have mapping issues, and any changes in bases between the reads and the genome. We "Autogenerate a SNP track", which produces an extra track we can enable in JBrowse. This track reads the same BAM file used for visualising reads, and then produces a SNP and coverage visualisation. **NB**: This only works for small BAM files, if your files are large (>200 Mb), then you should consider generating these coverage and SNP tracks by other means (e.g. `bamCoverage` and `FreeBayes` or similar tools) as it will be significantly faster. You can learn more about generating these files in [the Mapping tutorial]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -248,7 +246,7 @@ The Blast visualisation module requires that you have a gff3 formatted set of fe
 
 The best way to accomplish this is through the `gffread` tool which can cleanup a gff3 file, and export various features, optionally translating them. With these outputs, the cleaned features and `fasta` formatted sequences, you can Blast the sequences, and then supply the resulting Blast XML outputs in addition to the cleaned features, allowing a script to re-associate these Blast results to their original locations along the genome.
 
-> ### {% icon hands_on %} Hands-on: Building a JBrowse for Blast results
+> <hands-on-title>Building a JBrowse for Blast results</hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`

@@ -43,14 +43,13 @@ key_points:
 - Galaxy Climate JupyterLab
 - CLM-FATES
 - Model analysis
+tags:
+  - interactive-tools
 contributors:
 - annefou
 
 ---
 
-
-# Introduction
-{:.no_toc}
 
 
 The practical aims at familiarizing you with running CLM-FATES within Galaxy Climate JupyterLab.
@@ -64,7 +63,7 @@ The practical aims at familiarizing you with running CLM-FATES within Galaxy Cli
 >
 {: .agenda}
 
-> ### {% icon comment %} Background
+> <comment-title>Background</comment-title>
 >
 > FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”.
 > FATES needs what we call a "Host Land Model" (HLM) to run and in this tutorial
@@ -80,7 +79,7 @@ The practical aims at familiarizing you with running CLM-FATES within Galaxy Cli
 ## Motivation
 
 In this tutorial, we will be using a Galaxy interactive tool called Galaxy Climate JupyterLab for running CLM-FATES.
-This interactive tool is only available from [LiveGalaxy.eu](https://live.usegalaxy.eu/){:target="_blank"}.
+This interactive tool is only available from [LiveGalaxy.eu](https://live.usegalaxy.eu/).
 
 This platform is meant to be used for:
 - preparing new input datasets;
@@ -93,7 +92,7 @@ The main advantage over the Galaxy CLM-FATES tool is that you can run any versio
 that are not released yet. However, it is not recommended to run more than a few decades of simulation time.
 In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy tool.
 
-> ### {% icon comment %} CML-FATES in JupyterLab versus CLM-FATES Galaxy tool
+> <comment-title>CML-FATES in JupyterLab versus CLM-FATES Galaxy tool</comment-title>
 > Do not use the interactive Galaxy Climate JupyterLab for running long and "operational" simulations and
 > do not forget that you need to save back your results to your Galaxy history or local machine before
 > stopping your JupyterLab.
@@ -102,7 +101,7 @@ In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy too
 
 # Step-1: Get data
 
-> ## {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title> Data upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates-jupyterlab*.
 >
@@ -137,13 +136,13 @@ In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy too
 
 # Step-2: Opening up Climate JupyterLab
 
-> ## {% icon hands_on %} Hands-on: Launch JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy
+> <hands-on-title> Launch JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy </hands-on-title>
 >
 > Currently JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy is available on [Live.useGalaxy.eu](https://live.usegalaxy.eu) only. JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem and not the default JupyterLab in Galaxy contains all the python packages and additional software we need for running Earth System Model, including Functionally Assembled Terrestrial Ecosystem Simulator (FATES). The default JupyterLab in Galaxy would not be sufficient for executing all the tasks in th
-is tutorial.
+> is tutorial.
 >
-> 1. Open the {% tool [JupyterLab](interactive_tool_jupyter_notebook) %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook){:target="_blank"}
-> 2. Click Execute
+> 1. Open the {% tool [JupyterLab](interactive_tool_jupyter_notebook) %} or opening directly on [live.usegalaxy](https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook)
+> 2. Click Run Tool
 > 3. The tool will start running and will stay running permanently
 > 4. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the JupyterLab instance you started.
 > 5. Click on your JupyterLab instance (please not that it may take a few minutes before you can click on the link to your jupyterLab instance).
@@ -153,7 +152,7 @@ is tutorial.
 
 You should now be looking at a page with the JupyterLab interface:
 
-![Jupyterlab climate session](../../images/jupyterlab_climate_session.png)
+![Jupyterlab climate session interface](../../images/jupyterlab_climate_session.png)
 
 
 # Step-3: Create a new session CLM-FATES in JupyterLab
@@ -162,7 +161,7 @@ You should now be looking at a page with the JupyterLab interface:
 
 In this part of the tutorial, we will be using the existing Jupyter Notebook called **ipython_galaxy_notebook.ipynb**
 
-> ### {% icon hands_on %} Hands-on: Open a JupyterLab Terminal
+> <hands-on-title>Open a JupyterLab Terminal</hands-on-title>
 > To open **ipython_galaxy_notebook.ipynb**, double click on it.
 > More information on the JupyterLab interface can be found on the [JupyterLab documentation](https://jupyterlab.readthedocs.io/en/stable/user/interface.html).
 >
@@ -187,7 +186,7 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 > ```
 {: .hands_on}
 
-> ### {% icon comment %} Direct download in JupyterLab from Zenodo
+> <comment-title>Direct download in JupyterLab from Zenodo</comment-title>
 >
 > You may also download the input dataset directly from Zenodo.
 > - Open a JupyterLab Terminal and enter the following command:
@@ -198,15 +197,15 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 > ```
 {:  .comment}
 
-> ### {% icon comment %} Using JupyterLab Terminal
+> <comment-title>Using JupyterLab Terminal</comment-title>
 >
 > Most of the tutorial (except visualization) can be executed from a JupyterLab Terminal. In that case,
-> you should not add `%%bash` to your commands. More on JupyterLab Terminal can be found [here](https://jupyterlab.readthedocs.io/en/stable/user/terminal.html).
+> you should not add `%%bash` to your commands. More on JupyterLab Terminal can be found on [Read the Docs](https://jupyterlab.readthedocs.io/en/stable/user/terminal.html).
 {:  .comment}
 
 ## Get CLM-FATES EMERALD release
 
-> ### {% icon hands_on %} Hands-on: Clone CLM-FATES for Nordic sites
+> <hands-on-title>Clone CLM-FATES for Nordic sites</hands-on-title>
 >
 > ```
 > %%bash
@@ -231,7 +230,7 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 
 ## Create CLM-FATES new case
 
-> ### {% icon hands_on %} Hands-on: Create CLM-FATES new case for ALP1 site
+> <hands-on-title>Create CLM-FATES new case for ALP1 site</hands-on-title>
 >
 > ```
 > %%bash
@@ -242,7 +241,7 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 >
 {: .hands_on}
 
-> ### {% icon warning %} Command not found!
+> <warning-title>Command not found!</warning-title>
 > If you get an error when invoking `create_newcase` make sure you have switch to fates conda environment:
 > ```
 > %%bash
@@ -251,7 +250,7 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 > ```
 {: .warning}
 
-The 4 main arguments of create_newcase are explained on the figure below: ![create_newcase main arguments](../../images/newcase_fates.png).
+The 4 main arguments of create_newcase are explained on the figure below: ![Snapshot of create_newcase main arguments showing: what is the case name? which resolution? which model configuration? which set of components? which machine are you running on?](../../images/newcase_fates.png).
 
 - **case**: specifies the name and location of the case being created. It creates a new case in `$HOME/ctsm_cases/` and its name is `fates_alp1`. make sure to give a meaningful name to your FATES experiments.
 - **res**: specifies the model resolution (resolution of the grid). Here **1x1_ALP1** corresponds to a single point resolution.
@@ -267,12 +266,12 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
     - **River runoff**:MOSART: MOdel for Scale Adaptive River Transport
     - **Land Ice**: SGLC Stub Glacier (land ice) component
     - **Wave**-   SWAV Stub wave component
-   The list of available component set is given [here](http://www.cesm.ucar.edu/models/cesm2/config/compsets.html).
+   See also the [list of available component sets](http://www.cesm.ucar.edu/models/cesm2/config/compsets.html).
 - **mach**: specifies the machine where CLM-FATES will be compiled and run. We use `espresso` which is the local setup (see `$HOME/.cime/` folder).
 
 ## Setup, build and submit your first simulation
 
-> ### {% icon hands_on %} Hands-on: Setup, build and submit
+> <hands-on-title>Setup, build and submit</hands-on-title>
 >
 > Check the content of the directory and browse the sub-directories:
 > - CaseDocs: namelists or similar
@@ -302,7 +301,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 
 ## Check your run
 
-> ### {% icon hands_on %} Hands-on: check your simulation
+> <hands-on-title>check your simulation</hands-on-title>
 >
 > 1. From a new code cell:
 >
@@ -331,7 +330,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > We have run a very short simulation and get one file only, called `fates_alp1_t.clm2.h0.2000-01.nc`. The
 > CLM-FATES model outputs are stored in netCDF format.
 >
-> > ### {% icon comment %} What is a netCDF file?
+> > <comment-title>What is a netCDF file?</comment-title>
 > >
 > > Netcdf stands for “network Common Data Form”. It is self-describing, portable, metadata friendly, supported by many languages
 > > (including python, R, fortran, C/C++, Matlab, NCL, etc.), viewing tools (like panoply, ncview/ncdump) and tool suites of file operators (in particular NCO and CDO).
@@ -379,7 +378,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 
 ## Customize your run
 
-> ### {% icon hands_on %} Hands-on: Run 10 years
+> <hands-on-title>Run 10 years</hands-on-title>
 >
 > ```
 > %%bash
@@ -405,7 +404,7 @@ In this section, we will be able to analyze your 10 year simulation only when th
 
 ## Analyzing FATES-CLM model outputs
 
-> ### {% icon hands_on %} Hands-on: Open a new Python notebook
+> <hands-on-title>Open a new Python notebook</hands-on-title>
 > - Create a notebook by clicking the `+` button in the file browser and then selecting a kernel in the new Launcher tab:
 > - Rename your notebook to **analyse_case.ipynb**
 > Get more information online at [JupyterLab notebooks](https://jupyterlab.readthedocs.io/en/stable/user/notebook.html).
@@ -466,7 +465,7 @@ p.fig.savefig('CANOPY_HEIGHT_DIST.png')
 
 # Save your results to your Galaxy history
 
-> ### {% icon hands_on %} Hands-on: Put your data to your Galaxy history
+> <hands-on-title>Put your data to your Galaxy history</hands-on-title>
 >
 > ```
 > %%bash
@@ -497,7 +496,7 @@ p.fig.savefig('CANOPY_HEIGHT_DIST.png')
 > ```
 {: .hands_on}
 
-> ### {% icon warning %} Danger: You can lose data!
+> <warning-title>Danger: You can lose data!</warning-title>
 > If you do not copy data (FATES model results, jupyter notebooks, plots, etc.) before you stop your Galaxy climate
 > JupyterLab tool, all your results will be lost!
 {: .warning}
@@ -507,26 +506,16 @@ p.fig.savefig('CANOPY_HEIGHT_DIST.png')
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the {% icon galaxy-gear %} icon in the history panel and select `Share or Publish`. On this page you can do 3 things:
+{% snippet faqs/galaxy/histories_sharing.md %}
 
-1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
-2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
-3. **Share with a user**. This will share the history only with specific users on the Galaxy instance.
-
-> ### {% icon comment %} Permissions
-> Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.
->
-> Be sure to select **Also make all objects within the History accessible** whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.
-{: .comment}
-
-> ### {% icon hands_on %} Hands-on: Share history
+> <hands-on-title>Share history</hands-on-title>
 >
 > 1. Share your history with your neighbour.
 > 2. Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users under their top masthead "User" menu under `Histories shared with me`.
 {: .hands_on}
 
 
-> ### {% icon comment %} Clone CLM-FATES release for Nordic site from github (advanced)
+> <comment-title>Clone CLM-FATES release for Nordic site from github (advanced)</comment-title>
 >
 > You may also get the CLM-FATES release 2.0.1 directly from github:
 >
@@ -563,7 +552,5 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 {:  .comment}
 
 # Conclusion
-
-{:.no_toc}
 
 We have learnt to run single-point simulations with FATES-CLM through the Galaxy Climate JupyterLab.

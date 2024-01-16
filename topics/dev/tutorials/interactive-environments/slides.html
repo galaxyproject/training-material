@@ -3,6 +3,7 @@ layout: tutorial_slides
 logo: "GTN"
 
 title: "Galaxy Interactive Environments"
+draft: true
 questions:
   - "What are Galaxy Interactive Environments (GIEs)?"
   - "How to enable GIEs in Galaxy?"
@@ -33,7 +34,7 @@ subtopic: advanced
 - Embedded access to third-party application inside of Galaxy
 - Interactively analyze data, access analysis products within Galaxy
 
-![](../../images/vis_IE_ipython0.png)
+![Ipython is shown in the center pane of galaxy](../../images/vis_IE_ipython0.png)
 
 - Bring external analysis platform to the data instead of vice-versa
   - no need to download/re-upload your data
@@ -75,7 +76,7 @@ GIE for visualization? Check that it is the right choice for your project
 
 ## Which should I use?
 
-![](../../images/which_viz_flowchart.png)
+![Flowchart. Only available on an external website? If yes use a display application. Does it need to be served (e.g. python), if yes use an interactive tool. Is it computationally intensive, then it needs to be a regular tool. Is it written in javascript? Then it shold be a generic plugin. If it passes all these tests it can be a charts plugin.](../../images/which_viz_flowchart.png)
 
 
 ---
@@ -85,12 +86,12 @@ GIE for visualization? Check that it is the right choice for your project
 - Can be bound to specific datatypes
   - Available under the visualizations button on the dataset
 
-.image-25[![](../../images/vis_IE_button.png)]
+.image-25[![visualisation button in galaxy is clicked on a dataset. Jupyter and Rstudio appear below charts.](../../images/vis_IE_button.png)]
 
 - Or more general-purpose applications (Jupyter/Rstudio)
 - IE launcher
 
-.image-25[![](../../images/vis_IE_launcher_menu.png)]
+.image-25[![A drop down menu from the masthead of galaxy shows interactive environments as well.](../../images/vis_IE_launcher_menu.png)]
 ---
 
 ### IE Launcher
@@ -98,7 +99,7 @@ GIE for visualization? Check that it is the right choice for your project
 - Choose between different available docker images
 - Attach one or more datasets from history
 
-.image-75[![](../../images/vis_IE_launcher.png)]
+.image-75[![An IE launcher is shown with select boxes for the GIE, image, and datasets. Launch is shown below.](../../images/vis_IE_launcher.png)]
 
 ---
 
@@ -107,7 +108,7 @@ GIE for visualization? Check that it is the right choice for your project
 - Docker Containers are launched on-demand by users..
 - ..and killed automatically when users stop using them
 
-![](../../images/vis_IE_infra.png)
+![schematic of request flow. A users requests an IE session with galaxy which connects to a docker host, launches the IE, and communicates this to a NodeJS proxy living next to galaxy. The user opens the connection through the proxy to access the container.](../../images/vis_IE_infra.png)
 
 .footnote[ Admin Docs: https://docs.galaxyproject.org/en/master/admin/interactive_environments.html ]
 
@@ -119,19 +120,19 @@ GIE for visualization? Check that it is the right choice for your project
   - Provides special functions to interact with the Galaxy history (get/put datasets)
   - Ability to save and load notebooks
 
-.image-75[![](../../images/vis_IE_ipython1.png)]
+.image-75[![jupyter seen in the main panel of galaxy](../../images/vis_IE_ipython1.png)]
 
 ---
 
 ### Jupyter
 
-![](../../images/vis_IE_ipython2.png)
+![the above screenshot but they have scrolled to show embedded plots computed in jupyter in galaxy](../../images/vis_IE_ipython2.png)
 
 ---
 
 ### Jupyter
 
-![](../../images/vis_IE_ipython3.png)
+![Another screenshot of jupyter in galaxy, this time fetching datasets from galaxy and running samtools.](../../images/vis_IE_ipython3.png)
 
 ---
 
@@ -141,7 +142,7 @@ GIE for visualization? Check that it is the right choice for your project
 - Provides special functions to interact with the Galaxy history
 - Ability to save and load workbook and R history object
 
-![](../../images/vis_IE_rstudio.png)
+![default rstudio in galaxy, multiple panes are visible for computing, values, and files.](../../images/vis_IE_rstudio.png)
 
 ---
 
@@ -150,19 +151,19 @@ GIE for visualization? Check that it is the right choice for your project
 - Visualizes single dataset
 - Only available for datasets of specific formats
 
-![](../../images/vis_IE_iobio.png)
+![IOBIO are dynamic javascript-y visualisations with lots of constantly updating graphs that are recalculated on the fly. They are shown in two scratchbooks in Galaxy](../../images/vis_IE_iobio.png)
 
 ---
 
 ### IOBIO
 
-![](../../images/vis_IE_iobio2.png)
+![a close up of iobio with several graphs and illegible text.](../../images/vis_IE_iobio2.png)
 
 ---
 
 ### Phinch
 
-![](../../images/vis_IE_phinch.png)
+![Phinch is shown inside galaxy, another visually intensive graphing application for metagenomics data.](../../images/vis_IE_phinch.png)
 
 ---
 
@@ -203,7 +204,7 @@ GIE for visualization? Check that it is the right choice for your project
 
 ### Development
 
-![](../../images/vis_IE_ipython_components.png)
+![schematic of GIE with a box on the left labelled ipython.mako being invoked by a launch ipython notebook call. This has boxes for running a docker container and then proxying authentication. These point to a docker container with a config.yaml containing the history id, api key and password, the ipython galaxy notebook, and the ipython webservice which loops while the connection is active. This proxies the connection and points to a cartoon of ipython in galaxy's center panel.](../../images/vis_IE_ipython_components.png)
 
 ---
 
@@ -432,7 +433,6 @@ CMD /startup.sh
 server {
     listen 80;
     server_name localhost;
-    access_log /var/log/nginx/localhost.access.log;
 
     # Note the trailing slash used everywhere!
     location PROXY_PREFIX/helloworld/ {
@@ -495,6 +495,6 @@ $ cd hello-ie
 $ docker build -t hello-ie .
 ```
 
-![](../../images/vis_IE_helloworld.png)
+![A directory listing is shown in the center panel.](../../images/vis_IE_helloworld.png)
 
 .footnote[Try it yourself: https://github.com/hexylena/hello-world-interactive-environment]

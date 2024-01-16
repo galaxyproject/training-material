@@ -17,20 +17,22 @@ key_points:
   - It can drastically simplify management of large numbers of VMs
 contributors:
   - hexylena
+subtopic: cloud
 tags:
   - terraform
   - deploying
   - cloud
+priority: 3
 ---
 
 # Overview
-{:.no_toc}
+
 
 In this tutorial we will briefly cover what [Terraform](https://www.terraform.io) is and how you can leverage it for your needs. This will not make you an expert on Terraform but will give you the tools you need in order to maintain your cloud infrastructure as code.
 
 This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient. This tutorial uses the OpenStack provider for Terraform. Other Cloud providers are available, but their invocation will be different from that which is described here.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -71,7 +73,7 @@ Some groups use Ansible or Bash scripts in order to launch VMs. This can be a be
 
 We will start small, by managing a single VM in our cloud account. Make sure you have your OpenStack credentials available.
 
-> ### {% icon tip %} Obtaining credentials from OpenStack dashboard
+> <tip-title>Obtaining credentials from OpenStack dashboard</tip-title>
 >
 > You can download the environment file with the credentials from the OpenStack dashboard.
 >
@@ -90,7 +92,7 @@ Terraform reads all files with the extension `.tf` in your current directory. Re
 - Keypairs in a single file
 - Servers/Instances in individual files.
 
-> ### {% icon hands_on %} Hands-on: Setting up Terraform
+> <hands-on-title>Setting up Terraform</hands-on-title>
 >
 > 1. [Install Terraform](https://www.terraform.io/downloads.html)
 >
@@ -106,11 +108,11 @@ Terraform reads all files with the extension `.tf` in your current directory. Re
 >
 > 4. Run `terraform init`
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What did the output look like?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > If this is not the first time you've run it, you will see Terraform download any missing providers:
 >    > >
@@ -153,17 +155,17 @@ We recommend the first option, as often Terraform plans are [made publicly avail
 
 We will start by managing your SSH keypair for the cloud as this is an easy thing to add.
 
-> ### {% icon comment %} Your Operating System
+> <comment-title>Your Operating System</comment-title>
 >
 > If you are on Windows and do not know your public key, please skip to the "Adding an Instance" section, as you probably do not have the tools installed to do this, and we cannot document how to do it. Instead you can simply reference the key by name later. We will point out this location.
 >
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Keypairs
+> <hands-on-title>Keypairs</hands-on-title>
 >
 > 1. Find the public key you will use for connecting to the your new VM. It is usually known as `id_rsa.pub`
 >
->    > ### {% icon comment %} No public key
+>    > <comment-title>No public key</comment-title>
 >    > If you can find the private key file (possibly a `cloud.pem` file you downloaded earlier from OpenStack), then you can find the public key by running the command:
 >    >
 >    > ```shell
@@ -182,11 +184,11 @@ We will start by managing your SSH keypair for the cloud as this is an easy thin
 >
 > 3. Run `terraform plan`
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What does the output look like? Did it execute successfully?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > If you have not sourced your OpenStack credentials file, you will see something like the following:
 >    > >
@@ -264,7 +266,7 @@ Terraform informs us first about the different symbols used. Here it tells us th
 
 Lastly it informs us that we did not save our plan. Terraform can maintain a concept of what the remote resource's state looks like between your `terraform plan` and `terraform apply` steps. This is a more advanced feature and will not be covered today.
 
-> ### {% icon hands_on %} Hands-on: Applying our plan
+> <hands-on-title>Applying our plan</hands-on-title>
 >
 > Now that you've reviewed the plan and everything looks good, we're ready to apply our changes.
 >
@@ -310,7 +312,7 @@ Lastly it informs us that we did not save our plan. Terraform can maintain a con
 >    ```
 >
 >
->    > ### {% icon comment %} "Key pair 'my-key' already exists"
+>    > <comment-title>"Key pair 'my-key' already exists"</comment-title>
 >    >
 >    > If you see an error message that says:
 >    >
@@ -330,10 +332,10 @@ We should now have a keypair in our cloud!
 We now have:
 
 - Terraform installed
-- The OpenStack plugin intialized
+- The OpenStack plugin initialized
 - A keypair in OpenStack
 
-> ### {% icon comment %} Doing this training outside of a training event
+> <comment-title>Doing this training outside of a training event</comment-title>
 > If you are doing this training outside of an event, then you will likely need to do some additional steps specific to your Cloud:
 >
 > 1. Identify a small image flavor that you can use for your testing.
@@ -345,11 +347,11 @@ We now have:
 
 You are now ready to launch an instance!
 
-> ### {% icon hands_on %} Hands-on: Launching an Instance
+> <hands-on-title>Launching an Instance</hands-on-title>
 >
 > 1. Open your `main.tf` in your text editor and add the following.
 >
->    > ### {% icon warning %} Warning: Correct image/flavor/network/security_group names
+>    > <warning-title>Correct image/flavor/network/security_group names</warning-title>
 >    > The documentation below notes some specific values for the `image_name`, `flavor_name`, `security_groups`, and `network` properties. These *may not be correct* for your training, instead your instructor will provide these values to you.
 >    {: .warning}
 >
@@ -503,7 +505,7 @@ You are now ready to launch an instance!
 You now have a running instance! We do not know the IP address so we cannot login yet. You can obtain that from the OpenStack dashboard, or via the `terraform show` command
 
 
-> ### {% icon hands_on %} `terraform show` and logging in
+> <hands-on-title>`terraform show` and logging in</hands-on-title>
 >
 > 1. Run `terraform show`
 >
@@ -599,7 +601,7 @@ We use a very similar setup for our production cloud cluster that powers UseGala
 
 We will start by setting up the new nodes and launching them as a test:
 
-> ### {% icon hands_on %} Hands-on: Adding configuration for other nodes
+> <hands-on-title>Adding configuration for other nodes</hands-on-title>
 >
 > 1. Update the name of the instance you already have, `test` to `name = "central-manager"`. This will be our scheduler central manager.
 >
@@ -685,11 +687,11 @@ We will start by setting up the new nodes and launching them as a test:
 >
 > 6. It should complete successfully
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What did the output look like?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > ```
 >    > > openstack_compute_instance_v2.nfs: Creation complete after 2m55s (ID: 421f0899-f2c1-43c9-8bbe-9b0415c8f4f4)
@@ -709,7 +711,7 @@ These VMs that we have launched currently are all absolutely identical, except f
 [`cloud-init`](https://cloud-init.io/) is used for this process, it allows for injecting files and executing commands as part of the boot process.
 
 
-> ### {% icon details %} Other actions
+> <details-title>Other actions</details-title>
 > cloud-init allows for many more actions to be executed as well, you can read about them in [the documentation](https://cloudinit.readthedocs.io/en/latest/).
 {: .details}
 
@@ -735,7 +737,7 @@ write_files:
 
 This will create a file with the value from `content`, owned by root/group root, in `/etc/condor/condor_config.local`. So let's re-structure our `main.tf` file to have some configuration:
 
-> ### {% icon hands_on %} Hands-on: cloud-init
+> <hands-on-title>cloud-init</hands-on-title>
 >
 > 1. Edit your central-manager server and add a block like the following at the end.
 >
@@ -844,7 +846,7 @@ This will create a file with the value from `content`, owned by root/group root,
 >    ```
 > 4. Compare your final configuration against ours:
 >
->    > ### {% icon solution %} Final Configuration
+>    > <solution-title>Final Configuration</solution-title>
 >    > ```
 >    > resource "openstack_compute_keypair_v2" "my-cloud-key" {
 >    >   name       = "my-key"
@@ -1018,7 +1020,7 @@ This will create a file with the value from `content`, owned by root/group root,
 
 We now have a running cluster! Let's log in
 
-> ### {% icon hands_on %} Hands-on: Cluster Usage
+> <hands-on-title>Cluster Usage</hands-on-title>
 >
 > 1. Now that we have a cluster in the cloud, let's login. Look through the output of `terraform show` to find your `central-manager` server and its IP address.
 >
@@ -1028,11 +1030,11 @@ We now have a running cluster! Let's log in
 >
 >    After your central manager VM booted, the executor nodes booted as well. Then, using the IP address of the central manager, the executors contacted that machine, and advertised their availability to run jobs.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What does the output look like? How many executor nodes do you see?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > ```
 >    > > [centos@central-manager share]$ condor_status
 >    > > Name                   OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
@@ -1084,7 +1086,7 @@ We now have a running cluster! Let's log in
 
 Terraform has the ability to produce a graph showing the relationship of resources in your infrastructure. We will produce a graphic for our current terraform plan:
 
-> ### {% icon hands_on %} Hands-on: Infrastructure Graph
+> <hands-on-title>Infrastructure Graph</hands-on-title>
 >
 > 1. Run:
 >
@@ -1096,11 +1098,11 @@ Terraform has the ability to produce a graph showing the relationship of resourc
 >
 > 2. Open up `graph.png` in an image viewer
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What did the output look like?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > ![A simple graph](../../images/graph.png "A simple graph showing the structure of the infrastructure in this lesson")
 >    > {: .solution}
 >    {: .question}
@@ -1121,7 +1123,7 @@ Once you develop complex infrastructure, these graphics become less useful.
 
 # Tearing Everything Down
 
-> ### {% icon hands_on %} Hands-on: Cleanup
+> <hands-on-title>Cleanup</hands-on-title>
 >
 > 1. Simple delete your `main.tf` file (or rename it without the `.tf` extension)
 >

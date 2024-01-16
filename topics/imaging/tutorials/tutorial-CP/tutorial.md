@@ -31,38 +31,34 @@ zenodo_link: ''
 ---
 
 
-# Introduction
-{:.no_toc}
-
-The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In DNA staining of cells, nucleoli can be identified as the absence of DNA in nuclei ([Fig. 1](#nucleoli)).  
-Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based RNA interference (RNAi) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alternative to performing new experiments.  
-In particular, regardless of the targeted biological process, many screens include a DNA label and therefore can also reveal the effect of gene knock-downs on nucleoli.  
+The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In DNA staining of cells, nucleoli can be identified as the absence of DNA in nuclei ([Fig. 1](#figure-1)).
+Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based RNA interference (RNAi) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alternative to performing new experiments.
+In particular, regardless of the targeted biological process, many screens include a DNA label and therefore can also reveal the effect of gene knock-downs on nucleoli.
 
 
-<a name="nucleoli"></a>
 ![DNA channel](../../images/tutorial-CP/img_dna_channel.png "DNA channel from the screen described in {% cite Heriche_2014 %}. The red arrows point at nucleoli."){: width="50%"}
 
 In this tutorial, we will analyse DNA channel images of publicly available RNAi screens to extract numerical descriptors (i.e. features) of nucleoli.
-The images and associated metadata will be retrieved from the [Image Data Resource (IDR)](http://idr.openmicroscopy.org/){:target="_blank"}, a repository that collects image datasets of tissues and cells.
+The images and associated metadata will be retrieved from the [Image Data Resource (IDR)](http://idr.openmicroscopy.org/), a repository that collects image datasets of tissues and cells.
 
 
 To process and analyse the images, we will use [CellProfiler](http://cellprofiler-manual.s3.amazonaws.com/CellProfiler-3.1.9/index.html) ({% cite McQuin_2018 %}), a popular image analysis software. CellProfiler normally comes as a desktop application in which users can compose image analysis workflows from a series of modules. Many of these modules are now also available as tools in Galaxy.
 
-To fully emulate the behaviour of the standalone CellProfiler in Galaxy, each image analysis workflow needs to have three parts: 
+To fully emulate the behaviour of the standalone CellProfiler in Galaxy, each image analysis workflow needs to have three parts:
 
 1) **StartingModules** {% icon tool %} to initialise the pipeline,
 
-2) tools performing the analysis ([Fig. 2](#high_level_view)): identification of the nuclei, nucleoli and background, together with the feature extraction,
+2) tools performing the analysis ([Fig. 2](#figure-2)): identification of the nuclei, nucleoli and background, together with the feature extraction,
 
 3) **CellProfiler** {% icon tool %} to actually run the pipeline.
 
-<a name="high_level_view"></a>
+
 ![High-level view of the workflow](../../images/tutorial-CP/wf.jpg "High-level view of the workflow")
 
 In this tutorial, you will learn how to create a workflow that downloads a selection of images from the IDR, and uses CellProfiler to segment the nuclei and nucleoli. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -77,7 +73,7 @@ In this tutorial, you will learn how to create a workflow that downloads a selec
 
 
 
-> ### {% icon hands_on %} Hands-on: Download images from the IDR
+> <hands-on-title>Download images from the IDR</hands-on-title>
 >
 > 1. If you are logged in, create a new history for this tutorial.
 >
@@ -94,31 +90,31 @@ In this tutorial, you will learn how to create a workflow that downloads a selec
 >
 >
 >
->    > ### {% icon tip %} Tip: Get the IDR link from a manual selection of images
+>    > <tip-title>Get the IDR link from a manual selection of images</tip-title>
 >    >
->    > To get the valid IDR link, go to the [dataset of interest in the IDR](http://idr.openmicroscopy.org/webclient/?show=screen-102){:target="_blank"} and select in the preview of a plate a few images ((figure [Fig. 3](#IDR_interface) - 1)). Once you see them at the bottom of the page (figure [Fig. 3](#IDR_interface) - 2), select them again and click the link button in the top-right corner of the right panel (figure [Fig. 3](#IDR_interface) - 3).
->    > <a name="IDR_interface"></a>
+>    > To get the valid IDR link, go to the [dataset of interest in the IDR](http://idr.openmicroscopy.org/webclient/?show=screen-102) and select in the preview of a plate a few images ((figure [Fig. 3](#figure-3) - 1)). Once you see them at the bottom of the page (figure [Fig. 3](#figure-3) - 2), select them again and click the link button in the top-right corner of the right panel (figure [Fig. 3](#figure-3) - 3).
+>    >
 >    > ![IDR interface](../../images/tutorial-CP/IDR_interface.jpg "IDR interface")
 >    {: .tip}
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > **IMPORTANT:** When the number of images to download is high, it is strongly recommended to enable the option *“Download images in a tarball?”* in order to improve the performance.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
-> 1. Why are we taking the `Cy3` channel in the [example data](http://idr.openmicroscopy.org/webclient/img_detail/295900/){:target="_blank"}?
+> 1. Why are we taking the `Cy3` channel in the [example data](http://idr.openmicroscopy.org/webclient/img_detail/295900/)?
 > 2. How could we download 100,000 images in one go?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The `Cy3` dye was used in the study to stain DNA. Since we want to segment the abscence of DNA, `Cy3` is the only channel that we need to download from the IDR.
 > >
 > > 2. We could upload a text file with the image ids of interest.
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -127,7 +123,7 @@ In this tutorial, you will learn how to create a workflow that downloads a selec
 
 The tool **Starting Modules** {% icon tool %} comprises the first 4 modules of the standalone CellProfiler. It needs to be the first tool of a workflow because it sets the naming and metadata handling for the rest of tools.
 
-> ### {% icon hands_on %} Hands-on: Specify metadata to CellProfiler
+> <hands-on-title>Specify metadata to CellProfiler</hands-on-title>
 >
 > 1. **Starting Modules** {% icon tool %} with the following parameters:
 >    - Images
@@ -139,18 +135,18 @@ The tool **Starting Modules** {% icon tool %} comprises the first 4 modules of t
 >       - *"Select the pattern to extract metadata from the file name"*: `field1__field2__field3__field4__field5__field6`
 >       - *"Extract metadata from"*: `All images`
 >    - NamesAndTypes
->       - *"Process 3D"*: `No, do not process 3D data` 
->       - *"Assign a name to"*: `Give every image the same name` 
->       - *"Name to assign these images"*: `DNA` 
->       - *"Select the image type"*: `Grayscale image` 
->           - *"Set intensity range from"*: `Image metadata` 
+>       - *"Process 3D"*: `No, do not process 3D data`
+>       - *"Assign a name to"*: `Give every image the same name`
+>       - *"Name to assign these images"*: `DNA`
+>       - *"Select the image type"*: `Grayscale image`
+>           - *"Set intensity range from"*: `Image metadata`
 >    - Groups
->       - *"Do you want to group your images?"*: `Yes, group the images` 
->       - *"param"*: `field1` 
+>       - *"Do you want to group your images?"*: `Yes, group the images`
+>       - *"param"*: `field1`
 >
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > The images downloaded from the IDR are named following the pattern: `plateName__imageID__cropX__cropY__cropWidth__cropHeight`. These fields indicate to which plate the image belongs, what is the identifier of the image in the IDR, and the 4 cropping parameters selected. In our case, the upper-left corner (X, Y) and the width and height from there. We have a total of 6 metadata values encoded in the name of the file, separated by `__`. The pattern to extract our metadata from the file name properly is, therefore: `field1__field2__field3__field4__field5__field6`. It is important to keep in mind that, for CellProfiler, our `plateName` will be called `field1`, `imageID` will be `field2`, `cropX` will be `field3`, etc. These matches are relevant for a meaningful interpretation of the features.
 >    {: .comment}
@@ -161,7 +157,7 @@ The tool **Starting Modules** {% icon tool %} comprises the first 4 modules of t
 
 ## Segment nuclei
 
-Since we are interested in segmenting the nucleoli, you may wonder why we need to segment nuclei first. There are several reasons for that: 
+Since we are interested in segmenting the nucleoli, you may wonder why we need to segment nuclei first. There are several reasons for that:
 
 - Get the nuclei features. The intensity, size, shape, number of nucleoli per nucleus, etc. can be informative to study the nucleoli.
 
@@ -169,7 +165,7 @@ Since we are interested in segmenting the nucleoli, you may wonder why we need t
 
 In the first step, we will identify the nuclei that are complete, meaning that they are not touching the borders of the image.
 
-> ### {% icon hands_on %} Hands-on: Segment nuclei that are complete within the boundaries of the image
+> <hands-on-title>Segment nuclei that are complete within the boundaries of the image</hands-on-title>
 >
 > 1. **IdentifyPrimaryObjects** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **Starting Modules** {% icon tool %})
@@ -192,7 +188,7 @@ In the first step, we will identify the nuclei that are complete, meaning that t
 >
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > - The names entered to the input image and objects have to be consistent (case sensitive) with the ones in *NamesAndTypes* and the tools to follow.
 >    > - The min and max diameter of the objects (`Typical minimum diameter of objects, in pixel units (Min)` and `Typical minimum diameter of objects, in pixel units (Max)`) will have to be adjusted to the resolution of the images.
@@ -201,13 +197,13 @@ In the first step, we will identify the nuclei that are complete, meaning that t
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > We are using here Otsu's thresholding method for segmentation. What other segmentation options are available? What is the difference between them?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > In the *global* methods we have `Manual`, `Measurement`, `Minimum cross entropy`, `Otsu` and `Robust background`. For the *adaptive* ones we only have `Otsu`. Check the parameters' help to get more information on each one. 
+> > In the *global* methods we have `Manual`, `Measurement`, `Minimum cross entropy`, `Otsu` and `Robust background`. For the *adaptive* ones we only have `Otsu`. Check the parameters' help to get more information on each one.
 > >
 > {: .solution}
 >
@@ -217,11 +213,11 @@ From the previous tool, we got a group of objects (nuclei). Now, we want to expo
 
 ![Identified nuclei with labels](../../images/tutorial-CP/img_nuclei_labels.png "Identified nuclei with labels.")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Why are some nuclei not labeled in the image above?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > We have indicated to the tool **IdentifyPrimaryObjects** {% icon tool %} that the nuclei that are either outside the diameter range or touching the border should be discarded.
 > >
@@ -230,7 +226,7 @@ From the previous tool, we got a group of objects (nuclei). Now, we want to expo
 {: .question}
 
 
-> ### {% icon hands_on %} Hands-on: Mask the nuclei detected
+> <hands-on-title>Mask the nuclei detected</hands-on-title>
 >
 > 1. **ConvertObjectsToImage** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **IdentifyPrimaryObjects** {% icon tool %})
@@ -260,18 +256,18 @@ From the previous tool, we got a group of objects (nuclei). Now, we want to expo
 >            - *"Text to append to the image name"*: `_nucleiNumbers`
 >    - *"Overwrite existing files without warning?"*: `Yes`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
->    > The `Text color` parameter can be any of your choice, the hexa code is not really relevant. The only consideration is that it needs to be visible on top of the nuclei. 
+>    > The `Text color` parameter can be any of your choice, the hexa code is not really relevant. The only consideration is that it needs to be visible on top of the nuclei.
 >    {: .comment}
 {: .hands_on}
- 
+
 
 ## Segment nucleoli
 
 The nucleoli are lacking intensity in the DNA staining and therefore, we need to enhance the black holes before masking.
 
-> ### {% icon hands_on %} Hands-on: Detect and mask dark holes
+> <hands-on-title>Detect and mask dark holes</hands-on-title>
 >
 > 1. **EnhanceOrSuppressFeatures** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **SaveImages** {% icon tool %})
@@ -296,7 +292,7 @@ The nucleoli are lacking intensity in the DNA staining and therefore, we need to
 
 Now that we have all the holes in one mask, we can segment the nucleoli as individual objects in the same way as we did with the nuclei. All the nucleoli can be then combined into one single image.
 
-> ### {% icon hands_on %} Hands-on: Segment nucleoli as individual objects
+> <hands-on-title>Segment nucleoli as individual objects</hands-on-title>
 >
 > 1. **IdentifyPrimaryObjects** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MaskImage** {% icon tool %})
@@ -334,7 +330,7 @@ We have now one segmentation mask per image with all the nuclei detected, `MaskN
 ![Combined mask for nuclei and nucleoli](../../images/tutorial-CP/img_combined_masks.png "Combined segmentation masks for nuclei (blue) and nucleoli (magenta).")
 
 
-> ### {% icon hands_on %} Hands-on: Convert and save the nuclei and nucleoli masks
+> <hands-on-title>Convert and save the nuclei and nucleoli masks</hands-on-title>
 >
 > 1. **GrayToColor** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ConvertObjectsToImage** {% icon tool %})
@@ -358,7 +354,7 @@ We have now one segmentation mask per image with all the nuclei detected, `MaskN
 >    - *"Overwrite existing files without warning?"*: `Yes`
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > - You can pick any other color of your choice, as long as the contrast is good enough to distinguish both objects.
 >    > - We are saving here a tiff image but any other format of your choice would work too.
@@ -376,7 +372,7 @@ To extract the background, we first need to get the foreground and subtract it f
 
 ## Identify the foreground
 
-> ### {% icon hands_on %} Hands-on: Segment all nuclei
+> <hands-on-title>Segment all nuclei</hands-on-title>
 >
 > 1. **IdentifyPrimaryObjects** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **SaveImages** {% icon tool %})
@@ -411,7 +407,7 @@ To extract the background, we first need to get the foreground and subtract it f
 
 ## Remove the foreground from the original image
 
-> ### {% icon hands_on %} Hands-on: Subtract the foreground from the original image
+> <hands-on-title>Subtract the foreground from the original image</hands-on-title>
 >
 > **ImageMath** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ConvertObjectsToImage** {% icon tool %})
@@ -442,7 +438,7 @@ Now that we have the objects of interest segmented and the background extracted,
 
 A step that requires special attention is the relationship nucleolus-nucleus. This is useful to compute statistics on the number of nucleoli by nucleus.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > The order in which the tools in this section are chained is not relevant for the outcome.
 {: .comment}
@@ -450,7 +446,7 @@ A step that requires special attention is the relationship nucleolus-nucleus. Th
 
 ## Measure the granularity, texture, intensity, size and shape
 
-> ### {% icon hands_on %} Hands-on: Measure the granularity, texture, intensity, size and shape
+> <hands-on-title>Measure the granularity, texture, intensity, size and shape</hands-on-title>
 >
 > 1. **MeasureGranularity** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ImageMath** {% icon tool %})
@@ -491,12 +487,12 @@ A step that requires special attention is the relationship nucleolus-nucleus. Th
 >
 {: .hands_on}
 
-  
-> ### {% icon question %} Questions
+
+> <question-title></question-title>
 >
 > Why are we measuring the granularity, texture and intensity of the original image and the nuclei only?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The nucleoli was not stained in the DNA channel and hence, the granularity, texture and intensity are constant values.
 > >
@@ -509,7 +505,7 @@ A step that requires special attention is the relationship nucleolus-nucleus. Th
 
 It might be relevant to compute some statistics on the number of nucleoli inside each nucleus. CellProfiler has a very interesting module to relate both objects, in which each one of the nucleoli is assigned an identifier and linked to the identifier of its parent nucleus.
 
-> ### {% icon hands_on %} Hands-on: Relate nucleoli to their parent nucleus
+> <hands-on-title>Relate nucleoli to their parent nucleus</hands-on-title>
 >
 > 1. **RelateObjects** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureObjectSizeShape** {% icon tool %})
@@ -526,7 +522,7 @@ It might be relevant to compute some statistics on the number of nucleoli inside
 
 In this section, we will measure the image quality, the area occupied by the nuclei and nucleoli in the original image and the intensity of the foreground and background.
 
-> ### {% icon hands_on %} Hands-on: Measure the image quality
+> <hands-on-title>Measure the image quality</hands-on-title>
 >
 > 1. **MeasureImageQuality** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **RelateObjects** {% icon tool %})
@@ -549,7 +545,7 @@ In this section, we will measure the image quality, the area occupied by the nuc
 >            - *"Measure the area occupied in a binary image, or in objects?"*: `Objects`
 >                - *"Enter the name of the objects to measure"*: `Nucleoli`
 >
->     
+>
 > 3. **MeasureImageIntensity** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureImageAreaOccupied** {% icon tool %})
 >    - In *"new image"*:
@@ -568,11 +564,11 @@ In this section, we will measure the image quality, the area occupied by the nuc
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > In step 3, we are measuring the area occupied by objects for the DNA twice. Why is that?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > We want to have the global intensity of the image, so the parameter *"Measure the intensity only from areas enclosed by objects?"* has to be set to `No`. However, we also want to obtain the intensity of the foreground, so only the parts of the images that are enclosed by nuclei.
 > >
@@ -584,7 +580,7 @@ In this section, we will measure the image quality, the area occupied by the nuc
 
 All the parameters that we have measured related to the images and objects need to be exported to a file for each one of 6 example images analysed.
 
-> ### {% icon hands_on %} Hands-on: Export features
+> <hands-on-title>Export features</hands-on-title>
 >
 > **ExportToSpreadsheet** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureImageIntensity** {% icon tool %})
@@ -603,7 +599,7 @@ All the parameters that we have measured related to the images and objects need 
 All the steps in our workflow (except for the **IDR download** {% icon tool %}) have been passing through an `output_pipeline` as a parameter. This was the way to assemble all the modules from CellProfiler, now we can run all of them together!
 
 
-> ### {% icon hands_on %} Hands-on: Run CellProfiler pipeline
+> <hands-on-title>Run CellProfiler pipeline</hands-on-title>
 >
 > **CellProfiler** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Pipeline file"*: `output_pipeline` (output of **ExportToSpreadsheet** {% icon tool %})
@@ -613,7 +609,7 @@ All the steps in our workflow (except for the **IDR download** {% icon tool %}) 
 >
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > This is the only time-consuming step of the workflow, as it needs to perform the whole analysis in the input dataset.
 >    {: .comment}
@@ -622,6 +618,6 @@ All the steps in our workflow (except for the **IDR download** {% icon tool %}) 
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, you have downloaded images from a public image repository into your Galaxy history. After that, you have built and run a typical image analysis pipeline, composed of segmentation of several objects and feature extraction. As an outcome, you got plenty of features to analyse! And some masks to check that the segmentation algorithms worked as expected. Now you are ready to perform your biological data analysis!

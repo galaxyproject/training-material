@@ -77,12 +77,12 @@ While training a neural network, input data is passed in small batches. A batch 
 #### Loss function
 The error between the computed and actual output is calculated using a loss function which is necessary to evaluate the strength of learning. Learning is good when loss decreases with training epochs otherwise, training should be stopped and the architecture should be carefully adjusted. There are several choices of loss functions too. Functions such as root mean squared error (RMSE) and absolute error (AE) are used for regression problems while cross-entropy error functions such as binary cross-entropy and categorical cross-entropy are used in classification problems. An example of loss function is shown in Figure 8.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What do you understand by an architecture of a neural network?
 > 2. How does a neural network learn?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Architecture of a neural network consists of multiple layers such as input, hidden, convolutional, output and their number of respective neurons, optimiser, loss and activation functions etc.
 > > 2. The learning happens by minimising the loss between the computed and actual output. The weights of all neuronal connections are adjusted (increased or decreased) to achieve the minimum loss. To ascertain the amount of change for weights, a technique known as backpropagation is used. Using this technique, the loss computed at the output layer is "propagated" back in the neural network (from output to input layer) and each neuronal connection is assigned a share of the total loss. In other words, how much each neuron is contributing to the total accumulated loss. For example, w1 is adjusted according to equation:
@@ -101,7 +101,7 @@ Deep learning is an established tool in finding patterns in big data for multipl
 ## Get training and test datasets
 The datasets used for this tutorial contain gene expression profiles of humans suffering from two types of cancer - [acute myeloid leukemia (AML)](https://en.wikipedia.org/wiki/Acute_myeloid_leukemia) and [acute lymphoblastic leukemia (ALL)](https://en.wikipedia.org/wiki/Acute_lymphoblastic_leukemia). The tutorial aims to differentiate between these two cancer types, predicting a cancer type for each patient, by learning unique patterns in gene expression profiles of patients. The data is divided into 2 parts - one for training and another for prediction. Each part contains two datasets - one has the gene expression profiles and another has labels (the types of cancer). The size of the training data (`X_train`) is (38, 7129) where 38 is the number of patients and 7129 is the number of genes. The label dataset (`y_train`) is of size (38, 1) and contains the information of the type of cancer for each patient (label encoding is 0 for ALL and 1 for AML). The test dataset (`X_test`) is of size (34, 7129) and contains the same genes for 34 different patients. The label dataset for test is `y_test` and is of size (34, 1). The neural network, which will be formulated in the remaining part of the tutorial, learns on the training data and its labels to create a trained model. The prediction ability of this model is evaluated on the test data (which is unseen during training to get an unbiased estimate of prediction ability). These datasets are uploaded to Galaxy by following the steps defined below:
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -119,6 +119,7 @@ The datasets used for this tutorial contain gene expression profiles of humans s
 > 3. Rename the datasets as `X_test`, `X_train`, `y_test` and `y_train` respectively.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 4. Check that the datatype is `tabular`.
@@ -133,7 +134,7 @@ Defining a neural network architecture needs to ascertain the types and number o
 
 ### Create architecture: Choose layers
 
-> ### {% icon hands_on %} Hands-on: Create a deep learning model architecture using Keras
+> <hands-on-title>Create a deep learning model architecture using Keras</hands-on-title>
 >
 > 1. **Create a deep learning model architecture using Keras** {% icon tool %} with the following parameters:
 >    - *"Select keras model type"*: `Sequential`
@@ -160,7 +161,7 @@ The tool returns a JSON output file containing data about the neural network lay
 
 ### Create architecture: Add training parameters
 
-> ### {% icon hands_on %} Hands-on: Create deep learning model with an optimizer, loss function and fit parameters
+> <hands-on-title>Create deep learning model with an optimizer, loss function and fit parameters</hands-on-title>
 >
 > 1. **Create deep learning model with an optimizer, loss function and fit parameters** {% icon tool %} with the following parameters:
 >    - *"Choose a building mode"*: `Build a training model`
@@ -186,7 +187,7 @@ The tool returns a zipped file containing an object of the neural network archit
 ### Deep learning training
 A neural network is trained on training data to learn hidden representations and mapping from features (genes) to both the types of cancer. As discussed earlier, the neural network minimises the error, which is given by the loss function, between actual and predicted labels while adjusting the weights of connections among neurons in multiple layers. Once the training is finished, the architecture and learned weights are saved. They are used to predict labels in test data. The deep learning training is set up as follows:
 
-> ### {% icon hands_on %} Hands-on: Deep learning training and evaluation conduct deep training and evaluation either implicitly or explicitly
+> <hands-on-title>Deep learning training and evaluation conduct deep training and evaluation either implicitly or explicitly</hands-on-title>
 >
 > 1. **Deep learning training and evaluation conduct deep training and evaluation** {% icon tool %} with the following parameters:
 >    - *"Select a scheme"*: `Train and validate`
@@ -206,7 +207,7 @@ The tool gives 3 files as output - a tabular file containing output (accuracy of
 ### Prediction on test data
 After training, the saved architecture (fitted estimator) and weights are used to predict labels for the test data. For each patient in the test data, a type of cancer is predicted using the trained model learned in the previous step.
 
-> ### {% icon hands_on %} Hands-on: Model Prediction predicts on new data using a preffited model
+> <hands-on-title>Model Prediction predicts on new data using a preffited model</hands-on-title>
 > 
 > 1. **Model Prediction predicts on new data using a preffited model** {% icon tool %} with the following parameters:
 >    - *"Choose the dataset containing pipeline/estimator object"*: `Fitted estimator or estimator skeleton` (output of **Deep learning training and evaluation** {% icon tool %})
@@ -225,7 +226,7 @@ The tool returns the predicted labels (0 for ALL and 1 AML) for test data in a t
 ## Visualisation
 Visualising the results is important to ascertain the generalisation ability of the trained model on an unseen dataset. Using a dataset with the actual labels for the test data, the performance of the trained model is estimated by comparing the actual labels against the predicted labels using a confusion matrix plot.
 
-> ### {% icon hands_on %} Hands-on: Machine Learning Visualization Extension includes several types of plotting for machine learning
+> <hands-on-title>Machine Learning Visualization Extension includes several types of plotting for machine learning</hands-on-title>
 > 
 > 1. **Machine Learning Visualization Extension includes several types of plotting for machine learning** {% icon tool %} with the following parameters:
 >    - *"Select a plotting type"*: `Confusion matrix for classes` 
@@ -238,7 +239,7 @@ Visualising the results is important to ascertain the generalisation ability of 
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > Please note that your predictions could be different from the plot shown in Figure 11 because the training data is small and the predictions may vary. Stability in predictions can be achieved if the deep learning model is trained on large data. But, for this tutorial, it is kept small to reduce the training time as the aim is to showcase how to create a pipeline for deep learning training. Generally, deep learning models are trained on large data and may keep running for a few hours to a few days.
 {: .comment}
 
@@ -250,5 +251,5 @@ The image below shows [confusion matrix](https://en.wikipedia.org/wiki/Confusion
 ## Conclusion
 The tutorial presents a case-study to predict labels (ALL and AML) of 34 new cancer patients after learning gene expression profiles of 38 cancer patients through multiple steps of a deep learning pipeline. All these steps show how to create a neural network architecture using Galaxy's deep learning tools and analyse results using a confusion matrix visualisation. Similarly, multiple different architectures of neural networks can be created well-suited to datasets and aim of particular experiments. Moreover, it should be noted that one architecture of neural network giving promising results on a dataset may not work at all with another dataset. It is essential to perform multiple experiments with a dataset to formulate an optimal neural network architecture.
 
-{:.no_toc}
+
 

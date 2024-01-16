@@ -1,5 +1,7 @@
+{% assign locale = site.data.lang[page.lang] %}
+
 {% if include.material.workflows %}
-    <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/workflows/" title="Workflows" alt="{{ include.material.title }} workflows">
-        {% icon workflow %}{% if include.label %} Workflows{% endif %}
+    <a class="btn btn-default topic-icon" href="{{ site.baseurl }}/topics/{{ include.material.topic_name }}/tutorials/{{ include.material.tutorial_name }}/workflows/" title="{{ include.material.title }} workflows">
+        {% icon workflow aria=false %}{% if include.label %}&nbsp;{{locale['workflows'] | default: "Workflows"}}{% endif %}
     </a>
 {% endif %}

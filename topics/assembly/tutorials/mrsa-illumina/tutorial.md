@@ -25,11 +25,18 @@ tags:
 - illumina
 - assembly
 - amr
-contributors:
-- bazante1
-- miaomiaozhou88
-- shiltemann
-- hexylena
+- one-health
+
+contributions:
+  authorship:
+  - bazante1
+  editing:
+  - hexylena
+  - bazante1
+  - shiltemann
+  - miaomiaozhou88
+  funding:
+  - avans-atgm
 
 follow_up_training:
 - type: "internal"
@@ -43,8 +50,6 @@ follow_up_training:
 ---
 
 
-# Introduction
-{:.no_toc}
 
 In this training you're going to make an assembly of data produced by
 "Complete Genome Sequences of Eight Methicillin-Resistant
@@ -52,12 +57,13 @@ In this training you're going to make an assembly of data produced by
 Japan" from {% cite Hikichi_2019 %} which describes:
 
 > Methicillin-resistant *Staphylococcus aureus* (MRSA) is a major pathogen
-causing nosocomial infections, and the clinical manifestations of MRSA
-range from asymptomatic colonization of the nasal mucosa to soft tissue
-infection to fulminant invasive disease. Here, we report the complete
-genome sequences of eight MRSA strains isolated from patients in Japan.
+> causing nosocomial infections, and the clinical manifestations of MRSA
+> range from asymptomatic colonization of the nasal mucosa to soft tissue
+> infection to fulminant invasive disease. Here, we report the complete
+> genome sequences of eight MRSA strains isolated from patients in Japan.
+{: .quote cite="{% cite_url Hikichi_2019 %}"}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -76,7 +82,7 @@ Nanopore Technologies sequencing have much longer variable lengths.
 
 {% snippet faqs/galaxy/sequencing_illumina_miseq.md %}
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. {% tool [Import](upload1) %} the files from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
@@ -104,12 +110,12 @@ Nanopore Technologies sequencing have much longer variable lengths.
 >
 > 6. **View** {% icon galaxy-eye %} the renamed file
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > 1. What are the 4 main features of each read in a fastq file.
 >    > 2. What does the `_1` and `_2` mean in your filenames?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. The following:
 >    > >
 >    > >    -   A `@` followed by a name and sometimes information of the read
@@ -145,7 +151,7 @@ reads include:
 - Do I need to ask/perform for a new sequencing run?
 - Is it suitable for the analysis I need to do?
 
-> ### {% icon hands_on %} Hands-on: QC & Filtering
+> <hands-on-title>QC & Filtering</hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >    - {% icon param-files %} *"Short read data from your current history"*: `DRR187559_1` and `DRR187559_2`
@@ -179,7 +185,7 @@ trimming will be performed where if the average quality of 4 bases drops below
 which are at least 30 bases long, anything shorter will complicate the assembly
 and we will drop.
 
-> ### {% icon hands_on %} Hands-on: Assessing the data quality of the trimmed reads and comparing to the input reads
+> <hands-on-title>Assessing the data quality of the trimmed reads and comparing to the input reads</hands-on-title>
 >
 > 1. {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1) %}  with the following parameters:
 >    - *"Single-end or paired-end reads?"*: `Paired-end (two separate input files)`
@@ -225,7 +231,7 @@ and we will drop.
 
 MultiQC is a tool to combine multiple outputs in one clear and easy to read overview. It generates plots to easily visualize the different quality statistics of all your fastq files.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Looking at your `MultiQC on data ....: Webpage` output, answer the following questions:
 >
@@ -235,7 +241,7 @@ MultiQC is a tool to combine multiple outputs in one clear and easy to read over
 > 4. Did trimming affect the GC content?
 > 5. Is this data ok to assemble? Do we need to re-sequence it?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. There were slight decreases in duplicate reads (19.8% →  18%, 21.2% →  20.5%)
 > > 2. Read lengths went down more significantly; 191 to 152 bp, and 221 to 192 bp. These are still probably fine for assembly but you'll see that MultiQC has marked the 152 bp result in yellow.
@@ -258,7 +264,7 @@ improved to work faster and only for smaller (bacterial) genomes.
 
 {% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
-> ### {% icon hands_on %} Hands-on: Assembly using Shovill
+> <hands-on-title>Assembly using Shovill</hands-on-title>
 >
 > 1. {% tool [Shovill](toolshed.g2.bx.psu.edu/repos/iuc/shovill/shovill/1.1.0+galaxy0) %} with the following parameters:
 >    - *"Input reads type, collection or single library"*: `Paired End`
@@ -270,11 +276,11 @@ improved to work faster and only for smaller (bacterial) genomes.
 >
 > 2. View {% icon galaxy-eye %} the `Contigs` file:
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    > 1. How big is the first contig?
 >    > 2. What is the coverage of your biggest (first) contig?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > Both of these can be found in the header line of the Contigs produced by Shovill
 >    > >
 >    > > *NOTE: The results can differ from this example, because Shovill can differ a bit per assembly*
@@ -294,12 +300,12 @@ improved to work faster and only for smaller (bacterial) genomes.
 {: .hands_on}
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > First read [this page in the Bandage wiki](https://github.com/rrwick/Bandage/wiki/Simple-example) to help understand what the graph means.
 >
 > 1. What do you think of this assembly? Is it useful? Is it good enough?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. This is a very messy assembly, with a lot of potential paths through the sequence. We cannot feel confident in the output .fasta file (as it is much smaller than the expected 2.9Mbp). In real life we might consider doing a hybrid assembly with Nanopore or other long read data to help resolve these issues.
 > >
@@ -316,7 +322,7 @@ reference file as input, and will provide complementary metrics. QUAST
 stands for QUality ASsessment Tool. With later updates gene annotation
 also possible with QUAST.
 
-> ### {% icon hands_on %} Hands-on: Quality Control of assembly using Quast
+> <hands-on-title>Quality Control of assembly using Quast</hands-on-title>
 >
 > 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
 >    - *"Use customized names for the input files?"*: `No, use dataset names`
@@ -336,11 +342,11 @@ also possible with QUAST.
 
 This fasta file contains 32 contigs, meaning the chromosome is separated over multiple contigs. These contigs can also contain (parts of) plasmids.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. What is you GC content?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The GC content for our assembly was 32.77% (for comparison [MRSA Isolate HC1335 Strain](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5174738/) GC% is 32.89%). This means the length and GC% of the assembly could be good!
 > >
@@ -351,7 +357,7 @@ This fasta file contains 32 contigs, meaning the chromosome is separated over mu
 
 Because we are working with a MRSA we are curious to see which resistance genes are located on the genome or on the plasmid. To determine whether the contigs contain antimicrobial resistance (AMR) genes [staramr](https://github.com/phac-nml/staramr) can be used  **Staramr** scans bacterial genome contigs against both the **ResFinder** ({% cite Zankari2012 %}), **PointFinder** ({% cite Zankari2017 %}), and **PlasmidFinder** ({% cite Carattoli2014 %}) databases (used by the ResFinder webservice) and compiles a summary report of detected antimicrobial resistance genes.
 
-> ### {% icon hands_on %} Hands-on: Run staramr
+> <hands-on-title>Run staramr</hands-on-title>
 >
 > 1. {% tool [staramr](toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"genomes"*: `Shovill on data ... Contigs`
@@ -387,13 +393,13 @@ To get more information about these antibiotic resistant genes, you can check th
 CARD can be very helpful to check all the resistance genes and check if
 it is logical to find the resistance gene in a specific bacteria.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. To what family does [mecA](https://card.mcmaster.ca/ontology/36911) belong?
 > 2. Do you expect to find this gene in this MRSA strain and why?
 > 3. Is the accession number of the entry related to the accession reported by staramr?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. [Methicillin resistant PBP2](https://card.mcmaster.ca/ontology/37589)
 > > 2. The strain we use is a Methicillin(multi) resistant Staphylococcus aureus. As `mecA` has a perfect resistome mach with *S. aureus*, and the AMR Gene Family is methicillin resistant PBP2, we expect to see mecA in MRSA.
@@ -416,7 +422,7 @@ In this case you will use your assembly as your reference and the output
 from prokka as an information track.
 
 
-> ### {% icon hands_on %} Hands-on: Annotating the Genome
+> <hands-on-title>Annotating the Genome</hands-on-title>
 >
 > 1. {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Contigs to annotate"*: `Shovill on data ... Contigs`
@@ -498,4 +504,4 @@ If it takes too long to build the JBrowse instance, you can view an embedded one
 {% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data" loc="contig00018:5488..27391" tracks="DNA,14e421a8469880793f2a8d774224e10d_0,6851a9d3f5d62263e4e4b34f1513980c_0" %}
 
 # Conclusion
-{:.no_toc}
+

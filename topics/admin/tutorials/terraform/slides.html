@@ -14,6 +14,7 @@ objectives:
 key_points:
   - Terraform lets you develop and implement infrastructure-as-code within your organisation
   - It can drastically simplify management of large numbers of VMs
+subtopic: cloud
 contributors:
   - hexylena
 ---
@@ -42,7 +43,7 @@ contributors:
 - If one dies, no one is sad
 ]
 
-![](../../images/pets-vs-cattle.jpg)
+![On the left is a very cute cat with big eyes, on the right is a picture of cows.](../../images/pets-vs-cattle.jpg)
 
 ---
 
@@ -86,7 +87,7 @@ resource "aws_route53_record" "my.server" {
 - Preview the planned changes before applying them
 
 
-![](../../images/plan.png "Terraform plan")
+![Text in the terminal showing that an openstack compute keypair my-cloud-key is being created. Plan: 2 to add, 0 to change, 0 to destroy](../../images/plan.png "Terraform plan")
 
 ???
 
@@ -101,7 +102,7 @@ Easy to see which resources need to be recreated, can produce a nice graph of th
 - Consistently reproduce the same infrastructure in a new cloud, new project.
 
 .image-70[
-![](../../images/graph2.png "A more complex graph showing variables")
+![Graph of requirements showing relationship between provider, instance, and things like the keypair to be added](../../images/graph2.png "A more complex graph showing variables")
 ]
 
 ???
@@ -149,5 +150,3 @@ If you find you love it, many advanced features:
 - Custom plugins
 - Provisioning VMs
 - GitHub integration
-
-![](https://www.terraform.io/docs/github-actions/actions/images/validate-b6722450.png)

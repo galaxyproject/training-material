@@ -1,0 +1,18 @@
+<article>
+	<h3>
+		<a href="{% if n.external %}{{ n.link }}{% else %}{{site.baseurl}}{{n.url}}{% endif %}">{{n.title}}</a>
+	</h3>
+	<p>
+	{{ n.date | date: "%-d %B %Y" }} &nbsp;
+	{% for tag in n.tags %}
+	<span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag  }}</span>
+	{% endfor %}
+	</p>
+	<p class="card-text">
+		{% if n.external %}
+		This is an external post, please follow the link to read it.
+		{% else %}
+		{{ n.excerpt | strip_html }}
+		{% endif %}
+	</p>
+</article>

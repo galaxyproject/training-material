@@ -3,6 +3,7 @@ title: Renaming a collection
 area: collections
 box_type: tip
 layout: faq
+contributors: [delphine-l, martenson, shiltemann, hexylena]
 ---
 
 

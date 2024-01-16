@@ -35,7 +35,7 @@ contributors:
 
 ---
 
-### Why is it important?
+### Why is it importantg?
 
 - Sequence comparison is a core problem of bioinformatics that allows us to study:
  - Evolution (Where do we come from? And other species?)
@@ -68,7 +68,7 @@ contributors:
 
 
 Sequence type    | Approx. length
----        | ---          
+---        | ---
 Gene			|  ~1,000 to 10,000 bp
 Bacteria genome		|  ~10<sup>6</sup> bp
 Mammalian chr.		|  ~10<sup>8</sup> bp
@@ -82,7 +82,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 ### Exponential growth of the Sequence Read Archive
 
 
-![](../../images/hpc-for-lsgc/SRA.png)
+![line chart going from 2009 to 2013 with number of bases growing from 10e11 to 10e15, and all bases slowly growing larger than open access, but open access still being the vast majority. A pie chart is overlaid showing the majority is Illumina GA, with SOLiD making up 10% and others a tiny slice.](../../images/hpc-for-lsgc/SRA.png)
 
 - Other databases have experienced similar growth too
 
@@ -113,13 +113,13 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 - Does not produce alignments, but rather just represents a comparison
 - The **x** and **y** axis represent the sequences being compared
 
-![](../../images/hpc-for-lsgc/Dot01.png)
+![Montage of three dot plots](../../images/hpc-for-lsgc/Dot01.png)
 
 ---
 
 ### Comparing genomes with dotplots
 
-![](../../images/hpc-for-lsgc/Dot02.png)
+![A dotplot is shown, with lines going from bottom left to the top right. Part way through it is fractured and a line is seen in the opposite direction showing an inversion. There is noise scattered around the plot from accidental overlaps. An inset shows some repeats which appear as regular small diagonal lines, repeated in x and y axes.](../../images/hpc-for-lsgc/Dot02.png)
 
 ---
 
@@ -136,7 +136,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
  - Where is the signal?
 ]
 
-.pull-right[.image-70[![](../../images/hpc-for-lsgc/Dot03.png)]]
+.pull-right[.image-70[![A tiny dot plot is shown, with two sequences and dots scattered across the plot. No pattern emerges due to repeating letters in some sequences.](../../images/hpc-for-lsgc/Dot03.png)]]
 
 
 ---
@@ -148,7 +148,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 - Alignments have to take into account their surroundings!
 
 - Use dynamic programming to compute an accumulated score
- 
+
 - Match =  4
 - Miss  = -4
 
@@ -156,7 +156,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 .pull-right[
 .image-70[
-![](../../images/hpc-for-lsgc/Dot04.png)
+![A table with sequence across top left and right are shown, some boxes are filled with 4 and -4 according to match or mismatches.](../../images/hpc-for-lsgc/Dot04.png)
 ]
 ]
 
@@ -179,7 +179,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 ]
 
 .pull-right[
-![](../../images/hpc-for-lsgc/Dot05.png)
+![The same chart as before, but more cells are filled in, the numbers get mostly increasingly negative.](../../images/hpc-for-lsgc/Dot05.png)
 ]
 
 ---
@@ -187,11 +187,11 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 ### How do we include alignments? Cont. II
 
 
-![](../../images/hpc-for-lsgc/Dot06.png)
+![A filled out chart and then several boxes are highlighted showing a best scoring set of matches using a typical algorithm for sequence alignment. The alignment is shown at the left.](../../images/hpc-for-lsgc/Dot06.png)
 
 ---
 
-### How do we include alignments? Cont. III 
+### How do we include alignments? Cont. III
 
 - But what if the two sequences are not toy examples?
 
@@ -206,7 +206,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 ### How do we include alignments? Cont. IV
 
 
-![](../../images/hpc-for-lsgc/Dot07.png)
+![A larger subset of a table is shown from rows 0 to 100 billion. The text grows quadratically is shown over the table.](../../images/hpc-for-lsgc/Dot07.png)
 
 
 ---
@@ -225,7 +225,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 ### How to speed up finding alignments? Cont. I
 
-![](../../images/hpc-for-lsgc/Dot08.png)
+![The same matrix is shown again, but now black diagonal lines appear, circled as k-mers of fixed size.](../../images/hpc-for-lsgc/Dot08.png)
 
 ---
 ### How to speed up finding alignments? Cont. II
@@ -246,7 +246,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 ### How to speed up finding alignments? Cont. III
 
-![](../../images/hpc-for-lsgc/Dot09.png)
+![Multiple aligned k-mers are grouped into larger runs of sequence and labelled high-scoring pairs.](../../images/hpc-for-lsgc/Dot09.png)
 
 ---
 
@@ -286,7 +286,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 ### The GECKO algorithm
 
-![](../../images/hpc-for-lsgc/Gecko01.png)
+![Sequence X and Y enter the pipeline and produce two dictionary and dictionary hashes. These are combined into a hits file which shows a dotplot with several circles in diagonals. These are then sorted, filtered, and produce a set of HSPs which show the same dots connected up into diagonal lines.](../../images/hpc-for-lsgc/Gecko01.png)
 
 ---
 
@@ -319,7 +319,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 ]
 
 .pull-right[
-![](../../images/hpc-for-lsgc/Gecko02.png)
+![A genomes list enters the workflow and is mapped into a workload file which gives all combinations of G1 to GN. This is sent to a job runner and the individual pairwise comparisons are distributed across worker nodes.](../../images/hpc-for-lsgc/Gecko02.png)
 ]
 ---
 
@@ -332,11 +332,11 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 - It consists on sorting the initial seeds found (which is the most time-consuming step) using shared memory threads (pthreads and openMP)
 
-- Each core uses up to t threads to sort the dictionaries containing the seeds
+- Each core uses up to `t` threads to sort the dictionaries containing the seeds
 ]
 
 .pull-right[
-![](../../images/hpc-for-lsgc/Gecko03.png)
+![Two sequences, G1 and G2 enter, produce dictionaries, and hits which are then combined into sorted Hits and fragmented hits.](../../images/hpc-for-lsgc/Gecko03.png)
 ]
 ---
 
@@ -361,7 +361,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 ### GECKO-MGV: interactive sequence comparison (Cont. I)
 
-![](../../images/hpc-for-lsgc/Gecko04.png)
+![Multiple pairwise alignments are shown on the left, in the center is a large dot-plot, and below is a distribution matrix with a large scatter plot. On the right a minimap and various filtering options are shown.](../../images/hpc-for-lsgc/Gecko04.png)
 
 ---
 
@@ -379,7 +379,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 ### GECKO-MGV: interactive sequence comparison (Cont. III)
 
-![](../../images/hpc-for-lsgc/Gecko05.png)
+![The same application is shown with a set of repeats highlighted, and pulled out into a table and at the bottom a sequence logo is shown with the multiple sequence alignment.](../../images/hpc-for-lsgc/Gecko05.png)
 
 ---
 
@@ -392,13 +392,13 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 - But all vs all chromosomes between any two species generate usually over 400 comparisons
 
-- This results in extremely large computation times 
+- This results in extremely large computation times
  - Do all of these even have any similarity signals?
  - Instead of runnning everything from scratch with GECKO, first use CHROMEISTER to detect significant comparisons
 ]
 
 .pull-right[
-![](../../images/hpc-for-lsgc/Chrom01.png)
+![A large multi-genome dot-plot is shown.](../../images/hpc-for-lsgc/Chrom01.png)
 ]
 
 ---
@@ -414,14 +414,14 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 ]
 
 .pull-right[
-![](../../images/hpc-for-lsgc/Chrom02.png)
+![An even larger, denser dot plot is shown with a very low signal to noise ratio.](../../images/hpc-for-lsgc/Chrom02.png)
 ]
 
 ---
 
 ### CHROMEISTER: Motivation (Cont. II)
 
-![](../../images/hpc-for-lsgc/Chrom03.png)
+![Two 3d plots are shown, the first resembles the previous dot plot with high noise, and lots of tiny peaks. An arrow points to the second set of "filtered seeds" with several diagonal sets of peaks highlighted.](../../images/hpc-for-lsgc/Chrom03.png)
 
 ---
 ### CHROMEISTER: Methods
@@ -447,11 +447,11 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
  - Hits with frequency above one are repetitions by definition (in a computational sense) so we remove them
  - Short k-mers produce repetitions and noise, so we have to use long k-mers
- - But long k-mers produce less seeds due to biological evolution, therefore a certain inexactitude is allowed 
+ - But long k-mers produce less seeds due to biological evolution, therefore a certain inexactitude is allowed
 
 - Are these two words equal? Under what considerations?
 
-![](../../images/hpc-for-lsgc/Chrom04.png)
+![Two sequences 1 and 2 are shown. Each has a single nucleotide change at the start and end.](../../images/hpc-for-lsgc/Chrom04.png)
 
 ---
 
@@ -465,16 +465,16 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
  - A kernel is convoluted with the dotplot to improve visualization and remove single repetitions
  - The scoring distance is calculated between the peak hit points using taxicab distance:
 
-.image-50[
-![](../../images/hpc-for-lsgc/Chrom05.png)
-]
+$$d_{raw} = \sum_{i}^{l-1}taxicab(max(H_m(i), H_m(i+1)))$$
+
+$$d = \frac{d_{raw}}{l^2}$$
 
 ---
 
 
 ### CHROMEISTER: Examples
 
-![](../../images/hpc-for-lsgc/Chrom06.png)
+![A low signal to noise ratio dot plot plot labelled Macaca Mulatta Chr X vs Homo Sapiens Chr X is reduced to a diagonal line via CHROMEISTER under 2 minutes. Below an Aegilops tauschii Chr.1 vs Triticum aestivum Chr 1 produced with NUCMER is reduced to a very clear dot plot with CHROMEISTER.](../../images/hpc-for-lsgc/Chrom06.png)
 
 ---
 
@@ -490,6 +490,6 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 ]
 
 .pull-right[
-![](../../images/hpc-for-lsgc/Chrom07.png)
+![A multi-genome dot plot is shown comparing two genomes. It is very clean and low-noise.](../../images/hpc-for-lsgc/Chrom07.png)
 ]
 

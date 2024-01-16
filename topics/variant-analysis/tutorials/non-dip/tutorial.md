@@ -2,9 +2,11 @@
 layout: tutorial_hands_on
 
 title: "Calling variants in non-diploid systems"
+subtopic: introduction
 zenodo_link: "https://doi.org/10.5281/zenodo.1251112"
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "How does frequency of mitochondrial polymorphisms change from mother to child?"
 objectives:
@@ -20,8 +22,6 @@ contributors:
   - astrovsky01
 ---
 
-# Introduction
-{:.no_toc}
 
 The majority of life on Earth is non-diploid and represented by prokaryotes, viruses, and their derivatives, such as our own mitochondria or plant's chloroplasts. In non-diploid systems, allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between the sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes ({% cite Rebolledo-Jaramillo2014 %}, {% cite Li2015 %}).
 
@@ -40,7 +40,7 @@ The goal of this example is to detect heteroplasmies - variants within mitochond
 
 Datasets representing a child and a mother are available in [Zenodo](https://doi.org/10.5281/zenodo.1251112). These datasets were obtained by paired-end Illumina sequencing of human genomic DNA enriched for mitochondria. The enrichment was performed using long-range PCR with two primer pairs that amplify the entire mitochondrial genome. Samples will therefore still contain a lot of DNA from the nuclear genome, which, in this case, is a contaminant.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -53,11 +53,12 @@ Datasets representing a child and a mother are available in [Zenodo](https://doi
 
 For this tutorial we have prepared a subset of data previously by our group ({% cite Rebolledo-Jaramillo2014 %}). Let's import these data into Galaxy. They are available from [this Galaxy Library](https://usegalaxy.org/library/folders/Fe4842bd0c37b03a7) or via [Zenodo](https://zenodo.org/record/582600)
 
-> ### {% icon hands_on %} Hands-on: Get the data
+> <hands-on-title>Get the data</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 1. Import files from [Zenodo](https://zenodo.org/record/1251112):
@@ -80,7 +81,7 @@ For this tutorial we have prepared a subset of data previously by our group ({% 
 
 Before proceeding with the analysis, we need to find out how good the data actually is. For this will use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
-> ### {% icon hands_on %} Hands-on: Assess quality of data
+> <hands-on-title>Assess quality of data</hands-on-title>
 >
 > 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on each of the four FASTQ datasets with the following parameters:
 >       - {% icon param-files %} *"Short read data from your current history"*: all 4 FASTQ datasets selected with **Multiple datasets**
@@ -97,7 +98,7 @@ Once the FastQC jobs runs, you will be able to look at the HTML reports generate
 
 Our reads are long (250 bp) so we will use BWA-MEM ({% cite Li2013 %}) to align them against the reference genome as it has good mapping performance for longer reads (100bp and up).
 
-> ### {% icon hands_on %} Hands-on: Map reads
+> <hands-on-title>Map reads</hands-on-title>
 >
 > 1. Use {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} to map the reads to the reference genome with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
@@ -113,7 +114,7 @@ Our reads are long (250 bp) so we will use BWA-MEM ({% cite Li2013 %}) to align 
 >
 {: .hands_on}
 
-> ### {% icon comment %} More about selecting datasets
+> <comment-title>More about selecting datasets</comment-title>
 >
 > By selecting datasets 1 and 3 as **Select the first set of reads** and datasets 2 and 4 as **Select the second set of reads**, Galaxy will automatically launch two BWA-MEM jobs using datasets 1,2 and 3,4 generating two resulting BAM files.
 > By setting **Set read groups information** to `Set read groups (SAM/BAM specifications)` and clicking **Auto-assign** we will ensure that the reads in the resulting BAM dataset are properly set.
@@ -125,7 +126,7 @@ Our reads are long (250 bp) so we will use BWA-MEM ({% cite Li2013 %}) to align 
 
 Because we have set read groups, we can now merge the two BAM dataset into one. This is because read groups label each read as belonging to either *mother* or *child*.
 
-> ### {% icon hands_on %} Hands-on: Merge multiple datasets into one
+> <hands-on-title>Merge multiple datasets into one</hands-on-title>
 >
 > 1. Use {% tool [MergeSAMFiles](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1) %} to merge the BAM datasets with the following parameters:
 >    - {% icon param-files %} *"Select SAM/BAM dataset or dataset collection"*: select both BAM datasets produced by **BWA-MEM** {% icon tool %}
@@ -139,14 +140,14 @@ Preparation of sequencing libraries (at least at the time of writing) for techno
 
 Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the **MarkDuplicates** utility from [Picard](https://broadinstitute.github.io/picard/command-line-overview.html) package which is designed to identify both PCR and optical duplicates.
 
-> ### {% icon details %} More about MarkDuplicates
+> <details-title>More about MarkDuplicates</details-title>
 >
 > Duplicates are identified as read pairs having identical 5' positions (coordinate and strand) for both reads in a mate pair (and optionally, matching unique molecular identifier reads; see `BARCODE_TAG` option). Optical, or more broadly sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from biochemical processes during clonal amplification and sequencing; they are identified using the `READ_NAME_REGEX` and the `OPTICAL_DUPLICATE_PIXEL_DISTANCE` options. The tool's main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see `REMOVE_DUPLICATE` and `REMOVE_SEQUENCING_DUPLICATES`), and optionally marked with a duplicate type in the 'DT' optional attribute. In addition, it also outputs a metrics file containing the numbers of `READ_PAIRS_EXAMINED`, `SECONDARY_OR_SUPPLEMENTARY_RDS`, `UNMAPPED_READS`, `UNPAIRED_READS`, `UNPAIRED_READ DUPLICATES`, `READ_PAIR_DUPLICATES`, and `READ_PAIR_OPTICAL_DUPLICATES`.
 >
 > Usage example: `java -jar picard.jar MarkDuplicates I=input.bam O=marked_duplicates.bam M=marked_dup_metrics.txt`
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: De-duplicate mapped data
+> <hands-on-title>De-duplicate mapped data</hands-on-title>
 >
 > 1. Use {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2) %} to de-duplicate the merged BAM datasets with the following parameters:
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: select the merged BAM dataset produced by **MergeSAMFiles** {% icon tool %}
@@ -176,11 +177,11 @@ Column headers are:
 - PERCENT_DUPLICATION
 - ESTIMATED_LIBRARY_SIZE
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. What percent of read duplication are found in each read group (child and mother)?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The two datasets have ~6% and ~9% duplicates for child and mother, respectively.
 > >
@@ -213,7 +214,7 @@ GGG--CACACAGGG            Alt: G
 
 The last of these is *left-aligned*. In this case gaps (represented by dashes) are moved as far left as possible. For a formal definition of left-alignment and variant normalization, see {% cite Tan2015 %}.
 
-> ### {% icon hands_on %} Hands-on: Left-align indels
+> <hands-on-title>Left-align indels</hands-on-title>
 >
 > 1. Use {% tool [BamLeftAlign](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1) %} to perform left alignment with the following parameters:
 >    - *"Choose the source for the reference genome"*: `Locally cached`
@@ -227,7 +228,7 @@ The last of these is *left-aligned*. In this case gaps (represented by dashes) a
 
 Remember that we are trying to call variants in mitochondrial genome. Let focus only on the reads derived from mitochondria genome by filtering everything else out.
 
-> ### {% icon hands_on %} Hands-on: Filter BAM data
+> <hands-on-title>Filter BAM data</hands-on-title>
 >
 > 1. Use {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1) %} with the following parameters:
 >    - {% icon param-file %} *"BAM dataset(s) to filter"*: select the BAM dataset produced by **BamLeftAlign** {% icon tool %}
@@ -249,7 +250,7 @@ Remember that we are trying to call variants in mitochondrial genome. Let focus 
 >            - *"Select BAM property to filter on"*: `reference`
 >            - *"Select reads with mapped mate"*: `chrM`
 >
->    > ### {% icon comment %} Filtering reads
+>    > <comment-title>Filtering reads</comment-title>
 >    > Further explanation of the filters used:
 >    > - *mapQuality* is set to ≥20. Mapping quality reflects the probability that the read is placed incorrectly using [phred scale](https://en.wikipedia.org/wiki/Phred_quality_score). Thus 20 is 1/100 or 1% chance that the read is incorrectly mapped. By setting this parameter to ≥20, we will keep all reads that have 1% or less probability of being mapped incorrectly.
 >    > - *isPaired* will eliminate singleton (unpaired) reads.
@@ -262,7 +263,7 @@ Remember that we are trying to call variants in mitochondrial genome. Let focus 
 
 FreeBayes is widely used for calling variants in diploid systems. However, it can also be used for calling variants in pooled samples where the number of samples is not known. This is the exact scenario we have here: in our sample we have multiple mitochondrial (or bacterial or viral) genomes, but we do not know exactly how many. Thus we will use the `--pooled-continuous` option of FreeBayes to generate frequency-based variant calls as well as some other options highlighted below.
 
-> ### {% icon hands_on %} Hands-on: Calling variants
+> <hands-on-title>Calling variants</hands-on-title>
 >
 > 1. Use {% tool [FreeBayes](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.1) %} to call variants with the following parameters:
 >    - *"Choose the source for the reference genome"*: `Locally cached`
@@ -280,7 +281,7 @@ FreeBayes is widely used for calling variants in diploid systems. However, it ca
 >        - *"Assume that samples result from pooled sequencing"*: `Yes`
 >        - *"Output all alleles which pass input filters, regardless of genotyping outcome or model"*: `Yes`
 >
->    > ### {% icon comment %} Population model options
+>    > <comment-title>Population model options</comment-title>
 >    > The "Population model options" are one of the most important parameter choices to make when calling variants in non-diploid systems.
 >    {: .comment}
 >
@@ -290,7 +291,7 @@ FreeBayes is widely used for calling variants in diploid systems. However, it ca
 >        - *"Ignore multi-nucleotide polymorphisms, MNPs"*: `Yes`
 >        - *"Ignore complex events (composites of other classes)"*: `Yes`
 >
->    > ### {% icon comment %} Allelic scope options
+>    > <comment-title>Allelic scope options</comment-title>
 >    > Mitochondria has a number of low complexity regions (mononucleotide repeats). Setting the allelic scope parameters as described above will decrease noise from these regions.
 >    {: .comment}
 >
@@ -298,7 +299,7 @@ FreeBayes is widely used for calling variants in diploid systems. However, it ca
 >        - *"Exclude alignments from analysis if they have a mapping quality less than"*: `20`
 >        - *"Exclude alleles from analysis if their supporting base quality less than"*: `30`
 >
->    > ### {% icon comment %} Filter options
+>    > <comment-title>Filter options</comment-title>
 >    > Setting *Exclude alignments from analysis if they have a mapping quality less than* to `20` (phred score of 20) will make FreeBayes only consider reliably aligned reads.
 >    > Setting *Exclude alleles from analysis if their supporting base quality less than* to `30` (phred score of 30) will make FreeBayes only consider high quality bases.
 >    {: .comment}
@@ -347,11 +348,11 @@ Among numerous types of data generated by FreeBayes let's consider the following
 
 * `##INFO=<ID=DP,Number=1,Type=Integer,Description="Total read depth at the locus">` - This is the number of reads covering a given site.
 * `##INFO=<ID=SRP,Number=1,Type=Float,Description="Strand balance probability for the reference allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SRF and SRR given E(SRF/SRR) ~ 0.5, derived using Hoeffding's inequality">` - The higher this quantity the better the site as it diminishes the chance of the site having significant strand bias.
-* `##INFO=<ID=SAP,Number=A,Type=Float,Description="Strand balance probability for the alternate allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SAF and SAR given E(SAF/SAR) ~ 0.5, derived using Hoeffding's inequality">` - The higher this quantity the better the site as it diminishes the chance of the site having significant strand bias  (also see [here](https://groups.google.com/forum/#!topic/freebayes/fX4TOAqXJrA)).
+* `##INFO=<ID=SAP,Number=A,Type=Float,Description="Strand balance probability for the alternate allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SAF and SAR given E(SAF/SAR) ~ 0.5, derived using Hoeffding's inequality">` - The higher this quantity the better the site as it diminishes the chance of the site having significant strand bias  (also see this [discussion on the freebayes forum](https://groups.google.com/forum/#!topic/freebayes/fX4TOAqXJrA)).
 * `##INFO=<ID=EPP,Number=A,Type=Float,Description="End Placement Probability: Phred-scaled upper-bounds estimate of the probability of observing the deviation between EL and ER given E(EL/ER) ~ 0.5, derived using Hoeffding's inequality">` - The higher this number the lower the chance of having significant placement bias.
 * `QUAL` - phred scaled variant quality.
 
-> ### {% icon hands_on %} Hands-on: Filtering VCF data
+> <hands-on-title>Filtering VCF data</hands-on-title>
 >
 > 1. Use {% tool [VCFfilter](toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/1.0.0_rc1+galaxy3) %} to filter the variants with the following parameters:
 >    - {% icon param-file %} *"VCF dataset to filter"*: select the VCF dataset produced by **FreeBayes** {% icon tool %}
@@ -376,16 +377,16 @@ Among numerous types of data generated by FreeBayes let's consider the following
 >        - *"Select the filter type"*: `Info filter (-f)`
 >        - *"Specify filtering value"*: `DP > 20`
 >
->    > ### {% icon comment %} VCF filter options
+>    > <comment-title>VCF filter options</comment-title>
 >    > Filtering FreeBayes VCF for strand bias (`SPR` and `SAP`), placement bias (`EPP`), variant quality (`QUAL`), and depth of coverage (`DP`).
 >    {: .comment}
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. How many variants remain after filtering the VCF?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. Two variants remain after filtering the VCF (your results might be different depending on the input and references you use):
 > > ```
 > > #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
@@ -403,7 +404,7 @@ For visualizing VCFs Galaxy has two external tool options. The first is called [
 
 VCF.IOBIO can be invoked by expanding a VCF dataset in Galaxy's history by clicking on it:
 
-> ### {% icon hands_on %} Hands-on: Display data in VCF.IOBIO
+> <hands-on-title>Display data in VCF.IOBIO</hands-on-title>
 >
 >![Expanded output](../../images/mt_vcf_dataset_expanded.png "At the bottom there is a link 'display at vcf.iobio'. Clicking on this link will start indexing of VCF datasets, which is required to display them.")
 >
@@ -414,7 +415,7 @@ VCF.IOBIO can be invoked by expanding a VCF dataset in Galaxy's history by click
 
 Similarly to VCF.IOBIO expanding a history item representing a VCF dataset will reveal an IGV link:
 
-> ### {% icon hands_on %} Hands-on: Display data in IGV
+> <hands-on-title>Display data in IGV</hands-on-title>
 >
 >![VCFfilter output expanded](../../images/mt_vcf_dataset_expanded.png "At the bottom there is a link 'display at IGV: local Human hg38'.")
 >
@@ -431,7 +432,7 @@ Similarly to VCF.IOBIO expanding a history item representing a VCF dataset will 
 
 Visualizing VCF datasets is a good way to get an overall idea of the data, but it does not tell a lot of details. For example, above we have visualized site 3243 using IGV. It is interesting but we need to find out more. One thing we can do is to convert VCF dataset into a tab-delimited representation and with it play a bit more.
 
-> ### {% icon hands_on %} Hands-on: Convert VCF to tab-delimited data
+> <hands-on-title>Convert VCF to tab-delimited data</hands-on-title>
 >
 > 1. Use {% tool [VCFtoTab-delimited](toolshed.g2.bx.psu.edu/repos/devteam/vcf2tsv/vcf2tsv/1.0.0_rc1+galaxy0) %} to filter the variants with the following parameters:
 >    - {% icon param-file %} *"Select VCF dataset to convert"*: select the VCF dataset produced by **VCFfilter** {% icon tool %}
@@ -440,12 +441,12 @@ Visualizing VCF datasets is a good way to get an overall idea of the data, but i
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Why are there four rows in the VCFtoTab-delimited {% icon tool %} output when the input VCF had only two rows?
 > 1. How many columns are in the VCFtoTab-delimited {% icon tool %} output?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Since *"Report data per sample"* was set to `Yes`, VCFtoTab-delimited {% icon tool %} produced two rows for each of the two variants, one row per sample (child and mother).
 > > 1. There are 62 (!) columns in the output of VCFtoTab-delimited {% icon tool %}.
@@ -463,7 +464,7 @@ Visualizing VCF datasets is a good way to get an overall idea of the data, but i
 * 54 `AO` - number of alternative observations (how many times do we see the alternative allele at this position in this sample)
 * 55 `DP` - depth of coverage at this site for this sample
 
-> ### {% icon hands_on %} Hands-on: Cut columns from a file
+> <hands-on-title>Cut columns from a file</hands-on-title>
 >
 > 1. Use {% tool [Cut columns from a table](Cut1) %} to select specific columns with the following parameters:
 >    - *"Cut columns"*: `c2,c4,c5,c52,c54,c55`
@@ -491,11 +492,11 @@ Mother  1386   691
 Child   341    694
 ```
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. What do you notice about the relative frequencies of the `A` and `G` alleles between mother and child?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The *major* allele in the mother (`A`) becomes the *minor* allele in the child -- a remarkable frequency change due to mitochondrial bottleneck!
 > {: .solution}

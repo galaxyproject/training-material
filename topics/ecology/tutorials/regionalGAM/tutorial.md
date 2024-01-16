@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: Regional GAM
 zenodo_link: "https://zenodo.org/record/1324204#.W2BmRn7fNE4"
-edam_ontology: "topic_0610"
+edam_ontology: ["topic_0610"]
 questions:
     - "What are abundance and trends of a butterfly species?"
 objectives:
@@ -14,6 +14,11 @@ key_points:
     - "We sequentially computed phenology, abundance index, trend and model this trend"
     - "We learned how to interpret a trend using modeling and data visualization"
     - "This tool compute phenology in order to predict missing data, no definitive conclusion can be made on the phenology using this tool"
+tags:
+   - Species populations EBV class
+   - Species traits EBV class
+   - EBV dataset
+   - EBV workflow
 contributors:
     - claraurf
     - emichn
@@ -22,8 +27,6 @@ contributors:
     - sbenateau
 ---
 
-# Introduction
-{:.no_toc}
 
 This tutorial will show you how to study species abundance through the computation of a flight curve, abundance index, and trends. It will explain you how to use different [regionalGAM](https://github.com/RetoSchmucki/regionalGAM) tools on Galaxy allowing you to deal with datasets containing abundance information for various species per site and per date through a couple of years.
 
@@ -31,7 +34,7 @@ After a certain number of steps, you will be able to extract single species data
 
 You will basically learn how to create a file on the basis of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -46,7 +49,7 @@ The goal of the first step is to upload and prepare the file so that it will be 
 
 ## Data upload
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a proper name like `regionalGAM tutorial`
 >
@@ -79,7 +82,7 @@ The current dataset contains a lot of data (exact site names for 5 butterfly mon
 
 Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We want to create a down-sampled file, by selecting the lines where NLBMS is found.
 
-> ### {% icon hands_on %} Hands-on: Downsample and hide some information
+> <hands-on-title>Downsample and hide some information</hands-on-title>
 > 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
 >       - {% icon param-file %} *"Select cells from"*: Uploaded CSV dataset file {% icon tool %}
 >       - *"AWK Program"*:
@@ -94,7 +97,7 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How many sites do you have before and after removing the sites from outside the Netherlands?
 >
@@ -103,14 +106,14 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 >
 > {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The dataset contains 280 sites now against 1143 before down-sampling.
 > {: .solution}
 {: .question}
 
-> ### {% icon details %} If your original data is in RData format
+> <details-title>If your original data is in RData format</details-title>
 >
-> > ### {% icon hands_on %} Hands-on: Data upload.
+> > <hands-on-title>Data upload.</hands-on-title>
 > > 1. Import the RData
 > >
 > >    For example, you can upload:
@@ -131,15 +134,15 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 >
 > If the tool **RData parser** {% icon tool %} don't succeed to create a single tabular file, it generates separate files, each of them containing one column. The file with the `TREND` header can be let aside as we don't need it for what will follow.
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > If Rdata parser fails to generate a single unified tabular file, can you propose a way to regenerate such a dataset ?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > You can do that using:
 > > > 1. **Paste two files side by side tool** {% icon tool %} with the following parameters:
-> >     - {% icon param-file %} *"paste"*: output from **RData parser** {% icon tool %} headed with "SPECIES"
-> >     - {% icon param-file %}*"and"*: output from **RData parser** {% icon tool %} with headed with "SITE"
+> > >   - {% icon param-file %} *"paste"*: output from **RData parser** {% icon tool %} headed with "SPECIES"
+> > >   - {% icon param-file %}*"and"*: output from **RData parser** {% icon tool %} with headed with "SITE"
 > > > 2. Repeat **Paste two files side by side** {% icon tool %} executions as many times as there are separated files in order to create a final dataset with all the columns:
 > > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 2 columns with the one headed by `YEAR`
 > > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 3 columns with the one headed by `MONTH`
@@ -155,7 +158,7 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 
 As the dataset is quite big and may contain heterogeneous information, we need to know whether the data are about one species or more.
 
-> ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset?
+> <hands-on-title>How many species are taken into account in this dataset?</hands-on-title>
 >
 > 1. **Count occurrences of each record** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"from dataset"*: output of **Text reformatting with awk**
@@ -166,7 +169,7 @@ As the dataset is quite big and may contain heterogeneous information, we need t
 > 3. Check that the dataset is for one species only
 {: .hands_on}
 
-> ### {% icon details %} Datasets containing information about more than one species
+> <details-title>Datasets containing information about more than one species</details-title>
 >
 > If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
 >
@@ -179,12 +182,12 @@ As the dataset is quite big and may contain heterogeneous information, we need t
 >   https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv
 >   ```
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > 1. How many species does your initial dataset take into account ?
 > > 2. What are their names ?
 > >
-> > > ### {% icon solution %} Solutions
+> > > <solution-title></solution-title>
 > > >
 > > > 1. The dataset contains information on 2 different species
 > > > 2. Their names are "Pyronia tithonus" and "Aglais io".
@@ -194,7 +197,7 @@ As the dataset is quite big and may contain heterogeneous information, we need t
 >
 > We now need to create a new file containing the data for only one species
 >
-> > ### {% icon hands_on %} Hands-on: Creating a new file containing only the data from one species
+> > <hands-on-title>Creating a new file containing only the data from one species</hands-on-title>
 > > 1. Copy the name of the species you are interested in (for example: "Aglais io").
 > > 2. **Filter data on any column using simple expressions** {% icon tool %}
 > >      - {% icon param-file %} *"Filter"*: output of **Text reformatting with awk** {% icon tool %}
@@ -218,7 +221,7 @@ As the dataset is quite big and may contain heterogeneous information, we need t
 
 Now you have a file containing all the data on the species of interest. The main goal of this step is to model one phenology per year using a general additive model (GAM) with time and sites as explanatory variables. This model will be used to predict values for missing counts at local sites in order to improve the quality of the abundance indices.
 
-> ### {% icon hands_on %} Hands-on: Phenology
+> <hands-on-title>Phenology</hands-on-title>
 > 1. **Flight curve** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"Count file"*: output file you just generated with the **Text reformatting with awk** or **Filter data on any column using simple expressions** if your file was containing more than one species {% icon tool %}
 >
@@ -245,7 +248,7 @@ Now you have a file containing all the data on the species of interest. The main
 
 This graph displays the modeled flight curve of *Pyronia tithonus* over the years. But the first year is "null", probably a left-over of the 1st line with the header, and the week number is not shown.
 
-> ### {% icon hands_on %} Hands-on: Create a new column of the dataset containing the week and the year
+> <hands-on-title>Create a new column of the dataset containing the week and the year</hands-on-title>
 > 1. **Count occurrences of each record** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"from dataset"*: output from **Flight curve**
 >    - *"Select"*: `Column: 2` (the column with the year)
@@ -253,11 +256,11 @@ This graph displays the modeled flight curve of *Pyronia tithonus* over the year
 >    - *"How should the results be sorted?"*: `By the values being counted`
 > 2. Inspect and expand the output data from **Count occurrences of each record** {% icon tool %}
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > What can you see in this file?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > A list of the years and the number of occurrence for each year which should match the number of days for each year.
 >    > {: .solution }
 >    {: .question}
@@ -280,7 +283,7 @@ This graph displays the modeled flight curve of *Pyronia tithonus* over the year
 >    - *"Replace with"*: `\1`
 > 7. **Remove beginning of a file** {% icon tool %} to remove first line (to avoid header in the visualization)
 >
->    > ### {% icon comment %} Dataset with information about more than one species
+>    > <comment-title>Dataset with information about more than one species</comment-title>
 >    > If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
 >    {: .comment}
 >
@@ -306,7 +309,7 @@ This graph displays the modeled flight curve of *Pyronia tithonus* over the year
 
 This shows the abundance of *Pyronia tithonus*, over the weeks. We can see there is a peak every year as expected and we can notice some differences in the values between the weeks and years, but not how the weeks overlap between the years. We will plot a stalked version of this visualization to check if there are no unexpected changes and have an idea of the quality of the reconstructed phenology.
 
-> ### {% icon hands_on %} Hands-on: Visualize the years on a stacked graph
+> <hands-on-title>Visualize the years on a stacked graph</hands-on-title>
 > 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"from dataset"*: output from **Flight curve**
 >    - *"Column to plot on x-axis"*: `4` (the column with the year)
@@ -325,18 +328,18 @@ This shows the abundance of *Pyronia tithonus*, over the weeks. We can see there
 
 With this graph, we can see that *Pyronia tithonus* records are always around the same weeks every year. We can also see small differences between years but overall the phenology is quite stable and the results of this step seem good and allow us to continue with the calculation of the abundance index.
 
-> ### {% icon details %} Working with more than one species
+> <details-title>Working with more than one species</details-title>
 >
 > If you are working with more than one species, you should follow the next steps
 >
-> > ### {% icon hands_on %} Hands-on:
+> > <hands-on-title></hands-on-title>
 > > 1. **Paste two files side by side** {% icon tool %} with the following parameters:
 > >     -  *"Paste"*: `the output` from **Merge Columns together** (with the dataset for species 1)
 > >     -  *"and"*: `the output` from **Merge Columns together** (with the dataset for species 2)
 > >     -  *"Delimited by"*: tabulation
 > >
 > >   >
-> >   > ### {% icon comment %} Comment: You can add other species.
+> >   > <comment-title>You can add other species.</comment-title>
 > >   > In order to do so you will have to do as explained below:
 > >   > 1. **Paste two files side by side** {% icon tool %} with the following parameters:
 > >   >    -  *"Paste"*: the `output` from **Paste two files side by side** (with the dataset containing species 1 and 2)
@@ -348,7 +351,7 @@ With this graph, we can see that *Pyronia tithonus* records are always around th
 >
 > If your input dataset contains information about more than one species, you can now generate a chart for the multi-species dataset:
 >
-> > ### {% icon hands_on %} Hands-on:
+> > <hands-on-title></hands-on-title>
 > > 1. Inspect and expand the output data from **flight curve** {% icon tool %}
 > > 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
 > > 3. Select a visualization: `line chart (NVD3)`
@@ -380,7 +383,7 @@ With this graph, we can see that *Pyronia tithonus* records are always around th
 
 We now would like to create a file showing the abundance index per year of a chosen species in a certain site.
 
-> ### {% icon hands_on %} Hands-on: Generate an abundance index
+> <hands-on-title>Generate an abundance index</hands-on-title>
 > 1. **Abundance index** {% icon tool %} with the following parameters:
 >     -  *"Count file"*: output from **Text reformatting with awk**, that should be named `Counting file` and/or tagged `Count`
 >     -  *"Flight curve output"*: output from **flight curve**
@@ -398,7 +401,7 @@ We now would like to create a file showing the abundance index per year of a cho
 
 The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the future.
 
-> ### {% icon hands_on %} Hands-on: Expected temporal trend
+> <hands-on-title>Expected temporal trend</hands-on-title>
 > 1. **Expected temporal trend** {% icon tool %} with the following parameters:
 >    -  *"Tabular file generated by the ab_index tool"*: output of **abundance index**
 {: .hands_on}
@@ -417,7 +420,7 @@ Sometimes the expected temporal trend can't be done on dataset. If you want this
 We would like to know if the year has an influence on the abundance of a species. We will use a linear regression to do that.
 
 
-> ### {% icon details %} More details about the statistics
+> <details-title>More details about the statistics</details-title>
 > The model fitted to the data is:
 > $$ Y_i = \alpha + \beta x_i + \epsilon_i $$
 > with $$Y_i$$ = value of the dependent variable for the unit $$i$$
@@ -428,7 +431,7 @@ We would like to know if the year has an influence on the abundance of a species
 >
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: Model temporal trend with linear regression
+> <hands-on-title>Model temporal trend with linear regression</hands-on-title>
 > 1. **Model temporal trend with a simple linear regression** {% icon tool %}
 >    - {% icon param-file %} *"File generated by the glmmpql/Expected temporal trend tool"*: tabular output of **temporal trend**
 >    - {% icon param-file %} *"File generated by the ab_index tool"*: output from **abundance index**
@@ -446,13 +449,13 @@ Details about the output from the tool
 4. The value of the "hypothesis test statistic"
 5. The probability value.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What are the estimates of the regression coefficients?
 > 2. Can we use this model to make good predictions?
 > 3. Is the test p-value significant?
 >
-> > ### {% icon solution %} Solutions
+> > <solution-title></solution-title>
 > >
 > > 1. Intercept is 183.33852 and the slope (Year) is -0.08952.
 > > 2. No, the residual standard error is high.
@@ -463,7 +466,7 @@ Details about the output from the tool
 
 We can also test for autocorrelation in the data.
 
-> ### {% icon hands_on %} Hands-on: Check if there is autocorrelation of residuals
+> <hands-on-title>Check if there is autocorrelation of residuals</hands-on-title>
 > 1. **Autocorrelation test check for temporal autocorrelation in the residuals** {% icon tool %} with the following parameters.
 >    - {% icon param-file %} *"gls model"*: tabular output of **Model temporal trend**
 {: .hands_on}
@@ -475,7 +478,7 @@ Have a look at this plot. We can see that one of the value is above the threshol
 
 ## Take into account the autocorrelation
 
-> ### {% icon hands_on %} Hands-on: Model temporal trend taking into account autocorrelation of residuals
+> <hands-on-title>Model temporal trend taking into account autocorrelation of residuals</hands-on-title>
 > 1. **Linear regression ajusted for autocorrelation in the residuals** {% icon tool %} with the following parameters.
 >    - {% icon param-file %} *"File generated by the glmmpql/Expected temporal trend tool"*: tabular output of **temporal trend**
 >    - {% icon param-file %} *"File generated by the ab_index tool"*: output from **abundance index**
@@ -483,7 +486,7 @@ Have a look at this plot. We can see that one of the value is above the threshol
 
 For this step you can use the scratchbook function in order to see the results of both models at the same time.
 
-> ### {% icon details %} How to use the scratchbook
+> <details-title>How to use the scratchbook</details-title>
 > You can follow this tutorial if you want to learn how to use the scratchbook.
 > https://usegalaxy.org/tours/core.scratchbook
 >
@@ -495,7 +498,7 @@ Here you can compare the models using the AIC for Akaike information criterion. 
 We will therefore, based on the AIC, select the model taking into account the autocorrelation.
 We can now represent the data with the trend line from the model.
 
-> ### {% icon hands_on %} Hands-on: Plot the data and the trend line from the model
+> <hands-on-title>Plot the data and the trend line from the model</hands-on-title>
 > 1. **Plot abundance with trend line** {% icon tool %} with the following parameters.
 >    - {% icon param-file %} *"File generated by the ab_index tool"*: output from **abundance index**
 >    - {% icon param-files %} *"gls model"*: outputs of **Model temporal trend with a simple linear regression**.
@@ -506,6 +509,6 @@ We can now represent the data with the trend line from the model.
 You can see the trends is an apparent decrease. Here results are statistically significant so we can say that there is a significant decrease of the abundance.
 
 # Conclusions
-{:.no_toc}
+
 
 In this tutorial, you have analyzed regional GAM data to extract useful information in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data for one specific species of your choice. From there, you can show the phenology of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the phenology of various species. Afterwards, we have shown you how to create a dataset containing the information on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to assess the abundance of species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate whether the year has an influence on the abundance of a species or not.

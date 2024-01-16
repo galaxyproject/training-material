@@ -1,0 +1,14 @@
+- doc: Test outline for feature_extraction
+  job:
+    input image:
+      class: File
+      path: test-data/input_image_1.tiff
+      filetype: tiff
+    rules:
+      class: File
+      path: test-data/rules.tabular
+      filetype: tabular
+  outputs:
+    output:
+      path: test-data/feature_extraction_output.tabular
+      compare: diff

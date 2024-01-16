@@ -12,6 +12,8 @@ time_estimation: "1H"
 key_points:
   - "R can be used to customise Volcano Plot output"
   - "The RStudio interactive tool can be used to run R inside Galaxy"
+tags:
+  - interactive-tools
 contributors:
   - mblue9
 requirements:
@@ -22,7 +24,7 @@ requirements:
           - rstudio
     -
         type: "internal"
-        topic_name: introduction
+        topic_name: data-science
         tutorials:
           - r-basics
           - r-advanced
@@ -35,12 +37,10 @@ requirements:
 ---
 
 
-# Introduction
-{:.no_toc}
 
 The [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial, introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -59,11 +59,12 @@ We will use one file for this analysis:
 
 ## Import data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this exercise e.g. `Volcano plot R`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the differentially results table.
@@ -73,6 +74,7 @@ We will use one file for this analysis:
 >    - Option 2: From [Zenodo](https://zenodo.org/record/2529117)
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    - You can paste the link below into the **Paste/Fetch** box:
@@ -95,7 +97,7 @@ Click on the {% icon galaxy-eye %} (eye) icon and take a look at the `DE results
 
 We will create a volcano plot colouring all significant genes. We will call genes significant here if they have FDR < 0.01 and a log2 fold change of 0.58 (equivalent to a fold-change of 1.5). These were the values used in the original paper for this dataset. We will also label the top 10 most significant genes with their gene names. We will select to output the Rscript file which we will then use to edit the plot in R.
 
-> ### {% icon hands_on %} Hands-on: Create a Volcano plot
+> <hands-on-title>Create a Volcano plot</hands-on-title>
 >
 > 1. {% tool [Volcano Plot](toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5) %} to create a volcano plot
 >    - {% icon param-file %} *"Specify an input file"*: the de results file
@@ -122,7 +124,7 @@ Now we will customise the plot by editing the R code in RStudio. You can use Gal
 
 We'll import the differentially expressed results input file and the RScript into R.
 
-> ### {% icon hands_on %} Hands-on: Using datasets from Galaxy
+> <hands-on-title>Using datasets from Galaxy</hands-on-title>
 >
 > 1. Note the history IDs of 1) the differentially expressed results and 2) the RScript in your Galaxy history
 >
@@ -148,7 +150,7 @@ We'll have a look at the script.
 
 The first few lines from `# Galaxy settings start` to `# Galaxy settings end` are settings needed to run the Volcano plot tool in Galaxy. We don't need them to run the script in R so we will delete them. If we don't delete the error handling line, the R session will crash if we encounter any error in the code. It's ok as it will resume again where we were but better to not have this happen.
 
-> ### {% icon hands_on %} Hands-on: Delete unneeded lines
+> <hands-on-title>Delete unneeded lines</hands-on-title>
 >
 > Delete these lines from the top of the script.
 >
@@ -177,7 +179,7 @@ library(ggrepel)
 When we launched Galaxy RStudio there was information in the Console letting us know that some packages are pre-installed. These packages include `ggplot2` and `dplyr`. In this Galaxy there is a yellow warning banner across the top of the script saying `Package ggrepel required is not installed. Install. Don't Show Again`.
 So we just need to install the `ggrepel` package.
 
-> ### {% icon hands_on %} Hands-on: Install package
+> <hands-on-title>Install package</hands-on-title>
 >
 > Either click on "Install" in the yellow warning banner if present, or in the Console type
 >
@@ -189,7 +191,7 @@ So we just need to install the `ggrepel` package.
 
 We need to change the path of the differentially expressed file in the script. The path in the script is `/data/dnb03/galaxy_db/files/4/6/c/dataset_46c498bc-060e-492f-9b42-51908a55e354.dat`. This is a temporary location where the Galaxy Volcano plot tool copied the input file in order to use it, the file no longer exists there. Your path will be different. In the script change this path to `de-results.tsv` like below.
 
-> ### {% icon hands_on %} Hands-on: Run script
+> <hands-on-title>Run script</hands-on-title>
 >
 > 1. Change the input file path in script
 >
@@ -203,7 +205,7 @@ We need to change the path of the differentially expressed file in the script. T
 >
 > 2. Highlight the code in the script and run
 >
->    > ### {% icon tip %} Tip: Highlight all code and run shortcuts
+>    > <tip-title>Highlight all code and run shortcuts</tip-title>
 >    > - To highlight all code type <kbd>CTRL</kbd>+<kbd>a</kbd> (or <kbd>CMD</kbd>+<kbd>a</kbd>)
 >    > - To run type <kbd>CTRL</kbd>+<kbd>Enter</kbd> (or <kbd>CMD</kbd>+<kbd>Enter</kbd>)
 >    {: .tip}
@@ -214,7 +216,7 @@ You should see a file called `volcano_plot.pdf` appear in the Files pane. Click 
 
 We'll delete the lines below that save the plot to a PDF file. The plots will then be produced in the Plots pane so we can more easily see the different plots we're going to make, without having to keep opening the PDF file.
 
-> ### {% icon hands_on %} Hands-on: Produce plots in Plots pane
+> <hands-on-title>Produce plots in Plots pane</hands-on-title>
 >
 > 1. Delete the lines below that save the plot to a PDF file
 >
@@ -240,7 +242,7 @@ You should now see the plot produced in the Plots pane.
 
 We'll demonstate how you can change the colours. We'll change the colour of the downregulated genes from cornflowerblue to purple. We'll change the upregulated genes from firebrick to orange.
 
-> ### {% icon hands_on %} Hands-on: Change colours
+> <hands-on-title>Change colours</hands-on-title>
 >
 > 1. Edit the line below in the script
 >
@@ -259,7 +261,7 @@ We'll demonstate how you can change the colours. We'll change the colour of the 
 {: .hands_on}
 
 
-> ### {% icon tip %} Tip: R colours
+> <tip-title>R colours</tip-title>
 >
 > If you want to use other colours you can see the built-in R colours with their names in [this cheatsheet](https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf).
 >
@@ -270,7 +272,7 @@ We'll demonstate how you can change the colours. We'll change the colour of the 
 
 We'll make the points a bit smaller. We'll change to 0.5.
 
-> ### {% icon hands_on %} Hands-on: Change points size
+> <hands-on-title>Change points size</hands-on-title>
 >
 > 1. Edit the line below in the script
 >
@@ -289,16 +291,16 @@ We'll make the points a bit smaller. We'll change to 0.5.
 {: .hands_on}
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How could we change the transparency of the points?
 >
->    > ### {% icon solution %} Solution
+>    > <solution-title></solution-title>
 >    >
 >    > We could use `alpha =`. For example
->    ```R
->    geom_point(aes(colour = sig), alpha = 0.5)
->    ```
+>    > ```R
+>    > geom_point(aes(colour = sig), alpha = 0.5)
+>    > ```
 >    >
 >    {: .solution}
 {: .question}
@@ -308,7 +310,7 @@ We'll make the points a bit smaller. We'll change to 0.5.
 
 We'll make the font size of the labels a bit smaller.
 
-> ### {% icon hands_on %} Hands-on: Change labels text size
+> <hands-on-title>Change labels text size</hands-on-title>
 >
 > 1. Edit the line below in the script
 >
@@ -327,16 +329,16 @@ We'll make the font size of the labels a bit smaller.
 {: .hands_on}
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How could we change the number of genes labelled from 10 to 20?
 >
->    > ### {% icon solution %} Solution
+>    > <solution-title></solution-title>
 >    >
 >    > We could change the 10 to 20 here
->    ```R
->    top <- slice_min(results, order_by = pvalue, n = 20)
->    ```
+>    > ```R
+>    > top <- slice_min(results, order_by = pvalue, n = 20)
+>    > ```
 >    >
 >    {: .solution}
 {: .question}
@@ -347,7 +349,7 @@ We'll make the font size of the labels a bit smaller.
 
 We can change the categories of points we're colouring in the plot. For example, instead of using separate categories for upregulated, downregulated we could just use a single category for significant.
 
-> ### {% icon hands_on %} Hands-on: Change categories
+> <hands-on-title>Change categories</hands-on-title>
 >
 > 1. Change the category names to signif and notsignif
 >
@@ -394,11 +396,11 @@ We can change the categories of points we're colouring in the plot. For example,
 {: .hands_on}
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How would you remove the legend from the plot? You can use Google.
 >
->    > ### {% icon solution %} Solution
+>    > <solution-title></solution-title>
 >    >
 >    > If you Google `remove legend ggplot2` you may find a few ways it can be done. One way is
 >    >
@@ -411,7 +413,7 @@ We can change the categories of points we're colouring in the plot. For example,
 
 You can save the edited script by clicking the {% icon galaxy-save %} icon at the top of the script in RStudio or through File > Save. You can download from Galaxy RStudio from the Files pane by ticking the box beside the script name, then More > Export > Download.
 
-> ### {% icon tip %} Tip: More plot options
+> <tip-title>More plot options</tip-title>
 >
 > If you enter values in the Volcano Plot Galaxy tool form for Plot options, such as plot title, x and y axis labels or limits, they'll be output in the script. This is one way you could see how to customise these options in the plot.
 >
@@ -419,6 +421,6 @@ You can save the edited script by clicking the {% icon galaxy-save %} icon at th
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we have seen how a volcano plot can be generated and customised using Galaxy and R. You can see some more possible customisations in the [RNA Seq Counts to Viz in R]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial and at the [ggrepel website](https://ggrepel.slowkow.com/index.html).

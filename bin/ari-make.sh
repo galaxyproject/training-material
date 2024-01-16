@@ -1,12 +1,21 @@
 #!/bin/bash
 set -e
 
+function cleanup(){
+	kill $(pgrep -f $(npm bin)/http-server) || true
+}
+
+trap cleanup EXIT
+
 # We have an old commit ID, so we need to figure out which slides to build.
+videos="$(find topics -name 'slides.html' -or -name 'slides_*ES.html')"
 if [[ "${PREVIOUS_COMMIT_ID}" != "none" ]]; then
-	changed_slides="$(join <(find topics -name 'slides.html' -or -name introduction.html | xargs ./bin/filter-has-videos | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort))"
+	changed_slides="$(join <(echo "$videos" | xargs ./bin/filter-resource-metadata video | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort))"
 else
-	changed_slides="$(find topics -name 'slides.html' -or -name introduction.html | xargs ./bin/filter-has-videos)"
+	changed_slides="$(echo "$videos" | xargs ./bin/filter-resource-metadata video)"
 fi
+
+./node_modules/.bin/http-server -p 9876 _site &
 
 for slides in $changed_slides; do
 	echo "====== $slides ======"
@@ -17,18 +26,15 @@ for slides in $changed_slides; do
 
 	# Process the slides
 	echo $built_slides
-	cat "$built_slides" | \
-		sed "s|/training-material/|$(pwd)/_site/training-material/|g"  | \
-		sed "s|<head>|<head><base href=\"file://$(pwd)/$slides\">|" | \
-		wkhtmltopdf \
-			--enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
-			--user-style-sheet bin/slides-fix.css \
-			- _site/training-material/"$pdf";
+	docker run --rm --network host -v $(pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides /slides/_site/training-material/$pdf
 
 	# Build the slides
 	echo ari.sh "_site/training-material/$pdf" "$slides" "$mp4"
 	./bin/ari.sh "_site/training-material/$pdf" "$slides" "$mp4"
 done
+
+cleanup
+
 
 # Now we'll note our current, changed commit since this all went so well.
 mkdir -p videos/topics/

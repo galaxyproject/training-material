@@ -16,8 +16,6 @@ contributors:
 subtopic: analyse
 ---
 
-# Introduction
-{:.no_toc}
 
 InterMine ({% cite Smith2012 %}) is a well-establish platform to integrate and access life sciences data.
 It provides the integrated data via a web interface and RESTful web services.
@@ -32,7 +30,7 @@ it's possible to export a list of identifiers from Galaxy into any InterMine ins
 
 Learn more in this tutorial.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -43,7 +41,7 @@ Learn more in this tutorial.
 
 # Import data from InterMine
 
-> ### {% icon hands_on %} Hands-on: Import
+> <hands-on-title>Import</hands-on-title>
 > Search Galaxy for `InterMine` (not case sensitive; `intermine` is fine too), and click on **InterMine Server** under **Get Data**.
 >
 > 1. {% tool [InterMine Server](intermine) %}
@@ -56,7 +54,7 @@ Learn more in this tutorial.
 > 5. Select **Send to Galaxy** and double-check the *"Galaxy Location"* is correct.
 > 6. Click on the **Send to Galaxy** button on the bottom right of the pop-up window.
 >
->    > ### {% icon tip %} Enable popups
+>    > <tip-title>Enable popups</tip-title>
 >    >
 >    > If you get an error when you click on the **Send to Galaxy** button, please make sure to allow popups and try again.
 >    {: .tip}
@@ -69,7 +67,7 @@ You have now exported your query results from InterMine to Galaxy.
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Import some fly data from [Zenodo](https://zenodo.org/record/3407174) or from the data library
 >
@@ -78,6 +76,7 @@ You have now exported your query results from InterMine to Galaxy.
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 2. Rename the dataset to `GenesLocatedOnChromosome4`
@@ -90,11 +89,11 @@ You have now exported your query results from InterMine to Galaxy.
 
 The dataset contains the secondary identifier and the symbol of the *Drosophila melanogaster* genes and their location on the chromosome 4
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Do the data contain the type, e.g `Protein` or `Gene`?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > No, they don't. So we have to specify it, when we create the InterMine Interchange file
 > >
@@ -106,7 +105,7 @@ The dataset contains the secondary identifier and the symbol of the *Drosophila 
 
 We will use **Create InterMine Interchange Dataset** {% icon tool %} in order to generate an intermediate file which will be used to send the identifiers (e.g. gene identifiers) to InterMine. This file requires the identifier's type (e.g. `Gene`), the identifier (e.g `WBGene00007063`) and, optionally, the organims's name.
 
-> ### {% icon hands_on %} Hands-on: Generate InterMine file
+> <hands-on-title>Generate InterMine file</hands-on-title>
 >
 > 1. {% tool [Create InterMine Interchange dateset](toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tabular file"*: select the `GenesLocatedOnChromosome4` dataset which contains some fly's genes
@@ -114,7 +113,7 @@ We will use **Create InterMine Interchange Dataset** {% icon tool %} in order to
 >    - *"Feature Type"*: `Gene`
 >    - *"Feature Identifier column"*: `Column: 2`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    > - In this example, because the `GenesLocatedOnChromosome4` dataset does not contain the type we have to specify it, in the *"Feature Type"*
 >    > - *"Feature Type"*: this is type of the identifiers you are exporting to InterMine, in this example `Gene`. It must be a class in the InterMine data model.
 >    > - *"Feature Identifier column"*: select a column from the input file which contains the identifier. We have selected Column 2, which contains the gene symbol.
@@ -123,7 +122,7 @@ We will use **Create InterMine Interchange Dataset** {% icon tool %} in order to
 >    > - *"Organism Name"*: alternatively you can directly provide the organism's name. The organims' name is not mandatory, but is good to provide if it is known. It does not have to be precise
 >    {: .comment}
 >
-> 2. Click on **Execute**
+> 2. Click on **Run Tool**
 >
 {: .hands_on}
 
@@ -131,7 +130,7 @@ We will use **Create InterMine Interchange Dataset** {% icon tool %} in order to
 
 Once the generation of the interchange dataset has been completed, open the green box related to **Create InterMine Interchange on data**.
 
-> ### {% icon hands_on %} Hands-on: Send data
+> <hands-on-title>Send data</hands-on-title>
 >
 > 1. Click on view intermine at **Registry** to be redirected to the InterMine registry, which shows a full list of InterMines and the various organisms they support.
 > 2. Find an InterMine that has the organism type you’re working with, in our case FlyMine, and click on the **Send to** green button to export the identifiers to.

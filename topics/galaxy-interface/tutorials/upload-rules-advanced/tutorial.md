@@ -26,8 +26,7 @@ contributors:
 subtopic: upload
 ---
 
-# Introduction
-{:.no_toc}
+
 
 This builds on the previous Rule Based Uploader tutorial to cover even more advanced topics.
 
@@ -35,7 +34,7 @@ This builds on the previous Rule Based Uploader tutorial to cover even more adva
 > This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}) tutorial.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will:
 >
@@ -54,7 +53,7 @@ For this multiomics example, we will start with a uniprot query and build URLs f
 
 In order to make this data useful for the Rule Builder, we need to turn these accessoin IDs into URLs.
 
-> ### {% icon hands_on %} Hands-on: Turn Uniprot Accession IDs into URLs
+> <hands-on-title>Turn Uniprot Accession IDs into URLs</hands-on-title>
 >
 > 1. Open [Uniprot](https://www.uniprot.org/uniprot/E7C0H6)
 > 1. **Click** on one of the entries in the table (e.g. `E7C0H6`)
@@ -68,13 +67,13 @@ In order to make this data useful for the Rule Builder, we need to turn these ac
 >    ![Viewing the FASTA file](../../images/rules/uniprot_fasta_url.png)
 >
 > 5. We can deduce that the FASTA files for the other accession IDs will be available from URLs of the form `https://www.uniprot.org/uniprot/{identifier}.fasta`
->
+> <!-- https://rest.uniprot.org/uniprotkb/search?format=fasta&includeIsoform=true&query=accession:E7C0H6  is also an option, for future editors. -->
 {: .hands_on}
 {:#example-3-metadata}
 
 We will use this information to build a collection of FASTA files from our query.
 
-> ### {% icon hands_on %} Hands-on: Build Collection from Uniprot Accession IDs
+> <hands-on-title>Build Collection from Uniprot Accession IDs</hands-on-title>
 >
 > 1. Open the Rule Builder
 >    - *"Upload data as"*: `Collection(s)`
@@ -123,7 +122,7 @@ We will use this information to build a collection of FASTA files from our query
 >
 >      ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_5_url.png)
 >
->    > ### {% icon comment %} Regular expression explained
+>    > <comment-title>Regular expression explained</comment-title>
 >    > In this regular expression, `.*` will capture the entire accession ID.
 >    >
 >    > In the replacement expression, `https://www.uniprot.org/uniprot/\0.fasta`, the `\0` will be replaced by the captured
@@ -142,10 +141,10 @@ We will use this information to build a collection of FASTA files from our query
 > 6. Finalize the collection:
 >     - *"Name"*: for example `UP000052092`
 >     - *"Type"*: `fasta`
->     - Click `Upload`
+>     - Click `Build`
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_7_mapping_extension_and_name.png)
 >
->    > ### {% icon comment %} JSON Rule Definitions
+>    > <comment-title>JSON Rule Definitions</comment-title>
 >    > This example is ready to go, but before clicking "Build" it may be interesting to check out the rules Galaxy is following to clean and import your data. Click the little Wrench icon at the top of the list of rules. The result is a bunch of JavaScript object notation (JSON) text that you should never need to worry about but that you can build or modify by hand if you find it useful. We will use it the next example to quickly restore the list builder back to this state.
 >    >
 >    > ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_8_source.png)
@@ -162,7 +161,7 @@ This example will demonstrate creating multiple collections at the same time. We
 
 For this example we will re-use the metadata from the [previous example](#example-3-metadata).
 
-> ### {% icon hands_on %} Hands-on: Build a matched collection
+> <hands-on-title>Build a matched collection</hands-on-title>
 >
 > 1. **Open** the Rule Builder
 >    - *"Upload data as"*: `Collection(s)`
@@ -185,7 +184,7 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >    You should now see the rules you created in the last example.
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_3_initial_rules.png)
 >
->    > ### {% icon comment %} JSON Editor
+>    > <comment-title>JSON Editor</comment-title>
 >    >
 >    > Another way to do this is to open the JSON Editor, by clicking the wrench icon {% icon tool %} to the left of the history icon.  This will open up the JSON that gets created as you modify rules.  You can copy and paste JSON here or modify it directly. When you're working in this way, be sure to write good JSON (closing brackets, fields that make sense, etc.), otherwise you will get an error.
 >    {: .comment}
@@ -235,8 +234,8 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >
 >    Notice we have two URLs, two collection names, and two datatype extensions for each accession ID we started with. Like in the example where we split the columns, here we will split these up to describe multiple collections.
 > 7. From **Rules** menu, select  `Split Columns`
->    - *"Odd Number Column(s)"*: `C`, `D`, and `E` (the fasta columns)
->    - *"Even Number Column(s)"*: `F`, `G`, and `H` (the gff3 columns)
+>    - *"Odd Row Column(s)"*: `C`, `D`, and `E` (the fasta columns)
+>    - *"Even Row Column(s)"*: `F`, `G`, and `H` (the gff3 columns)
 >
 >    This will take the row consisting of the columns `ABCDEFGH` and build two rows, one with `ABCDEF` and the other with `ABFGH`
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_7_split_columns.png)
@@ -276,14 +275,14 @@ For this example, we will describe analyzing the metadata of the [SRA project PR
 So use either the SRA exporter tool or download the CSV file with fake URLs. If you download the data from the SRA exporter tool, select only the first 12 columns from the data (up to the column labeled "Library Name") and copy the resulting data to your clipboard.
 
 
-> ### {% icon hands_on %} Hands-on: Building Nested Lists
+> <hands-on-title>Building Nested Lists</hands-on-title>
 >
 > 1. Open the Rule Builder
 >    - *"Upload data as"*: `Collection(s)`
 >    - *"Load tabular data from"*: `Pasted Table`
 >    - Paste the table
 >
->    > ### {% icon solution %} Show Table
+>    > <solution-title>Show Table</solution-title>
 >    >
 >    > Below is the table with pre-downloaded example data mentioned above:
 >    >
@@ -386,7 +385,7 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >     - Set this `Column definition` for the URL target
 >     - Strip the header row
 >
->       > ### {% icon solution %} Solution
+>       > <solution-title></solution-title>
 >       > From **Filter** menu, select `First or Last N Rows`
 >       >   - Filter first Row
 >       >
@@ -396,19 +395,19 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >       {: .solution}
 >
 >    For the analysis we wish to do, we want to group these files based on the type indicated in column `L` (LibraryName) shown below.
->    The source data though adds numbers to the library type to to generate the `LibraryName`, we need to strip those out to use the type
+>    The source data though adds numbers to the library type to generate the `LibraryName`, so we need to strip those out to use the type
 >    as an identifier for grouping the datasets. To do this, use the regex column adder rule again.
 >
 > 3. From **Column** menu, select `Using a Regular Expression`
 >     - *"From Column"*: `L`
->     - Select `Create column from regular expression groups`
+>     - Select `Create columns matching expression groups`
 >     - *"Regular Expression"*: `([^\d]+)\d+`.
 >     - *"Number of Groups"*: `1`
 >
 >    The result looks like:
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_4_regex.png)
 >
->    > ### {% icon comment %} Regular expression explained
+>    > <comment-title>Regular expression explained</comment-title>
 >    > In this regular expression, `\d` means any digit, so `[^...]` means match anything that is not inside the brackets.
 >    > So together `[^\d]+` means match one or more, non digits at the start of the column and the `()` around that means capture
 >    > them into a group. We've add `\d+` at the end of the expression but it isn't grouped so we are effectively ignoring the
@@ -423,7 +422,7 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >     - Click on `... Assign Another Column`
 >     - Select column `A`
 >
->        > ### {% icon comment %} Re-ordering columns
+>        > <comment-title>Re-ordering columns</comment-title>
 >        > If you make a mistake in the order you select columns in you can simple use the up and down arrows to re-arrange the list
 >        {: .comment}
 >
@@ -449,7 +448,7 @@ To start this example, we will first upload a simple, flat collection of data. T
 will be the same as those used by the [DESeq2 Vignette](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
 from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/release/data/experiment/html/pasilla.html).
 
-> ### {% icon hands_on %} Hands-on: Applying Rules to Existing Collections
+> <hands-on-title>Applying Rules to Existing Collections</hands-on-title>
 >
 > 1. Open the Rule Builder
 >    - *"Upload data as"*: `Collection(s)`
@@ -484,7 +483,7 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >    sublists below that. We can do this with the `Apply Rules` collection operation tool, which will
 >    likely be under the `Collection Operations` tool menu in your Galaxy interface.
 >
-> 4. Open the **Apply Rule to Collection** tool
+> 4. Open the **Apply Rules** tool
 >
 >    The very simple interface should look something like this:
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_5_apply_rules_landing.png)
@@ -492,7 +491,7 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >    This interface simply lets one pick a collection to operate on and then launch the rule builder
 >    window to work to describe and preview manipulating the metadata of that collection.
 >
-> 5. **Apply Rule to Collection** {% icon tool %} with the following parameters:
+> 5. **Apply Rules** {% icon tool %} with the following parameters:
 >    - *"Input Collection"*: the collection we just uploaded
 >    - Click the `Edit` button
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_6_apply_rules_init_flat.png)
@@ -510,7 +509,7 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >    - *"Regular Expression"*: `(.*)_(.*)_.*`
 >    - *"Number of Groups"*: `2`
 >
->    > ### {% icon comment %} Regular expression explained
+>    > <comment-title>Regular expression explained</comment-title>
 >    >  Here ``.*`` means match any number of any character - so basically match anything.
 >    >  The parentheses around ``.*`` means form a "group" from whatever is matched.
 >    >  The ``_`` describes the literal ``_`` values in the identifier we are matching. The result is that
@@ -532,10 +531,10 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_8_nested.png)
 >
 >    Placing the "single" and "paired" sublists inside the "treated" and "untreated" lists was a bit arbitrary and depending on the
->    workflow these may need to be inverted at different parts of an analysis. The **Apply Rules** tool can be used to invert these levels
+>    workflow these may need to be inverted at different parts of an analysis. The `Apply Rules` tool can be used to invert these levels
 >    if that is needed.
 >
-> 8. **Apply Rule to Collection** {% icon tool %} with the following parameters:
+> 8. **Apply Rules** {% icon tool %} with the following parameters:
 >    - *"Input Collection"*: the new nested list we created in the previous step
 >    - Click "Edit".
 >
@@ -556,13 +555,13 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_11_inverted.png)
 >
->    In addition to structural re-organizations of a collection, the Apply Rules tool can be used to
+>    In addition to structural re-organizations of a collection, the `Apply Rules` tool can be used to
 >    filter elements out of the collection.
 >
-> 10. **Apply Rule to Collection** {% icon tool %} with the following parameters:
+> 10. **Apply Rules** {% icon tool %} with the following parameters:
 >     - *"Input Collection"*: the original flat list created
 >     - Click `Edit`
->     - From **Filter** menu, select `From a regular expression`
+>     - From **Filter** menu, select `Using a Regular Expression`
 >       - *"From Column"*: `A`
 >       - *"Regular Expression"*: `.*_single_.*`
 >     - From **Rules** menu, select `Add / Modify Column Definitions`
@@ -574,15 +573,15 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >
 >     ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_13_filtered.png)
 >
->     Structural re-organizations of collections can also be combined with filtering. To demonstrate this, reopen the original flat list created for this example again in the rule builder of the Apply Rules tool. Use the same regular expression as last time to filter the result but also add a column for "treated" and "untreated" list identifiers.
+>     Structural re-organizations of collections can also be combined with filtering. To demonstrate this, reopen the original flat list created for this example again in the rule builder of the `Apply Rules` tool. Use the same regular expression as last time to filter the result but also add a column for "treated" and "untreated" list identifiers.
 >
-> 11. **Apply Rule to Collection** {% icon tool %} with the following parameters:
+> 11. **Apply Rules** {% icon tool %} with the following parameters:
 >     - From **Filter** menu, select `Using a Regular Expression`
 >       - *"From Column"*: `A`
 >       - *"Regular Expression"*: `.*_single_.*`
 >     - From **Column** menu, select `Using a Regular Expression`
 >       - *"From Column"*: `A`
->       - Select `Create column from regular expression groups`
+>       - Select `Create columns matching expression groups`
 >       - *"Regular Expression"*:  `(.*)_single_.*`
 >       - *"Number of Groups"*: `1`
 >     - From **Rules** menu, select  `Add / Modify Column Definitions`

@@ -14,19 +14,19 @@ The following is a set of guidelines for contributing to this training material 
 
 # What should I know before I get started?
 
-This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](https://galaxyproject.github.io/training-material/topics/contributing/slides/introduction.html)
+This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](https://training.galaxyproject.org/training-material/topics/contributing/tutorials/introduction/slides.html)
 
 By contributing, you agree that we may redistribute your work under [this repository's license](LICENSE.md).
 
 We will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community.
 
-If you have any questions, you can reach us using the [Gitter chat](https://gitter.im/Galaxy-Training-Network/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link).
+If you have any questions, you can reach us using the [Matrix chat](https://matrix.to/#/!Galaxy-Training-Network_Lobby:gitter.im).
 
 # How can I contribute?
 
 You can report mistakes or errors, create more contents, etc. Whatever is your background, there is probably a way to do it: via the GitHub website, via command-line. If you feel it is too much, you can even write it with any text editor and contact us: we will work together to integrate it.
 
-You can check our [Frequently Asked Questions](http://galaxyproject.github.io/training-material/faq#how-can-i-contribute) and our [dedicated tutorials](http://galaxyproject.github.io/training-material/topics/contributing) for more details.
+You can check our [Frequently Asked Questions](https://training.galaxyproject.org/training-material/faq#how-can-i-contribute) and our [dedicated tutorials](https://training.galaxyproject.org/training-material/topics/contributing) for more details.
 
 # How is the training material maintained?
 

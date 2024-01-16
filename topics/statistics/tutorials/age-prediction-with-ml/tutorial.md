@@ -19,14 +19,12 @@ contributors:
 - anuprulez
 ---
 
-# Introduction
-{:.no_toc}
 
 [Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is used to create predictive models by learning features from datasets. In the studies performed by [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub), biomarkers are examined to predict the chronological age of humans by analysing the RNA-seq gene expression levels and DNA methylation pattern respectively. Different machine learning algorithms are used in these studies to select specific biomarkers to make age prediction. The RNA-seq gene expression ([FPKM](https://www.ebi.ac.uk/training/online/glossary/fpkm)) dataset is generated using fibroblast cell lines of humans. The skin fibroblasts cells keep damage that happens with age. Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. Within each individual, [DNA methylation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/) changes with age. This knowledge is used to select useful biomarkers from DNA methylation dataset. The [CpGs sites](https://en.wikipedia.org/wiki/CpG_site) with the highest correlation to age are selected as the biomarkers/features. In both these studies, specific biomarkers are analysed by machine learning algorithms to create an age prediction model.
 
 The datasets from these studies contain features (present as columns). The last column in both the datasets refers to `age` which is used as labels/targets. Since the targets are real numbers, the machine learning task becomes [regression](https://en.wikipedia.org/wiki/Regression_analysis). Using these features and targets, a model is learned using machine learning (regression) which learns a mapping between these features and targets. Using machine learning tools in Galaxy, we can achieve comparable prediction scores to those achieved by published analyses. In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn.org/stable/)) machine learning tools to [RNA-seq](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [DNA methylation](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) datasets to predict the chronological age of humans. This tutorial is divided into two parts - one with an RNA-seq dataset and another with a DNA methylation dataset.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > In cross-validation, a dataset is divided into `k` equal parts (`k` should be at least `2`). One part is used as the validation set to evaluate the performance of any machine learning algorithm and the remaining parts are used for learning/training.
 {: .comment}
 
@@ -38,7 +36,7 @@ In both the parts, learning on datasets is done using cross-validation and the [
 ![model_good](../../images/age-prediction-with-ml/model_good.png "This shows an example of a good model as most of the points lie along the x = y line. Because most of the points lie along the x = y line, R2 score is 0.99 very close to the best score of 1.0")
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -51,7 +49,7 @@ In both the parts, learning on datasets is done using cross-validation and the [
 
 The RNA-seq dataset is collected from fibroblast cell lines belonging to 133 healthy patients with age ranging from 1 to 94 years. The skin fibroblasts cells dataset is conducive for age prediction related studies for multiple reasons - these skin fibroblasts hold age-related damage, contain phenotypic, epigenomic and transcriptomic changes which are age-dependent and it is easy to collect this dataset using non-invasive techniques. Using this dataset, we perform an [exhaustive search](https://en.wikipedia.org/wiki/Hyperparameter_optimization) (also known as grid search) for finding the best features and then apply [ElasticNet regressor](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet) with 5-fold cross-validation. The R2 score achieved is comparable to the predictions found in the study performed by [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9).
 
-> ### {% icon details %} 5-fold cross-validation
+> <details-title>5-fold cross-validation</details-title>
 >
 > It is a model validation technique which estimates the performance of a predictive model on an unseen data. A dataset is divided into `5` folds and these folds are categorised into training and validation sets. The idea of cross-validation is shown in figure [3](#figure-3). The complete dataset is divided into `5` equal parts. 80% of the dataset is used for training and the remaining 20% is used for validating the performance of training. This is done for `5` folds/iterations, each time the validation set (20% of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over `5` folds.
 >
@@ -63,7 +61,7 @@ The RNA-seq dataset is collected from fibroblast cell lines belonging to 133 hea
 
 We proceed to the analysis by uploading the RNA-seq dataset. The dataset has `133` rows corresponding to human patients and over `27,000` columns specifying genes. The last column `age` contains the chronological age. For the validation set, this `age` column is predicted and the R2 metric is computed.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -87,7 +85,7 @@ We proceed to the analysis by uploading the RNA-seq dataset. The dataset has `13
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > In the `training_data_normal` dataset, you might have noticed that it showed `134` rows instead of `133` rows. The first row contains the header information i.e. the description of each column.
 {: .comment}
 
@@ -95,7 +93,7 @@ We proceed to the analysis by uploading the RNA-seq dataset. The dataset has `13
 
 We can see that this RNA-seq dataset is high-dimensional. There are over `27,000` columns/features. Generally, not all the features in the dataset are useful for prediction. We need only those features which increase the predictive ability of the model. To filter these features, we perform feature selection and retain only those which are useful. To do that, we use [SelectKBest](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest) module. This approach involves extracting those features which are most correlated to the target (`age` in our dataset). [F-regression](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression) is used for the extraction of features. Moreover, we are not sure of how many of these features we will need. To find the right number of features, we do a hyperparameter search (to find the best combination of values of different parameters). It works by setting many different numbers of features to determine to number which gives the highest accuracy. To wrap this feature selector with a regressor, we will use the **Pipeline builder** tool. This tool creates a sequential flow of algorithms to execute on datasets. Since the hyperparameters will be tuned, we choose to output the parameters for searchCV. The tool does not take any dataset as input. Rather, the outputs will be used as inputs to the **Hyperparameter search** tool (explained in the following step). We will use ElasticNet as a regressor which creates an age prediction model. It is a linear regressor with `l1` (also called lasso) and `l2` (also called ridge) as regularisers. Regularisation is a technique used in machine learning to prevent overfitting. Overfitting happens when a machine learning algorithm starts memorising the dataset it is trained upon, rather than learning general features. The consequence of overfitting is that the accuracy on the training set is good, but results on the unseen set (test set) are poor, which happens because the algorithm has not learned general features from the dataset. To prevent overfitting, regularisers like `l1` and `l2` are used. `L1` is a linear term added to the error function of a machine learning algorithm and `l2` adds a squared term to the error function. More details about `l1` and `l2` can found [here](https://www.kaggle.com/residentmario/l1-norms-versus-l2-norms).
 
-> ### {% icon hands_on %} Hands-on: Create pipeline
+> <hands-on-title>Create pipeline</hands-on-title>
 >
 > 1. **Pipeline builder** {% icon tool %} with the following parameters:
 >    - In *"1: Pre-processing step"*:
@@ -134,11 +132,11 @@ In the **Pipeline builder** tool, we added two steps - preprocessing (feature se
 
 For these three parameters, we have 24 different combinations (4 x 2 x 3) of values and we will verify the performance of each combination. The parameter **k** is used for feature selection and parameters **normalize** and **alpha** are used for the regressor. There are many more hyperparameters of the [ElasticNet](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet) regressor which are explained in the official documentation of scikit-learn. However, the combination of the above three parameters already gives a comparable accuracy published in the study [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9). Therefore, we will stick to these parameters.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > It is advisable to tune all the parameters of a machine learning algorithm for a dataset if no prior information is available about the subset of parameters which works best for the dataset.
 {: .comment}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > These parameters have the same description and values in the second part of the tutorial where we will again use the **Hyperparameter search** tool.
 {: .comment}
 
@@ -146,7 +144,7 @@ For these three parameters, we have 24 different combinations (4 x 2 x 3) of val
 
 We will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.
 
-> ### {% icon hands_on %} Hands-on: Hyperparameter search
+> <hands-on-title>Hyperparameter search</hands-on-title>
 >
 > 1. **Hyperparameter search** {% icon tool %} with the following parameters:
 >    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
@@ -197,13 +195,13 @@ We will use the **Hyperparameter search** tool to find the best values for each 
 
 The tool returns two outputs, one of which is a table with numerical results. Please inspect it carefully: the `rank_test_score` column shows the ranking of different combinations based on the values in the `mean_test_score` column.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the best `mean_test_score` value estimated by the **Hyperparameter search** tool?
 > 2. Which combination of parameters gives the best result?
 > 3. How many possible combinations of parameters the **Hyperparameter search** tool estimated?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 0.73 (it is close to the best R2 score (0.81) achieved by a customised ensemble algorithm explained by [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9))
 > > 2. alpha: 0.001, normalize: True, k: 5880
@@ -217,7 +215,7 @@ The tool returns two outputs, one of which is a table with numerical results. Pl
 
 We will visualize the tabular output of **Hyperparameter search** tool from the previous step using the **Parallel coordinates plot of tabular data** tool. There are multiple columns in the tabular output, but we will focus on only a few of them.
 
-> ### {% icon hands_on %} Hands-on: Create parallel coordinates plot
+> <hands-on-title>Create parallel coordinates plot</hands-on-title>
 >
 > 1. **Parallel coordinates plot** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"Select data file"*: `tabular` file (output of **Hyperparameter search** {% icon tool %})
@@ -230,11 +228,11 @@ The output plot has the following legend: the colour-coding is based on the `mea
 
 ![data](../../images/age-prediction-with-ml/parallel_coor_plot.png "The visualization of the hyperparameter optimisation tool output. We optimised the values of 3 hyperparameters (alpha, normalize and k). These can be seen as the columns (first three from left to right) in the plot. The rightmost column contains the accuracy values (mean_test_score).")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > What are the worst performing combinations of hyperparameters (name four)?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Worst four: 
 > >    - alpha: 0.00001, normalize: False, k: 5880
@@ -262,7 +260,7 @@ In the second part of the analysis, we will use the [DNA methylation dataset](ht
 
 We proceed with the analysis by uploading new datasets. You might want to create a new history first. The training set contains `208` rows corresponding to humans and `13` features (age-correlated CpG sites in DNA methylation dataset). The last column is `age`. The test set contains `104` rows and the same number of features as the training set. The `age` column in the test set is predicted after training on the training set. Another dataset `test_rows_labels` contains the true age values of the test set which is used to compute R2 scores between true and predicted age.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
@@ -292,7 +290,7 @@ The `train_rows` contains a column `Age` which is the label or target. We will e
 
 We will create a pipeline with **Pipeline builder** tool, but this time, we just specify the regressor. [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) has used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) as the regressor and we can conclude from this study that the ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use [Gradient boosting](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor) which is an ensemble-based regressor because it uses multiple decision tree regressors internally and predicts by taking the collective performances of the predictions (by multiple decision trees). It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelised. The **Pipeline builder** tool will wrap this regressor and return a zipped file and a tabular file containing all tunable hyperparameters.
 
-> ### {% icon hands_on %} Hands-on: Create pipeline
+> <hands-on-title>Create pipeline</hands-on-title>
 >
 > 1. **Pipeline builder** {% icon tool %} with the following parameters:
 >    - In *"Final Estimator"*:
@@ -304,7 +302,7 @@ We will create a pipeline with **Pipeline builder** tool, but this time, we just
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > The [*ensemble*](https://scikit-learn.org/stable/modules/ensemble.html#ensemble) method uses multiple learning models internally for better predictions.
 {: .comment}
 
@@ -317,7 +315,7 @@ We use only one parameter `n_estimators` of the `Gradient boosting` regressor fo
 
 We will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.
 
-> ### {% icon hands_on %} Hands-on: Hyperparameter search
+> <hands-on-title>Hyperparameter search</hands-on-title>
 >
 > 1. **Hyperparameter search** {% icon tool %} with the following parameters:
 >    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
@@ -360,13 +358,13 @@ We will use the **Hyperparameter search** tool to find the best values for each 
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is the optimal number of estimators for the given dataset?
 >
 > Hint: Please look at the `mean_test_score` column in the tabular result from the **Hyperparameter search** tool.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 75. (Even though the default value of the number of estimators for Gradient boosting regressor is `100`, `75` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset). 50 estimators also give almost the same accuracy.
 > >
@@ -378,7 +376,7 @@ We will use the **Hyperparameter search** tool to find the best values for each 
 
 Using the **Hyperparameter search** tool, we found the best model based on the training data. Now, we will predict age in the test dataset using this model in order to see if the model has learned important features which can be generalised on a new dataset. The test dataset (`test_rows`) contains the same number of features, but does not contain the `age` column. This is predicted using the trained model.
 
-> ### {% icon hands_on %} Hands-on: Predict age
+> <hands-on-title>Predict age</hands-on-title>
 >
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters:
 >    - *"Select a Classification Task"*: `Load a model and predict`
@@ -392,7 +390,7 @@ Using the **Hyperparameter search** tool, we found the best model based on the t
 
 In the previous step, we generated predictions for the test dataset. We have one more dataset (`test_rows_labels`) which contains the true age values of the test set. Using the true and predicted values of age in the test set, we will verify the performance by analysing the plots.
 
-> ### {% icon hands_on %} Hands-on: Create regression plots
+> <hands-on-title>Create regression plots</hands-on-title>
 >
 > 1. **Plot actual vs predicted curves and residual plots of tabular data** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"Select input data file"*: `test_rows_labels` tabular file
@@ -402,11 +400,11 @@ In the previous step, we generated predictions for the test dataset. We have one
 
 The tool outputs three HTML files which contain the interactive plots.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Inspect the plots. What can you say about the predictions?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Figures [6](#figure-6) and [8](#figure-8) show that the prediction is good because the predicted age lies close to the true age.
 > >
@@ -433,6 +431,6 @@ The [residual plot](http://docs.statwing.com/interpreting-residual-plots-to-impr
 Figure [6](#figure-6) shows that we achieved an R2 score of `0.94` and root mean square score of `3.76` for the test set using the Gradient boosting regressor. The study of [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) also mentions a similar root mean square score (`3.93`), derived using the random forest regressor. The root mean square score shows the difference in the true and predicted age of humans. The R2 score (`0.94`) is close to the best achievable score of `1.0` which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in Galaxy, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.
 
 # Conclusion
-{:.no_toc}
+
 
 In our tutorial, we were able to use machine learning tools in Galaxy to reproduce the results reported in these scientific studies - [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub). We also learned how to work with high-dimensional datasets, perform a hyperparameter search and cross-validation. Further, we can reuse the trained models to make predictions on a new dataset provided that this new dataset has the same features. There are numerous other machine learning algorithms available in Galaxy which can also be tried out on these datasets to verify whether the accuracy can be improved.

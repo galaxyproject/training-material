@@ -36,18 +36,18 @@ What is an artificial neural network?
 - ML discipline roughly inspired by how neurons in a human brain work
 - Huge resurgence due to availability of data and computing capacity
 - Various types of neural networks (Feedforward, Recurrent, Convolutional)
-- FNN applied to classification, clustering, regression, and association 
+- FNN applied to classification, clustering, regression, and association
 
 ---
 
 # Inspiration for neural networks
 
-- Neuron a special biological cell with information processing ability 
+- Neuron a special biological cell with information processing ability
 	- Receives signals from other neurons through its *dendrites*
 	- If the signals received exceeds a threshold, the neuron fires
 	- Transmits signals to other neurons via its *axon*
 - *Synapse*: contact between axon of a neuron and denderite of another
-	- Synapse either enhances/inhibits the signal that passes through it 
+	- Synapse either enhances/inhibits the signal that passes through it
 	- Learning occurs by changing the effectiveness of synapse
 
 ![Sketch of a biological neuron and its components]({{site.baseurl}}/topics/statistics/images/FNN_bio_neuron.png) <!-- https://pixy.org/3013900/ CC0 license-->
@@ -58,8 +58,8 @@ What is an artificial neural network?
 
 - Outter most layer of brain, 2 to 3 mm thick, surface area of 2,200 sq. cm
 - Has about 10^11 neurons
-	- Each neuron connected to 10^3 to 10^4 neurons 
-	- Human brain has 10^14 to 10^15 connections 
+	- Each neuron connected to 10^3 to 10^4 neurons
+	- Human brain has 10^14 to 10^15 connections
 
 ---
 
@@ -70,7 +70,7 @@ What is an artificial neural network?
 	- Millions of times slower than an electronic circuit
 	- Complex tasks like face recognition done within a few hundred ms
 	- Computation involved cannot take more than 100 serial steps
-- The information sent from one neuron to another is very small 
+- The information sent from one neuron to another is very small
 	- Critical information not transmitted
 	- But captured by the interconnections
 - Distributed computation/representation of the brain
@@ -88,7 +88,7 @@ What is an artificial neural network?
 # Learning in Perceptron
 
 - Given a set of input-output pairs (called *training set*)
-- Learning algorithm iteratively adjusts model parameters 
+- Learning algorithm iteratively adjusts model parameters
 	- Weights and biases
 - So the model can accurately map inputs to outputs
 - Perceptron learning algorithm
@@ -114,7 +114,7 @@ What is an artificial neural network?
 - More hidden layers (and more neurons in each hidden layer)
 	- Can estimate more complex functions
 	- More parameters increases training time
-	- More likelihood of *overfitting* 
+	- More likelihood of *overfitting*
 
 ---
 
@@ -126,16 +126,16 @@ What is an artificial neural network?
 
 # Supervised learning
 
- 
+
 - Training set of size *m*: { (x^1,y^1),(x^2,y^2),...,(x^m,y^m) }
 	- Each pair (x^i,y^i) is called a *training example*
 	- x^i is called *feature vector*
 	- Each element of feature vector is called a *feature*
-	- Each x^i corresponds to a *label* y^i 
+	- Each x^i corresponds to a *label* y^i
 - We assume an unknown function y=f(x) maps feature vectors to labels
 - The goal is to use the training set to learn or estimate f
 	- We want the estimate to be close to f(x) not only for training set
-	- But for training examples not in training set 
+	- But for training examples not in training set
 
 ---
 
@@ -164,8 +164,8 @@ What is an artificial neural network?
 - Multiclass classification
 	- As many neurons in output layer as number of classes
 	- *Softmax* activation function
-	- Takes input to neurons in output layer 
-	- Creates a probability distribution, sum of outputs adds up to 1 
+	- Takes input to neurons in output layer
+	- Creates a probability distribution, sum of outputs adds up to 1
 	- The neuron with the highest proability is the predicted label
 - Regression problem
 	- Single neuron in output layer
@@ -176,11 +176,11 @@ What is an artificial neural network?
 # Loss/Cost functions
 
 - During training, for each training example (x^i,y^i), we present x^i to neural network
-	- Compare predicted output with label y^1 
+	- Compare predicted output with label y^1
 	- Need loss function to measure difference between predicted & expected output
-- Use *Cross entropy* loss function for classification problems 
+- Use *Cross entropy* loss function for classification problems
 - And *Quadratic* loss function for regression problems
-	- Quadratic cost function is also called *Mean Squared Error (MSE)* 
+	- Quadratic cost function is also called *Mean Squared Error (MSE)*
 
 ---
 
@@ -203,11 +203,11 @@ What is an artificial neural network?
 # Backpropagation (BP) learning algorithm
 
 - A *gradient descent* technique
-	- Find local minimum of a function by iteratively moving in opposite direction of gradient of function at current point 
-- Goal of learning is to minimize cost function given training set 
-	- Cost function is a function of network weights & biases of all neurons in all layers 
+	- Find local minimum of a function by iteratively moving in opposite direction of gradient of function at current point
+- Goal of learning is to minimize cost function given training set
+	- Cost function is a function of network weights & biases of all neurons in all layers
 	- Backpropagation iteratively computes gradient of cost function relative to each weight and bias
-	- Updates weights and biases in the opposite direction of gradient 
+	- Updates weights and biases in the opposite direction of gradient
 	- Gradients (partial derivatives) are used to update weights and biases
 	- To find a local minimum
 
@@ -230,7 +230,7 @@ What is an artificial neural network?
 - *Batch* gradient descent
 	- Calculate gradient for each weight/bias for *all* samples
 	- Average gradients and update weights/biases
-	- Slow, if we have too many samples  
+	- Slow, if we have too many samples
 
 - *Stochastic* gradient descent
 	- Update weights/biases based on gradient of *each* sample
@@ -246,16 +246,16 @@ What is an artificial neural network?
 
 # Vanishing gradient problem
 
-- Second BP equation is recursive 
+- Second BP equation is recursive
 	- We have derivative of activation function
-	- Calc. error in layer prior to output: 1 mult. by derivative value 
+	- Calc. error in layer prior to output: 1 mult. by derivative value
 	- Calc. error in two layers prior output: 2 mult. by derivative values
- 
+
 - If derivative values are small (e.g. for Sigmoid), product of multiple small values will be a very small value
-	- Since error values decide updates for biases/weights 
-	- Update to biases/weights in first layers will be very small 
-		- Slowing the learning algorithm to a halt 
-	- The reason Sigmoid not used in deep networks 
+	- Since error values decide updates for biases/weights
+	- Update to biases/weights in first layers will be very small
+		- Slowing the learning algorithm to a halt
+	- The reason Sigmoid not used in deep networks
 		- Why ReLU is popular in deep networks
 
 ---
@@ -278,7 +278,7 @@ What is an artificial neural network?
 
 - Galaxy Training Materials ([training.galaxyproject.org](https://training.galaxyproject.org))
 
-![]({{site.baseurl}}/topics/introduction/images/gtn_stats.png)
+![Screenshot of the gtn stats page with 21 topics, 170 tutorials, 159 contributors, 16 scientific topics, and a growing community]({{site.baseurl}}/topics/introduction/images/gtn_stats.png)
 
 ???
 

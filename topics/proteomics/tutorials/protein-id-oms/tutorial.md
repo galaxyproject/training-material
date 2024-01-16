@@ -32,11 +32,9 @@ contributors:
   - stortebecker
   - bgruening
 subtopic: id-quant
-tags: [DDA]
+tags: [DDA, HeLa]
 ---
 
-# Introduction
-{:.no_toc}
 
 Identifying the proteins contained in a sample is an important step in any proteomic experiment. However, in most settings, proteins are digested to peptides prior to LC-MS/MS analysis. In this so-called "bottom-up" procedure, only peptide masses are measured. Therefore, protein identification cannot be performed directly from raw data, but is a multi-step process:
 
@@ -52,7 +50,7 @@ For an alternative protein ID workflow using the [Compomics](https://compomics.c
 The latter tutorial does not allow to continue with the tutorial on protein quantitation.
 
 # Input data
-{:.no_toc}
+
 
 As an example dataset, we will use an LC-MS/MS analysis of HeLa cell lysate published
 in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/24678044). Detailed information
@@ -63,7 +61,7 @@ If you already completed the tutorial on [Database Handling]({{site.baseurl}}/to
 you can use the constructed database including decoys.
 You can find a prepared database, as well as the input LC-MS/MS data in different file formats on [Zenodo](https://zenodo.org/record/796184).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -82,7 +80,7 @@ Machine vendors offer algorithms to extract peaks from profile raw data. Those a
 However, the OpenMS tool ***PeakPickerHiRes*** {% icon tool %} is reported to generate slightly better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
 If your data were generated on a low resolution mass spectrometer, use **PeakPickerWavelet** {% icon tool %} instead.
 
-> ### {% icon hands_on %} Hands-On: File Conversion and Peak Picking
+> <hands-on-title>File Conversion and Peak Picking</hands-on-title>
 >
 > We provide the [input data](https://zenodo.org/record/796184) in the original `raw` format and also already converted to `mzML`. If **msconvert** {% icon tool %} does not run on your Galaxy instance, please download the preconverted `mzML` as an input and continue with step 5 of the following hands-on training.
 >
@@ -115,13 +113,13 @@ If your data were generated on a low resolution mass spectrometer, use **PeakPic
 >
 >           Peak picking will only be performed on MS2 level.
 >
->   > ### {% icon comment %} Comment: Local Use of MSConvert
->   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If **msconvert** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](https://compomics.com/bioinformatics-for-proteomics/identification/) ("Peak List Generation"). Afterwards, upload the resulting mzML file to your Galaxy history.
->  {: .comment}
+>   > <comment-title>Local Use of MSConvert</comment-title>
+>   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If **msconvert** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a [detailed description of the necessary steps on this site](https://compomics.com/bioinformatics-for-proteomics/identification/) ("Peak List Generation"). Afterwards, upload the resulting mzML file to your Galaxy history.
+>   {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment: MS2 peak picking during data acquisition
+> <comment-title>MS2 peak picking during data acquisition</comment-title>
 > MS2 peaks are often acquired in centroided mode in first place. The profile data are converted to centroided mode already during data acquisition, resulting in MS2-centroided `raw` files. If your MS2 data are already centroided, simply omit the peak picking step.
 {: .comment}
 
@@ -132,11 +130,11 @@ To find out the peptide sequences, the MS2 spectrum is compared to a theoretical
 
 Different peptide search engines have been developed to fulfill the matching procedure. Here, we will use the search engine [X!Tandem](https://www.ncbi.nlm.nih.gov/pubmed/14976030). OpenMS provides "adapters" (wrappers) for several other peptide search engines, like MSGF+ or OMSSA. You may replace the XTandemAdapter by another search engine of your choice.
 
-> ### {% icon hands_on %} Hands-On: Peptide Identification
+> <hands-on-title>Peptide Identification</hands-on-title>
 >
 > 1. Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial [Database Handling]({% link topics/proteomics/tutorials/database-handling/tutorial.md %}) into your current history by using the multiple history view
 >
->   > ### {% icon comment %} You did not run the Database Handling first?
+>   > <comment-title>You did not run the Database Handling first?</comment-title>
 >   > You can upload the ready-made database from Zenodo
 >   >
 >   > ```
@@ -155,11 +153,11 @@ Different peptide search engines have been developed to fulfill the matching pro
 >    - {% icon param-file %} *"input file"*: **XTandem** output
 {: .hands_on}
 
-> ### {% icon comment %} Settings for labelled data
+> <comment-title>Settings for labelled data</comment-title>
 > Several common quantitation methods are based on labels e.g. SILAC, TMT, iTRAQ, Dimethyl. Those labels must be specified in the search engine as a (variable) modification. See also [Peptide and Protein Quantification via Stable Isotope Labelling]({% link topics/proteomics/tutorials/protein-quant-sil/tutorial.md %}).
 {: .comment}
 
-> ### {% icon comment %} Comment: Advanced Search Engine Parameters
+> <comment-title>Advanced Search Engine Parameters</comment-title>
 > The OpenMS adapters do not always allow to set every option of the underlying search engine. If an option is missing, you may also run the search engine locally or by using a Galaxy wrapper. Afterwards, convert the search engine output to the OpenMS format `idXML` by running **IDFileConverter** {% icon tool %}.
 >
 > The search engine X!Tandem features some more advanced options than the ones reflected in the **XTandemAdapter** {% icon tool %}. If you need those advanced options, the **XTandemAdapter** {% icon tool %} allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as an input in the field `Default X!Tandem configuration file`. You may also set the option *"ignore_adapter_param"* to `Yes` to overwrite all options set by the GUI.
@@ -175,7 +173,7 @@ The false discovery rate is therefore defined as the number of false discoveries
 
 To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool **PeptideIndexer** {% icon tool %}. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. Then we calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm Fido, which is used by OpenMS. We will then filter PSMs for 1 % FDR with **FalseDiscoveryRate** {% icon tool %}. and set the score back to PEP with **IDScoreSwitcher** {% icon tool %}.
 
-> ### {% icon hands_on %} Hands-On: Peptide FDR filtering
+> <hands-on-title>Peptide FDR filtering</hands-on-title>
 >
 > 1. Run {% tool [PeptideIndexer](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0) %} with
 >    - {% icon param-file %} *"Input idXML file containing the identifications"*: output of **XTandemAdapter**
@@ -204,11 +202,11 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions:
+> <question-title></question-title>
 > 1. How many peptides were identified?
 > 2. How many peptides with oxidized methionine were identified?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. You should have identified 3378 non-redundant peptide hits.
 > > 2. 804 peptides contain an oxidized methionine.
 > > Numbers may slightly vary depending on the versions of the tools and the used FASTA file.
@@ -220,7 +218,7 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein.
 The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/20712337) algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches. Afterwards, we keep only proteins with 1% FDR.
 
-> ### {% icon hands_on %} Hands-On: Protein inference
+> <hands-on-title>Protein inference</hands-on-title>
 >
 > 1. Run {% tool [FidoAdapter](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0) %}
 >    - {% icon param-file %} *"Input: identification results"*: output of **IDScoreSwitcher**
@@ -235,14 +233,14 @@ The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/2071
 >    - {% icon param-file %} *"input file"*: output of **FalseDiscoveryRate**
 {: .hands_on}
 
-> ### {% icon comment %} Comment: "Greedy" Group Resolution
+> <comment-title>"Greedy" Group Resolution</comment-title>
 > Protein groups are reported, when an identified peptide maps to multiple proteins in the used database [Nesvizhskii and Aebersold (2005)](https://www.ncbi.nlm.nih.gov/pubmed/16009968). Some peptides may map to different protein groups and can therefore not be used for protein quantitation. The option `-greedy_group_resolution` solves this problem by assigning peptides only to the one most probable protein group, thus enabling to quantify proteins based not only on unique, but also on shared peptides. This usually leads to a much higher number of quantified proteins. However it will introduce noise in the FCs when a peptide was indeed shared by different proteins and the quantity of this peptide was a weighted sum of contributions. The greedy group resolution is similar to Occam's razor.
 {: .comment}
 
-> ### {% icon question %} Questions:
+> <question-title></question-title>
 > How many proteins were finally identified?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > You should have identified 1252 proteins.
 > > Numbers may slightly vary depending on the versions of the tools and the used FASTA file.
 > {: .solution }
@@ -255,7 +253,7 @@ It also enables you to check for contaminations in your samples.
 
 **CAVE:** When analyzing human samples, many proteins that are common contaminants may also stem from the sample. Therefore, human contaminants do not have to be excluded from further analysis, but you should keep in mind that the source of these proteins is unclear.
 
-> ### {% icon hands_on %} Hands-On: Analysis of Contaminants
+> <hands-on-title>Analysis of Contaminants</hands-on-title>
 >
 > 1. Run {% tool [TextExporter](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0) %} to convert the idXML output to a human-readable tabular file.
 >    - {% icon param-file %} *"Input file"*: **FalseDiscoveryRate** output
@@ -272,12 +270,12 @@ It also enables you to check for contaminations in your samples.
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 > 1. Which contaminants did you identify? Where do these contaminations likely come from?
 > 2. What other sources of contaminants exist?
 > 3. How many false positives do we expect in our list?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1.  TRY1_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts. Also, eight human proteins are listed, these are commonly introduced during sample preparation. As we were analyzing a human sample, it is not neccessary to remove these proteins, as they may as well originate from the HeLa cells.
 > > 2.  Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.
 > > 3.  As we were allowing for a false discovery rate of 1 %, we would expect 13 (1255/0.01) false positive proteins in our list.
@@ -292,7 +290,7 @@ By comparing results of multiple search engines, you may improve the *sensitivit
 
 Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.uni-tuebingen.de/archive/openms/Documentation/release/latest/html/TOPP_ConsensusID.html) to combine the search engine results.
 
-> ### {% icon hands_on %} Hands-On: Multiple search engines
+> <hands-on-title>Multiple search engines</hands-on-title>
 >
 > 1. Run **MSGFPlusAdapter** {% icon tool %} with
 >    - {% icon param-file %} *"Input file"*: the MS2-centroided mzML
@@ -350,11 +348,11 @@ Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.un
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions:
+> <question-title></question-title>
 > 1. How many PSMs could be matched with XTandem and MSGFPlus alone? How many peptides were identified?
 > 2. How many PSMs could be matched after combining the results with ConsensusID? How many peptides were identified?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1.  After FDR-filtering, XTandem matched 3,552 PSMs (2,616 unique peptides) and MSGFPlus matched 4,292 PSMs (2,991 peptides).
 > > 2.  Combining the results with ConsensusID leads to matching of 4,299 PSMs (3,041 unique peptides).
 > {: .solution }
@@ -363,9 +361,8 @@ Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.un
 
 # Premade Workflow
 
-A premade workflow for this tutorial can be found [here]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %}).
-
-A premade workflow using the search engines XTandem and MSGF+ can be found [here]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga %}).
+- [A premade workflow for this tutorial]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %}).
+- [A premade workflow using the search engines XTandem and MSGF+]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga %}).
 
 # Further Reading
 

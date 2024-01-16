@@ -16,13 +16,11 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
 
 If you are working on your own training materials and want preview them online without installing anything on your computer, you can do this using GitPod!
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, you will learn how to run a local instance of the GTN website:
 >
@@ -35,19 +33,19 @@ If you are working on your own training materials and want preview them online w
 # Setting up Gitpod
 
 
-> ### {% icon hands_on %} Hands-on: Setting up GitPod
+> <hands-on-title>Setting up GitPod</hands-on-title>
 >
 > 1. **Create a fork** of the GTN GitHub repository
 >    - Go on the GitHub repository: [github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material){: width="50%"}
 >    - Click on th Fork button (top-right corner of the page)
 >      ![The fork button on GitHub](../../images/PR_fork.jpg)
 >
->    > ### {% icon tip %}: Already have a fork of the GTN?
+>    > <tip-title>Already have a fork of the GTN?</tip-title>
 >    > If you already have a fork, fantastic! But a common issue is that the `main` branch gets outdated, or your fork was from before we renamed the `master` branch to `main`.
 >    >
 >    > - Start by browsing to your fork in GitHub
->    > - Check the default branch that is shown? Does it say `master`? Then you need to update it.
->    >     1. Go to your fork's settings
+>    > - Check the default branch that is shown? Does it say `master`? Then you need to update it. (Note - don't just switch branches from "master" to "main", follow the instructions below to reset the default branch to "main".)
+>    >     1. Go to your fork's settings (Click on the gear icon called "Settings")
 >    >     2. Find "Branches" on the left
 >    >     3. If it says master you can click on the ⇆  icon to switch branches.
 >    >     4. Select `main` (it may not be present).
@@ -66,10 +64,10 @@ If you are working on your own training materials and want preview them online w
 >
 >    For example, `gitpod.io/#https://github.com/<your username>/training-material`
 >
->    > ### {% icon tip %} Tip: Make this even easier with the GitPod browser extension!
+>    > <tip-title>Make this even easier with the GitPod browser extension!</tip-title>
 >    >  1. To make this even easier, you can install the GitPod browser extension
 >    >     - [Firefox](https://addons.mozilla.org/en-GB/firefox/addon/gitpod/)
->    >     - [Chrome or Edge](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbekii)
+>    >     - [Chrome or Edge](https://chrome.google.com/webstore/detail/gitpod-always-ready-to-co/dodmmooeoklaejobgleioelladacbeki)
 >    >  2. Now it is just a single click to open any GitHub repository in GitPod
 >    >     ![screenshot of the button the GitPod browser extension adds to GitHub repository ](../../images/gitpod/browser-extension.png)
 >    {: .tip}
@@ -95,7 +93,7 @@ Let's have a closer look at the GitPod workspace:
 
 Before we start making any changes, let's build the website and get a live preview.
 
-> ### {% icon hands_on %} Hands-on: Setting up GitPod
+> <hands-on-title>Setting up GitPod</hands-on-title>
 >
 > 1. In the terminal window (bottom), type the following command:
 >    `make serve-gitpod`
@@ -115,7 +113,7 @@ Before we start making any changes, let's build the website and get a live previ
 >
 >    ![output in the terminal after the build process has completed ](../../images/gitpod/ready.png)
 >
->    > ### {% icon tip %} Tip: Not opening?
+>    > <tip-title>Not opening?</tip-title>
 >    > ![screenshot of firefox permissions dialog which shows blocked windows and an allow menu](../../images/gitpod_popup.png)
 >    > Some browsers block popups by default, you may need to allow GitPod to show popups in order to click links.
 >    {: .tip}
@@ -136,7 +134,7 @@ Now that you have the GitPod environment working and we have a live preview up, 
 **Scenario:** You have spotted a typo in one of the tutorials, and would like to fix this and see the resulting GTN webpage.
 
 
-> ### {% icon hands_on %} Hands-on: Make and view changes
+> <hands-on-title>Make and view changes</hands-on-title>
 >
 > 1. In the preview of the GTN website, open the following tutorial:
 >    - Topic: "Introduction to Galaxy Analyses" topic
@@ -150,7 +148,7 @@ Now that you have the GitPod environment working and we have a live preview up, 
 >    topics/introduction/tutorials/galaxy-intro-short/tutorial.md
 >    ```
 >
->    > ### {% icon tip %} Tip: Finding files faster?
+>    > <tip-title>Finding files faster?</tip-title>
 >    > You can use the key combination <kbd>ctrl-p</kbd> to launch the file search dialog and simply enter the text `topics/introduction/tutorials/galaxy-intro-short/tutorial.md`
 >    {: .tip}
 >
@@ -179,7 +177,7 @@ In this way you can edit files in the text editor, and see the effects in the we
 
 When you have finished your changes, it all looks good in the preview, you want to save your changes back to GitHub so that you can either continue later, or make a Pull Request to the GTN to contribute your changes.
 
-> ### {% icon hands_on %} Hands-on: Save changes
+> <hands-on-title>Save changes</hands-on-title>
 >
 > 1. **Option 1: via the terminal**
 >    - Hit <kbd>ctrl+c</kbd> if your preview was still running to stop it
@@ -213,7 +211,7 @@ When you have finished your changes, it all looks good in the preview, you want 
 >    - If you used option 1 and want to do that right away, you can click on the link in the terminal:
 >      ![link in the terminal to open a PR](../../images/gitpod/push.png)
 >
-> > ### Note: GitPod Permissions
+> > <tip-title>GitPod Permissions</tip-title>
 > > If this is your first time using GitPod, you may need to grant permissions to let GitPod push to your GitHub fork
 > > ![prompt to changes permissions](../../images/gitpod/access.png)
 > > This will take you through a process to authorize GitPod, and set permissions
@@ -227,7 +225,7 @@ When you have finished your changes, it all looks good in the preview, you want 
 
 Everybody gets 50 hours per month for free on GitPod, so it is wise to close your GitPod workspace when you are finished with it, to conserve your quotum.
 
-> ### {% icon hands_on %} Hands-on: Shutting down your GitPod workspace
+> <hands-on-title>Shutting down your GitPod workspace</hands-on-title>
 >
 > 1. Click on the menu button at the top left corner of the screen
 >    - Choose "Gitpod: Stop Workspace"

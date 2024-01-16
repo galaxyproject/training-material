@@ -21,6 +21,7 @@ key_points:
   - "Visualiza los archivos de salida haciendo clic en el icono del ojo."
   - "Visualiza todos tus historiales y mueve archivos entre ellos. Cambia a un historial diferente."
   - "Termina sesión en tu servidor de Galaxy. Cuando vuelvas a iniciar sesión (en el mismo servidor), tus historiales estarán allí."
+lang: es
 translations:
   - en
 contributors:
@@ -30,12 +31,12 @@ contributors:
 
 ---
 
-# Overview
-{:.no_toc}
+# Descripción General
+
 * Esta es una breve introducción a la interfaz de usuario de Galaxy -  La página web con la que vas a interactuar.
 * En este tutorial vamos a cubrir tareas clave en Galaxy: cargar archivos, uso de herramientas y visualización de historiales.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 > 1. TOC
 > {:toc}
 >
@@ -43,14 +44,14 @@ contributors:
 
 ## ¿Qué aspecto tiene Galaxy?
 
-> ### {% icon hands_on %} Práctica: Iniciar sesión en Galaxy
+> <hands-on-title>Iniciar sesión en Galaxy</hands-on-title>
 > 1. Abre tu navegador favorito (usa Chrome, Safari o Firefox, pero no Internet Explorer!)
 > 2. Navega hasta tu instancia de Galaxy
 > 3. Inicia sesión o regístrate
 >
 > ![login](../../images/galaxy-login.png)
 >
->   > ### {% icon comment %} Diferentes servidores Galaxy
+>   > <comment-title>Diferentes servidores Galaxy</comment-title>
 >   >  Esta es una imagen de Galaxy Australia, situado en [usegalaxy.org.au](https://usegalaxy.org.au/)
 >   >
 >   > El servidor de Galaxy que estás usando podría lucir un poco distinto y tener otra dirección web:
@@ -76,7 +77,7 @@ La primera vez que uses Galaxy, no encontrarás archivos en tu panel de historia
 
 Tu “Historial” está en el panel de la derecha.
 
-> ### {% icon hands_on %} Práctica: Nombrar historial
+> <hands-on-title>Nombrar historial</hands-on-title>
 > 1. Ve al panel **History** (a la derecha)
 > 2. Haz clic en el nombre del historial (que por defecto es "Unnamed history")
 >
@@ -85,7 +86,7 @@ Tu “Historial” está en el panel de la derecha.
 > 3. Teclea el nuevo nombre, por ejemplo, "Mi-Analisis"
 > 4. Presiona <kbd>Enter</kbd> en tu teclado para guardar
 >
-> > ### {% icon comment %} ¿Cambiar el nombre no funciona?
+> > <comment-title>¿Cambiar el nombre no funciona?</comment-title>
 > > Si cambiar el nombre no funciona, es posible que no hayas iniciado sesión, trata de iniciar sesión en Galaxy primero. Los usuarios anónimos tienen permitido tener un solo historial y no pueden cambiarle el nombre.
 > {: .comment}
 >
@@ -95,7 +96,7 @@ Tu “Historial” está en el panel de la derecha.
 
 Tus herramientas están en el panel de la izquierda.
 
-> ### {% icon hands_on %} Práctica: Cargar un archivo desde una dirección URL
+> <hands-on-title>Cargar un archivo desde una dirección URL</hands-on-title>
 > 1. En la parte superior del panel **Tools** (a la derecha), haz clic en {% icon galaxy-upload %} **Upload**
 >
 >	![upload button](../../images/upload-data.png)
@@ -119,14 +120,14 @@ Tus herramientas están en el panel de la izquierda.
 Tu archivo aparece ahora en tu historial actual.
 Cuando el archivo se haya cargado en Galaxy, aparecerá en color verde.
 
-> ### {% icon comment %} Comentario
+> <comment-title>Comentario</comment-title>
 > Después de esto, podrás ver tu primer elemento del historial (llamado "dataset") en el panel derecho de Galaxy. Pasará de color gris (preparando/en cola) a amarillo (ejecutando) y luego a verde (cargado exitosamente)
 >
 {: .comment}
 
 ¿Qué es un archivo?
 
-> ### {% icon hands_on %} Práctica: Visualizar el contenido de un conjunto de datos
+> <hands-on-title>Visualizar el contenido de un conjunto de datos</hands-on-title>
 > 1. Haz clic en el icono {% icon galaxy-eye %} (ojo) junto al nombre del conjunto de datos para visualizar su contenido
 >
 >	![eye](../../images/eye-icon.png){:width="320px"}
@@ -142,7 +143,7 @@ Este archivo contiene lecturas de secuenciación de ADN bacteriano en formato FA
 
 Echemos un vistazo a la calidad de las lecturas de este archivo
 
-> ### {% icon hands_on %} Práctica: Utilizar una herramienta
+> <hands-on-title>Utilizar una herramienta</hands-on-title>
 > 1. Teclea **FastQC** en el cuadro de búsqueda del panel de herramientas (parte superior)
 > 2. Haz clic en la herramienta {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72) %}
 >
@@ -161,14 +162,14 @@ La herramienta se ejecutará y dos nuevos archivos de salida aparecerán en la p
 
 Vamos a ver el archivo de salida llamado *FastQC on data 1: Webpage*.
 
-> ### {% icon comment %} Comentario
+> <comment-title>Comentario</comment-title>
 > * Observa que Galaxy ha nombrado este conjunto de datos usando como base el nombre de la herramienta con que se generó (“FastQC”) y el archivo de entrada (“data 1”)
 > * El nombre "data 1" significa que la salida corresponde al conjunto de datos número 1 en el historial actual de Galaxy (nuestro archivo FASTQ).
 >
 {: .comment}
 
 
-> ### {% icon hands_on %} Práctica: Visualización de resultados
+> <hands-on-title>Visualización de resultados</hands-on-title>
 > * Haz clic en el icono {% icon galaxy-eye %} (ojo) junto a la salida "Webpage".
 >
 >	La información se desplegará en el panel central
@@ -178,12 +179,12 @@ Vamos a ver el archivo de salida llamado *FastQC on data 1: Webpage*.
 
 Esta herramienta resume la información de calidad de todas las lecturas en nuestro archivo FASTQ.
 
-> ### {% icon question %} Preguntas
+> <question-title>Preguntas</question-title>
 >
 > 1. ¿Cuál es la longitud de las lecturas en nuestro archivo FASTQ?
 > 2. ¿Estas lecturas tienen valores de calidad más altos en el la región central de la secuencia o en los extremos?
 >
->   > ### {% icon solution %} Respuestas
+>   > <solution-title>Respuestas</solution-title>
 >   > 1. 150 bp
 >   > 2. En el centro
 >   {: .solution}
@@ -195,7 +196,7 @@ Esta herramienta resume la información de calidad de todas las lecturas en nues
 Vamos a ejecutar otra herramienta para filtrar las lecturas de baja calidad de nuestro archivo FASTQ.
 
 
-> ### {% icon hands_on %} Práctica: Ejecutar otra herramienta
+> <hands-on-title>Ejecutar otra herramienta</hands-on-title>
 > 1. Teclea **Filter by quality** en el cuadro de búsqueda del panel de herramientas (parte superior)
 > 2. Haz clic en la herramienta {% tool [Filter by quality](toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1) %}
 > 3. Selecciona los siguientes parámetros:
@@ -215,7 +216,7 @@ Una vez que la herramienta se ha ejecutado, los archivos de salida aparecerán e
 
 Podríamos hacer clic en el icono del ojo para ver el contenido de este archivo de salida, pero no será muy informativo, solo veremos una lista de lecturas.
 
-> ### {% icon hands_on %} Práctica: Obtener metadatos de un archivo
+> <hands-on-title>Obtener metadatos de un archivo</hands-on-title>
 > 1. Haz clic en el nombre de un conjunto de datos de salida en el panel de historial.
 >
 >	Esta acción expandirá la información que se tenga sobre el archivo.
@@ -224,11 +225,11 @@ Podríamos hacer clic en el icono del ojo para ver el contenido de este archivo 
 >
 {: .hands_on}
 
-> ### {% icon question %} Pregunta
+> <question-title>Pregunta</question-title>
 >
 > ¿Cuántas lecturas han sido descartadas?
 >
->   > ### {% icon solution %} Respuesta
+>   > <solution-title>Respuesta</solution-title>
 >   > Se descartaron 1786 lecturas de baja calidad
 >   {: .solution}
 {: .question}
@@ -237,7 +238,7 @@ Podríamos hacer clic en el icono del ojo para ver el contenido de este archivo 
 
 Ahora hemos decidido que nuestro conjunto de datos de entrada tiene que ser filtrado usando un criterio de calidad aún más estricto. Vamos a cambiar los parámetros de filtrado y volveremos a ejecutar la herramienta.
 
-> ### {% icon hands_on %} Práctica: Volver a ejecutar la herramienta
+> <hands-on-title>Volver a ejecutar la herramienta</hands-on-title>
 > 1. Haz clic en el icono {% icon galaxy-refresh %} (**Run this job again**) para el set de datos de salida **Filter by quality** {% icon tool %}
 >
 >	![rerun](../../images/rerun.png)
@@ -252,7 +253,7 @@ Ahora hemos decidido que nuestro conjunto de datos de entrada tiene que ser filt
 > 4. Visualiza los resultados: Haz clic en el nombre del conjunto de datos de salida para expandir la información. (*Nota*: No uses el icono {% icon galaxy-eye %} (ojo))
 {: .hands_on}
 
-> ### {% icon question %} Preguntas
+> <question-title>Preguntas</question-title>
 >
 > ¿Cuántas lecturas fueron descartadas bajo estas nuevas condiciones de filtrado?
 >
@@ -264,14 +265,14 @@ Puedes volver a ejecutar la herramienta varias veces cambiando los parámetros. 
 
 Vamos a crear un historial nuevo.
 
-> ### {% icon hands_on %} Práctica: Nuevo historial
+> <hands-on-title>Nuevo historial</hands-on-title>
 > 1. Crear un nuevo historial
 >
->    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy-es/histories_create_new.md %}
 >
 > 2. Cambiar el nombre de tu historial, *e.g.* "Nuevo-Analisis"
 >
->    {% snippet faqs/galaxy/histories_rename.md %}
+>    {% snippet faqs/galaxy-es/histories_rename.md %}
 >
 {: .hands_on}
 
@@ -281,7 +282,7 @@ Este nuevo historial todavía no tiene datos.
 
 ¿Dónde está tu primer historial llamado “Mi-Analisis”?
 
-> ### {% icon hands_on %} Práctica: Visualizar historiales
+> <hands-on-title>Visualizar historiales</hands-on-title>
 > 1. Haz clic en el icono **View all histories** ({% icon galaxy-columns %}) en la parte superior derecha de tu historial
 >
 >	![view-hist](../../images/galaxy_interface_history_switch.png){:width="320px"}
@@ -294,7 +295,7 @@ Este nuevo historial todavía no tiene datos.
 >
 >	Esto generará una copia del conjunto de datos en tu historial nuevo (sin utilizar espacio de disco adicional)
 >
-> 3. Haz clic en **Analyze Data** en la parte superior para regresar a la ventana de análisis
+> 3. Haz clic en el icono {% icon galaxy-home %} (o en **Analyze Data** en versiones anteriores de Galaxy) en la parte superior para regresar a la ventana de análisis
 >
 > ![Copy a dataset between histories](../../images/copy-dataset.gif "Copia un conjunto de datos arrastrándolo de un historial a otro")
 >
@@ -304,7 +305,6 @@ Tu ventana principal de Galaxy mostrará el historia actual como "Nuevo-Analisis
 
 Puedes regresar a la página "View all histories" en cualquier momento para cambiar de historial.
 
-# Conclusion
-{:.no_toc}
+# Conclusión
 
 {% icon trophy %} ¡Bien hecho! Has completado el tutorial de Breve introducción a Galaxy, donde aprendiste a nombrar un historial, cargar un archivo, utilizar una herramienta y visualizar los resultados. Hay tutoriales adicionales disponibles para una introducción más detallada a las funciones de Galaxy.

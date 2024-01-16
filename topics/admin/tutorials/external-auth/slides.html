@@ -95,8 +95,7 @@ location / {
     auth_pam "Basic Auth Realm Name";
     auth_pam_service_name "nginx";
     ...
-    proxy_set_header REMOTE_USER $remote_user; # if using Paste
-    uwsgi_param HTTP_REMOTE_USER $remote_user; # if using uWSGI
+    proxy_set_header REMOTE_USER $remote_user;
 }
 ```
 

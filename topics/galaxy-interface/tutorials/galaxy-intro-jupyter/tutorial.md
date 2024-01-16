@@ -21,14 +21,12 @@ contributors:
 subtopic: analyse
 ---
 
-# Introduction
-{:.no_toc}
 
 In this tutorial we are going to explore the basics of using Jupyter in Galaxy. We will use a RNA seq count file as a test set to get a hang of the Jupyter notebooks.
 The file is available in [Zenodo](https://zenodo.org/record/1185122#.WzlCQNhKgWo) or in the *Tutorial* section of *Data Libraries*.
-Select a file ending with `.count` and upload it in your history (If you want to know how to upload data in galaxy, see [Getting Data into Galaxy](http://galaxyproject.github.io/training-material/topics/galaxy-interface/tutorials/get-data/slides.html#1) tutorial)
+Select a file ending with `.count` and upload it in your history (If you want to know how to upload data in galaxy, see [Getting Data into Galaxy]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}) tutorial)
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will see :
 >
@@ -46,7 +44,7 @@ These notebooks allow you to replace any in-house script you might need to compl
 
 ![Jupyter notebook](../../images/notebook_overview.png)
 
-You can find the complete manual for Jupyter commands [here](http://jupyter-notebook.readthedocs.io/en/stable/).
+You can find the complete manual for Jupyter commands [on Read the Docs](http://jupyter-notebook.readthedocs.io/en/stable/).
 
 # Use Jupyter notebook in Galaxy
 
@@ -54,7 +52,7 @@ You can find the complete manual for Jupyter commands [here](http://jupyter-note
 The Jupyter notebook can be started from different points. You can either open a Jupyter notebook from a dataset in your history or from the *Visualize* tab in the upper menu.
 
 
-> ### {% icon hands_on %} Hands-on: Launching a Jupyter notebook from a dataset or a saved Jupyter notebook
+> <hands-on-title>Launching a Jupyter notebook from a dataset or a saved Jupyter notebook</hands-on-title>
 > If you only need one dataset from your history to perform you analysis or want to open a Jupyter notebook that you previously saved in your history, you can launch a Jupyter from a single dataset.
 > 1. Expand the dataset in you history by clicking on its name.
 > 2. Click on the visualization icon {% icon galaxy-barchart %} of the dataset `[...].count`.
@@ -63,7 +61,7 @@ The Jupyter notebook can be started from different points. You can either open a
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Lauching a Jupyter notebook from the *Visualize* tab
+> <hands-on-title>Lauching a Jupyter notebook from the <i>Visualize</i> tab</hands-on-title>
 >
 > 1. Click on the *Visualize* tab on the upper menu and select `Interactive Environments`
 > 2. To open a notebook, set the parameters as follows :
@@ -76,9 +74,9 @@ The Jupyter notebook can be started from different points. You can either open a
 
 ## Install Libraries in Jupyter
 
-You can install tools and libraries in Jupyter through conda and pip. In this tutorial we are going to use two libraries, [pandas]() and [seaborn]() respectively allowing to manipulate data as Dataframe and to create graphs.
+You can install tools and libraries in Jupyter through conda and pip. In this tutorial we are going to use two libraries, [pandas](https://pandas.pydata.org/) and [seaborn](https://seaborn.pydata.org) respectively allowing to manipulate data as Dataframe and to create graphs.
 
-> ### {% icon hands_on %} Hands-on: Install from a Conda recipe
+> <hands-on-title>Install from a Conda recipe</hands-on-title>
 >
 > 1. Click on a cell of your notebook to edit it (verify that it is defined as a `Code` cell)
 > 2. Enter the following lines : `!conda install -y pandas` and `!conda install -y seaborn`
@@ -89,7 +87,7 @@ You can install tools and libraries in Jupyter through conda and pip. In this tu
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Import Python libraries
+> <hands-on-title>Import Python libraries</hands-on-title>
 >
 > 1. Click on a cell of your notebook to edit it (verify that it is defined as a `Code` cell)
 > 2. Enter the following lines : `import pandas as pd`, `import seaborn as sns`, `from IPython.display import display`, and `import matplotlib.pyplot as plt`.
@@ -102,7 +100,7 @@ You can install tools and libraries in Jupyter through conda and pip. In this tu
 
 In this tutorial we are going to simply plot a distribution graph of our data.
 
-> ### {% icon hands_on %} Hands-on: Draw a distribution plot
+> <hands-on-title>Draw a distribution plot</hands-on-title>
 >
 > 1. Open the dataset as a pandas Dataframe with the function `dataframe = pd.read_table("[file_number]", header=None)`
 >    - The files are referenced in Jupyter by their number in the history.
@@ -120,7 +118,7 @@ In this tutorial we are going to simply plot a distribution graph of our data.
 In addition of starting a Jupyter notebook with datasets included at the beginning , you can import them later using the `get(12)` command, with the number of your dataset in the history (If you are working on a collection, unhide datasets to see their numbers).
 If you want to save a file you generated in your notebook, use the `put("file_name")` command. That is what we are going to do with our distribution plot.
 
-> ### {% icon hands_on %} Hands-on: Save an Jupyter generated image into a Galaxy History
+> <hands-on-title>Save an Jupyter generated image into a Galaxy History</hands-on-title>
 >
 > 1. Create an image file with the figure you just draw with the command `fig.savefig('distplot.png')`
 > 2. Export your image into your history with the command  `put('distplot.png')`
@@ -137,6 +135,6 @@ Once you are done with you analysis or anytime during the editing process, you c
 This will create a new notebook `.pynb` file in your history every time you click on this icon. You can later re-open it to continue to use it as described in the [open a notebook section](#open-a-notebook)
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} You have just performed your first analysis in Jupyter notebook integrated environment in Galaxy. You generated an distribution plot that you saved in your history along with the notebook to generate it.

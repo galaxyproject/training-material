@@ -21,8 +21,6 @@ contributors:
 - simonbray
 ---
 
-# Introduction
-{:.no_toc}
 
 In this tutorial you will learn how to use Galaxy tools to solve [regression](https://en.wikipedia.org/wiki/Regression_analysis) problems. First, we will introduce the concept of regression briefly, and then examine linear regression, which models the relationship between a target variable and some explanatory variables (also known as independent variables). Next, we will discuss gradient boosting regression, an more advanced regressor model which can model nonlinear relationships between variables. Then, we will show how to visualize the results in each step. Finally, we will discuss how to train our models by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the models and learning algorithms work.
 
@@ -32,7 +30,7 @@ It has been recognized that within each individual, the level of [DNA methylatio
 
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -57,13 +55,13 @@ In linear regression, our goal is to find the line that best models the path of 
 ![regression](images/linear_regression_regressor.png "Regression fit through data points.")
 
 
-> ### {% icon details %} Cost function
+> <details-title>Cost function</details-title>
 >
 > Once we have a prediction in regression problems, we need some way to tell if it’s reasonable or not. A cost function helps us do this. The cost function compares all the predictions against their actual values and provides a single number that we can use as a measure. Two common cost functions are the error and squared error. The error is how far our prediction is away from the actual value (Figure 4).
 >
 >![regression](images/cost_function.png "Distance between true value and prediction.")
-We know an error above the actual value and an error below the actual value should be about as bad as each other. The squared error makes this clear because both positive and negative values of the error result in a positive squared error. We will use the Mean Squared Error (MSE) function as our cost function. This function finds the average squared error value for all of our data points. Cost functions are important to us because they measure how accurate our model is against the target values.
-> 
+> We know an error above the actual value and an error below the actual value should be about as bad as each other. The squared error makes this clear because both positive and negative values of the error result in a positive squared error. We will use the Mean Squared Error (MSE) function as our cost function. This function finds the average squared error value for all of our data points. Cost functions are important to us because they measure how accurate our model is against the target values.
+>
 {: .details}
 
 
@@ -80,7 +78,7 @@ In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn
 
 Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model. We proceed with the analysis by uploading new datasets and creating a new history. 
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
@@ -107,7 +105,7 @@ The datasets from this study contain features (present as columns). The last col
 The `train_rows` contains a column `Age` which is the label or target. We will evaluate our model on `test_rows` and compare the predicted age with the true age in `test_rows_labels`
 {: .comment}
 
-> ### {% icon details %} Test-train data splitting data within Galaxy
+> <details-title>Test-train data splitting data within Galaxy</details-title>
 > For this task, test and training datasets are provided. However, if you want to analyze your own data, you can check out the **Split Dataset** tool, which can split a dataset into training and test subsets with a number of advanced options.
 >
 {: .details}
@@ -118,9 +116,9 @@ At the first step, to learn the mapping between several features and the targets
 
 The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model.
 
-> ### {% icon hands_on %} Hands-on: Train a model
+> <hands-on-title>Train a model</hands-on-title>
 >
-> 1. **Generalized linear models for classification and regression** {% icon tool %} with the following parameters to train the regressor:
+> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select a linear method"*: `Linear Regression model`
 >          - *"Select input type"*: `tabular data`
@@ -135,11 +133,11 @@ The dataset is divided into two parts - training and test sets. The training set
 > 2. Rename the generated file to `LinearRegression_model`
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is learned by the linear regressor?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The linear regressor learns the coefficients of the best fit line to the data.
 > > 
@@ -154,9 +152,9 @@ After learning on the training dataset, we should evaluate the performance on th
 Now, we will predict age in the test dataset using this model in order to see if the model has learned important features which can be generalized on a new dataset. The test dataset (`test_rows`) contains the same number of features but does not contain the `Age` column; the age will instead be predicted using the trained model.
 
 
-> ### {% icon hands_on %} Hands-on: Predict targets using the model
+> <hands-on-title>Predict targets using the model</hands-on-title>
 >
-> 1. **Generalized linear models for classification and regression** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `LinearRegression_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -169,7 +167,7 @@ Now, we will predict age in the test dataset using this model in order to see if
 
 We will evaluate the predictions by comparing them to the expected targets. In the previous step, we generated predictions for the test dataset (`predicted_data_linear`). We have one more dataset (`test_rows_labels`) which contains the true age values of the test set. Using the true and predicted values of age in the test set, we will verify the performance by analyzing the plots. As you can see, `predicted_data_linear` has no header, so first we need to remove the header from `test_rows_labels` to perform the comparison.
 
-> ### {% icon hands_on %} Hands-on: Remove the header
+> <hands-on-title>Remove the header</hands-on-title>
 >
 > 1. **Remove beginning of a file** {% icon tool %} with the following parameters:
 >       - {% icon param-file %} *"Remove first"*: `1`
@@ -181,8 +179,8 @@ We will evaluate the predictions by comparing them to the expected targets. In t
 Now we visualize and analyze the predictions using the **Plot actual vs predicted curves and residual plots** tool in Galaxy.
 Hint: Please find the above tool in "Graph/Display data" tool section in Galaxy.
 
-> ### {% icon hands_on %} Hands-on: Check and visualize the predictions
-> 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualize the predictions:
+> <hands-on-title>Check and visualize the predictions</hands-on-title>
+> {% tool [Plot actual vs predicted curves and residual plots](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_without_header`
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data_linear`
 {: .hands_on}
@@ -203,7 +201,7 @@ The visualization tool creates the following plots:
 
 These plots are important to visualize the quality of regression and the true and predicted targets - how close or far they are from each other. The closer they are, the better the prediction.
 
-> ### {% icon details %} R2 (coefficient of determination)
+> <details-title>R2 (coefficient of determination)</details-title>
 > In both the parts, learning on datasets is done using cross-validation and [R2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html) scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures [8](#figure-8) and [9](#figure-9). In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the `x = y` line as the true and predicted targets are close to each other. In figure [8](#figure-8), we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is `-0.06`. On the other hand, figure [9](#figure-9) shows a better pattern as most of the points lie along the line and the R2 score is almost `1.0`. For RNA-seq dataset, we will compute the cross-validated R2 score using the training set and for DNA methylation dataset, we will compute the R2 score for the test set.
 >
 > ![model_bad](../../images/age-prediction-with-ml/model_bad.png "This shows an example of a bad model as most of the points are scattered.")
@@ -213,11 +211,11 @@ These plots are important to visualize the quality of regression and the true an
 {: .details}
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Inspect the plots. What can you say about the predictions?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Figures 5, 6 and 7 show that the prediction is acceptable and the predicted age lies about close to the true age, but the reults can be improved by using better algorithms such as ensemble-based regressors. 
 > >
@@ -236,7 +234,7 @@ It is not a good choice when the relationship between independent and dependent 
 To learn the mapping between several features and the targets, in the next step, we will apply the
 [Gradient boosting regressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor). It is an ensemble-based regressor because its prediction is the collective performance of multiple weak learners (e.g. decision trees). It learns features from training dataset and maps all the rows to their respective targets (real numbers). The process of mapping gives a trained model.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > An [*ensemble*](https://scikit-learn.org/stable/modules/ensemble.html#ensemble) method uses multiple learning models internally for better predictions and boosting is a method of converting weak learners into strong learners.
 {: .comment}
 
@@ -244,9 +242,9 @@ To learn the mapping between several features and the targets, in the next step,
 
 Like the random forest method, gradient boosting is an ensemble-based regressor, because it uses multiple decision tree regressors internally and makes predictions by taking the collective performances of predictions made by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes errors. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelized. *Hint:* Please find the following tool in "Machine learning" tool section in Galaxy.
 
-> ### {% icon hands_on %} Hands-on: Train a model
+> <hands-on-title>Train a model</hands-on-title>
 >
-> 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to train the regressor:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Gradient Boosting Regressor` (*Note:* choose `Gradient Boosting Regressor` not `Gradient Boosting Classifier`)
 >          - *"Select input type"*: `tabular data`
@@ -261,11 +259,11 @@ Like the random forest method, gradient boosting is an ensemble-based regressor,
 > 2. Rename the generated file to `gradient_boosting_model`
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is learned by the gradient boosting regressor?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > **Gradient boosting** regressor learns multiple attributes like **feature_importances_** (weight for each feature/column),
 > > **oob_improvement_** (which stores incremental improvements in learning), **estimators_** (collection of weak learners) and a few more.
@@ -277,9 +275,9 @@ Like the random forest method, gradient boosting is an ensemble-based regressor,
 
 After learning on the training dataset, we should evaluate the performance on the test dataset.
 
-> ### {% icon hands_on %} Hands-on: Predict targets using the model
+> <hands-on-title>Predict targets using the model</hands-on-title>
 >
-> 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `gradient_boosting_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -289,8 +287,8 @@ After learning on the training dataset, we should evaluate the performance on th
 {: .hands_on}
 
 Now we can visualize and analyze the predictions using the **Plot actual vs predicted curves and residual plots** tool.
-> ### {% icon hands_on %} Hands-on: Check and visualize the predictions
-> 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualize the predictions:
+> <hands-on-title>Check and visualize the predictions</hands-on-title>
+> {% tool [Plot actual vs predicted curves and residual plots](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels` (*Note:* use the `test_rows_labels` dataset, not the `test_rows_labels_without_header` one)
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data_gradient_boosting`
 {: .hands_on}
@@ -304,9 +302,9 @@ R2 score is 0.93, the same as the linear model, but the RMSE is smaller (3.85), 
 
 In the final step, we will create a pipeline learner with the **Pipeline builder** tool but this time, we just specify the regressor. The **Pipeline builder** tool will wrap this regressor and return a zip file. By choosing `Yes` from the boolean option, tunable hyperparameters will be output in a separate file.
 
-> ### {% icon hands_on %} Hands-on: Create pipeline
+> <hands-on-title>Create pipeline</hands-on-title>
 >
-> 1. **Pipeline builder** {% icon tool %} with the following parameters:
+> {% tool [Pipeline builder](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0.8.4) %}:
 >    - In *"Final Estimator"*:
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `GradientBoostingRegressor`
@@ -323,7 +321,7 @@ In the final step, we will create a pipeline learner with the **Pipeline builder
 After the **New Pipeline/Estimator** dataset and its tunable hyperparameters are produced by the **Pipeline builder** tool, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter `n_estimators` of `Gradient boosting` regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. The default value of `n_estimators` for this regressor is `100`. However, we are not sure if this gives the best accuracy. Therefore, it is important to try setting this parameter to different values to find the optimal one. We choose some values which are less than `100` and a few more than `100`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to predict age in the test dataset.
 
 
-> ### {% icon details %} 5-fold cross-validation
+> <details-title>5-fold cross-validation</details-title>
 >
 > This is a model validation technique which estimates the performance of a predictive model on an unseen dataset. A dataset is divided into `5` folds and these folds are categorized into training and validation sets. The idea of cross-validation is shown in figure [12](#figure-12). The complete dataset is divided into `5` equal parts. 4 out of the 5 parts are used for training and the remaining 1 part is used for validating the performance of training. This is done for `5` folds/iterations; each time the validation set (1/5 of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over `5` folds.
 >
@@ -332,9 +330,9 @@ After the **New Pipeline/Estimator** dataset and its tunable hyperparameters are
 >
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: Hyperparameter search
+> <hands-on-title>Hyperparameter search</hands-on-title>
 >
-> 1. **Hyperparameter search** {% icon tool %} with the following parameters:
+> {% tool [Hyperparameter search](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.8.4) %}:
 >    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
 >        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (output of **Pipeline builder** {% icon tool %})
 >        - *"Is the estimator a deep learning model?"*: `No`
@@ -377,13 +375,13 @@ After the **New Pipeline/Estimator** dataset and its tunable hyperparameters are
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is the optimal number of estimators for the given dataset?
 >
 > Hint: Please look at the `mean_test_score` column in the tabular result from the **Hyperparameter search** tool.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 75. (Even though the default value of the number of estimators for the gradient boosting regressor is `100`, `75` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset). 50 estimators also give almost the same accuracy.
 > >
@@ -393,9 +391,9 @@ After the **New Pipeline/Estimator** dataset and its tunable hyperparameters are
 
 Using the **Hyperparameter search** tool, we optimized our model, based on the training data. Now, we will predict the age from the test dataset using this model.
 
-> ### {% icon hands_on %} Hands-on: Predict age
+> <hands-on-title>Predict age</hands-on-title>
 >
-> 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >        - {% icon param-files %} *"Models"*: `zipped` file (output of **Hyperparameter search** {% icon tool %})
 >        - {% icon param-files %} *"Data (tabular)"*: `test_rows` tabular file
@@ -406,20 +404,20 @@ Using the **Hyperparameter search** tool, we optimized our model, based on the t
 
 Now we will verify the performance by creating and analyzing the plots.
 
-> ### {% icon hands_on %} Hands-on: Create regression plots
+> <hands-on-title>Create regression plots</hands-on-title>
 >
-> 1. **Plot actual vs predicted curves and residual plots of tabular data** {% icon tool %} with the following parameters:
+> {% tool [Plot actual vs predicted curves and residual plots](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1) %}:
 >    - {% icon param-files %} *"Select input data file"*: `test_rows_labels` tabular file
 >    - {% icon param-files %} *"Select predicted data file"*: `tabular` file (output of **Ensemble methods for classification and regression** {% icon tool %})
 >
 {: .hands_on}
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Inspect the plots. What can you say about the predictions?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The figures show that the prediction is very good because the predicted age lies close to the true age. 
 > {: .solution}

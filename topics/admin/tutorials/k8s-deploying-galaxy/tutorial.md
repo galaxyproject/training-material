@@ -18,20 +18,22 @@ contributors:
   - afgane
   - nuwang
   - almahmoud
-  - ic4f
+  - jdavcs
 tags:
   - kubernetes
+subtopic: cloud
 follow_up_training:
   - type: "internal"
     topic_name: admin
     tutorials:
       - k8s-managing-galaxy
+priority: 2
 ---
 
 # Galaxy Helm Chart
 
 ## Overview
-{:.no_toc}
+
 
 Galaxy has a minimal number of required dependencies, which makes its basic
 installation quick for both users and developers. However, configuring a
@@ -64,7 +66,7 @@ Some of the goals for deploying and running Galaxy in this mode include:
 - Minimize customized dependencies
 - Minimize the need to build custom components
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -96,7 +98,7 @@ instead we recommend just cloning the GitHub repository with the chart
 implementation. This will be the easiest method to keep up with chart changes
 for the time being.
 
-> ### {% icon hands_on %} Hands-on: Download the chart
+> <hands-on-title>Download the chart</hands-on-title>
 >
 >   Clone the chart repository from the machine where you would like to deploy
 >   Galaxy and change into the chart directory.
@@ -128,7 +130,7 @@ and it's best to refer to the general [Galaxy documentation][GxyDocs]; we'll
 also take a look at how to make configuration changes in the context of the
 chart later in this tutorial.
 
-> ### {% icon hands_on %} Hands-on: Deploying the Galaxy Helm Chart
+> <hands-on-title>Deploying the Galaxy Helm Chart</hands-on-title>
 >
 > 1. First, we need to fetch any dependencies for the chart. One of the
 >    advantages of using Helm is that we can reuse best-practice deployment
@@ -170,7 +172,7 @@ just defines more configuration options. Namely, we attach to the
 [Galaxy CVMFS][CVMFS] ready-only file system for retrieving the tool
 configurations while leveraging [BioContainers] for resolving tool dependencies.
 
-> ### {% icon hands_on %} Hands-on: Deploying the CVMFS-enabled Configuration
+> <hands-on-title>Deploying the CVMFS-enabled Configuration</hands-on-title>
 >
 > 1. If you are following this tutorial sequentially and have a release of
 >    Galaxy already running, let's delete it (assuming that's fine and you have
@@ -222,7 +224,7 @@ generally not a problem where the processes will just respawn and everything wil
 interfere here with all the application data being potentially lost. This
 predominantly depends on how the relevant storage class was configured.
 
-> ### {% icon hands_on %} Hands-on: Deleting a Deployed Helm Release
+> <hands-on-title>Deleting a Deployed Helm Release</hands-on-title>
 >
 > 1. Before we delete a deployment, let's ensure we understand what will happen
 >    with the underlying storage used by Galaxy.

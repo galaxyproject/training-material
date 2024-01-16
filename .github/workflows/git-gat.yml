@@ -1,6 +1,7 @@
-name: GIT-GAT
+name: "[CI] GIT-GAT"
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - 'topics/admin/**'
@@ -14,7 +15,7 @@ on:
 
 jobs:
   run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -91,3 +92,5 @@ jobs:
             git push -f --set-upstream origin $today
             git push -f --tags
         if: github.event.pull_request.head.repo.full_name == 'galaxyproject/training-material' && github.event.pull_request.base.repo.full_name == 'galaxyproject/training-material'
+        # TODO: figure out the logic aroudn checking branch name.
+        # && github.ref == 'refs/heads/main'

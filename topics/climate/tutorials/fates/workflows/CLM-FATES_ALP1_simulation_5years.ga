@@ -1,0 +1,495 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Functionally Assembled Terrestrial Ecosystem Simulator (FATES)",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-1784-2920",
+            "name": "Anne Fouilloux"
+        }
+    ],
+    "format-version": "0.1",
+    "name": "CLM-FATES_ ALP1 simulation (5 years)",
+    "license": "Apache-2.0",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input dataset for CLM-FATES"
+                }
+            ],
+            "label": "Input dataset for CLM-FATES",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 389.09725189208984,
+                "height": 81.31945037841797,
+                "left": 340.0173645019531,
+                "right": 540.0173797607422,
+                "top": 307.7778015136719,
+                "width": 200.00001525878906,
+                "x": 340.0173645019531,
+                "y": 307.7778015136719
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "13b908b0-6a00-437b-bc4d-6c34f6f2d390",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "424dce0e-f3f0-4095-8513-9268be9c705d"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "CLM-FATES restart file"
+                }
+            ],
+            "label": "CLM-FATES restart file",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 732.5695114135742,
+                "height": 81.31945037841797,
+                "left": 317.3958435058594,
+                "right": 517.3958587646484,
+                "top": 651.2500610351562,
+                "width": 200.00001525878906,
+                "x": 317.3958435058594,
+                "y": 651.2500610351562
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "19770ee9-8f78-4030-a8b8-1a44dd25ed43",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "1cecc2ed-8a94-448a-90f7-e67f8e8cf117"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "adv_period|condi_type_run|restart": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "inputdata": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CTSM/FATES-EMERALD",
+            "outputs": [
+                {
+                    "name": "history_files",
+                    "type": "input"
+                },
+                {
+                    "name": "atm_log",
+                    "type": "txt"
+                },
+                {
+                    "name": "cesm_log",
+                    "type": "txt"
+                },
+                {
+                    "name": "cpl_log",
+                    "type": "txt"
+                },
+                {
+                    "name": "lnd_log",
+                    "type": "txt"
+                },
+                {
+                    "name": "rof_log",
+                    "type": "txt"
+                },
+                {
+                    "name": "restart",
+                    "type": "tar"
+                },
+                {
+                    "name": "case_info",
+                    "type": "txt"
+                },
+                {
+                    "name": "rinfo",
+                    "type": "txt"
+                },
+                {
+                    "name": "work",
+                    "type": "tar"
+                }
+            ],
+            "position": {
+                "bottom": 879.3056030273438,
+                "height": 452.4305725097656,
+                "left": 599.1319580078125,
+                "right": 799.1319732666016,
+                "top": 426.8750305175781,
+                "width": 200.00001525878906,
+                "x": 599.1319580078125,
+                "y": 426.8750305175781
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "b525b88bc941",
+                "name": "ctsm_fates",
+                "owner": "climate",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tar\", \"adv\": {\"co2\": \"367.0\", \"condi_user_mods\": {\"add_changes\": \"no\", \"__current_case__\": 1}}, \"adv_clm\": {\"use_fates_planthydro\": \"false\", \"use_fates_cohort_age_tracking\": \"false\", \"use_fates_ed_st3\": \"false\", \"use_fates_ed_prescribed_phys\": \"false\", \"use_fates_logging\": \"false\", \"use_fates_fixed_biogeog\": \"false\", \"fates_spitfire_mode\": \"0\", \"fates_parteh_mode\": \"\"}, \"adv_period\": {\"condi_type_run\": {\"run_type\": \"hybrid\", \"__current_case__\": 2, \"run_refcase\": \"ALP1_refcase\", \"run_refdate\": \"2300-01-01\", \"run_startdate\": \"0001-01-01\", \"restart\": {\"__class__\": \"ConnectedValue\"}}, \"stopn\": \"5\", \"stop_option\": \"nyears\"}, \"casename\": \"ALP1_exp\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"inputdata\": {\"__class__\": \"ConnectedValue\"}, \"resolution\": \"1x1_ALP1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.1",
+            "type": "tool",
+            "uuid": "91a8cda0-72a6-46cf-babe-a4c0b11731f0",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "rinfo",
+                    "uuid": "5a152c6b-5574-46be-a0fc-be24471f83f7"
+                },
+                {
+                    "label": null,
+                    "output_name": "work",
+                    "uuid": "a00239c9-9d0e-46d3-970e-d2e699eb6e4f"
+                },
+                {
+                    "label": null,
+                    "output_name": "rof_log",
+                    "uuid": "230f4572-a4bb-46d4-aff5-25a592b375c3"
+                },
+                {
+                    "label": null,
+                    "output_name": "cpl_log",
+                    "uuid": "3d6ef14c-9ee1-4fa5-be75-91985a8bc365"
+                },
+                {
+                    "label": null,
+                    "output_name": "cesm_log",
+                    "uuid": "9c0f5924-4042-4c76-8c38-b4ae523b67a1"
+                },
+                {
+                    "label": null,
+                    "output_name": "atm_log",
+                    "uuid": "c8dd2197-1288-4a90-be18-9dd32a926ad5"
+                },
+                {
+                    "label": null,
+                    "output_name": "restart",
+                    "uuid": "5c5a27f6-42a3-4b50-b954-54ba8e9e0c67"
+                },
+                {
+                    "label": null,
+                    "output_name": "lnd_log",
+                    "uuid": "5290961c-4660-42c2-88d1-ccd8e2f78412"
+                },
+                {
+                    "label": null,
+                    "output_name": "case_info",
+                    "uuid": "9dd13369-b025-4095-9842-9030623fc941"
+                },
+                {
+                    "label": null,
+                    "output_name": "history_files",
+                    "uuid": "8993eb0a-6e44-4cce-b8a1-f950b96cb8a8"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "history_files"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Extract Dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "bottom": 392.63890075683594,
+                "height": 132.43055725097656,
+                "left": 871.8923950195312,
+                "right": 1071.8924102783203,
+                "top": 260.2083435058594,
+                "width": 200.00001525878906,
+                "x": 871.8923950195312,
+                "y": 260.2083435058594
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "netcdf"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"first\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "efb5bd53-a220-47fe-b4e0-15dd623737a1",
+            "workflow_outputs": [
+                {
+                    "label": "input dataset(s) (extracted element)",
+                    "output_name": "output",
+                    "uuid": "debf2e31-dbea-46d5-8644-586c9731cdbe"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray Metadata Info",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "info",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 686.1111602783203,
+                "height": 142.43055725097656,
+                "left": 887.951416015625,
+                "right": 1087.951431274414,
+                "top": 543.6806030273438,
+                "width": 200.00001525878906,
+                "x": 887.951416015625,
+                "y": 543.6806030273438
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1",
+            "tool_shed_repository": {
+                "changeset_revision": "7edbe5ae8b72",
+                "name": "xarray_metadata_info",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"netcdf\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.15.1",
+            "type": "tool",
+            "uuid": "1dce5844-3ad9-42f8-b3f3-021c20b4bff1",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "info",
+                    "uuid": "ed801226-13db-4c99-8c49-521428e96dd8"
+                },
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "10127f47-1ba1-4ecf-bb1c-014b87f098cb"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "var_tab": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray Selection",
+            "outputs": [
+                {
+                    "name": "simpleoutput",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 613.9409942626953,
+                "height": 142.43055725097656,
+                "left": 1162.7083740234375,
+                "right": 1362.7083892822266,
+                "top": 471.51043701171875,
+                "width": 200.00001525878906,
+                "x": 1162.7083740234375,
+                "y": 471.51043701171875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1",
+            "tool_shed_repository": {
+                "changeset_revision": "225d0d275a24",
+                "name": "xarray_select",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"netcdf\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"condi_source_coord\": {\"coord_source\": \"coord_from_stdin\", \"__current_case__\": 1, \"condi_coord\": {\"coord\": \"global\", \"__current_case__\": 2}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"time\": {\"condi_datetime\": {\"datetime\": \"no\", \"__current_case__\": 0}}, \"user_choice\": [], \"var\": \"LEAFC\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.15.1",
+            "type": "tool",
+            "uuid": "34e85d8a-b640-41a6-b9ee-82a73f5fda43",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "simpleoutput",
+                    "uuid": "1c9a151b-50e8-439e-9586-96af577d9c27"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "infile": {
+                    "id": 5,
+                    "output_name": "simpleoutput"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Replace",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 698.3507232666016,
+                "height": 92.43055725097656,
+                "left": 1185.4862060546875,
+                "right": 1385.4862213134766,
+                "top": 605.920166015625,
+                "width": 200.00001525878906,
+                "x": 1185.4862060546875,
+                "y": 605.920166015625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"caseinsensitive\": \"false\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"find_pattern\": \"00:00:00\", \"global\": \"true\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"is_regex\": \"false\", \"replace_pattern\": \"\", \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}, \"skip_first_line\": \"true\", \"wholewords\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.3",
+            "type": "tool",
+            "uuid": "f6ea58b5-a373-4cf4-884a-242dc8cc1928",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "10b70ac6-9a53-45ba-a761-71dd1e987184"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input1": {
+                    "id": 6,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scatterplot with ggplot2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "bottom": 815.1215362548828,
+                "height": 152.43055725097656,
+                "left": 1339.3751220703125,
+                "right": 1539.3751373291016,
+                "top": 662.6909790039062,
+                "width": 200.00001525878906,
+                "x": 1339.3751220703125,
+                "y": 662.6909790039062
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "87908c76ca8d",
+                "name": "ggplot2_point",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adv\": {\"type\": \"pointslines\", \"points\": {\"pointoptions\": \"default\", \"__current_case__\": 0}, \"factor\": {\"factoring\": \"Default\", \"__current_case__\": 0}, \"axis_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"axis_text_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"plot_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"gridlinecust\": \"default\", \"transform\": \"none\", \"scaling\": {\"plot_scaling\": \"Automatic\", \"__current_case__\": 0}, \"theme\": \"bw\", \"legend\": \"yes\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"out\": {\"unit_output_dim\": \"in\", \"width_output_dim\": \"19.0\", \"height_output_dim\": \"5.0\", \"dpi_output_dim\": \"300.0\", \"additional_output_format\": \"none\"}, \"title\": \"Total carbon in live plant leaves\", \"xlab\": \"Time\", \"xplot\": \"1\", \"ylab\": \"LEAFC (kgC ha-1)\", \"yplot\": \"4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1+galaxy2",
+            "type": "tool",
+            "uuid": "dc2790c9-e3f1-441c-8d95-2406a44bfa3e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output1",
+                    "uuid": "2857a6af-c707-4dea-a188-dd9f2e8146e5"
+                }
+            ]
+        }
+    },
+    "tags": ["climate"],
+    "uuid": "8d36903c-1665-4c7b-8858-cd1195fd30f2",
+    "version": 3
+}

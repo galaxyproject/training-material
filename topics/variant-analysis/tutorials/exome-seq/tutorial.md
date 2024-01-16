@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Exome sequencing data analysis for diagnosing a genetic disease"
+subtopic: human-genetics-cancer
 zenodo_link: "https://doi.org/10.5281/zenodo.3054169"
 questions:
   - "How do you identify genetic variants in samples based on exome sequencing
@@ -32,7 +33,6 @@ contributors:
   - bgruening
 ---
 
-# Introduction
 
 Exome sequencing is a method that enables the selective sequencing of the
 exonic regions of a genome - that is the transcribed parts of the genome present
@@ -55,7 +55,7 @@ Of note, a recent study focusing on the area of clinical pediatric neurology
 indicates that the costs of exome sequencing may actually not be higher even
 today than the costs of conventional genetic testing ([Vissers et al., 2017](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5589982/)).
 
-> ### {% icon details %} Exome sequencing *vs* whole-genome sequencing
+> <details-title>Exome sequencing <i>vs</i> whole-genome sequencing</details-title>
 >
 > In principle, the steps illustrated in this tutorial are suitable also for
 > the analysis of whole-genome sequencing (WGS) data. At comparable mean
@@ -89,7 +89,7 @@ possible to search for variants following any kind of Mendelian inheritance
 scheme compatible with the observed inheritance pattern of the disease, or to
 detect possibly causative *de-novo* mutations or *loss-of-heterozygosity* (LOH) events.
 
-> ### {% icon details %} Related tutorials
+> <details-title>Related tutorials</details-title>
 >
 > This tutorial focuses on the practical aspects of analyzing real-world
 > patient data. If you are more interested in the theoretical aspects of
@@ -104,7 +104,7 @@ detect possibly causative *de-novo* mutations or *loss-of-heterozygosity* (LOH) 
 >
 {: .details}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -143,16 +143,17 @@ tutorials.
 The following hands-on section will guide you through obtaining the right
 data for either analysis.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Obtain the raw sequencing data
 >
->    > ### {% icon comment %} Starting from raw sequencing data
+>    > <comment-title>Starting from raw sequencing data</comment-title>
 >    > In this and the following steps you will obtain the original unmapped
 >    > sequencing data and prepare for a full analysis including the mapping of
 >    > the sequenced reads.
@@ -192,7 +193,7 @@ data for either analysis.
 >    **proceed with Step 7** below.
 >
 > 4. Obtain the premapped sequencing data
->    > ### {% icon comment %} Alternative entry point: Premapped data
+>    > <comment-title>Alternative entry point: Premapped data</comment-title>
 >    > Skip this and the following two steps if you already obtained and
 >    > prepared the original unmapped seuencing data and are planning to
 >    > perform the mapping step yourself.
@@ -227,7 +228,7 @@ data for either analysis.
 >
 >    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="Human Feb. 2009 (GRCh37/hg19) (hg19)" %}
 >
->    > ### {% icon details %} Why specify genome versions
+>    > <details-title>Why specify genome versions</details-title>
 >    > When you are starting with sequencing data that has already been mapped
 >    > to a particular genome version (human hg19 in this case), it is good
 >    > practice to attach this information as metadata to the datasets.
@@ -268,7 +269,7 @@ data for either analysis.
 >
 > 9. Obtain the reference genome
 >
->    > ### {% icon comment %} Shortcut
+>    > <comment-title>Shortcut</comment-title>
 >    > You can skip this step if the Galaxy server you are working on offers
 >    > a `hg19` version of the human reference genome with prebuilt indexes for
 >    > *bwa-mem* (only necessary if starting from unmapped original sequencing
@@ -283,7 +284,10 @@ data for either analysis.
 >    https://zenodo.org/record/3243160/files/hg19_chr8.fa.gz
 >    ```
 >
->    Make sure you specify the datatype as `fasta` in the import dialog.
+>    In the upload dialog, make sure you specify:
+>
+>    - **Type**: `fasta`
+>    - **Genome**: `Human Feb. 2009 (GRCh37/hg19) (hg19)`
 >
 >    Alternatively, load the dataset from a shared data library.
 >
@@ -291,8 +295,8 @@ data for either analysis.
 >
 >     The reference genome you have imported above came as a compressed
 >     file, but got unpacked by Galaxy to plain `fasta` format according to
->     your datatype selection. You may now wish to remove the `.gz` suffix
->     from the dataset name.
+>     your datatype selection. At a minimum, you may now wish to remove the
+>     `.gz` suffix from the dataset name to avoid confusion.
 >
 {: .hands_on}
 
@@ -321,8 +325,8 @@ out a few interesting aspects about that data. For a more thorough explanation
 of NGS data quality control, you may want to have a look at the dedicated
 tutorial on [Quality control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
-> ### {% icon hands_on %} Hands-on: Quality control of the input datasets
-> 1. Run **FastQC** {% icon tool %} on each of your six fastq datasets
+> <hands-on-title>Quality control of the input datasets</hands-on-title>
+> 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0) %} on each of your six fastq datasets
 >       - {% icon param-files %} *"Short read data from your current history"*: all 6 FASTQ  datasets selected with **Multiple datasets**
 >
 >    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
@@ -331,7 +335,7 @@ tutorial on [Quality control]({% link topics/sequence-analysis/tutorials/quality
 >    data, another one with an html report of the findings for each input
 >    dataset) will get added to your history.
 >
-> 2. Use **MultiQC** {% icon tool %} to aggregate the raw **FastQC** data of all input datasets into one report
+> 2. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the raw **FastQC** data of all input datasets into one report
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
@@ -341,20 +345,20 @@ tutorial on [Quality control]({% link topics/sequence-analysis/tutorials/quality
 >
 > 3. Inspect the *Webpage* output produced by the tool
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. Based on the report, do you think preprocessing of the reads
 >    >    (trimming and/or filtering) will be necessary before mapping?
 >    > 2. Why do all samples show a non-normal GC content distribution, and
 >    >    should you be worried?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Sequence quality is quite good overall. If anything you might
 >    > >    consider trimming the 3' ends of reads (base qualities decline
 >    > >    slightly towards the 3' ends) or to filter out the small fraction
 >    > >    of reads with a mean base quality < 5.
->    > >    Feel free to run, *e.g.*, **Trimmomatic** {% icon tool %} on the
+>    > >    Feel free to run, *e.g.*, {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1) %} on the
 >    > >    fastq datasets if you want to, but don't expect this to have a big
 >    > >    effect on the analysis given the high overall quality of the data
 >    > >    of all samples.
@@ -387,12 +391,12 @@ mapping and only illustrate the concrete steps necessary  to map our specific
 NGS reads datasets to the human reference genome. We recommend you to follow
 the dedicated [Mapping tutorial]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}), if you need a general introduction to read mapping.
 
-> ### {% icon hands_on %} Hands-on: Read Mapping
-> 1. **Map with BWA-MEM** {% icon tool %} to map the reads from the **father** sample to the reference genome
+> <hands-on-title>Read Mapping</hands-on-title>
+> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} to map the reads from the **father** sample to the reference genome
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
 >        - *"Using reference genome"*: `Human: hg19` (or a similarly named option)
 >
->      > ### {% icon comment %} Using the imported `hg19` sequence
+>      > <comment-title>Using the imported `hg19` sequence</comment-title>
 >      > If you have imported the `hg19` chr8 sequence as a fasta dataset into
 >      > your history instead:
 >      >   - *"Will you select a reference genome from your history or use a
@@ -406,7 +410,7 @@ the dedicated [Mapping tutorial]({% link topics/sequence-analysis/tutorials/mapp
 >       - {% icon param-file %} *"Select second set of reads"*: the
 >         reverse reads (R2) dataset of the **father** sample
 >
->      > ### {% icon tip %} No FASTQ datasets selectable?
+>      > <tip-title>No FASTQ datasets selectable?</tip-title>
 >      > Please confirm that the problematic datasets declare *format*:
 >      > `fastqsanger.gz`.
 >      >
@@ -426,7 +430,7 @@ the dedicated [Mapping tutorial]({% link topics/sequence-analysis/tutorials/mapp
 >      - *"Auto-assign"*: `No`
 >        - *"Read group sample name (SM)"*: `father`
 >
->    > ### {% icon warning %} Read group IDs and sample names - choose, but choose wisely
+>    > <warning-title>Read group IDs and sample names - choose, but choose wisely</warning-title>
 >    > In general, you are free to choose ID and SM values to your liking, but
 >    > ...
 >    >
@@ -442,9 +446,9 @@ the dedicated [Mapping tutorial]({% link topics/sequence-analysis/tutorials/mapp
 >    > multisample analysis. Choose descriptive, but short and easy to
 >    > remember sample names since you will have to type them in again!
 >    >
->    {: .comment}
+>    {: .warning}
 >
-> 2. **Map with BWA-MEM** {% icon tool %} to map the reads from the **mother** sample to the reference genome **using the same parameters as before** except
+> 2. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} to map the reads from the **mother** sample to the reference genome **using the same parameters as before** except
 >
 >    - *"Single or Paired-end reads"*: `Paired`
 >       - {% icon param-file %} *"Select first set of reads"*: the
@@ -458,7 +462,7 @@ the dedicated [Mapping tutorial]({% link topics/sequence-analysis/tutorials/mapp
 >      - *"Auto-assign"*: `No`
 >        - *"Read group sample name (SM)"*: `mother`
 >
-> 3. **Map with BWA-MEM** {% icon tool %} to map the reads from the **child** sample to the reference genome **using the same parameters as before** except
+> 3. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} to map the reads from the **child** sample to the reference genome **using the same parameters as before** except
 >
 >    - *"Single or Paired-end reads"*: `Paired`
 >       - {% icon param-file %} *"Select first set of reads"*: the
@@ -477,8 +481,16 @@ the dedicated [Mapping tutorial]({% link topics/sequence-analysis/tutorials/mapp
 # Mapped reads postprocessing
 
 At this point in the analysis you should have obtained three mapped reads
-datasets in `bam` format. Ideally, these would carry `#father`, `#mother` and
-`#child` tags for quick identification of the samples they provide data for.
+datasets in `bam` format. Each of these datasets should:
+
+- have its *database* set to the key `hg19`
+
+  Please correct any missing (`?`) or wrong keys now!
+
+  {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="Human Feb. 2009 (GRCh37/hg19) (hg19)" %}
+
+- ideally, carry one of the `#father`, `#mother` or `#child` tags
+  for quick identification of the samples they provide data for.
 
 In principle, you could use these datasets directly for variant calling, and in
 many cases, including this one, this would be sufficient to identify the
@@ -488,7 +500,7 @@ To obtain an accurate picture of the variant spectrum found in your samples it
 is good practice though to perform various postprocessing steps on the mapped
 reads before passing them to a variant caller.
 
-> ### {% icon comment %} Shortcut
+> <comment-title>Shortcut</comment-title>
 > If you are in a hurry, you may skip the postprocessing steps and continue
 > with your mapped reads datasets and the *Variant Calling* section. Make sure
 > though you come back here, or read about mapped reads postprocessing
@@ -517,7 +529,7 @@ mapped reads postprocessing pipelines, so all we are going to do here is:
   heterozygous for a variant, but fragments with one of the two alleles get
   amplified more efficiently than the others).
 
-> ### {% icon comment %} More postprocessing steps
+> <comment-title>More postprocessing steps</comment-title>
 > The [Somatic variant calling tutorial](../somatic-variants/tutorial.html)
 > provides an example of a much more complex mapped reads postprocessing
 > pipeline that may be required for optimal performance of other variant
@@ -528,25 +540,23 @@ mapped reads postprocessing pipelines, so all we are going to do here is:
 
 To produce new filtered BAM datasets with only mapped reads the mate of which is also mapped:
 
-> ### {% icon hands_on %} Hands-on: Filtering for read pair mapping status
+> <hands-on-title>Filtering for read pair mapping status</hands-on-title>
 >
-> 1. **Filter SAM or BAM, output SAM or BAM** {% icon tool %} with the following
+> 1. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0) %} with the following
 > parameters (leaving non-mentioned ones at their defaults):
->   - {% icon param-files %} *"SAM or BAM file to filter"*: all 3 mapped reads
+>   - {% icon param-files %} *"SAM/BAM/CRAM data set"*: all 3 mapped reads
 >     datasets of the family trio, outputs of **Map with BWA-MEM**
 >     {% icon tool %}
->   - *"Filter on bitwise flag"*: `yes`
->     - *"Only output alignments with all of these flag bits set"*:
->       Do not select anything here!
->     - *"Skip alignments with any of these flag bits set"*:
->        - {% icon param-check %} *"The read is unmapped"*
->        - {% icon param-check %} *"The mate is unmapped"*
+>   - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
+>     - In *"Configure filters"*:
+>       - *"Exclude reads with any of the following flags set"*:
+>         `Read is unmapped` **and** `Mate is unmapped`
 >
 {: .hands_on}
 
 This will result in three new datasets, one for each sample in the analysis.
 
-> ### {% icon details %} More than one way to filter
+> <details-title>More than one way to filter</details-title>
 > Instead of the above filter conditions we could also have exploited the
 > *Read is mapped in a proper pair* flag bit.
 >
@@ -578,17 +588,16 @@ This will result in three new datasets, one for each sample in the analysis.
 > detect structural variants in this tutorial) instead of just filtering for
 > mapped reads with a mapped mate, you could run the alternative:
 >
-> > ### {% icon hands_on %} Hands-on:
+> > <hands-on-title></hands-on-title>
 > >
-> > 1. **Filter SAM or BAM, output SAM or BAM** {% icon tool %}:
-> >   - {% icon param-files %} *"SAM or BAM file to filter"*: all 3 mapped
-> >     reads datasets of the family trio, outputs of **Map with BWA-MEM**
+> > 1. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0) %}:
+> >   - {% icon param-files %} *"SAM/BAM/CRAM data set"*: all 3 mapped reads
+> >     datasets of the family trio, outputs of **Map with BWA-MEM**
 > >     {% icon tool %}
-> >   - *"Filter on bitwise flag"*: `yes`
-> >     - *"Only output alignments with all of these flag bits set"*:
-> >       - {% icon param-check %} *"Read is mapped in a proper pair"*
-> >     - *"Skip alignments with any of these flag bits set"*:
-> >       - {% icon param-check %} *"The read is unmapped"*
+> >   - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
+> >     - In *"Configure filters"*:
+> >       - *"Require that these flags are set"*: `Read is mapped in a proper pair`
+> >       - *"Exclude reads with any of the following flags set"*: `Read is unmapped`
 > >
 > {: .hands_on}
 >
@@ -596,11 +605,11 @@ This will result in three new datasets, one for each sample in the analysis.
 
 ## Removing duplicate reads
 
-> ### {% icon hands_on %} Hands-on: Remove duplicates
+> <hands-on-title>Remove duplicates</hands-on-title>
 >
-> 1. **RmDup** {% icon tool %} with the following parameters:
+> 1. {% tool [RmDup](toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1) %} with the following parameters:
 >   - {% icon param-files %} *"BAM file"*: all 3 filtered reads datasets; the
->     outputs of **Filter SAM or BAM**
+>     outputs of **Samtools view**
 >   - *"Is this paired-end or single end data"*: `BAM is paired-end`
 >     - *"Treat as single-end"*: `No`
 >
@@ -631,22 +640,23 @@ SNPs (single-nucleotide polymorphisms), indels (insertions and deletions), MNPs
 substitution events) smaller than the length of a short-read sequencing
 alignment.
 
-> ### {% icon hands_on %} Hands-on: Generating FreeBayes calls
+> <hands-on-title>Generating FreeBayes calls</hands-on-title>
 >
-> 1. Run **FreeBayes** {% icon tool %}:
+> 1. Run {% tool [FreeBayes](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.6+galaxy0) %}:
 >    - *"Choose the source for the reference genome"*: `Locally cached`
 >      - *"Run in batch mode?"*: `Merge output VCFs`
 >        - {% icon param-files %} *"BAM dataset(s)"*: all three mapped reads
 >          datasets of the family trio; the outputs of **RmDup**
 >      - *"Using reference genome"*: `Human: hg19` (or a similarly named option)
 >
->      > ### {% icon comment %} Using the imported `hg19` sequence
+>      > <comment-title>Using the imported `hg19` sequence</comment-title>
 >      > If you have imported the `hg19` chr8 sequence as a fasta dataset
 >      > into your history instead:
 >      > - *"Choose the source for the reference genome"*: `History`
 >      >   - *"Run in batch mode?"*: `Merge output VCFs`
->      >     - {% icon param-files %} *"BAM dataset(s)"*: all three mapped
->      >       reads datasets of the family trio
+>      >     - {% icon param-files %} *"BAM or CRAM dataset(s)"*: all three
+>      >        mapped and fully post-processed reads datasets of the family trio;
+>      >        outputs of **RmDup**
 >      >   - {% icon param-file %} *"Use the following dataset as the
 >      >     reference sequence"*: your imported `hg19` fasta dataset.
 >      {: .comment}
@@ -669,7 +679,7 @@ information about the variant. This includes but is not limited to:
 - measures of the reliability of the variant call and of all individual
   genotype calls
 
-> ### {% icon hands_on %} Optional hands-on: Inspect the VCF output produced by FreeBayes
+> <hands-on-title>Optional hands-on: Inspect the VCF output produced by FreeBayes</hands-on-title>
 >
 > 1. Display the VCF dataset:
 >    - Click the {% icon galaxy-eye %} icon next to the VCF dataset generated
@@ -678,7 +688,7 @@ information about the variant. This includes but is not limited to:
 >      VCF is a tabular plain text format though its information density makes
 >      it complicated to  understand.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > Can you locate at least some of the above-listed information in the
 >    > dataset?
@@ -690,7 +700,7 @@ information about the variant. This includes but is not limited to:
 >    >   and `1/1` to represent homozygous reference, heterozygous and
 >    >   homozygous variant states, respectively.
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > - The position of each variant with respect to the reference genome is
 >    > >   stored in the first two columns (labeled `CHROM` and `POS`).
@@ -741,7 +751,7 @@ analysis tools. In particular, we want to:
 - Make sure that indels are represented in left-aligned and normalized form
   because this is how known indels are stored in public annotation databases.
 
-  > ### {% icon details %} Indel normalization
+  > <details-title>Indel normalization</details-title>
   > Indel normalization is a surprisingly complex topic, which is explained
   > really well and in detail in
   > [Tan et al., 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4481842/).
@@ -754,14 +764,14 @@ analysis tools. In particular, we want to:
 A tool that can do this and also ensures that a VCF dataset conforms to
 standards in some other, less important respects is **bcftools norm**.
 
-> ### {% icon hands_on %} Hands-on: Post-processing FreeBayes calls
+> <hands-on-title>Post-processing FreeBayes calls</hands-on-title>
 >
-> 1. **bcftools norm** {% icon tool %} with the following parameters:
+> 1. {% tool [bcftools norm](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.15.1+galaxy3) %} with the following parameters:
 >    - *"VCF/BCF Data"*: the VCF output of **FreeBayes** {% icon tool %}
 >    - *"Choose the source for the reference genome"*: `Use a built-in genome`
 >      - *"Reference genome"*: `Human: hg19` (or a similarly named option)
 >
->      > ### {% icon comment %} Using the imported `hg19` sequence
+>      > <comment-title>Using the imported `hg19` sequence</comment-title>
 >      > If you have imported the `hg19` chr8 sequence as a fasta dataset
 >      > into your history instead:
 >      > - *"Choose the source for the reference genome"*:
@@ -770,6 +780,7 @@ standards in some other, less important respects is **bcftools norm**.
 >      {: .comment}
 >    - *"When any REF allele does not match the reference genome base"*:
 >      `ignore the problem (-w)`
+>    - *"Atomize"*: `No`
 >    - *"Left-align and normalize indels?"*: `Yes`
 >    - *"Perform deduplication for the folowing types of variant records"*:
 >      `do not deduplicate any records`
@@ -836,7 +847,7 @@ annotation data for human variants from many different sources. These can be
 used to annotate any list of human variants conveniently, without the need for
 separate downloads and conversion between different annotation data formats.
 
-> ### {% icon details %} Custom annotations and GEMINI
+> <details-title>Custom annotations and GEMINI</details-title>
 > Beyond its bundled annotation data, GEMINI also provides (limited) support
 > for using custom annotations.
 > The [Somatic variant calling tutorial](../somatic-variants/tutorial.html)
@@ -857,17 +868,18 @@ GEMINI about the relationship between our samples and their observed
 phenotypes. This is done through a so-called **pedigree file** in PED format,
 which is rather simple to generate manually.
 
-> ### {% icon hands_on %} Hands-on: Obtain SnpEff genome and GEMINI pedigree files
+> <hands-on-title>Obtain SnpEff genome and GEMINI pedigree files</hands-on-title>
 > 1. Download **SnpEff functional genomic annotations**
 >
->     > ### {% icon comment %} Shortcut
+>     > <comment-title>Shortcut</comment-title>
 >     > You can skip this step if the Galaxy server you are working on offers
 >     > `Homo sapiens: hg19` as a locally installed snpEff database. You can
->     > check the **Genome source** select list of the **SnpEff eff**
->     > {% icon tool%} tool to see if this is the case.
+>     > check the **Genome source** select list of the
+>     > {% tool [SnpEff eff](toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy2) %}
+>     > tool to see if this is the case.
 >     {: .comment}
 >
->     Use **SnpEff Download** {% icon tool %} to download genome annotation
+>     Use {% tool [SnpEff Download](toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff_download/4.3+T.galaxy2) %} to download genome annotation
 >     database `hg19`.
 > 2. Create a PED-formatted pedigree dataset describing our single-family sample trio:
 >
@@ -882,7 +894,7 @@ which is rather simple to generate manually.
 >
 >    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
 >
->    > ### {% icon warning %} Remember those sample names
+>    > <warning-title>Remember those sample names</warning-title>
 >    >
 >    > The above content of the pedigree dataset assumes you chose `father`,
 >    > `mother`, `proband` as the sample names at the read mapping step
@@ -898,10 +910,10 @@ which is rather simple to generate manually.
 >    >
 >    {: .warning}
 >
->    > ### {% icon details %} More on PED files
+>    > <details-title>More on PED files</details-title>
 >    >
->    > The PED format is explained in the help section of **GEMINI load**
->    > {% icon tool %}.
+>    > The PED format is explained in the help section of
+>    > {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %}.
 >    >
 >    > Take a moment and try to understand the information that is encoded in
 >    > the PED dataset we are using here.
@@ -914,8 +926,8 @@ We need to start annotating our variants with SnpEff simply because Gemini
 knows how to parse SnpEff-annotated VCFs, while GEMINI output cannot be used
 with SnpEff.
 
-> ### {% icon hands_on %} Hands-on: Adding annotations with SnpEff
-> 1. **SnpEff eff** {% icon tool %}
+> <hands-on-title>Adding annotations with SnpEff</hands-on-title>
+> 1. {% tool [SnpEff eff](toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy2) %}
 >    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: the
 >      output of **bcftools norm** {% icon tool %}
 >    - *"Input format"*: `VCF`
@@ -923,7 +935,7 @@ with SnpEff.
 >    - *"Genome source"*: `Locally installed reference genome`
 >       - *"Genome"*: `Homo sapiens: hg19` (or a similarly named option)
 >
->      > ### {% icon comment %} Using the imported `hg19` SnpEff genome database
+>      > <comment-title>Using the imported `hg19` SnpEff genome database</comment-title>
 >      > If you have imported the `hg19` SnpEff genome database into your
 >      > history instead:
 >      >   - *"Genome source"*: `Downloaded snpEff database in your history`
@@ -940,19 +952,19 @@ of variants across gene features. The other one is the main annotation result -
 a VCF like the input, but with annotations of variant effects added to the INFO
 column.
 
-> ### {% icon hands_on %} Optional hands-on: Inspect the Summary Stats output produced by SnpEff
+> <hands-on-title>Optional hands-on: Inspect the Summary Stats output produced by SnpEff</hands-on-title>
 >
 > 1. Display the dataset:
 >    - Click the {% icon galaxy-eye %} icon next to the HTML dataset generated
 >      by SnpEff to display its contents.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > One section in the report is **Number of effects by type and region**.
 >    > Given that you are analyzing exome data, what is the most surprising
 >    > aspect in this section? Do you have an idea how to explain it?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > According to the report, intronic variants make up 50% of all
 >    > > variants detected!
@@ -983,9 +995,9 @@ extraction/annotation/storage step is performed by the **GEMINI load** tool. In
 addition, that same tool can be used to incorporate sample pedigree info into
 the database.
 
-> ### {% icon hands_on %} Hands-on: Creating a GEMINI database from a variants dataset
+> <hands-on-title>Creating a GEMINI database from a variants dataset</hands-on-title>
 >
-> 1. **GEMINI load** {% icon tool %} with
+> 1. {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %} with
 >    - {% icon param-file %} *"VCF dataset to be loaded in the GEMINI database"*:
 >      the output of **SnpEff eff** {% icon tool %}
 >    - *"The variants in this input are"*: `annotated with snpEff`
@@ -1020,7 +1032,7 @@ variants, rich annotations and pedigree info stored in a format that enables
 flexible and highly efficient queries, which will greatly simplify our actual
 task to identify the variant responsible for the child's disease!
 
-> ### {% icon details %} The GEMINI suite of tools
+> <details-title>The GEMINI suite of tools</details-title>
 >
 > For a beginner, the sheer number of GEMINI tools may be a bit daunting and
 > give the impression that this framework adds a lot of complexity.
@@ -1066,7 +1078,7 @@ boy child's osteopetrosis phenotype. Remember that the parents are
 consanguineous, but both of them do not suffer from the disease. This
 information allows us to make some assumptions about the inheritance pattern of the causative variant.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Which inheritance patterns are in line with the phenotypic observations
 > for the family trio?
@@ -1084,7 +1096,7 @@ information allows us to make some assumptions about the inheritance pattern of 
 >
 > Think about which of these might apply to the causative variant.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > - Since both parents are unaffected the variant cannot be dominant and
 > >   inherited.
 > > - A de-novo acquisition of a dominant (or an X-linked recessive) mutation
@@ -1121,8 +1133,8 @@ Below is how you can perform the query for inherited autosomal recessive
 variants. Feel free to run analogous queries for other types of variants that
 you think could plausibly be causative for the child's disease.
 
-> ### {% icon hands_on %} Hands-on: Finding and reporting plausible causative variants
-> 1. **GEMINI inheritance pattern** {% icon tool %}
+> <hands-on-title>Finding and reporting plausible causative variants</hands-on-title>
+> 1. {% tool [GEMINI inheritance pattern](toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1) %}
 >    - *"GEMINI database"*: the GEMINI database of annotated variants; output
 >      of **GEMINI load** {% icon tool %}
 >    - *"Your assumption about the inheritance pattern of the phenotype of interest"*:
@@ -1155,7 +1167,7 @@ you think could plausibly be causative for the child's disease.
 >          `chrom, start, ref, alt, impact, gene, clinvar_sig,
 >          clinvar_disease_name, clinvar_gene_phenotype, rs_ids`
 >
->    > ### {% icon comment %} Variant- *vs* gene-centric ClinVar information
+>    > <comment-title>Variant- <i>vs</i> gene-centric ClinVar information</comment-title>
 >    > Most annotation data offered by GEMINI is variant-centric, *i.e.*,
 >    > annotations reported for a variant are specific to this exact variant.
 >    > A few annotation sources, however, also provide gene-centric
@@ -1174,13 +1186,13 @@ you think could plausibly be causative for the child's disease.
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > From the GEMINI reports you generated, can you identify the most likely
 > candidate variant responsible for the child's disease?
 {: .question}
 
-> ### {% icon details %} More GEMINI usage examples
+> <details-title>More GEMINI usage examples</details-title>
 >
 > While only demonstrating command line use of GEMINI, the following tutorial
 > slides may give you additional ideas for variant queries and filters:
@@ -1192,7 +1204,6 @@ you think could plausibly be causative for the child's disease.
 {: .details}
 
 # Conclusion
-{:.no_toc}
 
 It was not hard to find the most likely causative mutation for the child's
 disease (you did find it, right?).

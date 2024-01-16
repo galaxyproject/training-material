@@ -21,8 +21,6 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
 
 Sometimes there is quite a long list of genes to interpret after a differential expression analysis, and it is usually infeasible to go through the list one gene at a time trying to understand it’s biological function. A common downstream procedure is gene set testing, which aims to understand which pathways/gene networks the differentially expressed genes are implicated in. There are many different gene set testing methods that can be applied and it can be useful to try several.
 
@@ -31,7 +29,7 @@ The purpose of this tutorial is to demonstrate how to perform gene set testing u
 ![Tutorial Dataset](../../images/rna-seq-reads-to-counts/mouse_exp.png "Tutorial Dataset")
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -53,7 +51,7 @@ We will use several files for this analysis:
 
 # Import data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq genes to pathways`
 >
@@ -114,7 +112,7 @@ To generate the two input files we will use:
 * **Cut** to extract the two columns for the gene length information
 
 
-> ### {% icon hands_on %} Hands-on: Prepare the two inputs for GOSeq
+> <hands-on-title>Prepare the two inputs for GOSeq</hands-on-title>
 >
 > 1. **Compute an expression on every row** {% icon tool %} with the following parameters:
 >    - {% icon param-text %} *"Add expression"*: `bool(c8<0.01)` (adj.P < 0.01)
@@ -141,7 +139,7 @@ To generate the two input files we will use:
 
 We now have the two required input files for goseq.
 
-> ### {% icon hands_on %} Hands-on: Perform GO analysis
+> <hands-on-title>Perform GO analysis</hands-on-title>
 >
 > 1. **goseq** {% icon tool %} with
 >    - {% icon param-file %} *"Differentially expressed genes file"*: `goseq DE status`
@@ -172,10 +170,10 @@ A plot of the top 10 over-represented GO terms (by *p*-value) can be output from
 ![Basal Plot](../../images/rna-seq-genes-to-pathways/basal_top_GO.png "Basal pregnant vs lactating top 10 GO terms")
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 > Can you generate the plot of top 10 GO terms for the luminal differentially expressed genes? Tip: You could use the Rerun button for each step (as the parameters are already selected) and choose the luminal file as input.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Running goseq on the luminal file should give a plot similar to below.
 > > ![Luminal Plot](../../images/rna-seq-genes-to-pathways/luminal_top_GO.png "Luminal pregnant vs lactating top 10 GO terms")
@@ -193,7 +191,7 @@ The [Molecular Signatures Database (MSigDB)](http://software.broadinstitute.org/
 
 There are several ways we could choose to rank our genes, we could rank by log-fold change (most upregulated to most downregulated) but that doesn't take into account any error in the log fold change value. Another way is to use the "signed fold change" which is to rank by the sign of the fold change multiplied by the P value (as described [here](http://genomespot.blogspot.com/2014/09/data-analysis-step-8-pathway-analysis.html). We could also use the t statistic that's output from limma, as that takes into account the log-fold change and it's standard error, see [here](https://support.bioconductor.org/p/6124/) for more explanation. We'll use the t statistic to rank here.
 
-> ### {% icon hands_on %} Hands-on: Perform gene set enrichment with fgsea
+> <hands-on-title>Perform gene set enrichment with fgsea</hands-on-title>
 >
 > 1. **Cut columns from a table** {% icon tool %} with
 >    - {% icon param-text %} *"Cut columns"*: `c1,c6` (the Entrez gene ids and t-statistic)
@@ -225,10 +223,10 @@ An enrichment plot of the each of the top pathways can also be produced, one is 
 
 ![fgsea Enrichment](../../images/rna-seq-genes-to-pathways/fgsea_enrichplot.png "fgsea Enrichment plot")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 > Can you run fgsea on the luminal contrast and generate the fgsea summary table plot?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Running fgsea on the luminal file should give a plot similar to below.
 > > ![fgsea Luminal](../../images/rna-seq-genes-to-pathways/fgsea_table_luminal.png "fgsea Summary table for luminal")
@@ -240,7 +238,7 @@ An enrichment plot of the each of the top pathways can also be produced, one is 
 
 The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)](https://www.ncbi.nlm.nih.gov/pubmed/27694195) is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We'll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting *"Output Filtered Counts Table?"*: `Yes`). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the same one from the tutorial [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html). EGSEA provides twelve base methods and we will select eleven, all except roast, as the fry method is a fast approximation of roast.
 
-> ### {% icon hands_on %} Hands-on: Perform ensemble gene set testing with EGSEA
+> <hands-on-title>Perform ensemble gene set testing with EGSEA</hands-on-title>
 >
 > 1. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
 >      - {% icon param-file %} *"File to cut"*: `limma-voom filtered counts`
@@ -275,10 +273,10 @@ KEGG pathway diagrams are generated if KEGG pathways are selected, as shown belo
 
 ![EGSEA KEGG](../../images/rna-seq-genes-to-pathways/EGSEA_KEGG.png "EGSEA KEGG pathways")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 > Can you run EGSEA on the luminal contrast identify the top KEGG gene sets? Tip: you could use the rerun button and replace the "Contrast of Interest" with the name of the luminal contrast.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Running EGSEA on the luminal file should give top KEGG gene sets similar to below.
 > > ![EGSEA KEGG luminal](../../images/rna-seq-genes-to-pathways/EGSEA_KEGG_luminal.png "EGSEA KEGG pathways for luminal")
@@ -287,6 +285,6 @@ KEGG pathway diagrams are generated if KEGG pathways are selected, as shown belo
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we have seen some gene set testing methods that can be used to interpret lists of differentially expressed genes. Multiple methods can be used to help identify pathways of interest and to provide complementary ways of visualising results. This follows on from the accompanying tutorials, [RNA-seq reads to counts]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}) and [RNA-seq counts to genes]({% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}), that showed how to turn reads (FASTQs) into differentially expressed genes for this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR [(Law et al. 2016)](https://f1000research.com/articles/5-1408/v2) and From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline [(Chen, Lun, Smyth 2016)](https://f1000research.com/articles/5-1438/v2).

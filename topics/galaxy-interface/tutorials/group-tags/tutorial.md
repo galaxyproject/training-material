@@ -20,9 +20,6 @@ subtopic: manage
 ---
 
 
-# Introduction
-{:.no_toc}
-
 Advanced uses of Galaxy often require the use of dataset collections,
 which can contain between one and tens of thousands of datasets.
 Grouping datasets in this way has numerous advantages:
@@ -43,7 +40,7 @@ For a more detailed description and background for differential expression
 testing see the [Reference-based RNA-Seq data analysis]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html).
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -67,7 +64,7 @@ to the Rule Based Uploader.
 
 ## Set group tags during upload
 
-> ### {% icon hands_on %} Hands-on: Set group tags during upload
+> <hands-on-title>Set group tags during upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -121,7 +118,7 @@ to the Rule Based Uploader.
 
 We now want to add group tags using the "Tag elements from file" tool.
 
-> ### {% icon hands_on %} Hands-on: Upload and create a collection
+> <hands-on-title>Upload and create a collection</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the following files
@@ -138,17 +135,17 @@ We now want to add group tags using the "Tag elements from file" tool.
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. Click on the {% icon galaxy-selector %} icon (**Operations on multiple datasets**)
-> 4. Check all new datasets
-> 5. Click on **For all selected...** and then **Build Dataset List**
-> 6. Enter a name for the new collection and click **Create list**
+> 3. Create a **Dataset List (Collection)** with these 7 files
+>
+>    {% snippet faqs/galaxy/collections_build_list.md datasets_description="The 7 datasets you've just imported" n="7" %}
+>
 {: .hands_on}
 
 We have now a collection with our files. We can now either upload a tabular file containing the element identifiers
 and the tags we want to apply, or we can extract the element identifiers and extract the tags using a Regular Expression.
 We will do the latter.
 
-> ### {% icon hands_on %} Hands-on: Set group tags using the "Tag elements from file" tool
+> <hands-on-title>Set group tags using the "Tag elements from file" tool</hands-on-title>
 > 1. **Extract element identifiers** {% icon tool %}
 >      - {% icon param-collection %} *"Dataset collection"*: created collection
 > 2. **Replace Text in entire line** {% icon tool %}
@@ -158,7 +155,7 @@ We will do the latter.
 >            - *"Find pattern"*: `(.*)_(.*)_(.*).counts`
 >            - *"Replace with"*: `\1_\2_\3.counts\tgroup:\2\tgroup:\3`
 >
->     This step add an additional columns that can be used with the ``Tag elements from file`` tool
+>     This step adds an additional columns that can be used with the ``Tag elements from file`` tool
 >
 > 3. Change the datatype to `tabular`
 >
@@ -175,14 +172,14 @@ You should now have a properly tagged collection of tabular files that can be us
 
 DESeq2 has two modes for specifying factors. One can either
 select datasets corresponding to factors, or use group tags
-to specify factors. We will use the grop tags present in
+to specify factors. We will use the group tags present in
 our collection to specify factors.
 
 The tool interface will prompt you with the group tags that are available for your inputs:
 
 ![Group tags in the tool UI](../../images/group-tags/tool-ui.png)
 
-> ### {% icon hands_on %} Hands-on: Running **DESeq2** with group tags
+> <hands-on-title>Running <b>DESeq2</b> with group tags</hands-on-title>
 >
 > 1. **DESeq2** {% icon tool %} with the following parameters:
 >    - *"how"*: `Select group tags corresponding to levels`
@@ -197,7 +194,7 @@ The tool interface will prompt you with the group tags that are available for yo
 >                  - In *"2: Factor level"*:
 >                      - *"Specify a factor level"*: `untreat`
 >                      - *"Select groups that correspond to this factor level"*: `Tags: untreat`
->          - {% icon param-repeat %} Click on *"Insert Factor"* (not on "Insert Factor level")
+>          - Click on {% icon param-repeat %} *"Insert Factor"* (not on "Insert Factor level")
 >          - In "2: Factor"
 >              - "Specify a factor name" to `Sequencing`
 >              - In *"Factor level"*:
@@ -212,6 +209,6 @@ The tool interface will prompt you with the group tags that are available for yo
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 We can select a subset of Collections using the special group tag.

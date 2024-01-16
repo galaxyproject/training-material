@@ -1,62 +1,71 @@
 ---
 layout: page
+redirect_from:
+- faq
+title: Frequently Asked Questions
 ---
-
-
-# Frequently Asked Questions
 
 Thanks for using the GTN! If you have any questions regarding the GTN, Galaxy, or any of the topics covered by the tutorials, you can check one of the FAQ pages below to see if your question is among them.
 
 
-## Quick start
+## General FAQs
 
-<a href="{{site.baseurl}}/faqs/galaxy/"><button type="button" class="btn btn-warning btn-info">Galaxy FAQs</button></a>
-<a href="{{site.baseurl}}/faqs/gtn/"><button type="button" class="btn btn-warning btn-info">GTN FAQs</button></a>
+Common questions about the Galaxy platform, or about the GTN itself, can be found on the following pages:
 
-## GTN Questions
+<div markdown="0">
 
-Have questions about this website or the GTN in general? Please check the [GTN FAQs]({{site.baseurl}}/faqs/gtn/)
+{% include _includes/button.html link="/faqs/galaxy" colour="yellow" label="Galaxy FAQs" buttonsize="large" %}
 
-## Galaxy Questions
+{% include _includes/button.html link="/faqs/gtn" colour="purple" label="GTN FAQs" buttonsize="large" %}
 
-Have a question about Galaxy? Please check the [Galaxy FAQs]({{site.baseurl}}/faqs/galaxy/)
+</div>
 
 
 ## Topic FAQ pages
 
 Each topic in the GTN also has a dedicated FAQ page:
 
-{% assign sorted_topics = "" | split: "," %}
-{% assign sorted_topics_pre = site.data | sort | order: "title" %}
+{% assign sorted_topics = site | list_topics_by_category: "non-tag" %}
 
-{% for topic in sorted_topics_pre %}
-    {% if topic[0] == "introduction" %}
-        {% assign sorted_topics = sorted_topics | unshift: topic %}
-    {% else %}
-        {% assign sorted_topics = sorted_topics | push: topic %}
-    {% endif %}
-{% endfor %}
+### Galaxy for Scientists
 
+<div markdown="0">
+{% assign buttoncolours = "red,orange,yellow,green,blue,purple,pink" | split: "," %}
 
-**Galaxy for Scientists**
-
-<ul>
+{% assign buttonnum = 0 %}
 {% for topic in sorted_topics %}
   {% if topic[1].enable != false and topic[1].type == 'use'  %}
-<li><a href="{{site.baseurl}}/topics/{{topic[1].name}}/faqs/"> {{topic[1].title}}</a></li>
+    {% assign l = topic[1].name | prepend: "/topics/" | append: "/faqs/" %}
+    {% assign lab = topic[1].title %}
+    {% assign i = buttonnum | modulo: buttoncolours.size %}
+    {% assign col = buttoncolours[i] %}
+
+    {% include _includes/button.html link=l label=lab buttonsize="large" colour=col %}
+
+    {% assign buttonnum = buttonnum | plus: 1 %}
   {% endif %}
 {% endfor %}
-</ul>
 
-**Galaxy for Instructors, Developers & System Administrators**
+</div>
 
-<ul>
+### Galaxy for Instructors, Developers & System Administrators
+
+<div markdown="0">
 {% for topic in sorted_topics %}
   {% if topic[1].enable != false and topic[1].type and topic[1].type != 'use'  %}
-<li><a href="{{site.baseurl}}/topics/{{topic[1].name}}/faqs/"> {{topic[1].title}}</a></li>
+
+    {% assign l = topic[1].name | prepend: "/topics/" | append: "/faqs/" %}
+    {% assign lab = topic[1].title %}
+    {% assign i = buttonnum | modulo: buttoncolours.size %}
+    {% assign col = buttoncolours[i] %}
+
+    {% include _includes/button.html link=l label=lab buttonsize="large" colour=col %}
+
+    {% assign buttonnum = buttonnum | plus: 1 %}
+
   {% endif %}
 {% endfor %}
-</ul>
+</div>
 
 
 ## Tutorial FAQ pages

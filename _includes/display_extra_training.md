@@ -2,7 +2,7 @@
     <li>
     {% if training.type == "internal" %}
         {% assign extra_topic_metadata = site.data[training.topic_name] %}
-        {% assign extra_topic = site.pages | topic_filter:training.topic_name %}
+        {% assign extra_topic = site | topic_filter:training.topic_name %}
         <a href="{{ site.baseurl }}/topics/{{ training.topic_name }}">{{ extra_topic_metadata.title }}</a>
         {% if training.tutorials %}
             <ul>

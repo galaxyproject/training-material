@@ -86,7 +86,7 @@ The `--requirement seqtk@1.2` gets translated into the following Galaxy tool XML
 
 ## Dependency Resolution
 
-![](../../images/galaxy_instance.png)
+![schematic of a galaxy server with dependency resolution via requirement tags at the top. On the left is the tool box with a number of xml files listed like seqtk_seq and seqtk_subseq. On the right is applications & libraries showing only a few tools like seqtk, all of the 3 multipoe subtools were collapsed](../../images/galaxy_instance.png)
 
 ???
 
@@ -100,7 +100,7 @@ The `--requirement seqtk@1.2` gets translated into the following Galaxy tool XML
 
 class: enlarge120
 
-![](../../../../shared/images/conda_logo.png)
+![Conda logo](../../../../shared/images/conda_logo.png)
 
 Package, dependency and environment management
 
@@ -108,7 +108,7 @@ Package, dependency and environment management
 
 class: enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Conda Terminology
+###.image-25[![Conda logo](../../../../shared/images/conda_logo.png)] <br/> Conda Terminology
 
 Conda **recipes** build **packages** that are published to **channels**.
 
@@ -116,7 +116,7 @@ Conda **recipes** build **packages** that are published to **channels**.
 
 class: enlarge120
 
-### .image-25[![](../../../../shared/images/conda_logo.png)] <br /> Conda Key Features for Galaxy
+### .image-25[![Conda logo](../../../../shared/images/conda_logo.png)] <br /> Conda Key Features for Galaxy
 
 - No compilation at install time - *binaries* with their dependencies, libraries...
 
@@ -143,19 +143,19 @@ Compared with the Tool Shed dependency management (`tool_dependencies.xml`), Bio
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Conda Distributions
+###.image-25[![Conda logo](../../../../shared/images/conda_logo.png)] <br/> Conda Distributions
 
 ```
 
 
 ```
-![](../../images/miniconda_vs_anaconda.png)
+![Schematic showing conda as a small circle, miniconda encompasses it and adds python and base packages. Anaconda encompasses all of it, adding 150 high quality packages.](../../images/miniconda_vs_anaconda.png)
 
 ---
 
 class: enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Best Practice Channels
+###.image-25[![conda logo](../../../../shared/images/conda_logo.png)] <br/> Best Practice Channels
 
 - Packages through channels within Continuum.
 
@@ -171,7 +171,7 @@ class: enlarge120
 
 class: left, enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Install and Configure
+###.image-25[![conda logo](../../../../shared/images/conda_logo.png)] <br/> Install and Configure
 
 ```bash
 $ planemo conda_init
@@ -188,7 +188,7 @@ This has already been done on [Planemo machine](https://github.com/galaxyproject
 
 class: enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Quickstart
+###.image-25[![conda logo](../../../../shared/images/conda_logo.png)] <br/> Quickstart
 #### Using Conda outside Planemo
 
 - Install some packages within an isolated environment
@@ -220,13 +220,13 @@ Galaxy now automatically installs Conda when first launched and will use [Biocon
 
 ### Installing Tools with Conda
 
-![](../../images/tool_install.png)
+![Screenshot of tool installation menu](../../images/tool_install.png)
 
 ---
 
 ### Managing Tool Dependencies
 
-![](../../images/dependency_manage.png)
+![Screenshot of the galaxy page for managing tool dependencies](../../images/dependency_manage.png)
 
 ---
 
@@ -377,22 +377,23 @@ The following line indicates the seqtk package was found:
 [galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
 ```
 ]
----
-
-### {% icon hands_on %} Hands-on
-
-![](../../images/exercise.png)
 
 ---
 
-### {% icon hands_on %} Hands-on
+<hands-on-title>Hands-on</hands-on-title>
+
+![Cartoon of people jumping.](../../images/exercise.png)
+
+---
+
+<hands-on-title>Hands-on</hands-on-title>
 
 #### The Goal
 - Use the Planemo commands `conda_install`, `conda_env`, and `test` to practice the Galaxy tool dependency development lifecycle.
 
 ---
 
-### {% icon hands_on %} Hands-on
+<hands-on-title>Hands-on</hands-on-title>
 
 #### Steps
 
@@ -453,16 +454,13 @@ $ $HOME/miniconda3/bin/conda search -c iuc -c conda-forge -c bioconda seqtk
 
 ### Using Anaconda Search - https://anaconda.org
 
-![](../../images/anaconda_landing.png)
-
-
-???
+![screensho of the anaconda homepage](../../images/anaconda_landing.png)
 
 ---
 
 ### Using Anaconda Search - https://anaconda.org
 
-![](../../images/anaconda_result.png)
+![Screenshot of an anaconda search for the term seqtk](../../images/anaconda_result.png)
 
 ???
 
@@ -471,13 +469,13 @@ only one that will be used by Galaxy by default.
 
 ---
 
-### {% icon hands_on %} Hands-on
+<hands-on-title>Hands-on</hands-on-title>
 
-![](../../images/exercise.png)
+![Cartoon of people jumping.](../../images/exercise.png)
 
 ---
 
-### {% icon hands_on %} Hands-on
+<hands-on-title>Hands-on</hands-on-title>
 
 #### The Goal
 - Find the correct package and version for a tool in a best practice channel.
@@ -485,7 +483,7 @@ only one that will be used by Galaxy by default.
 
 ---
 
-### {% icon hands_on %} Hands-on
+<hands-on-title>Hands-on</hands-on-title>
 
 #### Steps
 
@@ -692,10 +690,9 @@ $ $HOME/miniconda3/bin/conda build .
 
 .footnote[If miniconda wasn't configured with `planemo conda_init`, you may have <br/> to run `conda install conda-build` before using the above command.]
 
-
 ---
 
-.image-75[![](../../../../shared/images/bioconda_logo.png)]
+.image-75[![bioconda logo](../../../../shared/images/bioconda_logo.png)]
 
 
 - A channel dedicated to bioinformatics (and other informatics) packages
@@ -706,7 +703,7 @@ $ $HOME/miniconda3/bin/conda build .
 
 ---
 
-###.image-25[![](../../../../shared/images/bioconda_logo.png)] contributing 1/2
+###.image-25[![bioconda logo](../../../../shared/images/bioconda_logo.png)] contributing 1/2
 
 - Fork [Bioconda](https://github.com/bioconda/bioconda-recipes/fork).
 - Clone your fork:
@@ -727,7 +724,7 @@ $ $HOME/miniconda3/bin/conda build .
 
 ---
 
-###.image-25[![](../../../../shared/images/bioconda_logo.png)] contributing 2/2
+###.image-25[![bioconda logo](../../../../shared/images/bioconda_logo.png)] contributing 2/2
 
 - Commit and push to GitHub
 
@@ -750,7 +747,7 @@ $ $HOME/miniconda3/bin/conda build .
 - Enjoy your new Conda package at https://anaconda.org/bioconda
 
 
-See [Contributing with GitHub](../github-contribution/slides.html)
+See [Contributing with GitHub]({% link topics/contributing/tutorials/github-command-line-contribution/slides.html %}).
 
 ---
 
@@ -765,13 +762,13 @@ cache.
 
 ---
 
-### {% icon hands_on %} Hands-on
+<hands-on-title>Hands-on</hands-on-title>
 
-![](../../images/exercise.png)
+![Cartoon of people jumping.](../../images/exercise.png)
 
 ---
 
-### {% icon hands_on %} Hands-on
+<hands-on-title>Hands-on</hands-on-title>
 
 #### The Goal
 - Implement and test a local Conda recipe.
@@ -781,7 +778,7 @@ cache.
 
 class: left
 
-### {% icon hands_on %} Hands-on
+<hands-on-title>Hands-on</hands-on-title>
 
 #### Before
 
@@ -799,7 +796,7 @@ This directory contains the outline of a tool for [fleeqtk](https://github.com/j
 
 class: left
 
-### {% icon hands_on %} Hands-on
+<hands-on-title>Hands-on</hands-on-title>
 
 #### Steps
 
@@ -1087,7 +1084,7 @@ class: left
 
 ## CircleCI Continuous Building
 
-.image-70[![](../../images/circleci-logo.png)]
+.image-70[![circle ci logo](../../images/circleci-logo.png)]
 
 - Lint recipes.
 - Build and run tests.

@@ -1,0 +1,387 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Long non-coding RNAs (lncRNAs) annotation with FEELnc",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0001-7379-9173",
+            "name": "St\u00e9phanie Robin"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "GPL-3.0-or-later",
+    "name": "Long non-coding RNAs (lncRNAs) annotation with FEELnc",
+    "steps": {
+        "0": {
+            "annotation": "RNASeq data mapped on the genome",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "RNASeq data mapped on the genome",
+                    "name": "mapped_RNASeq.bam"
+                }
+            ],
+            "label": "mapped_RNASeq.bam",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 342.40000915527344,
+                "height": 82.19999694824219,
+                "left": 297.5,
+                "right": 497.5,
+                "top": 260.20001220703125,
+                "width": 200,
+                "x": 297.5,
+                "y": 260.20001220703125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"bam\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "0d6d7a64-f5f5-4d80-8e76-72859ae6fa1b",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Original structural annotation",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Original structural annotation",
+                    "name": "genome_annotation.gff3"
+                }
+            ],
+            "label": "genome_annotation.gff3",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 448.40000915527344,
+                "height": 82.19999694824219,
+                "left": 297,
+                "right": 497,
+                "top": 366.20001220703125,
+                "width": 200,
+                "x": 297,
+                "y": 366.20001220703125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"gff3\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "4cc3b4aa-b54d-4652-bd14-9611bece1ca8",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Genome sequence",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Genome sequence",
+                    "name": "genome_assembly.fasta"
+                }
+            ],
+            "label": "genome_assembly.fasta",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 546.4000091552734,
+                "height": 82.19999694824219,
+                "left": 298,
+                "right": 498,
+                "top": 464.20001220703125,
+                "width": 200,
+                "x": 298,
+                "y": 464.20001220703125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "580a4505-ee23-4a3a-ac37-7e83cef79a0a",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/1.3.6",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "guide|guide_source|ref_hist": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input_bam": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool StringTie",
+                    "name": "input_bam"
+                }
+            ],
+            "label": null,
+            "name": "StringTie",
+            "outputs": [
+                {
+                    "name": "output_gtf",
+                    "type": "gtf"
+                }
+            ],
+            "position": {
+                "bottom": 468.00001525878906,
+                "height": 184.8000030517578,
+                "left": 580,
+                "right": 780,
+                "top": 283.20001220703125,
+                "width": 200,
+                "x": 580,
+                "y": 283.20001220703125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_gtf": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_gtf"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/1.3.6",
+            "tool_shed_repository": {
+                "changeset_revision": "eba36e001f45",
+                "name": "stringtie",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"abundance_estimation\": \"false\", \"omit_sequences\": \"\", \"name_prefix\": \"\", \"fraction\": \"0.15\", \"min_tlen\": \"200\", \"min_anchor_len\": \"10\", \"min_anchor_cov\": \"1\", \"min_bundle_cov\": \"2\", \"bdist\": \"50\", \"bundle_fraction\": \"0.95\", \"disable_trimming\": \"false\", \"multi_mapping\": \"false\"}, \"guide\": {\"use_guide\": \"yes\", \"__current_case__\": 1, \"guide_source\": {\"guide_gff_select\": \"history\", \"__current_case__\": 1, \"ref_hist\": {\"__class__\": \"RuntimeValue\"}}, \"input_estimation\": \"false\", \"special_outputs\": {\"special_outputs_select\": \"no\", \"__current_case__\": 2}, \"coverage_file\": \"false\"}, \"input_bam\": {\"__class__\": \"RuntimeValue\"}, \"rna_strandness\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.6",
+            "type": "tool",
+            "uuid": "2e1499d2-23c2-478d-b58e-c3d855995f30",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool gffread",
+                    "name": "chr_replace"
+                }
+            ],
+            "label": null,
+            "name": "gffread",
+            "outputs": [
+                {
+                    "name": "output_gtf",
+                    "type": "gtf"
+                }
+            ],
+            "position": {
+                "bottom": 776.0000152587891,
+                "height": 184.8000030517578,
+                "left": 591.5,
+                "right": 791.5,
+                "top": 591.2000122070312,
+                "width": 200,
+                "x": 591.5,
+                "y": 591.2000122070312
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_gtf": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_gtf"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "154d00cbbf2d",
+                "name": "gffread",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chr_replace\": {\"__class__\": \"RuntimeValue\"}, \"decode_url\": \"false\", \"expose\": \"false\", \"filtering\": null, \"full_gff_attribute_preservation\": \"false\", \"gffs\": {\"gff_fmt\": \"gtf\", \"__current_case__\": 2, \"tname\": \"\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"maxintron\": null, \"merging\": {\"merge_sel\": \"none\", \"__current_case__\": 0}, \"reference_genome\": {\"source\": \"none\", \"__current_case__\": 0}, \"region\": {\"region_filter\": \"none\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1.3+galaxy0",
+            "type": "tool",
+            "uuid": "95a56f78-0d60-4d4f-ac20-b01e2bb52162",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/feelnc/feelnc/0.2",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "candidate": {
+                    "id": 3,
+                    "output_name": "output_gtf"
+                },
+                "genome": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "reference": {
+                    "id": 4,
+                    "output_name": "output_gtf"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FEELnc",
+                    "name": "candidate"
+                },
+                {
+                    "description": "runtime parameter for tool FEELnc",
+                    "name": "genome"
+                },
+                {
+                    "description": "runtime parameter for tool FEELnc",
+                    "name": "reference"
+                }
+            ],
+            "label": null,
+            "name": "FEELnc",
+            "outputs": [
+                {
+                    "name": "candidate_lncRNA",
+                    "type": "gtf"
+                },
+                {
+                    "name": "candidate_mRNA",
+                    "type": "gtf"
+                },
+                {
+                    "name": "classifier",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 529.0000152587891,
+                "height": 214.8000030517578,
+                "left": 922,
+                "right": 1122,
+                "top": 314.20001220703125,
+                "width": 200,
+                "x": 922,
+                "y": 314.20001220703125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/feelnc/feelnc/0.2",
+            "tool_shed_repository": {
+                "changeset_revision": "67af24676bd6",
+                "name": "feelnc",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"candidate\": {\"__class__\": \"RuntimeValue\"}, \"genome\": {\"__class__\": \"RuntimeValue\"}, \"reference\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2",
+            "type": "tool",
+            "uuid": "74ebae55-e16d-4884-bd59-0d6775bb731a",
+            "workflow_outputs": [
+                {
+                    "label": "mRNAs",
+                    "output_name": "candidate_mRNA",
+                    "uuid": "4055b259-173c-492d-86a4-5e662b663421"
+                },
+                {
+                    "label": "lncRNAs",
+                    "output_name": "candidate_lncRNA",
+                    "uuid": "abc029ba-b7ba-4586-88b4-5e5d758c2f39"
+                },
+                {
+                    "label": "Classifier output",
+                    "output_name": "classifier",
+                    "uuid": "93ff3464-d1bb-4059-86af-3e703da3e542"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "inputs": {
+                    "id": 4,
+                    "output_name": "output_gtf"
+                },
+                "queries_0|inputs2": {
+                    "id": 5,
+                    "output_name": "candidate_lncRNA"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Concatenate datasets",
+                    "name": "inputs"
+                }
+            ],
+            "label": null,
+            "name": "Concatenate datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 758.2000122070312,
+                "height": 144,
+                "left": 1234,
+                "right": 1434,
+                "top": 614.2000122070312,
+                "width": 200,
+                "x": 1234,
+                "y": 614.2000122070312
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "final_annotation"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "f46f0e4f75c4",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputs\": {\"__class__\": \"RuntimeValue\"}, \"queries\": [{\"__index__\": 0, \"inputs2\": {\"__class__\": \"RuntimeValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "d6f07c9d-56db-43f9-b0e3-09db582015fd",
+            "workflow_outputs": [
+                {
+                    "label": "final_annotation",
+                    "output_name": "out_file1",
+                    "uuid": "7b91b6a4-ef67-4359-9c93-eabcc021b0fc"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "genome-annotation"
+    ],
+    "uuid": "ef83824c-31f6-40a5-9176-29bdd349a7e6",
+    "version": 8
+}

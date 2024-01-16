@@ -1,0 +1,278 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Microbiome - Taxonomy Profiling",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0001-9047-4215",
+            "name": "Engy Nasr",
+            "url": "https://orcid.org/0000-0001-9047-4215"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0001-9852-1987",
+            "name": "B\u00e9r\u00e9nice Batut",
+            "url": "https://orcid.org/0000-0001-9852-1987"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Pathogen Detection-Nanopore-Taxonomy-Profiling-and-Visualization-collection",
+    "steps": {
+        "0": {
+            "annotation": "Output collection from Nanopore - Preprocessing workflow",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Output collection from Nanopore - Preprocessing workflow",
+                    "name": "Nanopore Preprocessed reads collection"
+                }
+            ],
+            "label": "Nanopore Preprocessed reads collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 61.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "7af334e3-a2d8-4aa9-918a-2d0b779eea7d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Optional: Tabular Metadata file of the sample, nicer to visualize with",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Optional: Tabular Metadata file of the sample, nicer to visualize with",
+                    "name": "Sample Metadata"
+                }
+            ],
+            "label": "Sample Metadata",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 283,
+                "top": 222
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": true, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "6eae4699-bf86-4c49-8017-5fc7fa0176ba",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "85ec04da-85bf-4cca-b23d-74c08d08480b"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "single_paired|input_sequences": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Kraken2",
+            "outputs": [
+                {
+                    "name": "report_output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 278,
+                "top": 4
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Kraken2 with PlusPF database output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionreport_output": {
+                    "action_arguments": {
+                        "newname": "Kraken2 with PlusPF database output report"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "report_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e674066930b2",
+                "name": "kraken2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"confidence\": \"0.0\", \"kraken2_database\": \"2022-09-04T165121Z_standard_prebuilt_pluspf_2022-06-07\", \"min_base_quality\": \"0\", \"minimum_hit_groups\": \"2\", \"quick\": false, \"report\": {\"create_report\": true, \"use_mpa_style\": false, \"report_zero_counts\": false, \"report_minimizer_data\": false}, \"single_paired\": {\"single_paired_selector\": \"no\", \"__current_case__\": 2, \"input_sequences\": {\"__class__\": \"ConnectedValue\"}}, \"split_reads\": false, \"use_names\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "f7662c80-180a-4d06-8cad-85e4573852ff",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Kraken2 with PlusPF database output report",
+                    "output_name": "report_output",
+                    "uuid": "556fef83-c3d7-41eb-9843-674ed36d75be"
+                },
+                {
+                    "label": "Kraken2 with PlusPF database output",
+                    "output_name": "output",
+                    "uuid": "c11d1cab-2058-4e3f-a7e6-06ceb99dc67f"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken_biom/kraken_biom/1.2.0+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "kraken_reports": {
+                    "id": 2,
+                    "output_name": "report_output"
+                },
+                "metadata": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Kraken-biom",
+            "outputs": [
+                {
+                    "name": "biomOutput",
+                    "type": "tabular"
+                },
+                {
+                    "name": "otuOutput",
+                    "type": "mothur.map"
+                }
+            ],
+            "position": {
+                "left": 583,
+                "top": 0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionbiomOutput": {
+                    "action_arguments": {
+                        "newname": "Kraken-biom output JSON file"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "biomOutput"
+                },
+                "RenameDatasetActionotuOutput": {
+                    "action_arguments": {
+                        "newname": "OTU mother.map output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "otuOutput"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken_biom/kraken_biom/1.2.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "65eb9962d272",
+                "name": "kraken_biom",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fmt\": \"json\", \"kraken_reports\": {\"__class__\": \"ConnectedValue\"}, \"max\": \"O\", \"metadata\": {\"__class__\": \"ConnectedValue\"}, \"min\": \"S\", \"otu_fp\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "ccc200fa-cd06-47f6-b2b1-4299998bbb7c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "OTU mother.map output",
+                    "output_name": "otuOutput",
+                    "uuid": "d0e1ffbd-ad44-49c3-ae37-2113f7634012"
+                },
+                {
+                    "label": "Kraken-biom output JSON file",
+                    "output_name": "biomOutput",
+                    "uuid": "355bdba9-97d2-4c09-b902-79f19219b7e8"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "interactive_tool_phinch",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "biomOutput"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Phinch Visualisation",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 904,
+                "top": 3
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Taxonomy Visualization with Metadata, use Active interactive tools under User"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "interactive_tool_phinch",
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "07554896-1e38-47a3-9cc3-e8968b85fec7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Taxonomy Visualization with Metadata, use Active interactive tools under User",
+                    "output_name": "outfile",
+                    "uuid": "1f7547ba-6fde-4f7f-b44e-2d4f75272fc2"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "microbiome",
+        "nanopore"
+    ],
+    "uuid": "c4d34a19-9130-4e81-803f-1db29345575e",
+    "version": 5
+}

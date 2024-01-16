@@ -26,8 +26,6 @@ contributors:
 
 ---
 
-# Introduction
-{:.no_toc}
 
 [Machine learning](https://en.wikipedia.org/wiki/Machine_learning) uses techniques from statistics, mathematics and computer science to make computer programs learn from data. It is one of the most popular fields of computer science and finds applications in multiple streams of data analysis such as [classification](https://en.wikipedia.org/wiki/Statistical_classification), [regression](https://en.wikipedia.org/wiki/Regression_analysis), [clustering](https://en.wikipedia.org/wiki/Cluster_analysis), [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction), [density estimation](https://en.wikipedia.org/wiki/Density_estimation) and many more. Some real-life applications are spam filtering, medical diagnosis, autonomous driving, recommendation systems, facial recognition, stock prices prediction and many more. The following image shows a basic flow of any machine learning task. Data is provided by a user to a machine learning algorithm for analysis.
 
@@ -47,7 +45,7 @@ The following image shows how a classification task is performed. The complete d
 
 This tutorial shows how to use a machine learning module implemented as a Galaxy tool. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/1468039#.W8zyxBRoSAo).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > Performing a machine learning task (classification) using a tool involves the following steps:
 >
@@ -58,12 +56,12 @@ This tutorial shows how to use a machine learning module implemented as a Galaxy
 
 # Data upload
 
-The datasets required for this tutorial contain 9 features of breast cells which include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). In addition to these features, the training dataset contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer and `1` indicates breast cancer. The test dataset does not contain the `target` column.
+The datasets required for this tutorial contain 9 features of breast cells which include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/pmlb/tree/master/datasets/breast_w)). In addition to these features, the training dataset contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer and `1` indicates breast cancer. The test dataset does not contain the `target` column.
 
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
-> 1. Create a new history for this tutorial
+> 1. Create a new history for this tutorial.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
@@ -91,11 +89,11 @@ The datasets required for this tutorial contain 9 features of breast cells which
 
 
 # Train a classifier
-In this step, we will use the [SVM (support vector machine)](https://scikit-learn.org/stable/modules/svm.html#svm-classification) classifier for training on the `breast-w_train` dataset. The classifier learns a mapping between each row and its category. SVM is a memory efficient classifier which needs only those data points which lie on the decision boundaries among different classes to predict a class for a new sample. The rest of the data points can thrown away. We will use the `LinearSVC` variant of SVM which is faster. Other variants `SVC` and `NuSVC` have high running time for large datasets. The last column of the training dataset contains a category/class for each row. The classifier learns a mapping between data row and its category which is called a trained model. The trained model is used to predict the categories of the unseen data.
+In this step, we will use the [SVM (support vector machine)](https://scikit-learn.org/stable/modules/svm.html#svm-classification) classifier for training on the `breast-w_train` dataset. The classifier learns a mapping between each row and its category. SVM is a memory efficient classifier which needs only those data points which lie on the decision boundaries among different classes to predict a class for a new sample. The rest of the data points can be thrown away. We will use the `LinearSVC` variant of SVM which is faster. Other variants `SVC` and `NuSVC` have high running time for large datasets. The last column of the training dataset contains a category/class for each row. The classifier learns a mapping between data row and its category which is called a trained model. The trained model is used to predict the categories of the unseen data.
 
-> ### {% icon hands_on %} Hands-on: Train a classifier
+> <hands-on-title>Train a classifier</hands-on-title>
 >
-> **Support vector machines (SVMs) for classification** {% icon tool %} with the following parameters to train:
+> {% tool [Support vector machines (SVMs) for classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1) %} with the following parameters to train:
 >    - *"Select a Classification Task"*: `Train a model`
 >        - *"Classifier type"*: `Linear Support Vector Classification`
 >        - *"Select input type"*: `tabular data`
@@ -112,14 +110,13 @@ In this step, we will use the [SVM (support vector machine)](https://scikit-lear
 
 
 # Predict using a trained model
-The previous step produced a trained model (`zip` file) which we will use to predict classes for the test data (`breast-w_test`).
+The previous step produced a trained model (a zip archive) which we will now use to predict classes for the test data (`breast-w_test`).
 
-> ### {% icon hands_on %} Hands-on: Predict using a trained model
+> <hands-on-title>Predict using a trained model</hands-on-title>
 >
-> **Support vector machines (SVMs) for classification** {% icon tool %} with the following parameters
->
+> {% tool [Support vector machines (SVMs) for classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1) %} with the following parameters:
 >    - *"Select a Classification Task"*: `Load a model and predict`
->        - {% icon param-file %} *"Models"*: `Zipped `file (output of **Support vector machines (SVMs) for classification** {% icon tool %})
+>        - {% icon param-file %} *"Models"*: the zip dataset produced by **Support vector machines (SVMs) for classification** {% icon tool %}
 >        - {% icon param-file %} *"Data (tabular)"*: `breast-w_test` file
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Select the type of prediction"*: `Predict class labels`
@@ -128,16 +125,16 @@ The previous step produced a trained model (`zip` file) which we will use to pre
 
 
 # See predictions
-The last column of the predicted dataset shows the category of each row. A row either gets `0` (no breast cancer) or `1` (breast cancer) as its predicted category.
+The last column of the predicted dataset shows the category of each row. A row either got `0` (no breast cancer) or `1` (breast cancer) as its predicted category.
 
-> ### {% icon hands_on %} Hands-on: See the predicted column
-> 1. Click on `view data` link of the dataset created after executing the previous step.
-> 2. The last column of the `tabular` data shows the predicted category (`target`) for each row.
+> <hands-on-title>See the predicted column</hands-on-title>
+> 1. Click on the {% icon galaxy-eye %} (eye) icon of the dataset created by the previous step.
+> 2. The last column of the table shows the predicted category (`target`) for each row.
 >
 {: .hands_on}
 
 
-> ### {% icon details %} Additional ML resources
+> <details-title>Additional ML resources</details-title>
 >
-> Read more about **machine learning using scikit-learn** [here](http://scikit-learn.org/stable/).
+> Read more about [machine learning using scikit-learn](http://scikit-learn.org/stable/).
 {:.details}

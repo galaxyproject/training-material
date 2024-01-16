@@ -4,6 +4,7 @@ description: You can create a Galaxy workflow from scratch in the Galaxy workflo
 area: workflows
 box_type: tip
 layout: faq
+contributors: [hexylena,shiltemann]
 ---
 
 1. Click **Workflow** on the top bar

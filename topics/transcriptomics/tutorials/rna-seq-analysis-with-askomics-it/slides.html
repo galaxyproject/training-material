@@ -30,7 +30,7 @@ Study of biological mechanisms requires to:
 - **integrate** multiple data sources (differential expression results, genome annotation, remote protein database)
 - **query** them to answer a biological question (which genes are over-expressed in a condition, and what are the proteins coded by these genes)
 
-.image-00[ ![](images/from_data_to_result.png)]
+.image-00[ ![Local data tables and remote data with gene and proteins is combined in data integration. Now a graph is produced with differential expression pointing to a gene which points to a protein. Next the data is queried and results produced.](images/from_data_to_result.png)]
 
 ---
 
@@ -67,7 +67,7 @@ Set of recommendations to **integrate data**, to **integrate domain knowledge** 
   - **Predicate**: the relation (from subject to object)
   - **Object**: a value of the predicate for the subject
 
-.image-01[ ![](images/rdf_schema_1.png)]
+.image-01[ ![a small graph, subject points to object with an arrow labelled predicate.](images/rdf_schema_1.png)]
 
 ```turtle
 nextprot:P01137 :hasTaxon taxon:9606 .
@@ -88,7 +88,7 @@ nextprot:P01137 :hasTaxon taxon:9606 .
 nextprot:P01137 :hasSequence "MPPSGLRLLL" .
 ```
 
-.image-02[ ![](images/rdf_schema_2.png)]
+.image-02[ ![A graphic with two regions, data description and data. In the data is a circle labelled nextprot:P01137 which points to a sequence via a hasSequence arrow. The nextprot points to a taxon:9606 with a hasTaxon arrow. The taxon points to a nextprot:Organism in the data description region. The nextprot protein points to nextprot:Protein in the data description region via an rdf:type arrow.](images/rdf_schema_2.png)]
 
 ---
 
@@ -120,7 +120,7 @@ WHERE {
 ]
 
 .pull-right[
-.image-03[ ![](images/rdf_schema_3.png)]
+.image-03[ ![Dataset 1 and 2 are shown as two silos, each with different small graphs. Each has a red node. Those nodes are connected via a dashed line. A picture of a cloud points at the two datasets, and their individual graphs collapsed into one larger graph. A query is sent to this cloud which comes out as a result table.](images/rdf_schema_3.png)]
 ]
 
 
@@ -165,7 +165,7 @@ AskOmics can be used as a standalone software, or **with Galaxy**
 
 AskOmics uses the file structure (*e.g.* header of TSV files) to generate the graph of data description: **the abstraction**
 
-.image-04[ ![](images/askomics_convertion.png)]
+.image-04[ ![Two tables are provided, pointing to RDF abstraction with a small graph of DE, Gene, and their attributes. And RDF data which has the same graph as abstraction, but with real identifiers.](images/askomics_convertion.png)]
 
 
 The rest of the files is converted to RDF triples that correspond to the data.
@@ -199,7 +199,7 @@ abstractor -s https://sparql.nextprot.org/sparql -o nextprot_abstraction.ttl -f 
 
 - Users navigate through the abstraction of local and remote data and create a path that represents a query
 
-.image-06[ ![](images/askomics_query_builder.png)]
+.image-06[ ![A picture of an RDF graph with many nodes. On the right is a query interface of some sort.](images/askomics_query_builder.png)]
 
 - The query is converted to SPARQL code that is executed on the local and remote RDF data
 - Results are returned and can be downloaded

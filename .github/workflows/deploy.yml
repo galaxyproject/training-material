@@ -4,38 +4,49 @@ on:
   push:
     branches:
       - main
+  schedule:
+    # nightly builds to keep in sync with changes to the video library
+    - cron:  '0 0 * * *'
+
 
 jobs:
   deploy:
-    runs-on: ubuntu-18.04
-    strategy:
-      matrix:
-        ruby: [2.5]
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'galaxyproject'
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+
+      # BEGIN Dependencies
       - uses: actions/setup-python@v2
         with:
           python-version: '3.7'
           architecture: 'x64'
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '19'
       - uses: actions/cache@v2
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          path: |
+            vendor/bundle
+            ~/.npm
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
+          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config # for node
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
+          npm install
+          bundle pristine ffi
+      # END Dependencies
 
       - name: Build Site
         run: |
@@ -44,11 +55,31 @@ jobs:
           pip install requests ephemeris
           export PATH=/home/runner/.local/bin:$PATH
           make annotate ACTIVATE_ENV=pwd
+          curl -L https://docs.google.com/spreadsheets/d/1NfZhi5Jav7kl9zFCkeb7rIC2F8xW1isruv1TeO4WpNI/export\?format\=tsv | ruby bin/prepare_feedback.rb
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
+          cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
+          curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
+          curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
+          rdoc bin _plugins/ --output gtn_rdoc
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+          cp metadata/feedback.csv _site/training-material/api/feedback.csv
         env:
           GTN_FORK: ${{ github.repository_owner }}
+
+      - name: Add jupyter notebooks
+        run: |
+          # Remove our existing directory which was a placeholder
+          rm -rf _site/training-material/jupyter/
+
+          # Collect all notebooks into a tmp dir
+          mkdir /tmp/notebook/
+          ruby bin/filter-pyolite-safe | xargs -I{} -n1 cp '{}' /tmp/notebook
+
+          # Build the notebook site and add to deployment.
+          pip install jupyterlab~=3.5.1 jupyterlite==0.1.0b18 jupyterlite-xeus-sqlite==0.2.1
+          jupyter lite build --contents /tmp/notebook
+          mv _output _site/training-material/jupyter/
 
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3

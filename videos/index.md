@@ -1,5 +1,5 @@
 ---
-title: GTN Videos
+title: GTN Automated Videos
 layout: page
 redirect_from:
   - /topics/admin/videos/index
@@ -17,6 +17,7 @@ redirect_from:
   - /topics/introduction/videos/index
   - /topics/metabolomics/videos/index
   - /topics/metagenomics/videos/index
+  - /topics/microbiome/videos/index
   - /topics/proteomics/videos/index
   - /topics/sequence-analysis/videos/index
   - /topics/statistics/videos/index
@@ -36,14 +37,15 @@ redirect_from:
     {% endif %}
 {% endfor %}
 
-The GTN now generates videos for selected slide decks. Click on a topic below to jump to the video page for that topic!
+The GTN now automatically generates videos for selected slide decks. Click on a topic below to jump to the video page for that topic!
+Additionally there is a much larger [Video Library](https://gallantries.github.io/video-library/) available with recordings from human instructors teaching each tutorial.
 
 {% for topic in sorted_topics %}
 {% assign topic_id = topic[0] %}
 {% assign t = site.data[topic_id] %}
 
 	{% assign has_video = false %}
-	{% assign topic_material = site.pages | topic_filter:topic[0] %}
+	{% assign topic_material = site | topic_filter:topic[0] %}
 	{% for material in topic_material %}
 		{% if material.video %}
 			{% assign has_video = true %}
@@ -55,7 +57,7 @@ The GTN now generates videos for selected slide decks. Click on a topic below to
 <div id="playlist">
 	{% for material in topic_material %}
 		{% if material.video %}
-			{% capture vid %}{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction{% else %}tutorials/{{ material.tutorial_name }}/slides{% endif %}{% endcapture %}
+			{% capture vid %}{{ topic_id }}/tutorials/{{ material.tutorial_name }}/slides{% endcapture %}
 			<div class="pl-item">
 				<a href="watch.html?v={{ vid }}">
 					<div class="cover">
@@ -66,6 +68,19 @@ The GTN now generates videos for selected slide decks. Click on a topic below to
 					</div>
 				</a>
 			</div>
+			{% for lang in material.translations.slides %}
+			{% capture vid %}{{ topic_id }}/tutorials/{{ material.tutorial_name }}/slides_{{ lang | upcase }}{% endcapture %}
+			<div class="pl-item">
+				<a href="watch.html?v={{ vid }}">
+					<div class="cover">
+						<img src="https://training.galaxyproject.org/videos/topics/{{ vid }}.mp4.png" width="200px"/>
+					</div>
+					<div>
+						<div class="title">[{{ lang | upcase }}] {{ material.title }}</div>
+					</div>
+				</a>
+			</div>
+			{% endfor %}
 		{% endif %}
 	{% endfor %}
 </div>

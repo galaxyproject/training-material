@@ -1,8 +1,8 @@
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > What is the relation between `{{ include.forward }}` and `{{ include.reverse }}` ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The data has been sequenced using paired-end sequencing. 
 > >
 > > The paired-end sequencing is based on the idea that the initial DNA fragments (longer than the actual read length) is sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. The distance between both reads is known. Thus, it can be used as an additional piece of information to improve the read mapping.

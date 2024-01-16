@@ -1,7 +1,8 @@
 ---
 title: "New Tutorial: Visualization of RNA-Seq results with Volcano Plot in R"
 tags: [new tutorial, visualization]
-contributors: [mblue9]
+contributions:
+  authorship: [mblue9]
 tutorial: "topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html"
 cover: "topics/transcriptomics/images/rna-seq-viz-with-volcanoplot-r/volcano_categories.png"
 coveralt: "Screenshot of Volcano Plot customised in R. Significant genes had their colour changed to red, and points and labels were made smaller."

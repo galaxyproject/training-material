@@ -33,9 +33,6 @@ contributors:
   - hexylena
 ---
 
-# Introduction
-{:.no_toc}
-
 We stumbled upon a paper ({% cite Li2012 %}) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
 However, the list of genes is neither in the supplement of the paper, nor part of the GEO submission.
 The closest thing we could find is a file in GEO containing a list of the regions where the signal is significantly enriched (so called *peaks*):
@@ -52,7 +49,7 @@ The goal of this exercise is to **turn this list of genomic regions into a list 
 
 {% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -63,7 +60,8 @@ The goal of this exercise is to **turn this list of genomic regions into a list 
 
 # Pretreatments
 
-> ### {% icon hands_on %} Hands-on: Open Galaxy
+> <hands-on-title>Open Galaxy</hands-on-title>
+>
 > 1. Browse to a Galaxy instance: the one recommended by your instructor or one in the list **Galaxy instance** on the head of this page
 > 2. Log in or register (top panel)
 >
@@ -72,11 +70,12 @@ The goal of this exercise is to **turn this list of genomic regions into a list 
 
 The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the tools and datasets.
 
-![Galaxy interface](../../images/galaxy_interface.png "The Galaxy interface")
+![Galaxy interface screenshot showing history panel on the right, tools panel on the left, and main panel at the center](../../images/galaxy_interface.png "The Galaxy interface")
 
 Let's start with a fresh history.
 
-> ### {% icon hands_on %} Hands-on: Create history
+
+> <hands-on-title>Create history</hands-on-title>
 >
 > 1. Make sure you have an empty analysis history.
 >
@@ -84,7 +83,7 @@ Let's start with a fresh history.
 >
 > 2. **Rename your history** to make it easy to recognize
 >
->    > ### {% icon tip %} Rename a history
+>    > <tip-title>Rename a history</tip-title>
 >    >
 >    > * Click on the title of the history (by default the title is `Unnamed history`)
 >    >
@@ -99,14 +98,14 @@ Let's start with a fresh history.
 
 ## Data upload
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
-> 2. Click on the upload button in the upper left ot the interface
+> 2. Click on the upload button in the upper left of the interface
 >
->    ![Upload icon](../../../galaxy-interface/images/upload_button.png)
+>    ![Upload data icon](../../../galaxy-interface/images/upload_button.png)
 >
-> 3. Press **Choose local file** and search for your file on your computer
+> 3. Press **Choose local files** and search for your file on your computer
 > 4. Select `interval` as **Type**
 > 5. Press **Start**
 > 6. Press **Close**
@@ -121,14 +120,14 @@ Let's start with a fresh history.
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md format="interval" %}
 >
->    > ### {% icon tip %} Tip: Importing data to Galaxy
+>    > <tip-title>Importing data to Galaxy</tip-title>
 >    > There are [more options]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}) for advanced users.
 >    {: .tip}
 >
 {: .hands_on}
 
 
-> ### {% icon comment %} Interval file format
+> <comment-title>Interval file format</comment-title>
 > **Interval** format is a Galaxy format for representing genomic intervals. It is tab-separated, but has the added requirement that three of the columns must be:
 > - chromosome ID
 > - start position (0-based)
@@ -140,7 +139,7 @@ Let's start with a fresh history.
 {: .comment}
 
 
-> ### {% icon hands_on %} Hands-on: Inspect and edit attributes of a file
+> <hands-on-title>Inspect and edit attributes of a file</hands-on-title>
 >
 > 1. Click on the file in the history panel
 >
@@ -157,6 +156,9 @@ Let's start with a fresh history.
 >    A form to edit dataset attributes is displayed in the central panel
 >
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
+>
+>    ![The database/build version can be selected from a dropdown menu. Users can start typing the database name to filter the list](../../images/Search-for-mm9.PNG)
+>
 > 5. Click on **Save** on the top
 > 6. Add a tag called `#peaks` to the dataset to make it easier to track in the history
 >
@@ -171,7 +173,7 @@ Let's start with a fresh history.
 In order to find the related genes to these peak regions,
 we also need a list of genes in mice, which we can obtain from UCSC.
 
-> ### {% icon hands_on %} Hands-on: Data upload from UCSC
+> <hands-on-title>Data upload from UCSC</hands-on-title>
 >
 > 1. Search for `UCSC Main` in the tool search bar (top left)
 >
@@ -211,7 +213,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >
 {: .hands_on}
 
-> ### {% icon comment %} BED file format
+> <comment-title>BED file format</comment-title>
 > The **BED - Browser Extensible Data** format provides a flexible way to encode gene regions. BED lines have three required fields:
 > - chromosome ID
 > - start position (0-based)
@@ -232,7 +234,7 @@ We will first use a "naive" approach to try to identify the genes that the peak 
 
 Let's have a look at our files to see what we actually have here.
 
-> ### {% icon hands_on %} Hands-on: View file content
+> <hands-on-title>View file content</hands-on-title>
 >
 > 1. Click on the {% icon galaxy-eye %} (eye) icon (**View data**) of the peak file to view the content of it
 >
@@ -246,12 +248,12 @@ Let's have a look at our files to see what we actually have here.
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > While the file from UCSC has labels for the columns, the peak file does not. Can you guess what the columns stand for?
 >
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134).
 > >
@@ -271,22 +273,22 @@ Let's have a look at our files to see what we actually have here.
 In order to compare the two files, we have to make sure that the chromosome names follow the same format.
 As we can see, the peak file lacks `chr` before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let's check:
 
-> ### {% icon hands_on %} Hands-on: View end of file
+> <hands-on-title>View end of file</hands-on-title>
 >
 > 1. Search for **Select last** {% icon tool %} tool and run **Select last lines from a dataset (tail)** with the following settings:
 >     - *"Text file"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"Operation"*: `Keep last lines`
 >     - *"Number of lines"*: Choose a value, e.g. `100`
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 > 3. Wait for the job to finish
 > 4. Inspect the file through the {% icon galaxy-eye %} (eye) icon (**View data**)
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. How are the chromosomes named?
 >    > 2. How are the chromosomes X and Y named?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. The chromosomes are just given by their number. In the gene file from UCSC, they started with `chr`
 >    > > 2. The chromosomes X and Y are named 20 and 21
 >    > {: .solution }
@@ -298,7 +300,7 @@ In order to convert the chromosome names we have therefore two things to do:
 1. add `chr`
 2. change 20 and 21 to X and Y
 
-> ### {% icon hands_on %} Hands-on: Adjust chromosome names
+> <hands-on-title>Adjust chromosome names</hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} in a specific column with the following settings:
 >     - *"File to process"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
@@ -313,41 +315,37 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 2. Rename your output file `chr prefix added`.
 >
-> 3. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Let's rerun the tool with
+> 3. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Let's rerun the tool with two more replacements
 >    - *"File to process"*: the output from the last run, `chr prefix added`
 >    - *"in column"*: `1`
->    - *"Find pattern"*: `chr20`
->    - *"Replace with"*: `chrX`
+>    - {% icon param-repeat %} Replacement
+>      - *"Find pattern"*: `chr20`
+>      - *"Replace with"*: `chrX`
+>    - {% icon param-repeat %} Insert Replacement
+>      - *"Find pattern"*: `chr21`
+>      - *"Replace with"*: `chrY`
 >
->    > ### {% icon tip %} Tip: Rerunning a tool
+>    > <tip-title>Rerunning a tool</tip-title>
 >    >
 >    > * Expand the dataset information
 >    > * Press the {% icon galaxy-refresh %} icon (**Run this job again**)
 >    {: .tip}
 >
-> 4. Rename your output file `chrX fixed`
->
-> 5. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Rerun this tool to do the same for chromosome Y
->    - *"File to process"*: `chrX fixed`, the output from the last run
->    - *"in column"*: `1`
->    - *"Find pattern"*: `chr21`
->    - *"Replace with"*: `chrY`
->
-> 6. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon. Have we been successful?
+> 4. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon. Have we been successful?
 >
 >    We have quite a few files now and need to take care to select the correct ones at each step.
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > How many regions are in our output file? You can click the name of the output to expand it and see the number.
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > It should be equal to the number of regions in your first file, `GSE37268_mof3.out.hpeak.txt.gz`: 48,647
 >    > > If yours says 100 regions, then you have run it on the `Tail` file and need to re-run the steps.
 >    > {: .solution }
 >    {: .question}
 >
-> 7. Rename the file to something more recognizable, e.g. `Peak regions`
+> 5. Rename the file to something more recognizable, e.g. `Peak regions`
 {: .hands_on}
 
 ## Analysis
@@ -359,7 +357,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
 
 ![Get Flanks](../../images/intro_get_flanks.png)
 
-> ### {% icon hands_on %} Hands-on: Add promoter region to gene records
+> <hands-on-title>Add promoter region to gene records</hands-on-title>
 >
 > 1. {% tool [Get Flanks](toolshed.g2.bx.psu.edu/repos/devteam/get_flanks/get_flanks1/1.0.0) %} returns flanking region/s for every gene, with the following settings:
 >     - *"Select data"*: `Genes` file from UCSC
@@ -372,7 +370,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
 >
 > 2. Compare the rows of the resulting BED file with the input to find out how the start and end positions changed
 >
->    > ### {% icon tip %} Tip: Inspecting several files using the scratchbook
+>    > <tip-title>Inspecting several files using the scratchbook</tip-title>
 >    >
 >    > * Click **Enable/Disable Scratchbook** on the top panel
 >    >
@@ -391,19 +389,19 @@ The output is regions that start from 2kb upstream of the TSS and include 10kb d
 
 You might have noticed that the UCSC file is in `BED` format and has a database associated to it. That's what we want for our peak file as well. The **Intersect** tool we will use can automatically convert interval files to BED format but we'll convert our interval file explicitly here to show how this can be achieved with Galaxy.
 
-> ### {% icon hands_on %} Hands-on: Change format and database
+> <hands-on-title>Change format and database</hands-on-title>
 >
 > 1. Click on the {% icon galaxy-pencil %} (pencil) icon in the history entry of our peak region file
 > 2. Switch to the **Convert** tab
-> 3. Select `Convert Genomic Intervals to BED`
-> 4. Press **Convert datatype**
+> 3. Under *"Target datatype"*: `bed (using 'interval-to-bed')`
+> 4. Press **Create Dataset**
 > 5. Check that the "Database/Build" is `mm9` (the database build for mice used in the paper)
 > 6. Again rename the file to something more recognizable, e.g. `Peak regions BED`
 {: .hands_on}
 
 It's time to find the overlapping intervals (finally!). To do that, we want to extract the genes which overlap/intersect with our peaks.
 
-> ### {% icon hands_on %} Hands-on: Find Overlaps
+> <hands-on-title>Find Overlaps</hands-on-title>
 >
 > 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0) %} the intervals of two datasets, with the following settings:
 >     - *"Return"*: `Overlapping Intervals`
@@ -411,7 +409,7 @@ It's time to find the overlapping intervals (finally!). To do that, we want to e
 >     - *"that intersect"*: our peak region file from **Replace** (`Peak regions BED`)
 >     - *"for at least"*: `1`
 >
->    > ### {% icon comment %} Comments
+>    > <comment-title></comment-title>
 >    > The order of the inputs is important! We want to end up with a list of **genes**, so the corresponding dataset with the gene information needs to be the first input (`Promoter regions`).
 >    {: .comment}
 >    ![Genes overlapping peaks](../../images/intro_overlapping_genes.png)
@@ -422,9 +420,9 @@ We now have the list of genes (column 4) overlapping with the peak regions, simi
 To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
 We will group the table by chromosome and count the number of genes with peaks on each chromosome
 
-> ### {% icon hands_on %} Hands-on: Count genes on different chromosomes
+> <hands-on-title>Count genes on different chromosomes</hands-on-title>
 >
-> 1. {% tool [Group](Grouping1) %}  data by a column and perform aggregate operation on other columns with the following settings:
+> 1. {% tool [Group](Grouping1) %} data by a column and perform aggregate operation on other columns, with the following settings:
 >     - *"Select data"* to the result of the intersection
 >     - *"Group by column"*:`Column 1`
 >     - Press **Insert Operation** and choose:
@@ -432,13 +430,13 @@ We will group the table by chromosome and count the number of genes with peaks o
 >         - *"On column"*: `Column 1`
 >         - *"Round result to nearest integer?"*: `No`
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > Which chromosome contained the highest number of target genes?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
->    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 1992 genes. Note that for reproducibility, you should keep all input data used because Galaxy can store all parameters but inputs may change e.g. the annotation from UCSC.
+>    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 1992 genes. Note that for reproducibility, you should keep all input data used within the analysis. Rerunning the analysis with the same set of parameters, stored Galaxy, can lead to a different result if the inputs changed e.g. the annotation from UCSC.
 >    > {: .solution }
 >    {: .question}
 >
@@ -446,41 +444,68 @@ We will group the table by chromosome and count the number of genes with peaks o
 
 ## Visualization
 
-Since we have some nice data, let's draw a barchart out of it!
+We have some nice aggregated data, so why not draw a barchart of it?
 
-> ### {% icon hands_on %} Hands-on: Draw barchart
+Before we do that we should polish our grouped data a bit more though.
+
+You may have noticed that the mouse chromosomes are not listed in their correct
+order in that dataset (the **Group** tool tried to sort them, but did so
+alphabetically).
+
+We can fix this by running a dedicated tool for sorting on our data.
+
+> <hands-on-title>Fix sort order of gene counts table</hands-on-title>
+>
+> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} data in ascending or descending order, with the following settings:
+>     - *"Sort Query"*: result of running the Group tool
+>     - in {% icon param-repeat %} *"Column selections"*
+>       - *"on column"*: `Column 1`
+>       - *"in"*: `Ascending order`
+>       - *"Flavor"*: `Natural/Version sort (-V)`
+>
+>    {% snippet faqs/galaxy/tools_similar.md toolname="Sort data in ascending or descending order" toolversion="1.1.1" %}
+>
+{: .hands_on}
+
+Great, we are ready to plot things!
+
+> <hands-on-title>Draw barchart</hands-on-title>
 >
 > 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Group** tool
-> 2. Select `Bar diagram`
-> 3. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
-> 4. Switch to the {% icon galaxy-chart-select-data %} **Select data** tab and play around with the settings
-> 5. When you are happy, click the {% icon galaxy-save %} **Save** visualization in the top right of the *main panel*
+> 2. Select `Bar diagram (NVD3)`
+> 3. Click on the **<<** in the upper right corner
+> 4. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
+> 5. Switch to the {% icon galaxy-chart-select-data %} **Select data** tab and play around with the settings
+> 6. When you are happy, click the {% icon galaxy-save %} **Save** visualization in the top right of the *main panel*
 >
->    This will store it to your saved visualisations where you can later view, download, or share it with others.
+>    This will store it to your saved visualisations. Later you can view,
+>    download, or share it with others from **User -> Visualizations** in the
+>    top menu of Galaxy.
 >
 {: .hands_on}
 
 ## Extracting workflow
 
-When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
+When you look carefully at your history, you can see that it contains all the steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
 Wouldn't it be nice to just convert this history into a workflow that we'll be able to execute again and again?
 
 Galaxy makes this very simple with the `Extract workflow` option. This means that any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to easily share or publish your analysis.
 
-> ### {% icon hands_on %} Hands-on: Extract workflow
+> <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. **Clean up** your history
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-delete %} button.
 >
->    If you had any failed jobs (red), please remove those datasets from your history by clicking on the {% icon galaxy-cross %} (cross) button. This will make the creation of a workflow easier.
+>    This will make the creation of the workflow easier.
 >
-> 2. Go to the history **History options** ({% icon galaxy-gear %} (gear) icon)
-> 3. Select the `Extract Workflow` option.
+> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
 >
->    ![Extracting workflow in history menu](../../images/history_menu_extract_workflow.png)
+>    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
->    The central panel will change and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 >
-> 4. **Uncheck** any steps that shouldn't be included in the workflow
+> 3. Replace the **Workflow name** to something more descriptive, for example: `From peaks to genes`
+>
+> 4. If there are any steps that shouldn't be included in the workflow, you can **uncheck** them in the first column of boxes.
 >
 >    Since we did some steps which where specific to our custom peak file, we might want to exclude:
 >    - **Select last** {% icon tool %}
@@ -488,37 +513,35 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >    - **Convert Genomic Intervals to BED**
 >    - **Get flanks** {% icon tool %}
 >
-> 5. Rename the workflow to something descriptive, e.g. `From peaks to genes`
->
-> 6. Click on the **Create Workflow** button near the top.
+> 5. Click on the **Create Workflow** button near the top.
 >
 >    You will get a message that the workflow was created. But where did it go?
 >
-> 7. Click on **Workflow** in the top menu of Galaxy
+> 6. Click on **Workflow** in the top menu of Galaxy
 >
 >    Here you have a list of all your workflows
 >
-> 8. Select the newly generated workflow and click on **Edit**
+> 7. Select the newly generated workflow and click on **Edit**
 >
 >    You should see something similar to this:
 >
 >    ![Editing workflow interface](../../images/intro_06.png)
 >
->    > ### {% icon comment %} The workflow editor
+>    > <comment-title>The workflow editor</comment-title>
 >    > We can examine the workflow in Galaxy's workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.
 >    {: .comment}
 >
 >     Although we have our two inputs in the workflow they are missing their connection to the first tool (**Intersect** {% icon tool %}), because we didn't carry over some of the intermediate steps.
 >
-> 9. Connect each input dataset to the **Intersect** {% icon tool %} tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the **Intersect** box pointing inwards (which denotes an input)
-> 10. Rename the input datasets to `Reference regions` and `Peak regions`
-> 11. Click on the {% icon galaxy-gear %} (gear) icon at the top right
-> 12. Press **Auto Re-layout** to clean up our view
+> 8. Connect each input dataset to the **Intersect** {% icon tool %} tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the **Intersect** box pointing inwards (which denotes an input)
+> 9. Rename the input datasets to `Reference regions` and `Peak regions`
+> 10. Click on the {% icon galaxy-gear %} (gear) icon at the top right
+> 11. Press **Auto Re-layout** to clean up our view
 >     ![Auto re-layouting](../../images/intro_07.png)
-> 13. Click on the {% icon galaxy-gear %} (gear) icon at the top right
-> 14. Press **Save** to save your changes
+> 12. Click on the {% icon galaxy-save %} **Save** icon (top-right) to save your changes
+>     ![Save workflow button]({% link topics/contributing/images/save_workflow.png %}){: width="50%"}
 >
->    > ### {% icon tip %} Tip: Hiding intermediate steps
+>    > <tip-title>Hiding intermediate steps</tip-title>
 >    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which output to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
 >    >
 >    > ![Workflow editor mark output](../../../../shared/images/workflow_editor_mark_output.png)
@@ -538,7 +561,7 @@ In part 1 we used an overlap definition of 1 bp (default setting) to identify ge
 
 We again need our peak file, but we'd like to work in a clean history. Instead of uploading it twice, we can copy it to a new history.
 
-> ### {% icon hands_on %} Hands-on: Copy history items
+> <hands-on-title>Copy history items</hands-on-title>
 >
 > 1. Create a new history and give it a new name like `Galaxy Introduction Part 2`
 >
@@ -555,30 +578,30 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 
 ## Create peak summit file
 
-We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5). As the end of the peak region, we will simply define `start + 1`.
+We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5, rounded down to the next smallest integer because some peak summits fall in between to bases). As the end of the peak region, we will simply define `start + 1`.
 
-> ### {% icon hands_on %} Hands-on: Create peak summit file
+> <hands-on-title>Create peak summit file</hands-on-title>
 >
-> 1. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} with the following parameters:
->   - *"Add expression"*: `c2+c5`
->   - *"as a new column to"*: our peak file `Peak regions` (the interval format file)
->   - *"Round result?"*: `YES`
+> 1. {% tool [Compute on rows](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} with the following parameters:
+>   - *"Input file"*: our peak file `Peak regions` (the interval format file)
+>   - *"Input has a header line with column names?": `No`
+>   - In *"Expressions"*:
+>       - {% icon param-repeat %} *"Expressions"*
+>           - *"Add expression"*: `c2 + int(c5)`
+>           - *"Mode of the operation"*: Append
+>       - {% icon param-repeat %} *"Expressions"*
+>           - *"Add expression"*: `c8 + 1`
+>           - *"Mode of the operation"*: Append
 >
->   This will create an 8th column in our table, which we will use in our next step:
+>   This will create an 8th and a 9th column in our table, which we will use in our next step:
 >
-> 2. Rename the output `Peak regions new column`
+> 2. Rename the output `Peak summit regions`
 >
-> 3. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} rerun this tool on the last result with:
->   - *"Add expression"*: `c8+1`
->   - *"as a new column to"*: the `Peak regions new column` file we just created
->   - *"Round result?"*: `YES`
->
-> 4. Rename this file `Peak summit regions`
 {: .hands_on}
 
 Now we cut out just the chromosome plus the start and end of the summit:
 
-> ### {% icon hands_on %} Hands-on: Cut out columns
+> <hands-on-title>Cut out columns</hands-on-title>
 > 1. {% tool [Cut](Cut1) %} columns from a table with the following settings:
 >   - *"Cut columns"*: `c1,c8,c9`
 >   - *"Delimited by Tab"*: `Tab`
@@ -599,11 +622,11 @@ Now we cut out just the chromosome plus the start and end of the summit:
 
 The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers, but not the gene names. To get a list of gene names in the end, we use another BED file from the Data Libraries.
 
-> ### {% icon comment %} Comments
+> <comment-title></comment-title>
 > There are several ways to get the gene names in, if you need to do it yourself. One way is to retrieve a mapping through Biomart and then join the two files (**Join two Datasets side by side on a specified field** {% icon tool %}). Another is to get the full RefSeq table from UCSC and manually convert it to BED format.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. {% tool [Import](upload1) %} `mm9.RefSeq_genes_from_UCSC.bed` from [Zenodo](https://zenodo.org/record/1025586) or from the data library:
 >
@@ -630,7 +653,7 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 
 It's time to reuse the workflow we created earlier.
 
-> ### {% icon hands_on %} Hands-on: Run a workflow
+> <hands-on-title>Run a workflow</hands-on-title>
 > 1. Open the workflow menu (top menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
 > 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
@@ -643,7 +666,7 @@ It's time to reuse the workflow we created earlier.
 We used our workflow to rerun our analysis with the peak summits. The **Group** tool again produced a list containing the number of genes found in each chromosome.
 But wouldn't it be more interesting to know the number of peaks in each unique gene? Let's rerun the workflow with different settings!
 
-> ### {% icon hands_on %} Hands-on: Run a workflow with changed settings
+> <hands-on-title>Run a workflow with changed settings</hands-on-title>
 > 1. Open the workflow menu (top menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
 > 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
@@ -657,11 +680,11 @@ But wouldn't it be more interesting to know the number of peaks in each unique g
 
 Congratulations! You should have a file with all the unique gene names and a count on how many peaks they contained.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > The list of unique genes is not sorted. Try to sort it on your own!
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > You can use the tool "Sort data in ascending or descending order" on column 2 and "fast numeric sort".
 > {: .solution }
 {: .question}
@@ -672,6 +695,7 @@ Congratulations! You should have a file with all the unique gene names and a cou
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
 To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
+
 
 1. **Make accessible via Link**
 
@@ -685,8 +709,9 @@ To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the his
 
     This will share the history only with specific users on the Galaxy instance.
 
+![The menu for sharing histories includes buttons for making the history accessible, publishing it on this Galaxy server, and displays a sharable link to the history. At the bottom is a button for sharing the history with individual users.](../../images/publish.PNG)
 
-> ### {% icon hands_on %} Hands-on: Share history and workflow
+> <hands-on-title>Share history and workflow</hands-on-title>
 >
 > 1. Share one of your histories with your neighbour
 > 2. See if you can do the same with your workflow!
@@ -697,6 +722,6 @@ To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the his
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.

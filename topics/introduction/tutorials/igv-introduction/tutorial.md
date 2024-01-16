@@ -2,11 +2,13 @@
 layout: tutorial_hands_on
 
 title: "IGV Introduction"
+draft: true
 zenodo_link: ""
 questions:
 objectives:
 time_estimation: "2H"
 key_points:
+subtopic: next-steps
 contributors:
   - nekrut
   - joachimwolff

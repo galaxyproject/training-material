@@ -1,10 +1,11 @@
 ---
 layout: tutorial_hands_on
 
-title: Refining Genome Annotations with Apollo
-zenodo_link: https://zenodo.org/record/3270822
+title: Refining Genome Annotations with Apollo (prokaryotes)
+zenodo_link: https://zenodo.org/record/4889110
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - How to visualize your genome after automated annotations have been performed?
   - How to manually annotate genome after automated annotations have been performed?
@@ -23,11 +24,15 @@ key_points:
   - Apollo allows a group to view and manually refine predicted genome annotations
   - Use Apollo to edit annotations within your group.
   - Export manual annotations as GFF3.
-contributors:
-  - abretaud
-  - hexylena
-  - nathandunn
-  - mboudet
+contributions:
+  authorship:
+    - abretaud
+    - hexylena
+    - nathandunn
+    - mboudet
+  funding:
+    - gallantries
+    - eurosciencegateway
 
 requirements:
   - type: "internal"
@@ -38,22 +43,24 @@ requirements:
     topic_name: genome-annotation
     tutorials:
       - annotation-with-prokka
+
+subtopic: prokaryote
+abbreviations:
+  OGS: Official Gene Set
 ---
 
-> ### {% icon warning %} Only works on UseGalaxy.eu
+
+After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
+
+> <warning-title>Only works on UseGalaxy.eu</warning-title>
 > Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.
 {: .warning}
-
-# Introduction
-{:.no_toc}
-
-After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html), it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
 [Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this. It is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
 
 This demo is inspired by the [Apollo User's Guide](https://genomearchitect.readthedocs.io/en/latest/UsersGuide.html), which provides additional guidance.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -69,11 +76,11 @@ To annotate a genome using Apollo, we need the reference genome sequence in FAST
 - A set of prior gene predictions or other genomic feature predictions
 - The output of a bioinformatics analysis like BLAST or InterProScan
 - Sequencing reads from RNA-Seq or another HTS analysis
-- If you are not doing a *de novo* annotation, then a previous released <abbr title="Official Gene Set">OGS</abbr>
+- If you are not doing a *de novo* annotation, then a previous released {OGS}
 
 In this tutorial we have obtained some data from NCBI related to [*Escherichia coli K12 str. MG1655*](https://ecoliwiki.org/colipedia/index.php/Category:Strain:MG1655), and we will visualise this data and use it to make some annotations in order to familiarise you with the process.
 
-> ### {% icon comment %} Real Data: Unreal Circumstances
+> <comment-title>Real Data: Unreal Circumstances</comment-title>
 > While the data for this tutorial is sourced from publicly available databases, and is all related to different experiments on *E. coli K12*, this is not necessarily the data *you* might use to annotate your genomes. You probably know best what data you should be using in your own circumstances, for the specific features on which you are focused.
 {: .comment}
 
@@ -84,11 +91,12 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 <!-- Apis mellifera: https://zenodo.org/record/3270822 (based on https://hymenoptera.elsiklab.missouri.edu/beebase/download_sequences probably) -->
 <!-- Schizosaccharomyces pombe: https://usegalaxy.eu/u/abretaud/h/apollo-eukaryote-data -->
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 0. Create a new history and give it a good name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 1. Click the upload icon {% icon galaxy-upload %}
@@ -98,21 +106,21 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 > 3. Copy & Paste the following table into the Rule-based uploader textbox:
 >
 >    ```
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/augustus.gff3	Augustus	gff3
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/blastp_vs_swissprot_2018-01-22.blastxml	Blastp vs swissprot	blastxml
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_K12_Coverage.bigwig	BWA-MEM K12 Coverage	bigwig
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_K12_Mapping.bam	BWA-MEM K12 Mapping	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_O104_Coverage.bigwig	BWA-MEM O104 Coverage	bigwig
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_O104_Mapping.bam	BWA-MEM O104 Mapping	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/E._coli_str_K-12_substr_MG1655_100kb_subset.fasta	Genome	fasta
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/K12_Variants.vcf	K12 Variants	vcf
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/NCBI_AnnotWriter_Genes.gff3	NCBI AnnotWriter Genes	gff3
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/O104_H4_LASTZ_Alignment.bed	O104 H4 LASTZ Alignment	bed
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/O104_Variants.vcf	O104 Variants	vcf
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927169_rep1.bam	TopHat SRR1927169 rep1	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat SRR1927169 rep1 Coverage	bigwig
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927170_rep2.bam	TopHat SRR1927170 rep2	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat SRR1927170 rep2 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/augustus.gff3	Augustus	gff3
+>    https://zenodo.org/records/4889110/files/blastp_vs_swissprot_2018-01-22.blastxml	Blastp vs swissprot	blastxml
+>    https://zenodo.org/records/4889110/files/BWA-MEM_K12_Coverage.bigwig	BWA-MEM K12 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/BWA-MEM_K12_Mapping.bam	BWA-MEM K12 Mapping	bam
+>    https://zenodo.org/records/4889110/files/BWA-MEM_O104_Coverage.bigwig	BWA-MEM O104 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/BWA-MEM_O104_Mapping.bam	BWA-MEM O104 Mapping	bam
+>    https://zenodo.org/records/4889110/files/E._coli_str_K-12_substr_MG1655_100kb_subset.fasta	Genome	fasta
+>    https://zenodo.org/records/4889110/files/K12_Variants.vcf	K12 Variants	vcf
+>    https://zenodo.org/records/4889110/files/NCBI_AnnotWriter_Genes.gff3	NCBI AnnotWriter Genes	gff3
+>    https://zenodo.org/records/4889110/files/O104_H4_LASTZ_Alignment.bed	O104 H4 LASTZ Alignment	bed
+>    https://zenodo.org/records/4889110/files/O104_Variants.vcf	O104 Variants	vcf
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927169_rep1.bam	TopHat SRR1927169 rep1	bam
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat SRR1927169 rep1 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927170_rep2.bam	TopHat SRR1927170 rep2	bam
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat SRR1927170 rep2 Coverage	bigwig
 >    ```
 > 4. Click **Build**
 >
@@ -141,7 +149,7 @@ Refining genome annotations happens in multiple steps:
 
 In this tutorial we will focus more on the practical portions than the theoretical part of genome annotation, that are covered in other tutorials. When you've completed this tutorial you should be comfortable manipulating genomic data in Galaxy and Apollo.
 
-> ### {% icon details %} Why bother?
+> <details-title>Why bother?</details-title>
 >
 > Automated annotation programs continue to improve, however a simple score may not provide evidence necessary to confirm an accurate prediction.
 > Therefore, it is necessary to both visually inspect the results and manually fix any issues with the predictions.
@@ -153,12 +161,12 @@ In this tutorial we will focus more on the practical portions than the theoretic
 
 Let's begin by building a JBrowse instance with all the data we have for this genome.
 
-> ### {% icon comment %} Why bother?
+> <comment-title>Reduced data</comment-title>
 >
 > To reduce the size of the data, in this tutorial we will only work on a portion of the *Escherichia coli K12 str. MG1655* genome.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -214,7 +222,7 @@ Let's begin by building a JBrowse instance with all the data we have for this ge
 >                        - *"Minimum Gap Size"*: `3`
 >                        - *"Is this a protein blast search?"*: `Yes`
 >
->    > ### {% icon comment %} JBrowse is highly configurable
+>    > <comment-title>JBrowse is highly configurable</comment-title>
 >    >
 >    > JBrowse is highly configurable, we have set a very basic configuration but there are many more advanced features available to you, if you need them. You can choose precisely how data is displayed, and even what menu options are available when users click on features. If your features have some external identifiers like an NCBI Gene ID, you can even configure JBrowse that when the user clicks on the feature, it should show the gene page for that feature in a new tab. These sort of features are incredibly helpful for building very rich experiences.
 >    >
@@ -230,7 +238,7 @@ This tool will take some time to run dependent on data size. All of the inputs n
 
 Now that we have a good looking static JBrowse instance, it is time to load it into Apollo to turn it into a dynamic view where you can make modifications to the genes.
 
-> ### {% icon hands_on %} Import to Apollo
+> <hands-on-title>Import to Apollo</hands-on-title>
 >
 > 1. {% tool [Create or Update Organism](toolshed.g2.bx.psu.edu/repos/gga/apollo_create_or_update/create_or_update/4.2.5) %} with the following parameters:
 >    - {% icon param-file %} *"JBrowse HTML Output"*: output of **JBrowse** {% icon tool %}
@@ -272,7 +280,7 @@ The first four steps are generally the process of structural annotation (the pro
 
 Let's start by looking at the tracks available to us, and then turning on the gene call tracks so we can start exploring our data.
 
-> ### {% icon hands_on %} Visualize the Gene Calls
+> <hands-on-title>Visualize the Gene Calls</hands-on-title>
 >
 > 1. In the right hand panel at the top click on **Tracks** to open the track listing
 >
@@ -300,13 +308,13 @@ We will use the other track in the **Gene Calls** group later in this tutorial, 
 
 With the selected track, if you look along the genome, you will see many genes that were predicted by Augustus. Each of them as an unique name assigned by Augustus (e.g. `NC_000913.3.g7.t1`, which means `the 7th gene on the NC_000913.3 chromosome`). If you right click on gene, an select `View details`, you can get access to the coding sequence (CDS).
 
-> ### {% icon details %} Gene colors
+> <details-title>Gene colors</details-title>
 > Each gene color corresponds to an open reading frame on the genome. This allows to quickly see if two genes that are very close are on the same open reading frame, which could mean that they can be merged into a single gene, if other evidences support this.
 {: .details}
 
 What we want now is first to check that the structure of the genes predicted by Augustus are in good shape. To do this, we will display an additional evidence tracks.
 
-> ### {% icon hands_on %} Display blastp vs swissport track
+> <hands-on-title>Display blastp vs swissport track</hands-on-title>
 >
 > 1. In the right hand panel at the top click on **Tracks** to open the track listing
 >
@@ -344,7 +352,7 @@ Currently, the two genes we added have meaningless names. Let's improve that: ri
 
 From the blast results, we know that this gene is similar to a Swissprot protein, named `Putative uncharacterized protein YabP`. Let's write this in the **Name** field (type it manually and select it from the drop down list), and `YabP` in the **Symbol** field.
 
-> ### {% icon details %} Naming genes
+> <details-title>Naming genes</details-title>
 >
 > Giving a proper name to a gene is not always easy. Should it include "Putative" or not? What if multiple names can apply? Should it be lowercase or uppercase?
 > The important thing is to always use the same naming rules when working on a full annotation, and to agree on these rules with other collaborators.
@@ -359,7 +367,7 @@ You should see `Putative uncharacterized protein YabP` in the **Name** field.
 
 You can do the same for the other gene you created, which is similar to `Uncharacterized protein YabQ` according to Blastp vs Swissprot.
 
-> ### {% icon comment %} Saving your work
+> <comment-title>Saving your work</comment-title>
 >
 > You do not need to do anything specific to *Save* your work in Apollo. Just like Google Docs, each modification is immediately saved, and any other user working on the same genome will instantly see the changes you make.
 {: .comment}
@@ -387,7 +395,7 @@ Sometimes you'll want to modify a gene that was predicted by Augustus, just to a
 If you look at the details of the blast hits, you will notice an identifier looking like that: `gi|11387170|sp|P57289.1|`. In this identifier, `P57289` is the id of an [UniProt record](https://www.uniprot.org/uniprot/P57289). Navigate to this UniProt page and you'll find a lot more details about the protein which was found to be very similar to the gene we are currently annotating. In particular, you can see that 3 [Gene Ontology (GO)](http://www.geneontology.org/) terms are associated with it, in the **GO - Molecular function** and **GO - Biological process** sections. Let's add these terms to our gene with Apollo.
 
 
-> ### {% icon comment %} Gene Ontology (GO) Consortium
+> <comment-title>Gene Ontology (GO) Consortium</comment-title>
 >
 > The [Gene Ontology Consortium](http://www.geneontology.org/) provides with its Ontology a framework for the model of biology.
 > The GO defines concepts/classes used to describe gene function, and relationships between these concepts. It classifies functions along three aspects:
@@ -422,7 +430,7 @@ Other tabs are available in the annotation panel, allowing to add **Comments**, 
 
 In this tutorial we are lucky as we are studying a very well known reference organism. It means we have a [very good quality reference annotation](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=511145&lvl=3&lin=f&keep=1&srchmode=1&unlock) provided by NCBI. You can display it in Apollo by enabling the corresponding track:
 
-> ### {% icon hands_on %} Display NCBI annotation track
+> <hands-on-title>Display NCBI annotation track</hands-on-title>
 >
 > 1. In the right hand panel at the top click on **Tracks** to open the track listing
 >
@@ -448,96 +456,16 @@ You can add other types of alterations like insertions or deletions.
 
 Once you have added some alterations, Apollo will automatically display the effect it has on the overlapping genes.
 
-## Exporting annotation
+# Exporting and collaborating
 
-You can continue improving annotation whenever you want, the Apollo server will keep your changes in a safe place for future use. However at some point you will want to export your work to perform other analyses base on it. This can be done from Galaxy:
-
-> ### {% icon hands_on %} Export data to Galaxy
->
-> 1. {% tool [Retrieve Data from Apollo into Galaxy](toolshed.g2.bx.psu.edu/repos/gga/apollo_export/export/4.2.5) %} with the following parameters:
->    - *"Organism Common Name Source"*: `Direct Entry`
->        - *"Organism Common Name"*: `E. coli K12`
->
-{: .hands_on}
-
-This tool will create new datasets in your history:
-
-* the whole content of the **User-created Annotation** track, in GFF3 format
-* the cDNA sequence of all the genes from this same track
-* the CDS sequence of all the genes from this same track
-* the peptide sequences of all the genes from this same track
-* sequence alterations
-
-You can then do any other analysis using normal Galaxy tools.
-
-If you prefer, the same data can be downloaded directly from the Apollo right panel, in the **Ref Sequence** tab.
-
-Note that if you have inserted some sequence alterations, the fasta sequences will take them into account.
-
-# Collaborating with other annotators
-
-As explained at the beginning of this tutorial, Apollo is a collaborative annotation tool, which means you can work with other people from anywhere in the world. By default the organisms you create in Apollo are only accessible by yourself. But you can easily open the access to other people by creating a group of users on Apollo, and then allowing this group to access one or several of your organisms. This works for users hving an account on the same Galaxy  (most probably usegalaxy.eu).
-
-Click on the **Sharing** tab in the Apollo right panel.
-
-![Apollo right hand menu has a number of tabs, Annotations, Tracks, Ref Sequence, Sharing, and GGA are shown. Sharing is active.](../../images/apollo/sharing.png)
-
-You should see a screen like this:
-
-![Screenshot of the sharing tab with a blue bar reading Your Permissions, with group management below. A large header reads "Shareable organisms" and lists organisms that can be shared. A "Group membership" section shows that they are not a member of any group.](../../images/apollo/perm_home.png)
-
-It means that you are currently not in any group, and that, as its creator, you have the right to share access to one organism: `E. coli K12`.
-
-> ### {% icon hands_on %} Create a user group
->
-> 1. Click on the **Group management** tab
->
-> 2. Click on the **New** button
->
-> 3. Give a name to your new group, and then click on the **Create group** button
->
-> ![Group creation dialog with one field, the group name set to 'my_friends'](../../images/apollo/perm_group_create.png)
->
-{: .hands_on}
-
-Now you should see a screen like this:
-
-![Screenshot of the group detail interface showing no allowed organisms, but one available organism that can be added to this group.](../../images/apollo/perm_group_added.png)
-
-Let's add a colleague to our newly created group.
-
-> ### {% icon hands_on %} Adding a user in the group
->
-> 1. Click on the **Group members** tab
->
-> 2. Click on the **Add user** button
->
-> 3. Enter the email address of a user you want to work with (the one used to register on the same Galaxy server)
->
-> 4. Click on the **Add user** button
->
-> ![Screenshot of adding a user in the permapol to the previous group, my_friends. The user email is filled out to an example value.](../../images/apollo/perm_add_user.png)
->
-{: .hands_on}
-
-And now allow the user group to access our `E. coli K12` organism.
-
-> ### {% icon hands_on %} Giving access to an organism
->
-> 1. Click on the **Organisms** tab (if not already selected)
->
-> 2. Click on the **+** button next to the `E. coli K12` organism
->
-> 3. Confirm that you want to give access
->
-{: .hands_on}
-
-Now the other user should be able to access your organism, and make any modifications to the annotation (creating genes, structural changes, functional annotation, ...). In each gene history, Apollo keeps track of which user performed which operation, so you will always be able to know who did what on the annotation, and blame or credit them. Of course, using the same **Sharing** tab, you can stop at any time sharing an organism to a whole group or a specific users in a few clicks.
+{% include topics/genome-annotation/tutorials/apollo/collab.md eukaryote=false %}
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations and export them to Galaxy for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution.
+
+A [similar tutorial for eukaryote genomes]({% link topics/genome-annotation/tutorials/apollo-euk/tutorial.md %}) exists, using different types of evidence tracks, feel free to have a look at it to learn more.
 
 When refinement is sufficient an updated or new version of the annotation may be exported as GFF3 as well as published as a new JBrowse directory for inspection.
 

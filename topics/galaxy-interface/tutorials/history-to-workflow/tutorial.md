@@ -22,11 +22,11 @@ key_points:
   - "Workflows can be edited or created from scratch using the workflow editor"
 contributors:
   - tnabtaf
-subtopic: interface
+subtopic: workflows
 ---
 
 # Create a reusable workflow from a history
-{:.no_toc}
+
 
 This practical shows how to create a reusable analysis pipeline, called a *workflow* in Galaxy, from an analysis that you have already run in Galaxy, called a *history*.
 
@@ -35,7 +35,7 @@ This practical shows how to create a reusable analysis pipeline, called a *workf
 > This tutorial is intended for those who are new to Galaxy.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -46,7 +46,7 @@ This practical shows how to create a reusable analysis pipeline, called a *workf
 
 # Pretreatments
 
-> ### {% icon requirements %} Requirements
+> <comment-title>Requirements</comment-title>
 >
 > To run this practical you will need
 >
@@ -54,7 +54,7 @@ This practical shows how to create a reusable analysis pipeline, called a *workf
 > 1. An internet-connected computer.  Galaxy can run on your laptop without an internet connection, but this practical requires access to resources on the web.
 > 1. A web browser. [Firefox](https://www.mozilla.org/firefox) and [Google Chrome](https://www.google.com/chrome/) work well, as does [Safari](https://www.apple.com/safari/).  Internet Explorer is known to have issues with Galaxy so avoid using that.
 > 1. Access to a Galaxy instance, and an account on that instance. Galaxy is available in many ways. If you are doing this practical as part of a workshop, the instructor will tell you which instance to use. If you are doing this on your own, you can use [usegalaxy.org](https://usegalaxy.org).
-> 1. A Galaxy *history* from an analysis that you have already run.  If you don't have one handy, you can use this history on usegalaxy.org.  Click **Import History** to bring that history into your workspace on usegalaxy.org. Any history will work with this tutorial, but that's the one used in the examples.
+> 1. A Galaxy *history* from an analysis that you have already run.  If you don't have one handy, you can use [this history](https://usegalaxy.org/u/tnabtaf/h/overlapping-genes-on-opposite-strands). on usegalaxy.org.  Click **Import History** (top right) to bring that history into your workspace on usegalaxy.org. Any history will work with this tutorial, but that's the one used in the examples.
 {: .comment}
 
 This tutorial is a good second step after running your first analysis on Galaxy.
@@ -67,7 +67,7 @@ But what if you want to run that analysis again, maybe on updated datasets, or m
 
 Galaxy *workflows* enable this, and this tutorial shows how you can create one from the analysis you have already done, and then run the analysis exactly as you did before, but on the new datasets.
 
-> ### {% icon tip %} Tip: Confused about *Histories* and *Workflows?*
+> <tip-title>Confused about <i>Histories</i> and <i>Workflows?</i></tip-title>
 >
 > Well, you are not alone.  This analogy may help.
 >
@@ -84,20 +84,18 @@ Galaxy *workflows* enable this, and this tutorial shows how you can create one f
 
 By this time, you may have multiple histories under your Galaxy account.  You'll need to make the history that you want create a recipe/workflow for be your *current* history.  Your current history is the one shown in the History panel on the right.
 
-> ### {% icon hands_on %} Hands-on: Managing your histories
+> <hands-on-title>Managing your histories</hands-on-title>
 >
 >  1. Make sure you are *logged in*.
 >    - If you haven't yet created an account, now is an ideal time to that.  Your current history will be saved as your first history under your new account.
-> 2. *Click* on the **table icon** at the top-right of the history panel to switch to your *histories* view.
+> 2. *Click* on the **History options** at the top-right of the history panel and select **Show Histories Side-by-Side** to switch to *multiple history view*.
 >    - This lists your histories, from left to right in reverse chronological order, based on the last time each history was your current history.
 > 3. *Switch to* the history you want to extract a workflow from.
->    - If the history that you want to create a repeatable workflow for is *not* your *current* history (the left-most one), then find the history you want and then *click* the **Switch to** button at the top of the history.
->    - This makes that history the current history and moves it to the very left.
-> 4. *Click* the **Done** button at the top upper left of your histories view.
->    - This returns you to the Galaxy home page with the selected history as your current history.
+>    - If the history that you want to create a repeatable workflow for is *not* your *current* history, then find the history you want and then *click* the **Switch to** button at the bottom of the history.
+>    - This makes that history the current history.
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Always name your histories
+> <tip-title>Always name your histories</tip-title>
 >
 >If you just saw multiple `Unnamed history` entries in your histories view, then now you know why.
 >
@@ -109,10 +107,10 @@ By this time, you may have multiple histories under your Galaxy account.  You'll
 Now that we have the history we want, let's use Galaxy to create a reusable workflow from it.  To do this we'll use the history's **gear / history options** pull-down list.
 
 
-> ### {% icon hands_on %} Hands-on: Extract workflow
+> <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. *Click* on the **gear icon** at the top of your history.
->    - This opens a pull-down menu showing lots of actions that you can perform on this history.  Right now, we are interested in only one of them:
+> 1. *Click* on the {% icon galaxy-history-options %} **History options** at the top-right of the history panel.
+>    - This opens a pull-down menu showing lots of actions that you can perform on the current history.  Right now, we are interested in only one of them:
 > 2. *Click* on **Extract Workflow**.  It's about half-way down the menu.
 >    - This launches a form to create a workflow.
 > 3. *Give* your workflow a meaningful name.
@@ -135,23 +133,23 @@ This launches the workflow editor and shows a graphical representation of the in
 
 ![Workflow Editor](../../images/workflow_editor_landing_strand.png)
 
-While we could run this workflow right now, here are a few cleanup items we should do first.
+While we could run this workflow right now, here are a few cleanup steps we should do first.
 
 ### Rename input datasets
 
 The *extract workflow* step assigns the name of input datasets in your history to the corresponding inputs in your workflow.  This is very helpful in the short term because it makes it clear which of the boxes are which datasets.  But, for a workflow, we want a more general (but still helpful) name for input datasets.
 
-> ### {% icon hands_on %} Hands-on: Rename inputs
+> <hands-on-title>Rename inputs</hands-on-title>
 >
 > 1. *Click* on the first input dataset.
 >    - This changes the right panel to show information about the selected dataset.  In this example, this dataset is a set of genomic features (like genes or exons or repeats) that exist in an organism.
 > 2. *Set* the **Label** field to something more general, yet still informative.
->    - In the example workflow, we'll name this `Genome features` about as general as you can get.
+>    - In the example workflow, we'll name this `Genomic features` about as general as you can get.
 > 3. Add a *description* for your input datasets
 >     - This helps make your general input dataset name more informative.
 >     - *add* a description of the dataset in the **Annotation** box.
 >     - For the example, we'll use:
->        - `Workflow checks this set of genomic features to find any that overlap with each other on opposite strands.  **This must be at least a 6 column BED file,** as the workflow makes decisions based on column 6, the strand.`
+>        - `Workflow checks this set of genomic features to find any that overlap with each other on opposite strands.  **It must be at least a 6 column BED file,** as the workflow makes decisions based on column 6 (the strand).`
 >      ![Renamed and annotated input dataset](../../images/workflow_strand_renamed_plus_annot.png)
 {: .hands_on}
 
@@ -159,20 +157,20 @@ There are several other things we could do in the workflow editor, but let's foc
 
 First, your history might contain several false starts or tool runs where the parameters weren't quite right. Lets get rid of those now.
 
-> ### {% icon hands_on %} Hands-on: Drop unused input datasets and tool boxes
+> <hands-on-title>Drop unused input datasets and tool boxes</hands-on-title>
 >
 > 1. *Delete* unwanted steps
 >    - If your history contained any false starts or tool runs that didn't contribute to your final result, then *delete* them from the workflow by clicking the black **x** in the corner of those datasets/tools' boxes.
 >    - This will remove them from the workflow.
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Removing unnecessary steps before creating workflow
+> <tip-title>Removing unnecessary steps before creating workflow</tip-title>
 > You can also delete these steps when you are first extracting the workflow from your history, by unchecking them.  However, it is often easier to identify the steps to drop in the workflow view, where connections and dead-ends are more obvious.
 {: .tip}
 
 Second, you might want to give your output datasets meaningful names too.
 
-> ### {% icon hands_on %} Hands-on: Name output datasets
+> <hands-on-title>Name output datasets</hands-on-title>
 >
 > 1. *Click* on a step that produces an output file.
 >    - This brings up information about that step in the right panel.
@@ -186,9 +184,9 @@ We could add annotation to each step in the process as well, and if this workflo
 
 Now that our edits are done, let's save our work and run the workflow.
 
-> ### {% icon hands_on %} Hands-on: Save the workflow edits
+> <hands-on-title>Save the workflow edits</hands-on-title>
 >
->  1. *Click* on the **gear icon** at the top right of the central panel, *select* **Save** from the pull-down menu.
+>  1. *Click* on the {% icon galaxy-save %} at the top right to save workflow.
 {: .hands_on}
 
 
@@ -196,9 +194,9 @@ Now that our edits are done, let's save our work and run the workflow.
 
 Now that we have finished creating our workflow, it is time to test it.
 
-> ### {% icon hands_on %} Hands-on: Run the workflow
+> <hands-on-title>Run the workflow</hands-on-title>
 >
-> 1. *Click* on the **gear icon** and this time select **Run**.
+> 1. *Click* on the {% icon workflow-run %} to run workflow.
 > 2. *Examine* the workflow run form.
 >
 >
@@ -220,7 +218,7 @@ And Galaxy launches the workflow, running in a new history.  It says (in a nice 
 
 You can check the status of queued jobs and view the resulting data *by refreshing the History pane.* When the job has been run the status will change from 'running' to 'finished' if completed successfully or 'error' if problems were encountered.
 
-But, *that's a lie*.  In our case we sent the results to a new history, and the history panel is still showing us the old history.  To get to the new history, open the histories view (*click* the **table icon** at top of history) and then make the newly created history be the current history.
+But, *that's a lie*.  In our case we sent the results to a new history, and the history panel is still showing us the old history.  To get to the new history, open the multiple history view (*click* the {% icon galaxy-history-options %} **History Options** at top of the history panel) and then make the newly created history be the current history.
 
 Depending on your workflow and datasets, your analysis may already be done by the time you make it the current history and go back to the standard view.
 

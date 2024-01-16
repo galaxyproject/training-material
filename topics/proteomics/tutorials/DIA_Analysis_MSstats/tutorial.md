@@ -1,9 +1,7 @@
 ---
 layout: tutorial_hands_on
-enable: false
-
 title: Statistical analysis of DIA data
-zenodo_link: 'https://zenodo.org/record/4302084'
+zenodo_link: 'https://zenodo.org/record/4307758'
 level: Intermediate
 questions:
 - How to perform statistical analysis on DIA mass spectrometry data?
@@ -31,8 +29,6 @@ tags: [DIA]
 
 ---
 
-# Introduction
-{:.no_toc}
 
 This training covers the statistical analysis of data independent acquisition (DIA) mass spectrometry (MS) data, after successfull identification and quantification of peptides and proteins. We therefore recommend to first go through the [DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html) as well as the [DIA analysis tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html), which teach the principles and characteristics of DIA data analysis.
 
@@ -40,7 +36,7 @@ Modern mass spectrometry approaches enables the identification and quantificatio
 
 Here we will use **MSstats**, which enables the statistical analysis and processing of proteomic data ({% cite Choi2014 %}).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -50,18 +46,18 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 {: .agenda}
 
 ## Get data
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the DIA analysis results, the sample annotation and the comparison matrix from [Zenodo](https://zenodo.org/record/4302084)
+> 2. Import the DIA analysis results, the sample annotation and the comparison matrix from [Zenodo](https://zenodo.org/record/4307758)
 >    ```
->    https://zenodo.org/record/4302084/files/PyProphet_export.tabular
->    https://zenodo.org/record/4302084/files/Sample_annot_MSstats.txt
->    https://zenodo.org/record/4302084/files/Comp_matrix_HEK_Ecoli.txt
->    https://zenodo.org/record/4302084/files/PyProphet_msstats_input.tabular
+>    https://zenodo.org/record/4307758/files/PyProphet_export.tabular
+>    https://zenodo.org/record/4307758/files/Sample_annot_MSstats.txt
+>    https://zenodo.org/record/4307758/files/Comp_matrix_HEK_Ecoli.txt
+>    https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -75,7 +71,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 
 # Statistical analysis with **MSstats**
 
-> ### {% icon hands_on %} Hands-on: Performing statistical analysis using **MSstats** and the tabular output from **PyProphet export**
+> <hands-on-title>Performing statistical analysis using <b>MSstats</b> and the tabular output from <b>PyProphet export</b></hands-on-title>
 >
 > 1. {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0) %} with the following parameters:
 >    - *"input source"*: `OpenSWATH`
@@ -84,19 +80,19 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >    - *"Compare Groups"*: `Yes`
 >        - {% icon param-file %} *"Comparison Matrix"*: `Comp_matrix_HEK_Ecoli`
 >
->    > ### {% icon comment %} Comment: data Process and group comparison
+>    > <comment-title>data Process and group comparison</comment-title>
 >    >During the data process step the peptide intensities are normalized and protein inference is performed. Using a predefined comparison matrix multiple comparisons can be performed.
 >    {: .comment}
 >
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many lines does the PyPyprophet_export.tabular file have? How many lines does the ProcessedData have and do you notice any differences in their structure or format?
 > 2. How many proteins were used for the Group comparison? (see ComparisonResult)
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The PyPyprophet_export.tabular has appr. 230.000 lines whereas the ProcessedData has over 1 mio lines and is in the so called long format. Here every individual transition (single m/z value) is reported per row.
 > > 2. The ComparisonResult has 5022 lines, meaning over 5000 Proteins were compared between the two different Spike-in conditions.
@@ -106,22 +102,22 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 {: .question}
 
 
-> ### {% icon tip %} Tip: Continue with results from Zenodo
+> <tip-title>Continue with results from Zenodo</tip-title>
 >
 > In case the **MSstats** run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial
-> 1. Import the files from [Zenodo](https://zenodo.org/record/4302084)
+> 1. Import the files from [Zenodo](https://zenodo.org/record/4307758)
 >    ```
->    https://zenodo.org/record/4302084/files/MSstats_ComparisonResult_export_tabular.tsv
+>    https://zenodo.org/record/4307758/files/MSstats_ComparisonResult_export_tabular.tsv
 >    ```
 {: .tip}
 
 ## Detailed investigation of Ecoli identifications and quantifications
 
-> ### {% icon hands_on %} Hands-on: Investigating Ecoli proteins in the MSstats comparison results
+> <hands-on-title>Investigating Ecoli proteins in the MSstats comparison results</hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `MSstats_ComparisonResult_export_tabular` (output of **MSstats** {% icon tool %})
->    - *"the pattern"*: `(ECOLI)|(logFC)`
+>    - *"the pattern"*: `(ECOLI)|(log2FC)`
 >
 > 2. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Select_Ecoli` (output of **Select** {% icon tool %})
@@ -136,18 +132,18 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >    - *"Label for x axis"*: `log2 Fold Change`
 >
 >
->    > ### {% icon comment %} Comment: Extracting Ecoli information
+>    > <comment-title>Extracting Ecoli information</comment-title>
 >    >First we only select rows containing specific terms such as "Ecoli" from the complete ComparisonResults file. Afterwards, the table is filtered to containg only proteins with valid statistical information (e.g. p-value). Using the log2 Fold change values from all remaining Ecoli proteins we can observe the distribution of log2FC values from the comparison of the two Spike-in conditions.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many Ecoli proteins were identified and for how many was the p-value for the comparison of the two Spike-in conditions computed?
 > 2. How does the distribution of the log2FC values look like? Which Spike-in contained higher amounts of Ecoli and is it possible to see how much more Ecoli was spiked-in?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. In total, over 800 Ecoli proteins were identified from which 500 have a p-value for the comparison of the two Spike-in conditions.
 > > 2. We can see a gaussian distribution of the log2FC values around a positive value of 3. Since we compared Spike_in_2 / Spike_in_1 we can directly see that Spike_in_2 contained higher amounts of Ecoli. Furthermore, since the apex of the distribution is around 3 and we compared log2 intensities, we could estimate that Spike_in_2 contained approx. 8-times more Ecoli than Spike_in_1.
@@ -159,7 +155,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 
 # Statistical analysis with **MSstats**
 
-> ### {% icon hands_on %} Hands-on: Performing statistical analysis using **MSstats** and the msstats_input from **PyProphet export**
+> <hands-on-title>Performing statistical analysis using <b>MSstats</b> and the msstats_input from <b>PyProphet export</b></hands-on-title>
 >
 > 1. {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0) %} with the following parameters:
 >    - *"input source"*: `MStats 10 column format`
@@ -167,18 +163,18 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >    - *"Compare Groups"*: `Yes`
 >
 >
->    > ### {% icon comment %} Comment: MSstats input format
+>    > <comment-title>MSstats input format</comment-title>
 >    >For the statistical analysis using MSstats the input must be in the long format, containing all relevant information in 10 predefined columns. The conversion of the **PyProphet export** output can either be done using **MSstats** (as we did above), or during the **Pyprophet export** step by using another R package called swath2stats ({% cite Blattmann2016 %}). Prior to the conversion the data can be processed and filtered using the swath2stats functionalities.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many lines does the `PyProphet_msstats_input.tabular` file have? How many lines does the ProcessedData have and do you notice any differences in their structure or format?
 > 2. How many proteins were used for the Group comparison? And do you already see a difference to the first **MSstats** step?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The `PyProphet_msstats_input.tabular` has over 870.000 lines and the ProcessedData has over 1 mio lines. Here both files are in the long format, in which every transition is reported per row.
 > > 2. Here the ComparisonResult has only 3871 lines, meaning that almonst 1200 fewer proteins were used in the comparison of the two spike-in conditions.
@@ -187,22 +183,22 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >
 {: .question}
 
-> ### {% icon tip %} Tip: Continue with results from Zenodo
+> <tip-title>Continue with results from Zenodo</tip-title>
 >
 > In case the **MSstats** run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial
-> 1. Import the files from [Zenodo](https://zenodo.org/record/4302084)
+> 1. Import the files from [Zenodo](https://zenodo.org/record/4307758)
 >    ```
->    https://zenodo.org/record/4302084/files/MSstats_ComparisonResult_msstats_input.tsv
+>    https://zenodo.org/record/4307758/files/MSstats_ComparisonResult_msstats_input.tsv
 >    ```
 {: .tip}
 
 ## Detailed investigation of Ecoli identifications and quantifications
 
-> ### {% icon hands_on %} Hands-on: Investigating Ecoli proteins in the MSstats comparison results
+> <hands-on-title>Investigating Ecoli proteins in the MSstats comparison results</hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `MSstats_ComparisonResult_msstats_input` (output of the second **MSstats** {% icon tool %})
->    - *"the pattern"*: `(ECOLI)|(logFC)`
+>    - *"the pattern"*: `(ECOLI)|(log2FC)`
 >
 > 2. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Select_Ecoli` (output of the second **Select** {% icon tool %})
@@ -221,12 +217,12 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many Ecoli proteins were identified and for how many was the p-value for the comparison of the two Spike-in conditions computed? Are there any differences compared to the selected and filtered results from the previous **MSstats** step?
 > 2. How does the distribution of the log2FC values look like? Are there any differences compared to the selected and filtered results from the previous **MSstats** step?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. In total, over 600 Ecoli proteins were identified from which 500 have a p-value for the comparison of the two Spike-in conditions. Here we identify 200 Ecoli proteins less than before, however, the number of proteins for which a p-value was calculated differs only slightly.
 > > 2. Generally, the two log2FC distribution look very similar, showing a gaussian distribution of the log2FC values around a positive value of 3. There seems to be a slight difference of the apex of the distribution, in the first **MSstats** analysis it seems to be higher than 3, whereas in the second **MSstats** analysis the apex seems to be lower than 3.
@@ -238,7 +234,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 
 
 # Conclusion
-{:.no_toc}
+
 
 ![DIA_MSstats_pipe](../../images/DIA_MSstats_sum.png "All-in one workflow for DIA analysis in Galaxy. The statistical analysis using MSstats is highlighted in green.")
 

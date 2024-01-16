@@ -19,9 +19,6 @@ contributors:
   - dannon
 ---
 
-## Introduction
-{:.no_toc}
-
 In this tutorial we are going to demonstrate how to add a third party
 JavaScript-based visualization to Galaxy, and we'll talk about what the benefits
 are. The plugin we've selected for this exercise is the [*PV-Javascript Protein
@@ -31,7 +28,7 @@ available for the visualization of `PDB`-files such as e.g.
 [NGL](https://arose.github.io/ngl/) (also available in Galaxy) and
 [JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
 
-> ### {% icon details %} Background: What is the PDB (Protein Data Bank) file format?
+> <details-title>Background: What is the PDB (Protein Data Bank) file format?</details-title>
 >
 > The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial crystallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Data Bank ([https://www.rcsb.org](https://www.rcsb.org)). Proteins are usually labeled by a four-letter code.
 > Here is an example of a `PDB`-file for a hydrolase bond to its inhibitor (PDB: [1ACB](https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)):
@@ -81,7 +78,7 @@ continue by visiting the protein viewer developer site at
 [https://biasmv.github.io/pv/](https://biasmv.github.io/pv/) to get familiar
 with the plugin.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. View the plugin in action, rotate the molecule and change its style.
 >
@@ -91,7 +88,7 @@ with the plugin.
 >
 {: .hands_on}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -110,7 +107,7 @@ instance. All development takes place within the *Galaxy* codebase. The first
 thing we are going to do is to clone a *Galaxy* instance and prepare the
 directory structure for the new visualization plugin.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. Clone an instance of *Galaxy* in a path, further referred to as `$GALAXY_ROOT`:
 >    ```bash
@@ -152,7 +149,7 @@ Here's an example [logo](../../files/charts-plugins/pdb/logo.png):
 
 ![Logo](../../files/charts-plugins/pdb/logo.png)
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. Find an arbitrary image in `PNG`-file format. Possibly using *Google*'s [image search](https://images.google.com).
 >
@@ -167,7 +164,7 @@ allows developers to specify a variety of attributes and input parameters for
 their visualization. Throughout this tutorial we are going to gradually augment
 this file but for now we keep it simple.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. Rename the file to `config/myviz.xml`
 >
@@ -194,7 +191,7 @@ your plugin with its new logo in the list there.
 
 ### Assign a new datatype to your visualization
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. Open the file named `config/myviz.xml` and find the `<data_source>` section.
 >
@@ -202,7 +199,7 @@ your plugin with its new logo in the list there.
 >
 >    `<test type="isinstance" test_attr="datatype" result_type="datatype">molecules.PDB</test>`
 >
-> 3. Remove the `<specs>` and `<groups>` sections.
+> 3. Remove the `<settings>` and `<groups>` sections.
 >
 {: .hands_on}
 
@@ -226,7 +223,7 @@ In this tutorial we will implement the *PV-Viewer* plugin. In order to execute a
 a working example or documentation. Fortunately the *PV-Viewer* comes with both.
 Let's take a look at the [documentation](https://pv.readthedocs.io/).
 
-> ### {% icon hands_on %} Exploring the PV-Viewer
+> <hands-on-title>Exploring the PV-Viewer</hands-on-title>
 >
 > 1. Identify the parameter which is needed to initialize the plugin when calling [*pv.Viewer()*](https://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer).
 >
@@ -238,7 +235,7 @@ Let's take a look at the [documentation](https://pv.readthedocs.io/).
 
 Now that we have learned the basics on how the viewer plugin works, we can edit it and adjust  `script.js`.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. Access your visualization's `myviz/src` directory.
 >    ```bash
@@ -291,7 +288,7 @@ After it has been built and staged the plugin will be accessible through
 *Galaxy*'s user interface. This process not require restarting your *Galaxy*
 instance, just make sure to properly refresh your browser.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. Navigate to your visualization's root directory:
 >    ```bash
@@ -323,7 +320,7 @@ Lets test this.
 
 In this section we will select a `PDB`-file from the Protein Data Bank and visualize it with our new plugin.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. Visit [https://www.rcsb.org ](http://www.rcsb.org) and select a protein structure e.g. [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)
 >
@@ -362,7 +359,7 @@ latter is provided in *JavaScript* and not as XML.
 
 More information on parameters can be found in the [wiki](https://docs.galaxyproject.org/en/latest/dev/schema.html).
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. Add the following block into the `myviz.xml` file:
 >    ```xml
@@ -418,7 +415,7 @@ More information on parameters can be found in the [wiki](https://docs.galaxypro
 {: .hands_on}
 
 ## Conclusion
-{:.no_toc}
+
 
 First of all, thank you for completing this tutorial. We have learned how to add
 JavaScript visualizations to Galaxy utilizing the Charts framework.

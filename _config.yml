@@ -22,7 +22,7 @@ baseurl: "/training-material"
 github_repository: "https://github.com/galaxyproject/training-material"
 github_repository_branch: "main"
 gitter_url: "https://gitter.im/Galaxy-Training-Network/Lobby"
-logo: "assets/images/GTN.png"
+logo: "assets/images/GTNLogo1000.png"
 small_logo: "assets/images/GTN-60px.png"
 help_url: https://help.galaxyproject.org/
 other_languages: #"fr, ja, es, pt, ar"
@@ -33,22 +33,6 @@ other_languages: #"fr, ja, es, pt, ar"
   pt: Português
   ar: العربية
 
-words_to_not_translate:
-- bed
-- dna
-- expression
-- downstream
-- galaxy
-- mapping
-- reads
-- rna
-- single cell
-- single-cell
-- toolshed
-- upstream
-- wiggle
-- workflow
-
 # Where things are
 source: .
 destination: ./_site
@@ -56,6 +40,23 @@ plugins_dir: _plugins
 layouts_dir: _layouts
 data_dir: metadata
 includes_dir: .
+
+javascript_bundles:
+  theme:
+    preload: true
+    resources:
+      - assets/js/theme.js
+  main:
+    preload: true
+    resources:
+      - assets/js/jquery.slim.min.js
+      - assets/js/popper.min.js
+      - assets/js/bootstrap.min.js
+      - assets/js/bootstrap-toc.min.js
+      - assets/js/clipboard.min.js
+      - assets/js/list.min.js
+      - assets/js/mermaid@10.6.1.js
+      - assets/js/main.js
 
 # Conversion
 markdown: kramdown
@@ -83,53 +84,60 @@ abbreviate:
     - tutorial_slides
     - base_slides
 
-# Scholar
-scholar:
-  source: topics/
-  bibliography: "**/*.bib"
-  sort_by: "year,month"
-  bibliography_template: bibtemplate
-  style: _layouts/g3.csl
-
 # Icon tag config
 icon-tag:
   announcement: fas fa-bullhorn
+  arrow-keys: fa fa-arrows
   code-in: far fa-keyboard
   code-out: fas fa-laptop-code
   cofest: fas fa-users
   comment: far fa-comment-dots
   congratulations: far fa-thumbs-up
+  copy: far fa-copy
   curriculum: fas fa-graduation-cap
   details: fas fa-info-circle
   docker_image: fab fa-docker
   email: far fa-envelope
   exchange: fas fa-exchange-alt
+  external-link: fas fa-external-link-alt
+  switch-histories: fas fa-exchange-alt
   event: far fa-calendar
   feedback: far fa-comments
+  galaxy-advanced-search: fas fa-angle-double-down
+  galaxy-show-active: fa fa-map-marker
   galaxy-barchart: fas fa-chart-bar
   galaxy-bug: fas fa-bug
   galaxy-chart-select-data: fas fa-database
   galaxy-clear: fas fa-times-circle
   galaxy-columns: fas fa-columns
   galaxy-cross: fas fa-times
+  galaxy-dataset-map: fas fa-sitemap
+  galaxy-delete: fas fa-trash
   galaxy-dropdown: fas fa-caret-down
+  galaxy-history-options: fas fa-caret-down # Replaces gear.
   galaxy-eye: far fa-eye
   galaxy-gear: fas fa-cog
   galaxy-history: fas fa-columns
+  galaxy-history-archive: fas fa-archive
   galaxy-home: fas fa-home
   galaxy-info: fas fa-info-circle
   galaxy-library: far fa-folder
+  galaxy-link: fas fa-link
+  galaxy-panelview: fas fa-list
   galaxy-pencil: fas fa-pencil-alt
-  galaxy-refresh: fas fa-sync-alt
+  galaxy-refresh: fas fa-redo
+  galaxy-undo: fas fa-undo
   galaxy-rulebuilder-history: fas fa-history
   galaxy-save: far fa-save
   galaxy-scratchbook: fas fa-th
   galaxy-selector: far fa-check-square
+  galaxy-show-hidden: fas fa-eye-slash
   galaxy-star: far fa-star
   galaxy-tags: fas fa-tags
   galaxy-toggle: fas fa-toggle-on
   galaxy-upload: fas fa-upload
   galaxy-wf-connection: fas fa-arrows-alt-h
+  galaxy-wf-edit: fa fa-edit
   galaxy-wf-new: fas fa-plus
   galaxy-wf-report-download: fas fa-print
   galaxy_instance: fas fa-external-link-alt
@@ -140,15 +148,17 @@ icon-tag:
   hands_on: fas fa-pencil-alt
   help: far fa-question-circle
   history-annotate: fas fa-comment
-  history-share: fas fa-toggle-on
+  history-share: fas fa-share-alt
   instances: fas fa-globe
   interactive_tour: fas fa-magic
   keypoints: fas fa-key
   language: fas fa-language
   last_modification: far fa-calendar
   level: fas fa-graduation-cap
+  license: fas fa-balance-scale
   linkedin: fab fa-linkedin
   new-history: fas fa-plus
+  notebook: far fa-file-code
   objectives: fas fa-bullseye
   orcid: fab fa-orcid
   param-check: far fa-check-square
@@ -158,16 +168,36 @@ icon-tag:
   param-repeat: far fa-plus-square
   param-select: fas fa-filter
   param-text: fas fa-pencil-alt
+  param-toggle: fas fa-toggle-on
+  point-right: far fa-hand-point-right
+  pref-info: fas fa-user
+  pref-password: fas fa-unlock-alt
+  pref-identities: far fa-id-card
+  pref-permissions: fas fa-users
+  pref-dataprivate: fas fa-lock
+  pref-apikey: fas fa-key
+  pref-cloud: fas fa-cloud
+  pref-toolboxfilters: fas fa-filter
+  pref-custombuilds: fas fa-cubes
+  pref-signout: fa fa-sign-out
+  pref-notifications: far fa-plus-square
+  pref-delete: fas fa-radiation
+  pref-palette: fas fa-palette
+  pref-list: fas fa-list
+  purl: fas fa-fingerprint
   question: far fa-question-circle
   references: far fa-bookmark
   requirements: fas fa-check-circle
+  rss-feed: fas fa-rss
   search: fas fa fa-search
   slides: fab fa-slideshare
   solution: far fa-eye
   sticky-note: fas fa-sticky-note
   time: fas fa-hourglass-half
+  text-document: fas fa-file-alt
   tip: far fa-lightbulb
   tool: fas fa-wrench
+  tool-versions: fas fa-cubes
   topic: far fa-folder
   trophy: fas fa-trophy
   tutorial: fas fa-laptop
@@ -178,7 +208,9 @@ icon-tag:
   workflow: fas fa-share-alt
   workflow-run: fas fa-play
   video: fas fa-video
+  video-slides: far fa-play-circle
   zenodo_link: far fa-copy
+  version: fas fa-code-commit
 
 # To exclude in _site
 exclude:
@@ -187,6 +219,7 @@ exclude:
   - Gemfile.lock
   - package.json
   - package-lock.json
+  - node_modules
   - CONTRIBUTING.md
   - CONTRIBUTORS.yaml
   - CODEOWNERS
@@ -196,8 +229,6 @@ exclude:
   - Makefile
   - miniconda.sh
   - "**/README.md"
-  - "**/*.yaml"
-  - "**/*.yml"
   - "**/*.sh"
   - bin/
   - metadata/
@@ -213,21 +244,30 @@ exclude:
   - .venv
   # These are provided by an S3 proxy in production
   - videos/topics/
+  - "wk-*/**"
 include:
   - .nojekyll
 
 # Plugins
 plugins:
   - jekyll-feed
-  - jekyll-scholar
   - jekyll-redirect-from
-  - jekyll-last-modified-at
-  - jekyll-sitemap
 
-# Sitemap Configuration
-defaults:
-  -
-    scope:
-      path:            "topics/*/images/**"
-    values:
-      sitemap:         false
+# An announcement to display on the home page
+#announcement:
+#   class: success
+#   title: GTN Celebrates Pride Month
+#   text: |
+#     June is pride month in many countries around the world! The GTN is celebrating it by remembering the story of Alan L. Hart, a trans doctor who pioneered the use of x-ray photography in tuberculosis detection.
+#
+#     [Read about Alan L. Hart's contribution to M. Tuberculosis](/training-material/news/2023/06/01/hart.html){: .btn.btn-primary}
+#     <a href="#" class="btn btn-success" onclick="setTheme('progress')">Activate the GTN Theme!</a>
+#
+#     <strong>Note:</strong> You can change your theme any time via the 'Extras' menu at the top!
+
+# A banner image that can be displayed separately for short wide banner images. Alt text is mandatory.
+# banner_image:
+#   source: "https://gallantries.github.io/assets/images/smorgasbord3/png/banner-email.png"
+#   link: "https://gallantries.github.io/video-library/events/smorgasbord3/?utm_source=gtn-banner&utm_medium=website&utm_campaign=smorgasbord2023"
+#   alt: |
+#     The Gallantries, Galaxy Training Network & Galaxy Community are happy to announce: GTN Smorgasbord 3, gxy.io/smorgasbord3 a free galaxy training event, online, from may 22-26 2023. Topics covered include SARS-CoV-2, RNA-Seq, Single Cell, Proteomics, Machine Learning, Annotation, Climate, Ecology, Cancer, RO-Crates, and more! An EU flag in the corner indicates that this event is made possible with the support of the european union. A waterman butterfly projection map adorns the other corner suggesting a world wide event. Links are included to @gtn@mstdn.science @gallantries@mstdn.science, and two twitter urls @gxyTraining and @gallantries_eu

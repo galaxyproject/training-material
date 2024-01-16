@@ -1,7 +1,8 @@
 ---
 title: "Oh no, it changed! Quick, to the archive menu."
 tags: [new feature]
-contributors: [hexylena, shiltemann]
+contributions:
+  authorship: [hexylena, shiltemann]
 layout: news
 ---
 

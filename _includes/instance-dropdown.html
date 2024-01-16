@@ -1,23 +1,58 @@
-{% if include.instances[include.topic].supported or include.docker %}
-{% if include.instances[include.topic]['tutorials'][include.tuto].supported or include.docker %}
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
-        {% icon instances %}{% if include.label %} Available on these Galaxies{% endif %}
+{% assign locale = site.data.lang[page.lang] %}
+
+{% assign supported_exactly = own_material.supported_servers.exact | size %}
+{% assign supported_inexactly = own_material.supported_servers.inexact | size %}
+{% assign supported = supported_exactly | plus: supported_inexactly %}
+
+{% if supported > 0 or include.docker %}
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        {% icon instances %}{% if include.label %}&nbsp;{{ locale['supporting-galaxies'] | default: "Available on these Galaxies" }} {% endif %}
     </a>
     <ul class="dropdown-menu">
+        {% if supported_exactly > 0 %}
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	{% assign usegalaxy_exact = include.material.supported_servers.exact | where: "usegalaxy", "true"   %}
+	{% assign other_exact = include.material.supported_servers.exact | where: "usegalaxy", "false"   %}
+
+    {% for inst in usegalaxy_exact %}
+	<li>
+		<a class="dropdown-item" href="{{ inst.url }}" title="{{ inst[0] }}">
+			{{ inst.name }} <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    {% endfor %}
+    {% for inst in other_exact %}
+	<li>
+		<a class="dropdown-item" href="{{ inst.url }}" title="{{ inst[0] }}">
+			{{ inst.name }} <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    {% endfor %}
+    {% endif %}
+    {% if supported_inexactly > 0 %}
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    {% for inst in include.material.supported_servers.inexact %}
+	<li>
+		<a class="dropdown-item" href="{{ inst.url }}" title="{{ inst[0] }}">
+			{{ inst.name }}
+		</a>
+	</li>
+    {% endfor %}
+    {% endif %}
+
     {% if include.docker %}
+	<li class="dropdown-header">
+		Containers
+	</li>
         <li>
-            <a class="dropdown-item" href="{{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/{{ include.topic }}/docker" title="Docker image for this tutorial">
+            <a class="dropdown-item" href="{{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/{{ include.material.topic_name }}/docker" title="Docker image for this tutorial">
                 {% icon docker_image %} Docker image
             </a>
         </li>
     {% endif %}
-    {% for inst in include.instances[include.topic]['tutorials'][include.tuto]['instances'] %}
-        {% if inst[1].supported %}
-        <a class="dropdown-item" href="{{ inst[1].url }}" title="{{ inst[0] }}">
-            {{ inst[0] }}
-        </a>
-        {% endif %}
-    {% endfor %}
     </ul>
-{% endif %}
 {% endif %}

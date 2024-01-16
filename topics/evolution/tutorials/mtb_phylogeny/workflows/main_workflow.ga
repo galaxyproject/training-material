@@ -1,0 +1,179 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Estimate a phylogenetic tree from whole genome sequencing data for M. tuberculosis",
+    "format-version": "0.1",
+    "name": "Mtb phylogeny",
+    "steps": {
+        "0": {
+            "annotation": "Alignment in fasta format, containing variable positions from  variant calling",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Alignment in fasta format, containing variable positions from  variant calling",
+                    "name": "Input alignment"
+                }
+            ],
+            "label": "Input alignment",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 433.31666564941406,
+                "height": 82.19999694824219,
+                "left": 392.7166748046875,
+                "right": 592.7166748046875,
+                "top": 351.1166687011719,
+                "width": 200,
+                "x": 392.7166748046875,
+                "y": 351.1166687011719
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "94b1ea1c-8a3a-4fb7-9cfe-40a1c1c1833d",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Use R to visualize a phylogenetic tree",
+            "content_id": "interactive_tool_rstudio",
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": "RStudio",
+            "name": "RStudio",
+            "outputs": [
+                {
+                    "name": "jupyter_notebook",
+                    "type": "ipynb"
+                }
+            ],
+            "position": {
+                "bottom": 417.6999969482422,
+                "height": 61.80000305175781,
+                "left": 931.5,
+                "right": 1131.5,
+                "top": 355.8999938964844,
+                "width": 200,
+                "x": 931.5,
+                "y": 355.8999938964844
+            },
+            "post_job_actions": {
+                "HideDatasetActionjupyter_notebook": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "jupyter_notebook"
+                }
+            },
+            "tool_id": "interactive_tool_rstudio",
+            "tool_state": "{}",
+            "tool_version": "0.2",
+            "type": "tool",
+            "uuid": "76b467bf-9ebe-48ef-b25e-540afa0f406a",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Maximum likelihood-based inference of a phylogenetic tree",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.4+galaxy2",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Phyogenetic reconstruction with RAxML",
+                    "name": "infile"
+                }
+            ],
+            "label": "Estimate phylogeny with RAxML",
+            "name": "Phyogenetic reconstruction with RAxML",
+            "outputs": [
+                {
+                    "name": "info",
+                    "type": "txt"
+                },
+                {
+                    "name": "logReq",
+                    "type": "txt"
+                },
+                {
+                    "name": "parsimonyTreeReq",
+                    "type": "nhx"
+                },
+                {
+                    "name": "resultReq",
+                    "type": "nhx"
+                },
+                {
+                    "name": "bestTree",
+                    "type": "nhx"
+                }
+            ],
+            "position": {
+                "bottom": 629.4500122070312,
+                "height": 276,
+                "left": 678.2166748046875,
+                "right": 878.2166748046875,
+                "top": 353.45001220703125,
+                "width": 200,
+                "x": 678.2166748046875,
+                "y": 353.45001220703125
+            },
+            "post_job_actions": {
+                "DeleteIntermediatesActioninfo": {
+                    "action_arguments": {},
+                    "action_type": "DeleteIntermediatesAction",
+                    "output_name": "info"
+                },
+                "HideDatasetActionlogReq": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "logReq"
+                },
+                "HideDatasetActionparsimonyTreeReq": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "parsimonyTreeReq"
+                },
+                "HideDatasetActionresultReq": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "resultReq"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.4+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "73a469f7dc96",
+                "name": "raxml",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"RuntimeValue\"}, \"random_seed\": \"1234567890\", \"search_model_selector\": {\"model_type\": \"nucleotide\", \"__current_case__\": 0, \"base_model\": \"GTRGAMMA\"}, \"selExtraOpts\": {\"extraOptions\": \"required\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "8.2.4+galaxy2",
+            "type": "tool",
+            "uuid": "057bd38a-20c2-4713-ba6f-964f15904b37",
+            "workflow_outputs": [
+                {
+                    "label": "Best-scoring ML Tree",
+                    "output_name": "bestTree",
+                    "uuid": "9f8ae577-c583-4a2d-b64d-14c25fb859d9"
+                },
+                {
+                    "label": "Info",
+                    "output_name": "info",
+                    "uuid": "bdb8cf2f-b553-4a96-8b55-38b4b499ab88"
+                }
+            ]
+        }
+    },
+    "tags": ["evolution"],
+    "uuid": "e032dcc6-fcc8-4914-a506-8fb0c5e47ea1",
+    "version": 30
+}

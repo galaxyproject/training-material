@@ -4,7 +4,7 @@
 package galaxy {
 component util
 component auth
-component containers
+component files
 component data
 component [job-execution] as job_execution
 component [job-metrics] as job_metrics
@@ -26,10 +26,12 @@ package galaxy_test {
     component [test-selenium] as test_selenium
 }
 
-[containers] --> [util]
-[tool_util] --> [containers]
+
+[tool_util] --> [util]
+[files] --> [util]
 [objectstore] --> [util]
 [data] --> [objectstore]
+[data] --> [files]
 [selenium] --> [util]
 [web_stack] --> [util]
 [job_metrics] --> [util]

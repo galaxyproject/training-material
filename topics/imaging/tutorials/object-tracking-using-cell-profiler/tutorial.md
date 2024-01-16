@@ -25,9 +25,6 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
-
 Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g. {% cite Neumann2010 %}, {% cite Heriche2014%}). However, automated time-lapse imaging can produce large amounts of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points.
 
 To demonstrate how automatic tracking can be applied in such situations, this tutorial will track dividing nuclei in a short time-lapse recording of one mitosis of a syncytial blastoderm stage _Drosophila_ embryo expressing a GFP-histone gene that labels chromatin.
@@ -35,11 +32,11 @@ To demonstrate how automatic tracking can be applied in such situations, this tu
 Tracking is done by first segmenting objects then linking objects between consecutive frames. Linking is done by matching objects and several criteria or matching rules are available. Here we will link objects if they significantly overlap between the current and previous frames.
 
 
-> ### {% icon tip %} Prerequisites
+> <tip-title>Prerequisites</tip-title>
 > It is expected that you are already familiar with the Galaxy interface and the workflow editor. If this is not the case, we recommend you to complete the requirements listed at the start of this tutorial.
 {: .tip}
 
-> ### {% icon warning %} **Important information: CellProfiler in Galaxy**
+> <warning-title>Important information: CellProfiler in Galaxy</warning-title>
 > The Galaxy {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %}  tool takes two inputs: a CellProfiler pipeline and an image collection.
 > Some pipelines created with stand-alone CellProfiler may not work with the Galaxy CellProfiler tool. Some reasons are:
 >  * The pipeline was built with a different version of CellProfiler. The Galaxy tool currently uses CellProfiler 3.9.
@@ -54,7 +51,7 @@ Tracking is done by first segmenting objects then linking objects between consec
 
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -71,7 +68,7 @@ The images are saved as a zip archive on Zenodo and need to be uploaded to the G
 
 ![Dividing nuclei](../../images/object-tracking-using-cell-profiler/Dividing_nuclei.gif "Time lapse recording of anaphase nuclei in a Drosophila embryo.")
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial.
 >    When you log in for the first time, an empty, unnamed history is created by default. You can simply rename it.
@@ -83,7 +80,7 @@ The images are saved as a zip archive on Zenodo and need to be uploaded to the G
 >    - **Important:** If setting the type to 'Auto-detect', make sure that after upload, the datatype is set to zip.
 >
 >    ```
->    https://zenodo.org/api/files/e5d1bd5c-60a0-42e4-8f0d-a2ebc863c5d9/drosophila_sample.zip
+>    https://zenodo.org/records/4567084/files/drosophila_sample.zip
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -109,7 +106,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 ![Image of the workflow](../../images/object-tracking-using-cell-profiler/CP_object_tracking_pipeline.png "Overview of the CellProfiler pipeline using Galaxy tools.")
 
 
-> ### {% icon details %} More details about the pipeline steps
+> <details-title>More details about the pipeline steps</details-title>
 >    - Metadata is needed to tell CellProfiler what a temporal sequence of images is and what the order of images is in the sequence.
 >    - CellProfiler is designed to work primarily with grayscale images. Since we don't need the colour information, we convert colour images to grayscale type.
 >    - Segmentation means identifying the nuclei in each image. In CellProfiler, this is done by thresholding the intensity level in each image.
@@ -122,7 +119,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 ## Create a new workflow
 
-> ### {% icon hands_on %} Hands-on: Creating a new workflow
+> <hands-on-title>Creating a new workflow</hands-on-title>
 > 1. Create a new workflow
 >
 >    {% snippet faqs/galaxy/workflows_create_new.md %}
@@ -135,7 +132,7 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 
 ## Read the images
 
-> ### {% icon hands_on %} Hands-on: Reading images
+> <hands-on-title>Reading images</hands-on-title>
 >
 > 1. Add Inputs → **Input Dataset** to the workflow
 >
@@ -148,7 +145,7 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 
 ## Get the metadata
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > The Starting modules tool combines four CellProfiler modules that are always used together at the start of a pipeline. These modules are:
 >  * Images
@@ -157,7 +154,7 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 >  * Groups
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Getting metadata
+> <hands-on-title>Getting metadata</hands-on-title>
 >
 > 1. {% tool [Starting modules](toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} with the following parameters:
 >
@@ -206,11 +203,11 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How are we capturing metadata and what type of metadata are we getting?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Metadata is obtained from the filenames by extracting three text fields separated by an underscore. The metadata we get is "DrosophilaEmbryo", "GFPHistone" and numbers with leading zeros. These three fields represent respectively the sample identifier, the marker visualized in the image and the index in the time series.
 > >
@@ -218,11 +215,11 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 >
 {: .question}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How will CellProfiler form a temporal sequence?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Images will be grouped based on field1 which here is the sample identifier and ordered alpha-numerically (by default) which will order them by field3 (the time series index) since fields 1 and 2 are constant.
 > >
@@ -233,7 +230,7 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 
 ## Convert the images to grayscale
 
-> ### {% icon hands_on %} Hands-on: Colour to grayscale conversion
+> <hands-on-title>Colour to grayscale conversion</hands-on-title>
 >
 > 1. {% tool [ColorToGray](toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9+galaxy0) %} with the following parameters:
 >    - *"Select the input CellProfiler pipeline"*: Connect output of **Starting Modules** {% icon tool %} to input of {% tool ColorToGray %}
@@ -253,7 +250,7 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 
 The first step to track nuclei starts with the identification of those objects on the images.
 
-> ### {% icon hands_on %} Hands-on: Nuclei segmentation
+> <hands-on-title>Nuclei segmentation</hands-on-title>
 >
 > 1. {% tool [IdentifyPrimaryObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **ColorToGray** {% icon tool %}
@@ -287,7 +284,7 @@ The first step to track nuclei starts with the identification of those objects o
 
 Once the objects of interest (nuclei) are identified, we extract features, i.e. numerical descriptors of object properties. We do this because we may be interested in analysing the evolution of these properties over time or want to use them in the tracking procedure to match objects over time.
 
-> ### {% icon hands_on %} Hands-on: Shape features
+> <hands-on-title>Shape features</hands-on-title>
 >
 > 1. {% tool [MeasureObjectSizeShape](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **IdentifyPrimaryObjects** {% icon tool %}
@@ -298,7 +295,7 @@ Once the objects of interest (nuclei) are identified, we extract features, i.e. 
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Intensity features
+> <hands-on-title>Intensity features</hands-on-title>
 >
 > 1. {% tool [MeasureObjectIntensity](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **MeasureObjectSizeShape** {% icon tool %}
@@ -315,7 +312,7 @@ Once the objects of interest (nuclei) are identified, we extract features, i.e. 
 ## Track nuclei
 
 With the nuclei and the relevant features measured, we are now ready to start the tracking step!
-> ### {% icon hands_on %} Hands-on: Object tracking
+> <hands-on-title>Object tracking</hands-on-title>
 >
 > 1. {% tool [TrackObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **MeasureObjectIntensity** {% icon tool %}
@@ -333,7 +330,7 @@ With the nuclei and the relevant features measured, we are now ready to start th
 ## Visualize results
 
 To make sure that the tracking has gone as expected, we will have a look at the original images together with the results of the segmentation step. And we will visualize them together (in tiles) for easier comparison.
-> ### {% icon hands_on %} Hands-on: Visualize segmentation outcome
+> <hands-on-title>Visualize segmentation outcome</hands-on-title>
 >
 > 1. {% tool [OverlayOutlines](toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **TrackObjects** {% icon tool %}
@@ -349,7 +346,7 @@ To make sure that the tracking has gone as expected, we will have a look at the 
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Tiling images
+> <hands-on-title>Tiling images</hands-on-title>
 >
 > 1. {% tool [Tile](toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **OverlayOutlines** {% icon tool %}
@@ -374,7 +371,7 @@ To make sure that the tracking has gone as expected, we will have a look at the 
 ## Save the images and features
 
 The tiled images and the features computed in previous steps are now exported to the Galaxy history ready to be analyzed.
-> ### {% icon hands_on %} Hands-on: Save the images
+> <hands-on-title>Save the images</hands-on-title>
 >
 > 1. {% tool [SaveImages](toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **Tile** {% icon tool %}
@@ -392,11 +389,11 @@ The tiled images and the features computed in previous steps are now exported to
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > What will be the file names of the output images?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The files will be named DrosophilaEmbryo_GFPHistone_0000_tile.png,
 > > DrosophilaEmbryo_GFPHistone_0001_tile.png ...
@@ -405,7 +402,7 @@ The tiled images and the features computed in previous steps are now exported to
 {: .question}
 
 
-> ### {% icon hands_on %} Hands-on: Export tabular data to character-delimited text files
+> <hands-on-title>Export tabular data to character-delimited text files</hands-on-title>
 >
 > 1. {% tool [ExportToSpreadsheet](toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **SaveImages** {% icon tool %}
@@ -419,7 +416,7 @@ The tiled images and the features computed in previous steps are now exported to
 >    - *"Calculate the per-image standard deviation values for object measurements?"*: `Yes`
 >    - *"Create a GenePattern GCT file?"*: `No`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > By default all measurement types are exported.
 >    > This is in contrast to the stand-alone version of CellProfiler which allows choosing which measurement types to save.
@@ -431,7 +428,7 @@ The tiled images and the features computed in previous steps are now exported to
 # Run the pipeline with **CellProfiler**
 
 As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %}  takes as input the pipeline that we have been assembling over this tutorial and the input data. We are now ready to finally run CellProfiler!
-> ### {% icon hands_on %} Hands-on: Running the pipeline with CellProfiler
+> <hands-on-title>Running the pipeline with CellProfiler</hands-on-title>
 >
 > 1. {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Pipeline file"*: `output of **ExportToSpreadsheet** {% icon tool %}
@@ -443,7 +440,7 @@ As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > If the pipeline fails, inspect the CellProfiler log file for clues about errors.
 >    > A common source of errors is not providing the correct information to a module such as pointing a CellProfiler module at a non-existent dataset (e.g. with a typo in the name).
@@ -455,11 +452,11 @@ As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx
 ![Sample output](../../images/object-tracking-using-cell-profiler/CP_object_tracking_sample_output.png "Sample of images produced by the pipeline.")
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How many nuclei have been tracked?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Five objects were detected but only four of these were nuclei.
 > >
 > {: .solution}
@@ -467,22 +464,22 @@ As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx
 {: .question}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How could we get rid of tracks that don't correspond to nuclei?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Objects that are not nuclei appear to be transient so one solution would be to require the tracks to have a minimal length. This can be done using the *"Filter objects by lifetime"* parameter of the TrackObjects module.
 > >
 > {: .solution}
 >
 {: .question}
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Where is the data needed to plot change in nuclei eccentricity over time?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The data is in the csv file called Nuclei in the CellProfiler pipeline output data set.
 > >
 > {: .solution}
@@ -491,6 +488,6 @@ As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx
 
 
 # Conclusion
-{:.no_toc}
+
 
 We've run a CellProfiler pipeline on Galaxy to segment and track dividing nuclei in a Drosophila embryo. We've exported images to visually inspect the outcome and saved tables of computed object features in comma-separated text files for future analysis.

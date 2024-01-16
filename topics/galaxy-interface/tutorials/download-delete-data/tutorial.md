@@ -24,8 +24,6 @@ subtopic: cleanup
 ---
 
 
-# Introduction
-{:.no_toc}
 
 This tutorial outlines the process to get your data out of Galaxy and to delete it from Galaxy afterwards.
 
@@ -46,7 +44,7 @@ As you use a Galaxy server and upload data, perform analyses etc. you will use u
 The second section of this tutorial will outline how to delete data from your user space and to purge it from disk if you so desire.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -65,7 +63,7 @@ The easiest way to get your data is to download a single dataset from a history.
 
 The following example steps through the process using a generic history. The history pictured in the screenshots will most likely not appear in your Galaxy server but the process will be the same.
 
-> ### {% icon hands_on %} Hands-on: Download a single file
+> <hands-on-title>Download a single file</hands-on-title>
 >
 > 1. In the History pane, click on the name of the file you wish to download. This will expand the file in the History to show more details about it.
 >
@@ -81,11 +79,11 @@ Repeat this for any other data file you want in this or other histories.
 
 ## Download multiple datasets
 
-Sometimes you may want to download multiple datasets at once and doing them one by one can be a pain. Luckily, Galaxy has a mechanism for creating Collections. For more details about collections and how to create them, see [this tutorial](https://galaxyproject.github.io/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html) from the Galaxy Training Network.
+Sometimes you may want to download multiple datasets at once and doing them one by one can be a pain. Luckily, Galaxy has a mechanism for creating Collections. For more details about collections and how to create them, see [this tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}) from the Galaxy Training Network.
 
 The concept is very simple however, we are just going to lump together our files of interest and download them all at once.
 
-> ### {% icon hands_on %} Hands-on: Download multiple datasets
+> <hands-on-title>Download multiple datasets</hands-on-title>
 >
 > **Create a collection of the files you want**
 >
@@ -126,7 +124,7 @@ The third way to download data from Galaxy is by Exporting a history in its enti
 
 Depending on the size of the files and the complexity of the history, it can take quite some time to create the archive before download. For example it can take over 24 hours to create an archive file of a 50GB history. It may be simpler just to download the individual files of interest as outlined above.
 
-> ### {% icon hands_on %} Hands-on: Export an entire history
+> <hands-on-title>Export an entire history</hands-on-title>
 >
 > 1. In the History pane, click on the {% icon galaxy-gear %} history menu, then select **Export History to File**
 >
@@ -152,9 +150,9 @@ Deletion in Galaxy is a two stage process. If you delete something, it actually 
 
 This section will show you how to delete and then purge a single dataset from a history. You can also delete multiple datasets and then purge them all at once.
 
-> ### {% icon hands_on %} Hands-on: Delete a single dataset
+> <hands-on-title>Delete a single dataset</hands-on-title>
 >
-> 1. Click on the {% icon galaxy-cross %} **Delete** button of the dataset you wish to delete
+> 1. Click on the {% icon galaxy-delete %} **Delete** button of the dataset you wish to delete
 >
 >    ![delete button](../../images/download-delete/delete_button.png)
 >
@@ -176,7 +174,7 @@ This section will show you how to delete and then purge a single dataset from a 
 
 You can delete an entire history and purge it from disk.
 
-> ### {% icon hands_on %} Hands-on: Delete an entire History
+> <hands-on-title>Delete an entire History</hands-on-title>
 >
 > 1. Open the **History List** display by clicking on the {% icon galaxy-columns %} history list button
 >
@@ -188,7 +186,7 @@ You can delete an entire history and purge it from disk.
 >
 > 3. You can now delete a history by clicking on the {% icon galaxy-dropdown %} dropdown arrow at the top of the history, and then selecting **Delete** OR **Purge**.
 >
->    > ### {% icon warning %} You can lose data
+>    > <warning-title>You can lose data</warning-title>
 >    > **NOTE: Selecting Delete Permanently will remove the entire history and all of its non shared datasets from disk. It CANNOT be undone.**
 >    {: .warning}
 >
@@ -197,7 +195,7 @@ You can delete an entire history and purge it from disk.
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 This tutorial should have explained to you how to manage your data on Galaxy. Different Galaxy servers will have different policies regarding storage quotas and storage times. You should check with the Galaxy server you are using.
 

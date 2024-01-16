@@ -1,0 +1,177 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'pathname'
+require 'rubygems'
+require 'commander/import'
+require 'net/http'
+require 'json'
+require 'yaml'
+require 'httparty'
+
+program :name, 'Data Library Updater'
+program :version, '0.0.1'
+program :description, 'Updates data libraries from from zenodo_links'
+
+@SHARED_DATATYPES = YAML.load_file('shared/datatypes.yaml')
+
+def parse_zenodo_id_formats(link)
+  # https://zenodo.org/record/1234567
+  # https://zenodo.org/record/1234567#.X0X0X0X0X0X
+  # doi:10.5281/zenodo.1234567
+  # doi:10.5281/zenodo.1234567#.X0X0X0X0X0X
+  # 10.5281/zenodo.1234567
+  # 10.5281/zenodo.1234567#.X0X0X0X0X0X
+  # https://doi.org/10.5281/zenodo.3732358
+  # https://doi.org/10.5281/zenodo.3732358#.X0X0X0X0X0X
+  #
+  link = link.split('#')[0]
+  if link.match(/doi:/) || link.match(/^10.5281/) || link.match(/doi.org/)
+    link.split('.')[-1]
+  else
+    link.split('/')[-1]
+  end
+end
+
+def update_tutorial(path, zenodo_id)
+  # Edit the yaml header of the markdown file to update the ID
+  contents = File.read(path)
+  contents.gsub!(/^zenodo_link:.*/, "zenodo_link: 'https://zenodo.org/record/#{zenodo_id}'")
+  File.write(path, contents)
+end
+
+def update_data_library(path, topic, tutorial, zenodo_record)
+  zenodo_id = zenodo_record['id'].to_s
+  zenodo_files = zenodo_record.fetch('files', []).map do |f|
+    official_extension = f['type']
+    unofficial_extension = f['links']['self'].split('.')[-2..].join('.')
+    ext = @SHARED_DATATYPES.fetch(unofficial_extension, nil) || @SHARED_DATATYPES.fetch(official_extension, nil)
+    # puts "Processing file: #{f['type']} #{f['links']['self']} => #{ext}"
+    # puts "#{unofficial_extension} => #{@SHARED_DATATYPES.fetch(unofficial_extension, nil)}"
+    # puts "#{official_extension} => #{@SHARED_DATATYPES.fetch(official_extension, nil)}"
+    warn "Unknown file type: #{f['type']}. Consider adding this to shared/datatypes.yaml" if ext.nil?
+
+    {
+      'url' => f['links']['self'],
+      'src' => 'url',
+      'ext' => ext || f['type'],
+      'info' => "https://doi.org/10.5281/zenodo.#{zenodo_id}",
+      # 'checksum' => f['checksum'],
+      # 'key' => f['key'],
+    }
+  end
+
+  library = {
+    'destination' => {
+      'type' => 'library',
+      'name' => 'GTN - Material',
+      'description' => 'Galaxy Training Network Material',
+      'synopsis' => 'Galaxy Training Network Material. See https://training.galaxyproject.org',
+    },
+    'items' => [
+      'name' => topic['name'],
+      'description' => topic['description'],
+      'items' => [
+        'name' => tutorial['name'],
+        'items' => [
+          'name' => "DOI: 10.5281/zenodo.#{zenodo_id}",
+          'description' => 'latest',
+          'items' => zenodo_files
+        ]
+      ]
+    ]
+  }
+  data_library_path = data_library_for_tutorial(path)
+  puts "Writing data library to #{data_library_path}"
+  File.write(data_library_path, library.to_yaml)
+end
+
+def write_data_library(path, topic, tutorial, tutorial_zenodo_id, force)
+  # Fetch the zenodo record
+  uri = URI("https://zenodo.org/api/records/#{tutorial_zenodo_id}")
+  zenodo_record = HTTParty.get(uri)
+  new_zenodo_id = zenodo_record['id'].to_s
+
+  # If it's redirected we'll get a different ID here
+  puts "Discovered zenodo link: #{new_zenodo_id}"
+
+  # So load the data library, and check what's written there
+  datalibrary_zenodo_id = if File.exist?(data_library_for_tutorial(path))
+                            YAML.load_file(data_library_for_tutorial(path))['zenodo_id'].to_s
+                          end
+
+  # If the ID has changed we should update the tutorial as well:
+  if new_zenodo_id == tutorial_zenodo_id && !force
+    warn 'Tutorial is up to date'
+  else
+    warn "Zenodo ID has changed from #{tutorial_zenodo_id} to #{new_zenodo_id}, updating the tutorial"
+    update_tutorial(path, new_zenodo_id)
+  end
+
+  # If the new ID doesn't match the data library, then we should update it.
+  if new_zenodo_id == datalibrary_zenodo_id && !force
+    warn 'Data library is up to date'
+  else
+    warn "Zenodo ID has changed from #{datalibrary_zenodo_id} to #{new_zenodo_id}, updating the data library"
+    update_data_library(path, topic, tutorial, zenodo_record)
+  end
+end
+
+def data_library_for_tutorial(path)
+  File.join(File.dirname(path), 'data-library.yaml')
+end
+
+def parse_tutorial_for_zenodo_link(path)
+  parse_zenodo_id_formats(YAML.load_file(path)['zenodo_link'])
+rescue StandardError
+  nil
+end
+
+def parse_metadata(path)
+  parts = path.to_s.split('/')
+  topic_id = parts[1]
+  topic_metadata = YAML.load_file(File.join('metadata', "#{topic_id}.yaml"))
+  tutorial_metadata = YAML.load_file(path)
+  topic = { 'name' => topic_metadata['title'], 'description' => topic_metadata['summary'] }
+  tutorial = { 'name' => tutorial_metadata['title'] }
+  [topic, tutorial]
+end
+
+command :update do |c|
+  c.syntax = 'update <tutorial.md> [--force]'
+  c.description = 'Updates a data library'
+  c.option '--force', 'Force update'
+  c.option '--fragile', 'Exit quickly if the data library already exists'
+  c.action do |args, options|
+    path = Pathname.new(args.first).cleanpath
+    zenodo_id = parse_tutorial_for_zenodo_link(path).to_s
+    if zenodo_id.nil? || zenodo_id.empty?
+      warn "Could not parse zenodo ID from #{path}"
+      exit 0
+    end
+
+    if File.exist?(data_library_for_tutorial(path)) && options.fragile
+      warn "Data library already exists for #{path}"
+      exit 0
+    end
+
+    (topic, tutorial) = parse_metadata(path)
+    puts options[:force]
+    write_data_library(path, topic, tutorial, zenodo_id, options.force)
+  end
+end
+
+command :test do |c|
+  c.syntax = 'test'
+  c.description = 'self test'
+  c.action do |_args, _options|
+    puts 'Running self test'
+    p parse_zenodo_id_formats('https://zenodo.org/record/1234567')
+    p parse_zenodo_id_formats('https://zenodo.org/record/1234567#.X0X0X0X0X0X')
+    p parse_zenodo_id_formats('doi:10.5281/zenodo.1234567')
+    p parse_zenodo_id_formats('doi:10.5281/zenodo.1234567#.X0X0X0X0X0X')
+    p parse_zenodo_id_formats('https://doi.org/10.5281/zenodo.3732358')
+  end
+end
+
+default_command :update

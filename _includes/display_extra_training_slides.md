@@ -3,7 +3,7 @@
 {% for training in include.extra_trainings %}
     {% if training.type == "internal" %}
         {% assign extra_topic_metadata = site.data[training.topic_name] %}
-        {% assign extra_topic = site.pages | topic_filter:training.topic_name %}
+        {% assign extra_topic = site | topic_filter:training.topic_name %}
             {% capture topic_desc %}[{{ extra_topic_metadata.title }}]({{ site.baseurl }}/topics/{{ training.topic_name }}){% endcapture %}
         {% if training.tutorials %}
             {% for extra_tuto in training.tutorials %}

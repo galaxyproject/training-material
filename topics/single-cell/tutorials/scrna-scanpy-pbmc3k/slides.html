@@ -1,0 +1,188 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+title: "Clustering 3K PBMCs with Scanpy"
+zenodo_link: ''
+questions:
+  - "What are the main steps of scRNA-seq?"
+  - "What kind of variation can confound an analysis?"
+objectives:
+  - "Learn the main stages of an scRNA-seq analysis"
+  - "Understand the methods and concepts underlying scRNA-seq"
+time_estimation: 1H
+key_points:
+  - "Understanding the purpose of barcoding"
+  - "Knowing the difference between hard and soft clustering"
+  - "A KNN graph can be generated from a count matrix."
+  - "Community clustering can be generated from a KNN graph."
+  - "Interpreting scRNA-seq plots"
+contributors:
+  - mtekman
+
+redirect_from:
+  - /topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/slides
+
+---
+
+### Single Cell RNA Pre-processing
+
+![fig01](../../images/scrna-scanpy-pbmc3k/scrna_preproc.svg)
+
+???
+1. Barcode Extraction
+1. Mapping
+1. Gene Annotation
+1. Batch count matrices
+
+
+---
+
+### Single Cell RNA Downstream Analysis
+
+![fig10](../../images/scrna-scanpy-pbmc3k/scrna_downstream.svg)
+
+???
+1. Filtering
+1. Normalising
+   * Confounder Removal
+1. Dimension Reduction
+1. Clustering
+   * Annotation
+
+
+---
+
+### Barcoding Cells
+
+![fig1](../../images/scrna-intro/scrna_pbb_barcodes_add.svg)
+
+---
+
+### Filtering: Cell and Gene
+
+![fig2](../../images/scrna-raceid/libsize.svg)
+
+---
+
+### Normalisation: Technical Variation
+
+![fig3](../../images/scrna-raceid/technical_variation.svg)
+
+---
+
+### Normalisation: Biological Variation
+
+
+![fig4](../../images/scrna-raceid/cellcycle.svg)
+
+---
+
+### Dimension Reduction: Relatedness of Cells
+
+![fig5](../../images/scrna-intro/scrna_knn.svg)
+
+
+???
+Build a KNN graph from distance matrix:
+  * If P and q share distance which is
+
+---
+
+### Dimension Reduction: Projection
+
+![fig6](../../images/scrna-raceid/dimred.svg)
+
+???
+- Can use tSNE, PCA, UMAP
+
+---
+
+### Community Clustering: Louvain
+
+Aim: Maximise internal links and minimise external links
+
+![fig7](../../images/scrna-intro/commgraph1.svg)
+
+
+---
+
+### Community Clustering: Louvain
+
+Pick a cell, place in neighbour, and accept if *internal:external* increases
+
+
+![fig8](../../images/scrna-intro/commgraph2.svg)
+
+
+---
+
+### Cell Type: Identifying Cluster Types
+
+.left-column50[.image-100[![fig9](../../images/scrna-scanpy-pbmc3k/singlecellplot3.png)]]
+.left-column50[.image-100[![fig10](../../images/scrna-scanpy-pbmc3k/singlecellplot4.png)]]
+
+---
+
+### Clustering: Hard vs Soft
+
+.pull-left[
+
+<br />
+
+.image-100[![fig11](../../images/scrna-scanpy-pbmc3k/singlecellplot3.png)]
+
+*Hard*
+  * Big spaces between clusters
+  * Cell types are well defined and the clustering reflects that
+
+]
+
+--
+
+.pull-right[
+.image-100[![fig12](../../images/scrna-intro/10xdata.png)]
+
+*Soft*
+  * Clusters bleed into one another
+  * Cell types seem to intermingle with one another.
+
+]
+
+???
+Why? Why would there be clusters so close to one another?
+
+---
+
+### Continuous Phenotypes:
+
+.image-100[![fig13](../../images/scrna-raceid/contpheno.svg)]
+
+???
+* Cells aren't discrete, they transition
+
+* Continuously changing over time from a less mature type to more mature type
+
+
+---
+
+### Interactive Environments: live.usegalaxy.eu
+
+<br/>
+
+<video style="width:100%;height:auto;" controls>
+    <source src="https://zenodo.org/record/3687100/files/live_cellxgene.mp4" />
+</video>
+
+???
+What is Differential Expression in scRNA-seq?
+
+---
+
+### CellxGene Local Test
+
+* We can probe clusters to see how they are so differentially expressed
+
+        pip3 install cellxgene
+        cellxgene launch https://cellxgene-example-data.czi.technology/pbmc3k.h5ad
+
+* Launch locally: http://127.0.0.1:5005

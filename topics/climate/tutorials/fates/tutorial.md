@@ -29,6 +29,8 @@ objectives:
 - Creating multi-case scenarios.
 - Composing, executing and publishing CML-FATES workflow.
 time_estimation: 4H
+tags:
+- interactive-tools
 key_points:
 - CLM-FATES is a numerical terrestrial ecosystem model used in climate models
 - Panoply is a quick visualization tools for plotting your results
@@ -40,13 +42,10 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
-
 Terrestrial ecosystem models have been widely used to study the impact of climate changes on vegetation and terrestrial biogeochemical cycles in climate modelling community. They are also more and more applied in ecological studies to help ecologists to better understand the processes. But the technical challenges are still too high for most of the ecologists to use them. This practical aims at familiarizing you (especially ecologists) with running a terrestrial ecosystem model (i.e., CLM-FATES) at site-level in Galaxy and analyzing the model results.
 It will also teach you on how to create Galaxy workflow for your site-level CLM-FATES simulations to make your research fully reproducible. We hope this tutorial will promote the use of CLM-FATES and other terrestrial ecosystem models by a broader community.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -55,7 +54,7 @@ It will also teach you on how to create Galaxy workflow for your site-level CLM-
 >
 {: .agenda}
 
-> ### {% icon comment %} Background
+> <comment-title>Background</comment-title>
 >
 > FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”, which is a vegetation demographic model ({% cite Fisher2017 %}).
 > FATES needs what we call a "Host Land Model" (HLM) to run and in this tutorial
@@ -77,9 +76,9 @@ atm   cpl   lnd   share
 ```
 
 Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case. For instance, 'atm' contains all the meteorological forcing data for running CLM-FATES. 'lnd' contains the data required to describe surface conditions (e.g., soil depth) for the model. More details about the model inputdata can be found in [CLM and FATES documentation](https://escomp.github.io/ctsm-docs/versions/master/html/tech_note/Ecosystem/CLM50_Tech_Note_Ecosystem.html#model-input-requirements).
-For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. This is a site included in the modelling platform developed under [EMERALD project] (https://www.mn.uio.no/geo/english/research/projects/emerald/). More details about the sites can be found in {% cite Klanderud2015 %} and  {% cite Vigdis2020 %}
+For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. This is a site included in the modelling platform developed under [EMERALD project] (https://www.mn.uio.no/geo/english/research/projects/emerald/). More details about the sites can be found in {% cite Klanderud2015 %} and  {% cite Vandvik2020 %}
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates*.
 >
@@ -116,7 +115,7 @@ For the purpose of this tutorial, input data for a single point location (ALP1) 
 
 We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the version of [CLM-FATES](https://github.com/NordicESMhub/ctsm/tree/fates_emerald_api) that have been adapted to run at the sites included in the EMERALD project. More details about this model version can be found in [README_fates_emerald_api](https://github.com/NordicESMhub/ctsm/blob/fates_emerald_api/README_fates_emerald_api)
 
-> ### {% icon comment %} Tip: Finding your tool
+> <comment-title>Tip: Finding your tool</comment-title>
 >
 > Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
 >
@@ -124,7 +123,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 >
 {: .comment}
 
-> ### {% icon comment %} Tip: Pre-selected tool parameters
+> <comment-title>Tip: Pre-selected tool parameters</comment-title>
 >
 > When selecting a tool, Galaxy will pre-fill the tool parameters, selecting the first dataset with the corresponding type in your history.
 > Be aware that very often, the default pre-selection is incorrect and do not correspond to the required dataset.
@@ -132,7 +131,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 >
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Creating a new CTSM/FATES-EMERALD case
+> <hands-on-title>Creating a new CTSM/FATES-EMERALD case</hands-on-title>
 >
 > 1. {% tool [CTSM/FATES-EMERALD](toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"inputdata for running FATES EMERALD"*: `inputdata_version2.0.0_ALP1.tar` file from your history
@@ -146,7 +145,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 >        - *"Provides a numerical count for STOP_OPTION"*: `5`
 >        - *"Sets the run length along with STOP_N and STOP_DATE"*: `nyears`
 >
->    > ### {% icon comment %} Startup versus Hybrid
+>    > <comment-title>Startup versus Hybrid</comment-title>
 >    >
 >    >  When using **startup**, the FATES model will start from some arbitrary baseline state that is not linked to any previous run.
 >    > Startup runs are typically initialized using a start date of 0001-01-01 except if you change it (start date option).
@@ -160,12 +159,12 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 > 2. Check that the datatype {% icon galaxy-pencil %} of your outputs (history file) is **[netcdf](https://en.wikipedia.org/wiki/NetCDF)**
 >      - If this is not the case, please change the datatype now
 >
->    > ### {% icon comment %} About CLM-FATES history files
+>    > <comment-title>About CLM-FATES history files</comment-title>
 >    > All the CLM-FATES history files are organized in a collection.
 >    >
 >    {: .comment}
 >
->    > ### {% icon comment %} About datatypes
+>    > <comment-title>About datatypes</comment-title>
 >    >
 >    > All the history files contain gridded data values written at specified times during the model run.
 >    > Depending on the length of your simulation, you may have one or more history files that you can recognize from their names:
@@ -190,12 +189,12 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 > 5. **Inspect** {% icon galaxy-eye %} the generated output files
 >      - Identify which variables would provide you some insights about canopy transpiration.
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What are the short names of the relevant variables? Which one will you pick if you want a result in **mm/s**?
 >    > 2. What are the dimensions of these variables?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. **FCTR** is the canopy transpiration in W/m^2 and **QVEGT** is in mm/s. Therefore, we would select the latter.
 >    > > 2. These variables are stored as a function of time and lndgrid and since we have only one grid cell, lngrid=1, hence the time series.
 >    > {: .solution}
@@ -207,22 +206,22 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 
 ## Opening up Panoply
 
-> ### {% icon hands_on %} Hands-on: Launch Panoply
+> <hands-on-title>Launch Panoply</hands-on-title>
 >
 >  [Panoply](https://www.giss.nasa.gov/tools/panoply/) plots geo-referenced and other arrays from netCDF and is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
 >
-> > ### {% icon tip %} Tip: Only on UseGalaxy.eu
+> > <tip-title>Only on UseGalaxy.eu</tip-title>
 > > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or,
 > > as all interactive tools, from the dedicated useGalaxy.eu subdomain: [live.useGalaxy.eu](https://live.usegalaxy.eu).
 > > You may have to login again to [live.usegalaxy.eu](https://live.usegalaxy.eu) (use the same username and password than on other useGalaxy.eu subdomains)
 > > and switch to the correct history.
 > >
-> > You can access the tool by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply){:target="_blank"}
+> > You can access the tool by clicking [here to launch it on EU](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
 > {: .tip}
 >
 > 1. Open the {% tool [Panoply](interactive_tool_panoply) %}
 > 2. Check **ALP1_exp.nc** dataset selected in the netcdf input field
-> 3. Click Execute
+> 3. Click Run Tool
 > 4. The tool will start running and will stay running permanently
 > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
 > 6. Click on your Panoply instance
@@ -232,18 +231,18 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 
 ## Inspect metadata
 
-> ### {% icon hands_on %} Hands-on: Inspect dataset
+> <hands-on-title>Inspect dataset</hands-on-title>
 >
 > 1. Inspect dataset content
 >
 >    Here you can look at the dataset (`ALP1_exp.nc`) and related variables (FSDS, FSA, AREA_TREE, BIOMASS_CANOPY, etc.)
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > 1. What is the long name of **MORTALITY**?
 >    > 2. What is its physical unit?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. Rate of total mortality per PFT (Plat functional types)
 >    > > 2. indiv/ha/yr
 >    > {: .solution}
@@ -254,12 +253,12 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 >
 >    Cutomize your plot and save it as **png** file in the output folder. Remember that
 >    if you do not save in the output folder, your plot will get lost.
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    > 1. Can you observe any pattern? Does it make any sense?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. We can clearly see a seasonal cycle.
->    > > ![Panoply LEAFC timeserie](../../images/panoply_LEAFC_ALP1_exp.png "LEAFC")
+>    > > ![Panoply LEAFC timeseries](../../images/panoply_LEAFC_ALP1_exp.png "LEAFC")
 >    > {: .solution}
 >    {: .question}
 >
@@ -268,16 +267,16 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 >
 >    Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT (Plant functional type).
 >    Make sure to adjust the y-axis and save your plots in the output folder (as png file).
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    > 1. Can you observe any pattern? Does it make any sense?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. We can clearly see a seasonal cycle of PFT2.
 >    > > ![Panoply MORTALITY per PFT](../../images/panoply_MORTALITY_ALP1_exp.png "total mortality per PFT")
 >    > {: .solution}
 >    {: .question}
 >
->    > ### {% icon comment %} Quit Panoply properly to save your plots!
+>    > <comment-title>Quit Panoply properly to save your plots!</comment-title>
 >    >
 >    > To make sure all your plots stored in **outputs** folder  get exported to Galaxy, you need to quit panoply: **File** --> **Quit Panoply**.
 >    {: .comment}
@@ -288,7 +287,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 Panoply is a great tool for exploring the results of your simulations but what we would like is to automate the generation of the plots
 so that we can reuse it for any simulations.
 
-> ### {% icon hands_on %} Hands-on: Select and plot **LEAFC**
+> <hands-on-title>Select and plot <b>LEAFC</b></hands-on-title>
 >
 > 1. {% tool [NetCDF xarray Selection](toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1) %} to select the total carbon in live plant leaves (**LEAFC**)
 >      - {% icon param-file %} *"Input netcdf file"*: ALP1_exp.nc
@@ -329,13 +328,13 @@ so that we can reuse it for any simulations.
 >
 > 6. **View** {% icon galaxy-eye%} the resulting plot:
 >
->    ![LEAFC](../../images/LEAFC_ALP1_exp_ggplot.png)
+>    ![Snapshot of LEAFC resulting plot](../../images/LEAFC_ALP1_exp_ggplot.png)
 >
 {: .hands_on}
 
 # Convert your analysis history into a Galaxy workflow
 
-> ### {% icon hands_on %} Hands-on: Extract workflow
+> <hands-on-title>Extract workflow</hands-on-title>
 >
 > 1. Go to the **History Options menu**  {% icon galaxy-gear %} menu
 >    - Select the **Extract Workflow** option.
@@ -355,7 +354,7 @@ so that we can reuse it for any simulations.
 
 We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Concentration (CO2) is increased by a factor of 4.
 
-> ### {% icon hands_on %} Hands-on: Compare the two simulations
+> <hands-on-title>Compare the two simulations</hands-on-title>
 >
 >  Using the results from your two CLM-FATES simulations and the generated plots, assess the impact
 >  of an increase in the atmosperhic CO2 on the outputs of the model.
@@ -371,15 +370,15 @@ We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Conce
 >      - Generate the corresponding plot.
 >    The final workflow would be similar to the one shown below:
 >
->    ![FATES workflow](../../images/fates_workflow.png "FATES workflow")
+>    ![Snapshot of FATES workflow](../../images/fates_workflow.png "FATES workflow")
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    > 1. Is the model response to this significant increase of atmospheric CO2 what you expected?
 >    >   Justify your answer.
 >    > 2. Is the current workflow (in particular the variables selected for the plots) the best choice?
 >    >   What changes/additions would you recommend?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. Running 5 years is already sufficient to highlight significant changes.
 >    > > ![LEAFC 4xCO2](../../images/LEAFC_ALP1_4CO2_ggplot.png)
 >    > > 2. Many suggestions can be given here. One simple addition can be the generation of plots where
@@ -393,26 +392,16 @@ We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Conce
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the {% icon galaxy-gear %} icon in the history panel and select `Share or Publish`. On this page you can do 3 things:
+{% snippet faqs/galaxy/histories_sharing.md %}
 
-1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
-2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
-3. **Share with a user**. This will share the history only with specific users on the Galaxy instance.
-
-> ### {% icon comment %} Permissions
-> Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.
->
-> Be sure to select **Also make all objects within the History accessible** whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.
-{: .comment}
-
-> ### {% icon hands_on %} Hands-on: Share history
+> <hands-on-title>Share history</hands-on-title>
 >
 > 1. Share your history with your neighbour (ask for his/her galaxy username).
 > 2. Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users under their top masthead "User" menu under `Histories shared with me`.
 {: .hands_on}
 
 
-> ### {% icon comment %} Publish your history to https://workflowhub.eu/
+> <comment-title>Publish your history to https://workflowhub.eu/</comment-title>
 > One step further is to share your workflow on [https://workflowhub.eu](https://workflowhub.eu) where it
 > will be stored in a Galaxy workflow format as well as in [Common Workflow Language](https://www.commonwl.org/).
 > It provides standardised workflow identifiers and descriptions needed for workflow discovery, reuse, preservation, interoperability and monitoring and metadata harvesting using standard protocols.
@@ -421,6 +410,6 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 
 # Conclusion
 
-{:.no_toc}
+
 
 We have learnt to run single-point simulations with FATES-CLM and generate workflows for multi-site scenarios.

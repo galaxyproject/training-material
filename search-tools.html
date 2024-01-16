@@ -1,0 +1,123 @@
+---
+layout: page
+title: GTN Pan-Galactic Tool Search
+---
+
+
+<blockquote>
+<a href="https://galaxycat.france-bioinformatique.fr/">GalaxyCat</a> does the
+same thing as this search, but better! Please go use that. Their search includes EDAM operation filtering as well as other nice features.
+</blockquote>
+
+This allows you to search the list of tools available on the <a href="https://galaxyproject.org/use/">public Galaxy servers</a>,
+known to the Galaxy Hub. The list of tools is updated daily. These results
+include tools from the {{ site.data['public-server-tools'].servers | size }}
+responding Galaxy servers, including {{ site.data['public-server-tools'].tools
+| size }} tools total.
+
+<div class="row" id="search-form">
+	<div class="col-md-12">
+		<div class="form-group">
+			<label for="title">Tool ID</label>
+			<input type="text" class="form-control" id="title" placeholder="toolshed.g2.bx.psu.edu/repos/simon-gladman/velvetoptimiser/velvetoptimiser" oninput="onInputDebounced()">
+			<button class="btn btn-primary" onclick="search()">Search</button>
+		</div>
+	</div>
+</div>
+
+<img src="./assets/jbrowse/img/spinner.gif" id="spinner" alt="Loading spinner">
+<table class="table" id="results" style="table-layout: fixed; display: none">
+	<thead>
+		<tr>
+			<th scope="col">GUID</th>
+			<th scope="col">Servers</th>
+		</tr>
+	</thead>
+	<tbody>
+{%- for tool in site.data['public-server-tools'].tools -%}
+{%- for version in tool[1] -%}
+<tr>
+<td>
+{{ tool[0] }}{%- if version[0] != "_" -%}/{{ version[0] }}{%- endif -%}
+</td>
+<td>
+{%- for server in version[1] -%}
+<a href="{{ site.data['public-server-tools']['servers'][server].url }}?tool_id={{ tool[0] }}{%- if version[0] != "_" -%}/{{ version[0] }}{%- endif -%}">{{ site.data['public-server-tools']['servers'][server].name }}</a>
+{%- if forloop.last == false %}, {% endif -%}
+{%- endfor -%}
+</td>
+</tr>
+{%- endfor -%}
+{%- endfor -%}
+</tbody>
+</table>
+
+<script>
+HTMLCollection.prototype.forEach = Array.prototype.forEach;
+NodeList.prototype.forEach = Array.prototype.forEach;
+HTMLCollection.prototype.filter = Array.prototype.filter;
+NodeList.prototype.filter = Array.prototype.filter;
+HTMLCollection.prototype.map = Array.prototype.map;
+NodeList.prototype.map = Array.prototype.map;
+
+const textInput = document.getElementById("title")
+const table  = document.getElementById('results'),
+      rows   = table.tBodies[0].rows;
+
+var previousSearch = "";
+
+const DEBOUNCE_DURATION = 300; // in milliseconds
+
+
+
+function search(){
+	const textQuery = document.getElementById("title").value
+
+	if (previousSearch == `${textQuery}`) {
+		console.log("Skipping search for the same query")
+		return
+	}
+
+	document.getElementsByTagName("title")[0].innerText = `${textQuery} | GTN Pan-Galactic Tool Search`
+	console.log(`Searching! ${textQuery}`)
+
+	// Which should be hidden
+
+	var to_hide = rows.filter(row => {
+		if (textQuery != "" && row.children[0].innerText.toLowerCase().indexOf(textQuery.toLowerCase()) == -1) {
+			return true;
+		}
+		return false;
+	});
+
+	// Display all
+	document.querySelectorAll("#results tr").forEach(r => r.style.display = "");
+	// Hide the rest
+	to_hide.map(r => r.style.display = "none");
+
+	previousSearch = `${textQuery}`
+}
+
+const onInputDebounced = debounce(_ => {
+	console.log('DEBOUNCED');
+	search();
+}, DEBOUNCE_DURATION);
+
+// Attribution: https://gist.github.com/beaucharman/1f93fdd7c72860736643d1ab274fee1a
+function debounce(callback, wait, context = this) {
+  let timeout = null;
+  let callbackArgs = null;
+
+  const later = () => callback.apply(context, callbackArgs);
+  return function() {
+    callbackArgs = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Hide spinner, show table
+document.getElementById("spinner").style.display = "none";
+document.getElementById("results").style.display = "";
+
+</script>

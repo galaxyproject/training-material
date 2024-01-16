@@ -15,6 +15,8 @@ key_points:
   - "These analyses are *reproducible*; Galaxy keeps track of all the details of your analysis"
   - "Galaxy has a very large and active user community"
   - "There are many training materials available to learn Galaxy"
+translations:
+  - es
 contributors:
   - shiltemann
   - hexylena
@@ -40,8 +42,8 @@ What is Galaxy?
 - **Free** and Open Source
 
 
-- Many tools (~8000)
-- Popular (&gt;10.000 [publications](https://www.zotero.org/groups/1732893/galaxy))
+- Many tools (~9400[Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/))
+- Popular (&gt;11.900 [publications](https://www.zotero.org/groups/1732893/galaxy))
 - Extensive [tutorials](https://training.galaxyproject.org) available
 
 
@@ -99,13 +101,13 @@ What is Galaxy?
 
 # Find a Galaxy server
 
-- **The Big Three**: Galaxy Main ([usegalaxy.org](https://usegalaxy.org)), Galaxy Europe ([usegalaxy.eu](https://usegalaxy.eu)), Galaxy Australia ([usegalaxy.org.au](https://usegalaxy.org.au))
+{% assign servers = list_usegalaxy_servers_shuffle %}
+- **UseGalaxy.\***: {% for server in servers %}{{ server.human }} ([{{ server.name }}]({{ server.url }})){% if forloop.last %}{% else %}, {% endif %}{% endfor %}
 
-  .image-75[![usegalaxy.* servers]({{site.baseurl}}/shared/images/usegalaxy_servers.png)]
+  .image-50[![usegalaxy.* servers]({{site.baseurl}}/shared/images/usegalaxy_servers.png)]
 
-
-- Many other smaller, often domain-specific Galaxies available (125+)
- - List of all public Galaxies: [galaxyproject.org/use](https://galaxyproject.org/use/)
+- Many other smaller, often domain-specific Galaxies available
+ - List of all public Galaxies (135+): [galaxyproject.org/use](https://galaxyproject.org/use/)
 
 ???
 
@@ -175,7 +177,7 @@ What is Galaxy?
     - {% icon galaxy-eye %} **View** the file
     - {% icon galaxy-pencil %} **Edit attributes**
         - e.g. change name
-    - {% icon galaxy-cross %} **Delete file**
+    - {% icon galaxy-delete %} **Delete file**
 
 
 - Click to **expand**
@@ -308,7 +310,7 @@ What is Galaxy?
 
 - Galaxy has many options to visualize data
 
-![Galaxy visualisation examples]({{site.baseurl}}/topics/dev/images/charts_examples2.png)
+![Examples of 6 different visualisations in galaxy features an MSA, a couple graphs, RNA structure, and 3d visualisations of proteins]({{site.baseurl}}/topics/dev/images/charts_examples2.png)
 
 ???
 
@@ -348,7 +350,7 @@ What is Galaxy?
 
 ???
 
-- Workflows let you run your analyses very easily.
+- Workflows let you run your analyses very easily by connecting tools' outputs and inputs.
 - There are multiple ways to create a workflow.
 - Workflows can be automatically extracted from a history.
 - This means you perform the analysis manually once, and then can easily repeat it on different input data.
@@ -367,7 +369,7 @@ What is Galaxy?
 - Sharing options
     - Share with specific users
     - Share via link
-    - *Publish* to make it visibile to everybody
+    - *Publish* to make it visible to everybody
 
 
 ![shared data menu]({{site.baseurl}}/topics/introduction/images/shared_data.png)
@@ -387,7 +389,7 @@ What is Galaxy?
 
 - Galaxy Training Materials ([training.galaxyproject.org](https://training.galaxyproject.org))
 
-![]({{site.baseurl}}/topics/introduction/images/gtn_stats.png)
+{% snippet faqs/gtn/gtn_stats.md %}
 
 ???
 
@@ -404,16 +406,16 @@ What is Galaxy?
   ![Galaxy Help]({{site.baseurl}}/topics/introduction/images/galaxy_help.png)
 
 
-- **Gitter Chat**
-    - [Main Chat](https://gitter.im/galaxyproject/Lobby)
-    - [Galaxy Training Chat](https://gitter.im/Galaxy-Training-Network/Lobby)
+- **Chat on Matrix**
+    - [Main Chat](https://matrix.to/#/#galaxyproject_Lobby:gitter.im)
+    - [Galaxy Training Chat](https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im)
     - Many more channels (scientific domains, developers, admins)
 
 ???
 
 - If you get stuck, there are ways to get help.
 - You can ask your questions on the help forum.
-- Or you can chat with the community on Gitter.
+- Or you can chat with the community on Matrix.
 
 ---
 

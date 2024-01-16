@@ -2,10 +2,12 @@
 title: How can I contribute in "advanced" mode?
 area: contributors
 layout: faq
+box_type: tip
+contributors: [shiltemann,hexylena]
 ---
 
 
-Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on our [GitHub repository]({{ site.github_repository }}). Each training material is related to a topic. All training materials (slides, tutorials, etc) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomic analysis). Each topic has the following <a name="structure">structure</a>:
+Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on our [GitHub repository]({{ site.github_repository }}). Each training material is related to a topic. All training materials (slides, tutorials, etc) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomic analysis). Each topic has the following structure:
 
 ![Structure of the repository]({% link shared/images/repo_organization.png %}){: width="400px"}
 
@@ -17,7 +19,7 @@ Most of the content is written in [GitHub Flavored Markdown](https://guides.gith
     - a tutorial file written in Markdown with hands-on
     - an optional slides file in Markdown with slides to support the tutorial
     - a directory with Galaxy Interactive Tours to reproduce the tutorial
-    - a directory with workflows extracted from the tutoria
+    - a directory with workflows extracted from the tutorial
     - a YAML file with the links to the input data needed for the tutorial
     - a YAML file with the description of needed tools to run the tutorial
 
@@ -60,7 +62,7 @@ To learn how to add new content, check out our [series of tutorials on creating 
 
 {% assign topic = site.data["contributing"] %}
 <ol>
-{% assign topic_material = site.pages | topic_filter:'contributing' %}
+{% assign topic_material = site | topic_filter:'contributing' %}
 {% for material in topic_material %}
  {% if material.enable != "false" %}
   {% if material.type == "introduction" %}
@@ -76,6 +78,6 @@ To learn how to add new content, check out our [series of tutorials on creating 
 {% endfor %}
  </ol>
 
-We also strongly recommend you read and follow [The Carpentries](https://carpentries.org/) recommendations on [lesson design](https://carpentries.github.io/lesson-example/01-design/) and [lesson writing](https://carpentries.github.io/instructor-training/15-lesson-study/) if you plan to add or change some training materials, and also to check the [structure of the training material](#structure).
+We also strongly recommend you read and follow [The Carpentries](https://carpentries.org/) recommendations on [lesson design](https://carpentries.github.io/lesson-example/01-design/) and [lesson writing](https://carpentries.github.io/instructor-training/15-lesson-study/) if you plan to add or change some training materials, and also to check the structure of the training material above.
 
 

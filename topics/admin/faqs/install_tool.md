@@ -3,6 +3,7 @@ title: Install tools via the Admin UI
 area: galaxy admin interface
 box_type: tip
 layout: faq
+contributors: [shiltemann]
 ---
 
 

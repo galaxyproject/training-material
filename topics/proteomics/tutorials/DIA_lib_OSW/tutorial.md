@@ -1,7 +1,5 @@
 ---
 layout: tutorial_hands_on
-enable: false
-
 title: Library Generation for DIA Analysis
 zenodo_link: 'https://zenodo.org/record/4293493'
 level: Intermediate
@@ -25,8 +23,6 @@ tags: [DIA]
 ---
 
 
-# Introduction
-{:.no_toc}
 
 The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are in silico reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured MS2 spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT and DIA allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.
 
@@ -44,7 +40,7 @@ A plethora of software solutions were developed for the analysis of DDA proteomi
 
 The dataset in this training consists of different Spike-in mixtures of stable amounts of human peptides and different amounts of Ecoli peptides. Each sample reflects a non-fractionated MS measurement (DDA) of different Spike-in ratios. To faciliate the analysis and directly combine the identifications of all measurements, we will define the different measurements as fractions of one sample, as it would be the case for e.g. high pH, SCX or HILIC fractionated samples.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -55,7 +51,7 @@ The dataset in this training consists of different Spike-in mixtures of stable a
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
@@ -90,7 +86,7 @@ The dataset in this training consists of different Spike-in mixtures of stable a
 
 The MaxQuant Galaxy implementation contains the most important MaxQuant parameters. As an alternative, **MaxQuant (using mqpar.xml)** {% icon tool %} can be used with a preconfigured mqpar.xml file.
 
-> ### {% icon hands_on %} Hands-on: MaxQuant Analysis
+> <hands-on-title>MaxQuant Analysis</hands-on-title>
 >
 > 1. {% tool [MaxQuant](toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3) %} with the following parameters:
 >    - In *"Input Options"*:
@@ -111,7 +107,7 @@ The MaxQuant Galaxy implementation contains the most important MaxQuant paramete
 >    - In *"Output Options"*:
 >        - *"Select the desired outputs."*: `Protein Groups` `Peptides` `mqpar.xml` `Evidence` `MSMS`
 >
->    > ### {% icon comment %} Comment: Protein Groups
+>    > <comment-title>Protein Groups</comment-title>
 >    > Proteins that share all their peptides with other proteins cannot be unambiguously identified. Therefore, MaxQuant groups such proteins into one protein group and only one common quantification will be calculated. The different protein properties are separated by semicolon.
 >    {: .comment}
 >
@@ -120,7 +116,7 @@ The MaxQuant Galaxy implementation contains the most important MaxQuant paramete
 Here we used a variation of the *"identifier parse rule"* to allow for the organism label to be present in the spectral library. For investigations of single organisms and to keep only the Uniprot identifier one can adjust the *"identifier parse rule"* accordingly
 More details on the different **MaxQuant** parameters can be found in this [MaxQuant tutorial]({{site.baseurl}}/topics/proteomics/tutorials/maxquant-label-free/tutorial.html).
 
-> ### {% icon tip %} Tip: Continue with results from Zenodo
+> <tip-title>Continue with results from Zenodo</tip-title>
 >
 > In case the MaxQuant run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial
 > 1. Import the files from [Zenodo](https://zenodo.org/record/4293493)
@@ -140,15 +136,15 @@ To get a first overview of the MaxQuant results, the PTXQC report is helpful. Cl
 
 The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs quality control from MaxQuant result files. This quality control can be directly used in the Galaxy MaxQuant wrapper by setting *"Generate PTXQC"* to `yes`. This will generate a pdf file with multiple quality control plots. Be aware that the cutoffs set in PTXQC might not be applicable to your experiment and mass spectrometer type and therefore "under performing" and "fail" do not necessarily mean that the quality is poor.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many proteins were found in total?
 > 2. How many peptides were found in total?
 >
 >
-> > ### {% icon solution %} Solution
-> > 1. Approximately 5370 proteins were found (see ProteinGroups output)
-> > 2. Approximately 34970 peptides were found (see Peptides output)
+> > <solution-title></solution-title>
+> > 1. Approximately 5,370 proteins were found (see ProteinGroups output)
+> > 2. Approximately 34,970 peptides were found (see Peptides output)
 > >
 > {: .solution}
 >
@@ -157,7 +153,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 
 ## **Filter** for unique peptides in the *evidence* and *msms* output
 
-> ### {% icon hands_on %} Hands-on: Filtering the **MaxQuant** search results for unique peptides
+> <hands-on-title>Filtering the <b>MaxQuant</b> search results for unique peptides</hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >        - {% icon param-file %} *"Infile"*: `MaxQuant_Evidence`
@@ -169,19 +165,19 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >    - *"With following condition"*: `len(c12.split(';')) < 2`
 >    - *"Number of header lines to skip"*: `1`
 >
->    > ### {% icon comment %} Comment: Unique Features / peptides
+>    > <comment-title>Unique Features / peptides</comment-title>
 >    > Peptides which only occur in one protein are considered as unique for this specific protein. To avoid ambigious protein mapping later we filter the **MaxQuant** search results for unique peptides only. CAUTION: This increase in specificity (each peptide originates from only one protein) will reduce the size of the spectral library and might lead to decreased sensitivity  during the DIA analysis.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many unique features per lines remain after the filtering in the evidence and the msms output?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. ~100.000 lines in the evidence and ~98.000 lines in the msms.
+> > 1. ~100,000 lines in the evidence and ~98,000 lines in the msms.
 > >
 > {: .solution}
 >
@@ -190,7 +186,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 
 # **diapysef library generation**
 
-> ### {% icon hands_on %} Hands-on: Generation of a spectral library using the unique **MaxQuant** search results and indexed retention time *iRT* peptides
+> <hands-on-title>Generation of a spectral library using the unique <b>MaxQuant</b> search results and indexed retention time <i>iRT</i> peptides</hands-on-title>
 >
 > 1. {% tool [diapysef library generation](toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0) %} with the following parameters:
 >    - In *"MaxQuant output file msms.txt*:
@@ -200,19 +196,19 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >    - In *"Retention time alignment method"*:
 >        - {% icon param-file %} *"Infile"*: `iRTassays.tsv`
 >
->    > ### {% icon comment %} Comment: Indexed retention time *iRT* peptides
+>    > <comment-title>Indexed retention time <i>iRT</i> peptides</comment-title>
 >    >To allow for improved alignement of the different measurements, synthetic (non-endogenous) peptides which were spiked-in to all samples prior to the MS measurement. First the measured retention times (RTs) of those spiked-in peptides are extracted in the **MaxQuant** search results. Using the measured RTs as well as arbitrary assigned values (ranging from -26 to 99) a linear regression through the 11 synthetic peptides is applied.  Based on this linear regression fit *indexed* retention times (iRTs) are assigned to all other peptides.
 >    {: .comment}
 >
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many of the 11 synthetic peptides were found in the first DDA (Sample1) file?
 > 2. How many were found in the second DDA (Sample2) file?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 8 iRT peptides were found in the first DDA file
 > > 2. 9 iRT peptides were found in the second DDA file
@@ -223,29 +219,29 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 
 # Spectral library refinement with **OpenSwathAssayGenerator**
 
-> ### {% icon hands_on %} Hands-on: Spectral library optimization and refinement using **OpenSwathAssayGenerator**
+> <hands-on-title>Spectral library optimization and refinement using <b>OpenSwathAssayGenerator</b></hands-on-title>
 >
 > 1. {% tool [OpenSwathAssayGenerator](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+galaxy0) %} with the following parameters:
 >    - *"Output file type -- default: determined from file extension or content"*: `tabular (tsv)`
 >    - *"MZ threshold in Thomson for precursor ion selection"*: `0.015`
 >    - *"upper MZ limit for precursor ions"*: `1000.0`
 >    - *"MZ threshold in Thomson for fragment ion annotation"*: `0.015`
->    - *"Advanced Options"*: `Show Advanced Options`
 >
->    > ### {% icon comment %} Comment: Adjustment of the Spectral library
->    >The spectral library coming from **diapysef library generation** contains all observed fragment ions from the DDA runs resulting in a relativly large spectral library. Large libraries can lead to inceased processing times as well as fewer identifications after adjusting based on the False Discovery Rate (FDR). Thus, it is recommened to optimize and refine the spectral library by e.g. filtering for peptides with at least 6 transitions (increased confidence) and limiting the maximum also to 6 transitions (avoiding inflated libraries). Furthermore, the scan range can be adjusted (here between 400 - 1000 m/z) covering the same m/z range as in the DIA measurements.
+>
+>    > <comment-title>Adjustment of the Spectral library</comment-title>
+>    > The spectral library coming from **diapysef library generation** contains all observed fragment ions from the DDA runs resulting in a relativly large spectral library. Large libraries can lead to inceased processing times as well as fewer identifications after adjusting based on the False Discovery Rate (FDR). Thus, it is recommened to optimize and refine the spectral library by e.g. filtering for peptides with at least 6 transitions (increased confidence) and limiting the maximum also to 6 transitions (avoiding inflated libraries). Furthermore, the scan range can be adjusted (here between 400 - 1000 m/z) covering the same m/z range as in the DIA measurements.
 >    {: .comment}
 >
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many transitions does the refined spectral library contain and how many were removed?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. The refined library contains ~170.000 lines, and almost 700.000 lines were removed.
+> > 1. The refined library contains ~170,000 lines, and almost 700,000 lines were removed.
 > >
 > {: .solution}
 >
@@ -253,26 +249,27 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 
 # Adding decoy sequences with **OpenSwathDecoyGenerator**
 
-> ### {% icon hands_on %} Hands-on: Adding *decoy* transitions to the spectral library
+> <hands-on-title>Adding <i>decoy</i> transitions to the spectral library</hands-on-title>
 >
 > 1. {% tool [OpenSwathDecoyGenerator](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0) %} with the following parameters:
 >    - *"Output file type -- default: determined from file extension or content"*: `tabular (tsv)`
+>    - *"Advanced Options"*: `Show Advanced Options`
 >        - *"MZ threshold in Thomson for fragment ion annotation"*: `0.015`
 >
->    > ### {% icon comment %} Comment: *Decoy* transitions
->    >To enable correct false discovery rate (FDR) computation later on, we add computanionally generated decoy sequences to the spectral library. Those "non-observed" sequences can be generated based on the observed sequences with slight modifications. The most commonly used methods are either **shuffle** (randomly altering the amino acid sequence of each observed transition) or **reverse** (by reversing the actually obeserved transitions). Those artificially generated transitions were labelled as **decoy** and are later on considered as known false positives.
-Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy transition out of 100 identifications. Thus one could estimate that the remaining 99 non-labeled identifications contain also 1 % false positive hits.
+>    > <comment-title><i>Decoy</i> transitions</comment-title>
+>    > To enable correct false discovery rate (FDR) computation later on, we add computanionally generated decoy sequences to the spectral library. Those "non-observed" sequences can be generated based on the observed sequences with slight modifications. The most commonly used methods are either **shuffle** (randomly altering the amino acid sequence of each observed transition) or **reverse** (by reversing the actually obeserved transitions). Those artificially generated transitions were labelled as **decoy** and are later on considered as known false positives.
+>    > Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy transition out of 100 identifications. Thus one could estimate that the remaining 99 non-labeled identifications contain also 1 % false positive hits.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many lines do you expect after running the **OpenSwathDecoyGenerator** on your spectral library containing only observed transitions?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. We expect double the amount of lines, since we generate one *decoy* (non-observed) per *target* (observed) sequence.
+> > 1. We expect double the amount of lines (~340,000), since we generate one *decoy* (non-observed) per *target* (observed) sequence.
 > >
 > {: .solution}
 >
@@ -280,27 +277,27 @@ Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy trans
 
 # Converting the spectral library with **TargetedFileConverter**
 
-> ### {% icon hands_on %} Hands-on: Converting the final spectral library from *.tsv* to the sqlite *.pqp* format
+> <hands-on-title>Converting the final spectral library from <i>.tsv</i> to the sqlite <i>.pqp</i> format</hands-on-title>
 >
 > 1. {% tool [TargetedFileConverter](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.6+galaxy0) %} with the following parameters:
 >    - *"Output file type -- default: determined from file extension or content"*: `pqp`
 >
->    > ### {% icon comment %} Comment: Finding the right format for the spectral library.
+>    > <comment-title>Finding the right format for the spectral library.</comment-title>
 >    >Generally there is a broad variety of data formats for spectral libraries including *.tsv*, *.dlib*, *.pqp* and more. Depending on the DIA analysis software one or multiple formats are supported and can be used. In **OpenSwathWorkflow** one needs to have the spectral library in *.pqp* format to being able to combine multiple runs after the DIA analysis and before applying the FDR scoring. This is particularily interesting when the multiple runs should be compared later on.
 >    {: .comment}
 >
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many peptides and proteins does the final library contain?
 > 2. How many *target* peptides and proteins are in the library?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. The final spectral library contains 56.789 peptides covering 10.232 proteins.
-> > 2. Since we added equal numbers of *decoy* sequences we expect to have only half of the peptides and proteins (~28.000 and ~5.100) which are real targets.
+> > 1. The final spectral library contains over 56,000 peptides covering over 10,200 proteins.
+> > 2. Since we added equal numbers of *decoy* sequences we expect to have only half of the peptides and proteins (~28,000 and ~5,100) which are real targets.
 > >
 > {: .solution}
 >
@@ -308,7 +305,7 @@ Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy trans
 
 
 # Conclusion
-{:.no_toc}
+
 
 ![DDA_lib_gen_pipe](../../images/DIA_lib_gen_sum.png "All-in one workflow for DIA analysis in Galaxy. The generation of a spectral library is highlighted in red.")
 

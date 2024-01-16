@@ -1,38 +1,42 @@
 ---
 layout: base
+title: GTN Videos
 ---
-{% include _includes/default-header.html %}
 
-<div class="container main-content">
-	<div class="row">
-		<div class="col-md-12">
-			<video id="player" width="100%" height="610" controls preload="metadata" style="background: black">
-			</video>
+<div class="row">
+	<div class="col-md-12">
+		<video id="player" width="100%" height="610" controls preload="metadata" style="background: black">
+		</video>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-8">
+		<div class="row">
+			<h2 id="title"></h2>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<b>Transcript</b>
+			</div>
+			<div class="col-sm-2" id="transcript-edit">
+				Edit Source Slide
+			</div>
+			<div class="col-sm-2" id="source-slides">
+				View Slides
+			</div>
+			<div class="col-sm-2" id="transcript-plain">
+				View Plain Text
+			</div>
+		</div>
+		<div class="row" id="transcript">
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-sm-8">
-			<div class="row">
-				<h2 id="title"></h2>
-			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<h3>Transcript</h3>
-				</div>
-				<div class="col-sm-6" id="transcript-edit">
-					Edit
-				</div>
-			</div>
-			<div class="row" id="transcript">
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="row">
-				<div class="col-sm-12">
-					<h3>Other Videos</h3>
-					<div><a href="{% link videos/index.md %}">See all GTN Videos</a></div>
-					<div id="playlist" class="vertical">
-					</div>
+	<div class="col-sm-4">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3>Other Videos</h3>
+				<div><a href="{% link videos/index.md %}">See all GTN Videos</a></div>
+				<div id="playlist" class="vertical">
 				</div>
 			</div>
 		</div>
@@ -42,7 +46,7 @@ layout: base
 
 <script type="text/javascript">
 var params = (new URL(document.location)).searchParams,
-	videoid = params.get('v'),
+	videoid = params.get('v').startsWith('/') ? params.get('v').substring(1) : params.get('v'),
 	seekTo = params.get('t'),
 	videohost = 'https://training.galaxyproject.org',
 	vtt = `${videohost}/videos/topics/${videoid}.en.vtt`,
@@ -57,7 +61,9 @@ player.innerHTML = `
 	<track label="English" kind="captions" srclang="en" src="${vtt}" default>
 `;
 
-document.getElementById("transcript-edit").innerHTML = `<a href="https://github.com/galaxyproject/training-material/edit/main/topics/${videoid}.html">Found a typo? Edit</a>`
+document.getElementById("transcript-edit").innerHTML = `<a href="https://github.com/galaxyproject/training-material/edit/main/topics/${videoid}.html">Edit Source Slide</a>`
+document.getElementById("source-slides").innerHTML = `<a href="https://training.galaxyproject.org/training-material/topics/${videoid}.html">View Slides</a>`
+document.getElementById("transcript-plain").innerHTML = `<a href="https://training.galaxyproject.org/training-material/topics/${videoid}-plain.html">View Plain Text</a>`
 
 if(seekTo !== null){
 	if(seekTo.indexOf(":") > -1){
@@ -122,4 +128,3 @@ fetch('{{ site.baseurl }}/api/videos.json')
 	});
 
 </script>
-{% include _includes/default-footer.html %}

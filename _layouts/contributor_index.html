@@ -3,11 +3,11 @@ layout: base
 ---
 
 {% assign contributors = site.data['contributors'] %}
+{% assign entity = site | fetch_contributor: page.contributor %}
 
-{% include _includes/default-header.html %}
-{% assign stories = site.pages | where:"layout", "training_philosophy" %}
-{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" %}
-{% assign slides = site.pages | filter_slides %}
+<script type="application/ld+json">
+	{{ page.contributor | to_pfo_jsonld: site }}
+</script>
 
 <style type="text/css" media="all">
 .card-title {
@@ -15,179 +15,320 @@ layout: base
 }
 
 </style>
-<div class="container main-content">
-	<section>
-		<div class="stats">
-			<div class="row">
+<section class="contributor-page contributor-{{ page.contributor }}">
+	<div class="stats">
+		<div class="row">
+			<div class="col-md-9">
+				<hgroup>
+					<h1>
+						{{ entity.name | default: page.contributor }}
+					</h1>
+				{% if entity.funder_name %}
+					<p>Funded by {{ entity.funder_name }}</p>
+				{% endif %}
+				</hgroup>
 
-				<div class="col-md-3">
-					{% if contributors[page.contributor].github != false %}
-						<a href="https://github.com/{{ page.contributor }}" class="thumbnail">
-							<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="{{ page.contributor }}" >
-						</a>
-					{% else %}
-						<span class="thumbnail">
-							<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="{{ page.contributor }}" >
-						</span>
-					{% endif %}
+				{% if entity.bio %}
+				<p class="text-muted">
+					{{ entity.bio }}
+				</p>
+				{% endif %}
 
-					<h3>
-						{{ contributors[page.contributor].name | default: page.contributor }}
-					</h3>
-
-					{% assign has_philosophy = false %}
-					{% for story in stories %}
-						{% if story.username == page.contributor %}
-							{% assign has_philosophy = true %}
-						{% endif %}
-					{% endfor %}
-
-					{% if has_philosophy %}
-					<div class="contact-items">
-						<a href="{{ site.baseurl }}/topics/instructors/philosophies/#{{ page.contributor }}">
-							Training Philosophy
-						</a>
-					</div>
-					{% endif %}
-
-					{% if contributors[page.contributor].github != false %}
-					<div class="contact-items">
-						<a title="GitHub" href="https://github.com/{{ page.contributor }}">
-							{% icon github %} {{ page.contributor }}
-						</a>
-					</div>
-					{% endif %}
-
-					{% if contributors[page.contributor].email %}
-					<div class="contact-items">
-						<a title="E-mail" href="mailto:{{ contributors[page.contributor].email }}">
-							{% icon email %} {{ contributors[page.contributor].email }}
-						</a>
-					</div>
-					{% endif %}
-
-					{% if contributors[page.contributor].gitter %}
-					<div class="contact-items">
-						<a title="Gitter" href="https://gitter.im/{{ contributors[page.contributor].gitter }}">
-							{% icon gitter %} {{ contributors[page.contributor].gitter }}
-						</a>
-					</div>
-					{% endif %}
-
-					{% if contributors[page.contributor].twitter %}
-					<div class="contact-items">
-						<a title="Twitter" href="https://twitter.com/{{ contributors[page.contributor].twitter }}">
-							{% icon twitter %} {{ contributors[page.contributor].twitter }}
-						</a>
-					</div>
-					{% endif %}
-
-					{% if contributors[page.contributor].linkedin %}
-					<div class="contact-items">
-						<a title="LinkedIn" href="https://www.linkedin.com/in/{{ contributors[page.contributor].linkedin }}">
-							{% icon linkedin %} {{ contributors[page.contributor].linkedin }}
-						</a>
-					</div>
-					{% endif %}
-
-					{% if contributors[page.contributor].orcid %}
-					<div class="contact-items">
-						<a title="ORCID" href="https://orcid.org/{{ contributors[page.contributor].orcid }}">
-							{% icon orcid %} {{ contributors[page.contributor].orcid }}
-						</a>
-					</div>
-					{% endif %}
-					<br/>
-					<canvas id="myChart" height="300px"></canvas>
-
+				{% if entity.funder %}
+				<div class="label label-default label-large" style="{{ 'GTN Funder' | colour_tag }}">GTN Funder</div>
+				{% endif %}
+				{% if entity.in_memoriam %}
+				<div class="alert alert-dark" role="alert">
+					<h2 class="alert-heading">In Memoriam</h2>
+					<p>{{ entity.in_memoriam | markdownify }}</p>
 				</div>
 
-				<div class="col-md-9">
-					<h1>Contributions</h1>
-					<p class="text-muted">
-					{% if contributors[page.contributor].bio %}
-						{{ contributors[page.contributor].bio }}
+				{% endif %}
+
+				{% assign affil_count  = entity.affiliations | size %}
+				{% if affil_count > 0 %}
+				<h2>Affiliations</h2>
+				<div class="contributors-line">
+					{% include _includes/contributor-list.html contributors=entity.affiliations badge=true %}
+				</div>
+				{% endif %}
+
+				{% assign member_count  = entity.members | size %}
+				{% if member_count > 0 %}
+				<h2>Members</h2>
+				<p class="text-muted">These individuals have noted that they are affiliated in some way with this organisation. This list is non-exhaustive.</p>
+				<div class="contributors-line">
+					{% include _includes/contributor-list.html contributors=entity.members badge=true %}
+				</div>
+				{% endif %}
+
+				<h2>Contributions</h2>
+
+				{% if entity.funder %}
+				{% if entity.url %}
+				<a href="{{ entity.url }}">{{ entity.url }}</a>
+				{% endif %}
+				{{ entity.funding_statement | markdownify }}
+				{% endif %}
+
+				<p class="text-muted">
+					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
+
+                {% unless entity.github == false %}
+                <br><br>
+		{% unless entity.funder %}
+                <h3> GitHub Activity</h4>
+                <ul>
+                  <li><a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+author%3A{{page.contributor}}">{% icon github %} Pull Requests</a> </li>
+                  <li><a href="https://github.com/galaxyproject/training-material/commits?author={{page.contributor}}">{% icon github %} Commits</a></li>
+                  <li><a href="https://github.com/galaxyproject/training-material/issues?q=+is%3Aissue+author%3A{{page.contributor}}">{% icon github %} Issues Reported</a></li>
+                </ul>
+                {% endunless %}
+		{% endunless %}
+                </p>
+				{% if page.editor_count > 0 %}
+				<h3>Editorial Roles</h3>
+				<p>This contributor has taken on additional responsibilities as an editor for the following topics. They are responsible for ensuring that the content is up to date, accurate, and follows GTN best practices.</p>
+				<ul>
+				{% for res in page.editors %}
+					<li>
+						{% if res.layout == 'learning-pathway' %}
+						<a href="{{ site.baseurl }}{{ res.url }}">{{ res.title }}</a>
+						{% else %}
+						<a href="{{ site.baseurl }}/topics/{{ res.name }}">{{ res.title }}</a>
+						{% endif %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+				{% if page.tutorials_count > 0 %}
+				<h3>Tutorials</h3>
+				<ul>
+				{% for res in page.tutorials %}
+					<li>
+						{% assign topic_id = res[0] | get_topic %}
+						{% assign topic = site.data[topic_id] %}
+						<a href="{{ site.baseurl }}/topics/{{ topic_id }}">
+							{{ topic.title }}
+						</a>
+						/
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
+						</a>
+						{% assign res_activity = res[1] %}
+						{% include _includes/contributor-human-icons.html activity=res_activity %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+				{% if page.slides_count > 0 %}
+				<h3>Slides</h3>
+				<ul>
+				{% for res in page.slides %}
+					<li>
+						{% assign topic_id = res[0] | get_topic %}
+						{% assign topic = site.data[topic_id] %}
+						<a href="{{ site.baseurl }}/topics/{{ topic_id }}">
+							{{ topic.title }}
+						</a>
+						/
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
+						</a>
+						{% assign res_activity = res[1] %}
+						{% include _includes/contributor-human-icons.html activity=res_activity %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+				{% if page.learning_pathways_count > 0 %}
+				<h3>Learning Pathways</h3>
+				<ul>
+				{% for res in page.learning_pathways %}
+					<li>
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
+						</a>
+						{% assign res_activity = res[1] %}
+						{% include _includes/contributor-human-icons.html activity=res_activity %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+
+				{% if page.news_count > 0 %}
+                <h3>News</h3>
+                <div class="newslist">
+                {% assign news_sorted = page.news | sort: 'date' | reverse %}
+                {% for n in news_sorted %}
+                   {% include _includes/news-card.html news=n %}
+                {% endfor %}
+                </div>
+				{% endif %}
+
+			</div>
+
+			<div class="col-md-3">
+				<div>
+					{{ entity | fetch_entity_avatar: page.contributor, 200 }}
+				</div>
+
+				<h2>External Links</h2>
+				{% if page.has_philosophy %}
+				<div class="contact-items">
+					<a href="{{ site.baseurl }}/topics/teaching/tutorials/experiences/tutorial.html#{{ page.contributor }}">
+						Training Philosophy
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.github != false %}
+				<div class="contact-items">
+					<a title="GitHub" href="https://github.com/{{ page.contributor }}">
+						{% icon github %} {{ page.contributor }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.funding_id %}
+					Grant ID:
+					{% if entity.funding_system %}
+						{% assign url = entity | fetch_funding_url %}
+						<a href="{{ url }}">
+							{{ entity.funding_id }}
+						</a>
 					{% else %}
-						The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.)
+						{{ entity.funding_id }}
 					{% endif %}
-					</p>
+				{% endif %}
 
-					<h2>Tutorials</h2>
-					<ul>
-					{% for res in tutorials %}
-						{% if res.contributors contains page.contributor %}
-						<li>
-							{% assign topic_id = res | get_topic %}
-							{% assign topic = site.data[topic_id] %}
-							<a href="{{ site.baseurl }}/topics/{{ topic_id }}">
-								{{ topic.title }}
-							</a>
-							/
-							<a href="{{ site.baseurl }}/{{ res.url }}">
-							{{ res.title }}
-							</a>
-						</li>
-						{% endif %}
-					{% endfor %}
-					</ul>
+				{% if entity.email %}
+				<div class="contact-items">
+					<a title="E-mail" href="mailto:{{ entity.email }}">
+						{% icon email %} {{ entity.email }}
+					</a>
+				</div>
+				{% endif %}
 
-					<h2>Slides</h2>
-					<ul>
-					{% for res in slides %}
-						{% if res.contributors contains page.contributor %}
-						<li>
-							{% assign topic_id = res | get_topic %}
-							{% assign topic = site.data[topic_id] %}
-							<a href="{{ site.baseurl }}/topics/{{ topic_id }}">
-								{{ topic.title }}
-							</a>
-							/
-							<a href="{{ site.baseurl }}/{{ res.url }}">
-							{{ res.title }}
-							</a>
-						</li>
-						{% endif %}
-					{% endfor %}
-					</ul>
+				{% if entity.matrix %}
+				<div class="contact-items">
+					<a title="matrix" href="https://matrix.to/#/@{{ entity.matrix }}">
+						{% icon gitter %} {{ entity.matrix }}
+					</a>
+				</div>
+				{% endif %}
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+				{% if entity.fediverse %}
+				<div class="contact-items">
+					<a href="{{ entity.fediverse }}" rel="me">
+						<span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> {{ entity.fediverse }}
+					</a>
+				</div>
+				{% endif %}
 
-					<script type="text/javascript">
+				{% if entity.twitter %}
+				<div class="contact-items">
+					<a title="Twitter" href="https://twitter.com/{{ entity.twitter }}">
+						{% icon twitter %} {{ entity.twitter }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.linkedin %}
+				<div class="contact-items">
+					<a title="LinkedIn" href="https://www.linkedin.com/in/{{ entity.linkedin }}">
+						{% icon linkedin %} {{ entity.linkedin }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.orcid %}
+				<div class="contact-items">
+					<a title="ORCID" href="https://orcid.org/{{ entity.orcid }}">
+						{% icon orcid %} {{ entity.orcid }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.elixir_node %}
+				<div class="contact-items">
+					<img src="{{ site.baseurl }}/assets/images/elixir/elixir-{{ entity.elixir_node }}.svg" alt="elixir logo for {{ entity.elixir_node | elixirnode2name }}">
+				</div>
+				{% endif %}
+
+				<p>Favourite Topics</p>
+				<canvas id="myChart" height="300px"></canvas>
+				<p>Favourite Formats</p>
+				<canvas id="slidesVsTutorials" height="300px"></canvas>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<script src="{% link assets/js/Chart.bundle.js %}"></script>
+
+<script>
+const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+if(isReduced){
+    Chart.defaults.global.animation.duration = 0;
+}
 
 var ctx = document.getElementById('myChart').getContext('2d');
+var ctx2 = document.getElementById('slidesVsTutorials').getContext('2d');
 
 var topics = [
-{% for res in tutorials %}
-	{% if res.contributors contains page.contributor %}
-		{% assign topic_id = res | get_topic %}
-		{% assign topic = site.data[topic_id] %}
-		"{{ topic.title }}",
-	{% endif %}
+{% for res in page.tutorials %}
+	{% assign topic_id = res[0] | get_topic %}
+	{% assign topic = site.data[topic_id] %}
+	"{{ topic.title }}",
 {% endfor %}
-{% for res in slides %}
-	{% if res.contributors contains page.contributor %}
-		{% assign topic_id = res | get_topic %}
-		{% assign topic = site.data[topic_id] %}
-		"{{ topic.title }}",
-	{% endif %}
+{% for res in page.slides %}
+	{% assign topic_id = res[0] | get_topic %}
+	{% assign topic = site.data[topic_id] %}
+	"{{ topic.title }}",
 {% endfor %}
 ];
 
+var slidesVsTutos = [
+{% for res in page.tutorials %}
+	"Tutorials",
+{% endfor %}
+{% for res in page.slides %}
+	"Slides",
+	{% if res.video %}
+	"Videos",
+	{% endif %}
+{% endfor %}
+{% for res in page.news %}
+	"News Posts",
+{% endfor %}
+{% for res in page.learning_pathways %}
+	"Learning Pathways",
+{% endfor %}
+]
+
 function foo(arr) {
-    var a = [], b = [], prev;
+	var a = [], b = [], prev;
 
-    arr.sort();
-    for ( var i = 0; i < arr.length; i++ ) {
-        if ( arr[i] !== prev ) {
-            a.push(arr[i]);
-            b.push(1);
-        } else {
-            b[b.length-1]++;
-        }
-        prev = arr[i];
-    }
+	arr.sort();
+	for ( var i = 0; i < arr.length; i++ ) {
+		if ( arr[i] !== prev ) {
+			a.push(arr[i]);
+			b.push(1);
+		} else {
+			b[b.length-1]++;
+		}
+		prev = arr[i];
+	}
 
-    return [a, b];
+	return [a, b];
 }
 
 out = foo(topics)
@@ -201,35 +342,40 @@ function genColors(size) {
 }
 
 
+// Which topics
 var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'doughnut',
-
-    // The data for our dataset
-    data: {
-        labels: out[0],
-        datasets: [{
-            label: 'Contribution Areas',
-            backgroundColor: genColors(out[0].length),
-            data: out[1]
-        }]
-    },
-
-    // Configuration options go here
+	type: 'doughnut',
+	data: {
+		labels: out[0],
+		datasets: [{
+			label: 'Contribution Areas',
+			backgroundColor: genColors(out[0].length),
+			data: out[1]
+		}]
+	},
 	options: {
 		legend: {
 			display: false
 		}
 	}
 });
-					</script>
 
-				</div>
-
-				</div>
-			</div>
-		</div>
-	</section>
-</div>
-
-{% include _includes/default-footer.html %}
+out = foo(slidesVsTutos);
+// What material type
+var chart2 = new Chart(ctx2, {
+	type: 'doughnut',
+	data: {
+		labels: out[0],
+		datasets: [{
+			label: 'Contribution Areas',
+			backgroundColor: genColors(out[0].length),
+			data: out[1]
+		}]
+	},
+	options: {
+		legend: {
+			display: false
+		}
+	}
+});
+</script>

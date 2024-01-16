@@ -4,7 +4,7 @@ redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial
 
 title: "Rule Based Uploader"
-zenodo_link: ""
+zenodo_link: "https://zenodo.org/records/3263975"
 level: Intermediate
 questions:
   - "How to use the rule based uploader to create complex collections"
@@ -33,8 +33,6 @@ contributors:
 subtopic: upload
 ---
 
-# Introduction
-{:.no_toc}
 
 Through a series of examples, this tutorial aims to familiarize the reader with building Galaxy collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc..
 
@@ -42,7 +40,7 @@ Through a series of examples, this tutorial aims to familiarize the reader with 
 > This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}) tutorial.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will:
 >
@@ -56,28 +54,28 @@ Through a series of examples, this tutorial aims to familiarize the reader with 
 
 This approach could be used to manipulate lists of uploads coming from many different formats, but we will start with a tabular description of files for a study from the [European Nucleotide Archive](https://www.ebi.ac.uk/ena). We will be using the data from a study of [16s ribosomal RNA](https://www.ebi.ac.uk/ena/data/view/PRJDA60709).
 
-> ### {% icon hands_on %} Hands-on: Downloading Data from ENA
-> To start, navigate to the above study and click the option to "Select columns". Here we will narrow the set of columns we consider to just a few relevant to uploading these files to Galaxy.
+> <hands-on-title>Downloading Data from ENA</hands-on-title>
+> To start, navigate to the above study and click the option to "Show Column Selection". Here we will narrow the set of columns we consider to just a few relevant to uploading these files to Galaxy.
 >
 > Select only:
 >
-> - Study accession
-> - Experiment accession
-> - FASTQ files (FTP)
-> - Sample accession
+> - `study_accession`
+> - `experiment_accession`
+> - `fastq_ftp`
+> - `sample_accession`
 >
 > The table should look like:
 >
 > Study accession | Sample accession | Experiment accession | FASTQ files (FTP)
 > --------------- | ---------------- | -------------------- | -----------------
-> PRJDA60709      | SAMD00016379     | DRX000475            | File 1
-> PRJDA60709      | SAMD00016383     | DRX000476            | File 1
-> PRJDA60709      | SAMD00016380     | DRX000477            | File 1
-> PRJDA60709      | SAMD00016378     | DRX000478            | File 1
-> PRJDA60709      | SAMD00016381     | DRX000479            | File 1
-> PRJDA60709      | SAMD00016382     | DRX000480            | File 1
+> PRJDA60709      | SAMD00016379     | DRX000475            | DRX000475.fastq.gz
+> PRJDA60709      | SAMD00016383     | DRX000476            | DRX000476.fastq.gz
+> PRJDA60709      | SAMD00016380     | DRX000477            | DRX000477.fastq.gz
+> PRJDA60709      | SAMD00016378     | DRX000478            | DRX000478.fastq.gz
+> PRJDA60709      | SAMD00016381     | DRX000479            | DRX000479.fastq.gz
+> PRJDA60709      | SAMD00016382     | DRX000480            | DRX000480.fastq.gz
 >
-> Download the resulting tabular data describing the files by clicking the "TEXT" link at the top of the page. Alternatively, the resulting sample sheet can be downloaded directly [here](https://www.ebi.ac.uk/ena/data/warehouse/filereport?accession=PRJDA60709&result=read_run&fields=study_accession,sample_accession,experiment_accession,fastq_ftp&download=true). The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - Galaxy will just need more time to download and process the files.
+> Download the resulting tabular data describing the files by clicking the "Download report: TSV" link above the table. Alternatively, the [resulting sample sheet can be downloaded directly](https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJDA60709&result=read_run&fields=study_accession,sample_accession,experiment_accession,fastq_ftp&format=tsv&download=true&limit=0). The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - Galaxy will just need more time to download and process the files.
 {: .hands_on}
 
 Unfortunately the ENA ftp server is not operational at this moment,
@@ -86,16 +84,16 @@ You can select all the data below and copy them to your clipboard.
 
 ```
 study_accession	sample_accession	experiment_accession	fastq_ftp
-PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
-PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
-PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
-PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
-PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
-PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
+PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/records/3263975/files/DRR000770.fastqsanger.gz
+PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/records/3263975/files/DRR000771.fastqsanger.gz
+PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/records/3263975/files/DRR000772.fastqsanger.gz
+PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/records/3263975/files/DRR000773.fastqsanger.gz
+PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/records/3263975/files/DRR000774.fastqsanger.gz
+PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/records/3263975/files/DRR000775.fastqsanger.gz
 ```
 {:#example-1-metadata}
 
-> ### {% icon hands_on %} Hands-on: Accessing the Rule Based Uploader
+> <hands-on-title>Accessing the Rule Based Uploader</hands-on-title>
 >
 > 1. **Click** the upload icon toward the top left corner.
 >
@@ -111,12 +109,12 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
 >
 >    ```
 >    study_accession	sample_accession	experiment_accession	fastq_ftp
->    PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
->    PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
->    PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
->    PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
->    PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
->    PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
+>    PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/records/3263975/files/DRR000770.fastqsanger.gz
+>    PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/records/3263975/files/DRR000771.fastqsanger.gz
+>    PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/records/3263975/files/DRR000772.fastqsanger.gz
+>    PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/records/3263975/files/DRR000773.fastqsanger.gz
+>    PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/records/3263975/files/DRR000774.fastqsanger.gz
+>    PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/records/3263975/files/DRR000775.fastqsanger.gz
 >    ```
 >
 >    ![screenshot](../../images/rules/rules_example_1_2_paste.png)
@@ -129,7 +127,7 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
 
 At first glance, this may be feel like Excel or another spreadsheet program and you may feel the urge to start editing cells but we strongly encourage defining rules for manipulating the data instead. There are a few reasons for this:
 
-* **Manually modifying this metadata is not reproducible** - we will not belabor the point here but check out [Why not use excel for this?]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html#why-not-use-excel-for-this) for more context. Building up rules for modifying this metadata will allow Galaxy to track and report your manipulations (providing traceability) and apply them to new sets of files (providing reproducibility).
+* **Manually modifying this metadata is not reproducible** - we will not belabor the point here but check out [Why not use excel for this?]({% link faqs/galaxy/why_not_excel.md %}) for more context. Building up rules for modifying this metadata will allow Galaxy to track and report your manipulations (providing traceability) and apply them to new sets of files (providing reproducibility).
 * **Manually modifying this metadata is error prone** - we believe defining rules and treating the metadata in a systematic way minimizes the possibility to manual errors. These errors can be very hard to detect for large sets of data.
 * **Manually modifying data is not scalable** - this rule-based technique potentially scales to importing tens of thousands of datasets.
 
@@ -141,7 +139,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 * Define column `D` as the dataset URL (this is the location Galaxy can download the data from).
 * Tell Galaxy to treat these files as `fastqsanger.gz` files.
 
-> ### {% icon hands_on %} Hands-on: Using Tabular Inputs to the Rule Builder
+> <hands-on-title>Using Tabular Inputs to the Rule Builder</hands-on-title>
 >
 > We will start by stripping that header out of the table. We call rules that strip rows out the table `Filter rules` in this dialog.
 >
@@ -175,15 +173,15 @@ In order to get these files into Galaxy, we will want to do a few things:
 
 This example will demonstrate using such history datasets as the source for collection uploads - this can be handy when you'd like to apply existing Galaxy tabular manipulation tools to the metadata before processing for instance.
 
-> ### {% icon hands_on %} Hands-on: Creating a Simple Dataset List
+> <hands-on-title>Creating a Simple Dataset List</hands-on-title>
 >
-> > ### {% icon tip %} Tip: Create a new history
+> > <tip-title>Create a new history</tip-title>
 > > Before we start uploading, it may be a good idea to create a new history for this example to keep things simple and match the following screenshots.
 > {: .tip}
 >
 > For our second example, we will use the same initial metadata, but instead uploaded as a file to Galaxy. This is a relatively common use case wherein you, through some filtering and querying in Galaxy, build a list of accession numbers or other sample identifiers, and then want to fetch the associated datasets to begin working with them.
 >
-> > ### {% icon comment %} Loading Metadata from a History Element
+> > <comment-title>Loading Metadata from a History Element</comment-title>
 > > In addition to directly pasting data into the Rule Based Uploader, you can also load the metadata from a dataset in your Galaxy History, or from a file in your FTP directory if the admin has enabled FTP upload
 > {: .comment}
 >
@@ -191,12 +189,12 @@ This example will demonstrate using such history datasets as the source for coll
 >
 >    ```
 >    study_accession	sample_accession	experiment_accession	fastq_ftp
->    PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
->    PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
->    PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
->    PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
->    PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
->    PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
+>    PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/records/3263975/files/DRR000770.fastqsanger.gz
+>    PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/records/3263975/files/DRR000771.fastqsanger.gz
+>    PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/records/3263975/files/DRR000772.fastqsanger.gz
+>    PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/records/3263975/files/DRR000773.fastqsanger.gz
+>    PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/records/3263975/files/DRR000774.fastqsanger.gz
+>    PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/records/3263975/files/DRR000775.fastqsanger.gz
 >    ```
 >
 > 2. **Open** the `Rule-based` upload tab again, but this time:
@@ -206,7 +204,7 @@ This example will demonstrate using such history datasets as the source for coll
 >
 >    ![screenshot](../../images/rules/rules_example_2_1_inputs.png)
 >
->    > ### {% icon tip %} Tip: Don't see your dataset?
+>    > <tip-title>Don't see your dataset?</tip-title>
 >    > If you don't see your dataset, refresh your page and try again.
 >    {: .tip}
 >
@@ -237,7 +235,7 @@ This example will demonstrate using such history datasets as the source for coll
 
 For this next example we will again use ENA data, this time corresponding to the study [PRJDB3920](https://www.ebi.ac.uk/ena/data/view/PRJDB3920) instead.
 
-> ### {% icon hands_on %} Hands-on: Creating a List of Dataset Pairs
+> <hands-on-title>Creating a List of Dataset Pairs</hands-on-title>
 >
 > 1. **Open** the Rule Builder
 >
@@ -248,13 +246,13 @@ For this next example we will again use ENA data, this time corresponding to the
 >
 >      ```
 >      study_accession	sample_accession	experiment_accession	fastq_ftp
->      PRJDB3920	SAMD00034150	DRX036147	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036148	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036149	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036150	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036150_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036150_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036151	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036151_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036151_2.fastq.gz
->      PRJDB3920	SAMD00034153	DRX036152	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036152_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036152_2.fastq.gz
->      PRJDB3920	SAMD00034152	DRX036164	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036164_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036164_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036147	https://zenodo.org/records/3263975/files/DRX036147_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036147_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036148	https://zenodo.org/records/3263975/files/DRX036148_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036148_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036149	https://zenodo.org/records/3263975/files/DRX036149_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036149_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036150	https://zenodo.org/records/3263975/files/DRX036150_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036150_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036151	https://zenodo.org/records/3263975/files/DRX036151_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036151_2.fastq.gz
+>      PRJDB3920	SAMD00034153	DRX036152	https://zenodo.org/records/3263975/files/DRX036152_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036152_2.fastq.gz
+>      PRJDB3920	SAMD00034152	DRX036164	https://zenodo.org/records/3263975/files/DRX036164_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036164_2.fastq.gz
 >      ```
 >
 >
@@ -278,7 +276,7 @@ For this next example we will again use ENA data, this time corresponding to the
 >    - *"Number of Groups"*: `2`
 >    ![screenshot](../../images/rules/rules_example_3_4_regex.png)
 >
->    > ### {% icon comment %} Regular expression explained
+>    > <comment-title>Regular expression explained</comment-title>
 >    > Here `.*` means match any number of any character - so basically match anything.
 >    > The parentheses around `.*` means form a "group" from whatever is matched. The `;` will match with the actual `;` in the target cells.
 >    > In his example we have two such matching groups.
@@ -308,7 +306,7 @@ For this next example we will again use ENA data, this time corresponding to the
 >     - *"Number of groups"*: `1`
 >    ![screenshot](../../images/rules/rules_example_3_10_regex_paired.png)
 >
->    > ### {% icon comment %} Regular expression explained
+>    > <comment-title>Regular expression explained</comment-title>
 >    > Here `\d` means match any digit. This regular expression will use a capturing group to select only the `1` or `2` part of the URL that appears before the extension.
 >    > In his example we have one matching groups ( contained in the parentheses )
 >    {: .comment}
@@ -322,7 +320,7 @@ For this next example we will again use ENA data, this time corresponding to the
 >    - *"paired-end indicator"*: column `D`
 >    - *"URL"*: column `E`
 >
->    > ### {% icon comment %} Paired Indicator Column Definition
+>    > <comment-title>Paired Indicator Column Definition</comment-title>
 >    > The column selector for paired indicator is a bit less obvious and a bit more picky than the other ones we have used. The row value of the paired indicator column must be one of the following to indicate "forward" or "reverse" reads.
 >    >
 >    > Column  | Acceptable Indicators

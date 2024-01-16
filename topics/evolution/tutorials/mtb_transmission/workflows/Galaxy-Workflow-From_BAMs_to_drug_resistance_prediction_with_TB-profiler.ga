@@ -1,0 +1,551 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Starting from the BAM files produced by snippy, generate a table that summarizes the drug-resistance profile for each sample",
+    "format-version": "0.1",
+    "name": "From BAMs to drug resistance prediction with TB-profiler",
+    "steps": {
+        "0": {
+            "annotation": "BAMs obtained from single-end mappings with snippy",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "BAMs obtained from single-end mappings with snippy",
+                    "name": "MTB single-end BAMs"
+                }
+            ],
+            "label": "MTB single-end BAMs",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 586.3333282470703,
+                "height": 89.09999084472656,
+                "left": -233.6999969482422,
+                "right": -13.699996948242188,
+                "top": 497.23333740234375,
+                "width": 220,
+                "x": -233.6999969482422,
+                "y": 497.23333740234375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "5befe3e8-ccba-4b78-b7f1-dab039ef1011",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "BAMs obtained from paired-end mappings with snippy",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "BAMs obtained from paired-end mappings with snippy",
+                    "name": "MTB paired-end BAMs"
+                }
+            ],
+            "label": "MTB paired-end BAMs",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 695.3333282470703,
+                "height": 89.09999084472656,
+                "left": -234.6999969482422,
+                "right": -14.699996948242188,
+                "top": 606.2333374023438,
+                "width": 220,
+                "x": -234.6999969482422,
+                "y": 606.2333374023438
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "d6f269d8-66e8-4baf-9b5c-de9e7313c4a0",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Merge single-end and paired-end BAMs in a single collection to be analyzed alltogether",
+            "content_id": "__MERGE_COLLECTION__",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "inputs_0|input": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "inputs_1|input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Merge collections",
+            "name": "Merge collections",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 720.5,
+                "height": 222.26666259765625,
+                "left": 34.80000305175781,
+                "right": 254.8000030517578,
+                "top": 498.23333740234375,
+                "width": 220,
+                "x": 34.80000305175781,
+                "y": 498.23333740234375
+            },
+            "post_job_actions": {},
+            "tool_id": "__MERGE_COLLECTION__",
+            "tool_state": "{\"advanced\": {\"conflict\": {\"duplicate_options\": \"keep_first\", \"__current_case__\": 3}}, \"inputs\": [{\"__index__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "2142f124-4731-49fb-8e65-8e050705e001",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "180a1bdf-d552-49b7-93e9-4daf609096a6"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "We want a text (SAM) file to substitute the string \"MTB_anc\" by \"Chromosome\" so it is compatible with TB-profiler",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.13+galaxy2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Samtools view BAM > SAM",
+            "name": "Samtools view",
+            "outputs": [
+                {
+                    "name": "outputsam",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 951.5000152587891,
+                "height": 189.8333282470703,
+                "left": 277.6000061035156,
+                "right": 497.6000061035156,
+                "top": 761.6666870117188,
+                "width": 220,
+                "x": 277.6000061035156,
+                "y": 761.6666870117188
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.13+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "0dbf49c414ae",
+                "name": "samtools_view",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"addref_cond\": {\"addref_select\": \"no\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"outtype\": \"all_reads\", \"__current_case__\": 0, \"output_options\": {\"reads_report_type\": \"retained\", \"__current_case__\": 0, \"adv_output\": {\"readtags\": [], \"collapsecigar\": \"false\"}, \"output_format\": {\"oformat\": \"sam\", \"__current_case__\": 1, \"with_header\": \"true\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.13+galaxy2",
+            "type": "tool",
+            "uuid": "1040a122-5729-41a4-bd45-2406231f8024",
+            "workflow_outputs": [
+                {
+                    "label": "Samtools view on input dataset(s): filtered alignments",
+                    "output_name": "outputsam",
+                    "uuid": "aa220027-9d10-4328-b2c2-e4d139d5d5bd"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "Change the string MTB_anc to \"Chromosome\" so it is compatible with TB-profiler",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "outputsam"
+                }
+            },
+            "inputs": [],
+            "label": "Sed (MTB_anc to Chromosome)",
+            "name": "Text transformation",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 943.2000122070312,
+                "height": 122.5333251953125,
+                "left": 537.5999755859375,
+                "right": 757.5999755859375,
+                "top": 820.6666870117188,
+                "width": 220,
+                "x": 537.5999755859375,
+                "y": 820.6666870117188
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"code\": \"s/MTB_anc/Chromosome/g\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "95fc656b-43fc-4f1e-8850-25489e793376",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "c3b3612d-3999-4022-9d6c-49ce6756ba2a"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.13+galaxy2",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Samtools view SAM > BAM",
+            "name": "Samtools view",
+            "outputs": [
+                {
+                    "name": "outputsam",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 945.5000152587891,
+                "height": 189.8333282470703,
+                "left": 810.5999755859375,
+                "right": 1030.5999755859375,
+                "top": 755.6666870117188,
+                "width": 220,
+                "x": 810.5999755859375,
+                "y": 755.6666870117188
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.13+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "0dbf49c414ae",
+                "name": "samtools_view",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"addref_cond\": {\"addref_select\": \"no\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"outtype\": \"all_reads\", \"__current_case__\": 0, \"output_options\": {\"reads_report_type\": \"retained\", \"__current_case__\": 0, \"adv_output\": {\"readtags\": [], \"collapsecigar\": \"false\"}, \"output_format\": {\"oformat\": \"bam\", \"__current_case__\": 2}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.13+galaxy2",
+            "type": "tool",
+            "uuid": "729169fd-682e-4394-8421-1cde0aa2ac37",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outputsam",
+                    "uuid": "67aacaf4-b657-4269-b3eb-5cf22e1e9596"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "Generate TB-profiler reports with drug resistance determinants",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/3.0.8+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "fastq_or_bam|bam_input": {
+                    "id": 5,
+                    "output_name": "outputsam"
+                }
+            },
+            "inputs": [],
+            "label": "TB-profiler",
+            "name": "TB-Profiler Profile",
+            "outputs": [
+                {
+                    "name": "results_json",
+                    "type": "json"
+                },
+                {
+                    "name": "output_vcf",
+                    "type": "vcf"
+                },
+                {
+                    "name": "output_txt",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 724.9333343505859,
+                "height": 254.6999969482422,
+                "left": 1069.800048828125,
+                "right": 1289.800048828125,
+                "top": 470.23333740234375,
+                "width": 220,
+                "x": 1069.800048828125,
+                "y": 470.23333740234375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/3.0.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "809dfc93d593",
+                "name": "tbprofiler",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced\": {\"options\": \"no\", \"__current_case__\": 0}, \"fastq_or_bam\": {\"input_select\": \"bam\", \"__current_case__\": 3, \"bam_input\": {\"__class__\": \"ConnectedValue\"}}, \"output_format\": \"txt\", \"platform\": \"illumina\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.8+galaxy0",
+            "type": "tool",
+            "uuid": "07d7e2cc-9669-45b5-bc1e-27bda80752c4",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": "89e84a41-76ce-46eb-acec-1563e8d20ef6"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_txt",
+                    "uuid": "c148b074-5e6a-4846-86e7-0193a5ce38b5"
+                },
+                {
+                    "label": null,
+                    "output_name": "results_json",
+                    "uuid": "b22dcd19-5127-4dc3-b329-8a09ab7f5db3"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "From TB profiler, search with `grep` the part of the text that describes the DR profile (e.g Drug-Resistance: MDR) ",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "output_txt"
+                }
+            },
+            "inputs": [],
+            "label": "Get drug resistance profile",
+            "name": "Search in textfiles",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 594.7666625976562,
+                "height": 122.5333251953125,
+                "left": 1343.800048828125,
+                "right": 1563.800048828125,
+                "top": 472.23333740234375,
+                "width": 220,
+                "x": 1343.800048828125,
+                "y": 472.23333740234375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"case_sensitive\": \"-i\", \"color\": \"NOCOLOR\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"lines_after\": \"0\", \"lines_before\": \"0\", \"regex_type\": \"-P\", \"url_paste\": \"Drug-Resistance:\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "9b418ac9-364d-4877-a858-b33a1e335900",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "b876e27d-6013-4265-ae70-cffad0895db9"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "We have generated one file per sample, that contains the DR profile (e.g Drug-Resistance: MDR) We want to prepend the name of the sample so we have: (Sample_name Drug-Resistance: MDR) ",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Add Sample Name",
+            "name": "Add input name as column",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 596.7666625976562,
+                "height": 122.5333251953125,
+                "left": 1605.800048828125,
+                "right": 1825.800048828125,
+                "top": 474.23333740234375,
+                "width": 220,
+                "x": 1605.800048828125,
+                "y": 474.23333740234375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "3284b72eef56",
+                "name": "add_input_name_as_column",
+                "owner": "mvdbeek",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"header\": {\"contains_header\": \"no\", \"__current_case__\": 1}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"prepend\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.0",
+            "type": "tool",
+            "uuid": "d92f5d19-212d-4d8b-a7f7-f249788088ac",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "1b9d5610-2f91-450a-a1b9-1718d8afde1a"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "The output will be:\nSample_A  DR_profile_A\nSample_B DR_profile_B\nSample_Z DR_profile_Z",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "inputs": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Concatenate datasets",
+                    "name": "inputs"
+                }
+            ],
+            "label": "Concatenate DR profiles in a single table",
+            "name": "Concatenate datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 596.7666625976562,
+                "height": 122.5333251953125,
+                "left": 1871.800048828125,
+                "right": 2091.800048828125,
+                "top": 474.23333740234375,
+                "width": 220,
+                "x": 1871.800048828125,
+                "y": 474.23333740234375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "f46f0e4f75c4",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputs\": {\"__class__\": \"RuntimeValue\"}, \"queries\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "44a1faa8-cd48-4a85-96f7-81dcf3041e19",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "8bf7beae-528c-4d8b-abac-827a84a931a8"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "Remove unnecessary text from the table like \".txt\" or \"Drug-resistance:\"",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "infile": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Replace Text",
+                    "name": "infile"
+                }
+            ],
+            "label": "Cleanup the table",
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 599.8666534423828,
+                "height": 122.53334045410156,
+                "left": 2136.300048828125,
+                "right": 2356.300048828125,
+                "top": 477.33331298828125,
+                "width": 220,
+                "x": 2136.300048828125,
+                "y": 477.33331298828125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"RuntimeValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \".txt\", \"replace_pattern\": \"this is my replacement\"}, {\"__index__\": 1, \"find_pattern\": \"Drug-resistance:\", \"replace_pattern\": \"\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "398ccbde-0309-41bb-b348-fc8ecca15cb9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "6b30ef89-359b-4593-a600-40d11d47138b"
+                }
+            ]
+        }
+    },
+    "tags": ["evolution"],
+    "uuid": "b5e0c91f-736b-4e4c-83ae-1e38b764851a",
+    "version": 10
+}

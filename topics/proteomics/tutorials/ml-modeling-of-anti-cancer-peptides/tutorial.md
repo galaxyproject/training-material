@@ -19,8 +19,6 @@ subtopic: property-prediction
 tags: [ML, cancer]
 ---
 
-## Introduction
-{:.no_toc}
 
 
 Biological molecules such as proteins, peptides, DNA, and RNA can be represented by their biochemical or sequence-based properties. These properties can be utilized to deduce biological meanings using ML modeling. A descriptor or feature is the quantitative or qualitative measure of a property that is associated with a sequence. For example, a chemical compound can be described via its charge chemical formula, molecular weight, number of rotatable bonds, etc. Similarly, several properties can be deduced from the biological sequence that can be utilized to describe a biological activity such as anticancer property. Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to build an ML model and this model can be used to predict biological properties of unknown peptides. Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches. Finding ACPs through wet-lab methods is costly and time-consuming; thus, the development of an efficient computational approach is useful to predict potential ACP peptides before wet-lab experimentation. In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to predict the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors and use these descriptors for ML modeling. We will use CTD (composition, transition, and distribution) descriptor to define peptide sequences in the training set and will test 6 different ML algorithms. We will also assess the effect of normalization on the accuracy of ML models.
@@ -36,7 +34,7 @@ In **Figure 1** features or descriptors are represented with (F1, F2, F3, etc.) 
 
 An easy way to install and use the PDAUG toolset, and follow this tutorial is via a prebuilt docker image equipped with a PDAUG toolset, workflow, and data library. A prebuilds docker image can be downloaded and run by typing a simple command at the terminal after installing docker software on any operating system.
 
-> ### {% icon hands_on %} Hands-on: Easy access of tools, workflows and data from docker image
+> <hands-on-title>Easy access of tools, workflows and data from docker image</hands-on-title>
 >
 > 1. Downloading the docker image from the docker hub using `docker pull jayadevjoshi12/galaxy_pdaug:latest` command.
 > 2. Running the container with latest PDAUG tools `docker run -i -t -p 8080:80 jayadevjoshi12/galaxy_pdaug:latest`.
@@ -47,7 +45,7 @@ An easy way to install and use the PDAUG toolset, and follow this tutorial is vi
 
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -64,7 +62,7 @@ A high-quality dataset was retrieved from a previously published work {% cite ha
 
 ### Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo](https://zenodo.org/record/4111092#.X712_6pKhhE) or from the shared data library
@@ -75,6 +73,7 @@ A high-quality dataset was retrieved from a previously published work {% cite ha
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets to their basename (ACPs.fasta, non_ACPs.fasta)
@@ -92,7 +91,7 @@ A high-quality dataset was retrieved from a previously published work {% cite ha
 In this step we will calculate CTD descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property are located on this length {% cite Govindan_Nair_2013 %}.
 
 
-> ### {% icon hands_on %} Hands-on: Calculating CTD descriptors for ACPs and non-ACPs
+> <hands-on-title>Calculating CTD descriptors for ACPs and non-ACPs</hands-on-title>
 >
 > 1. {% tool [PDAUG Sequence Property Based Descriptors](toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input fasta file"*: `ACPs.fasta` (output of **Input dataset** {% icon tool %})
@@ -117,7 +116,7 @@ In Binary classification, ML algorithms classify the elements of a set into two 
 
 
 
-> ### {% icon hands_on %} Hands-on: Adding class labels to the tabular data
+> <hands-on-title>Adding class labels to the tabular data</hands-on-title>
 >
 > 1. {% tool [PDAUG Add Class Label](toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Sequence Property Based Descriptors on data 1 - CTD (tabular)` (output of **Peptide Sequence Descriptors** {% icon tool %})
@@ -135,7 +134,7 @@ In Binary classification, ML algorithms classify the elements of a set into two 
 
 In previous steps, we labeled positive data or ACPs as "1", and negative data or non-ACPs as "0", now we can combine these two tabular datafiles as one training dataset.  In this step, we will merge these tabular detasets as a labeled training data set.
 
-> ### {% icon hands_on %} Hands-on: Merging two tabular files
+> <hands-on-title>Merging two tabular files</hands-on-title>
 >
 > 1. {% tool [PDAUG Merge Dataframes](toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0) %} with the following parameters:
 >    - {% icon param-files %} *"Input files"*: `PDAUG Add Class Label on data 3 - (tabular)` (output of **Add Class Label** {% icon tool %}), `PDAUG Add Class Label on data 4 - (tabular)` (output of **Add Class Label** {% icon tool %})
@@ -150,7 +149,7 @@ In previous steps, we labeled positive data or ACPs as "1", and negative data or
 In this step, we will apply six ML algorithms Linear Regression Classifier (LRC), Random Forest Classifier(RFC), Gaussian naive Bayes Classifier (GBC), Decision Tree Classifier (DTC), Stochastic Gradient Descent Classifier (SGDC) & Support Vector Machine Classifier (SVMC) with 10 fold cross-validation on the training data. In cross-validation, positive and negative data are randomly divided into 10 parts each set has the 10th part of active as well as inactive peptides. The algorithm was trained on the 9 sets and the prediction was made on the remaining 10th set. This process was repeated for every set. Thus the final performance scores are calculated as a mean of all the folds. We used min-max to normalize the data before ML modeling. The entire workflow was applied to the four descriptor sets and accuracy was estimated based on accuracy, precision, recall, f1, and AUC.
 
 
-> ### {% icon hands_on %} Hands-on: Applying 6 ML algorithms on the training data set
+> <hands-on-title>Applying 6 ML algorithms on the training data set</hands-on-title>
 >
 > 1. {% tool [PDAUG ML Models](toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Merge Dataframes on data 6 and data 5 - (tabular)` (output of **Merge dataframes** {% icon tool %})
@@ -202,7 +201,7 @@ In this step, we will apply six ML algorithms Linear Regression Classifier (LRC)
 
 In previous steps we have trained the ML models, these models return a TSV  that captures performance measures of these algorithms. We used the `Merge Data Frame` tool to combine these results as one file in this step.  
 
-> ### {% icon hands_on %} Hands-on: Merging result as one tabular file
+> <hands-on-title>Merging result as one tabular file</hands-on-title>
 >
 > 1. {% tool [PDAUG Merge Dataframes](toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0) %} with the following parameters:
 >    - {% icon param-files %} *"Input files"*: `PDAUG ML Models on data 7 - LRC (tabular)` (output of **ML Models** {% icon tool %}), `PDAUG ML Models on data 7 - RFC (tabular)` (output of **ML Models** {% icon tool %}), `PDAUG ML Models on data 7 - GBC (tabular)` (output of **ML Models** {% icon tool %}), `PDAUG ML Models on data 7 - DTC (tabular)` (output of **ML Models** {% icon tool %}), `PDAUG ML Models on data 7 - SGDC (tabular)` (output of **ML Models** {% icon tool %}), `PDAUG ML Models on data 7 - SVMC (tabular)` (output of **ML Models** {% icon tool %})
@@ -216,7 +215,7 @@ In previous steps we have trained the ML models, these models return a TSV  tha
 In the final step, a heat map will be generated which represents performance measures of various algorithms. We applied five different performance measures, accuracy, recall, F1-score, precision, and mean AUC (Area Under Curve) score.
 
 
-> ### {% icon hands_on %} Hands-on: Plotting the results
+> <hands-on-title>Plotting the results</hands-on-title>
 >
 > 1. {% tool [PDAUG Basic Plots](toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0) %} with the following parameters:
 >    - *"Data plotting method"*: `Heat Map`
@@ -243,7 +242,7 @@ The value for each of these estimates falls between 0 and 1, and larger values i
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we learn how to utilize the quantitative properties of peptide sequences and apply the ML algorithms to predict the biological properties of the peptide sequence.
 

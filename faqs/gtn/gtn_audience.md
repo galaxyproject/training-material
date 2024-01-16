@@ -2,6 +2,8 @@
 title: What audiences are the tutorials for?
 area: introduction
 layout: faq
+box_type: tip
+contributors: [bebatut,shiltemann]
 ---
 
 There are two distinct audiences for these materials.

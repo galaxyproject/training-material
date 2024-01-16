@@ -1,0 +1,1 @@
+../../proteogenomics-dbcreation/faqs/proteogenomics_querytabular.md

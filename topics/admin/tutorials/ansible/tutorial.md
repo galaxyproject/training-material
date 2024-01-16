@@ -20,17 +20,18 @@ contributors:
   - hexylena
   - shiltemann
 subtopic: core
+tags:
+  - ansible
 
 ---
 
 # Overview
-{:.no_toc}
 
 In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the [Galaxyproject Ansible roles](https://github.com/galaxyproject?q=ansible).
 
 This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -90,9 +91,7 @@ Additionally, playbooks are often stored in Git or other version control reposit
 if anything happens to the infrastructure you manage, you'll still have a copy of the information
 required to rebuild everything with Ansible.
 
-
-
-> ### {% icon details %} Ansible Inventory Documentation
+> <details-title>Ansible Inventory Documentation (Do you connect with a different user? Password? SSH key?)</details-title>
 > For more advanced features of the inventory file, check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html).
 {: .details}
 
@@ -138,7 +137,7 @@ tasks     | **Always start reading here**. This is the most important folder and
 templates | Files that are templated out with variables before being copied.
 vars      | Default values for variables the user should normally not change (e.g. name of a package in different Linux distributions).
 
-> ### {% icon details %} Ansible Role Documentation
+> <details-title>Ansible Role Documentation</details-title>
 >
 > For more information check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_reuse_roles.html).
 {: .details}
@@ -206,7 +205,7 @@ Some groups prefer one style or another. You can mix both of these but you proba
 
 This is a quite minimal playbook. It selects a `hosts` group named `webservers`, overrides the variable `cvmfs_numfiles`, and then says the following set of roles will be executed for this group of hosts. Ansible makes it easy to collect tasks that should apply to a group of hosts and run a playbook for all of those hosts. Some good uses of this are things like ensuring a certain set of users are installed on all of your managed machines, or using one of the package autoupdating roles to make sure your machines are up-to-date.
 
-> ### {% icon details %} Ansible Playbook Documentation
+> <details-title>Ansible Playbook Documentation</details-title>
 >
 > For more information check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html).
 {: .details}
@@ -240,7 +239,7 @@ For a real-life example, UseGalaxy.eu [generally attempts](https://github.com/us
 
 The above introduction was certainly not enough for you to feel confident in Ansible, so we will now build a small role and a playbook to run this role.
 
-> ### {% icon warning %} Safety First
+> <warning-title>Safety First</warning-title>
 >
 > Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the command line, but scaled across N machines. Be very careful with the changes you plan to make.
 > Ansible provides some flags which can help you identify changes before they're made to production systems:
@@ -256,11 +255,11 @@ The above introduction was certainly not enough for you to feel confident in Ans
 {: .warning}
 
 
-> ### {% icon comment %} Requirements for Running This Tutorial
+> <comment-title>Requirements for Running This Tutorial</comment-title>
 >
 > 1. You have [Ansible installed](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) on the machine where you will install Galaxy
 >
->    > ### {% icon comment %} Comment: Running Ansible on remote machine
+>    > <comment-title>Running Ansible on remote machine</comment-title>
 >    > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
 >    {: .comment}
 >
@@ -271,7 +270,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 
 ## A Basic Role
 
-> ### {% icon hands_on %} Hands-on: Setting up our workspace
+> <hands-on-title>Setting up our workspace</hands-on-title>
 >
 > 1. In this training we will run Ansible on the machine it will modify. This is not best practice, but it is convenient for trainings. You should probably run this in a VM either on the Cloud or in VirtualBox or similar
 >
@@ -287,7 +286,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 >    2. Create [an inventory file](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html) with the group `my_hosts` and `localhost ansible_connection=local`, which tells Ansible to not use SSH, and just use the local connection. Additionally, you should explicitly set the `ansible_user` variable to the username to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not `ansible_user` is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.
 >
->       > ### {% icon solution %} Solution
+>       > <solution-title></solution-title>
 >       > The file should look like:
 >       >
 >       > ```ini
@@ -295,6 +294,10 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >       > localhost ansible_connection=local ansible_user=ubuntu
 >       > ```
 >       {: .solution }
+>
+>       > <details-title>For your own infrastructure, do you connect with a different user? Password? SSH key?</details-title>
+>       > For more advanced features of the inventory file, check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html).
+>       {: .details}
 >
 > 5. Create the roles directory, your role, and the tasks folder: `mkdir -p roles/my-role/tasks/`
 >
@@ -312,7 +315,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 >    You can read about all of the parameters available to the [`copy`](http://docs.ansible.com/ansible/2.9/modules/copy_module.html) module in Ansible's documentation.
 >
->    > ### {% icon details %} Ansible Module Documentation
+>    > <details-title>Ansible Module Documentation</details-title>
 >    > You can usually find a module for most commands you will run in a shell, e.g. by searching the internet for "ansible copy file to server" or "ansible restart service". If you cannot find a module that does it, there is the [`command`](http://docs.ansible.com/ansible/2.9/modules/command_module.html) module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.
 >    >
 >    {: .details }
@@ -330,11 +333,11 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >         - my-role
 >     ```
 >
->     > ### {% icon question %} Question
+>     > <question-title></question-title>
 >     >
 >     > How does your file tree look now? Use `find` or `tree`.
 >     >
->     > > ### {% icon solution %} Solution
+>     > > <solution-title></solution-title>
 >     > >
 >     > > ```
 >     > > .
@@ -353,13 +356,13 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 11. Run the playbook:
 >
->     > > ### {% icon code-in %} Input: Bash
+>     > > <code-in-title>Bash</code-in-title>
 >     > > ```bash
 >     > > ansible-playbook -i hosts playbook.yml
 >     > > ```
 >     > {: .code-in}
 >     >
->     > > ### {% icon code-out %} Output: Bash
+>     > > <code-out-title>Bash</code-out-title>
 >     > > ```
 >     > > PLAY [my_hosts] ****************************************************************
 >     > > TASK [Gathering Facts] *********************************************************
@@ -381,7 +384,7 @@ Now that you've done this, here are some starting points for exploration:
 - Add more hosts, watch as Ansible executes over all of them in parallel.
 - Identify a task you do regularly, e.g. restarting a service. Find the Ansible service module and add that to your playbook.
 
-> ### {% icon comment %} Too Many Cows?
+> <comment-title>Too Many Cows?</comment-title>
 > If you've installed the `cowsay` tool, Ansible (for some reason) will take advantage of that to output a lot of the output with cowsay. To disable this you can `export ANSIBLE_NOCOWS=1` (Remember that exporting will only last as long as the current invocation of your terminal does, so consider adding this to your user profile if you wish to keep cowsay installed and still have legible output.)
 >
 > ```
@@ -416,7 +419,7 @@ ok: [localhost]
 
 The [`setup`](https://docs.ansible.com/ansible/2.9/modules/setup_module.html) module runs by default for every host and gathers facts about the host.
 
-> ### {% icon hands_on %} Hands-on: The Setup Module
+> <hands-on-title>The Setup Module</hands-on-title>
 >
 > 1. Run the command `ansible -i hosts -m setup my_hosts | less`.
 >
@@ -424,12 +427,12 @@ The [`setup`](https://docs.ansible.com/ansible/2.9/modules/setup_module.html) mo
 >
 > 2. Investigate the output. See what sort of information is made available to you.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > 1. What variable stores the OS name?
 >    > 2. Where are all of the places that you can find your machine's IP (v4) addresses?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. The OS name is stored in `ansible_distribution`. We saw `ansible_os_family` used above in the `ansible-cvmfs` role. You can use these variables if you are writing a generic role but packages or commands are named different on different operating systems.
 >    > >
@@ -450,11 +453,11 @@ The [`setup`](https://docs.ansible.com/ansible/2.9/modules/setup_module.html) mo
 
 Templates give you greater control over the files you are deploying to the target system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance, deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands-on are available to you to use in templates, `when` statements (like the [ansible-cvmfs example we saw earlier](#modules-and-tasks)). Additionally all of the variables you've defined are available as well.
 
-> ### {% icon details %} Template Syntax
+> <details-title>Template Syntax</details-title>
 > Templates end with the `.j2` suffix and use Jinja2 syntax. If you are not familiar with it, you should [read about it](http://jinja.pocoo.org/docs/2.10/templates/) first, before moving on with the tutorial. Ansible fills the templates with variable values and copies the file to its remote destination without the `.j2` suffix.
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: Variables and Templates
+> <hands-on-title>Variables and Templates</hands-on-title>
 >
 > 1. Create the directories: `roles/my-role/templates`, `roles/my-role/defaults`
 >
@@ -495,13 +498,13 @@ Templates give you greater control over the files you are deploying to the targe
 >
 > 8. Check the contents of `/tmp/test.ini`
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > cat /tmp/test.ini
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output
+>    > > <code-out-title></code-out-title>
 >    > >
 >    > > The file should look like:
 >    > > ```
@@ -527,24 +530,19 @@ Templates give you greater control over the files you are deploying to the targe
 >     server_name: Dogs!
 >     ```
 >
->     > ### {% icon tip %} Variable connection
->     > When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named `my_hosts`, it checks many different places for variables, including "group_vars/my_hosts.yml". If there are variables there, they're added to the collection of current variables. It also checks "group_vars/all.yml" (for the built-in host group `all`). There is a precedence order, but then these variables are available for roles and tasks to consume.
->     {: .tip}
+>     {% snippet topics/admin/faqs/ansible-connection.md %}
 >
 > 12. Run the playbook again, but imagine you are worried about this change, and supply the `--check --diff` flag to see what changes are made before committing to make them.
 >
->     > ### {% icon code-in %} Input: Bash
+>     > <code-in-title>Bash</code-in-title>
 >     > ```bash
 >     > ansible-playbook -i hosts playbook.yml --check --diff
 >     > ```
 >     {: .code-in}
 >
->     > ### {% icon tip %} What if you forget `--diff`?
->     > If you forget to use `--diff`, it is not easy to see what has changed. Some modules like the `copy` and `template` modules have a `backup` option. If you set this option, then it will keep a backup copy next to the destination file.
->     > However, most modules do not have such an option, so if you want to know what changes, always use `--diff`.
->     {: .tip}
+>     {% snippet topics/admin/faqs/ansible_diff.md %}
 >
->     > ### {% icon code-out %} Output
+>     > <code-out-title></code-out-title>
 >     >
 >     > ```
 >     > PLAY [my_hosts] ****************************************************************
@@ -570,7 +568,7 @@ Templates give you greater control over the files you are deploying to the targe
 > 13. Run the playbook again, without the `--check` flag to apply your changes.
 {: .hands_on}
 
-> ### {% icon comment %} Ansible Variable Templating
+> <comment-title>Ansible Variable Templating</comment-title>
 > In this hands-on we used some templated variables. We defined them in a template, but they are also commonly used in the group variables file. Our templated variable looked like: {% raw %}`listen = {{ ansible_default_ipv4.address }}`{% endraw %}.
 >
 > It is common to see things like this in Ansible roles:
@@ -598,18 +596,18 @@ Now that you've built a small role, you can imagine that building real roles tha
 
 **Warning**: This will install Memcached on the target machine.
 
-> ### {% icon hands_on %} Hands-on: Installing a module using ansible-galaxy
+> <hands-on-title>Installing a module using ansible-galaxy</hands-on-title>
 >
 > 1. Install the geerlingguy.memcached role with ansible-galaxy into your roles folder:
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > ansible-galaxy install \
 >    > >     -p roles/ geerlingguy.memcached
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output
+>    > > <code-out-title></code-out-title>
 >    > > This will install the new role into your `roles` folder, alongside your own role.
 >    > > ```
 >    > > - downloading role 'memcached', owned by geerlingguy
@@ -624,11 +622,11 @@ Now that you've built a small role, you can imagine that building real roles tha
 >
 > 3. Run the playbook
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > Did something go wrong?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
 >    > > The solution to this is to set `become: true`.
@@ -639,12 +637,12 @@ Now that you've built a small role, you can imagine that building real roles tha
 >    > >
 >    > > `become` causes Ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is `root`. If you want to become a different user, just set `become_user`. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set `--ask-become-pass`, using the privilege escalation password for that host.
 >    > >
->    > > > ### {% icon details %} Ansible Become
+>    > > > <details-title>Ansible Become</details-title>
 >    > > > See the [documentation](https://docs.ansible.com/ansible/2.9/user_guide/become.html) if you need to control this behaviour differently. `become` can be set either at the task level or the playbook level.
 >    > > >
 >    > > {: .details}
 >    > >
->    > > > ### {% icon tip %} Should I use sudo or directly login as root?
+>    > > > <tip-title>Should I use sudo or directly login as root?</tip-title>
 >    > > > This is often site-specific policy. If your site doesn't have a dictated policy, then it's generally preferable to not allow direct login as root, and login as a separate user.
 >    > > {: .tip}
 >    > >
@@ -669,11 +667,13 @@ These are usually good proxies for quality, but do not treat them as strict rule
 
 Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with `ansible-galaxy install`, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. [galaxyproject](https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles) and [usegalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles)
 
-# (Optional) Ansible Vault
+{% snippet topics/admin/faqs/ansible_role-properties.md %}
+
+# Ansible Vault
 
 Now that you have a small role built up, you might start thinking about deploying larger and more complex services and infrastructure. One last common task we want to cover here is the inclusion of secrets. Ansible Vault is really useful to include encrypted secrets in your playbook repository.
 
-> ### {% icon hands_on %} Hands-on: Setting up secrets
+> <hands-on-title>Setting up secrets</hands-on-title>
 >
 > 0. Run `mkdir -p secret_group_vars`
 >
@@ -689,11 +689,11 @@ Now that you have a small role built up, you might start thinking about deployin
 >    apikey: super-secret-api-key-wow!
 >    ```
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > How does your file look? Is it readable? Run `cat secret_group_vars/all.yml`
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > The file will look like this, it is encrypted by Ansible Vault with AES256 encryption.
 >    > > ```
@@ -731,13 +731,13 @@ Now that you have a small role built up, you might start thinking about deployin
 >
 > 8. Check the contents of `/tmp/test.ini`
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > cat /tmp/test.ini
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output
+>    > > <code-out-title></code-out-title>
 >    > > The file should look like:
 >    > >
 >    > > ```ini
@@ -751,7 +751,7 @@ Now that you have a small role built up, you might start thinking about deployin
 >
 {: .hands_on}
 
-In real life scenarios where you are sharing your playbooks publicly, be sure to encrypt all secrets from the start (or fix/remove the git history if you ever did.) If you are storing your vault password in a file, remember to add it to your `.gitignore` (or VCS appropriate file.)
+In real life scenarios where you are sharing your playbooks publicly, be sure to encrypt all secrets from the start (or remove any secrets from the git history if you ever committed them in plain text). If you are storing your vault password in a file, remember to add it to your `.gitignore` (or VCS appropriate file.)
 
 # Other Stuff
 

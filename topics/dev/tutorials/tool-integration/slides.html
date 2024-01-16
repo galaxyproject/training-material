@@ -22,7 +22,7 @@ key_points:
   - "Use Planemo"
   - "Use Conda"
   - "Use GitHub"
-  - "Use Travis"
+  - "Use GitHub Actions"
   - "No more excuse to develop crappy Galaxy tools"
 follow_up_training:
   -
@@ -46,16 +46,16 @@ contributors:
 
 ## Tools in the Galaxy UI
 
-![](../../images/galaxy_instance_detailed_screenshot.png)
+![Screenshot of galaxy with the three main panels labelled list of available tools on left, 'wrapper' in center, and history with results as datasets on right](../../images/galaxy_instance_detailed_screenshot.png)
 
 ---
 
 ## Galaxy tool / wrapper
 
-![](../../images/graphlan_screenshot.png)
+![Screenshot of tool interface in Galaxy for GraPhlAn showing a variety of input types like file selection, select, text, numbers.](../../images/graphlan_screenshot.png)
 
 ```bash
-graphlan.py --format "png" --size 7 input_tree.txt png_image.png
+graphlan.py --format png --size 7 'input_tree.txt' 'png_image.png'
 ```
 
 ---
@@ -73,7 +73,7 @@ Link between the Galaxy UI and the underlying tool:
 
 ## Tool execution
 
-![](../../images/wrapper_layers.png)
+![A flowchart is depicated with the galaxy interface pointing to a bowtie2-wrapper.xml file which has a command, inputs, and outputs. Inputs points back to the tool interface. The command block points to the Operating System with an image of servers and the bowtie2 binary. This points back to outputs, and back to the history within the galaxy interface](../../images/wrapper_layers.png)
 
 ???
 
@@ -86,7 +86,7 @@ Link between the Galaxy UI and the underlying tool:
 
 ## Tool execution
 
-![](../../images/wrapper_big_picture_1.png)
+![An XML file as an image. The tool id is on the first line, then a description element, a command block running "echo Hello World $mystring to $output", an inputs section with a mystring text input, and an output1 tabular data file. A help block is shown last.](../../images/wrapper_big_picture_1.png)
 
 ???
 
@@ -97,19 +97,51 @@ Link between the Galaxy UI and the underlying tool:
 
 ## Tool execution
 
-![](../../images/wrapper_big_picture_2.png)
+![The previous image, but the input parameter named 'mystring' is shown pointing to its place in the command block. Same for the output pointing to the command block. An overlay shows the Job Command Line /bin/echo Hello world you are amazing > a/path.dat](../../images/wrapper_big_picture_2.png)
 
 ---
 
 ## Tool execution
 
-![](../../images/wrapper_big_picture_3.png)
+![The previous image but now there is an overlay showing the output text Hello world you are amazing](../../images/wrapper_big_picture_3.png)
 
 ---
 
 ## Tool XML
 
 Galaxy tool XML format is formally defined in a XML Schema Definition (XSD), used to generate the corresponding [online documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html)
+
+---
+
+## XML Editor
+
+You are free to use your prefered code editor to write Galaxy tools.
+
+If you use Visual Studio Code (or Codium), we recommend to install the [dedicated extension](https://marketplace.visualstudio.com/items?itemName=davelopez.galaxy-tools).
+
+It provides XML validation, tags and attributes completion, help/documentation on hover, and other smart features to assist in following best practices.
+
+![An animation showing someone writing a tool XML file, while being assisted by the VSCode extension.](../../images/vscode_tool.gif)
+
+---
+
+## `tool`
+
+```xml
+<tool id="graphlan" name="GraPhlAn" version="1.1.3+galaxy2" profile="22.05">
+```
+- `id`: unique identifier of your tool, should contain only `[a-z0-9_-]`
+- `name`: shown to the user, displayed in the tool box
+- `version`: the version of the wrapped tool, followed by a `+galaxyX` suffix for wrapper version
+- `profile`: minimum Galaxy version that should be required to run this tool (IUC recommends not older than 1 year)
+
+???
+
+- The top level `tool` tag defines the tool naming and version
+- The `id` attribute is the unique identifier of your tool, it should contain only letters, digits, underscores or dashes
+- The `name` attribute is shown to the user and displayed in the tool box
+- The `version` attribute contains the version of the wrapped tool, followed by a `+galaxyX` suffix for wrapper version
+- The `profile` attribute should be set to the minimum Galaxy version that should be required to run this tool (IUC recommends not older than 1 year)
 
 ---
 
@@ -150,7 +182,9 @@ python '$__tool_directory__/graphlan.py'
 
 ## `inputs` > `param` to `command`
 
-Parameters are directly linked to variables in `<command>`
+Parameters are directly linked to variables in `<command>` by the `name` or `argument` attribute
+
+Parameters can be optional or required.
 
 ```xml
 <command><![CDATA[
@@ -174,14 +208,15 @@ graphlan.py
 
 ???
 
-- `name` or `argument` identifies a parameter (details of `argument` later)
-- Parameters can have different types (`data`, `data_collection`, `integer`, `float`, `text`, `select`, `boolean`, `color`, `data_column`,...)
+- The `name` or `argument` attribute identifies a parameter (details of `argument` later).
+- Parameters have different types (`data`, `data_collection`, `integer`, `float`, `text`, `select`, `boolean`, `color`, `data_column`,...)
+  and can be optional.
 
 ---
 
 ## `inputs` > `param` > `data`
 
-![](../../images/input_data.png)
+![Screenshot of the file selection input in Galaxy permitting selection of a single file, multiple files, or a collection. In bold text a label appears above the component describing its use. Below the component in light grey is a help message. This applies to every input in Galaxy](../../images/input_data.png)
 
 ```xml
 <param name="..." type="data" format="txt" label="..." help="..." />
@@ -193,17 +228,16 @@ graphlan.py
 
 ## `inputs` > `param` > `integer` | `float`
 
-![](../../images/input_integer.png)
+![Screenshot of an integer input, it's just an input field set to 7.](../../images/input_integer.png)
 
 ```xml
 <param name="..." type="integer" value="7" label="..." help="..."/>
 ```
 
-![](../../images/input_integer_range.png)
+![Screenshot of a float input from the cd_hit tool. This time also a slider appears due to addition of min and max](../../images/input_float_range.png)
 
 ```xml
-<param name="..." type="float" min="0" max="10" value="1" label="..."
-    help="..."/>
+<param name="..." type="float" min="0.4" max="1.0" value="0.9" label="..." help="..."/>
 ```
 
 ???
@@ -215,7 +249,7 @@ graphlan.py
 
 ## `inputs` > `param` > `text`
 
-![](../../images/input_text.png)
+![Screenshot of a textbox from the cd_hit tool.](../../images/input_text.png)
 
 ```xml
 <param name="..." type="text" value="..." label="..." help="..."/>
@@ -225,13 +259,11 @@ graphlan.py
 
 ## `inputs` > `param` > `select`
 
-![](../../images/input_select.png)
+![Screenshot of a select drop down with several image formats from the bedtools_bedtoigv tool.](../../images/input_select.png)
 
 ```xml
-<param name="..." type="select" label="..." help="...">
+<param name="..." type="select" label="...">
     <option value="png" selected="true">PNG</option>
-    <option value="pdf">PDF</option>
-    <option value="ps">PS</option>
     <option value="eps">EPS</option>
     <option value="svg">SVG</option>
 </param>
@@ -243,7 +275,7 @@ If no `option` has `selected="true"`, the first one is selected by default.
 
 ## `inputs` > `param` > `select`
 
-![](../../images/input_select_checkboxes.png)
+![The select is now a set of checkboxes.](../../images/input_select_checkboxes.png)
 
 ```xml
 <param name="..." type="select" display="radio" label="..." help="...">
@@ -258,7 +290,7 @@ If no `option` has `selected="true"`, the first one is selected by default.
 
 ## `inputs` > `param` > `select`
 
-![](../../images/input_select_multiple.png)
+![A select/unselect all checkbox appears before a box with numerous selections inside, appearing as badges that can be added or removed.](../../images/input_select_multiple.png)
 
 ```xml
 <param name="..." type="select" multiple="true" label="..." help="...">
@@ -272,7 +304,7 @@ If no `option` has `selected="true"`, the first one is selected by default.
 
 ## `inputs` > `param` > `boolean`
 
-![](../../images/input_boolean.png)
+![A yes/no switch from the bg_sortmerna tool.](../../images/input_boolean.png)
 
 ```xml
 <param name="..." type="boolean" checked="false" truevalue="--log" falsevalue=""
@@ -285,7 +317,10 @@ class: reduce70
 
 ## `inputs` > `param` > `conditional`
 
-.image-75[ ![](../../images/input_conditional.png) ]
+.pull-left[![Screenshot of a conditional select box set to Paired, and two file inputs appear below it.](../../images/input_conditional.png)]
+.pull-right[![Screenshot of a conditional select box set to Single, and only a single file input appears below it.](../../images/input_conditional_single.png)]
+
+<br style="clear:left;"/>
 
 ```xml
 <command><![CDATA[
@@ -318,7 +353,7 @@ class: reduce70
 
 ## `inputs` > `param` > `repeat`
 
-![](../../images/input_repeat.png)
+![Two boxes appear labelled 1: Series and 2: Series, with an insert series button below them. Each series box has two inputs in it, a file input and a select box.](../../images/input_repeat.png)
 
 ```xml
 <command><![CDATA[
@@ -345,13 +380,7 @@ It makes sense to use a `<repeat>` block only if it contains multiple related pa
 
 ## `outputs`
 
-Which files the tool will produce as output?
-
-![](../../images/output.png)
-
----
-
-## `outputs`
+.image-25[![Screenshot of a galaxy history with two outputs.](../../images/output.png)]
 
 ```xml
 <outputs>
@@ -428,7 +457,7 @@ If you need more precision:
 
 ## `help`
 
-![](../../images/help.png)
+![Screenshot of a help block in a galaxy tool, it shows the below text block rendered according to restructured text rules. What it does is bold, and user manual is a hyperlink to the bitbucket url.](../../images/help.png)
 
 ```xml
 <help><![CDATA[
@@ -450,7 +479,7 @@ Content should be in [reStructuredText markup format](https://docutils.sourcefor
 
 ## `citations`
 
-![](../../images/citations.png)
+![Screenshot of the citations box showing 5 nicely formatted citations with italics, and hyperlinked DOIs.](../../images/citations.png)
 
 ```xml
 <citations>
@@ -500,6 +529,8 @@ echo "Yeah it worked!"
 
 <small>The job will exit on the first error encountered.</small>
 
+<small>You can use `&&` or `;` if using a `profile` >= 20.09 (the `set -e` shell directive is now used by default).</small>
+
 ---
 
 ## Param argument
@@ -519,7 +550,7 @@ Use the `argument` tag when a `param` name reflects the command line argument
 
 Use sections to group related parameters
 
-![](../../images/input_section.png)
+![Screenshot of the same section twice, in the first it shows Additional Options and is collapsed. In the second it is expanded and an integer input can be seen.](../../images/input_section.png)
 
 ```xml
 <section name="advanced" title="Advanced options" expanded="False">
@@ -530,7 +561,7 @@ Use sections to group related parameters
 
 ---
 
-![](../../images/planemo-logo.png)
+![Planemo logo, the E mimics the galaxy logo with three bars, the bottom most offset](../../images/planemo-logo.png)
 
 > Command-line utilities to assist in building and publishing Galaxy tools.
 
@@ -539,13 +570,13 @@ Use sections to group related parameters
 
 ---
 
-##.image-25[![](../../images/planemo-logo.png)]
+##.image-25[![Planemo logo](../../images/planemo-logo.png)]
 
-![](../../images/big_picture.png)
+![An overly complicated flowchart with 11 steps and a three level hierarchy. The gist is that planemo tool_init lets a wrapper be created, planemo lint is then used. Planemo conda installs packages from a conda repository. This is then run with planemo test and planemo serve. Afterwards planemo shed_test, shed_create, and shed_update upload the wrapper to the galaxy toolshed. Then it is installed to a galaxy instance where it can be tested, and fetches the conda env from conda.](../../images/big_picture.png)
 
 ---
 
-##.image-25[![](../../images/planemo-logo.png)]
+##.image-25[![planemo logo again](../../images/planemo-logo.png)]
 
 `planemo tool_init`
 
@@ -576,17 +607,12 @@ $ planemo tool_init --id 'samtools_sort' --name 'Samtools sort' \
 
 class: packed
 
-##.image-25[![](../../images/planemo-logo.png)]
+##.image-25[![planemo logo again](../../images/planemo-logo.png)]
 
-`planemo lint`
-
-Checks the syntax of a tool
+`planemo lint`: Checks the syntax of a tool
 
 ```bash
 $ planemo lint
-```
-
-```bash
 Linting tool /opt/galaxy/tools/seqtk_seq.xml
 Applying linter tests... CHECK
 .. CHECK: 1 test(s) found.
@@ -609,7 +635,7 @@ Applying linter citations... CHECK
 
 ---
 
-##.image-25[![](../../images/planemo-logo.png)]
+##.image-25[![planemo logo again](../../images/planemo-logo.png)]
 
 `planemo serve`
 
@@ -623,11 +649,11 @@ Open http://127.0.0.1:9090/ in your web browser to view your new tool
 
 ---
 
-##.image-25[![](../../images/planemo-logo.png)]
+##.image-25[![planemo logo again](../../images/planemo-logo.png)]
 
 Building Galaxy Tools
 
-![](../../images/planemo_tool_building_lint.png)
+![flowchart with planemo tool_init creating a wrapper tool.xml and planemo lint being run repeatedly.](../../images/planemo_tool_building_lint.png)
 
 ---
 
@@ -640,17 +666,6 @@ Building Galaxy Tools
 - Functional testing is a quality assurance (QA) process.
 - The tests comfort developers and users that the tools can run across different servers/architectures. And that the latest modifications don't break older features.
 - Tools are tested by feeding them inputs and parameters and verifying the outputs (typically a diff)
-
----
-
-## Good practices
-
-1. Build tests using inputs/parameters/outputs
-2. Run the tests --> Failed --> Coffee
-3. Develop
-4. Run the tests --> Failed --> Coffee
-5. Develop
-6. Run the tests --> Succeed --> Beer
 
 ---
 
@@ -780,7 +795,7 @@ graphlan/
 
 ---
 
-##.image-25[![](../../images/planemo-logo.png)]
+##.image-25[![planemo logo yet again](../../images/planemo-logo.png)]
 
 `planemo test`
 
@@ -790,15 +805,15 @@ Runs all functional tests
 $ planemo test
 ```
 
-An HTML report is automatically created with logs in case of failing test
+An HTML report (`tool_test_output.html`) is automatically created with logs in case of failing test
 
 ---
 
-##.image-25[![](../../images/planemo-logo.png)]
+##.image-25[![planemo logo](../../images/planemo-logo.png)]
 
 Test Galaxy Tools
 
-![](../../images/planemo_tool_building_test.png)
+![flowchart with planemo tool_init creating a wrapper tool.xml and planemo lint being run repeatedly, and now planemo test as well.](../../images/planemo_tool_building_test.png)
 
 ---
 
@@ -810,7 +825,7 @@ Test Galaxy Tools
 
 How Galaxy will deal with dependencies?
 
-![](../../images/galaxy_instance.png)
+![schematic of a galaxy server with dependency resolution via requirement tags at the top. On the left is the tool box with a number of xml files listed like seqtk_seq and seqtk_subseq. On the right is applications & libraries showing only a few tools like seqtk, all of the 3 multipoe subtools were collapsed](../../images/galaxy_instance.png)
 
 ---
 
@@ -827,7 +842,7 @@ Local installation using Conda packages
 
 ---
 
-.image-50[![](../../../../shared/images/conda_logo.png)]
+.image-50[![Conda logo, the C is textured.](../../../../shared/images/conda_logo.png)]
 
 - Package, dependency and environment manager
 - Based on recipes describing how to install the software which are then built for their distribution
@@ -888,7 +903,7 @@ quit
 
 ## `macros`
 
-![](../../images/macro.png)
+![Another schemating with many arrows. Macros.xml is on the left with token and xml blocks. The token block points to examples like @THREADS@ and @HELP_ABOUT@. The xml block points to examples like <expand macro="requirements">. Both of these examples point to three blast tools which make use of the macros.](../../images/macro.png)
 
 .footnote[[Planemo documentation about macros](https://planemo.readthedocs.io/en/latest/writing_advanced.html#macros-reusable-elements)]
 
@@ -977,11 +992,12 @@ trinity.xml
 ```xml
 <macros>
     <token name="@TOOL_VERSION@">1.2</token>
+    <token name="@VERSION_SUFFIX@">3</token>
 </macros>
 ```
 
 ```xml
-<tool id="seqtk_seq" name="Convert to FASTA (seqtk)" version="@TOOL_VERSION@+galaxy3">
+<tool id="seqtk_seq" name="Convert to FASTA" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@">
     <requirements>
         <requirement type="package" version="@TOOL_VERSION@">seqtk</requirement>
     </requirements>
@@ -1023,11 +1039,11 @@ echo '$__app__.config.user_library_import_dir'
 <param name="..." type="data" format="txt" label="..." help="..." />
 ```
 
-![](../../images/input_data.png)
+![File selector input](../../images/input_data.png)
 
 Possible to select multiple dataset:
 
-![](../../images/input_data_multiple.png)
+![File selector input screenshot, but now the middle "multiple files" button is checked.](../../images/input_data_multiple.png)
 
 - Useful to launch the same tool on multiple datasets independently
 - One job per dataset
@@ -1040,7 +1056,7 @@ Possible to select multiple dataset:
 <param name="..." type="data" format="txt" multiple="true" label="..." help="..." />
 ```
 
-![](../../images/input_data_multiple2.png)
+![A multi-select file input field is shown, different than the normal file input there is no single file option.](../../images/input_data_multiple2.png)
 
 In the command:
 
@@ -1103,17 +1119,17 @@ Usage
 
 ## Dataset collections as input
 
-Mapping over:
+Mapping over (1 job per collection element):
 
 ```xml
 <param name="inputs" type="data" format="bam" label="Input BAM(s)" />
 ```
 
-![](../../images/input_data_collection.png)
+![The normal file selector is shown however now the collection input is clicked.](../../images/input_data_collection.png)
 
 Single execution:
-- accepted with `multiple="true"`
-- or accept only collections:
+- accepted with `multiple="true"` as described in previous slides
+- or you can accept only collections:
 
 ```xml
 <param name="inputs" type="data_collection" collection_type="list|paired|list:paired|..."
@@ -1121,8 +1137,7 @@ Single execution:
 ```
 
 ```xml
-<command><![CDATA[
-...
+<command><![CDATA[ ...
 #for $input in $inputs
     --input '$input'
     --sample_name '$input.element_identifier'
@@ -1157,9 +1172,9 @@ Unknown number of files:
 
 ---
 
-## Use multiple CPUs
+## Using multiple CPUs
 
-![](../../images/job_conf.xml_2.png)
+![Screenshot of two xml files. In the top is the jb_conf.xml where a command line job submission specification indicates that it will be submitted with 4 threads. A single tool, ncbi blastn wrapper is assigned to that destination. In the second xml file the blastn command uses the GALAXY_SLOTS variable to control how many threads are supplied to the tool.](../../images/job_conf.xml_2.png)
 
 ```bash
 blastn -query foo_bar -num_threads 4
@@ -1180,7 +1195,7 @@ blastn -query foo_bar -num_threads 4
 
 ## Using a data table in a tool
 
-![](../../images/tool_data_table_conf.xml.png)
+![Three xml files are shown. At the top is the tool data table conf which mentions a tool-data/bowtie2_indices.loc. Below is that bowtie2 loc file which indicates that hg19 will be found at a specific location in the /db directory. And the third is the bowtie2 wrapper which loads options from a data table, and points to the bowtie2_indexes named table in the first xml.](../../images/tool_data_table_conf.xml.png)
 
 ---
 
@@ -1216,7 +1231,7 @@ Added value:
 
 ## IUC: Intergalactic Utilities Commission
 
-.image-50[![IUC](../../images/iuc_logo.png)]
+.image-50[![IUC logo](../../images/iuc_logo.png)]
 
 - A team maintaining high quality tools
 - Establishing and following [best practices](https://galaxy-iuc-standards.readthedocs.io/) for tool development
@@ -1241,8 +1256,8 @@ Adding to an existing GitHub repository (IUC, GalaxyP, ...)
 Using your own GitHub repository
 
 - Reasons: ownership, specific practices, exotic tools
-- Follow the same structure
-- Use `.travis.yml` to automate tests and publishing
+- Follow the same structure as IUC
+- Automate tests and ToolShed publishing by reusing `.github/` configuration
 
 ---
 
@@ -1252,6 +1267,7 @@ Using planemo by hand
 
 - Ok for few tools
 - Makes contributing harder
+- Not recommended
 
 [Check out our tutorial to publish to the ToolShed using Planemo]({% link topics/dev/tutorials/toolshed/slides.html %})
 
@@ -1259,35 +1275,48 @@ Using planemo by hand
 
 ## Continuous Integration
 
-.image-50[![](../../images/github_logo.png)]
+.image-50[![Github logo](../../images/github_logo.png)]
 
-.image-50[![](../../images/travis_ci_logo.png)]
+.image-50[![Planemo logo](../../images/planemo-logo.png)]
 
-.image-50[![](../../images/planemo-logo.png)]
-
-.image-50[![](../../../../shared/images/conda_logo.png)]
+.image-50[![Conda logo](../../../../shared/images/conda_logo.png)]
 
 ---
 
 ## Continuous Integration
 
 - Create a Pull Request on a GitHub repository
-- Tests are automatically run on Travis
+- Tests are automatically run on GitHub Actions
 - Other contributors review your tool
-- The Pull Request is accepted when all lights are green
+- The Pull Request is accepted when all the lights are green
 - The tool is automatically uploaded to the ToolShed
 
 ---
 
-## GitHub side
+## GitHub Actions configuration
 
-![](../../images/github_travis_github.png)
+GitHub Actions configured in the `.github/` directory
+
+![Screenshot of a CI configuration file. It runs several planemo commands during before install, install, and script portions.](../../images/github_actions_iuc.png)
+
+Uses a standard GitHub Action developed on https://github.com/galaxyproject/planemo-ci-action
 
 ---
 
-## Travis CI side
+## GitHub Actions execution
 
-![](../../images/github_travis_travis.png)
+![Screenshot of a CI execution showing a tool test passing.](../../images/github_actions_executed1.png)
+![Screenshot of a CI execution showing details of test logs.](../../images/github_actions_executed2.png)
+
+---
+
+## GitHub Actions: test reports
+
+Downloadable HTML report, open it with a web browser to see the details
+
+.pull-left[![Screenshot of a CI execution artifacts, with a link to download an HTML report of the tests.](../../images/github_actions_artifacts.png)]
+
+.pull-right[![Screenshot of an example of HTML report of the tests.](../../images/github_actions_artifacts2.png)]
 
 ---
 
@@ -1356,78 +1385,4 @@ Applying linter readme... CHECK
 .. INFO: No README found skipping.
 +Linting tool […]/tandem_repeats_finder/tandem_repeats_finder_wrapper.xml
 […]
-```
-
----
-
-.image-50[![](../../../../shared/images/ansible_logo.png)]
-
-.image-50[![](../../../../shared/images/conda_logo.png)]
-
-.image-50[![](../../../../shared/images/docker_logo.png)]
-
----
-
-## Docker Galaxy Flavors
-
-![](../../images/galaxydocker_logo.png)
-
-.footnote[[Docker Galaxy Stable](https://github.com/bgruening/docker-galaxy-stable)]
-
----
-
-## Docker Galaxy Flavors
-
-Dockerfile
-
-```yaml
-# Galaxy - My own flavour
-# VERSION       0.1
-
-FROM quay.io/bgruening/galaxy:16.07
-
-MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
-
-ENV GALAXY_CONFIG_BRAND deepTools
-
-# Adding the tool definitions to the container
-ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml
-
-# Install deepTools
-RUN install-tools $GALAXY_ROOT/my_tool_list.yml
-```
-
----
-
-## Docker Galaxy Flavors
-
-`tool_list.yml`
-
-```yaml
-api_key: admin
-galaxy_instance: http://127.0.0.1:8080/
-tools:
-- name: fastqc
-  owner: devteam
-  tool_panel_section_id: cshl_library_information
-  tool_shed_url: https://toolshed.g2.bx.psu.edu
-  revisions:
-    - '8c650f7f76e9'  # v0.62
-    - 'd2cf2c0c8a11'  # v0.63
-- name: suite_deeptools
-  owner: bgruening
-  tool_panel_section_label: 'deepTools'
-  tool_shed_url: https://toolshed.g2.bx.psu.edu
-  revisions:
-    - '7f5562625ae2'
-```
-
----
-
-## Docker Galaxy Flavors
-
-RUN
-
-```bash
-docker run -d -p 8080:80 galaxy-deeptools
 ```

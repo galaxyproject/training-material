@@ -2,8 +2,9 @@
 layout: tutorial_hands_on
 
 title: "Calling very rare variants"
+subtopic: introduction
 zenodo_link: ""
-enable: false
+draft: true
 questions:
   - "What frequency of variants is so low that it is obscured by sequencing error rate?"
   - "What are the different types of consensus sequences produced from duplex sequencing?"
@@ -19,11 +20,10 @@ contributors:
   - NickSto
 ---
 
-# Introduction
 
 This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the *ABL1* dataset published by [Schmitt and colleagues](https://www.ncbi.nlm.nih.gov/pubmed/25849638) (SRA accession [SRR1799908](https://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -52,7 +52,7 @@ Processing the raw reads into consensus sequences consists of four main steps:
 
 Du Novo is a tool which can carry out these steps. Unlike most other such tools, it can do so without the use of a reference sequence, and it can correct for errors in the tags which can contribute to data loss.
 
-> ### {% icon comment %} Terminology
+> <comment-title>Terminology</comment-title>
 >
 > Du Novo processes the tags from each fragment by concatenating them into a single **barcode**.
 >
@@ -79,9 +79,9 @@ In the image above there are two alleles: green (`A`) and red (`G`). After PCR a
 
 The entire analysis described here is accessible as a [Galaxy history](https://usegalaxy.org/u/nstoler/h/du-novo-gtn-tutorial) that you can copy and play with.
 
-> ### {% icon comment %} Running the tools
+> <comment-title>Running the tools</comment-title>
 > * Leave all parameters on their default settings, unless instructed otherwise.
->   > ### {% icon comment %} Helping Du Novo
+>   > <comment-title>Helping Du Novo</comment-title>
 >   > But if you'd like to help improve Du Novo, consider checking `Yes` under {% icon param-check %} *Send usage data*.
 >   {: .comment}
 {: .comment}
@@ -106,7 +106,7 @@ The starting point of the analysis is sequencing reads (in [FASTQ](https://en.wi
 
 We uploaded the [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/) data directly from SRA as shown in [this screencast](https://vimeo.com/121187220).
 
-> ### {% icon hands_on %} Hands-on: Importing the raw data
+> <hands-on-title>Importing the raw data</hands-on-title>
 >
 > You can obtain the reads from this dataset by copying [this history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015).
 > 1. Make sure you're logged into [Galaxy](https://usegalaxy.org).
@@ -120,7 +120,7 @@ We uploaded the [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/article
 > `https://usegalaxy.org/history/export_archive?id=7ac09d1db287dbba`
 {: .hands_on}
 
-This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-the-read-quality).
+This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** in the dedicated [quality-control tutorial]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc---short--long-reads).
 
 This gave us the following plots:
 
@@ -134,7 +134,7 @@ One can see that these data are of excellent quality and no additional processin
 
 Now we are ready to collapse the raw reads into duplex consensus sequences.
 
-> ### {% icon comment %} Finding Du Novo
+> <comment-title>Finding Du Novo</comment-title>
 > * The tools in this portion of the tutorial can all be found in the **NGS: Du Novo** section.
 {: .comment}
 
@@ -142,7 +142,7 @@ Now we are ready to collapse the raw reads into duplex consensus sequences.
 
 The {% icon tool %} **Du Novo: Make families** tool will separate the 12bp tags from each read pair and concatenate them into a 24bp barcode. Then it will use the barcodes to sort the reads into families that all descend from the same original fragment.
 
-> ### {% icon hands_on %} Hands-on: Sorting reads into families
+> <hands-on-title>Sorting reads into families</hands-on-title>
 >
 > Run {% icon tool %} **Du Novo: Make families** with the following parameters:
 >  - {% icon param-file %} *Sequencing reads, mate 1*: `1: SRR1799908_forward`
@@ -158,7 +158,7 @@ The grouping reads based on barcode relies on exact barcode matches. Any PCR or 
 
 Du Novo includes a tool which can correct most of these errors and recover the affected reads. This can increase the final yield of duplex consensus reads by up to 11% (Stoler *et al.* 2018, in preparation).
 
-> ### {% icon hands_on %} Hands-on: Correcting barcodes
+> <hands-on-title>Correcting barcodes</hands-on-title>
 >
 > Run {% icon tool %} **Du Novo: Correct barcodes** with the following parameters:
 >  - {% icon param-file %} *Input reads*: `7: Du Novo: Make families on data 2 and data 1`
@@ -171,14 +171,14 @@ Du Novo includes a tool which can correct most of these errors and recover the a
 
 After grouping reads that came from the same original fragment, we need to align them with each other. This next tool will perform a multiple sequence alignment on each family.
 
-> ### {% icon comment %} Analysis bottleneck
+> <comment-title>Analysis bottleneck</comment-title>
 > This is by far the most time-consuming step.
 >
 > On this dataset, it took 2 hours to complete when run on [Galaxy Main](https://usegalaxy.org/).
 > - At the time, Galaxy allocated 6 cores to the job.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Aligning families
+> <hands-on-title>Aligning families</hands-on-title>
 >
 > Run {% icon tool %} **Du Novo: Align families** with the following parameters:
 >  - {% icon param-file %} *Input reads*: `8: Du Novo: Correct barcodes on data 7`
@@ -193,7 +193,7 @@ Now, we need to collapse the aligned reads into consensus sequences. This next t
 
 Normally, the tool only produces the final double-stranded consensus sequences. But we will make use of the single-stranded consensus sequences [later](#calling-variants-with-single-strand-consensus-sequences), so we'll tell it to keep those as well.
 
-> ### {% icon hands_on %} Hands-on: Making consensus sequences
+> <hands-on-title>Making consensus sequences</hands-on-title>
 >
 > Run {% icon tool %} **Du Novo: Make consensus reads** with the following parameters:
 >  - {% icon param-file %} *Aligned input reads*: `9: Du Novo: Align families on data 8`
@@ -209,7 +209,7 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 >  - `13: Du Novo: Make consensus reads on data 9 (SSCS mate 2)`
 {: .hands_on}
 
-> ### {% icon comment %} Setting output formats
+> <comment-title>Setting output formats</comment-title>
 >
 > You may have to set the datatype of the outputs from {% icon tool %} **Du Novo: Make consensus reads** tool.
 >
@@ -221,7 +221,7 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 > 4. Enter `fastqsanger`, then click the **Change datatype** button in the upper right of the pane.
 {: .comment}
 
-> ### {% icon details %} Where do the FASTQ quality scores come from?
+> <details-title>Where do the FASTQ quality scores come from?</details-title>
 >
 > There is no easy way to assign a PHRED score to a consensus base derived from many duplex reads.
 >
@@ -235,11 +235,11 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 
 ## Filtering consensuses
 
-You may have realized that when calling a "consensus" between two sequences, if the two disagree on a base, there's no way to know which is correct. So in these situations, Du Novo uses the [IUPAC ambiguity letter](https://en.wikipedia.org/wiki/Nucleic_acid_notation) for the two different bases (e.g. `W` = `A` or `T`). Also, when calling single-stranded consensus sequences, if there aren't enough high-quality bases to call a position (in the [above hands-on](#hands_on-hands-on-making-consensus-sequences), we set this threshold to 70%), it gives an `N`.
+You may have realized that when calling a "consensus" between two sequences, if the two disagree on a base, there's no way to know which is correct. So in these situations, Du Novo uses the [IUPAC ambiguity letter](https://en.wikipedia.org/wiki/Nucleic_acid_notation) for the two different bases (e.g. `W` = `A` or `T`). Also, when calling single-stranded consensus sequences, if there aren't enough high-quality bases to call a position (in the [above hands-on](#hands-on-making-consensus-sequences), we set this threshold to 70%), it gives an `N`.
 
 This information could be useful for some analyses, but not for our variant calling. The tool {% icon tool %} **Sequence Content Trimmer** will help with filtering these out. With the settings below, it will move along the read, tracking the frequency of ambiguous (non-ACGT) bases in a 10bp window. If it sees more than 2 ambiguous bases in a window, it will remove the rest of the read, starting with the first offending base in the window. We'll also tell it to remove entirely any read pair containing a read that got trimmed to less than 50bp.
 
-> ### {% icon hands_on %} Hands-on: Filtering the consensus sequences
+> <hands-on-title>Filtering the consensus sequences</hands-on-title>
 >
 > Run {% icon tool %} **Sequence Content Trimmer** with the following parameters:
 >  - {% icon param-select %} *Paired reads?*: `Paired`
@@ -269,7 +269,7 @@ We're not specifically interested in the reference sequence, since all we care a
 
 Here, we'll use {% icon tool %} **Map with BWA-MEM** to map the DCS reads to the human reference genome.
 
-> ### {% icon hands_on %} Hands-on: Align with BWA-MEM
+> <hands-on-title>Align with BWA-MEM</hands-on-title>
 >
 > Run {% icon tool %} **Map with BWA-MEM** with the following parameters:
 >  - {% icon param-select %} *Using reference genome?*: `Human (Homo sapiens) (b38): hg38`
@@ -283,7 +283,7 @@ Here, we'll use {% icon tool %} **Map with BWA-MEM** to map the DCS reads to the
 
 To normalize the positional distribution of indels we use the {% icon tool %} **BamLeftAlign** utility from the [FreeBayes](https://github.com/ekg/freebayes#indels) package. You can find it in the **NGS: Variant Analysis** section. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci):
 
-> ### {% icon hands_on %} Hands-on: Left-align indels
+> <hands-on-title>Left-align indels</hands-on-title>
 >
 > Run {% icon tool %} **BamLeftAlign** with the following parameters:
 >  - {% icon param-file %} *Select alignment file in BAM format*: `16: Map with BWA-MEM on data 15 and data 14 (mapped reads in BAM format)`
@@ -305,7 +305,7 @@ In our case, we're interested in *rare* variants. So what we'll report is the si
 
 To identify sites containing variants we use the {% icon tool %} **Naive Variant Caller (NVC)** tool from the **NGS: Variant Analysis** section. This reads the alignment and counts the number of bases of each type at each site.
 
-> ### {% icon hands_on %} Hands-on: Count the variants
+> <hands-on-title>Count the variants</hands-on-title>
 >
 > Run {% icon tool %} **Naive Variant Caller (NVC)** with the following parameters:
 >  - {% icon param-file %} *BAM file*: `17: BamLeftAlign on data 16 (alignments)`
@@ -315,7 +315,7 @@ To identify sites containing variants we use the {% icon tool %} **Naive Variant
 >  - {% icon param-text %} *Chromosome*: `chr9`
 >    - *ABL1* is on chr9. Restricting it to this region saves some processing time.
 >  - {% icon param-text %} *Minimum base quality*: `0`
-     - In our case, base quality [isn't meaningful](#details-where-do-the-fastq-quality-scores-come-from), so we set the threshold to 0.
+>    - In our case, base quality [isn't meaningful](#details-where-do-the-fastq-quality-scores-come-from), so we set the threshold to 0.
 >  - {% icon param-text %} *Minimum mapping quality*: `20`
 >  - {% icon param-text %} *Ploidy*: `1`
 >    - Ploidy is irrelevant here as it is a mixture of multiple genomes.
@@ -329,7 +329,7 @@ The {% icon tool %} **Naive Variant Caller (NVC)** generates a [VCF](https://en.
 
 Now we'll want to parse the VCF produced by the NVC, determine what the major and minor allele is at each site, and calculate their frequencies. The {% icon tool %} **Variant Annotator** from the **NGS: Variant Analysis** section can do this.
 
-> ### {% icon hands_on %} Hands-on: Read the variants file
+> <hands-on-title>Read the variants file</hands-on-title>
 >
 > Run {% icon tool %} **Variant Annotator** with the following parameters:
 >  - {% icon param-file %} *Input variants from Naive Variants Detector*: `18: Naive Variant Caller (NVC) on data 17`
@@ -347,7 +347,7 @@ Now we have a file containing the base counts for every site covered by at least
 
 The {% icon tool %} **Variant Annotator** produces a simple tab-delimited file, with one site per line. We can use the {% icon tool %} **Filter** tool from the **Filter and Sort** section to process this kind of file. We'll use the filter `c16 >= 0.01` to remove lines where the value in column 16 is less than 0.01. Column 16 contains the minor allele frequency, so this will remove all sites with a MAF less than 1%.
 
-> ### {% icon hands_on %} Hands-on: Filter the raw variants list
+> <hands-on-title>Filter the raw variants list</hands-on-title>
 >
 > Run {% icon tool %} **Filter** with the following parameters:
 >  - {% icon param-file %} *Filter*: `19: Variant Annotator on data 18`
@@ -379,7 +379,7 @@ Analysis of SSCS data follows the exact same trajectory:
  	- [Left aligning indels](#left-aligning-indels)
 * [Calling the variants](#calling-the-variants)
 
-> ### {% icon tip %} Tip: Re-running with the same settings
+> <tip-title>Re-running with the same settings</tip-title>
 >
 > There's a shortcut to avoid setting every parameter the second time you run a tool.
 >
@@ -390,13 +390,21 @@ Analysis of SSCS data follows the exact same trajectory:
 
 ## Re-running analyses with workflows
 
-Instead of manually re-running all the tools in the variant calling section, you can use a **workflow** to automatically run the same tools, but on the SSCS reads. Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows [here](../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data).
+Instead of manually re-running all the tools in the variant calling section, you can use a **workflow** to automatically run the same tools, but on the SSCS reads. Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows in the [Galaxy 101 introductory tutorial](../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data).
 
 We've prepared two workflows which split the above analysis into two steps:
 
-1. [Using Du Novo](https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial) to create consensus sequencs from raw reads.
+1. [Using Du Novo](https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial) to create consensus sequences from raw reads.
   - This will generate trimmed DCS and SSCS files from raw sequencing data.
   - This does not include the FastQC step. You should always run FastQC on your raw reads first, to check the quality of your sequencing run before proceeding with the analysis.
+
+   > <comment-title>Helping Du Novo</comment-title>
+   > The {% icon param-check %} *Send usage data* option is left off in the above workflow.
+   > This is because we want to make sure you only share data knowingly.
+   >
+   > But again, if you'd like to help improve Du Novo, consider turning it on.
+   {: .comment}
+
 2. [Calling variants](https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial) from consensus sequences.
   - This takes a pair of FASTQ files and calls variants using them.
   - If you'd like variants from both DCS and SSCS, you'll have to run this twice, once on each.
@@ -404,20 +412,9 @@ We've prepared two workflows which split the above analysis into two steps:
 
 You can use the variant calling workflow to call variants using the SSCS instead of the DCS.
 
-> ### {% icon comment %} Helping Du Novo
-> The {% icon param-check %} *Send usage data* option is left off in the above workflows.
-> - We want to make sure you only share data knowingly.
->
-> But again, if you'd like to help improve Du Novo, consider turning it on.
-{: .comment}
+![Du Novo workflow](../../images/workflow-dunovo.png "Workflow 1: Making consensus sequences")
 
-**Workflow: Making consensus sequences**
-
-[![Du Novo workflow](../../images/workflow-dunovo.png)](https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial)
-
-**Workflow: Variant calling**
-
-[![Variant calling workflow](../../images/workflow-dunovo-variant-calling.png)](https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial)
+![Variant calling workflow](../../images/workflow-dunovo-variant-calling.png "Workflow 2: Variant calling")
 
 # Conclusion
 

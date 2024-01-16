@@ -1,0 +1,2977 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Workflow for GTN Pangeo 101 for everyone - Introduction to Xarray",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-1784-2920",
+            "name": "Anne Fouilloux",
+            "url": "https://github.com/annefou"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "GTN 'Pangeo 101 for everyone - Xarray'",
+    "steps": {
+        "0": {
+            "annotation": "Which index to plot. Default is the first one e.g. 0",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Which index to plot. Default is the first one e.g. 0",
+                    "name": "plot first time e.g. index=0"
+                }
+            ],
+            "label": "plot first time e.g. index=0",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 806.859375,
+                "height": 102.5625,
+                "left": 328.5625,
+                "right": 528.5625,
+                "top": 704.296875,
+                "width": 200,
+                "x": 328.5625,
+                "y": 704.296875
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": \"0\", \"suggestions\": [\"0\"], \"parameter_type\": \"text\", \"optional\": true}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "6919cfef-7066-4bcc-b416-23d311895239",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "netCDF input (4 days forecast) of PM2.5 from Copernicus Atmosphere Monitoring Service\nhttps://ads.atmosphere.copernicus.eu/#!/home\n\nAs an example https://doi.org/10.5281/zenodo.5805953",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "netCDF input (4 days forecast) of PM2.5 from Copernicus Atmosphere Monitoring Service\nhttps://ads.atmosphere.copernicus.eu/#!/home\n\nAs an example https://doi.org/10.5281/zenodo.5805953",
+                    "name": "CAMS-PM2_5-20211222.netcdf"
+                }
+            ],
+            "label": "CAMS-PM2_5-20211222.netcdf",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 1039.46875,
+                "height": 82.171875,
+                "left": -237.4375,
+                "right": -37.4375,
+                "top": 957.296875,
+                "width": 200,
+                "x": -237.4375,
+                "y": 957.296875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "23224390-493a-491e-a97e-3c12737b066c",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Which index to plot. Default is the first one e.g. 60",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Which index to plot. Default is the first one e.g. 60",
+                    "name": "plot forecast time 2 days 12:00 UTC"
+                }
+            ],
+            "label": "plot forecast time 2 days 12:00 UTC",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 1120.859375,
+                "height": 102.5625,
+                "left": 328.5625,
+                "right": 528.5625,
+                "top": 1018.296875,
+                "width": 200,
+                "x": 328.5625,
+                "y": 1018.296875
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": \"60\", \"suggestions\": [\"60\"], \"parameter_type\": \"text\", \"optional\": true}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "566d7f78-5e2d-4f1c-a86c-7273150215fa",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Select time index 5 for plotting",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select time index 5 for plotting",
+                    "name": "time=5"
+                }
+            ],
+            "label": "time=5",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 627.078125,
+                "height": 61.78125,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": 565.296875,
+                "width": 200,
+                "x": 1222.5625,
+                "y": 565.296875
+            },
+            "tool_id": null,
+            "tool_state": "{\"restrictions\": [\"5\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "a24ee007-4960-4baf-8adf-7eb52332d863",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "Select time index 6 for plotting",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select time index 6 for plotting",
+                    "name": "time=6"
+                }
+            ],
+            "label": "time=6",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 728.078125,
+                "height": 61.78125,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": 666.296875,
+                "width": 200,
+                "x": 1222.5625,
+                "y": 666.296875
+            },
+            "tool_id": null,
+            "tool_state": "{\"restrictions\": [\"6\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "63505be1-6d31-4fc7-b4a9-13fd2020b2a6",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "Select time index 3 for plotting",
+            "content_id": null,
+            "errors": null,
+            "id": 5,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select time index 3 for plotting",
+                    "name": "time=3"
+                }
+            ],
+            "label": "time=3",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 829.078125,
+                "height": 61.78125,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": 767.296875,
+                "width": 200,
+                "x": 1222.5625,
+                "y": 767.296875
+            },
+            "tool_id": null,
+            "tool_state": "{\"restrictions\": [\"3\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "809770ff-4420-465e-b861-8ad043ec474f",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "Select time index 2 for plotting",
+            "content_id": null,
+            "errors": null,
+            "id": 6,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select time index 2 for plotting",
+                    "name": "time=2"
+                }
+            ],
+            "label": "time=2",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 930.078125,
+                "height": 61.78125,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": 868.296875,
+                "width": 200,
+                "x": 1222.5625,
+                "y": 868.296875
+            },
+            "tool_id": null,
+            "tool_state": "{\"restrictions\": [\"2\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "1534fecd-9660-4ac2-8332-2256def2a529",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "Select time index 7 for plotting",
+            "content_id": null,
+            "errors": null,
+            "id": 7,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select time index 7 for plotting",
+                    "name": "time=7"
+                }
+            ],
+            "label": "time=7",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 1500.078125,
+                "height": 61.78125,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": 1438.296875,
+                "width": 200,
+                "x": 1222.5625,
+                "y": 1438.296875
+            },
+            "tool_id": null,
+            "tool_state": "{\"restrictions\": [\"7\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "abf46fe0-1dfd-4953-96e5-e971245ee9ad",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "Select time index 1 for plotting",
+            "content_id": null,
+            "errors": null,
+            "id": 8,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select time index 1 for plotting",
+                    "name": "time=1"
+                }
+            ],
+            "label": "time=1",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 1600.078125,
+                "height": 61.78125,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": 1538.296875,
+                "width": 200,
+                "x": 1222.5625,
+                "y": 1538.296875
+            },
+            "tool_id": null,
+            "tool_state": "{\"restrictions\": [\"1\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "128438ed-e0fe-4ac6-89f8-c33ee6eee110",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "Select time index 4 for plotting",
+            "content_id": null,
+            "errors": null,
+            "id": 9,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select time index 4 for plotting",
+                    "name": "time=4"
+                }
+            ],
+            "label": "time=4",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 1700.078125,
+                "height": 61.78125,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": 1638.296875,
+                "width": 200,
+                "x": 1222.5625,
+                "y": 1638.296875
+            },
+            "tool_id": null,
+            "tool_state": "{\"restrictions\": [\"4\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "ab171440-bd89-4184-9bd1-95fb9794c97a",
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "Select time index 9 for plotting",
+            "content_id": null,
+            "errors": null,
+            "id": 10,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select time index 9 for plotting",
+                    "name": "time=0"
+                }
+            ],
+            "label": "time=0",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 1801.078125,
+                "height": 61.78125,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": 1739.296875,
+                "width": 200,
+                "x": 1222.5625,
+                "y": 1739.296875
+            },
+            "tool_id": null,
+            "tool_state": "{\"restrictions\": [\"0\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "38a2dac0-d29a-4217-882d-316e095cd9f3",
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray Coordinate Info",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 473.859375,
+                "height": 113.5625,
+                "left": 40.5625,
+                "right": 240.5625,
+                "top": 360.296875,
+                "width": 200,
+                "x": 40.5625,
+                "y": 360.296875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6015f30a7258",
+                "name": "xarray_coords_info",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "a88bbebf-2396-45d8-9012-75a295eca17f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_dir",
+                    "uuid": "a55c361e-9df4-4026-b94d-958f404063b5"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray Metadata Info",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "info",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 666.25,
+                "height": 143.953125,
+                "left": 328.5625,
+                "right": 528.5625,
+                "top": 522.296875,
+                "width": 200,
+                "x": 328.5625,
+                "y": 522.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActioninfo": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "info"
+                },
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1",
+            "tool_shed_repository": {
+                "changeset_revision": "e8650cdf092f",
+                "name": "xarray_metadata_info",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.15.1",
+            "type": "tool",
+            "uuid": "acde0c8f-4b44-4893-bc49-2356c3adaf99",
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "output_dir"
+                }
+            },
+            "inputs": [],
+            "label": "extract longitude",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "bottom": 312.25,
+                "height": 133.953125,
+                "left": 328.5625,
+                "right": 528.5625,
+                "top": 178.296875,
+                "width": 200,
+                "x": 328.5625,
+                "y": 178.296875
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"longitude\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "bdd20b99-cb89-4c08-b1c7-512e3d09c55e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "cbe23d4b-dbe6-44c8-bcd9-2d6177c4eec4"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "output_dir"
+                }
+            },
+            "inputs": [],
+            "label": "extract latitude",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "bottom": 484.25,
+                "height": 133.953125,
+                "left": 328.5625,
+                "right": 528.5625,
+                "top": 350.296875,
+                "width": 200,
+                "x": 328.5625,
+                "y": 350.296875
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"latitude\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "07b58c0e-f45a-47f8-93d5-95113766d98a",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "d3501c46-1ac0-4cd8-9fbc-dbaa13fb2b38"
+                }
+            ]
+        },
+        "15": {
+            "annotation": "This step is used to extract time from all the coordinates.",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "output_dir"
+                }
+            },
+            "inputs": [],
+            "label": "Extract time from coordinate info",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "bottom": 979.25,
+                "height": 133.953125,
+                "left": 328.5625,
+                "right": 528.5625,
+                "top": 845.296875,
+                "width": 200,
+                "x": 328.5625,
+                "y": 845.296875
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"time\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "cea72621-2a3b-4ea2-8b58-28bed9ea5a7d",
+            "workflow_outputs": [
+                {
+                    "label": "input dataset(s) (extracted element)",
+                    "output_name": "output",
+                    "uuid": "3b4968d7-8984-4e66-87a9-a3ab8fc12ca4"
+                }
+            ]
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "user_choice_0|dim_tab": {
+                    "id": 14,
+                    "output_name": "output"
+                },
+                "user_choice_1|dim_tab": {
+                    "id": 13,
+                    "output_name": "output"
+                },
+                "var_tab": {
+                    "id": 12,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray operations",
+            "outputs": [
+                {
+                    "name": "output_netcdf",
+                    "type": "netcdf"
+                }
+            ],
+            "position": {
+                "bottom": 175.59375,
+                "height": 286.296875,
+                "left": 666.5625,
+                "right": 866.5625,
+                "top": -110.703125,
+                "width": 200,
+                "x": 666.5625,
+                "y": -110.703125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1a91e551f3a9",
+                "name": "xarray_netcdf2netcdf",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"scale\": null, \"user_choice\": [{\"__index__\": 0, \"dim\": \"latitude\", \"dim_tab\": {\"__class__\": \"ConnectedValue\"}, \"condi_between\": {\"comparator\": \"sl\", \"__current_case__\": 0, \"t1\": \"290\", \"t2\": \"291\"}}, {\"__index__\": 1, \"dim\": \"longitude\", \"dim_tab\": {\"__class__\": \"ConnectedValue\"}, \"condi_between\": {\"comparator\": \"sl\", \"__current_case__\": 0, \"t1\": \"392\", \"t2\": \"393\"}}], \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"write_all\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "39c3c4aa-8aa8-4838-9f4f-1e2bbe969cea",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_netcdf",
+                    "uuid": "88559166-0620-48ef-8def-48e43bf5f9e8"
+                }
+            ]
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "user_choice_0|dim_tab": {
+                    "id": 15,
+                    "output_name": "output"
+                },
+                "var_tab": {
+                    "id": 12,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray operations",
+            "outputs": [
+                {
+                    "name": "output_netcdf",
+                    "type": "netcdf"
+                }
+            ],
+            "position": {
+                "bottom": 428.421875,
+                "height": 215.125,
+                "left": 666.5625,
+                "right": 866.5625,
+                "top": 213.296875,
+                "width": 200,
+                "x": 666.5625,
+                "y": 213.296875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1a91e551f3a9",
+                "name": "xarray_netcdf2netcdf",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"scale\": null, \"user_choice\": [{\"__index__\": 0, \"dim\": \"time\", \"dim_tab\": {\"__class__\": \"ConnectedValue\"}, \"condi_between\": {\"comparator\": \"sl\", \"__current_case__\": 0, \"t1\": \"0\", \"t2\": \"24\"}}], \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"write_all\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "161a7b32-a63a-4ff1-991d-4cad44e317f1",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_netcdf",
+                    "uuid": "5f3567ca-c0ff-40c6-a1b7-5af79f34e9ee"
+                }
+            ]
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "user_choice_0|dim_tab": {
+                    "id": 15,
+                    "output_name": "output"
+                },
+                "user_choice_1|dim_tab": {
+                    "id": 14,
+                    "output_name": "output"
+                },
+                "user_choice_2|dim_tab": {
+                    "id": 13,
+                    "output_name": "output"
+                },
+                "var_tab": {
+                    "id": 12,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray operations",
+            "outputs": [
+                {
+                    "name": "output_netcdf",
+                    "type": "netcdf"
+                }
+            ],
+            "position": {
+                "bottom": 824.765625,
+                "height": 357.46875,
+                "left": 666.5625,
+                "right": 866.5625,
+                "top": 467.296875,
+                "width": 200,
+                "x": 666.5625,
+                "y": 467.296875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1a91e551f3a9",
+                "name": "xarray_netcdf2netcdf",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"scale\": null, \"user_choice\": [{\"__index__\": 0, \"dim\": \"time\", \"dim_tab\": {\"__class__\": \"ConnectedValue\"}, \"condi_between\": {\"comparator\": \"sl\", \"__current_case__\": 0, \"t1\": \"10\", \"t2\": \"18\"}}, {\"__index__\": 1, \"dim\": \"latitude\", \"dim_tab\": {\"__class__\": \"ConnectedValue\"}, \"condi_between\": {\"comparator\": \"sl\", \"__current_case__\": 0, \"t1\": \"269\", \"t2\": \"299\"}}, {\"__index__\": 2, \"dim\": \"longitude\", \"dim_tab\": {\"__class__\": \"ConnectedValue\"}, \"condi_between\": {\"comparator\": \"sl\", \"__current_case__\": 0, \"t1\": \"360\", \"t2\": \"400\"}}], \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"write_all\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "e6436aee-bdfd-410b-8b2a-125586e2e8a8",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_netcdf",
+                    "uuid": "63946d3c-506d-4f50-a6ee-13e8c70c9ab8"
+                }
+            ]
+        },
+        "19": {
+            "annotation": "Map of PM2.5 for the reference date and time.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 15,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "var_tab": {
+                    "id": 12,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "condi_datetime"
+                },
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "var_tab"
+                }
+            ],
+            "label": "PM2.5 CAMS Europe 0 days 00:00 UTC (reference time)",
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1138.203125,
+                "height": 275.90625,
+                "left": 666.5625,
+                "right": 866.5625,
+                "top": 862.296875,
+                "width": 200,
+                "x": 666.5625,
+                "y": 862.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"RuntimeValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"Yes\", \"threshold\": null, \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"RuntimeValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "3d814592-5964-4827-b1db-4b8d8e89af05",
+            "workflow_outputs": [
+                {
+                    "label": "PM2.5 reference date Europe",
+                    "output_name": "output_dir",
+                    "uuid": "42483031-21e2-4d88-8898-4a9aa9bb10e5"
+                }
+            ]
+        },
+        "20": {
+            "annotation": "one map plot for the entire region (here Europe) and for day 2 12:00 UTC.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 15,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "var_tab": {
+                    "id": 12,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "condi_datetime"
+                },
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "var_tab"
+                }
+            ],
+            "label": "PM2.5 CAMS forecast 2 days 12:00 UTC",
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1390.8125,
+                "height": 255.515625,
+                "left": 666.5625,
+                "right": 866.5625,
+                "top": 1135.296875,
+                "width": 200,
+                "x": 666.5625,
+                "y": 1135.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"RuntimeValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"Yes\", \"threshold\": null, \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"RuntimeValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "8d8440dd-6bcd-499a-bff7-f76426c841ef",
+            "workflow_outputs": [
+                {
+                    "label": "PM2.5 fc 2 days 12:00 UTC Europe",
+                    "output_name": "output_dir",
+                    "uuid": "07ba8141-bad3-4a61-833d-3b3e82b53fdb"
+                }
+            ]
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "input": {
+                    "id": 16,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 12,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool NetCDF xarray Selection",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool NetCDF xarray Selection",
+                    "name": "var_tab"
+                }
+            ],
+            "label": null,
+            "name": "NetCDF xarray Selection",
+            "outputs": [
+                {
+                    "name": "simpleoutput",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": -31.75,
+                "height": 143.953125,
+                "left": 944.5625,
+                "right": 1144.5625,
+                "top": -175.703125,
+                "width": 200,
+                "x": 944.5625,
+                "y": -175.703125
+            },
+            "post_job_actions": {
+                "HideDatasetActionsimpleoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "simpleoutput"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1",
+            "tool_shed_repository": {
+                "changeset_revision": "6baac361495b",
+                "name": "xarray_select",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"condi_source_coord\": {\"coord_source\": \"coord_from_stdin\", \"__current_case__\": 1, \"condi_coord\": {\"coord\": \"global\", \"__current_case__\": 2}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"time\": {\"condi_datetime\": {\"datetime\": \"no\", \"__current_case__\": 0}}, \"user_choice\": [], \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.15.1",
+            "type": "tool",
+            "uuid": "6c6f47cc-5b47-4cc3-a2f0-320aedcebb74",
+            "workflow_outputs": []
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "input": {
+                    "id": 17,
+                    "output_name": "output_netcdf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray Coordinate Info",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 377.859375,
+                "height": 113.5625,
+                "left": 944.5625,
+                "right": 1144.5625,
+                "top": 264.296875,
+                "width": 200,
+                "x": 944.5625,
+                "y": 264.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6015f30a7258",
+                "name": "xarray_coords_info",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "22ca6b7a-1fab-4118-b08c-15a3bda93743",
+            "workflow_outputs": []
+        },
+        "23": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray Coordinate Info",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 1304.859375,
+                "height": 113.5625,
+                "left": 944.5625,
+                "right": 1144.5625,
+                "top": 1191.296875,
+                "width": 200,
+                "x": 944.5625,
+                "y": 1191.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6015f30a7258",
+                "name": "xarray_coords_info",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "a06bc889-0224-4bdc-8541-edf054df6b93",
+            "workflow_outputs": []
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray Metadata Info",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "info",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 1111.25,
+                "height": 143.953125,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": 967.296875,
+                "width": 200,
+                "x": 1222.5625,
+                "y": 967.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActioninfo": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "info"
+                },
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1",
+            "tool_shed_repository": {
+                "changeset_revision": "e8650cdf092f",
+                "name": "xarray_metadata_info",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.15.1",
+            "type": "tool",
+            "uuid": "dd71f017-a1b1-4dec-a2dd-3b22933bd36f",
+            "workflow_outputs": []
+        },
+        "25": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1",
+            "errors": null,
+            "id": 25,
+            "input_connections": {
+                "input": {
+                    "id": 21,
+                    "output_name": "simpleoutput"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Column Regex Find And Replace",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Column Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": -47.140625,
+                "height": 113.5625,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": -160.703125,
+                "width": 200,
+                "x": 1222.5625,
+                "y": -160.703125
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ae8c4b2488e7",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"checks\": [{\"__index__\": 0, \"pattern\": \"0 days\", \"replacement\": \"20211222\"}, {\"__index__\": 1, \"pattern\": \"1 days\", \"replacement\": \"20211223\"}, {\"__index__\": 2, \"pattern\": \"2 days\", \"replacement\": \"20211224\"}, {\"__index__\": 3, \"pattern\": \"3 days\", \"replacement\": \"20211225\"}, {\"__index__\": 4, \"pattern\": \"4 days\", \"replacement\": \"20211226\"}], \"field\": \"2\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "a1ac2eae-560b-465d-b153-beb394aec139",
+            "workflow_outputs": []
+        },
+        "26": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+            "errors": null,
+            "id": 26,
+            "input_connections": {
+                "input1": {
+                    "id": 21,
+                    "output_name": "simpleoutput"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Scatterplot with ggplot2",
+                    "name": "input1"
+                }
+            ],
+            "label": "PM2.5 over Naples (4 days forecast)",
+            "name": "Scatterplot with ggplot2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "bottom": -198.359375,
+                "height": 154.34375,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": -352.703125,
+                "width": 200,
+                "x": 1222.5625,
+                "y": -352.703125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "e3a675da7fd0",
+                "name": "ggplot2_point",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"type\": \"lines\", \"points\": {\"pointoptions\": \"defined\", \"__current_case__\": 1, \"size\": \"1.0\", \"alpha\": \"0.7\", \"pointcolor\": \"black\"}, \"factor\": {\"factoring\": \"Default\", \"__current_case__\": 0}, \"axis_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"axis_text_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"plot_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"gridlinecust\": \"default\", \"transform\": \"none\", \"scaling\": {\"plot_scaling\": \"Automatic\", \"__current_case__\": 0}, \"theme\": \"bw\", \"legend\": \"yes\"}, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"out\": {\"unit_output_dim\": \"in\", \"width_output_dim\": \"7.0\", \"height_output_dim\": \"7.0\", \"dpi_output_dim\": \"300.0\", \"additional_output_format\": \"none\"}, \"title\": \"\", \"xlab\": \"Forecast time (hour) from December, 22 2021\", \"xplot\": \"1\", \"ylab\": \"Particule Matter < 2.5 um-3\", \"yplot\": \"6\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1+galaxy2",
+            "type": "tool",
+            "uuid": "27171f25-90d7-405c-af69-82625303a2a2",
+            "workflow_outputs": [
+                {
+                    "label": "1D plot PM2.5 over Naples (4 days forecast)",
+                    "output_name": "output1",
+                    "uuid": "8984beb4-e593-42f8-8de5-0e92631061c7"
+                }
+            ]
+        },
+        "27": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 27,
+            "input_connections": {
+                "input": {
+                    "id": 22,
+                    "output_name": "output_dir"
+                }
+            },
+            "inputs": [],
+            "label": "Extract times from coordinates",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "bottom": 388.25,
+                "height": 133.953125,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": 254.296875,
+                "width": 200,
+                "x": 1222.5625,
+                "y": 254.296875
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"time\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "b73f7317-d86c-4b42-ad39-e6febe9fa3dd",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "06d825b7-4242-42c7-98ce-85a13f775d5e"
+                }
+            ]
+        },
+        "28": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 28,
+            "input_connections": {
+                "input": {
+                    "id": 23,
+                    "output_name": "output_dir"
+                }
+            },
+            "inputs": [],
+            "label": "Extract time",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "bottom": 1304.859375,
+                "height": 113.5625,
+                "left": 1222.5625,
+                "right": 1422.5625,
+                "top": 1191.296875,
+                "width": 200,
+                "x": 1222.5625,
+                "y": 1191.296875
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"time\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "85cd5774-4b6c-4194-ab50-67d89333fb71",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "a0efce76-3fcd-4f14-bf46-82a6f2ee85dc"
+                }
+            ]
+        },
+        "29": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1",
+            "errors": null,
+            "id": 29,
+            "input_connections": {
+                "ifilename": {
+                    "id": 25,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool climate stripes",
+                    "name": "ifilename"
+                }
+            ],
+            "label": " stripes PM2.5 over Naples (4 days forecast)",
+            "name": "climate stripes",
+            "outputs": [
+                {
+                    "name": "ofilename",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "bottom": -1072.96875,
+                "height": 174.734375,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": -1247.703125,
+                "width": 200,
+                "x": 1680.5625,
+                "y": -1247.703125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "c6f2435d680b",
+                "name": "climate_stripes",
+                "owner": "climate",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"xname\": \"time\", \"format_date\": \"%Y%m%d %H:%M:%S.%f\", \"format_plot\": \"%d %b %H hours\", \"colormap\": \"winter\"}, \"ifilename\": {\"__class__\": \"RuntimeValue\"}, \"title\": \"PM2.5 4 days forecast from December 22 2021 over Naples\", \"variable\": \"pm2p5_conc\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "d5da8203-3dab-447b-a8db-1eab85cb8174",
+            "workflow_outputs": [
+                {
+                    "label": "PM2.5 stripes Naples for 4 days forecast from reference date",
+                    "output_name": "ofilename",
+                    "uuid": "92cad576-78b5-4e07-9a07-6f05ff8f4a56"
+                }
+            ]
+        },
+        "30": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 30,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 27,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": -861.578125,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": -1096.703125,
+                "width": 200,
+                "x": 1680.5625,
+                "y": -1096.703125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": \"30.0\", \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "7bbe106b-f63b-4103-b4d3-ea002ff57271",
+            "workflow_outputs": []
+        },
+        "31": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 31,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 6,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 230.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": -4.703125,
+                "width": 200,
+                "x": 1680.5625,
+                "y": -4.703125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": \"30.0\", \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "39a47497-2699-42c8-aa5d-4277f88d7d49",
+            "workflow_outputs": []
+        },
+        "32": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 32,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 8,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 503.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 268.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 268.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": \"30.0\", \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "bce85b91-e86d-4793-847a-9b2532096e76",
+            "workflow_outputs": []
+        },
+        "33": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 33,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "condi_datetime"
+                },
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "var_tab"
+                }
+            ],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": -42.578125,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": -277.703125,
+                "width": 200,
+                "x": 1680.5625,
+                "y": -277.703125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"RuntimeValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": \"30.0\", \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"RuntimeValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "bf6d5e94-9f93-4ddf-9dc0-755244c3ed81",
+            "workflow_outputs": []
+        },
+        "34": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 34,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 9,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 776.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 541.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 541.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": \"30.0\", \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "c31620a3-7950-4a19-911c-e2796aa7dbb4",
+            "workflow_outputs": []
+        },
+        "35": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 35,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": -315.578125,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": -550.703125,
+                "width": 200,
+                "x": 1680.5625,
+                "y": -550.703125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": \"30.0\", \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "a1ae3971-7799-4c82-8c6d-7ef45ad6df55",
+            "workflow_outputs": []
+        },
+        "36": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 36,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 7,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1050.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 815.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 815.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": \"30.0\", \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "c78798a4-2051-4f9a-8893-063f3f533b93",
+            "workflow_outputs": []
+        },
+        "37": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 37,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": -588.578125,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": -823.703125,
+                "width": 200,
+                "x": 1680.5625,
+                "y": -823.703125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": \"30.0\", \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "d275b801-ba4a-421f-9f1b-63b1a2107134",
+            "workflow_outputs": []
+        },
+        "38": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 38,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1323.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 1088.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 1088.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": null, \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "a7f13c8a-c519-41ed-822a-c76811512239",
+            "workflow_outputs": []
+        },
+        "39": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 39,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1596.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 1361.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 1361.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": null, \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "423248ba-1862-46c8-ae9f-dceef5f7d971",
+            "workflow_outputs": []
+        },
+        "40": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 40,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 10,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1869.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 1634.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 1634.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": \"30.0\", \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "16cfabc8-5374-4bb1-9f72-06a0aa832cc9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_dir",
+                    "uuid": "e4e0322c-9e22-4cbf-8880-b0b0e4f67a9e"
+                }
+            ]
+        },
+        "41": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 41,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 2142.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 1907.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 1907.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": null, \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "c846246d-4421-49bf-8dda-b4aa9c58c9f5",
+            "workflow_outputs": []
+        },
+        "42": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 42,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 6,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "condi_datetime"
+                },
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool NetCDF xarray map plotting",
+                    "name": "var_tab"
+                }
+            ],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 2415.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 2180.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 2180.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"RuntimeValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": null, \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"RuntimeValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "fabbd0da-1904-4fdd-a664-328c290fc91e",
+            "workflow_outputs": []
+        },
+        "43": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 43,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 10,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 2688.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 2453.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 2453.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": null, \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "82338106-d63e-4e89-a660-6b46f918cf62",
+            "workflow_outputs": []
+        },
+        "44": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 44,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 7,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 2961.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 2726.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 2726.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": null, \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "867f5ebf-c4e3-4431-a629-b623b85c5a42",
+            "workflow_outputs": []
+        },
+        "45": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 45,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 9,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 3234.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 2999.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 2999.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": null, \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "d36eae87-c3d4-440e-b128-8c274062ad4f",
+            "workflow_outputs": []
+        },
+        "46": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "errors": null,
+            "id": 46,
+            "input_connections": {
+                "condi_datetime|time_tab": {
+                    "id": 28,
+                    "output_name": "output"
+                },
+                "condi_datetime|time_values": {
+                    "id": 8,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 18,
+                    "output_name": "output_netcdf"
+                },
+                "var_tab": {
+                    "id": 24,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray map plotting",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "version",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 3507.421875,
+                "height": 235.125,
+                "left": 1680.5625,
+                "right": 1880.5625,
+                "top": 3272.296875,
+                "width": 200,
+                "x": 1680.5625,
+                "y": 3272.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_dir": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_dir"
+                },
+                "HideDatasetActionversion": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "version"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d7479b6dfbe8",
+                "name": "xarray_mapplot",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"borders\": \"0.2\", \"cmap\": \"cm.roma_r\", \"coastline\": \"0.5\", \"colorbar_label\": \"\", \"condi_datetime\": {\"datetime\": \"yes\", \"__current_case__\": 1, \"time_tab\": {\"__class__\": \"ConnectedValue\"}, \"time_values\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"land\": null, \"lat_dim\": \"latitude\", \"lon_dim\": \"longitude\", \"ocean\": null, \"proj\": \"\", \"range\": \"0,35\", \"shift\": \"\", \"threshold\": null, \"title\": \"\", \"var\": \"pm2p5_conc\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"xlim\": \"\", \"ylim\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.2+galaxy0",
+            "type": "tool",
+            "uuid": "b8318ec3-91e5-4bfb-ad74-9c3cb661cbfb",
+            "workflow_outputs": []
+        },
+        "47": {
+            "annotation": "",
+            "content_id": "__MERGE_COLLECTION__",
+            "errors": null,
+            "id": 47,
+            "input_connections": {
+                "inputs_0|input": {
+                    "id": 30,
+                    "output_name": "output_dir"
+                },
+                "inputs_1|input": {
+                    "id": 32,
+                    "output_name": "output_dir"
+                },
+                "inputs_2|input": {
+                    "id": 31,
+                    "output_name": "output_dir"
+                },
+                "inputs_3|input": {
+                    "id": 33,
+                    "output_name": "output_dir"
+                },
+                "inputs_4|input": {
+                    "id": 34,
+                    "output_name": "output_dir"
+                },
+                "inputs_5|input": {
+                    "id": 37,
+                    "output_name": "output_dir"
+                },
+                "inputs_6|input": {
+                    "id": 35,
+                    "output_name": "output_dir"
+                },
+                "inputs_7|input": {
+                    "id": 36,
+                    "output_name": "output_dir"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Merge collections",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 339.109375,
+                "height": 509.8125,
+                "left": 1988.5625,
+                "right": 2188.5625,
+                "top": -170.703125,
+                "width": 200,
+                "x": 1988.5625,
+                "y": -170.703125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__MERGE_COLLECTION__",
+            "tool_state": "{\"advanced\": {\"conflict\": {\"duplicate_options\": \"keep_first\", \"__current_case__\": 3}}, \"inputs\": [{\"__index__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 2, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 3, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 4, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 5, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 6, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 7, \"input\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "c70b7b91-54ca-4ff7-bf8d-93b569f5dc20",
+            "workflow_outputs": []
+        },
+        "48": {
+            "annotation": "",
+            "content_id": "__MERGE_COLLECTION__",
+            "errors": null,
+            "id": 48,
+            "input_connections": {
+                "inputs_0|input": {
+                    "id": 43,
+                    "output_name": "output_dir"
+                },
+                "inputs_1|input": {
+                    "id": 46,
+                    "output_name": "output_dir"
+                },
+                "inputs_2|input": {
+                    "id": 42,
+                    "output_name": "output_dir"
+                },
+                "inputs_3|input": {
+                    "id": 41,
+                    "output_name": "output_dir"
+                },
+                "inputs_4|input": {
+                    "id": 45,
+                    "output_name": "output_dir"
+                },
+                "inputs_5|input": {
+                    "id": 38,
+                    "output_name": "output_dir"
+                },
+                "inputs_6|input": {
+                    "id": 39,
+                    "output_name": "output_dir"
+                },
+                "inputs_7|input": {
+                    "id": 44,
+                    "output_name": "output_dir"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Merge collections",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 2582.109375,
+                "height": 509.8125,
+                "left": 1988.5625,
+                "right": 2188.5625,
+                "top": 2072.296875,
+                "width": 200,
+                "x": 1988.5625,
+                "y": 2072.296875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__MERGE_COLLECTION__",
+            "tool_state": "{\"advanced\": {\"conflict\": {\"duplicate_options\": \"keep_first\", \"__current_case__\": 3}}, \"inputs\": [{\"__index__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 2, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 3, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 4, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 5, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 6, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 7, \"input\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "6e46f3b7-e12f-4416-8cb5-6c061b891c63",
+            "workflow_outputs": []
+        },
+        "49": {
+            "annotation": "We have 8 plots, one for each forecast time for the first forecast day betwwen 100:00 and 17:00 UTC and we applied a mask e.g. only plot values great than 30 um/m3.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1",
+            "errors": null,
+            "id": 49,
+            "input_connections": {
+                "input": {
+                    "id": 47,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Image Montage",
+                    "name": "input"
+                }
+            ],
+            "label": "PM2.5 forecast 10:00 - 17:00 UTC > 30 um/m3",
+            "name": "Image Montage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "bottom": 224.03125,
+                "height": 174.734375,
+                "left": 2266.5625,
+                "right": 2466.5625,
+                "top": 49.296875,
+                "width": 200,
+                "x": 2266.5625,
+                "y": 49.296875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "39881709807e",
+                "name": "graphicsmagick_image_montage",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"width\": \"4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.31+galaxy1",
+            "type": "tool",
+            "uuid": "8264424f-2479-4eb2-8df1-b7fde84113d7",
+            "workflow_outputs": [
+                {
+                    "label": "PM2.5 (values > 30 um/m3)  fc 10:00 - 17:00 UTC over Italy",
+                    "output_name": "output",
+                    "uuid": "1c16eeb7-dfe1-40de-9be7-3aa2a8568308"
+                }
+            ]
+        },
+        "50": {
+            "annotation": "We have 8 plots, one for each forecast time. We take the forecast on day 1 between 10:00 and 17:00 UTC",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1",
+            "errors": null,
+            "id": 50,
+            "input_connections": {
+                "input": {
+                    "id": 48,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Image Montage",
+                    "name": "input"
+                }
+            ],
+            "label": "PM2.5 forecast 10:00 - 17:00 UTC ",
+            "name": "Image Montage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "bottom": 2426.25,
+                "height": 133.953125,
+                "left": 2266.5625,
+                "right": 2466.5625,
+                "top": 2292.296875,
+                "width": 200,
+                "x": 2266.5625,
+                "y": 2292.296875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "39881709807e",
+                "name": "graphicsmagick_image_montage",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"width\": \"4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.31+galaxy1",
+            "type": "tool",
+            "uuid": "84cbf552-1abd-4b4b-a022-92a5f3b15ff0",
+            "workflow_outputs": [
+                {
+                    "label": "PM2.5 fc 10:00 - 17:00 UTC over Italy",
+                    "output_name": "output",
+                    "uuid": "070fe227-b533-4c77-bed0-4d005b174920"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "pangeo",
+        "climate",
+        "copernicus",
+        "GTN"
+    ],
+    "uuid": "69952ee5-9d13-4822-a2d9-6de34d6251f3",
+    "version": 83
+}

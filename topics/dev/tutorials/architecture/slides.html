@@ -49,7 +49,7 @@ We're here to answer your questions about Galaxy architecture!
 
 class: enlarge200
 
-**Gitter:** [galaxyproject/Lobby ](https://gitter.im/galaxyproject/Lobby)
+**Chat:** [galaxyproject Lobby](https://matrix.to/#/#galaxyproject_Lobby:gitter.im)
 
 **GitHub:** [github.com/galaxyproject ](https://github.com/galaxyproject)
 
@@ -79,18 +79,18 @@ https://gitter.im/galaxyproject
 
 More links we'll mention as we go through the slides:
 
-- https://gitter.im/galaxyproject/Lobby
-- https://gitter.im/galaxyproject/dev
-- https://gitter.im/galaxyproject/admins
-- https://gitter.im/galaxyproject/FederatedGalaxy
-- https://gitter.im/galaxyproject/bioblend
-- https://gitter.im/galaxyproject/ephemeris
-- https://gitter.im/usegalaxy-eu/Lobby
-- https://gitter.im/galaxy-iuc/iuc
-- https://gitter.im/bgruening/docker-galaxy-stable
-- https://gitter.im/Galaxy-Training-Network/Lobby
-- https://gitter.im/biocontainers/Lobby
-- https://gitter.im/bioconda/Lobby
+- https://matrix.to/#/#galaxyproject_Lobby:gitter.im
+- https://matrix.to/#/#galaxyproject_dev:gitter.im
+- https://matrix.to/#/#galaxyproject_admins:gitter.im
+- https://matrix.to/#/#galaxyproject_FederatedGalaxy:gitter.im
+- https://matrix.to/#/#galaxyproject_bioblend:gitter.im
+- https://matrix.to/#/#galaxyproject_ephemeris:gitter.im
+- https://matrix.to/#/#usegalaxy-eu_Lobby:gitter.im
+- https://matrix.to/#/#galaxy-iuc_iuc:gitter.im
+- https://matrix.to/#/#bgruening_docker-galaxy-stable:gitter.im
+- https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im
+- https://matrix.to/#/#biocontainers_Lobby:gitter.im
+- https://matrix.to/#/#bioconda_Lobby:gitter.im
 
 Working group chats linked at https://galaxyproject.org/community/wg/.
 
@@ -232,7 +232,7 @@ Other repositories with high quality tools:
 
 Intergalactic Workflow Commission. Hosting workflows and defining best practices for publishing workflows.
 
-https://gitter.im/galaxyproject/iwc
+https://matrix.to/#/#galaxyproject_iwc:gitter.im
 
 ---
 
@@ -258,7 +258,7 @@ container, virtual machines, Google compute images
 
 Language server implementation for Galaxy tools. Visual Studio Code extension for tool development.
 
-Test execution, code completion, best practices, documentaiton tooltips, etc..
+Test execution, code completion, best practices, documentation tooltips, etc..
 
 ---
 
@@ -298,6 +298,18 @@ usegalaxy-eu/**{ansible-\*, \*-playbook}**
 Ansible is an advanced configuration management system
 
 These playbooks are used to maintain Galaxy main, cloud and Docker images, virtual machines, ...
+
+---
+
+class: enlarge150
+
+[galaxyproject/**gravity** ](https://github.com/galaxyproject/gravity)
+
+A process manager (supervisor) and management tools for Galaxy servers.
+
+`galaxyctl` which is used to manage the starting, stopping, and logging of Galaxy's various processes.
+
+`galaxy` which can be used to run a Galaxy server in the foreground.
 
 ---
 
@@ -351,6 +363,16 @@ Ephemeris generally talks to the Galaxy API and is a pure Python project, gxadmi
 
 ---
 
+### Total Perspective Vortex
+
+[galaxyproject/total-perspective-vortex **](https://github.com/galaxyproject/total-perspective-vortex)
+
+![TPV Logo](https://raw.githubusercontent.com/galaxyproject/total-perspective-vortex/main/docs/images/tpv-logo-wide.png)
+
+TotalPerspectiveVortex (TPV) provides an installable set of dynamic rules for the Galaxy application that can route entities (Tools, Users, Roles) to appropriate job destinations based on a configurable yaml file.
+
+---
+
 class: enlarge150
 
 [**usegalaxy-eu/tiaas2 **](https://github.com/usegalaxy-eu/tiaas2)
@@ -374,7 +396,7 @@ for more context.
 
 ## Putting it all together
 
-![](../../images/galaxy_main_scheme.png)
+![Large graphic showing different domains and where different portions of the Galaxy community can be found from Biology, Dev, Packaging, Deployment, Documentation, Training, and Support.](../../images/galaxy_main_scheme.png)
 
 ???
 
@@ -500,20 +522,22 @@ If you get Red Xs - take a second to ponder whether they make sense and don't be
 
 ### Linting and Code Formatting
 
-Part of the Galaxy CI process includes linting both the backend Python and frontend ES 6 code.
+Part of the Galaxy CI process includes linting and checking the format of both the backend Python and frontend ES 6 code.
 This linting process captures many common problems as well as enforcing a common code style.
 
 The output reports from the CI process are relatively straightforward, but it is a good process
-to lint changes before opening pull requests for them. The Python linter can be run using `tox`
-as follows.
+to lint changes and formatting your code before opening pull requests for them. 
+
+Execute the `format` make command to format the backend code and then use `tox`
+to lint the formatted code.
 
 ```
+$ make format
 $ tox -e lint
 ```
 
-The client code formatting guidelines are much more strict but as a result can be applied
-automatically for very consistent code. Execute the `client-format` make command to format
-the code and then the `client-lint` command to check the result.
+Execute the `client-format` make command to format the code and then the `client-lint` command
+to lint the formatted code.
 
 ```
 $ make client-format
@@ -716,8 +740,6 @@ using galaxy.util, galaxy.model.mapping, and galaxy.web.framework.
 
 ![package structure](../../images/core_packages.plantuml.svg)
 
-(somewhat aspirational still)
-
 ---
 
 ### PyPI
@@ -756,9 +778,9 @@ template: left-aligned
 
 ### ASGI - Application
 
-Spirtual successor to
+Spiritual successor to
 [WSGI](https://www.python.org/dev/peps/pep-0333/). An ASGI application
-is a async callable that takes in a `scope` (`dict` describing the
+is an async callable that takes in a `scope` (`dict` describing the
 connection), `send` (an async callable to respond to events via),
 and `receive` (an async callable to receive messages).
 
@@ -769,7 +791,7 @@ async def application(scope, receive, send):
     await send({"type": "http.response.body", ...})
 ```
 
-Checkout [ASGI documentaiton](https://asgi.readthedocs.io/) for more details.
+Checkout [ASGI documentation](https://asgi.readthedocs.io/) for more details.
 
 ---
 
@@ -777,8 +799,8 @@ template: left-aligned
 
 ### ASGI & Starlette Low-level Example
 
-We will talk about a lot about Galaxy and FastAPI - but much of its
-plubming is just aliases for starlette ASGI handling.
+We will talk a lot about Galaxy and FastAPI - but much of its
+plumbing is just aliases for starlette ASGI handling.
 
 ```python
 from starlette.responses import PlainTextResponse
@@ -907,7 +929,7 @@ def build_middleware_stack(self) -> ASGIApp:
     return app
 ```
 
-Start with the router and surrond it with each layer of configured middleware.
+Start with the router and surround it with each layer of configured middleware.
 
 ---
 
@@ -1013,7 +1035,7 @@ https://www.starlette.io/routing/
 class: enlarge200
 
 In order to understand how the routing classes are setup within Galaxy,
-lets step back and and look really quickly at how Galaxy's FastAPI
+lets step back and look really quickly at how Galaxy's FastAPI
 application (ASGI endpoint) is constructed.
 
 ---
@@ -1139,7 +1161,7 @@ wsgi_handler = WSGIMiddleware(gx_webapp)
 app.mount('/', wsgi_handler)
 ```
 
-This effectively provies a fallback to our legacy WSGI application.
+This effectively provides a fallback to our legacy WSGI application.
 
 ---
 
@@ -1603,8 +1625,8 @@ class DatasetCollectionManager:
 ```]
 
 - We're no longer depending on `app`.
-- The type signature very clearly delinates what dependencies are required.
-- Unit testing can inject percise dependencies supplying only the behavior needed.
+- The type signature very clearly delineates what dependencies are required.
+- Unit testing can inject precise dependencies supplying only the behavior needed.
 
 ---
 
@@ -1631,7 +1653,7 @@ class: enlarge150
 
 ### What is Type-based Dependency Injection?
 
-A dependency injection **container** keeps tracks of singleons or recipes for how to construct each type. By
+A dependency injection **container** keeps tracks of singletons or recipes for how to construct each type. By
 default when it goes to construct an object, it can just ask the container for each dependency based on the
 type signature of the class being constructed.
 
@@ -1811,24 +1833,394 @@ def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id,
 
 ### Tips for Designing New Galaxy Backend Components
 
-- Consume only the related components you need to - avoid `app` when possible.
+- Consume only the related components you need to avoid `app` when possible.
 - Annotate inputs to the component with Python types.
 - Use interface types to shield consumers from implementation details.
 - Rely on Galaxy's dependency injection to construct the component and provide it to consumers.
 
 ---
 
-## Application Components - Models and Managers
+## Galaxy Tasks
+
+*The architecture surrounding Galaxy task management.*
+
+---
+
+![Processing requests on the server](../../images/asgi_app.plantuml.svg)
+
+???
+
+Web servers are a terrible place to do work. Traditional Python WSGI servers
+are meant for processing requests that take less a minute - they are meant
+for long running tasks.
+
+This request/response cycle is inappropriate for deleting all the files in a
+history, submitted 10,000 batch jobs for a collection, building a zip file for
+a library folder.
+
+---
+
+![Zoom in on Backend](../../images/core_backend_controllers.plantuml.svg)
+
+---
+
+![Infrastructure including Celery](../../images/core_backend_celery.plantuml.svg)
+
+???
+
+Handling a task description off to Celery allows the web server to respond right
+away and avoid various hacks. Celery is meant for these long running tasks and has
+a set of operations for handling them properly.
+
+---
+
+![Celery Overview](https://d33wubrfki0l68.cloudfront.net/f6a5a0c33eac1250034747d375da9a396e5488ce/0196f/media/async-task-python.png)
+
+---
+
+class: enlarge150
+
+### Downsides of Celery
+
+Adds more complexity to deploying Galaxy. Celery needs to be available to Galaxy
+at runtime, production Galaxy instances need a broker and a backend.
+
+---
+
+class: reduce90
+
+### Gravity + Celery
+
+.code[```
+$ galaxy
+Registered galaxy config: /home/nate/work/galaxy/config/galaxy.yml
+Creating or updating service gunicorn
+Creating or updating service celery
+Creating or updating service celery-beat
+celery: added process group
+2022-01-20 14:44:24,619 INFO spawned: 'celery' with pid 291651
+celery-beat: added process group
+2022-01-20 14:44:24,620 INFO spawned: 'celery-beat' with pid 291652
+gunicorn: added process group
+2022-01-20 14:44:24,622 INFO spawned: 'gunicorn' with pid 291653
+celery                           STARTING
+celery-beat                      STARTING
+gunicorn                         STARTING
+==> /home/nate/work/galaxy/database/gravity/log/gunicorn.log <==
+...log output follows...
+```]
+
+???
+
+Start Galaxy with Gravity starts not only the Python web server (gunicorn)
+running the Galaxy application but also celery and required services.
+
+---
+
+![Celery tasks being registered at startup](../../images/celery_tasks_list.png)
+
+---
+
+class: enlarge150
+
+### Declaring a Task
+
+- Placed in `galaxy.celery.tasks`.
+- We've placed a layer around Celery to mirror what we're with API endpoints.
+  - Typed functions with Pydantic inputs implicitly mapped.
+  - Implicit type based dependency injection from Galaxy's DI container (using Lagom)
+  - Feels a lot like writing an API endpoint.
+
+---
+
+class: enlarge150
+
+### A Simple Task
+
+.code[```
+@galaxy_task(
+    ignore_result=True,
+    action="setting up export history job"
+)
+def export_history(
+    model_store_manager: ModelStoreManager,
+    request: SetupHistoryExportJob,
+):
+    model_store_manager.setup_history_export_job(request)
+```]
+
+---
+
+class: enlarge150
+
+### The `galaxy_task` Decorator
+
+.code[```
+@galaxy_task(
+    ignore_result=True,
+    action="setting up export history job"
+)
+def export_history(
+    model_store_manager: ModelStoreManager,
+    request: SetupHistoryExportJob,
+):
+    model_store_manager.setup_history_export_job(request)
+```]
+
+- `galaxy_task` is a wrapper around Celery's `task` decorator
+- Wrap a simple function to turn it into a task.
+- Ensure all inputs are JSON serializable or components in Galaxy's dependency injection container
+
+---
+
+class: enlarge150
+
+### Celery and Pydantic
+
+The `request` argument to `export_history` is a Pydantic model type named
+`SetupHistoryExportJob`. These are mostly defined in `galaxy.schema.tasks`.
+
+.code[```
+from pydantic import BaseModel
+
+class SetupHistoryExportJob(BaseModel):
+    history_id: int
+    job_id: int
+    store_directory: str
+    include_files: bool
+    include_hidden: bool
+    include_deleted: bool
+```]
+
+---
+
+class: enlarge200
+
+### Celery and Pydantic - Implementation
+
+- Custom JSON encoding and decoding to adapt Celery to Pydantic.
+- Implemented in `galaxy.celery._serialization`.
+- Inject `__type__` and `__class__` attributes into JSON description.
+- `@galaxy_task` decorator sets Celery `serializer` attribute.
+
+---
+
+class: enlarge150
+
+### Celery and Dependency Injection
+
+.code[```
+@galaxy_task(
+    ignore_result=True,
+    action="setting up export history job"
+)
+def export_history(
+    model_store_manager: ModelStoreManager,
+    request: SetupHistoryExportJob,
+):
+    model_store_manager.setup_history_export_job(request)
+```]
+
+- The type declaration on `model_store_manager` of `ModelStoreManager` causes
+  the Galaxy manager object of this class to be passed to the function when the
+  task is running.
+- Client does not need to have any knowledge of this class.
+
+---
+
+### Executing Tasks from Galaxy
+
+See `lib/galaxy/tools/imp_exp/__init__.py`:
+
+.code[```
+from galaxy.schema.tasks import SetupHistoryExportJob
+
+...
+
+    request = SetupHistoryExportJob(
+        history_id=history.id,
+        job_id=self.job_id,
+        store_directory=store_directory,
+        include_files=True,
+        include_hidden=include_hidden,
+        include_deleted=include_deleted,
+    )
+    export_history.delay(request=request)
+
+```]
+
+The delay method is created implicitly from the `galaxy_task` decorator.
+
+---
+
+class: enlarge200
+
+### Best Practices
+
+- Place tasks in `galaxy.celery.tasks`.
+- Keep the tasks as thin as possible (ideally simply delegate inputs
+  to a manager or another Galaxy component independent of Celery).
+- Ensure required/injected Galaxy components as small and decomposed as
+  possible.
+- Place new request definition argument types in `galaxy.schema.tasks`.
+
+---
+
+### Existing Tasks Success Stories
+
+---
+
+class: enlarge150
+
+### PDF Export Problems
+
+- We added PDF export of Galaxy Markdown using weasyprint
+- Generation of PDF took too long, feature was quite unstable
+
+---
+
+class: enlarge150
+
+### Short Term Storage (STS)
+
+- A Galaxy component for managing user downloadable files that only
+  need to exist for a little time.
+- Traditionally, these kind of files have required a lot of
+  hacking to do well in Galaxy (tracking transient request-like stuff in data model, etc..)
+- Not just unoptimized by default, but unusable
+- Required customizing nginx routes, special web server plugins, etc...
+
+https://github.com/galaxyproject/galaxy/pull/13691
+
+---
+
+class: enlarge150
+
+.code[```
+class GeneratePdfDownload(BaseModel):
+    short_term_storage_request_id: str
+    basic_markdown: str
+    document_type: PdfDocumentType
+```]
+
+---
+
+class: enlarge120
+
+### Robust PDF Export
+
+.code[```
+from galaxy.managers.markdown_util import generate_branded_pdf
+
+@galaxy_task(
+    action="preparing Galaxy Markdown PDF for download"
+)
+def prepare_pdf_download(
+    request: GeneratePdfDownload,
+    config: GalaxyAppConfiguration,
+    short_term_storage_monitor: ShortTermStorageMonitor,
+):
+    generate_branded_pdf(
+        request,
+        config,
+        short_term_storage_monitor,
+    )
+```]
+
+---
+
+class: enlarge120
+
+### Exporting Histories, Invocations, Libraries
+
+.code[```
+@galaxy_task(
+    action="generate and stage a workflow invocation store for download"
+)
+def prepare_invocation_download(
+    model_store_manager: ModelStoreManager,
+    request: GenerateInvocationDownload,
+):
+    model_store_manager.prepare_invocation_download(
+        request
+    )
+```]
+
+https://github.com/galaxyproject/galaxy/pull/12533
+
+---
+
+class: enlarge150
+
+### Optimized Uploads
+
+- Decomposed job handling, precursor to migrating more job components to Celery
+- Converting uploads to tasks signficantly sped up running Galaxy tests
+  - API tests went from 2.5 hours to 50 minutes
+  - Amazing speed up for small jobs
+- Exploring task composition
+
+https://github.com/galaxyproject/galaxy/pull/13655
+
+---
+
+### Uploads - Task Composition
+
+See `lib/galaxy/tools/execute.py`
+
+.code[```
+async_result = (
+    setup_fetch_data.s(job_id, raw_tool_source=raw_tool_source)
+    | fetch_data.s(job_id=job_id).set(queue="galaxy.external")
+    | set_job_metadata.s(
+        extended_metadata_collection="extended" in tool.app.config.metadata_strategy,
+        job_id=job_id,
+    ).set(
+        queue="galaxy.external",
+        link_error=finish_job.si(job_id=job_id, raw_tool_source=raw_tool_source)
+    )
+    | finish_job.si(job_id=job_id, raw_tool_source=raw_tool_source)
+)()
+```]
+
+---
+
+class: enlarge200
+
+### Batch Operations
+
+Task-based operations enable the most expensive of the new history's batch operations.
+
+- Changing datatypes
+- Purging datasets
+
+https://github.com/galaxyproject/galaxy/pull/14042
+
+---
+
+class: enlarge200
+
+### Future Work
+
+- *Migrating tool submission to tasks*
+- Workflow scheduling
+- Importing shared histories
+
+https://github.com/galaxyproject/galaxy/issues/11721
+
+---
+
+## Application Components - Models, Managers, and Services
 
 *The architecture surrounding Galaxy components.*
 
 ---
 
-![This section will talk about that manager layer and what lies below](../../images/wsgi_app.plantuml.svg)
+![This section will talk about that manager layer and what lies below](../../images/asgi_app.plantuml.svg)
 
 ---
 
-The are many of ways to describe and visualize the Galaxy server architecture,
+There are many ways to describe and visualize the Galaxy server architecture,
 one is to imagine the Galaxy database as the ultimate source for Galaxy "stuff"
 and the API controllers as the ultimate sink.
 
@@ -1842,6 +2234,21 @@ framework) while the model layer is meant to mediate all database interactions
 ![Models and Managers](../../images/core_models_managers.plantuml.svg)
 
 ---
+
+class: enlarge150
+
+### Services
+
+Handle API and web processing details of requests and responses at a high-level.
+
+Thin layer below the controllers to shield applciation logic from FastAPI internals.
+
+In practice, it is totally fine to skip this layer and have FastAPI controllers talk directly
+to managers.
+
+---
+
+class: enlarge150
 
 ### Managers
 
@@ -1869,10 +2276,12 @@ in a manager instead of in the model.
 ### Galaxy Models
 
 - Database interactions powered by SQLAlchemy - https://www.sqlalchemy.org/.
-- Galaxy doesn't think in terms "rows" but "objects".
-- Classes for Galaxy model objects in `lib/galaxy/model/__init__.py`.
-- Classes mapped to tables in `lib/galaxy/model/mapping.py`
-  - Describes table definitions and relationships.
+- Galaxy doesn't think in terms of "rows" but "objects".
+- Classes for Galaxy model objects defined in `lib/galaxy/model/__init__.py`.
+- Classes mapped to database objects in same module via "declarative mapping".
+  - Classes/attributes mapped to tables/columns
+  - Associations between classes mapped to relationships between tables
+
 
 ---
 
@@ -1880,16 +2289,30 @@ in a manager instead of in the model.
 
 ---
 
-### Galaxy Model Migrations
+### Galaxy Database Schema Migrations
 
-- A migration describes a linear list of database "diff"s to
-  end up with the current Galaxy model.
-- Allow the schema to be migrated forward automatically.
-- Powered by sqlalchemy-migrate - https://sqlalchemy-migrate.readthedocs.io/en/latest/.
-- Each file in `lib/galaxy/model/migrate/versions/`
-  - `0124_job_state_history.py`
-  - `0125_workflow_step_tracking.py`
-  - `0126_password_reset.py`
+- Automated execution of incremental, reversible changes to the database schema.
+- Performed to update or revert the database schema to a newer or older version.
+- Powered by Alembic - https://alembic.sqlalchemy.org/.
+  - (as of 22.05; prior to that by SQLAlchemy Migrate)
+- Each file in `lib/galaxy/model/migrations/alembic/versions_gxy` represents a migration description
+  - `e7b6dcb09efd_create_gxy_branch.py`
+  - `6a67bf27e6a6_deferred_data_tables.py`
+  - `b182f655505f_add_workflow_source_metadata_column.py`
+
+---
+
+### More on Schema Migrations
+
+- Great documentation in code README - `lib/galaxy/model/migrations/README.md`
+  - Admin perspective on how to migrate databases forward and revert on problems.
+  - Developer persepctive on how to add new revisions.
+- Galaxy's data model is split into the galaxy model and the legacy install model:
+  - Persisted in one combined database or two separate databases
+  - Represented by 2 migration branches: "gxy" and "tsi"
+- Schema changes defined in revision modules:
+  - `lib/galaxy/model/migrations/alembic/versions_gxy` (gxy branch: galaxy model)
+  - `lib/galaxy/model/migrations/alembic/versions_tsi` (tsi branch: legacy install model)
 
 ---
 
@@ -2015,7 +2438,7 @@ Adding new visualizations to a Galaxy instance
 - Additional static data if needed (CSS, JS, …)
 
 
-.footnote[[Learn more about it with our visualization tutorial.](topics/dev/tutorials/visualization/slides.html)]
+.footnote[[Learn more about it with our visualization tutorial.]({% link topics/dev/tutorials/visualization-generic/slides.html %})]
 
 ---
 
@@ -2066,32 +2489,6 @@ or use data providers to adapt it
 In config, assert that visualization requires a given type of data providers
 
 Data providers process data before sending to browser - slice, filter, reformat, ...
-
----
-
-### Interactive Environments
-
-Similar to visualizations: config and template
-
-Within the base template, launch a Docker container running a web accessible
-process
-
-Build a UI that accesses that process through a proxy
-
-.footnote[[Learn more about it with our IE tutorial.](topics/dev/tutorials/interactive-environments/slides.html)]
-
----
-
-template: left-aligned
-
-### Interactive Environments - Examples
-
-All in `config/plugins/interactive_environments`:
-
-- `jupyter`
-- `rstudio`
-- `phinch`
-- `bam_iobio`
 
 ---
 
@@ -2367,7 +2764,7 @@ The client is built from JavaScript source files. We use ES6 JavaScript.
 
 A tutorial to help learn JavaScript generally might be https://www.w3schools.com/js/.
 
-For someone familiar with JavaScript but that wants a primer on the new language features in ES6, 
+For someone familiar with JavaScript but that wants a primer on the new language features in ES6,
 https://www.w3schools.com/js/js_es6.asp may be more appropriate.
 
 ---
@@ -2427,37 +2824,37 @@ Webhooks is a system in Galaxy which can be used to write small JS and/or Python
 In short: A plugin infrastructure for the Galaxy UI
 
 
-.footnote[You can learn more about webhooks using our webhook [training](topics/dev/tutorials/webhooks/slides.html).]
+.footnote[You can learn more about webhooks using our webhook [training]({% link topics/dev/tutorials/webhooks/slides.html %}).]
 
 ---
 
 ### Webhook masthead example
 
-![](../../images/webhook_masthead.png)
+![A person shaped icon in the Galaxy masthead is being hovered over and the popup reads "Show Username", presumably a custom webhook from a tutorial.](../../images/webhook_masthead.png)
 
 At the header menu: Enabling the overlay search, link to communities ...
 
-.footnote[You can learn more about webhooks using our webhook [training](topics/dev/tutorials/webhooks/slides.html).]
+.footnote[You can learn more about webhooks using our webhook [training]({% link topics/dev/tutorials/webhooks/slides.html %}).]
 
 ---
 
 ### Webhook tool/workflow example
-<br><br>
-![](../../images/webhook_tool.png)
+
+![Screenshot of Galaxy with the job completion screen shown and a PhD comic image shown below.](../../images/webhook_tool.png)
 
 Shown after tool or workflow execution. Comics, citations, support ...
 
-.footnote[You can learn more about webhooks using our webhook [training](topics/dev/tutorials/webhooks/slides.html).]
+.footnote[You can learn more about webhooks using our webhook [training]({% link topics/dev/tutorials/webhooks/slides.html %}).]
 
 ---
 
 ### Webhook history-menu example
 
-![](../../images/webhook_history.png)
+![A section of the history menu is labelled Webhooks and shows a custom menu entry.](../../images/webhook_history.png)
 
 Adds an entry to the history menu - no functionality as of now
 
-.footnote[You can learn more about webhooks using our webhook [training](topics/dev/tutorials/webhooks/slides.html).]
+.footnote[You can learn more about webhooks using our webhook [training]({% link topics/dev/tutorials/webhooks/slides.html %}).]
 
 ---
 
@@ -3115,5 +3512,3 @@ class: enlarge150
 We do build on many of the same standards, concepts, and libraries - the entire stack isn't custom code but there is a non-trivial web framework defined in "Galaxy".
 
 The Galaxy community likes Django and uses it to build newer webapps, Galaxy simply predates it and has evolved its own framework.
-
----
