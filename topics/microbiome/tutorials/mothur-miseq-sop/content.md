@@ -1,5 +1,9 @@
 ---
 layout: none
+redirect_from:
+- /topics/metagenomics/tutorials/mothur-miseq-sop/content
+- /topics/metagenomics/tutorials/mothur-miseq-sop-short/content
+
 ---
 {% if include.short %}
   {% assign other_tutorial = "../mothur-miseq-sop/tutorial.html" %}
