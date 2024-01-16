@@ -418,13 +418,13 @@ Note that for using `planemo`from a new shell you will need to activate the pyth
 >
 > 1. In order to test if the installation worked execute
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Input: Bash</code-in-title>
 >    > ```bash
 >    > planemo --version
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-in-title>Output</code-in-title>
 >    > This should output the version of `planemo`, e.g.
 >    > ```bash
 >    > planemo, version 0.74.3
