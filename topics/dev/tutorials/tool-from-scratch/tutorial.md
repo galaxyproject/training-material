@@ -343,7 +343,7 @@ next section of this tutorial, one of its functions is necessary for the tool wr
 via the python package manager `pip`. To that end, before beginning this section, please install `planemo` locally by running
 `planemo`. To that end, before beginning this section, please install planemo locally by running
 
-> ### {% icon hands_on %} Hands-on: Installing `planemo` via pip
+> <hands-on-title>Installing `planemo` via pip</hands-on-title>
 >
 > It is advised to install `planemo` in a virtual environment (step 1-2).
 >
@@ -354,7 +354,7 @@ via the python package manager `pip`. To that end, before beginning this section
 
 Note that for using `planemo`from a new shell you will need to activate the python virtual environment again.
 
-> ### {% icon hands_on %} Hands-on: Testing `planemo` and getting help
+> <hands-on-title>Testing `planemo` and getting help</hands-on-title>
 >
 > 1. In order to test if the installation worked execute
 >
