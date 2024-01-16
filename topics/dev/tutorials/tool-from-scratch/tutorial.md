@@ -94,7 +94,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
 >    > wget -O bellerophon.tar.gz https://github.com/davebx/bellerophon/archive/1.0.tar.gz
->    > shasum -a 256 bellerophon.tar.gz # Copy the 64-character hexadecimal number that this outputs.
+> > sha256sum bellerophon.tar.gz # Copy the 64-character hexadecimal number that this outputs.
 >    > ```
 >    {: .code-in}
 >
@@ -340,7 +340,7 @@ anyone wrapping a tool, a more complete list is available in [the Galaxy tool do
 
 Planemo is an important tool within the Galaxy development workflow. Although it will be covered in greater detail in the
 next section of this tutorial, one of its functions is necessary for the tool wrapper development. `planemo` is available
-via the python package manager `pip` and `conda`. If you not have conda installed we suggest to use `pip` for installing
+via the python package manager `pip`. To that end, before beginning this section, please install `planemo` locally by running
 `planemo`. To that end, before beginning this section, please install planemo locally by running
 
 > ### {% icon hands_on %} Hands-on: Installing `planemo` via pip
@@ -352,14 +352,7 @@ via the python package manager `pip` and `conda`. If you not have conda installe
 > 3. Install `planemo` `pip install planemo`
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Installing `planemo` via conda
->
-> 1. Install [miniconda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
-> 2. Create a conda environment with `planemo` installed `conda create -c conda-forge -c bioconda -n planemo planemo`
-> 3. Activate the conda environment `conda activate planemo`
-{: .hands_on}
-
-Note that for using `planemo`from a new shell you will need to activate the python/conda environment again.
+Note that for using `planemo`from a new shell you will need to activate the python virtual environment again.
 
 > ### {% icon hands_on %} Hands-on: Testing `planemo` and getting help
 >
