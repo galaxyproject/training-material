@@ -325,7 +325,7 @@ We can also cross-reference images inside our Markdown with an anchor. For examp
 
 As an example for this image:
 
-![alt text]({{site.baseurl}}/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
+![alt text]({{site.baseurl}}/topics/microbiome/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
 
 {% raw %}
 ```markdown
