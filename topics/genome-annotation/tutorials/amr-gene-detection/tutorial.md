@@ -99,7 +99,7 @@ To identify AMR genes in contigs, tools like ABRicate or staramr ({% cite bharat
 
 > <comment-title></comment-title>
 >
-> If you are interested in learning more about using ABRicate for AMR gene detection, you can check the sub-section on AMR in "Gene based pathogenic identification" of ["Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition" tutorial]({% link topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.md %})
+> If you are interested in learning more about using ABRicate for AMR gene detection, you can check the sub-section on AMR in "Gene based pathogenic identification" of ["Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition" tutorial]({% link topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.md %})
 >
 {: .comment}
 
