@@ -24,6 +24,11 @@ contributions:
     - wee-snufkin
     - hexhowells
     - nomadscientist
+  editing:
+    - hexylena
+  testing:
+    - pavanvidem
+    - mtekman
   funding: 
     - elixir-fair-data
 
