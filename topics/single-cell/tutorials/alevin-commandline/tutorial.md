@@ -42,6 +42,9 @@ contributions:
   authorship:
     - wee-snufkin
     - nomadscientist
+  editing:
+    - pavanvidem
+    - mtekman
   testing:
     - pavanvidem
   funding:
