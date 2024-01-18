@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Phylogenetics - Back to basics
-zenodo_link: 'https://tinyurl.com/phylo-trees-1-data'
+zenodo_link: 'https://zenodo.org/records/10415242/files/anolis-raw.fst'
 enable: false
 tags:
   - phylogenetics
@@ -323,7 +323,7 @@ In the real world, a phylogenetic analyses often span hundreds, or even thousand
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the following files from [GTN](./data/anolis-raw.fst) or from the shared data library.
+> 2. Import the file anolis-raw.fst from [Zenodo](https://zenodo.org/records/10415242/files/anolis-raw.fst) or from the shared data library.
 >    ```
 >    anolis-raw.fst
 >    ```
