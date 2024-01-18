@@ -79,7 +79,7 @@
       "name": "Metagenomics assembly tutorial workflow",
       "title": "Metagenomics assembly tutorial workflow",
       "test_results": null,
-      "modified": "2024-01-18 16:07:15 +0000",
+      "modified": "2024-01-18 18:31:44 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"metaSPAdes\"];\n  0 -->|output| 1;\n  2[\"MEGAHIT\"];\n  0 -->|output| 2;\n  3[\"Bowtie2\"];\n  0 -->|output| 3;\n  2 -->|output| 3;\n  4[\"megahit contig2fastg\"];\n  2 -->|output| 4;\n  5[\"Quast\"];\n  2 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Bandage Image\"];\n  4 -->|fastg| 6;\n  7[\"Bandage Info\"];\n  4 -->|fastg| 7;\n  8[\"Column join\"];\n  7 -->|outfile| 8;\n"
     },
     {
@@ -97,7 +97,7 @@
       "name": "workflow-generate-dataset-for-assembly-tutorial",
       "title": "workflow-generate-dataset-for-assembly-tutorial",
       "test_results": null,
-      "modified": "2024-01-18 16:07:15 +0000",
+      "modified": "2024-01-18 18:31:44 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Cutadapt\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"MEGAHIT\"];\n  2 -->|out1| 3;\n  2 -->|out2| 3;\n  4[\"Bowtie2\"];\n  2 -->|out1| 4;\n  2 -->|out2| 4;\n  3 -->|output| 4;\n  5[\"BAM filter\"];\n  4 -->|output| 5;\n  6[\"BAM filter\"];\n  4 -->|output| 6;\n  7[\"Convert, Merge, Randomize\"];\n  5 -->|outfile| 7;\n  8[\"Convert, Merge, Randomize\"];\n  6 -->|outfile| 8;\n  9[\"Select random lines\"];\n  7 -->|out_file1| 9;\n  10[\"Select random lines\"];\n  8 -->|out_file1| 10;\n  11[\"Filter Tabular\"];\n  9 -->|out_file1| 11;\n  12[\"Filter Tabular\"];\n  10 -->|out_file1| 12;\n  13[\"Unique\"];\n  11 -->|output| 13;\n  14[\"Unique\"];\n  12 -->|output| 14;\n  15[\"Concatenate datasets\"];\n  13 -->|outfile| 15;\n  14 -->|outfile| 15;\n  16[\"seqtk_subseq\"];\n  2 -->|out1| 16;\n  15 -->|out_file1| 16;\n  17[\"seqtk_subseq\"];\n  2 -->|out2| 17;\n  15 -->|out_file1| 17;\n  18[\"FastQC\"];\n  16 -->|default| 18;\n  19[\"FastQC\"];\n  17 -->|default| 19;\n"
     }
   ],
