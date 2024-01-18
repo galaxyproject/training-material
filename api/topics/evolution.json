@@ -111,7 +111,7 @@
           "name": "Mtb phylogeny",
           "title": "Mtb phylogeny",
           "test_results": null,
-          "modified": "2024-01-18 13:13:51 +0000",
+          "modified": "2024-01-18 14:47:17 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"RStudio\"];\n  2[\"Phyogenetic reconstruction with RAxML\"];\n  0 -->|output| 2;\n"
         }
       ],
@@ -294,7 +294,7 @@
           "name": "From BAMs to drug resistance prediction with TB-profiler",
           "title": "From BAMs to drug resistance prediction with TB-profiler",
           "test_results": null,
-          "modified": "2024-01-18 13:13:51 +0000",
+          "modified": "2024-01-18 14:47:17 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset collection\"];\n  2[\"Merge collections\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Samtools view\"];\n  2 -->|output| 3;\n  4[\"Text transformation\"];\n  3 -->|outputsam| 4;\n  5[\"Samtools view\"];\n  4 -->|output| 5;\n  6[\"TB-Profiler Profile\"];\n  5 -->|outputsam| 6;\n  7[\"Search in textfiles\"];\n  6 -->|output_txt| 7;\n  8[\"Add input name as column\"];\n  7 -->|output| 8;\n  9[\"Concatenate datasets\"];\n  8 -->|output| 9;\n  10[\"Replace Text\"];\n  9 -->|out_file1| 10;\n"
         },
         {
@@ -312,7 +312,7 @@
           "name": "From Fastqs to VCFs and BAMs",
           "title": "From Fastqs to VCFs and BAMs",
           "test_results": null,
-          "modified": "2024-01-18 13:13:51 +0000",
+          "modified": "2024-01-18 14:47:17 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset collection\"];\n  2[\"Input dataset\"];\n  3[\"Trimmomatic\"];\n  0 -->|output| 3;\n  4[\"Trimmomatic\"];\n  1 -->|output| 4;\n  5[\"snippy\"];\n  3 -->|fastq_out| 5;\n  2 -->|output| 5;\n  6[\"snippy\"];\n  4 -->|fastq_out_paired| 6;\n  2 -->|output| 6;\n  7[\"Merge collections\"];\n  5 -->|snpvcf| 7;\n  6 -->|snpvcf| 7;\n  8[\"Merge collections\"];\n  5 -->|snpsbam| 8;\n  6 -->|snpsbam| 8;\n  9[\"TB Variant Filter\"];\n  7 -->|output| 9;\n"
         },
         {
@@ -330,7 +330,7 @@
           "name": "From VCFs to SNP distance matrix",
           "title": "From VCFs to SNP distance matrix",
           "test_results": null,
-          "modified": "2024-01-18 13:13:51 +0000",
+          "modified": "2024-01-18 14:47:17 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"TB Variant Filter\"];\n  0 -->|output| 2;\n  3[\"bcftools consensus\"];\n  2 -->|output1| 3;\n  1 -->|output| 3;\n  4[\"Concatenate datasets\"];\n  3 -->|output_file| 4;\n  5[\"Finds SNP sites\"];\n  4 -->|out_file1| 5;\n  6[\"SNP distance matrix\"];\n  5 -->|output_fasta| 6;\n"
         }
       ],
