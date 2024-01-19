@@ -121,7 +121,7 @@
           "name": "CP_pipeline_IDR_training",
           "title": "CP_pipeline_IDR_training",
           "test_results": null,
-          "modified": "2024-01-19 00:17:25 +0000",
+          "modified": "2024-01-19 15:20:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting Modules\"];\n  1[\"IDR Download\"];\n  2[\"IdentifyPrimaryObjects\"];\n  0 -->|output_pipeline| 2;\n  3[\"ConvertObjectsToImage\"];\n  2 -->|output_pipeline| 3;\n  4[\"DisplayDataOnImage\"];\n  3 -->|output_pipeline| 4;\n  5[\"SaveImages\"];\n  4 -->|output_pipeline| 5;\n  6[\"EnhanceOrSuppressFeatures\"];\n  5 -->|output_pipeline| 6;\n  7[\"MaskImage\"];\n  6 -->|output_pipeline| 7;\n  8[\"IdentifyPrimaryObjects\"];\n  7 -->|output_pipeline| 8;\n  9[\"ConvertObjectsToImage\"];\n  8 -->|output_pipeline| 9;\n  10[\"GrayToColor\"];\n  9 -->|output_pipeline| 10;\n  11[\"SaveImages\"];\n  10 -->|output_pipeline| 11;\n  12[\"IdentifyPrimaryObjects\"];\n  11 -->|output_pipeline| 12;\n  13[\"ConvertObjectsToImage\"];\n  12 -->|output_pipeline| 13;\n  14[\"ImageMath\"];\n  13 -->|output_pipeline| 14;\n  15[\"MeasureGranularity\"];\n  14 -->|output_pipeline| 15;\n  16[\"MeasureTexture\"];\n  15 -->|output_pipeline| 16;\n  17[\"MeasureObjectIntensity\"];\n  16 -->|output_pipeline| 17;\n  18[\"MeasureObjectSizeShape\"];\n  17 -->|output_pipeline| 18;\n  19[\"RelateObjects\"];\n  18 -->|output_pipeline| 19;\n  20[\"MeasureImageQuality\"];\n  19 -->|output_pipeline| 20;\n  21[\"MeasureImageAreaOccupied\"];\n  20 -->|output_pipeline| 21;\n  22[\"MeasureImageIntensity\"];\n  21 -->|output_pipeline| 22;\n  23[\"ExportToSpreadsheet\"];\n  22 -->|output_pipeline| 23;\n  24[\"CellProfiler\"];\n  1 -->|output_tar| 24;\n  23 -->|output_pipeline| 24;\n"
         }
       ],
@@ -420,7 +420,7 @@
           "name": "CP_object_tracking_example",
           "title": "CP_object_tracking_example",
           "test_results": null,
-          "modified": "2024-01-19 00:17:25 +0000",
+          "modified": "2024-01-19 15:20:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting Modules\"];\n  1[\"Input dataset\"];\n  2[\"ColorToGray\"];\n  0 -->|output_pipeline| 2;\n  3[\"Unzip\"];\n  1 -->|output| 3;\n  4[\"IdentifyPrimaryObjects\"];\n  2 -->|output_pipeline| 4;\n  5[\"MeasureObjectSizeShape\"];\n  4 -->|output_pipeline| 5;\n  6[\"MeasureObjectIntensity\"];\n  5 -->|output_pipeline| 6;\n  7[\"TrackObjects\"];\n  6 -->|output_pipeline| 7;\n  8[\"OverlayOutlines\"];\n  7 -->|output_pipeline| 8;\n  9[\"Tile\"];\n  8 -->|output_pipeline| 9;\n  10[\"SaveImages\"];\n  9 -->|output_pipeline| 10;\n  11[\"ExportToSpreadsheet\"];\n  10 -->|output_pipeline| 11;\n  12[\"CellProfiler\"];\n  3 -->|unzipped| 12;\n  11 -->|output_pipeline| 12;\n"
         }
       ],
@@ -685,7 +685,7 @@
           "name": "Workflow constructed from Tutorial 'Introduction to image analysis using Galaxy'",
           "title": "Workflow constructed from Tutorial 'Introduction to image analysis using Galaxy'",
           "test_results": null,
-          "modified": "2024-01-19 00:17:25 +0000",
+          "modified": "2024-01-19 15:20:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Histogram equalization\"];\n  0 -->|output| 1;\n  2[\"Image Info\"];\n  0 -->|output| 2;\n  3[\"Filter Image\"];\n  0 -->|output| 3;\n  4[\"Filter Image\"];\n  0 -->|output| 4;\n  5[\"Convert image\"];\n  0 -->|output| 5;\n  6[\"Convert image\"];\n  1 -->|output| 6;\n  7[\"Auto Threshold\"];\n  3 -->|output| 7;\n  8[\"Histogram equalization\"];\n  3 -->|output| 8;\n  9[\"Binary 2 Label\"];\n  7 -->|output| 9;\n  10[\"Convert image\"];\n  8 -->|output| 10;\n  11[\"Overlay Images\"];\n  6 -->|output| 11;\n  9 -->|output| 11;\n  12[\"Convert image\"];\n  9 -->|output| 12;\n  13[\"Count Objects\"];\n  9 -->|output| 13;\n"
         }
       ],
@@ -965,7 +965,7 @@
           "name": "analyze_screen",
           "title": "analyze_screen",
           "test_results": null,
-          "modified": "2024-01-19 00:17:25 +0000",
+          "modified": "2024-01-19 15:20:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"feature_extraction\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Collapse Collection\"];\n  2 -->|output| 3;\n"
         },
         {
@@ -988,7 +988,7 @@
           "name": "feature_extraction",
           "title": "feature_extraction",
           "test_results": null,
-          "modified": "2024-01-19 00:17:25 +0000",
+          "modified": "2024-01-19 15:20:24 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Filter Image\"];\n  0 -->|output| 2;\n  3[\"Auto Threshold\"];\n  2 -->|output| 3;\n  4[\"Split objects\"];\n  3 -->|output| 4;\n  5[\"2D Feature Extraction\"];\n  4 -->|output| 5;\n  6[\"Filter segmentation\"];\n  5 -->|output| 6;\n  4 -->|output| 6;\n  1 -->|output| 6;\n  7[\"2D Feature Extraction\"];\n  6 -->|output| 7;\n  0 -->|output| 7;\n"
         }
       ],
@@ -1199,7 +1199,7 @@
           "name": "GTN_Exemplar_002_TMA_workflow",
           "title": "GTN_Exemplar_002_TMA_workflow",
           "test_results": null,
-          "modified": "2024-01-19 00:17:25 +0000",
+          "modified": "2024-01-19 15:20:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"BaSiC Illumination\"];\n  0 -->|output| 3;\n  4[\"ASHLAR\"];\n  3 -->|output_dfp| 4;\n  3 -->|output_ffp| 4;\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"UNetCoreograph\"];\n  4 -->|output| 5;\n  6[\"Mesmer\"];\n  5 -->|tma_sections| 6;\n  7[\"Convert image\"];\n  5 -->|tma_sections| 7;\n  8[\"MCQUANT\"];\n  1 -->|output| 8;\n  5 -->|tma_sections| 8;\n  6 -->|mask| 8;\n  9[\"Rename OME-TIFF Channels\"];\n  1 -->|output| 9;\n  7 -->|output| 9;\n  10[\"Convert McMicro Output to Anndata\"];\n  8 -->|cellmask| 10;\n  11[\"Single Cell Phenotyping\"];\n  10 -->|outfile| 11;\n  2 -->|output| 11;\n  12[\"Vitessce Visualization\"];\n  11 -->|output| 12;\n  9 -->|renamed_image| 12;\n  6 -->|mask| 12;\n"
         }
       ],
