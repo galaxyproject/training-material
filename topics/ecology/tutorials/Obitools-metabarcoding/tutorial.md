@@ -19,13 +19,13 @@ tags:
   - eDNA
   - Metabarcoding
 contributions:
-- authorship:
+  authorship:
   - colineroyaux
   - onorvez
   - ecoissac
   - fboyer
   - yvanlebras
-- funding:
+  funding:
   - gallantries
   - pndb
 
