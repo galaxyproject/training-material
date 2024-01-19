@@ -32,6 +32,9 @@ contributors:
 - colineroyaux
 - yvanlebras
 - jbmihoub
+funding:
+- gallantries
+- pndb
 
 ---
 
