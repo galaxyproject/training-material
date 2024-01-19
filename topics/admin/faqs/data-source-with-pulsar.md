@@ -8,17 +8,17 @@ contributors: [martinwolst]
 
 Data source tools such as UCSC Main will fail if Pulsar is the default destination.
 
-To prevent the error from occureing you can force individual tools to run on a different destination or handler by adding to the job_conf file like:
+To fix this issue you can force individual tools to run on a specific destination or handler by adding to your job_conf file like:
 
-
+XML
 ```xml
 <tools>
-    <tool id="longbar" destination="my-local" />
+    <tool id="ucsc_table_direct1" destination="my-local" />
 </tools>
 ```
-
+YML
 ```yml
 tools:
-- id: longbar
+- id: ucsc_table_direct1
   handler: my-local
 ```
