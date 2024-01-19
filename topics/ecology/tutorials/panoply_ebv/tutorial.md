@@ -19,15 +19,17 @@ tags:
 - interactive-tools
 - EBV cube
 - Data visualization
-contributors:
-- yvanlebras
-- colineroyaux
-- Marie59
-- annefou
-funding:
-- gallantries
-- fairease
-- pndb
+contributions:
+  authorship:
+  - pndb
+  - yvanlebras
+  - colineroyaux
+  - Marie59
+  - annefou
+  funding:
+  - gallantries
+  - fairease
+  - pndb
 
 ---
 
