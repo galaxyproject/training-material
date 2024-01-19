@@ -24,7 +24,10 @@ contributors:
 - colineroyaux
 - Marie59
 - annefou
-
+funding:
+- gallantries
+- fairease
+- pndb
 
 ---
 
