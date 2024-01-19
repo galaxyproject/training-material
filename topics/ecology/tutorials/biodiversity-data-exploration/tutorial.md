@@ -24,6 +24,8 @@ contributions:
   - yvanlebras
   funding:
   - gallantries
+  - pndb
+  - fnso2019
 
 ---
 
