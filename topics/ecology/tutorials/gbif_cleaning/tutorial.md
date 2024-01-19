@@ -19,11 +19,12 @@ tags:
   - gbif
   - data management
   - data cleaning
-contributors:
-- yvanlebras
-- sbenateau
-funding:
-- pndb
+contributions:
+  authorship:
+  - yvanlebras
+  - sbenateau
+  funding:
+  - pndb
 
 ---
 
