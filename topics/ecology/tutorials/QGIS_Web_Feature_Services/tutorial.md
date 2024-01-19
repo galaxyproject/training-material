@@ -21,10 +21,10 @@ contributors:
 - colineroyaux
 - Marie59
 - yvanlebras
-  funding:
-  - gallantries
-  - fairease
-  - pndb
+funding:
+- gallantries
+- fairease
+- pndb
 
 ---
 
