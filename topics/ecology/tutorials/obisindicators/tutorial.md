@@ -16,6 +16,8 @@ contributions:
         - yvanlebras
     funding:
         - gallantries
+        - fairease
+        - pndb
 ---
 
 
