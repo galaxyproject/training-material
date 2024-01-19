@@ -24,6 +24,9 @@ contributors:
 - ecoissac
 - fboyer
 - yvanlebras
+  funding:
+  - gallantries
+  - pndb
 
 ---
 
