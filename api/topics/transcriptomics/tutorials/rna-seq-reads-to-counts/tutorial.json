@@ -111,7 +111,7 @@
       "name": "QC report",
       "title": "QC report",
       "test_results": null,
-      "modified": "2024-01-18 18:31:45 +0000",
+      "modified": "2024-01-19 00:17:27 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset collection\"];\n  2[\"Infer Experiment\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"MarkDuplicates\"];\n  1 -->|output| 3;\n  4[\"Samtools idxstats\"];\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  2 -->|output| 5;\n  3 -->|metrics_file| 5;\n  4 -->|output| 5;\n"
     },
     {
@@ -129,7 +129,7 @@
       "name": "RNA Seq Reads To Counts",
       "title": "RNA Seq Reads To Counts",
       "test_results": null,
-      "modified": "2024-01-18 18:31:45 +0000",
+      "modified": "2024-01-19 00:17:27 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  10[\"Infer Experiment\"];\n  5 -->|output_alignments| 10;\n  1 -->|output| 10;\n  11[\"Read Distribution\"];\n  5 -->|output_alignments| 11;\n  1 -->|output| 11;\n  12[\"Column Join\"];\n  6 -->|output_short| 12;\n  13[\"MultiQC\"];\n  4 -->|text_file| 13;\n  3 -->|report| 13;\n  10 -->|output| 13;\n  7 -->|metrics_file| 13;\n  8 -->|output| 13;\n  9 -->|outputtxt| 13;\n  11 -->|output| 13;\n  6 -->|output_summary| 13;\n  5 -->|summary_file| 13;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"Cutadapt\"];\n  0 -->|output| 3;\n  4[\"FastQC\"];\n  3 -->|out1| 4;\n  5[\"HISAT2\"];\n  3 -->|out1| 5;\n  6[\"featureCounts\"];\n  5 -->|output_alignments| 6;\n  7[\"MarkDuplicates\"];\n  5 -->|output_alignments| 7;\n  8[\"Samtools idxstats\"];\n  5 -->|output_alignments| 8;\n  9[\"Gene Body Coverage (BAM)\"];\n  5 -->|output_alignments| 9;\n  1 -->|output| 9;\n"
     }
   ],
