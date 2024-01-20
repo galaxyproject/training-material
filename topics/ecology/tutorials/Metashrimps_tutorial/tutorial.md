@@ -31,9 +31,6 @@ contributions:
     editing:
         - yvanlebras
         - hexylena
-    infrastructure:
-        - PNDB
-        - MNHN
     funding:
         - PNDB
         - FNSO2019
