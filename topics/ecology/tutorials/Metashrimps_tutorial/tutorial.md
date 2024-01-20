@@ -50,7 +50,6 @@ of metadata and how this tool responds to this necessity.
 > [FAIR](https://www.go-fair.org/fair-principles/) stand for **Findable, Accessible, Interoperable, Reusable**. 
 >
 >![FAIR Data Principles](./Images/FAIR_data_principles.jpg){:width="500"}
-
 >These principles were [officialy instaured in 2016](https://doi.org/10.1038/sdata.2016.18) to improve the access and usabiliy of data by the machine and to help making data reusable and shareable for users.
 >Metadata is the data used to describe and explain all the context behind the production of data. It is necessary to produce a rich and FAIR metadata in order 
 >to permit external users to understand and reuse data for their own studies.
@@ -93,6 +92,8 @@ publishable as a real Data Paper giving recognition to all the people that helpe
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+{: .hands_on}
+
 
 # Upload Data in MetaShRIMPS
 
