@@ -31,9 +31,7 @@ contributions:
     editing:
         - yvanlebras
         - hexylena
-    funding:
-        - PNDB
-        - FNSO2019
+
 ---
 
 
