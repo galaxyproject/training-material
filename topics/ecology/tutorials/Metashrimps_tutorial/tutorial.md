@@ -14,7 +14,7 @@ objectives:
 - Learn how to create a FAIR Quality assessment report from a metadata using EML standard
 - Understand the concept of Data Paper and learn how to produce it
 - Explain the necessity of using such tools when producing ecological metadata
-time_estimation: 30mn
+time_estimation: 30M
 key_points:
 - This tool aims to improve FAIR quality of metadata
 - Creating metadata as FAIR as possible is a must
