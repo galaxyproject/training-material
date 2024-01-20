@@ -34,6 +34,9 @@ contributions:
     infrastructure:
         - PNDB
         - MNHN
+    funding:
+        - PNDB
+        - FNSO2019
 ---
 
 
