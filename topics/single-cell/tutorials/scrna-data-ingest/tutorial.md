@@ -458,7 +458,7 @@ Cell Data Set (CDS) format is usually used when working with a package called Mo
        text="You can choose whether you want just to transform AnnData to CDS or to create CDS input file for Monocle3 tutorial to proceed with the downstream analysis described in that tutorial. Please note that depending on your dataset, you might need to refer to the first method which uses both annotated and unprocessed matrices. If you did some pre-processing on your AnnData object, then you might need to choose the first method anyway since Monocle3 performs its own pre-processing, so we would also need an unprocessed expression matrix alongside annotated (pre-processed) AnnData. That method is more expanded and specific, while the general one just shows the main principle of the conversion." %}
 
 
- <div class="General-AnnData-to-CDS-conversion" markdown="1">
+<div class="General-AnnData-to-CDS-conversion" markdown="1">
 
 ## General AnnData to CDS conversion
 
@@ -489,7 +489,8 @@ We will continue working on previously used dataset, so you can copy it from you
 > 1. Create a new history for this tutorial
 > 
 > 2. You can either copy the previously used dataset from your history:
-> {% snippet faqs/galaxy/histories_copy_dataset.md %}
+>
+>    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 >
 > Or, alternatively, download the dataset from [Zenodo]({{ page.zenodo_link }})
 >
@@ -597,14 +598,13 @@ You have two options for uploading these datasets. Importing via history is ofte
 >
 > 1. Import history from: [input history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files)
 >
->
 >    {% snippet faqs/galaxy/histories_import.md %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the history to your name of choice.
 >
 {: .hands_on}
 
-><hands-on-title>Option 2: Data upload - Add to history</hands-on-title>
+> <hands-on-title>Option 2: Data upload - Add to history</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the AnnData object from [Zenodo](https://zenodo.org/records/7078524)
@@ -627,7 +627,7 @@ You have two options for uploading these datasets. Importing via history is ofte
 
 To run Monocle, we need cell metadata, gene metadata, and an expression matrix file of genes by cells. (In theory, the expression matrix alone could do, but then we wouldn’t have all those useful annotations that we worked on so hard in the previous tutorials!). In order to get these files, we will extract the gene and cell annotations from our AnnData object.
 
- > <question-title></question-title>
+> <question-title></question-title>
 >
 > How many lines do you expect to be in the gene and cell metadata files?
 >
