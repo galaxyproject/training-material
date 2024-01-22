@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Introduction to sequencing with Python 1"
+title: "Introduction to sequencing with Python (part one)"
 questions:
   - What are the origins of Sanger sequencing
   - How did sequencing machines evolve?
