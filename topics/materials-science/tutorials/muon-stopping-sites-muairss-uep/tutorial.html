@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Finding the muon stopping site with pymuon-suite in Galaxy / Materials Science</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@1f9cb2b0b2d9d51c57d161537daae02f93e382e4",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1705956707' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1705956707' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Finding the muon stopping site with pymuon-suite in Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-22 17:23:27 +0000">
+<meta name="DC.creator" content="Leandro Liborio">
+<meta name="DC.creator" content="Eli Chadwick">
+<meta name="DC.creator" content="Patrick Austin"><meta name="description" content="Modelling, simulation and analysis for the material science domain.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Materials Science / Hands-on: Finding the muon stopping site with pymuon-suite in Galaxy">
+        <meta property="og:description" content="Modelling, simulation and analysis for the material science domain.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-01-22 17:23:27 +0000",
+  "datePublished": "2024-01-22 20:44:48 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Finding the muon stopping site with pymuon-suite in Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Materials Science",
+    "description": "Modelling, simulation and analysis for the material science domain.",
+    "url": "https://training.galaxyproject.org/training-material/topics/materials-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Finding the muon stopping site with pymuon-suite in Galaxy",
+  "url": "https://training.galaxyproject.org/training-material/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.html",
+  "version": 12,
+  "timeRequired": "PT1H",
+  "teaches": "Understand why finding stopping sites is useful\n - Use pymuon-suite in Galaxy to find stopping sites\n - Understand the limitations of these tools and techniques",
+  "keywords": [
+    "Materials Science"
+  ],
+  "description": "The questions this  addresses are:\n - What are stopping sites and why is finding them important?\n - What computational techniques can be used to find stopping sites?\n - How can Galaxy help me with my analysis?\n\n\nThe objectives are:\n - Understand why finding stopping sites is useful\n - Use pymuon-suite in Galaxy to find stopping sites\n - Understand the limitations of these tools and techniques\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/leandro-liborio/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/leandro-liborio/",
+      "name": "Leandro Liborio",
+      "image": "https://avatars.githubusercontent.com/leandro-liborio",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/elichad/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/elichad/",
+      "name": "Eli Chadwick",
+      "image": "https://avatars.githubusercontent.com/elichad",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0035-6475",
+      "orcid": "https://orcid.org/0000-0002-0035-6475"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/patrick-austin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/patrick-austin/",
+      "name": "Patrick Austin",
+      "image": "https://avatars.githubusercontent.com/patrick-austin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/leandro-liborio/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/leandro-liborio/",
+      "name": "Leandro Liborio",
+      "image": "https://avatars.githubusercontent.com/leandro-liborio",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Materials Science",
+      "description": "Modelling, simulation and analysis for the material science domain.",
+      "url": "https://training.galaxyproject.org/training-material/topics/materials-science/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+
+  ],
+  "abstract": "The problem of identifying the stopping site of the muon is often key in the"
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1705956707'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/materials-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Materials Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/materials-science/faqs/" title="Check our FAQs for the Materials Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-materials-science">
+    <h1 data-toc-skip>Finding the muon stopping site with pymuon-suite in Galaxy</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/leandro-liborio/" class="contributor-badge contributor-leandro-liborio"><img src="https://avatars.githubusercontent.com/leandro-liborio?s=36" alt="Leandro Liborio avatar" width="36" class="avatar" />
+    Leandro Liborio</a><a href="/training-material/hall-of-fame/elichad/" class="contributor-badge contributor-elichad"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/elichad?s=36" alt="Eli Chadwick avatar" width="36" class="avatar" />
+    Eli Chadwick</a><a href="/training-material/hall-of-fame/patrick-austin/" class="contributor-badge contributor-patrick-austin"><img src="https://avatars.githubusercontent.com/patrick-austin?s=36" alt="Patrick Austin avatar" width="36" class="avatar" />
+    Patrick Austin</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/leandro-liborio/" class="contributor-badge contributor-leandro-liborio"><img src="https://avatars.githubusercontent.com/leandro-liborio?s=36" alt="Leandro Liborio avatar" width="36" class="avatar" />
+    Leandro Liborio</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are stopping sites and why is finding them important?</p>
+</li>
+        
+        <li><p>What computational techniques can be used to find stopping sites?</p>
+</li>
+        
+        <li><p>How can Galaxy help me with my analysis?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand why finding stopping sites is useful</p>
+</li>
+        
+        <li><p>Use pymuon-suite in Galaxy to find stopping sites</p>
+</li>
+        
+        <li><p>Understand the limitations of these tools and techniques</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/10219558">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/workflows/" title="Finding the muon stopping site with pymuon-suite in Galaxy workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
+    
+    
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/materials-science/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 22, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 22, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 12 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>The problem of identifying the stopping site of the muon is often key in the
+interpretation of muon experimental results. As it was mentioned in the lecture, 
+the problem of finding the muon stopping site has been previously
+tackled using computational tools, and one of the most common methods is the so-called
+Unperturbed Electrostatic Potential (UEP) method, which identifies proposes that 
+the muon stops at the minima of the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> of a crystalline host material.</p>
+
+<p>pymuon-suite in Galaxy implements a variant of the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr>, that allows the
+users to efficiently scan the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> of the host material and use a clustering procedure 
+to classify those minima as potential stopping sites. But, before moving into the details 
+of how the method works, it is useful to revisit some of the key assumptions 
+behind what happens in a muon experiment.</p>
+
+<p>At the atomic level, muon spectroscopy experiments go something like this:</p>
+
+<ul>
+  <li>A spin-polarized muon beam of positive muons is fired at the sample</li>
+  <li>Through inelastic collisions with the atoms of the crystalline host material,
+ muons shed their kinetic energy, which turns into heat or causes small amounts 
+ of damage to the crystal. This continues until the muons’ kinetic energy becomes low enough
+that it is comparable to their potential energy in the electrostatic potential
+generated by electrons and nuclei alike.</li>
+  <li>At that point, Coulomb forces start driving the muon, until it eventually
+loses as much energy as possible and comes to a stop in a position that
+sometimes represents a local (and possibly global) minimum for the sample’s
+<abbr title="Unperturbed Electrostatic Potential">UEP</abbr> energy. Once it stopped, the muon may spend
+the rest of its time in that position until it decays.</li>
+</ul>
+
+<p><a href="../../images/muon_spectroscopy_diagram.png" rel="noopener noreferrer"><img src="../../images/muon_spectroscopy_diagram.png" alt="Graphical illustration of muons being implanted in a sample, then decaying to a positron and being detected. " width="957" height="478" loading="lazy" /></a></p>
+
+<p>Where these minima of the potential actually are isn’t always obvious and,
+although the our version of the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> method has proven to be quite efficient and useful, 
+ there are certain crystalline materials where predicting the minima of the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> 
+ potential can be a lot harder. For instance, in lithium fluoride <span class="citation"><a href="#Liborio2018">Liborio <i>et al.</i> 2018</a></span>, 
+ the potential’s minima are flat and
+wide and current computer simulations fail to predict the muon stopping site. 
+Hence, users must exercise scientific criteria when analyzing results form the method</p>
+
+<p>This tutorial goes into the details of how to estimate the muon stopping 
+site in crystalline copper, as described in the lecture, and it assumes
+ that some basic Galaxy concepts such as: how to upload a file;
+how to use a Galaxy tool; how to create, view and share a history and how to extract
+ and run a Galaxy workflow, are known. Hence, 
+as stated in the requirements at the beginning of this tutorial please, before starting
+ have a look at this: <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html">A short introduction to Galaxy</a></p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#workflow-for-finding-the-µ-stopping-site" id="markdown-toc-workflow-for-finding-the-µ-stopping-site">Workflow for Finding the µ+ stopping site</a>    <ol>
+      <li><a href="#import-workflow" id="markdown-toc-import-workflow">Import workflow</a></li>
+      <li><a href="#dft-calculation-of-the-pure-host-material" id="markdown-toc-dft-calculation-of-the-pure-host-material"><abbr title="Density Functional Theory">DFT</abbr> calculation of the Pure Host Material</a></li>
+      <li><a href="#create-randomly-populated-muonated-structures" id="markdown-toc-create-randomly-populated-muonated-structures">Create Randomly Populated Muonated Structures</a></li>
+      <li><a href="#relax-electrostatic-forces-on-muons" id="markdown-toc-relax-electrostatic-forces-on-muons">Relax Electrostatic Forces on Muons</a></li>
+      <li><a href="#cluster-relaxed-structures---µ-stopping-sites" id="markdown-toc-cluster-relaxed-structures---µ-stopping-sites">Cluster Relaxed Structures - µ+ Stopping Sites</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="workflow-for-finding-the-µ-stopping-site">Workflow for Finding the µ+ stopping site</h1>
+<p>As described in the lecture, the full workflow associated with finding 
+potential muon stopping sites in crystalline copper is shown in the figure below:</p>
+
+<p><a href="../../images/Workflow_for_finding_mu+.png" rel="noopener noreferrer"><img src="../../images/Workflow_for_finding_mu+.png" alt="Graphical illustration of the steps in finding the muon stopping site for a Silicon crystal lattice. (1) Start with a pure host, (2) randomly populate with muons, (3) relax electrostatic forces, (4) cluster structures to give the stopping site in either (5) a conventional unit cell or (6) a supercell." width="720" height="405" loading="lazy" /></a></p>
+
+<p>It comprises 6 steps that will be described in detail in the next sections.  Steps 1 and 6 
+are performed outside of the Galaxy platform, usually in an external computer cluster that can
+run the necessary Density Functional Theory (DFT) simulations. Steps 2, 3, 4, and 5 of this workflow are are carried out 
+in Galaxy using two Galaxy tools: <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS UEP Optimise</code> and <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS Cluster</code>.</p>
+
+<p><a href="../../images/2GalaxyTools.png" rel="noopener noreferrer"><img src="../../images/2GalaxyTools.png" alt="Screenshots of the Galaxy UI showing the two tools, PyMuonSuite AIRSS UEP Optimise and PyMuonSuite AIRSS Cluster, and which steps of the described process they correspond to (1,2,3 and 4,5,6 respectively)." width="720" height="405" loading="lazy" /></a></p>
+
+<p>Hence, there is a difference between the full workflow and the specific Galaxy part of this workflow, which can be 
+saved, shared and edited in the Galaxy platform. For the case of finding potential muon stopping sites in 
+crystalline Cu, the components of Galaxy workflow are shown below:</p>
+
+<p><a href="../../images/GalaxyWorkflow.png" rel="noopener noreferrer"><img src="../../images/GalaxyWorkflow.png" alt="Screenshot of the Galaxy workflow editor showing the three input files (Copper-out.cell, Copper.den_fmt, Copper.castep) needed for the tool PyMuonSuite AIRSS UEP Optimise, and how that output connects to the PyMuonSuite AIRSS Cluster tool." width="985" height="406" loading="lazy" /></a></p>
+
+<p>And this is the workflow that can be imported for this tutorial.</p>
+
+<h2 id="import-workflow">Import workflow</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-import-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import workflow</div>
+
+  <ol>
+    <li>Import the workflow for this tutorial using <a href="workflows/">these instructions</a>.</li>
+    <li>Open the editor for the workflow, and verify that all the required tools
+are installed on your Galaxy instance, and have the same version(s) as the
+tools in workflow. If this is not the case a dialogue box will warn you.</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="dft-calculation-of-the-pure-host-material"><abbr title="Density Functional Theory">DFT</abbr> calculation of the Pure Host Material</h2>
+
+<p>This method requires only a single <abbr title="Density Functional Theory">DFT</abbr> calculation for the host material.<br />
+ This calculation could be a geometry optimisation, which uses 
+ a self-consistent methodology to estimate the electronic 
+ structure of the material and relax the structure. Pymuon_suite uses the 
+ CASTEP code for running its <abbr title="Density Functional Theory">DFT</abbr> calculations, and some basic information
+  about how to run a geometry optimisation is available in the <a href="https://castep-docs.github.io/castep-docs/">CASTEP documentation</a>.</p>
+
+<p>Once the relaxed structure and its corresponding electronic structure are obtained, 
+a set of CASTEP output files is generated. We need to load just three of these files
+into Galaxy.  These are the relaxed CASTEP structural file <code class="language-plaintext highlighter-rouge">*-out.cell</code>, the
+charge density file <code class="language-plaintext highlighter-rouge">*.den_fmt</code> and the CASTEP output file <code class="language-plaintext highlighter-rouge">*.castep</code>.</p>
+
+<p>The CASTEP files for this example have all been pre-generated for this tutorial,
+but in general you would need to create these yourself by running CASTEP simulations
+outside of Galaxy.</p>
+
+<p>To run the first part of the workflow, on the left menu of the Galaxy web-page
+we look for the <code class="language-plaintext highlighter-rouge">FIND MUON STOPPING SITES</code> header and first click on <code class="language-plaintext highlighter-rouge">UEP method</code> and then 
+select the <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS UEP Optimise</code> Galaxy tool. This brings up the central panel of the Galaxy 
+web-page, where can load the CASTEP files; complete the <em>Generation</em> parameters to set up the
+creation of randomly populated muonated structures; and complete the <em>Optimisation</em> parameters to set up the relaxation the 
+electrostatic forces of the muon in each of the randomly populated muonated structures.</p>
+
+<h3 id="how-to-load-castep-files-into-galaxy">How to load CASTEP files into Galaxy</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/records/10219558">Zenodo</a>, from you computer, or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">materials-science</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">Finding the muon stopping site with pymuon-suite in Galaxy</code>):</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/10219558/files/Cu-out.cell 
+https://zenodo.org/records/10219558/files/Cu.castep 
+https://zenodo.org/records/10219558/files/Cu.den_fmt 
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Rename the datasets to match their file names, if needed.</li>
+    <li>
+      <p>Check that the datatype is correct for each dataset.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="create-randomly-populated-muonated-structures">Create Randomly Populated Muonated Structures</h2>
+
+<p>The first step within the Galaxy platform is the population of the 
+host material’s interstitial spaces with muons that are 
+randomly distributed in accordance with certain physical constraints.</p>
+
+<p><a href="../../images/Create-random-structures.png" rel="noopener noreferrer"><img src="../../images/Create-random-structures.png" alt="Graphical illustration of how the parameters Gaussian Width affects the potential of atoms, Van der Waals Scale increases the distance between atoms and muons, and Poisson Radius increases the starting distance between muons." width="720" height="405" loading="lazy" /></a></p>
+
+<p>Essentially, the muons are randomly distributed while respecting 
+a minimum distance between them and between the atoms 
+in the host material. The <code class="language-plaintext highlighter-rouge">Poisson radius</code> parameter sets the minimum spacing
+between the muons that are randomly implanted in the sample, while the
+<code class="language-plaintext highlighter-rouge">Van der Waals scale</code> parameter sets the minimum spacing between randomly
+implanted muons and the atoms in the host material.  Two of the images in the figure 
+above show how the density of distributed muons changes for different values of 
+the Poisson radius. These images are just for visualization purposes, what 
+the method really does is generate a set of muonated structures, where each one has a muon 
+in a different place, and place each muonated structure in a corresponding folder.</p>
+
+<h2 id="relax-electrostatic-forces-on-muons">Relax Electrostatic Forces on Muons</h2>
+
+<p>As stated in the lecture, the method minimizes the electrostatic forces acting on the muon in each of the 
+muonated structures generated in the previous step.  In this relaxation procedure, 
+the forces are calculated analytically using data obtained from the <abbr title="Density Functional Theory">DFT</abbr> simulation of the unperturbed host material: 
+the charge density file <code class="language-plaintext highlighter-rouge">*.den_fmt</code>, the relaxed CASTEP structural file <code class="language-plaintext highlighter-rouge">*-out.cell</code>, the and the CASTEP output file <code class="language-plaintext highlighter-rouge">*.castep</code>,
+and then the muon is displaced in a direction 
+that minimizes the forces acting upon it. This is a self-consistent procedure, which is repeated until the 
+forces on each muon are below the value specified in the <code class="language-plaintext highlighter-rouge">geometry optimisation tolerance</code> parameter, or until 
+the maximum number of <code class="language-plaintext highlighter-rouge">geometry optimisation steps</code> is reached.</p>
+
+<p><a href="../../images/relax_electrostatic_forces_on_muons.png" rel="noopener noreferrer"><img src="../../images/relax_electrostatic_forces_on_muons.png" alt="Graphical illustration of how muon positions might move during geometry optimisation to concentrate in one or more areas in the structure, and the equation defining the electrostatics of this process." width="720" height="405" loading="lazy" /></a></p>
+
+<p>This workflow’s step could be computationally expensive. The larger the 
+the size of the host material’s unit cell, and the smaller the values of <code class="language-plaintext highlighter-rouge">Poisson radius</code> and
+<code class="language-plaintext highlighter-rouge">Van der Waals scale</code> parameters, the larger number of muonated structures created, and the 
+more expensive this step will be.  In any case: the relaxation procedure is run in the Galaxy 
+server, so the user can just start it and leave it running in the Galaxy instance. The status of 
+the relaxation will be indicated in the history panel on the right menu of the Galaxy web-page, where 
+all the processes run by the Galaxy instance are numbered.</p>
+
+<p>Below, a hands-on example on how to run these workflow steps.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-pymuonsuite-airss-uep-optimise"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: PyMuonSuite AIRSS UEP Optimise</div>
+
+  <ol>
+    <li>Run the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_uep_opt/pm_uep_opt/0.3.0+galaxy1" title="PyMuonSuite AIRSS UEP Optimise tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PyMuonSuite AIRSS UEP Optimise</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.0+galaxy1)</span> tool with the following parameters:
+      <ul>
+        <li><em>“Tool Parameters”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Structure file”</em>: <code class="language-plaintext highlighter-rouge">Cu-out.cell</code> relaxed CASTEP structural file</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Charge density file”</em>: <code class="language-plaintext highlighter-rouge">Cu.den_fmt</code> CASTEP file with charge density of host material</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“CASTEP log file”</em>: <code class="language-plaintext highlighter-rouge">Cu.castep</code> The CASTEP output file for the initial <abbr title="Density Functional Theory">DFT</abbr> simulation</li>
+          </ul>
+        </li>
+        <li><em>“Generation Parameters”</em>:
+          <ul>
+            <li><em>“Poisson radius”</em>: <code class="language-plaintext highlighter-rouge">0.6</code> Sets the minimum spacing between the muons that are randomly implanted in the sample</li>
+            <li><em>“Van der Waals scale”</em>: <code class="language-plaintext highlighter-rouge">0.5</code> Sets the minimum spacing between randomly implanted muons atoms in host material</li>
+            <li><em>“Random seed”</em>: <code class="language-plaintext highlighter-rouge">optional</code> this is if we want to re-use a set of generated structures.  Rarely used</li>
+            <li><em>“Format for file containing all muon positions (optional)”</em>: <code class="language-plaintext highlighter-rouge">cell</code> Generates an extra output file containing all the muon positions</li>
+          </ul>
+        </li>
+        <li><em>“Optimisation parameters Parameters”</em>:
+          <ul>
+            <li><em>“Geometry optimization steps”</em>: <code class="language-plaintext highlighter-rouge">300</code> Maximum number of geometry optimisation steps</li>
+            <li><em>“Geometry optimization tolerance”</em>: <code class="language-plaintext highlighter-rouge">0.05</code> Tolerance on geometry optimisation in eV/AA</li>
+            <li><em>“Gaussian width factor”</em>: <code class="language-plaintext highlighter-rouge">5.0</code> Adjusts how atom potentials are modelled</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="cluster-relaxed-structures---µ-stopping-sites">Cluster Relaxed Structures - µ+ Stopping Sites</h2>
+
+<p>Once the relaxation is over, there will appear a new item on the history panel denominated
+<em>PyMuonSuite AIRSS UEP Optimise on data X, data Y and data Z</em>. This item 
+contains a <code class="language-plaintext highlighter-rouge">*.zip</code> file with all the optimised muonated structures, where <em>X</em>, <em>Y</em> and <em>Z</em> are 
+the numbers of the processes, in the history panel, that were used for running the relaxation 
+of the electrostatic forces on muons.</p>
+
+<p><a href="../../images/cluster_relaxed_structures_mu+_stopping_sites.png" rel="noopener noreferrer"><img src="../../images/cluster_relaxed_structures_mu+_stopping_sites.png" alt="Graphical illustration of muons clustered in two possible sites for a structure, how this is represented in the tool output report, and the original structure within that cluster which has minimal energy." width="720" height="405" loading="lazy" /></a></p>
+
+<p>The first step for running the clustering procedure is to select the <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS Cluster</code> Galaxy tool on
+the left menu of the Galaxy web-page . This brings up the corresponding central panel of the Galaxy 
+web-page, where can load the optimised muonated structures <code class="language-plaintext highlighter-rouge">*.zip</code> contained in the 
+<em>PyMuonSuite AIRSS UEP Optimise on data X, data Y and data Z</em> item.</p>
+
+<p>Then we need to select the <em>clustering method</em> and it corresponding parameters. There are two clustering methodologies 
+available: <code class="language-plaintext highlighter-rouge">hierarchical</code> and <code class="language-plaintext highlighter-rouge">k-means</code> clustering. We recommend using the hierarchical clustering first, choosing different 
+values of the <code class="language-plaintext highlighter-rouge">t parameter for hierarchical clustering</code>, until a consistent number of clusters is found.  Once that 
+number is found, we can perform a k-means clustering analysis, using the number of hierarchical clustering clusters as 
+the value for the <code class="language-plaintext highlighter-rouge">Number of clusters for k-means clustering</code> parameter.</p>
+
+<p>Finally, we need to choose the <em>Clustering Save Format</em>. This allows for the visualisation of the potential stopping sites 
+associated to each of the clusters found, but it can also be used to prepare the <code class="language-plaintext highlighter-rouge">*.cell</code> supercell file that is needed to 
+run the last step of the workflow: the <abbr title="Density Functional Theory">DFT</abbr> relaxation of each of the muonated structures associated to each of
+the potential stopping sites.  The <code class="language-plaintext highlighter-rouge">*.cell</code> supercell file can then be downloaded from Galaxy and used to run 
+a CASTEP <abbr title="Density Functional Theory">DFT</abbr> simulation, which can be used to analyse things such as the distortions caused by the muon in the host 
+material.</p>
+
+<p><a href="../../images/DFT_supercell_muonated_structures.png" rel="noopener noreferrer"><img src="../../images/DFT_supercell_muonated_structures.png" alt="Graphical illustration of how a muon within a conventional unit cell can be converted to a larger 3 by 3 by 3 supercell, still containing only one muon but with more of the original atoms of the lattice." width="720" height="405" loading="lazy" /></a></p>
+
+<p>Below, a hands-on example on how to run this workflow step.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-pymuonsuite-airss-cluster"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: PyMuonSuite AIRSS Cluster</div>
+
+  <ol>
+    <li>Run the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_read/pm_muairss_read/0.3.0+galaxy0" title="PyMuonSuite AIRSS Cluster tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PyMuonSuite AIRSS Cluster</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.0+galaxy0)</span> tool with the following parameters:
+      <ul>
+        <li><em>“Tool Parameters”</em>:
+          <ul>
+            <li><em>“optimised muonated structures”</em>: <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS UEP Optimise on data X, data Y and data Z</code> load the optimised muonated structures <code class="language-plaintext highlighter-rouge">*.zip</code> file</li>
+            <li><em>“Clustering method”</em>: <code class="language-plaintext highlighter-rouge">hierarchical</code> Performs hierarchical clustering</li>
+            <li><em>“t parameter for hierarchical clustering”</em>: <code class="language-plaintext highlighter-rouge">0.2</code> Threshold value for clusters</li>
+            <li><em>“Clustering method”</em>: <code class="language-plaintext highlighter-rouge">k-means</code> Performs k-means clustering.  Needs guess for number of clusters</li>
+            <li><em>“Number of clusters for k-means clustering “</em>: <code class="language-plaintext highlighter-rouge">2</code> Proposed number of clusters for k-means. Usually the clusters found with <code class="language-plaintext highlighter-rouge">hierarchical</code> clustering</li>
+            <li><em>“Clustering Save Format”</em>: <code class="language-plaintext highlighter-rouge">cell</code>  Creates a structural file for each cluster, corresponding to the structure in the cluster with minimal energy, with  the specified format</li>
+            <li><em>“Supercell”</em>: <code class="language-plaintext highlighter-rouge">3</code> Supercell size and shape to use when saving cluster structures</li>
+            <li><em>“Muon symbol”</em>: <code class="language-plaintext highlighter-rouge">H:mu</code> The symbol to use for the muon when writing out the CASTEP custom species. H:mu is the default.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="analysis-of-the-cluster-report">Analysis of the Cluster report</h3>
+
+<p>Once the clustering procedure is over, there will appear a new item on the history panel denominated
+<em>Cluster report for PyMuonSuite AIRSS UEP Optimise on data X, data Y, and data Z</em>, which contains a 
+human-readable summary of the clustering results, with the underlying raw data also provided. The top of the 
+report contains a summary of the settings used to run the clustering, and when it was run.</p>
+
+<blockquote class="code-out">
+  <div class="box-title code-out-title" id="code-out-muairss-clusters-report"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: MuAirss Clusters report</div>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>****************************
+|                          |
+|       PYMUON-SUITE       |
+|  MuAirss Clusters report |
+|                          |
+****************************
+
+Name: struct
+Date: 2023-11-06 09:41:00.787599
+Structure file(s): input_structure.cell
+Parameter file: params.yaml
+
+Clustering method: Hierarchical
+    t = 0.4
+
+*******************
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The remainder of the report details the clusters and the individual muonated 
+structures composing each cluster. In
+addition to showing the relative numbers of structures forming each cluster,
+we also report the structure with the minimum energy, the average energy for all the structures 
+and the corresponding standard deviation for that average energy. By analysing of these 
+quantities for different values of the <code class="language-plaintext highlighter-rouge">Poisson radius</code>, <code class="language-plaintext highlighter-rouge">Van der Waals scale</code> and 
+<code class="language-plaintext highlighter-rouge">t parameter for hierarchical clustering</code> parameters, we can determine which 
+are the “stable” clusters, which are the ones associated to potential stopping sites.</p>
+
+<blockquote class="code-out">
+  <div class="box-title code-out-title" id="code-out-muairss-clusters-report-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: MuAirss Clusters report</div>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Clusters for struct:
+CALCULATOR: uep
+	2 clusters found
+
+
+	-----------
+	Cluster 1
+	-----------
+	Structures: 7
+
+	Energy (eV):
+	Minimum		Average		StDev
+	-10.30		-10.30		0.00
+
+	Minimum energy structure: struct_7
+
+
+	Structure list:
+	struct_1	struct_3	struct_5	struct_6	
+	struct_7	struct_8	struct_12	
+
+	-----------
+	Cluster 2
+	-----------
+	Structures: 7
+
+	Energy (eV):
+	Minimum		Average		StDev
+	-11.93		-11.93		0.00
+
+	Minimum energy structure: struct_14
+
+
+	Structure list:
+	struct_2	struct_4	struct_9	struct_10	
+	struct_11	struct_13	struct_14	
+
+	----------
+
+	Similarity (ranked):
+	1 &lt;--&gt; 2 (distance = 1.681)
+
+--------------------------
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The classical <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> method scans the electrostatic potential looking for minima in it, which 
+are associated to potential muon stopping sites. This method further classifies those minima 
+by estimating their “attractor size”.  If you look at the picture in the figure below, the two 
+minima have similar values, but the capacity to “attract” a muon is greater for the minima on the left, 
+which makes it more likely to be a muon stopping site. The probability of a potential stopping site is 
+given by the size of the cluster that forms around its associated minima.</p>
+
+<p><a href="../../images/theoretical_basis_of_our_variant_of_the_UEP_method.png" rel="noopener noreferrer"><img src="../../images/theoretical_basis_of_our_variant_of_the_UEP_method.png" alt="Graphical illustration of how muons may be clustered in two different potential minima that have similar energies with a simple 1D plot, and two real examples (CaF and YF3) showing the potential energy in a 3D structure." width="720" height="405" loading="lazy" /></a></p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Galaxy supports multiple PyMuonSuite tools which can be used together to find muon stopping sites</p>
+</li>
+                        
+                        <li><p>The workflow for finding the stopping site involves three stages - structure generation, structure optimisation, and structure clustering</p>
+</li>
+                        
+                        <li><p>Within the UEP, the optimisation stage is based on analytically calculating the electrostatic forces applied to the muon, which can be performed via Galaxy.</p>
+</li>
+                        
+                        <li><p>The approach requires a CASTEP DFT calculation to be completed as a starting point</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/materials-science/faqs/">FAQ page for the Materials Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Liborio2018">Liborio, L., S. Sturniolo, and D. Jochym, 2018 <b>Computational prediction of muon stopping sites using <i>ab initio</i> random structure searching (AIRSS)</b>. The Journal of Chemical Physics 148: 134114. <a href="https://doi.org/10.1063/1.5024450">10.1063/1.5024450</a></li></ol>
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>AIRSS</dt>
+                    <dd>Ab Initio Random Structure Search</dd>
+                    
+                    <dt>DFT</dt>
+                    <dd>Density Functional Theory</dd>
+                    
+                    <dt>UEP</dt>
+                    <dd>Unperturbed Electrostatic Potential</dd>
+                    
+                </dl>
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Finding the muon stopping site with pymuon-suite in Galaxy (Materials Science)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Leandro Liborio, Eli Chadwick, Patrick Austin,  <b>Finding the muon stopping site with pymuon-suite in Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.html">https://training.galaxyproject.org/training-material/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{materials-science-muon-stopping-sites-muairss-uep,
+author = "Leandro Liborio and Eli Chadwick and Patrick Austin",
+	title = "Finding the muon stopping site with pymuon-suite in Galaxy (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/eurosciencegateway" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/eurosciencegateway/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: pm_muairss_read
+  owner: muon-spectroscopy-computational-project
+  revisions: 40071ff77285
+  tool_panel_section_label: Muon Spectroscopy
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: pm_uep_opt
+  owner: muon-spectroscopy-computational-project
+  revisions: eea73e1f65cb
+  tool_panel_section_label: Muon Spectroscopy
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/1f9cb2b0b2d9d51c57d161537daae02f93e382e4">1f9cb2b</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1705956707'></script>
+        
+    </body>
+</html>

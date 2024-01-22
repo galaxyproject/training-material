@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Introduction to Muon Spectroscopy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@1f9cb2b0b2d9d51c57d161537daae02f93e382e4",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/materials-science/slides/introduction.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1705956707' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1705956707' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Introduction to Muon Spectroscopy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-19 17:14:56 +0000">
+<meta name="DC.creator" content="Anish Mudaraddi">
+<meta name="DC.creator" content="Eli Chadwick">
+<meta name="DC.creator" content="Patrick Austin">
+<meta name="DC.creator" content="Leandro Liborio">
+
+        
+        
+        
+        
+        <meta name="description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Introduction to Muon Spectroscopy">
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        <script type="application/ld+json">
+            
+
+
+{}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1705956707'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics//slides/.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Introduction to Muon Spectroscopy
+
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+	
+<ul class="text-list">
+			
+			<li>
+				<a href="/training-material/hall-of-fame/anish-mudaraddi/" class="contributor-badge contributor-anish-mudaraddi"><img src="https://avatars.githubusercontent.com/anish-mudaraddi?s=36" alt="Anish Mudaraddi avatar" width="36" class="avatar" />
+    Anish Mudaraddi</a>
+			<li>
+				<a href="/training-material/hall-of-fame/elichad/" class="contributor-badge contributor-elichad"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/elichad?s=36" alt="Eli Chadwick avatar" width="36" class="avatar" />
+    Eli Chadwick</a>
+			<li>
+				<a href="/training-material/hall-of-fame/patrick-austin/" class="contributor-badge contributor-patrick-austin"><img src="https://avatars.githubusercontent.com/patrick-austin?s=36" alt="Patrick Austin avatar" width="36" class="avatar" />
+    Patrick Austin</a>
+			<li>
+				<a href="/training-material/hall-of-fame/leandro-liborio/" class="contributor-badge contributor-leandro-liborio"><img src="https://avatars.githubusercontent.com/leandro-liborio?s=36" alt="Leandro Liborio avatar" width="36" class="avatar" />
+    Leandro Liborio</a></li>
+</ul>
+	
+
+
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+# What are &quot;Muons&quot;?
+
+Muons are subatomic particles that have spin 1/2, carry one elementary electric
+charge, and have a mass about 207 times the rest mass of the electron or 1/9th
+of the rest mass of the proton.
+
+Muons may be though of as &quot;heavy electrons&quot; or &quot;light protons&quot;, and they are
+generated via nuclear reactions currently at four muon sources around the world.
+
+The ISIS Neutron and Muon Source, at the Rutherford Appleton Laboratory in the
+UK, is one of them. 
+
+---
+
+# What is Muon Spectroscopy?
+
+In a muon experiment, the muons are channelled into beamlines and fired towards
+the samples that we want to study.
+
+They are implanted into the sample and decay with an average lifetime of 2.2μs,
+releasing a positron in the direction of the spin of the muon at the time of
+decay.
+
+The positrons leave the sample and are collected by a positron detector. These
+detections are used to infer the behaviour of the muons and, with that, study
+different properties of the sample. 
+
+![Diagram showing muon implantation, decay, and positron detection](../images/muon_spectroscopy_diagram.png)
+---
+
+# Muon Simulations
+
+One of the main problems in Muon Spectroscopy is knowing where the muon is
+implanted - where it stops - inside the sample.  
+
+The stopping site is influenced by many factors and knowing its location is very
+useful for the interpretation of muon experiments.
+
+Computer simulations can help with estimating the muon stopping site.
+
+---
+
+# Muon Galaxy tools
+
+Muon Galaxy gives easy access to a set of software tools developed by the 
+[Muon Spectroscopy Computational Project (MSCP)](https://muon-spectroscopy-computational-project.github.io/index.html)
+for simulating muon science experiments including:
+
+  - approximating the muon stopping site
+
+  - simulating spin dynamics of muonated structures
+
+
+
+---
+
+
+
+
+## Related tutorials
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/anish-mudaraddi/" class="contributor-badge contributor-anish-mudaraddi"><img src="https://avatars.githubusercontent.com/anish-mudaraddi?s=36" alt="Anish Mudaraddi avatar" width="36" class="avatar" />
+    Anish Mudaraddi</a><a href="/training-material/hall-of-fame/elichad/" class="contributor-badge contributor-elichad"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/elichad?s=36" alt="Eli Chadwick avatar" width="36" class="avatar" />
+    Eli Chadwick</a><a href="/training-material/hall-of-fame/patrick-austin/" class="contributor-badge contributor-patrick-austin"><img src="https://avatars.githubusercontent.com/patrick-austin?s=36" alt="Patrick Austin avatar" width="36" class="avatar" />
+    Patrick Austin</a><a href="/training-material/hall-of-fame/leandro-liborio/" class="contributor-badge contributor-leandro-liborio"><img src="https://avatars.githubusercontent.com/leandro-liborio?s=36" alt="Leandro Liborio avatar" width="36" class="avatar" />
+    Leandro Liborio</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/joelvdavies/" class="contributor-badge contributor-joelvdavies"><img src="https://avatars.githubusercontent.com/joelvdavies?s=36" alt="Joel Davies avatar" width="36" class="avatar" />
+    Joel Davies</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+	
+
+	<div>
+		<div>
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/eurosciencegateway" alt="Logo">
+		
+		</div>
+		<div>
+		
+		</div>
+	</div>
+
+
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1705956707'></script>
+        
+    </body>
+</html>
