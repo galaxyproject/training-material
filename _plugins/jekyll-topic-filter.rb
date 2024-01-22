@@ -1043,7 +1043,7 @@ module Jekyll
       topic = page['path'].split('/')[1]
       material = page['path'].split('/')[3]
       ret = TopicFilter.fetch_tutorial_material(site, topic, material)
-      Jekyll.logger.warning "Could not find material #{topic} #{material}" if ret.nil?
+      Jekyll.logger.warn "Could not find material #{topic} #{material}" if ret.nil?
       ret
     end
 
