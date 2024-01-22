@@ -38,7 +38,6 @@ contributions:
 ---
 
 
-# Introduction
 
 This tutorial aims to teach how to use the interactive tool MetaShRIMPS, available on Galaxy Ecology,
 to produce Data Papers drafts and FAIR quality assessment reports from metadata using EML
