@@ -372,7 +372,4 @@ minima have similar values, but the capacity to "attract" a muon is greater for 
 which makes it more likely to be a muon stopping site. The probability of a potential stopping site is 
 given by the size of the cluster that forms around its associated minima.
 
-![Graphical illustration of how muons may be clustered in two different potential minima that have similar energies with a simple 1D plot, and two real examples (CaF and YF3) showing the potential energy in a 3D structure.](../../images/theoretical_basis_of_our_variant_of_the_UEP_method.png) 
-
-
-LIMITATIONS OF THE METHOD - WARNINGS
+![Graphical illustration of how muons may be clustered in two different potential minima that have similar energies with a simple 1D plot, and two real examples (CaF and YF3) showing the potential energy in a 3D structure.](../../images/theoretical_basis_of_our_variant_of_the_UEP_method.png)
