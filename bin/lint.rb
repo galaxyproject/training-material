@@ -980,6 +980,12 @@ module GtnLinter
                                                 code: 'GTN:014')])
     end
 
+    if path.match(/\?/)
+      emit_results([ReviewDogEmitter.file_error(path: path,
+                                                message: 'There ?s in this filename, that is forbidden.',
+                                                code: 'GTN:014')])
+    end
+
     case path
     when /md$/
       handle = File.open(path, 'r')
