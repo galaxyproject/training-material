@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4332a084904b4e2e3fd32f27e0e4ad6660adbe43",
+		release: "galaxy-training-network@7ad9b81798aa7626966e58954721c451a16d04b5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1705910459' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1705910459' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1705914325' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1705914325' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Obis marine indicators">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
+<meta name="DC.date" content="2024-01-20 07:36:38 +0000">
 <meta name="DC.creator" content="Marie Josse">
 <meta name="DC.creator" content="Yvan Le Bras"><meta name="description" content="Learn to analyse Ecological data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -119,7 +119,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2023-11-03 14:30:27 +0000",
+  "dateModified": "2024-01-20 07:36:38 +0000",
   "datePublished": "2023-04-11 09:13:43 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Obis marine indicators",
@@ -233,7 +233,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Obis marine indicators",
   "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/obisindicators/tutorial.html",
-  "version": 14,
+  "version": 16,
   "timeRequired": "PT1H",
   "teaches": "Calculating and vizualizing marine biodiversity indicators",
   "keywords": [
@@ -388,7 +388,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "OBIS is a global open-access data and information clearing-house on marine biodiversity for science, conservation and sustainable development. In order to visualize their marine data OBIS created the package obisindicators."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1705910459'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1705914325'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -760,7 +760,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 11, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 20, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -773,7 +773,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00332">https://gxy.io/GTN:T00332</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 14 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 16 </div>
 
     </blockquote>
     </section>
@@ -806,7 +806,7 @@ This tutorial will guide you on getting obis marine data and processing them in 
   <li><a href="#upload-of-the-data" id="markdown-toc-upload-of-the-data">Upload of the data</a></li>
   <li><a href="#convert-data-csv-to-tabular" id="markdown-toc-convert-data-csv-to-tabular">Convert data <strong>csv-to-tabular</strong></a></li>
   <li><a href="#clean-data-advanced-cut" id="markdown-toc-clean-data-advanced-cut">Clean data <strong>Advanced Cut</strong></a></li>
-  <li><a href="#ocean-biodiversity-indicators" id="markdown-toc-ocean-biodiversity-indicators"><strong>Ocean biodiversity indicators</strong></a></li>
+  <li><a href="#ocean-biodiversity-indicators" id="markdown-toc-ocean-biodiversity-indicators">Ocean biodiversity indicators</a></li>
   <li><a href="#number-of-records" id="markdown-toc-number-of-records">Number of records</a></li>
   <li><a href="#shannon" id="markdown-toc-shannon">Shannon</a></li>
   <li><a href="#simpson" id="markdown-toc-simpson">Simpson</a></li>
@@ -927,7 +927,7 @@ This tutorial will guide you on getting obis marine data and processing them in 
 
 <p>You are now all set to use your obis data in order to do a diversity analysis.</p>
 
-<h2 id="ocean-biodiversity-indicators"><strong>Ocean biodiversity indicators</strong></h2>
+<h2 id="ocean-biodiversity-indicators">Ocean biodiversity indicators</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-ocean-biodiversity-indicators"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Ocean biodiversity indicators</div>
@@ -1005,13 +1005,13 @@ else
 
 <h2 id="hill">Hill</h2>
 
-<h3 id="hill-1"><strong>Hill 1</strong></h3>
+<h3 id="hill-1">Hill 1</h3>
 
 <p>The Hill biodiversity index accounts for species’ relative abundance (number of records in OBIS) and Hill1 can be roughly interpreted as the number of species with “typical” abundances, and is a commonly used indicator for marine biodiversity richness. It is defined as:</p>
 
 <p>Warning: The Simpson index has the same assumptions as the Shannon index.</p>
 
-<h3 id="hill-2"><strong>Hill 2</strong></h3>
+<h3 id="hill-2">Hill 2</h3>
 
 <p>The Hill biodiversity index accounts for species’ relative abundance (number of records in OBIS) and discounts rare species, so Hill2 can be interpreted as the equivalent to the number of more dominant species and so is less sensitive to sample size than Hill1. The Hill index is a commonly used indicator for marine biodiversity richness. It is defined as:</p>
 
@@ -1153,6 +1153,28 @@ author = "Marie Josse and Yvan Le Bras",
 
 	</div>
 
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/fairease" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/fairease/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/pndb" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/pndb/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
 </div>
 </div>
 
@@ -1228,7 +1250,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4332a084904b4e2e3fd32f27e0e4ad6660adbe43">4332a08</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/7ad9b81798aa7626966e58954721c451a16d04b5">7ad9b81</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1256,7 +1278,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1705910459'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1705914325'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         
