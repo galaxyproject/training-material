@@ -90,7 +90,7 @@ publishable as a real Data Paper giving recognition to all the people that helpe
 >    https://zenodo.org/record/8130567/files/Kakila_database_marine_mammal.xml
 >    ```
 >
->    {% snippet faqs/import_files.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 {: .hands_on}
 
 
