@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Introduction to sequencing with python 1"
+title: "Introduction to sequencing with Python 1"
 questions:
   - What are the origins of Sanger sequencing
   - How did sequencing machines evolve?
@@ -127,10 +127,11 @@ In a series of now classical papers ([Paper 1](http://genome.cshlp.org/content/8
 
 In particular they developed a standard metric for describing the reliability of base calls:
 
-An important technical aspect of our work is the use of log-transformed error probabilities rather than untransformed ones, which facilitates working with error rates in the range of most importance (very close to 0). Specifically, we define the quality value q assigned to a base-call to be
+An important technical aspect of our work is the use of log-transformed error probabilities rather than untransformed ones, which facilitates working with error rates in the range of most importance (very close to 0). Specifically, we define the quality value $$q$$ assigned to a base-call to be:
+
 $$q = -10\times log_{10}(p)$$
 
-where p is the estimated error probability for that base-call. Thus a base-call having a probability of 1/1000 of being incorrect is assigned a quality value of 30. Note that high quality values correspond to low error probabilities, and conversely.
+where $$p$$ is the estimated error probability for that base-call. Thus a base-call having a probability of 1/1000 of being incorrect is assigned a quality value of 30. Note that high quality values correspond to low error probabilities, and conversely.
 
 We will be using the concept of "*quality score*" or "*phred-scaled quality score*" repeatedly in this course. 
 
@@ -157,7 +158,7 @@ In this lesson we will cover some of the fundamental Python basics including var
 
 ><warning-title>Indentation or bust!</warning-title>
 >Python is an indented language: code blocks are defined using indentation with [spaces](https://peps.python.org/pep-0008/#tabs-or-spaces)!
->{: .warning}
+{: .warning}
 
 In Python, indentation is used to indicate the scope of control structures such as `for` loops, `if` statements, and function and class definitions. The amount of indentation is not fixed, but it must be consistent within a block of code. The recommended amount of indentation is 4 spaces, although some developers prefer to use 2 spaces. Indenting is important in Python because it is used to indicate the level of nesting and structure of the code, which makes it easier to read and understand. Additionally, indentation is also used to indicate which lines of code are executed together as a block.
 
