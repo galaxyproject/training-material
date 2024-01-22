@@ -65,10 +65,9 @@ This first step consist of downloading and uploading obis data onto galaxy.
 
 <div class="Tool" markdown="1">
 ## Use the galaxy tool
-> 
 > <hands-on-title>Download your data</hands-on-title>
 > 
-> 1. {% tool [OBIS occurences](obis_data) %} with the following parameters:
+> 1. {% tool [OBIS occurences](toolshed.g2.bx.psu.edu/repos/ecology/obis_data/obis_data/0.0.2) %} with the following parameters:
 >    - *"Scientific name of the species"*: Empty
 >    - *"Taxon ID"*: Empty
 >    - *"Input latitude min (+north/-south)"*: `41.5`
@@ -78,7 +77,7 @@ This first step consist of downloading and uploading obis data onto galaxy.
 > 2. **Run Tool**
 {: .hands_on}
 
-## Clean data **Advanced Cut**
+## Clean data Advanced Cut
 
 > <hands-on-title>Clean your data</hands-on-title>
 > 
@@ -126,7 +125,7 @@ In the downloaded folder you should have your data either csv format (Occurence.
 
 {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 
-## Convert data **csv-to-tabular**
+## Convert data csv-to-tabular
 
 > <hands-on-title>Convert your data</hands-on-title>
 > 
@@ -137,7 +136,7 @@ In the downloaded folder you should have your data either csv format (Occurence.
 >    
 {: .hands_on}
 
-## Clean data **Advanced Cut**
+## Clean data Advanced Cut
 
 > <hands-on-title>Clean your data</hands-on-title>
 > 
@@ -151,7 +150,7 @@ In the downloaded folder you should have your data either csv format (Occurence.
 
 You are now all set to use your obis data in order to do a diversity analysis. 
 
-## **Ocean biodiversity indicators**
+## Ocean biodiversity indicators
 
 > <hands-on-title>Ocean biodiversity indicators</hands-on-title>
 >
@@ -223,13 +222,13 @@ Maxp is the maximum of the total number of records for the ith-species ni divide
 
 ## Hill
 
-### **Hill 1**
+### Hill 1
 
 The Hill biodiversity index accounts for species’ relative abundance (number of records in OBIS) and Hill1 can be roughly interpreted as the number of species with “typical” abundances, and is a commonly used indicator for marine biodiversity richness. It is defined as:
 
 Warning: The Simpson index has the same assumptions as the Shannon index.
 
-### **Hill 2**
+### Hill 2
 
 The Hill biodiversity index accounts for species’ relative abundance (number of records in OBIS) and discounts rare species, so Hill2 can be interpreted as the equivalent to the number of more dominant species and so is less sensitive to sample size than Hill1. The Hill index is a commonly used indicator for marine biodiversity richness. It is defined as:
 
