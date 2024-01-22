@@ -23,7 +23,7 @@ draft: true
 notebook:
   language: python
   pyolite: true
-  
+
 ---
 
 ![](https://i.imgur.com/1PCleoW.png)
@@ -110,7 +110,6 @@ However, there is still substantial labor involved in pouring the gels, loading 
 
 384 samples may sound like a lot, but it is nothing if we are sequencing an entire genome. The beauty of NGS is that these technologies are not bound by sample handling logistics. They still require preparation of libraries, but once a library is made (which can be automated) it is processed more or less automatically to generate multiple copies of each fragment (in the case of 454, Illumina, Ion Torrent, PacBio, Oxford Nanopore, Element, Complete Genomics etc...) and loaded onto the machine, where millions of individual fragments are sequenced simultaneously. We will learn about these technologies later in this course.
 
-
 # Reading
 
 * 2001 [Overview of pyrosequencing methodology - Ronaghi](http://genome.cshlp.org/content/11/1/3)
@@ -141,36 +140,24 @@ Can we sequence a genome using the shotgun approach?
 
 ![Myers/Green debate](./images/myers_versus_green.png "Gene Myers versus Phil Green")
 
----
-tags: BMMB554-23
----
+# Simulating Sanger sequencing with Python
 
- [![](https://imgs.xkcd.com/comics/sigil_cycle.png)](https://xkcd.com/1306)
+[![](https://imgs.xkcd.com/comics/sigil_cycle.png)](https://xkcd.com/1306)
 
-# Lecture 5: Python 1 - Variables, expressions, statements, fuctions
-
-----
-
-## Quiz
-
-The class will begin with a very short quiz. You will have results back to you today.
+In this lesson we will cover some of the fundamental Python basics including variables, expressions, statements, and fuctions.
 
 ## Prep
 
 1. Start [JupyterLab](https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab)
 2. Within JupyterLab start a new Python3 notebook
-3. Open [this page](http://cs1110.cs.cornell.edu/tutor/#mode=edit) in a new browser tab
 
-
-:::info
-Preclass prep: Chapters [1](https://greenteapress.com/thinkpython2/html/thinkpython2002.html), [2](https://greenteapress.com/thinkpython2/html/thinkpython2003.html), [3](https://greenteapress.com/thinkpython2/html/thinkpython2004.html) from "Think Python"
-:::
+## Preclass prep: Chapters [1](https://greenteapress.com/thinkpython2/html/thinkpython2002.html), [2](https://greenteapress.com/thinkpython2/html/thinkpython2003.html), [3](https://greenteapress.com/thinkpython2/html/thinkpython2004.html) from "Think Python"
 
 ## [Indentation](https://peps.python.org/pep-0008/#indentation) is everything!
 
-:::warning
-Python is an indented language: code blocks are defined using indentation with [spaces](https://peps.python.org/pep-0008/#tabs-or-spaces)!
-:::
+><warning-title>Indentation or bust!</warning-title>
+>Python is an indented language: code blocks are defined using indentation with [spaces](https://peps.python.org/pep-0008/#tabs-or-spaces)!
+>{: .warning}
 
 In Python, indentation is used to indicate the scope of control structures such as `for` loops, `if` statements, and function and class definitions. The amount of indentation is not fixed, but it must be consistent within a block of code. The recommended amount of indentation is 4 spaces, although some developers prefer to use 2 spaces. Indenting is important in Python because it is used to indicate the level of nesting and structure of the code, which makes it easier to read and understand. Additionally, indentation is also used to indicate which lines of code are executed together as a block.
 
@@ -182,31 +169,24 @@ In this lecture we will re-implement our Sanger sequencing simulator from the pr
 
 First we import a module called [`random`](https://docs.python.org/3/library/random.html) which contains a number of functions for generating and working with random numbers 
 
-
-```python=
+```python
 import random
 ```
-
 Next, we will write a simple loop that would generate a sequence of pre-set length:
 
-
-```python=
+```python
 seq = ''
 for _ in range(100):
     seq += random.choice('ATCG')
 ```
 
-
-```python=
+```python
 seq
 ```
 
-
-
-
-    'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACAACTGCAAGGTCGTGGCACC'
-
-
+```
+CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACAACTGCAAGGTCGTGGCACC
+```
 
 ## Simulate one polymerase molecule
 
@@ -218,8 +198,7 @@ In every iteration of the loop, regardless of whether the nucleotide is 'A' or n
 
 This means that when the current nucleotide is 'A', then the generated random number will decide whether the code will add the nucleotide 'A' or 'a' to the `synthesized_strand`, and it will break out of the loop after adding the nucleotide to the `synthesized_strand`. To get a good idea of what is going on let's visualize the code execution in 
 
-
-```python=
+```python
 synthesized_strand = ''
 
 for nucleotide in seq:
@@ -235,8 +214,7 @@ for nucleotide in seq:
 
 This can be simplified by first removing `d_or_dd` variable:
 
-
-```python=
+```python
 synthesized_strand = ''
 for nucleotide in seq:
     if nucleotide == 'A':
@@ -249,13 +227,13 @@ for nucleotide in seq:
 print(synthesized_strand)
 ```
 
-    CTTGCGGCTATa
-
+```
+CTTGCGGCTATa
+```
 
 and removing unnecessary group of `if ... else` statements:
 
-
-```python=
+```python
 synthesized_strand = ''
 for nucleotide in seq:
     if nucleotide == 'A' and random.random() > 0.5:
@@ -265,13 +243,13 @@ for nucleotide in seq:
 print(synthesized_strand)
 ```
 
-    CTTGCGGCTATAGGAATa
-
+```
+CTTGCGGCTATAGGAATa
+```
 
 finally let's make `synthesized_strand += 'a'` a bit more generic:
 
-
-```python=
+```python
 synthesized_strand = ''
 for nucleotide in seq:
     if nucleotide == 'A' and random.random() > 0.5:
@@ -288,8 +266,7 @@ print(synthesized_strand)
 
 To simulate 10 polymerase molecules we simply wrap the code from above into a `for` loop:
 
-
-```python=
+```python
 for _ in range(10):
     synthesized_strand = ''
     for nucleotide in seq:
@@ -315,7 +292,7 @@ for _ in range(10):
 One problem with this code is that does not actually save the newly synthesized strand: it simply prints it. To fix this we will create a [list](https://greenteapress.com/thinkpython2/html/thinkpython2011.html) (or an array) called `new_strands` and initialize it by assigning an empty array to it:
 
 
-```python=
+```python
 new_strands = []
 for _ in range(10):
     synthesized_strand = ''
@@ -328,7 +305,7 @@ for _ in range(10):
 ```
 
 
-```python=
+```python
 new_strands
 ```
 
@@ -353,7 +330,7 @@ new_strands
 And to repeat this for the remaining three nucleotides we will do the following crazy thing:
 
 
-```python=
+```python
 new_strands = []
 for _ in range(10):
     synthesized_strand = ''
@@ -393,16 +370,11 @@ for _ in range(10):
 ```
 
 
-```python=
+```python
 len(new_strands)
 ```
 
-
-
-
     40
-
-
 
 Repeating the same code four times is just plain stupid so instead we will write a function called `polymerase`. Here we need to worry about the scope of variables.  The scope of a variable refers to the regions of the code where the variable can be accessed or modified. Variables that are defined within a certain block of code (such as a function or a loop) are said to have a *local* scope, meaning that they can only be accessed within that block of code. Variables that are defined outside of any block of code are said to have a *global* scope, meaning that they can be accessed from anywhere in the code.
 
@@ -413,7 +385,7 @@ There are also some languages that have block scope, where a variable defined wi
 In Python, variables defined in the main module have global scope and can be accessed from any function or module. Variables defined within a function have local scope, and they can only be accessed within that function. Variables defined within a loop or a block, can be accessed only within the scope of the loop or block.
 
 
-```python=
+```python
 def ddN(number_of_iterations, template, base, ddN_ratio):
     new_strands = []
     for _ in range(number_of_iterations):
@@ -428,12 +400,9 @@ def ddN(number_of_iterations, template, base, ddN_ratio):
 ```
 
 
-```python=
+```python
 ddN(10,seq,'A',0.5)
 ```
-
-
-
 
     ['CTTGCGGCTATAGGa',
      'CTTGCGGCTATa',
@@ -451,7 +420,7 @@ ddN(10,seq,'A',0.5)
 To execute this function on all four types of ddNTPs with need to wrap it in a `for` loop iterating over the four possibilities:
 
 
-```python=
+```python
 for nt in 'ATCG':
     ddN(10,seq,nt,0.5)
 ```
@@ -461,7 +430,7 @@ for nt in 'ATCG':
 To store the sequences being generated in the previous loop we will create and initialize a list called `seq_run`:
 
 
-```python=
+```python
 seq_run = []
 for nt in 'ATCG':
     seq_run.append(ddN(10,seq,nt,0.5))
@@ -470,7 +439,7 @@ for nt in 'ATCG':
 you will see that the seq run is a two-dimensional list:
 
 
-```python=
+```python
 seq_run
 ```
 
@@ -514,7 +483,7 @@ seq_run
 as you will read in your next home assignment list elements can be addressed by "index". The first element has number 0:
 
 
-```python=
+```python
 seq_run[0]
 ```
 
@@ -539,14 +508,14 @@ seq_run[0]
 Another way to store these data is in a dictionary, which is a collection of key:value pairs where a key and value can be anything:
 
 
-```python=
+```python
 seq_run = {}
 for nt in 'ATCG':
     seq_run[nt] = ddN(10,seq,nt,0.90)
 ```
 
 
-```python=
+```python
 seq_run
 ```
 
@@ -599,7 +568,7 @@ seq_run
 dictionary elements can be retrieved using a key:
 
 
-```python=
+```python
 seq_run['A']
 ```
 
@@ -631,7 +600,7 @@ These two libraries will be used in almost all lectures concerning Python in thi
 [Gel electophoresis](https://en.wikipedia.org/wiki/Gel_electrophoresis) separates molecules based on mass, shape, or charge. In case of DNA all molecules are universally negatively charges and thus will always migrate to (+) electrode. All our molecules are linear single stranded pieces (our gel is *denaturing*) and so the only physical/chemical characteristic that distinguishes them is *length*. Therefore the first thing we will do is to convert our sequences into their lengths. For this we will initialize a new dictionary called `seq_lengths`:
 
 
-```python=
+```python
 seq_lengths = {'base':[],'length':[]}
 for key in seq_run.keys():
     for sequence in seq_run[key]:
@@ -640,7 +609,7 @@ for key in seq_run.keys():
 ```
 
 
-```python=
+```python
 seq_lengths
 ```
 
@@ -733,25 +702,23 @@ seq_lengths
 now let's import `pandas`:
 
 
-```python=
+```python
 import pandas as pd
 ```
 
 and inject `seq_lengths` into a pandas *dataframe*:
 
 
-```python=
+```python
 sequences = pd.DataFrame(seq_lengths)
 ```
 
 it looks pretty:
 
 
-```python=
+```python
 sequences
 ```
-
-
 
 
 <div>
@@ -981,12 +948,9 @@ sequences
 </table>
 </div>
 
-
-
 In our data there is a number of DNA fragments that have identical length (just look at the dataframe above). We can condense these by grouping dataframe entries first by nucleotide (`['base']`) and then by length (`['length']`). For each group we will then compute `count` and put it into a new column named, ..., `count`:
 
-
-```python=
+```python
 sequences_grouped_by_length = sequences.groupby(
     ['base','length']
 ).agg(
@@ -997,13 +961,9 @@ sequences_grouped_by_length = sequences.groupby(
 ).reset_index()
 ```
 
-
-```python=
+```python
 sequences_grouped_by_length
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1237,8 +1197,6 @@ sequences_grouped_by_length
 </table>
 </div>
 
-
-
 The following chart is created using the `alt.Chart()` function and passing the data as an argument. The `mark_tick()` function is used to create a tick chart with a thickness of 4 pixels.
 
 The chart is encoded with two main axis:
@@ -1249,8 +1207,7 @@ The chart also encodes a color, it encodes the `'count'` field of the data and i
 
 Finally, the chart properties are set to a width of 100 pixels and a height of 800 pixels.
 
-
-```python=
+```python
 import altair as alt
 alt.Chart(sequences_grouped_by_length).mark_tick(thickness=4).encode(
     y = alt.Y('length:Q'),
@@ -1262,72 +1219,12 @@ alt.Chart(sequences_grouped_by_length).mark_tick(thickness=4).encode(
     height=800)
 ```
 
-```vega
-{
-  "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
-  "data": {"name": "data-5650348fcc3dbf4a470160cf3ea573d2"},
-  "mark": {"type": "tick", "thickness": 4},
-  "encoding": {
-    "color": {
-      "field": "count",
-      "legend": null,
-      "scale": {"scheme": "greys"},
-      "type": "quantitative"
-    },
-    "x": {"field": "base", "type": "nominal"},
-    "y": {"field": "length", "type": "quantitative"}
-  },
-  "height": 800,
-  "width": 100,
-  "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
-  "datasets": {
-    "data-5650348fcc3dbf4a470160cf3ea573d2": [
-      {"base": "A", "length": 10, "count": 1},
-      {"base": "A", "length": 15, "count": 1},
-      {"base": "A", "length": 16, "count": 1},
-      {"base": "A", "length": 19, "count": 1},
-      {"base": "A", "length": 21, "count": 1},
-      {"base": "A", "length": 34, "count": 1},
-      {"base": "A", "length": 54, "count": 1},
-      {"base": "A", "length": 81, "count": 1},
-      {"base": "A", "length": 87, "count": 1},
-      {"base": "A", "length": 88, "count": 1},
-      {"base": "C", "length": 1, "count": 1},
-      {"base": "C", "length": 8, "count": 1},
-      {"base": "C", "length": 24, "count": 3},
-      {"base": "C", "length": 39, "count": 2},
-      {"base": "C", "length": 47, "count": 1},
-      {"base": "C", "length": 67, "count": 2},
-      {"base": "G", "length": 4, "count": 1},
-      {"base": "G", "length": 6, "count": 1},
-      {"base": "G", "length": 14, "count": 1},
-      {"base": "G", "length": 22, "count": 1},
-      {"base": "G", "length": 23, "count": 1},
-      {"base": "G", "length": 28, "count": 1},
-      {"base": "G", "length": 31, "count": 1},
-      {"base": "G", "length": 43, "count": 1},
-      {"base": "G", "length": 65, "count": 1},
-      {"base": "G", "length": 100, "count": 1},
-      {"base": "T", "length": 3, "count": 1},
-      {"base": "T", "length": 11, "count": 1},
-      {"base": "T", "length": 27, "count": 1},
-      {"base": "T", "length": 51, "count": 1},
-      {"base": "T", "length": 57, "count": 1},
-      {"base": "T", "length": 60, "count": 2},
-      {"base": "T", "length": 84, "count": 1},
-      {"base": "T", "length": 100, "count": 2}
-    ]
-  }
-}
-```
-
-
-
+![Gel rendering 1](./images/gel1.svg "A simulated gel image")
 
 And here is a color version of the same graph using just one line of the gel:
 
 
-```python=
+```python
 import altair as alt
 alt.Chart(sequences_grouped_by_length).mark_tick(thickness=4).encode(
     y = alt.Y('length:Q'),
@@ -1338,63 +1235,11 @@ alt.Chart(sequences_grouped_by_length).mark_tick(thickness=4).encode(
     height=800)
 ```
 
-```vega
-{
-  "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
-  "data": {"name": "data-5650348fcc3dbf4a470160cf3ea573d2"},
-  "mark": {"type": "tick", "thickness": 4},
-  "encoding": {
-    "color": {"field": "base", "scale": {"scheme": "set1"}, "type": "nominal"},
-    "y": {"field": "length", "type": "quantitative"}
-  },
-  "height": 800,
-  "width": 20,
-  "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
-  "datasets": {
-    "data-5650348fcc3dbf4a470160cf3ea573d2": [
-      {"base": "A", "length": 10, "count": 1},
-      {"base": "A", "length": 15, "count": 1},
-      {"base": "A", "length": 16, "count": 1},
-      {"base": "A", "length": 19, "count": 1},
-      {"base": "A", "length": 21, "count": 1},
-      {"base": "A", "length": 34, "count": 1},
-      {"base": "A", "length": 54, "count": 1},
-      {"base": "A", "length": 81, "count": 1},
-      {"base": "A", "length": 87, "count": 1},
-      {"base": "A", "length": 88, "count": 1},
-      {"base": "C", "length": 1, "count": 1},
-      {"base": "C", "length": 8, "count": 1},
-      {"base": "C", "length": 24, "count": 3},
-      {"base": "C", "length": 39, "count": 2},
-      {"base": "C", "length": 47, "count": 1},
-      {"base": "C", "length": 67, "count": 2},
-      {"base": "G", "length": 4, "count": 1},
-      {"base": "G", "length": 6, "count": 1},
-      {"base": "G", "length": 14, "count": 1},
-      {"base": "G", "length": 22, "count": 1},
-      {"base": "G", "length": 23, "count": 1},
-      {"base": "G", "length": 28, "count": 1},
-      {"base": "G", "length": 31, "count": 1},
-      {"base": "G", "length": 43, "count": 1},
-      {"base": "G", "length": 65, "count": 1},
-      {"base": "G", "length": 100, "count": 1},
-      {"base": "T", "length": 3, "count": 1},
-      {"base": "T", "length": 11, "count": 1},
-      {"base": "T", "length": 27, "count": 1},
-      {"base": "T", "length": 51, "count": 1},
-      {"base": "T", "length": 57, "count": 1},
-      {"base": "T", "length": 60, "count": 2},
-      {"base": "T", "length": 84, "count": 1},
-      {"base": "T", "length": 100, "count": 2}
-    ]
-  }
-}
-```
+![Gel rendering 2](./images/gel2.svg "A simulated gel image using \"colored dyes\"")
 
 ## Putting everything together
 
-
-```python=
+```python
 # Generate random sequences
 
 seq = ''
@@ -1402,16 +1247,12 @@ for _ in range(300):
     seq += random.choice('ATCG')
 ```
 
-
-```python=
+```python
 seq
 ```
     'GTCGATGCCTGTTTGACCTAACTGGCGTGAAGGCTATATCAGTTATCCCAAGCGTAGGCTTTCAATTCGCCCGGTTGCGTCGCCCGATTATCAATCGCGGAAGGTGGGTGCGATTGGAAGTCCAAAACCTTTATCCTGACACACTTTCTGACTCGGCTTGGCAATGGGAAGTGTAGAACGTAGCGGGGACCTACATCATATCGTACATAACTGAGACGTGCTCACCCGCAGAGATAAGAACTGCAATACCCGGGTGAATACTTGGGGAGTCTCACCCAGATGGTTGGCCTGATCCTCCCC'
 
-
-
-
-```python=
+```python
 # Function silulating a single run of a single polymerase molecule
 
 def ddN(number_of_iterations, template, base, ddN_ratio):
@@ -1427,8 +1268,7 @@ def ddN(number_of_iterations, template, base, ddN_ratio):
     return(new_strands)
 ```
 
-
-```python=
+```python
 # Generating simulated sequencing run
 
 seq_run = {}
@@ -1436,8 +1276,7 @@ for nt in 'ATCG':
     seq_run[nt] = ddN(100000,seq,nt,0.95)
 ```
 
-
-```python=
+```python
 # Computing lengths
 
 seq_lengths = {'base':[],'length':[]}
@@ -1447,15 +1286,13 @@ for key in seq_run.keys():
         seq_lengths['length'].append(len(sequence))
 ```
 
-
-```python=
+```python
 # Converting dictionaty into Pandas dataframe
 
 sequences = pd.DataFrame(seq_lengths)
 ```
 
-
-```python=
+```python
 # Grouping by nucleotide and length
 
 sequences_grouped_by_length = sequences.groupby(
@@ -1468,8 +1305,7 @@ sequences_grouped_by_length = sequences.groupby(
 ).reset_index()
 ```
 
-
-```python=
+```python
 # Plotting (note the quadratic scale for realism)
 
 import altair as alt
@@ -1484,339 +1320,9 @@ alt.Chart(sequences_grouped_by_length).mark_tick(thickness=4).encode(
     height=800)
 ```
 
+![Gel rendering 3](./images/gel3.svg "A simulated gel image using quadratic scale")
 
-```vega
-{
-  "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
-  "data": {"name": "data-a64e05465e355c9b5ce6518085e8479a"},
-  "mark": {"type": "tick", "thickness": 4},
-  "encoding": {
-    "color": {
-      "field": "count",
-      "legend": null,
-      "scale": {"scheme": "greys", "type": "log"},
-      "type": "quantitative"
-    },
-    "tooltip": {"field": "count", "type": "quantitative"},
-    "x": {"field": "base", "type": "nominal"},
-    "y": {"field": "length", "scale": {"type": "sqrt"}, "type": "quantitative"}
-  },
-  "height": 800,
-  "width": 100,
-  "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
-  "datasets": {
-    "data-a64e05465e355c9b5ce6518085e8479a": [
-      {"base": "A", "length": 5, "count": 4987},
-      {"base": "A", "length": 16, "count": 4843},
-      {"base": "A", "length": 20, "count": 4538},
-      {"base": "A", "length": 21, "count": 4305},
-      {"base": "A", "length": 30, "count": 4227},
-      {"base": "A", "length": 31, "count": 3904},
-      {"base": "A", "length": 36, "count": 3626},
-      {"base": "A", "length": 38, "count": 3406},
-      {"base": "A", "length": 41, "count": 3381},
-      {"base": "A", "length": 45, "count": 3181},
-      {"base": "A", "length": 50, "count": 2949},
-      {"base": "A", "length": 51, "count": 2807},
-      {"base": "A", "length": 56, "count": 2639},
-      {"base": "A", "length": 64, "count": 2618},
-      {"base": "A", "length": 65, "count": 2444},
-      {"base": "A", "length": 87, "count": 2313},
-      {"base": "A", "length": 90, "count": 2083},
-      {"base": "A", "length": 93, "count": 2081},
-      {"base": "A", "length": 94, "count": 1935},
-      {"base": "A", "length": 101, "count": 1839},
-      {"base": "A", "length": 102, "count": 1832},
-      {"base": "A", "length": 113, "count": 1737},
-      {"base": "A", "length": 118, "count": 1607},
-      {"base": "A", "length": 119, "count": 1627},
-      {"base": "A", "length": 124, "count": 1458},
-      {"base": "A", "length": 125, "count": 1383},
-      {"base": "A", "length": 126, "count": 1325},
-      {"base": "A", "length": 127, "count": 1229},
-      {"base": "A", "length": 133, "count": 1198},
-      {"base": "A", "length": 139, "count": 1137},
-      {"base": "A", "length": 141, "count": 1081},
-      {"base": "A", "length": 143, "count": 1010},
-      {"base": "A", "length": 151, "count": 984},
-      {"base": "A", "length": 163, "count": 910},
-      {"base": "A", "length": 164, "count": 887},
-      {"base": "A", "length": 169, "count": 872},
-      {"base": "A", "length": 170, "count": 828},
-      {"base": "A", "length": 175, "count": 772},
-      {"base": "A", "length": 177, "count": 714},
-      {"base": "A", "length": 178, "count": 643},
-      {"base": "A", "length": 182, "count": 617},
-      {"base": "A", "length": 189, "count": 613},
-      {"base": "A", "length": 193, "count": 582},
-      {"base": "A", "length": 195, "count": 546},
-      {"base": "A", "length": 198, "count": 490},
-      {"base": "A", "length": 200, "count": 462},
-      {"base": "A", "length": 205, "count": 490},
-      {"base": "A", "length": 207, "count": 446},
-      {"base": "A", "length": 209, "count": 408},
-      {"base": "A", "length": 210, "count": 418},
-      {"base": "A", "length": 214, "count": 396},
-      {"base": "A", "length": 216, "count": 386},
-      {"base": "A", "length": 224, "count": 327},
-      {"base": "A", "length": 230, "count": 353},
-      {"base": "A", "length": 232, "count": 331},
-      {"base": "A", "length": 234, "count": 266},
-      {"base": "A", "length": 236, "count": 256},
-      {"base": "A", "length": 237, "count": 272},
-      {"base": "A", "length": 239, "count": 268},
-      {"base": "A", "length": 240, "count": 234},
-      {"base": "A", "length": 245, "count": 241},
-      {"base": "A", "length": 246, "count": 207},
-      {"base": "A", "length": 248, "count": 208},
-      {"base": "A", "length": 257, "count": 200},
-      {"base": "A", "length": 258, "count": 193},
-      {"base": "A", "length": 260, "count": 200},
-      {"base": "A", "length": 268, "count": 158},
-      {"base": "A", "length": 274, "count": 169},
-      {"base": "A", "length": 278, "count": 149},
-      {"base": "A", "length": 280, "count": 157},
-      {"base": "A", "length": 292, "count": 138},
-      {"base": "A", "length": 300, "count": 2479},
-      {"base": "C", "length": 3, "count": 5043},
-      {"base": "C", "length": 8, "count": 4712},
-      {"base": "C", "length": 9, "count": 4504},
-      {"base": "C", "length": 17, "count": 4268},
-      {"base": "C", "length": 18, "count": 4174},
-      {"base": "C", "length": 22, "count": 3963},
-      {"base": "C", "length": 26, "count": 3648},
-      {"base": "C", "length": 34, "count": 3415},
-      {"base": "C", "length": 40, "count": 3415},
-      {"base": "C", "length": 47, "count": 3189},
-      {"base": "C", "length": 48, "count": 2993},
-      {"base": "C", "length": 49, "count": 2828},
-      {"base": "C", "length": 53, "count": 2685},
-      {"base": "C", "length": 59, "count": 2504},
-      {"base": "C", "length": 63, "count": 2419},
-      {"base": "C", "length": 68, "count": 2382},
-      {"base": "C", "length": 70, "count": 2097},
-      {"base": "C", "length": 71, "count": 2072},
-      {"base": "C", "length": 72, "count": 2041},
-      {"base": "C", "length": 78, "count": 1863},
-      {"base": "C", "length": 81, "count": 1781},
-      {"base": "C", "length": 83, "count": 1694},
-      {"base": "C", "length": 84, "count": 1659},
-      {"base": "C", "length": 85, "count": 1505},
-      {"base": "C", "length": 92, "count": 1483},
-      {"base": "C", "length": 96, "count": 1342},
-      {"base": "C", "length": 98, "count": 1345},
-      {"base": "C", "length": 111, "count": 1339},
-      {"base": "C", "length": 122, "count": 1219},
-      {"base": "C", "length": 123, "count": 1184},
-      {"base": "C", "length": 128, "count": 1089},
-      {"base": "C", "length": 129, "count": 1012},
-      {"base": "C", "length": 135, "count": 935},
-      {"base": "C", "length": 136, "count": 904},
-      {"base": "C", "length": 140, "count": 846},
-      {"base": "C", "length": 142, "count": 790},
-      {"base": "C", "length": 144, "count": 776},
-      {"base": "C", "length": 148, "count": 771},
-      {"base": "C", "length": 152, "count": 698},
-      {"base": "C", "length": 154, "count": 654},
-      {"base": "C", "length": 157, "count": 653},
-      {"base": "C", "length": 162, "count": 593},
-      {"base": "C", "length": 179, "count": 609},
-      {"base": "C", "length": 184, "count": 537},
-      {"base": "C", "length": 190, "count": 509},
-      {"base": "C", "length": 191, "count": 510},
-      {"base": "C", "length": 194, "count": 495},
-      {"base": "C", "length": 197, "count": 416},
-      {"base": "C", "length": 202, "count": 380},
-      {"base": "C", "length": 206, "count": 408},
-      {"base": "C", "length": 211, "count": 386},
-      {"base": "C", "length": 217, "count": 350},
-      {"base": "C", "length": 221, "count": 321},
-      {"base": "C", "length": 223, "count": 321},
-      {"base": "C", "length": 225, "count": 318},
-      {"base": "C", "length": 226, "count": 314},
-      {"base": "C", "length": 227, "count": 300},
-      {"base": "C", "length": 229, "count": 259},
-      {"base": "C", "length": 241, "count": 241},
-      {"base": "C", "length": 244, "count": 230},
-      {"base": "C", "length": 249, "count": 248},
-      {"base": "C", "length": 250, "count": 231},
-      {"base": "C", "length": 251, "count": 224},
-      {"base": "C", "length": 261, "count": 210},
-      {"base": "C", "length": 271, "count": 195},
-      {"base": "C", "length": 273, "count": 179},
-      {"base": "C", "length": 275, "count": 186},
-      {"base": "C", "length": 276, "count": 161},
-      {"base": "C", "length": 277, "count": 151},
-      {"base": "C", "length": 288, "count": 145},
-      {"base": "C", "length": 289, "count": 125},
-      {"base": "C", "length": 294, "count": 121},
-      {"base": "C", "length": 295, "count": 108},
-      {"base": "C", "length": 297, "count": 118},
-      {"base": "C", "length": 298, "count": 99},
-      {"base": "C", "length": 299, "count": 111},
-      {"base": "C", "length": 300, "count": 1997},
-      {"base": "G", "length": 1, "count": 5066},
-      {"base": "G", "length": 4, "count": 4797},
-      {"base": "G", "length": 7, "count": 4535},
-      {"base": "G", "length": 11, "count": 4367},
-      {"base": "G", "length": 15, "count": 4031},
-      {"base": "G", "length": 24, "count": 3866},
-      {"base": "G", "length": 25, "count": 3731},
-      {"base": "G", "length": 27, "count": 3440},
-      {"base": "G", "length": 29, "count": 3285},
-      {"base": "G", "length": 32, "count": 3168},
-      {"base": "G", "length": 33, "count": 2950},
-      {"base": "G", "length": 42, "count": 2903},
-      {"base": "G", "length": 52, "count": 2643},
-      {"base": "G", "length": 54, "count": 2454},
-      {"base": "G", "length": 57, "count": 2543},
-      {"base": "G", "length": 58, "count": 2297},
-      {"base": "G", "length": 69, "count": 2163},
-      {"base": "G", "length": 73, "count": 2089},
-      {"base": "G", "length": 74, "count": 1969},
-      {"base": "G", "length": 77, "count": 1883},
-      {"base": "G", "length": 79, "count": 1745},
-      {"base": "G", "length": 82, "count": 1695},
-      {"base": "G", "length": 86, "count": 1653},
-      {"base": "G", "length": 97, "count": 1547},
-      {"base": "G", "length": 99, "count": 1444},
-      {"base": "G", "length": 100, "count": 1467},
-      {"base": "G", "length": 103, "count": 1299},
-      {"base": "G", "length": 104, "count": 1294},
-      {"base": "G", "length": 106, "count": 1214},
-      {"base": "G", "length": 107, "count": 1123},
-      {"base": "G", "length": 108, "count": 1075},
-      {"base": "G", "length": 110, "count": 1006},
-      {"base": "G", "length": 112, "count": 978},
-      {"base": "G", "length": 116, "count": 916},
-      {"base": "G", "length": 117, "count": 830},
-      {"base": "G", "length": 120, "count": 846},
-      {"base": "G", "length": 138, "count": 824},
-      {"base": "G", "length": 150, "count": 740},
-      {"base": "G", "length": 155, "count": 701},
-      {"base": "G", "length": 156, "count": 630},
-      {"base": "G", "length": 160, "count": 654},
-      {"base": "G", "length": 161, "count": 610},
-      {"base": "G", "length": 166, "count": 561},
-      {"base": "G", "length": 167, "count": 532},
-      {"base": "G", "length": 168, "count": 505},
-      {"base": "G", "length": 171, "count": 526},
-      {"base": "G", "length": 173, "count": 456},
-      {"base": "G", "length": 176, "count": 439},
-      {"base": "G", "length": 180, "count": 462},
-      {"base": "G", "length": 183, "count": 385},
-      {"base": "G", "length": 185, "count": 373},
-      {"base": "G", "length": 186, "count": 361},
-      {"base": "G", "length": 187, "count": 306},
-      {"base": "G", "length": 188, "count": 342},
-      {"base": "G", "length": 203, "count": 346},
-      {"base": "G", "length": 213, "count": 287},
-      {"base": "G", "length": 215, "count": 302},
-      {"base": "G", "length": 218, "count": 265},
-      {"base": "G", "length": 220, "count": 250},
-      {"base": "G", "length": 228, "count": 241},
-      {"base": "G", "length": 231, "count": 237},
-      {"base": "G", "length": 233, "count": 214},
-      {"base": "G", "length": 238, "count": 203},
-      {"base": "G", "length": 243, "count": 211},
-      {"base": "G", "length": 252, "count": 209},
-      {"base": "G", "length": 253, "count": 164},
-      {"base": "G", "length": 254, "count": 173},
-      {"base": "G", "length": 256, "count": 178},
-      {"base": "G", "length": 264, "count": 166},
-      {"base": "G", "length": 265, "count": 156},
-      {"base": "G", "length": 266, "count": 139},
-      {"base": "G", "length": 267, "count": 119},
-      {"base": "G", "length": 269, "count": 133},
-      {"base": "G", "length": 279, "count": 101},
-      {"base": "G", "length": 282, "count": 117},
-      {"base": "G", "length": 283, "count": 109},
-      {"base": "G", "length": 286, "count": 105},
-      {"base": "G", "length": 287, "count": 96},
-      {"base": "G", "length": 291, "count": 80},
-      {"base": "G", "length": 300, "count": 1680},
-      {"base": "T", "length": 2, "count": 5054},
-      {"base": "T", "length": 6, "count": 4775},
-      {"base": "T", "length": 10, "count": 4464},
-      {"base": "T", "length": 12, "count": 4272},
-      {"base": "T", "length": 13, "count": 3993},
-      {"base": "T", "length": 14, "count": 3904},
-      {"base": "T", "length": 19, "count": 3671},
-      {"base": "T", "length": 23, "count": 3538},
-      {"base": "T", "length": 28, "count": 3263},
-      {"base": "T", "length": 35, "count": 3192},
-      {"base": "T", "length": 37, "count": 2950},
-      {"base": "T", "length": 39, "count": 2871},
-      {"base": "T", "length": 43, "count": 2626},
-      {"base": "T", "length": 44, "count": 2569},
-      {"base": "T", "length": 46, "count": 2472},
-      {"base": "T", "length": 55, "count": 2318},
-      {"base": "T", "length": 60, "count": 2290},
-      {"base": "T", "length": 61, "count": 2059},
-      {"base": "T", "length": 62, "count": 2051},
-      {"base": "T", "length": 66, "count": 1922},
-      {"base": "T", "length": 67, "count": 1809},
-      {"base": "T", "length": 75, "count": 1608},
-      {"base": "T", "length": 76, "count": 1638},
-      {"base": "T", "length": 80, "count": 1609},
-      {"base": "T", "length": 88, "count": 1405},
-      {"base": "T", "length": 89, "count": 1370},
-      {"base": "T", "length": 91, "count": 1321},
-      {"base": "T", "length": 95, "count": 1252},
-      {"base": "T", "length": 105, "count": 1205},
-      {"base": "T", "length": 109, "count": 1133},
-      {"base": "T", "length": 114, "count": 1108},
-      {"base": "T", "length": 115, "count": 966},
-      {"base": "T", "length": 121, "count": 955},
-      {"base": "T", "length": 130, "count": 920},
-      {"base": "T", "length": 131, "count": 870},
-      {"base": "T", "length": 132, "count": 809},
-      {"base": "T", "length": 134, "count": 721},
-      {"base": "T", "length": 137, "count": 761},
-      {"base": "T", "length": 145, "count": 746},
-      {"base": "T", "length": 146, "count": 685},
-      {"base": "T", "length": 147, "count": 615},
-      {"base": "T", "length": 149, "count": 642},
-      {"base": "T", "length": 153, "count": 592},
-      {"base": "T", "length": 158, "count": 549},
-      {"base": "T", "length": 159, "count": 553},
-      {"base": "T", "length": 165, "count": 468},
-      {"base": "T", "length": 172, "count": 517},
-      {"base": "T", "length": 174, "count": 461},
-      {"base": "T", "length": 181, "count": 446},
-      {"base": "T", "length": 192, "count": 408},
-      {"base": "T", "length": 196, "count": 360},
-      {"base": "T", "length": 199, "count": 334},
-      {"base": "T", "length": 201, "count": 338},
-      {"base": "T", "length": 204, "count": 321},
-      {"base": "T", "length": 208, "count": 336},
-      {"base": "T", "length": 212, "count": 277},
-      {"base": "T", "length": 219, "count": 314},
-      {"base": "T", "length": 222, "count": 243},
-      {"base": "T", "length": 235, "count": 257},
-      {"base": "T", "length": 242, "count": 260},
-      {"base": "T", "length": 247, "count": 225},
-      {"base": "T", "length": 255, "count": 243},
-      {"base": "T", "length": 259, "count": 208},
-      {"base": "T", "length": 262, "count": 176},
-      {"base": "T", "length": 263, "count": 178},
-      {"base": "T", "length": 270, "count": 154},
-      {"base": "T", "length": 272, "count": 147},
-      {"base": "T", "length": 281, "count": 168},
-      {"base": "T", "length": 284, "count": 157},
-      {"base": "T", "length": 285, "count": 149},
-      {"base": "T", "length": 290, "count": 130},
-      {"base": "T", "length": 293, "count": 133},
-      {"base": "T", "length": 296, "count": 125},
-      {"base": "T", "length": 300, "count": 2371}
-    ]
-  }
-}
-```
-
-
-
-```python=
+```python
 # Plotting using color
 
 import altair as alt
@@ -1831,335 +1337,5 @@ alt.Chart(sequences_grouped_by_length).mark_tick(thickness=4).encode(
     height=800)
 ```
 
-```vega
-{
-  "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
-  "data": {"name": "data-a64e05465e355c9b5ce6518085e8479a"},
-  "mark": {"type": "tick", "thickness": 4},
-  "encoding": {
-    "color": {"field": "base", "scale": {"scheme": "set1"}, "type": "nominal"},
-    "opacity": {"field": "count", "legend": null, "type": "nominal"},
-    "tooltip": {"field": "count", "type": "quantitative"},
-    "y": {"field": "length", "scale": {"type": "sqrt"}, "type": "quantitative"}
-  },
-  "height": 800,
-  "width": 20,
-  "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
-  "datasets": {
-    "data-a64e05465e355c9b5ce6518085e8479a": [
-      {"base": "A", "length": 5, "count": 4987},
-      {"base": "A", "length": 16, "count": 4843},
-      {"base": "A", "length": 20, "count": 4538},
-      {"base": "A", "length": 21, "count": 4305},
-      {"base": "A", "length": 30, "count": 4227},
-      {"base": "A", "length": 31, "count": 3904},
-      {"base": "A", "length": 36, "count": 3626},
-      {"base": "A", "length": 38, "count": 3406},
-      {"base": "A", "length": 41, "count": 3381},
-      {"base": "A", "length": 45, "count": 3181},
-      {"base": "A", "length": 50, "count": 2949},
-      {"base": "A", "length": 51, "count": 2807},
-      {"base": "A", "length": 56, "count": 2639},
-      {"base": "A", "length": 64, "count": 2618},
-      {"base": "A", "length": 65, "count": 2444},
-      {"base": "A", "length": 87, "count": 2313},
-      {"base": "A", "length": 90, "count": 2083},
-      {"base": "A", "length": 93, "count": 2081},
-      {"base": "A", "length": 94, "count": 1935},
-      {"base": "A", "length": 101, "count": 1839},
-      {"base": "A", "length": 102, "count": 1832},
-      {"base": "A", "length": 113, "count": 1737},
-      {"base": "A", "length": 118, "count": 1607},
-      {"base": "A", "length": 119, "count": 1627},
-      {"base": "A", "length": 124, "count": 1458},
-      {"base": "A", "length": 125, "count": 1383},
-      {"base": "A", "length": 126, "count": 1325},
-      {"base": "A", "length": 127, "count": 1229},
-      {"base": "A", "length": 133, "count": 1198},
-      {"base": "A", "length": 139, "count": 1137},
-      {"base": "A", "length": 141, "count": 1081},
-      {"base": "A", "length": 143, "count": 1010},
-      {"base": "A", "length": 151, "count": 984},
-      {"base": "A", "length": 163, "count": 910},
-      {"base": "A", "length": 164, "count": 887},
-      {"base": "A", "length": 169, "count": 872},
-      {"base": "A", "length": 170, "count": 828},
-      {"base": "A", "length": 175, "count": 772},
-      {"base": "A", "length": 177, "count": 714},
-      {"base": "A", "length": 178, "count": 643},
-      {"base": "A", "length": 182, "count": 617},
-      {"base": "A", "length": 189, "count": 613},
-      {"base": "A", "length": 193, "count": 582},
-      {"base": "A", "length": 195, "count": 546},
-      {"base": "A", "length": 198, "count": 490},
-      {"base": "A", "length": 200, "count": 462},
-      {"base": "A", "length": 205, "count": 490},
-      {"base": "A", "length": 207, "count": 446},
-      {"base": "A", "length": 209, "count": 408},
-      {"base": "A", "length": 210, "count": 418},
-      {"base": "A", "length": 214, "count": 396},
-      {"base": "A", "length": 216, "count": 386},
-      {"base": "A", "length": 224, "count": 327},
-      {"base": "A", "length": 230, "count": 353},
-      {"base": "A", "length": 232, "count": 331},
-      {"base": "A", "length": 234, "count": 266},
-      {"base": "A", "length": 236, "count": 256},
-      {"base": "A", "length": 237, "count": 272},
-      {"base": "A", "length": 239, "count": 268},
-      {"base": "A", "length": 240, "count": 234},
-      {"base": "A", "length": 245, "count": 241},
-      {"base": "A", "length": 246, "count": 207},
-      {"base": "A", "length": 248, "count": 208},
-      {"base": "A", "length": 257, "count": 200},
-      {"base": "A", "length": 258, "count": 193},
-      {"base": "A", "length": 260, "count": 200},
-      {"base": "A", "length": 268, "count": 158},
-      {"base": "A", "length": 274, "count": 169},
-      {"base": "A", "length": 278, "count": 149},
-      {"base": "A", "length": 280, "count": 157},
-      {"base": "A", "length": 292, "count": 138},
-      {"base": "A", "length": 300, "count": 2479},
-      {"base": "C", "length": 3, "count": 5043},
-      {"base": "C", "length": 8, "count": 4712},
-      {"base": "C", "length": 9, "count": 4504},
-      {"base": "C", "length": 17, "count": 4268},
-      {"base": "C", "length": 18, "count": 4174},
-      {"base": "C", "length": 22, "count": 3963},
-      {"base": "C", "length": 26, "count": 3648},
-      {"base": "C", "length": 34, "count": 3415},
-      {"base": "C", "length": 40, "count": 3415},
-      {"base": "C", "length": 47, "count": 3189},
-      {"base": "C", "length": 48, "count": 2993},
-      {"base": "C", "length": 49, "count": 2828},
-      {"base": "C", "length": 53, "count": 2685},
-      {"base": "C", "length": 59, "count": 2504},
-      {"base": "C", "length": 63, "count": 2419},
-      {"base": "C", "length": 68, "count": 2382},
-      {"base": "C", "length": 70, "count": 2097},
-      {"base": "C", "length": 71, "count": 2072},
-      {"base": "C", "length": 72, "count": 2041},
-      {"base": "C", "length": 78, "count": 1863},
-      {"base": "C", "length": 81, "count": 1781},
-      {"base": "C", "length": 83, "count": 1694},
-      {"base": "C", "length": 84, "count": 1659},
-      {"base": "C", "length": 85, "count": 1505},
-      {"base": "C", "length": 92, "count": 1483},
-      {"base": "C", "length": 96, "count": 1342},
-      {"base": "C", "length": 98, "count": 1345},
-      {"base": "C", "length": 111, "count": 1339},
-      {"base": "C", "length": 122, "count": 1219},
-      {"base": "C", "length": 123, "count": 1184},
-      {"base": "C", "length": 128, "count": 1089},
-      {"base": "C", "length": 129, "count": 1012},
-      {"base": "C", "length": 135, "count": 935},
-      {"base": "C", "length": 136, "count": 904},
-      {"base": "C", "length": 140, "count": 846},
-      {"base": "C", "length": 142, "count": 790},
-      {"base": "C", "length": 144, "count": 776},
-      {"base": "C", "length": 148, "count": 771},
-      {"base": "C", "length": 152, "count": 698},
-      {"base": "C", "length": 154, "count": 654},
-      {"base": "C", "length": 157, "count": 653},
-      {"base": "C", "length": 162, "count": 593},
-      {"base": "C", "length": 179, "count": 609},
-      {"base": "C", "length": 184, "count": 537},
-      {"base": "C", "length": 190, "count": 509},
-      {"base": "C", "length": 191, "count": 510},
-      {"base": "C", "length": 194, "count": 495},
-      {"base": "C", "length": 197, "count": 416},
-      {"base": "C", "length": 202, "count": 380},
-      {"base": "C", "length": 206, "count": 408},
-      {"base": "C", "length": 211, "count": 386},
-      {"base": "C", "length": 217, "count": 350},
-      {"base": "C", "length": 221, "count": 321},
-      {"base": "C", "length": 223, "count": 321},
-      {"base": "C", "length": 225, "count": 318},
-      {"base": "C", "length": 226, "count": 314},
-      {"base": "C", "length": 227, "count": 300},
-      {"base": "C", "length": 229, "count": 259},
-      {"base": "C", "length": 241, "count": 241},
-      {"base": "C", "length": 244, "count": 230},
-      {"base": "C", "length": 249, "count": 248},
-      {"base": "C", "length": 250, "count": 231},
-      {"base": "C", "length": 251, "count": 224},
-      {"base": "C", "length": 261, "count": 210},
-      {"base": "C", "length": 271, "count": 195},
-      {"base": "C", "length": 273, "count": 179},
-      {"base": "C", "length": 275, "count": 186},
-      {"base": "C", "length": 276, "count": 161},
-      {"base": "C", "length": 277, "count": 151},
-      {"base": "C", "length": 288, "count": 145},
-      {"base": "C", "length": 289, "count": 125},
-      {"base": "C", "length": 294, "count": 121},
-      {"base": "C", "length": 295, "count": 108},
-      {"base": "C", "length": 297, "count": 118},
-      {"base": "C", "length": 298, "count": 99},
-      {"base": "C", "length": 299, "count": 111},
-      {"base": "C", "length": 300, "count": 1997},
-      {"base": "G", "length": 1, "count": 5066},
-      {"base": "G", "length": 4, "count": 4797},
-      {"base": "G", "length": 7, "count": 4535},
-      {"base": "G", "length": 11, "count": 4367},
-      {"base": "G", "length": 15, "count": 4031},
-      {"base": "G", "length": 24, "count": 3866},
-      {"base": "G", "length": 25, "count": 3731},
-      {"base": "G", "length": 27, "count": 3440},
-      {"base": "G", "length": 29, "count": 3285},
-      {"base": "G", "length": 32, "count": 3168},
-      {"base": "G", "length": 33, "count": 2950},
-      {"base": "G", "length": 42, "count": 2903},
-      {"base": "G", "length": 52, "count": 2643},
-      {"base": "G", "length": 54, "count": 2454},
-      {"base": "G", "length": 57, "count": 2543},
-      {"base": "G", "length": 58, "count": 2297},
-      {"base": "G", "length": 69, "count": 2163},
-      {"base": "G", "length": 73, "count": 2089},
-      {"base": "G", "length": 74, "count": 1969},
-      {"base": "G", "length": 77, "count": 1883},
-      {"base": "G", "length": 79, "count": 1745},
-      {"base": "G", "length": 82, "count": 1695},
-      {"base": "G", "length": 86, "count": 1653},
-      {"base": "G", "length": 97, "count": 1547},
-      {"base": "G", "length": 99, "count": 1444},
-      {"base": "G", "length": 100, "count": 1467},
-      {"base": "G", "length": 103, "count": 1299},
-      {"base": "G", "length": 104, "count": 1294},
-      {"base": "G", "length": 106, "count": 1214},
-      {"base": "G", "length": 107, "count": 1123},
-      {"base": "G", "length": 108, "count": 1075},
-      {"base": "G", "length": 110, "count": 1006},
-      {"base": "G", "length": 112, "count": 978},
-      {"base": "G", "length": 116, "count": 916},
-      {"base": "G", "length": 117, "count": 830},
-      {"base": "G", "length": 120, "count": 846},
-      {"base": "G", "length": 138, "count": 824},
-      {"base": "G", "length": 150, "count": 740},
-      {"base": "G", "length": 155, "count": 701},
-      {"base": "G", "length": 156, "count": 630},
-      {"base": "G", "length": 160, "count": 654},
-      {"base": "G", "length": 161, "count": 610},
-      {"base": "G", "length": 166, "count": 561},
-      {"base": "G", "length": 167, "count": 532},
-      {"base": "G", "length": 168, "count": 505},
-      {"base": "G", "length": 171, "count": 526},
-      {"base": "G", "length": 173, "count": 456},
-      {"base": "G", "length": 176, "count": 439},
-      {"base": "G", "length": 180, "count": 462},
-      {"base": "G", "length": 183, "count": 385},
-      {"base": "G", "length": 185, "count": 373},
-      {"base": "G", "length": 186, "count": 361},
-      {"base": "G", "length": 187, "count": 306},
-      {"base": "G", "length": 188, "count": 342},
-      {"base": "G", "length": 203, "count": 346},
-      {"base": "G", "length": 213, "count": 287},
-      {"base": "G", "length": 215, "count": 302},
-      {"base": "G", "length": 218, "count": 265},
-      {"base": "G", "length": 220, "count": 250},
-      {"base": "G", "length": 228, "count": 241},
-      {"base": "G", "length": 231, "count": 237},
-      {"base": "G", "length": 233, "count": 214},
-      {"base": "G", "length": 238, "count": 203},
-      {"base": "G", "length": 243, "count": 211},
-      {"base": "G", "length": 252, "count": 209},
-      {"base": "G", "length": 253, "count": 164},
-      {"base": "G", "length": 254, "count": 173},
-      {"base": "G", "length": 256, "count": 178},
-      {"base": "G", "length": 264, "count": 166},
-      {"base": "G", "length": 265, "count": 156},
-      {"base": "G", "length": 266, "count": 139},
-      {"base": "G", "length": 267, "count": 119},
-      {"base": "G", "length": 269, "count": 133},
-      {"base": "G", "length": 279, "count": 101},
-      {"base": "G", "length": 282, "count": 117},
-      {"base": "G", "length": 283, "count": 109},
-      {"base": "G", "length": 286, "count": 105},
-      {"base": "G", "length": 287, "count": 96},
-      {"base": "G", "length": 291, "count": 80},
-      {"base": "G", "length": 300, "count": 1680},
-      {"base": "T", "length": 2, "count": 5054},
-      {"base": "T", "length": 6, "count": 4775},
-      {"base": "T", "length": 10, "count": 4464},
-      {"base": "T", "length": 12, "count": 4272},
-      {"base": "T", "length": 13, "count": 3993},
-      {"base": "T", "length": 14, "count": 3904},
-      {"base": "T", "length": 19, "count": 3671},
-      {"base": "T", "length": 23, "count": 3538},
-      {"base": "T", "length": 28, "count": 3263},
-      {"base": "T", "length": 35, "count": 3192},
-      {"base": "T", "length": 37, "count": 2950},
-      {"base": "T", "length": 39, "count": 2871},
-      {"base": "T", "length": 43, "count": 2626},
-      {"base": "T", "length": 44, "count": 2569},
-      {"base": "T", "length": 46, "count": 2472},
-      {"base": "T", "length": 55, "count": 2318},
-      {"base": "T", "length": 60, "count": 2290},
-      {"base": "T", "length": 61, "count": 2059},
-      {"base": "T", "length": 62, "count": 2051},
-      {"base": "T", "length": 66, "count": 1922},
-      {"base": "T", "length": 67, "count": 1809},
-      {"base": "T", "length": 75, "count": 1608},
-      {"base": "T", "length": 76, "count": 1638},
-      {"base": "T", "length": 80, "count": 1609},
-      {"base": "T", "length": 88, "count": 1405},
-      {"base": "T", "length": 89, "count": 1370},
-      {"base": "T", "length": 91, "count": 1321},
-      {"base": "T", "length": 95, "count": 1252},
-      {"base": "T", "length": 105, "count": 1205},
-      {"base": "T", "length": 109, "count": 1133},
-      {"base": "T", "length": 114, "count": 1108},
-      {"base": "T", "length": 115, "count": 966},
-      {"base": "T", "length": 121, "count": 955},
-      {"base": "T", "length": 130, "count": 920},
-      {"base": "T", "length": 131, "count": 870},
-      {"base": "T", "length": 132, "count": 809},
-      {"base": "T", "length": 134, "count": 721},
-      {"base": "T", "length": 137, "count": 761},
-      {"base": "T", "length": 145, "count": 746},
-      {"base": "T", "length": 146, "count": 685},
-      {"base": "T", "length": 147, "count": 615},
-      {"base": "T", "length": 149, "count": 642},
-      {"base": "T", "length": 153, "count": 592},
-      {"base": "T", "length": 158, "count": 549},
-      {"base": "T", "length": 159, "count": 553},
-      {"base": "T", "length": 165, "count": 468},
-      {"base": "T", "length": 172, "count": 517},
-      {"base": "T", "length": 174, "count": 461},
-      {"base": "T", "length": 181, "count": 446},
-      {"base": "T", "length": 192, "count": 408},
-      {"base": "T", "length": 196, "count": 360},
-      {"base": "T", "length": 199, "count": 334},
-      {"base": "T", "length": 201, "count": 338},
-      {"base": "T", "length": 204, "count": 321},
-      {"base": "T", "length": 208, "count": 336},
-      {"base": "T", "length": 212, "count": 277},
-      {"base": "T", "length": 219, "count": 314},
-      {"base": "T", "length": 222, "count": 243},
-      {"base": "T", "length": 235, "count": 257},
-      {"base": "T", "length": 242, "count": 260},
-      {"base": "T", "length": 247, "count": 225},
-      {"base": "T", "length": 255, "count": 243},
-      {"base": "T", "length": 259, "count": 208},
-      {"base": "T", "length": 262, "count": 176},
-      {"base": "T", "length": 263, "count": 178},
-      {"base": "T", "length": 270, "count": 154},
-      {"base": "T", "length": 272, "count": 147},
-      {"base": "T", "length": 281, "count": 168},
-      {"base": "T", "length": 284, "count": 157},
-      {"base": "T", "length": 285, "count": 149},
-      {"base": "T", "length": 290, "count": 130},
-      {"base": "T", "length": 293, "count": 133},
-      {"base": "T", "length": 296, "count": 125},
-      {"base": "T", "length": 300, "count": 2371}
-    ]
-  }
-}
-```
-
-
-
-
-
-```python=
-
-```
+![Gel rendering 4](./images/gel4.svg "A simulated gel image using quadratic scale with colors")
 
