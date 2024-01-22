@@ -230,6 +230,15 @@ layout: base
 				</div>
 				{% endif %}
 
+                {% if entity.bluesky %}
+             	<div class="contact-items">
+					<a title="BlueSky" href="https://bsky.app/profile/{{entity.bluesky}}">
+						<span style="fill: var(--hyperlink);">{{ "assets/images/bluesky-logo.svg" | load_svg }}</span> {{ entity.bluesky }}
+					</a>
+				</div>
+
+                {% endif %}
+
 				{% if entity.twitter %}
 				<div class="contact-items">
 					<a title="Twitter" href="https://twitter.com/{{ entity.twitter }}">
