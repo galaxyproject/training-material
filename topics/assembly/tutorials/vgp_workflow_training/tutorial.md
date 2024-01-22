@@ -8,7 +8,7 @@ tags:
  - eukaryote
  - VGP
 questions:
-- "what combination of tools can produce the highest quality assembly of vertebrate genomes?"
+- "What combination of tools can produce the highest quality assembly of vertebrate genomes?"
 - "How can we evaluate how good it is?"
 objectives:
 - "Learn the tools necessary to perform a de novo assembly of a vertebrate genome"
