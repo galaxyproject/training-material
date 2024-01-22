@@ -1195,6 +1195,25 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 
 This can also be used inline: My favourite fruit is an <span class="Ananas">🍍</span><span class="Avocados">🥑</span>.
 
+> <tip-title>Multiple, Disconnected CYOAs</tip-title>
+> If you wish to have multiple CYOAs in a single tutorial, you are free to do that! However you must:
+>
+> 1. Ensure that all options are disjoint, there should not be any shared terms! (I.e if the both CYOAs need to use "STAR", please find a different way to phrase it, or even use "STAR ", it just needs to be different.)
+> 2. Provide a disambiguation term for them, passed as a parameter to all, or all but one, includes.
+>
+> This disambiguation term will affect the URL parameter, which will become `?gtn-cyoa{term}={value}`
+>
+> E.g.:
+>
+> ```
+> {% begin raw%}
+> {% include _includes/cyoa-choices.html option1="Oui" option2="Non" default="Oui" text="Vos données ESTAMP sont prêtes ?" %}
+> {% include _includes/cyoa-choices.html option1="Yes" option2="No" text="Do the thing?" disambiguation="english" %}
+> {% endraw %}
+> ```
+{: .tip}
+
+
 ### URL Parameter
 
 The branch can be selected via URL parameter e.g. for courses, to prevent users selecting the wrong path. Just supply `?gtn-cyoa=Ananas` (or your preferred value) on the tutorial URL.
