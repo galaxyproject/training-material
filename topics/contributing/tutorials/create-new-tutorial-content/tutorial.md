@@ -1206,7 +1206,7 @@ This can also be used inline: My favourite fruit is an <span class="Ananas">🍍
 > E.g.:
 >
 > ```
-> {% begin raw%}
+> {% raw %}
 > {% include _includes/cyoa-choices.html option1="Oui" option2="Non" default="Oui" text="Vos données ESTAMP sont prêtes ?" %}
 > {% include _includes/cyoa-choices.html option1="Yes" option2="No" text="Do the thing?" disambiguation="english" %}
 > {% endraw %}
