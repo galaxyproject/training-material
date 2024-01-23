@@ -30,7 +30,6 @@ tags: [label-TMT11]
 ---
 
 
-
 The final workflow in the array of clinical metaproteomics tutorials is the data interpretation workflow. Interpreting MaxQuant data using MSstats involves applying a rigorous statistical framework to glean meaningful insights from quantitative proteomic datasets. The MaxQuant output is explored to understand data distribution and variability. Subsequent normalization helps account for systematic variations. MSstats allows the user to define the experimental design, including sample groups and conditions, to perform statistical analysis. The output provides valuable information about differential protein expression across conditions, estimates of fold changes, and associated p-values, aiding in the identification of biologically significant proteins. Furthermore, MSstats enables quality control and data visualization, ultimately enhancing our ability to draw meaningful conclusions from complex proteomic datasets. Additional tutorial material for using MaxQuant and MSstatTMT for TMT data analysis can be found at [MaxQuant and MSstats for the analysis of TMT data](https://gxy.io/GTN:T00220).
 
 ![Data-Interpretation-workflow](../../images/clinical-mp/clinical-mp-data-interpretation.JPG)
@@ -96,9 +95,9 @@ The final workflow in the array of clinical metaproteomics tutorials is the data
 
 ![Data-Interpretation with Unipept](../../images/clinical-mp/clinical-mp-data-interpretation-figure2.jpg)
 
-## Extract Microbial sequences with **Select**
+## Extraction of Microbial Sequences using **Select**
 
-> <hands-on-title> Select </hands-on-title>
+> <hands-on-title> Extract Microbial sequences with Select </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output` (Input dataset)
@@ -109,9 +108,9 @@ The final workflow in the array of clinical metaproteomics tutorials is the data
 >
 {: .hands_on}
 
-## Extract Human sequences with **Select**
+## Extraction of Human Sequences using **Select**
 
-> <hands-on-title> Select </hands-on-title>
+> <hands-on-title> Select sequences matching "HUMAN" </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output` (Input dataset)
@@ -120,6 +119,21 @@ The final workflow in the array of clinical metaproteomics tutorials is the data
 >
 >
 {: .hands_on}
+
+
+## Remove reverse and contaminants from human sequences with **Select**
+
+> <hands-on-title> Select </hands-on-title>
+>
+> 1. {% tool [Select](Grep1) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `out_file1` (output of **Select** {% icon tool %})
+>    - *"that"*: `NOT Matching`
+>    - *"the pattern"*: `(REV)|(con)`
+>    - *"Keep header line"*: `Yes`
+>
+>
+{: .hands_on}
+
 
 # MSstats TMT
 MSstats TMT(Tandem Mass Tag) is a computational tool designed for the robust statistical analysis of mass spectrometry-based quantitative proteomics data using TMT labeling. TMT is a widely used method for multiplexed quantitative proteomics, enabling simultaneous identification and quantification of proteins across multiple samples. MSstats TMT plays a crucial role in this process by providing a statistical framework for analyzing TMT data, and facilitating accurate and reliable protein abundance measurements. The tool offers a range of features, including quality control, normalization, and statistical modeling, allowing researchers to identify differentially expressed proteins with confidence. MSstats TMT is particularly valuable in large-scale studies where quantifying protein expression across multiple conditions is essential for understanding complex biological processes. Its application contributes to advancing our understanding of proteomic changes in response to various experimental conditions or perturbations. 
@@ -143,20 +157,6 @@ MSstats TMT(Tandem Mass Tag) is a computational tool designed for the robust sta
 >            - *"Select protein IDs to draw plots"*: `generate all plots for each protein`
 >            - *"Select comparisons to draw plots"*: `Generate all plots for each comparison`
 >        - *"Select outputs"*: `MSstatsTMT summarization log` `MSstatsTMT summarization MSstats` `Protein abundance`
->
->
-{: .hands_on}
-
-
-## Remove reverse and contaminants with **Select**
-
-> <hands-on-title> Select </hands-on-title>
->
-> 1. {% tool [Select](Grep1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `out_file1` (output of **Select** {% icon tool %})
->    - *"that"*: `NOT Matching`
->    - *"the pattern"*: `(REV)|(con)`
->    - *"Keep header line"*: `Yes`
 >
 >
 {: .hands_on}
