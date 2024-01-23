@@ -121,7 +121,7 @@ First, we want to generate a large comprehensive protein sequence database using
 For this tutorial, a literature survey was conducted to obtain 118 taxonomic species of organisms that are commonly associated with the female reproductive tract ([Afiuni-Zadeh, S., Boylan, K.L.M., Jagtap, P.D. et al., 2018](https://doi.org/10.1038/s41598-018-29092-4)). This species list was used to generate a protein sequence FASTA database was generated using the UniProt XML Downloader tool within the Galaxy framework. In this tutorial, the Species FASTA database (~3.38 million sequences) has already been provided as input. However, if you have your own list of species of interest as a tabular file (`Your_Species_tabular.tabular`), steps to generate a FASTA file from a tabular file are included:
 
 
-## Download Protein Sequences using UniProt XML downloader with **UniProt**
+## Download Species Protein Sequences using UniProt XML downloader with **UniProt**
 
 > <hands-on-title> UniProt XML downloader</hands-on-title>
 > 1. {% tool [UniProt](toolshed.g2.bx.psu.edu/repos/galaxyp/uniprotxml_downloader/uniprotxml_downloader/2.3.0) %} with the following parameters:
@@ -187,7 +187,8 @@ For this tutorial, a literature survey was conducted to obtain 118 taxonomic spe
 >
 {: .question}
 
-
+## Merging databases to obtain large comprehensive database for MetaNovo with **FASTA Merge Files and Filter Unique Sequences**
+Once generated, the Species UniProt database (~3.38 million sequences) will be merged with the Human SwissProt database (reviewed only; ~20.4K sequences) and contaminant (cRAP) sequences database (116 sequences) and filtered to generate the large comprehensive database (~2.59 million sequences). The large comprehensive database will be used to generate a compact database using MetaNovo, which is much more manageable.
 
 ## Download contaminants with **Protein Database Downloader**
 
@@ -226,9 +227,6 @@ For this tutorial, a literature survey was conducted to obtain 118 taxonomic spe
 {: .question}
 
 
-## Merging databases to obtain large comprehensive database for MetaNovo with **FASTA Merge Files and Filter Unique Sequences**
-Once generated, the Species UniProt database (~3.38 million sequences) will be merged with the Human SwissProt database (reviewed only; ~20.4K sequences) and contaminant (cRAP) sequences database (116 sequences) and filtered to generate the large comprehensive database (~2.59 million sequences). The large comprehensive database will be used to generate a compact database using MetaNovo, which is much more manageable.
-
 > <hands-on-title> FASTA Merge Files and Filter Unique Sequences </hands-on-title>
 >
 > 1. {% tool [FASTA Merge Files and Filter Unique Sequences](toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0) %} with the following parameters:
@@ -246,9 +244,11 @@ Once generated, the Species UniProt database (~3.38 million sequences) will be m
 # Reducing Database size
 
 ## Metanovo tool generates a compact database from your comprehensive database with **MetaNovo**
-Next, the large comprehensive database of ~2.59 million sequences can be reduced using the MetaNovo tool to generate a more manageable database that contains identified proteins. The compact MetaNovo-generated database (~1.9K sequences) will be merged with Human SwissProt (reviewed only) and contaminants (cRAP) databases to generate the reduced database (~21.2k protein sequences) that will be used for peptide identification (see [Discovery Module tutorial](https://github.com/subinamehta/training-material/blob/main/topics/proteomics/tutorials/clinical-mp-discovery/tutorial.md)).
+Next, the large comprehensive database of ~2.59 million sequences can be reduced using the MetaNovo tool to generate a more manageable database that contains identified proteins.
 
-> <hands-on-title> MetaNovo  </hands-on-title>
+The compact MetaNovo-generated database (~1.9K sequences) will be merged with Human SwissProt (reviewed only) and contaminants (cRAP) databases to generate the reduced database (~21.2k protein sequences) that will be used for peptide identification (see [Discovery Module tutorial](https://github.com/subinamehta/training-material/blob/main/topics/proteomics/tutorials/clinical-mp-discovery/tutorial.md)).
+
+> <hands-on-title> MetaNovo </hands-on-title>
 >
 > 1. {% tool [MetaNovo](toolshed.g2.bx.psu.edu/repos/galaxyp/metanovo/metanovo/1.9.4+galaxy4) %} with the following parameters:
 >    - *"MGF Input Type"*: `Collection`
