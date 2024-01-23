@@ -207,7 +207,7 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 
 ##  Using Text Manipulation Tools to Manage Microbial Outputs from SearchGUI/PeptideShaker
 
-> <hands-on-title> Selecting microbial peptides from SearchGUI/PeptideShaker with **Select** tool </hands-on-title>
+> <hands-on-title> Selecting microbial peptides from SearchGUI/PeptideShaker with Select tool </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output_peptides` (output of **Peptide Shaker** {% icon tool %})
@@ -231,7 +231,7 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 >
 {: .question}
 
-> <hands-on-title> Selecting microbial PSMs from SearchGUI/PeptideShaker with **Select** </hands-on-title>
+> <hands-on-title> Selecting microbial PSMs from SearchGUI/PeptideShaker with Select </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output_psm` (output of **Peptide Shaker** {% icon tool %})
@@ -243,7 +243,7 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 {: .hands_on}
 
 
-> <hands-on-title> Filtering confident microbial peptides from SGPS  with **Filter** </hands-on-title>
+> <hands-on-title> Filtering confident microbial peptides from SGPS  with Filter </hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Select** {% icon tool %})
@@ -268,7 +268,7 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 {: .question}
 
 
-> <hands-on-title> Filtering confident microbial PSMs from SGPS with **Filter** </hands-on-title>
+> <hands-on-title> Filtering confident microbial PSMs from SGPS with Filter </hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Select** {% icon tool %})
@@ -281,7 +281,7 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 
 We will generate and merge the Human SwissProt Protein Database and contaminants (cRAP) and convert the resulting FASTA file to a tabular file that will be used in the Query Tabular tool to generate distinct microbial peptides from SearchGUI/PeptideShaker.
 
-> <hands-on-title> Merging Human SwissProt and cRAP databases for Query Tabular with **FASTA Merge Files and Filter Unique Sequences** </hands-on-title>
+> <hands-on-title> Merging Human SwissProt and cRAP databases for Query Tabular with FASTA Merge Files and Filter Unique Sequences </hands-on-title>
 >
 > 1. {% tool [FASTA Merge Files and Filter Unique Sequences](toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0) %} with the following parameters:
 >    - *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
@@ -294,7 +294,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 {: .hands_on}
 
 
-> <hands-on-title> Converting FASTA sequences to TAB-delimited file with **FASTA-to-Tabular** </hands-on-title>
+> <hands-on-title> Converting FASTA sequences to TAB-delimited file with FASTA-to-Tabular </hands-on-title>
 >
 > 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Convert these sequences"*: `output` (output of **FASTA Merge Files and Filter Unique Sequences** {% icon tool %})
@@ -303,7 +303,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 {: .hands_on}
 
 
-> <hands-on-title> Filtering out accession numbers from TAB-delimited file  with **Filter Tabular** </hands-on-title>
+> <hands-on-title> Filtering out accession numbers from TAB-delimited file  with Filter Tabular </hands-on-title>
 >
 > 1. {% tool [Filter Tabular](toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0) %} with the following parameters:
 >    - {% icon param-file %} *"Tabular Dataset to filter"*: `output` (output of **FASTA-to-Tabular** {% icon tool %})
@@ -336,7 +336,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 {: .question}
 
 
-> <hands-on-title> Querying protein accession numbers and peptide sequences of confident microbial PSMs (from SGPS) with **Query Tabular** </hands-on-title>
+> <hands-on-title> Querying protein accession numbers and peptide sequences of confident microbial PSMs (from SGPS) with Query Tabular </hands-on-title>
 >
 > 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0) %} with the following parameters:
 >    - In *"Database Table"*:
@@ -391,7 +391,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 {: .hands_on}
 
 
-> <hands-on-title> Cutting out peptide sequences from Query Tabular with **Cut** </hands-on-title>
+> <hands-on-title> Cutting out peptide sequences from Query Tabular with Cut </hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c3`
@@ -401,7 +401,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 {: .hands_on}
 
 
-> <hands-on-title> Grouping distinct (unique) peptides from SGPS with **Group** </hands-on-title>
+> <hands-on-title> Grouping distinct (unique) peptides from SGPS with Group </hands-on-title>
 >
 > 1. {% tool [Group](Grouping1) %} with the following parameters:
 >    - {% icon param-file %} *"Select data"*: `out_file1` (output of **Cut** {% icon tool %})
@@ -414,7 +414,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 ## Perform peptide discovery with **MaxQuant**
 MaxQuant is an MS-based proteomics platform that is capable of processing raw data and provides improved mass precision and high precursor mass accuracy (HPMA), which resulted in increased protein identification and more in-depth proteomic analysis. Raw MS/MS spectra will be searched against the reduced MetaNovo-generated database (~21.2k sequences). More information about analysis using MaxQuant is available, including [Label-free data analysis](https://gxy.io/GTN:T00218) and [MaxQuant and MSstats for the analysis of TMT data](https://gxy.io/GTN:T00220).
 
-> <hands-on-title> Peptide discovery using **MaxQuant** </hands-on-title>
+> <hands-on-title> Peptide discovery using MaxQuant </hands-on-title>
 >
 > 1. {% tool [MaxQuant](toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/2.0.3.0+galaxy0) %} with the following parameters:
 >    - In *"Input Options"*:
@@ -453,19 +453,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 > >
 > > <solution-title></solution-title>
 > >
-> > 1. In MaxQuant, the **Experimental Design** file is used to specify the experimental conditions, sample groups, and the relationships between different samples in a proteomics experiment. This file is a crucial component of the MaxQuant analysis process because it helps the software correctly organize and analyze the mass spectrometry data. The **Experimental Design** file typically has a ".txt" extension and is a tab-delimited text file.
-> > 
-> > Here's what you might include in an Experimental Design file for MaxQuant:
-> > 
-> > - **Sample Names**: You specify the names of each sample in your experiment. These names should be consistent with the naming conventions used in your raw data files.
-> > 
-> > - **Experimental Conditions**: You define the experimental conditions or treatment groups associated with each sample. For example, you might have control and treated groups, and you would assign the appropriate condition to each sample.
-> > 
-> > - **Replicates**: You indicate the replicates for each sample, which is important for assessing the statistical significance of your results. Replicates are typically denoted by numeric values (e.g., "1," "2," "3") or by unique identifiers (e.g., "Replicate A," "Replicate B").
-> > 
-> > - **Labels**: If you're using isobaric labeling methods like TMT (Tandem Mass Tag) or iTRAQ (Isobaric Tags for Relative and Absolute Quantitation), you specify the labels > > > > associated with each sample. This is important for quantification.
-> > 
-> > - **Other Metadata**: You can include additional metadata relevant to your experiment, such as the biological source, time points, or any other information that helps describe the samples and experimental conditions.
+> > 1. In MaxQuant, the **Experimental Design** file is used to specify the experimental conditions, sample groups, and the relationships between different samples in a proteomics experiment. This file is a crucial component of the MaxQuant analysis process because it helps the software correctly organize and analyze the mass spectrometry data. The **Experimental Design** file typically has a ".txt" extension and is a tab-delimited text file. Here's what you might include in an Experimental Design file for MaxQuant: **Sample Names** (You specify the names of each sample in your experiment. These names should be consistent with the naming conventions used in your raw data files.), **Experimental Conditions** (You define the experimental conditions or treatment groups associated with each sample. For example, you might have control and treated groups, and you would assign the appropriate condition to each sample.), **Replicates** (You indicate the replicates for each sample, which is important for assessing the statistical significance of your results. Replicates are typically denoted by numeric values (e.g., "1," "2," "3") or by unique identifiers (e.g., "Replicate A," "Replicate B")), **Labels** (If you're using isobaric labeling methods like TMT (Tandem Mass Tag) or iTRAQ (Isobaric Tags for Relative and Absolute Quantitation), you specify the labels associated with each sample. This is important for quantification.), **Other Metadata** (You can include additional metadata relevant to your experiment, such as the biological source, time points, or any other information that helps describe the samples and experimental conditions.)
 > >
 > {: .solution}
 >
@@ -474,7 +462,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 
 ## Using Text Manipulation Tools to Manage Microbial Outputs from MaxQuant
 
-> <hands-on-title> Selecting microbial peptides from MaxQuant with **Select** </hands-on-title>
+> <hands-on-title> Selecting microbial peptides from MaxQuant with Select </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `peptides` (output of **MaxQuant** {% icon tool %})
@@ -486,7 +474,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 {: .hands_on}
 
 
-> <hands-on-title> Cutting out microbial peptide sequences  with **Cut** </hands-on-title>
+> <hands-on-title> Cutting out microbial peptide sequences with Cut </hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
@@ -496,7 +484,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 {: .hands_on}
 
 
-> <hands-on-title> Remove header line from MaxQuant peptide output with **Remove beginning** </hands-on-title>
+> <hands-on-title> Remove header line from MaxQuant peptide output with Remove beginning </hands-on-title>
 >
 > 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - {% icon param-file %} *"from"*: `out_file1` (output of **Cut** {% icon tool %})
@@ -505,7 +493,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 {: .hands_on}
 
 
-> <hands-on-title> Grouping distinct (unique) peptide sequences from MaxQuant with **Group** </hands-on-title>
+> <hands-on-title> Grouping distinct (unique) peptide sequences from MaxQuant with Group </hands-on-title>
 >
 > 1. {% tool [Group](Grouping1) %} with the following parameters:
 >    - {% icon param-file %} *"Select data"*: `out_file1` (output of **Remove beginning** {% icon tool %})
@@ -531,7 +519,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 ## Process SGPS and MaxQuant peptides to compile one list of unique microbial peptides
 
 
-> <hands-on-title> Concatenate SGPS and MaxQuant peptides into a singular database with **Concatenate datasets** </hands-on-title>
+> <hands-on-title> Concatenate SGPS and MaxQuant peptides into a singular database with Concatenate datasets </hands-on-title>
 >
 > 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >    - {% icon param-files %} *"Datasets to concatenate"*: `out_file1` (output of **Group** {% icon tool %}), `out_file1` (output of **Group** {% icon tool %})
@@ -540,7 +528,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 {: .hands_on}
 
 
-> <hands-on-title> Group the peptides from SGPS and MaxQuant to remove duplicates with **Group** </hands-on-title>
+> <hands-on-title> Group the peptides from SGPS and MaxQuant to remove duplicates with Group </hands-on-title>
 >
 > 1. {% tool [Group](Grouping1) %} with the following parameters:
 >    - {% icon param-file %} *"Select data"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
