@@ -3,6 +3,7 @@ layout: learning-pathway
 cover-image: /assets/images/genomics_intro.png
 cover-image-alt: "Genomics intro"
 tags: [introduction, real-course]
+type: use
 editorial_board:
 - nekrut
 
