@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Introduction to sequencing with Python (part two) / Foundations of Data Science</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@331a95b6951932c290e10f8dcb268100e9253ef3",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture3/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706047726' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706047726' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Introduction to sequencing with Python (part two)">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-23 21:32:52 +0000">
+<meta name="DC.creator" content="Anton Nekrutenko"><meta name="description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Foundations of Data Science / Hands-on: Introduction to sequencing with Python (part two)">
+        <meta property="og:description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Data-Science Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-01-23 21:32:52 +0000",
+  "datePublished": "2024-01-23 22:01:44 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Introduction to sequencing with Python (part two)",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Draft",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Introduction to sequencing with Python (part two)",
+  "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture3/tutorial.html",
+  "version": 4,
+  "timeRequired": "PT1H",
+  "teaches": "Understand manipulation of FASTQ data in Python\n - Understand quality metrics",
+  "keywords": [
+    "Foundations of Data Science",
+    "jupyter-notebook"
+  ],
+  "description": "The questions this  addresses are:\n - What is FASTQ format\n - How do I parse FASTQ format with Python\n - How do I decide whether my data is good or not?\n\n\nThe objectives are:\n - Understand manipulation of FASTQ data in Python\n - Understand quality metrics\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "name": "Anton Nekrutenko",
+      "image": "https://avatars.githubusercontent.com/nekrut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "jupyter-notebook"
+    }
+  ],
+  "abstract": "[<a href=\"https://imgs.xkcd.com/comics/python.png\" rel=\"noopener noreferrer\"><img src=\"https://imgs.xkcd.com/comics/python.png\"  alt=\"XKCD353. \"   loading=\"lazy\"></a>](https://xkcd.com/353/)"
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706047726'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/gnmx-lecture3/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/gnmx-lecture3/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/data-science/tutorials/gnmx-lecture3/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/data-science/tutorials/gnmx-lecture3/tutorial.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/topics/data-science/tutorials/gnmx-lecture3/tutorial.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-data-science">
+    <h1 data-toc-skip>Introduction to sequencing with Python (part two)</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Anton Nekrutenko avatar" width="36" class="avatar" />
+    Anton Nekrutenko</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is FASTQ format</p>
+</li>
+        
+        <li><p>How do I parse FASTQ format with Python</p>
+</li>
+        
+        <li><p>How do I decide whether my data is good or not?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand manipulation of FASTQ data in Python</p>
+</li>
+        
+        <li><p>Understand quality metrics</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/gnmx-lecture3/data-science-gnmx-lecture3.ipynb" title="Jupyter Notebook" alt="Introduction to sequencing with Python (part two) Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 23, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <div class="box-title">Best viewed in a Jupyter Notebook</div>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fgnmx-lecture3%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="/training-material/jupyter/lab/index.html?path=data-science-gnmx-lecture3.ipynb">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture3/data-science-gnmx-lecture3.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture3/data-science-gnmx-lecture3.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture3/data-science-gnmx-lecture3-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                </section>
+                
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p><a href="https://xkcd.com/353/"><a href="https://imgs.xkcd.com/comics/python.png" rel="noopener noreferrer"><img src="https://imgs.xkcd.com/comics/python.png" alt="XKCD353. " loading="lazy" /></a></a></p>
+
+<p>Preclass prep: Chapters <a href="https://greenteapress.com/thinkpython2/html/thinkpython2009.html">8</a> and <a href="https://greenteapress.com/thinkpython2/html/thinkpython2011.html">10</a> from “Think Python”</p>
+
+<blockquote class="quote" cite="https://langmead-lab.org/teaching-materials">
+  <p>This material uses examples from notebooks developed by <a href="https://langmead-lab.org/teaching-materials/">Ben Langmead</a></p>
+</blockquote>
+
+<h1 id="prep">Prep</h1>
+
+<ol>
+  <li>Start <a href="https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab">JupyterLab</a></li>
+  <li>Within JupyterLab start a new Python3 notebook</li>
+  <li>Open <a href="http://cs1110.cs.cornell.edu/tutor/#mode=edit">this page</a> in a new browser tab</li>
+</ol>
+
+<h1 id="strings-in-python">Strings in Python</h1>
+
+<p>In Python, strings are sequences of characters enclosed in quotation marks (either single or double quotes). They can be assigned to a variable and manipulated using various string methods. For example:</p>
+
+<p>string1 = “Hello World!”
+string2 = ‘Hello World!’</p>
+
+<p>print(string1)  # Output: Hello World!
+print(string2)  # Output: Hello World!</p>
+
+<p>You can also use the + operator to concatenate strings, and the * operator to repeat a string a certain number of times:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string3</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello </span><span class="sh">"</span> <span class="o">+</span> <span class="sh">"</span><span class="s">World!</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">string3</span><span class="p">)</span>  <span class="c1"># Output: Hello World!
+</span>
+<span class="n">string4</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello </span><span class="sh">"</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">string4</span><span class="p">)</span>  <span class="c1"># Output: Hello Hello Hello
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello World!
+Hello Hello Hello 
+</code></pre></div></div>
+
+<p>There are also many built-in string methods such as <code class="language-plaintext highlighter-rouge">upper()</code>, <code class="language-plaintext highlighter-rouge">lower()</code>, <code class="language-plaintext highlighter-rouge">replace()</code>, <code class="language-plaintext highlighter-rouge">split()</code>, <code class="language-plaintext highlighter-rouge">find()</code>, <code class="language-plaintext highlighter-rouge">len()</code>, etc. These can be used to manipulate and extract information from strings:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string5</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello World!</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">string5</span><span class="p">.</span><span class="nf">upper</span><span class="p">())</span>   <span class="c1"># Output: HELLO WORLD!
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string5</span><span class="p">.</span><span class="nf">lower</span><span class="p">())</span>   <span class="c1"># Output: hello world!
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string5</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s">H</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">J</span><span class="sh">"</span><span class="p">))</span>  <span class="c1"># Output: Jello World!
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string5</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">"</span><span class="s"> </span><span class="sh">"</span><span class="p">))</span>  <span class="c1"># Output: ['Hello', 'World!']
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HELLO WORLD!
+hello world!
+Jello World!
+['Hello', 'World!']
+</code></pre></div></div>
+
+<p>You can also use indexing, slicing and string formatting to access or manipulate substrings or insert dynamic data into a string.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">=</span> <span class="sh">"</span><span class="s">John</span><span class="sh">"</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">My name is {} and I am {} years old.</span><span class="sh">"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>My name is John and I am 30 years old.
+</code></pre></div></div>
+
+<p>You can also use f-strings, or formatted string literals, to embed expressions inside string literals.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">=</span> <span class="sh">"</span><span class="s">John</span><span class="sh">"</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">My name is </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s"> and I am </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s"> years old.</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>My name is John and I am 30 years old.
+</code></pre></div></div>
+
+<h2 id="string-indexing">String indexing</h2>
+
+<p>In Python, strings are sequences of characters, and each character has a corresponding index, starting from 0.
+This means that we can access individual characters in a string using their index. This is called “string indexing”.</p>
+
+<p>Here is an example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello World!</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># Output: H
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Output: e
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Output: !
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>H
+e
+!
+</code></pre></div></div>
+
+<p>You can also use negative indexing to access characters from the end of the string, with -1 being the last character, -2 the second to last and so on.</p>
+
+<p>You can also use slicing to extract a substring from a string. The syntax is <code class="language-plaintext highlighter-rouge">string[start:end:step]</code>, where <code class="language-plaintext highlighter-rouge">start</code> is the starting index, <code class="language-plaintext highlighter-rouge">end</code> is the ending index (not included), and step is the number of characters to skip between each index.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello World!</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># Output: Hello
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">11</span><span class="p">])</span>  <span class="c1"># Output: World
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># Output: HloWrd
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello
+World
+HloWrd
+</code></pre></div></div>
+
+<p>You can also use the string formatting method to get the string at the specific index.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello World!</span><span class="sh">"</span>
+<span class="n">index</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">The character at index </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s"> is: </span><span class="si">{</span><span class="n">string</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The character at index 3 is: l
+</code></pre></div></div>
+
+<h2 id="string-functions">String functions</h2>
+
+<p>In Python, many built-in string methods can be used to manipulate and extract information from strings. Here are some of the most commonly used ones:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">upper()</code>: Converts the string to uppercase</li>
+  <li><code class="language-plaintext highlighter-rouge">lower()</code>: Converts the string to lowercase</li>
+  <li><code class="language-plaintext highlighter-rouge">replace(old, new)</code>: Replaces all occurrences of the old substring with the new substring</li>
+  <li><code class="language-plaintext highlighter-rouge">split(separator)</code>: Splits the string into a list of substrings using the specified separator</li>
+  <li><code class="language-plaintext highlighter-rouge">find(substring)</code>: Returns the index of the first occurrence of the substring, or -1 if the substring is not found</li>
+  <li><code class="language-plaintext highlighter-rouge">index(substring)</code>: Returns the index of the first occurrence of the substring or raises a ValueError if the substring is not found</li>
+  <li><code class="language-plaintext highlighter-rouge">count(substring)</code>: Returns the number of occurrences of the substring</li>
+  <li><code class="language-plaintext highlighter-rouge">join(iterable)</code>: Concatenates the elements of an iterable (such as a list or tuple) with the string as the separator</li>
+  <li><code class="language-plaintext highlighter-rouge">strip()</code>: Removes leading and trailing whitespaces from the string</li>
+  <li><code class="language-plaintext highlighter-rouge">lstrip()</code>: Removes leading whitespaces from the string</li>
+  <li><code class="language-plaintext highlighter-rouge">rstrip()</code>: Removes trailing whitespaces from the string</li>
+  <li><code class="language-plaintext highlighter-rouge">startswith(substring)</code>: Returns True if the string starts with the specified substring, False otherwise</li>
+  <li><code class="language-plaintext highlighter-rouge">endswith(substring)</code>: Returns True if the string ends with the specified substring, False otherwise</li>
+  <li><code class="language-plaintext highlighter-rouge">isalpha()</code>: Returns True if the string contains only alphabetic characters, False otherwise</li>
+  <li><code class="language-plaintext highlighter-rouge">isdigit()</code>: Returns True if the string contains only digits, False otherwise</li>
+  <li><code class="language-plaintext highlighter-rouge">isalnum()</code>: Returns True if the string contains only alphanumeric characters, False otherwise</li>
+  <li><code class="language-plaintext highlighter-rouge">format()</code>: Formats the string by replacing placeholders with specified values</li>
+  <li><code class="language-plaintext highlighter-rouge">len()</code>: Returns the length of the string</li>
+</ul>
+
+<p>Here is an example of some of these methods:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello World!</span><span class="sh">"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">upper</span><span class="p">())</span>  <span class="c1"># Output: HELLO WORLD!
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">lower</span><span class="p">())</span>  <span class="c1"># Output: hello world!
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s">H</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">J</span><span class="sh">"</span><span class="p">))</span>  <span class="c1"># Output: Jello World!
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">"</span><span class="s"> </span><span class="sh">"</span><span class="p">))</span>  <span class="c1"># Output: ['Hello', 'World!']
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="sh">"</span><span class="s">World</span><span class="sh">"</span><span class="p">))</span>  <span class="c1"># Output: 6
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="sh">"</span><span class="s">l</span><span class="sh">"</span><span class="p">))</span>  <span class="c1"># Output: 3
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">strip</span><span class="p">())</span>  <span class="c1"># Output: "Hello World!"
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello</span><span class="sh">"</span><span class="p">))</span>  <span class="c1"># Output: True
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">endswith</span><span class="p">(</span><span class="sh">"</span><span class="s">World!</span><span class="sh">"</span><span class="p">))</span>  <span class="c1"># Output: True
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">isalpha</span><span class="p">())</span>  <span class="c1"># Output: False
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">isalnum</span><span class="p">())</span>  <span class="c1"># Output: False
+</span><span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">format</span><span class="p">())</span>  <span class="c1"># Output: Hello World!
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>  <span class="c1"># Output: 12
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HELLO WORLD!
+hello world!
+Jello World!
+['Hello', 'World!']
+6
+3
+Hello World!
+True
+True
+False
+False
+Hello World!
+12
+</code></pre></div></div>
+
+<h2 id="playing-with-strings">Playing with strings</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st</span> <span class="o">=</span> <span class="sh">'</span><span class="s">ACGT</span><span class="sh">'</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">len</span><span class="p">(</span><span class="n">st</span><span class="p">)</span> <span class="c1"># getting the length of a string
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sh">''</span> <span class="c1"># empty string (epsilon)
+</span></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>''
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">len</span><span class="p">(</span><span class="sh">''</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">random</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="sh">'</span><span class="s">ACGT</span><span class="sh">'</span><span class="p">)</span> <span class="c1"># generating a random nucleotide
+</span></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'G'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># now I'll make a random nucleotide string by concatenating random nucleotides
+</span><span class="n">st</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="sh">'</span><span class="s">ACGT</span><span class="sh">'</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)])</span>
+<span class="n">st</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'GCTATATCAATGTTATCCGTTTTCTGATGTCGCGAGGACA'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># substring, starting at position 1 and extending up to but not including position 3
+# note that the first position is numbered 0
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'CT'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># prefix of length 3
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'GCT'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># another way of getting the prefix of length 3
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'GCT'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st</span><span class="p">[</span><span class="nf">len</span><span class="p">(</span><span class="n">st</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="nf">len</span><span class="p">(</span><span class="n">st</span><span class="p">)]</span> <span class="c1"># suffix of length 3
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'ACA'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="c1"># another way of getting the suffix of length 3
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'ACA'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st1</span><span class="p">,</span> <span class="n">st2</span> <span class="o">=</span> <span class="sh">'</span><span class="s">CAT</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ATAC</span><span class="sh">'</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st1</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'CAT'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st2</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'ATAC'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st1</span> <span class="o">+</span> <span class="n">st2</span> <span class="c1"># concatenation of 2 strings
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'CATATAC'
+</code></pre></div></div>
+
+<h1 id="fastq">FASTQ</h1>
+
+<p>This notebook explores [FASTQ], the most common format for storing sequencing reads.</p>
+
+<p>FASTA and FASTQ are rather similar, but FASTQ is almost always used for storing <em>sequencing reads</em> (with associated quality values), whereas FASTA is used for storing all kinds of DNA,
+RNA or protein sequences (without associated quality values).</p>
+
+<h2 id="basic-format">Basic format</h2>
+<p>Here’s a single sequencing read in FASTQ format:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@ERR294379.100739024 HS24_09441:8:2203:17450:94030#42/1
+AGGGAGTCCACAGCACAGTCCAGACTCCCACCAGTTCTGACGAAATGATGAGAGCTCAGAAGTAACAGTTGCTTTCAGTCCCATAAAAACAGTCCTACAA
++
+BDDEEF?FGFFFHGFFHHGHGGHCH@GHHHGFAHEGFEHGEFGHCCGGGFEGFGFFDFFHBGDGFHGEFGHFGHGFGFFFEHGGFGGDGHGFEEHFFHGE
+</code></pre></div></div>
+
+<p>It’s spread across four lines.  The four lines are:</p>
+
+<ol>
+  <li>”<code class="language-plaintext highlighter-rouge">@</code>” followed by a read name</li>
+  <li>Nucleotide sequence</li>
+  <li>”<code class="language-plaintext highlighter-rouge">+</code>”, possibly followed by some info, but ignored by virtually all tools</li>
+  <li>Quality sequence (explained below)</li>
+</ol>
+
+<p>Here is a very simple Python function for parsing files of FASTQ records:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">parse_fastq</span><span class="p">(</span><span class="n">fh</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s"> Parse reads from a FASTQ filehandle.  For each read, we
+        return a name, nucleotide-string, quality-string triple. </span><span class="sh">"""</span>
+    <span class="n">reads</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">first_line</span> <span class="o">=</span> <span class="n">fh</span><span class="p">.</span><span class="nf">readline</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">first_line</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">break</span>  <span class="c1"># end of file
+</span>        <span class="n">name</span> <span class="o">=</span> <span class="n">first_line</span><span class="p">[</span><span class="mi">1</span><span class="p">:].</span><span class="nf">rstrip</span><span class="p">()</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="n">fh</span><span class="p">.</span><span class="nf">readline</span><span class="p">().</span><span class="nf">rstrip</span><span class="p">()</span>
+        <span class="n">fh</span><span class="p">.</span><span class="nf">readline</span><span class="p">()</span>  <span class="c1"># ignore line starting with +
+</span>        <span class="n">qual</span> <span class="o">=</span> <span class="n">fh</span><span class="p">.</span><span class="nf">readline</span><span class="p">().</span><span class="nf">rstrip</span><span class="p">()</span>
+        <span class="n">reads</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="n">qual</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">reads</span>
+
+<span class="n">fastq_string</span> <span class="o">=</span> <span class="sh">'''</span><span class="s">@ERR294379.100739024 HS24_09441:8:2203:17450:94030#42/1
+AGGGAGTCCACAGCACAGTCCAGACTCCCACCAGTTCTGACGAAATGATG
++
+BDDEEF?FGFFFHGFFHHGHGGHCH@GHHHGFAHEGFEHGEFGHCCGGGF
+@ERR294379.136275489 HS24_09441:8:2311:1917:99340#42/1
+CTTAAGTATTTTGAAAGTTAACATAAGTTATTCTCAGAGAGACTGCTTTT
++
+@@AHFF?EEDEAF?FEEGEFD?GGFEFGECGE?9H?EEABFAG9@CDGGF
+@ERR294379.97291341 HS24_09441:8:2201:10397:52549#42/1
+GGCTGCCATCAGTGAGCAAGTAAGAATTTGCAGAAATTTATTAGCACACT
++
+CDAF&lt;FFDEHEFDDFEEFDGDFCHD=GHG&lt;GEDHDGJFHEFFGEFEE@GH</span><span class="sh">'''</span>
+
+<span class="kn">from</span> <span class="n">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="nf">parse_fastq</span><span class="p">(</span><span class="nc">StringIO</span><span class="p">(</span><span class="n">fastq_string</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('ERR294379.100739024 HS24_09441:8:2203:17450:94030#42/1',
+  'AGGGAGTCCACAGCACAGTCCAGACTCCCACCAGTTCTGACGAAATGATG',
+  'BDDEEF?FGFFFHGFFHHGHGGHCH@GHHHGFAHEGFEHGEFGHCCGGGF'),
+ ('ERR294379.136275489 HS24_09441:8:2311:1917:99340#42/1',
+  'CTTAAGTATTTTGAAAGTTAACATAAGTTATTCTCAGAGAGACTGCTTTT',
+  '@@AHFF?EEDEAF?FEEGEFD?GGFEFGECGE?9H?EEABFAG9@CDGGF'),
+ ('ERR294379.97291341 HS24_09441:8:2201:10397:52549#42/1',
+  'GGCTGCCATCAGTGAGCAAGTAAGAATTTGCAGAAATTTATTAGCACACT',
+  'CDAF&lt;FFDEHEFDDFEEFDGDFCHD=GHG&lt;GEDHDGJFHEFFGEFEE@GH')]
+</code></pre></div></div>
+
+<p>The nucleotide string can sometimes contain the character “<code class="language-plaintext highlighter-rouge">N</code>”.  <code class="language-plaintext highlighter-rouge">N</code> essentially means “no confidence.” The sequencer knows there’s a nucleotide there but doesn’t know whether it’s an A, C, G or T.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-a-note-on-tt-while-true-tt-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: A note on <tt>while True</tt></div>
+
+  <p>In Python, the while loop is used to repeatedly execute a block of code as long as a certain condition is true. The while True statement is a special case where the loop will run indefinitely until a break statement is encountered inside the loop.</p>
+
+  <p>Here is an example of a while True loop:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+   <span class="n">user_input</span> <span class="o">=</span> <span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">Enter </span><span class="sh">'</span><span class="s">q</span><span class="sh">'</span><span class="s"> to quit: </span><span class="sh">"</span><span class="p">)</span>
+   <span class="k">if</span> <span class="n">user_input</span> <span class="o">==</span> <span class="sh">'</span><span class="s">q</span><span class="sh">'</span><span class="p">:</span>
+       <span class="k">break</span>
+   <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">You entered:</span><span class="sh">"</span><span class="p">,</span> <span class="n">user_input</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Exited the loop</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div>  </div>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter 'q' to quit:  q
+Exited the loop
+</code></pre></div>  </div>
+
+  <p>In this example, the loop will keep asking for user input until the user enters the ‘q’ character, which triggers the break statement, and the loop is exited.</p>
+
+  <p>It is important to be careful when using while True loops, as they will run indefinitely if a break statement is not included. This can cause the program to crash or hang, if not handled properly.</p>
+
+  <p>Also, It is recommended to use <code class="language-plaintext highlighter-rouge">while True</code> loop with a <code class="language-plaintext highlighter-rouge">break</code> statement, in case you want to execute the loop until some specific condition is met, otherwise, it’s not a good practice to use <code class="language-plaintext highlighter-rouge">while True</code>.</p>
+
+  <p>It’s a good practice to include a way for the user to exit the loop, such as the break statement in the example above, or a counter variable to keep track of the number of iterations.</p>
+</blockquote>
+
+<h2 id="read-name">Read name</h2>
+
+<p>Read names often contain information about:</p>
+
+<ol>
+  <li>The scientific study for which the read was sequenced.  E.g. the string <code class="language-plaintext highlighter-rouge">ERR294379</code> (an <a href="http://www.ebi.ac.uk/ena/about/sra_format">SRA accession number</a>) in the read names correspond to <a href="http://www.ncbi.nlm.nih.gov/sra/?term=ERR294379">this study</a>.</li>
+  <li>The sequencing instrument, and the exact <em>part</em> of the sequencing instrument, where the DNA was sequenced.  See the <a href="http://en.wikipedia.org/wiki/FASTQ_format#Illumina_sequence_identifiers">FASTQ format</a> Wikipedia article for specifics on how the Illumina software encodes this information.</li>
+  <li>Whether the read is part of a <em>paired-end read</em> and, if so, which end it is.  Paired-end reads will be discussed further below.  The <code class="language-plaintext highlighter-rouge">/1</code> you see at the end of the read names above indicates the read is the first end from a paired-end read.</li>
+</ol>
+
+<h2 id="quality-values">Quality values</h2>
+
+<p>Quality values are probabilities.  Each nucleotide in each sequencing read has an associated quality value.  A nucleotide quality value encodes the probability that the nucleotide was <em>incorrectly called</em> by the sequencing instrument and its software.  If the nucleotide is <code class="language-plaintext highlighter-rouge">A</code>, the corresponding quality value encodes the probability that the nucleotide at that position is actually <em>not</em> an <code class="language-plaintext highlighter-rouge">A</code>.</p>
+
+<p>Quality values are encoded in two senses: first, the relevant probabilities are re-scaled using the Phread scale, which is a negative log scale.
+In other words if <em>p</em> is the probability that the nucleotide was incorrectly called, we encode this as <em>Q</em> where <em>Q</em> = -10 * log10(<em>p</em>).</p>
+
+<p>For example, if <em>Q</em> = 30, then <em>p</em> = 0.001, a 1-in-1000 chance that the nucleotide is wrong.  If <em>Q</em> = 20, then <em>p</em> = 0.01, a 1-in-100 chance.  If <em>Q</em> = 10, then <em>p</em> = 0.1, a 1-in-10 chance.  And so on.</p>
+
+<p>Second, scaled quality values are <em>rounded</em> to the nearest integer and encoded using <a href="http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters">ASCII printable characters</a>.  For example, using the Phred33 encoding (which is by far the most common), a <em>Q</em> of 30 is encoded as the ASCII character with code 33 + 30 = 63, which is “<code class="language-plaintext highlighter-rouge">?</code>”.  A <em>Q</em> of 20 is encoded as the ASCII character with code 33 + 20 = 53, which is “<code class="language-plaintext highlighter-rouge">5</code>”.  And so on.</p>
+
+<p>Let’s define some relevant Python functions:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">phred33_to_q</span><span class="p">(</span><span class="n">qual</span><span class="p">):</span>
+  <span class="sh">"""</span><span class="s"> Turn Phred+33 ASCII-encoded quality into Phred-scaled integer </span><span class="sh">"""</span>
+  <span class="k">return</span> <span class="nf">ord</span><span class="p">(</span><span class="n">qual</span><span class="p">)</span><span class="o">-</span><span class="mi">33</span>
+
+<span class="k">def</span> <span class="nf">q_to_phred33</span><span class="p">(</span><span class="n">Q</span><span class="p">):</span>
+  <span class="sh">"""</span><span class="s"> Turn Phred-scaled integer into Phred+33 ASCII-encoded quality </span><span class="sh">"""</span>
+  <span class="k">return</span> <span class="nf">chr</span><span class="p">(</span><span class="n">Q</span> <span class="o">+</span> <span class="mi">33</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">q_to_p</span><span class="p">(</span><span class="n">Q</span><span class="p">):</span>
+  <span class="sh">"""</span><span class="s"> Turn Phred-scaled integer into error probability </span><span class="sh">"""</span>
+  <span class="k">return</span> <span class="mf">10.0</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">Q</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">p_to_q</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+  <span class="sh">"""</span><span class="s"> Turn error probability into Phred-scaled integer </span><span class="sh">"""</span>
+  <span class="kn">import</span> <span class="n">math</span>
+  <span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="o">-</span><span class="mf">10.0</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">log10</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Here are the examples I discussed above
+</span>
+<span class="c1"># Convert Qs into ps
+</span><span class="nf">q_to_p</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="nf">q_to_p</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="nf">q_to_p</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(0.001, 0.01, 0.1)
+</code></pre></div></div>
+
+<pre><code class="language-python=">p_to_q(0.00011) # note that the result is rounded
+</code></pre>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>40
+</code></pre></div></div>
+
+<pre><code class="language-python=">q_to_phred33(30), q_to_phred33(20)
+</code></pre>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('?', '5')
+</code></pre></div></div>
+
+<p>To convert an entire string Phred33-encoded quality values into the corresponding <em>Q</em> or <em>p</em> values, I can do the following:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Take the first read from the small example above
+</span><span class="n">name</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="n">qual</span> <span class="o">=</span> <span class="nf">parse_fastq</span><span class="p">(</span><span class="nc">StringIO</span><span class="p">(</span><span class="n">fastq_string</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">q_string</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="n">phred33_to_q</span><span class="p">,</span> <span class="n">qual</span><span class="p">))</span>
+<span class="n">p_string</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="n">q_to_p</span><span class="p">,</span> <span class="n">q_string</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">q_string</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">p_string</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[33, 35, 35, 36, 36, 37, 30, 37, 38, 37, 37, 37, 39, 38, 37, 37, 39, 39, 38, 39, 38, 38, 39, 34, 39, 31, 38, 39, 39, 39, 38, 37, 32, 39, 36, 38, 37, 36, 39, 38, 36, 37, 38, 39, 34, 34, 38, 38, 38, 37]
+[0.000501187233627272, 0.00031622776601683794, 0.00031622776601683794, 0.00025118864315095795, 0.00025118864315095795, 0.00019952623149688788, 0.001, 0.00019952623149688788, 0.00015848931924611126, 0.00019952623149688788, 0.00019952623149688788, 0.00019952623149688788, 0.0001258925411794166, 0.00015848931924611126, 0.00019952623149688788, 0.00019952623149688788, 0.0001258925411794166, 0.0001258925411794166, 0.00015848931924611126, 0.0001258925411794166, 0.00015848931924611126, 0.00015848931924611126, 0.0001258925411794166, 0.0003981071705534969, 0.0001258925411794166, 0.0007943282347242813, 0.00015848931924611126, 0.0001258925411794166, 0.0001258925411794166, 0.0001258925411794166, 0.00015848931924611126, 0.00019952623149688788, 0.000630957344480193, 0.0001258925411794166, 0.00025118864315095795, 0.00015848931924611126, 0.00019952623149688788, 0.00025118864315095795, 0.0001258925411794166, 0.00015848931924611126, 0.00025118864315095795, 0.00019952623149688788, 0.00015848931924611126, 0.0001258925411794166, 0.0003981071705534969, 0.0003981071705534969, 0.00015848931924611126, 0.00015848931924611126, 0.00015848931924611126, 0.00019952623149688788]
+</code></pre></div></div>
+
+<p>You might wonder how the sequencer and its software can <em>know</em> the probability that a nucleotide is incorrectly called.  It can’t; this number is just an estimate.  To describe exactly how it’s estimated is beyond the scope of this notebook; if you’re interested, search for academic papers with “base calling” in the title.  Here’s a helpful <a href="http://www.youtube.com/watch?v=eXkjlopwIH4">video by Rafa Irizarry</a>.</p>
+
+<p>A final note: other ways of encoding quality values were proposed and used in the past.  For example, Phred64 uses an ASCII offset of 64 instead of 33, and Solexa64 uses “odds” instead of the probability <em>p</em>.  But Phred33 is by far the most common today and you will likely never have to worry about this.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-a-note-in-tt-map-tt-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: A note in <tt>map()</tt></div>
+
+  <p>In Python, the <code class="language-plaintext highlighter-rouge">map()</code> function is used to apply a given function to all elements of an iterable (such as a list, tuple, or string) and return an iterator (an object that can be iterated, e.g. in a <code class="language-plaintext highlighter-rouge">for</code>-loop) that yields the results.</p>
+
+  <p>The <code class="language-plaintext highlighter-rouge">map()</code> function takes two arguments:</p>
+
+  <p>A function that is to be applied to each element of the iterable
+An iterable on which the function is to be applied</p>
+
+  <p>Here is an example:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Using a function to square each element of a list
+</span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">squared_numbers</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">squared_numbers</span><span class="p">))</span>  <span class="c1"># Output: [1, 4, 9, 16, 25]
+</span></code></pre></div>  </div>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1, 4, 9, 16, 25]
+</code></pre></div>  </div>
+
+  <p>In the example above, the <code class="language-plaintext highlighter-rouge">map()</code> function applies the lambda function <code class="language-plaintext highlighter-rouge">lambda x: x**2</code> to each element of the numbers list, and returns an iterator of the squared numbers. The <code class="language-plaintext highlighter-rouge">list()</code> function is used to convert the iterator to a list, so that the result can be printed.</p>
+
+  <p>Another example is,</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Using the map() function to convert a list of strings to uppercase
+</span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">hello</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">world</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">uppercase_words</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">word</span><span class="p">:</span> <span class="n">word</span><span class="p">.</span><span class="nf">upper</span><span class="p">(),</span> <span class="n">words</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">uppercase_words</span><span class="p">))</span>  <span class="c1"># Output: ['HELLO', 'WORLD']
+</span></code></pre></div>  </div>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['HELLO', 'WORLD']
+</code></pre></div>  </div>
+
+  <p>It’s important to note that the <code class="language-plaintext highlighter-rouge">map()</code> function returns an iterator, which can be used in a for loop, but is not a list, tuple, or any other iterable. If you want to create a list, tuple, or other iterable from the result of the <code class="language-plaintext highlighter-rouge">map()</code> function, you can use the <code class="language-plaintext highlighter-rouge">list()</code>, <code class="language-plaintext highlighter-rouge">tuple()</code>, or any other built-in function that creates an iterable.</p>
+
+  <p>In Python 3, the <code class="language-plaintext highlighter-rouge">map()</code> function returns an iterator, which can be used in a for loop, but it’s not iterable. If you want to create a list, tuple, or other iterable from the result of the <code class="language-plaintext highlighter-rouge">map()</code> function, you can use the <code class="language-plaintext highlighter-rouge">list()</code>, <code class="language-plaintext highlighter-rouge">tuple()</code>, or any other built-in function that creates an iterable.</p>
+
+  <p>In Python 2, <code class="language-plaintext highlighter-rouge">map()</code> function returns a list, which can be used in a for loop, and it’s iterable.</p>
+
+  <p>In python 3.x, there is an alternative way to use map() function is <code class="language-plaintext highlighter-rouge">list(map(...))</code> or <code class="language-plaintext highlighter-rouge">tuple(map(...))</code> etc.</p>
+</blockquote>
+
+<h2 id="paired-end-reads">Paired-end reads</h2>
+
+<p>Sequencing reads can come in <em>pairs</em>.  Basically instead of reporting a single snippet of nucleotides from the genome, the sequencer might report a <em>pair</em> of
+snippets that appear <em>close to each other</em> in the genome.  To accomplish this, the sequencer sequences <em>both ends</em> of a longer <em>fragment</em> of DNA.</p>
+
+<p>Here is simple Python code that mimics how the sequencer obtains one paired-end read:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Let's just make a random genome of length 1K
+</span><span class="kn">import</span> <span class="n">random</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">seed</span><span class="p">(</span><span class="mi">637485</span><span class="p">)</span>
+<span class="n">genome</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="sh">'</span><span class="s">ACGT</span><span class="sh">'</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)])</span>
+<span class="n">genome</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'AGTACGTCATACCGTTATGATCTAGGTGGGATCGCGGATTGGTCGTGCAGAATACAGCCTTGGAGAGTGGTTAACACGATAAGGCCGATAATATGTCTGGATAAGCTCAGGCTCTGCTCCGAGGCGCTAAGGTACATGTTATTGATTTGGAGCTCAAAAATTGCCATAGCATGCAATACGCCCGTTGATAGACCACTTGCCTTCAGGGGAGCGTCGCATGTATTGATTGTGTTACATAAACCCTCCCCCCCTACACGTGCTTGTCGACGCGGCACTGGACACTGATACGAGGAGGCACTTCGCTAGAAACGGCTTACTGCAGGTGATAAAATCAACAGATGGCACGCTCGCAACAGAAGCATAATATGCTTCCAACCAGGACCGGCATTTAACTCAATATATTAGCTCTCGAGGACAACGCACTACGTTTTCCAATTCAGCGGACTGGCGCCATTACAGTAAGTTGATTGTGCAGTGGTCTTTGACAGACAGCAGTTCGCTCCTTACTGACAATACCTGATACTTATAGTATGGCAGCGAGTCGTTGTCTAGGTTAGCCACCTCAGTCTACAGCAGGTAATGAAGCATTCCCACAAAGGCTGGTCCATACACCCGACTGCTACGATTCATGCTTCGCTCGAGAACTGCCCCTGCCTTAGATTCCCCCTCGTCTCCAATGAATACCCATTTTTTTAGATTGCTGAAAACCTTTCGTAAGACGCTTTCCAGTGATTACATGCCCTAACTGGGTACAGTTTGCCCAGGAGCTTTTTGGATGGAGGAGTATTAGTAGCGACCAAAACTCTTCCTCGACTGTTACTGTGTAGAGTCCCAAACGCTAAAGCGGTCCCAGAAAAACGGAACGGCCTACAGATTAAATTGCTCCGTGTTGCAGTTAAGGCGTACAAACCCCTCTGTGTATTAGTTTAAGTCTCTGAGTCTTCTTTGCTATGACGGATTGATGGGTGCCGGTTTGTAGTTCAAGAACCGTGAGTGAACC'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The sequencer draws a fragment from the genome of length, say, 250
+</span><span class="n">offset</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span> <span class="o">-</span> <span class="mi">250</span><span class="p">)</span>
+<span class="n">fragment</span> <span class="o">=</span> <span class="n">genome</span><span class="p">[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span><span class="o">+</span><span class="mi">250</span><span class="p">]</span>
+<span class="n">fragment</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'GTATTGATTGTGTTACATAAACCCTCCCCCCCTACACGTGCTTGTCGACGCGGCACTGGACACTGATACGAGGAGGCACTTCGCTAGAAACGGCTTACTGCAGGTGATAAAATCAACAGATGGCACGCTCGCAACAGAAGCATAATATGCTTCCAACCAGGACCGGCATTTAACTCAATATATTAGCTCTCGAGGACAACGCACTACGTTTTCCAATTCAGCGGACTGGCGCCATTACAGTAAGTTGATT'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Then it reads sequences from either end of the fragment
+</span><span class="n">end1</span><span class="p">,</span> <span class="n">end2</span> <span class="o">=</span> <span class="n">fragment</span><span class="p">[:</span><span class="mi">75</span><span class="p">],</span> <span class="n">fragment</span><span class="p">[</span><span class="o">-</span><span class="mi">75</span><span class="p">:]</span>
+<span class="n">end1</span><span class="p">,</span> <span class="n">end2</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('GTATTGATTGTGTTACATAAACCCTCCCCCCCTACACGTGCTTGTCGACGCGGCACTGGACACTGATACGAGGAG',
+ 'CAATATATTAGCTCTCGAGGACAACGCACTACGTTTTCCAATTCAGCGGACTGGCGCCATTACAGTAAGTTGATT')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># And because of how Illumina sequencing works, the
+# second end is always from the opposite strand from the first
+# (this is not the case for 454 and SOLiD data)
+</span>
+<span class="kn">import</span> <span class="n">string</span>
+
+<span class="c1"># function for reverse-complementing
+</span><span class="n">revcomp_trans</span> <span class="o">=</span> <span class="nb">str</span><span class="p">.</span><span class="nf">maketrans</span><span class="p">(</span><span class="sh">"</span><span class="s">ACGTacgt</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">TGCAtgca</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">reverse_complement</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">s</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nf">translate</span><span class="p">(</span><span class="n">revcomp_trans</span><span class="p">)</span>
+
+<span class="n">end2</span> <span class="o">=</span> <span class="nf">reverse_complement</span><span class="p">(</span><span class="n">end2</span><span class="p">)</span>
+<span class="n">end1</span><span class="p">,</span> <span class="n">end2</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('GTATTGATTGTGTTACATAAACCCTCCCCCCCTACACGTGCTTGTCGACGCGGCACTGGACACTGATACGAGGAG',
+ 'AATCAACTTACTGTAATGGCGCCAGTCCGCTGAATTGGAAAACGTAGTGCGTTGTCCTCGAGAGCTAATATATTG')
+</code></pre></div></div>
+
+<p>FASTQ can be used to store paired-end reads.  Say we have 1000 paired-end reads.  We should store them in a <em>pair</em> of FASTQ files.  The first FASTQ file (say, <code class="language-plaintext highlighter-rouge">reads_1.fq</code>) would contain all of the first ends and the second FASTQ file (say, <code class="language-plaintext highlighter-rouge">reads_2.fq</code>) would contain all of the second ends.  In both files, the ends would appear in corresponding order.  That is, the first entry in <code class="language-plaintext highlighter-rouge">reads_1.fq</code> is paired with the first entry in <code class="language-plaintext highlighter-rouge">reads_2.fq</code> and so on.</p>
+
+<p>Here is a Python function that parses a pair of files containing paired-end reads.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">parse_paired_fastq</span><span class="p">(</span><span class="n">fh1</span><span class="p">,</span> <span class="n">fh2</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s"> Parse paired-end reads from a pair of FASTQ filehandles
+        For each pair, we return a name, the nucleotide string
+        for the first end, the quality string for the first end,
+        the nucleotide string for the second end, and the
+        quality string for the second end. </span><span class="sh">"""</span>
+    <span class="n">reads</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">first_line_1</span><span class="p">,</span> <span class="n">first_line_2</span> <span class="o">=</span> <span class="n">fh1</span><span class="p">.</span><span class="nf">readline</span><span class="p">(),</span> <span class="n">fh2</span><span class="p">.</span><span class="nf">readline</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">first_line_1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">break</span>  <span class="c1"># end of file
+</span>        <span class="n">name_1</span><span class="p">,</span> <span class="n">name_2</span> <span class="o">=</span> <span class="n">first_line_1</span><span class="p">[</span><span class="mi">1</span><span class="p">:].</span><span class="nf">rstrip</span><span class="p">(),</span> <span class="n">first_line_2</span><span class="p">[</span><span class="mi">1</span><span class="p">:].</span><span class="nf">rstrip</span><span class="p">()</span>
+        <span class="n">seq_1</span><span class="p">,</span> <span class="n">seq_2</span> <span class="o">=</span> <span class="n">fh1</span><span class="p">.</span><span class="nf">readline</span><span class="p">().</span><span class="nf">rstrip</span><span class="p">(),</span> <span class="n">fh2</span><span class="p">.</span><span class="nf">readline</span><span class="p">().</span><span class="nf">rstrip</span><span class="p">()</span>
+        <span class="n">fh1</span><span class="p">.</span><span class="nf">readline</span><span class="p">()</span>  <span class="c1"># ignore line starting with +
+</span>        <span class="n">fh2</span><span class="p">.</span><span class="nf">readline</span><span class="p">()</span>  <span class="c1"># ignore line starting with +
+</span>        <span class="n">qual_1</span><span class="p">,</span> <span class="n">qual_2</span> <span class="o">=</span> <span class="n">fh1</span><span class="p">.</span><span class="nf">readline</span><span class="p">().</span><span class="nf">rstrip</span><span class="p">(),</span> <span class="n">fh2</span><span class="p">.</span><span class="nf">readline</span><span class="p">().</span><span class="nf">rstrip</span><span class="p">()</span>
+        <span class="n">reads</span><span class="p">.</span><span class="nf">append</span><span class="p">(((</span><span class="n">name_1</span><span class="p">,</span> <span class="n">seq_1</span><span class="p">,</span> <span class="n">qual_1</span><span class="p">),</span> <span class="p">(</span><span class="n">name_2</span><span class="p">,</span> <span class="n">seq_2</span><span class="p">,</span> <span class="n">qual_2</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">reads</span>
+
+<span class="n">fastq_string1</span> <span class="o">=</span> <span class="sh">'''</span><span class="s">@509.6.64.20524.149722/1
+AGCTCTGGTGACCCATGGGCAGCTGCTAGGGAGCCTTCTCTCCACCCTGA
++
+HHHHHHHGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHIIHHIHFHHF
+@509.4.62.19231.2763/1
+GTTGATAAGCAAGCATCTCATTTTGTGCATATACCTGGTCTTTCGTATTC
++
+HHHHHHHHHHHHHHEHHHHHHHHHHHHHHHHHHHHHHHDHHHHHHGHGHH</span><span class="sh">'''</span>
+
+<span class="n">fastq_string2</span> <span class="o">=</span> <span class="sh">'''</span><span class="s">@509.6.64.20524.149722/2
+TAAGTCAGGATACTTTCCCATATCCCAGCCCTGCTCCNTCTTTAAATAAT
++
+HHHHHHHHHHHHHHHHHHHH@HHFHHHEFHHHHHHFF#FFFFFFFHHHHH
+@509.4.62.19231.2763/2
+CTCTGCTGGTATGGTTGACGCCGGATTTGAGAATCAANAAGAGCTTACTA
++
+HHHHHHHHHHHHHHHHHHEHEHHHFHGHHHHHHHH&gt;@#@=44465HHHHH</span><span class="sh">'''</span>
+
+<span class="nf">parse_paired_fastq</span><span class="p">(</span><span class="nc">StringIO</span><span class="p">(</span><span class="n">fastq_string1</span><span class="p">),</span> <span class="nc">StringIO</span><span class="p">(</span><span class="n">fastq_string2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[(('509.6.64.20524.149722/1',
+   'AGCTCTGGTGACCCATGGGCAGCTGCTAGGGAGCCTTCTCTCCACCCTGA',
+   'HHHHHHHGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHIIHHIHFHHF'),
+  ('509.6.64.20524.149722/2',
+   'TAAGTCAGGATACTTTCCCATATCCCAGCCCTGCTCCNTCTTTAAATAAT',
+   'HHHHHHHHHHHHHHHHHHHH@HHFHHHEFHHHHHHFF#FFFFFFFHHHHH')),
+ (('509.4.62.19231.2763/1',
+   'GTTGATAAGCAAGCATCTCATTTTGTGCATATACCTGGTCTTTCGTATTC',
+   'HHHHHHHHHHHHHHEHHHHHHHHHHHHHHHHHHHHHHHDHHHHHHGHGHH'),
+  ('509.4.62.19231.2763/2',
+   'CTCTGCTGGTATGGTTGACGCCGGATTTGAGAATCAANAAGAGCTTACTA',
+   'HHHHHHHHHHHHHHHHHHEHEHHHFHGHHHHHHHH&gt;@#@=44465HHHHH'))]
+</code></pre></div></div>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-a-note-on-triple-quotes-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: A note on triple quotes</div>
+
+  <p>In Python, triple quotes (either single or double) are used to create multi-line strings. They can also be used to create doc-strings, which are used to document a function, class, or module.</p>
+
+  <p>For example:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string1</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">This is a
+multiline string</span><span class="sh">"""</span>
+
+<span class="n">string2</span> <span class="o">=</span> <span class="sh">'''</span><span class="s">This is also
+a multiline string</span><span class="sh">'''</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">string1</span><span class="p">)</span>
+<span class="c1"># Output:
+# This is a
+# multiline string
+</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">string2</span><span class="p">)</span>
+<span class="c1"># Output:
+# This is also
+# a multiline string
+</span></code></pre></div>  </div>
+
+  <p>This is a
+   multiline string
+   This is also
+   a multiline string</p>
+
+  <p>Triple quotes can also be used to create docstrings, which are used to document a function, class, or module. The first line of a docstring is a brief summary of what the function, class, or module does, and the following lines provide more detailed information.</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+   <span class="sh">"""</span><span class="s">
+   This is a docstring for the my_function.
+   This function does not perform any operation.
+   </span><span class="sh">"""</span>
+   <span class="k">pass</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">my_function</span><span class="p">.</span><span class="n">__doc__</span><span class="p">)</span>
+<span class="c1"># Output:
+# This is a docstring for the my_function.
+# This function does not perform any operation.
+</span></code></pre></div>  </div>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   This is a docstring for the my_function.
+   This function does not perform any operation.
+</code></pre></div>  </div>
+
+</blockquote>
+
+<h2 id="how-good-are-my-reads">How good are my reads?</h2>
+
+<p>Let’s reuse the <code class="language-plaintext highlighter-rouge">parse_fastq</code> function from above:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">reads</span> <span class="o">=</span> <span class="nf">parse_fastq</span><span class="p">(</span><span class="nc">StringIO</span><span class="p">(</span><span class="n">fastq_string</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">run_qualities</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">read</span> <span class="ow">in</span> <span class="n">reads</span><span class="p">:</span>
+    <span class="n">read_qualities</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">quality</span> <span class="ow">in</span> <span class="n">read</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="n">read_qualities</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">phred33_to_q</span><span class="p">(</span><span class="n">quality</span><span class="p">))</span>
+    <span class="n">run_qualities</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">read_qualities</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">base_qualities</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">run_qualities</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">read</span> <span class="ow">in</span> <span class="n">run_qualities</span><span class="p">:</span>
+        <span class="n">base</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">read</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">base_qualities</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+    
+<span class="c1"># same thing with numpy
+# base_qualities = np.array(run_qualities).T
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">plotting_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">base</span><span class="sh">'</span><span class="p">:[],</span>
+    <span class="sh">'</span><span class="s">mean</span><span class="sh">'</span><span class="p">:[],</span>
+    <span class="sh">'</span><span class="s">median</span><span class="sh">'</span><span class="p">:[],</span>
+    <span class="sh">'</span><span class="s">q25</span><span class="sh">'</span><span class="p">:[],</span>
+    <span class="sh">'</span><span class="s">q75</span><span class="sh">'</span><span class="p">:[],</span>
+    <span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">:[],</span>
+    <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">:[]</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">base</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">base_qualities</span><span class="p">):</span>
+    <span class="n">plotting_data</span><span class="p">[</span><span class="sh">'</span><span class="s">base</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">plotting_data</span><span class="p">[</span><span class="sh">'</span><span class="s">mean</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">base</span><span class="p">))</span>
+    <span class="n">plotting_data</span><span class="p">[</span><span class="sh">'</span><span class="s">median</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">median</span><span class="p">(</span><span class="n">base</span><span class="p">))</span>
+    <span class="n">plotting_data</span><span class="p">[</span><span class="sh">'</span><span class="s">q25</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">quantile</span><span class="p">(</span><span class="n">base</span><span class="p">,.</span><span class="mi">25</span><span class="p">))</span>
+    <span class="n">plotting_data</span><span class="p">[</span><span class="sh">'</span><span class="s">q75</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">quantile</span><span class="p">(</span><span class="n">base</span><span class="p">,.</span><span class="mi">75</span><span class="p">))</span>
+    <span class="n">plotting_data</span><span class="p">[</span><span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">min</span><span class="p">(</span><span class="n">base</span><span class="p">))</span>
+    <span class="n">plotting_data</span><span class="p">[</span><span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="n">base</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="n">plotting_data_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">plotting_data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">altair</span> <span class="k">as</span> <span class="n">alt</span>
+
+<span class="n">base</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">plotting_data_df</span><span class="p">).</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="p">.</span><span class="nc">X</span><span class="p">(</span><span class="sh">'</span><span class="s">base:Q</span><span class="sh">'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Position in the read</span><span class="sh">"</span><span class="p">)</span>
+<span class="p">).</span><span class="nf">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="n">median</span> <span class="o">=</span> <span class="n">base</span><span class="p">.</span><span class="nf">mark_tick</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">red</span><span class="sh">'</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="sh">'</span><span class="s">horizontal</span><span class="sh">'</span><span class="p">).</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="p">.</span><span class="nc">Y</span><span class="p">(</span><span class="sh">'</span><span class="s">median:Q</span><span class="sh">'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Phred quality score</span><span class="sh">"</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">base</span><span class="p">.</span><span class="nf">mark_rule</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">,</span><span class="n">opacity</span><span class="o">=</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span><span class="n">strokeWidth</span><span class="o">=</span><span class="mi">10</span><span class="p">).</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="p">.</span><span class="nc">Y</span><span class="p">(</span><span class="sh">'</span><span class="s">q25:Q</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">alt</span><span class="p">.</span><span class="nc">Y2</span><span class="p">(</span><span class="sh">'</span><span class="s">q75:Q</span><span class="sh">'</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">min_max</span> <span class="o">=</span> <span class="n">base</span><span class="p">.</span><span class="nf">mark_rule</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">black</span><span class="sh">'</span><span class="p">).</span><span class="nf">encode</span><span class="p">(</span>
+        <span class="n">alt</span><span class="p">.</span><span class="nc">Y</span><span class="p">(</span><span class="sh">'</span><span class="s">min:Q</span><span class="sh">'</span><span class="p">),</span>
+        <span class="n">alt</span><span class="p">.</span><span class="nc">Y2</span><span class="p">(</span><span class="sh">'</span><span class="s">max:Q</span><span class="sh">'</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">median</span> <span class="o">+</span> <span class="n">q</span> <span class="o">+</span> <span class="n">min_max</span>
+</code></pre></div></div>
+
+<figure id="figure-1" style="max-width: 90%;"><div style="overflow-x: auto"><object data="./images/qualities.svg" type="image/svg+xml" alt="Qualities. ">Qualities.</object></div><a target="_blank" href="./images/qualities.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Box plot of quality values across read positions</figcaption></figure>
+
+<h2 id="other-comments">Other comments</h2>
+
+<p>In all the examples above, the reads in the FASTQ file are all the same length.  This is not necessarily the case though it is usually true for datasets generated by sequencing-by-synthesis instruments.  FASTQ files can contain reads of various lengths.</p>
+
+<p>FASTQ files often have the extension <code class="language-plaintext highlighter-rouge">.fastq</code> or <code class="language-plaintext highlighter-rouge">.fq</code>.</p>
+
+<h2 id="other-resources">Other resources</h2>
+
+<ul>
+  <li><a href="http://biopython.org/wiki/Main_Page">BioPython</a></li>
+  <li><a href="http://biopython.org/wiki/SeqIO">SeqIO</a></li>
+  <li><a href="http://samtools.sourceforge.net/">SAMtools</a></li>
+  <li><a href="http://hannonlab.cshl.edu/fastx_toolkit/">FASTX</a></li>
+  <li><a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FASTQC</a></li>
+  <li><a href="https://github.com/lh3/seqtk">seqtk</a></li>
+</ul>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Python can be used to parse FASTQ easily</p>
+</li>
+                        
+                        <li><p>One can readily visualize quality values</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Introduction to sequencing with Python (part two) (Foundations of Data Science)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Anton Nekrutenko,  <b>Introduction to sequencing with Python (part two) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture3/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture3/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{data-science-gnmx-lecture3,
+author = "Anton Nekrutenko",
+	title = "Introduction to sequencing with Python (part two) (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture3/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/data-science/tutorials/gnmx-lecture3/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/331a95b6951932c290e10f8dcb268100e9253ef3">331a95b</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/gnmx-lecture3/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706047726'></script>
+        
+    </body>
+</html>
