@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Clinical-MP-Database Quantitation
-zenodo_link: 'https://doi.org/10.5281/zenodo.10105821'
+zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - How to perform quantitation?
 objectives:
