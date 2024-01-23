@@ -212,7 +212,7 @@ Let's get an **AnnData object** that we can further work on. It's the object use
 >    ```
 >    https://zenodo.org/record/7053673/files/Mito-counted_AnnData
 >    ```
-> 
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 4. **Rename** {% icon galaxy-pencil %} the datasets `Downsampled AnnData object`
