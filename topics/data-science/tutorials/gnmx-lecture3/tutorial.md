@@ -25,6 +25,8 @@ notebook:
   pyolite: true
 ---
 
+[![](https://imgs.xkcd.com/comics/python.png)](https://xkcd.com/353/)
+
 Preclass prep: Chapters [8](https://greenteapress.com/thinkpython2/html/thinkpython2009.html) and [10](https://greenteapress.com/thinkpython2/html/thinkpython2011.html) from "Think Python"
 
 > This material uses examples from notebooks developed by [Ben Langmead](https://langmead-lab.org/teaching-materials/)
@@ -55,7 +57,6 @@ print(string3)  # Output: Hello World!
 
 string4 = "Hello " * 3
 print(string4)  # Output: Hello Hello Hello
-
 ```
 
     Hello World!
@@ -377,7 +378,7 @@ parse_fastq(StringIO(fastq_string))
 The nucleotide string can sometimes contain the character "`N`".  `N` essentially means "no confidence." The sequencer knows there's a nucleotide there but doesn't know whether it's an A, C, G or T.
 
 
-> <comment-title>A note on `while True`</comment-title>
+> <comment-title>A note on <tt>while True</tt></comment-title>
 >
 >In Python, the while loop is used to repeatedly execute a block of code as long as a certain condition is true. The while True statement is a special case where the loop will run indefinitely, until a break statement is encountered inside the loop.
 >
@@ -489,7 +490,7 @@ You might wonder how the sequencer and its software can *know* the probability t
 
 A final note: other ways of encoding quality values were proposed and used in the past.  For example, Phred64 uses an ASCII offset of 64 instead of 33, and Solexa64 uses "odds" instead of the probability *p*.  But Phred33 is by far the most common today and you will likely never have to worry about this.
 
-><comment-title>A note in `map()`</comment-title>
+><comment-title>A note in <tt>map()</tt></comment-title>
 >
 >In Python, the `map()` function is used to apply a given function to all elements of an iterable (such as a list, tuple, or string) and return an iterator (an object that can be iterated, e.g. in a `for`-loop) that yields the results.
 >
@@ -508,23 +509,25 @@ A final note: other ways of encoding quality values were proposed and used in th
 >print(list(squared_numbers))  # Output: [1, 4, 9, 16, 25]
 >```
 >
->    [1, 4, 9, 16, 25]
->
+>```
+>[1, 4, 9, 16, 25]
+>```
 >
 >In the example above, the `map()` function applies the lambda function `lambda x: x**2` to each element of the numbers list, and returns an iterator of the squared numbers. The `list()` function is used to convert the iterator to a list, so that the result can be printed.
 >
 >Another example is,
 >
 >
->```python=
+>```python
 ># Using the map() function to convert a list of strings to uppercase
 >words = ["hello", "world"]
 >uppercase_words = map(lambda word: word.upper(), words)
 >print(list(uppercase_words))  # Output: ['HELLO', 'WORLD']
 >```
 >
->    ['HELLO', 'WORLD']
->
+>```
+>['HELLO', 'WORLD']
+>```
 >
 >It's important to note that the `map()` function returns an iterator, which can be used in a for loop, but is not a list, tuple, or any other iterable. If you want to create a list, tuple, or other iterable from the result of the `map()` function, you can use the `list()`, `tuple()`, or any other built-in function that creates an iterable.
 >
@@ -786,519 +789,7 @@ min_max = base.mark_rule(color='black').encode(
 median + q + min_max
 ```
 
-```vega
-{
-  "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
-  "layer": [
-    {
-      "mark": {"type": "tick", "color": "red", "orient": "horizontal"},
-      "encoding": {
-        "x": {
-          "field": "base",
-          "title": "Position in the read",
-          "type": "quantitative"
-        },
-        "y": {
-          "field": "median",
-          "title": "Phred quality score",
-          "type": "quantitative"
-        }
-      },
-      "height": 200,
-      "width": 800
-    },
-    {
-      "mark": {
-        "type": "rule",
-        "color": "green",
-        "opacity": 0.5,
-        "strokeWidth": 10
-      },
-      "encoding": {
-        "x": {
-          "field": "base",
-          "title": "Position in the read",
-          "type": "quantitative"
-        },
-        "y": {"field": "q25", "type": "quantitative"},
-        "y2": {"field": "q75"}
-      },
-      "height": 200,
-      "width": 800
-    },
-    {
-      "mark": {"type": "rule", "color": "black"},
-      "encoding": {
-        "x": {
-          "field": "base",
-          "title": "Position in the read",
-          "type": "quantitative"
-        },
-        "y": {"field": "min", "type": "quantitative"},
-        "y2": {"field": "max"}
-      },
-      "height": 200,
-      "width": 800
-    }
-  ],
-  "data": {"name": "data-ccf1ca196f1d0e4919420b2695143650"},
-  "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
-  "datasets": {
-    "data-ccf1ca196f1d0e4919420b2695143650": [
-      {
-        "base": 0,
-        "mean": 32.666666666666664,
-        "median": 33,
-        "q25": 32,
-        "q75": 33.5,
-        "min": 31,
-        "max": 34
-      },
-      {
-        "base": 1,
-        "mean": 33.666666666666664,
-        "median": 35,
-        "q25": 33,
-        "q75": 35,
-        "min": 31,
-        "max": 35
-      },
-      {
-        "base": 2,
-        "mean": 33,
-        "median": 32,
-        "q25": 32,
-        "q75": 33.5,
-        "min": 32,
-        "max": 35
-      },
-      {
-        "base": 3,
-        "mean": 37.333333333333336,
-        "median": 37,
-        "q25": 36.5,
-        "q75": 38,
-        "min": 36,
-        "max": 39
-      },
-      {
-        "base": 4,
-        "mean": 33.333333333333336,
-        "median": 36,
-        "q25": 31.5,
-        "q75": 36.5,
-        "min": 27,
-        "max": 37
-      },
-      {
-        "base": 5,
-        "mean": 37,
-        "median": 37,
-        "q25": 37,
-        "q75": 37,
-        "min": 37,
-        "max": 37
-      },
-      {
-        "base": 6,
-        "mean": 32.333333333333336,
-        "median": 30,
-        "q25": 30,
-        "q75": 33.5,
-        "min": 30,
-        "max": 37
-      },
-      {
-        "base": 7,
-        "mean": 36,
-        "median": 36,
-        "q25": 35.5,
-        "q75": 36.5,
-        "min": 35,
-        "max": 37
-      },
-      {
-        "base": 8,
-        "mean": 36.666666666666664,
-        "median": 36,
-        "q25": 36,
-        "q75": 37,
-        "min": 36,
-        "max": 38
-      },
-      {
-        "base": 9,
-        "mean": 37,
-        "median": 37,
-        "q25": 36,
-        "q75": 38,
-        "min": 35,
-        "max": 39
-      },
-      {
-        "base": 10,
-        "mean": 36.333333333333336,
-        "median": 36,
-        "q25": 36,
-        "q75": 36.5,
-        "min": 36,
-        "max": 37
-      },
-      {
-        "base": 11,
-        "mean": 35.333333333333336,
-        "median": 37,
-        "q25": 34.5,
-        "q75": 37,
-        "min": 32,
-        "max": 37
-      },
-      {
-        "base": 12,
-        "mean": 37,
-        "median": 37,
-        "q25": 36,
-        "q75": 38,
-        "min": 35,
-        "max": 39
-      },
-      {
-        "base": 13,
-        "mean": 34.333333333333336,
-        "median": 35,
-        "q25": 32.5,
-        "q75": 36.5,
-        "min": 30,
-        "max": 38
-      },
-      {
-        "base": 14,
-        "mean": 37,
-        "median": 37,
-        "q25": 37,
-        "q75": 37,
-        "min": 37,
-        "max": 37
-      },
-      {
-        "base": 15,
-        "mean": 36.333333333333336,
-        "median": 36,
-        "q25": 36,
-        "q75": 36.5,
-        "min": 36,
-        "max": 37
-      },
-      {
-        "base": 16,
-        "mean": 37,
-        "median": 36,
-        "q25": 36,
-        "q75": 37.5,
-        "min": 36,
-        "max": 39
-      },
-      {
-        "base": 17,
-        "mean": 38,
-        "median": 38,
-        "q25": 37.5,
-        "q75": 38.5,
-        "min": 37,
-        "max": 39
-      },
-      {
-        "base": 18,
-        "mean": 36.333333333333336,
-        "median": 36,
-        "q25": 35.5,
-        "q75": 37,
-        "min": 35,
-        "max": 38
-      },
-      {
-        "base": 19,
-        "mean": 38,
-        "median": 38,
-        "q25": 37.5,
-        "q75": 38.5,
-        "min": 37,
-        "max": 39
-      },
-      {
-        "base": 20,
-        "mean": 36,
-        "median": 35,
-        "q25": 35,
-        "q75": 36.5,
-        "min": 35,
-        "max": 38
-      },
-      {
-        "base": 21,
-        "mean": 35,
-        "median": 37,
-        "q25": 33.5,
-        "q75": 37.5,
-        "min": 30,
-        "max": 38
-      },
-      {
-        "base": 22,
-        "mean": 37,
-        "median": 38,
-        "q25": 36,
-        "q75": 38.5,
-        "min": 34,
-        "max": 39
-      },
-      {
-        "base": 23,
-        "mean": 37,
-        "median": 38,
-        "q25": 36,
-        "q75": 38.5,
-        "min": 34,
-        "max": 39
-      },
-      {
-        "base": 24,
-        "mean": 37,
-        "median": 37,
-        "q25": 36,
-        "q75": 38,
-        "min": 35,
-        "max": 39
-      },
-      {
-        "base": 25,
-        "mean": 31.666666666666668,
-        "median": 31,
-        "q25": 29.5,
-        "q75": 33.5,
-        "min": 28,
-        "max": 36
-      },
-      {
-        "base": 26,
-        "mean": 37.666666666666664,
-        "median": 38,
-        "q25": 37.5,
-        "q75": 38,
-        "min": 37,
-        "max": 38
-      },
-      {
-        "base": 27,
-        "mean": 38.666666666666664,
-        "median": 39,
-        "q25": 38.5,
-        "q75": 39,
-        "min": 38,
-        "max": 39
-      },
-      {
-        "base": 28,
-        "mean": 37.666666666666664,
-        "median": 38,
-        "q25": 37,
-        "q75": 38.5,
-        "min": 36,
-        "max": 39
-      },
-      {
-        "base": 29,
-        "mean": 33.333333333333336,
-        "median": 34,
-        "q25": 30.5,
-        "q75": 36.5,
-        "min": 27,
-        "max": 39
-      },
-      {
-        "base": 30,
-        "mean": 38,
-        "median": 38,
-        "q25": 38,
-        "q75": 38,
-        "min": 38,
-        "max": 38
-      },
-      {
-        "base": 31,
-        "mean": 36.333333333333336,
-        "median": 36,
-        "q25": 36,
-        "q75": 36.5,
-        "min": 36,
-        "max": 37
-      },
-      {
-        "base": 32,
-        "mean": 32.333333333333336,
-        "median": 32,
-        "q25": 31,
-        "q75": 33.5,
-        "min": 30,
-        "max": 35
-      },
-      {
-        "base": 33,
-        "mean": 34,
-        "median": 39,
-        "q25": 31.5,
-        "q75": 39,
-        "min": 24,
-        "max": 39
-      },
-      {
-        "base": 34,
-        "mean": 36.666666666666664,
-        "median": 36,
-        "q25": 35.5,
-        "q75": 37.5,
-        "min": 35,
-        "max": 39
-      },
-      {
-        "base": 35,
-        "mean": 35.333333333333336,
-        "median": 38,
-        "q25": 34,
-        "q75": 38,
-        "min": 30,
-        "max": 38
-      },
-      {
-        "base": 36,
-        "mean": 38,
-        "median": 37,
-        "q25": 36.5,
-        "q75": 39,
-        "min": 36,
-        "max": 41
-      },
-      {
-        "base": 37,
-        "mean": 36.333333333333336,
-        "median": 36,
-        "q25": 36,
-        "q75": 36.5,
-        "min": 36,
-        "max": 37
-      },
-      {
-        "base": 38,
-        "mean": 36.666666666666664,
-        "median": 39,
-        "q25": 35.5,
-        "q75": 39,
-        "min": 32,
-        "max": 39
-      },
-      {
-        "base": 39,
-        "mean": 35.666666666666664,
-        "median": 36,
-        "q25": 34.5,
-        "q75": 37,
-        "min": 33,
-        "max": 38
-      },
-      {
-        "base": 40,
-        "mean": 36.666666666666664,
-        "median": 37,
-        "q25": 36.5,
-        "q75": 37,
-        "min": 36,
-        "max": 37
-      },
-      {
-        "base": 41,
-        "mean": 35.333333333333336,
-        "median": 37,
-        "q25": 34.5,
-        "q75": 37,
-        "min": 32,
-        "max": 37
-      },
-      {
-        "base": 42,
-        "mean": 38,
-        "median": 38,
-        "q25": 38,
-        "q75": 38,
-        "min": 38,
-        "max": 38
-      },
-      {
-        "base": 43,
-        "mean": 33,
-        "median": 36,
-        "q25": 30,
-        "q75": 37.5,
-        "min": 24,
-        "max": 39
-      },
-      {
-        "base": 44,
-        "mean": 34,
-        "median": 34,
-        "q25": 32.5,
-        "q75": 35.5,
-        "min": 31,
-        "max": 37
-      },
-      {
-        "base": 45,
-        "mean": 34.666666666666664,
-        "median": 34,
-        "q25": 34,
-        "q75": 35,
-        "min": 34,
-        "max": 36
-      },
-      {
-        "base": 46,
-        "mean": 36.333333333333336,
-        "median": 36,
-        "q25": 35.5,
-        "q75": 37,
-        "min": 35,
-        "max": 38
-      },
-      {
-        "base": 47,
-        "mean": 35.666666666666664,
-        "median": 38,
-        "q25": 34.5,
-        "q75": 38,
-        "min": 31,
-        "max": 38
-      },
-      {
-        "base": 48,
-        "mean": 38,
-        "median": 38,
-        "q25": 38,
-        "q75": 38,
-        "min": 38,
-        "max": 38
-      },
-      {
-        "base": 49,
-        "mean": 37.666666666666664,
-        "median": 37,
-        "q25": 37,
-        "q75": 38,
-        "min": 37,
-        "max": 39
-      }
-    ]
-  }
-}
-```
+![Qualities](./images/qualities.svg "Box plot of quality values across read positions")
 
 ## Other comments
 
@@ -1308,10 +799,10 @@ FASTQ files often have extension `.fastq` or `.fq`.
 
 ## Other resources
 
-- [BioPython]: http://biopython.org/wiki/Main_Page
-- [SeqIO]: http://biopython.org/wiki/SeqIO
-- [SAMtools]: http://samtools.sourceforge.net/
-- [FASTX]: http://hannonlab.cshl.edu/fastx_toolkit/
-- [FASTQC]: http://www.bioinformatics.babraham.ac.uk/projects/fastqc/
-- [seqtk]: https://github.com/lh3/seqtk
+- [BioPython](http://biopython.org/wiki/Main_Page)
+- [SeqIO](http://biopython.org/wiki/SeqIO)
+- [SAMtools](http://samtools.sourceforge.net/)
+- [FASTX](http://hannonlab.cshl.edu/fastx_toolkit/)
+- [FASTQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+- [seqtk](https://github.com/lh3/seqtk)
 
