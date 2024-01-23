@@ -105,7 +105,8 @@ print(f"My name is {name} and I am {age} years old.")
 
 ## String indexing
 
-In Python, strings are sequences of characters, and each character has a corresponding index, starting from 0. This means that we can access individual characters in a string using their index. This is called "string indexing".
+In Python, strings are sequences of characters, and each character has a corresponding index, starting from 0.
+This means that we can access individual characters in a string using their index. This is called "string indexing".
 
 Here is an example:
 
@@ -122,7 +123,7 @@ print(string[-1])  # Output: !
 
 You can also use negative indexing to access characters from the end of the string, with -1 being the last character, -2 the second to last and so on.
 
-You can also use slicing to extract a substring from a string. The syntax is `string[start:end:step]`, where start is the starting index, end is the ending index (not included), and step is the number of characters to skip between each index.
+You can also use slicing to extract a substring from a string. The syntax is `string[start:end:step]`, where `start` is the starting index, `end` is the ending index (not included), and step is the number of characters to skip between each index.
 
 ```python
 string = "Hello World!"
@@ -135,7 +136,7 @@ print(string[::2])  # Output: HloWrd
     World
     HloWrd
 
-You can also use string formatting method for getting the string at the specific index.
+You can also use the string formatting method to get the string at the specific index.
 
 ```python
 string = "Hello World!"
@@ -148,14 +149,14 @@ print(f"The character at index {index} is: {string[index]}")
 
 ## String functions
 
-In Python, there are many built-in string methods that can be used to manipulate and extract information from strings. Here are some of the most commonly used ones:
+In Python, many built-in string methods can be used to manipulate and extract information from strings. Here are some of the most commonly used ones:
 
 - `upper()`: Converts the string to uppercase
 - `lower()`: Converts the string to lowercase
 - `replace(old, new)`: Replaces all occurrences of the old substring with the new substring
 - `split(separator)`: Splits the string into a list of substrings using the specified separator
 - `find(substring)`: Returns the index of the first occurrence of the substring, or -1 if the substring is not found
-- `index(substring)`: Returns the index of the first occurrence of the substring, or raises a ValueError if the substring is not found
+- `index(substring)`: Returns the index of the first occurrence of the substring or raises a ValueError if the substring is not found
 - `count(substring)`: Returns the number of occurrences of the substring
 - `join(iterable)`: Concatenates the elements of an iterable (such as a list or tuple) with the string as the separator
 - `strip()`: Removes leading and trailing whitespaces from the string
@@ -307,7 +308,8 @@ st1 + st2 # concatenation of 2 strings
 
 This notebook explores [FASTQ], the most common format for storing sequencing reads.
 
-FASTA and FASTQ are rather similar, but FASTQ is almost always used for storing *sequencing reads* (with associated quality values), whereas FASTA is used for storing all kinds of DNA, RNA or protein sequences (without associated quality values).
+FASTA and FASTQ are rather similar, but FASTQ is almost always used for storing *sequencing reads* (with associated quality values), whereas FASTA is used for storing all kinds of DNA,
+RNA or protein sequences (without associated quality values).
 
 ## Basic format
 Here's a single sequencing read in FASTQ format:
@@ -324,7 +326,7 @@ It's spread across four lines.  The four lines are:
 3. "`+`", possibly followed by some info, but ignored by virtually all tools
 4. Quality sequence (explained below)
 
-Here is a very simple Python function for parsing file of FASTQ records:
+Here is a very simple Python function for parsing files of FASTQ records:
 
 
 ```python
@@ -380,7 +382,7 @@ The nucleotide string can sometimes contain the character "`N`".  `N` essentiall
 
 > <comment-title>A note on <tt>while True</tt></comment-title>
 >
->In Python, the while loop is used to repeatedly execute a block of code as long as a certain condition is true. The while True statement is a special case where the loop will run indefinitely, until a break statement is encountered inside the loop.
+>In Python, the while loop is used to repeatedly execute a block of code as long as a certain condition is true. The while True statement is a special case where the loop will run indefinitely until a break statement is encountered inside the loop.
 >
 >Here is an example of a while True loop:
 >
@@ -404,7 +406,7 @@ The nucleotide string can sometimes contain the character "`N`".  `N` essentiall
 >
 >It is important to be careful when using while True loops, as they will run indefinitely if a break statement is not included. This can cause the program to crash or hang, if not handled properly.
 >
->Also, It is recommended to use `while True` loop with a `break` statement, in case if you want to execute the loop until some specific condition met, otherwise it's not a good practice to use `while True`.
+>Also, It is recommended to use `while True` loop with a `break` statement, in case you want to execute the loop until some specific condition is met, otherwise, it's not a good practice to use `while True`.
 >
 >It's a good practice to include a way for the user to exit the loop, such as the break statement in the example above, or a counter variable to keep track of the number of iterations.
 {: .comment}
@@ -415,13 +417,14 @@ Read names often contain information about:
 
 1. The scientific study for which the read was sequenced.  E.g. the string `ERR294379` (an [SRA accession number](http://www.ebi.ac.uk/ena/about/sra_format)) in the read names correspond to [this study](http://www.ncbi.nlm.nih.gov/sra/?term=ERR294379).
 2. The sequencing instrument, and the exact *part* of the sequencing instrument, where the DNA was sequenced.  See the [FASTQ format](http://en.wikipedia.org/wiki/FASTQ_format#Illumina_sequence_identifiers) Wikipedia article for specifics on how the Illumina software encodes this information.
-3. Whether the read is part of a *paired-end read* and, if so, which end it is.  Paired-end reads will be discussed further below.  The `/1` you see at the end of the read names above indicate the read is the first end from a paired-end read.
+3. Whether the read is part of a *paired-end read* and, if so, which end it is.  Paired-end reads will be discussed further below.  The `/1` you see at the end of the read names above indicates the read is the first end from a paired-end read.
 
 ## Quality values
 
 Quality values are probabilities.  Each nucleotide in each sequencing read has an associated quality value.  A nucleotide quality value encodes the probability that the nucleotide was *incorrectly called* by the sequencing instrument and its software.  If the nucleotide is `A`, the corresponding quality value encodes the probability that the nucleotide at that position is actually *not* an `A`.
 
-Quality values encoded in two senses: first, the relevant probabilities are re-scaled using the Phread scale, which is a negative log scale.  In other words if *p* us the probability that the nucleotide was incorrectly called, we encode this as *Q* where *Q* = -10 \* log10(*p*).
+Quality values are encoded in two senses: first, the relevant probabilities are re-scaled using the Phread scale, which is a negative log scale.
+In other words if *p* is the probability that the nucleotide was incorrectly called, we encode this as *Q* where *Q* = -10 \* log10(*p*).
 
 For example, if *Q* = 30, then *p* = 0.001, a 1-in-1000 chance that the nucleotide is wrong.  If *Q* = 20, then *p* = 0.01, a 1-in-100 chance.  If *Q* = 10, then *p* = 0.1, a 1-in-10 chance.  And so on.
 
@@ -459,7 +462,7 @@ q_to_p(30), q_to_p(20), q_to_p(10)
     (0.001, 0.01, 0.1)
 
 ```python=
-p_to_q(0.00011) # note that result is rounded
+p_to_q(0.00011) # note that the result is rounded
 ```
 
     40
@@ -486,7 +489,7 @@ print(p_string)
     [0.000501187233627272, 0.00031622776601683794, 0.00031622776601683794, 0.00025118864315095795, 0.00025118864315095795, 0.00019952623149688788, 0.001, 0.00019952623149688788, 0.00015848931924611126, 0.00019952623149688788, 0.00019952623149688788, 0.00019952623149688788, 0.0001258925411794166, 0.00015848931924611126, 0.00019952623149688788, 0.00019952623149688788, 0.0001258925411794166, 0.0001258925411794166, 0.00015848931924611126, 0.0001258925411794166, 0.00015848931924611126, 0.00015848931924611126, 0.0001258925411794166, 0.0003981071705534969, 0.0001258925411794166, 0.0007943282347242813, 0.00015848931924611126, 0.0001258925411794166, 0.0001258925411794166, 0.0001258925411794166, 0.00015848931924611126, 0.00019952623149688788, 0.000630957344480193, 0.0001258925411794166, 0.00025118864315095795, 0.00015848931924611126, 0.00019952623149688788, 0.00025118864315095795, 0.0001258925411794166, 0.00015848931924611126, 0.00025118864315095795, 0.00019952623149688788, 0.00015848931924611126, 0.0001258925411794166, 0.0003981071705534969, 0.0003981071705534969, 0.00015848931924611126, 0.00015848931924611126, 0.00015848931924611126, 0.00019952623149688788]
 
 
-You might wonder how the sequencer and its software can *know* the probability that a nucleotide is incorrected called.  It can't; this number is just an estimate.  To describe exactly how it's estimated is beyond the scope of this notebook; if you're interested, search for academic papers with "base calling" in the title.  Here's a helpful [video by Rafa Irizarry](http://www.youtube.com/watch?v=eXkjlopwIH4).
+You might wonder how the sequencer and its software can *know* the probability that a nucleotide is incorrectly called.  It can't; this number is just an estimate.  To describe exactly how it's estimated is beyond the scope of this notebook; if you're interested, search for academic papers with "base calling" in the title.  Here's a helpful [video by Rafa Irizarry](http://www.youtube.com/watch?v=eXkjlopwIH4).
 
 A final note: other ways of encoding quality values were proposed and used in the past.  For example, Phred64 uses an ASCII offset of 64 instead of 33, and Solexa64 uses "odds" instead of the probability *p*.  But Phred33 is by far the most common today and you will likely never have to worry about this.
 
@@ -531,18 +534,19 @@ A final note: other ways of encoding quality values were proposed and used in th
 >
 >It's important to note that the `map()` function returns an iterator, which can be used in a for loop, but is not a list, tuple, or any other iterable. If you want to create a list, tuple, or other iterable from the result of the `map()` function, you can use the `list()`, `tuple()`, or any other built-in function that creates an iterable.
 >
->In Python 3, the `map()` function returns an iterator, which can be used in a for loop, but it's not an iterable. If you want to create a list, tuple, or other iterable from the result of the `map()` function, you can use the `list()`, `tuple()`, or any other built-in function that creates an iterable.
+>In Python 3, the `map()` function returns an iterator, which can be used in a for loop, but it's not iterable. If you want to create a list, tuple, or other iterable from the result of the `map()` function, you can use the `list()`, `tuple()`, or any other built-in function that creates an iterable.
 >
->In Python 2, `map()` function returns a list, which can be used in a for loop, and it's an iterable.
+>In Python 2, `map()` function returns a list, which can be used in a for loop, and it's iterable.
 >
 >In python 3.x, there is an alternative way to use map() function is `list(map(...))` or `tuple(map(...))` etc.
 {: .comment}
 
 ## Paired-end reads
 
-Sequencing reads can come in *pairs*.  Basically instead of reporting a single snippet of nucleotides from the genome, the sequencer might report a *pair* of snippets that appear *close to each other* in the genome.  To accomplish this, the sequencer sequences *both ends* of a longer *fragment* of DNA.
+Sequencing reads can come in *pairs*.  Basically instead of reporting a single snippet of nucleotides from the genome, the sequencer might report a *pair* of
+snippets that appear *close to each other* in the genome.  To accomplish this, the sequencer sequences *both ends* of a longer *fragment* of DNA.
 
-Here is simple Python code that mimicks how the sequencer obtains one paired-end read:
+Here is simple Python code that mimics how the sequencer obtains one paired-end read:
 
 ```python
 # Let's just make a random genome of length 1K
@@ -795,7 +799,7 @@ median + q + min_max
 
 In all the examples above, the reads in the FASTQ file are all the same length.  This is not necessarily the case though it is usually true for datasets generated by sequencing-by-synthesis instruments.  FASTQ files can contain reads of various lengths.
 
-FASTQ files often have extension `.fastq` or `.fq`.
+FASTQ files often have the extension `.fastq` or `.fq`.
 
 ## Other resources
 
