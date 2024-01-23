@@ -406,6 +406,10 @@ module Jekyll
       page['path'].split('/')[1]
     end
 
+    def shuffle(array)
+      array.shuffle
+    end
+
     def get_og_desc(site, page); end
 
     def get_og_title(site, page, reverse)
@@ -521,6 +525,22 @@ Jekyll::Hooks.register :site, :post_read do |site|
           site.data['funders'][affiliation]['members'] = [] if !site.data['funders'][affiliation].key?('members')
 
           site.data['funders'][affiliation]['members'] << name
+        end
+      end
+    end
+
+    if contributor.key?('former_affiliations')
+      contributor['former_affiliations'].each do |affiliation|
+        if site.data['organisations'].key?(affiliation)
+          if !site.data['organisations'][affiliation].key?('former_members')
+            site.data['organisations'][affiliation]['former_members'] = []
+          end
+
+          site.data['organisations'][affiliation]['former_members'] << name
+        elsif site.data['funders'].key?(affiliation)
+          site.data['funders'][affiliation]['former_members'] = [] if !site.data['funders'][affiliation].key?('former_members')
+
+          site.data['funders'][affiliation]['former_members'] << name
         end
       end
     end

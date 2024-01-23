@@ -66,16 +66,22 @@ layout: base
 				<h2>Members</h2>
 				<p class="text-muted">These individuals have noted that they are affiliated in some way with this organisation. This list is non-exhaustive.</p>
 				<div class="contributors-line">
-					{% include _includes/contributor-list.html contributors=entity.members badge=true %}
+					{% include _includes/contributor-list.html contributors=entity.members badge=true shuffle=true %}
+				</div>
+				{% endif %}
+
+				{% assign former_member_count  = entity.former_members | size %}
+				{% if former_member_count > 0 %}
+				<h2>Former Members</h2>
+				<p class="text-muted">These individuals have noted that they previously were affiliated in some way with this organisation. This list is non-exhaustive.</p>
+				<div class="contributors-line">
+					{% include _includes/contributor-list.html contributors=entity.former_members badge=true shuffle=true %}
 				</div>
 				{% endif %}
 
 				<h2>Contributions</h2>
 
 				{% if entity.funder %}
-				{% if entity.url %}
-				<a href="{{ entity.url }}">{{ entity.url }}</a>
-				{% endif %}
 				{{ entity.funding_statement | markdownify }}
 				{% endif %}
 
@@ -200,6 +206,10 @@ layout: base
 						{% icon github %} {{ page.contributor }}
 					</a>
 				</div>
+				{% endif %}
+
+				{% if entity.url %}
+				Website: <a href="{{ entity.url }}">{{ entity.url }}</a>
 				{% endif %}
 
 				{% if entity.funding_id %}
