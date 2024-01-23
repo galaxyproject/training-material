@@ -123,7 +123,7 @@ The final workflow in the array of clinical metaproteomics tutorials is the data
 
 ## Remove reverse and contaminants from human sequences with **Select**
 
-> <hands-on-title> Select </hands-on-title>
+> <hands-on-title> Select out reverse and contaminants </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `out_file1` (output of **Select** {% icon tool %})
