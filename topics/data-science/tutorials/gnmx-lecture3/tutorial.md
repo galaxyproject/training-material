@@ -25,7 +25,7 @@ notebook:
   pyolite: true
 ---
 
-[![](https://imgs.xkcd.com/comics/python.png)](https://xkcd.com/353/)
+[![XKCD353](https://imgs.xkcd.com/comics/python.png)](https://xkcd.com/353/)
 
 Preclass prep: Chapters [8](https://greenteapress.com/thinkpython2/html/thinkpython2009.html) and [10](https://greenteapress.com/thinkpython2/html/thinkpython2011.html) from "Think Python"
 
