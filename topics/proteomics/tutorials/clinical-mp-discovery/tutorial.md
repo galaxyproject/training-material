@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Clinical-MP-Database Discovery
-zenodo_link: '(https://doi.org/10.5281/zenodo.10105821)'
+zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - How to perform database searching?
 - How to extract microbial and Human protein and peptide sequences from the results
