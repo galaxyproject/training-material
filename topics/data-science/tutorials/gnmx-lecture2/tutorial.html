@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Introduction to sequencing with Python (part one) / Foundations of Data Science</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@38aeb49328bce3e1d272e0960cc0463c6a66f96f",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture2/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706010000' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706010000' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Introduction to sequencing with Python (part one)">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-22 21:52:15 +0000">
+<meta name="DC.creator" content="Anton Nekrutenko"><meta name="description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Foundations of Data Science / Hands-on: Introduction to sequencing with Python (part one)">
+        <meta property="og:description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Data-Science Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-01-22 21:52:15 +0000",
+  "datePublished": "2024-01-23 11:29:11 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Introduction to sequencing with Python (part one)",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Draft",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Introduction to sequencing with Python (part one)",
+  "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture2/tutorial.html",
+  "version": 6,
+  "timeRequired": "PT1H",
+  "teaches": "Have a basic understanding of the history of sequencing\n - Understand Python basics",
+  "keywords": [
+    "Foundations of Data Science",
+    "jupyter-notebook"
+  ],
+  "description": "The questions this  addresses are:\n - What are the origins of Sanger sequencing\n - How did sequencing machines evolve?\n - How can we simulate Sanger sequencing with Python?\n\n\nThe objectives are:\n - Have a basic understanding of the history of sequencing\n - Understand Python basics\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "name": "Anton Nekrutenko",
+      "image": "https://avatars.githubusercontent.com/nekrut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "jupyter-notebook"
+    }
+  ],
+  "abstract": "<a href=\"https://i.imgur.com/1PCleoW.png\" rel=\"noopener noreferrer\"><img src=\"https://i.imgur.com/1PCleoW.png\"  alt=\"\"   loading=\"lazy\"></a>"
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706010000'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/gnmx-lecture2/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/gnmx-lecture2/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/data-science/tutorials/gnmx-lecture2/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/data-science/tutorials/gnmx-lecture2/tutorial.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/topics/data-science/tutorials/gnmx-lecture2/tutorial.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-data-science">
+    <h1 data-toc-skip>Introduction to sequencing with Python (part one)</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Anton Nekrutenko avatar" width="36" class="avatar" />
+    Anton Nekrutenko</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are the origins of Sanger sequencing</p>
+</li>
+        
+        <li><p>How did sequencing machines evolve?</p>
+</li>
+        
+        <li><p>How can we simulate Sanger sequencing with Python?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Have a basic understanding of the history of sequencing</p>
+</li>
+        
+        <li><p>Understand Python basics</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/gnmx-lecture2/data-science-gnmx-lecture2.ipynb" title="Jupyter Notebook" alt="Introduction to sequencing with Python (part one) Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 23, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 22, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <div class="box-title">Best viewed in a Jupyter Notebook</div>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fgnmx-lecture2%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="/training-material/jupyter/lab/index.html?path=data-science-gnmx-lecture2.ipynb">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture2/data-science-gnmx-lecture2.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture2/data-science-gnmx-lecture2.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture2/data-science-gnmx-lecture2-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                </section>
+                
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p><a href="https://i.imgur.com/1PCleoW.png" rel="noopener noreferrer"><img src="https://i.imgur.com/1PCleoW.png" alt="" loading="lazy" /></a></p>
+
+<h1 id="the-problem">The problem</h1>
+
+<p>The difficulty with sequencing nucleic acids is nicely summarized by <a href="http://dx.doi.org/10.1093/nar/gkm688">Hutchinson 2007</a>:</p>
+
+<ol>
+  <li>The chemical properties of different DNA molecules were so similar that it appeared difficult to separate them.</li>
+  <li>The chain length of naturally occurring DNA molecules was much greater than for proteins and made complete sequencing seem unapproachable.</li>
+  <li>The 20 amino acid residues found in proteins have widely varying properties that had proven useful in the separation of peptides. The existence of only four bases in DNA therefore seemed to make sequencing a more difficult problem for DNA than for protein.</li>
+  <li>No base-specific DNAases were known. Protein sequencing had depended upon proteases that cleave adjacent to certain amino acids.</li>
+</ol>
+
+<p>It is therefore not surprising that protein-sequencing was developed before DNA sequencing by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1197535/">Sanger and Tuppy 1951</a>.</p>
+
+<p>tRNA was the first complete nucleic acid sequenced (see pioneering work of <a href="http://www.jstor.org/stable/1715055">Robert Holley and colleagues</a> and also <a href="https://www.nobelprize.org/nobel_prizes/medicine/laureates/1968/holley-lecture.pdf">Holley’s Nobel Lecture</a>). Conceptually, Holley’s approach was similar to Sanger’s protein sequencing: break molecule into small pieces with RNases, determine sequences of small fragments, and use overlaps between fragments to reconstruct (assemble) the final nucleotide sequence.</p>
+
+<p>The work on finding approaches to sequencing DNA molecules began in the late 60s and early 70s. One of the earliest contributions has been made by Ray Wu (Cornell) and Dave Kaiser (Stanford), who used <em>E. coli</em> DNA polymerase to <a href="http://www.sciencedirect.com/science/article/pii/S0022283668800129?via%3Dihub">incorporate radioactively labelled nucleotides into protruding ends of bacteriphage lambda</a>. It took several more years for the development of more “high throughput” technologies by Sanger and Maxam/Gilbert. The Sanger technique has ultimately won over Maxam/Gilbert’s protocol due to its relative simplicity (once dideoxynucleotides has become commercially available) and the fact that it required a smaller amount of starting material as the polymerase was used to generate fragments necessary for sequence determination.</p>
+
+<h1 id="sangercoulson-plusminus-method">Sanger/Coulson plus/minus method</h1>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-two-nobel-prizes-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Two Nobel prizes</div>
+  <p><a href="https://www.nature.com/articles/505027a">Fred Sanger</a> is one of only <a href="https://en.wikipedia.org/wiki/Category:Nobel_laureates_with_multiple_Nobel_awards">four people</a>, who received two Nobel Prizes in their original form (for scientific, not societal, breakthroughs).</p>
+</blockquote>
+
+<p>This method builds on the idea of Wu and Kaiser (for <em>minus</em> part) and on the special property of DNA polymerase isolated from phage T4 (for <em>plus</em> part). The schematics of the method is given in the following figure (from <a href="http://www.sciencedirect.com/science/article/pii/0022283675902132?via%3Dihub">Sanger &amp; Coulson: 1975</a>):</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="./images/sanger_plus_minus.png" alt="Plus/minus method. " width="619" height="898" loading="lazy" /><a target="_blank" href="./images/sanger_plus_minus.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Plus/minus method (from Sanger &amp; Coulson 1975)</figcaption></figure>
+
+<p>In this method, a primer and DNA polymerase is used to synthesize DNA in the presence of P<sup>32</sup>-labeled nucleotides (only one of four is labeled). This generates P<sup>32</sup>-labeled copies of DNA being sequenced. These are then purified and (without denaturing) separated into two groups: <em>minus</em> and <em>plus</em>. Each group is further divided into four equal parts.</p>
+
+<p>In the case of <em>minus</em> polymerase a mix of nucleotides minus one is added to each of the four aliquotes: ACG (-T), ACT (-G), CGT (-A), AGT (-C). As a result in each case DNA strand is extended up to a missing nucleotide.</p>
+
+<p>In the case of plus only one nucleotide is added to each of the four aliquotes (+A, +C, +G, and +T) and T4 DNA polymerase is used. T4 DNA polymerase acts as an exonuclease that would degrade DNA
+from 3’-end up to a nucleotide that is supplied in the reaction.</p>
+
+<p>The products of these are loaded into a denaturing polyacrylamide gel as eight tracks (four for minus and four for plus; from <a href="http://www.sciencedirect.com/science/article/pii/0022283675902132?via%3Dihub">Sanger &amp; Coulson: 1975</a>):</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="./images/sanger_plus_minus_gel.png" alt="Plus/minus gel. " width="1008" height="1107" loading="lazy" /><a target="_blank" href="./images/sanger_plus_minus_gel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Plus/minus method gel radiograph (from Sanger &amp; Coulson 1975)</figcaption></figure>
+
+<h1 id="maxamgilbert-chemical-cleavage-method">Maxam/Gilbert chemical cleavage method</h1>
+
+<p>In this method DNA is terminally labeled with P<sup>32</sup>, separated into four equal aliquotes.  Two of these are treated with <a href="https://en.wikipedia.org/wiki/Dimethyl_sulfate">Dimethyl sulfate (DMSO)</a> and the remaining two are treated with <a href="https://en.wikipedia.org/wiki/Hydrazine">hydrazine</a>.</p>
+
+<p>DMSO methylates G and A residues. Treatment of DMSO-incubated DNA with alkali at high temperature will break DNA chains at G and A with Gs being preferentially broken, while treatment of DMSO-incubated DNA with acid will preferentially break DNA at As. Likewise treating hydrazine-incubated DNA with <a href="https://en.wikipedia.org/wiki/Piperidine">piperidine</a> breaks DNA at C and T, while DNA treated with hydrazine in the presence of NaCl preferentially breaks at Cs. The four reactions are then loaded on a gel generating the following picture (from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC392330/pdf/pnas00024-0174.pdf">Maxam &amp; Gilbert: 1977</a>):</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="./images/maxam_gilbert.jpeg" alt="Maxam/Gilbert gel. " width="1201" height="1148" loading="lazy" /><a target="_blank" href="./images/maxam_gilbert.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Radiograph of Maxam/Gilbert gel (from Maxam &amp; Gilbert 1977)</figcaption></figure>
+
+<h1 id="sanger-dideoxy-method">Sanger dideoxy method</h1>
+
+<p>The original Sanger +/- method was not popular and had a number of technical limitations. In a new approach, Sanger took advantage of inhibitors that stop the extension of a DNA strand at particular nucleotides.
+These inhibitors are dideoxy analogs of normal nucleotide triphosphates (from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf">Sanger et al. 1977</a>):</p>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="./images/sanger_ddN.png" alt="Sanger ddN. " width="918" height="792" loading="lazy" /><a target="_blank" href="./images/sanger_ddN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Sanger ddNTP gel (from Sanger et al. 1977)</figcaption></figure>
+
+<h1 id="original-approaches-were-laborious">Original approaches were laborious</h1>
+
+<p>In the original <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf">Sanger paper</a> the authors sequenced bacteriophage phiX174 by using its own restriction fragments as primers. This was an ideal set up to show the proof of principle for the new method. This is because phiX174 DNA is homogeneous and can be isolated in large quantities. Now suppose that you would like to sequence a larger genome (say <em>E. coli</em>). Remember that the original version of Sanger method can only sequence fragments up to 200 nucleotides at a time. So to sequence the entire <em>E. coli</em> genome (which by-the-way was not sequenced until <a href="http://science.sciencemag.org/content/277/5331/1453">1997</a>) you would need to split the genome into multiple pieces and sequence each of them individually. This is hard because to produce a readable Sanger sequencing gel each sequence must be amplified to a suitable amount (around 1 nanogram) and be homogeneous (you cannot mix multiple DNA fragments in a single reaction as it will be impossible to interpret the gel). Molecular cloning enabled by the availability of commercially available restriction enzymes and cloning vectors simplified this process. Until the onset of next generation sequencing in 2005 the process for sequencing looked something like this:</p>
+
+<ul>
+  <li>(<strong>1</strong>) - Generate a collection of fragments you want to sequence. It can be a collection of fragments from a genome that was mechanically sheared or just a single fragment generated by PCR.</li>
+  <li>(<strong>2</strong>) - These fragment(s) are then cloned into a plasmid vector (we will talk about other types of vectors such as BACs later in the course).</li>
+  <li>(<strong>3</strong>) - Vectors are transformed into bacterial cells and positive colonies (containing vectors with insert) are picked from an agar plate.</li>
+  <li>(<strong>4</strong>) - Each colony now represents a unique piece of DNA.</li>
+  <li>(<strong>5</strong>) - An individual colony is used to seed a bacterial culture that is grown overnight.</li>
+  <li>(<strong>6</strong>) - Plasmid DNA is isolated from this culture and now can be used for sequencing because it is (1) homogeneous and (2) we now have a sufficient amount.</li>
+  <li>(<strong>7</strong>) - It is sequenced using universal primers. For example, the image below shows a map for pGEM-3Z plasmid (a pUC18 derivative). Its multiple cloning site is enlarged and sites for <strong>T7</strong> and <strong>SP6</strong> sequencing primers are shown.</li>
+  <li>These are the <strong>pads</strong> I’m referring to in the lecture. These provide universal sites that can be used to sequence any insert in between.</li>
+</ul>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="./images/pgem3z.png" alt="pGEM3z. " width="640" height="434" loading="lazy" /><a target="_blank" href="./images/pgem3z.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Map of pGEM-3Z cloning vector (from Promega Inc.)</figcaption></figure>
+
+<p>Until the invention of NGS the above protocol was followed with some degree of automation. But you can see that it was quite laborious if the large number of fragments needed to be sequenced. This is because each of them needed to be subcloned and handled separately. This is in part why the Human Genome Project, which will be discussed in future lectures in detail, took so much time to complete.</p>
+
+<h1 id="evolution-of-sequencing-machines">Evolution of sequencing machines</h1>
+
+<p>The simplest possible sequencing machine is a <a href="https://en.wikipedia.org/wiki/Polyacrylamide_gel_electrophoresis">gel rig with polyacrylamide gel</a>. Sanger used it is his protocol obtaining the following results (from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf">Sanger et al. 1977</a>):</p>
+
+<figure id="figure-6" style="max-width: 90%;"><img src="./images/sanger_gel.png" alt="Sanger gel. " width="359" height="762" loading="lazy" /><a target="_blank" href="./images/sanger_gel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Typical polyacrylamide gel separating DNA fragments generate with Sanger's dideoxy method (from Sanger et al. 1977)</figcaption></figure>
+
+<p>Here for sequencing each fragment four separate reactions are performed (with ddA, ddT, ggC, and ddG) and four lanes on the gel are used. <a href="http://www.jstor.org/stable/pdf/2879539.pdf">One simplification of this process</a> that
+came in the 90s was to use fluorescently labeled dideoxy nucleotides. This is easier because everything can be performed in a single tube and uses a single lane on a gel
+(from Applied Biosystems <a href="https://www3.appliedbiosystems.com/cms/groups/mcb_support/documents/generaldocuments/cms_041003.pdf">support site</a>):</p>
+
+<figure id="figure-7" style="max-width: 90%;"><img src="./images/gel_versus_chromotogram.png" alt="PA versus chromotogram. " width="605" height="282" loading="lazy" /><a target="_blank" href="./images/gel_versus_chromotogram.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Comparison between a chromatogram and a polyacrylamide gel readouts (from Applied Biosystems)</figcaption></figure>
+
+<p>However, there is still substantial labor involved in pouring the gels, loading them, running machines, and cleaning everything post-run. A significant improvement was offered by the development of capillary electrophoresis allowing automation of liquid handling and sample loading. Although several manufacturers have been developing and selling such machines a <em>de facto</em> standard in this area was (and still is) the Applied Biosystems (ABI) Genetics and DNA Analyzer systems. The highest throughput ABI system, 3730<em>xl</em>, had 96 capillaries and could automatically process 384 samples.</p>
+
+<h1 id="ngs">NGS!</h1>
+
+<p>384 samples may sound like a lot, but it is nothing if we are sequencing an entire genome. The beauty of NGS is that these technologies are not bound by sample handling logistics. They still require the preparation of libraries,
+but once a library is made (which can be automated) it is processed more or less automatically to generate multiple copies of each fragment
+(in the case of 454, Illumina, Ion Torrent, PacBio, Oxford Nanopore, Element, Complete Genomics etc…) and loaded onto the machine, where millions of individual fragments are sequenced simultaneously.
+We will learn about these technologies later in this course.</p>
+
+<h1 id="reading">Reading</h1>
+
+<ul>
+  <li>2001 <a href="http://genome.cshlp.org/content/11/1/3">Overview of pyrosequencing methodology - Ronaghi</a></li>
+  <li>2005 <a href="http://www.nature.com/nature/journal/v437/n7057/pdf/nature03959.pdf">Description of 454 process - Margulies et al.</a></li>
+  <li>2007 <a href="http://link.springer.com/protocol/10.1385/1-59745-377-3:1">History of pyrosequencing - Pål Nyrén</a></li>
+  <li>2007 <a href="http://genomebiology.com/content/pdf/gb-2007-8-7-r143.pdf">Errors in 454 data - Huse et al. </a></li>
+  <li>2010 <a href="http://bioinformatics.oxfordjournals.org/content/26/18/i420.full.pdf+html">Properties of 454 data - Balzer et al.</a></li>
+</ul>
+
+<h2 id="a-few-classical-papers">A few classical papers</h2>
+
+<p>In a series of now classical papers (<a href="http://genome.cshlp.org/content/8/3/175.full">Paper 1</a>, <a href="http://genome.cshlp.org/content/8/3/186.full">Paper2</a>) Philip Green and co-workers have developed a quantitative framework for the analysis of data generated by automated DNA sequencers:</p>
+
+<figure id="figure-8" style="max-width: 90%;"><img src="./images/phred1.png" alt="phred1. " width="592" height="326" loading="lazy" /><a target="_blank" href="./images/phred1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> The first paper</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%;"><img src="./images/phred2.png" alt="phred2. " width="793" height="385" loading="lazy" /><a target="_blank" href="./images/phred2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> The second paper</figcaption></figure>
+
+<p>In particular, they developed a standard metric for describing the reliability of base calls:</p>
+
+<p>An important technical aspect of our work is the use of log-transformed error probabilities rather than untransformed ones, which facilitates working with error rates in the range of most importance (very close to 0).
+Specifically, we define the quality value \(q\) assigned to a base-call to be:</p>
+
+\[q = -10\times log_{10}(p)\]
+
+<p>where \(p\) is the estimated error probability for that base-call. Thus a base-call having a probability of 1/1000 of being incorrect is assigned a quality value of 30. Note that high-quality values correspond to low error probabilities, and conversely.</p>
+
+<p>We will be using the concept of “<em>quality score</em>” or “<em>phred-scaled quality score</em>” repeatedly in this course.</p>
+
+<h2 id="myers---green-debate">Myers - Green debate</h2>
+
+<p>Can we sequence a genome using the shotgun approach?</p>
+
+<figure id="figure-10" style="max-width: 90%;"><img src="./images/myers_versus_green.png" alt="Myers/Green debate. " width="923" height="687" loading="lazy" /><a target="_blank" href="./images/myers_versus_green.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Gene Myers versus Phil Green</figcaption></figure>
+
+<h1 id="simulating-sanger-sequencing-with-python">Simulating Sanger sequencing with Python</h1>
+
+<p><a href="https://xkcd.com/1306"><a href="https://imgs.xkcd.com/comics/sigil_cycle.png" rel="noopener noreferrer"><img src="https://imgs.xkcd.com/comics/sigil_cycle.png" alt="" loading="lazy" /></a></a></p>
+
+<p>In this lesson we will cover some of the fundamental Python basics including variables, expressions, statements, and functions.</p>
+
+<h2 id="prep">Prep</h2>
+
+<ol>
+  <li>Start <a href="https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab">JupyterLab</a></li>
+  <li>Within JupyterLab start a new Python3 notebook</li>
+</ol>
+
+<h2 id="preclass-prep-chapters-1-2-3-from-think-python">Preclass prep: Chapters <a href="https://greenteapress.com/thinkpython2/html/thinkpython2002.html">1</a>, <a href="https://greenteapress.com/thinkpython2/html/thinkpython2003.html">2</a>, <a href="https://greenteapress.com/thinkpython2/html/thinkpython2004.html">3</a> from “Think Python”</h2>
+
+<h2 id="indentation-is-everything"><a href="https://peps.python.org/pep-0008/#indentation">Indentation</a> is everything!</h2>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-indentation-or-bust-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Indentation or bust!</div>
+  <p>Python is an indented language: code blocks are defined using indentation with <a href="https://peps.python.org/pep-0008/#tabs-or-spaces">spaces</a>!</p>
+</blockquote>
+
+<p>In Python, indentation is used to indicate the scope of control structures such as <code class="language-plaintext highlighter-rouge">for</code> loops, <code class="language-plaintext highlighter-rouge">if</code> statements, and function and class definitions. The amount of indentation is not fixed, but it must be consistent within a block of code.
+The recommended amount of indentation is 4 spaces, although some developers prefer to use 2 spaces. Indenting is important in Python because it is used to indicate the level of nesting and structure of the code,
+which makes it easier to read and understand. Additionally, indentation is also used to indicate which lines of code are executed together as a block.</p>
+
+<h2 id="the-storyline">The storyline</h2>
+
+<p>In this lecture, we will re-implement our Sanger sequencing simulator from the previous lecture and generate realistic gel images.</p>
+
+<h2 id="generate-a-random-sequence">Generate a random sequence</h2>
+
+<p>First, we import a module called <a href="https://docs.python.org/3/library/random.html"><code class="language-plaintext highlighter-rouge">random</code></a> which contains a number of functions for generating and working with random numbers</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">random</span>
+</code></pre></div></div>
+<p>Next, we will write a simple loop that would generate a sequence of pre-set lengths:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq</span> <span class="o">=</span> <span class="sh">''</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">seq</span> <span class="o">+=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="sh">'</span><span class="s">ATCG</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACAACTGCAAGGTCGTGGCACC
+</code></pre></div></div>
+
+<h2 id="simulate-one-polymerase-molecule">Simulate one polymerase molecule</h2>
+
+<p>The code below iterates through each element of a sequence <code class="language-plaintext highlighter-rouge">seq</code> (assumed to be a string containing nucleotides) and it checks if the current nucleotide is equal to ‘A’. If it is, it generates a random number between 0 and 1 using the <code class="language-plaintext highlighter-rouge">random.random()</code> function.</p>
+
+<p>It then checks if the random number is greater than 0.5. If it is, the code does nothing and proceeds to the next iteration. If the random number is less than or equal to 0.5, the code adds the
+lowercase version of the nucleotide (‘a’) to a string called <code class="language-plaintext highlighter-rouge">synthesized_strand</code> and then breaks out of the loop.</p>
+
+<p>In every iteration of the loop, regardless of whether the nucleotide is ‘A’ or not, the code then adds the current nucleotide to the <code class="language-plaintext highlighter-rouge">synthesized_strand</code> string.</p>
+
+<p>This means that when the current nucleotide is ‘A’, then the generated random number will decide whether the code will add the nucleotide ‘A’ or ‘a’ to the <code class="language-plaintext highlighter-rouge">synthesized_strand</code>, and it will break out of the loop
+after adding the nucleotide to the <code class="language-plaintext highlighter-rouge">synthesized_strand</code>. To get a good idea of what is going on let’s visualize the code execution in</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+
+<span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">:</span>
+        <span class="n">d_or_dd</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">d_or_dd</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="bp">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">a</span><span class="sh">'</span>
+            <span class="k">break</span>
+    <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+</code></pre></div></div>
+
+<p>This can be simplified by first removing <code class="language-plaintext highlighter-rouge">d_or_dd</code> variable:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+<span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="bp">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">a</span><span class="sh">'</span>
+            <span class="k">break</span>
+    <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">synthesized_strand</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CTTGCGGCTATa
+</code></pre></div></div>
+
+<p>and removing an unnecessary group of <code class="language-plaintext highlighter-rouge">if ... else</code> statements:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+<span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span> <span class="ow">and</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">a</span><span class="sh">'</span>
+        <span class="k">break</span>
+    <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">synthesized_strand</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CTTGCGGCTATAGGAATa
+</code></pre></div></div>
+
+<p>finally let’s make <code class="language-plaintext highlighter-rouge">synthesized_strand += 'a'</code> a bit more generic:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+<span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span> <span class="ow">and</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
+        <span class="k">break</span>
+    <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">synthesized_strand</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CTTGCGGCTATAGGa
+</code></pre></div></div>
+
+<h2 id="simulating-multiple-molecules">Simulating multiple molecules</h2>
+
+<p>To simulate 10 polymerase molecules we simply wrap the code from above into a <code class="language-plaintext highlighter-rouge">for</code> loop:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+    <span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span> <span class="ow">and</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
+            <span class="k">break</span>
+        <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">synthesized_strand</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CTTGCGGCTa
+CTTGCGGCTa
+CTTGCGGCTa
+CTTGCGGCTa
+CTTGCGGCTa
+CTTGCGGCTa
+CTTGCGGCTATa
+CTTGCGGCTATAGGa
+CTTGCGGCTa
+CTTGCGGCTa
+</code></pre></div></div>
+
+<p>One problem with this code is that does not actually save the newly synthesized strand: it simply prints it. To fix this we will create a <a href="https://greenteapress.com/thinkpython2/html/thinkpython2011.html">list</a>
+(or an array) called <code class="language-plaintext highlighter-rouge">new_strands</code> and initialize it by assigning an empty array to it:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_strands</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+    <span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span> <span class="ow">and</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
+            <span class="k">break</span>
+        <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+    <span class="n">new_strands</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">synthesized_strand</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_strands</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['CTTGCGGCTa',
+ 'CTTGCGGCTa',
+ 'CTTGCGGCTATAGGAATAa',
+ 'CTTGCGGCTATAGGAATa',
+ 'CTTGCGGCTATa',
+ 'CTTGCGGCTATAGGa',
+ 'CTTGCGGCTATAGGa',
+ 'CTTGCGGCTATa',
+ 'CTTGCGGCTATAGGa',
+ 'CTTGCGGCTa']
+</code></pre></div></div>
+
+<h2 id="simulating-multiple-molecules-and-all-nucleotides">Simulating multiple molecules and all nucleotides</h2>
+
+<p>And to repeat this for the remaining three nucleotides we will do the following crazy thing:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_strands</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+    <span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="sh">'</span><span class="s">A</span><span class="sh">'</span> <span class="ow">and</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
+            <span class="k">break</span>
+        <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+    <span class="n">new_strands</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">synthesized_strand</span><span class="p">)</span>
+    
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+    <span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="sh">'</span><span class="s">C</span><span class="sh">'</span> <span class="ow">and</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
+            <span class="k">break</span>
+        <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+    <span class="n">new_strands</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">synthesized_strand</span><span class="p">)</span>
+    
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+    <span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="sh">'</span><span class="s">G</span><span class="sh">'</span> <span class="ow">and</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
+            <span class="k">break</span>
+        <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+    <span class="n">new_strands</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">synthesized_strand</span><span class="p">)</span>
+    
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+    <span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="sh">'</span><span class="s">T</span><span class="sh">'</span> <span class="ow">and</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
+            <span class="k">break</span>
+        <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+    <span class="n">new_strands</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">synthesized_strand</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">len</span><span class="p">(</span><span class="n">new_strands</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>40
+</code></pre></div></div>
+
+<p>Repeating the same code four times is just plain stupid so instead we will write a function called <code class="language-plaintext highlighter-rouge">polymerase</code>. Here we need to worry about the scope of variables.  The scope of a variable refers to the regions
+of the code where the variable can be accessed or modified. Variables that are defined within a certain block of code (such as a function or a loop) are said to have a <em>local</em> scope, meaning that they can
+only be accessed within that block of code. Variables that are defined outside of any block of code are said to have a <em>global</em> scope, meaning that they can be accessed from anywhere in the code.</p>
+
+<p>In most programming languages, a variable defined within a function has a local scope, and it can only be accessed within that function. If a variable with the same name is defined outside the function,
+it will have a global scope and can be accessed from anywhere in the code. However, if a variable with the same name is defined within the function, it will take precedence over the global variable and will be used within the function.</p>
+
+<p>There are also some languages that have block scope, where a variable defined within a block (such as an if statement or a for loop) can only be accessed within that block and not outside of it.</p>
+
+<p>In Python, variables defined in the main module have a global scope and can be accessed from any function or module. Variables defined within a function have local scope, and they can only be
+accessed within that function. Variables defined within a loop or a block can be accessed only within the scope of the loop or block.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">ddN</span><span class="p">(</span><span class="n">number_of_iterations</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">ddN_ratio</span><span class="p">):</span>
+    <span class="n">new_strands</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">number_of_iterations</span><span class="p">):</span>
+        <span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+        <span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">template</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="n">base</span> <span class="ow">and</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">ddN_ratio</span><span class="p">:</span>
+                <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
+                <span class="k">break</span>
+            <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+        <span class="n">new_strands</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">synthesized_strand</span><span class="p">)</span>
+    <span class="nf">return</span><span class="p">(</span><span class="n">new_strands</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">ddN</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">seq</span><span class="p">,</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['CTTGCGGCTATAGGa',
+ 'CTTGCGGCTATa',
+ 'CTTGCGGCTATa',
+ 'CTTGCGGCTATAGGAATa',
+ 'CTTGCGGCTa',
+ 'CTTGCGGCTa',
+ 'CTTGCGGCTa',
+ 'CTTGCGGCTATa',
+ 'CTTGCGGCTATAGGa',
+ 'CTTGCGGCTATa']
+</code></pre></div></div>
+
+<p>To execute this function on all four types of ddNTPs with need to wrap it in a <code class="language-plaintext highlighter-rouge">for</code> loop iterating over the four possibilities:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">nt</span> <span class="ow">in</span> <span class="sh">'</span><span class="s">ATCG</span><span class="sh">'</span><span class="p">:</span>
+    <span class="nf">ddN</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">seq</span><span class="p">,</span><span class="n">nt</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="a-bit-about-lists">A bit about <a href="https://greenteapress.com/thinkpython2/html/thinkpython2011.html">lists</a></h2>
+
+<p>To store the sequences being generated in the previous loop we will create and initialize a list called <code class="language-plaintext highlighter-rouge">seq_run</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq_run</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">nt</span> <span class="ow">in</span> <span class="sh">'</span><span class="s">ATCG</span><span class="sh">'</span><span class="p">:</span>
+    <span class="n">seq_run</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">ddN</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">seq</span><span class="p">,</span><span class="n">nt</span><span class="p">,</span><span class="mf">0.5</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>you will see that the seq run is a two-dimensional list:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq_run</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[['CTTGCGGCTa',
+  'CTTGCGGCTATAGGa',
+  'CTTGCGGCTa',
+  'CTTGCGGCTATa',
+  'CTTGCGGCTATAGGa',
+  'CTTGCGGCTATa',
+  'CTTGCGGCTa',
+  'CTTGCGGCTATAGGAATAa',
+  'CTTGCGGCTa',
+  'CTTGCGGCTATa'],
+ ['CTTGCGGCt', 'Ct', 'Ct', 'Ct', 'Ct', 'CTt', 'Ct', 'Ct', 'CTTGCGGCt', 'Ct'],
+ ['CTTGc',
+  'c',
+  'c',
+  'c',
+  'c',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGc',
+  'c',
+  'CTTGCGGCTATAGGAATAAAAGGc',
+  'c',
+  'CTTGc'],
+ ['CTTg',
+  'CTTGCg',
+  'CTTg',
+  'CTTg',
+  'CTTGCg',
+  'CTTGCGGCTATAGGAATAAAAg',
+  'CTTGCGGCTATAGGAATAAAAg',
+  'CTTg',
+  'CTTg',
+  'CTTg']]
+</code></pre></div></div>
+
+<p>as you will read in your next home assignment list elements can be addressed by “index”. The first element has the number 0:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq_run</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['CTTGCGGCTa',
+ 'CTTGCGGCTATAGGa',
+ 'CTTGCGGCTa',
+ 'CTTGCGGCTATa',
+ 'CTTGCGGCTATAGGa',
+ 'CTTGCGGCTATa',
+ 'CTTGCGGCTa',
+ 'CTTGCGGCTATAGGAATAa',
+ 'CTTGCGGCTa',
+ 'CTTGCGGCTATa']
+</code></pre></div></div>
+
+<h2 id="a-bit-about-dictionaries">A bit about <a href="https://greenteapress.com/thinkpython2/html/thinkpython2012.html">dictionaries</a></h2>
+
+<p>Another way to store these data is in a dictionary, which is a collection of <code class="language-plaintext highlighter-rouge">key:value</code> pairs where a key and value can be anything:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq_run</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">nt</span> <span class="ow">in</span> <span class="sh">'</span><span class="s">ATCG</span><span class="sh">'</span><span class="p">:</span>
+    <span class="n">seq_run</span><span class="p">[</span><span class="n">nt</span><span class="p">]</span> <span class="o">=</span> <span class="nf">ddN</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">seq</span><span class="p">,</span><span class="n">nt</span><span class="p">,</span><span class="mf">0.90</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq_run</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'A': ['CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACa',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTa',
+  'CTTGCGGCTATAGGAATAa',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTa',
+  'CTTGCGGCTa',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACAACTGCa',
+  'CTTGCGGCTATAGGa',
+  'CTTGCGGCTATAGGAATAAAa',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACAACTGCAa',
+  'CTTGCGGCTATAGGAa'],
+ 'T': ['CTTGCGGCTAt',
+  'CTTGCGGCTATAGGAATAAAAGGCTTt',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACAACt',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACAACTGCAAGGTCGTGGCACC',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATt',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTAt',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCAt',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACAACTGCAAGGTCGTGGCACC',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCAt',
+  'CTt'],
+ 'C': ['CTTGCGGCTATAGGAATAAAAGGc',
+  'CTTGCGGCTATAGGAATAAAAGGc',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTc',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGAc',
+  'c',
+  'CTTGCGGCTATAGGAATAAAAGGc',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTc',
+  'CTTGCGGc',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGAc',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGc'],
+ 'G': ['CTTGCGGCTATAGg',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTg',
+  'CTTGCg',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACAACTGCAAGGTCGTGGCACC',
+  'CTTg',
+  'CTTGCGGCTATAGGAATAAAAGg',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTg',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCg',
+  'CTTGCGGCTATAGGAATAAAAGGCTTTGCGg',
+  'CTTGCGGCTATAGGAATAAAAg']}
+</code></pre></div></div>
+
+<p>dictionary elements can be retrieved using a key:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq_run</span><span class="p">[</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACa',
+ 'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTa',
+ 'CTTGCGGCTATAGGAATAa',
+ 'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTa',
+ 'CTTGCGGCTa',
+ 'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACAACTGCa',
+ 'CTTGCGGCTATAGGa',
+ 'CTTGCGGCTATAGGAATAAAa',
+ 'CTTGCGGCTATAGGAATAAAAGGCTTTGCGGGTAGTGACCGCGCCGCGTATGTAATTCATGGGTGTCGTCGCGCCCTCACAACTGCAa',
+ 'CTTGCGGCTATAGGAa']
+</code></pre></div></div>
+
+<h2 id="drawing-a-sequencing-gel">Drawing a sequencing gel</h2>
+
+<p>Now that we can simulate and store newly synthesized sequencing strands terminated with ddNTPs let us try to draw a realistic representation of the sequencing gel. For this, we will use
+several components that will be discussed in much greater detail in the upcoming lectures. These components are:</p>
+
+<ul>
+  <li><a href="https://pandas.pydata.org/"><code class="language-plaintext highlighter-rouge">pandas</code></a> - a dataframe manipulation tool</li>
+  <li><a href="https://altair-viz.github.io/"><code class="language-plaintext highlighter-rouge">altair</code></a> - a statistical visualization library built on top of <code class="language-plaintext highlighter-rouge">vega-light</code> visualization grammar</li>
+</ul>
+
+<p>These two libraries will be used in almost all lectures concerning Python in this class.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Gel_electrophoresis">Gel electophoresis</a> separates molecules based on mass, shape, or charge. In the case of DNA all molecules are universally negatively charged and thus will always migrate
+to (+) electrode. All our molecules are linear single-stranded pieces (our gel is <em>denaturing</em>) and so the only physical/chemical characteristic that distinguishes them is <em>length</em>.
+Therefore the first thing we will do is to convert our sequences into their lengths. For this, we will initialize a new dictionary called <code class="language-plaintext highlighter-rouge">seq_lengths</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq_lengths</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">base</span><span class="sh">'</span><span class="p">:[],</span><span class="sh">'</span><span class="s">length</span><span class="sh">'</span><span class="p">:[]}</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">seq_run</span><span class="p">.</span><span class="nf">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">seq_run</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+        <span class="n">seq_lengths</span><span class="p">[</span><span class="sh">'</span><span class="s">base</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">seq_lengths</span><span class="p">[</span><span class="sh">'</span><span class="s">length</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq_lengths</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'base': ['A',
+  'A',
+  'A',
+  'A',
+  'A',
+  'A',
+  'A',
+  'A',
+  'A',
+  'A',
+  'T',
+  'T',
+  'T',
+  'T',
+  'T',
+  'T',
+  'T',
+  'T',
+  'T',
+  'T',
+  'C',
+  'C',
+  'C',
+  'C',
+  'C',
+  'C',
+  'C',
+  'C',
+  'C',
+  'C',
+  'G',
+  'G',
+  'G',
+  'G',
+  'G',
+  'G',
+  'G',
+  'G',
+  'G',
+  'G'],
+ 'length': [81,
+  54,
+  19,
+  34,
+  10,
+  87,
+  15,
+  21,
+  88,
+  16,
+  11,
+  27,
+  84,
+  100,
+  57,
+  51,
+  60,
+  100,
+  60,
+  3,
+  24,
+  24,
+  67,
+  39,
+  1,
+  24,
+  67,
+  8,
+  39,
+  47,
+  14,
+  65,
+  6,
+  100,
+  4,
+  23,
+  28,
+  43,
+  31,
+  22]}
+</code></pre></div></div>
+
+<p>now let’s import <code class="language-plaintext highlighter-rouge">pandas</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+</code></pre></div></div>
+
+<p>and inject <code class="language-plaintext highlighter-rouge">seq_lengths</code> into a pandas <em>dataframe</em>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sequences</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">seq_lengths</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>it looks pretty:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sequences</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>base</th>
+      <th>length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>A</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>A</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>A</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>A</td>
+      <td>88</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>A</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>T</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>T</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>T</td>
+      <td>84</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>T</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>T</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>T</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>T</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>T</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>T</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>T</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>C</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>C</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>C</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>C</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>C</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>C</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>C</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>C</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>C</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>C</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>G</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>G</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>G</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>G</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>G</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>G</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>G</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>G</td>
+      <td>43</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>G</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>G</td>
+      <td>22</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>In our data, there is a number of DNA fragments that have identical length (just look at the dataframe above). We can condense these by grouping dataframe entries first by nucleotide (<code class="language-plaintext highlighter-rouge">['base']</code>) and then by length (<code class="language-plaintext highlighter-rouge">['length']</code>). For each group we will then compute <code class="language-plaintext highlighter-rouge">count</code> and put it into a new column named, …, <code class="language-plaintext highlighter-rouge">count</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sequences_grouped_by_length</span> <span class="o">=</span> <span class="n">sequences</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span>
+    <span class="p">[</span><span class="sh">'</span><span class="s">base</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">length</span><span class="sh">'</span><span class="p">]</span>
+<span class="p">).</span><span class="nf">agg</span><span class="p">(</span>
+    <span class="n">count</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">NamedAgg</span><span class="p">(</span>
+        <span class="n">column</span><span class="o">=</span><span class="sh">'</span><span class="s">length</span><span class="sh">'</span><span class="p">,</span>
+        <span class="n">aggfunc</span><span class="o">=</span><span class="sh">'</span><span class="s">count</span><span class="sh">'</span>
+    <span class="p">)</span>
+<span class="p">).</span><span class="nf">reset_index</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sequences_grouped_by_length</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>base</th>
+      <th>length</th>
+      <th>count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>10</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A</td>
+      <td>15</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A</td>
+      <td>16</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A</td>
+      <td>19</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A</td>
+      <td>21</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>A</td>
+      <td>34</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>A</td>
+      <td>54</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>A</td>
+      <td>81</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>A</td>
+      <td>87</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>A</td>
+      <td>88</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>C</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>C</td>
+      <td>8</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>C</td>
+      <td>24</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>C</td>
+      <td>39</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>C</td>
+      <td>47</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>C</td>
+      <td>67</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>G</td>
+      <td>4</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>G</td>
+      <td>6</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>G</td>
+      <td>14</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>G</td>
+      <td>22</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>G</td>
+      <td>23</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>G</td>
+      <td>28</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>G</td>
+      <td>31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>G</td>
+      <td>43</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>G</td>
+      <td>65</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>G</td>
+      <td>100</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>T</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>T</td>
+      <td>11</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>T</td>
+      <td>27</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>T</td>
+      <td>51</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>T</td>
+      <td>57</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>T</td>
+      <td>60</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>T</td>
+      <td>84</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>T</td>
+      <td>100</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>The following chart is created using the <code class="language-plaintext highlighter-rouge">alt.Chart()</code> function and passing the data as an argument. The <code class="language-plaintext highlighter-rouge">mark_tick()</code> function is used to create a tick chart with a thickness of 4 pixels.</p>
+
+<p>The chart is encoded with two main axis:</p>
+
+<ul>
+  <li>y-axis which represents the length of the data and is encoded by the <code class="language-plaintext highlighter-rouge">'length'</code> field of the data.</li>
+  <li>x-axis which represents the base of the data and is encoded by the <code class="language-plaintext highlighter-rouge">'base'</code> field of the data.
+The chart also encodes a color, it encodes the <code class="language-plaintext highlighter-rouge">'count'</code> field of the data, sets the legend to <code class="language-plaintext highlighter-rouge">None</code>, and uses the <code class="language-plaintext highlighter-rouge">'greys'</code> scale from the Altair library.</li>
+</ul>
+
+<p>Finally, the chart properties are set to a width of 100 pixels and a height of 800 pixels.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">altair</span> <span class="k">as</span> <span class="n">alt</span>
+<span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">sequences_grouped_by_length</span><span class="p">).</span><span class="nf">mark_tick</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="mi">4</span><span class="p">).</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">Y</span><span class="p">(</span><span class="sh">'</span><span class="s">length:Q</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">X</span><span class="p">(</span><span class="sh">'</span><span class="s">base</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Color</span><span class="p">(</span><span class="sh">'</span><span class="s">count:Q</span><span class="sh">'</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                    <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Scale</span><span class="p">(</span><span class="n">scheme</span><span class="o">=</span><span class="sh">"</span><span class="s">greys</span><span class="sh">"</span><span class="p">))</span>
+<span class="p">).</span><span class="nf">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</code></pre></div></div>
+
+<figure id="figure-11" style="max-width: 90%;"><div style="overflow-x: auto"><object data="./images/gel1.svg" type="image/svg+xml" alt="Gel rendering 1. ">Gel rendering 1.</object></div><a target="_blank" href="./images/gel1.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> A simulated gel image</figcaption></figure>
+
+<p>And here is a color version of the same graph using just one line of the gel:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">altair</span> <span class="k">as</span> <span class="n">alt</span>
+<span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">sequences_grouped_by_length</span><span class="p">).</span><span class="nf">mark_tick</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="mi">4</span><span class="p">).</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">Y</span><span class="p">(</span><span class="sh">'</span><span class="s">length:Q</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Color</span><span class="p">(</span><span class="sh">'</span><span class="s">base:N</span><span class="sh">'</span><span class="p">,</span><span class="c1">#legend=None,
+</span>                    <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Scale</span><span class="p">(</span><span class="n">scheme</span><span class="o">=</span><span class="sh">"</span><span class="s">set1</span><span class="sh">"</span><span class="p">))</span>
+<span class="p">).</span><span class="nf">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</code></pre></div></div>
+
+<figure id="figure-12" style="max-width: 90%;"><div style="overflow-x: auto"><object data="./images/gel2.svg" type="image/svg+xml" alt="Gel rendering 2. ">Gel rendering 2.</object></div><a target="_blank" href="./images/gel2.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> A simulated gel image using \"colored dyes\"</figcaption></figure>
+
+<h2 id="putting-everything-together">Putting everything together</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Generate random sequences
+</span>
+<span class="n">seq</span> <span class="o">=</span> <span class="sh">''</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">300</span><span class="p">):</span>
+    <span class="n">seq</span> <span class="o">+=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="sh">'</span><span class="s">ATCG</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq</span>
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'GTCGATGCCTGTTTGACCTAACTGGCGTGAAGGCTATATCAGTTATCCCAAGCGTAGGCTTTCAATTCGCCCGGTTGCGTCGCCCGATTATCAATCGCGGAAGGTGGGTGCGATTGGAAGTCCAAAACCTTTATCCTGACACACTTTCTGACTCGGCTTGGCAATGGGAAGTGTAGAACGTAGCGGGGACCTACATCATATCGTACATAACTGAGACGTGCTCACCCGCAGAGATAAGAACTGCAATACCCGGGTGAATACTTGGGGAGTCTCACCCAGATGGTTGGCCTGATCCTCCCC'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Function simulating a single run of a single polymerase molecule
+</span>
+<span class="k">def</span> <span class="nf">ddN</span><span class="p">(</span><span class="n">number_of_iterations</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">ddN_ratio</span><span class="p">):</span>
+    <span class="n">new_strands</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">number_of_iterations</span><span class="p">):</span>
+        <span class="n">synthesized_strand</span> <span class="o">=</span> <span class="sh">''</span>
+        <span class="k">for</span> <span class="n">nucleotide</span> <span class="ow">in</span> <span class="n">template</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nucleotide</span> <span class="o">==</span> <span class="n">base</span> <span class="ow">and</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">ddN_ratio</span><span class="p">:</span>
+                <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
+                <span class="k">break</span>
+            <span class="n">synthesized_strand</span> <span class="o">+=</span> <span class="n">nucleotide</span>
+        <span class="n">new_strands</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">synthesized_strand</span><span class="p">)</span>
+    <span class="nf">return</span><span class="p">(</span><span class="n">new_strands</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Generating simulated sequencing run
+</span>
+<span class="n">seq_run</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">nt</span> <span class="ow">in</span> <span class="sh">'</span><span class="s">ATCG</span><span class="sh">'</span><span class="p">:</span>
+    <span class="n">seq_run</span><span class="p">[</span><span class="n">nt</span><span class="p">]</span> <span class="o">=</span> <span class="nf">ddN</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span><span class="n">seq</span><span class="p">,</span><span class="n">nt</span><span class="p">,</span><span class="mf">0.95</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Computing lengths
+</span>
+<span class="n">seq_lengths</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">base</span><span class="sh">'</span><span class="p">:[],</span><span class="sh">'</span><span class="s">length</span><span class="sh">'</span><span class="p">:[]}</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">seq_run</span><span class="p">.</span><span class="nf">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">seq_run</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+        <span class="n">seq_lengths</span><span class="p">[</span><span class="sh">'</span><span class="s">base</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">seq_lengths</span><span class="p">[</span><span class="sh">'</span><span class="s">length</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Converting dictionary into Pandas dataframe
+</span>
+<span class="n">sequences</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">seq_lengths</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Grouping by nucleotide and length
+</span>
+<span class="n">sequences_grouped_by_length</span> <span class="o">=</span> <span class="n">sequences</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span>
+    <span class="p">[</span><span class="sh">'</span><span class="s">base</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">length</span><span class="sh">'</span><span class="p">]</span>
+<span class="p">).</span><span class="nf">agg</span><span class="p">(</span>
+    <span class="n">count</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">NamedAgg</span><span class="p">(</span>
+        <span class="n">column</span><span class="o">=</span><span class="sh">'</span><span class="s">length</span><span class="sh">'</span><span class="p">,</span>
+        <span class="n">aggfunc</span><span class="o">=</span><span class="sh">'</span><span class="s">count</span><span class="sh">'</span>
+    <span class="p">)</span>
+<span class="p">).</span><span class="nf">reset_index</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plotting (note the quadratic scale for realism)
+</span>
+<span class="kn">import</span> <span class="n">altair</span> <span class="k">as</span> <span class="n">alt</span>
+<span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">sequences_grouped_by_length</span><span class="p">).</span><span class="nf">mark_tick</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="mi">4</span><span class="p">).</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">Y</span><span class="p">(</span><span class="sh">'</span><span class="s">length:Q</span><span class="sh">'</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Scale</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="sh">'</span><span class="s">sqrt</span><span class="sh">'</span><span class="p">)),</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">X</span><span class="p">(</span><span class="sh">'</span><span class="s">base</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Color</span><span class="p">(</span><span class="sh">'</span><span class="s">count:Q</span><span class="sh">'</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                    <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Scale</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="sh">'</span><span class="s">log</span><span class="sh">'</span><span class="p">,</span><span class="n">scheme</span><span class="o">=</span><span class="sh">"</span><span class="s">greys</span><span class="sh">"</span><span class="p">)),</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="sh">'</span><span class="s">count:Q</span><span class="sh">'</span>
+<span class="p">).</span><span class="nf">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</code></pre></div></div>
+
+<figure id="figure-13" style="max-width: 90%;"><div style="overflow-x: auto"><object data="./images/gel3.svg" type="image/svg+xml" alt="Gel rendering 3. ">Gel rendering 3.</object></div><a target="_blank" href="./images/gel3.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> A simulated gel image using quadratic scale</figcaption></figure>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plotting using color
+</span>
+<span class="kn">import</span> <span class="n">altair</span> <span class="k">as</span> <span class="n">alt</span>
+<span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">sequences_grouped_by_length</span><span class="p">).</span><span class="nf">mark_tick</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="mi">4</span><span class="p">).</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">Y</span><span class="p">(</span><span class="sh">'</span><span class="s">length:Q</span><span class="sh">'</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Scale</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="sh">"</span><span class="s">sqrt</span><span class="sh">"</span><span class="p">)),</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Color</span><span class="p">(</span><span class="sh">'</span><span class="s">base:N</span><span class="sh">'</span><span class="p">,</span><span class="c1">#legend=None,
+</span>                    <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Scale</span><span class="p">(</span><span class="n">scheme</span><span class="o">=</span><span class="sh">"</span><span class="s">set1</span><span class="sh">"</span><span class="p">)),</span>
+    <span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Opacity</span><span class="p">(</span><span class="sh">'</span><span class="s">count:N</span><span class="sh">'</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="bp">None</span><span class="p">),</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="sh">'</span><span class="s">count:Q</span><span class="sh">'</span>
+<span class="p">).</span><span class="nf">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</code></pre></div></div>
+
+<figure id="figure-14" style="max-width: 90%;"><div style="overflow-x: auto"><object data="./images/gel4.svg" type="image/svg+xml" alt="Gel rendering 4. ">Gel rendering 4.</object></div><a target="_blank" href="./images/gel4.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> A simulated gel image using quadratic scale with colors</figcaption></figure>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Sanger sequencing is sequencing by synthesis</p>
+</li>
+                        
+                        <li><p>Python is powerful</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Introduction to sequencing with Python (part one) (Foundations of Data Science)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Anton Nekrutenko,  <b>Introduction to sequencing with Python (part one) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture2/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture2/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{data-science-gnmx-lecture2,
+author = "Anton Nekrutenko",
+	title = "Introduction to sequencing with Python (part one) (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture2/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/data-science/tutorials/gnmx-lecture2/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/38aeb49328bce3e1d272e0960cc0463c6a66f96f">38aeb49</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/gnmx-lecture2/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706010000'></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </body>
+</html>
