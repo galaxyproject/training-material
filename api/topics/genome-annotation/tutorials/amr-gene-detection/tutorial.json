@@ -1,0 +1,321 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Identification of AMR genes in an assembled bacterial genome",
+  "zenodo_link": "https://zenodo.org/record/4534098",
+  "questions": [
+    "Which resistance genes are on a bacterial genome?",
+    "Where are the genes located on the genome?"
+  ],
+  "objectives": [
+    "Assess presence of antimicrobial resistance genes",
+    "Perform a species identification and MLST typing",
+    "Search for resistance genes on the assembly",
+    "Find a gene on your genome using Prokka + JBrowse"
+  ],
+  "time_estimation": "2h",
+  "key_points": [
+    "Annotation with Prokka is very easy"
+  ],
+  "tags": [
+    "illumina",
+    "amr",
+    "one-health"
+  ],
+  "subtopic": "prokaryote",
+  "contributions": {
+    "authorship": [
+      "bazante1",
+      "bebatut"
+    ],
+    "editing": [
+      "hexylena",
+      "bazante1",
+      "shiltemann",
+      "miaomiaozhou88"
+    ],
+    "funding": [
+      "avans-atgm",
+      "abromics"
+    ]
+  },
+  "follow_up_training": [
+    {
+      "type": "internal",
+      "topic_name": "visualisation",
+      "tutorials": [
+        "jbrowse"
+      ]
+    },
+    {
+      "type": "internal",
+      "topic_name": "galaxy-interface",
+      "tutorials": [
+        "history-to-workflow"
+      ]
+    }
+  ],
+  "mathjax": null,
+  "short_id": null,
+  "url": "/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html",
+  "topic_name": "genome-annotation",
+  "tutorial_name": "amr-gene-detection",
+  "dir": "topics/genome-annotation/tutorials/amr-gene-detection",
+  "id": "genome-annotation/amr-gene-detection",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "main-workflow.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/amr-gene-detection/workflows/main-workflow.ga",
+      "path": "topics/genome-annotation/tutorials/amr-gene-detection/workflows/main-workflow.ga",
+      "wfid": "genome-annotation-amr-gene-detection",
+      "wfname": "main-workflow",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow",
+      "license": "MIT",
+      "creators": [
+        {
+          "class": "Person",
+          "identifier": "https://orcid.org/0000-0003-2255-1631",
+          "name": "Bazante Sanders"
+        },
+        {
+          "class": "Person",
+          "identifier": "https://orcid.org/0000-0001-9852-1987",
+          "name": "Bérénice Batut"
+        }
+      ],
+      "name": "mrsa AMR gene detection",
+      "title": "mrsa AMR gene detection",
+      "test_results": null,
+      "modified": "2024-01-23 16:27:33 +0000",
+      "mermaid": "flowchart TD\n  0[\"contigs\"];\n  1[\"forward_reads\"];\n  2[\"reverse_reads\"];\n  3[\"staramr\"];\n  0 -->|output| 3;\n  4[\"Bakta\"];\n  0 -->|output| 4;\n  5[\"Bowtie2\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Select\"];\n  3 -->|detailed_summary| 6;\n  7[\"Table to GFF3\"];\n  6 -->|out_file1| 7;\n  8[\"JBrowse\"];\n  4 -->|annotation_gff3| 8;\n  7 -->|output| 8;\n  5 -->|output| 8;\n"
+    }
+  ],
+  "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.json",
+  "tools": [
+    "Grep1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bakta/bakta/1.8.2+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2",
+    "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.10.0+galaxy1",
+    "upload1"
+  ],
+  "supported_servers": {
+    "exact": [
+      {
+        "url": "https://usegalaxy.eu",
+        "name": "UseGalaxy.eu",
+        "usegalaxy": true
+      }
+    ],
+    "inexact": [
+
+    ]
+  },
+  "topic_name_human": "Genome Annotation",
+  "admin_install": {
+    "install_tool_dependencies": true,
+    "install_repository_dependencies": true,
+    "install_resolver_dependencies": true,
+    "tools": [
+      {
+        "name": "bowtie2",
+        "owner": "devteam",
+        "revisions": "03e9b2fbc005",
+        "tool_panel_section_label": "Mapping",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "bakta",
+        "owner": "iuc",
+        "revisions": "728dacaf08a9",
+        "tool_panel_section_label": "Annotation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "jbrowse",
+        "owner": "iuc",
+        "revisions": "a6e57ff585c0",
+        "tool_panel_section_label": "Graph/Display Data",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "tbl2gff3",
+        "owner": "iuc",
+        "revisions": "4a7f4b0cc0a3",
+        "tool_panel_section_label": "Annotation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "staramr",
+        "owner": "nml",
+        "revisions": "3b22de20bd4b",
+        "tool_panel_section_label": "Metagenomic Analysis",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      }
+    ]
+  },
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bowtie2\n  owner: devteam\n  revisions: 03e9b2fbc005\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bakta\n  owner: iuc\n  revisions: 728dacaf08a9\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: jbrowse\n  owner: iuc\n  revisions: a6e57ff585c0\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tbl2gff3\n  owner: iuc\n  revisions: 4a7f4b0cc0a3\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: staramr\n  owner: nml\n  revisions: 3b22de20bd4b\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial",
+  "contributors": [
+    {
+      "name": "Bazante Sanders",
+      "joined": "2020-12",
+      "affiliations": [
+        "avans-atgm"
+      ],
+      "id": "bazante1",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/"
+    },
+    {
+      "name": "Bérénice Batut",
+      "email": "berenice.batut@gmail.com",
+      "twitter": "bebatut",
+      "linkedin": "berenicebatut",
+      "matrix": "bebatut:matrix.org",
+      "orcid": "0000-0001-9852-1987",
+      "joined": "2017-09",
+      "elixir_node": "fr",
+      "contact_for_training": true,
+      "location": {
+        "country": "FR",
+        "lat": 45.77,
+        "lon": 3.08
+      },
+      "fediverse": "https://piaille.fr/@bebatut",
+      "fediverse_flavor": "mastodon",
+      "affiliations": [
+        "gallantries",
+        "ifb"
+      ],
+      "id": "bebatut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+    },
+    {
+      "name": "Helena Rasche",
+      "email": "hexylena@galaxians.org",
+      "orcid": "0000-0001-9760-8992",
+      "maintainer_contact": "gitter",
+      "matrix": "hexylena:matrix.org",
+      "joined": "2017-09",
+      "elixir_node": "nl",
+      "fediverse": "https://galaxians.garden/hexylena",
+      "fediverse_flavor": "akkoma",
+      "affiliations": [
+        "gallantries",
+        "by-covid",
+        "erasmusmc",
+        "elixir-europe",
+        "elixir-converge"
+      ],
+      "former_affiliations": [
+        "deNBI",
+        "avans-atgm",
+        "uni-freiburg"
+      ],
+      "contact_for_training": false,
+      "location": {
+        "country": "NL",
+        "lat": 51.91,
+        "lon": 4.46
+      },
+      "id": "hexylena",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+    },
+    {
+      "name": "Bazante Sanders",
+      "joined": "2020-12",
+      "affiliations": [
+        "avans-atgm"
+      ],
+      "id": "bazante1",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/"
+    },
+    {
+      "name": "Saskia Hiltemann",
+      "maintainer_contact": "gitter",
+      "email": "saskia.hiltemann@gmail.com",
+      "fediverse": "https://mstdn.science/@shiltemann",
+      "fediverse_flavor": "mastodon",
+      "bluesky": "shiltemann.bsky.social",
+      "linkedin": "shiltemann",
+      "matrix": "shiltemann:matrix.org",
+      "orcid": "0000-0003-3803-468X",
+      "joined": "2017-09",
+      "bio": "Researcher at Erasmus Medical Center",
+      "elixir_node": "nl",
+      "contact_for_training": true,
+      "affiliations": [
+        "CINECA-Project",
+        "gallantries",
+        "erasmusmc"
+      ],
+      "location": {
+        "country": "NL",
+        "lat": 51.912,
+        "lon": 4.462
+      },
+      "id": "shiltemann",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+    },
+    {
+      "name": "Miaomiao Zhou",
+      "email": "m.zhou1@avans.nl",
+      "joined": "2020-12",
+      "orcid": "0000-0003-4426-1758",
+      "id": "miaomiaozhou88",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/miaomiaozhou88.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/miaomiaozhou88/"
+    },
+    {
+      "name": "Avans Hogeschool",
+      "joined": "2020-11",
+      "url": "https://training.galaxyproject.org/training-material/api/organisations/avans-atgm.json",
+      "avatar": "/training-material/shared/images/logo-avans.png",
+      "members": [
+        "bazante1"
+      ],
+      "former_members": [
+        "dirowa",
+        "hexylena"
+      ],
+      "id": "avans-atgm",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/avans-atgm/"
+    },
+    {
+      "name": "ABRomics",
+      "github": false,
+      "joined": "2024-01",
+      "avatar": "/training-material/assets/images/abromics.png",
+      "url": "https://training.galaxyproject.org/training-material/api/funders/abromics.json",
+      "funder": true,
+      "id": "abromics",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abromics/"
+    }
+  ]
+}

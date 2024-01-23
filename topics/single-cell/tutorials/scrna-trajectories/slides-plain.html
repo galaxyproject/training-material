@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@bf587d2df29eeb32489e10e3b0f2fae6f3129e1f",
+		release: "galaxy-training-network@2bc203c10717c91121b71a6cc6f63eb21f0eadfe",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706020713' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706020713' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706027250' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706027250' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -66,7 +66,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Trajectory analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-01-23 14:38:37 +0000">
+<meta name="DC.date" content="2024-01-23 16:27:34 +0000">
 <meta name="DC.creator" content="Julia Jakiela"><meta name="description" content="### What is trajectory analysis? .footnote[{% cite Deconinck2021 %}]  --  Trajectory inference (TI) methods have emerged as a novel subfield within computational biology to better study the underlying dynamics of a biological process of interest, such as:  cellular development    | differentiation      | immune responses :---:| :---:| :---: .image-40[ ![Petri dish with a magnified scheme of embryonic development](../../images/scrna-casestudy-monocle/1_cell_delevopment.png) ] | .image-40[ ![Scheme of one cell differentiating into three different types](../../images/scrna-casestudy-monocle/2_differentiation.png) ] | .image-40[ ![Different types of immune cells taking part in inflammation](../../images/scrna-casestudy-monocle/3_immune.png) ]  -- TI allows us to study how cells evolve from one cell state to another, and subsequently when and how cell fate decisions are made.  .image-40[ ![A cell changing its shape in three steps (showing the evolution from one state to another)](../../i...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Single Cell / Slide Deck: Trajectory analysis">
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706020713'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706027250'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1210,7 +1210,7 @@ Tutorial Content is licensed under
 <ol class="bibliography"><li id="Grn2015">Grün, D., A. Lyubimova, L. Kester, K. Wiebrands, O. Basak <i>et al.</i>, 2015 <b>Single-cell messenger RNA sequencing reveals rare intestinal cell types</b>. Nature 525: 251–255. <a href="https://doi.org/10.1038/nature14966">10.1038/nature14966</a></li>
 <li id="Cannoodt2016">Cannoodt, R., W. Saelens, and Y. Saeys, 2016 <b>Computational methods for trajectory inference from single-cell transcriptomics</b>. European Journal of Immunology 46: 2496–2506. <a href="https://doi.org/10.1002/eji.201646347">10.1002/eji.201646347</a></li>
 <li id="Haghverdi2016">Haghverdi, L., M. Büttner, F. A. Wolf, F. Buettner, and F. J. Theis, 2016 <b>Diffusion pseudotime robustly reconstructs lineage branching</b>. Nature Methods 13: 845–848. <a href="https://doi.org/10.1038/nmeth.3971">10.1038/nmeth.3971</a></li>
-<li id="Chen2019">Chen, S., Y. Zhou, Y. Chen, and J. Gu, 2018 <b>fastp: an ultra-fast all-in-one FASTQ preprocessor</b>. <a href="https://doi.org/10.1093/bioinformatics/bty560">10.1093/bioinformatics/bty560</a></li>
+<li id="Chen2019">Chen, C.-H., T. Xiao, H. Xu, P. Jiang, C. A. Meyer <i>et al.</i>, 2018 <b>Improved design and analysis of CRISPR knockout screens</b> (J. Wren, Ed.). Bioinformatics 34: 4095–4101. <a href="https://doi.org/10.1093/bioinformatics/bty450">10.1093/bioinformatics/bty450</a></li>
 <li id="Wolf2019">Wolf, F. A., P. Angerer, and F. J. Theis, 2018 <b>SCANPY: large-scale single-cell gene expression data analysis</b>. Genome Biology 19: <a href="https://doi.org/10.1186/s13059-017-1382-0">10.1186/s13059-017-1382-0</a></li>
 <li id="Bergen2020">Bergen, V., M. Lange, S. Peidli, F. A. Wolf, and F. J. Theis, 2020 <b>Generalizing RNA velocity to transient cell states through dynamical modeling</b>. Nature Biotechnology 38: 1408–1414. <a href="https://doi.org/10.1038/s41587-020-0591-3">10.1038/s41587-020-0591-3</a></li>
 <li id="Sagar2020">Sagar, and D. Grün, 2020 <b>Deciphering Cell Fate Decision by Integrated Single-Cell Sequencing Analysis</b>. Annual Review of Biomedical Data Science 3: 1–22. <a href="https://doi.org/10.1146/annurev-biodatasci-111419-091750">10.1146/annurev-biodatasci-111419-091750</a></li>
@@ -1234,7 +1234,7 @@ Tutorial Content is licensed under
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/bf587d2df29eeb32489e10e3b0f2fae6f3129e1f">bf587d2</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/2bc203c10717c91121b71a6cc6f63eb21f0eadfe">2bc203c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1258,7 +1258,7 @@ Tutorial Content is licensed under
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706020713'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706027250'></script>
         
     </body>
 </html>

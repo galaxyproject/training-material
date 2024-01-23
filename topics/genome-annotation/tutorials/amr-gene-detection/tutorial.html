@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Identification of AMR genes in an assembled bacterial genome / Genome Annotation</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@2bc203c10717c91121b71a6cc6f63eb21f0eadfe",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706027250' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706027250' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Identification of AMR genes in an assembled bacterial genome">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-23 14:33:43 +0000">
+<meta name="DC.creator" content="Bazante Sanders">
+<meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Genome Annotation / Hands-on: Identification of AMR genes in an assembled bacterial genome">
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-01-23 14:33:43 +0000",
+  "datePublished": "2024-01-23 16:20:06 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Identification of AMR genes in an assembled bacterial genome",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Identification of AMR genes in an assembled bacterial genome",
+  "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html",
+  "version": 5,
+  "timeRequired": "PT2H",
+  "teaches": "Assess presence of antimicrobial resistance genes\n - Perform a species identification and MLST typing\n - Search for resistance genes on the assembly\n - Find a gene on your genome using Prokka + JBrowse",
+  "keywords": [
+    "Genome Annotation",
+    "illumina",
+    "amr",
+    "one-health"
+  ],
+  "description": "The questions this  addresses are:\n - Which resistance genes are on a bacterial genome?\n - Where are the genes located on the genome?\n\n\nThe objectives are:\n - Assess presence of antimicrobial resistance genes\n - Perform a species identification and MLST typing\n - Search for resistance genes on the assembly\n - Find a gene on your genome using Prokka + JBrowse\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "name": "Bazante Sanders",
+      "image": "https://avatars.githubusercontent.com/bazante1",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "name": "Bazante Sanders",
+      "image": "https://avatars.githubusercontent.com/bazante1",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/miaomiaozhou88/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/miaomiaozhou88/",
+      "name": "Miaomiao Zhou",
+      "image": "https://avatars.githubusercontent.com/miaomiaozhou88",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4426-1758",
+      "orcid": "https://orcid.org/0000-0003-4426-1758"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0362",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0362",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0362"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "illumina"
+    },
+    {
+      "@type": "Thing",
+      "name": "amr"
+    },
+    {
+      "@type": "Thing",
+      "name": "one-health"
+    }
+  ],
+  "abstract": "Antimicrobial resistance (AMR) is a global phenomenon with no geographical or species boundaries, which poses an important threat to human, animal and environmental health. It is a complex and growing problem that compromises our ability to treat bacterial infections."
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706027250'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/genome-annotation" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Genome Annotation
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/genome-annotation/faqs/" title="Check our FAQs for the Genome Annotation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-genome-annotation">
+    <h1 data-toc-skip>Identification of AMR genes in an assembled bacterial genome</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge contributor-bazante1"><img src="https://avatars.githubusercontent.com/bazante1?s=36" alt="Bazante Sanders avatar" width="36" class="avatar" />
+    Bazante Sanders</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a><a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge contributor-bazante1"><img src="https://avatars.githubusercontent.com/bazante1?s=36" alt="Bazante Sanders avatar" width="36" class="avatar" />
+    Bazante Sanders</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/miaomiaozhou88/" class="contributor-badge contributor-miaomiaozhou88"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/miaomiaozhou88?s=36" alt="Miaomiao Zhou avatar" width="36" class="avatar" />
+    Miaomiao Zhou</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Which resistance genes are on a bacterial genome?</p>
+</li>
+        
+        <li><p>Where are the genes located on the genome?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Assess presence of antimicrobial resistance genes</p>
+</li>
+        
+        <li><p>Perform a species identification and MLST typing</p>
+</li>
+        
+        <li><p>Search for resistance genes on the assembly</p>
+</li>
+        
+        <li><p>Find a gene on your genome using Prokka + JBrowse</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/4534098">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/amr-gene-detection/workflows/" title="Identification of AMR genes in an assembled bacterial genome workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/amr-gene-detection/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
+    
+    
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/genome-annotation/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 23, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Antimicrobial resistance (AMR) is a global phenomenon with no geographical or species boundaries, which poses an important threat to human, animal and environmental health. It is a complex and growing problem that compromises our ability to treat bacterial infections.</p>
+
+<p>AMR gene content can be assessed from whole genome sequencing to detect known resistance mechanisms and potentially identify novel mechanisms.</p>
+
+<p>To illustrate the process to identify AMR gene in a bacterial genome, we take an assembly of a bacterial genome generated by following a <a href="/training-material/topics/assembly/tutorials/mrsa-illumina/tutorial.html">bacterial genome assembly tutorial</a> from data produced in “Complete Genome Sequences of Eight Methicillin-Resistant <em>Staphylococcus aureus</em> Strains Isolated from Patients in Japan” <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span>.</p>
+
+<blockquote class="quote" cite="https://doi.org/10.1128%2Fmra.01212-19">
+  <p>Methicillin-resistant <em>Staphylococcus aureus</em> (MRSA) is a major pathogen
+causing nosocomial infections, and the clinical manifestations of MRSA
+range from asymptomatic colonization of the nasal mucosa to soft tissue
+infection to fulminant invasive disease. Here, we report the complete
+genome sequences of eight MRSA strains isolated from patients in Japan.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#galaxy-and-data-preparation" id="markdown-toc-galaxy-and-data-preparation">Galaxy and data preparation</a></li>
+  <li><a href="#identification-of-amr-genes" id="markdown-toc-identification-of-amr-genes">Identification of AMR genes</a></li>
+  <li><a href="#getting-more-information-about-arg-via-the-card-database" id="markdown-toc-getting-more-information-about-arg-via-the-card-database">Getting more information about ARG via the CARD database</a></li>
+  <li><a href="#visualization-of-the-args-and-plasmid-genes-in-their-genomic-context" id="markdown-toc-visualization-of-the-args-and-plasmid-genes-in-their-genomic-context">Visualization of the ARGs and plasmid genes in their genomic context</a>    <ol>
+      <li><a href="#extraction-of-the-arg-and-plasmid-genes-location" id="markdown-toc-extraction-of-the-arg-and-plasmid-genes-location">Extraction of the ARG and plasmid genes location</a></li>
+      <li><a href="#annotation-of-the-contigs" id="markdown-toc-annotation-of-the-contigs">Annotation of the contigs</a></li>
+      <li><a href="#mapping-the-raw-reads-on-the-contigs" id="markdown-toc-mapping-the-raw-reads-on-the-contigs">Mapping the raw reads on the contigs</a></li>
+      <li><a href="#visualisation-of-the-args" id="markdown-toc-visualisation-of-the-args">Visualisation of the ARGs</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="galaxy-and-data-preparation">Galaxy and data preparation</h1>
+
+<p>Any analysis should get its own Galaxy history. So let’s start by creating a new one and get the data (contig file from the assembly) into it.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-galaxy-and-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare Galaxy and data</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this analysis</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the contig file from <a href="https://zenodo.org/record/4534098">Zenodo</a> or from Galaxy shared data libraries:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4534098/files/DRR187559_contigs.fasta
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="identification-of-amr-genes">Identification of AMR genes</h1>
+
+<p>To identify AMR genes in contigs, tools like ABRicate or staramr (<span class="citation"><a href="#bharat2022correlation">Bharat <i>et al.</i> 2022</a></span>) can be used. In this tutorial, we use <a href="https://github.com/phac-nml/staramr"><strong>staramr</strong></a>. <strong>Staramr</strong> scans bacterial genome contigs against the <strong>ResFinder</strong> (<span class="citation"><a href="#zankari2012identification">Zankari <i>et al.</i> 2012</a></span>), <strong>PointFinder</strong> (<span class="citation"><a href="#zankari2017pointfinder">Zankari <i>et al.</i> 2017</a></span>), and <strong>PlasmidFinder</strong> (<span class="citation"><a href="#carattoli2014plasmidfinder">Carattoli <i>et al.</i> 2014</a></span>) databases (used by the ResFinder webservice) and compiles a summary report of detected antimicrobial resistance genes.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+  <p>If you are interested in learning more about using ABRicate for AMR gene detection, you can check the sub-section on AMR in “Gene based pathogenic identification” of <a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html">“Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition” tutorial</a></p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-staramr"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run staramr</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.10.0+galaxy1" title="staramr tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>staramr</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.0+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“genomes”</em>: Contig file</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><strong>staramr</strong> generates 8 outputs:</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">summary.tsv</code>:  A summary of all detected AMR genes/mutations/plasmids/sequence type in each genome, one genome per line and the following columns:</p>
+
+    <ul>
+      <li><strong>Isolate ID</strong>: The id of the isolate/genome file(s) passed to <code class="language-plaintext highlighter-rouge">staramr</code>.</li>
+      <li><strong>Quality Module</strong>: The isolate/genome file(s) pass/fail result(s) for the quality metrics</li>
+      <li><strong>Genotype</strong>: The AMR genotype of the isolate.</li>
+      <li><strong>Predicted Phenotype</strong>: The predicted AMR phenotype (drug resistances) for the isolate.</li>
+      <li>
+        <p><strong>CGE Predicted Phenotype</strong>: The CGE-predicted AMR phenotype (drug resistances) for the isolate (CGE = <a href="http://www.genomicepidemiology.org/">Center for Genomic Epidemiology</a>)</p>
+      </li>
+      <li><strong>Plasmid</strong>: Plasmid types that were found for the isolate.</li>
+      <li>
+        <p><strong>Scheme</strong>: The MLST scheme used</p>
+
+        <p>MLST stands for MultiLocus Sequence Typing. It is a technique for the typing of multiple loci, using DNA sequences of internal fragments of multiple housekeeping genes to characterize isolates of microbial species.</p>
+
+        <p>Here, <strong>starmr</strong> uses <a href="https://github.com/tseemann/mlst">mlst</a> to scan the contig files against traditional <a href="https://pubmlst.org/">PubMLST</a> typing schemes. The correspondance between the scheme and the bacteria genus and species is accessible in the <a href="https://github.com/tseemann/mlst/blob/master/db/scheme_species_map.tab">map</a></p>
+      </li>
+      <li><strong>Sequence Type</strong>: The sequence type that’s assigned when combining all allele types</li>
+      <li><strong>Genome Length</strong>: The isolate/genome file(s) genome length(s)</li>
+      <li><strong>N50 value</strong>: The isolate/genome file(s) N50 value(s)</li>
+      <li><strong>Number of Contigs Greater Than Or Equal To 300 bp</strong>: The number of contigs greater or equal to 300 base pair in the isolate/genome file(s)</li>
+      <li><strong>Quality Module Feedback</strong>: The isolate/genome file(s) detailed feedback for the quality metrics</li>
+    </ul>
+
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-inspect-the-staramr-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspect the staramr output</div>
+
+      <ol>
+        <li>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <code class="language-plaintext highlighter-rouge">summary.tsv</code> file</li>
+      </ol>
+
+    </blockquote>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-inspect-the-staramr-output"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Inspect the staramr output</div>
+
+      <ol>
+        <li>How many genomes are there?</li>
+        <li>Has the genome failed or passed the quality? Why?</li>
+        <li>What are the predicted AMR drug resistances?</li>
+        <li>What is the MLST scheme? Does that correspond to the expected species and genus?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-inspect-the-staramr-output"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-inspect-the-staramr-output" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Inspect the staramr output</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <ol>
+          <li>There is one genome (1 line)</li>
+          <li>The genome has failed the quality (column 2), because the genome length is not within the acceptable length range (last column).</li>
+          <li>amikacin, gentamicin, tobramycin, spectinomycin, erythromycin, azithromycin, penicillin, tetracycline</li>
+          <li>The scheme is saureus, so <em>Staphylococcus aureus</em> (given the <a href="https://github.com/tseemann/mlst/blob/master/db/scheme_species_map.tab">scheme genus map</a>), which is coherent with MRSA</li>
+        </ol>
+      </blockquote>
+
+    </blockquote>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">detailed_summary.tsv</code>: A detailed summary of all detected AMR genes/mutations/plasmids/sequence type in each genome, one gene per line and the following columns:</p>
+
+    <ul>
+      <li><strong>Isolate ID</strong>: The id of the isolate/genome file(s) passed to <code class="language-plaintext highlighter-rouge">staramr</code>.</li>
+      <li><strong>Data</strong>: The particular gene detected from ResFinder, PlasmidFinder, PointFinder, or the sequence type.</li>
+      <li><strong>Data Type</strong>: The type of gene (Resistance or Plasmid), or MLST.</li>
+      <li><strong>Predicted Phenotype</strong>: The predicted AMR phenotype (drug resistances) found in ResFinder/PointFinder. Plasmids will be left blank by default.</li>
+      <li><strong>CGE Predicted Phenotype</strong>: The CGE-predicted AMR phenotype (drug resistances) found in ResFinder/PointFinder. Plasmids will be left blank by default.</li>
+      <li><strong>%Identity</strong>: The % identity of the top BLAST HSP to the gene.</li>
+      <li><strong>%Overlap</strong>: THe % overlap of the top BLAST HSP to the gene (calculated as <strong>hsp length/total length * 100</strong>).</li>
+      <li><strong>HSP Length/Total Length</strong> The top BLAST HSP length over the gene total length (nucleotides).</li>
+      <li><strong>Contig</strong>: The contig id containing this gene.</li>
+      <li><strong>Start</strong>: The start of the gene (will be greater than <strong>End</strong> if on minus strand).</li>
+      <li><strong>End</strong>: The end of the gene.</li>
+      <li><strong>Accession</strong>: The accession of the gene from either ResFinder or PlasmidFinder  database.</li>
+    </ul>
+
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-inspect-the-staramr-output-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspect the staramr output</div>
+
+      <ol>
+        <li>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <code class="language-plaintext highlighter-rouge">detailed_summary.tsv</code> file</li>
+      </ol>
+
+    </blockquote>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-inspect-the-staramr-output-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Inspect the staramr output</div>
+
+      <ol>
+        <li>What are the different sequence types that have been identified?</li>
+        <li>Where are located the plasmid genes?</li>
+        <li>Where are located the resistances genes?</li>
+        <li>By looking for the accession number (M13771) on NCBI (<a href="https://www.ncbi.nlm.nih.gov/nuccore/">https://www.ncbi.nlm.nih.gov/nuccore/</a>), where does the first resistance come from?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-inspect-the-staramr-output-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-inspect-the-staramr-output-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Inspect the staramr output</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <ol>
+          <li>There are:
+            <ul>
+              <li>1 MSLT</li>
+              <li>5 plasmid <em>rep</em> genes</li>
+              <li>7 resistance genes</li>
+            </ul>
+          </li>
+          <li>The plasmid genes are on contig00019 (3 genes - coherent with <span class="citation"><a href="#Lozano_2012">Lozano <i>et al.</i> 2012</a></span>), contig00024, and contig00002.</li>
+          <li>The resistance genes are:
+            <ul>
+              <li>4/7 on contigs with plasmid genes (contig00002, contig00019, contig00024)</li>
+              <li>3/7 on contigs without plasmid genes (contig00022, contig00021)</li>
+            </ul>
+          </li>
+          <li>M13771 is a 6’-aminoglycoside acetyltransferase phosphotransferase (AAC(6’)-APH(2’)) bifunctional resistance protein from <em>Streptococcus faecalis</em>. It might come from horizontal transfer from <em>Streptococcus faecalis</em> on a plasmid of <em>Staphylococcus aureus</em>.</li>
+        </ol>
+      </blockquote>
+
+    </blockquote>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">resfinder.tsv</code>: A tabular file of each AMR gene and additional BLAST information from the <strong>ResFinder</strong> database, one gene per line and the following columns:</p>
+
+    <ul>
+      <li><strong>Isolate ID</strong>: The id of the isolate/genome file(s) passed to <code class="language-plaintext highlighter-rouge">staramr</code>.</li>
+      <li><strong>Gene</strong>: The particular AMR gene detected.</li>
+      <li><strong>Predicted Phenotype</strong>: The predicted AMR phenotype (drug resistances) for this gene.</li>
+      <li><strong>CGE Predicted Phenotype</strong>: The CGE-predicted AMR phenotype (drug resistances) for this gene.</li>
+      <li><strong>%Identity</strong>: The % identity of the top BLAST HSP to the AMR gene.</li>
+      <li><strong>%Overlap</strong>: THe % overlap of the top BLAST HSP to the AMR gene (calculated as <strong>hsp length/total length * 100</strong>).</li>
+      <li><strong>HSP Length/Total Length</strong> The top BLAST HSP length over the AMR gene total length (nucleotides).</li>
+      <li><strong>Contig</strong>: The contig id containing this AMR gene.</li>
+      <li><strong>Start</strong>: The start of the AMR gene (will be greater than <strong>End</strong> if on minus strand).</li>
+      <li><strong>End</strong>: The end of the AMR gene.</li>
+      <li><strong>Accession</strong>: The accession of the AMR gene in the ResFinder database.</li>
+      <li><strong>Sequence</strong>: The AMR Gene sequence</li>
+      <li><strong>CGE Notes</strong>: Any CGE notes associated with the prediction.</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">plasmidfinder.tsv</code>: A tabular file of each AMR plasmid type and additional BLAST information from the <strong>PlasmidFinder</strong> database, one plasmid type per line with the following columns:</p>
+
+    <ul>
+      <li><strong>Isolate ID</strong>: The id of the isolate/genome file(s) passed to <code class="language-plaintext highlighter-rouge">staramr</code>.</li>
+      <li><strong>Plasmid</strong>: The particular plasmid type detected.</li>
+      <li><strong>%Identity</strong>: The % identity of the top BLAST HSP to the plasmid type.</li>
+      <li><strong>%Overlap</strong>: The % overlap of the top BLAST HSP to the plasmid type (calculated as    <strong>hsp length/total length * 100</strong>).</li>
+      <li><strong>HSP Length/Total Length</strong> The top BLAST HSP length over the plasmid type total length (nucleotides).</li>
+      <li><strong>Contig</strong>: The contig id containing this plasmid type.</li>
+      <li><strong>Start</strong>: The start of the plasmid type (will be greater than <strong>End</strong> if on minus strand).</li>
+      <li><strong>End</strong>: The end of the plasmid type.</li>
+      <li><strong>Accession</strong>: The accession of the plasmid type in the PlasmidFinder database.</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">mlst.tsv</code>: A tabular file of each multi-locus sequence type (MLST) and it’s corresponding locus/alleles, one genome per line with the following columns:</p>
+
+    <ul>
+      <li><strong>Isolate ID</strong>: The id of the isolate/genome file(s) passed to <code class="language-plaintext highlighter-rouge">staramr</code>.</li>
+      <li><strong>Scheme</strong>: The scheme that <code class="language-plaintext highlighter-rouge">MLST</code> has identified.</li>
+      <li><strong>Sequence Type</strong>: The sequence type that’s assigned when combining all allele types</li>
+      <li><strong>Locus #</strong>: A particular locus in the specified MLST scheme.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">settings.txt</code>: The command-line, database versions, and other settings used to run <code class="language-plaintext highlighter-rouge">staramr</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">results.xlsx</code>: An Excel spreadsheet containing the previous files as separate worksheets.</li>
+  <li><code class="language-plaintext highlighter-rouge">hits</code>: A collection with fasta files of the BLAST HSP nucleotides for the entries listed in the <strong>resfinder.tsv</strong> and <strong>pointfinder.tsv</strong> files. There are up to two files per input genome, one for ResFinder and one for PointFinder.</li>
+</ol>
+
+<h1 id="getting-more-information-about-arg-via-the-card-database">Getting more information about ARG via the CARD database</h1>
+
+<p>To get more information about the antibiotic resistant genes (ARG), we can check the <a href="https://card.mcmaster.ca">CARD database</a> (<strong>C</strong>omprehensive <strong>A</strong>ntibiotic <strong>R</strong>esistance <strong>D</strong>atabase) (<span class="citation"><a href="#Jia2016">Jia <i>et al.</i> 2016</a></span>)</p>
+
+<p>CARD can be very helpful to check all the resistance genes and check if it is logical to find the resistance gene in a specific bacteria.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>To what family does <a href="https://card.mcmaster.ca/ontology/36911">mecA</a> belong?</li>
+    <li>Do you expect to find this gene in this MRSA strain and why?</li>
+    <li>Is the accession number of the entry related to the accession reported by staramr?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li><a href="https://card.mcmaster.ca/ontology/37589">Methicillin resistant PBP2</a></li>
+      <li>The strain we use is a Methicillin(multi) resistant Staphylococcus aureus. As <code class="language-plaintext highlighter-rouge">mecA</code> has a perfect resistome mach with <em>S. aureus</em>, and the AMR Gene Family is methicillin resistant PBP2, we expect to see mecA in MRSA.</li>
+      <li>No, these are completely unrelated. Unfortunately this is a <strong>very</strong> common issue in bioinformatics. Everyone builds their own numbering system for entries in their database (usually calling them ‘accessions’), and then someone else needs to build a service to link these databases.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="visualization-of-the-args-and-plasmid-genes-in-their-genomic-context">Visualization of the ARGs and plasmid genes in their genomic context</h1>
+
+<p>We would like to look at the ARGs and plasmid genes in their genomic context. To do that, we will usie <a href="https://jbrowse.org/jb2/">JBrowse</a> (<span class="citation"><a href="#diesh2023jbrowse">Diesh <i>et al.</i> 2023</a></span>) with several information:</p>
+
+<ol>
+  <li>Assembly as the reference</li>
+  <li>ARGs location</li>
+  <li>Contigs annotation (genes, etc)</li>
+  <li>Coverage of the contigs from the raw reads</li>
+</ol>
+
+<h2 id="extraction-of-the-arg-and-plasmid-genes-location">Extraction of the ARG and plasmid genes location</h2>
+
+<p>The first step is to extract the location of the ARGs and plasmid genes on the contigs. This information is available on the <code class="language-plaintext highlighter-rouge">detailed_summary.tsv</code> output of <strong>starmar</strong>. The genes and their location are on the lines with a decimal value on column 6 or 7. So to only get this information, we need to select lines with a decimal value (<code class="language-plaintext highlighter-rouge">###.##</code>) followed by a tab character, the column separator in Galaxy. As a result, any lines without an identity or overlap value will be filtered out.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-args-and-plasmid-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract ARGs and plasmid genes</div>
+  <ol>
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">detailed_summary.tsv</code> <strong>staramr</strong> output</li>
+        <li><em>“that”</em>: Matching</li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">[0-9]+\.[0-9]+\t</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How many genes have been kept?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>12</p>
+
+  </blockquote>
+</blockquote>
+
+<p>This table can not be used directly in JBrowse. It first needs to be transformed in a standard format: GFF3, a file format used for describing genes and other features of DNA, RNA and protein sequences.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-gff3-file-format"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: GFF3 file format</div>
+
+  <p>A GFF is a tab delimited file with 9 fields per line:</p>
+  <ol>
+    <li><strong>seqid</strong>: The name of the sequence where the feature is located.</li>
+    <li><strong>source</strong>: The algorithm or procedure that generated the feature. This is typically the name of a software or database.</li>
+    <li><strong>type</strong>: The feature type name, like “gene” or “exon”. In a well structured GFF file, all the children features always follow their parents in a single block (so all exons of a transcript are put after their parent “transcript” feature line and before any other parent transcript line). In GFF3, all features and their relationships should be compatible with the standards released by the Sequence Ontology Project.</li>
+    <li><strong>start</strong>: Genomic start of the feature, with a 1-base offset. This is in contrast with other 0-offset half-open sequence formats, like BED.</li>
+    <li><strong>end</strong>: Genomic end of the feature, with a 1-base offset. This is the same end coordinate as it is in 0-offset half-open sequence formats, like BED.[citation needed]</li>
+    <li><strong>score</strong>: Numeric value that generally indicates the confidence of the source in the annotated feature. A value of “.” (a dot) is used to define a null value.</li>
+    <li><strong>strand</strong>: Single character that indicates the strand of the feature. This can be “+” (positive, or 5’-&gt;3’), “-“, (negative, or 3’-&gt;5’), “.” (undetermined), or “?” for features with relevant but unknown strands.</li>
+    <li><strong>phase</strong>: phase of CDS features; it can be either one of 0, 1, 2 (for CDS features) or “.” (for everything else). See the section below for a detailed explanation.</li>
+    <li><strong>attributes</strong>: A list of tag-value pairs separated by a semicolon with additional information about the feature.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-a-gff-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a GFF file</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2" title="Table to GFF3 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table to GFF3</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2)</span>
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: output of the above <strong>Select lines</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step</li>
+        <li><em>“Record ID column or value”</em>: <code class="language-plaintext highlighter-rouge">9</code></li>
+        <li><em>“Start column or value”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+        <li><em>“End column or value”</em>: <code class="language-plaintext highlighter-rouge">11</code></li>
+        <li><em>“Type column or value”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+        <li><em>“Score column or value”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
+        <li><em>“Source column or value”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Qualifiers”</em>
+          <ul>
+            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">name</code></li>
+            <li><em>“Qualifier value column or raw text”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Qualifiers”</em>
+          <ul>
+            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">phenotype</code></li>
+            <li><em>“Qualifier value column or raw text”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Qualifiers”</em>
+          <ul>
+            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">accession</code></li>
+            <li><em>“Qualifier value column or raw text”</em>: <code class="language-plaintext highlighter-rouge">12</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How many genes have been found per contigs?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li>Contig 19: 3 plasmid genes, 1 ARG</li>
+      <li>Contig 24: 1 plasmid gene, 2 ARGs</li>
+      <li>Contig 2: 1 plasmid gene, 1 ARG</li>
+      <li>Contig 22: 2 ARGs</li>
+      <li>Contig 21: 1 ARG</li>
+    </ul>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="annotation-of-the-contigs">Annotation of the contigs</h2>
+
+<p>In addition to the ARGs and plasmid genes, it would be good to have extra information about other genes on the contigs. Several tools exists to do that: Prokka (<span class="citation"><a href="#seemann2014prokka">Seemann 2014</a></span>), Bakta (<span class="citation"><a href="#schwengers2021bakta">Schwengers <i>et al.</i> 2021</a></span>), etc. Here, we use <strong>Bakta</strong> as recommended by Torsten Seeman as the successor of Prokka.</p>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Have you already run Bakta on this dataset before?
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="No" onclick="cyoaChoice('No')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">No</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Yes" onclick="cyoaChoice('Yes')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Yes</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("No");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="No">
+
+  <p><strong>Bakta</strong>  is a tool for the rapid &amp; standardized annotation of bacterial genomes and plasmids from both isolates and MAGs.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-annotate-the-contigs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotate the contigs</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bakta/bakta/1.8.2+galaxy0" title="Bakta tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bakta</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.2+galaxy0)</span> with the following parameters:
+        <ul>
+          <li>In <em>“Input/Output options”</em>:
+            <ul>
+              <li><em>“The bakta database”</em>: latest one</li>
+              <li><em>“The amrfinderplus database”</em>: latest one</li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select genome in fasta format”</em>: Contig file</li>
+            </ul>
+          </li>
+          <li>In <em>“Optional annotation”</em>:
+            <ul>
+              <li><em>“Keep original contig header (–keep-contig-headers)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>How many features have been identified?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>51k+ (number of lines in the GFF)</p>
+
+    </blockquote>
+  </blockquote>
+
+</div>
+
+<div class="Yes">
+
+  <p>If you already ran <strong>Bakta</strong> on your contigs, you can just upload here the GFF generated by <strong>Bakta</strong>.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-import-annotation-gff"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import annotation GFF</div>
+
+    <ol>
+      <li><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the GFF file generated by <strong>Bakta</strong></li>
+    </ol>
+
+  </blockquote>
+
+  <p><a href="./images/bakta.svg" rel="noopener noreferrer"><img src="./images/bakta.svg" alt="Bakta - circular plot of the annotation, with the contigs on the outside ordered clockwise by length size." width="3000" height="3000" loading="lazy" /></a></p>
+
+</div>
+
+<h2 id="mapping-the-raw-reads-on-the-contigs">Mapping the raw reads on the contigs</h2>
+
+<p>To get information about the coverage of the contigs and genes, we map the reads used to build the contigs to the contigs using <strong>Bowtie2</strong> (<span class="citation"><a href="#langmead2009ultrafast">Langmead <i>et al.</i> 2009</a></span>).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-annotating-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotating the Genome</div>
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the reads (after quality control) from another history, from <a href="https://zenodo.org/record/4534098">Zenodo</a> or from Galaxy shared data libraries:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4534098/files/DRR187559_1.fastq.gz
+https://zenodo.org/record/4534098/files/DRR187559_2.fastq.bz2
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0" title="Bowtie2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bowtie2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5.0+galaxy0)</span> with the following parameters:</p>
+      <ul>
+        <li><em>“Is this single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #1”</em>: Forward reads</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #2”</em>: Reverse reads</li>
+          </ul>
+        </li>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history and build index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select reference genome”</em>: Contig file</li>
+          </ul>
+        </li>
+        <li><em>“Save the bowtie2 mapping statistics to the history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What is the alignment rate? What does that mean for the assembly?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>The alignment rate is 99.77%. Most of the reads have been mapped on the contigs. They have been then used to build the contigs.</p>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="visualisation-of-the-args">Visualisation of the ARGs</h2>
+
+<p>We can now visualize the contigs, the mapping coverage, and the genes, using JBrowse and different information track.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize the Genome</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="JBrowse tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.11+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: Contig file</li>
+          </ul>
+        </li>
+        <li><em>“Genetic Code”</em>: <code class="language-plaintext highlighter-rouge">11. The Bacterial, Archaeal and Plant Plastid Code</code></li>
+        <li>In <em>“Track Group”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
+              <ul>
+                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">Bakta</code></li>
+                <li>In <em>“Annotation Track”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
+                      <ul>
+                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/BED Features</code>
+                          <ul>
+                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/BED Track Data”</em>: <code class="language-plaintext highlighter-rouge">Annotation_and_sequences</code> (output of <strong>Bakta</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                            <li><em>“JBrowse Track Type [Advanced]”</em>: <code class="language-plaintext highlighter-rouge">Neat Canvas Features</code></li>
+                            <li><em>“Track Visibility”</em>: <code class="language-plaintext highlighter-rouge">On for new users</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
+              <ul>
+                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">ARGs and plasmid genes</code></li>
+                <li>In <em>“Annotation Track”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
+                      <ul>
+                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/BED Features</code>
+                          <ul>
+                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/BED Track Data”</em>: Output of <strong>Table to GFF3</strong></li>
+                            <li><em>“JBrowse Track Type [Advanced]”</em>: <code class="language-plaintext highlighter-rouge">Neat Canvas Features</code></li>
+                            <li><em>“Track Visibility”</em>: <code class="language-plaintext highlighter-rouge">On for new users</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
+              <ul>
+                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">Coverage</code></li>
+                <li>In <em>“Annotation Track”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
+                      <ul>
+                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">BAM Pileups</code>
+                          <ul>
+                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM Track Data”</em>: Bowtie2’s output</li>
+                            <li><em>“Autogenerate SNP Track”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>View the output of JBrowse</li>
+  </ol>
+
+</blockquote>
+
+<p>In the output of the JBrowse you can view the mapped reads and the found genes against the reference genome. With the search tools you can easily find genes of interest. JBrowse can handle many inputs and can be very useful. Using the Bowtie2 mapping output, low coverage regions can be detected. This SNP detection can also give a clear view of where the data was less reliable or where variations were located.</p>
+
+<p>If it takes too long to build the JBrowse instance, you can view an embedded one here. (<strong>Warning</strong>: feature name search will not work.)</p>
+
+<!--SNIPPET-->
+<iframe id="embedded_jbrowse" src="/training-material/assets/jbrowse/index.html?loc=contig00019:81..23760&amp;data=/training-material/topics/genome-annotation/tutorials/amr-gene-detection/data&amp;trackList=0" border="0" width="100%" height="500px"></iframe>
+<p><a href="/training-material/assets/jbrowse/index.html?loc=contig00019:81..23760&amp;data=/training-material/topics/genome-annotation/tutorials/amr-gene-detection/data" target="_blank" style="padding: 0.5rem 1rem; background-color: #dfe5f9;border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">Open JBrowse in a new tab</a></p>
+<p><!--END_SNIPPET--></p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is the name for the gene found by Bakta corresponding to the rep16 gene found by staramr?</li>
+    <li>What are the NCBI Protein id and UniRef id for aac(6’)-aph(2’’)?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>By zooming at the beginning of the contig, the name for rep16 is DUF536 domain-containing protein</li>
+      <li>aac(6’)-aph(2’’) is on contig00019:20311..21749. The corresponding gene found by Bakta is bifunctional aminoglycoside N-acetyltransferase AAC(6’)-Ie/aminoglycoside O-phosphotransferase APH(2’’)-Ia. When clicking on it, we can find the dbxref attributes:
+        <ul>
+          <li>NCBI Protein: WP_001028144.1</li>
+          <li>UniRef: UniRef50_P0A0C2</li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, contigs were scaned for AMR and plasmid genes. The genes were then visualized in their genomic context after contig annotation.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Annotation with Prokka is very easy</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/genome-annotation/faqs/">FAQ page for the Genome Annotation topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="langmead2009ultrafast">Langmead, B., C. Trapnell, M. Pop, and S. L. Salzberg, 2009 <b>Ultrafast and memory-efficient alignment of short DNA sequences to the human genome</b>. Genome biology 10: 1–10. <a href="https://doi.org/10.1186/gb-2009-10-3-r25">10.1186/gb-2009-10-3-r25</a></li>
+<li id="Lozano_2012">Lozano, C., Garcı́a-Migura Lourdes, C. Aspiroz, M. Zarazaga, C. Torres <i>et al.</i>, 2012 <b>Expansion of a Plasmid Classification System for Gram-Positive Bacteria and Determination of the Diversity of Plasmids in Staphylococcus aureus Strains of Human, Animal, and Food Origins</b>. Applied and Environmental Microbiology 78: 5948–5955. <a href="https://doi.org/10.1128/aem.00870-12">10.1128/aem.00870-12</a></li>
+<li id="zankari2012identification">Zankari, E., H. Hasman, S. Cosentino, M. Vestergaard, S. Rasmussen <i>et al.</i>, 2012 <b>Identification of acquired antimicrobial resistance genes</b>. Journal of antimicrobial chemotherapy 67: 2640–2644. <a href="https://doi.org/10.1093/jac/dks261">10.1093/jac/dks261</a></li>
+<li id="carattoli2014plasmidfinder">Carattoli, A., E. Zankari, Garcı̀a-Fernandez Aurora, M. V. Larsen, O. Lund <i>et al.</i>, 2014 <b>In silico detection and typing of plasmids using PlasmidFinder and plasmid multilocus sequence typing </b>. Antimicrob Agents Chemother 58: 3895–903. <a href="https://doi.org/10.1128/AAC.02412-14 0">10.1128/AAC.02412-14 0</a></li>
+<li id="seemann2014prokka">Seemann, T., 2014 <b>Prokka: rapid prokaryotic genome annotation</b>. Bioinformatics 30: 2068–2069. <a href="https://doi.org/10.1093/bioinformatics/btu153">10.1093/bioinformatics/btu153</a></li>
+<li id="Jia2016">Jia, B., A. R. Raphenya, B. Alcock, N. Waglechner, P. Guo <i>et al.</i>, 2016 <b>CARD 2017: expansion and model-centric curation of the comprehensive antibiotic resistance database</b>. Nucleic Acids Research 45: D566–D573. <a href="https://doi.org/10.1093/nar/gkw1004">10.1093/nar/gkw1004</a></li>
+<li id="zankari2017pointfinder">Zankari, E., R. Allesøe, K. G. Joensen, L. M. Cavaco, O. Lund <i>et al.</i>, 2017 <b>PointFinder: a novel web tool for WGS-based detection of antimicrobial resistance associated with chromosomal point mutations in bacterial pathogens</b>. Journal of Antimicrobial Chemotherapy 72: 2764–2768. <a href="https://doi.org/10.1093/jac/dkx217">10.1093/jac/dkx217</a></li>
+<li id="Hikichi_2019">Hikichi, M., M. Nagao, K. Murase, C. Aikawa, T. Nozawa <i>et al.</i>, 2019 <b>Complete Genome Sequences of Eight Methicillin-Resistant Staphylococcus aureus Strains Isolated from Patients in Japan</b> (I. L. G. Newton, Ed.). Microbiology Resource Announcements 8: <a href="https://doi.org/10.1128/mra.01212-19">10.1128/mra.01212-19</a></li>
+<li id="schwengers2021bakta">Schwengers, O., L. Jelonek, M. A. Dieckmann, S. Beyvers, J. Blom <i>et al.</i>, 2021 <b>Bakta: rapid and standardized annotation of bacterial genomes via alignment-free sequence identification</b>. Microbial genomics 7: 000685. <a href="https://doi.org/10.1099/mgen.0.000685">10.1099/mgen.0.000685</a></li>
+<li id="bharat2022correlation">Bharat, A., A. Petkau, B. P. Avery, J. C. Chen, J. P. Folster <i>et al.</i>, 2022 <b>Correlation between phenotypic and in silico detection of antimicrobial resistance in Salmonella enterica in Canada using Staramr</b>. Microorganisms 10: 292. <a href="https://doi.org/10.3390/microorganisms10020292">10.3390/microorganisms10020292</a></li>
+<li id="diesh2023jbrowse">Diesh, C., G. J. Stevens, P. Xie, T. De Jesus Martinez, E. A. Hershberg <i>et al.</i>, 2023 <b>JBrowse 2: a modular genome browser with views of synteny and structural variation</b>. Genome biology 24: 1–21. <a href="https://doi.org/10.1186/s13059-023-02914-z">10.1186/s13059-023-02914-z</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Identification of AMR genes in an assembled bacterial genome (Genome Annotation)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Bazante Sanders, Bérénice Batut,  <b>Identification of AMR genes in an assembled bacterial genome (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{genome-annotation-amr-gene-detection,
+author = "Bazante Sanders and Bérénice Batut",
+	title = "Identification of AMR genes in an assembled bacterial genome (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/avans-atgm" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/avans-atgm/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/abromics" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/abromics/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <div class="box-title">Go Further</div>
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/visualisation">Visualisation</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Genomic Data Visualisation with JBrowse:
+                            
+                                <a href="/training-material/topics/visualisation/tutorials/jbrowse/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">Using Galaxy and Managing your Data</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Hands-on: Hands-on: Extracting Workflows from Histories:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+                    </ul>
+                </blockquote>
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: bowtie2
+  owner: devteam
+  revisions: 03e9b2fbc005
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bakta
+  owner: iuc
+  revisions: 728dacaf08a9
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: jbrowse
+  owner: iuc
+  revisions: a6e57ff585c0
+  tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: tbl2gff3
+  owner: iuc
+  revisions: 4a7f4b0cc0a3
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: staramr
+  owner: nml
+  revisions: 3b22de20bd4b
+  tool_panel_section_label: Metagenomic Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/2bc203c10717c91121b71a6cc6f63eb21f0eadfe">2bc203c</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706027250'></script>
+        
+    </body>
+</html>

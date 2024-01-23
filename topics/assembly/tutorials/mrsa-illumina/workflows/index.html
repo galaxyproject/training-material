@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Workflows / Genome Assembly of MRSA using Illumina MiSeq Data / Assembly</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Workflows / Genome Assembly of a bacterial genome (MRSA) sequenced using Illumina MiSeq Data / Assembly</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@bf587d2df29eeb32489e10e3b0f2fae6f3129e1f",
+		release: "galaxy-training-network@2bc203c10717c91121b71a6cc6f63eb21f0eadfe",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706020713' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706020713' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706027250' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706027250' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -68,12 +68,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="2021-03-19 14:51:45 +0000"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Assembly / Genome Assembly of MRSA using Illumina MiSeq Data / Workflows">
+	<meta property="og:title" content="Assembly / Genome Assembly of a bacterial genome (MRSA) sequenced using Illumina MiSeq Data / Workflows">
         <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706020713'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706027250'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -224,7 +224,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <section class="tutorial">
     <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Genome Assembly of MRSA using Illumina MiSeq Data</a></p>
+    <p>These workflows are associated with <a href="../tutorial.html">Genome Assembly of a bacterial genome (MRSA) sequenced using Illumina MiSeq Data</a></p>
     <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
 
@@ -236,10 +236,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<h5 class="card-title">Genome Assembly of MRSA using Illumina MiSeq Data</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
 				
+				Bazante Sanders, 
+				
+				Bérénice Batut
+				
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated Mar 19, 2021</small>
+				<small class="text-muted">Last updated Jan 23, 2024</small>
 			</p>
 			<p class="card-text">
 			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main_workflow">Launch in Tutorial Mode</span>
@@ -249,11 +253,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 			License: 
 				
-				None Specified, defaults to
-				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
 				
 				<br/>
-			Tests: ❌
+			Tests: ✅
 			Results: Not yet automated
 			</p>
 <div class="dropdown">
@@ -270,57 +273,24 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
-  10["staramr"];
-  7 -->|contigs| 10;
-  11["Bowtie2"];
-  5 -->|fastq_out_r1_paired| 11;
-  5 -->|fastq_out_r2_paired| 11;
-  7 -->|contigs| 11;
-  12["Quast"];
-  7 -->|contigs| 12;
-  13["Bandage Image"];
-  7 -->|contigs_graph| 13;
-  14["Prokka"];
-  7 -->|contigs| 14;
-  15["MultiQC"];
-  6 -->|text_file| 15;
-  4 -->|text_file| 15;
-  9 -->|text_file| 15;
-  8 -->|text_file| 15;
-  16["Select"];
-  10 -->|detailed_summary| 16;
-  17["Table to GFF3"];
-  16 -->|out_file1| 17;
-  18["JBrowse"];
-  7 -->|contigs| 18;
-  14 -->|out_gff| 18;
-  11 -->|output| 18;
-  17 -->|output| 18;
-  19["JBrowse"];
-  7 -->|contigs| 19;
-  14 -->|out_gff| 19;
-  11 -->|output| 19;
-  17 -->|output| 19;
-  2["Convert compressed file to uncompressed."];
+  0["DRR187559_2"];
+  1["DRR187559_1"];
+  2["FastQC"];
   0 -->|output| 2;
-  3["Convert compressed file to uncompressed."];
+  3["fastp"];
   1 -->|output| 3;
+  0 -->|output| 3;
   4["FastQC"];
-  2 -->|output1| 4;
-  5["Trimmomatic"];
-  3 -->|output1| 5;
-  2 -->|output1| 5;
-  6["FastQC"];
-  3 -->|output1| 6;
-  7["Shovill"];
-  5 -->|fastq_out_r1_paired| 7;
-  5 -->|fastq_out_r2_paired| 7;
-  8["FastQC"];
-  5 -->|fastq_out_r2_paired| 8;
-  9["FastQC"];
-  5 -->|fastq_out_r1_paired| 9;
+  1 -->|output| 4;
+  5["Shovill"];
+  3 -->|out1| 5;
+  3 -->|out2| 5;
+  6["Quast"];
+  5 -->|contigs| 6;
+  7["Bandage Image"];
+  5 -->|contigs_graph| 7;
+  8["Bandage Info"];
+  5 -->|contigs_graph| 8;
 
 	</pre>
 		</div><!-- card-body -->
@@ -351,7 +321,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/bf587d2df29eeb32489e10e3b0f2fae6f3129e1f">bf587d2</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/2bc203c10717c91121b71a6cc6f63eb21f0eadfe">2bc203c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -375,7 +345,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706020713'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706027250'></script>
         
     </body>
 </html>
