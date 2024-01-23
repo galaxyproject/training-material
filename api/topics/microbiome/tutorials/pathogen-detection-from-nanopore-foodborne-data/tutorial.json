@@ -89,7 +89,7 @@
       "name": "Pathogen-Detection-Nanopore-Gene-based-pathogenic-Identification-collection",
       "title": "Pathogen-Detection-Nanopore-Gene-based-pathogenic-Identification-collection",
       "test_results": null,
-      "modified": "2024-01-23 11:40:03 +0000",
+      "modified": "2024-01-23 14:38:36 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Build list\"];\n  0 -->|output| 2;\n  3[\"Extract element identifiers\"];\n  0 -->|output| 3;\n  4[\"Flye\"];\n  2 -->|output| 4;\n  5[\"Split file\"];\n  3 -->|output| 5;\n  6[\"Bandage Image\"];\n  4 -->|assembly_gfa| 6;\n  7[\"medaka consensus pipeline\"];\n  4 -->|consensus| 7;\n  0 -->|output| 7;\n  8[\"Parse parameter value\"];\n  5 -->|list_output_txt| 8;\n  9[\"Build list\"];\n  7 -->|out_consensus| 9;\n  10[\"ABRicate\"];\n  7 -->|out_consensus| 10;\n  11[\"FASTA-to-Tabular\"];\n  7 -->|out_consensus| 11;\n  12[\"ABRicate\"];\n  7 -->|out_consensus| 12;\n  13[\"Compose text parameter value\"];\n  8 -->|text_param| 13;\n  14[\"MLST\"];\n  9 -->|output| 14;\n  15[\"Cut\"];\n  10 -->|report| 15;\n  16[\"Cut\"];\n  12 -->|report| 16;\n  17[\"Replace\"];\n  8 -->|text_param| 17;\n  13 -->|out1| 17;\n  10 -->|report| 17;\n  18[\"Replace\"];\n  13 -->|out1| 18;\n  11 -->|output| 18;\n  19[\"Replace Text\"];\n  14 -->|report| 19;\n  8 -->|text_param| 19;\n  20[\"Add line to file\"];\n  15 -->|out_file1| 20;\n  8 -->|text_param| 20;\n  21[\"Add line to file\"];\n  16 -->|out_file1| 21;\n  8 -->|text_param| 21;\n  22[\"Tabular-to-FASTA\"];\n  18 -->|outfile| 22;\n  23[\"Concatenate datasets\"];\n  1 -->|output| 23;\n  19 -->|outfile| 23;\n"
     },
     {
@@ -118,7 +118,7 @@
       "name": "Pathogen-Detection-Nanopore-All-Samples-Analysis",
       "title": "Pathogen-Detection-Nanopore-All-Samples-Analysis",
       "test_results": null,
-      "modified": "2024-01-23 11:40:03 +0000",
+      "modified": "2024-01-23 14:38:36 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset collection\"];\n  2[\"Input dataset collection\"];\n  3[\"Input dataset collection\"];\n  4[\"Collapse Collection\"];\n  0 -->|output| 4;\n  5[\"Collapse Collection\"];\n  1 -->|output| 5;\n  6[\"Collapse Collection\"];\n  2 -->|output| 6;\n  7[\"Split by group\"];\n  4 -->|output| 7;\n  8[\"Add line to file\"];\n  6 -->|output| 8;\n  9[\"Cut\"];\n  7 -->|split_output| 9;\n  10[\"Filter sequences by ID\"];\n  7 -->|split_output| 10;\n  5 -->|output| 10;\n  11[\"Multi-Join\"];\n  3 -->|output| 11;\n  8 -->|outfile| 11;\n  12[\"Remove beginning\"];\n  9 -->|out_file1| 12;\n  13[\"Replace\"];\n  11 -->|outfile| 13;\n  14[\"Advanced Cut\"];\n  11 -->|outfile| 14;\n  15[\"bedtools getfasta\"];\n  10 -->|output_pos| 15;\n  12 -->|out_file1| 15;\n  16[\"Replace\"];\n  13 -->|outfile| 16;\n  17[\"ClustalW\"];\n  15 -->|output| 17;\n  18[\"Replace\"];\n  16 -->|outfile| 18;\n  19[\"Filter empty datasets\"];\n  17 -->|output| 19;\n  20[\"Advanced Cut\"];\n  18 -->|outfile| 20;\n  21[\"FASTTREE\"];\n  19 -->|output| 21;\n  22[\"Paste\"];\n  14 -->|output| 22;\n  20 -->|output| 22;\n  23[\"Newick Display\"];\n  21 -->|output| 23;\n  24[\"Transpose\"];\n  22 -->|out_file1| 24;\n  25[\"Replace\"];\n  22 -->|out_file1| 25;\n  26[\"Heatmap w ggplot\"];\n  24 -->|out_file| 26;\n"
     },
     {
@@ -147,7 +147,7 @@
       "name": "Pathogen-Detection-Nanopore-Pre-Processing-collection",
       "title": "Pathogen-Detection-Nanopore-Pre-Processing-collection",
       "test_results": null,
-      "modified": "2024-01-23 11:40:03 +0000",
+      "modified": "2024-01-23 14:38:36 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Porechop\"];\n  0 -->|output| 1;\n  2[\"NanoPlot\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  0 -->|output| 3;\n  4[\"fastp\"];\n  1 -->|outfile| 4;\n  5[\"NanoPlot\"];\n  4 -->|out1| 5;\n  6[\"Kraken2\"];\n  4 -->|out1| 6;\n  7[\"FastQC\"];\n  4 -->|out1| 7;\n  8[\"Filter failed datasets\"];\n  6 -->|output| 8;\n  9[\"Filter failed datasets\"];\n  6 -->|report_output| 9;\n  10[\"MultiQC\"];\n  3 -->|text_file| 10;\n  7 -->|text_file| 10;\n  11[\"Krakentools: Extract Kraken Reads By ID\"];\n  4 -->|out1| 11;\n  9 -->|output| 11;\n  8 -->|output| 11;\n"
     },
     {
@@ -176,7 +176,7 @@
       "name": "Pathogen-Detection-Nanopore-SNP-based-pathogenetic-Identification-collection",
       "title": "Pathogen-Detection-Nanopore-SNP-based-pathogenetic-Identification-collection",
       "test_results": null,
-      "modified": "2024-01-23 11:40:03 +0000",
+      "modified": "2024-01-23 14:38:36 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Convert compressed file to uncompressed.\"];\n  1 -->|output| 2;\n  3[\"Map with minimap2\"];\n  0 -->|output| 3;\n  2 -->|output1| 3;\n  4[\"Clair3\"];\n  3 -->|alignment_output| 4;\n  2 -->|output1| 4;\n  5[\"bcftools norm\"];\n  4 -->|merge_output| 5;\n  2 -->|output1| 5;\n  6[\"SnpSift Filter\"];\n  5 -->|output_file| 6;\n  7[\"SnpSift Extract Fields\"];\n  6 -->|output| 7;\n  8[\"bcftools consensus\"];\n  6 -->|output| 8;\n  2 -->|output1| 8;\n"
     },
     {
@@ -205,7 +205,7 @@
       "name": "Pathogen Detection-Nanopore-Taxonomy-Profiling-and-Visualization-collection",
       "title": "Pathogen Detection-Nanopore-Taxonomy-Profiling-and-Visualization-collection",
       "test_results": null,
-      "modified": "2024-01-23 11:40:03 +0000",
+      "modified": "2024-01-23 14:38:36 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Kraken2\"];\n  0 -->|output| 2;\n  3[\"Kraken-biom\"];\n  2 -->|report_output| 3;\n  1 -->|output| 3;\n  4[\"Phinch Visualisation\"];\n  3 -->|biomOutput| 4;\n"
     }
   ],
@@ -673,6 +673,7 @@
       "fediverse": "https://scholar.social/@zerodivision",
       "fediverse_flavor": "mastodon",
       "affiliations": [
+        "by-covid",
         "uni-freiburg"
       ],
       "id": "wm75",
