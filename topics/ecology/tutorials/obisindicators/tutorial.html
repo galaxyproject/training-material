@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@10d1fd407342fe159a55fd272e1d8d106b8f2bc3",
+		release: "galaxy-training-network@41ee7ebeebf9179952a9c22e90853d5af959d363",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1705968674' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1705968674' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706000634' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706000634' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Obis marine indicators">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-01-20 07:36:38 +0000">
+<meta name="DC.date" content="2024-01-23 07:49:29 +0000">
 <meta name="DC.creator" content="Marie Josse">
 <meta name="DC.creator" content="Yvan Le Bras"><meta name="description" content="Learn to analyse Ecological data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -119,7 +119,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-01-20 07:36:38 +0000",
+  "dateModified": "2024-01-23 07:49:29 +0000",
   "datePublished": "2023-04-11 09:13:43 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Obis marine indicators",
@@ -233,13 +233,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Obis marine indicators",
   "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/obisindicators/tutorial.html",
-  "version": 16,
+  "version": 20,
   "timeRequired": "PT1H",
   "teaches": "Calculating and vizualizing marine biodiversity indicators",
   "keywords": [
-    "Ecology"
+    "Ecology",
+    "earth-system",
+    "ocean",
+    "marine omics",
+    "biodiversity"
   ],
-  "description": "The objectives are:\n - Calculating and vizualizing marine biodiversity indicators\n\n",
+  "description": "The questions this  addresses are:\n - How to retrieve Obis data with Galaxy ?\n - How can you analyse and visualise them ?\n\n\nThe objectives are:\n - Calculating and vizualizing marine biodiversity indicators\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -383,12 +387,27 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   ],
   "educationalLevel": "Introductory",
   "mentions": [
-
+    {
+      "@type": "Thing",
+      "name": "earth-system"
+    },
+    {
+      "@type": "Thing",
+      "name": "ocean"
+    },
+    {
+      "@type": "Thing",
+      "name": "marine omics"
+    },
+    {
+      "@type": "Thing",
+      "name": "biodiversity"
+    }
   ],
   "abstract": "OBIS is a global open-access data and information clearing-house on marine biodiversity for science, conservation and sustainable development. In order to visualize their marine data OBIS created the package obisindicators."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1705968674'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706000634'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -608,6 +627,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
         
+        <li><p>How to retrieve Obis data with Galaxy ?</p>
+</li>
+        
+        <li><p>How can you analyse and visualise them ?</p>
+</li>
+        
         </ul>
 
         <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
@@ -724,23 +749,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     
     
     
-	<li class="dropdown-header">
-		<b>Possibly Working</b>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.fr/" title="">
-			UseGalaxy.fr
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org" title="">
-			UseGalaxy.org (Main)
-		</a>
-	</li>
-    
-    
 
     
 	<li class="dropdown-header">
@@ -760,7 +768,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 11, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 20, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -773,7 +781,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00332">https://gxy.io/GTN:T00332</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 16 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 20 </div>
 
     </blockquote>
     </section>
@@ -804,8 +812,11 @@ This tutorial will guide you on getting obis marine data and processing them in 
 
 <ol id="markdown-toc">
   <li><a href="#upload-of-the-data" id="markdown-toc-upload-of-the-data">Upload of the data</a></li>
-  <li><a href="#convert-data-csv-to-tabular" id="markdown-toc-convert-data-csv-to-tabular">Convert data <strong>csv-to-tabular</strong></a></li>
-  <li><a href="#clean-data-advanced-cut" id="markdown-toc-clean-data-advanced-cut">Clean data <strong>Advanced Cut</strong></a></li>
+  <li><a href="#use-the-galaxy-tool" id="markdown-toc-use-the-galaxy-tool">Use the galaxy tool</a></li>
+  <li><a href="#clean-data-advanced-cut" id="markdown-toc-clean-data-advanced-cut">Clean data Advanced Cut</a></li>
+  <li><a href="#get-to-the-portal" id="markdown-toc-get-to-the-portal">Get to the Portal</a></li>
+  <li><a href="#convert-data-csv-to-tabular" id="markdown-toc-convert-data-csv-to-tabular">Convert data csv-to-tabular</a></li>
+  <li><a href="#clean-data-advanced-cut-1" id="markdown-toc-clean-data-advanced-cut-1">Clean data Advanced Cut</a></li>
   <li><a href="#ocean-biodiversity-indicators" id="markdown-toc-ocean-biodiversity-indicators">Ocean biodiversity indicators</a></li>
   <li><a href="#number-of-records" id="markdown-toc-number-of-records">Number of records</a></li>
   <li><a href="#shannon" id="markdown-toc-shannon">Shannon</a></li>
@@ -826,104 +837,180 @@ This tutorial will guide you on getting obis marine data and processing them in 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
+  <p>Create a new history for this tutorial and give it a name (example: “Obisindicators tutorial”) for you to find it again later if needed.</p>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+  <p><!--END_SNIPPET--></p>
+</blockquote>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		You can use a tool to download the data you want to study or you can download them from the Obis portal.
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Tool" onclick="cyoaChoice('Tool')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Tool</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Portal" onclick="cyoaChoice('Portal')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Portal</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Tool");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Tool">
+  <h2 id="use-the-galaxy-tool">Use the galaxy tool</h2>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-download-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Download your data</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/obis_data/obis_data/0.0.2" title="OBIS occurences tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OBIS occurences</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> with the following parameters:
+        <ul>
+          <li><em>“Scientific name of the species”</em>: Empty</li>
+          <li><em>“Taxon ID”</em>: Empty</li>
+          <li><em>“Input latitude min (+north/-south)”</em>: <code class="language-plaintext highlighter-rouge">41.5</code></li>
+          <li><em>“Input latitude max (+north/-south)”</em>: <code class="language-plaintext highlighter-rouge">45.0</code></li>
+          <li><em>“Input longitude min (+east/-west)”</em>: <code class="language-plaintext highlighter-rouge">7.5</code></li>
+          <li><em>“Input longitude max (+east/-west)”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+        </ul>
+      </li>
+      <li><strong>Run Tool</strong></li>
+    </ol>
+  </blockquote>
+
+  <h2 id="clean-data-advanced-cut">Clean data Advanced Cut</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-clean-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Clean your data</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
+-<em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Species occurences</code>
+        <ul>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">c['1', '9', '10', '61', '113']</code>
+You should have the 5 folowing columns : basisOfRecord, decimalLatitude, decimalLongitude, species and individualCount</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+</div>
+
+<div class="Portal">
+  <h2 id="get-to-the-portal">Get to the Portal</h2>
   <ol>
-    <li>
-      <p>Create a new history for this tutorial and give it a name (example: “Obisindicators tutorial”) for you to find it again later if needed.</p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
-      <p><!--END_SNIPPET--></p>
-    </li>
-    <li>
-      <p>Download the files from <a href="https://mapper.obis.org/">Obis</a></p>
-
-      <figure id="figure-1" style="max-width: 90%;"><img src="../../images/obisindicators/portal.png" alt="Obis portal welcome page. " width="1680" height="1050" loading="lazy" /><a target="_blank" href="../../images/obisindicators/portal.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Obis portal</figcaption></figure>
-
-      <blockquote class="details">
-        <div class="box-title details-title" id="details-download-data-from-the-obis-portal"><button class="gtn-boxify-button details" type="button" aria-controls="details-download-data-from-the-obis-portal" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Download data from the obis portal</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-        <ul>
-          <li>Go on the right panel and enter the criteria of your choise here in “Area” write down <strong>Mediterranean</strong> and select “France: Mediterranean Sea”.</li>
-          <li>Click on save on the top right</li>
-        </ul>
-        <figure id="figure-2" style="max-width: 90%;"><img src="../../images/obisindicators/download.png" alt="Guide to download obis data. " width="1680" height="1050" loading="lazy" /><a target="_blank" href="../../images/obisindicators/download.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Obis download</figcaption></figure>
-        <ul>
-          <li>Then on the 3 green lines top right press download</li>
-          <li>Enter your email on the pop-up screen and press <strong>Yes, procced</strong></li>
-        </ul>
-        <figure id="figure-3" style="max-width: 90%;"><img src="../../images/obisindicators/waiting.png" alt="The obis portal while you wait for the download. " width="1680" height="1050" loading="lazy" /><a target="_blank" href="../../images/obisindicators/waiting.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Waiting download</figcaption></figure>
-        <ul>
-          <li>The download can take a while depending on the size of your dataset (here less than 15min)</li>
-          <li>Then click on <strong>Download ZIP file</strong></li>
-          <li>Don’t forget to unzip your file on your machine.</li>
-        </ul>
-      </blockquote>
-    </li>
+    <li>Download the files from <a href="https://mapper.obis.org/">Obis</a></li>
   </ol>
+
+  <figure id="figure-1" style="max-width: 90%;"><img src="../../images/obisindicators/portal.png" alt="Obis portal welcome page. " width="1680" height="1050" loading="lazy" /><a target="_blank" href="../../images/obisindicators/portal.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Obis portal</figcaption></figure>
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-download-data-from-the-obis-portal"><button class="gtn-boxify-button details" type="button" aria-controls="details-download-data-from-the-obis-portal" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Download data from the obis portal</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ul>
+      <li>Go on the right panel and enter the criteria of your choise here in “Area” write down <strong>Mediterranean</strong> and select “France: Mediterranean Sea”.</li>
+      <li>Click on save on the top right</li>
+    </ul>
+    <figure id="figure-2" style="max-width: 90%;"><img src="../../images/obisindicators/download.png" alt="Guide to download obis data. " width="1680" height="1050" loading="lazy" /><a target="_blank" href="../../images/obisindicators/download.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Obis download</figcaption></figure>
+    <ul>
+      <li>Then on the 3 green lines top right press download</li>
+      <li>Enter your email on the pop-up screen and press <strong>Yes, procced</strong></li>
+    </ul>
+    <figure id="figure-3" style="max-width: 90%;"><img src="../../images/obisindicators/waiting.png" alt="The obis portal while you wait for the download. " width="1680" height="1050" loading="lazy" /><a target="_blank" href="../../images/obisindicators/waiting.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Waiting download</figcaption></figure>
+    <ul>
+      <li>The download can take a while depending on the size of your dataset (here less than 15min)</li>
+      <li>Then click on <strong>Download ZIP file</strong></li>
+      <li>Don’t forget to unzip your file on your machine.</li>
+    </ul>
+  </blockquote>
 
   <p>In the downloaded folder you should have your data either csv format (Occurence.csv) and you must have at least 4 columns containing: latitude, longitude, species and record.</p>
 
   <ol>
-    <li>
-      <p>Upload obis data</p>
+    <li>Upload obis data</li>
+  </ol>
 
-      <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-importing-data-from-your-computer"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-your-computer" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Importing data from your computer</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-importing-data-from-your-computer"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-your-computer" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Importing data from your computer</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-        <ul>
-          <li>Open the Galaxy Upload Manager <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span></li>
-          <li>Select <strong>Choose local files</strong></li>
-          <li>
-            <p>Browse in your computer and get the downloaded zip folder</p>
-          </li>
-          <li>Press <strong>Start</strong> (it can take a few seconds to get ready)</li>
-        </ul>
-      </blockquote>
-    </li>
+    <ul>
+      <li>Open the Galaxy Upload Manager <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span></li>
+      <li>Select <strong>Choose local files</strong></li>
+      <li>
+        <p>Browse in your computer and get the downloaded zip folder</p>
+      </li>
+      <li>Press <strong>Start</strong> (it can take a few seconds to get ready)</li>
+    </ul>
+  </blockquote>
+
+  <ol>
     <li>
       <p>Rename the datasets “obis data” for example and preview your dataset</p>
     </li>
     <li>
       <p>Check the datatype must be csv or tabular</p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
-      <p><!--END_SNIPPET--></p>
     </li>
   </ol>
 
-</blockquote>
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+  <p><!--END_SNIPPET--></p>
 
-<h2 id="convert-data-csv-to-tabular">Convert data <strong>csv-to-tabular</strong></h2>
+  <h2 id="convert-data-csv-to-tabular">Convert data csv-to-tabular</h2>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert your data</div>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-convert-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert your data</div>
 
-  <ol>
-    <li>On your data in your history pannel click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span></li>
-    <li>In the top click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Convert</li>
-    <li>Press <i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Create Dataset</li>
-  </ol>
+    <ol>
+      <li>On your data in your history pannel click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span></li>
+      <li>In the top click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Convert</li>
+      <li>Press <i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Create Dataset</li>
+    </ol>
 
-</blockquote>
+  </blockquote>
 
-<h2 id="clean-data-advanced-cut">Clean data <strong>Advanced Cut</strong></h2>
+  <h2 id="clean-data-advanced-cut-1">Clean data Advanced Cut</h2>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-clean-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Clean your data</div>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-clean-your-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Clean your data</div>
 
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
-      <ul>
-        <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
-          <ul>
-            <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">c['1', '3', '4', '9', '95']</code></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
+-<em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">obis data</code>
+        <ul>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">c['1', '3', '4', '9', '95']</code>
+You should have the 5 folowing columns: basisOfRecord, decimalLatitude, decimalLongitude, species and individualCount</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+</div>
 
 <p>You are now all set to use your obis data in order to do a diversity analysis.</p>
 
@@ -935,6 +1022,7 @@ This tutorial will guide you on getting obis marine data and processing them in 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.1" title="Ocean biodiversity indicators tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ocean biodiversity indicators</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
       <ul>
+        <li><em>“Input table”</em>: The result tabular of the Advanced Cut tool</li>
         <li><em>“What character is the separator in your data? (Mostlikely a comma for a csv file and t for a tabular)”</em>: <code class="language-plaintext highlighter-rouge">Tabulator (\t)</code></li>
         <li><em>“Select column containing the decimal value of the longitude “</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
         <li><em>“Select column containing the decimal value of the latitude “</em>: <code class="language-plaintext highlighter-rouge">c3</code></li>
@@ -985,11 +1073,11 @@ This tutorial will guide you on getting obis marine data and processing them in 
 
 <p>The expected number of marine species in a random sample of 50 individuals (records) is an indicator on marine biodiversity richness.</p>
 
-<p>The ES50 is defined in OBIS as the $sum(esi)$ over all species of the following per species calculation:</p>
+<p>The ES50 is defined in OBIS as the \(sum(esi)\) over all species of the following per species calculation:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>when $n$ - ni$ $\ge$ $50$ (with n as the total number of records in the cell and ni the total number of records for the ith-species)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>when $$ n - ni$ &lt;= 50 $$ (with n as the total number of records in the cell and ni the total number of records for the ith-species)
     $$ esi = 1 - exp(lngamma(n-ni+1) + lngamma(n-50+1) - lngamma(n-ni-50+1) - lngamma(n+1)) $$
-when $n$ $\ge$ $50$
+when $$ n &gt;= 50 $$
     $$ esi = 1 $$
 else
     $$ esi = NULL $$
@@ -1166,6 +1254,17 @@ author = "Marie Josse and Yvan Le Bras",
 
 	<div class="col-md-3 col-xs-12">
 		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/eurosciencegateway" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/eurosciencegateway/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+	<div class="col-md-3 col-xs-12">
+		
 		<img class="funder-avatar" src="https://avatars.githubusercontent.com/pndb" alt="Logo">
 		
 		<a href="/training-material/hall-of-fame/pndb/" class="btn btn-secondary">See Funder Profile</a>
@@ -1211,6 +1310,11 @@ tools:
   revisions: d698c222f354
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: obis_data
+  owner: ecology
+  revisions: 1fcd81d65467
+  tool_panel_section_label: Get Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: obisindicators
   owner: ecology
   revisions: 1015a0070bac
@@ -1250,7 +1354,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/10d1fd407342fe159a55fd272e1d8d106b8f2bc3">10d1fd4</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/41ee7ebeebf9179952a9c22e90853d5af959d363">41ee7eb</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1278,7 +1382,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1705968674'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706000634'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

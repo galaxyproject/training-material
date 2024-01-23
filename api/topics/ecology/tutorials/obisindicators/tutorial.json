@@ -1,8 +1,10 @@
 {
   "layout": "tutorial_hands_on",
   "title": "Obis marine indicators",
-  "zenodo_link": "",
-  "questions": null,
+  "questions": [
+    "How to retrieve Obis data with Galaxy ?",
+    "How can you analyse and visualise them ?"
+  ],
   "objectives": [
     "Calculating and vizualizing marine biodiversity indicators"
   ],
@@ -10,6 +12,12 @@
   "key_points": [
     "Marine data",
     "Diversity indicators"
+  ],
+  "tags": [
+    "earth-system",
+    "ocean",
+    "marine omics",
+    "biodiversity"
   ],
   "contributions": {
     "authorship": [
@@ -19,10 +27,11 @@
     "funding": [
       "gallantries",
       "fairease",
+      "eurosciencegateway",
       "pndb"
     ]
   },
-  "mathjax": 7474,
+  "mathjax": 8646,
   "short_id": "T00332",
   "url": "/topics/ecology/tutorials/obisindicators/tutorial.html",
   "topic_name": "ecology",
@@ -740,7 +749,7 @@
           "version": "0.1"
         }
       },
-      "modified": "2024-01-23 00:11:16 +0000",
+      "modified": "2024-01-23 09:03:56 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Advanced Cut\"];\n  1 -->|tabular| 2;\n  3[\"Ocean biodiversity indicators\"];\n  2 -->|output| 3;\n"
     }
   ],
@@ -748,6 +757,7 @@
   "tools": [
     "csv_to_tabular",
     "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/ecology/obis_data/obis_data/0.0.2",
     "toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.1",
     "toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.2"
   ],
@@ -760,16 +770,7 @@
       }
     ],
     "inexact": [
-      {
-        "url": "https://usegalaxy.fr/",
-        "name": "UseGalaxy.fr",
-        "usegalaxy": false
-      },
-      {
-        "url": "https://usegalaxy.org",
-        "name": "UseGalaxy.org (Main)",
-        "usegalaxy": true
-      }
+
     ]
   },
   "topic_name_human": "Ecology",
@@ -783,6 +784,13 @@
         "owner": "bgruening",
         "revisions": "d698c222f354",
         "tool_panel_section_label": "Text Manipulation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "obis_data",
+        "owner": "ecology",
+        "revisions": "1fcd81d65467",
+        "tool_panel_section_label": "Get Data",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
@@ -801,7 +809,7 @@
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obisindicators\n  owner: ecology\n  revisions: 1015a0070bac\n  tool_panel_section_label: Biodiversity data exploration\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obisindicators\n  owner: ecology\n  revisions: 393957ecc97d\n  tool_panel_section_label: Biodiversity data exploration\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obis_data\n  owner: ecology\n  revisions: 1fcd81d65467\n  tool_panel_section_label: Get Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obisindicators\n  owner: ecology\n  revisions: 1015a0070bac\n  tool_panel_section_label: Biodiversity data exploration\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obisindicators\n  owner: ecology\n  revisions: 393957ecc97d\n  tool_panel_section_label: Biodiversity data exploration\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {
@@ -887,6 +895,25 @@
       ],
       "id": "fairease",
       "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/"
+    },
+    {
+      "name": "EuroScienceGateway",
+      "github": false,
+      "joined": "2023-10",
+      "avatar": "/training-material/assets/images/eurosciencegateway.png",
+      "url": "https://training.galaxyproject.org/training-material/api/funders/eurosciencegateway.json",
+      "funder": true,
+      "funding_id": "101057388",
+      "funding_system": "cordis",
+      "funding_statement": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.",
+      "members": [
+        "abretaud",
+        "bgruening",
+        "erxleben",
+        "rlibouban"
+      ],
+      "id": "eurosciencegateway",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/"
     },
     {
       "name": "Pôle National de Données de Biodiversité",
