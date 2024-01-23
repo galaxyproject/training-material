@@ -14,11 +14,8 @@ key_points:
 tags:
   - earth-system
   - ocean
-  - marine data
-  - omics
+  - marine omics
   - biodiversity
-  - maps
-  - csv data
 contributions:
     authorship:
         - Marie59
