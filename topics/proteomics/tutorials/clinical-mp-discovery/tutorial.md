@@ -113,7 +113,7 @@ Using the FastaCLI tool, decoy sequences will be appended to the FASTA database.
 
 The msconvert tool allows for the conversion of mass spectrometry data files between different formats, such as thermo.raw, mgf, or mzml.
 
-> <hands-on-title> msconvert </hands-on-title>
+> <hands-on-title> msconvert: RAW to MGF </hands-on-title>
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} with the following parameters:
 >    - {% icon param-collection %} *"Input unrefined MS data"*: `output` (Input dataset collection)
@@ -279,10 +279,9 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 {: .hands_on}
 
 
-## Merging Human SwissProt and cRAP databases for Query Tabular with **FASTA Merge Files and Filter Unique Sequences**
 We will generate and merge the Human SwissProt Protein Database and contaminants (cRAP) and convert the resulting FASTA file to a tabular file that will be used in the Query Tabular tool to generate distinct microbial peptides from SearchGUI/PeptideShaker.
 
-> <hands-on-title> FASTA MERGE </hands-on-title>
+> <hands-on-title> Merging Human SwissProt and cRAP databases for Query Tabular with **FASTA Merge Files and Filter Unique Sequences** </hands-on-title>
 >
 > 1. {% tool [FASTA Merge Files and Filter Unique Sequences](toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0) %} with the following parameters:
 >    - *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
@@ -295,9 +294,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 {: .hands_on}
 
 
-## Converting FASTA sequences to TAB-delimited file with **FASTA-to-Tabular**
-
-> <hands-on-title> FASTA-to-Tabular </hands-on-title>
+> <hands-on-title> Converting FASTA sequences to TAB-delimited file with **FASTA-to-Tabular** </hands-on-title>
 >
 > 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Convert these sequences"*: `output` (output of **FASTA Merge Files and Filter Unique Sequences** {% icon tool %})
@@ -306,9 +303,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 {: .hands_on}
 
 
-## Filtering out accession numbers from TAB-delimited file  with **Filter Tabular**
-
-> <hands-on-title> Filter tabular </hands-on-title>
+> <hands-on-title> Filtering out accession numbers from TAB-delimited file  with **Filter Tabular** </hands-on-title>
 >
 > 1. {% tool [Filter Tabular](toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0) %} with the following parameters:
 >    - {% icon param-file %} *"Tabular Dataset to filter"*: `output` (output of **FASTA-to-Tabular** {% icon tool %})
@@ -340,9 +335,8 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 >
 {: .question}
 
-## Querying protein accession numbers and peptide sequences of confident microbial PSMs (from SGPS) with **Query Tabular**
 
-> <hands-on-title> Query Tabular </hands-on-title>
+> <hands-on-title> Querying protein accession numbers and peptide sequences of confident microbial PSMs (from SGPS) with **Query Tabular** </hands-on-title>
 >
 > 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0) %} with the following parameters:
 >    - In *"Database Table"*:
@@ -397,10 +391,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 {: .hands_on}
 
 
-
-## Cutting out peptide sequences from Query Tabular with **Cut**
-
-> <hands-on-title> CUT </hands-on-title>
+> <hands-on-title> Cutting out peptide sequences from Query Tabular with **Cut** </hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c3`
@@ -410,9 +401,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 {: .hands_on}
 
 
-## Grouping distinct (unique) peptides from SGPS with **Group**
-
-> <hands-on-title> Group </hands-on-title>
+> <hands-on-title> Grouping distinct (unique) peptides from SGPS with **Group** </hands-on-title>
 >
 > 1. {% tool [Group](Grouping1) %} with the following parameters:
 >    - {% icon param-file %} *"Select data"*: `out_file1` (output of **Cut** {% icon tool %})
@@ -422,10 +411,10 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 {: .hands_on}
 
 
-## Peptide discovery using MaxQuant with **MaxQuant**
+## Perform peptide discovery with **MaxQuant**
 MaxQuant is an MS-based proteomics platform that is capable of processing raw data and provides improved mass precision and high precursor mass accuracy (HPMA), which resulted in increased protein identification and more in-depth proteomic analysis. Raw MS/MS spectra will be searched against the reduced MetaNovo-generated database (~21.2k sequences). More information about analysis using MaxQuant is available, including [Label-free data analysis](https://gxy.io/GTN:T00218) and [MaxQuant and MSstats for the analysis of TMT data](https://gxy.io/GTN:T00220).
 
-> <hands-on-title> MaxQuant </hands-on-title>
+> <hands-on-title> Peptide discovery using **MaxQuant** </hands-on-title>
 >
 > 1. {% tool [MaxQuant](toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/2.0.3.0+galaxy0) %} with the following parameters:
 >    - In *"Input Options"*:
@@ -539,10 +528,10 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 {: .question}
 
 
+## Process SGPS and MaxQuant peptides to compile one list of unique microbial peptides
 
-## Concatenate SGPS and MaxQuant peptides into a singular database  with **Concatenate datasets**
 
-> <hands-on-title> Concatenate </hands-on-title>
+> <hands-on-title> Concatenate SGPS and MaxQuant peptides into a singular database with **Concatenate datasets** </hands-on-title>
 >
 > 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >    - {% icon param-files %} *"Datasets to concatenate"*: `out_file1` (output of **Group** {% icon tool %}), `out_file1` (output of **Group** {% icon tool %})
@@ -551,9 +540,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 {: .hands_on}
 
 
-## Group the peptides from SGPS and MaxQuant to remove duplicates with **Group**
-
-> <hands-on-title> Remove duplicates </hands-on-title>
+> <hands-on-title> Group the peptides from SGPS and MaxQuant to remove duplicates with **Group** </hands-on-title>
 >
 > 1. {% tool [Group](Grouping1) %} with the following parameters:
 >    - {% icon param-file %} *"Select data"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
