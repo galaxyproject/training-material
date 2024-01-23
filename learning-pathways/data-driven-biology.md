@@ -26,6 +26,12 @@ pathway:
         topic: data-science
       - name: cli-advanced
         topic: data-science
+      - name: python-basics
+        topic: data-science
+      - name: gnmx-lecture2
+        topic: data-science
+      - name: gnmx-lecture3
+        topic: data-science
 
 
 ---
