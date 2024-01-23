@@ -144,7 +144,7 @@ In the downloaded folder you should have your data either csv format (Occurence.
 >    -*"File to cut"*: `obis data`
 >    - *"Cut by"*: `fields`
 >        - *"List of Fields"*: `c['1', '3', '4', '9', '95']`
-> You should have the 5 folowing columns : basisOfRecord, decimalLatitude, decimalLongitude, species and individualCount
+> You should have the 5 folowing columns: basisOfRecord, decimalLatitude, decimalLongitude, species and individualCount
 {: .hands_on}
 </div>
 
