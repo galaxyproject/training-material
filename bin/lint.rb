@@ -575,6 +575,22 @@ module GtnLinter
         )
       end
     end
+
+    find_matching_texts(contents, /\]\(\)/i)
+      .map do |idx, _text, selected|
+      path = selected[1].to_s.strip
+      if !File.exist?(path.gsub(%r{^/}, ''))
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0),
+          replacement: nil,
+          message: "The link does not seem to have a target.",
+          code: 'GTN:018'
+        )
+      end
+    end
   end
 
   def self.check_looks_like_heading(contents)
