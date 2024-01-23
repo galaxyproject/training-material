@@ -22,7 +22,7 @@ contributions:
   - hexylena
 level: Introductory
 subtopic: workflows
-reqiurements:
+requirements:
 - type: external
   link: "https://www.mozilla.org/en-US/firefox/new/"
   title: "The Firefox Browser (this will not work in Chrome)"
