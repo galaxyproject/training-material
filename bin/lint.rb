@@ -570,7 +570,7 @@ module GtnLinter
           match_start: selected.begin(0),
           match_end: selected.end(0),
           replacement: nil,
-          message: "The alt text for this image seems to be empty",
+          message: 'The alt text for this image seems to be empty',
           code: 'GTN:034'
         )
       end
@@ -604,7 +604,7 @@ module GtnLinter
           match_start: selected.begin(0),
           match_end: selected.end(0),
           replacement: nil,
-          message: "The link does not seem to have a target.",
+          message: 'The link does not seem to have a target.',
           code: 'GTN:018'
         )
       end
@@ -789,7 +789,7 @@ module GtnLinter
       *check_bolded_heading(contents),
       *snippets_too_close_together(contents),
       *zenodo_api(contents),
-      *empty_alt_text(contents),
+      *empty_alt_text(contents)
     ]
   end
 
