@@ -15,10 +15,17 @@ time_estimation: 30M
 key_points:
 - Print ready screenshots
 - Basic image compression
-contributors:
-- ElectronicBlueberry
+contributions:
+  authorship:
+  - ElectronicBlueberry
+  editing:
+  - hexylena
 level: Introductory
 subtopic: workflows
+reqiurements:
+- type: external
+  link: "https://www.mozilla.org/en-US/firefox/new/"
+  title: "The Firefox Browser (this will not work in Chrome)"
 ---
 
 Sometimes we want to share our workflows outside of Galaxy, like printing it on a poster.
@@ -214,58 +221,56 @@ There are many ways to compress an image.
 Palette compression is particularly well suited for workflows.
 It can heavily reduce file size with minimal loss, if the amount of colors in an image is fairly low.
 
-For the following section of this tutorial basic knowledge on how to operate the terminal on your operating system is required.
-If you are unsure how to do this, it is advisable to read up on a short quick start relevant for your operating system.
+To compress our image, we will be using a piece of software called [GraphicsMagick](http://www.graphicsmagick.org/)
 
-You will specifically need to know how to:
- * Open a terminal
- * List files and folders in the current directory
- * Change the current directory
- * Run a command
+This tool is known to be installed on [usegalaxy.eu](https://usegalaxy.eu), we suggest you follow these steps there:
 
-To compress our image, we will be using a piece of software called [ImageMagick](https://imagemagick.org/). Install it before proceeding.
+> <hands-on-title>Uploading Your Image</hands-on-title>
+>
+> 1. Open [usegalaxy.eu](https://usegalaxy.eu)
+> 1. At the top of the {% icon tool %} **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload Data**
+> 1. Select "Choose Local Files" from the bottom of the dialog
+> 1. Select your saved screenshot, likely from your Downloads folder.
+> 1. Click **Start**
+> 1. Click **Close**
+>
+{: .hands_on }
 
-> <tip-title>Installing ImageMagick on Linux</tip-title>
->
-> Unlike on Windows and OS X, the Linux version on ImageMagick does not come with an easy installer.
->
-> I recommend using the portable version (first entry in the downloads section), placing it in a `/bin/` folder in your home folder,
-> and linking said bin folder to your `PATH` in your `.bashrc` file (usually located in your home folder but hidden).
->
-> To add the `/bin/` folder to your `PATH` add the following to your `.bashrc`:
-> ```
-> export PATH=$PATH:~/bin/
-> ```
->
-> You can now use ImageMagick from anywhere with the `magick` command.
-{: .tip}
+With the data on your Galaxy, we can start trying to compress it!
 
 > <hands-on-title>Compressing your screenshot</hands-on-title>
+> 1. Run the {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.40+galaxy0) %} tool
+>    - {% icon param-file %} *"Image to convert"*: `screenshot.png`
+>    - {% icon param-select %} *"Reduce Color Palette"*: `Automatic`
+>    - {% icon param-select %} *"Output Format"*: `png`
 >
-> 1. **Give your screenshot a simple name** without spaces, like `my-workflow.png`
-> 2. **Open the terminal** (powershell on windows), and navigate to the location of your screenshot.
-> 3. **Start the compression** using:
->    ```
->    magick my-workflow.png -type Palette my-workflow-compressed.png
->    ```
->    
->    - The first file name is the name of the screenshot chosen in step 1
->    - `-type Palette` tells ImageMagick to use automatic palette compression
->    - The second file name is the name of your (not yet existing) output file
->
+>    This will have GraphicsMagick use automatic palette compression.
 >    This command may take a while.
 >
-> 4. **Open the compressed image** to check if everything is still clearly visible.
+> 1. **Open the compressed image** to check if everything is still clearly visible.
 >    
->    Also check if the file size is now small enough for your purposes.
+>    Also check if the file size is now small enough for your purposes. (Click the dataset in your history to expand it to see the file size.)
 >
-> 5. If you want more control over your output file, you can use `-colors x` instead of `-type Palette`,
->    where x is the amount of colors you want to keep in your output image. `x` should be in powers of two (16, 32, 64 etc.).
->    
+> 1. If you want more control over your output file, you can provide a number of colours, instead of using the automatic reduction. Let's re-run the tool and provide a number of colours you want to keep in your output image. This number should be in powers of two (4, 8, 16, 32, 64 etc.).
+>
 >    Using smaller numbers will further reduce the file size at the cost of image quality.
 >    Smaller values do not always yield smaller files! Experiment a bit, or go with the option from step 4 for simplicity.
 >
-{: .hands-on}
+> 1. Run the {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.40+galaxy0) %} tool
+>    - {% icon param-file %} *"Image to convert"*: `screenshot.png`
+>    - {% icon param-select %} *"Reduce Color Palette"*: `Manual`
+>    - {% icon param-select %} *"Color Palette Size"*: `4`
+>    - {% icon param-select %} *"Output Format"*: `png`
+>
+> 1. Try different values until you get a result you like! Did you manage to create a smaller result than the automatic palette compression?
+{: .hands_on }
+
+> <tip-title>Tips for compressing images</tip-title>
+> 1. JPEG is a naturally "lossy" format, you can try that instead of PNG
+> 1. If the image is quite large, consider scaling it down with the "Resize %" parameter
+> 1. Experiment with the colour palettes! You will likely be able to find one that is a good tradeoff between accuracy and file size for your use case.
+{: .tip}
+
 
 Here's an example workflow screenshot compressed from `2.4mb` to `830kb`. Click it to view it in full resolution.
 
