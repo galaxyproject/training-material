@@ -53,6 +53,14 @@ layout: base
 				</div>
 				{% endif %}
 
+				{% assign former_affil_count  = entity.former_affiliations | size %}
+				{% if former_affil_count > 0 %}
+				<h2>Former Affiliations</h2>
+				<div class="contributors-line">
+					{% include _includes/contributor-list.html contributors=entity.former_affiliations badge=true %}
+				</div>
+				{% endif %}
+
 				{% assign member_count  = entity.members | size %}
 				{% if member_count > 0 %}
 				<h2>Members</h2>
