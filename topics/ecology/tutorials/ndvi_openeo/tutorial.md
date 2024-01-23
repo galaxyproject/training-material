@@ -134,7 +134,8 @@ Check that your data are in csv format.
 >
 > 3. {% snippet faqs/galaxy/interactive_tools_open.md tool="Holoviz" %}
 > 
-> 4. Once, you are in the jupyterlab open a terminal in bash and write the following
+> 4. Once, you are in the jupyterlab go in the the **notebooks** folder
+> 5. Open a terminal in bash and write the following
 > > <code-in-title>Download the notebook</code-in-title>
 > > ```bash
 > > wget https://raw.githubusercontent.com/fair-ease/Holoviz/main/Tabular_Datasets_NDVI.ipynb
