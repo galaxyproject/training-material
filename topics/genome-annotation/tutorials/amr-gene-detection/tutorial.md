@@ -366,11 +366,11 @@ In addition to the ARGs and plasmid genes, it would be good to have extra inform
 
 > <question-title></question-title>
 >
-> 1. How many features have been identified?
+> How many features have been identified?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 51k+ (number of lines in the GFF)
+> > 51k+ (number of lines in the GFF)
 > >
 > {: .solution}
 {: .question}

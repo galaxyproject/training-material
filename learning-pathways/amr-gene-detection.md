@@ -50,6 +50,6 @@ pathway:
   - section: "Recommended follow-up tutorials"
     tutorials:
       - name: pathogen-detection-from-nanopore-foodborne-data
-        topic: metagenomics
+        topic: microbiome
 
 ---
