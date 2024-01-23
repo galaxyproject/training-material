@@ -83,7 +83,7 @@ In this current workflow, we perform Quantification using the MaxQuant tool and 
 
 
 
-# **MaxQuant**
+# Peptide quantification using **MaxQuant**
 
 In the [Discovery Module](https://github.com/subinamehta/training-material/blob/main/topics/proteomics/tutorials/clinical-mp-discovery/tutorial.md), we used MaxQuant to identify peptides for verification. Now, we will again use MaxQuant to further quantify the PepQuery-verified peptides, both microbial and human. More information about quantitation using MaxQuant is available, including [Label-free data analysis](https://gxy.io/GTN:T00218) and [MaxQuant and MSstats for the analysis of TMT data](https://gxy.io/GTN:T00220).
 
@@ -143,9 +143,9 @@ The outputs we are most interested in consist of the `MaxQuant Evidence file`, `
 >
 {: .question}
 
-## Select microbial protein groups from MaxQuant with **Select**
+## Using Text Manipulation Tools to Manage MaxQuant Outputs
 
-> <hands-on-title> Select </hands-on-title>
+> <hands-on-title> Select microbial protein groups from MaxQuant with Select </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `proteinGroups` (output of **MaxQuant** {% icon tool %})
@@ -156,9 +156,7 @@ The outputs we are most interested in consist of the `MaxQuant Evidence file`, `
 {: .hands_on}
 
 
-## Select microbial peptides from MaxQuant with **Select**
-
-> <hands-on-title> Select </hands-on-title>
+> <hands-on-title> Select microbial peptides from MaxQuant with Select </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `peptides` (output of **MaxQuant** {% icon tool %})
@@ -168,9 +166,7 @@ The outputs we are most interested in consist of the `MaxQuant Evidence file`, `
 {: .hands_on}
 
 
-## Select out microbial protein names with **Cut**
-
-> <hands-on-title> Select </hands-on-title>
+> <hands-on-title> Select out microbial protein names with Cut </hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
@@ -180,9 +176,8 @@ The outputs we are most interested in consist of the `MaxQuant Evidence file`, `
 {: .hands_on}
 
 
-## Select out microbial peptide sequences with **Cut**
 
-> <hands-on-title> Select </hands-on-title>
+> <hands-on-title> Select out microbial peptide sequences with Cut </hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
@@ -193,7 +188,7 @@ The outputs we are most interested in consist of the `MaxQuant Evidence file`, `
 
 ## Generating a list of quantified proteins with **Group**
 
-> <hands-on-title> Group </hands-on-title>
+> <hands-on-title> Group quantified proteins </hands-on-title>
 >
 > 1. {% tool [Group](Grouping1) %} with the following parameters:
 >    - {% icon param-file %} *"Select data"*: `out_file1` (output of **Cut** {% icon tool %})
@@ -205,7 +200,7 @@ The outputs we are most interested in consist of the `MaxQuant Evidence file`, `
 
 ## Generating a list of quantified peptides with **Group**
 
-> <hands-on-title> Group </hands-on-title>
+> <hands-on-title> Group quantified peptides </hands-on-title>
 >
 > 1. {% tool [Group](Grouping1) %} with the following parameters:
 >    - {% icon param-file %} *"Select data"*: `out_file1` (output of **Cut** {% icon tool %})
