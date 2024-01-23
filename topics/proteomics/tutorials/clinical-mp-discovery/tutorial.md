@@ -205,9 +205,9 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 >
 {: .question}
 
-##  Selecting microbial peptides from SearchGUI/PeptideShaker **Select**
+##  Using Text Manipulation Tools to Manage Microbial Outputs from SearchGUI/PeptideShaker
 
-> <hands-on-title> Select </hands-on-title>
+> <hands-on-title> Selecting microbial peptides from SearchGUI/PeptideShaker with **Select** tool </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output_peptides` (output of **Peptide Shaker** {% icon tool %})
@@ -231,9 +231,7 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 >
 {: .question}
 
-## Selecting microbial PSMs from SearchGUI/PeptideShaker with **Select**
-
-> <hands-on-title> Select </hands-on-title>
+> <hands-on-title> Selecting microbial PSMs from SearchGUI/PeptideShaker with **Select** </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output_psm` (output of **Peptide Shaker** {% icon tool %})
@@ -245,9 +243,7 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 {: .hands_on}
 
 
-## Filtering confident microbial peptides from SGPS  with **Filter**
-
-> <hands-on-title> Filter </hands-on-title>
+> <hands-on-title> Filtering confident microbial peptides from SGPS  with **Filter** </hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Select** {% icon tool %})
@@ -271,9 +267,8 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 >
 {: .question}
 
-## Filtering confident microbial PSMs from SGPS with **Filter**
 
-> <hands-on-title> Filter </hands-on-title>
+> <hands-on-title> Filtering confident microbial PSMs from SGPS with **Filter** </hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Select** {% icon tool %})
@@ -403,7 +398,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 
 
 
-## Cutting out peptide sequences from Query Tabular  with **Cut**
+## Cutting out peptide sequences from Query Tabular with **Cut**
 
 > <hands-on-title> CUT </hands-on-title>
 >
@@ -415,7 +410,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 {: .hands_on}
 
 
-## Grouping distinct (unique) peptides from SGPS  with **Group**
+## Grouping distinct (unique) peptides from SGPS with **Group**
 
 > <hands-on-title> Group </hands-on-title>
 >
@@ -488,9 +483,9 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 {: .question}
 
 
-## Selecting microbial peptides from MaxQuant with **Select**
+## Using Text Manipulation Tools to Manage Microbial Outputs from MaxQuant
 
-> <hands-on-title> Select </hands-on-title>
+> <hands-on-title> Selecting microbial peptides from MaxQuant with **Select** </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `peptides` (output of **MaxQuant** {% icon tool %})
@@ -502,9 +497,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 {: .hands_on}
 
 
-## Cutting out microbial peptide sequences  with **Cut**
-
-> <hands-on-title> Cut </hands-on-title>
+> <hands-on-title> Cutting out microbial peptide sequences  with **Cut** </hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
@@ -514,9 +507,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 {: .hands_on}
 
 
-## Remove header line from MaxQuant peptide output with **Remove beginning**
-
-> <hands-on-title> Remove header</hands-on-title>
+> <hands-on-title> Remove header line from MaxQuant peptide output with **Remove beginning** </hands-on-title>
 >
 > 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - {% icon param-file %} *"from"*: `out_file1` (output of **Cut** {% icon tool %})
@@ -525,9 +516,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 {: .hands_on}
 
 
-## Grouping distinct (unique) peptide sequences from MaxQuant with **Group**
-
-> <hands-on-title> Group </hands-on-title>
+> <hands-on-title> Grouping distinct (unique) peptide sequences from MaxQuant with **Group** </hands-on-title>
 >
 > 1. {% tool [Group](Grouping1) %} with the following parameters:
 >    - {% icon param-file %} *"Select data"*: `out_file1` (output of **Remove beginning** {% icon tool %})
