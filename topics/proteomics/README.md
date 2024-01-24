@@ -24,6 +24,9 @@ topic | features
 [Clinical-Metaproteomics-Data-Verification](tutorials/clinical-mp-data-verification/tutorial.md) | [:book:](tutorials/clinical-mp-data-verification/tutorial.md)
 [Clinical-Metaproteomics-Quantitation](tutorials/clinical-mp-quantitation/tutorial.md) | [:book:](tutorials/clinical-mp-quantitation/tutorial.md)
 [Clinical-Metaproteomics-Data-Interpretation](tutorials/clinical-mp-data-interpretation/tutorial.md) | [:book:](tutorials/clinical-mp-data-interpretation/tutorial.md)
+[N-Tails](./tutorials/ntails/workflows/) | [:page_facing_up:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows) [:book:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows)
+[Secretome Prediction](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows) | [:page_facing_up:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows) [:book:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows)
+
 
 The Galaxy community offers many different ways of training. The table above lists all available training features of a specific topic to give you a fast and comprehensive overview.
 
@@ -33,11 +36,6 @@ The Galaxy community offers many different ways of training. The table above lis
  - :page_facing_up: The training course and material is available as Galaxy page (:thumbsup: hands-on training).
  - :book: The training course and material is available as annotated text (:thumbsup: hands-on training).
  - :mortar_board: Slides as Introduction (:thumbsup: Slides)
-
-topic | features
-:-- | :--:
-[N-Tails](./tutorials/ntails/workflows/) | [:page_facing_up:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows) [:book:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows)
-[Secretome Prediction](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows) | [:page_facing_up:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows) [:book:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows)
 
 ### Workflows
 
