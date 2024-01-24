@@ -40,14 +40,13 @@ The Galaxy community offers many different ways of training. The table above lis
 ```
 ### Workflows
 
-The GalaxyP GTN project also offers a selection of published GalaxyP workflows. The presented workflows are adapted to specific questions in proteomics,
-which are not answered in the more basic tutorials.
+The GalaxyP GTN project also offers a selection of published GalaxyP workflows. The presented workflows are adapted to specific
+questions in proteomics,which are not answered in the more basic tutorials.
 You are free to use and modify all workflows for your scientific question.
 
 ### Disclaimer
-Thanks for your interest in the GTN GalaxyP training material project. We only recently started working on this repository.
-We try to integrate more and more topics over time.
-Keep an eye out for new material from time to time.
+Thanks for your interest in the GTN GalaxyP training material project. We only recently started working on this
+repository.We try to integrate more and more topics over time. Keep an eye out for new material from time to time.
 
 ```
 
