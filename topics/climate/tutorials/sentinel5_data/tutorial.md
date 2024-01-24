@@ -1,10 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Sentinel 3 data visualisation
+title: Sentinel 5P data visualisation
 questions:
 - How to visualise volcanoes with Sentinel 5 data ?
-- How can we see the evolution of sulfur dioxide and aerosol index hrough time?
+- How can we see the evolution of sulfur dioxide and aerosol index through time?
 - How can be used OpenEO ?
 objectives:
 - Learn to use OpenEO in a jupyterlab
@@ -121,7 +121,7 @@ Interactive tools are working differently than classical tools as it allows the 
 > 14. This part is now finished you just have to correctly close this notebook. On the top left click on **files** and then on **Shut down**.
 > ![The shut down button to correctly close the jupyterlab](../../images/sentinel_5/shut_down.png)
 >
-> > <details-title> Some complementary info on the notebooks </details-title
+> > <details-title> Some complementary info on the notebooks </details-title>
 > > In the jupyterlab go to :
 > >   - **notebooks**
 > >   - Then, **openeo** 
