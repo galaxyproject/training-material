@@ -105,8 +105,8 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 >    data in the history, it is recommended to tag the datasets by attaching a meaningful tag '#'
 >    to them. The tagging will automatically be attached to any file generated
 >    from the original tagged dataset.
->    *e.g.*, `#normal` for normal tissue datasets (with `-N_` in the name) and
->    *e.g.*, `#tumor` for tumor dataset (with `-T_` in the name).
+>   *e.g.*, `#normal` for normal tissue datasets (with `-N_` in the name) and
+>   *e.g.*, `#tumor` for tumor dataset (with `-T_` in the name).
 >
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
@@ -188,29 +188,23 @@ However, the aim is to detect clear reads for hCNVs and will use a trimming step
 >      
 >      This makes the tool treat the forward and reverse reads simultaneously.
 >
->      - {% icon param-file %} *"Input FASTQ file (R1/first of pair)"*: the
->        forward reads (r1) dataset of the normal tissue sample
->      - {% icon param-file %} *"Input FASTQ file (R2/second of pair)"*: the
->        reverse reads (r2) dataset of the normal tissue sample
+>      - {% icon param-file %} *"Input FASTQ file (R1/first of pair)"*: the forward reads (r1) dataset of the normal tissue sample
+>      - {% icon param-file %} *"Input FASTQ file (R2/second of pair)"*: the reverse reads (r2) dataset of the normal tissue sample
 >
 >    - *"Perform initial ILLUMINACLIP step?"*: `Yes`
 >       - *"Select standard adapter sequences or provide custom?"*: `Standard`
->          - *"Adapter sequences to use"*: `TruSeq3 (paired-ended, for MiSeq and HiSeq)`
->       - *"Maximum mismatch count which will still allow a full match to be
->        performed"*: `2`
->       - *"How accurate the match between the two 'adapter ligated' reads must
->        be for PE palindrome read alignment"*: `30`
->       - *"How accurate the match between any adapter etc. sequence must be
->        against a read"*: `10`
->       - *"Minimum length of adapter that needs to be detected (PE specific/
->        palindrome mode)"*: `8`
+>       - *"Adapter sequences to use"*: `TruSeq3 (paired-ended, for MiSeq and HiSeq)`
+>       - *"Maximum mismatch count which will still allow a full match to be performed"*: `2`
+>       - *"How accurate the match between the two 'adapter ligated' reads must be for PE palindrome read alignment"*: `30`
+>       - *"How accurate the match between any adapter etc. sequence must be against a read"*: `10`
+>       - *"Minimum length of adapter that needs to be detected (PE specific/ palindrome mode)"*: `8`
 >       - *"Always keep both reads (PE specific/palindrome mode)?"*: `Yes`
 >
 >       These parameters are used to cut ILLUMINA-specific adapter sequences
 >       from the reads.
 >
 >    - *"Trimmomatic Operation"*
->      -  *"Select Trimmomatic operation to perform"*: `Cut the specified number of bases from the start of the read (HEADCROP)`
+>      - *"Select Trimmomatic operation to perform"*: `Cut the specified number of bases from the start of the read (HEADCROP)`
 >      - *"Number of bases to remove from the start of the read"*: `3`
 >      - {% icon param-repeat %} "Insert Trimmomatic Operation"*
 >        - *"Select Trimmomatic operation to perform"*: `Cut bases off the end of a read, if below a threshold quality (TRAILING)`
@@ -274,10 +268,10 @@ However, because of the high average data quality, there was no need to perform 
 >    - *"Single or Paired-end reads"*: `Paired`
 >       - {% icon param-file %} *"Select first set of reads"*: the trimmed
 >         forward reads (r1) dataset of the **normal tissue** sample; output of
->         **Trimmomatic** {% icon tool %}
+>        **Trimmomatic** {% icon tool %}
 >       - {% icon param-file %} *"Select second set of reads"*: the trimmed
 >         reverse reads (r2) dataset of the **normal tissue** sample; output of
->         **Trimmomatic** {% icon tool %}
+>        **Trimmomatic** {% icon tool %}
 >    - *"Set read groups information?"*: `Set read groups (SAM/BAM specification)`
 >      - *"Auto-assign"*: `No`
 >        - *"Read group identifier (ID)"*: `Not available.`
@@ -301,10 +295,10 @@ However, because of the high average data quality, there was no need to perform 
 >    - *"Single or Paired-end reads"*: `Paired`
 >       - {% icon param-file %} *"Select first set of reads"*: the trimmed
 >         forward reads (r1) dataset of the **tumor tissue** sample; output of
->         **Trimmomatic** {% icon tool %}
+>        **Trimmomatic** {% icon tool %}
 >       - {% icon param-file %} *"Select second set of reads"*: the reverse
 >         reads (r2) dataset of the **tumor tissue** sample; output of
->         **Trimmomatic** {% icon tool %}
+>        **Trimmomatic** {% icon tool %}
 >    - *"Set read groups information?"*: `Set read groups (SAM/BAM specification)`
 >      - *"Auto-assign"*: `No`
 >        - *"Read group identifier (ID)"*: `Not available.`
@@ -337,20 +331,20 @@ The remaining data preprocessing until the Control-FreeC step is the same for No
 >    -  {% icon param-file %} *"Dataset"*: `Insert dataset`
 >       - *"Input dataset"*: `The output of map with BWA-MEM for cancer tissue`
 > 2. Run {% tool [Create text file](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/1.1.0) %}  with the following parameters
->   -  *"Characters to insert"*: `normal reads`
->   -  *"Specify the number of iterations by"*: `User defined number`
->   -  *"How many times?"*: `1`
+>   - *"Characters to insert"*: `normal reads`
+>   - *"Specify the number of iterations by"*: `User defined number`
+>   - *"How many times?"*: `1`
 >   -  {% icon param-repeat %} "Insert selection"*
->      -  *"Characters to insert"*: `tumor reads`
->      -  *"Specify the number of iterations by"*: `User defined number`
->      -  *"How many times?"*: `1`
+>      - *"Characters to insert"*: `tumor reads`
+>      - *"Specify the number of iterations by"*: `User defined number`
+>      - *"How many times?"*: `1`
 >   - This will create a text file with only two lines normal reads and tumor reads
 >
 > 3. Run {% tool [Relabel identifiers](__RELABEL_FROM_FILE__) %}  with the following parameters
 >   - {% icon param-collection %} *"Input Collection"*: the creat a list from `Build lsit tool`.
 >   - *"How should the new labels be specified?"*: `Using lines in a simple text file.`
->   -  *"New Identifiers"*: The outcom from `Create txt file tool`
->   -  *"Ensure strict mapping"*: `False`
+>   - *"New Identifiers"*: The outcom from `Create txt file tool`
+>   - *"Ensure strict mapping"*: `False`
 >
 >   - Make sure to use the same files order for the both of **Build list** tool and **Creat text file**.   
 {: .hands_on}
@@ -364,15 +358,13 @@ and in results interpretation.
 > <hands-on-title>Data filtration and Remove duplicates</hands-on-title>
 > 1. Run {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3) %}  with the following parameters
 >   - {% icon param-collection %} *"SAM/BAM/CRAM dataset"*: The outpot of  `Relabel identifiers` dataset cpllection.
->   -  *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
->   -  In*"Configure filters:"*:
->        - In *"1: Configure filters:"*
->          -  *"Filter by quality"*: `1`
->        - In *"2: Configure filters:"*
->          -  *"Exclude reads with any of the following flags set"*: `Read is unmapped` `Mate  is unmapped`
->   -  *Produce extra dataset with dropped reads?"*: `False`
->   -  *"Output format"*: `BAM (-b)`
->   -  *"Reference data"*: `No`
+>   - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
+>   - *"Configure filters:"*:
+>     - *"Filter by quality"*: `1`
+>     - *"Exclude reads with any of the following flags set"*: `Read is unmapped` `Mate  is unmapped`
+>   - *Produce extra dataset with dropped reads?"*: `False`
+>   - *"Output format"*: `BAM (-b)`
+>   - *"Reference data"*: `No`
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
@@ -392,10 +384,10 @@ To detect hCNVs expression accurately. The reads must go through the lift alignm
 
 > <hands-on-title>Homogenize the positional distributed indels</hands-on-title>
 > 1. Run {% tool [BamLeftAlign](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1) %}  with the following parameters
->   -  *"Choose the source for the reference genome"*: `Locally cached `
+>   - *"Choose the source for the reference genome"*: `Locally cached `
 >   -  {% icon param-collection %} *"Select alignment file in BAM format"*: The outpot of  `tool RmDup`.
->   -  *"Using reference genome"*: `hg19`
->   -  *"Maximum number of iterations"*: `5`
+>   - *"Using reference genome"*: `hg19`
+>   - *"Maximum number of iterations"*: `5`
 >
 > 2. Run {% tool [Samtools calmd](toolshed.g2.bx.psu.edu/repos/devteam/samtools_calmd/samtools_calmd/2.0.2) %}  with the following parameters
 >   - {% icon param-collection %} *"BAM file to recalculate"*: The outpot of  `BamLeftAlign`.
@@ -440,36 +432,36 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 >   - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
 >   - *"Configure filters:"*:
 >     - *"Filter by quality"*: `255`
->   -  *What would you like to have reported?"*: `Reads dropped during filtering and subsampling`
->   -  *Produce extra dataset with dropped reads?"*: `False`
->   -  *"Output format"*: `BAM (-b)`
->   -  *"Reference data"*: `No`
+>   - *What would you like to have reported?"*: `Reads dropped during filtering and subsampling`
+>   - *Produce extra dataset with dropped reads?"*: `False`
+>   - *"Output format"*: `BAM (-b)`
+>   - *"Reference data"*: `No`
 >
 >
 > 5. Run {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3) %}  with the following parameters
 >   - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: The outpot of  `Samtools view`.
->   -  *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
+>   - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
 >   - *"Configure filters:"*:
 >     - *"Filter by regions:"*: `Regions from BED file`
 >     - {% icon param-collection %} *"Filter by intervals in a bed file:"*: The outpot of  ` Replace Text` BED format.
 >     - *"Filter by readgroup"*: `NO`
 >     - *"Filter by quality"*: `1`
->   -  *Produce extra dataset with dropped reads?"*: `False`
->   -  *"Output format"*: `BAM (-b)`
->   -  *"Reference data"*:`No`
+>   - *Produce extra dataset with dropped reads?"*: `False`
+>   - *"Output format"*: `BAM (-b)`
+>   - *"Reference data"*:`No`
 {: .hands_on}
 
 > <hands-on-title>Extract files form list</hands-on-title>
 > extract the files from the list to handel them separitly
 > 1. Run {% tool [Extract Dataset](__EXTRACT_DATASET__) %}  with the following parameters:
 >   -  {% icon param-collection %} *"Input List"*: `The outpot of Samtools view`.
->   -  *"How should a dataset be selected?"*: `Select by element identifier`
->   -  *"Element identifier:"*: `tumor reads`
+>   - *"How should a dataset be selected?"*: `Select by element identifier`
+>   - *"Element identifier:"*: `tumor reads`
 >
 > 2. Run {% tool [Extract Dataset](__EXTRACT_DATASET__) %}  with the following parameters:
 >   -  {% icon param-collection %} *"Input List"*: The outpot of  `Samtools view`.
->   -  *"How should a dataset be selected?"*: `Select by element identifier`
->   -  *"Element identifier:"*: `normal reads`
+>   - *"How should a dataset be selected?"*: `Select by element identifier`
+>   - *"Element identifier:"*: `normal reads`
 {: .hands_on}
 
 
@@ -517,11 +509,11 @@ The data are now ready to detect hCNV. Control-FREEC detects copy-number alterat
 >    ```
 >
  > 2. Run {% tool [Control-FREEC](toolshed.g2.bx.psu.edu/repos/iuc/control_freec/control_freec/11.6+galaxy1) %}  with the following parameters
->   -  *"Select the sequencing method of the input file(s)?"*: `whole-exome sequencing (WES)`
+>   - *"Select the sequencing method of the input file(s)?"*: `whole-exome sequencing (WES)`
 >   -  {% icon param-file %} *"Sample file"*: The outpot of  `Extract Dataset` (**cancer reads**)
 >   -  {% icon param-file %} *"Control file"*: The outpot of  `Extract Dataset` (**normal reads**)
 >   -  {% icon param-file %} *"BED file with capture regions"*: `chr 5, 7, 12 capture reagions **Input file**` 
->   -  *"Format of reads"*: `Illumina paired-end (FR)`
+>   - *"Format of reads"*: `Illumina paired-end (FR)`
 >
 >   - *"Advanced WES settings:"*:
 >     - *"Degree of polynomial:"*: `control-read-count-based normalization, WES (1)`
@@ -532,11 +524,11 @@ The data are now ready to detect hCNV. Control-FREEC detects copy-number alterat
 >     - *"Adjust sample contamination?"*: `True`
 >     - *"Sample contamination by normal cells"*: `0.30000000000000004`
 >     - *"Intercept of polynomial"*: `with GC-content (1)`
->     -  *"Sample sex"*: `XX`
+>     - *"Sample sex"*: `XX`
 >
->   -  *"Choose the source for the reference genome"*: `Locally cached`
->   -  *"Reference genome"*: `hg19`
->   -  *"Outputs:"*:
+>   - *"Choose the source for the reference genome"*: `Locally cached`
+>   - *"Reference genome"*: `hg19`
+>   - *"Outputs:"*:
 >     - *"BedGraph Output for UCSC genome browser"*: `False`
 >     - *"Visualize normalized copy number profile with predicted CNAs"*: `True`
 >     - *"2D data track file for Circos"*: `True`
@@ -570,7 +562,7 @@ the relationships between the genomic intervals [Krzywinski, Schein et al. 2009]
 
 > <hands-on-title>Visualise the hCNV findings</hands-on-title>
 > 1. Run {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %}  with the following parameters
->   -  *"Reference Genome Source"*: `Custom Karyotype`
+>   - *"Reference Genome Source"*: `Custom Karyotype`
 >   -  {% icon param-file %} *"Sample file"*: The outpot of  `Output dataset out_chr_sorted_circos from control freec`
 >
 >   - *"Ideogram:"*:
@@ -581,48 +573,48 @@ the relationships between the genomic intervals [Krzywinski, Schein et al. 2009]
 >       - *"Radius"*: `0.01`
 >       - *"Label Font Size"*: `40`
 >     - *"Cytogenic Bands:"*:
->       -  *"Band Stroke Color"*: `Black`
+>       - *"Band Stroke Color"*: `Black`
 >    - *"2D Data Tracks:"*:
 >      -  {% icon galaxy-wf-new %} "Insert 2D Data Plot"*
->        -  *"Outside Radius"*: `0.95`
->        -  *"Plot Type"*: `Scatter`
+>        - *"Outside Radius"*: `0.95`
+>        - *"Plot Type"*: `Scatter`
 >        - {% icon param-file %} *"Scatter Plot Data Source"*: `Output dataset 'out_ratio_log2_circos' from Control-FreeC`
 >        - *"Plot Format Specific Options:"*:
->          -  *"Glyph"*: `Circle`
->          -  *"Glyph Size"*: `4`
->          -  *"Fill Color"*: `Gray`
->          -  *"Stroke Color"*: `Black`
->          -  *"Stroke Thickness"*: `0`  
+>          - *"Glyph"*: `Circle`
+>          - *"Glyph Size"*: `4`
+>          - *"Fill Color"*: `Gray`
+>          - *"Stroke Color"*: `Black`
+>          - *"Stroke Thickness"*: `0`  
 >         - *"Rules:"*:
 >           -  {% icon galaxy-wf-new %} *"Insert Rule"*:
 >             -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*
->               -  *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
->               -  *"Points above this value"*: `0.0`
+>               - *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
+>               - *"Points above this value"*: `0.0`
 >             -  {% icon galaxy-wf-new %} *"Insert Actions to Apply"*
->               -  *"Action"*: `Change Fill Color for all points`
->               -  *"Fill Color"*: `Red`
->             -  *"Continue flow"*: `False`
+>               - *"Action"*: `Change Fill Color for all points`
+>               - *"Fill Color"*: `Red`
+>             - *"Continue flow"*: `False`
 >           -  {% icon param-repeat %} *"Insert Rule"*:
 >               -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*:
->                 -  *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
->                 -  *"Points below this value"*: `0.0`
+>                 - *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
+>                 - *"Points below this value"*: `0.0`
 >               -  {% icon galaxy-wf-new %} *"Insert Actions to ApplyInsert Actions to Apply"*:
->                 -  *"Action"*: `Change Fill Color for all points`
->                 -  *"Fill Color"*: `Blue`
->               -  *"Continue flow"*: `False`
+>                 - *"Action"*: `Change Fill Color for all points`
+>                 - *"Fill Color"*: `Blue`
+>               - *"Continue flow"*: `False`
 >         -  In*"Axes:"*:
 >           -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*
->             -  *"Radial Position"*: `Absolute position (values match data values)`
->             -  *"Spacing"*: `1.0`
->             -  *"y0"*: `-4.0`
->             -  *"y1"*: `4.0`
->             -  *"Color"*: `Gray`
->             -  *"Color Transparency"*: `1.0`
->             -  *"Thickness"*: `2`
+>             - *"Radial Position"*: `Absolute position (values match data values)`
+>             - *"Spacing"*: `1.0`
+>             - *"y0"*: `-4.0`
+>             - *"y1"*: `4.0`
+>             - *"Color"*: `Gray`
+>             - *"Color Transparency"*: `1.0`
+>             - *"Thickness"*: `2`
 >           - *"When to show"*: `Always`
->   -  *"Limits:"*:
->     -  *"Maximum number of links to draw"*: `2500000`
->     -  *"Maximum number of points per track"*: `2500000`
+>   - *"Limits:"*:
+>     - *"Maximum number of links to draw"*: `2500000`
+>     - *"Maximum number of points per track"*: `2500000`
 {: .hands_on}
 
 > <question-title></question-title>
