@@ -58,9 +58,9 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 >
 > 1. For this tutorial, make a new history.
 >
->   {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
->   {% snippet faqs/galaxy/histories_rename.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the data files from
 >    [Zenodo](https://zenodo.org/record/2582555):
@@ -81,16 +81,16 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 >
 >    The dat aset can also be downloaded a local storage.  
 >
->   {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
 >
->   {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Make sure to upload the sequences in fastaq format. Look at the history and
 >    check if the created datasets have their data types assigned correctly with two reads for
 >    the tumor tissues and two reads for the normal tissues. If not, fix any
 >    missing or wrong data type assignments.
 >
->   {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger.gz" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger.gz" %}
 >
 > 4. Give the data meaningful names and tags to facilitate analysis.
 >     
@@ -98,7 +98,7 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 >    When uploading data from a link, Galaxy names the files after the link address.
 >    It might be useful to change or modify the name to something more meaningful.
 >
->   {% snippet faqs/galaxy/datasets_rename.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 >
 > 5. This tutorial has a set of shared steps performed on the data. To track the
@@ -109,7 +109,7 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 >   *e.g.*, `#tumor` for tumor dataset (with `-T_` in the name).
 >
 >
->   {% snippet faqs/galaxy/datasets_add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 >
 {: .hands_on}
@@ -129,7 +129,7 @@ The data was obtained following a series of laboratory procedures, including DNA
 > 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on the fastq datasets
 >       - {% icon param-files %} *"Short read data from the current history"*: all 4 FASTQ  datasets selected with **Multiple datasets**
 >
->   {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 >    This job will generate eight new datasets to the history. To
 >    parse the quality results view the html report of each dataset.
@@ -366,7 +366,7 @@ and in results interpretation.
 >   - *"Output format"*: `BAM (-b)`
 >   - *"Reference data"*: `No`
 >
->   {% snippet faqs/galaxy/tools_select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 > 2. Run {% tool [RmDup](toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1) %}  with the following parameters
 >   - {% icon param-collection %} *"BAM File"*:  The outpot of  `Samtools view`
@@ -425,7 +425,7 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 >
 >    This step will generate a data collection folder with two files inside. Change the datatype for the files inside it into **BED format**.  
 >
->   {% snippet faqs/galaxy/datasets_change_datatype.md %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 4. Run {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3) %}  with the following parameters
 >   - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: The outpot of  `CalMD`.
