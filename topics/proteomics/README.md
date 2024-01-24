@@ -1,6 +1,6 @@
 GalaxyP Training material
 =================
-
+<details><summary>Proteomics training material</summary>
 topic | features
 :-- | :--:
 [Database Handling](tutorials/database-handling/tutorial.md) | [:book:](tutorials/database-handling/tutorial.md)
@@ -30,6 +30,8 @@ The Galaxy community offers many different ways of training. The table above lis
  - :book: The training course and material is available as annotated text (:thumbsup: hands-on training).
  - :mortar_board: Slides as Introduction
 
+
+
 ### Workflows
 
 The GalaxyP GTN project also offers a selection of published GalaxyP workflows. The presented workflows are adapted to specific questions in proteomics, which are not answered in the more basic tutorials.
@@ -44,3 +46,4 @@ topic | features
 Thanks for your interest in the GTN GalaxyP training material project. We only recently started working on this repository. We try to integrate more and more topics over time. Keep an eye out for new material from time to time.
 
 If you want to join the discussion about new material to integrate, please post your thoughts on this [issue page](https://github.com/galaxyproject/training-material/issues/237). We are most thankful for any feedback!
+</details>
