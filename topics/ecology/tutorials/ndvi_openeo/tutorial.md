@@ -16,10 +16,8 @@ key_points:
 - Handle jupyterlab tools
 tags:
   - earth-system
-  - soil
+  - land degradation
   - NDVI
-  - timeseries
-  - csv data
   - copernicus
   - holoviews
 contributions:
