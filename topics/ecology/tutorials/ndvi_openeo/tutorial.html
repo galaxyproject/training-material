@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: From NDVI data with OpenEO to time series visualisation with Holoviews / Ecology</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@b8aebcc7004d621fe54d797e9157e08102a58722",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ndvi_openeo/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706125867' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706125867' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: From NDVI data with OpenEO to time series visualisation with Holoviews">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-24 08:43:07 +0000">
+<meta name="DC.creator" content="Marie Josse"><meta name="description" content="Learn to analyse Ecological data through Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Ecology / Hands-on: From NDVI data with OpenEO to time series visualisation with Holoviews">
+        <meta property="og:description" content="Learn to analyse Ecological data through Galaxy.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-01-24 08:43:07 +0000",
+  "datePublished": "2024-01-24 19:43:59 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: From NDVI data with OpenEO to time series visualisation with Holoviews",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Ecology",
+    "description": "Learn to analyse Ecological data through Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: From NDVI data with OpenEO to time series visualisation with Holoviews",
+  "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ndvi_openeo/tutorial.html",
+  "version": 5,
+  "timeRequired": "PT1H",
+  "teaches": "Use OpenEo technologies and learn how to download data with them\n - Learn to use Holoviz environment to process csv data\n - Create timeseries and visualisation of the NDVI\n - Handle going form one interactive tool to another",
+  "keywords": [
+    "Ecology",
+    "earth-system",
+    "land degradation",
+    "NDVI",
+    "copernicus",
+    "holoviews"
+  ],
+  "description": "The questions this  addresses are:\n - What's the NDVI ?\n - How to evaluate the NDVI through out time ?\n\n\nThe objectives are:\n - Use OpenEo technologies and learn how to download data with them\n - Learn to use Holoviz environment to process csv data\n - Create timeseries and visualisation of the NDVI\n - Handle going form one interactive tool to another\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "name": "Marie Josse",
+      "image": "https://avatars.githubusercontent.com/Marie59",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Ecology",
+      "description": "Learn to analyse Ecological data through Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0610",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0610"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "earth-system"
+    },
+    {
+      "@type": "Thing",
+      "name": "land degradation"
+    },
+    {
+      "@type": "Thing",
+      "name": "NDVI"
+    },
+    {
+      "@type": "Thing",
+      "name": "copernicus"
+    },
+    {
+      "@type": "Thing",
+      "name": "holoviews"
+    }
+  ],
+  "abstract": "Through this tutorial you will learn here how to access and download Copernicus Data Space Ecosystem (CDSE) data through a jupyterlab Galaxy interactive tool :"
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706125867'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/ecology" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Ecology
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/ecology/faqs/" title="Check our FAQs for the Ecology topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/ecology/tutorials/ndvi_openeo/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/ecology/tutorials/ndvi_openeo/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/ecology/tutorials/ndvi_openeo/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/ecology/tutorials/ndvi_openeo/tutorial.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/topics/ecology/tutorials/ndvi_openeo/tutorial.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-ecology">
+    <h1 data-toc-skip>From NDVI data with OpenEO to time series visualisation with Holoviews</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=36" alt="Marie Josse avatar" width="36" class="avatar" />
+    Marie Josse</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What’s the NDVI ?</p>
+</li>
+        
+        <li><p>How to evaluate the NDVI through out time ?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Use OpenEo technologies and learn how to download data with them</p>
+</li>
+        
+        <li><p>Learn to use Holoviz environment to process csv data</p>
+</li>
+        
+        <li><p>Create timeseries and visualisation of the NDVI</p>
+</li>
+        
+        <li><p>Handle going form one interactive tool to another</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/ecology/tutorials/ndvi_openeo/workflows/" title="From NDVI data with OpenEO to time series visualisation with Holoviews workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/ecology/tutorials/ndvi_openeo/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/ecology/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 24, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Through this tutorial you will learn here how to access and download Copernicus Data Space Ecosystem (CDSE) data through a jupyterlab Galaxy interactive tool :</p>
+
+<p>This tool enables you to leverage the Copernicus Data Space Ecosystem services and access data effortlessly.
+The JupyterLab service allows you to dive into data exploration, visualization, and analysis without the hassle of installing dependencies or downloading large data sets.</p>
+
+<p>You will also apprehend how to use the Holoviz ecosysytem by plotting and visualising NDVI (from the CDSE) timeseries :
+HoloViz provides high-level Python tools that are designed to work together to solve the entire problem of visualization, from conducting exploratory data analysis to deploying complex dashboards.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#context-on-galaxy" id="markdown-toc-context-on-galaxy">Context on Galaxy</a></li>
+  <li><a href="#copernicus-data-space-ecosystem" id="markdown-toc-copernicus-data-space-ecosystem">Copernicus Data Space Ecosystem</a></li>
+  <li><a href="#holoviz" id="markdown-toc-holoviz">Holoviz</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="context-on-galaxy">Context on Galaxy</h2>
+<p>Interactive tools work differently than classical tools as it allows the user to interact with a dedicated graphical interface. This kind of tools is used to give access to Jupyter notebooks, RStudio or R Shiny apps for example.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-short-introduction-on-how-galaxy-works"><button class="gtn-boxify-button details" type="button" aria-controls="details-short-introduction-on-how-galaxy-works" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Short introduction on how Galaxy works</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>You can come back to where you left off the tutorial anytime by clicking <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-log-in-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Log in to Galaxy</div>
+    <ol>
+      <li>Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)</li>
+      <li>Browse to your <a href="https://earth-system.usegalaxy.eu/">Galaxy instance</a></li>
+      <li>On the top pannel go to <strong>Login or Register</strong></li>
+    </ol>
+
+  </blockquote>
+
+  <p>The Galaxy homepage is divided into three panels:</p>
+  <ul>
+    <li>Tools on the left</li>
+    <li>Viewing panel in the middle</li>
+    <li>History of analysis and files on the right</li>
+  </ul>
+
+  <figure id="figure-1" style="max-width: 90%;"><img src="/training-material/shared/images/galaxy_interface.png" alt="Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right." width="2009" height="969" loading="lazy" /><a target="_blank" href="/training-material/shared/images/galaxy_interface.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy interface explanation</figcaption></figure>
+
+  <p>The first time you use Galaxy, there will be no files in your history panel.</p>
+</blockquote>
+
+<h1 id="copernicus-data-space-ecosystem">Copernicus Data Space Ecosystem</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-launch-the-interactive-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Launch the interactive tool</div>
+
+  <ol>
+    <li><span class="tool" data-tool="interactive_tool_copernicus" title="Copernicus Data Space Ecosystem tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Copernicus Data Space Ecosystem</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Do you already have a notebook?”</em>: <code class="language-plaintext highlighter-rouge">Start with a fresh notebook</code></li>
+        <li><em>“Include data into the environment - optional “</em>: You don’t need anything</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click on <strong>Run Tool</strong></p>
+    </li>
+    <li>
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the Copernicus Data Space Ecosystem to be running (Job Info)</li>   <li>Click on Copernicus Data Space Ecosystem</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-navigate-the-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Navigate the jupyterlab</div>
+  <ol>
+    <li>Once you are in the jupyterlab go to :
+      <ul>
+        <li><strong>notebooks</strong></li>
+        <li>Then, <strong>openeo</strong></li>
+        <li>Open the notebook <strong>NDVI_Timeseries.ipynb</strong></li>
+      </ul>
+    </li>
+    <li>You can start running your notebook. To do so you can go on the pannel displaying button right above the notebook and click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span>. 
+Everytime you press this button you can excecute a one by one the cells.</li>
+    <li>In the <strong>Setup</strong> section when you execute the connection cell you’ll have some actions to conduct.</li>
+    <li>First click ont the link appearing, you’re notebook should look like the following :
+<a href="../../images/ndvi_openeo_holoviz/ndvi_notebook.png" rel="noopener noreferrer"><img src="../../images/ndvi_openeo_holoviz/ndvi_notebook.png" alt="Begining of the NDVI notebook  with the connection link visible. " width="1920" height="1080" loading="lazy" /></a></li>
+    <li>Once you clicked a new window opens. If you don’t have a copernicus account please create one and follow the instructions given.</li>
+    <li>If you have an account sign in and then press the green <strong>YES</strong>
+<a href="../../images/ndvi_openeo_holoviz/connection.png" rel="noopener noreferrer"><img src="../../images/ndvi_openeo_holoviz/connection.png" alt="Image of how does the connection page looks like. " width="1920" height="1080" loading="lazy" /></a></li>
+    <li>You’ll be redirected to a page letting you know the connection was a success
+<a href="../../images/ndvi_openeo_holoviz/connection_ok.png" rel="noopener noreferrer"><img src="../../images/ndvi_openeo_holoviz/connection_ok.png" alt="Image of the successful connection. " width="1920" height="1080" loading="lazy" /></a></li>
+    <li>Now, you can go back on your jupyterlab and execute the rest of the notebook.</li>
+    <li>Once you executed the entire notebook you should have a new folder in the left pannel named <strong>ndvi-results</strong> go in it.</li>
+    <li>Select the 3 files there and click right, and then copy
+<a href="../../images/ndvi_openeo_holoviz/copy_paste.png" rel="noopener noreferrer"><img src="../../images/ndvi_openeo_holoviz/copy_paste.png" alt="The copy command on the 3 files in the ndvi-results folder. " width="484" height="562" loading="lazy" /></a></li>
+    <li>Then go back to the root of your path and go in the <strong>ouputs</strong> folder. There you can click right and paste the 3 NDVI files. 
+<a href="../../images/ndvi_openeo_holoviz/outputs.png" rel="noopener noreferrer"><img src="../../images/ndvi_openeo_holoviz/outputs.png" alt="The resulting 3 files in the outputs folder. " width="290" height="562" loading="lazy" /></a></li>
+    <li>This part is now finished you just have to correctly close this notebook. On the top left click on <strong>files</strong> and then on <strong>Shut down</strong>.
+<a href="../../images/ndvi_openeo_holoviz/shut_down.png" rel="noopener noreferrer"><img src="../../images/ndvi_openeo_holoviz/shut_down.png" alt="The shut down button to correctly close the jupyterlab. " width="420" height="690" loading="lazy" /></a></li>
+  </ol>
+</blockquote>
+
+<p>Go back on your Galaxy window. After a couple minutes you should see your outputs turning green in your history.</p>
+
+<p>Check that your data are in csv format.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-check-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-check-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Check datatype </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span>, it should be <code class="language-plaintext highlighter-rouge">csv</code></p>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">csv</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+  <p><!--END_SNIPPET--></p>
+</blockquote>
+
+<h1 id="holoviz">Holoviz</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-launch-holoviz"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Launch Holoviz</div>
+
+  <ol class="code-in">
+    <li><span class="tool" data-tool="interactive_tool_holoviz" title="Holoviz tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Holoviz</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Do you already have a notebook?”</em>: <code class="language-plaintext highlighter-rouge">Start with a fresh notebook</code></li>
+        <li><em>“Include data into the environment - optional “</em>: Select <code class="language-plaintext highlighter-rouge">timeseries-basic</code>, <code class="language-plaintext highlighter-rouge">timeseries-masked</code> and <code class="language-plaintext highlighter-rouge">timeseries-smoothed</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Click on <strong>Run Tool</strong></p>
+    </li>
+    <li>
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the Holoviz to be running (Job Info)</li>   <li>Click on Holoviz</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Once, you are in the jupyterlab go in the the <strong>notebooks</strong> folder</li>
+    <li>Open a terminal in bash and write the following
+      <blockquote>
+        <div class="box-title code-in-title" id="code-in-download-the-notebook"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Download the notebook</div>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://raw.githubusercontent.com/fair-ease/Holoviz/main/Tabular_Datasets_NDVI.ipynb
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+  <p>Now that you have your notebook you can just follow the instructions.</p>
+</blockquote>
+
+<p>Enjoy discovering the rest of the notebook.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>The tutorial ends there and with that you have the basis on how to use jupyterlab tools and more particularly the copernicus and holoviz ones.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Manage NDVI data</p>
+</li>
+                        
+                        <li><p>Handle jupyterlab tools</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/ecology/faqs/">FAQ page for the Ecology topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=From NDVI data with OpenEO to time series visualisation with Holoviews (Ecology)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Marie Josse,  <b>From NDVI data with OpenEO to time series visualisation with Holoviews (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ndvi_openeo/tutorial.html">https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ndvi_openeo/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{ecology-ndvi_openeo,
+author = "Marie Josse",
+	title = "From NDVI data with OpenEO to time series visualisation with Holoviews (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ndvi_openeo/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/fairease" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/fairease/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/eurosciencegateway" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/eurosciencegateway/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/ndvi_openeo/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/b8aebcc7004d621fe54d797e9157e08102a58722">b8aebcc</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/ecology/tutorials/ndvi_openeo/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706125867'></script>
+        
+    </body>
+</html>
