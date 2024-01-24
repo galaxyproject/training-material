@@ -2,6 +2,7 @@ GalaxyP Training material
 =================
 <details>
 <summary> 
+ 
 topic | features
 :-- | :--:
 [Database Handling](tutorials/database-handling/tutorial.md) | [:book:](tutorials/database-handling/tutorial.md)
