@@ -559,6 +559,24 @@ module GtnLinter
     end
   end
 
+  def self.empty_alt_text(contents)
+    find_matching_texts(contents, /!\[\]\(/i)
+      .map do |idx, _text, selected|
+      path = selected[1].to_s.strip
+      if !File.exist?(path.gsub(%r{^/}, ''))
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0),
+          replacement: nil,
+          message: 'The alt text for this image seems to be empty',
+          code: 'GTN:034'
+        )
+      end
+    end
+  end
+
   def self.check_bad_link(contents)
     find_matching_texts(contents, /{%\s*link\s+([^%]*)\s*%}/i)
       .map do |idx, _text, selected|
@@ -571,6 +589,22 @@ module GtnLinter
           match_end: selected.end(0),
           replacement: nil,
           message: "The linked file (`#{selected[1].strip}`) could not be found.",
+          code: 'GTN:018'
+        )
+      end
+    end
+
+    find_matching_texts(contents, /\]\(\)/i)
+      .map do |idx, _text, selected|
+      path = selected[1].to_s.strip
+      if !File.exist?(path.gsub(%r{^/}, ''))
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0),
+          replacement: nil,
+          message: 'The link does not seem to have a target.',
           code: 'GTN:018'
         )
       end
@@ -754,7 +788,8 @@ module GtnLinter
       *check_bad_heading_order(contents),
       *check_bolded_heading(contents),
       *snippets_too_close_together(contents),
-      *zenodo_api(contents)
+      *zenodo_api(contents),
+      *empty_alt_text(contents)
     ]
   end
 
