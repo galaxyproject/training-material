@@ -40,7 +40,7 @@ Then, you can visualise these data and process them with Panoply (plots geo-refe
 
 The purpose of this tutorial is to propose a user-friendly, interactive and efficient way to explore and jointly analyze remote sensing observations, from both the atmosphere and solid earth communities, for the monitoring of the volcanic activity in case of eruption and the multi-scale impact of volcanic emissions on the atmosphere.
 
-> <details-title>What about the data used here/details-title>
+> <details-title>What about the data used here</details-title>
 > Dataset of Sentinel 5P L2 from the 1st of April to the 30th of may 2021 of the Antilles. Especially of the La Soufriere Saint Vincent (Antilles) where a volcaninc erruption occured 9th of April. This dataset is focused on the dioxide sulfur (SO2) and Aerosol index (AI) spread out. Indeed, the knowledge of volcanic activity at a high temporal resolution is crucial for robustly determining large-scale impacts of volcanoes on atmosphere (air quality, air traffic) and climate. As such, this platform will be also of interest for scientists involved in the field of volcanic impacts at large, including institutions in charge of the monitoring of air quality and aviation safety.
 {: .details}
 
