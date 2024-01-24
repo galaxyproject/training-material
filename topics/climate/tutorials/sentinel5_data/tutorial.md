@@ -206,7 +206,7 @@ You can do the same plot for each data subset.
 > 1. Go on the top left in **File** 
 > 2. Select **Quit Panoply**
 > 3. Go back to your current Galaxy history and you should find Panoply outputs
->      ![The new history with panoply outputs]((../../images/sentinel_5/panoply_outputs.png)
+>      ![The new history with panoply outputs](../../images/sentinel_5/panoply_outputs.png)
 > 4. On the top of the galaxy page click on the {% icon galaxy-scratchbook %} to activate the multi view.
 > 5. Then in the panoply outputs click on the {% icon galaxy-eye %} of each of the png images.
 > You should be able to rearrange the windows to see each outputs
