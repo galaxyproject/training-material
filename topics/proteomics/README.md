@@ -1,6 +1,9 @@
 GalaxyP Training material
 =================
 <details>
+<summary>
+List of tutorials
+</summary> 
 
 topic | features
 :-- | :--:
