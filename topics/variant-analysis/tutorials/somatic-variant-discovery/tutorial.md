@@ -58,9 +58,9 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 >
 > 1. For this tutorial, make a new history.
 >
->    {% snippet faqs/galaxy/histories_create_new.md %}
+>   {% snippet faqs/galaxy/histories_create_new.md %}
 >
->    {% snippet faqs/galaxy/histories_rename.md %}
+>   {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the data files from
 >    [Zenodo](https://zenodo.org/record/2582555):
@@ -81,16 +81,16 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 >
 >    The dat aset can also be downloaded a local storage.  
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
+>   {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>   {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Make sure to upload the sequences in fastaq format. Look at the history and
 >    check if the created datasets have their data types assigned correctly with two reads for
 >    the tumor tissues and two reads for the normal tissues. If not, fix any
 >    missing or wrong data type assignments.
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger.gz" %}
+>   {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger.gz" %}
 >
 > 4. Give the data meaningful names and tags to facilitate analysis.
 >     
@@ -98,7 +98,7 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 >    When uploading data from a link, Galaxy names the files after the link address.
 >    It might be useful to change or modify the name to something more meaningful.
 >
->    {% snippet faqs/galaxy/datasets_rename.md %}
+>   {% snippet faqs/galaxy/datasets_rename.md %}
 >
 >
 > 5. This tutorial has a set of shared steps performed on the data. To track the
@@ -109,7 +109,7 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 >   *e.g.*, `#tumor` for tumor dataset (with `-T_` in the name).
 >
 >
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>   {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 >
 {: .hands_on}
@@ -129,7 +129,7 @@ The data was obtained following a series of laboratory procedures, including DNA
 > 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on the fastq datasets
 >       - {% icon param-files %} *"Short read data from the current history"*: all 4 FASTQ  datasets selected with **Multiple datasets**
 >
->    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
+>   {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 >    This job will generate eight new datasets to the history. To
 >    parse the quality results view the html report of each dataset.
@@ -170,10 +170,10 @@ The data was obtained following a series of laboratory procedures, including DNA
 >    > >    and bimodal GC content distributions have been identified as a hallmark 
 >    > >    of that capture method
 >    > >    for example, see Fig. 4C in
->    > >    {% cite Meienberg2015 %}.
+>    > >   {% cite Meienberg2015 %}.
 >    > >
 >    > {: .solution}
->    {: .question}
+>   {: .question}
 {: .hands_on}
 
 ## Read trimming and filtering
@@ -247,7 +247,7 @@ However, because of the high average data quality, there was no need to perform 
 >    > > trimming them didn't lead to dramatic changes. However,
 >    > > we can point out that some of the adapters were removed.  
 >    > {: .solution}
->    {: .question}
+>   {: .question}
 {: .hands_on}
 
 ## Read Mapping
@@ -263,7 +263,7 @@ However, because of the high average data quality, there was no need to perform 
 >      >   - *"Will you select a reference genome from your history or use a
 >      >     built-in index?"*: `Use a genome from history and build index`
 >      >      - {% icon param-file %} *"Use the following dataset as the reference sequence"*: your imported `hg19` fasta dataset.
->      {: .comment}
+>     {: .comment}
 >
 >    - *"Single or Paired-end reads"*: `Paired`
 >       - {% icon param-file %} *"Select first set of reads"*: the trimmed
@@ -284,7 +284,7 @@ However, because of the high average data quality, there was no need to perform 
 >    > In general, we can choose our own ID and SM values, but the ID should
 >    > unambiguously identify the sequencing run that produced the reads,
 >    > while the SM value should identify the biological sample.
->    {: .comment}
+>   {: .comment}
 >
 > 2. Use {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} to map the reads from the **tumor tissue** sample
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
@@ -326,15 +326,15 @@ The remaining data preprocessing until the Control-FreeC step is the same for No
 
 > <hands-on-title>Filtrate the mapped reads</hands-on-title>
 > 1. Use {% tool [Build list](__BUILD_LIST__) %} to creat a list from the maped reads of the **normal tissue** and **tumor tissue**
->    -  {% icon param-file %} *"Dataset"*: `Insert dataset`
+>    - {% icon param-file %} *"Dataset"*: `Insert dataset`
 >       - *"Input dataset"*: `The output of map with BWA-MEM for normal tissue`
->    -  {% icon param-file %} *"Dataset"*: `Insert dataset`
+>    - {% icon param-file %} *"Dataset"*: `Insert dataset`
 >       - *"Input dataset"*: `The output of map with BWA-MEM for cancer tissue`
 > 2. Run {% tool [Create text file](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/1.1.0) %}  with the following parameters
 >   - *"Characters to insert"*: `normal reads`
 >   - *"Specify the number of iterations by"*: `User defined number`
 >   - *"How many times?"*: `1`
->   -  {% icon param-repeat %} "Insert selection"*
+>   - {% icon param-repeat %} "Insert selection"*
 >      - *"Characters to insert"*: `tumor reads`
 >      - *"Specify the number of iterations by"*: `User defined number`
 >      - *"How many times?"*: `1`
@@ -366,7 +366,7 @@ and in results interpretation.
 >   - *"Output format"*: `BAM (-b)`
 >   - *"Reference data"*: `No`
 >
->    {% snippet faqs/galaxy/tools_select_collection.md %}
+>   {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 > 2. Run {% tool [RmDup](toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1) %}  with the following parameters
 >   - {% icon param-collection %} *"BAM File"*:  The outpot of  `Samtools view`
@@ -385,7 +385,7 @@ To detect hCNVs expression accurately. The reads must go through the lift alignm
 > <hands-on-title>Homogenize the positional distributed indels</hands-on-title>
 > 1. Run {% tool [BamLeftAlign](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1) %}  with the following parameters
 >   - *"Choose the source for the reference genome"*: `Locally cached `
->   -  {% icon param-collection %} *"Select alignment file in BAM format"*: The outpot of  `tool RmDup`.
+>   - {% icon param-collection %} *"Select alignment file in BAM format"*: The outpot of  `tool RmDup`.
 >   - *"Using reference genome"*: `hg19`
 >   - *"Maximum number of iterations"*: `5`
 >
@@ -425,7 +425,7 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 >
 >    This step will generate a data collection folder with two files inside. Change the datatype for the files inside it into **BED format**.  
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md %}
+>   {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 4. Run {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3) %}  with the following parameters
 >   - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: The outpot of  `CalMD`.
@@ -454,12 +454,12 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 > <hands-on-title>Extract files form list</hands-on-title>
 > extract the files from the list to handel them separitly
 > 1. Run {% tool [Extract Dataset](__EXTRACT_DATASET__) %}  with the following parameters:
->   -  {% icon param-collection %} *"Input List"*: `The outpot of Samtools view`.
+>   - {% icon param-collection %} *"Input List"*: `The outpot of Samtools view`.
 >   - *"How should a dataset be selected?"*: `Select by element identifier`
 >   - *"Element identifier:"*: `tumor reads`
 >
 > 2. Run {% tool [Extract Dataset](__EXTRACT_DATASET__) %}  with the following parameters:
->   -  {% icon param-collection %} *"Input List"*: The outpot of  `Samtools view`.
+>   - {% icon param-collection %} *"Input List"*: The outpot of  `Samtools view`.
 >   - *"How should a dataset be selected?"*: `Select by element identifier`
 >   - *"Element identifier:"*: `normal reads`
 {: .hands_on}
@@ -510,9 +510,9 @@ The data are now ready to detect hCNV. Control-FREEC detects copy-number alterat
 >
  > 2. Run {% tool [Control-FREEC](toolshed.g2.bx.psu.edu/repos/iuc/control_freec/control_freec/11.6+galaxy1) %}  with the following parameters
 >   - *"Select the sequencing method of the input file(s)?"*: `whole-exome sequencing (WES)`
->   -  {% icon param-file %} *"Sample file"*: The outpot of  `Extract Dataset` (**cancer reads**)
->   -  {% icon param-file %} *"Control file"*: The outpot of  `Extract Dataset` (**normal reads**)
->   -  {% icon param-file %} *"BED file with capture regions"*: `chr 5, 7, 12 capture reagions **Input file**` 
+>   - {% icon param-file %} *"Sample file"*: The outpot of  `Extract Dataset` (**cancer reads**)
+>   - {% icon param-file %} *"Control file"*: The outpot of  `Extract Dataset` (**normal reads**)
+>   - {% icon param-file %} *"BED file with capture regions"*: `chr 5, 7, 12 capture reagions **Input file**` 
 >   - *"Format of reads"*: `Illumina paired-end (FR)`
 >
 >   - *"Advanced WES settings:"*:
@@ -563,7 +563,7 @@ the relationships between the genomic intervals [Krzywinski, Schein et al. 2009]
 > <hands-on-title>Visualise the hCNV findings</hands-on-title>
 > 1. Run {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %}  with the following parameters
 >   - *"Reference Genome Source"*: `Custom Karyotype`
->   -  {% icon param-file %} *"Sample file"*: The outpot of  `Output dataset out_chr_sorted_circos from control freec`
+>   - {% icon param-file %} *"Sample file"*: The outpot of  `Output dataset out_chr_sorted_circos from control freec`
 >
 >   - *"Ideogram:"*:
 >     - *Spacing Between Ideograms (in chromosome units)"*: `3.0`
@@ -575,7 +575,7 @@ the relationships between the genomic intervals [Krzywinski, Schein et al. 2009]
 >     - *"Cytogenic Bands:"*:
 >       - *"Band Stroke Color"*: `Black`
 >    - *"2D Data Tracks:"*:
->      -  {% icon galaxy-wf-new %} "Insert 2D Data Plot"*
+>      - {% icon galaxy-wf-new %} "Insert 2D Data Plot"*
 >        - *"Outside Radius"*: `0.95`
 >        - *"Plot Type"*: `Scatter`
 >        - {% icon param-file %} *"Scatter Plot Data Source"*: `Output dataset 'out_ratio_log2_circos' from Control-FreeC`
@@ -586,24 +586,24 @@ the relationships between the genomic intervals [Krzywinski, Schein et al. 2009]
 >          - *"Stroke Color"*: `Black`
 >          - *"Stroke Thickness"*: `0`  
 >         - *"Rules:"*:
->           -  {% icon galaxy-wf-new %} *"Insert Rule"*:
->             -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*
+>           - {% icon galaxy-wf-new %} *"Insert Rule"*:
+>             - {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*
 >               - *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
 >               - *"Points above this value"*: `0.0`
->             -  {% icon galaxy-wf-new %} *"Insert Actions to Apply"*
+>             - {% icon galaxy-wf-new %} *"Insert Actions to Apply"*
 >               - *"Action"*: `Change Fill Color for all points`
 >               - *"Fill Color"*: `Red`
 >             - *"Continue flow"*: `False`
->           -  {% icon param-repeat %} *"Insert Rule"*:
->               -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*:
+>           - {% icon param-repeat %} *"Insert Rule"*:
+>               - {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*:
 >                 - *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
 >                 - *"Points below this value"*: `0.0`
->               -  {% icon galaxy-wf-new %} *"Insert Actions to ApplyInsert Actions to Apply"*:
+>               - {% icon galaxy-wf-new %} *"Insert Actions to ApplyInsert Actions to Apply"*:
 >                 - *"Action"*: `Change Fill Color for all points`
 >                 - *"Fill Color"*: `Blue`
 >               - *"Continue flow"*: `False`
 >         -  In*"Axes:"*:
->           -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*
+>           - {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*
 >             - *"Radial Position"*: `Absolute position (values match data values)`
 >             - *"Spacing"*: `1.0`
 >             - *"y0"*: `-4.0`
