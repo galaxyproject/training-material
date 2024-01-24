@@ -1,6 +1,7 @@
 GalaxyP Training material
 =================
 <details><summary>Proteomics training material</summary>
+ 
 topic | features
 :-- | :--:
 [Database Handling](tutorials/database-handling/tutorial.md) | [:book:](tutorials/database-handling/tutorial.md)
