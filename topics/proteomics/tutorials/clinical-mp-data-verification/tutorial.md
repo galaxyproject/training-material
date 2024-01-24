@@ -164,7 +164,7 @@ We generate and merge Human UniProt (with Isoforms) and contaminants (cRAP) to m
 ## Peptide verification using PepQuery2
 The PepQuery2 tool will be used to validate the identified microbial peptides from SearchGUI/PeptideShaker and MaxQuant to ensure that they are indeed of microbial origin and that human peptides were not misassigned. We will use the list of `Distinct Peptides` (from the [Discovery Module](https://github.com/subinamehta/training-material/blob/main/topics/proteomics/tutorials/clinical-mp-discovery/tutorial.md)), `Human UniProt+Isoforms+cRAP database`, and our `MGF file collection` as inputs for PepQuery2. The outputs we are interested in are the four PSM Rank (txt) files (one for each MGF file).
 
-Interestingly, the PepQuery2 tool does not rely on searching peptides against a reference protein sequence database as “traditional” shotgun proteomics does, which enables it to identify novel, disease-specific sequences with sensitivity and specificity in its protein validation. More information about PepQuery is available, including the first [Wen B, Wang X, Zhang B., 2019](https://doi.org/10.1101%2Fgr.235028.118) and second iterations [Wen B & Zhang B., 2023](https://doi.org/10.1038/s41467-023-37462-4).
+Interestingly, the PepQuery2 tool does not rely on searching peptides against a reference protein sequence database as “traditional” shotgun proteomics does, which enables it to identify novel, disease-specific sequences with sensitivity and specificity in its protein validation. More information about PepQuery is available, including the first {% cite Wen2019 %} and second iterations {% cite Wen2023 %}.
 
 
 > <hands-on-title> Peptide validation using PepQuery2 </hands-on-title>
@@ -254,7 +254,7 @@ Now, we want to filter for confident peptides from PepQuery2 and prepare them fo
 
 ##  **Query Tabular**
 
-We will use the Query Tabular tool to search the PepQuery-verified peptides against the concatenated dataset that contains peptides and proteins from SearchGUI/Peptide and MaxQuant ([Johnson et al., 2018](https://doi.org/10.12688%2Ff1000research.16450.1)).
+We will use the Query Tabular tool { %cite Johnson2019 %} to search the PepQuery-verified peptides against the concatenated dataset that contains peptides and proteins from SearchGUI/Peptide and MaxQuant.
 
 > <hands-on-title> Querying verified peptides </hands-on-title>
 >
@@ -362,7 +362,7 @@ Again, we will use the Query Tabular tool to retrieve UniProt IDs (accession num
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Yes, it is possible for a single peptide or protein to have multiple accession numbers, particularly when dealing with different protein sequence databases, databases for specific species, or different versions of the same database. That's the reason in our workflow we merge both accession and sequences.
+> > 1. Yes, a single peptide or protein can have multiple accession numbers, particularly when dealing with different protein sequence databases, databases for specific species, or different versions of the same database. That's the reason in our workflow we merge both accession and sequences.
 > >
 > {: .solution}
 >
