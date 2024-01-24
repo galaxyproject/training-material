@@ -105,20 +105,20 @@ Interactive tools are working differently than classical tools as it allows the 
 >    Everytime you press this button you can excecute a one by one the cells. 
 > 5. In the **Setup** section when you execute the connection cell you'll have some actions to conduct.
 > 6. First click ont the link appearing, you're notebook should look like the following :
-> ![Begining of the Sentinel 5 notebook  with the connection link visible](../../images/sentinel_5/notebook_begin.png)
+>      ![Begining of the Sentinel 5 notebook  with the connection link visible](../../images/sentinel_5/notebook_begin.png)
 > 7. Once you clicked a new window opens. If you don't have a copernicus account please create one and follow the instructions given. 
 > 8. If you have an account sign in and then press the green **YES**
-> ![Image of how does the connection page looks like](../../images/sentinel_5/connection.png)
+>      ![Image of how does the connection page looks like](../../images/sentinel_5/connection.png)
 > 9. You'll be redirected to a page letting you know the connection was a success
-> ![Image of the successful connection](../../images/sentinel_5/connection_ok.png)
+>      ![Image of the successful connection](../../images/sentinel_5/connection_ok.png)
 > 10. Now, you can go back on your jupyterlab and execute the rest of the notebook.
 > 11. Once you executed the entire notebook you should have a new file in the left pannel named **sentinel5.nc**.
 > 12. Select the file there and click right, and then copy
 >      ![The copy command on the 3 netcdf files](../../images/sentinel_5/copy.png)
 > 13. Then go back to the root of your path and go in the **ouputs** folder. There you can click right and paste the file. 
-> ![The resulting file in the outputs folder](../../images/sentinel_5/outputs.png)
+>      ![The resulting file in the outputs folder](../../images/sentinel_5/outputs.png)
 > 14. This part is now finished you just have to correctly close this notebook. On the top left click on **files** and then on **Shut down**.
-> ![The shut down button to correctly close the jupyterlab](../../images/sentinel_5/shut_down.png)
+>      ![The shut down button to correctly close the jupyterlab](../../images/sentinel_5/shut_down.png)
 >
 > > <details-title> Some complementary info on the notebooks </details-title>
 > > In the jupyterlab go to :
@@ -162,17 +162,17 @@ Go back on your Galaxy window. After a couple minutes you should see your output
 > Once in the Panoply interface :
 > 5. In the pop-up window go select the 3 netcf files `sentinel5_SO2.nc`, `sentinel5_aerosol_340.nc` and `sentinel5_aerosol_354.nc` and then Open.
 > 6. In the bottom of this window you have the possibilty to select what you want to **Show** go there and select "Georeferenced variables"
-> ![How to select Georeferenced variables](../../images/sentinel_5/georef_var.png)
+>      ![How to select Georeferenced variables](../../images/sentinel_5/georef_var.png)
 > 7. Select one of the 3 possible data and then on the top left press **Create Plot**
 > 8. In the pop-up window stay on the default choice "Create georeferenced Longitude-Latitude plot" and press **Create**
-> ![Creation of a georeferenced plot](../../images/sentinel_5/create_georef.png)
+>      ![Creation of a georeferenced plot](../../images/sentinel_5/create_georef.png)
 > 
 > You will obtain a world map like the folowing
-> ![World map in panoply](../../images/sentinel_5/1st_map.png)
+>      ![World map in panoply](../../images/sentinel_5/1st_map.png)
 > You should see a colored spot in the Atlantic.
 > 9. On your keyboard press `ctrl` (or `cmd` on Mac) and select a rectangle around the colored spot to zoom in.
 > 10. In the "Overlay" tab in "Overlay 1:" select **MWDB_Coasts_Countries_1.cnob**, in order to see the islands delimitation on your map.
-> ![Zoomed-in map of the colored data](../../images/sentinel_5/final_visu.png)
+>      ![Zoomed-in map of the colored data](../../images/sentinel_5/final_visu.png)
 > 11. Save your plot. Go on the top left to "File" then "Save Image As ..." go in the **output** folder and save.
 {: .hands_on}
 
@@ -206,14 +206,14 @@ You can do the same plot for each data subset.
 > 1. Go on the top left in **File** 
 > 2. Select **Quit Panoply**
 > 3. Go back to your current Galaxy history and you should find Panoply outputs
-> ![The new history with panoply outputs]((../../images/sentinel_5/panoply_outputs.png)
+>      ![The new history with panoply outputs]((../../images/sentinel_5/panoply_outputs.png)
 > 4. On the top of the galaxy page click on the {% icon galaxy-scratchbook %} to activate the multi view.
 > 5. Then in the panoply outputs click on the {% icon galaxy-eye %} of each of the png images.
 > You should be able to rearrange the windows to see each outputs
-> ![Multi-view of the panoply plots](../../images/sentinel_5/pano_outputs.png)
+>      ![Multi-view of the panoply plots](../../images/sentinel_5/pano_outputs.png)
 > 6. For the animated file go on {% icon galaxy-save %}
 > Then, in your downloads you should have a small video that you can visualise on your computer.
-> ![Video of the sulfur dioxide (SO2) evolution from april to may](../../images/sentinel_5/film.png)
+>      ![Video of the sulfur dioxide (SO2) evolution from april to may](../../images/sentinel_5/film.png)
 {: .hands_on}
 
 # Conclusion
