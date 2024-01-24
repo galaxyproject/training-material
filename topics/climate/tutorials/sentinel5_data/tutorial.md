@@ -114,7 +114,7 @@ Interactive tools are working differently than classical tools as it allows the 
 > 10. Now, you can go back on your jupyterlab and execute the rest of the notebook.
 > 11. Once you executed the entire notebook you should have a new file in the left pannel named **sentinel5.nc**.
 > 12. Select the file there and click right, and then copy
-> ![The copy command on the 3 netcdf files](../../images/sentinel_5/copy.png)
+>      ![The copy command on the 3 netcdf files](../../images/sentinel_5/copy.png)
 > 13. Then go back to the root of your path and go in the **ouputs** folder. There you can click right and paste the file. 
 > ![The resulting file in the outputs folder](../../images/sentinel_5/outputs.png)
 > 14. This part is now finished you just have to correctly close this notebook. On the top left click on **files** and then on **Shut down**.
