@@ -31,7 +31,7 @@ tags: [label-TMT11]
 
 # Abstract
 
-[Metaproteomics](https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/tutorial.html) is the large-scale characterization of the entire complement of proteins expressed by microbiota. However, metaproteomics analysis of clinical samples is challenged by the presence of abundant human (host) proteins which hampers the confident detection of lower abundant microbial proteins ([Batut et al., 2018](https://doi.org/10.1016/j.cels.2018.05.012); [Jagtap et al., 2015](https://doi.org/10.1002/pmic.201500074)).
+Metaproteomics is the large-scale characterization of the entire complement of proteins expressed by microbiota. However, metaproteomics analysis of clinical samples is challenged by the presence of abundant human (host) proteins which hampers the confident detection of lower abundant microbial proteins ([Batut et al., 2018](https://doi.org/10.1016/j.cels.2018.05.012); [Jagtap et al., 2015](https://doi.org/10.1002/pmic.201500074)).
 
 To address this, we used tandem mass spectrometry (MS/MS) and bioinformatics tools on the Galaxy platform to develop a metaproteomics workflow to characterize the metaproteomes of clinical samples. This clinical metaproteomics workflow holds potential for general clinical applications such as potential secondary infections during COVID-19 infection, microbiome changes during cystic fibrosis as well as broad research questions regarding host-microbe interactions.
 
