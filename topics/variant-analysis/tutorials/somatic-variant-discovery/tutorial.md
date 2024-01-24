@@ -209,21 +209,16 @@ However, the aim is to detect clear reads for hCNVs and will use a trimming step
 >       These parameters are used to cut ILLUMINA-specific adapter sequences
 >       from the reads.
 >
->    - In *"Trimmomatic Operation"*
->       - In *"1: Trimmomatic Operation"*
->           -  *"Select Trimmomatic operation to perform"*: `Cut the specified number
->       of bases from the start of the read (HEADCROP)`
->              - *"Number of bases to remove from the start of the read"*: `3`
->       - {% icon param-repeat %} "Insert Trimmomatic Operation"*
->       - In *"2: Trimmomatic Operation"*
->           -  *"Select Trimmomatic operation to perform"*: `Cut bases off the end of
->       a read, if below a threshold quality (TRAILING)`
->              - *"Minimum quality required to keep a base"*: `10`
->       - {% icon param-repeat %} "Insert Trimmomatic Operation"*
->       - In *"3: Trimmomatic Operation"*
->           - *"Select Trimmomatic operation to perform"*: `Drop reads below a
+>    - *"Trimmomatic Operation"*
+>      -  *"Select Trimmomatic operation to perform"*: `Cut the specified number of bases from the start of the read (HEADCROP)`
+>      - *"Number of bases to remove from the start of the read"*: `3`
+>      - {% icon param-repeat %} "Insert Trimmomatic Operation"*
+>        - *"Select Trimmomatic operation to perform"*: `Cut bases off the end of a read, if below a threshold quality (TRAILING)`
+>        - *"Minimum quality required to keep a base"*: `10`
+>      - {% icon param-repeat %} "Insert Trimmomatic Operation"*
+>        - *"Select Trimmomatic operation to perform"*: `Drop reads below a
 >       specified length (MINLEN)`
->              - *"Minimum quality required to keep a base"*: `25`
+>        - *"Minimum quality required to keep a base"*: `25`
 >
 >    
 {: .hands_on}
@@ -403,13 +398,13 @@ To detect hCNVs expression accurately. The reads must go through the lift alignm
 >   -  *"Maximum number of iterations"*: `5`
 >
 > 2. Run {% tool [Samtools calmd](toolshed.g2.bx.psu.edu/repos/devteam/samtools_calmd/samtools_calmd/2.0.2) %}  with the following parameters
->   -  {% icon param-collection %} *"BAM file to recalculate"*: The outpot of  `BamLeftAlign`.
->   -  *"Choose the source for the reference genome"*: `Use a built-in genome`
->   -  *"Using reference genome"*: `hg19`
->   -  *"Do you also want BAQ (Base Alignment Quality) scores to be calculated?"*: `No`
->   -  *"Additional options"*: `Advanced options`
->   -  *"Change identical bases to '='"*: `False`
->   -  *"Coefficient to cap mapping quality of poorly mapped reads"*: `50`
+>   - {% icon param-collection %} *"BAM file to recalculate"*: The outpot of  `BamLeftAlign`.
+>   - *"Choose the source for the reference genome"*: `Use a built-in genome`
+>   - *"Using reference genome"*: `hg19`
+>   - *"Do you also want BAQ (Base Alignment Quality) scores to be calculated?"*: `No`
+>   - *"Additional options"*: `Advanced options`
+>   - *"Change identical bases to '='"*: `False`
+>   - *"Coefficient to cap mapping quality of poorly mapped reads"*: `50`
 {: .hands_on}
 
 
@@ -419,24 +414,22 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 
 > <hands-on-title>Filtrate the indels reads</hands-on-title>
 > 1. Run {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3) %}  with the following parameters
->   -  {% icon param-collection %} *"BAM file to recalculate"*: The outpot of  `Samtools CalMD`.
->   -  *"What would you like to look at?"*: `Just the input header (-H)`
->   -  *"What would you like to have reported?"*: `The header in ...`
->   -  *"Output format"*: `SAM`
->   -  *"Reference data"*: `No, see help (-output-fmt-option no_ref)`  
+>   - {% icon param-collection %} *"BAM file to recalculate"*: The outpot of  `Samtools CalMD`.
+>   - *"What would you like to look at?"*: `Just the input header (-H)`
+>   - *"What would you like to have reported?"*: `The header in ...`
+>   - *"Output format"*: `SAM`
+>   - *"Reference data"*: `No, see help (-output-fmt-option no_ref)`  
 > 2. Run {% tool [Select](Grep1) %}  with the following parameters
->   -  {% icon param-collection %} *"Select lines from"*: The outpot of  `Samtools view`.
->   -  *"that"*: `Matching`
->   -  *"the pattern"*: `^@SQ\tSN:(chr[0-9]+|chrM|chrX|chrY)\tLN:[0-9]+`
->   -  *"Keep header line"*: `False`
+>   - {% icon param-collection %} *"Select lines from"*: The outpot of  `Samtools view`.
+>   - *"that"*: `Matching`
+>   - *"the pattern"*: `^@SQ\tSN:(chr[0-9]+|chrM|chrX|chrY)\tLN:[0-9]+`
+>   - *"Keep header line"*: `False`
 >
 > 3. Run {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %}  with the following parameters
->   -  {% icon param-collection %} *"Select lines from"*: The outpot of  `Select`.
->   -  In *"Replacements:"*:
->       - In *"1: Replacements:"*
->          -  *"Find pattern"*: `^@SQ\tSN:(chr[0-9]+|chrM|chrX|chrY)\tLN:([0-9]+)`
->       - In *"2: Replacements:"*
->          -  *"Replace with:"*: `\1\t0\t\2`
+>   - {% icon param-collection %} *"Select lines from"*: The outpot of  `Select`.
+>   - *"Replacements:"*:
+>     - *"Find pattern"*: `^@SQ\tSN:(chr[0-9]+|chrM|chrX|chrY)\tLN:([0-9]+)`
+>     - *"Replace with:"*: `\1\t0\t\2`
 >
 >    This step will generate a data collection folder with two files inside. Change the datatype for the files inside it into **BED format**.  
 >
@@ -444,10 +437,9 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 >
 > 4. Run {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3) %}  with the following parameters
 >   - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: The outpot of  `CalMD`.
->   -  *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
->   -  In*"Configure filters:"*:
->       - In *"1: Configure filters:"*
->         -  *"Filter by quality"*: `255`
+>   - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
+>   - *"Configure filters:"*:
+>     - *"Filter by quality"*: `255`
 >   -  *What would you like to have reported?"*: `Reads dropped during filtering and subsampling`
 >   -  *Produce extra dataset with dropped reads?"*: `False`
 >   -  *"Output format"*: `BAM (-b)`
@@ -457,15 +449,11 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 > 5. Run {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3) %}  with the following parameters
 >   - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: The outpot of  `Samtools view`.
 >   -  *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
->   -  In*"Configure filters:"*:
->       - In *"1: Configure filters:"*
->         -  *"Filter by regions:"*: `Regions from BED file`
->       - In *"2: Configure filters:"*
->         -  {% icon param-collection %} *"Filter by intervals in a bed file:"*: The outpot of  ` Replace Text` BED format.
->       - In *"3: Configure filters:"*
->         -  *"Filter by readgroup"*: `NO`
->       - In *"4: Configure filters:"*
->         -  *"Filter by quality"*: `1`
+>   - *"Configure filters:"*:
+>     - *"Filter by regions:"*: `Regions from BED file`
+>     - {% icon param-collection %} *"Filter by intervals in a bed file:"*: The outpot of  ` Replace Text` BED format.
+>     - *"Filter by readgroup"*: `NO`
+>     - *"Filter by quality"*: `1`
 >   -  *Produce extra dataset with dropped reads?"*: `False`
 >   -  *"Output format"*: `BAM (-b)`
 >   -  *"Reference data"*:`No`
@@ -535,35 +523,23 @@ The data are now ready to detect hCNV. Control-FREEC detects copy-number alterat
 >   -  {% icon param-file %} *"BED file with capture regions"*: `chr 5, 7, 12 capture reagions **Input file**` 
 >   -  *"Format of reads"*: `Illumina paired-end (FR)`
 >
->   -  In*"Advanced WES settings:"*:
->      - In *"1: Advanced WES settings:"*
->         -  *"Degree of polynomial:"*: `control-read-count-based normalization, WES (1)`
->      - In *"2:Advanced WES settings:"*
->         -  *"Read Count (RC) correction for GC-content bias and low mappability:"*: `normalize the sample and the control RC using GC-content and then calculate the ratio "Sample RC/contol RC" (1)`
->      - In *"3: Advanced WES settings:"*
->         -  *"Minimal number of consecutive windows to call a CNA"*: `WES (3)`
->      - In *"4: Advanced WES settings:"*
->         -  *"Segmentation of normalized profiles (break point)"*: `1.2`
->      - In *"5: Advanced WES settings:"*
->         -  *"Desired behavior in the ambiguous regions"-1" "*: `make a separate fragment of this "unknown" region and do not assign any copy number to this region at all (4)`
->      - In *"6: Advanced WES settings:"*
->         -  *"Adjust sample contamination?"*: `True`
->      - In *"7: Advanced WES settings:"*
->         -  *"Sample contamination by normal cells"*: `0.30000000000000004`
->      - In *"8: Advanced WES settings:"*
->         -  *"Intercept of polynomial"*: `with GC-content (1)`
->      - In *"9: Advanced WES settings:"*
->         -  *"Sample sex"*: `XX`
+>   - *"Advanced WES settings:"*:
+>     - *"Degree of polynomial:"*: `control-read-count-based normalization, WES (1)`
+>     - *"Read Count (RC) correction for GC-content bias and low mappability:"*: `normalize the sample and the control RC using GC-content and then calculate the ratio "Sample RC/contol RC" (1)`
+>     - *"Minimal number of consecutive windows to call a CNA"*: `WES (3)`
+>     - *"Segmentation of normalized profiles (break point)"*: `1.2`
+>     - *"Desired behavior in the ambiguous regions"-1" "*: `make a separate fragment of this "unknown" region and do not assign any copy number to this region at all (4)`
+>     - *"Adjust sample contamination?"*: `True`
+>     - *"Sample contamination by normal cells"*: `0.30000000000000004`
+>     - *"Intercept of polynomial"*: `with GC-content (1)`
+>     -  *"Sample sex"*: `XX`
 >
 >   -  *"Choose the source for the reference genome"*: `Locally cached`
 >   -  *"Reference genome"*: `hg19`
->   -  In*"Outputs:"*:
->       - In *"1: Outputs:"*
->         -  *"BedGraph Output for UCSC genome browser"*: `False`
->       - In *"2 :Outputs:"*
->         -  *"Visualize normalized copy number profile with predicted CNAs"*: `True`
->       - In *"3: Outputs:"*
->         -  *"2D data track file for Circos"*: `True`
+>   -  *"Outputs:"*:
+>     - *"BedGraph Output for UCSC genome browser"*: `False`
+>     - *"Visualize normalized copy number profile with predicted CNAs"*: `True`
+>     - *"2D data track file for Circos"*: `True`
 >
 > > <question-title></question-title>
 > >
@@ -597,110 +573,56 @@ the relationships between the genomic intervals [Krzywinski, Schein et al. 2009]
 >   -  *"Reference Genome Source"*: `Custom Karyotype`
 >   -  {% icon param-file %} *"Sample file"*: The outpot of  `Output dataset out_chr_sorted_circos from control freec`
 >
->   -  In*"Ideogram:"*:
->       - In *"1: Ideogram:"*
->         -  *Spacing Between Ideograms (in chromosome units)"*: `3.0`
->       - In *"2: Ideogram:"*
->         -  *"Radius"*: `0.8`
->       - In *"3: Ideogram:"*
->         -  *"Thickness"*: `45.0`
->       - In *"4: Ideogram:"*
->         -  In*"Labels:"*:
->             -  In*"1: Labels:"*
->                 -  *"Radius"*: `0.01`
->             -  In*"2: Labels:"*
->                 -  *"Label Font Size"*: `40`
->       - In *"5: Ideogram:"*
->         -  In*"Cytogenic Bands:"*:
->             -  In*"1: Cytogenic Bands:"*
->                 -  *"Band Stroke Color"*: `Black`
->   -  In*"2D Data Tracks:"*:
+>   - *"Ideogram:"*:
+>     - *Spacing Between Ideograms (in chromosome units)"*: `3.0`
+>     - *"Radius"*: `0.8`
+>     - *"Thickness"*: `45.0`
+>     - *"Labels:"*:
+>       - *"Radius"*: `0.01`
+>       - *"Label Font Size"*: `40`
+>     - *"Cytogenic Bands:"*:
+>       -  *"Band Stroke Color"*: `Black`
+>    - *"2D Data Tracks:"*:
 >      -  {% icon galaxy-wf-new %} "Insert 2D Data Plot"*
->         -  In*"2D Data Plots:"*:
->            - In *"1: 2D Data Plots:"*
->              -  *"Outside Radius"*: `0.95`
->            - In *"2: 2D Data Plots:"*
->              -  *"Plot Type"*: `Scatter`
->            - In *"3: 2D Data Plots:"*
->              -  {% icon param-file %} *"Scatter Plot Data Source"*: `Output dataset 'out_ratio_log2_circos' from Control-FreeC`
->            - In *"4: 2D Data Plots:"*
->              -  In*"Plot Format Specific Options:"*:
->                 - In *"1: Plot Format Specific Options:"*
->                   -  *"Glyph"*: `Circle`
->                 - In *"2: Plot Format Specific Options:"*
->                   -  *"Glyph Size"*: `4`
->                 - In *"3: Plot Format Specific Options:"*
->                   -  *"Fill Color"*: `Gray`
->                 - In *"4: Plot Format Specific Options:"*
->                   -  *"Stroke Color"*: `Black`
->                 - In *"5: Plot Format Specific Options:"*
->                   -  *"Stroke Thickness"*: `0`  
->         - In *"5: 2D Data Plots:"*
->           -  In*"Rules:"*:
->               - In *"1: Rules:"*
->                 -  {% icon galaxy-wf-new %} *"Insert Rule"*:
->                    -  In*"Rule 1"*
->                       - In *"1: Rule 1"*
->                         -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*
->                            -  In*" Conditions to Applies"*
->                               - In *"1: Conditions to Applies"*
->                                  -  *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
->                               - In *"2: Conditions to Applies"*
->                                  -  *"Points above this value"*: `0.0`
->                       - In *"2: Rule 1"*
->                          -  {% icon galaxy-wf-new %} *"Insert Actions to Apply"*
->                             -  In*"Actions to Applies"*
->                                - In *"1: Actions to Applies"*
->                                   -  *"Action"*: `Change Fill Color for all points`
->                                - In *"2: Actions to Applies"*
->                                   -  *"Fill Color"*: `Red`
->                       - In *"3: Rule 1"*
->                         -  *"Continue flow"*: `False`
->               - In *"2: Rules:"*
->                  -  {% icon param-repeat %} *"Insert Rule"*:
->                     -  In*"Rule 2"*
->                        - In *"1: Rule 2"*
->                           -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*:
->                              -  In*" Conditions to Applies"*
->                                 - In *"1: Conditions to Applies"*
->                                    -  *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
->                                 - In *"2: Conditions to Applies"*
->                                    -  *"Points below this value"*: `0.0`
->                        - In *"2: Rule 2"*
->                           -  {% icon galaxy-wf-new %} *"Insert Actions to ApplyInsert Actions to Apply"*:
->                              -  In*"Actions to Applies"*
->                                 - In *"1: Actions to Applies"*
->                                    -  *"Action"*: `Change Fill Color for all points`
->                                 - In *"2: Actions to Applies"*
->                                    -  *"Fill Color"*: `Blue`
->                      - In *"3: Rule 2"*
->                        -  *"Continue flow"*: `False`
->            - In *"6: 2D Data Plots:"*
->                -  In*"Axes:"*:
->                   -  In “1: Axes:”
->                      -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*
->                        -  In*"Axis 1:"*:
->                           - In *"1: Axis 1"*
->                              -  *"Radial Position"*: `Absolute position (values match data values)`
->                           - In *"2: Axis 2"*
->                             -  *"Spacing"*: `1.0`
->                           - In *"3: Axis 1"*
->                             -  *"y0"*: `-4.0`
->                           - In *"4: Axis 1"*
->                             -  *"y1"*: `4.0`
->                           - In *"5: Axis 1"*
->                             -  *"Color"*: `Gray`
->                           - In *"6: Axis 1"*
->                             -  *"Color Transparency"*: `1.0`
->                           - In *"7: Axis 1"*
->                             -  *"Thickness"*: `2`
->                   -  In “2: Axes:”
->                      - *"When to show"*: `Always`
->   -  In*"Limits:"*:
->       - In *"1: Limits:"*
->         -  *"Maximum number of links to draw"*: `2500000`
->       - In *"2: Limits:"*
->         -  *"Maximum number of points per track"*: `2500000`
+>        -  *"Outside Radius"*: `0.95`
+>        -  *"Plot Type"*: `Scatter`
+>        - {% icon param-file %} *"Scatter Plot Data Source"*: `Output dataset 'out_ratio_log2_circos' from Control-FreeC`
+>        - *"Plot Format Specific Options:"*:
+>          -  *"Glyph"*: `Circle`
+>          -  *"Glyph Size"*: `4`
+>          -  *"Fill Color"*: `Gray`
+>          -  *"Stroke Color"*: `Black`
+>          -  *"Stroke Thickness"*: `0`  
+>         - *"Rules:"*:
+>           -  {% icon galaxy-wf-new %} *"Insert Rule"*:
+>             -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*
+>               -  *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
+>               -  *"Points above this value"*: `0.0`
+>             -  {% icon galaxy-wf-new %} *"Insert Actions to Apply"*
+>               -  *"Action"*: `Change Fill Color for all points`
+>               -  *"Fill Color"*: `Red`
+>             -  *"Continue flow"*: `False`
+>           -  {% icon param-repeat %} *"Insert Rule"*:
+>               -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*:
+>                 -  *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
+>                 -  *"Points below this value"*: `0.0`
+>               -  {% icon galaxy-wf-new %} *"Insert Actions to ApplyInsert Actions to Apply"*:
+>                 -  *"Action"*: `Change Fill Color for all points`
+>                 -  *"Fill Color"*: `Blue`
+>               -  *"Continue flow"*: `False`
+>         -  In*"Axes:"*:
+>           -  {% icon galaxy-wf-new %} *"Insert Conditions to Apply"*
+>             -  *"Radial Position"*: `Absolute position (values match data values)`
+>             -  *"Spacing"*: `1.0`
+>             -  *"y0"*: `-4.0`
+>             -  *"y1"*: `4.0`
+>             -  *"Color"*: `Gray`
+>             -  *"Color Transparency"*: `1.0`
+>             -  *"Thickness"*: `2`
+>           - *"When to show"*: `Always`
+>   -  *"Limits:"*:
+>     -  *"Maximum number of links to draw"*: `2500000`
+>     -  *"Maximum number of points per track"*: `2500000`
 {: .hands_on}
 
 > <question-title></question-title>
