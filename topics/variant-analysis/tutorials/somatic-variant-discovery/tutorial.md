@@ -430,7 +430,7 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 > 4. Run {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3) %}  with the following parameters
 >   - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: The outpot of  `CalMD`.
 >   - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
->   - *"Configure filters:"*
+>   - **Configure filters**
 >     - *"Filter by quality"*: `255`
 >   - *What would you like to have reported?"*: `Reads dropped during filtering and subsampling`
 >   - *Produce extra dataset with dropped reads?"*: `False`
