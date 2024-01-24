@@ -173,7 +173,7 @@ The data was obtained following a series of laboratory procedures, including DNA
 >    > >   {% cite Meienberg2015 %}.
 >    > >
 >    > {: .solution}
->   {: .question}
+>    {: .question}
 {: .hands_on}
 
 ## Read trimming and filtering
@@ -436,7 +436,6 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 >   - *Produce extra dataset with dropped reads?"*: `False`
 >   - *"Output format"*: `BAM (-b)`
 >   - *"Reference data"*: `No`
->
 >
 > 5. Run {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3) %}  with the following parameters
 >   - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: The outpot of  `Samtools view`.
