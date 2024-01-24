@@ -113,7 +113,7 @@ The first workflow for the clinical metaproteomics data analysis is the Database
 >
 {: .hands_on}
 
-# **Step-by-step analysis**
+# Step-by-step analysis
 
 # Download Protein Sequences using taxon names
 First, we want to generate a large comprehensive protein sequence database using the UniProt XML Downloader to extract sequences for species of interest. To do so, you will need a tabular file that contains a list of species.
