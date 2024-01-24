@@ -431,8 +431,7 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 >   - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: The outpot of  `CalMD`.
 >   - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
 >   - *"Configure filters:"*:
->     - *"Filter by quality"*: `255`
->
+>   - *"Filter by quality"*: `255`
 >   - *What would you like to have reported?"*: `Reads dropped during filtering and subsampling`
 >   - *Produce extra dataset with dropped reads?"*: `False`
 >   - *"Output format"*: `BAM (-b)`
