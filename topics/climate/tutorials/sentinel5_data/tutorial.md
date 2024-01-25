@@ -178,7 +178,7 @@ Go back on your Galaxy window. After a couple minutes you should see your output
 
 You can do the same plot for each data subset.
 
-<tip-title>Switch from one graph to another</tip-title>
+> <tip-title>Switch from one graph to another</tip-title>
 > In the top of your graph there is a tab **Window** click on it there you should see the other graph made.
 > An example here with the SO2 graph selected but you could switch to the AER_AI ones by checking one of their box.
 > ![Image of how to switch graph](../../images/sentinel_5/switch_graph.png)
