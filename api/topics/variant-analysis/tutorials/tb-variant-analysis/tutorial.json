@@ -158,7 +158,7 @@
       "name": "M. tuberculosis Variant Analysis tutorial",
       "title": "M. tuberculosis Variant Analysis tutorial",
       "test_results": null,
-      "modified": "2024-01-24 19:51:12 +0000",
+      "modified": "2024-01-25 00:11:33 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"FastQC\"];\n  0 -->|output| 5;\n  6[\"FastQC\"];\n  1 -->|output| 6;\n  7[\"Trimmomatic\"];\n  0 -->|output| 7;\n  1 -->|output| 7;\n  8[\"MultiQC\"];\n  6 -->|text_file| 8;\n  5 -->|text_file| 8;\n  9[\"snippy\"];\n  7 -->|fastq_out_r1_paired| 9;\n  7 -->|fastq_out_r2_paired| 9;\n  2 -->|output| 9;\n  10[\"Kraken2\"];\n  7 -->|fastq_out_r1_paired| 10;\n  7 -->|fastq_out_r2_paired| 10;\n  11[\"TB Variant Filter\"];\n  9 -->|snpvcf| 11;\n  12[\"TB-Profiler Profile\"];\n  9 -->|snpsbam| 12;\n  13[\"JBrowse\"];\n  4 -->|output| 13;\n  9 -->|snpsbam| 13;\n  11 -->|output1| 13;\n  3 -->|output| 13;\n  14[\"TB Variant Report\"];\n  9 -->|snpvcf| 14;\n  12 -->|results_json| 14;\n"
     }
   ],
