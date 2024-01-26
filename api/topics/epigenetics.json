@@ -248,7 +248,7 @@
           "name": "GTN - ChIP Seq - Formation Of Super Structures On Xi",
           "title": "GTN - ChIP Seq - Formation Of Super Structures On Xi",
           "test_results": null,
-          "modified": "2024-01-25 00:11:31 +0000",
+          "modified": "2024-01-26 00:11:17 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"Input dataset\"];\n  7[\"Input dataset\"];\n  8[\"Input dataset\"];\n  9[\"Input dataset\"];\n  10[\"FastQC\"];\n  0 -->|output| 10;\n  11[\"Trim Galore!\"];\n  1 -->|output| 11;\n  0 -->|output| 11;\n  12[\"FastQC\"];\n  1 -->|output| 12;\n  13[\"Samtools idxstats\"];\n  2 -->|output| 13;\n  14[\"bamCoverage\"];\n  2 -->|output| 14;\n  15[\"bamCoverage\"];\n  3 -->|output| 15;\n  16[\"bamCoverage\"];\n  3 -->|output| 16;\n  17[\"Samtools idxstats\"];\n  3 -->|output| 17;\n  18[\"plotFingerprint\"];\n  3 -->|output| 18;\n  2 -->|output| 18;\n  19[\"bamCompare\"];\n  3 -->|output| 19;\n  2 -->|output| 19;\n  20[\"MACS2 callpeak\"];\n  2 -->|output| 20;\n  3 -->|output| 20;\n  21[\"bamCompare\"];\n  3 -->|output| 21;\n  2 -->|output| 21;\n  22[\"bamCompare\"];\n  4 -->|output| 22;\n  2 -->|output| 22;\n  23[\"MACS2 callpeak\"];\n  2 -->|output| 23;\n  4 -->|output| 23;\n  24[\"bamCompare\"];\n  4 -->|output| 24;\n  2 -->|output| 24;\n  25[\"bamCompare\"];\n  5 -->|output| 25;\n  2 -->|output| 25;\n  26[\"MACS2 callpeak\"];\n  2 -->|output| 26;\n  5 -->|output| 26;\n  27[\"bamCompare\"];\n  7 -->|output| 27;\n  6 -->|output| 27;\n  28[\"MACS2 callpeak\"];\n  6 -->|output| 28;\n  7 -->|output| 28;\n  29[\"bamCompare\"];\n  8 -->|output| 29;\n  6 -->|output| 29;\n  30[\"MACS2 callpeak\"];\n  6 -->|output| 30;\n  8 -->|output| 30;\n  31[\"multiBamSummary\"];\n  2 -->|output| 31;\n  3 -->|output| 31;\n  4 -->|output| 31;\n  5 -->|output| 31;\n  6 -->|output| 31;\n  7 -->|output| 31;\n  8 -->|output| 31;\n  9 -->|output| 31;\n  32[\"bamCompare\"];\n  9 -->|output| 32;\n  6 -->|output| 32;\n  33[\"MACS2 callpeak\"];\n  6 -->|output| 33;\n  9 -->|output| 33;\n  34[\"Bowtie2\"];\n  11 -->|trimmed_reads_pair1| 34;\n  11 -->|trimmed_reads_pair2| 34;\n  35[\"Concatenate datasets\"];\n  20 -->|output_narrowpeaks| 35;\n  23 -->|output_narrowpeaks| 35;\n  36[\"plotCorrelation\"];\n  31 -->|outFile| 36;\n  37[\"Concatenate datasets\"];\n  20 -->|output_narrowpeaks| 37;\n  23 -->|output_narrowpeaks| 37;\n  26 -->|output_narrowpeaks| 37;\n  28 -->|output_narrowpeaks| 37;\n  30 -->|output_narrowpeaks| 37;\n  33 -->|output_narrowpeaks| 37;\n  38[\"bedtools SortBED\"];\n  35 -->|out_file1| 38;\n  39[\"bedtools SortBED\"];\n  37 -->|out_file1| 39;\n  40[\"bedtools MergeBED\"];\n  38 -->|output| 40;\n  41[\"bedtools MergeBED\"];\n  39 -->|output| 41;\n  42[\"computeMatrix\"];\n  19 -->|outFileName| 42;\n  22 -->|outFileName| 42;\n  40 -->|output| 42;\n  43[\"computeMatrix\"];\n  19 -->|outFileName| 43;\n  22 -->|outFileName| 43;\n  25 -->|outFileName| 43;\n  27 -->|outFileName| 43;\n  29 -->|outFileName| 43;\n  32 -->|outFileName| 43;\n  41 -->|output| 43;\n  44[\"plotHeatmap\"];\n  42 -->|outFileName| 44;\n  45[\"plotHeatmap\"];\n  43 -->|outFileName| 45;\n"
         }
       ],
@@ -438,6 +438,319 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "redirect_from": [
+        "/topics/chip-seq/tutorials/tal1-binding-site-identification/tutorial",
+        "/short/epigenetics/tal1-binding-site-identification",
+        "/short/T00143"
+      ],
+      "title": "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.197100",
+      "edam_ontology": [
+        "topic_3169"
+      ],
+      "tags": [
+        "ChIP-seq"
+      ],
+      "questions": [
+        "How is raw ChIP-seq data processed and analyzed?",
+        "What are the binding sites of TAL1?",
+        "Which genes are regulated by TAL1?"
+      ],
+      "objectives": [
+        "Inspect read quality with FastQC",
+        "Perform read trimming with Trimmomatic",
+        "Align trimmed reads with BWA",
+        "Assess quality and reproducibility of experiments",
+        "Identify TAL1 binding sites with MACS2",
+        "Determine unique/common TAL1 binding sites from G1E and Megakaryocytes",
+        "Identify unique/common TAL1 peaks occupying gene promoters",
+        "Visually inspect TAL1 peaks with Trackster"
+      ],
+      "requirements": [
+        {
+          "type": "external",
+          "title": "Trackster",
+          "link": "https://wiki.galaxyproject.org/Learn/Visualization"
+        }
+      ],
+      "time_estimation": "3h",
+      "key_points": [
+        "Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.",
+        "Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.",
+        "By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced."
+      ],
+      "contributors": [
+        {
+          "name": "Mallory Freeberg",
+          "orcid": "0000-0003-2949-3921",
+          "joined": "2017-09",
+          "id": "malloryfreeberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/malloryfreeberg.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/"
+        },
+        {
+          "name": "Mo Heydarian",
+          "email": "mheydarian@gmail.com",
+          "orcid": "0000-0001-9449-9364",
+          "joined": "2017-09",
+          "id": "moheydarian",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/moheydarian.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/"
+        },
+        {
+          "name": "Vivek Bhardwaj",
+          "joined": "2017-09",
+          "id": "vivekbhr",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/vivekbhr.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/"
+        },
+        {
+          "name": "Joachim Wolff",
+          "email": "wolffj@informatik.uni-freiburg.de",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "affiliations": [
+            "uni-freiburg"
+          ],
+          "id": "joachimwolff",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/joachimwolff.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/"
+        },
+        {
+          "name": "Anika Erxleben",
+          "email": "anikaerxleben@gmail.com",
+          "orcid": "0000-0002-7427-6478",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "affiliations": [
+            "eurosciencegateway",
+            "uni-freiburg"
+          ],
+          "id": "erxleben",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/erxleben.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/"
+        }
+      ],
+      "mathjax": null,
+      "short_id": "T00143",
+      "url": "/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html",
+      "topic_name": "epigenetics",
+      "tutorial_name": "tal1-binding-site-identification",
+      "dir": "topics/epigenetics/tutorials/tal1-binding-site-identification",
+      "id": "epigenetics/tal1-binding-site-identification",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "tal1-binding-site-identification-workflow.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/tal1-binding-site-identification-workflow.ga",
+          "path": "topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/tal1-binding-site-identification-workflow.ga",
+          "wfid": "epigenetics-tal1-binding-site-identification",
+          "wfname": "tal1-binding-site-identification-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-tal1-binding-site-identification/versions/tal1-binding-site-identification-workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "name": "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)",
+          "title": "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)",
+          "test_results": null,
+          "modified": "2024-01-26 00:11:17 +0000",
+          "mermaid": "flowchart TD\n  0[\"G1E_input_R1_downsampled_SRR507859.fastqsanger\"];\n  1[\"G1E_input_R2_downsampled_SRR507860.fastqsanger\"];\n  2[\"G1E_Tal1_R1_downsampled_SRR492444.fastqsanger\"];\n  3[\"G1E_Tal1_R2_downsampled_SRR492445.fastqsanger\"];\n  4[\"Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger\"];\n  5[\"Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger\"];\n  6[\"Megakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger\"];\n  7[\"Megakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger\"];\n  8[\"RefSeq_gene_annotations_mm10.bed\"];\n  9[\"FastQC\"];\n  0 -->|output| 9;\n  10[\"Trimmomatic\"];\n  0 -->|output| 10;\n  11[\"FastQC\"];\n  1 -->|output| 11;\n  12[\"Trimmomatic\"];\n  1 -->|output| 12;\n  13[\"FastQC\"];\n  2 -->|output| 13;\n  14[\"Trimmomatic\"];\n  2 -->|output| 14;\n  15[\"FastQC\"];\n  3 -->|output| 15;\n  16[\"Trimmomatic\"];\n  3 -->|output| 16;\n  17[\"FastQC\"];\n  4 -->|output| 17;\n  18[\"Trimmomatic\"];\n  4 -->|output| 18;\n  19[\"FastQC\"];\n  5 -->|output| 19;\n  20[\"Trimmomatic\"];\n  5 -->|output| 20;\n  21[\"FastQC\"];\n  6 -->|output| 21;\n  22[\"Trimmomatic\"];\n  6 -->|output| 22;\n  23[\"FastQC\"];\n  7 -->|output| 23;\n  24[\"Trimmomatic\"];\n  7 -->|output| 24;\n  25[\"FastQC\"];\n  10 -->|fastq_out| 25;\n  26[\"Map with BWA\"];\n  10 -->|fastq_out| 26;\n  27[\"FastQC\"];\n  12 -->|fastq_out| 27;\n  28[\"Map with BWA\"];\n  12 -->|fastq_out| 28;\n  29[\"FastQC\"];\n  14 -->|fastq_out| 29;\n  30[\"Map with BWA\"];\n  14 -->|fastq_out| 30;\n  31[\"FastQC\"];\n  16 -->|fastq_out| 31;\n  32[\"Map with BWA\"];\n  16 -->|fastq_out| 32;\n  33[\"FastQC\"];\n  18 -->|fastq_out| 33;\n  34[\"Map with BWA\"];\n  18 -->|fastq_out| 34;\n  35[\"FastQC\"];\n  20 -->|fastq_out| 35;\n  36[\"Map with BWA\"];\n  20 -->|fastq_out| 36;\n  37[\"FastQC\"];\n  22 -->|fastq_out| 37;\n  38[\"Map with BWA\"];\n  22 -->|fastq_out| 38;\n  39[\"FastQC\"];\n  24 -->|fastq_out| 39;\n  40[\"Map with BWA\"];\n  24 -->|fastq_out| 40;\n  41[\"Samtools idxstats\"];\n  26 -->|bam_output| 41;\n  42[\"Samtools idxstats\"];\n  28 -->|bam_output| 42;\n  43[\"Samtools idxstats\"];\n  30 -->|bam_output| 43;\n  44[\"bamCompare\"];\n  30 -->|bam_output| 44;\n  26 -->|bam_output| 44;\n  45[\"Samtools idxstats\"];\n  32 -->|bam_output| 45;\n  46[\"plotFingerprint\"];\n  26 -->|bam_output| 46;\n  28 -->|bam_output| 46;\n  30 -->|bam_output| 46;\n  32 -->|bam_output| 46;\n  47[\"MACS2 callpeak\"];\n  26 -->|bam_output| 47;\n  28 -->|bam_output| 47;\n  30 -->|bam_output| 47;\n  32 -->|bam_output| 47;\n  48[\"bamCompare\"];\n  32 -->|bam_output| 48;\n  28 -->|bam_output| 48;\n  49[\"Samtools idxstats\"];\n  34 -->|bam_output| 49;\n  50[\"Samtools idxstats\"];\n  36 -->|bam_output| 50;\n  51[\"Samtools idxstats\"];\n  38 -->|bam_output| 51;\n  52[\"bamCompare\"];\n  38 -->|bam_output| 52;\n  34 -->|bam_output| 52;\n  53[\"Samtools idxstats\"];\n  40 -->|bam_output| 53;\n  54[\"multiBamSummary\"];\n  26 -->|bam_output| 54;\n  28 -->|bam_output| 54;\n  30 -->|bam_output| 54;\n  32 -->|bam_output| 54;\n  34 -->|bam_output| 54;\n  36 -->|bam_output| 54;\n  38 -->|bam_output| 54;\n  40 -->|bam_output| 54;\n  55[\"plotFingerprint\"];\n  34 -->|bam_output| 55;\n  36 -->|bam_output| 55;\n  38 -->|bam_output| 55;\n  40 -->|bam_output| 55;\n  56[\"MACS2 callpeak\"];\n  34 -->|bam_output| 56;\n  36 -->|bam_output| 56;\n  38 -->|bam_output| 56;\n  40 -->|bam_output| 56;\n  57[\"bamCompare\"];\n  40 -->|bam_output| 57;\n  36 -->|bam_output| 57;\n  58[\"computeMatrix\"];\n  44 -->|outFileName| 58;\n  48 -->|outFileName| 58;\n  47 -->|output_narrowpeaks| 58;\n  59[\"plotCorrelation\"];\n  54 -->|outFile| 59;\n  60[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 60;\n  56 -->|output_narrowpeaks| 60;\n  61[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 61;\n  56 -->|output_narrowpeaks| 61;\n  62[\"bedtools Intersect intervals\"];\n  56 -->|output_narrowpeaks| 62;\n  47 -->|output_narrowpeaks| 62;\n  63[\"computeMatrix\"];\n  52 -->|outFileName| 63;\n  57 -->|outFileName| 63;\n  56 -->|output_narrowpeaks| 63;\n  64[\"plotHeatmap\"];\n  58 -->|outFileName| 64;\n  65[\"plotHeatmap\"];\n  63 -->|outFileName| 65;\n"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/3.3.2.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.3.2.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.3.2.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.3.2.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://galaxy.mesocentre.uca.fr",
+            "name": "Galaxy@AuBi",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Epigenetics",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "deeptools_bam_compare",
+            "owner": "bgruening",
+            "revisions": "e821645ef8fc",
+            "tool_panel_section_label": "deepTools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "deeptools_compute_gc_bias",
+            "owner": "bgruening",
+            "revisions": "2bc10a9ca58b",
+            "tool_panel_section_label": "deepTools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "deeptools_compute_matrix",
+            "owner": "bgruening",
+            "revisions": "514fa53b5efb",
+            "tool_panel_section_label": "deepTools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "deeptools_correct_gc_bias",
+            "owner": "bgruening",
+            "revisions": "2c37ce318bc3",
+            "tool_panel_section_label": "deepTools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "deeptools_multi_bam_summary",
+            "owner": "bgruening",
+            "revisions": "78f405266706",
+            "tool_panel_section_label": "deepTools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "deeptools_plot_correlation",
+            "owner": "bgruening",
+            "revisions": "32e451def88c",
+            "tool_panel_section_label": "deepTools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "deeptools_plot_fingerprint",
+            "owner": "bgruening",
+            "revisions": "2da482e408b8",
+            "tool_panel_section_label": "deepTools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "deeptools_plot_heatmap",
+            "owner": "bgruening",
+            "revisions": "a4dfb122e52b",
+            "tool_panel_section_label": "deepTools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bwa",
+            "owner": "devteam",
+            "revisions": "64f11cf59c6e",
+            "tool_panel_section_label": "Mapping",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastqc",
+            "owner": "devteam",
+            "revisions": "e7b2202befea",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "samtools_idxstats",
+            "owner": "devteam",
+            "revisions": "7a6034296ae9",
+            "tool_panel_section_label": "SAM/BAM",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bedtools",
+            "owner": "iuc",
+            "revisions": "b28e0cfa7ba1",
+            "tool_panel_section_label": "BED",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "macs2",
+            "owner": "iuc",
+            "revisions": "424aefbd7777",
+            "tool_panel_section_label": "Peak Calling",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "trimmomatic",
+            "owner": "pjbriggs",
+            "revisions": "898b67846b47",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: deeptools_bam_compare\n  owner: bgruening\n  revisions: e821645ef8fc\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_compute_gc_bias\n  owner: bgruening\n  revisions: 2bc10a9ca58b\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_compute_matrix\n  owner: bgruening\n  revisions: 514fa53b5efb\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_correct_gc_bias\n  owner: bgruening\n  revisions: 2c37ce318bc3\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_multi_bam_summary\n  owner: bgruening\n  revisions: 78f405266706\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_plot_correlation\n  owner: bgruening\n  revisions: 32e451def88c\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_plot_fingerprint\n  owner: bgruening\n  revisions: 2da482e408b8\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_plot_heatmap\n  owner: bgruening\n  revisions: a4dfb122e52b\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: 64f11cf59c6e\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: e7b2202befea\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_idxstats\n  owner: devteam\n  revisions: 7a6034296ae9\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bedtools\n  owner: iuc\n  revisions: b28e0cfa7ba1\n  tool_panel_section_label: BED\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: macs2\n  owner: iuc\n  revisions: 424aefbd7777\n  tool_panel_section_label: Peak Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: 898b67846b47\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Hi-C analysis of Drosophila melanogaster cells using HiCExplorer",
       "zenodo_link": "https://doi.org/10.5281/zenodo.1183661",
       "questions": [
@@ -521,7 +834,7 @@
           "name": "Galaxy Workflow Galaxy Hi C",
           "title": "Galaxy Workflow Galaxy Hi C",
           "test_results": null,
-          "modified": "2024-01-25 00:11:31 +0000",
+          "modified": "2024-01-26 00:11:17 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"Map with BWA-MEM\"];\n  0 -->|output| 6;\n  7[\"Map with BWA-MEM\"];\n  1 -->|output| 7;\n  8[\"hicBuildMatrix\"];\n  7 -->|output| 8;\n  6 -->|output| 8;\n  9[\"hicMergeMatrixBins\"];\n  8 -->|outFileName| 9;\n  10[\"hicCorrectMatrix\"];\n  8 -->|outFileName| 10;\n  11[\"hicCorrectMatrix\"];\n  8 -->|outFileName| 11;\n  12[\"hicPlotMatrix\"];\n  9 -->|outFileName| 12;\n  13[\"hicPlotMatrix\"];\n  11 -->|outFileName| 13;\n  14[\"hicFindTADs\"];\n  11 -->|outFileName| 14;\n  15[\"hicPCA\"];\n  14 -->|matrix_output| 15;\n  16[\"hicPlotTADs\"];\n  14 -->|domains| 16;\n  11 -->|outFileName| 16;\n  14 -->|tad_score| 16;\n  15 -->|pca1| 16;\n  15 -->|pca2| 16;\n  3 -->|output| 16;\n  2 -->|output| 16;\n  4 -->|output| 16;\n  5 -->|output| 16;\n"
         }
       ],
@@ -774,7 +1087,7 @@
           "name": "ATAC-seq GTM",
           "title": "ATAC-seq GTM",
           "test_results": null,
-          "modified": "2024-01-25 00:11:30 +0000",
+          "modified": "2024-01-26 00:11:16 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Filter\"];\n  1 -->|output| 4;\n  5[\"FastQC\"];\n  2 -->|output| 5;\n  6[\"Cutadapt\"];\n  3 -->|output| 6;\n  2 -->|output| 6;\n  7[\"FastQC\"];\n  3 -->|output| 7;\n  8[\"bedtools Intersect intervals\"];\n  4 -->|out_file1| 8;\n  0 -->|output| 8;\n  9[\"FastQC\"];\n  6 -->|out2| 9;\n  10[\"Bowtie2\"];\n  6 -->|out1| 10;\n  6 -->|out2| 10;\n  11[\"FastQC\"];\n  6 -->|out1| 11;\n  12[\"Filter\"];\n  10 -->|output| 12;\n  13[\"MarkDuplicates\"];\n  12 -->|out_file1| 13;\n  14[\"bedtools BAM to BED\"];\n  13 -->|outFile| 14;\n  15[\"Paired-end histogram\"];\n  13 -->|outFile| 15;\n  16[\"MACS2 callpeak\"];\n  14 -->|output| 16;\n  17[\"Wig/BedGraph-to-bigWig\"];\n  16 -->|output_treat_pileup| 17;\n  18[\"computeMatrix\"];\n  17 -->|out_file1| 18;\n  0 -->|output| 18;\n  19[\"pyGenomeTracks\"];\n  17 -->|out_file1| 19;\n  16 -->|output_narrowpeaks| 19;\n  0 -->|output| 19;\n  1 -->|output| 19;\n  20[\"computeMatrix\"];\n  17 -->|out_file1| 20;\n  8 -->|output| 20;\n  21[\"plotHeatmap\"];\n  18 -->|outFileName| 21;\n  22[\"plotHeatmap\"];\n  20 -->|outFileName| 22;\n"
         }
       ],
@@ -956,319 +1269,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "redirect_from": [
-        "/topics/chip-seq/tutorials/tal1-binding-site-identification/tutorial",
-        "/short/epigenetics/tal1-binding-site-identification",
-        "/short/T00143"
-      ],
-      "title": "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.197100",
-      "edam_ontology": [
-        "topic_3169"
-      ],
-      "tags": [
-        "ChIP-seq"
-      ],
-      "questions": [
-        "How is raw ChIP-seq data processed and analyzed?",
-        "What are the binding sites of TAL1?",
-        "Which genes are regulated by TAL1?"
-      ],
-      "objectives": [
-        "Inspect read quality with FastQC",
-        "Perform read trimming with Trimmomatic",
-        "Align trimmed reads with BWA",
-        "Assess quality and reproducibility of experiments",
-        "Identify TAL1 binding sites with MACS2",
-        "Determine unique/common TAL1 binding sites from G1E and Megakaryocytes",
-        "Identify unique/common TAL1 peaks occupying gene promoters",
-        "Visually inspect TAL1 peaks with Trackster"
-      ],
-      "requirements": [
-        {
-          "type": "external",
-          "title": "Trackster",
-          "link": "https://wiki.galaxyproject.org/Learn/Visualization"
-        }
-      ],
-      "time_estimation": "3h",
-      "key_points": [
-        "Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.",
-        "Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.",
-        "By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced."
-      ],
-      "contributors": [
-        {
-          "name": "Mallory Freeberg",
-          "orcid": "0000-0003-2949-3921",
-          "joined": "2017-09",
-          "id": "malloryfreeberg",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/malloryfreeberg.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/"
-        },
-        {
-          "name": "Mo Heydarian",
-          "email": "mheydarian@gmail.com",
-          "orcid": "0000-0001-9449-9364",
-          "joined": "2017-09",
-          "id": "moheydarian",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/moheydarian.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/"
-        },
-        {
-          "name": "Vivek Bhardwaj",
-          "joined": "2017-09",
-          "id": "vivekbhr",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/vivekbhr.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/"
-        },
-        {
-          "name": "Joachim Wolff",
-          "email": "wolffj@informatik.uni-freiburg.de",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "affiliations": [
-            "uni-freiburg"
-          ],
-          "id": "joachimwolff",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/joachimwolff.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/"
-        },
-        {
-          "name": "Anika Erxleben",
-          "email": "anikaerxleben@gmail.com",
-          "orcid": "0000-0002-7427-6478",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "affiliations": [
-            "eurosciencegateway",
-            "uni-freiburg"
-          ],
-          "id": "erxleben",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/erxleben.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/"
-        }
-      ],
-      "mathjax": null,
-      "short_id": "T00143",
-      "url": "/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html",
-      "topic_name": "epigenetics",
-      "tutorial_name": "tal1-binding-site-identification",
-      "dir": "topics/epigenetics/tutorials/tal1-binding-site-identification",
-      "id": "epigenetics/tal1-binding-site-identification",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "tal1-binding-site-identification-workflow.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/tal1-binding-site-identification-workflow.ga",
-          "path": "topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/tal1-binding-site-identification-workflow.ga",
-          "wfid": "epigenetics-tal1-binding-site-identification",
-          "wfname": "tal1-binding-site-identification-workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-tal1-binding-site-identification/versions/tal1-binding-site-identification-workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "name": "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)",
-          "title": "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)",
-          "test_results": null,
-          "modified": "2024-01-25 00:11:31 +0000",
-          "mermaid": "flowchart TD\n  0[\"G1E_input_R1_downsampled_SRR507859.fastqsanger\"];\n  1[\"G1E_input_R2_downsampled_SRR507860.fastqsanger\"];\n  2[\"G1E_Tal1_R1_downsampled_SRR492444.fastqsanger\"];\n  3[\"G1E_Tal1_R2_downsampled_SRR492445.fastqsanger\"];\n  4[\"Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger\"];\n  5[\"Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger\"];\n  6[\"Megakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger\"];\n  7[\"Megakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger\"];\n  8[\"RefSeq_gene_annotations_mm10.bed\"];\n  9[\"FastQC\"];\n  0 -->|output| 9;\n  10[\"Trimmomatic\"];\n  0 -->|output| 10;\n  11[\"FastQC\"];\n  1 -->|output| 11;\n  12[\"Trimmomatic\"];\n  1 -->|output| 12;\n  13[\"FastQC\"];\n  2 -->|output| 13;\n  14[\"Trimmomatic\"];\n  2 -->|output| 14;\n  15[\"FastQC\"];\n  3 -->|output| 15;\n  16[\"Trimmomatic\"];\n  3 -->|output| 16;\n  17[\"FastQC\"];\n  4 -->|output| 17;\n  18[\"Trimmomatic\"];\n  4 -->|output| 18;\n  19[\"FastQC\"];\n  5 -->|output| 19;\n  20[\"Trimmomatic\"];\n  5 -->|output| 20;\n  21[\"FastQC\"];\n  6 -->|output| 21;\n  22[\"Trimmomatic\"];\n  6 -->|output| 22;\n  23[\"FastQC\"];\n  7 -->|output| 23;\n  24[\"Trimmomatic\"];\n  7 -->|output| 24;\n  25[\"FastQC\"];\n  10 -->|fastq_out| 25;\n  26[\"Map with BWA\"];\n  10 -->|fastq_out| 26;\n  27[\"FastQC\"];\n  12 -->|fastq_out| 27;\n  28[\"Map with BWA\"];\n  12 -->|fastq_out| 28;\n  29[\"FastQC\"];\n  14 -->|fastq_out| 29;\n  30[\"Map with BWA\"];\n  14 -->|fastq_out| 30;\n  31[\"FastQC\"];\n  16 -->|fastq_out| 31;\n  32[\"Map with BWA\"];\n  16 -->|fastq_out| 32;\n  33[\"FastQC\"];\n  18 -->|fastq_out| 33;\n  34[\"Map with BWA\"];\n  18 -->|fastq_out| 34;\n  35[\"FastQC\"];\n  20 -->|fastq_out| 35;\n  36[\"Map with BWA\"];\n  20 -->|fastq_out| 36;\n  37[\"FastQC\"];\n  22 -->|fastq_out| 37;\n  38[\"Map with BWA\"];\n  22 -->|fastq_out| 38;\n  39[\"FastQC\"];\n  24 -->|fastq_out| 39;\n  40[\"Map with BWA\"];\n  24 -->|fastq_out| 40;\n  41[\"Samtools idxstats\"];\n  26 -->|bam_output| 41;\n  42[\"Samtools idxstats\"];\n  28 -->|bam_output| 42;\n  43[\"Samtools idxstats\"];\n  30 -->|bam_output| 43;\n  44[\"bamCompare\"];\n  30 -->|bam_output| 44;\n  26 -->|bam_output| 44;\n  45[\"Samtools idxstats\"];\n  32 -->|bam_output| 45;\n  46[\"plotFingerprint\"];\n  26 -->|bam_output| 46;\n  28 -->|bam_output| 46;\n  30 -->|bam_output| 46;\n  32 -->|bam_output| 46;\n  47[\"MACS2 callpeak\"];\n  26 -->|bam_output| 47;\n  28 -->|bam_output| 47;\n  30 -->|bam_output| 47;\n  32 -->|bam_output| 47;\n  48[\"bamCompare\"];\n  32 -->|bam_output| 48;\n  28 -->|bam_output| 48;\n  49[\"Samtools idxstats\"];\n  34 -->|bam_output| 49;\n  50[\"Samtools idxstats\"];\n  36 -->|bam_output| 50;\n  51[\"Samtools idxstats\"];\n  38 -->|bam_output| 51;\n  52[\"bamCompare\"];\n  38 -->|bam_output| 52;\n  34 -->|bam_output| 52;\n  53[\"Samtools idxstats\"];\n  40 -->|bam_output| 53;\n  54[\"multiBamSummary\"];\n  26 -->|bam_output| 54;\n  28 -->|bam_output| 54;\n  30 -->|bam_output| 54;\n  32 -->|bam_output| 54;\n  34 -->|bam_output| 54;\n  36 -->|bam_output| 54;\n  38 -->|bam_output| 54;\n  40 -->|bam_output| 54;\n  55[\"plotFingerprint\"];\n  34 -->|bam_output| 55;\n  36 -->|bam_output| 55;\n  38 -->|bam_output| 55;\n  40 -->|bam_output| 55;\n  56[\"MACS2 callpeak\"];\n  34 -->|bam_output| 56;\n  36 -->|bam_output| 56;\n  38 -->|bam_output| 56;\n  40 -->|bam_output| 56;\n  57[\"bamCompare\"];\n  40 -->|bam_output| 57;\n  36 -->|bam_output| 57;\n  58[\"computeMatrix\"];\n  44 -->|outFileName| 58;\n  48 -->|outFileName| 58;\n  47 -->|output_narrowpeaks| 58;\n  59[\"plotCorrelation\"];\n  54 -->|outFile| 59;\n  60[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 60;\n  56 -->|output_narrowpeaks| 60;\n  61[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 61;\n  56 -->|output_narrowpeaks| 61;\n  62[\"bedtools Intersect intervals\"];\n  56 -->|output_narrowpeaks| 62;\n  47 -->|output_narrowpeaks| 62;\n  63[\"computeMatrix\"];\n  52 -->|outFileName| 63;\n  57 -->|outFileName| 63;\n  56 -->|output_narrowpeaks| 63;\n  64[\"plotHeatmap\"];\n  58 -->|outFileName| 64;\n  65[\"plotHeatmap\"];\n  63 -->|outFileName| 65;\n"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/3.3.2.0.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.3.2.0.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.3.2.0.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.3.2.0.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6",
-        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://galaxy.mesocentre.uca.fr",
-            "name": "Galaxy@AuBi",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Epigenetics",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "deeptools_bam_compare",
-            "owner": "bgruening",
-            "revisions": "e821645ef8fc",
-            "tool_panel_section_label": "deepTools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "deeptools_compute_gc_bias",
-            "owner": "bgruening",
-            "revisions": "2bc10a9ca58b",
-            "tool_panel_section_label": "deepTools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "deeptools_compute_matrix",
-            "owner": "bgruening",
-            "revisions": "514fa53b5efb",
-            "tool_panel_section_label": "deepTools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "deeptools_correct_gc_bias",
-            "owner": "bgruening",
-            "revisions": "2c37ce318bc3",
-            "tool_panel_section_label": "deepTools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "deeptools_multi_bam_summary",
-            "owner": "bgruening",
-            "revisions": "78f405266706",
-            "tool_panel_section_label": "deepTools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "deeptools_plot_correlation",
-            "owner": "bgruening",
-            "revisions": "32e451def88c",
-            "tool_panel_section_label": "deepTools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "deeptools_plot_fingerprint",
-            "owner": "bgruening",
-            "revisions": "2da482e408b8",
-            "tool_panel_section_label": "deepTools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "deeptools_plot_heatmap",
-            "owner": "bgruening",
-            "revisions": "a4dfb122e52b",
-            "tool_panel_section_label": "deepTools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bwa",
-            "owner": "devteam",
-            "revisions": "64f11cf59c6e",
-            "tool_panel_section_label": "Mapping",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fastqc",
-            "owner": "devteam",
-            "revisions": "e7b2202befea",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "samtools_idxstats",
-            "owner": "devteam",
-            "revisions": "7a6034296ae9",
-            "tool_panel_section_label": "SAM/BAM",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bedtools",
-            "owner": "iuc",
-            "revisions": "b28e0cfa7ba1",
-            "tool_panel_section_label": "BED",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "macs2",
-            "owner": "iuc",
-            "revisions": "424aefbd7777",
-            "tool_panel_section_label": "Peak Calling",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "trimmomatic",
-            "owner": "pjbriggs",
-            "revisions": "898b67846b47",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: deeptools_bam_compare\n  owner: bgruening\n  revisions: e821645ef8fc\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_compute_gc_bias\n  owner: bgruening\n  revisions: 2bc10a9ca58b\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_compute_matrix\n  owner: bgruening\n  revisions: 514fa53b5efb\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_correct_gc_bias\n  owner: bgruening\n  revisions: 2c37ce318bc3\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_multi_bam_summary\n  owner: bgruening\n  revisions: 78f405266706\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_plot_correlation\n  owner: bgruening\n  revisions: 32e451def88c\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_plot_fingerprint\n  owner: bgruening\n  revisions: 2da482e408b8\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_plot_heatmap\n  owner: bgruening\n  revisions: a4dfb122e52b\n  tool_panel_section_label: deepTools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: 64f11cf59c6e\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: e7b2202befea\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_idxstats\n  owner: devteam\n  revisions: 7a6034296ae9\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bedtools\n  owner: iuc\n  revisions: b28e0cfa7ba1\n  tool_panel_section_label: BED\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: macs2\n  owner: iuc\n  revisions: 424aefbd7777\n  tool_panel_section_label: Peak Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: 898b67846b47\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "DNA Methylation data analysis",
       "zenodo_link": "https://zenodo.org/record/557099",
       "edam_ontology": [
@@ -1342,7 +1342,7 @@
           "name": "Workflow Methylation Seq",
           "title": "Workflow Methylation Seq",
           "test_results": null,
-          "modified": "2024-01-25 00:11:31 +0000",
+          "modified": "2024-01-26 00:11:17 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"Input dataset\"];\n  7[\"Input dataset\"];\n  8[\"Input dataset\"];\n  9[\"FastQC\"];\n  0 -->|output| 9;\n  10[\"FastQC\"];\n  1 -->|output| 10;\n  11[\"bwameth\"];\n  0 -->|output| 11;\n  1 -->|output| 11;\n  12[\"Replace column\"];\n  3 -->|output| 12;\n  4 -->|output| 12;\n  13[\"metilene\"];\n  2 -->|output| 13;\n  5 -->|output| 13;\n  3 -->|output| 13;\n  8 -->|output| 13;\n  7 -->|output| 13;\n  6 -->|output| 13;\n  14[\"MethylDackel\"];\n  11 -->|output| 14;\n  15[\"MethylDackel\"];\n  11 -->|output| 15;\n  16[\"Select last\"];\n  12 -->|outfile_replace| 16;\n  17[\"Select last\"];\n  15 -->|outFileExtractCpGFraction| 17;\n  18[\"computeMatrix\"];\n  16 -->|outfile| 18;\n  2 -->|output| 18;\n  19[\"Text reformatting\"];\n  17 -->|outfile| 19;\n  20[\"computeMatrix\"];\n  19 -->|outfile| 20;\n  2 -->|output| 20;\n  21[\"plotProfile\"];\n  20 -->|outFileName| 21;\n"
         }
       ],
@@ -1485,184 +1485,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Infinium Human Methylation BeadChip",
-      "zenodo_link": "https://zenodo.org/record/1251211",
-      "questions": [
-        "Which DNA regions and positions are diffrentialy methylated in pre MAPKi treatment and post MAPKi resistance Melanomas GSE65183?",
-        "How to analyse and visualise Infinium Human Methylation BeadChip's?"
-      ],
-      "time_estimation": "1h",
-      "objectives": [
-        "Learn how to perform reproducible Infinium Human Methylation BeadChip analysis",
-        "Visualise differentially methylated positions using UCSC browser"
-      ],
-      "key_points": [
-        "Infinium Human Methylation BeadChip is an array based technology to generate DNA methylation profiling at individual CpG loci in the human genome based on Illumina’s bead technology.",
-        "Time and cost efficiency followed by high sample output, and overall quantitative accuracy and reproducibility made Infinium Human Methylation BeadChip one of the most widely used arrays on the market."
-      ],
-      "contributors": [
-        {
-          "name": "Katarzyna Kamieniecka",
-          "twitter": "katemurat",
-          "orcid": "0009-0004-2454-5950",
-          "joined": "2018-08",
-          "elixir_node": "uk",
-          "id": "kkamieniecka",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/kkamieniecka.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/"
-        },
-        {
-          "name": "Khaled Jum’ah",
-          "email": "k.jumah@bradford.ac.uk",
-          "orcid": "0000-0001-5481-8893",
-          "joined": "2022-09",
-          "id": "Khaled196",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/Khaled196.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Khaled196/"
-        },
-        {
-          "name": "Krzysztof Poterlowicz",
-          "twitter": "bioinfbrad",
-          "orcid": "0000-0001-6173-5674",
-          "joined": "2017-09",
-          "elixir_node": "uk",
-          "id": "poterlowicz-lab",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/poterlowicz-lab.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/"
-        }
-      ],
-      "mathjax": null,
-      "short_id": "T00139",
-      "url": "/topics/epigenetics/tutorials/ewas-suite/tutorial.html",
-      "topic_name": "epigenetics",
-      "tutorial_name": "ewas-suite",
-      "dir": "topics/epigenetics/tutorials/ewas-suite",
-      "id": "epigenetics/ewas-suite",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": true,
-      "workflows": [
-        {
-          "workflow": "Infinium-Human-Methylation-BeadChip.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/ewas-suite/workflows/Infinium-Human-Methylation-BeadChip.ga",
-          "path": "topics/epigenetics/tutorials/ewas-suite/workflows/Infinium-Human-Methylation-BeadChip.ga",
-          "wfid": "epigenetics-ewas-suite",
-          "wfname": "infinium-human-methylation-beadchip",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip",
-          "license": "AGPL-3.0-or-later",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "0009-0004-2454-5950",
-              "name": "Katarzyna Kamieniecka"
-            },
-            {
-              "class": "Person",
-              "identifier": "0000-0001-5481-8893",
-              "name": "Khaled Jum'ah"
-            },
-            {
-              "class": "Organization",
-              "name": "poterlowicz-lab",
-              "url": "https://github.com/ELIXIR-UK-DaSH"
-            }
-          ],
-          "name": "Infinium Human Methylation BeadChip",
-          "title": "Infinium Human Methylation BeadChip",
-          "test_results": null,
-          "modified": "2024-01-25 00:11:30 +0000",
-          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"Input dataset\"];\n  7[\"Input dataset\"];\n  8[\"Input dataset\"];\n  9[\"Input dataset\"];\n  10[\"Infinium Human Methylation BeadChip\"];\n  4 -->|output| 10;\n  5 -->|output| 10;\n  6 -->|output| 10;\n  7 -->|output| 10;\n  0 -->|output| 10;\n  1 -->|output| 10;\n  2 -->|output| 10;\n  3 -->|output| 10;\n  8 -->|output| 10;\n  9 -->|output| 10;\n  11[\"ChIPpeakAnno annoPeaks\"];\n  10 -->|dmp| 11;\n  12[\"Cut\"];\n  11 -->|tab| 12;\n  13[\"Remove beginning\"];\n  12 -->|out_file1| 13;\n  14[\"Cluster Profiler Bitr\"];\n  13 -->|out_file1| 14;\n  15[\"Cluster Profiler GO\"];\n  14 -->|translation| 15;\n"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/ewas-suite/tutorial.json",
-      "tools": [
-        "Cut1",
-        "Remove beginning1",
-        "toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks/chipeakanno_annopeaks/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_go/clusterprofiler_go/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Epigenetics",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "chipeakanno_annopeaks",
-            "owner": "kpbioteam",
-            "revisions": "104882a2de00",
-            "tool_panel_section_label": "Test Tools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "clusterprofiler_bitr",
-            "owner": "kpbioteam",
-            "revisions": "762c61c71874",
-            "tool_panel_section_label": "Test Tools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "clusterprofiler_go",
-            "owner": "kpbioteam",
-            "revisions": "5299be80cafb",
-            "tool_panel_section_label": "Test Tools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "ewastools",
-            "owner": "kpbioteam",
-            "revisions": "369fef559cfc",
-            "tool_panel_section_label": "Epigenetics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: chipeakanno_annopeaks\n  owner: kpbioteam\n  revisions: 104882a2de00\n  tool_panel_section_label: Test Tools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: clusterprofiler_bitr\n  owner: kpbioteam\n  revisions: 762c61c71874\n  tool_panel_section_label: Test Tools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: clusterprofiler_go\n  owner: kpbioteam\n  revisions: 5299be80cafb\n  tool_panel_section_label: Test Tools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ewastools\n  owner: kpbioteam\n  revisions: 369fef559cfc\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/ewas-suite/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/ewas-suite/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "redirect_from": [
         "/topics/chip-seq/tutorials/estrogen-receptor-binding-site-identification/tutorial",
         "/short/epigenetics/estrogen-receptor-binding-site-identification",
@@ -1786,7 +1608,7 @@
           "name": "Identification Of The Binding Sites Of The Estrogen Receptor - Chip Seq",
           "title": "Identification Of The Binding Sites Of The Estrogen Receptor - Chip Seq",
           "test_results": null,
-          "modified": "2024-01-25 00:11:30 +0000",
+          "modified": "2024-01-26 00:11:16 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"Input dataset\"];\n  7[\"Input dataset\"];\n  8[\"Input dataset\"];\n  9[\"IdxStats\"];\n  0 -->|output| 9;\n  10[\"bamCoverage\"];\n  0 -->|output| 10;\n  11[\"bamCoverage\"];\n  0 -->|output| 11;\n  12[\"plotFingerprint\"];\n  4 -->|output| 12;\n  0 -->|output| 12;\n  13[\"computeGCBias\"];\n  4 -->|output| 13;\n  14[\"IdxStats\"];\n  4 -->|output| 14;\n  15[\"bamCoverage\"];\n  4 -->|output| 15;\n  16[\"bamCoverage\"];\n  4 -->|output| 16;\n  17[\"bamCompare\"];\n  0 -->|output| 17;\n  4 -->|output| 17;\n  18[\"bamCompare\"];\n  0 -->|output| 18;\n  4 -->|output| 18;\n  19[\"MACS2 callpeak\"];\n  4 -->|output| 19;\n  0 -->|output| 19;\n  20[\"multiBamSummary\"];\n  7 -->|output| 20;\n  6 -->|output| 20;\n  5 -->|output| 20;\n  4 -->|output| 20;\n  3 -->|output| 20;\n  2 -->|output| 20;\n  1 -->|output| 20;\n  0 -->|output| 20;\n  21[\"computeMatrix\"];\n  18 -->|outFileName| 21;\n  8 -->|output| 21;\n  22[\"computeMatrix\"];\n  18 -->|outFileName| 22;\n  8 -->|output| 22;\n  23[\"plotCorrelation\"];\n  20 -->|outFile| 23;\n  24[\"plotHeatmap\"];\n  21 -->|outFileName| 24;\n  25[\"plotHeatmap\"];\n  22 -->|outFileName| 25;\n"
         },
         {
@@ -1804,7 +1626,7 @@
           "name": "Identification Of The Binding Sites Of The Estrogen Receptor - Qc Mapping",
           "title": "Identification Of The Binding Sites Of The Estrogen Receptor - Qc Mapping",
           "test_results": null,
-          "modified": "2024-01-25 00:11:30 +0000",
+          "modified": "2024-01-26 00:11:16 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Trim Galore!\"];\n  0 -->|output| 2;\n  3[\"Bowtie2\"];\n  2 -->|trimmed_reads_single| 3;\n  4[\"BAM-to-SAM\"];\n  3 -->|output| 4;\n"
         }
       ],
@@ -1986,44 +1808,60 @@
       }
     },
     {
-      "layout": "introduction_slides",
-      "logo": "GTN",
-      "priority": 1,
-      "title": "Introduction to ChIP-Seq data analysis",
+      "layout": "tutorial_hands_on",
+      "title": "Infinium Human Methylation BeadChip",
+      "zenodo_link": "https://zenodo.org/record/1251211",
+      "questions": [
+        "Which DNA regions and positions are diffrentialy methylated in pre MAPKi treatment and post MAPKi resistance Melanomas GSE65183?",
+        "How to analyse and visualise Infinium Human Methylation BeadChip's?"
+      ],
+      "time_estimation": "1h",
+      "objectives": [
+        "Learn how to perform reproducible Infinium Human Methylation BeadChip analysis",
+        "Visualise differentially methylated positions using UCSC browser"
+      ],
+      "key_points": [
+        "Infinium Human Methylation BeadChip is an array based technology to generate DNA methylation profiling at individual CpG loci in the human genome based on Illumina’s bead technology.",
+        "Time and cost efficiency followed by high sample output, and overall quantitative accuracy and reproducibility made Infinium Human Methylation BeadChip one of the most widely used arrays on the market."
+      ],
       "contributors": [
         {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "matrix": "bebatut:matrix.org",
-          "orcid": "0000-0001-9852-1987",
+          "name": "Katarzyna Kamieniecka",
+          "twitter": "katemurat",
+          "orcid": "0009-0004-2454-5950",
+          "joined": "2018-08",
+          "elixir_node": "uk",
+          "id": "kkamieniecka",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kkamieniecka.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "id": "Khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Khaled196/"
+        },
+        {
+          "name": "Krzysztof Poterlowicz",
+          "twitter": "bioinfbrad",
+          "orcid": "0000-0001-6173-5674",
           "joined": "2017-09",
-          "elixir_node": "fr",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 45.77,
-            "lon": 3.08
-          },
-          "fediverse": "https://piaille.fr/@bebatut",
-          "fediverse_flavor": "mastodon",
-          "affiliations": [
-            "gallantries",
-            "ifb"
-          ],
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+          "elixir_node": "uk",
+          "id": "poterlowicz-lab",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/poterlowicz-lab.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/"
         }
       ],
       "mathjax": null,
-      "short_id": "S00059",
-      "url": "/topics/epigenetics/tutorials/introduction-chip-seq/slides.html",
+      "short_id": "T00139",
+      "url": "/topics/epigenetics/tutorials/ewas-suite/tutorial.html",
       "topic_name": "epigenetics",
-      "tutorial_name": "introduction-chip-seq",
-      "dir": "topics/epigenetics/tutorials/introduction-chip-seq",
-      "id": "epigenetics/introduction-chip-seq",
+      "tutorial_name": "ewas-suite",
+      "dir": "topics/epigenetics/tutorials/ewas-suite",
+      "id": "epigenetics/ewas-suite",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -2031,45 +1869,66 @@
         "both": null,
         "session": null
       },
-      "hands_on": false,
+      "hands_on": true,
       "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-chip-seq/tutorial.json",
+      "workflows": [
+        {
+          "workflow": "Infinium-Human-Methylation-BeadChip.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/ewas-suite/workflows/Infinium-Human-Methylation-BeadChip.ga",
+          "path": "topics/epigenetics/tutorials/ewas-suite/workflows/Infinium-Human-Methylation-BeadChip.ga",
+          "wfid": "epigenetics-ewas-suite",
+          "wfname": "infinium-human-methylation-beadchip",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip",
+          "license": "AGPL-3.0-or-later",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0009-0004-2454-5950",
+              "name": "Katarzyna Kamieniecka"
+            },
+            {
+              "class": "Person",
+              "identifier": "0000-0001-5481-8893",
+              "name": "Khaled Jum'ah"
+            },
+            {
+              "class": "Organization",
+              "name": "poterlowicz-lab",
+              "url": "https://github.com/ELIXIR-UK-DaSH"
+            }
+          ],
+          "name": "Infinium Human Methylation BeadChip",
+          "title": "Infinium Human Methylation BeadChip",
+          "test_results": null,
+          "modified": "2024-01-26 00:11:16 +0000",
+          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"Input dataset\"];\n  7[\"Input dataset\"];\n  8[\"Input dataset\"];\n  9[\"Input dataset\"];\n  10[\"Infinium Human Methylation BeadChip\"];\n  4 -->|output| 10;\n  5 -->|output| 10;\n  6 -->|output| 10;\n  7 -->|output| 10;\n  0 -->|output| 10;\n  1 -->|output| 10;\n  2 -->|output| 10;\n  3 -->|output| 10;\n  8 -->|output| 10;\n  9 -->|output| 10;\n  11[\"ChIPpeakAnno annoPeaks\"];\n  10 -->|dmp| 11;\n  12[\"Cut\"];\n  11 -->|tab| 12;\n  13[\"Remove beginning\"];\n  12 -->|out_file1| 13;\n  14[\"Cluster Profiler Bitr\"];\n  13 -->|out_file1| 14;\n  15[\"Cluster Profiler GO\"];\n  14 -->|translation| 15;\n"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/ewas-suite/tutorial.json",
       "tools": [
-
+        "Cut1",
+        "Remove beginning1",
+        "toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks/chipeakanno_annopeaks/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_go/clusterprofiler_go/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0"
       ],
       "supported_servers": {
         "exact": [
-
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": false
+          }
         ],
         "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "id": "eu",
-            "human": "Galaxy Europe",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "id": "us",
-            "human": "Galaxy Main",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "id": "au",
-            "human": "Galaxy Australia",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.fr",
-            "url": "https://usegalaxy.fr",
-            "id": "fr",
-            "human": "Galaxy France",
-            "usegalaxy": true
-          }
+
         ]
       },
       "topic_name_human": "Epigenetics",
@@ -2078,10 +1937,37 @@
         "install_repository_dependencies": true,
         "install_resolver_dependencies": true,
         "tools": [
-
+          {
+            "name": "chipeakanno_annopeaks",
+            "owner": "kpbioteam",
+            "revisions": "104882a2de00",
+            "tool_panel_section_label": "Test Tools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "clusterprofiler_bitr",
+            "owner": "kpbioteam",
+            "revisions": "762c61c71874",
+            "tool_panel_section_label": "Test Tools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "clusterprofiler_go",
+            "owner": "kpbioteam",
+            "revisions": "5299be80cafb",
+            "tool_panel_section_label": "Test Tools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ewastools",
+            "owner": "kpbioteam",
+            "revisions": "369fef559cfc",
+            "tool_panel_section_label": "Epigenetics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: chipeakanno_annopeaks\n  owner: kpbioteam\n  revisions: 104882a2de00\n  tool_panel_section_label: Test Tools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: clusterprofiler_bitr\n  owner: kpbioteam\n  revisions: 762c61c71874\n  tool_panel_section_label: Test Tools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: clusterprofiler_go\n  owner: kpbioteam\n  revisions: 5299be80cafb\n  tool_panel_section_label: Test Tools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ewastools\n  owner: kpbioteam\n  revisions: 369fef559cfc\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -2095,8 +1981,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-chip-seq/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-chip-seq/slides.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/ewas-suite/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/ewas-suite/tutorial.json"
       }
     },
     {
@@ -2216,6 +2102,120 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-dna-methylation/slides.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-dna-methylation/slides.json"
+      }
+    },
+    {
+      "layout": "introduction_slides",
+      "logo": "GTN",
+      "priority": 1,
+      "title": "Introduction to ChIP-Seq data analysis",
+      "contributors": [
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "matrix": "bebatut:matrix.org",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 45.77,
+            "lon": 3.08
+          },
+          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse_flavor": "mastodon",
+          "affiliations": [
+            "gallantries",
+            "ifb"
+          ],
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+        }
+      ],
+      "mathjax": null,
+      "short_id": "S00059",
+      "url": "/topics/epigenetics/tutorials/introduction-chip-seq/slides.html",
+      "topic_name": "epigenetics",
+      "tutorial_name": "introduction-chip-seq",
+      "dir": "topics/epigenetics/tutorials/introduction-chip-seq",
+      "id": "epigenetics/introduction-chip-seq",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-chip-seq/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Epigenetics",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-chip-seq/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-chip-seq/slides.json"
       }
     }
   ]

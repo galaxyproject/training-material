@@ -268,531 +268,6 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
-      "title": "Removal of human reads from SARS-CoV-2 sequencing data",
-      "questions": [
-        "How can you remove traces of human sequence data from a sequenced viral sample?"
-      ],
-      "objectives": [
-        "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
-        "Organize the data into a collection",
-        "Preprocess and map the data against the human reference genome",
-        "Eliminate reads/read pairs that map to the human genome from the original data"
-      ],
-      "time_estimation": "1h",
-      "level": "Intermediate",
-      "key_points": [
-        "Before submitting raw viral sequencing data to public databases you will want to remove human sequence traces",
-        "Human reads can be identified by mapping the data to the human reference genome",
-        "After mapping, you can extract the read identifiers of the non-human reads and use these to extract just the desired original sequenced reads from the input data"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "sequence-analysis",
-          "tutorials": [
-            "quality-control",
-            "mapping"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "collections"
-          ]
-        }
-      ],
-      "tags": [
-        "covid19"
-      ],
-      "contributors": [
-        {
-          "name": "Wolfgang Maier",
-          "orcid": "0000-0002-9464-6640",
-          "matrix": "wm75:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "fediverse": "https://scholar.social/@zerodivision",
-          "fediverse_flavor": "mastodon",
-          "affiliations": [
-            "by-covid",
-            "uni-freiburg"
-          ],
-          "id": "wm75",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
-        }
-      ],
-      "mathjax": null,
-      "short_id": "T00236",
-      "url": "/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
-      "topic_name": "sequence-analysis",
-      "tutorial_name": "human-reads-removal",
-      "dir": "topics/sequence-analysis/tutorials/human-reads-removal",
-      "id": "sequence-analysis/human-reads-removal",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": {
-          "description": null,
-          "materials": [
-            {
-              "link": "topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
-              "title": "Removal of human reads from SARS-CoV-2 sequencing data",
-              "type": "Tutorial"
-            },
-            {
-              "external": true,
-              "link": "https://usegalaxy.eu/u/wolfgang-maier/h/removal-of-human-reads-from-sars-cov-2-sequencing-data",
-              "title": "Example History",
-              "type": "Example History"
-            }
-          ],
-          "tags": [
-            "sequence-analysis"
-          ],
-          "type": "Tutorial",
-          "gtn_id": "sequence-analysis/human-reads-removal",
-          "title": "Removal of human reads from SARS-CoV-2 sequencing data"
-        },
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "human-reads-removal.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
-          "path": "topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
-          "wfid": "sequence-analysis-human-reads-removal",
-          "wfname": "human-reads-removal",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-human-reads-removal/versions/human-reads-removal",
-          "license": null,
-          "creators": [
-
-          ],
-          "name": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
-          "title": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
-          "test_results": null,
-          "modified": "2024-01-25 00:11:32 +0000",
-          "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Trimmomatic\"];\n  0 -->|output| 1;\n  2[\"Unzip Collection\"];\n  0 -->|output| 2;\n  3[\"Map with BWA-MEM\"];\n  1 -->|fastq_out_paired| 3;\n  4[\"Samtools fastx\"];\n  3 -->|bam_output| 4;\n  5[\"Select\"];\n  4 -->|forward| 5;\n  6[\"Replace Text\"];\n  5 -->|out_file1| 6;\n  7[\"seqtk_subseq\"];\n  2 -->|forward| 7;\n  6 -->|outfile| 7;\n  8[\"seqtk_subseq\"];\n  2 -->|reverse| 8;\n  6 -->|outfile| 8;\n  9[\"Zip Collection\"];\n  7 -->|default| 9;\n  8 -->|default| 9;\n"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
-      "tools": [
-        "Grep1",
-        "__UNZIP_COLLECTION__",
-        "__ZIP_COLLECTION__",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1",
-        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0",
-        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://galaxy.mesocentre.uca.fr",
-            "name": "Galaxy@AuBi",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://galaxytrakr.org/",
-            "name": "GalaxyTrakr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Sequence analysis",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Text Manipulation",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bwa",
-            "owner": "devteam",
-            "revisions": "e188dc7a68e6",
-            "tool_panel_section_label": "Mapping",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "samtools_fastx",
-            "owner": "iuc",
-            "revisions": "a8d69aee190e",
-            "tool_panel_section_label": "SAM/BAM",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "seqtk",
-            "owner": "iuc",
-            "revisions": "3da72230c066",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "trimmomatic",
-            "owner": "pjbriggs",
-            "revisions": "898b67846b47",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "trimmomatic",
-            "owner": "pjbriggs",
-            "revisions": "d94aff5ee623",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_fastx\n  owner: iuc\n  revisions: a8d69aee190e\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: 898b67846b47\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: d94aff5ee623\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Clean and manage Sanger sequences from raw files to aligned consensus",
-      "zenodo_link": "https://zenodo.org/records/7104640/files/AOPEP_and_CHD8_sequences_20220907.zip?download=1",
-      "questions": [
-        "How to clean Sanger sequencing files?"
-      ],
-      "objectives": [
-        "Learn how to manage sequencing files (AB1, FASTQ, FASTA)",
-        "Learn how to clean your Sanger sequences in an automated and reproducible way"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Check your data and results for mistakes afterward !!!! This procedure is useful but not perfect"
-      ],
-      "contributors": [
-        {
-          "name": "Coline Royaux",
-          "email": "coline.royaux@mnhn.fr",
-          "twitter": "ColineRoyaux",
-          "orcid": "0000-0003-4308-5617",
-          "joined": "2020-11",
-          "elixir_node": "fr",
-          "affiliations": [
-            "pndb",
-            "gallantries"
-          ],
-          "id": "colineroyaux",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/colineroyaux.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/colineroyaux/"
-        }
-      ],
-      "mathjax": null,
-      "short_id": "T00383",
-      "url": "/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/tutorial.html",
-      "topic_name": "sequence-analysis",
-      "tutorial_name": "Manage_AB1_Sanger",
-      "dir": "topics/sequence-analysis/tutorials/Manage_AB1_Sanger",
-      "id": "sequence-analysis/Manage_AB1_Sanger",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "Sanger1_From-AB1-to-aligned-consensus-and-primers-fasta-+-BLAST.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/workflows/Sanger1_From-AB1-to-aligned-consensus-and-primers-fasta-+-BLAST.ga",
-          "path": "topics/sequence-analysis/tutorials/Manage_AB1_Sanger/workflows/Sanger1_From-AB1-to-aligned-consensus-and-primers-fasta-+-BLAST.ga",
-          "wfid": "sequence-analysis-Manage_AB1_Sanger",
-          "wfname": "sanger1_from-ab1-to-aligned-consensus-and-primers-fasta-+-blast",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-Manage_AB1_Sanger/versions/sanger1_from-ab1-to-aligned-consensus-and-primers-fasta-+-blast",
-          "license": "MIT",
-          "creators": [
-            {
-              "class": "Organization",
-              "name": "Coline Royaux"
-            }
-          ],
-          "name": "Sanger1 : From AB1 to aligned consensus and primers fasta + BLAST",
-          "title": "Sanger1 : From AB1 to aligned consensus and primers fasta + BLAST",
-          "test_results": null,
-          "modified": "2024-01-25 00:11:32 +0000",
-          "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset collection\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"ab1 to FASTQ converter\"];\n  0 -->|output| 4;\n  5[\"ab1 to FASTQ converter\"];\n  1 -->|output| 5;\n  6[\"Filter FASTA\"];\n  2 -->|output| 6;\n  7[\"Filter FASTA\"];\n  3 -->|output| 7;\n  8[\"seqtk_trimfq\"];\n  4 -->|output| 8;\n  9[\"seqtk_trimfq\"];\n  5 -->|output| 9;\n  10[\"Degap.seqs\"];\n  6 -->|output| 10;\n  11[\"Degap.seqs\"];\n  7 -->|output| 11;\n  12[\"Sort collection\"];\n  8 -->|default| 12;\n  13[\"FASTQ Groomer\"];\n  9 -->|default| 13;\n  14[\"Reverse-Complement\"];\n  11 -->|out_fasta| 14;\n  15[\"Reverse-Complement\"];\n  13 -->|output_file| 15;\n  16[\"Sort collection\"];\n  15 -->|output| 16;\n  17[\"seqtk_mergepe\"];\n  12 -->|output| 17;\n  16 -->|output| 17;\n  18[\"FASTQ Groomer\"];\n  17 -->|default| 18;\n  19[\"FASTQ to Tabular\"];\n  18 -->|output_file| 19;\n  20[\"Tabular-to-FASTA\"];\n  19 -->|output_file| 20;\n  21[\"Align sequences\"];\n  20 -->|output| 21;\n  22[\"Consensus sequence from aligned FASTA\"];\n  21 -->|aligned_sequences| 22;\n  23[\"Merge.files\"];\n  22 -->|output| 23;\n  24[\"Merge.files\"];\n  23 -->|output| 24;\n  14 -->|output| 24;\n  10 -->|out_fasta| 24;\n  25[\"Regex Find And Replace\"];\n  24 -->|output| 25;\n  26[\"Align sequences\"];\n  25 -->|out_file1| 26;\n  27[\"NCBI BLAST+ blastn\"];\n  25 -->|out_file1| 27;\n"
-        },
-        {
-          "workflow": "Training-Sanger-sequences-CHD8.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/workflows/Training-Sanger-sequences-CHD8.ga",
-          "path": "topics/sequence-analysis/tutorials/Manage_AB1_Sanger/workflows/Training-Sanger-sequences-CHD8.ga",
-          "wfid": "sequence-analysis-Manage_AB1_Sanger",
-          "wfname": "training-sanger-sequences-chd8",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-Manage_AB1_Sanger/versions/training-sanger-sequences-chd8",
-          "license": "MIT",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "https://orcid.org/0000-0003-4308-5617",
-              "name": "Coline Royaux"
-            }
-          ],
-          "name": "Training Sanger sequences CHD8",
-          "title": "Training Sanger sequences CHD8",
-          "test_results": null,
-          "modified": "2024-01-25 00:11:32 +0000",
-          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Unzip\"];\n  0 -->|output| 2;\n  3[\"Filter FASTA\"];\n  1 -->|output| 3;\n  4[\"Filter FASTA\"];\n  1 -->|output| 4;\n  5[\"Extract element identifiers\"];\n  2 -->|unzipped| 5;\n  6[\"Degap.seqs\"];\n  3 -->|output| 6;\n  7[\"Degap.seqs\"];\n  4 -->|output| 7;\n  8[\"Regex Find And Replace\"];\n  5 -->|output| 8;\n  9[\"Regex Find And Replace\"];\n  5 -->|output| 9;\n  10[\"Reverse-Complement\"];\n  7 -->|out_fasta| 10;\n  11[\"Filter collection\"];\n  8 -->|out_file1| 11;\n  2 -->|unzipped| 11;\n  12[\"Filter collection\"];\n  9 -->|out_file1| 12;\n  11 -->|output_discarded| 12;\n  13[\"ab1 to FASTQ converter\"];\n  11 -->|output_filtered| 13;\n  14[\"ab1 to FASTQ converter\"];\n  12 -->|output_filtered| 14;\n  15[\"seqtk_trimfq\"];\n  13 -->|output| 15;\n  16[\"seqtk_trimfq\"];\n  14 -->|output| 16;\n  17[\"FASTQ Groomer\"];\n  15 -->|default| 17;\n  18[\"Sort collection\"];\n  16 -->|default| 18;\n  19[\"Sort collection\"];\n  17 -->|output_file| 19;\n  20[\"Reverse-Complement\"];\n  19 -->|output| 20;\n  21[\"seqtk_mergepe\"];\n  18 -->|output| 21;\n  20 -->|output| 21;\n  22[\"FASTQ Groomer\"];\n  21 -->|default| 22;\n  23[\"FASTQ to Tabular\"];\n  22 -->|output_file| 23;\n  24[\"Tabular-to-FASTA\"];\n  23 -->|output_file| 24;\n  25[\"Align sequences\"];\n  24 -->|output| 25;\n  26[\"Consensus sequence from aligned FASTA\"];\n  25 -->|aligned_sequences| 26;\n  27[\"Merge.files\"];\n  26 -->|output| 27;\n  28[\"Merge.files\"];\n  27 -->|output| 28;\n  10 -->|output| 28;\n  6 -->|out_fasta| 28;\n  29[\"Regex Find And Replace\"];\n  28 -->|output| 29;\n  30[\"Align sequences\"];\n  29 -->|out_file1| 30;\n  31[\"NCBI BLAST+ blastn\"];\n  29 -->|out_file1| 31;\n"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/tutorial.json",
-      "tools": [
-        "__FILTER_FROM_FILE__",
-        "__SORTLIST__",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_masker_by_quality/fastq_masker_by_quality/1.1.5",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_fasta/cshl_fastq_to_fasta/1.0.2+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_tabular/fastq_to_tabular/1.1.5",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastx_reverse_complement/cshl_fastx_reverse_complement/1.0.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.10.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/ecology/ab1_fastq_converter/ab1_fastq_converter/1.20.0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/aligned_to_consensus/aligned_to_consensus/1.0.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/mothur_degap_seqs/mothur_degap_seqs/1.39.5.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/mothur_merge_files/mothur_merge_files/1.39.5.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/qiime_align_seqs/qiime_align_seqs/1.9.1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_mergepe/1.3.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_trimfq/1.3.1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Sequence analysis",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "fastq_groomer",
-            "owner": "devteam",
-            "revisions": "47e5dbc3e790",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fastq_masker_by_quality",
-            "owner": "devteam",
-            "revisions": "9dfda4e310ed",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fastq_to_fasta",
-            "owner": "devteam",
-            "revisions": "77b41c89d856",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fastq_to_tabular",
-            "owner": "devteam",
-            "revisions": "4b347702c4aa",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fastx_reverse_complement",
-            "owner": "devteam",
-            "revisions": "6027ef51ef91",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "ncbi_blast_plus",
-            "owner": "devteam",
-            "revisions": "0e3cf9594bb7",
-            "tool_panel_section_label": "NCBI Blast",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "tabular_to_fasta",
-            "owner": "devteam",
-            "revisions": "0a7799698fe5",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "ab1_fastq_converter",
-            "owner": "ecology",
-            "revisions": "307518fb51af",
-            "tool_panel_section_label": "Convert Formats",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "aligned_to_consensus",
-            "owner": "ecology",
-            "revisions": "0ccbe1c20fc3",
-            "tool_panel_section_label": "Assembly",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "filter_by_fasta_ids",
-            "owner": "galaxyp",
-            "revisions": "dff7df6fcab5",
-            "tool_panel_section_label": "Proteomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "regex_find_replace",
-            "owner": "galaxyp",
-            "revisions": "503bcd6ebe4b",
-            "tool_panel_section_label": "Text Manipulation",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "unzip",
-            "owner": "imgteam",
-            "revisions": "57f0914ddb7b",
-            "tool_panel_section_label": "Collection Operations",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "collection_element_identifiers",
-            "owner": "iuc",
-            "revisions": "d3c07d270a50",
-            "tool_panel_section_label": "Collection Operations",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "mothur_degap_seqs",
-            "owner": "iuc",
-            "revisions": "6f08af23888a",
-            "tool_panel_section_label": "Mothur",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "mothur_merge_files",
-            "owner": "iuc",
-            "revisions": "7bd37d6decd9",
-            "tool_panel_section_label": "Mothur",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "qiime_align_seqs",
-            "owner": "iuc",
-            "revisions": "e8bb88f051ec",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "seqtk",
-            "owner": "iuc",
-            "revisions": "3da72230c066",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "seqtk",
-            "owner": "iuc",
-            "revisions": "3da72230c066",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: fastq_groomer\n  owner: devteam\n  revisions: 47e5dbc3e790\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_masker_by_quality\n  owner: devteam\n  revisions: 9dfda4e310ed\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_to_fasta\n  owner: devteam\n  revisions: 77b41c89d856\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_to_tabular\n  owner: devteam\n  revisions: 4b347702c4aa\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastx_reverse_complement\n  owner: devteam\n  revisions: 6027ef51ef91\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 0e3cf9594bb7\n  tool_panel_section_label: NCBI Blast\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tabular_to_fasta\n  owner: devteam\n  revisions: 0a7799698fe5\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ab1_fastq_converter\n  owner: ecology\n  revisions: 307518fb51af\n  tool_panel_section_label: Convert Formats\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: aligned_to_consensus\n  owner: ecology\n  revisions: 0ccbe1c20fc3\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: filter_by_fasta_ids\n  owner: galaxyp\n  revisions: dff7df6fcab5\n  tool_panel_section_label: Proteomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 503bcd6ebe4b\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 57f0914ddb7b\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collection_element_identifiers\n  owner: iuc\n  revisions: d3c07d270a50\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mothur_degap_seqs\n  owner: iuc\n  revisions: 6f08af23888a\n  tool_panel_section_label: Mothur\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mothur_merge_files\n  owner: iuc\n  revisions: 7bd37d6decd9\n  tool_panel_section_label: Mothur\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: qiime_align_seqs\n  owner: iuc\n  revisions: e8bb88f051ec\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Mapping",
       "zenodo_link": "https://doi.org/10.5281/zenodo.1324070",
       "questions": [
@@ -1005,7 +480,7 @@
           "name": "GTN - Sequence Analyses - Mapping - Jbrowse (imported from uploaded file)",
           "title": "GTN - Sequence Analyses - Mapping - Jbrowse (imported from uploaded file)",
           "test_results": null,
-          "modified": "2024-01-25 00:11:32 +0000",
+          "modified": "2024-01-26 00:11:18 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"Trim Galore!\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  3 -->|text_file| 5;\n  2 -->|text_file| 5;\n  6[\"Bowtie2\"];\n  4 -->|trimmed_reads_pair1| 6;\n  4 -->|trimmed_reads_pair2| 6;\n  7[\"Samtools stats\"];\n  6 -->|output| 7;\n  8[\"JBrowse\"];\n  6 -->|output| 8;\n"
         },
         {
@@ -2798,7 +2273,7 @@
               "version": "0.1"
             }
           },
-          "modified": "2024-01-25 00:11:32 +0000",
+          "modified": "2024-01-26 00:11:18 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"Trim Galore!\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  3 -->|text_file| 5;\n  2 -->|text_file| 5;\n  6[\"Bowtie2\"];\n  4 -->|trimmed_reads_pair1| 6;\n  4 -->|trimmed_reads_pair2| 6;\n  7[\"Stats\"];\n  6 -->|output| 7;\n  8[\"Filter\"];\n  6 -->|output| 8;\n  9[\"Stats\"];\n  8 -->|out_file1| 9;\n"
         }
       ],
@@ -4432,7 +3907,7 @@
               "version": "0.1"
             }
           },
-          "modified": "2024-01-25 00:11:32 +0000",
+          "modified": "2024-01-26 00:11:18 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"Cutadapt\"];\n  1 -->|output| 3;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  5[\"Cutadapt\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  6[\"MultiQC\"];\n  4 -->|text_file| 6;\n  2 -->|text_file| 6;\n"
         }
       ],
@@ -4557,41 +4032,43 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "NCBI BLAST+ against the MAdLand",
-      "zenodo_link": "https://zenodo.org/records/7524427",
+      "title": "Clean and manage Sanger sequences from raw files to aligned consensus",
+      "zenodo_link": "https://zenodo.org/records/7104640/files/AOPEP_and_CHD8_sequences_20220907.zip?download=1",
       "questions": [
-        "What is MAdLand DB?",
-        "How can we perform Blast analysis on Galaxy?"
+        "How to clean Sanger sequencing files?"
       ],
       "objectives": [
-        "Load FASTA sequence into Galaxy",
-        "Perform NCBI-Blast+ analysis against MAdLandDB"
+        "Learn how to manage sequencing files (AB1, FASTQ, FASTA)",
+        "Learn how to clean your Sanger sequences in an automated and reproducible way"
       ],
-      "time_estimation": "15m",
+      "time_estimation": "1H",
       "key_points": [
-        "Blast tool searches a database of sequences for similar sequences to a query sequence.",
-        "Diamond  quickly aligns large-scale data sets using a compressed version of the reference sequences called a \"database diamond\".",
-        "MAdLand is a database of fully sequenced plant and algal genomes, with an emphasis on non-seed plants and streptophyte algae that can be use for sequence similarity search."
+        "Check your data and results for mistakes afterward !!!! This procedure is useful but not perfect"
       ],
       "contributors": [
         {
-          "name": "Deepti Varshney",
-          "joined": "2022-12",
+          "name": "Coline Royaux",
+          "email": "coline.royaux@mnhn.fr",
+          "twitter": "ColineRoyaux",
+          "orcid": "0000-0003-4308-5617",
+          "joined": "2020-11",
+          "elixir_node": "fr",
           "affiliations": [
-            "uni-freiburg"
+            "pndb",
+            "gallantries"
           ],
-          "id": "deeptivarshney",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/deeptivarshney.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/deeptivarshney/"
+          "id": "colineroyaux",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/colineroyaux.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/colineroyaux/"
         }
       ],
       "mathjax": null,
-      "short_id": "T00238",
-      "url": "/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.html",
+      "short_id": "T00383",
+      "url": "/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/tutorial.html",
       "topic_name": "sequence-analysis",
-      "tutorial_name": "ncbi-blast-against-the-madland",
-      "dir": "topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland",
-      "id": "sequence-analysis/ncbi-blast-against-the-madland",
+      "tutorial_name": "Manage_AB1_Sanger",
+      "dir": "topics/sequence-analysis/tutorials/Manage_AB1_Sanger",
+      "id": "sequence-analysis/Manage_AB1_Sanger",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -4601,11 +4078,73 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json",
+      "workflows": [
+        {
+          "workflow": "Sanger1_From-AB1-to-aligned-consensus-and-primers-fasta-+-BLAST.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/workflows/Sanger1_From-AB1-to-aligned-consensus-and-primers-fasta-+-BLAST.ga",
+          "path": "topics/sequence-analysis/tutorials/Manage_AB1_Sanger/workflows/Sanger1_From-AB1-to-aligned-consensus-and-primers-fasta-+-BLAST.ga",
+          "wfid": "sequence-analysis-Manage_AB1_Sanger",
+          "wfname": "sanger1_from-ab1-to-aligned-consensus-and-primers-fasta-+-blast",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-Manage_AB1_Sanger/versions/sanger1_from-ab1-to-aligned-consensus-and-primers-fasta-+-blast",
+          "license": "MIT",
+          "creators": [
+            {
+              "class": "Organization",
+              "name": "Coline Royaux"
+            }
+          ],
+          "name": "Sanger1 : From AB1 to aligned consensus and primers fasta + BLAST",
+          "title": "Sanger1 : From AB1 to aligned consensus and primers fasta + BLAST",
+          "test_results": null,
+          "modified": "2024-01-26 00:11:18 +0000",
+          "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset collection\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"ab1 to FASTQ converter\"];\n  0 -->|output| 4;\n  5[\"ab1 to FASTQ converter\"];\n  1 -->|output| 5;\n  6[\"Filter FASTA\"];\n  2 -->|output| 6;\n  7[\"Filter FASTA\"];\n  3 -->|output| 7;\n  8[\"seqtk_trimfq\"];\n  4 -->|output| 8;\n  9[\"seqtk_trimfq\"];\n  5 -->|output| 9;\n  10[\"Degap.seqs\"];\n  6 -->|output| 10;\n  11[\"Degap.seqs\"];\n  7 -->|output| 11;\n  12[\"Sort collection\"];\n  8 -->|default| 12;\n  13[\"FASTQ Groomer\"];\n  9 -->|default| 13;\n  14[\"Reverse-Complement\"];\n  11 -->|out_fasta| 14;\n  15[\"Reverse-Complement\"];\n  13 -->|output_file| 15;\n  16[\"Sort collection\"];\n  15 -->|output| 16;\n  17[\"seqtk_mergepe\"];\n  12 -->|output| 17;\n  16 -->|output| 17;\n  18[\"FASTQ Groomer\"];\n  17 -->|default| 18;\n  19[\"FASTQ to Tabular\"];\n  18 -->|output_file| 19;\n  20[\"Tabular-to-FASTA\"];\n  19 -->|output_file| 20;\n  21[\"Align sequences\"];\n  20 -->|output| 21;\n  22[\"Consensus sequence from aligned FASTA\"];\n  21 -->|aligned_sequences| 22;\n  23[\"Merge.files\"];\n  22 -->|output| 23;\n  24[\"Merge.files\"];\n  23 -->|output| 24;\n  14 -->|output| 24;\n  10 -->|out_fasta| 24;\n  25[\"Regex Find And Replace\"];\n  24 -->|output| 25;\n  26[\"Align sequences\"];\n  25 -->|out_file1| 26;\n  27[\"NCBI BLAST+ blastn\"];\n  25 -->|out_file1| 27;\n"
+        },
+        {
+          "workflow": "Training-Sanger-sequences-CHD8.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/workflows/Training-Sanger-sequences-CHD8.ga",
+          "path": "topics/sequence-analysis/tutorials/Manage_AB1_Sanger/workflows/Training-Sanger-sequences-CHD8.ga",
+          "wfid": "sequence-analysis-Manage_AB1_Sanger",
+          "wfname": "training-sanger-sequences-chd8",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-Manage_AB1_Sanger/versions/training-sanger-sequences-chd8",
+          "license": "MIT",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "https://orcid.org/0000-0003-4308-5617",
+              "name": "Coline Royaux"
+            }
+          ],
+          "name": "Training Sanger sequences CHD8",
+          "title": "Training Sanger sequences CHD8",
+          "test_results": null,
+          "modified": "2024-01-26 00:11:18 +0000",
+          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Unzip\"];\n  0 -->|output| 2;\n  3[\"Filter FASTA\"];\n  1 -->|output| 3;\n  4[\"Filter FASTA\"];\n  1 -->|output| 4;\n  5[\"Extract element identifiers\"];\n  2 -->|unzipped| 5;\n  6[\"Degap.seqs\"];\n  3 -->|output| 6;\n  7[\"Degap.seqs\"];\n  4 -->|output| 7;\n  8[\"Regex Find And Replace\"];\n  5 -->|output| 8;\n  9[\"Regex Find And Replace\"];\n  5 -->|output| 9;\n  10[\"Reverse-Complement\"];\n  7 -->|out_fasta| 10;\n  11[\"Filter collection\"];\n  8 -->|out_file1| 11;\n  2 -->|unzipped| 11;\n  12[\"Filter collection\"];\n  9 -->|out_file1| 12;\n  11 -->|output_discarded| 12;\n  13[\"ab1 to FASTQ converter\"];\n  11 -->|output_filtered| 13;\n  14[\"ab1 to FASTQ converter\"];\n  12 -->|output_filtered| 14;\n  15[\"seqtk_trimfq\"];\n  13 -->|output| 15;\n  16[\"seqtk_trimfq\"];\n  14 -->|output| 16;\n  17[\"FASTQ Groomer\"];\n  15 -->|default| 17;\n  18[\"Sort collection\"];\n  16 -->|default| 18;\n  19[\"Sort collection\"];\n  17 -->|output_file| 19;\n  20[\"Reverse-Complement\"];\n  19 -->|output| 20;\n  21[\"seqtk_mergepe\"];\n  18 -->|output| 21;\n  20 -->|output| 21;\n  22[\"FASTQ Groomer\"];\n  21 -->|default| 22;\n  23[\"FASTQ to Tabular\"];\n  22 -->|output_file| 23;\n  24[\"Tabular-to-FASTA\"];\n  23 -->|output_file| 24;\n  25[\"Align sequences\"];\n  24 -->|output| 25;\n  26[\"Consensus sequence from aligned FASTA\"];\n  25 -->|aligned_sequences| 26;\n  27[\"Merge.files\"];\n  26 -->|output| 27;\n  28[\"Merge.files\"];\n  27 -->|output| 28;\n  10 -->|output| 28;\n  6 -->|out_fasta| 28;\n  29[\"Regex Find And Replace\"];\n  28 -->|output| 29;\n  30[\"Align sequences\"];\n  29 -->|out_file1| 30;\n  31[\"NCBI BLAST+ blastn\"];\n  29 -->|out_file1| 31;\n"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/tutorial.json",
       "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2"
+        "__FILTER_FROM_FILE__",
+        "__SORTLIST__",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_masker_by_quality/fastq_masker_by_quality/1.1.5",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_fasta/cshl_fastq_to_fasta/1.0.2+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_tabular/fastq_to_tabular/1.1.5",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastx_reverse_complement/cshl_fastx_reverse_complement/1.0.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.10.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/ecology/ab1_fastq_converter/ab1_fastq_converter/1.20.0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/aligned_to_consensus/aligned_to_consensus/1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/mothur_degap_seqs/mothur_degap_seqs/1.39.5.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/mothur_merge_files/mothur_merge_files/1.39.5.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/qiime_align_seqs/qiime_align_seqs/1.9.1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_mergepe/1.3.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_trimfq/1.3.1"
       ],
       "supported_servers": {
         "exact": [
@@ -4618,39 +4157,10 @@
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
             "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": true
           }
         ],
         "inexact": [
-          {
-            "url": "https://cpt.tamu.edu/galaxy-public/",
-            "name": "Center for Phage Technology (CPT)",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://galaxy.mesocentre.uca.fr",
-            "name": "Galaxy@AuBi",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://galaxytrakr.org/",
-            "name": "GalaxyTrakr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          }
+
         ]
       },
       "topic_name_human": "Sequence analysis",
@@ -4660,10 +4170,38 @@
         "install_resolver_dependencies": true,
         "tools": [
           {
-            "name": "diamond",
-            "owner": "bgruening",
-            "revisions": "e8ac2b53f262",
-            "tool_panel_section_label": "NCBI Blast",
+            "name": "fastq_groomer",
+            "owner": "devteam",
+            "revisions": "47e5dbc3e790",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastq_masker_by_quality",
+            "owner": "devteam",
+            "revisions": "9dfda4e310ed",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastq_to_fasta",
+            "owner": "devteam",
+            "revisions": "77b41c89d856",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastq_to_tabular",
+            "owner": "devteam",
+            "revisions": "4b347702c4aa",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastx_reverse_complement",
+            "owner": "devteam",
+            "revisions": "6027ef51ef91",
+            "tool_panel_section_label": "FASTA/FASTQ",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
@@ -4674,15 +4212,92 @@
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "ncbi_blast_plus",
+            "name": "tabular_to_fasta",
             "owner": "devteam",
-            "revisions": "0e3cf9594bb7",
-            "tool_panel_section_label": "NCBI Blast",
+            "revisions": "0a7799698fe5",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ab1_fastq_converter",
+            "owner": "ecology",
+            "revisions": "307518fb51af",
+            "tool_panel_section_label": "Convert Formats",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "aligned_to_consensus",
+            "owner": "ecology",
+            "revisions": "0ccbe1c20fc3",
+            "tool_panel_section_label": "Assembly",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "filter_by_fasta_ids",
+            "owner": "galaxyp",
+            "revisions": "dff7df6fcab5",
+            "tool_panel_section_label": "Proteomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "regex_find_replace",
+            "owner": "galaxyp",
+            "revisions": "503bcd6ebe4b",
+            "tool_panel_section_label": "Text Manipulation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "unzip",
+            "owner": "imgteam",
+            "revisions": "57f0914ddb7b",
+            "tool_panel_section_label": "Collection Operations",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "collection_element_identifiers",
+            "owner": "iuc",
+            "revisions": "d3c07d270a50",
+            "tool_panel_section_label": "Collection Operations",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "mothur_degap_seqs",
+            "owner": "iuc",
+            "revisions": "6f08af23888a",
+            "tool_panel_section_label": "Mothur",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "mothur_merge_files",
+            "owner": "iuc",
+            "revisions": "7bd37d6decd9",
+            "tool_panel_section_label": "Mothur",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "qiime_align_seqs",
+            "owner": "iuc",
+            "revisions": "e8bb88f051ec",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "seqtk",
+            "owner": "iuc",
+            "revisions": "3da72230c066",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "seqtk",
+            "owner": "iuc",
+            "revisions": "3da72230c066",
+            "tool_panel_section_label": "FASTA/FASTQ",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: diamond\n  owner: bgruening\n  revisions: e8ac2b53f262\n  tool_panel_section_label: NCBI Blast\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 0e3cf9594bb7\n  tool_panel_section_label: NCBI Blast\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 0e3cf9594bb7\n  tool_panel_section_label: NCBI Blast\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: fastq_groomer\n  owner: devteam\n  revisions: 47e5dbc3e790\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_masker_by_quality\n  owner: devteam\n  revisions: 9dfda4e310ed\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_to_fasta\n  owner: devteam\n  revisions: 77b41c89d856\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_to_tabular\n  owner: devteam\n  revisions: 4b347702c4aa\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastx_reverse_complement\n  owner: devteam\n  revisions: 6027ef51ef91\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 0e3cf9594bb7\n  tool_panel_section_label: NCBI Blast\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tabular_to_fasta\n  owner: devteam\n  revisions: 0a7799698fe5\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ab1_fastq_converter\n  owner: ecology\n  revisions: 307518fb51af\n  tool_panel_section_label: Convert Formats\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: aligned_to_consensus\n  owner: ecology\n  revisions: 0ccbe1c20fc3\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: filter_by_fasta_ids\n  owner: galaxyp\n  revisions: dff7df6fcab5\n  tool_panel_section_label: Proteomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 503bcd6ebe4b\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 57f0914ddb7b\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collection_element_identifiers\n  owner: iuc\n  revisions: d3c07d270a50\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mothur_degap_seqs\n  owner: iuc\n  revisions: 6f08af23888a\n  tool_panel_section_label: Mothur\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mothur_merge_files\n  owner: iuc\n  revisions: 7bd37d6decd9\n  tool_panel_section_label: Mothur\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: qiime_align_seqs\n  owner: iuc\n  revisions: e8bb88f051ec\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -4696,8 +4311,248 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Removal of human reads from SARS-CoV-2 sequencing data",
+      "questions": [
+        "How can you remove traces of human sequence data from a sequenced viral sample?"
+      ],
+      "objectives": [
+        "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
+        "Organize the data into a collection",
+        "Preprocess and map the data against the human reference genome",
+        "Eliminate reads/read pairs that map to the human genome from the original data"
+      ],
+      "time_estimation": "1h",
+      "level": "Intermediate",
+      "key_points": [
+        "Before submitting raw viral sequencing data to public databases you will want to remove human sequence traces",
+        "Human reads can be identified by mapping the data to the human reference genome",
+        "After mapping, you can extract the read identifiers of the non-human reads and use these to extract just the desired original sequenced reads from the input data"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "sequence-analysis",
+          "tutorials": [
+            "quality-control",
+            "mapping"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections"
+          ]
+        }
+      ],
+      "tags": [
+        "covid19"
+      ],
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "orcid": "0000-0002-9464-6640",
+          "matrix": "wm75:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "fediverse": "https://scholar.social/@zerodivision",
+          "fediverse_flavor": "mastodon",
+          "affiliations": [
+            "by-covid",
+            "uni-freiburg"
+          ],
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+        }
+      ],
+      "mathjax": null,
+      "short_id": "T00236",
+      "url": "/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
+      "topic_name": "sequence-analysis",
+      "tutorial_name": "human-reads-removal",
+      "dir": "topics/sequence-analysis/tutorials/human-reads-removal",
+      "id": "sequence-analysis/human-reads-removal",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": {
+          "description": null,
+          "materials": [
+            {
+              "link": "topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
+              "title": "Removal of human reads from SARS-CoV-2 sequencing data",
+              "type": "Tutorial"
+            },
+            {
+              "external": true,
+              "link": "https://usegalaxy.eu/u/wolfgang-maier/h/removal-of-human-reads-from-sars-cov-2-sequencing-data",
+              "title": "Example History",
+              "type": "Example History"
+            }
+          ],
+          "tags": [
+            "sequence-analysis"
+          ],
+          "type": "Tutorial",
+          "gtn_id": "sequence-analysis/human-reads-removal",
+          "title": "Removal of human reads from SARS-CoV-2 sequencing data"
+        },
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "human-reads-removal.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
+          "path": "topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
+          "wfid": "sequence-analysis-human-reads-removal",
+          "wfname": "human-reads-removal",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-human-reads-removal/versions/human-reads-removal",
+          "license": null,
+          "creators": [
+
+          ],
+          "name": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
+          "title": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
+          "test_results": null,
+          "modified": "2024-01-26 00:11:18 +0000",
+          "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Trimmomatic\"];\n  0 -->|output| 1;\n  2[\"Unzip Collection\"];\n  0 -->|output| 2;\n  3[\"Map with BWA-MEM\"];\n  1 -->|fastq_out_paired| 3;\n  4[\"Samtools fastx\"];\n  3 -->|bam_output| 4;\n  5[\"Select\"];\n  4 -->|forward| 5;\n  6[\"Replace Text\"];\n  5 -->|out_file1| 6;\n  7[\"seqtk_subseq\"];\n  2 -->|forward| 7;\n  6 -->|outfile| 7;\n  8[\"seqtk_subseq\"];\n  2 -->|reverse| 8;\n  6 -->|outfile| 8;\n  9[\"Zip Collection\"];\n  7 -->|default| 9;\n  8 -->|default| 9;\n"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
+      "tools": [
+        "Grep1",
+        "__UNZIP_COLLECTION__",
+        "__ZIP_COLLECTION__",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://galaxy.mesocentre.uca.fr",
+            "name": "Galaxy@AuBi",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://galaxytrakr.org/",
+            "name": "GalaxyTrakr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Sequence analysis",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Text Manipulation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bwa",
+            "owner": "devteam",
+            "revisions": "e188dc7a68e6",
+            "tool_panel_section_label": "Mapping",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "samtools_fastx",
+            "owner": "iuc",
+            "revisions": "a8d69aee190e",
+            "tool_panel_section_label": "SAM/BAM",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "seqtk",
+            "owner": "iuc",
+            "revisions": "3da72230c066",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "trimmomatic",
+            "owner": "pjbriggs",
+            "revisions": "898b67846b47",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "trimmomatic",
+            "owner": "pjbriggs",
+            "revisions": "d94aff5ee623",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_fastx\n  owner: iuc\n  revisions: a8d69aee190e\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: 898b67846b47\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: d94aff5ee623\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json"
       }
     },
     {
@@ -4964,6 +4819,151 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "NCBI BLAST+ against the MAdLand",
+      "zenodo_link": "https://zenodo.org/records/7524427",
+      "questions": [
+        "What is MAdLand DB?",
+        "How can we perform Blast analysis on Galaxy?"
+      ],
+      "objectives": [
+        "Load FASTA sequence into Galaxy",
+        "Perform NCBI-Blast+ analysis against MAdLandDB"
+      ],
+      "time_estimation": "15m",
+      "key_points": [
+        "Blast tool searches a database of sequences for similar sequences to a query sequence.",
+        "Diamond  quickly aligns large-scale data sets using a compressed version of the reference sequences called a \"database diamond\".",
+        "MAdLand is a database of fully sequenced plant and algal genomes, with an emphasis on non-seed plants and streptophyte algae that can be use for sequence similarity search."
+      ],
+      "contributors": [
+        {
+          "name": "Deepti Varshney",
+          "joined": "2022-12",
+          "affiliations": [
+            "uni-freiburg"
+          ],
+          "id": "deeptivarshney",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/deeptivarshney.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/deeptivarshney/"
+        }
+      ],
+      "mathjax": null,
+      "short_id": "T00238",
+      "url": "/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.html",
+      "topic_name": "sequence-analysis",
+      "tutorial_name": "ncbi-blast-against-the-madland",
+      "dir": "topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland",
+      "id": "sequence-analysis/ncbi-blast-against-the-madland",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://cpt.tamu.edu/galaxy-public/",
+            "name": "Center for Phage Technology (CPT)",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://galaxy.mesocentre.uca.fr",
+            "name": "Galaxy@AuBi",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://galaxytrakr.org/",
+            "name": "GalaxyTrakr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": false
+          }
+        ]
+      },
+      "topic_name_human": "Sequence analysis",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "diamond",
+            "owner": "bgruening",
+            "revisions": "e8ac2b53f262",
+            "tool_panel_section_label": "NCBI Blast",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ncbi_blast_plus",
+            "owner": "devteam",
+            "revisions": "0e3cf9594bb7",
+            "tool_panel_section_label": "NCBI Blast",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ncbi_blast_plus",
+            "owner": "devteam",
+            "revisions": "0e3cf9594bb7",
+            "tool_panel_section_label": "NCBI Blast",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: diamond\n  owner: bgruening\n  revisions: e8ac2b53f262\n  tool_panel_section_label: NCBI Blast\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 0e3cf9594bb7\n  tool_panel_section_label: NCBI Blast\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 0e3cf9594bb7\n  tool_panel_section_label: NCBI Blast\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json"
       }
     }
   ]
