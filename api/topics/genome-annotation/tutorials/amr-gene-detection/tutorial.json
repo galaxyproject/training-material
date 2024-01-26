@@ -1,20 +1,20 @@
 {
   "layout": "tutorial_hands_on",
   "title": "Identification of AMR genes in an assembled bacterial genome",
-  "zenodo_link": "https://zenodo.org/record/4534098",
+  "zenodo_link": "https://zenodo.org/record/10572227",
   "questions": [
     "Which resistance genes are on a bacterial genome?",
     "Where are the genes located on the genome?"
   ],
   "objectives": [
-    "Assess presence of antimicrobial resistance genes",
-    "Perform a species identification and MLST typing",
-    "Search for resistance genes on the assembly",
-    "Find a gene on your genome using Prokka + JBrowse"
+    "Run a series of tool to assess the presence of antimicrobial resistance genes (ARG)",
+    "Get information about ARGs",
+    "Visualize the ARGs and plasmid genes in their genomic context"
   ],
   "time_estimation": "2h",
   "key_points": [
-    "Annotation with Prokka is very easy"
+    "staramr is a powerful tool to predict ARGs and plasmid genes",
+    "Visualization of the ARGs and plasmid genes in their genomic context helps to make sense of the data"
   ],
   "tags": [
     "illumina",
@@ -22,6 +22,7 @@
     "one-health"
   ],
   "subtopic": "prokaryote",
+  "level": "Introductory",
   "contributions": {
     "authorship": [
       "bazante1",
@@ -95,7 +96,7 @@
       "name": "mrsa AMR gene detection",
       "title": "mrsa AMR gene detection",
       "test_results": null,
-      "modified": "2024-01-26 13:18:39 +0000",
+      "modified": "2024-01-26 15:52:19 +0000",
       "mermaid": "flowchart TD\n  0[\"contigs\"];\n  1[\"forward_reads\"];\n  2[\"reverse_reads\"];\n  3[\"staramr\"];\n  0 -->|output| 3;\n  4[\"Bakta\"];\n  0 -->|output| 4;\n  5[\"Bowtie2\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Select\"];\n  3 -->|detailed_summary| 6;\n  7[\"Table to GFF3\"];\n  6 -->|out_file1| 7;\n  8[\"JBrowse\"];\n  4 -->|annotation_gff3| 8;\n  7 -->|output| 8;\n  5 -->|output| 8;\n"
     }
   ],

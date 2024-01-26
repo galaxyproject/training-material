@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@71620687c8e93ac0029cfa74b3b0d7dbaeb1dbd7",
+		release: "galaxy-training-network@6ccbdad6fb09b634a74abf69ee6eca04b4681c4b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706275116' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706275116' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706284336' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706284336' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -66,7 +66,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Identification of AMR genes in an assembled bacterial genome">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-01-23 14:33:43 +0000">
+<meta name="DC.date" content="2024-01-26 15:19:31 +0000">
 <meta name="DC.creator" content="Bazante Sanders">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -117,7 +117,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-01-23 14:33:43 +0000",
+  "dateModified": "2024-01-26 15:19:31 +0000",
   "datePublished": "2024-01-23 16:20:06 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Identification of AMR genes in an assembled bacterial genome",
@@ -231,16 +231,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Identification of AMR genes in an assembled bacterial genome",
   "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html",
-  "version": 5,
+  "version": 6,
   "timeRequired": "PT2H",
-  "teaches": "Assess presence of antimicrobial resistance genes\n - Perform a species identification and MLST typing\n - Search for resistance genes on the assembly\n - Find a gene on your genome using Prokka + JBrowse",
+  "teaches": "Run a series of tool to assess the presence of antimicrobial resistance genes (ARG)\n - Get information about ARGs\n - Visualize the ARGs and plasmid genes in their genomic context",
   "keywords": [
     "Genome Annotation",
     "illumina",
     "amr",
     "one-health"
   ],
-  "description": "The questions this  addresses are:\n - Which resistance genes are on a bacterial genome?\n - Where are the genes located on the genome?\n\n\nThe objectives are:\n - Assess presence of antimicrobial resistance genes\n - Perform a species identification and MLST typing\n - Search for resistance genes on the assembly\n - Find a gene on your genome using Prokka + JBrowse\n\n",
+  "description": "The questions this  addresses are:\n - Which resistance genes are on a bacterial genome?\n - Where are the genes located on the genome?\n\n\nThe objectives are:\n - Run a series of tool to assess the presence of antimicrobial resistance genes (ARG)\n - Get information about ARGs\n - Visualize the ARGs and plasmid genes in their genomic context\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -547,7 +547,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0362"
     }
   ],
-  "educationalLevel": "Introductory",
+  "educationalLevel": "Beginner",
   "mentions": [
     {
       "@type": "Thing",
@@ -565,7 +565,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Antimicrobial resistance (AMR) is a global phenomenon with no geographical or species boundaries, which poses an important threat to human, animal and environmental health. It is a complex and growing problem that compromises our ability to treat bacterial infections."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706275116'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706284336'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -806,16 +806,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
         <ul>
         
-        <li><p>Assess presence of antimicrobial resistance genes</p>
+        <li><p>Run a series of tool to assess the presence of antimicrobial resistance genes (ARG)</p>
 </li>
         
-        <li><p>Perform a species identification and MLST typing</p>
+        <li><p>Get information about ARGs</p>
 </li>
         
-        <li><p>Search for resistance genes on the assembly</p>
-</li>
-        
-        <li><p>Find a gene on your genome using Prokka + JBrowse</p>
+        <li><p>Visualize the ARGs and plasmid genes in their genomic context</p>
 </li>
         
         </ul>
@@ -842,6 +839,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
 
         
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
 
         
 
@@ -855,7 +863,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/4534098">
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/10572227">
     <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
 </a>
 
@@ -954,7 +962,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 23, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 26, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -965,7 +973,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
 
     </blockquote>
     </section>
@@ -984,7 +992,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>AMR gene content can be assessed from whole genome sequencing to detect known resistance mechanisms and potentially identify novel mechanisms.</p>
 
-<p>To illustrate the process to identify AMR gene in a bacterial genome, we take an assembly of a bacterial genome generated by following a <a href="/training-material/topics/assembly/tutorials/mrsa-illumina/tutorial.html">bacterial genome assembly tutorial</a> from data produced in “Complete Genome Sequences of Eight Methicillin-Resistant <em>Staphylococcus aureus</em> Strains Isolated from Patients in Japan” <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span>.</p>
+<p>To illustrate the process to identify AMR gene in a bacterial genome, we take an assembly of a bacterial genome (KUN1163 sample) generated by following a <a href="/training-material/topics/assembly/tutorials/mrsa-illumina/tutorial.html">bacterial genome assembly tutorial</a> from data produced in “Complete Genome Sequences of Eight Methicillin-Resistant <em>Staphylococcus aureus</em> Strains Isolated from Patients in Japan” (<span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span>).</p>
 
 <blockquote class="quote" cite="https://doi.org/10.1128%2Fmra.01212-19">
   <p>Methicillin-resistant <em>Staphylococcus aureus</em> (MRSA) is a major pathogen
@@ -1038,9 +1046,9 @@ genome sequences of eight MRSA strains isolated from patients in Japan.</p>
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the contig file from <a href="https://zenodo.org/record/4534098">Zenodo</a> or from Galaxy shared data libraries:</p>
+      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the contig file from <a href="https://zenodo.org/record/10572227">Zenodo</a> or from Galaxy shared data libraries:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4534098/files/DRR187559_contigs.fasta
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/10572227/files/DRR187559_contigs.fasta
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1123,7 +1131,7 @@ genome sequences of eight MRSA strains isolated from patients in Japan.</p>
       <ol>
         <li>How many genomes are there?</li>
         <li>Has the genome failed or passed the quality? Why?</li>
-        <li>What are the predicted AMR drug resistances?</li>
+        <li>What are the predicted AMR drug resistances? Are they similar to the one found for KUN1163 in <a href="https://journals.asm.org/doi/10.1128/mra.01212-19#tab1">Table 1</a> in <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span>?</li>
         <li>What is the MLST scheme? Does that correspond to the expected species and genus?</li>
       </ol>
 
@@ -1133,7 +1141,100 @@ genome sequences of eight MRSA strains isolated from patients in Japan.</p>
         <ol>
           <li>There is one genome (1 line)</li>
           <li>The genome has failed the quality (column 2), because the genome length is not within the acceptable length range (last column).</li>
-          <li>amikacin, gentamicin, tobramycin, spectinomycin, erythromycin, azithromycin, penicillin, tetracycline</li>
+          <li>
+            <p>We can summarize starmr output and Table 1 in <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span>:</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Antibiotic name</th>
+                  <th>Abbreviation</th>
+                  <th>staramr</th>
+                  <th><span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Amikacin</td>
+                  <td> </td>
+                  <td>Yes</td>
+                  <td> </td>
+                </tr>
+                <tr>
+                  <td>Azithromycin</td>
+                  <td> </td>
+                  <td>Yes</td>
+                  <td> </td>
+                </tr>
+                <tr>
+                  <td>Cefazolin</td>
+                  <td>CEZ</td>
+                  <td> </td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>clindamycin</td>
+                  <td>CLDM</td>
+                  <td> </td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>Erythromycin</td>
+                  <td>EM</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>Gentamicin</td>
+                  <td>GM</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>Imipenem</td>
+                  <td>IPM</td>
+                  <td> </td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>Levofloxacin</td>
+                  <td>LVFX</td>
+                  <td> </td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>Oxacillin</td>
+                  <td>MPIPC</td>
+                  <td> </td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>Penicillin</td>
+                  <td> </td>
+                  <td>Yes</td>
+                  <td> </td>
+                </tr>
+                <tr>
+                  <td>Spectinomycin</td>
+                  <td> </td>
+                  <td>Yes</td>
+                  <td> </td>
+                </tr>
+                <tr>
+                  <td>Tetracycline</td>
+                  <td> </td>
+                  <td>Yes</td>
+                  <td> </td>
+                </tr>
+                <tr>
+                  <td>Tobramycin</td>
+                  <td> </td>
+                  <td>Yes</td>
+                  <td> </td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
           <li>The scheme is saureus, so <em>Staphylococcus aureus</em> (given the <a href="https://github.com/tseemann/mlst/blob/master/db/scheme_species_map.tab">scheme genus map</a>), which is coherent with MRSA</li>
         </ol>
       </blockquote>
@@ -1329,7 +1430,7 @@ genome sequences of eight MRSA strains isolated from patients in Japan.</p>
     <li><strong>source</strong>: The algorithm or procedure that generated the feature. This is typically the name of a software or database.</li>
     <li><strong>type</strong>: The feature type name, like “gene” or “exon”. In a well structured GFF file, all the children features always follow their parents in a single block (so all exons of a transcript are put after their parent “transcript” feature line and before any other parent transcript line). In GFF3, all features and their relationships should be compatible with the standards released by the Sequence Ontology Project.</li>
     <li><strong>start</strong>: Genomic start of the feature, with a 1-base offset. This is in contrast with other 0-offset half-open sequence formats, like BED.</li>
-    <li><strong>end</strong>: Genomic end of the feature, with a 1-base offset. This is the same end coordinate as it is in 0-offset half-open sequence formats, like BED.[citation needed]</li>
+    <li><strong>end</strong>: Genomic end of the feature, with a 1-base offset. This is the same end coordinate as it is in 0-offset half-open sequence formats, like BED.</li>
     <li><strong>score</strong>: Numeric value that generally indicates the confidence of the source in the annotated feature. A value of “.” (a dot) is used to define a null value.</li>
     <li><strong>strand</strong>: Single character that indicates the strand of the feature. This can be “+” (positive, or 5’-&gt;3’), “-“, (negative, or 3’-&gt;5’), “.” (undetermined), or “?” for features with relevant but unknown strands.</li>
     <li><strong>phase</strong>: phase of CDS features; it can be either one of 0, 1, 2 (for CDS features) or “.” (for everything else). See the section below for a detailed explanation.</li>
@@ -1498,10 +1599,10 @@ genome sequences of eight MRSA strains isolated from patients in Japan.</p>
   <div class="box-title hands-on-title" id="hands-on-annotating-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotating the Genome</div>
   <ol>
     <li>
-      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the reads (after quality control) from another history, from <a href="https://zenodo.org/record/4534098">Zenodo</a> or from Galaxy shared data libraries:</p>
+      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the reads (after quality control) from another history, from <a href="https://zenodo.org/record/10572227">Zenodo</a> or from Galaxy shared data libraries:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4534098/files/DRR187559_1.fastq.gz
-https://zenodo.org/record/4534098/files/DRR187559_2.fastq.bz2
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/10572227/files/DRR187559_after_fastp_1.fastq.gz
+https://zenodo.org/record/10572227/files/DRR187559_after_fastp_2.fastq.gz
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1509,8 +1610,8 @@ https://zenodo.org/record/4534098/files/DRR187559_2.fastq.bz2
       <ul>
         <li><em>“Is this single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #1”</em>: Forward reads</li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #2”</em>: Reverse reads</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #1”</em>: <code class="language-plaintext highlighter-rouge">DRR187559_after_fastp_1.fastq.gz</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #2”</em>: <code class="language-plaintext highlighter-rouge">DRR187559_after_fastp_2.fastq.gz</code></li>
           </ul>
         </li>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history and build index</code>
@@ -1667,7 +1768,10 @@ https://zenodo.org/record/4534098/files/DRR187559_2.fastq.bz2
                     <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
-                        <li><p>Annotation with Prokka is very easy</p>
+                        <li><p>staramr is a powerful tool to predict ARGs and plasmid genes</p>
+</li>
+                        
+                        <li><p>Visualization of the ARGs and plasmid genes in their genomic context helps to make sense of the data</p>
 </li>
                         
                     </ul>
@@ -1997,7 +2101,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/71620687c8e93ac0029cfa74b3b0d7dbaeb1dbd7">7162068</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6ccbdad6fb09b634a74abf69ee6eca04b4681c4b">6ccbdad</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2021,7 +2125,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706275116'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706284336'></script>
         
     </body>
 </html>
