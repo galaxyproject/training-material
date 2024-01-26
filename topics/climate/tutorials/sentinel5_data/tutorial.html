@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Sentinel 5P data visualisation / Climate</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@71620687c8e93ac0029cfa74b3b0d7dbaeb1dbd7",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/sentinel5_data/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706275116' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706275116' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Sentinel 5P data visualisation">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-25 07:59:51 +0000">
+<meta name="DC.creator" content="Marie Josse"><meta name="description" content="Learn to analyze climate data through Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Climate / Hands-on: Sentinel 5P data visualisation">
+        <meta property="og:description" content="Learn to analyze climate data through Galaxy.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-01-25 07:59:51 +0000",
+  "datePublished": "2024-01-26 13:11:38 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Sentinel 5P data visualisation",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Climate",
+    "description": "Learn to analyze climate data through Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/climate/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Sentinel 5P data visualisation",
+  "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/sentinel5_data/tutorial.html",
+  "version": 8,
+  "timeRequired": "PT1H",
+  "teaches": "Learn to use OpenEO in a jupyterlab\n - Learn to handle satellite data\n - Practice on how to visualise netcdf data with Panoply\n - Handle going from one interactive tool to another\n - Learn to visualise gases around a volcano",
+  "keywords": [
+    "Climate",
+    "earth-system",
+    "volcano",
+    "satellite data"
+  ],
+  "description": "The questions this  addresses are:\n - How to visualise volcanoes with Sentinel 5 data ?\n - How can we see the evolution of sulfur dioxide and aerosol index through time?\n - How can be used OpenEO ?\n\n\nThe objectives are:\n - Learn to use OpenEO in a jupyterlab\n - Learn to handle satellite data\n - Practice on how to visualise netcdf data with Panoply\n - Handle going from one interactive tool to another\n - Learn to visualise gases around a volcano\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "name": "Marie Josse",
+      "image": "https://avatars.githubusercontent.com/Marie59",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Climate",
+      "description": "Learn to analyze climate data through Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/climate/"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "earth-system"
+    },
+    {
+      "@type": "Thing",
+      "name": "volcano"
+    },
+    {
+      "@type": "Thing",
+      "name": "satellite data"
+    }
+  ],
+  "abstract": "Through this tutorial you will learn here how to access and download Copernicus Data Space Ecosystem (CDSE) data through a jupyterlab Galaxy interactive tool :"
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706275116'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/climate" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Climate
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/climate/faqs/" title="Check our FAQs for the Climate topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/sentinel5_data/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/climate/tutorials/sentinel5_data/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/climate/tutorials/sentinel5_data/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/climate/tutorials/sentinel5_data/tutorial.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/topics/climate/tutorials/sentinel5_data/tutorial.html">2023-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-climate">
+    <h1 data-toc-skip>Sentinel 5P data visualisation</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=36" alt="Marie Josse avatar" width="36" class="avatar" />
+    Marie Josse</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to visualise volcanoes with Sentinel 5 data ?</p>
+</li>
+        
+        <li><p>How can we see the evolution of sulfur dioxide and aerosol index through time?</p>
+</li>
+        
+        <li><p>How can be used OpenEO ?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learn to use OpenEO in a jupyterlab</p>
+</li>
+        
+        <li><p>Learn to handle satellite data</p>
+</li>
+        
+        <li><p>Practice on how to visualise netcdf data with Panoply</p>
+</li>
+        
+        <li><p>Handle going from one interactive tool to another</p>
+</li>
+        
+        <li><p>Learn to visualise gases around a volcano</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/climate/tutorials/sentinel5_data/workflows/" title="Sentinel 5P data visualisation workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/climate/tutorials/sentinel5_data/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/climate/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 26, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 25, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Through this tutorial you will learn here how to access and download Copernicus Data Space Ecosystem (CDSE) data through a jupyterlab Galaxy interactive tool :</p>
+
+<p>This tool enables you to leverage the Copernicus Data Space Ecosystem services and access data effortlessly.
+The JupyterLab service allows you to dive into data exploration, visualization, and analysis without the hassle of installing dependencies or downloading large data sets.</p>
+
+<p>Then, you can visualise these data and process them with Panoply (plots geo-referenced and other arrays from netCDF, HDF, GRIB, and other datasets).</p>
+
+<p>The purpose of this tutorial is to propose a user-friendly, interactive and efficient way to explore and jointly analyze remote sensing observations, from both the atmosphere and solid earth communities, for the monitoring of the volcanic activity in case of eruption and the multi-scale impact of volcanic emissions on the atmosphere.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-what-about-the-data-used-here"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-about-the-data-used-here" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: What about the data used here</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Dataset of Sentinel 5P L2 from the 1st of April to the 30th of may 2021 of the Antilles. Especially of the La Soufriere Saint Vincent (Antilles) where a volcaninc erruption occured 9th of April. This dataset is focused on the dioxide sulfur (SO2) and Aerosol index (AI) spread out. Indeed, the knowledge of volcanic activity at a high temporal resolution is crucial for robustly determining large-scale impacts of volcanoes on atmosphere (air quality, air traffic) and climate. As such, this platform will be also of interest for scientists involved in the field of volcanic impacts at large, including institutions in charge of the monitoring of air quality and aviation safety.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#context-on-galaxy" id="markdown-toc-context-on-galaxy">Context on Galaxy</a></li>
+  <li><a href="#copernicus-data-space-ecosystem" id="markdown-toc-copernicus-data-space-ecosystem">Copernicus Data Space Ecosystem</a></li>
+  <li><a href="#visualise-sentinel-5" id="markdown-toc-visualise-sentinel-5">Visualise Sentinel 5</a>    <ol>
+      <li><a href="#global-view" id="markdown-toc-global-view">Global view</a></li>
+      <li><a href="#georeferenced-plot-through-time" id="markdown-toc-georeferenced-plot-through-time">Georeferenced plot through time</a></li>
+      <li><a href="#create-an-animation-through-time" id="markdown-toc-create-an-animation-through-time">Create an animation through time</a></li>
+      <li><a href="#create-a-timeserie-plot" id="markdown-toc-create-a-timeserie-plot">Create a timeserie plot</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="context-on-galaxy">Context on Galaxy</h2>
+<p>Interactive tools are working differently than classical tools as it allows the user to interact with a dedicated graphical interface. This kind of tools is used to give access to Jupyter notebooks, RStudio or R Shiny apps for example.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-short-introduction-on-how-galaxy-works"><button class="gtn-boxify-button details" type="button" aria-controls="details-short-introduction-on-how-galaxy-works" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Short introduction on how Galaxy works</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>You can come back to where you left off the tutorial anytime by clicking <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-log-in-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Log in to Galaxy</div>
+    <ol>
+      <li>Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)</li>
+      <li>Browse to your <a href="https://earth-system.usegalaxy.eu/">Galaxy instance</a></li>
+      <li>On the top pannel go to <strong>Login or Register</strong></li>
+    </ol>
+
+  </blockquote>
+
+  <p>The Galaxy homepage is divided into three panels:</p>
+  <ul>
+    <li>Tools on the left</li>
+    <li>Viewing panel in the middle</li>
+    <li>History of analysis and files on the right</li>
+  </ul>
+
+  <figure id="figure-1" style="max-width: 90%;"><img src="/training-material/shared/images/galaxy_interface.png" alt="Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right." width="2009" height="969" loading="lazy" /><a target="_blank" href="/training-material/shared/images/galaxy_interface.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy interface explanation</figcaption></figure>
+
+  <p>The first time you use Galaxy, there will be no files in your history panel.</p>
+</blockquote>
+<hr />
+
+<h1 id="copernicus-data-space-ecosystem">Copernicus Data Space Ecosystem</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-launch-the-interactive-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Launch the interactive tool</div>
+
+  <ol>
+    <li><span class="tool" data-tool="interactive_tool_copernicus" title="Copernicus Data Space Ecosystem tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Copernicus Data Space Ecosystem</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Do you already have a notebook?”</em>: <code class="language-plaintext highlighter-rouge">Start with a fresh notebook</code></li>
+        <li><em>“Include data into the environment - optional “</em>: You don’t need anything</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click on <strong>Run Tool</strong></p>
+    </li>
+    <li>
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the Copernicus Data Space Ecosystem to be running (Job Info)</li>   <li>Click on Copernicus Data Space Ecosystem</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-navigate-the-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Navigate the jupyterlab</div>
+  <ol class="code-in">
+    <li>Go in the <strong>notebooks</strong> folder and open a Bash window</li>
+    <li>Write the following:
+      <blockquote>
+        <div class="box-title code-in-title" id="code-in-download-the-notebook"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Download the notebook</div>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://raw.githubusercontent.com/fair-ease/Copernicus-Data-Space-Ecosystem/main/Sentinel_5.ipynb
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+  <ol>
+    <li>Open the new notebook that appeared on the left</li>
+    <li>You can start running your notebook. To do so you can go go on the pannel displaying button right above the notebook and click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span>. 
+Everytime you press this button you can excecute a one by one the cells.</li>
+    <li>In the <strong>Setup</strong> section when you execute the connection cell you’ll have some actions to conduct.</li>
+    <li>First click ont the link appearing, you’re notebook should look like the following :
+  <a href="../../images/sentinel_5/notebook_begin.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/notebook_begin.png" alt="Begining of the Sentinel 5 notebook  with the connection link visible. " width="1521" height="550" loading="lazy" /></a></li>
+    <li>Once you clicked a new window opens. If you don’t have a copernicus account please create one and follow the instructions given.</li>
+    <li>If you have an account sign in and then press the green <strong>YES</strong>
+  <a href="../../images/sentinel_5/connection.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/connection.png" alt="Image of how does the connection page looks like. " width="1920" height="1080" loading="lazy" /></a></li>
+    <li>You’ll be redirected to a page letting you know the connection was a success
+  <a href="../../images/sentinel_5/connection_ok.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/connection_ok.png" alt="Image of the successful connection. " width="1920" height="1080" loading="lazy" /></a></li>
+    <li>Now, you can go back on your jupyterlab and execute the rest of the notebook.</li>
+    <li>Once you executed the entire notebook you should have a new file in the left pannel named <strong>sentinel5.nc</strong>.</li>
+    <li>Select the file there and click right, and then copy
+ <a href="../../images/sentinel_5/copy.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/copy.png" alt="The copy command on the 3 netcdf files. " width="638" height="756" loading="lazy" /></a></li>
+    <li>Then go back to the root of your path and go in the <strong>ouputs</strong> folder. There you can click right and paste the file. 
+ <a href="../../images/sentinel_5/outputs.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/outputs.png" alt="The resulting file in the outputs folder. " width="379" height="329" loading="lazy" /></a></li>
+    <li>This part is now finished you just have to correctly close this notebook. On the top left click on <strong>files</strong> and then on <strong>Shut down</strong>.
+ <a href="../../images/sentinel_5/shut_down.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/shut_down.png" alt="The shut down button to correctly close the jupyterlab. " width="420" height="690" loading="lazy" /></a></li>
+  </ol>
+
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-some-complementary-info-on-the-notebooks"><button class="gtn-boxify-button details" type="button" aria-controls="details-some-complementary-info-on-the-notebooks" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details:  Some complementary info on the notebooks </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>In the jupyterlab go to :</p>
+    <ul>
+      <li><strong>notebooks</strong></li>
+      <li>Then, <strong>openeo</strong></li>
+      <li>Open the notebook <strong>Sentinel_3.ipynb</strong>
+You can see it’s relatively similar to the one you just worked on. You can adapt it as you want to retrieve Sentinel data of all kind.</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<p>Go back on your Galaxy window. After a couple minutes you should see your outputs turning green in your history.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-clean-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Clean your data</div>
+  <p>Firstly, you’ll can change the name of your new items by adding the extension at the end <strong>sentinel5_SO2</strong> of your history into <strong>sentinel5_SO2.nc</strong> (for the 2 others <strong>sentinel5_aerosol_354.nc</strong> and <strong>sentinel5_aerosol_340.nc</strong>).</p>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+  <p><!--END_SNIPPET--></p>
+
+  <p>Check that your data are in netcdf format with <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span>, it should be <code class="language-plaintext highlighter-rouge">netcdf</code></p>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">nectdf</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+  <p><!--END_SNIPPET--></p>
+
+</blockquote>
+
+<h1 id="visualise-sentinel-5">Visualise Sentinel 5</h1>
+
+<h2 id="global-view">Global view</h2>
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualise-sentinel-5-data-with-panoply"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Visualise Sentinel 5 data with Panoply</div>
+
+  <ol>
+    <li><span class="tool" data-tool="interactive_tool_panoply" title="Panoply tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Panoply</strong></span> with the following parameters:
+      <ul>
+        <li><em>“netcdf”</em>: select <code class="language-plaintext highlighter-rouge">sentinel5_SO2.nc</code>, <code class="language-plaintext highlighter-rouge">sentinel5_aerosol_340.nc</code> and <code class="language-plaintext highlighter-rouge">sentinel5_aerosol_354.nc</code></li>
+      </ul>
+    </li>
+    <li><strong>Run Tool</strong></li>
+    <li>Access Panoply</li>
+  </ol>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the Panoply to be running (Job Info)</li>   <li>Click on Panoply</li> </ol> </blockquote>
+  <p><!--END_SNIPPET--></p>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-panoply-disconnected"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-panoply-disconnected" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Panoply - Disconnected</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>If at one point your Panoply interface becomes blank, do NOT panic ;) you just need to reload your tab (circular arrow top left)</p>
+  </blockquote>
+
+  <p>Once in the Panoply interface :</p>
+  <ol>
+    <li>In the pop-up window go select the 3 netcf files <code class="language-plaintext highlighter-rouge">sentinel5_SO2.nc</code>, <code class="language-plaintext highlighter-rouge">sentinel5_aerosol_340.nc</code> and <code class="language-plaintext highlighter-rouge">sentinel5_aerosol_354.nc</code> and then Open.</li>
+    <li>In the bottom of this window you have the possibilty to select what you want to <strong>Show</strong> go there and select “Georeferenced variables”
+  <a href="../../images/sentinel_5/georef_var.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/georef_var.png" alt="How to select Georeferenced variables. " width="1294" height="780" loading="lazy" /></a></li>
+    <li>Select one of the 3 possible data and then on the top left press <strong>Create Plot</strong></li>
+    <li>In the pop-up window stay on the default choice “Create georeferenced Longitude-Latitude plot” and press <strong>Create</strong>
+  <a href="../../images/sentinel_5/create_georef.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/create_georef.png" alt="Creation of a georeferenced plot. " width="1291" height="776" loading="lazy" /></a></li>
+  </ol>
+
+  <p>You will obtain a world map like the folowing
+     <a href="../../images/sentinel_5/1st_map.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/1st_map.png" alt="World map in panoply. " width="856" height="628" loading="lazy" /></a>
+You should see a colored spot in the Atlantic.</p>
+  <ol>
+    <li>On your keyboard press <code class="language-plaintext highlighter-rouge">ctrl</code> (or <code class="language-plaintext highlighter-rouge">cmd</code> on Mac) and select a rectangle around the colored spot to zoom in.</li>
+    <li>In the “Overlay” tab in “Overlay 1:” select <strong>MWDB_Coasts_Countries_1.cnob</strong>, in order to see the islands delimitation on your map.
+ <a href="../../images/sentinel_5/final_visu.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/final_visu.png" alt="Zoomed-in map of the colored data. " width="856" height="625" loading="lazy" /></a></li>
+    <li>Save your plot. Go on the top left to “File” then “Save Image As …” go in the <strong>output</strong> folder and save.</li>
+  </ol>
+</blockquote>
+
+<p>You can do the same plot for each data subset.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-switch-from-one-graph-to-another"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-switch-from-one-graph-to-another" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Switch from one graph to another</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>In the top of your graph there is a tab <strong>Window</strong> click on it there you should see the other graph made.
+An example here with the SO2 graph selected but you could switch to the AER_AI ones by checking one of their box.
+<a href="../../images/sentinel_5/switch_graph.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/switch_graph.png" alt="Image of how to switch graph. " width="850" height="626" loading="lazy" /></a></p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualise-data-through-out-time"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Visualise data through out time</div>
+  <h2 id="georeferenced-plot-through-time">Georeferenced plot through time</h2>
+  <ul>
+    <li>On you graph window in the “Array(s)” you can select the day you want too see.
+<a href="../../images/sentinel_5/change_date.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/change_date.png" alt="Selection of another date for your map. " width="900" height="731" loading="lazy" /></a>
+Some examples with changing the date :
+<a href="../../images/sentinel_5/change_date_result.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/change_date_result.png" alt="Example of the SO2 the 29th of May 2021. " width="852" height="624" loading="lazy" /></a>
+<a href="../../images/sentinel_5/05-29.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/05-29.png" alt="Example of the AER AI 354 the 29th of May 2021. " width="851" height="614" loading="lazy" /></a>
+<a href="../../images/sentinel_5/05-26.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/05-26.png" alt="Example of the AER AI 340 the 26th of May 2021. " width="846" height="627" loading="lazy" /></a></li>
+  </ul>
+
+  <h2 id="create-an-animation-through-time">Create an animation through time</h2>
+  <p>From one of your previous plot window (the S02 one for instance), click on <strong>File</strong> and select <strong>Export Animation</strong>. Save your plot in “outputs” using either <strong>MOV</strong> or <strong>AVI</strong> format. It goes through each plot e.g. for each month and create an animation where you can see the evolution of SO2 variable from the 1st of April to the 30th of May 2021. You will be able to download the resulting movie from Galaxy once you quit Panoply.</p>
+
+  <h2 id="create-a-timeserie-plot">Create a timeserie plot</h2>
+  <ol>
+    <li>In the first tabular select the “SO2” variable and click on <strong>Create Plot</strong></li>
+    <li>There you need to check the box “Create horizontal line plot along t axis” and create
+Here, you should see  timeserie as for the georeferenced plot you can swith from one day to another and also extract it as an animation through time.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-quit-panoply-correctly"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Quit Panoply correctly</div>
+  <ol>
+    <li>Go on the top left in <strong>File</strong></li>
+    <li>Select <strong>Quit Panoply</strong></li>
+    <li>Go back to your current Galaxy history and you should find Panoply outputs
+  <a href="../../images/sentinel_5/panoply_outputs.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/panoply_outputs.png" alt="The new history with panoply outputs. " width="325" height="711" loading="lazy" /></a></li>
+    <li>On the top of the galaxy page click on the <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> to activate the multi view.</li>
+    <li>Then in the panoply outputs click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> of each of the png images.
+You should be able to rearrange the windows to see each outputs
+  <a href="../../images/sentinel_5/pano_outputs.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/pano_outputs.png" alt="Multi-view of the panoply plots. " width="1810" height="940" loading="lazy" /></a></li>
+    <li>For the animated file go on <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span>
+Then, in your downloads you should have a small video that you can visualise on your computer.
+  <a href="../../images/sentinel_5/film.png" rel="noopener noreferrer"><img src="../../images/sentinel_5/film.png" alt="Video of the sulfur dioxide (SO2) evolution from april to may. " width="1517" height="993" loading="lazy" /></a></li>
+  </ol>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>Now you have finished this tutorial. You leearned how to use a jupyterlab tool with OpenEO technologies to download data and how to visualise them with Panoply.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Manage satellite data</p>
+</li>
+                        
+                        <li><p>Visualise netcdf data</p>
+</li>
+                        
+                        <li><p>Study volcano activity</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/climate/faqs/">FAQ page for the Climate topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Sentinel 5P data visualisation (Climate)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Marie Josse,  <b>Sentinel 5P data visualisation (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/sentinel5_data/tutorial.html">https://training.galaxyproject.org/training-material/topics/climate/tutorials/sentinel5_data/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{climate-sentinel5_data,
+author = "Marie Josse",
+	title = "Sentinel 5P data visualisation (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/climate/tutorials/sentinel5_data/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/fairease" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/fairease/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/eurosciencegateway" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/eurosciencegateway/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/sentinel5_data/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/71620687c8e93ac0029cfa74b3b0d7dbaeb1dbd7">7162068</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/sentinel5_data/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706275116'></script>
+        
+    </body>
+</html>
