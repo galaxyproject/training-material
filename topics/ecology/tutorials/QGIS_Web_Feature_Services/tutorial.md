@@ -17,10 +17,15 @@ tags:
   - QGIS
   - Maps
   - OGC
-contributors:
-- colineroyaux
-- Marie59
-- yvanlebras
+contributions:
+  authorship:
+  - colineroyaux
+  - Marie59
+  - yvanlebras
+  funding:
+  - gallantries
+  - fairease
+  - pndb
 
 ---
 

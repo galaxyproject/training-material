@@ -35,6 +35,12 @@ mapping:
                 description: Your twitter handle, without the `@`
                 examples:
                     - gxytraining
+            bluesky:
+                type: str
+                pattern: /[0-9a-zA-Z.]+/
+                description: Your bluesky handle
+                examples:
+                    - gtn.bsky.social
             fediverse:
                 type: str
                 pattern: /^https:\/\/[0-9a-zA-Z.]+/@?[0-9a-zA-Z.]+$/
@@ -90,6 +96,15 @@ mapping:
             affiliations:
                 type: seq
                 description: "A set of organisations or grants your are affiliated with"
+                sequence:
+                  - type: str
+                    required: true
+                    enum:
+                    - ORGANISATIONS
+                    - FUNDERS
+            former_affiliations:
+                type: seq
+                description: "A set of organisations you were previously affiliated with"
                 sequence:
                   - type: str
                     required: true

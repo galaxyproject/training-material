@@ -1,0 +1,422 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Identification of AMR genes in an assembled bacterial genome",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-2255-1631",
+            "name": "Bazante Sanders"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0001-9852-1987",
+            "name": "B\u00e9r\u00e9nice Batut"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT", 
+    "name": "mrsa AMR gene detection",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "contigs"
+                }
+            ],
+            "label": "contigs",
+            "name": "contigs",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 258
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"name\": \"contigs\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a18c5e52-124f-4480-80b4-ea5936618bc6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "forward_reads"
+                }
+            ],
+            "label": "forward_reads",
+            "name": "forward_reads",
+            "outputs": [],
+            "position": {
+                "left": 0.003423507807786663,
+                "top": 600.9912432161087
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"name\": \"forward_reads\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "edd7c009-b0f1-403d-9438-f675bd61d30a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "reverse_reads"
+                }
+            ],
+            "label": "reverse_reads",
+            "name": "reverse_reads",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 724
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"name\": \"reverse_reads\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "595db730-f37d-4314-85a3-e10dfb11e209",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.10.0+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "genomes": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "staramr",
+            "outputs": [
+                {
+                    "name": "blast_hits",
+                    "type": "input"
+                },
+                {
+                    "name": "mlst",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary",
+                    "type": "tabular"
+                },
+                {
+                    "name": "detailed_summary",
+                    "type": "tabular"
+                },
+                {
+                    "name": "resfinder",
+                    "type": "tabular"
+                },
+                {
+                    "name": "plasmidfinder",
+                    "type": "tabular"
+                },
+                {
+                    "name": "settings",
+                    "type": "txt"
+                },
+                {
+                    "name": "excel",
+                    "type": "xlsx"
+                }
+            ],
+            "position": {
+                "left": 290.00083115418806,
+                "top": 261
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.10.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "3b22de20bd4b",
+                "name": "staramr",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced\": {\"pid_threshold\": \"98.0\", \"plength_resfinder\": \"60.0\", \"plength_pointfinder\": \"95.0\", \"plength_plasmidfinder\": \"60.0\", \"genome_size_lower_bound\": \"4000000\", \"genome_size_upper_bound\": \"6000000\", \"minimum_N50_value\": \"10000\", \"minimum_contig_length\": \"300\", \"unacceptable_number_contigs\": \"1000\", \"report_all_blast\": false, \"exclude_negatives\": false, \"exclude_resistance_phenotypes\": false, \"mlst_scheme\": \"auto\", \"exclude_genes\": {\"exclude_genes_condition\": \"default\", \"__current_case__\": 0}, \"complex_mutations\": {\"complex_mutations_condition\": \"default\", \"__current_case__\": 0}, \"plasmidfinder_type\": \"include_all\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"genomes\": {\"__class__\": \"ConnectedValue\"}, \"pointfinder_db\": {\"use_pointfinder\": \"disabled\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.0+galaxy1",
+            "type": "tool",
+            "uuid": "2554da56-e9f9-4e65-98b6-25b4a2861df9",
+            "when": null,
+            "workflow_outputs": [
+                {"output_name": "detailed_summary", "label": "stararm_detailed_summary"}
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bakta/bakta/1.8.2+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_option|input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Bakta",
+                    "name": "annotation"
+                },
+                {
+                    "description": "runtime parameter for tool Bakta",
+                    "name": "annotation"
+                },
+                {
+                    "description": "runtime parameter for tool Bakta",
+                    "name": "annotation"
+                },
+                {
+                    "description": "runtime parameter for tool Bakta",
+                    "name": "input_option"
+                }
+            ],
+            "label": null,
+            "name": "Bakta",
+            "outputs": [
+                {
+                    "name": "annotation_tsv",
+                    "type": "tabular"
+                },
+                {
+                    "name": "annotation_gff3",
+                    "type": "gff3"
+                },
+                {
+                    "name": "annotation_ffn",
+                    "type": "fasta"
+                },
+                {
+                    "name": "annotation_plot",
+                    "type": "svg"
+                }
+            ],
+            "position": {
+                "left": 570.0016623083761,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bakta/bakta/1.8.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "728dacaf08a9",
+                "name": "bakta",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annotation\": {\"complete\": false, \"prodigal\": {\"__class__\": \"RuntimeValue\"}, \"translation_table\": \"11\", \"keep_contig_headers\": true, \"replicons\": {\"__class__\": \"RuntimeValue\"}, \"compliant\": false, \"proteins\": {\"__class__\": \"RuntimeValue\"}, \"meta\": false}, \"input_option\": {\"bakta_db_select\": \"V5.0_2023-02-20\", \"amrfinder_db_select\": \"amrfinderplus_V3.11_2022-12-19.1\", \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"min_contig_length\": null}, \"organism\": {\"genus\": null, \"species\": null, \"strain\": null, \"plasmid\": null}, \"output_files\": {\"output_selection\": [\"file_tsv\", \"file_gff3\", \"file_ffn\", \"file_plot\"]}, \"workflow\": {\"skip_analysis\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.8.2+galaxy0",
+            "type": "tool",
+            "uuid": "0b92601d-5b78-438c-998d-f9f4dc61c52d",
+            "when": null,
+            "workflow_outputs": [
+                {"output_name": "annotation_tsv", "label": "bakta_annotation_summary"}
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "library|input_1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "library|input_2": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "reference_genome|own_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Bowtie2",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bam"
+                },
+                {
+                    "name": "mapping_stats",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 290.00083115418806,
+                "top": 628
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "03e9b2fbc005",
+                "name": "bowtie2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"analysis_type\": {\"analysis_type_selector\": \"simple\", \"__current_case__\": 0, \"presets\": \"no_presets\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"library\": {\"type\": \"paired\", \"__current_case__\": 1, \"input_1\": {\"__class__\": \"ConnectedValue\"}, \"input_2\": {\"__class__\": \"ConnectedValue\"}, \"unaligned_file\": false, \"aligned_file\": false, \"paired_options\": {\"paired_options_selector\": \"no\", \"__current_case__\": 1}}, \"reference_genome\": {\"source\": \"history\", \"__current_case__\": 1, \"own_file\": {\"__class__\": \"ConnectedValue\"}}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"sam_options\": {\"sam_options_selector\": \"no\", \"__current_case__\": 1}, \"save_mapping_stats\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.5.0+galaxy0",
+            "type": "tool",
+            "uuid": "7e8f9570-3d8b-4a82-b109-09bc04b82c64",
+            "when": null,
+            "workflow_outputs": [
+                {"output_name": "mapping_stats", "label": "bowtie_mapping_stats"}
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "detailed_summary"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 570.0016706110071,
+                "top": 377
+            },
+            "post_job_actions": {},
+            "tool_id": "Grep1",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"keep_header\": false, \"pattern\": \"[0-9]+\\\\.[0-9]+\\\\t\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "3915c229-017b-4ec5-aa5c-36fed4fd3874",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "table": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Table to GFF3",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "gff3"
+                }
+            ],
+            "position": {
+                "left": 850.0024934625642,
+                "top": 367
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "4a7f4b0cc0a3",
+                "name": "tbl2gff3",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"attributes\": [{\"__index__\": 0, \"key\": \"name\", \"val\": \"2\"}, {\"__index__\": 1, \"key\": \"phenotype\", \"val\": \"4\"}, {\"__index__\": 2, \"key\": \"accession\", \"val\": \"12\"}], \"begin\": \"10\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"end\": \"11\", \"rid\": \"9\", \"score\": \"6\", \"source\": \"3\", \"strand\": {\"strand_select\": \"infer\", \"__current_case__\": 1}, \"table\": {\"__class__\": \"ConnectedValue\"}, \"type\": \"3\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2",
+            "type": "tool",
+            "uuid": "35129bdf-394f-4ec7-b16e-7533093db53a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "track_groups_0|data_tracks_0|data_format|annotation": {
+                    "id": 4,
+                    "output_name": "annotation_gff3"
+                },
+                "track_groups_1|data_tracks_0|data_format|annotation": {
+                    "id": 7,
+                    "output_name": "output"
+                },
+                "track_groups_2|data_tracks_0|data_format|annotation": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "JBrowse",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 1130.0033246167523,
+                "top": 325
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "a6e57ff585c0",
+                "name": "jbrowse",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"fasta\", \"action\": {\"action_select\": \"create\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"gencode\": \"1\", \"jbgen\": {\"defaultLocation\": \"\", \"trackPadding\": \"20\", \"shareLink\": true, \"aboutDescription\": \"\", \"show_tracklist\": true, \"show_nav\": true, \"show_overview\": true, \"show_menu\": true, \"hideGenomeOptions\": false}, \"plugins\": {\"BlastView\": true, \"ComboTrackSelector\": false, \"GCContent\": false}, \"reference_genome\": {\"genome_type_select\": \"history\", \"__current_case__\": 1, \"genome\": {\"__class__\": \"ConnectedValue\"}}, \"standalone\": \"minimal\", \"track_groups\": [{\"__index__\": 0, \"category\": \"Bakta\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"gene_calls\", \"__current_case__\": 2, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"match_part\": {\"match_part_select\": false, \"__current_case__\": 1}, \"index\": false, \"track_config\": {\"track_class\": \"NeatHTMLFeatures/View/Track/NeatFeatures\", \"__current_case__\": 3, \"html_options\": {\"topLevelFeatures\": null}}, \"jbstyle\": {\"style_classname\": \"feature\", \"style_label\": \"product,name,id\", \"style_description\": \"note,description\", \"style_height\": \"10px\", \"max_height\": \"600\"}, \"jbcolor_scale\": {\"color_score\": {\"color_score_select\": \"none\", \"__current_case__\": 0, \"color\": {\"color_select\": \"automatic\", \"__current_case__\": 0}}}, \"jb_custom_config\": {\"option\": []}, \"jbmenu\": {\"track_menu\": []}, \"track_visibility\": \"default_off\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}, {\"__index__\": 1, \"category\": \"ARGs and plasmid genes\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"gene_calls\", \"__current_case__\": 2, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"match_part\": {\"match_part_select\": false, \"__current_case__\": 1}, \"index\": false, \"track_config\": {\"track_class\": \"NeatHTMLFeatures/View/Track/NeatFeatures\", \"__current_case__\": 3, \"html_options\": {\"topLevelFeatures\": null}}, \"jbstyle\": {\"style_classname\": \"feature\", \"style_label\": \"product,name,id\", \"style_description\": \"note,description\", \"style_height\": \"10px\", \"max_height\": \"600\"}, \"jbcolor_scale\": {\"color_score\": {\"color_score_select\": \"none\", \"__current_case__\": 0, \"color\": {\"color_select\": \"automatic\", \"__current_case__\": 0}}}, \"jb_custom_config\": {\"option\": []}, \"jbmenu\": {\"track_menu\": []}, \"track_visibility\": \"default_off\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}, {\"__index__\": 2, \"category\": \"Coverage\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"pileup\", \"__current_case__\": 3, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"auto_snp\": false, \"chunkSizeLimit\": \"5000000\", \"jb_custom_config\": {\"option\": []}, \"track_visibility\": \"default_off\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}], \"uglyTestingHack\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.16.11+galaxy1",
+            "type": "tool",
+            "uuid": "9f973678-ce81-458a-a5d0-575d93d61429",
+            "when": null,
+            "workflow_outputs": [
+                {"output_name": "output", "label": "jbrowse_output"}
+            ]
+        }
+    },
+    "tags": [
+        "genome-annotation",
+
+        "microgalaxy"
+    ],
+    "uuid": "dd5c32ea-82e3-42e6-8282-e0deafbfa280",
+    "version": 3
+}
