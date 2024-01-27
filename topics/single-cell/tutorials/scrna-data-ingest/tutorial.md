@@ -335,6 +335,8 @@ We will work on the same AnnData object so if you create a new history for this 
 >    https://zenodo.org/record/10391629/files/Downsampled_annotated_AnnData.h5ad
 >    ```
 >
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 {: .hands_on}
 
 {% snippet faqs/galaxy/histories_copy_dataset.md %}
@@ -487,8 +489,6 @@ You have two options for uploading these datasets. Importing via history is ofte
 >    https://zenodo.org/records/7078524/files/AnnData_before_processing.h5ad
 >    https://zenodo.org/records/7078524/files/Annotated_AnnData.h5ad
 >    ```
->
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Check that the datatype is `h5ad`
 >
