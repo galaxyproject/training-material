@@ -344,7 +344,7 @@ We will work on the same AnnData object so if you create a new history for this 
 
  <div class="Quick-single-tool-method" markdown="1">
 
- ## Quick single tool method
+## Quick single tool method
 
 > <hands-on-title> SCEasy Converter </hands-on-title>
 >
