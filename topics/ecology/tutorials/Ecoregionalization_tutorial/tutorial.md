@@ -139,7 +139,7 @@ This is an example of occurrence data file input in this workflow :
 >
 {: .hands_on}
 
-# First step with **BRT tool prediction**
+# Predicting taxa distribution with **BRT**
 
 This first step implements a commonly used approach in ecological studies, namely species distribution modelling (SDM). This allows to characterize the distribution of each taxon by giving an 
 indicator of probability of taxon presence for each environmental layer pixel. Here, the method boosted regression trees (BRT) was used to adjust the relationship between the presence of a single 
@@ -189,7 +189,7 @@ Here is an example:
 
 ![](./Images/BRT-Thouarella_vulpicauda.pdf)
 
-# Second step with **TaxaSeeker**
+# Collecting the list of taxa with **TaxaSeeker**
 
 **What it does ?**
 
@@ -225,7 +225,7 @@ taxons.
 >
 {: .hands_on}
 
-# Third step with **ClusterEstimate**
+# Determine the optimal cluster number with **ClusterEstimate**
 
 **What it does ?**
 
@@ -280,7 +280,7 @@ With this graph you will be able to determine the optimal number of clusters tha
 maximizes the SIH index. In this example, the number of clusters that optimizes the SIH index is two, however, splitting into two clusters produces *de facto* a high SIH value because partitioning
 into two entities is very robust but is not necessarily a good indicator. Depending on your data, it may be better to take the second highest SIH score here six.
 
-# Fourth step with **ClaraClust**
+# Build ecoregional clusters with **ClaraClust**
 
 **What it does ?**
 
@@ -328,7 +328,7 @@ located at the border between two clusters. Here, in the graph below, there is a
 
 ![](./Images/SIH_plot.png "SIH plot")
 
-# Fifth step with **EcoMap**
+# Build a ecoregionalization map with **EcoMap**
 
 > <hands-on-title> Run EcoMap </hands-on-title>
 >
