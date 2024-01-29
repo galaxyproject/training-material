@@ -23,7 +23,8 @@ tags:
 - EBV workflow
 - modeling
 contributors:
-- PaulineSGN
+  authorship:
+    - PaulineSGN
 
 ---
 
