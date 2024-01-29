@@ -25,6 +25,8 @@ tags:
 contributors:
   authorship:
     - PaulineSGN
+  testing:
+    - yvanlebras
 
 ---
 
@@ -56,7 +58,7 @@ Let's delve into the tutorial, outlining each step and tool to manage the creati
 > 
 > Clustering: Clustering is a machine learning method of grouping data points by similarity or distance.
 >
-> CLARA/PAM : CLARA (Clustering Large Applications), is an extension to k-medoids (PAM) methods to deal with data containing a large number of objects. PAM stands for “Partition Around Medoids.”,the PAM algorithm searches for k representative objects in a data set (k medoids) and then assigns each object to the closest medoid in order to create clusters.
+> CLARA/PAM : CLARA (Clustering Large Applications), is an extension to k-medoids (PAM) methods to deal with data containing a large number of objects. PAM stands for “Partition Around Medoids”, the PAM algorithm searches for k representative objects in a data set (k medoids) and then assigns each object to the closest medoid in order to create clusters.
 {: .details}
 
 
@@ -77,29 +79,29 @@ This part will present the type of data you need to run the ecoregionalization w
 
 The first data you will need to run this workflow is environmental data. As defined above, environmental data are any measurements or information that describe environmental processes, location, or conditions. This workflow accepts several types of environmental parameters like temperature or soil type. However there is a mandatory file format, the tabular format (.tsv) and each pixel of the study area must be described in this file by associating latitude and longitude with environmental parameters.
 
-This is an example of environmental file input in this workflow : 
+This is an example of environmental file input in this workflow: 
 
 +------+------+---------+------+------+
 | long | lat  |  Carbo  | Grav | ...  |
 +------+------+---------+------+------+
 |139.22|-65.57|   0.88  |28.59 | ...  |
 +------+------+---------+------+------+
-|139.22|-65.57|   0.88  |28.61 | ...  |
+|139.25|-65.63|   0.88  |28.61 | ...  |
 +------+------+---------+------+------+
 | ...  | ...  |   ...   | ...  | ...  |
 +------+------+---------+------+------+
 
 ## Occurrence data
 
-The second data file you will need to run this workflow is occurrences data file. As defined above, occurrences data showing the presence of a species at a particular location. This data file, also need to be in tabular format (.tsv) and need to be construct as following : 
+The second data file you will need to run this workflow is an occurrences data file. As defined above, occurrences data are showing the presence of a species at a particular location. This data file, also need to be in tabular format (.tsv) and need to be construct as following: 
 
-- columns latitude and longitude
+- Columns latitude and longitude
 
-- one column per taxon where each box corresponding to a geographical point is marked 1 if the taxon is present or 0 if the taxon is absent 
+- One column per taxon where each box corresponding to a geographical point is marked 1 if the taxon is present or 0 if the taxon is absent 
 
-- the environmental characteristics corresponding to the geographical coordinates. 
+- The environmental characteristics corresponding to the geographical coordinates. 
 
-This is an example of occurrence data file input in this workflow :
+This is an example of occurrence data file input in this workflow:
 
 +---------+----------+-----------+------------------------+-----------+-----+------+--------------+-----+
 | station |   lat    |   long    |Acanthorhabdus_fragilis | Acarnidae | ... | Grav |  Maxbearing  | ... |
@@ -141,9 +143,7 @@ This is an example of occurrence data file input in this workflow :
 
 # Predicting taxa distribution with **BRT**
 
-This first step implements a commonly used approach in ecological studies, namely species distribution modelling (SDM). This allows to characterize the distribution of each taxon by giving an 
-indicator of probability of taxon presence for each environmental layer pixel. Here, the method boosted regression trees (BRT) was used to adjust the relationship between the presence of a single 
-taxon and the environmental conditions under which the taxon has been detected. BRT modelling is based on a learning algorithm automatic using iterative classification trees. 
+This first step implements a commonly used approach in ecological studies, namely species distribution modelling (SDM). This allows to characterize the distribution of each taxon by giving an indicator of probability of taxon presence for each environmental layer pixel. Here, the method boosted regression trees (BRT) was used to adjust the relationship between the presence of a single taxon and the environmental conditions under which the taxon has been detected. BRT modelling is based on a learning algorithm automatic using iterative classification trees. 
 
 **What it does ?**
 
@@ -182,12 +182,12 @@ In the collection 'Validation files' there must be a file containing for each ta
 In the collection 'Species distribution prediction map' there must be for each taxon a map representing their probability of presence at each environmental layer pixel. 
 Here is an example:
 
-![](./Images/BRT-Thouarella_vulpicauda_pred_plot.png)
+![](./Images/BRT-Thouarella_vulpicauda_pred_plot.png "Thouarelle vulpicauda distribution from BRT")
 
 In the 'Partial dependence plots' collection there should be graphs showing the percentage explanation of the model for each environmental parameter.
 Here is an example: 
 
-![](./Images/BRT-Thouarella_vulpicauda.pdf)
+![](./Images/BRT-Thouarella_vulpicauda.pdf "Percentage of explanation of the model for each environmental parameter")
 
 # Collecting the list of taxa with **TaxaSeeker**
 
