@@ -66,6 +66,6 @@ data.each do |row|
   File.open(filename, 'w') do |file|
     file.puts YAML.dump(post_metadata)
     file.puts "---\n"
-    file.puts row['Blog Post'].gsub("  ", "\n\n")
+    file.puts row['Blog Post'].gsub('  ', "\n\n")
   end
 end
