@@ -269,7 +269,7 @@
           "name": "MakeAFakeInput",
           "title": "MakeAFakeInput",
           "test_results": null,
-          "modified": "2024-01-28 23:34:04 +0000",
+          "modified": "2024-01-29 00:10:59 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"Unique\"];\n  9 -->|out_file1| 10;\n  11[\"Text transformation\"];\n  10 -->|outfile| 11;\n  12[\"Concatenate datasets\"];\n  6 -->|out_file1| 12;\n  11 -->|output| 12;\n  13[\"Unique\"];\n  12 -->|out_file1| 13;\n  14[\"seqtk_subseq\"];\n  0 -->|output| 14;\n  13 -->|outfile| 14;\n  15[\"Text transformation\"];\n  13 -->|outfile| 15;\n  16[\"seqtk_subseq\"];\n  1 -->|output| 16;\n  15 -->|output| 16;\n  2[\"FASTQ to Tabular\"];\n  0 -->|output| 2;\n  3[\"Cutadapt\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  4[\"Cut\"];\n  2 -->|output_file| 4;\n  5[\"Bowtie2\"];\n  3 -->|out1| 5;\n  3 -->|out2| 5;\n  6[\"Select random lines\"];\n  4 -->|output| 6;\n  7[\"BAM-to-SAM\"];\n  5 -->|output| 7;\n  8[\"Filter\"];\n  7 -->|output1| 8;\n  9[\"Cut\"];\n  8 -->|out_file1| 9;\n"
         },
         {
@@ -287,7 +287,7 @@
           "name": "Retrieve climate data from Copernicus",
           "title": "Retrieve climate data from Copernicus",
           "test_results": null,
-          "modified": "2024-01-28 23:34:04 +0000",
+          "modified": "2024-01-29 00:10:59 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Copernicus Climate Data Store\"];\n  0 -->|output| 1;\n"
         }
       ],
