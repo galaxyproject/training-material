@@ -181,12 +181,12 @@ In the collection 'Validation files' there must be a file containing for each ta
 In the collection 'Species distribution prediction map' there must be for each taxon a map representing their probability of presence at each environmental layer pixel. 
 Here is an example:
 
-![](./Images/BRT-Thouarella_vulpicauda_pred_plot.png "Thouarelle vulpicauda distribution from BRT")
+![Species distribution map](./Images/BRT-Thouarella_vulpicauda_pred_plot.png "Thouarelle vulpicauda distribution from BRT")
 
 In the 'Partial dependence plots' collection there should be graphs showing the percentage explanation of the model for each environmental parameter.
 Here is an example: 
 
-![](./Images/BRT-Thouarella_vulpicauda.pdf "Percentage of explanation of the model for each environmental parameter")
+![Partial dependence plots](./Images/BRT-Thouarella_vulpicauda.pdf "Percentage of explanation of the model for each environmental parameter")
 
 # Collecting the list of taxa with **TaxaSeeker**
 
@@ -269,7 +269,7 @@ The third output corresponds to the main information of the tool, a graph presen
 
 There is an example of an SIH index plot : 
 
-![](./Images/SIH_index_plot.png "SIH index plot")
+![SIH index plot](./Images/SIH_index_plot.png "SIH index plot")
 
 With this graph you will be able to determine the optimal number of clusters that have retained for the construction of ecoregions. As said before, the optimal number of cluster is the one that
 maximizes the SIH index. In this example, the number of clusters that optimizes the SIH index is two, however, splitting into two clusters produces *de facto* a high SIH value because partitioning
@@ -321,7 +321,7 @@ the bar, the better the consistency of the observation with its cluster and the 
 are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are 
 located at the border between two clusters. Here, in the graph below, there is a good distribution of the observations because the majority of the bars are above the average value of the silhouette index.
 
-![](./Images/SIH_plot.png "SIH plot")
+![SIH plot](./Images/SIH_plot.png "SIH plot")
 
 # Build a ecoregionalization map with **EcoMap**
 
@@ -339,7 +339,7 @@ located at the border between two clusters. Here, in the graph below, there is a
 
 This is an example of output map with our six cluster representing ecoregions.
 
-![](./Images/Map.png "Ecoregion map")
+![Ecoregion map](./Images/Map.png "Ecoregion map")
 
 # Conclusion
 
