@@ -161,7 +161,7 @@ This tool gives in output a file containing the predictions of the probability o
 >
 >      {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
->    - *"Write the name of your abiotic parameters (comma separated)"*: `Carbo,Grav,Maxbearing` (This is an example. You need to write the exact name of your environement parameters present in your environement file and your occurrences file(s))
+>    - *"Select columns corresponding to your abiotic parameters"*: You can for example select the 3 abiotic paramters `Carbo,Grav,Maxbearing` selecting columns 2, 3 and 4.
 >
 > Remember : Your abiotic parameters must be present in your occurrence data file(s) and must be named the same as in your environment file. 
 >    
@@ -174,8 +174,7 @@ This tool gives in output a file containing the predictions of the probability o
 >
 {: .hands_on}
 
-In the 'Prediction files' collection there must be a file containing predictions of the probability of the presence of each taxon for each environmental pixel (latitude, longitude) for each
-the occurrence files you entered.
+In the 'Prediction files' collection there must be a file containing predictions of the probability of the presence of each taxon for each environmental pixel (latitude, longitude) for each occurrence file you entered.
 
 In the collection 'Validation files' there must be a file containing for each taxon the validation metrics of the associated model.
 
@@ -197,8 +196,7 @@ This tool does three things:
 
 - It allows obtaining a summary file for each taxon indicating whether a BRT model was obtained and the number of occurrences per taxon.
 
-- It provides a list of taxons that obtained cleaned BRT models (without "_", "_sp", etc.) to propose the list to WorMS (World Register Of Marine Species) and obtain more information about the
-taxons.
+- It provides a list of taxons that obtained cleaned BRT models (without "_", "_sp", etc.) to propose the list to WoRMS (World Register Of Marine Species) and obtain more information about the taxons.
 
 - It generates a list of taxons that obtained a BRT model that we need in the subsequent ecoregionalization workflow step.
 
@@ -207,6 +205,8 @@ taxons.
 > <hands-on-title> Run TaxaSeeker </hands-on-title>
 >
 > 1. {% tool [TaxaSeeker](toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_taxa_seeker/ecoregion_taxa_seeker/0.1.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Environement file"*: `env.tsv` (Input dataset containing your environement data)
+>
 >    - {% icon param-file %} *"Occurences file"*: `occurrences.tsv` (Input dataset(s) containing your species occurrences. You can select multiple datasets)
 >
 >      {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
@@ -214,8 +214,6 @@ taxons.
 >    - {% icon param-file %} *"Predictions file"*: `Prediction files collection` (output of **BRT tool prediction** {% icon tool %})
 >
 >      {% snippet faqs/galaxy/tools_select_collection.md %}
->
->    - {% icon param-file %} *"Environement file"*: `env.tsv` (Input dataset containing your environement data)
 >
 > 2. Check your outputs. You must have three files:
 >
@@ -231,11 +229,8 @@ taxons.
 
 This tool enables the determination of the optimal number of clusters for partition-based clustering, along with generating files used in the subsequent ecoregionalization workflow step.
 
-The tool will produce three outputs. The first two are files that will be used in the rest of the workflow: a file containing four pieces of information, latitude, longitude, presence prediction
-and corresponding taxon, and a file containing the data to be partitioned. 
-The third output corresponds to the main information of the tool, a graph presenting the value of the SIH index according to the number of clusters. The silhouette index provides a measure of the
-separation between clusters and the compactness within each cluster. The silhouette index ranges from -1 to 1. Values close to 1 indicate that objects are well grouped and separated from other
-clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are located at the border between two neighboring clusters. So the optimal number of clusters is the one that maximizes the value of the SIH index.
+The tool will produce three outputs. The first two are files that will be used in the following steps of the workflow: a file containing four pieces of information, latitude, longitude, presence prediction and corresponding taxon, and a file containing the data to be partitioned. 
+The third output corresponds to the main information of the tool, a graph presenting the value of the SIH index according to the number of clusters. The silhouette index provides a measure of the separation between clusters and the compactness within each cluster. The silhouette index ranges from -1 to 1. Values close to 1 indicate that objects are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are located at the border between two neighboring clusters. So the optimal number of clusters is the one that maximizes the value of the SIH index.
 
 **How to use it ?**
 
