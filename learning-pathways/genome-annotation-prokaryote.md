@@ -24,7 +24,7 @@ pathway:
 
   - section: "Module 2: Gene calling and functional annotation"
     description: |
-      In this module you will learn to run tools to find the position of genes and other genomic component and to functionally annotate them
+      In this module you will learn to run tools to find the position of genes and other genomic components and to functionally annotate them
     tutorials:
       #- name: annotation-with-prokka
       #  topic: genome-annotation

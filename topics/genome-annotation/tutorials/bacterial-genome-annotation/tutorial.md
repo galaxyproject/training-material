@@ -96,7 +96,7 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 
 # Contig annotation
 
-For annotating the contigs, several tools exists to do that: Prokka ({% cite seemann2014prokka %}), Bakta ({% cite schwengers2021bakta %}), etc. Here, we use **Bakta** as recommended by Torsten Seeman as the successor of **Prokka**.
+For annotating the contigs, several tools exists to do that: Prokka ({% cite seemann2014prokka %}), Bakta ({% cite schwengers2021bakta %}), etc. Here, we use **Bakta** as recommended by {% include _includes/contributor-badge.html id="tseemann" %} as the successor of **Prokka**.
 
 **Bakta** is a tool for the rapid & standardized annotation of bacterial genomes and plasmids from both isolates and MAGs. It implements a comprehensive annotation workflow for coding and non-coding genes (*i.e.* tRNA, rRNA). 
 
@@ -243,11 +243,11 @@ It is also able to detect and annotate small proteins (sORF). Predicted CDS are 
 
 # Further structural annotation
 
-**Bakta** gives a lot of information already, specially regarding CDSs or RNAs, but some structural annotation might be missing, e.g. plasmids, or interesting to identify independently.
+**Bakta** gives a lot of information already, especially regarding CDSs or RNAs, but some structural annotation might be missing, e.g. plasmids, or interesting to identify independently.
 
 ## Plasmids
 
-To identify plasmids in our contigs, we use **PlasmidFinder** ({% cite carattoli2020plasmidfinder %}), a tool for the identification and typing of plasmid sequences in Whole-Genome Sequencing. It uses the [plasmidfinder database](https://bitbucket.org/genomicepidemiology/plasmidfinder_db/) with hundreds sequences to predict the plasmid in the data.
+To identify plasmids in our contigs, we use **PlasmidFinder** ({% cite carattoli2020plasmidfinder %}), a tool for the identification and typing of plasmid sequences in Whole-Genome Sequencing. It uses the [plasmidfinder database](https://bitbucket.org/genomicepidemiology/plasmidfinder_db/) with hundreds of sequences to predict the plasmid in the data.
 
 > <hands-on-title> Plasmid identification</hands-on-title>
 >
