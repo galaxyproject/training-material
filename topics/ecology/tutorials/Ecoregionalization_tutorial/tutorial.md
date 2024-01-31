@@ -154,13 +154,15 @@ This tool gives in output a file containing the predictions of the probability o
 
 > <hands-on-title> Run the BRT tool </hands-on-title>
 >
-> 1. {% tool [BRT tool prediction](toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_brt_analysis/ecoregion_brt_analysis/0.1.0+galaxy0) %} with the following parameters:
+> 1. {% tool [BRT prediction tool](toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_brt_analysis/ecoregion_brt_analysis/0.1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Environment Data"*: `env.tsv` (Input dataset containing your environement data)
+>    - *"What's the decimal separator of your environment data file ?"*: `Dot`
 >    - {% icon param-file %} *"Occurrences Data File"*: `occurrences.tsv` (Input dataset(s) containing your species occurrences. You can select multiple datasets)
 >
 >      {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
->    - *"Select columns corresponding to your abiotic parameters"*: You can for example select the 3 abiotic paramters `Carbo,Grav,Maxbearing` selecting columns 2, 3 and 4.
+>    - *"What's the decimal separator of your occurrences data file(s) ?"*: `Comma`
+>    - *"Choose column(s) where your abiotic parameter are in your environment data file."*: `c['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19']`
 >
 > Remember : Your abiotic parameters must be present in your occurrence data file(s) and must be named the same as in your environment file. 
 >    
@@ -204,13 +206,14 @@ This tool does three things:
 > <hands-on-title> Run TaxaSeeker </hands-on-title>
 >
 > 1. {% tool [TaxaSeeker](toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_taxa_seeker/ecoregion_taxa_seeker/0.1.0+galaxy0) %} with the following parameters:
+>
 >    - {% icon param-file %} *"Environement file"*: `env.tsv` (Input dataset containing your environement data)
 >
 >    - {% icon param-file %} *"Occurences file"*: `occurrences.tsv` (Input dataset(s) containing your species occurrences. You can select multiple datasets)
 >
 >      {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
->    - {% icon param-file %} *"Predictions file"*: `Prediction files collection` (output of **BRT tool prediction** {% icon tool %})
+>    - {% icon param-file %} *"Predictions file"*: `Prediction files collection` (output of **BRT prediction tool** {% icon tool %})
 >
 >      {% snippet faqs/galaxy/tools_select_collection.md %}
 >
@@ -238,7 +241,7 @@ The third output corresponds to the main information of the tool, a graph presen
 > 1. {% tool [ClusterEstimate](toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_cluster_estimate/ecoregion_cluster_estimate/0.1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Environment file"*: `env.tsv` (Input dataset containing your environement data)
 >    - {% icon param-file %} *"Taxa selected file (List of taxa from TaxaSeeker tool)"*: `List_of_taxa.txt` (output of **TaxaSeeker** {% icon tool %})
->    - {% icon param-file %} *"Prediction files"*: `Prediction files collection` (output of **BRT tool prediction** {% icon tool %})
+>    - {% icon param-file %} *"Prediction files"*: `Prediction files collection` (output of **BRT prediction tool** {% icon tool %})
 >
 >      {% snippet faqs/galaxy/tools_select_collection.md %}
 >
@@ -333,7 +336,6 @@ located at the border between two clusters. Here, in the graph below, there is a
 >
 > 2. Check output. You must have one Map representing ecoregions.
 >
->
 {: .hands_on}
 
 This is an example of output map with our six cluster representing ecoregions.
@@ -343,5 +345,3 @@ This is an example of output map with our six cluster representing ecoregions.
 # Conclusion
 
 Congratulations! You have successfully completed the ecoregionalization workflow. Here is the end of this tutorial aiming in explaining the purpose of the ecoregionalization workflow and how to use it. This workflow provides a systematic and reproducible approach to ecoregionalization, allowing researchers to identify distinct ecological regions based on species occurrences and environmental data.This tutorial shows how to use this workflow and its tools step by step or separatly.It allow you to understand the ecoregion construction. You learn the use of the BRT algorithm for the modeling of species distribution as well as the cluster construction with the k-medoid clustering algorithms (CLARA/PAM). Feel free to explore and adapt this workflow for your specific research needs. If you have any questions or encounter issues during the workflow, refer to the provided documentation or seek assistance from the Galaxy community. Don't hesitate to contact us if you have any questions.
-
-
