@@ -144,13 +144,13 @@ This is an example of occurrence data file input in this workflow:
 
 This first step implements a commonly used approach in ecological studies, namely species distribution modelling (SDM). This allows to characterize the distribution of each taxon by giving an indicator of probability of taxon presence for each environmental layer pixel. Here, the method boosted regression trees (BRT) was used to adjust the relationship between the presence of a single taxon and the environmental conditions under which the taxon has been detected. BRT modelling is based on a learning algorithm automatic using iterative classification trees. 
 
-### What it does ?
+## What it does ?
 
 Two treatments are performed in this tool: the creation of the taxa distribution model and the use of this model to obtain a prediction index. The prediction index obtained from each BRT model for each pixel of the environmental layers is an approximation of the probability of detection of the presence of the taxon.
 
 This tool gives in output a file containing the predictions of the probability of the presence of each taxon for each pixel (latitude, longitude) environmental, a visualization of these pixels for each taxon and graphs showing the percentage of model explanation for each environmental parameter. We'r gonna go back to this in the following workflow you have an example of these files below. 
 
-### How to use it ?
+## How to use it ?
 
 > <hands-on-title> Run the BRT tool </hands-on-title>
 >
@@ -191,7 +191,7 @@ Here is an example:
 
 # Collecting the list of taxa with **TaxaSeeker**
 
-### What it does ?
+## What it does ?
 
 This tool does three things:
 
@@ -201,7 +201,7 @@ This tool does three things:
 
 - It generates a list of taxons that obtained a BRT model that we need in the subsequent ecoregionalization workflow step.
 
-### How to use it ?
+## How to use it ?
 
 > <hands-on-title> Run TaxaSeeker </hands-on-title>
 >
@@ -227,14 +227,14 @@ This tool does three things:
 
 # Determine the optimal cluster number with **ClusterEstimate**
 
-### What it does ?
+## What it does ?
 
 This tool enables the determination of the optimal number of clusters for partition-based clustering, along with generating files used in the subsequent ecoregionalization workflow step.
 
 The tool will produce three outputs. The first two are files that will be used in the following steps of the workflow: a file containing four pieces of information, latitude, longitude, presence prediction and corresponding taxon, and a file containing the data to be partitioned. 
 The third output corresponds to the main information of the tool, a graph presenting the value of the SIH index according to the number of clusters. The silhouette index provides a measure of the separation between clusters and the compactness within each cluster. The silhouette index ranges from -1 to 1. Values close to 1 indicate that objects are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are located at the border between two neighboring clusters. So the optimal number of clusters is the one that maximizes the value of the SIH index.
 
-### How to use it ?
+## How to use it ?
 
 > <hands-on-title> Run ClusterEstimate </hands-on-title>
 >
@@ -279,11 +279,11 @@ into two entities is very robust but is not necessarily a good indicator. Depend
 
 # Build ecoregional clusters with **ClaraClust**
 
-### What it does ?
+## What it does ?
 
 This tool is made to partition the pixels of the environmental layers according to the associated values of the BRT prediction index. Due to the large size of the datasets, the Clara function of the Cluster package was used to apply the Partitioning Around Medoids (PAM) algorithm on a representative sample of the data. This speeds up the clustering process and makes the calculation more efficient. 
 
-### How to use it ?
+## How to use it ?
 
 > <hands-on-title> Run ClaraClust </hands-on-title>
 >
