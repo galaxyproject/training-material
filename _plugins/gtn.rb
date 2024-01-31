@@ -489,7 +489,7 @@ module Jekyll
     end
 
     def group_icons(icons)
-      icons.group_by{|k, v| v}.map{|k, v| [k, v.map{|z|z[0]} ]}.to_h.invert
+      icons.group_by { |_k, v| v }.transform_values { |v| v.map { |z| z[0] } }.invert
     end
   end
 end
