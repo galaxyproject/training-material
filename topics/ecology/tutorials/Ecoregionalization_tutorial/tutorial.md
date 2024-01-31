@@ -22,12 +22,11 @@ tags:
 - ecology
 - EBV workflow
 - modeling
-contributors:
+contributions:
   authorship:
     - PaulineSGN
   testing:
     - yvanlebras
-
 ---
 
 This tutorial is designed to guide you through the Ecoregionalization Galaxy workflow, demonstrating how to create an ecoregionalization map from occurrences and environmental data using a boosted regression trees model for predictions.
