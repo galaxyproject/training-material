@@ -3,6 +3,8 @@ title: "🪐📲 Hosting Galaxy at the Edge: Directly in Your Pocket!"
 tags: [fun, system administrators, developers, humour]
 contributions:
   authorship: [mtekman]
+  editing: [hexylena]
+  infrastructure: [mtekman]
 layout: news
 cover: news/images/2024-01-31-postmarket-phone-cover.jpg
 cover_alt: cropped picture of a mobile phone interface showing a terminal with Galaxy log outputs.
