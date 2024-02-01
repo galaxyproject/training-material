@@ -94,7 +94,7 @@
       "name": "Chloroplast-genome-assembly-and-annotation",
       "title": "Chloroplast-genome-assembly-and-annotation",
       "test_results": null,
-      "modified": "2024-02-01 10:11:50 +0000",
+      "modified": "2024-02-01 14:18:24 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Flye assembly\"];\n  1 -->|output| 4;\n  5[\"NanoPlot\"];\n  1 -->|output| 5;\n  6[\"Map with BWA-MEM\"];\n  0 -->|output| 6;\n  4 -->|consensus| 6;\n  7[\"Fasta Statistics\"];\n  4 -->|consensus| 7;\n  8[\"Bandage Info\"];\n  4 -->|assembly_gfa| 8;\n  9[\"Bandage Image\"];\n  4 -->|assembly_gfa| 9;\n  10[\"pilon\"];\n  6 -->|bam_output| 10;\n  4 -->|consensus| 10;\n  11[\"Fasta Statistics\"];\n  10 -->|output_fasta| 11;\n  12[\"Map with BWA-MEM\"];\n  2 -->|output| 12;\n  10 -->|output_fasta| 12;\n  13[\"Map with BWA-MEM\"];\n  3 -->|output| 13;\n  10 -->|output_fasta| 13;\n  14[\"Prokka\"];\n  10 -->|output_fasta| 14;\n  15[\"JBrowse\"];\n  10 -->|output_fasta| 15;\n  12 -->|bam_output| 15;\n  13 -->|bam_output| 15;\n  16[\"JBrowse\"];\n  10 -->|output_fasta| 16;\n  14 -->|out_gff| 16;\n"
     }
   ],
@@ -127,6 +127,11 @@
       {
         "url": "https://galaxytrakr.org/",
         "name": "GalaxyTrakr",
+        "usegalaxy": false
+      },
+      {
+        "url": "https://usegalaxy.be/",
+        "name": "UseGalaxy.be",
         "usegalaxy": false
       },
       {
