@@ -1,12 +1,14 @@
 ---
-title: "🪐📲 Host Galaxy, Now In Your Pocket!"
-tags: [fun,admin,developers]
+title: "🪐📲 Hosting Galaxy at the Edge: Directly in Your Pocket!"
+tags: [fun, system administrators, developers, humour]
 contributions:
   authorship: [mtekman]
 layout: news
+cover: news/images/2024-01-31-postmarket-phone.jpg
+cover_alt: two pictures of a mobile phone showing a terminal and htopGalaxy In Your Pocket
 ---
 
-Hey admins! Have you ever wanted to administer your own instance from
+Hey Galaxy admins! Have you ever wanted to administer your own instance from
 the luxury of your pocket?
 
 Now you can, with **Galaxy In Your Pocket™!**
