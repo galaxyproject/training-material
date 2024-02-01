@@ -93,699 +93,6 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
-      "title": "Submitting sequence data to ENA",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.5163611",
-      "questions": [
-        "How do you submit raw sequence reads and assembled genomes to the European Nucleotide Archive?"
-      ],
-      "objectives": [
-        "Submit raw sequencing reads and metadata to ENA's test server",
-        "Submit consensus sequence and metadata to ENA's test server"
-      ],
-      "time_estimation": "1h",
-      "level": "Intermediate",
-      "key_points": [
-        "Use Galaxy's 'ENA Upload tool' to submit raw reads to ENA",
-        "Use Galaxy's 'Submit consensus sequence to ENA' tool",
-        "You need to include your ENA Webin credentials in Galaxy",
-        "For small submission use 'ENA Upload tool' interactive metadata forms feature",
-        "For bulk submissions use a spreadsheet metadata template"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "sequence-analysis",
-          "tutorials": [
-            "human-reads-removal"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "collections"
-          ]
-        }
-      ],
-      "tags": [
-        "covid19"
-      ],
-      "contributors": [
-        {
-          "name": "Miguel Roncoroni",
-          "joined": "2021-08",
-          "email": "miguel.roncoroni@elixir-belgium.org",
-          "id": "roncoronimiguel",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/roncoronimiguel.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/"
-        },
-        {
-          "name": "Bert Droesbeke",
-          "email": "bedro@psb.ugent.be",
-          "matrix": "bedroesb:matrix.org",
-          "orcid": "0000-0003-0522-5674",
-          "joined": "2019-12",
-          "elixir_node": "be",
-          "id": "bedroesb",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bedroesb.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bedroesb/"
-        }
-      ],
-      "mathjax": null,
-      "short_id": "T00159",
-      "url": "/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html",
-      "topic_name": "galaxy-interface",
-      "tutorial_name": "upload-data-to-ena",
-      "dir": "topics/galaxy-interface/tutorials/upload-data-to-ena",
-      "id": "galaxy-interface/upload-data-to-ena",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": true,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/workflows/main_workflow.ga",
-          "path": "topics/galaxy-interface/tutorials/upload-data-to-ena/workflows/main_workflow.ga",
-          "wfid": "galaxy-interface-upload-data-to-ena",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-upload-data-to-ena/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "name": "GTN_ENA_upload_workflow",
-          "title": "GTN_ENA_upload_workflow",
-          "test_results": null,
-          "modified": "2024-01-31 00:11:18 +0000",
-          "mermaid": "flowchart TD\n  0[\"ENA Upload tool\"];\n  1[\"ENA Upload tool\"];\n"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/ena_webin_cli/7d751b5943b0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1"
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Using Galaxy and Managing your Data",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "ena_upload",
-            "owner": "iuc",
-            "revisions": "9e2df763086c",
-            "tool_panel_section_label": "Send Data",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "ena_upload",
-            "owner": "iuc",
-            "revisions": "a62c4a11a67d",
-            "tool_panel_section_label": "Send Data",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: ena_upload\n  owner: iuc\n  revisions: 9e2df763086c\n  tool_panel_section_label: Send Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ena_upload\n  owner: iuc\n  revisions: a62c4a11a67d\n  tool_panel_section_label: Send Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Creating, Editing and Importing Galaxy Workflows",
-      "tags": [
-        "workflows"
-      ],
-      "zenodo_link": "",
-      "questions": [
-        "How can you construct Galaxy workflows from scratch?",
-        "How can you label outputs?",
-        "How can you include workflows in workflows?",
-        "How can you tag workflows?",
-        "How can you manage tool versions?",
-        "How can you manage workflow versions?"
-      ],
-      "objectives": [
-        "Understand key aspects of workflows",
-        "Create clean, non-repetitive workflows"
-      ],
-      "time_estimation": "30m",
-      "key_points": [
-        "Creating powerful workflows is easy in the Workflow Editor"
-      ],
-      "contributors": [
-        {
-          "name": "Marius van den Beek",
-          "joined": "2018-06",
-          "id": "mvdbeek",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mvdbeek.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/"
-        }
-      ],
-      "level": "Intermediate",
-      "subtopic": "workflows",
-      "mathjax": null,
-      "short_id": "T00163",
-      "url": "/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html",
-      "topic_name": "galaxy-interface",
-      "tutorial_name": "workflow-editor",
-      "dir": "topics/galaxy-interface/tutorials/workflow-editor",
-      "id": "galaxy-interface/workflow-editor",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-editor/workflows/main_workflow.ga",
-          "path": "topics/galaxy-interface/tutorials/workflow-editor/workflows/main_workflow.ga",
-          "wfid": "galaxy-interface-workflow-editor",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-workflow-editor/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "name": "Tutorial workflow",
-          "title": "Tutorial workflow",
-          "test_results": null,
-          "modified": "2024-01-31 00:11:18 +0000",
-          "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"tac\"];\n  0 -->|output| 1;\n  2[\"Select first\"];\n  1 -->|outfile| 2;\n"
-        },
-        {
-          "workflow": "subworkflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-editor/workflows/subworkflow.ga",
-          "path": "topics/galaxy-interface/tutorials/workflow-editor/workflows/subworkflow.ga",
-          "wfid": "galaxy-interface-workflow-editor",
-          "wfname": "subworkflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-workflow-editor/versions/subworkflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "name": "Subworkflow",
-          "title": "Subworkflow",
-          "test_results": null,
-          "modified": "2024-01-31 00:11:18 +0000",
-          "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Tutorial workflow\"];\n  0 -->|output| 1;\n  2[\"Tutorial workflow\"];\n  0 -->|output| 2;\n  3[\"Paste\"];\n  1 -->|First lines| 3;\n  2 -->|First lines| 3;\n"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-editor/tutorial.json",
-      "tools": [
-        "Paste1",
-        "Show beginning1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tac/1.1.0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.mesocentre.uca.fr",
-            "name": "Galaxy@AuBi",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Using Galaxy and Managing your Data",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Text Manipulation",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-editor/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-editor/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Automating Galaxy workflows using the command line",
-      "tags": [
-        "workflows",
-        "variant-analysis",
-        "covid19"
-      ],
-      "zenodo_link": "",
-      "questions": [
-        "How can I schedule and run tens or hundreds of Galaxy workflows easily?",
-        "How can I automate my analyses when large amounts of data are being produced daily?"
-      ],
-      "objectives": [
-        "Learn to use the `planemo run` subcommand to run workflows from the command line.",
-        "Be able to write simple shell scripts for running multiple workflows concurrently or sequentially.",
-        "Learn how to use Pangolin to assign annotated variants to lineages."
-      ],
-      "time_estimation": "2h",
-      "key_points": [
-        "Workflows can be executed not only through the web browser, but also via the command line.",
-        "Executing workflows programmatically allows automation of analyses."
-      ],
-      "requirements": [
-        {
-          "title": "Familiarity with Galaxy and basic associated concepts, in particular workflows",
-          "type": "none"
-        },
-        {
-          "title": "Basic knowledge of the command line",
-          "type": "none"
-        }
-      ],
-      "contributors": [
-        {
-          "name": "Simon Bray",
-          "joined": "2019-05",
-          "elixir_node": "de",
-          "affiliations": [
-            "uni-freiburg"
-          ],
-          "id": "simonbray",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
-        },
-        {
-          "name": "Wolfgang Maier",
-          "orcid": "0000-0002-9464-6640",
-          "matrix": "wm75:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "fediverse": "https://scholar.social/@zerodivision",
-          "fediverse_flavor": "mastodon",
-          "affiliations": [
-            "by-covid",
-            "uni-freiburg"
-          ],
-          "id": "wm75",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
-        }
-      ],
-      "subtopic": "workflows",
-      "mathjax": null,
-      "short_id": "T00162",
-      "url": "/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html",
-      "topic_name": "galaxy-interface",
-      "tutorial_name": "workflow-automation",
-      "dir": "topics/galaxy-interface/tutorials/workflow-automation",
-      "id": "galaxy-interface/workflow-automation",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": {
-          "description": "This is a more technical tutorial which will teach you how to run workflows from the command line and scale your analyses. If you are on Windows, you will need WSL/WSL2 setup before this session.",
-          "materials": [
-            {
-              "external": true,
-              "link": "https://docs.microsoft.com/en-us/windows/wsl/install-win10",
-              "title": "Installing WSL on Windows",
-              "type": "Get Set Up (Windows)"
-            },
-            {
-              "link": "topics/galaxy-interface/tutorials/workflow-automation/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "galaxy-interface"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "simonbray"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "30M",
-              "link": "o39QjVnLG68",
-              "speakers": [
-                "simonbray"
-              ]
-            }
-          ],
-          "gtn_id": "galaxy-interface/workflow-automation",
-          "title": "Automating Galaxy workflows using the command line",
-          "captioned": true
-        },
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-automation/workflows/main_workflow.ga",
-          "path": "topics/galaxy-interface/tutorials/workflow-automation/workflows/main_workflow.ga",
-          "wfid": "galaxy-interface-workflow-automation",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-workflow-automation/versions/main_workflow",
-          "license": "MIT",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "https://orcid.org/0000-0002-9464-6640",
-              "name": "Wolfgang Maier"
-            }
-          ],
-          "name": "vcf2lineage",
-          "title": "vcf2lineage",
-          "test_results": null,
-          "modified": "2024-01-31 00:11:18 +0000",
-          "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input parameter\"];\n  2[\"Input dataset\"];\n  3[\"Compose text parameter value\"];\n  1 -->|output| 3;\n  4[\"SnpSift Filter\"];\n  3 -->|out1| 4;\n  0 -->|output| 4;\n  5[\"bcftools consensus\"];\n  4 -->|output| 5;\n  2 -->|output| 5;\n  6[\"Collapse Collection\"];\n  5 -->|output_file| 6;\n  7[\"Pangolin\"];\n  6 -->|output| 7;\n"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-automation/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.10",
-        "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/2.3.8",
-        "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          }
-        ]
-      },
-      "topic_name_human": "Using Galaxy and Managing your Data",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "bcftools_consensus",
-            "owner": "iuc",
-            "revisions": "e522022137f6",
-            "tool_panel_section_label": "Variant Calling",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "compose_text_param",
-            "owner": "iuc",
-            "revisions": "e188c9826e0f",
-            "tool_panel_section_label": "Expression Tools",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "pangolin",
-            "owner": "iuc",
-            "revisions": "b6abccb1f25b",
-            "tool_panel_section_label": "Phylogenetics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "snpsift",
-            "owner": "iuc",
-            "revisions": "5fab4f81391d",
-            "tool_panel_section_label": "Variant Calling",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "collapse_collections",
-            "owner": "nml",
-            "revisions": "830961c48e42",
-            "tool_panel_section_label": "Collection Operations",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bcftools_consensus\n  owner: iuc\n  revisions: e522022137f6\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: compose_text_param\n  owner: iuc\n  revisions: e188c9826e0f\n  tool_panel_section_label: Expression Tools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pangolin\n  owner: iuc\n  revisions: b6abccb1f25b\n  tool_panel_section_label: Phylogenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpsift\n  owner: iuc\n  revisions: 5fab4f81391d\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 830961c48e42\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-automation/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-automation/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "InterMine integration with Galaxy",
-      "zenodo_link": "https://zenodo.org/record/3407174",
-      "questions": [
-        "How to export your query results from your InterMine of choice to Galaxy?",
-        "How to export a list of identifiers from Galaxy to your InterMine of choice?"
-      ],
-      "objectives": [
-        "Learn how to import/export data from/to InterMine instances",
-        "Understand the InterMine Interchange Dataset"
-      ],
-      "time_estimation": "1h",
-      "contributors": [
-        {
-          "name": "Daniela Butano",
-          "joined": "2019-09",
-          "id": "danielabutano",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/danielabutano.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/danielabutano/"
-        },
-        {
-          "name": "Yo Yehudi",
-          "joined": "2019-09",
-          "id": "yochannah",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yochannah.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yochannah/"
-        }
-      ],
-      "subtopic": "analyse",
-      "mathjax": null,
-      "short_id": "T00152",
-      "url": "/topics/galaxy-interface/tutorials/intermine/tutorial.html",
-      "topic_name": "galaxy-interface",
-      "tutorial_name": "intermine",
-      "dir": "topics/galaxy-interface/tutorials/intermine",
-      "id": "galaxy-interface/intermine",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/intermine/workflows/main_workflow.ga",
-          "path": "topics/galaxy-interface/tutorials/intermine/workflows/main_workflow.ga",
-          "wfid": "galaxy-interface-intermine",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-intermine/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "name": "Intermine import/export",
-          "title": "Intermine import/export",
-          "test_results": null,
-          "modified": "2024-01-31 00:11:18 +0000",
-          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Create InterMine Interchange\"];\n  0 -->|output| 1;\n"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/intermine/tutorial.json",
-      "tools": [
-        "intermine",
-        "toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Using Galaxy and Managing your Data",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "intermine_galaxy_exchange",
-            "owner": "iuc",
-            "revisions": "c24014d80001",
-            "tool_panel_section_label": "Convert Formats",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: intermine_galaxy_exchange\n  owner: iuc\n  revisions: c24014d80001\n  tool_panel_section_label: Convert Formats\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/intermine/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/intermine/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Workflow Reports",
       "tags": [
         "workflows"
@@ -888,7 +195,7 @@
           "name": "GTN Training: Workflow Reports - Galaxy 101 For Everyone",
           "title": "GTN Training: Workflow Reports - Galaxy 101 For Everyone",
           "test_results": null,
-          "modified": "2024-01-31 00:11:18 +0000",
+          "modified": "2024-02-01 00:15:10 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Datamash\"];\n  1 -->|tabular| 2;\n  3[\"Remove beginning\"];\n  1 -->|tabular| 3;\n  4[\"Cut\"];\n  3 -->|out_file1| 4;\n  5[\"Group\"];\n  3 -->|out_file1| 5;\n  6[\"Group\"];\n  3 -->|out_file1| 6;\n  7[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 7;\n  8[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 8;\n  9[\"Unique\"];\n  4 -->|out_file1| 9;\n"
         },
         {
@@ -906,7 +213,7 @@
           "name": "GTN Training: Workflow Reports",
           "title": "GTN Training: Workflow Reports",
           "test_results": null,
-          "modified": "2024-01-31 00:11:18 +0000",
+          "modified": "2024-02-01 00:15:10 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Datamash\"];\n  1 -->|tabular| 2;\n  3[\"Remove beginning\"];\n  1 -->|tabular| 3;\n  4[\"Cut\"];\n  3 -->|out_file1| 4;\n  5[\"Group\"];\n  3 -->|out_file1| 5;\n  6[\"Group\"];\n  3 -->|out_file1| 6;\n  7[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 7;\n  8[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 8;\n  9[\"Unique\"];\n  4 -->|out_file1| 9;\n"
         }
       ],
@@ -948,11 +255,6 @@
           {
             "url": "https://galaxy.mesocentre.uca.fr",
             "name": "Galaxy@AuBi",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
             "usegalaxy": false
           }
         ]
@@ -1119,6 +421,370 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "InterMine integration with Galaxy",
+      "zenodo_link": "https://zenodo.org/record/3407174",
+      "questions": [
+        "How to export your query results from your InterMine of choice to Galaxy?",
+        "How to export a list of identifiers from Galaxy to your InterMine of choice?"
+      ],
+      "objectives": [
+        "Learn how to import/export data from/to InterMine instances",
+        "Understand the InterMine Interchange Dataset"
+      ],
+      "time_estimation": "1h",
+      "contributors": [
+        {
+          "name": "Daniela Butano",
+          "joined": "2019-09",
+          "id": "danielabutano",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/danielabutano.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/danielabutano/"
+        },
+        {
+          "name": "Yo Yehudi",
+          "joined": "2019-09",
+          "id": "yochannah",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yochannah.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yochannah/"
+        }
+      ],
+      "subtopic": "analyse",
+      "mathjax": null,
+      "short_id": "T00152",
+      "url": "/topics/galaxy-interface/tutorials/intermine/tutorial.html",
+      "topic_name": "galaxy-interface",
+      "tutorial_name": "intermine",
+      "dir": "topics/galaxy-interface/tutorials/intermine",
+      "id": "galaxy-interface/intermine",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/intermine/workflows/main_workflow.ga",
+          "path": "topics/galaxy-interface/tutorials/intermine/workflows/main_workflow.ga",
+          "wfid": "galaxy-interface-intermine",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-intermine/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "name": "Intermine import/export",
+          "title": "Intermine import/export",
+          "test_results": null,
+          "modified": "2024-02-01 00:15:10 +0000",
+          "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Create InterMine Interchange\"];\n  0 -->|output| 1;\n"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/intermine/tutorial.json",
+      "tools": [
+        "intermine",
+        "toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Using Galaxy and Managing your Data",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "intermine_galaxy_exchange",
+            "owner": "iuc",
+            "revisions": "c24014d80001",
+            "tool_panel_section_label": "Convert Formats",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: intermine_galaxy_exchange\n  owner: iuc\n  revisions: c24014d80001\n  tool_panel_section_label: Convert Formats\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/intermine/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/intermine/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Automating Galaxy workflows using the command line",
+      "tags": [
+        "workflows",
+        "variant-analysis",
+        "covid19"
+      ],
+      "zenodo_link": "",
+      "questions": [
+        "How can I schedule and run tens or hundreds of Galaxy workflows easily?",
+        "How can I automate my analyses when large amounts of data are being produced daily?"
+      ],
+      "objectives": [
+        "Learn to use the `planemo run` subcommand to run workflows from the command line.",
+        "Be able to write simple shell scripts for running multiple workflows concurrently or sequentially.",
+        "Learn how to use Pangolin to assign annotated variants to lineages."
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "Workflows can be executed not only through the web browser, but also via the command line.",
+        "Executing workflows programmatically allows automation of analyses."
+      ],
+      "requirements": [
+        {
+          "title": "Familiarity with Galaxy and basic associated concepts, in particular workflows",
+          "type": "none"
+        },
+        {
+          "title": "Basic knowledge of the command line",
+          "type": "none"
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Simon Bray",
+          "joined": "2019-05",
+          "elixir_node": "de",
+          "affiliations": [
+            "uni-freiburg"
+          ],
+          "id": "simonbray",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
+        },
+        {
+          "name": "Wolfgang Maier",
+          "orcid": "0000-0002-9464-6640",
+          "matrix": "wm75:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "fediverse": "https://scholar.social/@zerodivision",
+          "fediverse_flavor": "mastodon",
+          "affiliations": [
+            "by-covid",
+            "uni-freiburg"
+          ],
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+        }
+      ],
+      "subtopic": "workflows",
+      "mathjax": null,
+      "short_id": "T00162",
+      "url": "/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html",
+      "topic_name": "galaxy-interface",
+      "tutorial_name": "workflow-automation",
+      "dir": "topics/galaxy-interface/tutorials/workflow-automation",
+      "id": "galaxy-interface/workflow-automation",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": {
+          "description": "This is a more technical tutorial which will teach you how to run workflows from the command line and scale your analyses. If you are on Windows, you will need WSL/WSL2 setup before this session.",
+          "materials": [
+            {
+              "external": true,
+              "link": "https://docs.microsoft.com/en-us/windows/wsl/install-win10",
+              "title": "Installing WSL on Windows",
+              "type": "Get Set Up (Windows)"
+            },
+            {
+              "link": "topics/galaxy-interface/tutorials/workflow-automation/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "galaxy-interface"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "simonbray"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "30M",
+              "link": "o39QjVnLG68",
+              "speakers": [
+                "simonbray"
+              ]
+            }
+          ],
+          "gtn_id": "galaxy-interface/workflow-automation",
+          "title": "Automating Galaxy workflows using the command line",
+          "captioned": true
+        },
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-automation/workflows/main_workflow.ga",
+          "path": "topics/galaxy-interface/tutorials/workflow-automation/workflows/main_workflow.ga",
+          "wfid": "galaxy-interface-workflow-automation",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-workflow-automation/versions/main_workflow",
+          "license": "MIT",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "https://orcid.org/0000-0002-9464-6640",
+              "name": "Wolfgang Maier"
+            }
+          ],
+          "name": "vcf2lineage",
+          "title": "vcf2lineage",
+          "test_results": null,
+          "modified": "2024-02-01 00:15:10 +0000",
+          "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input parameter\"];\n  2[\"Input dataset\"];\n  3[\"Compose text parameter value\"];\n  1 -->|output| 3;\n  4[\"SnpSift Filter\"];\n  3 -->|out1| 4;\n  0 -->|output| 4;\n  5[\"bcftools consensus\"];\n  4 -->|output| 5;\n  2 -->|output| 5;\n  6[\"Collapse Collection\"];\n  5 -->|output_file| 6;\n  7[\"Pangolin\"];\n  6 -->|output| 7;\n"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-automation/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.10",
+        "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/2.3.8",
+        "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": false
+          }
+        ]
+      },
+      "topic_name_human": "Using Galaxy and Managing your Data",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "bcftools_consensus",
+            "owner": "iuc",
+            "revisions": "e522022137f6",
+            "tool_panel_section_label": "Variant Calling",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "compose_text_param",
+            "owner": "iuc",
+            "revisions": "e188c9826e0f",
+            "tool_panel_section_label": "Expression Tools",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "pangolin",
+            "owner": "iuc",
+            "revisions": "b6abccb1f25b",
+            "tool_panel_section_label": "Phylogenetics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "snpsift",
+            "owner": "iuc",
+            "revisions": "5fab4f81391d",
+            "tool_panel_section_label": "Variant Calling",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "collapse_collections",
+            "owner": "nml",
+            "revisions": "830961c48e42",
+            "tool_panel_section_label": "Collection Operations",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bcftools_consensus\n  owner: iuc\n  revisions: e522022137f6\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: compose_text_param\n  owner: iuc\n  revisions: e188c9826e0f\n  tool_panel_section_label: Expression Tools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pangolin\n  owner: iuc\n  revisions: b6abccb1f25b\n  tool_panel_section_label: Phylogenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpsift\n  owner: iuc\n  revisions: 5fab4f81391d\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 830961c48e42\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-automation/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-automation/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "redirect_from": [
         "/topics/galaxy-ui/tutorials/workflow-parameters/tutorial",
         "/short/galaxy-interface/workflow-parameters",
@@ -1245,7 +911,7 @@
           "name": "Select First N Lines",
           "title": "Select First N Lines",
           "test_results": null,
-          "modified": "2024-01-31 00:11:18 +0000",
+          "modified": "2024-02-01 00:15:10 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Select first\"];\n  0 -->|output| 1;\n"
         }
       ],
@@ -1268,11 +934,6 @@
           {
             "url": "https://galaxy.hyphy.org/",
             "name": "HyPhy HIV NGS Tools",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
             "usegalaxy": false
           },
           {
@@ -1336,6 +997,448 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Submitting sequence data to ENA",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.5163611",
+      "questions": [
+        "How do you submit raw sequence reads and assembled genomes to the European Nucleotide Archive?"
+      ],
+      "objectives": [
+        "Submit raw sequencing reads and metadata to ENA's test server",
+        "Submit consensus sequence and metadata to ENA's test server"
+      ],
+      "time_estimation": "1h",
+      "level": "Intermediate",
+      "key_points": [
+        "Use Galaxy's 'ENA Upload tool' to submit raw reads to ENA",
+        "Use Galaxy's 'Submit consensus sequence to ENA' tool",
+        "You need to include your ENA Webin credentials in Galaxy",
+        "For small submission use 'ENA Upload tool' interactive metadata forms feature",
+        "For bulk submissions use a spreadsheet metadata template"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "sequence-analysis",
+          "tutorials": [
+            "human-reads-removal"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections"
+          ]
+        }
+      ],
+      "tags": [
+        "covid19"
+      ],
+      "contributors": [
+        {
+          "name": "Miguel Roncoroni",
+          "joined": "2021-08",
+          "email": "miguel.roncoroni@elixir-belgium.org",
+          "id": "roncoronimiguel",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/roncoronimiguel.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/"
+        },
+        {
+          "name": "Bert Droesbeke",
+          "email": "bert.droesbeke@vib.be",
+          "matrix": "bedroesb:matrix.org",
+          "orcid": "0000-0003-0522-5674",
+          "joined": "2019-12",
+          "elixir_node": "be",
+          "id": "bedroesb",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bedroesb.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bedroesb/"
+        }
+      ],
+      "mathjax": null,
+      "short_id": "T00159",
+      "url": "/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html",
+      "topic_name": "galaxy-interface",
+      "tutorial_name": "upload-data-to-ena",
+      "dir": "topics/galaxy-interface/tutorials/upload-data-to-ena",
+      "id": "galaxy-interface/upload-data-to-ena",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": true,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/workflows/main_workflow.ga",
+          "path": "topics/galaxy-interface/tutorials/upload-data-to-ena/workflows/main_workflow.ga",
+          "wfid": "galaxy-interface-upload-data-to-ena",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-upload-data-to-ena/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "name": "GTN_ENA_upload_workflow",
+          "title": "GTN_ENA_upload_workflow",
+          "test_results": null,
+          "modified": "2024-02-01 00:15:10 +0000",
+          "mermaid": "flowchart TD\n  0[\"ENA Upload tool\"];\n  1[\"ENA Upload tool\"];\n"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/ena_webin_cli/7d751b5943b0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1"
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Using Galaxy and Managing your Data",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "ena_upload",
+            "owner": "iuc",
+            "revisions": "9e2df763086c",
+            "tool_panel_section_label": "Send Data",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ena_upload",
+            "owner": "iuc",
+            "revisions": "a62c4a11a67d",
+            "tool_panel_section_label": "Send Data",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: ena_upload\n  owner: iuc\n  revisions: 9e2df763086c\n  tool_panel_section_label: Send Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ena_upload\n  owner: iuc\n  revisions: a62c4a11a67d\n  tool_panel_section_label: Send Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Creating, Editing and Importing Galaxy Workflows",
+      "tags": [
+        "workflows"
+      ],
+      "zenodo_link": "",
+      "questions": [
+        "How can you construct Galaxy workflows from scratch?",
+        "How can you label outputs?",
+        "How can you include workflows in workflows?",
+        "How can you tag workflows?",
+        "How can you manage tool versions?",
+        "How can you manage workflow versions?"
+      ],
+      "objectives": [
+        "Understand key aspects of workflows",
+        "Create clean, non-repetitive workflows"
+      ],
+      "time_estimation": "30m",
+      "key_points": [
+        "Creating powerful workflows is easy in the Workflow Editor"
+      ],
+      "contributors": [
+        {
+          "name": "Marius van den Beek",
+          "joined": "2018-06",
+          "id": "mvdbeek",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mvdbeek.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/"
+        }
+      ],
+      "level": "Intermediate",
+      "subtopic": "workflows",
+      "mathjax": null,
+      "short_id": "T00163",
+      "url": "/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html",
+      "topic_name": "galaxy-interface",
+      "tutorial_name": "workflow-editor",
+      "dir": "topics/galaxy-interface/tutorials/workflow-editor",
+      "id": "galaxy-interface/workflow-editor",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-editor/workflows/main_workflow.ga",
+          "path": "topics/galaxy-interface/tutorials/workflow-editor/workflows/main_workflow.ga",
+          "wfid": "galaxy-interface-workflow-editor",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-workflow-editor/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "name": "Tutorial workflow",
+          "title": "Tutorial workflow",
+          "test_results": null,
+          "modified": "2024-02-01 00:15:10 +0000",
+          "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"tac\"];\n  0 -->|output| 1;\n  2[\"Select first\"];\n  1 -->|outfile| 2;\n"
+        },
+        {
+          "workflow": "subworkflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-editor/workflows/subworkflow.ga",
+          "path": "topics/galaxy-interface/tutorials/workflow-editor/workflows/subworkflow.ga",
+          "wfid": "galaxy-interface-workflow-editor",
+          "wfname": "subworkflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-workflow-editor/versions/subworkflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "name": "Subworkflow",
+          "title": "Subworkflow",
+          "test_results": null,
+          "modified": "2024-02-01 00:15:10 +0000",
+          "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Tutorial workflow\"];\n  0 -->|output| 1;\n  2[\"Tutorial workflow\"];\n  0 -->|output| 2;\n  3[\"Paste\"];\n  1 -->|First lines| 3;\n  2 -->|First lines| 3;\n"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-editor/tutorial.json",
+      "tools": [
+        "Paste1",
+        "Show beginning1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tac/1.1.0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.mesocentre.uca.fr",
+            "name": "Galaxy@AuBi",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Using Galaxy and Managing your Data",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Text Manipulation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-editor/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-editor/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Galaxy workflows in Dockstore",
+      "objectives": [
+        "What is Dockstore?",
+        "Why use Dockstore?",
+        "How to find workflows on Dockstore?",
+        "How to launch workflows from Dockstore?",
+        "Getting started with Galaxy workflows on Dockstore",
+        "Register your Galaxy workflow on Dockstore"
+      ],
+      "subtopic": "workflows",
+      "contributors": [
+        {
+          "name": "Avani Khadilkar",
+          "email": "akhadilk@ucsc.edu",
+          "joined": "2021-12",
+          "id": "avani-k",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/avani-k.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/avani-k/"
+        },
+        {
+          "name": "Elizabeth Sheets",
+          "email": "esheets@ucsc.edu",
+          "joined": "2021-12",
+          "id": "bethsheets",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bethsheets.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bethsheets/"
+        },
+        {
+          "name": "Charles Overbeck",
+          "email": "coverbec@ucsc.edu",
+          "joined": "2021-12",
+          "id": "coverbeck",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/coverbeck.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/coverbeck/"
+        },
+        {
+          "name": "Enis Afgan",
+          "joined": "2018-06",
+          "id": "afgane",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/afgane.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/afgane/"
+        }
+      ],
+      "mathjax": null,
+      "short_id": "S00061",
+      "url": "/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides.html",
+      "topic_name": "galaxy-interface",
+      "tutorial_name": "galaxy-on-dockstore",
+      "dir": "topics/galaxy-interface/tutorials/galaxy-on-dockstore",
+      "id": "galaxy-interface/galaxy-on-dockstore",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-on-dockstore/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Using Galaxy and Managing your Data",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides.json"
       }
     },
     {
@@ -1487,11 +1590,6 @@
       "supported_servers": {
         "exact": [
           {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
@@ -1588,134 +1686,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_slides",
-      "logo": "GTN",
-      "title": "Galaxy workflows in Dockstore",
-      "objectives": [
-        "What is Dockstore?",
-        "Why use Dockstore?",
-        "How to find workflows on Dockstore?",
-        "How to launch workflows from Dockstore?",
-        "Getting started with Galaxy workflows on Dockstore",
-        "Register your Galaxy workflow on Dockstore"
-      ],
-      "subtopic": "workflows",
-      "contributors": [
-        {
-          "name": "Avani Khadilkar",
-          "email": "akhadilk@ucsc.edu",
-          "joined": "2021-12",
-          "id": "avani-k",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/avani-k.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/avani-k/"
-        },
-        {
-          "name": "Elizabeth Sheets",
-          "email": "esheets@ucsc.edu",
-          "joined": "2021-12",
-          "id": "bethsheets",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bethsheets.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bethsheets/"
-        },
-        {
-          "name": "Charles Overbeck",
-          "email": "coverbec@ucsc.edu",
-          "joined": "2021-12",
-          "id": "coverbeck",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/coverbeck.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/coverbeck/"
-        },
-        {
-          "name": "Enis Afgan",
-          "joined": "2018-06",
-          "id": "afgane",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/afgane.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/afgane/"
-        }
-      ],
-      "mathjax": null,
-      "short_id": "S00061",
-      "url": "/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides.html",
-      "topic_name": "galaxy-interface",
-      "tutorial_name": "galaxy-on-dockstore",
-      "dir": "topics/galaxy-interface/tutorials/galaxy-on-dockstore",
-      "id": "galaxy-interface/galaxy-on-dockstore",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": false,
-      "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-on-dockstore/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "id": "eu",
-            "human": "Galaxy Europe",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "id": "us",
-            "human": "Galaxy Main",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "id": "au",
-            "human": "Galaxy Australia",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.fr",
-            "url": "https://usegalaxy.fr",
-            "id": "fr",
-            "human": "Galaxy France",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Using Galaxy and Managing your Data",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-on-dockstore/slides.json"
       }
     },
     {
@@ -1874,265 +1844,20 @@
     {
       "layout": "tutorial_hands_on",
       "redirect_from": [
-        "/topics/galaxy-ui/tutorials/galaxy-intro-jupyter/tutorial",
-        "/short/galaxy-interface/galaxy-intro-jupyter",
-        "/short/T00148"
+        "/topics/galaxy-data-manipulation/tutorials/processing-many-samples-at-once/tutorial",
+        "/short/galaxy-interface/processing-many-samples-at-once",
+        "/short/T00156"
       ],
-      "title": "Use Jupyter notebooks in Galaxy",
-      "zenodo_link": "https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts",
-      "questions": [
-        "How to use a Jupyter Notebook in Galaxy"
+      "title": "Multisample Analysis",
+      "tags": [
+        "collections"
       ],
-      "objectives": [
-        "Learn about the Jupyter Interactive Environment"
-      ],
-      "time_estimation": "30m",
-      "key_points": [
-        "Start Jupyter from the Visualize tab or from a dataset",
-        "Install Libraries with pip or Conda",
-        "Use get() to import datasets from your history to the notebook",
-        "Use put() to export datasets from the notebook to your history",
-        "Save your notebook into your history"
-      ],
-      "contributors": [
-        {
-          "name": "Delphine Lariviere",
-          "email": "delphine.lariviere@galaxy.org",
-          "joined": "2017-09",
-          "orcid": "0000-0001-6421-3484",
-          "id": "delphine-l",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/"
-        }
-      ],
-      "subtopic": "analyse",
-      "mathjax": null,
-      "short_id": "T00148",
-      "url": "/topics/galaxy-interface/tutorials/galaxy-intro-jupyter/tutorial.html",
-      "topic_name": "galaxy-interface",
-      "tutorial_name": "galaxy-intro-jupyter",
-      "dir": "topics/galaxy-interface/tutorials/galaxy-intro-jupyter",
-      "id": "galaxy-interface/galaxy-intro-jupyter",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-intro-jupyter/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "id": "eu",
-            "human": "Galaxy Europe",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "id": "us",
-            "human": "Galaxy Main",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "id": "au",
-            "human": "Galaxy Australia",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.fr",
-            "url": "https://usegalaxy.fr",
-            "id": "fr",
-            "human": "Galaxy France",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Using Galaxy and Managing your Data",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-intro-jupyter/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-intro-jupyter/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "redirect_from": [
-        "/topics/galaxy-ui/tutorials/history/tutorial",
-        "/short/galaxy-interface/history",
-        "/short/T00150"
-      ],
-      "title": "Understanding Galaxy history system",
       "zenodo_link": "",
-      "questions": [
-        "How do Galaxy histories work?"
-      ],
-      "objectives": [
-        "Gain understanding on navigating and manipulating histories"
-      ],
-      "time_estimation": "30m",
-      "key_points": [
-        "In Galaxy, data is stored in datasets and organized in histories",
-        "The right pane shows the current history. It displays the name of the history, the tags and annotations assigned to it, and the size of the data in it",
-        "The datasets are shown differently depending on their status: queued, running, ok, error, or paused",
-        "The summary view for each dataset can be expanded to show additional information",
-        "Datasets deleted are hidden from history. They can be restored to the history, or permanently deleted from the server, or purged. Purged files cannot be restored",
-        "Histories can also be deleted and purged, similar to datasets",
-        "Datasets can be organized into collections within a history with search and multi-select. Jobs applied to collections use the same settings for each dataset in the collection"
-      ],
-      "contributions": {
-        "authorship": [
-          "nekrut"
-        ],
-        "editing": [
-          "polkhe",
-          "martenson",
-          "gallardoalba",
-          "shiltemann",
-          "bebatut",
-          "bgruening",
-          "hexylena"
-        ]
-      },
-      "subtopic": "histories",
-      "mathjax": null,
-      "short_id": "T00150",
-      "url": "/topics/galaxy-interface/tutorials/history/tutorial.html",
-      "topic_name": "galaxy-interface",
-      "tutorial_name": "history",
-      "dir": "topics/galaxy-interface/tutorials/history",
-      "id": "galaxy-interface/history",
-      "video_library": {
-        "tutorial": {
-          "type": "Demo",
-          "title": "Demo: Understanding the Galaxy History System",
-          "tags": [
-            "galaxy-interface"
-          ],
-          "materials": [
-            {
-              "link": "topics/galaxy-interface/tutorials/history/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "versions": [
-            {
-              "link": "C3_HSgbbDWc",
-              "speakers": [
-                "shiltemann"
-              ],
-              "captions": [
-                "shiltemann"
-              ],
-              "length": "18M",
-              "date": "2023-05-19",
-              "galaxy_version": "23.01"
-            }
-          ],
-          "gtn_id": "galaxy-interface/history",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/history/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "id": "eu",
-            "human": "Galaxy Europe",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "id": "us",
-            "human": "Galaxy Main",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "id": "au",
-            "human": "Galaxy Australia",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.fr",
-            "url": "https://usegalaxy.fr",
-            "id": "fr",
-            "human": "Galaxy France",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Using Galaxy and Managing your Data",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
+      "level": "Advanced",
+      "questions": null,
+      "objectives": null,
+      "time_estimation": "1h",
+      "key_points": null,
       "contributors": [
         {
           "name": "Anton Nekrutenko",
@@ -2143,231 +1868,21 @@
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
         },
         {
-          "name": "Ekaterina Polkh",
+          "name": "Anne Pajon",
           "joined": "2017-09",
-          "affiliations": [
-            "uni-freiburg"
-          ],
-          "id": "polkhe",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/polkhe.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/"
-        },
-        {
-          "name": "Martin Čech",
-          "email": "marten@bx.psu.edu",
-          "matrix": "martenson:matrix.org",
-          "orcid": "0000-0002-9318-1781",
-          "elixir_node": "cz",
-          "contact_for_training": true,
-          "location": {
-            "country": "USA",
-            "lat": 37.0,
-            "lon": -122.0
-          },
-          "fediverse": "https://mastodon.world/@martenson",
-          "fediverse_flavor": "mastodon",
-          "joined": "2017-09",
-          "id": "martenson",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/martenson.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/martenson/"
-        },
-        {
-          "name": "Cristóbal Gallardo",
-          "joined": "2020-11",
-          "elixir_node": "de",
-          "orcid": "0000-0002-5752-2155",
-          "affiliations": [
-            "uni-freiburg"
-          ],
-          "id": "gallardoalba",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/"
-        },
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "fediverse": "https://mstdn.science/@shiltemann",
-          "fediverse_flavor": "mastodon",
-          "bluesky": "shiltemann.bsky.social",
-          "linkedin": "shiltemann",
-          "matrix": "shiltemann:matrix.org",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "contact_for_training": true,
-          "affiliations": [
-            "CINECA-Project",
-            "gallantries",
-            "erasmusmc"
-          ],
-          "location": {
-            "country": "NL",
-            "lat": 51.912,
-            "lon": 4.462
-          },
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
-        },
-        {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "matrix": "bebatut:matrix.org",
-          "orcid": "0000-0001-9852-1987",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 45.77,
-            "lon": 3.08
-          },
-          "fediverse": "https://piaille.fr/@bebatut",
-          "fediverse_flavor": "mastodon",
-          "affiliations": [
-            "gallantries",
-            "ifb"
-          ],
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
-        },
-        {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "fediverse": "https://fosstodon.org/@bgruening",
-          "fediverse_flavor": "mastodon",
-          "matrix": "bgruening:matrix.org",
-          "orcid": "0000-0002-3079-6586",
-          "elixir_node": "de",
-          "linkedin": "bgruening",
-          "contact_for_training": true,
-          "joined": "2017-09",
-          "location": {
-            "country": "DE",
-            "lat": 47.997791,
-            "lon": 7.842609
-          },
-          "affiliations": [
-            "eurosciencegateway",
-            "eosc-life",
-            "by-covid",
-            "deNBI",
-            "sfb992",
-            "elixir-converge",
-            "uni-freiburg"
-          ],
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
-        },
-        {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
-          "affiliations": [
-            "gallantries",
-            "by-covid",
-            "erasmusmc",
-            "elixir-europe",
-            "elixir-converge"
-          ],
-          "former_affiliations": [
-            "deNBI",
-            "avans-atgm",
-            "uni-freiburg"
-          ],
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/history/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/history/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "redirect_from": [
-        "/topics/galaxy-data-manipulation/tutorials/name-tags/tutorial",
-        "/short/galaxy-interface/name-tags",
-        "/short/T00154"
-      ],
-      "title": "Name tags for following complex histories",
-      "zenodo_link": "",
-      "questions": [
-        "What are name tags or hash tags?",
-        "How can I use them to keep track of my data?"
-      ],
-      "objectives": [
-        "Learn how to set name tags",
-        "Learn how they are propagated"
-      ],
-      "time_estimation": "20m",
-      "key_points": [
-        "Naming your datasets clearly is good practice, but name tags provide an easier alternative to the amount of effort required to rename 100s of datasets.",
-        "Name tags allow you to follow the flow of data throughout your history"
-      ],
-      "contributors": [
-        {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
-          "affiliations": [
-            "gallantries",
-            "by-covid",
-            "erasmusmc",
-            "elixir-europe",
-            "elixir-converge"
-          ],
-          "former_affiliations": [
-            "deNBI",
-            "avans-atgm",
-            "uni-freiburg"
-          ],
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+          "id": "pajanne",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pajanne.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pajanne/"
         }
       ],
       "subtopic": "manage",
       "mathjax": null,
-      "short_id": "T00154",
-      "url": "/topics/galaxy-interface/tutorials/name-tags/tutorial.html",
+      "short_id": "T00156",
+      "url": "/topics/galaxy-interface/tutorials/processing-many-samples-at-once/tutorial.html",
       "topic_name": "galaxy-interface",
-      "tutorial_name": "name-tags",
-      "dir": "topics/galaxy-interface/tutorials/name-tags",
-      "id": "galaxy-interface/name-tags",
+      "tutorial_name": "processing-many-samples-at-once",
+      "dir": "topics/galaxy-interface/tutorials/processing-many-samples-at-once",
+      "id": "galaxy-interface/processing-many-samples-at-once",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -2377,7 +1892,7 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/name-tags/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/processing-many-samples-at-once/tutorial.json",
       "tools": [
 
       ],
@@ -2439,165 +1954,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/name-tags/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/name-tags/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "redirect_from": [
-        "/topics/galaxy-ui/tutorials/jupyterlab/tutorial",
-        "/short/galaxy-interface/jupyterlab",
-        "/short/T00153"
-      ],
-      "title": "JupyterLab in Galaxy",
-      "zenodo_link": "",
-      "questions": [
-        "How can I manipulate data using JupyterLab in Galaxy?",
-        "How can I start a notebook in JupyterLab?",
-        "How can I import/export dataset from/to my history to/from the notebook?",
-        "How can I save my notebook to my history?"
-      ],
-      "objectives": [
-        "Launch JupyterLab in Galaxy",
-        "Start a notebook",
-        "Import libraries",
-        "Use get() to import datasets from your history to the notebook",
-        "Use put() to export datasets from the notebook to your history",
-        "Save your notebook into your history"
-      ],
-      "time_estimation": "1H",
-      "tags": [
-        "interactive-tools"
-      ],
-      "key_points": [
-        "How to work with JupyterLab interactively within Galaxy"
-      ],
-      "contributions": {
-        "authorship": [
-          "annefou"
-        ],
-        "editing": [
-          "hexylena"
-        ]
-      },
-      "subtopic": "analyse",
-      "mathjax": null,
-      "short_id": "T00153",
-      "url": "/topics/galaxy-interface/tutorials/jupyterlab/tutorial.html",
-      "topic_name": "galaxy-interface",
-      "tutorial_name": "jupyterlab",
-      "dir": "topics/galaxy-interface/tutorials/jupyterlab",
-      "id": "galaxy-interface/jupyterlab",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/jupyterlab/tutorial.json",
-      "tools": [
-        "interactive_tool_jupyter_notebook"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Using Galaxy and Managing your Data",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Anne Fouilloux",
-          "twitter": "AnneFouilloux",
-          "joined": "2019-07",
-          "elixir_node": "no",
-          "orcid": "0000-0002-1784-2920",
-          "id": "annefou",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/annefou.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/"
-        },
-        {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
-          "affiliations": [
-            "gallantries",
-            "by-covid",
-            "erasmusmc",
-            "elixir-europe",
-            "elixir-converge"
-          ],
-          "former_affiliations": [
-            "deNBI",
-            "avans-atgm",
-            "uni-freiburg"
-          ],
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/jupyterlab/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/jupyterlab/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/processing-many-samples-at-once/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/processing-many-samples-at-once/tutorial.json"
       }
     },
     {
@@ -2938,23 +2296,282 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Searching Your History",
+      "redirect_from": [
+        "/topics/galaxy-ui/tutorials/history/tutorial",
+        "/short/galaxy-interface/history",
+        "/short/T00150"
+      ],
+      "title": "Understanding Galaxy history system",
       "zenodo_link": "",
-      "level": "Introductory",
       "questions": [
-        "How can you find your datasets?",
-        "How to search by file type?",
-        "What filters are available to you?"
+        "How do Galaxy histories work?"
       ],
       "objectives": [
-        "Feel confident in searching your history"
+        "Gain understanding on navigating and manipulating histories"
       ],
-      "time_estimation": "5m",
+      "time_estimation": "30m",
       "key_points": [
-        "Searching is easy and powerful",
-        "It will help you manage large histories with complex analyses"
+        "In Galaxy, data is stored in datasets and organized in histories",
+        "The right pane shows the current history. It displays the name of the history, the tags and annotations assigned to it, and the size of the data in it",
+        "The datasets are shown differently depending on their status: queued, running, ok, error, or paused",
+        "The summary view for each dataset can be expanded to show additional information",
+        "Datasets deleted are hidden from history. They can be restored to the history, or permanently deleted from the server, or purged. Purged files cannot be restored",
+        "Histories can also be deleted and purged, similar to datasets",
+        "Datasets can be organized into collections within a history with search and multi-select. Jobs applied to collections use the same settings for each dataset in the collection"
       ],
+      "contributions": {
+        "authorship": [
+          "nekrut"
+        ],
+        "editing": [
+          "polkhe",
+          "martenson",
+          "gallardoalba",
+          "shiltemann",
+          "bebatut",
+          "bgruening",
+          "hexylena"
+        ]
+      },
+      "subtopic": "histories",
+      "mathjax": null,
+      "short_id": "T00150",
+      "url": "/topics/galaxy-interface/tutorials/history/tutorial.html",
+      "topic_name": "galaxy-interface",
+      "tutorial_name": "history",
+      "dir": "topics/galaxy-interface/tutorials/history",
+      "id": "galaxy-interface/history",
+      "video_library": {
+        "tutorial": {
+          "type": "Demo",
+          "title": "Demo: Understanding the Galaxy History System",
+          "tags": [
+            "galaxy-interface"
+          ],
+          "materials": [
+            {
+              "link": "topics/galaxy-interface/tutorials/history/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "versions": [
+            {
+              "link": "C3_HSgbbDWc",
+              "speakers": [
+                "shiltemann"
+              ],
+              "captions": [
+                "shiltemann"
+              ],
+              "length": "18M",
+              "date": "2023-05-19",
+              "galaxy_version": "23.01"
+            }
+          ],
+          "gtn_id": "galaxy-interface/history",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/history/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Using Galaxy and Managing your Data",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
       "contributors": [
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
+        },
+        {
+          "name": "Ekaterina Polkh",
+          "joined": "2017-09",
+          "affiliations": [
+            "uni-freiburg"
+          ],
+          "id": "polkhe",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/polkhe.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/"
+        },
+        {
+          "name": "Martin Čech",
+          "email": "marten@bx.psu.edu",
+          "matrix": "martenson:matrix.org",
+          "orcid": "0000-0002-9318-1781",
+          "elixir_node": "cz",
+          "contact_for_training": true,
+          "location": {
+            "country": "USA",
+            "lat": 37.0,
+            "lon": -122.0
+          },
+          "fediverse": "https://mastodon.world/@martenson",
+          "fediverse_flavor": "mastodon",
+          "joined": "2017-09",
+          "id": "martenson",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/martenson.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/martenson/"
+        },
+        {
+          "name": "Cristóbal Gallardo",
+          "joined": "2020-11",
+          "elixir_node": "de",
+          "orcid": "0000-0002-5752-2155",
+          "affiliations": [
+            "uni-freiburg"
+          ],
+          "id": "gallardoalba",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "matrix": "bebatut:matrix.org",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 45.77,
+            "lon": 3.08
+          },
+          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse_flavor": "mastodon",
+          "affiliations": [
+            "gallantries",
+            "ifb"
+          ],
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "elixir_node": "de",
+          "linkedin": "bgruening",
+          "contact_for_training": true,
+          "joined": "2017-09",
+          "location": {
+            "country": "DE",
+            "lat": 47.997791,
+            "lon": 7.842609
+          },
+          "affiliations": [
+            "eurosciencegateway",
+            "eosc-life",
+            "by-covid",
+            "deNBI",
+            "sfb992",
+            "elixir-converge",
+            "uni-freiburg"
+          ],
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        },
         {
           "name": "Helena Rasche",
           "email": "hexylena@galaxians.org",
@@ -2986,7 +2603,40 @@
           "id": "hexylena",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        },
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/history/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/history/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "redirect_from": [
+        "/topics/galaxy-data-manipulation/tutorials/collections/tutorial",
+        "/short/galaxy-interface/collections",
+        "/short/T00146"
+      ],
+      "title": "Using dataset collections",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.5119008",
+      "tags": [
+        "collections"
+      ],
+      "level": "Intermediate",
+      "questions": [
+        "How to manipulate large numbers of datasets at once?"
+      ],
+      "objectives": [
+        "Understand and master dataset collections"
+      ],
+      "time_estimation": "30m",
+      "key_points": [
+        "Multiple datasets can be combined in a collection.",
+        "This significantly simplifies the analysis.",
+        "This tutorial showed how to (1) create collection, (2) run tools on a collection, (3) combine collection elements into a final analysis results.",
+        "There is a variety of **Collection operation** tools allowing to perform a variety of transformations."
+      ],
+      "contributors": [
         {
           "name": "Anton Nekrutenko",
           "email": "anton@nekrut.org",
@@ -2996,14 +2646,208 @@
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
         }
       ],
-      "subtopic": "histories",
+      "subtopic": "manage",
       "mathjax": null,
-      "short_id": "T00158",
-      "url": "/topics/galaxy-interface/tutorials/search/tutorial.html",
+      "short_id": "T00146",
+      "url": "/topics/galaxy-interface/tutorials/collections/tutorial.html",
       "topic_name": "galaxy-interface",
-      "tutorial_name": "search",
-      "dir": "topics/galaxy-interface/tutorials/search",
-      "id": "galaxy-interface/search",
+      "tutorial_name": "collections",
+      "dir": "topics/galaxy-interface/tutorials/collections",
+      "id": "galaxy-interface/collections",
+      "video_library": {
+        "tutorial": {
+          "description": null,
+          "materials": [
+            {
+              "link": "topics/galaxy-interface/tutorials/collections/tutorial.html",
+              "title": "Using dataset collections",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "galaxy-interface"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "link": "uN6nP3I7QLE",
+              "captions": [
+                "delphine-l"
+              ],
+              "date": "2023-05-09",
+              "length": "13M",
+              "speakers": [
+                "delphine-l"
+              ]
+            },
+            {
+              "captions": [
+                "annefou",
+                "mariipia10"
+              ],
+              "date": "2021-08-09",
+              "length": "11M",
+              "link": "uZUt9XIHUQo",
+              "speakers": [
+                "nekrut"
+              ]
+            }
+          ],
+          "gtn_id": "galaxy-interface/collections",
+          "title": "Using dataset collections",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/collections/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://galaxytrakr.org/",
+            "name": "GalaxyTrakr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": false
+          }
+        ]
+      },
+      "topic_name_human": "Using Galaxy and Managing your Data",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "bwa",
+            "owner": "devteam",
+            "revisions": "3fe632431b68",
+            "tool_panel_section_label": "Mapping",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "lofreq_call",
+            "owner": "iuc",
+            "revisions": "e1461b5c52a0",
+            "tool_panel_section_label": "Variant Calling",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "snpsift",
+            "owner": "iuc",
+            "revisions": "5fab4f81391d",
+            "tool_panel_section_label": "Variant Calling",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "collapse_collections",
+            "owner": "nml",
+            "revisions": "25136a2b0cfe",
+            "tool_panel_section_label": "Collection Operations",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bwa\n  owner: devteam\n  revisions: 3fe632431b68\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: lofreq_call\n  owner: iuc\n  revisions: e1461b5c52a0\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpsift\n  owner: iuc\n  revisions: 5fab4f81391d\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 25136a2b0cfe\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/collections/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/collections/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "redirect_from": [
+        "/topics/galaxy-ui/tutorials/galaxy-intro-jupyter/tutorial",
+        "/short/galaxy-interface/galaxy-intro-jupyter",
+        "/short/T00148"
+      ],
+      "title": "Use Jupyter notebooks in Galaxy",
+      "zenodo_link": "https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts",
+      "questions": [
+        "How to use a Jupyter Notebook in Galaxy"
+      ],
+      "objectives": [
+        "Learn about the Jupyter Interactive Environment"
+      ],
+      "time_estimation": "30m",
+      "key_points": [
+        "Start Jupyter from the Visualize tab or from a dataset",
+        "Install Libraries with pip or Conda",
+        "Use get() to import datasets from your history to the notebook",
+        "Use put() to export datasets from the notebook to your history",
+        "Save your notebook into your history"
+      ],
+      "contributors": [
+        {
+          "name": "Delphine Lariviere",
+          "email": "delphine.lariviere@galaxy.org",
+          "joined": "2017-09",
+          "orcid": "0000-0001-6421-3484",
+          "id": "delphine-l",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/"
+        }
+      ],
+      "subtopic": "analyse",
+      "mathjax": null,
+      "short_id": "T00148",
+      "url": "/topics/galaxy-interface/tutorials/galaxy-intro-jupyter/tutorial.html",
+      "topic_name": "galaxy-interface",
+      "tutorial_name": "galaxy-intro-jupyter",
+      "dir": "topics/galaxy-interface/tutorials/galaxy-intro-jupyter",
+      "id": "galaxy-interface/galaxy-intro-jupyter",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -3013,7 +2857,7 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/search/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-intro-jupyter/tutorial.json",
       "tools": [
 
       ],
@@ -3075,8 +2919,163 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/search/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/search/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-intro-jupyter/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/galaxy-intro-jupyter/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Rule Based Uploader: Advanced",
+      "zenodo_link": "",
+      "level": "Advanced",
+      "questions": [
+        "How to use the rule based uploader to create complex collections"
+      ],
+      "objectives": [
+        "Learn even more about the Rule Based Uploader"
+      ],
+      "time_estimation": "20m",
+      "key_points": null,
+      "tags": [
+        "collections",
+        "tags"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections",
+            "upload-rules"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "affiliations": [
+            "gallantries",
+            "by-covid",
+            "erasmusmc",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        }
+      ],
+      "subtopic": "upload",
+      "mathjax": null,
+      "short_id": "T00161",
+      "url": "/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.html",
+      "topic_name": "galaxy-interface",
+      "tutorial_name": "upload-rules-advanced",
+      "dir": "topics/galaxy-interface/tutorials/upload-rules-advanced",
+      "id": "galaxy-interface/upload-rules-advanced",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Using Galaxy and Managing your Data",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.json"
       }
     },
     {
@@ -3282,6 +3281,149 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Searching Your History",
+      "zenodo_link": "",
+      "level": "Introductory",
+      "questions": [
+        "How can you find your datasets?",
+        "How to search by file type?",
+        "What filters are available to you?"
+      ],
+      "objectives": [
+        "Feel confident in searching your history"
+      ],
+      "time_estimation": "5m",
+      "key_points": [
+        "Searching is easy and powerful",
+        "It will help you manage large histories with complex analyses"
+      ],
+      "contributors": [
+        {
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "affiliations": [
+            "gallantries",
+            "by-covid",
+            "erasmusmc",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
+        }
+      ],
+      "subtopic": "histories",
+      "mathjax": null,
+      "short_id": "T00158",
+      "url": "/topics/galaxy-interface/tutorials/search/tutorial.html",
+      "topic_name": "galaxy-interface",
+      "tutorial_name": "search",
+      "dir": "topics/galaxy-interface/tutorials/search",
+      "id": "galaxy-interface/search",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/search/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Using Galaxy and Managing your Data",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/search/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/search/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "redirect_from": [
         "/topics/galaxy-ui/tutorials/history-to-workflow/tutorial",
         "/short/galaxy-interface/history-to-workflow",
@@ -3404,123 +3546,6 @@
     {
       "layout": "tutorial_hands_on",
       "redirect_from": [
-        "/topics/galaxy-data-manipulation/tutorials/processing-many-samples-at-once/tutorial",
-        "/short/galaxy-interface/processing-many-samples-at-once",
-        "/short/T00156"
-      ],
-      "title": "Multisample Analysis",
-      "tags": [
-        "collections"
-      ],
-      "zenodo_link": "",
-      "level": "Advanced",
-      "questions": null,
-      "objectives": null,
-      "time_estimation": "1h",
-      "key_points": null,
-      "contributors": [
-        {
-          "name": "Anton Nekrutenko",
-          "email": "anton@nekrut.org",
-          "joined": "2017-09",
-          "id": "nekrut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
-        },
-        {
-          "name": "Anne Pajon",
-          "joined": "2017-09",
-          "id": "pajanne",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pajanne.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pajanne/"
-        }
-      ],
-      "subtopic": "manage",
-      "mathjax": null,
-      "short_id": "T00156",
-      "url": "/topics/galaxy-interface/tutorials/processing-many-samples-at-once/tutorial.html",
-      "topic_name": "galaxy-interface",
-      "tutorial_name": "processing-many-samples-at-once",
-      "dir": "topics/galaxy-interface/tutorials/processing-many-samples-at-once",
-      "id": "galaxy-interface/processing-many-samples-at-once",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/processing-many-samples-at-once/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "id": "eu",
-            "human": "Galaxy Europe",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "id": "us",
-            "human": "Galaxy Main",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "id": "au",
-            "human": "Galaxy Australia",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.fr",
-            "url": "https://usegalaxy.fr",
-            "id": "fr",
-            "human": "Galaxy France",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Using Galaxy and Managing your Data",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/processing-many-samples-at-once/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/processing-many-samples-at-once/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "redirect_from": [
         "/topics/galaxy-data-manipulation/tutorials/group-tags/tutorial",
         "/short/galaxy-interface/group-tags",
         "/short/T00149"
@@ -3634,90 +3659,51 @@
     {
       "layout": "tutorial_hands_on",
       "redirect_from": [
-        "/topics/galaxy-data-manipulation/tutorials/collections/tutorial",
-        "/short/galaxy-interface/collections",
-        "/short/T00146"
+        "/topics/galaxy-ui/tutorials/jupyterlab/tutorial",
+        "/short/galaxy-interface/jupyterlab",
+        "/short/T00153"
       ],
-      "title": "Using dataset collections",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.5119008",
-      "tags": [
-        "collections"
-      ],
-      "level": "Intermediate",
+      "title": "JupyterLab in Galaxy",
+      "zenodo_link": "",
       "questions": [
-        "How to manipulate large numbers of datasets at once?"
+        "How can I manipulate data using JupyterLab in Galaxy?",
+        "How can I start a notebook in JupyterLab?",
+        "How can I import/export dataset from/to my history to/from the notebook?",
+        "How can I save my notebook to my history?"
       ],
       "objectives": [
-        "Understand and master dataset collections"
+        "Launch JupyterLab in Galaxy",
+        "Start a notebook",
+        "Import libraries",
+        "Use get() to import datasets from your history to the notebook",
+        "Use put() to export datasets from the notebook to your history",
+        "Save your notebook into your history"
       ],
-      "time_estimation": "30m",
+      "time_estimation": "1H",
+      "tags": [
+        "interactive-tools"
+      ],
       "key_points": [
-        "Multiple datasets can be combined in a collection.",
-        "This significantly simplifies the analysis.",
-        "This tutorial showed how to (1) create collection, (2) run tools on a collection, (3) combine collection elements into a final analysis results.",
-        "There is a variety of **Collection operation** tools allowing to perform a variety of transformations."
+        "How to work with JupyterLab interactively within Galaxy"
       ],
-      "contributors": [
-        {
-          "name": "Anton Nekrutenko",
-          "email": "anton@nekrut.org",
-          "joined": "2017-09",
-          "id": "nekrut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
-        }
-      ],
-      "subtopic": "manage",
+      "contributions": {
+        "authorship": [
+          "annefou"
+        ],
+        "editing": [
+          "hexylena"
+        ]
+      },
+      "subtopic": "analyse",
       "mathjax": null,
-      "short_id": "T00146",
-      "url": "/topics/galaxy-interface/tutorials/collections/tutorial.html",
+      "short_id": "T00153",
+      "url": "/topics/galaxy-interface/tutorials/jupyterlab/tutorial.html",
       "topic_name": "galaxy-interface",
-      "tutorial_name": "collections",
-      "dir": "topics/galaxy-interface/tutorials/collections",
-      "id": "galaxy-interface/collections",
+      "tutorial_name": "jupyterlab",
+      "dir": "topics/galaxy-interface/tutorials/jupyterlab",
+      "id": "galaxy-interface/jupyterlab",
       "video_library": {
-        "tutorial": {
-          "description": null,
-          "materials": [
-            {
-              "link": "topics/galaxy-interface/tutorials/collections/tutorial.html",
-              "title": "Using dataset collections",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "galaxy-interface"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "link": "uN6nP3I7QLE",
-              "captions": [
-                "delphine-l"
-              ],
-              "date": "2023-05-09",
-              "length": "13M",
-              "speakers": [
-                "delphine-l"
-              ]
-            },
-            {
-              "captions": [
-                "annefou",
-                "mariipia10"
-              ],
-              "date": "2021-08-09",
-              "length": "11M",
-              "link": "uZUt9XIHUQo",
-              "speakers": [
-                "nekrut"
-              ]
-            }
-          ],
-          "gtn_id": "galaxy-interface/collections",
-          "title": "Using dataset collections",
-          "captioned": true
-        },
+        "tutorial": null,
         "slides": null,
         "demo": null,
         "both": null,
@@ -3725,12 +3711,9 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/collections/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/jupyterlab/tutorial.json",
       "tools": [
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0"
+        "interactive_tool_jupyter_notebook"
       ],
       "supported_servers": {
         "exact": [
@@ -3740,42 +3723,18 @@
             "usegalaxy": true
           },
           {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://galaxytrakr.org/",
-            "name": "GalaxyTrakr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://galaxy.hyphy.org/",
-            "name": "HyPhy HIV NGS Tools",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
             "usegalaxy": false
           },
           {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
           }
+        ],
+        "inexact": [
+
         ]
       },
       "topic_name_human": "Using Galaxy and Managing your Data",
@@ -3784,37 +3743,10 @@
         "install_repository_dependencies": true,
         "install_resolver_dependencies": true,
         "tools": [
-          {
-            "name": "bwa",
-            "owner": "devteam",
-            "revisions": "3fe632431b68",
-            "tool_panel_section_label": "Mapping",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "lofreq_call",
-            "owner": "iuc",
-            "revisions": "e1461b5c52a0",
-            "tool_panel_section_label": "Variant Calling",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "snpsift",
-            "owner": "iuc",
-            "revisions": "5fab4f81391d",
-            "tool_panel_section_label": "Variant Calling",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "collapse_collections",
-            "owner": "nml",
-            "revisions": "25136a2b0cfe",
-            "tool_panel_section_label": "Collection Operations",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
+
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bwa\n  owner: devteam\n  revisions: 3fe632431b68\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: lofreq_call\n  owner: iuc\n  revisions: e1461b5c52a0\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpsift\n  owner: iuc\n  revisions: 5fab4f81391d\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 25136a2b0cfe\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -3827,49 +3759,16 @@
         "video": false
       },
       "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/collections/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/collections/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Rule Based Uploader: Advanced",
-      "zenodo_link": "",
-      "level": "Advanced",
-      "questions": [
-        "How to use the rule based uploader to create complex collections"
-      ],
-      "objectives": [
-        "Learn even more about the Rule Based Uploader"
-      ],
-      "time_estimation": "20m",
-      "key_points": null,
-      "tags": [
-        "collections",
-        "tags"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "collections",
-            "upload-rules"
-          ]
-        }
-      ],
       "contributors": [
         {
-          "name": "John Chilton",
-          "email": "jmchilton@gmail.com",
-          "joined": "2017-09",
-          "twitter": "jmchilton",
-          "matrix": "jmchilton:matrix.org",
-          "orcid": "0000-0002-6794-0756",
-          "id": "jmchilton",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+          "name": "Anne Fouilloux",
+          "twitter": "AnneFouilloux",
+          "joined": "2019-07",
+          "elixir_node": "no",
+          "orcid": "0000-0002-1784-2920",
+          "id": "annefou",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annefou.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/"
         },
         {
           "name": "Helena Rasche",
@@ -3904,14 +3803,75 @@
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
         }
       ],
-      "subtopic": "upload",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/jupyterlab/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/jupyterlab/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "redirect_from": [
+        "/topics/galaxy-data-manipulation/tutorials/name-tags/tutorial",
+        "/short/galaxy-interface/name-tags",
+        "/short/T00154"
+      ],
+      "title": "Name tags for following complex histories",
+      "zenodo_link": "",
+      "questions": [
+        "What are name tags or hash tags?",
+        "How can I use them to keep track of my data?"
+      ],
+      "objectives": [
+        "Learn how to set name tags",
+        "Learn how they are propagated"
+      ],
+      "time_estimation": "20m",
+      "key_points": [
+        "Naming your datasets clearly is good practice, but name tags provide an easier alternative to the amount of effort required to rename 100s of datasets.",
+        "Name tags allow you to follow the flow of data throughout your history"
+      ],
+      "contributors": [
+        {
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "affiliations": [
+            "gallantries",
+            "by-covid",
+            "erasmusmc",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        }
+      ],
+      "subtopic": "manage",
       "mathjax": null,
-      "short_id": "T00161",
-      "url": "/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.html",
+      "short_id": "T00154",
+      "url": "/topics/galaxy-interface/tutorials/name-tags/tutorial.html",
       "topic_name": "galaxy-interface",
-      "tutorial_name": "upload-rules-advanced",
-      "dir": "topics/galaxy-interface/tutorials/upload-rules-advanced",
-      "id": "galaxy-interface/upload-rules-advanced",
+      "tutorial_name": "name-tags",
+      "dir": "topics/galaxy-interface/tutorials/name-tags",
+      "id": "galaxy-interface/name-tags",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -3921,7 +3881,7 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/name-tags/tutorial.json",
       "tools": [
 
       ],
@@ -3983,8 +3943,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/name-tags/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/name-tags/tutorial.json"
       }
     }
   ]
