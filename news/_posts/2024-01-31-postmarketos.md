@@ -32,20 +32,13 @@ can have Galaxy running on a mobile ARM device of your own.
 
 ![Galaxy running on an Alcatel Idol 347]({% link news/images/2024-01-31-postmarket-phone.jpg %} "Galaxy running on an Alcatel Idol 347")
 
-Above is an image of a Galaxy server running within
-[Phosh UI](https://wiki.postmarketos.org/wiki/Phosh) in *PostmarketOS* on an
+Above is an image of Galaxy running within
+[Phosh UI](https://wiki.postmarketos.org/wiki/Phosh) in *PostmarketOS* on an old
 [Alcatel Idol 347](https://wiki.postmarketos.org/wiki/Alcatel_Idol_3_4.7%22_(alcatel-idol347)),
 using a Quad-core 1.2 GHz Cortex-A53 CPU and 1.3GB of RAM, with a 5GB swap mounted.
 
-As you can see from the `htop` output in the lower half of the image
-on the right, Galaxy server can easily run on 1GB RAM.
-
-### What's working?
-
-On this phone, just the Galaxy server at the moment, and even then
-only with some developer dependencies disabled. The Galaxy client (UI + webpage)
-also has some issues, but *could probably* also be built,
-albeit on a device with a bit more RAM.
+Galaxy appears to use around ~1 GB RAM, and the phone still has enough
+memory to spare to access the Galaxy UI via Firefox.
 
 ## Really, why?
 
