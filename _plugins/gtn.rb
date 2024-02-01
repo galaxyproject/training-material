@@ -508,6 +508,35 @@ Jekyll::Hooks.register :posts, :pre_render do |post, _out|
   post.data['image'] = post.data['cover']
 end
 
+# We're going to do some find and replace, to replace `@gtn:contributorName` with a link to their profile.
+Jekyll::Hooks.register :site, :pre_render do |site|
+  site.posts.docs.each do |post|
+    if post.content
+      post.content = post.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
+        # Get first capture
+        name = match.gsub('@gtn:', '')
+        if site.data['contributors'].key?(name)
+          "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
+        else
+          match
+        end
+      end
+    end
+  end
+  site.pages.each do |page|
+    if page.content
+      page.content = page.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
+        name = match.gsub('@gtn:', '')
+        if site.data['contributors'].key?(name)
+          "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
+        else
+          match
+        end
+      end
+    end
+  end
+end
+
 # Create back-refs for affiliations
 Jekyll::Hooks.register :site, :post_read do |site|
   # Users list affiliations on their profile in site.data['contributors']
