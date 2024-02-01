@@ -1044,8 +1044,8 @@ Thanks all! It has been a lot of fun.
 
 Special thanks to:
 
-- {% include _includes/contributor-badge.html id="hexylena" %} for
+- @gtn:hexylena for
     - review and contribution to the tutorial and associated code.
     - the vision of instant installation of generated tools for developer feedback.
     - elegantly generated lint-free XML provided by [galaxyml code](https://github.com/hexylena/galaxyxml)
-- {% include _includes/contributor-badge.html id="mvdbeek" %} for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
+- @gtn:mvdbeek for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
