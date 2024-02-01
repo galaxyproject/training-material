@@ -41,21 +41,18 @@ on the right, Galaxy server can easily run on 1GB RAM.
 ### What's working?
 
 On this phone, just the Galaxy server at the moment, and even then
-only with some developer dependencies disabled. The Galaxy client (UI
-+ webpage) also has some issues, but *could probably* also be built,
+only with some developer dependencies disabled. The Galaxy client (UI + webpage)
+also has some issues, but *could probably* also be built,
 albeit on a device with a bit more RAM.
 
 ## Really, why?
 
 Just imagine: *Galaxy In Your Pocket™*! A united Galaxy Client and
-Galaxy Server running on your phone, which you can then access using
+Galaxy Server running on your phone 📲, which you can then access using
 that same phone's web browser.
 
 It's the perfect setup that only a *true and dedicated* Galaxy Admin
 such as yourself can dream about.
 
 Or if you're not buying any of this, then it's for those emergency
-situations where you forgot your laptop and you have to poop.
-
-
-
+situations where you forgot your laptop and need to solve a bioinformatics crisis on the go.
