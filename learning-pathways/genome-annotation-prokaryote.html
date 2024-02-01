@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@8c2b6bee78ab51899d6c85ecccef657f80ffaae6",
+		release: "galaxy-training-network@337705899a491dc778343fac56fef8720dd20a6d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706746508' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706746508' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706782310' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706782310' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,14 +67,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Genome annotation for prokaryotes">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-01-08 15:22:52 +0000"><meta name="description" content="Learn how to annotate a prokaryotic genome sequence: find the position and function of genes, and even set up a manual curation environment with Apollo. ">
+<meta name="DC.date" content="2024-01-31 15:00:25 +0000"><meta name="description" content="Learn how to annotate a prokaryotic genome sequence: find the position and function of genes, and even set up a manual curation environment with Apollo. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Learning Pathway: Genome annotation for prokaryotes">
         <meta property="og:description" content="Learn how to annotate a prokaryotic genome sequence: find the position and function of genes, and even set up a manual curation environment with Apollo. ">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706746508'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706782310'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -180,9 +180,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/learning-pathways/genome-annotation-prokaryote.html">smorgasbord2023</a>
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/learning-pathways/genome-annotation-prokaryote.html">2024-01-01</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/learning-pathways/genome-annotation-prokaryote.html">2024-02-01</a>
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-12-01/learning-pathways/genome-annotation-prokaryote.html">2023-12-01</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/learning-pathways/genome-annotation-prokaryote.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -445,7 +445,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
     
         <h3 id="st-module-2-gene-calling-and-functional-annotation">Module 2: Gene calling and functional annotation</h3>
-        <p><p>In this module you will learn to run the Funannotate tool suite to find the position of genes and to functionally annotate them</p>
+        <p><p>In this module you will learn to run tools to find the position of genes and other genomic components and to functionally annotate them</p>
 </p>
 
 	
@@ -467,7 +467,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   
   
-        <!-- MAT: genome-annotation/annotation-with-prokka -->
+        <!-- MAT: genome-annotation/bacterial-genome-annotation -->
       
       <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
 
@@ -475,8 +475,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
           <td class="tutorial_title">
             
             
-            <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html">
-                Genome annotation with Prokka
+            <a href="/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html">
+                Bacterial Genome Annotation
             </a>
             
 
@@ -495,9 +495,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #cec5ff; --color-darker: #b8abff; --color-dimmed: #c3b8ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #f6ae00; --color-darker: #dc9b00; --color-dimmed: #e9a400;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #dad100; --color-darker: #c2ba00; --color-dimmed: #cec500;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #f1b000; --color-darker: #d79d00; --color-dimmed: #e4a700;" title="Click to show all tutorials tagged bacteria">bacteria</a>
+              
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c8c000; --color-darker: #b2ab00; --color-dimmed: #bdb500;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -507,53 +509,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
               
 
 
-<div class="btn-group">
-	<a class="visually-hidden" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
-</div>
-    <div class="btn-group">
-        <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides.html" title="Slides">
-            <i class="fab fa-slideshare" aria-hidden="true"></i>
-        </a>
-        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
-            <span class="sr-only">Toggle Dropdown</span>
-        </a>
-        <ul class="dropdown-menu">
-        
-        
-
-        <li class="dropdown-item"><strong>Automatic translations</strong></li>
-        
-		<li class="dropdown-item">
-        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fannotation-with-prokka%2Fslides.html&edit-text=&act=url" title="">
-            More Languages
-        </a>
-		</li>
-
-	<li class="dropdown-item">
-	<a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides-plain.html" aria-label="more accessible, plain text slides">
-		<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
-	</a>
-	</li>
-    </ul>
-</div>
-
 
 <!-- video slides -->
-
-<div class="btn-group">
-  <!-- add video button -->
-  <a class="btn btn-default topic-icon" href="/training-material/videos/watch.html?v=genome-annotation/tutorials/annotation-with-prokka/slides" title="Video Slides (text-to-speech)">
-    <i class="far fa-play-circle" aria-hidden="true"></i>
-  </a>
-
-  
-
-</div>
 
 
               
     <div class="btn-group">
-        <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+        <a href="/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html" class="btn btn-default" title="Follow the tutorial">
             <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
         </a>
         <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
@@ -565,7 +527,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
          <li class="dropdown-item"><strong>Automatic translations</strong></li>
         
 	<li class="dropdown-item">
-        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fannotation-with-prokka%2Ftutorial.html&edit-text=&act=url" title="">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fbacterial-genome-annotation%2Ftutorial.html&edit-text=&act=url" title="">
             More Languages
         </a>
 	</li>
@@ -588,45 +550,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
   
-<!-- GTN Video Library  -->
-  
-<div class="btn-group">
-  
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
-        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
-    </a>
-    <ul class="dropdown-menu">
-        
-        
-
-        
-        
-        
-
-        <li>
-            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/annotation-with-prokka/tutorial" title="View GTN Video Library for this Tutorial">
-                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021)
-            </a>
-        </li>
-        
-        
-          
-          
-          
-
-        <li>
-            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/annotation-with-prokka/slides" title="View GTN Video Library for these Slides">
-                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021)
-            </a>
-        </li>
-        
-        
-        
-    </ul>
-  
-</div>
-  
-   
 
 
               
@@ -639,53 +562,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
           <td> 
 
 
-<div class="btn-group">
-	<a class="visually-hidden" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
-</div>
-    <div class="btn-group">
-        <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides.html" title="Slides">
-            <i class="fab fa-slideshare" aria-hidden="true"></i>
-        </a>
-        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
-            <span class="sr-only">Toggle Dropdown</span>
-        </a>
-        <ul class="dropdown-menu">
-        
-        
-
-        <li class="dropdown-item"><strong>Automatic translations</strong></li>
-        
-		<li class="dropdown-item">
-        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fannotation-with-prokka%2Fslides.html&edit-text=&act=url" title="">
-            More Languages
-        </a>
-		</li>
-
-	<li class="dropdown-item">
-	<a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides-plain.html" aria-label="more accessible, plain text slides">
-		<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
-	</a>
-	</li>
-    </ul>
-</div>
-
 
 <!-- video slides -->
-
-<div class="btn-group">
-  <!-- add video button -->
-  <a class="btn btn-default topic-icon" href="/training-material/videos/watch.html?v=genome-annotation/tutorials/annotation-with-prokka/slides" title="Video Slides (text-to-speech)">
-    <i class="far fa-play-circle" aria-hidden="true"></i>
-  </a>
-
-  
-
-</div>
 
  </td>
           <td> 
     <div class="btn-group">
-        <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+        <a href="/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html" class="btn btn-default" title="Follow the tutorial">
             <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
         </a>
         <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
@@ -697,7 +580,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
          <li class="dropdown-item"><strong>Automatic translations</strong></li>
         
 	<li class="dropdown-item">
-        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fannotation-with-prokka%2Ftutorial.html&edit-text=&act=url" title="">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fbacterial-genome-annotation%2Ftutorial.html&edit-text=&act=url" title="">
             More Languages
         </a>
 	</li>
@@ -720,45 +603,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
   
-<!-- GTN Video Library  -->
-  
-<div class="btn-group">
-  
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
-        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
-    </a>
-    <ul class="dropdown-menu">
-        
-        
-
-        
-        
-        
-
-        <li>
-            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/annotation-with-prokka/tutorial" title="View GTN Video Library for this Tutorial">
-                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021)
-            </a>
-        </li>
-        
-        
-          
-          
-          
-
-        <li>
-            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/annotation-with-prokka/slides" title="View GTN Video Library for these Slides">
-                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021)
-            </a>
-        </li>
-        
-        
-        
-    </ul>
-  
-</div>
-  
-   
  </td>
 
           
@@ -826,9 +670,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #cec5ff; --color-darker: #b8abff; --color-dimmed: #c3b8ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #beb2ff; --color-darker: #aa99ff; --color-dimmed: #b4a5ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #dad100; --color-darker: #c2ba00; --color-dimmed: #cec500;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c8c000; --color-darker: #b2ab00; --color-dimmed: #bdb500;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -1142,7 +986,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/8c2b6bee78ab51899d6c85ecccef657f80ffaae6">8c2b6be</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/337705899a491dc778343fac56fef8720dd20a6d">3377058</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1170,7 +1014,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706746508'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706782310'></script>
         
     </body>
 </html>

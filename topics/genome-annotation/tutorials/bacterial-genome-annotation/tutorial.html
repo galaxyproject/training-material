@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Bacterial Genome Annotation / Genome Annotation</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@337705899a491dc778343fac56fef8720dd20a6d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706782310' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706782310' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Bacterial Genome Annotation">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-02-01 09:30:25 +0000">
+<meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Genome Annotation / Hands-on: Bacterial Genome Annotation">
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-02-01 09:30:25 +0000",
+  "datePublished": "2024-02-01 10:04:54 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Bacterial Genome Annotation",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Bacterial Genome Annotation",
+  "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html",
+  "version": 4,
+  "timeRequired": "PT3H",
+  "teaches": "Run a series of tool to annotate a draft bacterial genome for different types of genomic components\n - Evaluate the annotation\n - Process the outputs to formate them for visualization needs\n - Visualize a draft bacterial genome and its annotations",
+  "keywords": [
+    "Genome Annotation",
+    "illumina",
+    "bacteria",
+    "microgalaxy"
+  ],
+  "description": "The questions this  addresses are:\n - Which genes are on a draft bacterial genome?\n - Which other genomic components can be found on a draft bacterial genome?\n\n\nThe objectives are:\n - Run a series of tool to annotate a draft bacterial genome for different types of genomic components\n - Evaluate the annotation\n - Process the outputs to formate them for visualization needs\n - Visualize a draft bacterial genome and its annotations\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0362",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0362",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0362"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "illumina"
+    },
+    {
+      "@type": "Thing",
+      "name": "bacteria"
+    },
+    {
+      "@type": "Thing",
+      "name": "microgalaxy"
+    }
+  ],
+  "abstract": "After sequencing and assembly, a genome can be annotated. It is an essential step to describe the genome. "
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706782310'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/genome-annotation" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Genome Annotation
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/genome-annotation/faqs/" title="Check our FAQs for the Genome Annotation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html">2024-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-genome-annotation">
+    <h1 data-toc-skip>Bacterial Genome Annotation</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Which genes are on a draft bacterial genome?</p>
+</li>
+        
+        <li><p>Which other genomic components can be found on a draft bacterial genome?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Run a series of tool to annotate a draft bacterial genome for different types of genomic components</p>
+</li>
+        
+        <li><p>Evaluate the annotation</p>
+</li>
+        
+        <li><p>Process the outputs to formate them for visualization needs</p>
+</li>
+        
+        <li><p>Visualize a draft bacterial genome and its annotations</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/10572227">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/workflows/" title="Bacterial Genome Annotation workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr/" title="">
+			UseGalaxy.fr <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+    
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/genome-annotation/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 1, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 1, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>After sequencing and assembly, a genome can be annotated. It is an essential step to describe the genome.</p>
+
+<p>Genome annotation consists in describing the structure and function of the components of the genome, by predicting, analyzing, and interpreting them in order to extract their biological significance and understand the biological processes in which they participate. Among other things, it identifies the locations of genes and all the coding regions in a genome (<em>structural annotation</em>) and determines what those genes do (<em>functional annotation</em>).</p>
+
+<p>To illustrate the process to annotate a bacterial genome, we take an assembly of a bacterial genome (KUN1163 sample) generated by following a <a href="/training-material/topics/assembly/tutorials/mrsa-illumina/tutorial.html">bacterial genome assembly tutorial</a> from data produced in “Complete Genome Sequences of Eight Methicillin-Resistant <em>Staphylococcus aureus</em> Strains Isolated from Patients in Japan” (<span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span>).</p>
+
+<blockquote class="quote" cite="https://doi.org/10.1128%2Fmra.01212-19">
+  <p>Methicillin-resistant <em>Staphylococcus aureus</em> (MRSA) is a major pathogen
+causing nosocomial infections, and the clinical manifestations of MRSA
+range from asymptomatic colonization of the nasal mucosa to soft tissue
+infection to fulminant invasive disease. Here, we report the complete
+genome sequences of eight MRSA strains isolated from patients in Japan.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#galaxy-and-data-preparation" id="markdown-toc-galaxy-and-data-preparation">Galaxy and data preparation</a></li>
+  <li><a href="#contig-annotation" id="markdown-toc-contig-annotation">Contig annotation</a></li>
+  <li><a href="#further-structural-annotation" id="markdown-toc-further-structural-annotation">Further structural annotation</a>    <ol>
+      <li><a href="#plasmids" id="markdown-toc-plasmids">Plasmids</a></li>
+      <li><a href="#integrons" id="markdown-toc-integrons">Integrons</a></li>
+      <li><a href="#is-insertion-sequence-elements" id="markdown-toc-is-insertion-sequence-elements">IS (Insertion Sequence) elements</a></li>
+    </ol>
+  </li>
+  <li><a href="#visualisation-of-the-annotation" id="markdown-toc-visualisation-of-the-annotation">Visualisation of the annotation</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="galaxy-and-data-preparation">Galaxy and data preparation</h1>
+
+<p>Any analysis should get its own Galaxy history. So let’s start by creating a new one and get the data (contig file from the assembly) into it.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-galaxy-and-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare Galaxy and data</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this analysis</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the contig file from <a href="https://zenodo.org/record/10572227">Zenodo</a> or from Galaxy shared data libraries:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/10572227/files/DRR187559_contigs.fasta
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="contig-annotation">Contig annotation</h1>
+
+<p>For annotating the contigs, several tools exists to do that: Prokka (<span class="citation"><a href="#seemann2014prokka">Seemann 2014</a></span>), Bakta (<span class="citation"><a href="#schwengers2021bakta">Schwengers <i>et al.</i> 2021</a></span>), etc. Here, we use <strong>Bakta</strong> as recommended by <a href="/training-material/hall-of-fame/tseemann/" class="contributor-badge contributor-tseemann"><img src="https://avatars.githubusercontent.com/tseemann?s=36" alt="Torsten Seemann avatar" width="36" class="avatar" />
+    Torsten Seemann</a> as the successor of <strong>Prokka</strong>.</p>
+
+<p><strong>Bakta</strong> is a tool for the rapid &amp; standardized annotation of bacterial genomes and plasmids from both isolates and metagenome-assembled genomes (MAGs). It implements a comprehensive annotation workflow for coding and non-coding genes (<em>i.e.</em> tRNA, rRNA).</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="./images/bakta_wf.png" alt="Flow diagram of Bakta. It depicts the sequential steps and connections involved in its functioning." width="2362" height="1976" loading="lazy" /><a target="_blank" href="./images/bakta_wf.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Overview of the Bakta annotation workflow (<span class="citation"><a href="#schwengers2021bakta">Schwengers <i>et al.</i> 2021</a></span>)</figcaption></figure>
+
+<p>It is also able to detect and annotate small proteins (sORF). Predicted CDS are annotated using an alignment-free protein sequence identification approach with cross-references to public databases via stable identifiers.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-contig-annotation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Contig annotation</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bakta/bakta/1.8.2+galaxy0" title="Bakta tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bakta</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li>In <em>“Input/Output options”</em>:
+          <ul>
+            <li><em>“The bakta database”</em>: latest one</li>
+            <li><em>“The amrfinderplus database”</em>: latest one</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select genome in fasta format”</em>: Contig file</li>
+          </ul>
+        </li>
+        <li>In <em>“Optional annotation”</em>:
+          <ul>
+            <li><em>“Keep original contig header (–keep-contig-headers)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Selection of the output files”</em>:
+          <ul>
+            <li><em>“Output files selection”</em>:
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">Annotation file in TSV</code></li>
+                <li><code class="language-plaintext highlighter-rouge">Annotation and sequence in GFF3</code></li>
+                <li><code class="language-plaintext highlighter-rouge">Feature nucleotide sequences as FASTA</code></li>
+                <li><code class="language-plaintext highlighter-rouge">Summary as TXT</code></li>
+                <li><code class="language-plaintext highlighter-rouge">Plot of the annotation result as SVG</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p><strong>Bakta</strong> can generate many outputs. Here we selected:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Analysis_summary</code>: a summary of the analysis as text file</p>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <ol>
+        <li>How many contigs have been provided as input?</li>
+        <li>How long is the draft genome?</li>
+        <li>How many CDSs have been found?</li>
+        <li>How many small proteins?</li>
+        <li>Which other components have been found?</li>
+      </ol>
+
+      <p>How does it compare to results for KUN1163 in <a href="https://journals.asm.org/doi/10.1128/mra.01212-19#tab1">Table 1</a> in <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span>?</p>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <ol>
+          <li>44 (the sequence count)</li>
+          <li>2,911,349 bp, with is a bit shorter than the expected 2,914,567 bp in <a href="https://journals.asm.org/doi/10.1128/mra.01212-19#tab1">Table 1</a> in <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span></li>
+          <li>2,717 CDSs, a bit more than the expected 2,704 CDSs in <a href="https://journals.asm.org/doi/10.1128/mra.01212-19#tab1">Table 1</a> in <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span></li>
+          <li>5 sORFs. There is no information about sORFs in <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span></li>
+          <li>
+            <p>Other components</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Components</th>
+                  <th>Bakta</th>
+                  <th><span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>tRNAs</td>
+                  <td>57</td>
+                  <td>61</td>
+                </tr>
+                <tr>
+                  <td>Transfer-messenger RNA (tmRNAs)</td>
+                  <td>1</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>rRNAs</td>
+                  <td>9</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>ncRNAs</td>
+                  <td>95</td>
+                  <td>No information</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ol>
+
+      </blockquote>
+    </blockquote>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Nucleotide_sequences</code> with feature nucleotide sequences as FASTA file</p>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <ol>
+        <li>How many sequences are in this file?</li>
+        <li>What are the sequences stored there?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <ol>
+          <li>2,884 sequences</li>
+          <li>Here are stored:
+            <ul>
+              <li>tRNAs</li>
+              <li>tmRNAs</li>
+              <li>rRNAs</li>
+              <li>ncRNAs</li>
+              <li>CDSs</li>
+              <li>sORFs</li>
+            </ul>
+          </li>
+        </ol>
+
+      </blockquote>
+    </blockquote>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">annotation_summary</code> with annotations as simple human readble TSV</p>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <p>What is stored there?</p>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>This a table with 9 columns (<code class="language-plaintext highlighter-rouge">Sequence Id</code>, <code class="language-plaintext highlighter-rouge">Type</code>, <code class="language-plaintext highlighter-rouge">Start</code>, <code class="language-plaintext highlighter-rouge">Stop</code>, <code class="language-plaintext highlighter-rouge">Strand</code>, <code class="language-plaintext highlighter-rouge">Locus Tag</code>, <code class="language-plaintext highlighter-rouge">Gene</code>, <code class="language-plaintext highlighter-rouge">Product</code>, <code class="language-plaintext highlighter-rouge">DbXrefs</code>). It contains here 2,916 lines, so the information and location for:</p>
+        <ul>
+          <li>tRNAs</li>
+          <li>tmRNAs</li>
+          <li>rRNAs</li>
+          <li>ncRNAs</li>
+          <li>CDSs</li>
+          <li>sORFs</li>
+          <li>gaps</li>
+          <li>oriCs</li>
+          <li>oriVs</li>
+          <li>oriTs</li>
+        </ul>
+
+      </blockquote>
+    </blockquote>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Annotation_and_sequences</code> in GFF3</p>
+
+    <p>GFF is a file format used for describing genes and other features of DNA, RNA and protein sequences. It is a tab delimited file with 9 fields per line:</p>
+
+    <ol>
+      <li><strong>seqid</strong>: The name of the sequence where the feature is located.</li>
+      <li><strong>source</strong>: The algorithm or procedure that generated the feature. This is typically the name of a software or database.</li>
+      <li><strong>type</strong>: The feature type name, like “gene” or “exon”. In a well structured GFF file, all the children features always follow their parents in a single block (so all exons of a transcript are put after their parent “transcript” feature line and before any other parent transcript line). In GFF3, all features and their relationships should be compatible with the standards released by the Sequence Ontology Project.</li>
+      <li><strong>start</strong>: Genomic start of the feature, with a 1-base offset. This is in contrast with other 0-offset half-open sequence formats, like BED.</li>
+      <li><strong>end</strong>: Genomic end of the feature, with a 1-base offset. This is the same end coordinate as it is in 0-offset half-open sequence formats, like BED.</li>
+      <li><strong>score</strong>: Numeric value that generally indicates the confidence of the source in the annotated feature. A value of “.” (a dot) is used to define a null value.</li>
+      <li><strong>strand</strong>: Single character that indicates the strand of the feature. This can be “+” (positive, or 5’-&gt;3’), “-“, (negative, or 3’-&gt;5’), “.” (undetermined), or “?” for features with relevant but unknown strands.</li>
+      <li><strong>phase</strong>: phase of CDS features; it can be either one of 0, 1, 2 (for CDS features) or “.” (for everything else). See the section below for a detailed explanation.</li>
+      <li><strong>attributes</strong>: A list of tag-value pairs separated by a semicolon with additional information about the feature.</li>
+    </ol>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <p>How many features are annotated?</p>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>51k+ (number of lines in the GFF)</p>
+
+      </blockquote>
+    </blockquote>
+  </li>
+  <li>
+    <p>Plot of the annotation as circular genome annotation</p>
+
+    <p><a href="./images/bakta_plot.png" rel="noopener noreferrer"><img src="./images/bakta_plot.png" alt="A circular plot showcasing the draft genome, providing a visual representation of its genetic information." width="3000" height="3000" loading="lazy" /></a></p>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <ol>
+        <li>What the 2 rings in the center?</li>
+        <li>How are plotted the features?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <ol>
+          <li>The first ring represents the GC content per sliding window over the entire sequence(s) with in green representing GC above  and red GC below average. The 2nd ring represents the GC skew in orange and blue.</li>
+          <li>All features are plotted on two rings representing the forward and reverse strand from outer to inner with CDS in grey (the other colors are hard to distinguish)</li>
+        </ol>
+
+      </blockquote>
+    </blockquote>
+  </li>
+</ul>
+
+<h1 id="further-structural-annotation">Further structural annotation</h1>
+
+<p><strong>Bakta</strong> gives a lot of information already, especially regarding CDSs or RNAs, but some structural annotation might be missing, e.g. plasmids, or interesting to identify independently.</p>
+
+<h2 id="plasmids">Plasmids</h2>
+
+<p>To identify plasmids in our contigs, we use <strong>PlasmidFinder</strong> (<span class="citation"><a href="#carattoli2020plasmidfinder">Carattoli and Hasman 2020</a></span>), a tool for the identification and typing of plasmid sequences in Whole-Genome Sequencing. It uses the <a href="https://bitbucket.org/genomicepidemiology/plasmidfinder_db/">plasmidfinder database</a> with hundreds of sequences to predict the plasmid in the data.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plasmid-identification"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Plasmid identification</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/plasmidfinder/plasmidfinder/2.1.6+galaxy1" title="PlasmidFinder tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PlasmidFinder</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.6+galaxy1)</span> with the following parameters:
+      <ul>
+        <li>In <em>“Input parameters”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Choose a fasta or fastq file”</em>: Contig file</li>
+            <li><em>“PlasmidFinder database”</em>: most recent one</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p><strong>PlasmidFinder</strong> generates several outputs:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">raw_results.txt</code>: A text file containing the result table and alignments</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">results.tsv</code>: A tabular file with the following columns:</p>
+
+    <ul>
+      <li><strong>Database</strong></li>
+      <li><strong>Plasmid</strong>: Plasmid against which the input genome has been aligned.</li>
+      <li><strong>Identity</strong>: Percent identity in the alignment between the best matching plasmid in the database and the corresponding sequence in the inputgenome (also called the high-scoring segment pair (HSP)). A perfect alignment is 100%, but must also cover the entire length of the plasmid in the database (compare example 1 and 3).</li>
+      <li><strong>Query/Template Length</strong>: Query length is the length of the best matching plasmid in the database, while HSP length is the length of the alignment between the best matching plasmid and the corresponding sequence in the genome (also called the high-scoring segment pair (HSP)).</li>
+      <li><strong>Contig</strong>: Name of contig the plasmid is found in.</li>
+      <li><strong>Position in contig</strong>: Starting position of the found gene in the contig.</li>
+      <li><strong>Note</strong>: Notes about the plasmid</li>
+      <li><strong>Accession number</strong>: Reference Genbank accession number accoding to NCBI for the plasmid in the database.</li>
+    </ul>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <ol>
+        <li>How many plasmid sequences have been found?</li>
+        <li>Where are they located?</li>
+        <li>Are these sequences all associated with <em>Staphylococcus aureus</em>?</li>
+        <li>What can we conclude about contig00019?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <ol>
+          <li>5 plasmid sequences</li>
+          <li>3 are on the contig00019, 1 on contig00002, and 1 on contig00024</li>
+          <li>Looking at the accession number on the NCBI, we find that:
+            <ul>
+              <li>CP000737, AP003139 (2 times) correspond to <em>Staphylococcus aureus</em> plasmids</li>
+              <li>AF503772 corresponds to a <em>Enterococcus faecalis</em> plasmid</li>
+              <li>CP003584 corresponds to a <em>Enterococcus faecium</em> plasmid</li>
+            </ul>
+          </li>
+          <li>All plasmid sequences corresponding to <em>Staphylococcus aureus</em> plasmids are all on contig00019, making this contig likely a plasmid. In addition, this contig has a length of 30,347 bp, which is similar to the expected length of the plasmid for KUN1163 in <a href="https://journals.asm.org/doi/10.1128/mra.01212-19#tab1">Table 1</a> in <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span></li>
+        </ol>
+      </blockquote>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">plasmid.fasta</code>: A fasta file containing the best matching sequences from the query genome</li>
+  <li><code class="language-plaintext highlighter-rouge">hit_in_genome.fasta</code>: A fasta file containing the best matching plasmid genes from the database</li>
+</ul>
+
+<h2 id="integrons">Integrons</h2>
+
+<p>Integrons are genetic mechanisms that allow bacteria to adapt and evolve rapidly through the stockpiling and expression of new genes. An integron is minimally composed of:</p>
+
+<ul>
+  <li>a gene encoding for a site-specific recombinase (intI)</li>
+  <li>a proximal recombination site (attI), which is recognized by the integrase and at which gene cassettes may be inserted</li>
+  <li>a promoter (Pc) which directs transcription of cassette-encoded genes</li>
+</ul>
+
+<p>To detect integrons, we will use <strong>IntegronFinder</strong> (<span class="citation"><a href="#neron2022integronfinder">Néron <i>et al.</i> 2022</a></span>). This tool:</p>
+
+<ol>
+  <li>Annotates the CDS with <strong>Prodigal</strong></li>
+  <li>
+    <p>Detects independently:</p>
+
+    <ol>
+      <li>integron integrase using the intersection of two HMM profiles: one specific of tyrosine-recombinase (PF00589) and one specific of the integron integrase, near the patch III domain of tyrosine recombinases</li>
+      <li>attC recombination sites with a covariance model (CM), which models the secondary structure in addition to the few conserved sequence positions.</li>
+    </ol>
+  </li>
+  <li>
+    <p>Integrates the results to distinguish 3 types of elements</p>
+
+    <ul>
+      <li>Complete integron: Integron with integron integrase nearby attC site(s)</li>
+      <li>In0 element: Integron integrase only, without any attC site nearby</li>
+      <li>CALIN element: Cluster of attC sites Lacking INtegrase nearby</li>
+    </ul>
+  </li>
+</ol>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-integron-identification"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Integron identification</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/integron_finder/integron_finder/2.0.2+galaxy1" title="IntegronFinder tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IntegronFinder</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.2+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Replicon file”</em>: Contig file</li>
+        <li><em>“Thorough local detection”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Search also for promoter and attI sites?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Remove log file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><strong>IntegronFinder</strong> generates 2 outputs:</p>
+
+<ul>
+  <li>
+    <p>A summary with for each sequence in the input the number of identified CALIN elements, In0 elements, and complete integrons.</p>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <p>How many integron elements have been found?</p>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>No integron elements have been found on any contig. It could be because the genome is too stable, or because the assembly quality is not good enough and some parts useful for the integron detection were removed.</p>
+      </blockquote>
+    </blockquote>
+  </li>
+  <li>
+    <p>An integron annotation file as a tabular</p>
+  </li>
+</ul>
+
+<h2 id="is-insertion-sequence-elements">IS (Insertion Sequence) elements</h2>
+
+<p>Insertion sequence (IS) element is a short DNA sequence that acts as a simple transposable element. IS are the smallest but most abundant autonomous transposable elements in bacterial genomes.  They only code for proteins implicated in the transposition activity. They play then a key role in bacterial genome organization and evolution.</p>
+
+<p>To detect IS elements, we will use <strong>ISEScan</strong> (<span class="citation"><a href="#xie2017isescan">Xie and Tang 2017</a></span>). <strong>ISEScan</strong> is a highly sensitive software pipeline based on profile hidden Markov models constructed from manually curated IS elements</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-is-identification"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  IS identification</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isescan/isescan/1.7.2.3+galaxy0" title="ISEScan tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ISEScan</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.2.3+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome fasta input”</em>: Contig file</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><strong>ISEScan</strong> generates several files:</p>
+
+<ul>
+  <li>
+    <p>A summary as a table</p>
+  </li>
+  <li>
+    <p>The results as a table</p>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <ol>
+        <li>How many IS elements have been detected?</li>
+        <li>Where are they located?</li>
+        <li>What the different IS families?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <ol>
+          <li>20</li>
+          <li>
+            <p>Using <span class="tool" data-tool="Grouping1" title="Group data by a column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group data by a column</strong></span> to group and count on 1st column, we find:</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Contig</th>
+                  <th>IS element number</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>contig00001</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>contig00002</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>contig00003</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>contig00004</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>contig00005</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>contig00006</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>contig00009</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>contig00010</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>contig00011</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>contig00012</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>contig00019</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>contig00027</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>contig00032</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>contig00037</td>
+                  <td>1</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <li>
+            <p>As for previous question, when grouping and counting on 2nd column, we find 5 IS families:</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>IS families</th>
+                  <th>Identified IS elements</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>IS1182</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>IS21</td>
+                  <td>7</td>
+                </tr>
+                <tr>
+                  <td>IS3</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>IS6</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>ISL3</td>
+                  <td>1</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ol>
+
+      </blockquote>
+    </blockquote>
+  </li>
+  <li>The results as a GFF file</li>
+  <li>Several FASTA files:
+    <ul>
+      <li>IS nucleotide sequences</li>
+      <li>ORF nucleotide sequences</li>
+      <li>ORF amino acide sequences</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="visualisation-of-the-annotation">Visualisation of the annotation</h1>
+
+<p>We would like to look at the annotation using <a href="https://jbrowse.org/jb2/">JBrowse</a> (<span class="citation"><a href="#diesh2023jbrowse">Diesh <i>et al.</i> 2023</a></span>) with several information:</p>
+
+<ol>
+  <li>Annotations identified by <strong>Bakta</strong></li>
+  <li>Plasmid sequences identified by <strong>PlasmidFinder</strong></li>
+  <li>Integrons identified by <strong>IntegronFinder</strong></li>
+  <li>IS elements identified by <strong>ISEscan</strong></li>
+</ol>
+
+<p><strong>JBrowse</strong> needs the annotations to be in GFF format. <strong>Bakta</strong> and <strong>ISEscan</strong> generated both GFF files. For <strong>PlasmidFinder</strong> and <strong>IntegronFinder</strong>, we need to format the outputs.</p>
+
+<p><strong>PlasmidFinder</strong> generated the <code class="language-plaintext highlighter-rouge">results.tsv</code> with all needed information. To transform it to a GFF, we need to:</p>
+
+<ol>
+  <li>Split the 6th column on <code class="language-plaintext highlighter-rouge">..</code> to have start and end into 2 separated columns</li>
+  <li>Remove in the content of column 5 what is after the contig name</li>
+  <li>Remove the 1st line</li>
+  <li>Transform to GFF3</li>
+</ol>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-transform-plasmidfinder-to-gff"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Transform PlasmidFinder to GFF</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text in a specific column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in a specific column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">results.tsv</code> output of <strong>PlasmidFinder</strong></li>
+        <li>In <em>“Replacement”</em>:
+          <ul>
+            <li>In <em>“1: Replacement”</em>
+              <ul>
+                <li><em>in column</em>: <code class="language-plaintext highlighter-rouge">Column: 6</code></li>
+                <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">(.*)\.\.(.*)</code></li>
+                <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">\\1\t\\2</code></li>
+              </ul>
+
+              <p>This will split the content of the 6th column on <code class="language-plaintext highlighter-rouge">..</code> and put it into column 6 and column 7. Column 7 will be then replaced.</p>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Factor”</em></li>
+            <li>In <em>“2: Replacement”</em>
+              <ul>
+                <li><em>in column</em>: <code class="language-plaintext highlighter-rouge">Column: 5</code></li>
+                <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">(.*)( len.*)</code></li>
+                <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">\\1</code></li>
+              </ul>
+
+              <p>This will remove in the content of column 5 what is after the contig name</p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last lines from a dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last lines from a dataset</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text file”</em>: output of <strong>Replace Text</strong> above</li>
+        <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep everything from this line on</code></li>
+        <li><em>“Number of lines”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2" title="Table to GFF3 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table to GFF3</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: output of the above <strong>Select last</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step</li>
+        <li><em>“Record ID column or value”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+        <li><em>“Start column or value”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
+        <li><em>“End column or value”</em>: <code class="language-plaintext highlighter-rouge">7</code></li>
+        <li><em>“Type column or value”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><em>“Score column or value”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+        <li><em>“Source column or value”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Qualifiers”</em>
+          <ul>
+            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">name</code></li>
+            <li><em>“Qualifier value column or raw text”</em>: <code class="language-plaintext highlighter-rouge">8</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Qualifiers”</em>
+          <ul>
+            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">accession</code></li>
+            <li><em>“Qualifier value column or raw text”</em>: <code class="language-plaintext highlighter-rouge">9</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename to <code class="language-plaintext highlighter-rouge">PlasmidFinder GFF</code></li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-transform-integronfinder-output-to-gff-if-integrons-found"><button class="gtn-boxify-button details" type="button" aria-controls="details-transform-integronfinder-output-to-gff-if-integrons-found" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Transform IntegronFinder output to GFF if integrons found</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p><strong>IntegronFinder</strong> tabular output can be transformed to GFF by:</p>
+
+  <ol>
+    <li>Replace <code class="language-plaintext highlighter-rouge">NA</code> values on column 7 by <code class="language-plaintext highlighter-rouge">0</code></li>
+    <li>Remove the first two lines</li>
+    <li>Transform to GFF3</li>
+  </ol>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-transform-integronfinder-to-gff"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Transform IntegronFinder to GFF</div>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text in a specific column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in a specific column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: tabular output of <strong>IntegronFinder</strong></li>
+          <li>In <em>“Replacement”</em>:
+            <ul>
+              <li>In <em>“1: Replacement”</em>
+                <ul>
+                  <li><em>in column</em>: <code class="language-plaintext highlighter-rouge">Column: 7</code></li>
+                  <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">NA</code></li>
+                  <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last lines from a dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last lines from a dataset</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text file”</em>: output of <strong>Replace Text</strong> above</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep everything from this line on</code></li>
+          <li><em>“Number of lines”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2" title="Table to GFF3 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table to GFF3</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: tabular output of <strong>IntegronFinder</strong></li>
+          <li><em>“Record ID column or value”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+          <li><em>“Start column or value”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
+          <li><em>“End column or value”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+          <li><em>“Type column or value”</em>: <code class="language-plaintext highlighter-rouge">11</code></li>
+          <li><em>“Score column or value”</em>: <code class="language-plaintext highlighter-rouge">7</code></li>
+          <li><em>“Source column or value”</em>: <code class="language-plaintext highlighter-rouge">IntegronFinder</code></li>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Qualifiers”</em>
+            <ul>
+              <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">name</code></li>
+              <li><em>“Qualifier value column or raw text”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+            </ul>
+          </li>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Qualifiers”</em>
+            <ul>
+              <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">annotation</code></li>
+              <li><em>“Qualifier value column or raw text”</em>: <code class="language-plaintext highlighter-rouge">9</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Rename to <code class="language-plaintext highlighter-rouge">IntegronFinder GFF</code></li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p>We can now launch <strong>JBrowse</strong> with different information track.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize the Genome</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="JBrowse tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.11+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: Contig file</li>
+          </ul>
+        </li>
+        <li><em>“Genetic Code”</em>: <code class="language-plaintext highlighter-rouge">11. The Bacterial, Archaeal and Plant Plastid Code</code></li>
+        <li>In <em>“Track Group”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
+              <ul>
+                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">Bakta</code></li>
+                <li>In <em>“Annotation Track”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
+                      <ul>
+                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/BED Features</code>
+                          <ul>
+                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/BED Track Data”</em>: <code class="language-plaintext highlighter-rouge">Annotation_and_sequences</code> (output of <strong>Bakta</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                            <li><em>“JBrowse Track Type [Advanced]”</em>: <code class="language-plaintext highlighter-rouge">Neat Canvas Features</code></li>
+                            <li><em>“Track Visibility”</em>: <code class="language-plaintext highlighter-rouge">On for new users</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
+              <ul>
+                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">Plasmid sequences</code></li>
+                <li>In <em>“Annotation Track”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
+                      <ul>
+                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/BED Features</code>
+                          <ul>
+                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/BED Track Data”</em>: <code class="language-plaintext highlighter-rouge">PlasmidFinder GFF</code></li>
+                            <li><em>“JBrowse Track Type [Advanced]”</em>: <code class="language-plaintext highlighter-rouge">Neat Canvas Features</code></li>
+                            <li><em>“Track Visibility”</em>: <code class="language-plaintext highlighter-rouge">On for new users</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
+              <ul>
+                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">IS elements</code></li>
+                <li>In <em>“Annotation Track”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
+                      <ul>
+                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/BED Features</code>
+                          <ul>
+                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/BED Track Data”</em>: GFF output of <strong>ISEScan</strong></li>
+                            <li><em>“JBrowse Track Type [Advanced]”</em>: <code class="language-plaintext highlighter-rouge">Neat Canvas Features</code></li>
+                            <li><em>“Track Visibility”</em>: <code class="language-plaintext highlighter-rouge">On for new users</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <p><em>If integrons are found as <strong>IntegronFinder</strong></em></p>
+
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
+              <ul>
+                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">Integrons</code></li>
+                <li>In <em>“Annotation Track”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
+                      <ul>
+                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/BED Features</code>
+                          <ul>
+                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/BED Track Data”</em>: <code class="language-plaintext highlighter-rouge">IntegronFinder GFF</code></li>
+                            <li><em>“JBrowse Track Type [Advanced]”</em>: <code class="language-plaintext highlighter-rouge">Neat Canvas Features</code></li>
+                            <li><em>“Track Visibility”</em>: <code class="language-plaintext highlighter-rouge">On for new users</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>View the output of JBrowse</li>
+  </ol>
+
+</blockquote>
+
+<p>In the output of the JBrowse you can view the genes, IS, plasmid, etc on the contigs. With the search tools you can easily find genes of interest. JBrowse can handle many inputs and can be very useful.</p>
+
+<p>If it takes too long to build the JBrowse instance, you can view an embedded one here:</p>
+
+<!--SNIPPET-->
+<iframe id="embedded_jbrowse" src="/training-material/assets/jbrowse/index.html?loc=contig00019:1..30347&amp;data=/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/data&amp;trackList=0" border="0" width="100%" height="500px"></iframe>
+<p><a href="/training-material/assets/jbrowse/index.html?loc=contig00019:1..30347&amp;data=/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/data" target="_blank" style="padding: 0.5rem 1rem; background-color: #dfe5f9;border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">Open JBrowse in a new tab</a></p>
+<p><!--END_SNIPPET--></p>
+
+<blockquote>
+  <comment></comment>
+
+  <ol class="comment">
+    <li>It is ok to have the message stating <code class="language-plaintext highlighter-rouge">Error reading from name store.</code>.</li>
+    <li>The feature name search will not work.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Have all sequences identified by <strong>PlasmidFinder</strong> on contig19 been identified by <strong>Bakta</strong>?</li>
+    <li>Have all sequences identified by <strong>ISEScan</strong> on contig19 been identified by <strong>Bakta</strong>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Yes all sequences in the <strong>PlasmidFinder</strong> track are also in the <strong>Bakta</strong> track. For</li>
+      <li>All Insertion Sequences in the <strong>ISEScan</strong> track are also in the <strong>Bakta</strong> track, but the Terminanl Inverted repeats are not in the <strong>Bakta</strong> track</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p>To learn more options for <strong>JBrowse</strong>, check out the <a href="/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html">dedicated tutorial</a></p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, contigs were annotated with different tools and then visualized.</p>
+
+<p>Other visualizations, specially for publications, can be done using <strong>Circos</strong>. To learn how to do it, you can follow the <a href="/training-material/topics/visualisation/tutorials/circos-microbial/tutorial.html">dedicated tutorial</a>.</p>
+
+<p>To refine the genome annotation, you can also use <strong>Apollo</strong> and our <a href="/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html">tutorial</a>.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Bakta is a powerful tool to annotate a bacterial genome</p>
+</li>
+                        
+                        <li><p>Annotation can be easily visualized to understand the genomic context and help making sense of the annotations</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/genome-annotation/faqs/">FAQ page for the Genome Annotation topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="seemann2014prokka">Seemann, T., 2014 <b>Prokka: rapid prokaryotic genome annotation</b>. Bioinformatics 30: 2068–2069. <a href="https://doi.org/10.1093/bioinformatics/btu153">10.1093/bioinformatics/btu153</a></li>
+<li id="xie2017isescan">Xie, Z., and H. Tang, 2017 <b>ISEScan: automated identification of insertion sequence elements in prokaryotic genomes</b>. Bioinformatics 33: 3340–3347. <a href="https://doi.org/10.1093/bioinformatics/btx433">10.1093/bioinformatics/btx433</a></li>
+<li id="Hikichi_2019">Hikichi, M., M. Nagao, K. Murase, C. Aikawa, T. Nozawa <i>et al.</i>, 2019 <b>Complete Genome Sequences of Eight Methicillin-Resistant Staphylococcus aureus Strains Isolated from Patients in Japan</b> (I. L. G. Newton, Ed.). Microbiology Resource Announcements 8: <a href="https://doi.org/10.1128/mra.01212-19">10.1128/mra.01212-19</a></li>
+<li id="carattoli2020plasmidfinder">Carattoli, A., and H. Hasman, 2020 <b>PlasmidFinder and in silico pMLST: identification and typing of plasmid replicons in whole-genome sequencing (WGS)</b>. Horizontal gene transfer: methods and protocols 285–294. <a href="https://doi.org/10.1007/978-1-4939-9877-7_20">10.1007/978-1-4939-9877-7_20</a></li>
+<li id="schwengers2021bakta">Schwengers, O., L. Jelonek, M. A. Dieckmann, S. Beyvers, J. Blom <i>et al.</i>, 2021 <b>Bakta: rapid and standardized annotation of bacterial genomes via alignment-free sequence identification</b>. Microbial genomics 7: 000685. <a href="https://doi.org/10.1099/mgen.0.000685">10.1099/mgen.0.000685</a></li>
+<li id="neron2022integronfinder">Néron, B., E. Littner, M. Haudiquet, A. Perrin, J. Cury <i>et al.</i>, 2022 <b>IntegronFinder 2.0: identification and analysis of integrons across bacteria, with a focus on antibiotic resistance in Klebsiella</b>. Microorganisms 10: 700. <a href="https://doi.org/10.3390/microorganisms10040700">10.3390/microorganisms10040700</a></li>
+<li id="diesh2023jbrowse">Diesh, C., G. J. Stevens, P. Xie, T. De Jesus Martinez, E. A. Hershberg <i>et al.</i>, 2023 <b>JBrowse 2: a modular genome browser with views of synteny and structural variation</b>. Genome biology 24: 1–21. <a href="https://doi.org/10.1186/s13059-023-02914-z">10.1186/s13059-023-02914-z</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Bacterial Genome Annotation (Genome Annotation)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Bérénice Batut,  <b>Bacterial Genome Annotation (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{genome-annotation-bacterial-genome-annotation,
+author = "Bérénice Batut",
+	title = "Bacterial Genome Annotation (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/abromics" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/abromics/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <div class="box-title">Go Further</div>
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/genome-annotation">Genome Annotation</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Refining Genome Annotations with Apollo (prokaryotes):
+                            
+                                <a href="/training-material/topics/genome-annotation/tutorials/apollo/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/visualisation">Visualisation</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Hands-on: Hands-on: Visualisation with Circos:
+                            
+                                <a href="/training-material/topics/visualisation/tutorials/circos/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/visualisation/tutorials/circos/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Hands-on: Hands-on: Genomic Data Visualisation with JBrowse:
+                            
+                                <a href="/training-material/topics/visualisation/tutorials/jbrowse/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">Using Galaxy and Managing your Data</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Extracting Workflows from Histories:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+                    </ul>
+                </blockquote>
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bakta
+  owner: iuc
+  revisions: 728dacaf08a9
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: integron_finder
+  owner: iuc
+  revisions: 4768f7f8e93f
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: isescan
+  owner: iuc
+  revisions: 19f42b3ea391
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: jbrowse
+  owner: iuc
+  revisions: a6e57ff585c0
+  tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: plasmidfinder
+  owner: iuc
+  revisions: 7075b7a5441b
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: tbl2gff3
+  owner: iuc
+  revisions: 4a7f4b0cc0a3
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/337705899a491dc778343fac56fef8720dd20a6d">3377058</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706782310'></script>
+        
+    </body>
+</html>
