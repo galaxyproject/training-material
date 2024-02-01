@@ -7,7 +7,7 @@ contributions:
   infrastructure: [mtekman]
 layout: news
 cover: news/images/2024-01-31-postmarket-phone-cover.jpg
-cover_alt: cropped picture of a mobile phone interface showing a terminal with Galaxy log outputs.
+coveralt: cropped picture of a mobile phone interface showing a terminal with Galaxy log outputs.
 ---
 
 Hey Galaxy admins! Have you ever wanted to administer your own instance from
