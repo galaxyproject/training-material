@@ -4,8 +4,8 @@ tags: [fun, system administrators, developers, humour]
 contributions:
   authorship: [mtekman]
 layout: news
-cover: news/images/2024-01-31-postmarket-phone.jpg
-cover_alt: two pictures of a mobile phone showing a terminal and htopGalaxy In Your Pocket
+cover: news/images/2024-01-31-postmarket-phone-cover.jpg
+cover_alt: cropped picture of a mobile phone interface showing a terminal with Galaxy log outputs.
 ---
 
 Hey Galaxy admins! Have you ever wanted to administer your own instance from
@@ -55,4 +55,4 @@ It's the perfect setup that only a *true and dedicated* Galaxy Admin
 such as yourself can dream about.
 
 Or if you're not buying any of this, then it's for those emergency
-situations where you forgot your laptop and need to solve a bioinformatics crisis on the go.
+situations where you forgot your laptop and need to solve a bioinformatics crisis on the go 🧬🌄
