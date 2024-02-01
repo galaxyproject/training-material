@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@237588695fe293f0a00bd7d54e3679f10e48c8df",
+		release: "galaxy-training-network@7383d915dda6d066c16ced8dcb5f97372e8f4792",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706797103' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706797103' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1706797286' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1706797286' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Galaxy Monitoring with gxadmin">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-14 13:57:39 +0000">
+<meta name="DC.date" content="2024-02-01 10:46:14 +0000">
 <meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Resources related to configuration and maintenance of Galaxy servers">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Server administration / Hands-on: Galaxy Monitoring with gxadmin">
@@ -117,7 +117,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2023-04-14 13:57:39 +0000",
+  "dateModified": "2024-02-01 10:46:14 +0000",
   "datePublished": "2019-01-28 04:20:16 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Galaxy Monitoring with gxadmin",
@@ -231,7 +231,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Galaxy Monitoring with gxadmin",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/tutorial.html",
-  "version": 42,
+  "version": 43,
   "timeRequired": "PT30M",
   "teaches": "Learn gxadmin basics\n - See some queries and learn how they help debug production issues",
   "keywords": [
@@ -316,7 +316,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "We will just briefly cover the features available in `gxadmin`, there are lots of queries that may or may not be useful for your Galaxy instance and you will have to read the documentation before using them."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706797103'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1706797286'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -624,7 +624,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 28, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 14, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 1, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -637,7 +637,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00009">https://gxy.io/GTN:T00009</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 42 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 43 </div>
 
     </blockquote>
     </section>
@@ -656,7 +656,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>It started life as a small shell script that Helena wrote because she couldn’t remember what <a href="https://github.com/galaxyproject/gravity">Gravity</a> was called or where it could be found. Some of the functions needed for things like swapping zerglings are still included in gxadmin but are highly specific to UseGalaxy.eu and not generally useful.</p>
 
-<p>Since then it became the home for “all of the SQL queries we [galaxy admins] run regularly.” @hexylena and @natefoo often shared SQL queries with each other in private chats, but this wasn’t helpful to the admin community at large, so they decided to put them all in <code class="language-plaintext highlighter-rouge">gxadmin</code> and make it as easy to install as possible. We are continually trying to make this tool more generic and generally useful, if you notice something that’s missing or broken, or have a new query you want to run, just <a href="https://github.com/usegalaxy-eu/gxadmin/issues/new">let us know</a>.</p>
+<p>Since then it became the home for “all of the SQL queries we [galaxy admins] run regularly.” <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge-inline contributor-hexylena">
+  <img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+  Helena Rasche</a>
+ and <a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge-inline contributor-natefoo">
+  <img src="https://avatars.githubusercontent.com/natefoo?s=36" alt="Nate Coraor avatar" width="36" class="avatar" />
+  Nate Coraor</a>
+ often shared SQL queries with each other in private chats, but this wasn’t helpful to the admin community at large, so they decided to put them all in <code class="language-plaintext highlighter-rouge">gxadmin</code> and make it as easy to install as possible. We are continually trying to make this tool more generic and generally useful, if you notice something that’s missing or broken, or have a new query you want to run, just <a href="https://github.com/usegalaxy-eu/gxadmin/issues/new">let us know</a>.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -833,7 +839,10 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
 
 <h2 id="admin-favourite-queries">Admin Favourite Queries</h2>
 
-<p><strong>@slugger70’s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query old-histories</code>. He contributed this function to find old histories, as their instance has a 90 day limit on histories, anything older than that might be automatically removed. This helps their group identify any histories that can be purged in order to save space. Running this on UseGalaxy.eu, we have some truly ancient histories, and maybe could benefit from a similar policy.</p>
+<p><strong><a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge-inline contributor-slugger70">
+  <img src="https://avatars.githubusercontent.com/slugger70?s=36" alt="Simon Gladman avatar" width="36" class="avatar" />
+  Simon Gladman</a>
+‘s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query old-histories</code>. He contributed this function to find old histories, as their instance has a 90 day limit on histories, anything older than that might be automatically removed. This helps their group identify any histories that can be purged in order to save space. Running this on UseGalaxy.eu, we have some truly ancient histories, and maybe could benefit from a similar policy.</p>
 
 <blockquote class="code-in">
   <div class="box-title code-in-title" id="code-in"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
@@ -930,7 +939,10 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
 
 </blockquote>
 
-<p><strong>@natefoo’s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query job-inputs</code>. He contributed this function which helps him debug jobs which are not running and should be.</p>
+<p><strong><a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge-inline contributor-natefoo">
+  <img src="https://avatars.githubusercontent.com/natefoo?s=36" alt="Nate Coraor avatar" width="36" class="avatar" />
+  Nate Coraor</a>
+‘s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query job-inputs</code>. He contributed this function which helps him debug jobs which are not running and should be.</p>
 
 <blockquote class="code-in">
   <div class="box-title code-in-title" id="code-in-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
@@ -989,7 +1001,10 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
   </tbody>
 </table>
 
-<p><strong>@bgruening’s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query latest-users</code> let’s us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven’t registered for <a href="https://galaxyproject.eu/tiaas">training infrastructure as a service</a> which helps us coordinate infrastructure for them so they don’t have bad experiences.</p>
+<p><strong><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge-inline contributor-bgruening">
+  <img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" />
+  Björn Grüning</a>
+‘s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query latest-users</code> let’s us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven’t registered for <a href="https://galaxyproject.eu/tiaas">training infrastructure as a service</a> which helps us coordinate infrastructure for them so they don’t have bad experiences.</p>
 
 <blockquote class="code-in">
   <div class="box-title code-in-title" id="code-in-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
@@ -1058,7 +1073,10 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
   </tbody>
 </table>
 
-<p><strong>@hexylena’s favourite</strong> <code class="language-plaintext highlighter-rouge">gxadmin report job-info</code>. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.</p>
+<p><strong><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge-inline contributor-hexylena">
+  <img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+  Helena Rasche</a>
+‘s favourite</strong> <code class="language-plaintext highlighter-rouge">gxadmin report job-info</code>. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.</p>
 
 <blockquote class="code-in">
   <div class="box-title code-in-title" id="code-in-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
@@ -1132,7 +1150,10 @@ Canu assembler on data 41 (contigs)           |   fasta       |   9520365   |   
 </code></pre></div>  </div>
 </blockquote>
 
-<p><strong>@cat-bro</strong> contributed the ‘jobs’ query: <code class="language-plaintext highlighter-rouge">gxadmin query jobs</code> lets you list jobs that have been run on your Galaxy. It’s a <strong>lot</strong> more flexible than <code class="language-plaintext highlighter-rouge">queue-overview</code> and we suggest using it instead, in most places. E.g. to find <code class="language-plaintext highlighter-rouge">circos</code> jobs that were recently run:</p>
+<p><strong><a href="/training-material/hall-of-fame/cat-bro/" class="contributor-badge-inline contributor-cat-bro">
+  <img src="https://avatars.githubusercontent.com/cat-bro?s=36" alt="Catherine Bromhead avatar" width="36" class="avatar" />
+  Catherine Bromhead</a>
+ contributed</strong> the ‘jobs’ query: <code class="language-plaintext highlighter-rouge">gxadmin query jobs</code> lets you list jobs that have been run on your Galaxy. It’s a <em>lot</em> more flexible than <code class="language-plaintext highlighter-rouge">queue-overview</code> and we suggest using it instead, in most places. E.g. to find <code class="language-plaintext highlighter-rouge">circos</code> jobs that were recently run:</p>
 
 <blockquote class="code-in">
   <div class="box-title code-in-title" id="code-in-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
@@ -1552,7 +1573,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/237588695fe293f0a00bd7d54e3679f10e48c8df">2375886</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/7383d915dda6d066c16ced8dcb5f97372e8f4792">7383d91</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1580,7 +1601,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706797103'></script>
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1706797286'></script>
         
     </body>
 </html>
