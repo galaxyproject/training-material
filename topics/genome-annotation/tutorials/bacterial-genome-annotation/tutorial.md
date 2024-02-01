@@ -134,7 +134,7 @@ It is also able to detect and annotate small proteins (sORF). Predicted CDS are 
    > 4. How many small proteins?
    > 5. Which other components have been found? 
    >
-   > How do it compare to results for KUN1163 in [Table 1](https://journals.asm.org/doi/10.1128/mra.01212-19#tab1) in {% cite Hikichi_2019 %}?
+   > How does it compare to results for KUN1163 in [Table 1](https://journals.asm.org/doi/10.1128/mra.01212-19#tab1) in {% cite Hikichi_2019 %}?
    >
    > > <solution-title></solution-title>
    > >
@@ -336,7 +336,7 @@ To detect integrons, we will use **IntegronFinder** ({% cite neron2022integronfi
    >
    > > <solution-title></solution-title>
    > >
-   > > No integron elements have been found on any contig. It could be because the genome is too stable, or because the assembly is not good enough quality and some parts useful for the integron detection were removed.
+   > > No integron elements have been found on any contig. It could be because the genome is too stable, or because the assembly quality is not good enough and some parts useful for the integron detection were removed.
    > {: .solution}
    {: .question}
 
