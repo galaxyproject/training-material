@@ -326,8 +326,15 @@ It's spread across four lines.  The four lines are:
 3. "`+`", possibly followed by some info, but ignored by virtually all tools
 4. Quality sequence (explained below)
 
-Here is a very simple Python function for parsing files of FASTQ records:
+## Reading FASTQ with python
 
+Download a sample small fastq file:
+
+```
+!wget https://zenodo.org/records/10602772/files/fastq_single_end_short.fq
+```
+
+Now we will use a very simple Python function to read this file and load fastq data into a list:
 
 ```python
 def parse_fastq(fh):
@@ -345,36 +352,19 @@ def parse_fastq(fh):
         reads.append((name, seq, qual))
     return reads
 
-fastq_string = '''@ERR294379.100739024 HS24_09441:8:2203:17450:94030#42/1
-AGGGAGTCCACAGCACAGTCCAGACTCCCACCAGTTCTGACGAAATGATG
-+
-BDDEEF?FGFFFHGFFHHGHGGHCH@GHHHGFAHEGFEHGEFGHCCGGGF
-@ERR294379.136275489 HS24_09441:8:2311:1917:99340#42/1
-CTTAAGTATTTTGAAAGTTAACATAAGTTATTCTCAGAGAGACTGCTTTT
-+
-@@AHFF?EEDEAF?FEEGEFD?GGFEFGECGE?9H?EEABFAG9@CDGGF
-@ERR294379.97291341 HS24_09441:8:2201:10397:52549#42/1
-GGCTGCCATCAGTGAGCAAGTAAGAATTTGCAGAAATTTATTAGCACACT
-+
-CDAF<FFDEHEFDDFEEFDGDFCHD=GHG<GEDHDGJFHEFFGEFEE@GH'''
+with open('fastq_single_end_short.fq','r') as fq:
+    reads = parse_fastq(fq)
 
-from io import StringIO
-
-parse_fastq(StringIO(fastq_string))
+for read in reads:
+    print(read)
 ```
 
 
-
-    [('ERR294379.100739024 HS24_09441:8:2203:17450:94030#42/1',
-      'AGGGAGTCCACAGCACAGTCCAGACTCCCACCAGTTCTGACGAAATGATG',
-      'BDDEEF?FGFFFHGFFHHGHGGHCH@GHHHGFAHEGFEHGEFGHCCGGGF'),
-     ('ERR294379.136275489 HS24_09441:8:2311:1917:99340#42/1',
-      'CTTAAGTATTTTGAAAGTTAACATAAGTTATTCTCAGAGAGACTGCTTTT',
-      '@@AHFF?EEDEAF?FEEGEFD?GGFEFGECGE?9H?EEABFAG9@CDGGF'),
-     ('ERR294379.97291341 HS24_09441:8:2201:10397:52549#42/1',
-      'GGCTGCCATCAGTGAGCAAGTAAGAATTTGCAGAAATTTATTAGCACACT',
-      'CDAF<FFDEHEFDDFEEFDGDFCHD=GHG<GEDHDGJFHEFFGEFEE@GH')]
-
+```
+('ERR294379.100739024 HS24_09441:8:2203:17450:94030#42/1', 'AGGGAGTCCACAGCACAGTCCAGACTCCCACCAGTTCTGACGAAATGATG', 'BDDEEF?FGFFFHGFFHHGHGGHCH@GHHHGFAHEGFEHGEFGHCCGGGF')
+('ERR294379.136275489 HS24_09441:8:2311:1917:99340#42/1',  'CTTAAGTATTTTGAAAGTTAACATAAGTTATTCTCAGAGAGACTGCTTTT', '@@AHFF?EEDEAF?FEEGEFD?GGFEFGECGE?9H?EEABFAG9@CDGGF')
+('ERR294379.97291341 HS24_09441:8:2201:10397:52549#42/1',  'GGCTGCCATCAGTGAGCAAGTAAGAATTTGCAGAAATTTATTAGCACACT', 'CDAF<FFDEHEFDDFEEFDGDFCHD=GHG<GEDHDGJFHEFFGEFEE@GH')
+```
 
 
 The nucleotide string can sometimes contain the character "`N`".  `N` essentially means "no confidence." The sequencer knows there's a nucleotide there but doesn't know whether it's an A, C, G or T.
@@ -711,12 +701,17 @@ parse_paired_fastq(StringIO(fastq_string1), StringIO(fastq_string2))
 
 Let's reuse the `parse_fastq` function from above:
 
-
 ```python
-reads = parse_fastq(StringIO(fastq_string))
+# Read the file into a list
+with open('fastq_single_end_short.fq','r') as fq:
+    reads = parse_fastq(fq)
 ```
 
+☝️ This will load data into a list called `reads` containing individual reads (name, nucleotides, and quality values) represented as a [tuple](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences). 
+
+
 ```python
+# Extract qualities and convert them into numerical values
 run_qualities = []
 for read in reads:
     read_qualities = []
@@ -725,22 +720,19 @@ for read in reads:
     run_qualities.append(read_qualities)
 ```
 
+☝️ This will take quality string only for each read from `reads` and convert it into a list of values. The end result, a list of lists called `run_qualities`, will contain as many elements as there as reads, where each element (also a list) contains all quality values for a read. We need to [transpose](https://en.wikipedia.org/wiki/Transpose) this list, so that instead of representing every reads as a list of quality values we represent every position as a list of quality values for all reads at that position. This can be easily done with [numpy](https://numpy.org/)'s [`T`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.T.html):
+
 ```python
-base_qualities = []
-for i in range(len(run_qualities[0])):
-    base = []
-    for read in run_qualities:
-        base.append(read[i])
-    base_qualities.append(base)
-    
-# same thing with numpy
-# base_qualities = np.array(run_qualities).T
+# Transpose the quality values matrix
+
+import numpy as np
+base_qualities = np.array(run_qualities).T
 ```
 
+Now we need to extract some key per-position statistics from the `base_qualities` list generated above. We, again, use numpy for this:
 
 ```python
-import numpy as np
-
+# Prep data for plotting
 plotting_data = {
     'base':[],
     'mean':[],
@@ -760,14 +752,87 @@ for i,base in enumerate(base_qualities):
     plotting_data['max'].append(np.max(base))
 ```
 
+☝️ The result of this, a dictionary called `plotting_data`, contains statistics types as *keys* and corresponding values as *lists*. Now we load these into Pandas:
 
 ```python
+# Load into Pandas
 import pandas as pd
 plotting_data_df = pd.DataFrame(plotting_data)
 ```
 
+And plot:
 
 ```python
+# Plot!
+import altair as alt
+
+base = alt.Chart(plotting_data_df).encode(
+    alt.X('base:Q', title="Position in the read")
+).properties(
+    width=800,
+    height=200)
+
+median = base.mark_tick(color='red',orient='horizontal').encode(
+    alt.Y('median:Q', title="Phred quality score"),
+)
+
+q = base.mark_rule(color='green',opacity=.5,strokeWidth=10).encode(
+    alt.Y('q25:Q'),
+    alt.Y2('q75:Q')
+)
+
+min_max = base.mark_rule(color='black').encode(
+        alt.Y('min:Q'),
+        alt.Y2('max:Q')
+)
+
+median + q + min_max
+```
+
+Below is the same thing as just one code blob:
+
+```python
+# Read the file into a list
+with open('fastq_single_end_short.fq','r') as fq:
+    reads = parse_fastq(fq)
+
+# Extract qualities and convert them into numerical values
+run_qualities = []
+for read in reads:
+    read_qualities = []
+    for quality in read[2]:
+        read_qualities.append(phred33_to_q(quality))
+    run_qualities.append(read_qualities)
+
+# Transpose the quality values matrix
+
+import numpy as np
+base_qualities = np.array(run_qualities).T
+
+# Prep data for plotting
+plotting_data = {
+    'base':[],
+    'mean':[],
+    'median':[],
+    'q25':[],
+    'q75':[],
+    'min':[],
+    'max':[]
+}
+for i,base in enumerate(base_qualities):
+    plotting_data['base'].append(i)
+    plotting_data['mean'].append(np.mean(base))
+    plotting_data['median'].append(np.median(base))
+    plotting_data['q25'].append(np.quantile(base,.25))
+    plotting_data['q75'].append(np.quantile(base,.75))
+    plotting_data['min'].append(np.min(base))
+    plotting_data['max'].append(np.max(base))
+
+# Load into Pandas
+import pandas as pd
+plotting_data_df = pd.DataFrame(plotting_data)
+
+# Plot!
 import altair as alt
 
 base = alt.Chart(plotting_data_df).encode(
