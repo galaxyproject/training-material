@@ -1070,11 +1070,11 @@ Perhaps surprisingly, phylogenetic estimation doesn't have to start with a tree.
 
 Phylogenetic networks have two purposes: 
 
-(i) to show an estimate of the evolutionary history that is not strictly branching, so, involving horizontal gene transfer or hybridisation events.
- 
- or 
+1. to show an estimate of the evolutionary history that is not strictly branching, so, involving horizontal gene transfer or hybridisation events.
+  
+   or 
 
- (ii) to show conflicting phylogenetic signal in the data set, suggesting different possible trees.
+2. to show conflicting phylogenetic signal in the data set, suggesting different possible trees.
 
 In this tutorial we use networks for the second purpose because we are working under the assumption that there is a true tree, which is the actual evolutionary history of our species of interest.
 
@@ -1082,7 +1082,6 @@ To understand what this kind of phylogenetic network is, and how to interpret on
 
 Thus every branch of a tree can be thought of as a _split_ and a tree is a collection of *compatible* splits: where by "compatible" we just mean that they can be on the same tree.
 
-<!-- [diagram here of splits?] -->
 
 So our tree search is an attempt to find a "best" set of _splits_ that are all compatible, and which together explain the evolutionary relationships among the taxa of interest.
 
