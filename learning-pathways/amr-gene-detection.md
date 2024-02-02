@@ -28,7 +28,7 @@ pathway:
 
   - section: "Module: Assembly"
     description: |
-      Assembly is a major step in the process to detect AMR genes as it combines sequenced reads into contigs, longer sequences where it will be easier to identify genes and in particular AMR genes
+      Assembly is a major step in the process of detecting AMR genes as it combines sequenced reads into contigs, longer sequences where it will be easier to identify genes and in particular AMR genes
     tutorials:
       - name: mrsa-illumina
         topic: assembly
@@ -37,16 +37,16 @@ pathway:
 #      - name: hybrid-assembly
 #        topic: assembly
 
-#  - section: "Module: Genome annotation"
-#    description: |
-#      The generated contigs can be then annotated to detect genes, potential plasmid, etc. This will help the AMR gene detection process, specially the verification and the visualization
-#    tutorials:
-#      - name: bacterial-genome-annotation
-#        topic: genome-annotation
+  - section: "Module: Genome annotation"
+    description: |
+      The generated contigs can be annotated to detect genes, potential plasmids, etc. This will help the AMR gene detection process, especially the verification and visualization
+    tutorials:
+      - name: bacterial-genome-annotation
+        topic: genome-annotation
 
   - section: "Module: AMR gene detection"
     description: |
-      
+      AMR gene content can be assessed from the contigs to detect known resistance mechanisms and potentially identify novel mechanisms.
     tutorials:
       - name: amr-gene-detection
         topic: genome-annotation
