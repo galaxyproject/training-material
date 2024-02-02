@@ -1,8 +1,8 @@
 ---
 layout: tutorial_hands_on
 title: Phylogenetics - Back to basics
-zenodo_link: 'https://zenodo.org/records/10415242/files/anolis-raw.fst'
-enable: false
+zenodo_link: 'https://zenodo.org/records/10415242'
+draft: true
 tags:
   - phylogenetics
   - evolution
