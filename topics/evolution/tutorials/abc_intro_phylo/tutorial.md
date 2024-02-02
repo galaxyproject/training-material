@@ -112,7 +112,7 @@ This tutorial has the following structure:
 - Maximum Likelihood with IQTree -->
 
 ## What is a Phylogeny?
-![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. Source: Wikimedia commons"){: align="center" width="40%"}
+![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. Source: Wikimedia commons"){: width="40%"}
 
 A *phylogenetic tree*, also called a *phylogeny*, is usually a tree-like structure, like [Darwin's famous sketch](#figure-1). The leaves or tips of the tree represent extant (living/existing) taxonomic entities like species, genera, or strains (in general called "taxa"). The lines connecting taxa describe the evolutionary relationships between them.
 The intersections of lines correspond to hypothetical ancestral taxa. They represent branching events when species split into two new species, or a strain developed a phylogenetic important offshoot strain, etc.
@@ -127,12 +127,12 @@ As Theodosius Dobzhansky famously wrote, **"Nothing in biology makes sense excep
 
 There are many ways in which we can use phylogenetic analyses, from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in [Charles Darwin's famous sketch](#figure-1), to families:
 
-![Phylogenetic tree of hexapod families](./images/Hexapoda_phylogenetic_tree.png "Phylogeny of extant hexapod families. {% cite PMID:25275450 %} reproduced under Creative Commons Attribution 4.0 International License"){: align="center"}
+![Phylogenetic tree of hexapod families](./images/Hexapoda_phylogenetic_tree.png "Phylogeny of extant hexapod families. {% cite PMID:25275450 %} reproduced under Creative Commons Attribution 4.0 International License")
 
 
 and much bigger projects across all of life:
 
-![Phylogenetic tree of life based on sequenced genomes](./images/nmicrobiol201648_Fig1_HTML.webp "A modern view of the tree of life based on sequenced genomes. {% cite PMID:27572647 %} reproduced under Creative Commons Attribution 4.0 International License"){:align="center" width="800"}
+![Phylogenetic tree of life based on sequenced genomes](./images/nmicrobiol201648_Fig1_HTML.webp "A modern view of the tree of life based on sequenced genomes. {% cite PMID:27572647 %} reproduced under Creative Commons Attribution 4.0 International License"){: width="800"}
 
 <!-- topics/evolution/tutorials/abc_intro_phylo/images/nmicrobiol201648_Fig1_HTML.webp -->
 
@@ -166,7 +166,7 @@ Aside from gaining a fundamental understanding of biology, other reasons for inf
 
 Before we start building trees, let's define some terms.
 
-![Schematic of a phylogenetic tree where features such as nodes/taxa, edges/branches are annotated](images/TreeAnatomyWithOutgroup.png "Anatomy of a phylogenetic tree."){:align="center" width="100%"}
+![Schematic of a phylogenetic tree where features such as nodes/taxa, edges/branches are annotated](images/TreeAnatomyWithOutgroup.png "Anatomy of a phylogenetic tree."){: width="100%"}
 
 
 
@@ -190,11 +190,11 @@ One way to determine where the root of a tree belongs is to include an **outgrou
 
 You can see in the diagram above that the connection of the ingroup to the outgroup could be from multiple locations. Once the unrooted tree is created, using combined data from ingroup and outgroup taxa, we can confidently say that the root is on the branch connecting our ingroup to our outgroup:
 
-![Schematic showing connection between an in group and outgroup to root a tree](images/TreeAnatomyUnrooted.png "Rooting a tree"){:align="center" width="100%"}
+![Schematic showing connection between an in group and outgroup to root a tree](images/TreeAnatomyUnrooted.png "Rooting a tree"){: width="100%"}
 
 We can then imagine lifting up the unrooted tree at the branch connecting our outgroup and ingroup -- that is our best guess at the hypothetical ancestor of all our taxa and gives us a good indication of the branching order of our ingroup (and the outgroup):
 
-![Schematic showing how inclusion of an outgroup can be used to lift a tree to create a best guess at the location of the hypothetical ancestor](./images/TreeAnatomyLiftHere.png "'Lifted' tree demonstrating hypothetical ancestor and branching order"){:align="center"}
+![Schematic showing how inclusion of an outgroup can be used to lift a tree to create a best guess at the location of the hypothetical ancestor](./images/TreeAnatomyLiftHere.png "'Lifted' tree demonstrating hypothetical ancestor and branching order")
 
 Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about **monophyly** -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
 
@@ -207,7 +207,7 @@ So, how do we estimate phylogenetic trees?
 
 We start with the leaves of the tree which can be living (extant) or older taxa:
 
-![Leaves of a tree are represented as separate rectangles containing the words Extant taxon = living species](images/WeJustHaveLeaves.png "The 'leaves' of a tree (extant or older taxa) are the starting point for buidling phylogenies"){:align="center" width="100%"}
+![Leaves of a tree are represented as separate rectangles containing the words Extant taxon = living species](images/WeJustHaveLeaves.png "The 'leaves' of a tree (extant or older taxa) are the starting point for buidling phylogenies"){: width="100%"}
 
 There are several ways to estimate a tree, such as:
 
@@ -277,7 +277,7 @@ Distances have very desirable properties, that can be summarised as follows: for
 
 Distances can be calculated based on a variety of data. Here is a flow-chart of the process:
 
-![Flow chart illustrating how sequence alignment data or dis/similarity measures can be used to calculate phylogentic distances](images/TreeConstruction.drawio.png "Tree construction flow-chart"){:align="center" width="100%"}
+![Flow chart illustrating how sequence alignment data or dis/similarity measures can be used to calculate phylogentic distances](images/TreeConstruction.drawio.png "Tree construction flow-chart"){:width="100%"}
 
 The blue boxes on the left show some of the input data forms. The most commonly used kind of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the species of interest. We focus on this form of molecular phylogenetics in this tutorial.
 
@@ -288,7 +288,7 @@ These distances can be expressed as a matrix _D_, which becomes the input for di
 
 Distance-based methods (orange boxes) use algorithms to select a pair of taxa, or clades, to join together to make a new clade. Once that decision is made, the two taxa / clades that have been joined are replaced with the clade that the two of them make together as seen in the [figure below](#figure-7).
 
-![Joining Clades](images/JoiningCladesForTreeConstruction.png "Joining clades for tree construction"){: align="center" width="60%"}
+![Joining Clades](images/JoiningCladesForTreeConstruction.png "Joining clades for tree construction"){: width="60%"}
 
 
 ## Let's build our first tree
@@ -367,7 +367,7 @@ ACTTGGCGTAGCCGGAGGCC
 > Let's view the unaligned sequence in a more understandable form.
 >
 > 1. Click on the title of your file to see the row of small icons for saving, linking etc: 
-> ![Screenshot of Galaxy icons](./images/LittleJobIcons.png){:align="center"} 
+> ![Screenshot of Galaxy icons](./images/LittleJobIcons.png) 
 >
 > 2. Click on the **visualise icon** that looks like a bar chart and then select the **Multiple Sequence Alignment tool**.
 > You should see something like this:
@@ -512,7 +512,7 @@ This is **Newick Format**, and it's worth knowing at least a little of what it m
 * If there is a colon ':' followed by a number, then this is the **branch length** for the subtree.
 
 
-![Schematic showing how the parenthesised list of taxon names and numbers corresponds to a tree structure](./images/NewickExplained.png "Newick Format"){:align="center"}
+![Schematic showing how the parenthesised list of taxon names and numbers corresponds to a tree structure](./images/NewickExplained.png "Newick Format")
 
 The rooted, 3-taxon trees above have three taxa, labelled A, B and C.  Two of the internal nodes have been labelled (x and y), but it isn't necessary to do so in general (for example, if you wanted to use the label for something like support of each branch, as does FastTree).
 
@@ -533,7 +533,7 @@ That is why methods like FastTree are employed to find a tree with the best poss
 
 > <hands-on-title>Visualising a tree</hands-on-title>
 > 1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc. 
-> ![LittleIcons](./images/LittleJobIcons.png){:align="center"} 
+> ![LittleIcons](./images/LittleJobIcons.png)
 >
 > 2. Click the "Visualisation" icon that looks like a little bar chart.
 > 3. You will be presented with a couple of options. Select "Phylogenetic Tree Visualisation" -- this seems to be the best one.
@@ -616,13 +616,13 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 > A next level of sophistication is the Hasegawa-Kishino-Yano model (HKY85) published in 1985, which acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
 > Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
 > 
-> ![HKY85 Formula](./images/HKY85RateMatrix.png "HKY85 rate matrix"){: align="center" width="300px"}
+> ![HKY85 Formula](./images/HKY85RateMatrix.png "HKY85 rate matrix"){: width="300px"}
 > 
 > In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "the sum of everything else in the row."
 > 
 > A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the "reversible" property) but otherwise all rates are independent of each other:
 > 
-> ![GTR](./images/GTRRateMatrix.png "GTR rate matrix"){: align="center" width="300px"}
+> ![GTR](./images/GTRRateMatrix.png "GTR rate matrix"){: width="300px"}
 >
 > A further level of sophistication is the recognition that some sites may be constrained from changing at all. For example, there may be some that have a critical role in fixing the correct amino acid for a protein to function. This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
 > 
@@ -665,7 +665,7 @@ An unresolved node *may* be a true representation of the branching pattern of a 
 
 In phylogenetics unresolved nodes are more often due to a lack of resolving power in the data, so the phylogenetic method cannot choose the branch ordering:
 
-![Schematic trees showing unresolved nodes](./images/Unresolved.png "Unresolved nodes"){: align="center" width="400px"}
+![Schematic trees showing unresolved nodes](./images/Unresolved.png "Unresolved nodes"){: width="400px"}
 
 If there are many unresolved branches in the phylogeny, this is an indication that there is not enough information in your data: you'll need to obtain more.
 
@@ -713,7 +713,7 @@ While this is running you might use your time to read the [Models of sequence ev
 
 > <question-title>How well supported is your tree?</question-title>
 > Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree.
-> ![IQTreePhylovis](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis."){:align="center"}
+> ![IQTreePhylovis](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis.")
 > 1. What are the bootstrap values near the root of the tree? Do you think those branches are well supported?
 > 2. Which do you think is the biggest well-supported clade?
 > 2. Are there some nodes that would be better left unresolved?
@@ -1088,7 +1088,7 @@ So our tree search is an attempt to find a "best" set of _splits_ that are all c
 
 However, the data may support multiple splits that are _not_ compatible. For example, we might have a set of nucleotide sequence data like this:
 
-![TableOfSitesAndSplits](./images/tableOfSitesForSplits.png){:align="center"}
+![TableOfSitesAndSplits](./images/tableOfSitesForSplits.png)
 
 <!-- | Taxon | Sequence          | constant | singleton | 12,34  | 23,14 | 13,24 |
 | ----- | ----------------- | -------- | --------- | ------ | ----- | ----- |
@@ -1133,17 +1133,17 @@ The beauty of the network is that both thes pieces of information can be shown o
 >   Note: SplitsTree 4 is an older version, but works well. SplitsTree 6 is in development but appears to work equally well (at the time of writing). They do the same thing, and we only use tools common to both versions. Installing either version takes a minute or two.
 > 2. Download the aligned data .FASTA file (the output of MAFFT) to your own computer.
 > 3. Start up SplitsTree and open the file.  Within moments you should see something like this (using SplitsTree 4):
-> ![Default phylogenetic network](./images/ST4-default.png){: align="center"}
+> ![Default phylogenetic network](./images/ST4-default.png)
 > Click on some of the interior branches, which will highlight sets of parallel lines, that correspond to each split that is shown in the network. 
 >This network shows a number of deep branches that are quite well resolved, in the sense that they have very long, thin parallelograms, but there is a jumble of very small parallelograms in the centre of the network, indicating that there is not a lot of information in the data to determine the early branching order of the _Anolis_ phylogeny.
 > 
 > 4. Note that the initial distance measure is using "Uncorrected P" distance, which is simply the proportion of sites that differ between each pair of sequences. It is  possible to use more sophisticated models for maximum likelihood, such as Jukes-Cantor and HKY85. 
 >   Click on the **Distances menu** and select "HKY85".  A dialog box will appear with some options. Click "Apply" and get a network like this:
-> ![HKY85 Network](./images/ST4-HKY85.png){: align="center"}
+> ![HKY85 Network](./images/ST4-HKY85.png)
 >   The above shows you that the basic structure of the network does not change very much using different distance measures. This is a good thing because it means reasonable assumptions you make about your data are not drastically changing the results.
 > 5. Finally, perform a bootstrap analysis on this network.  Click on the **Analysis menu** and select Bootstrap.  Leave the default number of replicates as 1000 and click "run".
 >After a few seconds (less than a minute) you should see something like this:
-> ![HKY85 Network with Bootstrap](./images/ST4-HKY85-BS.png){: align="center"}
+> ![HKY85 Network with Bootstrap](./images/ST4-HKY85-BS.png)
 > This network shows the percentage of times out of those 1000 replicates that each split was in the network created for each replicate. 
 >Zoom in (there is a magnifying glass tool at the top) and scroll around the figure to see which are the strongly supported *splits*, which should correspond to the well supported bootstrap values in the trees you inferred above.
 {: .hands_on}
