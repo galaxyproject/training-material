@@ -358,7 +358,10 @@ ACTTGGCGTAGCCGGAGGCC
 
 <!-- A line beginning with the greater-than sign `>` holds the sequence name or identifier/ID; the other lines hold the sequence data for the sequence ID above. -->
 
-*Note:* The Fasta format can also include symbols such as a question mark '?' for missing data, or hyphen '-' to indicate an insertion or deletion events, collectively *indels*. It is common to represent a multiple sequence alignment in Fasta format with these symbols. It is also a common format for storing high-throughput read data, but *without quality scores* -- if you want to include read quality you would use FASTQ format.
+> <tip-title>FASTA format for multiple sequence alignments</tip-title>
+>
+>The Fasta format can also include symbols such as a question mark '?' for missing data, or hyphen '-' to indicate an insertion or deletion events, collectively *indels*. It is common to represent a multiple sequence alignment in Fasta format with these symbols. It is also a common format for storing high-throughput read data, but *without quality scores* -- if you want to include read quality you would use FASTQ format.
+{: .tip}
 
 > <hands-on-title>View your data</hands-on-title>
 > Let's view the unaligned sequence in a more understandable form.
