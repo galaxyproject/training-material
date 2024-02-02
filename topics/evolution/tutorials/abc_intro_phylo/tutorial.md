@@ -1127,7 +1127,7 @@ The beauty of the network is that both thes pieces of information can be shown o
 
 > <hands-on-title>Build a Neighbor-Net with Splitstree</hands-on-title>
 >
-> 1. Download and install <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html">SplitsTree 4</a> or <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree6/welcome.html">SplitsTree 6 CE</a> (Community Edition) on your own computer. 
+> 1. Download and install [SplitsTree 4](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [SplitsTree 6 CE](https://software-ab.cs.uni-tuebingen.de/download/splitstree6/welcome.html) (Community Edition) on your own computer. 
 >
 >    Note: SplitsTree 4 is an older version, but works well. SplitsTree 6 is in development but appears to work equally well (at the time of writing). They do the same thing, and we only use tools common to both versions. Installing either version takes a minute or two.
 > 2. Download the aligned data .FASTA file (the output of MAFFT) to your own computer.
