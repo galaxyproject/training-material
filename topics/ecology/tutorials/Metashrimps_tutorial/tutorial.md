@@ -122,7 +122,7 @@ You can either navigate through the Data Paper with the tabs or with the scrollb
 
 You can at the top of the page download the draft in either an HTML format or an editable docx format.
 ![Download in HTML](./Images/Download_HTML.png""Download in HTML")
-![Download in docx](./Images/Download_docx.png "Download in docx*)
+![Download in docx](./Images/Download_docx.png "Download in docx")
 
 ## Fair Quality Assessment report
 
