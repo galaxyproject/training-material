@@ -234,7 +234,7 @@
       <div id="method-i-build_news" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">build_news</span><span
-            class="method-args">(data, filter: nil, updates: true)</span>
+            class="method-args">(data, filter: nil, updates: true, only_news: false)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -242,8 +242,8 @@
           
 
           <div class="method-source-code" id="build_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 151</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_news</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">filter:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">updates:</span> <span class="ruby-keyword">true</span>)
+            <pre><span class="ruby-comment"># File bin/news.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_news</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">filter:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">updates:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">only_news:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">infix</span> = <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">titleize</span>(<span class="ruby-identifier">filter</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;# GTN #{infix} News for #{NOW.strftime(&#39;%b %d&#39;)}&quot;</span>
   <span class="ruby-identifier">newsworthy</span> = <span class="ruby-keyword">false</span>
@@ -252,6 +252,11 @@
     <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">format_news</span>(<span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:news</span>])
     <span class="ruby-identifier">newsworthy</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">format_news</span>(<span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:news</span>]).<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
   <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">only_news</span>
+    <span class="ruby-keyword">return</span> [<span class="ruby-identifier">output</span>, <span class="ruby-identifier">newsworthy</span>]
+  <span class="ruby-keyword">end</span>
+
 
   <span class="ruby-identifier">o</span> = <span class="ruby-identifier">format_tutorials</span>(
     <span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:tutorials</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{topics/#{filter}}</span> },
@@ -445,7 +450,7 @@
           
 
           <div class="method-source-code" id="fetch_workflowhub-source">
-            <pre><span class="ruby-comment"># File bin/workflows-fetch.rb, line 34</span>
+            <pre><span class="ruby-comment"># File bin/workflows-fetch.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_workflowhub</span>
   <span class="ruby-identifier">projects</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">request</span>(<span class="ruby-string">&#39;https://workflowhub.eu/projects&#39;</span>).<span class="ruby-identifier">body</span>)
   <span class="ruby-identifier">project_mapping</span> = <span class="ruby-identifier">projects</span>[<span class="ruby-string">&#39;data&#39;</span>].<span class="ruby-identifier">to_h</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;attributes&#39;</span>][<span class="ruby-string">&#39;title&#39;</span>]] }
@@ -515,7 +520,12 @@
           <div class="method-source-code" id="fetch_workflows-source">
             <pre><span class="ruby-comment"># File bin/workflows-fetch.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_workflows</span>(<span class="ruby-identifier">server</span>)
-  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">request</span>(<span class="ruby-node">&quot;#{server}/api/workflows/&quot;</span>)
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">response</span> = <span class="ruby-identifier">request</span>(<span class="ruby-node">&quot;#{server}/api/workflows/&quot;</span>)
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;ERROR: Failed to fetch workflows from #{server}&quot;</span>
+    <span class="ruby-keyword">return</span> []
+  <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">begin</span>
     <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
@@ -543,7 +553,7 @@
           
 
           <div class="method-source-code" id="filterSlides-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 60</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filterSlides</span>(<span class="ruby-identifier">x</span>)
   <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{topics/.*/tutorials/.*/slides.*\.html}</span>
 <span class="ruby-keyword">end</span></pre>
@@ -564,7 +574,7 @@
           <p>new   news new   slidevideos new   contributors   Done new   tutorials      Done new   slides         Done</p>
 
           <div class="method-source-code" id="filterTutorials-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 56</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filterTutorials</span>(<span class="ruby-identifier">x</span>)
   <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{topics/.*/tutorials/.*/tutorial.*\.md}</span>
 <span class="ruby-keyword">end</span></pre>
@@ -609,7 +619,7 @@
           
 
           <div class="method-source-code" id="fixNews-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 85</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fixNews</span>(<span class="ruby-identifier">n</span>)
   <span class="ruby-comment"># news/_posts/2021-11-10-api.html =&gt; news/2021/11/10/api.html</span>
   <span class="ruby-identifier">n</span>[<span class="ruby-value">:md</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{news/_posts/(....)-(..)-(..)-(.*.html)}</span>, <span class="ruby-string">&#39;news/\1/\2/\3/\4&#39;</span>)
@@ -631,7 +641,7 @@
           
 
           <div class="method-source-code" id="format_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 124</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_news</span>(<span class="ruby-identifier">news</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">news</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
@@ -657,7 +667,7 @@
           
 
           <div class="method-source-code" id="format_tutorials-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 133</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 137</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_tutorials</span>(<span class="ruby-identifier">added</span>, <span class="ruby-identifier">modified</span>, <span class="ruby-value">kind:</span> <span class="ruby-string">&#39;tutorials&#39;</span>, <span class="ruby-value">updates:</span> <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-identifier">count</span> = <span class="ruby-identifier">added</span>.<span class="ruby-identifier">length</span>
@@ -867,7 +877,7 @@
           
 
           <div class="method-source-code" id="linkify-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 75</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">linkify</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">path</span>)
   <span class="ruby-node">&quot;[#{text.gsub(&#39;|&#39;, &#39;-&#39;)}](https://training.galaxyproject.org/training-material/#{path}?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news)&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -888,7 +898,7 @@
           
 
           <div class="method-source-code" id="onlyEnabled-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 64</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">onlyEnabled</span>(<span class="ruby-identifier">x</span>)
   <span class="ruby-identifier">tutorial_meta</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">x</span>)
   <span class="ruby-identifier">tutorial_enabled</span> = <span class="ruby-identifier">tutorial_meta</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;enable&#39;</span>, <span class="ruby-keyword">true</span>)
@@ -1080,7 +1090,7 @@
           
 
           <div class="method-source-code" id="printableMaterial-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 79</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">printableMaterial</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">d</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">path</span>)
   { <span class="ruby-value">md:</span> <span class="ruby-identifier">linkify</span>(<span class="ruby-identifier">d</span>[<span class="ruby-string">&#39;title&#39;</span>], <span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/.md/</span>, <span class="ruby-string">&#39;.html&#39;</span>)),
@@ -1132,7 +1142,7 @@
           
 
           <div class="method-source-code" id="send_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 200</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 209</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_news</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>, <span class="ruby-value">channel:</span> <span class="ruby-string">&#39;default&#39;</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:postToMatrix</span>]
     <span class="ruby-comment"># rubocop:disable Style/GlobalVars</span>
@@ -1407,7 +1417,7 @@
           
 
           <div class="method-source-code" id="titleize-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 120</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">titleize</span>(<span class="ruby-identifier">t</span>)
   <span class="ruby-identifier">t</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\w+/</span>, <span class="ruby-operator">&amp;</span><span class="ruby-value">:capitalize</span>)
 <span class="ruby-keyword">end</span></pre>
