@@ -33,7 +33,7 @@ $rooms = {
   'single-cell' => {
     server: 'https://matrix.org',
     room: '!yuLoaCWKpFHkWPmVEO:gitter.im',
-  }
+  },
   'wg-goat' => {
     server: 'https://matrix.org',
     room: '!UQXYBSjdrLHcWgegmg:gitter.im',
