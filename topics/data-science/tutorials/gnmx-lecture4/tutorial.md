@@ -310,7 +310,7 @@ sns.heatmap(D,annot=True,cmap="crest")
 
 # Dictionaries: Translating sequences
 
-Perhaps the best way to demonstrate the utility of dictionaries is using the translation example. The universal genetic code can be represented as the following dictionary:
+Perhaps the best way to demonstrate the utility of dictionaries is using DNA-to-Protein translation as an example. 
 
 ## Using dictionaries to translate DNA
 
