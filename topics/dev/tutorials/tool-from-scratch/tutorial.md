@@ -436,6 +436,19 @@ Note that for using `planemo`from a new shell you will need to activate the pyth
 > 3. `planemo SUBCOMMAND --help` will show the usage information for the corresponding subcommand. Try to obtain the information for the `lint` subcommand.
 {: .hands_on}
 
+## Pre-recorded demo
+
+As part of a GTN *experiment*, we've generated a recording of the following steps in the tutorial to create the `bellerophon.xml` file. You can refer to it if you find any step confusing.
+
+<div id="demo"></div>
+<script src="{{ site.baseurl }}/assets/js/asciinema-player@3.6.3.min.js"></script>
+<script>
+AsciinemaPlayer.create('{{ site.baseurl }}/topics/dev/tutorials/tool-from-scratch/tutorial.cast', document.getElementById('demo'), {
+  poster: 'npt:1:15',
+  theme: 'solarized-light'
+});
+</script>
+
 ## Initializing a Tool Wrapper
 
 Initializing a tool wrapper to be run in Galaxy is simple
@@ -482,6 +495,8 @@ Initializing a tool wrapper to be run in Galaxy is simple
 >
 {: .hands_on}
 
+{% snippet topics/admin/faqs/diffs.md %}
+
 ## Galaxy Tool Wrappers
 
 Galaxy tool wrapper xml files are made up of several sections:
@@ -526,10 +541,10 @@ The tool ID and name are defined here as well as which minimum version of Galaxy
 > +<tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
 >      <requirements>
 >      </requirements>
->      <command detect_errors="exit_code"><![CDATA[
 > {% endraw %}
 > ```
 > {: data-commit="Fix tool id"}
+>
 {: .hands_on}
 
 The @TOOL_VERSION@ and @VERSION_SUFFIX@ are what are referred to as "tokens", and will be furter discussed in the "Macros" section.
@@ -550,10 +565,10 @@ The description is simply presented as plaintext between the tags. Bellerophon's
 > +    <description>chimeric reads from Arima Genomics</description>
 >      <requirements>
 >      </requirements>
->      <command detect_errors="exit_code"><![CDATA[
 > {% endraw %}
 > ```
 > {: data-commit="Fix tool description"}
+>
 {: .hands_on}
 
 Which would present the tool's in the toolbar and at the top of the tool form as
@@ -585,10 +600,10 @@ The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. 
 > +    </macros>
 >      <requirements>
 >      </requirements>
->      <command detect_errors="exit_code"><![CDATA[
 > {% endraw %}
 > ```
 > {: data-commit="Add macros"}
+>
 {: .hands_on}
 
 This will cause the version string at the beginning to read "1.0+galaxy0", and set the conda package that is pulled to be bellerophon version 1.0.
@@ -659,7 +674,6 @@ We will now add a useful macro entry. With the Galaxy ecosystem is becoming more
 > +    <expand macro="bio_tools"/>
 >      <requirements>
 >      </requirements>
->      <command detect_errors="exit_code"><![CDATA[
 > {% endraw %}
 > ```
 > {: data-commit="Expand biotools macros"}
@@ -696,8 +710,6 @@ This specifies the
 > +        <requirement type="package" version="@TOOL_VERSION@">bellerophon</requirement>
 > +        <requirement type="package" version="1.12">samtools</requirement>
 >      </requirements>
->      <command detect_errors="exit_code"><![CDATA[
->          TODO: Fill in command template.
 > {% endraw %}
 > ```
 > {: data-commit="Add requirements"}
@@ -796,7 +808,7 @@ otherwise-irrelevant parameters if they don't need to. There are only 4 attribut
 
 The bellerophon tool's help section reads
 
-```txt
+```
 optional arguments:
   -h, --help            show this help message and exit
   --forward FORWARD, -f FORWARD
@@ -875,8 +887,6 @@ It also defines the format of that file and the name shown to the user in the hi
 >      <outputs>
 > +        <data name="outfile" label="${tool.name} on ${on_string}" format="bam" />
 >      </outputs>
->      <help><![CDATA[
->          TODO: Fill in help.
 > {% endraw %}
 > ```
 > {: data-commit="Add outputs"}
