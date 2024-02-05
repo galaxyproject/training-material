@@ -18,6 +18,9 @@ parser.add_argument(
 parser.add_argument(
     "--git-gat", action='store_true', help="If the tutorial is of the git-gat flavour"
 )
+parser.add_argument(
+    "--output", choices=["git", "json"], default="git", help="Output format"
+)
 args = parser.parse_args()
 
 
@@ -97,6 +100,14 @@ for line, text in enumerate(args.tutorial.read().split("\n")):
 postfix = ["--", "2.25.1", "", ""]
 
 # import sys; sys.exit()
+
+if args.output == "json":
+    asdf = [
+        '\n'.join(diff) for diff in diffs
+        ]
+    import json
+    print(json.dumps(asdf, indent=2))
+    sys.exit()
 
 
 GITGAT = os.path.dirname(args.prefix)
