@@ -26,7 +26,7 @@ notebook:
 ---
 
 
-[![](https://imgs.xkcd.com/comics/seven.png)](https://xkcd.com/2483)
+[![XKCD 2483](https://imgs.xkcd.com/comics/seven.png)](https://xkcd.com/2483)
 
 
 Preclass prep: Chapters [5](https://greenteapress.com/thinkpython2/html/thinkpython2009.html) and [7](https://greenteapress.com/thinkpython2/html/thinkpython2011.html) from "Think Python"
@@ -297,7 +297,7 @@ def edDistDp(x, y):
 ```
 A graphical representation of the matrix between `GCGTATGCACGC` and `GCTATGCCACGC` looks like this:
 
-![](https://i.imgur.com/veMfPFt.png)
+![A DP matrix with Seaborn](https://i.imgur.com/veMfPFt.png)
 
 This image is generated using [Seaborn](https://seaborn.pydata.org/index.html) package using matrix directly:
 
