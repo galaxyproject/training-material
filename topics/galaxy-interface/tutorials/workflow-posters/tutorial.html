@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Creating high resolution images of Galaxy Workflows / Using Galaxy and Managing your Data</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@9b18ed7fcf5fb38019adf85d2e77c7d90a4ced2c",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-posters/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1707146478' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1707146478' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Creating high resolution images of Galaxy Workflows">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-23 10:55:00 +0000">
+<meta name="DC.creator" content="Laila Los"><meta name="description" content="A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Using Galaxy and Managing your Data / Hands-on: Creating high resolution images of Galaxy Workflows">
+        <meta property="og:description" content="A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-01-23 10:55:00 +0000",
+  "datePublished": "2024-02-05 15:13:56 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Creating high resolution images of Galaxy Workflows",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Using Galaxy and Managing your Data",
+    "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Creating high resolution images of Galaxy Workflows",
+  "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-posters/tutorial.html",
+  "version": 7,
+  "timeRequired": "PT30M",
+  "teaches": "Create a high resolution image of your Workflow, ready for a poster\n - Learn how to utilize external tools to make high resolution images of your Workflow\n - Learn how to compress high resolution Workflow images to share them in the web",
+  "keywords": [
+    "Using Galaxy and Managing your Data",
+    "workflows"
+  ],
+  "description": "The questions this  addresses are:\n - How can I print or screenshot my Workflow in high resolution for a poster or presentation?\n - How can I share high detail images of my Workflows?\n\n\nThe objectives are:\n - Create a high resolution image of your Workflow, ready for a poster\n - Learn how to utilize external tools to make high resolution images of your Workflow\n - Learn how to compress high resolution Workflow images to share them in the web\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://www.mozilla.org/en-US/firefox/new/",
+      "name": "The Firefox Browser (this will not work in Chrome)"
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ElectronicBlueberry/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ElectronicBlueberry/",
+      "name": "Laila Los",
+      "image": "https://avatars.githubusercontent.com/ElectronicBlueberry",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2362-9720",
+      "orcid": "https://orcid.org/0000-0002-2362-9720"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Using Galaxy and Managing your Data",
+      "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "workflows"
+    }
+  ],
+  "abstract": "Sometimes we want to share our workflows outside of Galaxy, like printing it on a poster."
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1707146478'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/galaxy-interface" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Using Galaxy and Managing your Data
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/galaxy-interface/faqs/" title="Check our FAQs for the Using Galaxy and Managing your Data topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/workflow-posters/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/galaxy-interface/tutorials/workflow-posters/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/galaxy-interface/tutorials/workflow-posters/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/galaxy-interface/tutorials/workflow-posters/tutorial.html">2024-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/galaxy-interface/tutorials/workflow-posters/tutorial.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-galaxy-interface">
+    <h1 data-toc-skip>Creating high resolution images of Galaxy Workflows</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/ElectronicBlueberry/" class="contributor-badge contributor-ElectronicBlueberry"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/ElectronicBlueberry?s=36" alt="Laila Los avatar" width="36" class="avatar" />
+    Laila Los</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can I print or screenshot my Workflow in high resolution for a poster or presentation?</p>
+</li>
+        
+        <li><p>How can I share high detail images of my Workflows?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Create a high resolution image of your Workflow, ready for a poster</p>
+</li>
+        
+        <li><p>Learn how to utilize external tools to make high resolution images of your Workflow</p>
+</li>
+        
+        <li><p>Learn how to compress high resolution Workflow images to share them in the web</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        <a href="https://www.mozilla.org/en-US/firefox/new/">The Firefox Browser (this will not work in Chrome)</a>
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.no/" title="">
+			UseGalaxy.no
+		</a>
+	</li>
+    
+    
+
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 5, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Sometimes we want to share our workflows outside of Galaxy, like printing it on a poster.
+Making screenshots of Workflows looses a lot of detail, often to an degree where information is lost.</p>
+
+<p>There are third party tools which can help us in making high resolution screenshots that preserve all details
+and produce pictures which are suitable for printing and sharing.</p>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		If you want to print your Galaxy Workflow on a poster, choose "Print", otherwise "Web" is the better option.
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Print" onclick="cyoaChoice('Print')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Print</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Web" onclick="cyoaChoice('Web')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Web</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Print");
+		})
+	</script>
+	
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#making-a-high-resolution-screenshot-of-a-galaxy-workflow" id="markdown-toc-making-a-high-resolution-screenshot-of-a-galaxy-workflow">Making a high-resolution Screenshot of a Galaxy Workflow</a>    <ol>
+      <li><a href="#hiding-the-galaxy-ui" id="markdown-toc-hiding-the-galaxy-ui">Hiding the Galaxy UI</a></li>
+      <li><a href="#exporting-high-res-screenshots" id="markdown-toc-exporting-high-res-screenshots">Exporting high-res screenshots</a></li>
+    </ol>
+  </li>
+  <li><a href="#compressing-workflow-screenshots" id="markdown-toc-compressing-workflow-screenshots">Compressing Workflow Screenshots</a>    <ol>
+      <li><a href="#palette-compression" id="markdown-toc-palette-compression">Palette Compression</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="making-a-high-resolution-screenshot-of-a-galaxy-workflow">Making a high-resolution Screenshot of a Galaxy Workflow</h1>
+
+<div class="Print">
+  <p>In this section we will learn on how to make an image of a workflow which is suitable for printing on a poster.</p>
+</div>
+
+<div class="Web">
+  <p>In this section we will learn on how to make a screenshot of a workflow which preserves as much details as possible.</p>
+</div>
+
+<p>We will be using a feature built into the <a href="https://www.mozilla.org/firefox/">Firefox</a> web browser to make screenshots larger than our screen.
+This only works in Firefox, so make sure you have it installed and are using it to follow the rest of this tutorial.</p>
+
+<h2 id="hiding-the-galaxy-ui">Hiding the Galaxy UI</h2>
+
+<div class="Print">
+  <p>For our Workflow poster, we will likely not want to print the rest of Galaxys user interface.</p>
+</div>
+
+<div class="Web">
+  <p>For our screenshot, we may want to hide the rest of Galaxys user interface, so the focus is on the Workflow itself.</p>
+</div>
+
+<p>We could cut it out of the final image using image-manipulation tools, but this is slow and cumbersome, especially for high-res images.</p>
+
+<p>From Galaxy version 23.2 onwards there is a feature with which we can hide the Galaxy UI directly.
+It is meant to be used for embedding workflows, but can be accessed directly, which is perfect for purpose.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-hiding-the-galaxy-ui-for-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hiding the Galaxy UI for a Workflow</div>
+
+  <ol>
+    <li><strong>Opening the Workflow Preview</strong>
+      <ul>
+        <li>Navigate to your Workflows list</li>
+        <li>Press “<i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> View” on your desired Workflow</li>
+        <li>You should now see the preview page, which should look similar to this:
+<a href="./images/workflow-preview.png" rel="noopener noreferrer"><img src="./images/workflow-preview.png" alt="Galaxys Workflow Preview page with the workflow being rendered next to an info-box. " width="1773" height="1004" loading="lazy" /></a></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Add the following to the URL in your browser:</strong></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&amp;embed=true&amp;buttons=false&amp;about=false&amp;heading=false&amp;minimap=false&amp;zoom_controls=false
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>You should now see your Workflow rendered as shown below:</strong></p>
+
+      <p><a href="./images/workflow-preview-embedded.png" rel="noopener noreferrer"><img src="./images/workflow-preview-embedded.png" alt="Workflow preview page with all UI elements except for the Workflow itself hidden. " width="1773" height="1004" loading="lazy" /></a>
+In this view, you can still zoom in and out using your mouse-wheel, and drag the canvas around.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-what-does-the-text-in-the-url-do"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-does-the-text-in-the-url-do" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: What does the text in the URL do?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>These are so called query-parameters. They are chained to the existing parameters with a <code class="language-plaintext highlighter-rouge">&amp;</code> symbol. 
+Each parameter tells galaxy to render the UI slightly differently.
+If you’re curios at what they all do, try removing them individually and reloading the page.</p>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+  <p>If you cannot see a preview page like in the first screenshot, or if the query parameters have no effect,
+you are on a Galaxy version older than 23.2</p>
+
+  <p>You can still follow the rest of this tutorial to learn how to make high-resolution screenshots.</p>
+</blockquote>
+
+<h2 id="exporting-high-res-screenshots">Exporting high-res screenshots</h2>
+
+<p>Now that we have a view of our Workflow without the Galaxy UI, let’s make a high-res screenshot using Firefox.</p>
+
+<div class="Print">
+  <p>Firstly position your Workflow, so all of it is visible in the way you would like it to be on the poster.</p>
+</div>
+
+<div class="Web">
+  <p>Firstly position your Workflow, so all of it is visible in the way you would like it to be on the screenshot.</p>
+</div>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-can-t-fit-your-entire-workflow-at-once"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-t-fit-your-entire-workflow-at-once" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Can't fit your entire Workflow at once?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>If you zoomed out as far as possible, but can’t view all of your Workflow, try the following:</p>
+  <ul>
+    <li>Navigate back to the full Workflow preview page (without the UI hidden)</li>
+    <li>Click anywhere outside of the Workflow preview (e.g. on the about section)</li>
+    <li>Zoom out the entire browser window a bit, by using <kbd>Ctrl</kbd> + <kbd>Mouse Wheel</kbd>, or <kbd>Ctrl</kbd> + <kbd>-</kbd></li>
+    <li>Re-add the query parameters we added in the previous section</li>
+    <li>If you still can’t fit all of it, repeat the above steps</li>
+  </ul>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-creating-a-high-resolution-screenshot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating a high-resolution screenshot</div>
+
+  <ol>
+    <li><strong>Open the Firefox Javascript console.</strong> To do this, either:
+      <ul>
+        <li>Use the shortcut <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd> (On OS X <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd>)</li>
+        <li>Or navigate to the console using your mouse:
+          <ul>
+            <li>Menu</li>
+            <li>More Tools</li>
+            <li>Web Developer Tools</li>
+            <li>Console Tab</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Resize or move the console</strong></p>
+
+      <p>The console may be in the way of your Workflow.</p>
+
+      <p>You can make it take up less space by dragging down the bar at the top.</p>
+
+      <p>You can also reposition it to the side, by selecting the three dots in the upper right corner of the console,
+and choosing a different position from: “Dock to Bottom”, “Dock to Right”, “Dock to Left”, “Separate Window”.</p>
+    </li>
+    <li>
+      <p><strong>Make the screenshot</strong></p>
+
+      <p>In the Javascript console type:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:screenshot --dpr 6
+</code></pre></div>      </div>
+      <p>After a short moment, a new screenshot should appear in your downloads folder.</p>
+
+      <p>The value “6” after the <code class="language-plaintext highlighter-rouge">--dpr</code> option is just an example. Keep reading to learn how to choose the right dpr value.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<div class="Print">
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-choosing-the-right-dpr-value-for-print"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-choosing-the-right-dpr-value-for-print" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Choosing the right dpr value for print</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p><code class="language-plaintext highlighter-rouge">dpr</code> stands for <strong>D</strong>evice <strong>P</strong>ixel <strong>R</strong>atio.</p>
+
+    <p>This is how much Firefox will scale up your screenshot. A dpr of 2, will make your screenshot twice as wide and high as you browser window.</p>
+
+    <p>Always go higher than you think you need, when choosing a dpr for print.
+Here’s a rule-of thumb on how to determine the correct dpr:</p>
+
+    <ul>
+      <li>Think about how much bigger your poster is going to be than your browser window, in physical dimensions.
+If unsure, round up.</li>
+      <li>Multiply that number by 2</li>
+    </ul>
+
+    <p>Example: If your poster will be roughly 4 times larger than your browser window, choose a dpr of 8.</p>
+
+  </blockquote>
+</div>
+
+<div class="Web">
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-choosing-the-right-dpr-value-for-your-screenshot"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-choosing-the-right-dpr-value-for-your-screenshot" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Choosing the right dpr value for your screenshot</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p><code class="language-plaintext highlighter-rouge">dpr</code> stands for <strong>D</strong>evice <strong>P</strong>ixel <strong>R</strong>atio.</p>
+
+    <p>This is how much Firefox will scale up your screenshot. A dpr of 2, will make your screenshot twice as wide and high as you browser window.</p>
+
+    <p>Choosing the right dpr for a screenshot depends on how much you’ve zoomed out.
+If you’ve zoomed out to about half the starting size, go with a dpr of two.
+If you want your screenshot to be extra crisp, add 2.</p>
+
+    <p>Example: You zoomed out to 25%. Use a dpr of 4 (<code class="language-plaintext highlighter-rouge">25% * 4 = 100%</code>), then add 2 for extra detail equals a dpr of 6.</p>
+
+    <p>To check if you’ve chosen an appropriate dpr, open the screenshot in firefox,
+click it to zoom in to 100%, and check if all text is clearly readable.</p>
+
+  </blockquote>
+</div>
+
+<h1 id="compressing-workflow-screenshots">Compressing Workflow Screenshots</h1>
+
+<div class="Print">
+  <p>You may have noticed the file-size of your screenshot it very large.
+Some print services may have restrictions on file size, and you won’t be able to upload your screenshot for printing.</p>
+</div>
+
+<div class="Web">
+  <p>You may have noticed the file-size of your screenshot it very large.
+You will likely not be able to upload it anywhere, as it is larger than most services allow images to be.</p>
+</div>
+
+<p>In the following section, you will learn how to compress your screenshot to a smaller file-size.</p>
+
+<h2 id="palette-compression">Palette Compression</h2>
+
+<p>There are many ways to compress an image.
+Palette compression is particularly well suited for workflows.
+It can heavily reduce file size with minimal loss, if the amount of colors in an image is fairly low.</p>
+
+<p>To compress our image, we will be using a piece of software called <a href="http://www.graphicsmagick.org/">GraphicsMagick</a></p>
+
+<p>This tool is known to be installed on <a href="https://usegalaxy.eu">usegalaxy.eu</a>, we suggest you follow these steps there:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-uploading-your-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Uploading Your Image</div>
+
+  <ol>
+    <li>Open <a href="https://usegalaxy.eu">usegalaxy.eu</a></li>
+    <li>At the top of the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Tools</strong> panel (on the left), click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong></li>
+    <li>Select “Choose Local Files” from the bottom of the dialog</li>
+    <li>Select your saved screenshot, likely from your Downloads folder.</li>
+    <li>Click <strong>Start</strong></li>
+    <li>Click <strong>Close</strong></li>
+  </ol>
+
+</blockquote>
+
+<p>With the data on your Galaxy, we can start trying to compress it!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-compressing-your-screenshot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compressing your screenshot</div>
+  <ol>
+    <li>Run the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.40+galaxy0" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.40+galaxy0)</span> tool
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Image to convert”</em>: <code class="language-plaintext highlighter-rouge">screenshot.png</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Reduce Color Palette”</em>: <code class="language-plaintext highlighter-rouge">Automatic</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output Format”</em>: <code class="language-plaintext highlighter-rouge">png</code></li>
+      </ul>
+
+      <p>This will have GraphicsMagick use automatic palette compression.
+This command may take a while.</p>
+    </li>
+    <li>
+      <p><strong>Open the compressed image</strong> to check if everything is still clearly visible.</p>
+
+      <p>Also check if the file size is now small enough for your purposes. (Click the dataset in your history to expand it to see the file size.)</p>
+    </li>
+    <li>
+      <p>If you want more control over your output file, you can provide a number of colours, instead of using the automatic reduction. Let’s re-run the tool and provide a number of colours you want to keep in your output image. This number should be in powers of two (4, 8, 16, 32, 64 etc.).</p>
+
+      <p>Using smaller numbers will further reduce the file size at the cost of image quality.
+Smaller values do not always yield smaller files! Experiment a bit, or go with the option from step 4 for simplicity.</p>
+    </li>
+    <li>Run the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.40+galaxy0" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.40+galaxy0)</span> tool
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Image to convert”</em>: <code class="language-plaintext highlighter-rouge">screenshot.png</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Reduce Color Palette”</em>: <code class="language-plaintext highlighter-rouge">Manual</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Color Palette Size”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output Format”</em>: <code class="language-plaintext highlighter-rouge">png</code></li>
+      </ul>
+    </li>
+    <li>Try different values until you get a result you like! Did you manage to create a smaller result than the automatic palette compression?</li>
+  </ol>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-tips-for-compressing-images"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tips-for-compressing-images" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Tips for compressing images</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ol>
+    <li>JPEG is a naturally “lossy” format, you can try that instead of PNG</li>
+    <li>If the image is quite large, consider scaling it down with the “Resize %” parameter</li>
+    <li>Experiment with the colour palettes! You will likely be able to find one that is a good tradeoff between accuracy and file size for your use case.</li>
+  </ol>
+</blockquote>
+
+<p>Here’s an example workflow screenshot compressed from <code class="language-plaintext highlighter-rouge">2.4mb</code> to <code class="language-plaintext highlighter-rouge">830kb</code>. Click it to view it in full resolution.</p>
+
+<p><a href="./images/example-screenshot-compressed.png" rel="noopener noreferrer"><img src="./images/example-screenshot-compressed.png" alt="high resolution screenshot of a Workflow. " width="6528" height="3680" loading="lazy" /></a></p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Print ready screenshots</p>
+</li>
+                        
+                        <li><p>Basic image compression</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/galaxy-interface/faqs/">FAQ page for the Using Galaxy and Managing your Data topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Creating high resolution images of Galaxy Workflows (Using Galaxy and Managing your Data)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Laila Los,  <b>Creating high resolution images of Galaxy Workflows (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-posters/tutorial.html">https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-posters/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{galaxy-interface-workflow-posters,
+author = "Laila Los",
+	title = "Creating high resolution images of Galaxy Workflows (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-posters/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-posters/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: graphicsmagick_image_convert
+  owner: bgruening
+  revisions: 5376a7767fb3
+  tool_panel_section_label: Convert Formats
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/9b18ed7fcf5fb38019adf85d2e77c7d90a4ced2c">9b18ed7</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/workflow-posters/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1707146478'></script>
+        
+    </body>
+</html>
