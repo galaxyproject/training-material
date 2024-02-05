@@ -90,7 +90,7 @@ for line, text in enumerate(tutorial_contents):
         new_diff = from_patch[1]
         chunks.append(prefix_text + "{% raw %}")
         chunks.append(prefix_text + "```diff")
-        chunks.extend([f'{prefix}{amount * " "}{line}' for line in new_diff])
+        chunks.extend([f'{prefix}{amount * " "}{line.replace("<!CDATA", "<​!​CDATA")}' for line in new_diff])
         chunks.append(prefix_text + "{% endraw %}")
         chunks.append(prefix_text + "```")
         chunks.append(prefix_text + '{: data-commit="%s"%s}' % (exp_msg, obs_extra))
