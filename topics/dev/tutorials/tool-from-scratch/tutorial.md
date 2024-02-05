@@ -457,21 +457,26 @@ Initializing a tool wrapper to be run in Galaxy is simple
 >
 > 4. You can now open the new xml file that has been generated to begin the wrapping. It should look something like this:
 >
->    ```xml
->    <tool id="bellerophon" name="bellerophon" version="0.1.0" python_template_version="3.5">
->        <requirements>
->        </requirements>
->        <command detect_errors="exit_code"><![CDATA[
->            TODO: Fill in command template.
->        ]]></command>
->        <inputs>
->        </inputs>
->        <outputs>
->        </outputs>
->        <help><![CDATA[
->            TODO: Fill in help.
->        ]]></help>
->    </tool>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/bellerophon.xml
+>    @@ -0,0 +1,14 @@
+>    +<tool id="bellerophon" name="bellerophon" version="0.1.0" python_template_version="3.5">
+>    +    <requirements>
+>    +    </requirements>
+>    +    <command detect_errors="exit_code"><![CDATA[
+>    +        TODO: Fill in command template.
+>    +    ]]></command>
+>    +    <inputs>
+>    +    </inputs>
+>    +    <outputs>
+>    +    </outputs>
+>    +    <help><![CDATA[
+>    +        TODO: Fill in help.
+>    +    ]]></help>
+>    +</tool>
+>    {% endraw %}
 >    ```
 >    {: data-commit="Planemo init"}
 >
@@ -512,8 +517,17 @@ The tool ID and name are defined here as well as which minimum version of Galaxy
 >
 > when complete, the line should appear as follows:
 >
-> ```xml
-> <tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -1,4 +1,4 @@
+> -<tool id="bellerophon" name="bellerophon" version="0.1.0" python_template_version="3.5">
+> +<tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+>      <requirements>
+>      </requirements>
+>      <command detect_errors="exit_code"><![CDATA[
+> {% endraw %}
 > ```
 > {: data-commit="Fix tool id"}
 {: .hands_on}
@@ -527,8 +541,17 @@ The description is simply presented as plaintext between the tags. Bellerophon's
 
 > <hands-on-title>Adding a description</hands-on-title>
 > Add the following description to your tool
-> ```xml
-> <description>chimeric reads from Arima Genomics</description>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -1,4 +1,5 @@
+>  <tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+> +    <description>chimeric reads from Arima Genomics</description>
+>      <requirements>
+>      </requirements>
+>      <command detect_errors="exit_code"><![CDATA[
+> {% endraw %}
 > ```
 > {: data-commit="Fix tool description"}
 {: .hands_on}
@@ -549,11 +572,21 @@ The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. 
 
 > <hands-on-title>Macros</hands-on-title>
 > Add the following macros section to your tool:
-> ```xml
-> <macros>
->     <token name="@TOOL_VERSION@">1.0</token>
->     <token name="@VERSION_SUFFIX@">0</token>
-> </macros>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -1,5 +1,9 @@
+>  <tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+>      <description>chimeric reads from Arima Genomics</description>
+> +    <macros>
+> +        <token name="@TOOL_VERSION@">1.0</token>
+> +        <token name="@VERSION_SUFFIX@">0</token>
+> +    </macros>
+>      <requirements>
+>      </requirements>
+>      <command detect_errors="exit_code"><![CDATA[
+> {% endraw %}
 > ```
 > {: data-commit="Add macros"}
 {: .hands_on}
@@ -596,28 +629,38 @@ We will now add a useful macro entry. With the Galaxy ecosystem is becoming more
 >
 > Let's create a macro xml file next to our tool xml: `bellerophon_macros.xml`
 >
-> ```xml
-> <macros>
->   <xml name="bio_tools">
->     <xrefs>
->         <xref type="bio.tools">Bellerophon</xref>
->     </xrefs>
->   </xml>
-> </macros>
+> {% raw %}
+> ```diff
+> --- /dev/null
+> +++ b/bellerophon_macros.xml
+> @@ -0,0 +1,7 @@
+> +<macros>
+> +  <xml name="bio_tools">
+> +    <xrefs>
+> +        <xref type="bio.tools">Bellerophon</xref>
+> +    </xrefs>
+> +  </xml>
+> +</macros>
+> {% endraw %}
 > ```
 > {: data-commit="Add macros.xml"}
 >
 > Now we can expand the `bio_tools` macro in our tool XML, beneath the tokens:
 >
-> ```xml
-> <macros>
->     <token name="@TOOL_VERSION@">1.0</token>
->     <token name="@VERSION_SUFFIX@">0</token>
-> </macros>
->
-> <import>bellerophon_macros.xml</import>
-> <expand macro="bio_tools"/>
->
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -4,6 +4,8 @@
+>          <token name="@TOOL_VERSION@">1.0</token>
+>          <token name="@VERSION_SUFFIX@">0</token>
+>      </macros>
+> +    <import>bellerophon_macros.xml</import>
+> +    <expand macro="bio_tools"/>
+>      <requirements>
+>      </requirements>
+>      <command detect_errors="exit_code"><![CDATA[
+> {% endraw %}
 > ```
 > {: data-commit="Expand biotools macros"}
 >
@@ -642,11 +685,20 @@ This specifies the
 > <hands-on-title>Adding requirements</hands-on-title>
 > In the case of bellerophon, which requires two dependencies, bellerophon and samtools, the requirements section appears like so. Add them to your tool XML.
 >
-> ```xml
->   <requirements>
->         <requirement type="package" version="@TOOL_VERSION@">bellerophon</requirement>
->         <requirement type="package" version="1.12">samtools</requirement>
->   </requirements>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -7,6 +7,8 @@
+>      <import>bellerophon_macros.xml</import>
+>      <expand macro="bio_tools"/>
+>      <requirements>
+> +        <requirement type="package" version="@TOOL_VERSION@">bellerophon</requirement>
+> +        <requirement type="package" version="1.12">samtools</requirement>
+>      </requirements>
+>      <command detect_errors="exit_code"><![CDATA[
+>          TODO: Fill in command template.
+> {% endraw %}
 > ```
 > {: data-commit="Add requirements"}
 {: .hands_on}
@@ -780,12 +832,21 @@ but not exposed to the user.
 > > > <solution-title></solution-title>
 > > > To include all of the necessary parameters, then, the inputs section would appear like this
 > > >
-> > > ```xml
-> > > <inputs>
-> > >     <param argument="--forward" type="data" format="qname_sorted.bam,sam" label="First set of reads" help="This is usually the forward reads in your experiment." />
-> > >     <param argument="--reverse" type="data" format="qname_sorted.bam,sam" label="Second set of reads" help="This is usually the reverse reads in your experiment." />
-> > >     <param argument="--quality" type="integer" value="20" min="0" label="Minimum mapping quality"/>
-> > > </inputs>
+> > > {% raw %}
+> > > ```diff
+> > > --- a/bellerophon.xml
+> > > +++ b/bellerophon.xml
+> > > @@ -14,6 +14,9 @@
+> > >          TODO: Fill in command template.
+> > >      ]]></command>
+> > >      <inputs>
+> > > +        <param argument="--forward" type="data" format="qname_sorted.bam,sam" label="First set of reads" help="This is usually the forward reads in your experiment." />
+> > > +        <param argument="--reverse" type="data" format="qname_sorted.bam,sam" label="Second set of reads" help="This is usually the reverse reads in your experiment." />
+> > > +        <param argument="--quality" type="integer" value="20" min="0" label="Minimum mapping quality"/>
+> > >      </inputs>
+> > >      <outputs>
+> > >      </outputs>
+> > > {% endraw %}
 > > > ```
 > > > {: data-commit="Add inputs"}
 > > {: .solution}
@@ -804,10 +865,19 @@ It also defines the format of that file and the name shown to the user in the hi
 > <hands-on-title>Adding your outputs</hands-on-title>
 > As Bellerophon has a single output file, add the following outputs section to your tool:
 >
-> ```xml
-> <outputs>
->     <data name="outfile" label="${tool.name} on ${on_string}" format="bam" />
-> </outputs>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -19,6 +19,7 @@
+>          <param argument="--quality" type="integer" value="20" min="0" label="Minimum mapping quality"/>
+>      </inputs>
+>      <outputs>
+> +        <data name="outfile" label="${tool.name} on ${on_string}" format="bam" />
+>      </outputs>
+>      <help><![CDATA[
+>          TODO: Fill in help.
+> {% endraw %}
 > ```
 > {: data-commit="Add outputs"}
 {: .hands_on}
@@ -932,30 +1002,42 @@ runs the helloworld.py script present in the same folder as the tool xml, then e
 >
 > The bellerophon command section, based on the variables set previously, would be as follows. Please add it to your tool XML.
 >
-> ```xml
->     <command detect_errors="exit_code"><![CDATA[
->         #if $forward.is_of_type("sam"):
->             #set $forward_input = 'forward_input.sam'
->             ln -s '${forward}' '$forward_input' &&
->         #else:
->             #set $forward_input = 'forward_input.bam'
->             ln -s '${forward}' '$forward_input' &&
->         #end if
->         #if $reverse.is_of_type("sam"):
->             #set $reverse_input = 'reverse_input.sam'
->             ln -s '${reverse}' '$reverse_input' &&
->         #else:
->             #set $reverse_input = 'reverse_input.bam'
->             ln -s '${reverse}' '$reverse_input' &&
->         #end if
->         bellerophon
->         --forward $forward_input
->         --reverse $reverse_input
->         --quality $quality
->         --output 'merged_out.bam'
->         && samtools sort --no-PG -O BAM -o '$outfile' -@ \${GALAXY_SLOTS:-1} merged_out.bam
->         ]]>
->     </command>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -11,8 +11,28 @@
+>          <requirement type="package" version="1.12">samtools</requirement>
+>      </requirements>
+>      <command detect_errors="exit_code"><![CDATA[
+> -        TODO: Fill in command template.
+> -    ]]></command>
+> +        #if $forward.is_of_type("sam"):
+> +            #set $forward_input = 'forward_input.sam'
+> +            ln -s '${forward}' '$forward_input' &&
+> +        #else:
+> +            #set $forward_input = 'forward_input.bam'
+> +            ln -s '${forward}' '$forward_input' &&
+> +        #end if
+> +        #if $reverse.is_of_type("sam"):
+> +            #set $reverse_input = 'reverse_input.sam'
+> +            ln -s '${reverse}' '$reverse_input' &&
+> +        #else:
+> +            #set $reverse_input = 'reverse_input.bam'
+> +            ln -s '${reverse}' '$reverse_input' &&
+> +        #end if
+> +        bellerophon
+> +        --forward $forward_input
+> +        --reverse $reverse_input
+> +        --quality $quality
+> +        --output 'merged_out.bam'
+> +        && samtools sort --no-PG -O BAM -o '$outfile' -@ \${GALAXY_SLOTS:-1} merged_out.bam
+> +        ]]>
+> +    </command>
+>      <inputs>
+>          <param argument="--forward" type="data" format="qname_sorted.bam,sam" label="First set of reads" help="This is usually the forward reads in your experiment." />
+>          <param argument="--reverse" type="data" format="qname_sorted.bam,sam" label="Second set of reads" help="This is usually the reverse reads in your experiment." />
+> {% endraw %}
 > ```
 > {: data-commit="Command block"}
 {: .hands_on}
@@ -1005,14 +1087,23 @@ As all parameters in bellerophon are accessible at once, and do not contradict o
 
 > <hands-on-title>Adding a test</hands-on-title>
 > Add the following test case to your tool:
-> ```xml
->     <tests>
->         <test expect_num_outputs="1">
->             <param name="forward" value="forward.bam" />
->             <param name="reverse" value="reverse.bam" />
->             <output name="outfile" file="merged-out.bam" ftype="bam" />
->         </test>
->     </tests>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -44,4 +44,11 @@
+>      <help><![CDATA[
+>          TODO: Fill in help.
+>      ]]></help>
+> +    <tests>
+> +        <test expect_num_outputs="1">
+> +            <param name="forward" value="forward.bam" />
+> +            <param name="reverse" value="reverse.bam" />
+> +            <output name="outfile" file="merged-out.bam" ftype="bam" />
+> +        </test>
+> +    </tests>
+>  </tool>
+> {% endraw %}
 > ```
 > {: data-commit="Adding a test"}
 {: .hands_on}
@@ -1081,12 +1172,23 @@ Multiple citations can be added by using additional citation tags.
 
 > <hands-on-title>Adding a citation</hands-on-title>
 > Add the citation above using either method (but not both!)
-> ```xml
-> <citations>
->     <citation type="doi">10.1038/s41586-021-03451-0</citation>
-> </citations>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -44,6 +44,9 @@
+>      <help><![CDATA[
+>          TODO: Fill in help.
+>      ]]></help>
+> +    <citations>
+> +        <citation type="doi">10.1038/s41586-021-03451-0</citation>
+> +    </citations>
+>      <tests>
+>          <test expect_num_outputs="1">
+>              <param name="forward" value="forward.bam" />
+> {% endraw %}
 > ```
-> {: .hidden data-commit="Add citation"}
+> {: data-commit="Add citation"}
 {: .hands_on}
 
 ## Final wrapper
