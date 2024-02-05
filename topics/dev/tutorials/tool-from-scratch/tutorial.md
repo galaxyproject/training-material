@@ -478,14 +478,14 @@ Initializing a tool wrapper to be run in Galaxy is simple
 >    +<tool id="bellerophon" name="bellerophon" version="0.1.0" python_template_version="3.5">
 >    +    <requirements>
 >    +    </requirements>
->    +    <command detect_errors="exit_code"><![CDATA[
+>    +    <command detect_errors="exit_code"><​!​[CDATA[
 >    +        TODO: Fill in command template.
 >    +    ]]></command>
 >    +    <inputs>
 >    +    </inputs>
 >    +    <outputs>
 >    +    </outputs>
->    +    <help><![CDATA[
+>    +    <help><​!​[CDATA[
 >    +        TODO: Fill in help.
 >    +    ]]></help>
 >    +</tool>
@@ -541,7 +541,7 @@ The tool ID and name are defined here as well as which minimum version of Galaxy
 > +<tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
 >      <requirements>
 >      </requirements>
->      <command detect_errors="exit_code"><![CDATA[
+>      <command detect_errors="exit_code"><​!​[CDATA[
 > {% endraw %}
 > ```
 > {: data-commit="Fix tool id"}
@@ -566,7 +566,7 @@ The description is simply presented as plaintext between the tags. Bellerophon's
 > +    <description>chimeric reads from Arima Genomics</description>
 >      <requirements>
 >      </requirements>
->      <command detect_errors="exit_code"><![CDATA[
+>      <command detect_errors="exit_code"><​!​[CDATA[
 > {% endraw %}
 > ```
 > {: data-commit="Fix tool description"}
@@ -602,7 +602,7 @@ The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. 
 > +    </macros>
 >      <requirements>
 >      </requirements>
->      <command detect_errors="exit_code"><![CDATA[
+>      <command detect_errors="exit_code"><​!​[CDATA[
 > {% endraw %}
 > ```
 > {: data-commit="Add macros"}
@@ -677,7 +677,7 @@ We will now add a useful macro entry. With the Galaxy ecosystem is becoming more
 > +    <expand macro="bio_tools"/>
 >      <requirements>
 >      </requirements>
->      <command detect_errors="exit_code"><![CDATA[
+>      <command detect_errors="exit_code"><​!​[CDATA[
 > {% endraw %}
 > ```
 > {: data-commit="Expand biotools macros"}
@@ -714,7 +714,7 @@ This specifies the
 > +        <requirement type="package" version="@TOOL_VERSION@">bellerophon</requirement>
 > +        <requirement type="package" version="1.12">samtools</requirement>
 >      </requirements>
->      <command detect_errors="exit_code"><![CDATA[
+>      <command detect_errors="exit_code"><​!​[CDATA[
 >          TODO: Fill in command template.
 > {% endraw %}
 > ```
@@ -893,7 +893,7 @@ It also defines the format of that file and the name shown to the user in the hi
 >      <outputs>
 > +        <data name="outfile" label="${tool.name} on ${on_string}" format="bam" />
 >      </outputs>
->      <help><![CDATA[
+>      <help><​!​[CDATA[
 >          TODO: Fill in help.
 > {% endraw %}
 > ```
@@ -1027,7 +1027,7 @@ runs the helloworld.py script present in the same folder as the tool xml, then e
 > @@ -11,8 +11,28 @@
 >          <requirement type="package" version="1.12">samtools</requirement>
 >      </requirements>
->      <command detect_errors="exit_code"><![CDATA[
+>      <command detect_errors="exit_code"><​!​[CDATA[
 > -        TODO: Fill in command template.
 > -    ]]></command>
 > +        #if $forward.is_of_type("sam"):
@@ -1110,7 +1110,7 @@ As all parameters in bellerophon are accessible at once, and do not contradict o
 > --- a/bellerophon.xml
 > +++ b/bellerophon.xml
 > @@ -44,4 +44,11 @@
->      <help><![CDATA[
+>      <help><​!​[CDATA[
 >          TODO: Fill in help.
 >      ]]></help>
 > +    <tests>
@@ -1195,7 +1195,7 @@ Multiple citations can be added by using additional citation tags.
 > --- a/bellerophon.xml
 > +++ b/bellerophon.xml
 > @@ -44,6 +44,9 @@
->      <help><![CDATA[
+>      <help><​!​[CDATA[
 >          TODO: Fill in help.
 >      ]]></help>
 > +    <citations>
