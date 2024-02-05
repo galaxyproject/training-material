@@ -15,6 +15,9 @@ parser.add_argument("tutorial", type=argparse.FileType("r"), help="Input tutoria
 parser.add_argument(
     "prefix", help="Some prefix for the output commit files to keep them separate"
 )
+parser.add_argument(
+    "--git-gat", action='store_true', help="If the tutorial is of the git-gat flavour"
+)
 args = parser.parse_args()
 
 
@@ -100,23 +103,25 @@ GITGAT = os.path.dirname(args.prefix)
 BASE = os.path.basename(args.prefix)
 BASE_PARTS = BASE.split('-')
 
-cmdhandle = open(f"{GITGAT}/.scripts/{BASE}-run.sh", 'w')
-cmdhandle.write("#!/bin/bash\n")
-cmdhandle.write("set -ex\n\n")
-cmdhandle.write("# Install dependencies before changing commits\n")
-cmdhandle.write(f"find .scripts -name requirements.txt | xargs --no-run-if-empty -n 1 pip install -r\n")
-cmdhandle.write('cat hosts | sed "s/^gat.*/$(hostname -f) ansible_connection=local ansible_user=$(whoami)/g" > ~/.hosts\n')
+cmdhandle = None
+if args.git_gat:
+    cmdhandle = open(f"{GITGAT}/.scripts/{BASE}-run.sh", 'w')
+    cmdhandle.write("#!/bin/bash\n")
+    cmdhandle.write("set -ex\n\n")
+    cmdhandle.write("# Install dependencies before changing commits\n")
+    cmdhandle.write(f"find .scripts -name requirements.txt | xargs --no-run-if-empty -n 1 pip install -r\n")
+    cmdhandle.write('cat hosts | sed "s/^gat.*/$(hostname -f) ansible_connection=local ansible_user=$(whoami)/g" > ~/.hosts\n')
 
-cmdhandle.write('export GALAXY_HOSTNAME="$(hostname -f)"\n')
-cmdhandle.write('export GALAXY_API_KEY=adminkey\n')
-cmdhandle.write("## The students should use a random password, we override with 'password' for reproducibility\n")
-cmdhandle.write("echo 'password' > ~/.vault-password.txt;\n")
-cmdhandle.write("## And one in this directory, it can contain garbage\n")
-cmdhandle.write("echo 'garbage' > ./.vault-password.txt;\n")
-# If it's after the ansible-galaxy tutorial
-if int(BASE_PARTS[0]) > 10:
-    cmdhandle.write("## Ensure the galaxy user is setup\n")
-    cmdhandle.write("sudo -u galaxy /srv/galaxy/venv/bin/python /usr/bin/galaxy-create-user -c /srv/galaxy/config/galaxy.yml --user admin@example.org --password password --key adminkey --username admin\n")
+    cmdhandle.write('export GALAXY_HOSTNAME="$(hostname -f)"\n')
+    cmdhandle.write('export GALAXY_API_KEY=adminkey\n')
+    cmdhandle.write("## The students should use a random password, we override with 'password' for reproducibility\n")
+    cmdhandle.write("echo 'password' > ~/.vault-password.txt;\n")
+    cmdhandle.write("## And one in this directory, it can contain garbage\n")
+    cmdhandle.write("echo 'garbage' > ./.vault-password.txt;\n")
+    # If it's after the ansible-galaxy tutorial
+    if int(BASE_PARTS[0]) > 10:
+        cmdhandle.write("## Ensure the galaxy user is setup\n")
+        cmdhandle.write("sudo -u galaxy /srv/galaxy/venv/bin/python /usr/bin/galaxy-create-user -c /srv/galaxy/config/galaxy.yml --user admin@example.org --password password --key adminkey --username admin\n")
 
 lastCommit = None
 for idx, diff in enumerate(diffs):
@@ -179,4 +184,5 @@ for idx, diff in enumerate(diffs):
     else:
         print("Unknown!")
 
-cmdhandle.write("# Done!\ngit checkout main\n")
+if cmdhandle:
+    cmdhandle.write("# Done!\ngit checkout main\n")
