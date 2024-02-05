@@ -1,0 +1,34 @@
+name: "[Cron] Rebuild needed asciinema recordings"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '00 23 * * 0'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: |
+      github.repository == 'galaxyproject/training-material' &&
+      (github.event_name != 'pull_request' ||
+       github.event.pull_request.head.repo.full_name == github.repository)
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 500
+
+      - name: Run script
+        run:
+          bin/video-asciinema.sh
+
+      - name: Create Pull Request
+        # If it's not a Pull Request then commit any changes as a new PR.
+        if: |
+          github.event_name != 'pull_request' &&
+          steps.calibre.outputs.markdown != ''
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: Auto record tutorial into asciinema cast
+          branch-suffix: timestamp
+          commit-message: Update asciinema recording
+          body: ${{ steps.calibre.outputs.markdown }}
+          add-paths: topics/dev/tutorials/tool-from-scratch/tutorial.cast
