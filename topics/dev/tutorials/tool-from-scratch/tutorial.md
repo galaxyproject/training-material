@@ -20,7 +20,8 @@ key_points:
   - Galaxy tools are made in 3 parts -- Conda, tool wrappers, and planemo
   - Anyone can write and deploy a tool wrapper!
 subtopic: tooldev
-contributors:
+contributions:
+  authorship:
   - astrovsky01
   - davebx
   - bernt-matthias
@@ -472,6 +473,7 @@ Initializing a tool wrapper to be run in Galaxy is simple
 >        ]]></help>
 >    </tool>
 >    ```
+>    {: data-commit="Planemo init"}
 >
 {: .hands_on}
 
@@ -513,6 +515,7 @@ The tool ID and name are defined here as well as which minimum version of Galaxy
 > ```xml
 > <tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
 > ```
+> {: data-commit="Fix tool id"}
 {: .hands_on}
 
 The @TOOL_VERSION@ and @VERSION_SUFFIX@ are what are referred to as "tokens", and will be furter discussed in the "Macros" section.
@@ -527,6 +530,7 @@ The description is simply presented as plaintext between the tags. Bellerophon's
 > ```xml
 > <description>chimeric reads from Arima Genomics</description>
 > ```
+> {: data-commit="Fix tool description"}
 {: .hands_on}
 
 Which would present the tool's in the toolbar and at the top of the tool form as
@@ -551,6 +555,7 @@ The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. 
 >     <token name="@VERSION_SUFFIX@">0</token>
 > </macros>
 > ```
+> {: data-commit="Add macros"}
 {: .hands_on}
 
 This will cause the version string at the beginning to read "1.0+galaxy0", and set the conda package that is pulled to be bellerophon version 1.0.
@@ -600,6 +605,7 @@ We will now add a useful macro entry. With the Galaxy ecosystem is becoming more
 >   </xml>
 > </macros>
 > ```
+> {: data-commit="Add macros.xml"}
 >
 > Now we can expand the `bio_tools` macro in our tool XML, beneath the tokens:
 >
@@ -613,6 +619,7 @@ We will now add a useful macro entry. With the Galaxy ecosystem is becoming more
 > <expand macro="bio_tools"/>
 >
 > ```
+> {: data-commit="Expand biotools macros"}
 >
 > If your tool does not yet have an entry in bio.tools, we highly encourage you to create one!
 > It takes just 5 minutes to register with bio.tools to start contributing towards this global registry of computational resources.
@@ -641,6 +648,7 @@ This specifies the
 >         <requirement type="package" version="1.12">samtools</requirement>
 >   </requirements>
 > ```
+> {: data-commit="Add requirements"}
 {: .hands_on}
 
 This uses the macro token for @TOOL_VERSION@ for the Bioconda package version to retrieve the version number for bellerophon, while samtools' version is set manually.
@@ -779,6 +787,7 @@ but not exposed to the user.
 > > >     <param argument="--quality" type="integer" value="20" min="0" label="Minimum mapping quality"/>
 > > > </inputs>
 > > > ```
+> > > {: data-commit="Add inputs"}
 > > {: .solution}
 > {: .question}
 {: .hands_on}
@@ -800,6 +809,7 @@ It also defines the format of that file and the name shown to the user in the hi
 >     <data name="outfile" label="${tool.name} on ${on_string}" format="bam" />
 > </outputs>
 > ```
+> {: data-commit="Add outputs"}
 {: .hands_on}
 
 This generates a history item called "bellerophon on `<input file name>`", as the ${tool.name} and ${on_string} are reserved values
@@ -947,6 +957,7 @@ runs the helloworld.py script present in the same folder as the tool xml, then e
 >         ]]>
 >     </command>
 > ```
+> {: data-commit="Command block"}
 {: .hands_on}
 
 The variables set in the inputs and output sections generate a full command to be run inside the Galaxy environment. When inside a conditional or
@@ -1003,6 +1014,7 @@ As all parameters in bellerophon are accessible at once, and do not contradict o
 >         </test>
 >     </tests>
 > ```
+> {: data-commit="Adding a test"}
 {: .hands_on}
 
 This runs the tool with the files forward.bam and reverse.bam from a folder named test-data in the tool's directory. Since no quality parameter was specified, it uses the default of 20. The parameter can also be manually set with the same param tag and value attribute, just inputting an applicable value such as "21". It then
@@ -1069,6 +1081,12 @@ Multiple citations can be added by using additional citation tags.
 
 > <hands-on-title>Adding a citation</hands-on-title>
 > Add the citation above using either method (but not both!)
+> ```xml
+> <citations>
+>     <citation type="doi">10.1038/s41586-021-03451-0</citation>
+> </citations>
+> ```
+> {: .hidden data-commit="Add citation"}
 {: .hands_on}
 
 ## Final wrapper
