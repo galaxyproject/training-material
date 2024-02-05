@@ -1531,3 +1531,8 @@ In order to setup your own tool repository the Galaxy community created a [templ
 
 # Conclusion
 
+
+<script type="text/javascript">
+// Replace all ZWSPs with nothing, to prevent users copying them and them not working.
+document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML.replaceAll("​", "")
+</script>

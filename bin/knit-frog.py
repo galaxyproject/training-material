@@ -151,6 +151,7 @@ for idx, diff in enumerate(diffs):
         lastCommit = f"{fn_topic}/{fn_tutorial}/{idx:04d}"
 
         (_, diff) = knit.removeWhitespacePrefix(diff)
+        diff = knit.removeZwsp(diff)
 
         patch_id = diff[-1]
         # Remove patch id, ```
