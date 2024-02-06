@@ -94,7 +94,7 @@ Unipept serves as a vital bioinformatics platform for the analysis of mass spect
 
 ![Data-Interpretation with Unipept](../../images/clinical-mp/clinical-mp-data-interpretation-figure2.jpg)
 
-## Extraction of Microbial Sequences using **Select**
+## Extraction of Microbial Sequences
 
 > <hands-on-title> Extract Microbial sequences with Select </hands-on-title>
 >
@@ -107,7 +107,6 @@ Unipept serves as a vital bioinformatics platform for the analysis of mass spect
 >
 {: .hands_on}
 
-## Extraction of Human Sequences using **Select**
 
 > <hands-on-title> Select sequences matching "HUMAN" </hands-on-title>
 >
@@ -118,9 +117,6 @@ Unipept serves as a vital bioinformatics platform for the analysis of mass spect
 >
 >
 {: .hands_on}
-
-
-## Remove reverse and contaminants from human sequences with **Select**
 
 > <hands-on-title> Select out reverse and contaminants </hands-on-title>
 >
@@ -144,7 +140,7 @@ MSstats TMT(Tandem Mass Tag) is a computational tool designed for the robust sta
 > 1. {% tool [MSstatsTMT](toolshed.g2.bx.psu.edu/repos/galaxyp/msstatstmt/msstatstmt/2.0.0+galaxy1) %} with the following parameters:
 >    - *"Input Source"*: `MaxQuant`
 >        - {% icon param-file %} *"evidence.txt - feature-level data"*: `output` (Input dataset)
->        - {% icon param-file %} *"proteinGroups.txt"*: `out_file1` (output of **Select** {% icon tool %})
+>        - {% icon param-file %} *"proteinGroups.txt"*: `out_file1` (output of **Select Microbial** {% icon tool %})
 >        - {% icon param-file %} *"annotation.txt"*: `output` (Input dataset)
 >    - In *"Plot Output Options"*:
 >        - *"Select protein IDs to draw plots"*: `generate all plots for each protein`
@@ -168,7 +164,7 @@ MSstats TMT(Tandem Mass Tag) is a computational tool designed for the robust sta
 > 1. {% tool [MSstatsTMT](toolshed.g2.bx.psu.edu/repos/galaxyp/msstatstmt/msstatstmt/2.0.0+galaxy1) %} with the following parameters:
 >    - *"Input Source"*: `MaxQuant`
 >        - {% icon param-file %} *"evidence.txt - feature-level data"*: `output` (Input dataset)
->        - {% icon param-file %} *"proteinGroups.txt"*: `out_file1` (output of **Select** {% icon tool %})
+>        - {% icon param-file %} *"proteinGroups.txt"*: `out_file1` (output of **Select HUMAN** {% icon tool %})
 >        - {% icon param-file %} *"annotation.txt"*: `output` (Input dataset)
 >    - In *"Plot Output Options"*:
 >        - *"Select protein IDs to draw plots"*: `generate all plots for each protein`
