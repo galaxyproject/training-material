@@ -1,0 +1,198 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Clinical-MP-Database Verification",
+  "zenodo_link": "https://doi.org/10.5281/zenodo.10105821",
+  "questions": [
+    "Why do we need to verify our identified peptides",
+    "What is the importance of making a new database for quantification"
+  ],
+  "objectives": [
+    "Verification of peptides helps in confirming the presence of the peptides in our samplle"
+  ],
+  "time_estimation": "3H",
+  "key_points": [
+    "Perform verification",
+    "Extraction of accession numbers for getting protein sequences"
+  ],
+  "contributions": {
+    "authorship": [
+      "subinamehta",
+      "katherine-d21",
+      "dechendb"
+    ],
+    "editing": [
+      "pratikdjagtap",
+      "timothygriffin"
+    ]
+  },
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "proteomics"
+    }
+  ],
+  "subtopic": "clinical-metaproteomics",
+  "follow_up_training": [
+    {
+      "type": "internal",
+      "topic_name": "proteomics",
+      "tutorials": [
+        "clinical-mp-quantitation"
+      ]
+    }
+  ],
+  "tags": [
+    "label-TMT11"
+  ],
+  "mathjax": null,
+  "short_id": null,
+  "url": "/topics/proteomics/tutorials/clinical-mp-data-verification/tutorial.html",
+  "topic_name": "proteomics",
+  "tutorial_name": "clinical-mp-data-verification",
+  "dir": "topics/proteomics/tutorials/clinical-mp-data-verification",
+  "id": "proteomics/clinical-mp-data-verification",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "api": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/clinical-mp-data-verification/tutorial.json",
+  "tools": [
+    "Cut1",
+    "Filter1",
+    "Grouping1",
+    "Remove beginning1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/pepquery2/pepquery2/2.0.2+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/uniprotxml_downloader/uniprotxml_downloader/2.4.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0",
+    "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"
+  ],
+  "supported_servers": {
+    "exact": [
+      {
+        "url": "https://usegalaxy.eu",
+        "name": "UseGalaxy.eu",
+        "usegalaxy": true
+      }
+    ],
+    "inexact": [
+
+    ]
+  },
+  "topic_name_human": "Proteomics",
+  "admin_install": {
+    "install_tool_dependencies": true,
+    "install_repository_dependencies": true,
+    "install_resolver_dependencies": true,
+    "tools": [
+      {
+        "name": "text_processing",
+        "owner": "bgruening",
+        "revisions": "d698c222f354",
+        "tool_panel_section_label": "Text Manipulation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "fasta_merge_files_and_filter_unique_sequences",
+        "owner": "galaxyp",
+        "revisions": "f546e7278f04",
+        "tool_panel_section_label": "FASTA/FASTQ",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "pepquery2",
+        "owner": "galaxyp",
+        "revisions": "a07976bbc4d9",
+        "tool_panel_section_label": "Proteomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "uniprotxml_downloader",
+        "owner": "galaxyp",
+        "revisions": "a371252a2cf6",
+        "tool_panel_section_label": "Get Data",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "query_tabular",
+        "owner": "iuc",
+        "revisions": "cf34c344508d",
+        "tool_panel_section_label": "Text Manipulation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "collapse_collections",
+        "owner": "nml",
+        "revisions": "90981f86000f",
+        "tool_panel_section_label": "Collection Operations",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      }
+    ]
+  },
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fasta_merge_files_and_filter_unique_sequences\n  owner: galaxyp\n  revisions: f546e7278f04\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pepquery2\n  owner: galaxyp\n  revisions: a07976bbc4d9\n  tool_panel_section_label: Proteomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: uniprotxml_downloader\n  owner: galaxyp\n  revisions: a371252a2cf6\n  tool_panel_section_label: Get Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: query_tabular\n  owner: iuc\n  revisions: cf34c344508d\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 90981f86000f\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial",
+  "contributors": [
+    {
+      "name": "Subina Mehta",
+      "email": "subinamehta@gmail.com",
+      "twitter": "Subina_Mehta",
+      "linkedin": "subinamehta",
+      "matrix": "subinamehta:matrix.org",
+      "orcid": "0000-0001-9818-0537",
+      "joined": "2018-06",
+      "id": "subinamehta",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/subinamehta.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/"
+    },
+    {
+      "name": "Katherine Do",
+      "joined": "2023-08",
+      "id": "katherine-d21",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/katherine-d21.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/katherine-d21/"
+    },
+    {
+      "name": "Dechen Bhuming",
+      "joined": "2023-06",
+      "id": "dechendb",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/dechendb.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/dechendb/"
+    },
+    {
+      "name": "Pratik Jagtap",
+      "email": "pjagtap@umn.edu",
+      "joined": "2017-09",
+      "orcid": "0000-0003-0984-0973",
+      "id": "pratikdjagtap",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/pratikdjagtap.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/"
+    },
+    {
+      "name": "Timothy J. Griffin",
+      "email": "tgriffin@umn.edu",
+      "github": false,
+      "joined": "2017-09",
+      "orcid": "0000-0001-6801-2559",
+      "id": "timothygriffin",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/timothygriffin.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/"
+    }
+  ]
+}
