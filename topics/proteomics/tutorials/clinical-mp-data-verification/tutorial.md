@@ -89,39 +89,26 @@ Interestingly, the PepQuery tool does not rely on searching peptides against a r
 # Extraction of Microbial Peptides from SearchGUI/PeptideShaker and MaxQuant
 Now that we have identified microbial peptides from SearchGUI/PeptideShaker and MaxQuant, we need to extract the microbial peptide sequences and group them to obtain a list of distinct microbial peptides. This list of distinct peptides will be used as input for PepQuery2 to verify confident microbial peptides.
 
-First, we will use the Cut tool to select the peptide and protein columns from the SearchGUI/PeptideShaker and MaxQuant Peptide Reports.
+First, we will use the Cut tool to select the peptide and protein columns from the SearchGUI/PeptideShaker and MaxQuant Peptide Reports. Then we use Remove header lines from SGPS and MaxQuant to prepare for concatenation with Remove beginning.
 
-> <hands-on-title> Extracting peptide and protein columns from SGPS using Cut </hands-on-title>
+> <hands-on-title> Extracting peptides </hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c6,c2`
 >    - {% icon param-file %} *"From"*: `output` (Input dataset)
 >
 >
-{: .hands_on}
-
-> <hands-on-title>  Extracting peptide and protein columns from MaxQuant using Cut </hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c35`
 >    - {% icon param-file %} *"From"*: `output` (Input dataset)
 >
 >
-{: .hands_on}
-
-
-Then, we will remove the header line from each of the Cut outputs to concatenate (link) them together more easily, using the Concatenate tool.
-
-> <hands-on-title> Remove header lines from SGPS to prepare for concatenation with Remove beginning </hands-on-title>
 >
 > 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - {% icon param-file %} *"from"*: `out_file1` (output of **Cut** {% icon tool %})
 >
 >
-{: .hands_on}
-
-
-> <hands-on-title> Remove header lines from MaxQuant to prepare for concatenation with Remove beginning </hands-on-title>
 >
 > 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - {% icon param-file %} *"from"*: `out_file1` (output of **Cut** {% icon tool %})
