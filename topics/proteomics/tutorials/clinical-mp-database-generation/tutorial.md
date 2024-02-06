@@ -29,8 +29,6 @@ subtopic: clinical-metaproteomics
 tags: [label-TMT11]
 ---
 
-# Abstract
-
 Metaproteomics is the large-scale characterization of the entire complement of proteins expressed by microbiota. However, metaproteomics analysis of clinical samples is challenged by the presence of abundant human (host) proteins which hampers the confident detection of lower abundant microbial proteins {% cite Batut2018 %} ; [{% cite Jagtap2015 %} .
 
 To address this, we used tandem mass spectrometry (MS/MS) and bioinformatics tools on the Galaxy platform to develop a metaproteomics workflow to characterize the metaproteomes of clinical samples. This clinical metaproteomics workflow holds potential for general clinical applications such as potential secondary infections during COVID-19 infection, microbiome changes during cystic fibrosis as well as broad research questions regarding host-microbe interactions.
@@ -55,8 +53,6 @@ The first workflow for the clinical metaproteomics data analysis is the Database
 {: .agenda}
 
 # Data Upload
-
-# Pretreatment
 
 ## Get data
 
@@ -106,8 +102,8 @@ The first workflow for the clinical metaproteomics data analysis is the Database
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Input Dataset collection"*: `MGF dataset collection`
->    - {% icon param-file %} *"3: Species_tabular"*: `Species_tabular.tabular`
+>    - {% icon param-file %} *" Input Dataset collection"*: `MGF dataset collection`
+>    - {% icon param-file %} *" Species_tabular"*: `Species_tabular.tabular`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
@@ -142,57 +138,27 @@ For this tutorial, a literature survey was conducted to obtain 118 taxonomic spe
 > <question-title></question-title>
 >
 > 1. Can we use a higher taxonomy clade than species for the UniProt XML downloader?
+> 2. Why are we using the tools separately? Can we run it all together?
+> 3. Can we select multiple files together?
+> 4. How many FASTA files can be merged at once, i.e. is there a limit on the number/size of files?
 >
 > > <solution-title></solution-title>
 > >
 > >
-> > 1. Yes, the UniProt XML downloader can also be used for generating a database from Genus, Family, Order, or any other higher taxonomy clade. 
+> > 1. Yes, the UniProt XML downloader can also be used for generating a database from Genus, Family, Order, or any other higher taxonomy clade.
+> > 2. The tools are run separately to reduce the load on the server and tool. If you have a limited number of taxon names, then you can run it all together.
+> > 3. Yes, that certainly can be done. We used one input file at a time to maintain the order of sequences in the database.
+> > 4. There is no limit.
 > >
 > {: .solution}
 >
 {: .question}
 
-> <question-title></question-title>
->
-> 1. Why are we using the tools separately? Can we run it all together?
->
-> > <solution-title></solution-title>
-> >
-> > 1. The tools are run separately to reduce the load on the server and tool. If you have a limited number of taxon names, then you can run it all together.
-> >
-> {: .solution}
->
-{: .question}
->
-> <question-title></question-title>
->
-> 1. Can we select multiple files together?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Yes, that certainly can be done. We used one input file at a time to maintain the order of sequences in the database.
-> >
-> {: .solution}
->
-{: .question}
-> <question-title></question-title>
->
-> 1. How many FASTA files can be merged at once, i.e. is there a limit on the number/size of files?
->
-> > <solution-title></solution-title>
-> >
-> > 1. There is definitely no limit.
-> >
-> {: .solution}
->
-{: .question}
 
-## Merging databases to obtain large comprehensive database for MetaNovo with **FASTA Merge Files and Filter Unique Sequences**
+## Merging databases to obtain a large comprehensive database for MetaNovo
 Once generated, the Species UniProt database (~3.38 million sequences) will be merged with the Human SwissProt database (reviewed only; ~20.4K sequences) and contaminant (cRAP) sequences database (116 sequences) and filtered to generate the large comprehensive database (~2.59 million sequences). The large comprehensive database will be used to generate a compact database using MetaNovo, which is much more manageable.
 
-## Download contaminants with **Protein Database Downloader**
-
-> <hands-on-title> Protein Database Downloader </hands-on-title>
+> <hands-on-title> Download contaminants with **Protein Database Downloader </hands-on-title>
 >
 > 1. {% tool [Protein Database Downloader](toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.4) %} with the following parameters:
 >    - *"Download from?"*: `cRAP (contaminants)`
@@ -200,9 +166,7 @@ Once generated, the Species UniProt database (~3.38 million sequences) will be m
 >
 {: .hands_on}
 
-## Download Human SwissProt (reviewed) database with **Protein Database Downloader**
-
-> <hands-on-title>  Protein Database Downloader</hands-on-title>
+> <hands-on-title> Human SwissProt (reviewed) database</hands-on-title>
 > 1. {% tool [Protein Database Downloader](toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.4) %} with the following parameters:
 >    - *"Download from?"*: `UniProtKB(reviewed only)`
 >        - In *"Taxonomy"*: `Homo sapiens (Human)`
@@ -270,36 +234,14 @@ The compact MetaNovo-generated database (~1.9K sequences) will be merged with Hu
 > <question-title></question-title>
 >
 > 1. Why are we reducing the size of the database?
+> 2. Why is this running TMT10 plex modification when the data is 11-plex?
+> 3. Regarding MetaNovo Spectrum Matching parameters, what are the most “important” parameters? Meaning, that if a user wants to reduce or increase the sensitivity/number of output sequences, what should they change?
 >
 > > <solution-title></solution-title>
 > >
 > >
-> > 1. Reducing the size of the database improves search speed, FDR, and sensitivity. 
-> >
-> {: .solution}
->
-{: .question}
-
-> <question-title></question-title>
->
-> 1. Why is this running TMT10 plex modification when the data is 11-plex?
->
-> > <solution-title></solution-title>
-> >
-> >
-> > 1. There is no option for 11-plex modifications in Metanovo, hence we use the TMT-10plex. 
-> >
-> {: .solution}
->
-{: .question}
-
-> <question-title></question-title>
->
-> 1. Regarding MetaNovo Spectrum Matching parameters, what are the most “important” parameters? Meaning, that if a user wants to reduce or increase the sensitivity/number of output sequences, what should they change?
->
-> > <solution-title></solution-title>
-> >
-> >
+> > 1. Reducing the size of the database improves search speed, FDR, and sensitivity.
+> > 2. There is no option for 11-plex modifications in Metanovo, hence we use the TMT-10plex.
 > > 3. The most important parameters are the tolerance (MS1 and MS2) and any modifications introduced during the processing of the data.
 > >
 > {: .solution}
