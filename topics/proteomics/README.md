@@ -37,7 +37,7 @@ The Galaxy community offers many different ways of training. The table above lis
  - :book: The training course and material is available as annotated text (:thumbsup: hands-on training).
  - :mortar_board: Slides as Introduction (:thumbsup: Slides)
 
-```
+
 ### Workflows
 
 The GalaxyP GTN project also offers a selection of published GalaxyP workflows. The presented workflows are adapted to specific
@@ -48,7 +48,7 @@ You are free to use and modify all workflows for your scientific question.
 Thanks for your interest in the GTN GalaxyP training material project. We only recently started working on this
 repository.We try to integrate more and more topics over time. Keep an eye out for new material from time to time.
 
-```
+
 
 </details>
 
