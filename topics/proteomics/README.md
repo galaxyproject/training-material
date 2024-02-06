@@ -39,7 +39,7 @@ The Galaxy community offers many different ways of training. The table above lis
  - :mortar_board: Slides as Introduction (:thumbsup: Slides)
 
 
-### Workflows
+## Workflows
 
 The GalaxyP GTN project also offers a selection of published GalaxyP workflows. The presented workflows are adapted to specific
 questions in proteomics,which are not answered in the more basic tutorials.
