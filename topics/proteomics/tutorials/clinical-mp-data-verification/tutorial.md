@@ -241,7 +241,7 @@ Now, we want to filter for confident peptides from PepQuery2 and prepare them fo
 
 ##  **Querying verified peptides**
 
-We will use the Query Tabular tool { %cite Johnson2019 % } to search the PepQuery-verified peptides against the concatenated dataset that contains peptides and proteins from SearchGUI/Peptide and MaxQuant.
+We will use the Query Tabular tool { %cite Johnson2019 % } to search the PepQuery-verified peptides against the concatenated dataset that contains peptides and proteins from SearchGUI/Peptide and MaxQuant. This step ensures all the PepQuery-verified peptides are assigned to their protein/protein groups.
 
 > <hands-on-title> Querying verified peptides </hands-on-title>
 >
@@ -275,7 +275,7 @@ We will use the Query Tabular tool { %cite Johnson2019 % } to search the PepQuer
 {: .hands_on}
 
 
-Using the Group tool, we will be able to select out distinct (unique) peptides and proteins from the Query Tabular tool.
+Using the Group tool, we can select distinct (unique) peptides and proteins from the Query Tabular tool.
 
 > <hands-on-title> Extract distinct peptides with Group </hands-on-title>
 >
@@ -334,23 +334,13 @@ Again, we will use the Query Tabular tool to retrieve UniProt IDs (accession num
 > <question-title></question-title>
 >
 > 1. What is the accession number of a protein?
+> 2. Can there be multiple accession numbers for one peptide or protein?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. An accession number of a protein, also referred to as a protein accession number, is a unique identifier assigned to a specific protein sequence in a protein sequence database. These accession numbers are used to reference and catalog proteins in a standardized and systematic manner
+> > 1. An accession number of a protein, also called a protein accession number, is a unique identifier assigned to a specific protein sequence in a protein sequence database. These accession numbers are used to reference and catalog proteins in a standardized and systematic manner
 > >
-> {: .solution}
->
-{: .question}
-
-> <question-title></question-title>
->
-> 1. Can there be multiple accession numbers for one peptide or protein?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Yes, a single peptide or protein can have multiple accession numbers, particularly when dealing with different protein sequence databases, databases for specific species, or different versions of the same database. That's the reason in our workflow we merge both accession and sequences.
-> >
+> > 2. Yes, a single peptide or protein can have multiple accession numbers, particularly when dealing with different protein sequence databases, databases for specific species, or different versions of the same database. That's the reason in our workflow we merge both accession and sequences.
 > {: .solution}
 >
 {: .question}
