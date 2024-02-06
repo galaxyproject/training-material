@@ -25,6 +25,13 @@ requirements:
     type: "internal"
     topic_name: proteomics
 subtopic: clinical-metaproteomics
+follow_up_training:
+
+    -
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - clinical-mp-quantitation
 tags: [label-TMT11]
 ---
 
