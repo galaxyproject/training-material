@@ -16,7 +16,6 @@ key_points:
 contributions:
   authorship:
   - nekrut
-
 subtopic: gnmx
 draft: true
 
@@ -44,7 +43,7 @@ Preclass prep: Chapters [5](https://greenteapress.com/thinkpython2/html/thinkpyt
 
 ## Dynamic programming matrix as a 2D list
 
-An excellent way to illustrate the utility of lists is to implement dynamic programming algorithm for sequence alignment. Suppose we have two sequences that deliberately have different lengths:
+An excellent way to illustrate the utility of lists is to implement a dynamic programming algorithm for sequence alignment. Suppose we have two sequences that deliberately have different lengths:
 
 $$
 \texttt{G C T A T A C}$
@@ -84,7 +83,7 @@ C
 \textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
 $$
 
-In this matrix the cells are addressed as shown below. They filled using the following logic:
+In this matrix, the cells are addressed as shown below. They filled in using the following logic:
 
 $$
 D[i,j] = min\begin{cases} 
@@ -124,7 +123,8 @@ $$
 
 ## Initializing the matrix
 
-Let's initialize the first column and first raw of the matrix. Because the distance between a string and an empty string is equal to the length of the string (e.g., a distance between, say, string $$\texttt{TCG}$$ and an empty string is 3) this resulting matrix will look like this:
+Let's initialize the first column and first row of the matrix. Because the distance between a string and an empty string is equal to the length of the
+string (e.g., a distance between, say, string $$\texttt{TCG}$$ and an empty string is 3) this resulting matrix will look like this:
 
 $$
 \begin{array}{ c | c | c | c | c | c | c}
@@ -278,7 +278,8 @@ $$
 $$
 
 
-The lower rightmost cell highlighted in red is special. It contains the value for the edit distance between the two strings. The following Python script implements this idea. You can see that it is essentially instantaneous:
+The lower rightmost cell highlighted in red is special. It contains the value for the edit distance between the two strings.
+The following Python script implements this idea. You can see that it is essentially instantaneous:
 
 ```python
 import numpy as np
@@ -310,11 +311,11 @@ sns.heatmap(D,annot=True,cmap="crest")
 
 # Dictionaries: Translating sequences
 
-Perhaps the best way to demonstrate the utility of dictionaries is using DNA-to-Protein translation as an example. 
+Perhaps the best way to demonstrate the utility of dictionaries is by using DNA-to-Protein translation as an example. 
 
 ## Using dictionaries to translate DNA
 
-The following dictionary maps codons to corresponding amino acid translations. In this case codon is the *key* and amino acid is the *value*:
+The following dictionary maps codons to corresponding amino acid translations. In this case, codon is the *key* and amino acid is the *value*:
 
 
 ```python
@@ -338,7 +339,7 @@ table = {
     }
 ```
 
-Let's generate random DNA sequence:
+Let's generate a random DNA sequence:
 
 
 ```python
@@ -377,7 +378,7 @@ print("Translation:", translation)
     Translation: RP_PKCV_MWLLGRISLRSVSVLVIGLLSAL_R
 
 
-Note that the code uses the `upper()` method to ensure the codon is in uppercase, since the table dictionary is case sensitive. Additionally, the code checks if the codon is in the table dictionary, and if not, it adds the letter "X" to the translation. This is a common way to represent unknown or stop codons in a protein sequence.
+Note that the code uses the `upper()` method to ensure the codon is in uppercase since the table dictionary is case-sensitive. Additionally, the code checks if the codon is in the table dictionary and if not, it adds the letter "X" to the translation. This is a common way to represent unknown or stop codons in a protein sequence.
 
 
 ```python
@@ -484,7 +485,10 @@ translate_phase(seq,2)
 
 
 
-To translate in all six reading frames (three of the "+" strand and three of the "-" strand) we need to be able to create a reverse complement of the sequence. Let's write a simple function for that. The cell below implements a function `revcomp` that takes a DNA sequence as input and returns its reverse complement. It works by first reversing the sequence using the slice notation `seq[::-1]`, which returns the sequence in reverse order. Then, the `translate` method is used with the `str.maketrans` function to replace each occurrence of 'a', 't', 'g', 'c', 'A', 'T', 'G', and 'C' in the reversed sequence with 't', 'a', 'c', 'g', 'T', 'A', 'C', and 'G', respectively:
+To translate in all six reading frames (three of the "+" strand and three of the "-" strand) we need to be able to create a reverse complement of the sequence. Let's write a simple function for that.
+The cell below implements a function `revcomp` that takes a DNA sequence as input and returns its reverse complement. It works by first reversing the sequence using the slice
+notation `seq[::-1]`, which returns the sequence in reverse order. Then, the `translate` method is used with the `str.maketrans` function to replace each occurrence
+of 'a', 't', 'g', 'c', 'A', 'T', 'G', and 'C' in the reversed sequence with 't', 'a', 'c', 'g', 'T', 'A', 'C', and 'G', respectively:
 
 
 ```python
@@ -494,7 +498,9 @@ def revcomp(seq):
     return seq[::-1].translate(str.maketrans('atgcATCG','tagcTACG'))
 ```
 
-Now let's use this function to create translation in all six reading frames. The cell below uses a `for` loop that iterates over the range `(0, 3)`, representing the different phases (or starting positions) of the translation. At each iteration, the `translate_phase` function is called with the DNA sequence and the current phase, and the resulting protein sequence is appended to the `translations` list along with the `phase` and the `strand` orientation (+ or -):
+Now let's use this function to create translation in all six reading frames. The cell below uses a `for` loop that iterates over the range `(0, 3)`, representing the different phases
+(or starting positions) of the translation. At each iteration, the `translate_phase` function is called with the DNA sequence and the current phase, and the resulting protein sequence
+is appended to the `translations` list along with the `phase` and the `strand` orientation (+ or -):
 
 
 ```python
@@ -524,7 +530,8 @@ translations
 
 ## Finding coordinates of continuous translations
 
-The translation we've generated above contain stops (e.g., `_` symbols). The actual biologically relevant protein sequences are between stops. We now need to split translation strings into meaningful peptide sequences and compute their coordinates. Let's begin by splitting a string on `_` and computing start and end positions of each peptide:
+The translation we've generated above contains stops (e.g., `_` symbols). The actual biologically relevant protein sequences are between stops.
+We now need to split translation strings into meaningful peptide sequences and compute their coordinates. Let's begin by splitting a string on `_` and computing the start and end positions of each peptide:
 
 
 ```python
@@ -542,11 +549,12 @@ print(split_indices)
 
 The code above generates a list of split indices for a string. The list contains the indices of the characters in the string that match a specified character (in this case, the underscore `_` character).
 
-The `enumerate` function is used to loop over the characters in the string, and at each iteration, the current index and character are stored in the variables `i` and `char`, respectively. If the current character matches the specified character, the index `i` is appended to the `split_indices` list.
+The `enumerate` function is used to loop over the characters in the string, and at each iteration, the current index and character are stored in the variables `i` and `char`, respectively.
+If the current character matches the specified character, the index `i` is appended to the `split_indices` list.
 
 After the loop, the `split_indices` list is printed to the console. For the input string `"aadsds_dsds_dsds"`, the output would be `[6, 11]`, indicating that the dashes are located at indices 6 and 11.
 
-But we actually need coordinates of peptides bound by `_` characters. To get to this let's first modify `split_indices` by adding beginning and end:
+But we actually need coordinates of peptides bound by `_` characters. To get to this let's first modify `split_indices` by adding the beginning and end:
 
 
 ```python
@@ -572,11 +580,11 @@ Now, let's convert these to ranges and also stick the peptide sequence in:
 string = "aadsds_dsds_dsds"
 
 split_indices = []
-for i,char in enumerate(string):
+for i, char in enumerate(string):
     if char == "_":
         split_indices.append(i)
         
-split_indices.insert(0,-1)
+split_indices.insert(0, -1)
 split_indices.append(len(string))
 
 orfs = string.split('_')
@@ -597,16 +605,16 @@ Now let's convert this to function:
 ```python
 def extract_coords(translation):
     split_indices = []
-    for i,char in enumerate(translation):
+    for i, char in enumerate(translation):
         if char == "_":
             split_indices.append(i)
         
-    split_indices.insert(0,-1)
+    split_indices.insert(0, -1)
     split_indices.append(len(translation))
 
     parts = []
     for i in range(len(split_indices)-1):
-        parts.append((translation.split('_')[i], split_indices[i]+1, split_indices[i+1]))
+        parts.append((translation.split('_')[i], split_indices[i] + 1, split_indices[i + 1]))
 
     return(parts)
 ```
@@ -623,7 +631,7 @@ extract_coords(string)
 
 
 
-And specify right parameters to make it truly generic:
+And specify the right parameters to make it truly generic:
 
 
 ```python
@@ -645,7 +653,7 @@ def extract_coords_with_annotation(separator,translation,phase,strand):
 
 
 ```python
-extract_coords_with_annotation('_',string,'0','+')
+extract_coords_with_annotation('_', string, '0', '+')
 ```
 
 
