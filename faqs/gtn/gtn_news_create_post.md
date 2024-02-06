@@ -10,7 +10,11 @@ If you have created a new tutorial, running an event, published a paper around t
 
 News items will show up on the [GTN homepage]({% link index.md %}) and in the [GTN news feed]({% link news.md %}).
 
-**Creating the news post**
+**Creating the news post: The Easy Way**
+
+[Fill out this Google Form](https://forms.gle/6SRAVcppzieef7Zz9). Every day our bot will import the news posts submitted via this Google Form, and we will process them, perhaps requesting small changes, so we recommend that you have a GitHub account already.
+
+**For Advanced Users**
 
 Have a look at the existing news items in the [`news/_posts/` folder](https://github.com/galaxyproject/training-material/tree/main/news/_posts) of the GTN repository for some examples.
 
