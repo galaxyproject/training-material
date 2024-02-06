@@ -117,7 +117,7 @@ First, we will use the Cut tool to select the peptide and protein columns from t
 {: .hands_on}
 
 
-## Concatenate peptides from MaxQuant and SGPS for PepQuery2 with **Concatenate datasets**
+## Concatenate peptides from MaxQuant and SGPS for PepQuery2 
 
 We will now concatenate the peptide and protein datasets from SearchGUI/PeptideShaker and MaxQuant. Later, we will generate a list of confident peptides using PepQuery2. The list of confident peptides will be searched against the concatenated peptide-protein datasets from SearchGUI/PeptideShaker and MaxQuant to generate a list of verified peptides.
 
@@ -130,7 +130,7 @@ We will now concatenate the peptide and protein datasets from SearchGUI/PeptideS
 {: .hands_on}
 
 
-## Creating input database for PepQuery2 with **FASTA Merge Files and Filter Unique Sequences**
+## Creating input database for PepQuery2
 
 We generate and merge Human UniProt (with Isoforms) and contaminants (cRAP) to make an input database for PepQuery2.
 
@@ -148,13 +148,13 @@ We generate and merge Human UniProt (with Isoforms) and contaminants (cRAP) to m
 
 
 
-## Peptide verification using PepQuery2
+## Peptide verification 
 The PepQuery2 tool will be used to validate the identified microbial peptides from SearchGUI/PeptideShaker and MaxQuant to ensure that they are indeed of microbial origin and that human peptides were not misassigned. We will use the list of `Distinct Peptides` (from the [Discovery Module](https://github.com/subinamehta/training-material/blob/main/topics/proteomics/tutorials/clinical-mp-discovery/tutorial.md)), `Human UniProt+Isoforms+cRAP database`, and our `MGF file collection` as inputs for PepQuery2. The outputs we are interested in are the four PSM Rank (txt) files (one for each MGF file).
 
 Interestingly, the PepQuery2 tool does not rely on searching peptides against a reference protein sequence database as “traditional” shotgun proteomics does, which enables it to identify novel, disease-specific sequences with sensitivity and specificity in its protein validation. More information about PepQuery is available, including the first {% cite Wen2019 %} and second iterations {% cite Wen2023 %}.
 
 
-> <hands-on-title> Peptide validation using PepQuery2 </hands-on-title>
+> <hands-on-title> Peptide verification </hands-on-title>
 >
 > 1. {% tool [PepQuery2](toolshed.g2.bx.psu.edu/repos/galaxyp/pepquery2/pepquery2/2.0.2+galaxy0) %} with the following parameters:
 >    - *"Validation Task Type"*: `novel peptide/protein validation`
@@ -205,7 +205,7 @@ Remember that PepQuery2 generates a PSM Rank file for each input MGF file, so we
 
 
 
-## Filtering out confident peptides from PepQuery2 with **Filter**
+## Filtering out confident peptides 
 
 Now, we want to filter for confident peptides from PepQuery2 and prepare them for the Query Tabular tool.
 
@@ -239,7 +239,7 @@ Now, we want to filter for confident peptides from PepQuery2 and prepare them fo
 {: .hands_on}
 
 
-##  **Query Tabular**
+##  **Querying verified peptides**
 
 We will use the Query Tabular tool { %cite Johnson2019 % } to search the PepQuery-verified peptides against the concatenated dataset that contains peptides and proteins from SearchGUI/Peptide and MaxQuant.
 
@@ -291,7 +291,7 @@ Using the Group tool, we will be able to select out distinct (unique) peptides a
 {: .hands_on}
 
 
-## Retrieve UniProt IDs for distinct peptides with **Query Tabular**
+## Retrieve UniProt IDs for distinct peptides
 
 Again, we will use the Query Tabular tool to retrieve UniProt IDs (accession numbers) for the distinct (grouped) peptides.
 
@@ -356,7 +356,7 @@ Again, we will use the Query Tabular tool to retrieve UniProt IDs (accession num
 {: .question}
 
 
-## Generate FASTA database from UniProt IDs with **UniProt**
+## Generate FASTA database from UniProt IDs
 Using the UniProt IDs from Query Tabular, we will be able to generate a FASTA database for our PepQuery-verified peptides.
 
 > <hands-on-title> UniprotXML-downloader </hands-on-title>
@@ -372,7 +372,7 @@ Using the UniProt IDs from Query Tabular, we will be able to generate a FASTA da
 {: .hands_on}
 
 
-## Generating compact database with **FASTA Merge Files and Filter Unique Sequences**
+## Generating compact database
 
 Lastly, we will merge the Human UniProt (with isoforms), contaminants (cRAP) and the PepQuery-verified FASTA databases into one Quantitation Database that will be used as input for the [Quantification Module](https://github.com/subinamehta/training-material/blob/main/topics/proteomics/tutorials/clinical-mp-quantitation/tutorial.md).
 
