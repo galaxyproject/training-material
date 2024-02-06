@@ -2,8 +2,8 @@ GalaxyP Training material
 =================
 <details>
 <summary>
-List of tutorials
-</summary> 
+ 
+# List of proteomics tutorials
 
 topic | features
 :-- | :--:
@@ -27,6 +27,7 @@ topic | features
 [N-Tails](./tutorials/ntails/workflows/) | [:page_facing_up:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows) [:book:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows)
 [Secretome Prediction](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows) | [:page_facing_up:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows) [:book:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows)
 
+</summary> 
 
 The Galaxy community offers many different ways of training. The table above lists all available training features of a specific topic to give you a fast and comprehensive overview.
 
