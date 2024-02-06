@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Introduction to sequencing with Python (part three) / Foundations of Data Science</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@60c339508e56bf12ca86708c47d639804f36e099",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture4/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1707215469' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1707215469' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Introduction to sequencing with Python (part three)">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-02-06 10:05:57 +0000">
+<meta name="DC.creator" content="Anton Nekrutenko"><meta name="description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Foundations of Data Science / Hands-on: Introduction to sequencing with Python (part three)">
+        <meta property="og:description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Data-Science Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-02-06 10:05:57 +0000",
+  "datePublished": "2024-02-06 10:22:19 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Introduction to sequencing with Python (part three)",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Draft",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Introduction to sequencing with Python (part three)",
+  "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture4/tutorial.html",
+  "version": 4,
+  "timeRequired": "PT1H",
+  "teaches": "Understanding of lists and dictionaries\n - Learning about dynamic programming\n - Learning about how to translate DNA in Python",
+  "keywords": [
+    "Foundations of Data Science",
+    "jupyter-notebook"
+  ],
+  "description": "The questions this  addresses are:\n - Understanding Python lists\n - Understanding Python dictionaries\n - Learnig about dynamic programming\n\n\nThe objectives are:\n - Understanding of lists and dictionaries\n - Learning about dynamic programming\n - Learning about how to translate DNA in Python\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "name": "Anton Nekrutenko",
+      "image": "https://avatars.githubusercontent.com/nekrut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "jupyter-notebook"
+    }
+  ],
+  "abstract": "[<a href=\"https://imgs.xkcd.com/comics/seven.png\" rel=\"noopener noreferrer\"><img src=\"https://imgs.xkcd.com/comics/seven.png\"  alt=\"XKCD 2483. \"   loading=\"lazy\"></a>](https://xkcd.com/2483)"
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1707215469'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/gnmx-lecture4/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/gnmx-lecture4/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/data-science/tutorials/gnmx-lecture4/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/data-science/tutorials/gnmx-lecture4/tutorial.html">2024-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/data-science/tutorials/gnmx-lecture4/tutorial.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-data-science">
+    <h1 data-toc-skip>Introduction to sequencing with Python (part three)</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Anton Nekrutenko avatar" width="36" class="avatar" />
+    Anton Nekrutenko</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Understanding Python lists</p>
+</li>
+        
+        <li><p>Understanding Python dictionaries</p>
+</li>
+        
+        <li><p>Learnig about dynamic programming</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understanding of lists and dictionaries</p>
+</li>
+        
+        <li><p>Learning about dynamic programming</p>
+</li>
+        
+        <li><p>Learning about how to translate DNA in Python</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/gnmx-lecture4/data-science-gnmx-lecture4.ipynb" title="Jupyter Notebook" alt="Introduction to sequencing with Python (part three) Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 6, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 6, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <div class="box-title">Best viewed in a Jupyter Notebook</div>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fgnmx-lecture4%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="/training-material/jupyter/lab/index.html?path=data-science-gnmx-lecture4.ipynb">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture4/data-science-gnmx-lecture4.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture4/data-science-gnmx-lecture4.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture4/data-science-gnmx-lecture4-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                </section>
+                
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p><a href="https://xkcd.com/2483"><a href="https://imgs.xkcd.com/comics/seven.png" rel="noopener noreferrer"><img src="https://imgs.xkcd.com/comics/seven.png" alt="XKCD 2483. " loading="lazy" /></a></a></p>
+
+<p>Preclass prep: Chapters <a href="https://greenteapress.com/thinkpython2/html/thinkpython2009.html">5</a> and <a href="https://greenteapress.com/thinkpython2/html/thinkpython2011.html">7</a> from “Think Python”</p>
+
+<blockquote class="quote" cite="https://langmead-lab.org/teaching-materials">
+  <p>This material uses examples from notebooks developed by <a href="https://langmead-lab.org/teaching-materials/">Ben Langmead</a></p>
+</blockquote>
+
+<h1 id="prep">Prep</h1>
+
+<ol>
+  <li>Start <a href="https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab">JupyterLab</a></li>
+  <li>Within JupyterLab start a new Python3 notebook</li>
+  <li>Open <a href="http://cs1110.cs.cornell.edu/tutor/#mode=edit">this page</a> in a new browser tab</li>
+</ol>
+
+<h1 id="lists-dynamic-programming-in-sequence-alignment">Lists: Dynamic programming in sequence alignment</h1>
+
+<h2 id="dynamic-programming-matrix-as-a-2d-list">Dynamic programming matrix as a 2D list</h2>
+
+<p>An excellent way to illustrate the utility of lists is to implement a dynamic programming algorithm for sequence alignment. Suppose we have two sequences that deliberately have different lengths:</p>
+
+\[\texttt{G C T A T A C}$\]
+
+<p>and</p>
+
+\[\texttt{G C G T A T G C}$\]
+
+<p>Let’s represent them as the following matrix where the first character \(\epsilon\) represents an empty string:</p>
+
+\[\begin{array}{ c | c | c | c | c | c | c}
+&amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+\hline
+\epsilon \\
+\hline
+G\\
+\hline
+ C\\
+ \hline
+G\\
+\hline
+T\\
+\hline
+A\\
+ \hline
+T\\
+\hline
+G\\
+\hline
+C
+\end{array}
+\\
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.\]
+
+<p>In this matrix, the cells are addressed as shown below. They filled in using the following logic:</p>
+
+\[D[i,j] = min\begin{cases} 
+          \color{green}{D[i-1,j] + 1} &amp; \\
+          \color{blue}{D[i,j-1] + 1} &amp; \\
+          \color{red}{D[i-1,j-1] + \delta(x[i-1],y[j-1])}
+             \end{cases}\]
+
+<p>where \(\color{green}{green}\) is <em>upper</em> cell, \(\color{blue}{blue}\) is <em>left</em> cell, and \(\color{red}{red}\) is <em>upper-left</em> cell:</p>
+
+\[\begin{array}{ c | c | c | c | c | c | c}
+&amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+            \hline
+          \epsilon &amp;  &amp;  &amp;  &amp;  &amp;  &amp;  &amp;  &amp; \\
+          \hline
+          G &amp; \\
+          \hline
+          C &amp;  &amp; &amp; \color{red}{D[2,2]} &amp; \color{green}{D[2,3]}\\
+          \hline
+          G &amp;  &amp; &amp; \color{blue}{D[3,2]} &amp; D[3,3]\\
+          \hline
+          T &amp; \\
+          \hline
+          A &amp; \\
+          \hline
+          T &amp; \\
+          \hline
+          G &amp; \\
+          \hline
+          C &amp; 
+\end{array}
+\\
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.\]
+
+<h2 id="initializing-the-matrix">Initializing the matrix</h2>
+
+<p>Let’s initialize the first column and first row of the matrix. Because the distance between a string and an empty string is equal to the length of the
+string (e.g., a distance between, say, string \(\texttt{TCG}\) and an empty string is 3) this resulting matrix will look like this:</p>
+
+\[\begin{array}{ c | c | c | c | c | c | c}
+&amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+            \hline
+          \epsilon &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+          \hline
+          G &amp; 1\\
+          \hline
+          C &amp; 2\\
+          \hline
+          G &amp; 3\\
+          \hline
+          T &amp; 4\\
+          \hline
+          A &amp; 5\\
+          \hline
+          T &amp; 6\\
+          \hline
+          G &amp; 7\\
+          \hline
+          C &amp; 8
+\end{array}
+\\
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.\]
+
+<p>This can be achieved with the following code:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">D</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="filling-the-matrix">Filling the matrix</h2>
+
+<p>Now we can fill the entire matrix by using two nested loops: one iterating over \(i\) coordinate (sequence \(x\)) and the other iterating over \(j\) coordinate (sequence \(y\)):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">delt</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">delt</span><span class="p">,</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Let’s start with the cell between \(\texttt{G}\) and \(\texttt{G}\). Recall that:</p>
+
+\[D[i,j] = min\begin{cases} 
+          \color{green}{D[i-1,j] + 1} &amp; \\
+          \color{blue}{D[i,j-1] + 1} &amp; \\
+          \color{red}{D[i-1,j-1] + \delta(x[i-1],y[j-1])}
+             \end{cases}\]
+
+<p>where \(\delta(x[i-1],y[j-1]) = 0\) if \(x[i-1] = y[j-1]\) and \(1\) otherwise. And now let’s color each of the cells corresponding to each part of the above expression:</p>
+
+\[\begin{array}{ c | c | c | c | c | c | c}
+&amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+\hline
+\epsilon &amp; \color{red}0 &amp; \color{green}1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+\hline
+G &amp; \color{blue}1\\
+          \hline
+          C &amp; 2\\
+          \hline
+          G &amp; 3\\
+          \hline
+          T &amp; 4\\
+          \hline
+          A &amp; 5\\
+          \hline
+          T &amp; 6\\
+          \hline
+          G &amp; 7\\
+          \hline
+          C &amp; 8
+\end{array}
+\\
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.\]
+
+<p>In this specific case:</p>
+
+\[D[i,j] = min\begin{cases} 
+          \color{green}{D[i-1,j] + 1}\ or\ 0+0=0 &amp; \\
+          \color{blue}{D[i,j-1] + 1}\ or\ 1+1=2 &amp; \\
+          \color{red}{D[i-1,j-1] + \delta(x[i-1],y[j-1])}\ or\ 1+1=2
+             \end{cases}\]
+
+<p>The minimum of 0, 2, and 2 will be 0, so we are putting zero into that cell:</p>
+
+\[\begin{array}{ c | c | c | c | c | c | c}
+&amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+\hline
+\epsilon &amp; \color{red}0 &amp; \color{green}1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+\hline
+G &amp; \color{blue}1 &amp; \color{red}0\\
+          \hline
+          C &amp; 2\\
+          \hline
+          G &amp; 3\\
+          \hline
+          T &amp; 4\\
+          \hline
+          A &amp; 5\\
+          \hline
+          T &amp; 6\\
+          \hline
+          G &amp; 7\\
+          \hline
+          C &amp; 8
+\end{array}
+\\
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.\]
+
+<p>Using this logic we can fill the entire matrix like this:</p>
+
+\[\begin{array}{ c | c | c | c | c | c | c}
+&amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+\hline
+\epsilon &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+\hline
+                 G &amp; 1 &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6\\
+          \hline
+                 C &amp; 2 &amp; 1 &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+          \hline
+                 G &amp; 3 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+          \hline
+                 T &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 3 &amp; 4\\
+          \hline
+                 A &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 3\\
+          \hline
+                 T &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 3\\
+          \hline
+                 G &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 2 &amp; 3\\
+          \hline
+                 C &amp; 8 &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; \color{red}2
+\end{array}
+\\
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.\]
+
+<p>The lower rightmost cell highlighted in red is special. It contains the value for the edit distance between the two strings.
+The following Python script implements this idea. You can see that it is essentially instantaneous:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">def</span> <span class="nf">edDistDp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s"> Calculate edit distance between sequences x and y using
+        matrix dynamic programming.  Return matrix and distance. </span><span class="sh">"""</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">D</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">delt</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">delt</span><span class="p">,</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">D</span><span class="p">,</span><span class="n">D</span><span class="p">[</span><span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="nf">len</span><span class="p">(</span><span class="n">y</span><span class="p">)]</span>
+</code></pre></div></div>
+<p>A graphical representation of the matrix between <code class="language-plaintext highlighter-rouge">GCGTATGCACGC</code> and <code class="language-plaintext highlighter-rouge">GCTATGCCACGC</code> looks like this:</p>
+
+<p><a href="https://i.imgur.com/veMfPFt.png" rel="noopener noreferrer"><img src="https://i.imgur.com/veMfPFt.png" alt="A DP matrix with Seaborn. " loading="lazy" /></a></p>
+
+<p>This image is generated using <a href="https://seaborn.pydata.org/index.html">Seaborn</a> package using matrix directly:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sns</span><span class="p">.</span><span class="nf">heatmap</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">annot</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="sh">"</span><span class="s">crest</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="dictionaries-translating-sequences">Dictionaries: Translating sequences</h1>
+
+<p>Perhaps the best way to demonstrate the utility of dictionaries is by using DNA-to-Protein translation as an example.</p>
+
+<h2 id="using-dictionaries-to-translate-dna">Using dictionaries to translate DNA</h2>
+
+<p>The following dictionary maps codons to corresponding amino acid translations. In this case, codon is the <em>key</em> and amino acid is the <em>value</em>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">table</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">ATA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ATC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ATT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ATG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">M</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">ACA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ACC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ACG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ACT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">AAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">K</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">K</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">AGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span>                
+        <span class="sh">'</span><span class="s">CTA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CTC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CTG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CTT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">CCA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CCC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CCG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CCT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">CAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">H</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">H</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Q</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Q</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">CGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GTA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GTC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GTG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GTT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GCA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GCC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GCG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GCT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">E</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">E</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TCA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TCC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TCG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TCT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TTC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">F</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TTT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">F</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TTA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TTG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Y</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Y</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">C</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">C</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">W</span><span class="sh">'</span><span class="p">,</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Let’s generate a random DNA sequence:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">random</span>
+<span class="n">seq</span> <span class="o">=</span> <span class="sh">""</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="sh">'</span><span class="s">atcg</span><span class="sh">'</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'agaccgtagcccaagtgcgtttgaatgtggctacttgggaggatttcattgcggtctgtctccgtacttgttattggtcttctttctgcattatgacgca'
+</code></pre></div></div>
+
+<p>To translate this sequence we write a code that uses a <code class="language-plaintext highlighter-rouge">for</code> loop that iterates over the DNA sequence in steps of 3, creating a codon at each iteration. If the codon is less than 3 letters long, the loop is broken. The resulting amino acid is then added to the <code class="language-plaintext highlighter-rouge">translation</code> string:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">translation</span> <span class="o">=</span> <span class="sh">""</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">seq</span><span class="p">),</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="n">codon</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">].</span><span class="nf">upper</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">codon</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span> <span class="k">break</span>
+    <span class="k">if</span> <span class="n">codon</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+        <span class="n">translation</span> <span class="o">+=</span> <span class="n">table</span><span class="p">[</span><span class="n">codon</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">translation</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">X</span><span class="sh">"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Translation:</span><span class="sh">"</span><span class="p">,</span> <span class="n">translation</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Translation: RP_PKCV_MWLLGRISLRSVSVLVIGLLSAL_R
+</code></pre></div></div>
+
+<p>Note that the code uses the <code class="language-plaintext highlighter-rouge">upper()</code> method to ensure the codon is in uppercase since the table dictionary is case-sensitive. Additionally, the code checks if the codon is in the table dictionary and if not, it adds the letter “X” to the translation. This is a common way to represent unknown or stop codons in a protein sequence.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">translation</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'RP_PKCV_MWLLGRISLRSVSVLVIGLLSAL_R'
+</code></pre></div></div>
+
+<p>Now we define a function that would perform translation so that we can reuse it later:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="n">translation</span> <span class="o">=</span> <span class="sh">''</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">ATA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ATC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ATT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ATG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">M</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">ACA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ACC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ACG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ACT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">AAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">K</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">K</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">AGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span>                
+        <span class="sh">'</span><span class="s">CTA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CTC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CTG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CTT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">CCA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CCC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CCG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CCT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">CAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">H</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">H</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Q</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Q</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">CGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GTA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GTC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GTG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GTT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GCA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GCC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GCG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GCT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">E</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">E</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TCA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TCC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TCG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TCT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TTC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">F</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TTT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">F</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TTA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TTG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Y</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Y</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">C</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">C</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">W</span><span class="sh">'</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">seq</span><span class="p">),</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="n">codon</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">].</span><span class="nf">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">codon</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span> <span class="k">break</span>
+        <span class="k">if</span> <span class="n">codon</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+            <span class="n">translation</span> <span class="o">+=</span> <span class="n">table</span><span class="p">[</span><span class="n">codon</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">translation</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">X</span><span class="sh">"</span>
+    <span class="nf">return</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">translate</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'RP_PKCV_MWLLGRISLRSVSVLVIGLLSAL_R'
+</code></pre></div></div>
+
+<h2 id="expanding-to-multiple-phases-frames">Expanding to multiple phases (frames)</h2>
+
+<p>We can further modify the function by adding a <code class="language-plaintext highlighter-rouge">phase</code> parameter that would allow translating in any of the three phases:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">translate_phase</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">phase</span><span class="p">):</span>
+    <span class="n">translation</span> <span class="o">=</span> <span class="sh">''</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">ATA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ATC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ATT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ATG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">M</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">ACA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ACC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ACG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ACT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">T</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">AAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">K</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">K</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">AGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">AGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span>                
+        <span class="sh">'</span><span class="s">CTA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CTC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CTG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CTT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">CCA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CCC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CCG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CCT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">CAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">H</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">H</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Q</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Q</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">CGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GTA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GTC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GTG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GTT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GCA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GCC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GCG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GCT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">E</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">E</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">GGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TCA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TCC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TCG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TCT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TTC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">F</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TTT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">F</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TTA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TTG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TAC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Y</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TAT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Y</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TAA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TAG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">TGC</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">C</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TGT</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">C</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TGA</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TGG</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">W</span><span class="sh">'</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">assert</span> <span class="n">phase</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">phase</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">,</span> <span class="sh">"</span><span class="s">Phase parameter can only be set to 0, 1, or 2! You specified {}</span><span class="sh">"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">seq</span><span class="p">),</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="n">codon</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">].</span><span class="nf">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">codon</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span> <span class="k">break</span>
+        <span class="k">if</span> <span class="n">codon</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+            <span class="n">translation</span> <span class="o">+=</span> <span class="n">table</span><span class="p">[</span><span class="n">codon</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">translation</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">X</span><span class="sh">"</span>
+    <span class="nf">return</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">translate_phase</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'TVAQVRLNVATWEDFIAVCLRTCYWSSFCIMT'
+</code></pre></div></div>
+
+<p>To translate in all six reading frames (three of the “+” strand and three of the “-“ strand) we need to be able to create a reverse complement of the sequence. Let’s write a simple function for that.
+The cell below implements a function <code class="language-plaintext highlighter-rouge">revcomp</code> that takes a DNA sequence as input and returns its reverse complement. It works by first reversing the sequence using the slice
+notation <code class="language-plaintext highlighter-rouge">seq[::-1]</code>, which returns the sequence in reverse order. Then, the <code class="language-plaintext highlighter-rouge">translate</code> method is used with the <code class="language-plaintext highlighter-rouge">str.maketrans</code> function to replace each occurrence
+of ‘a’, ‘t’, ‘g’, ‘c’, ‘A’, ‘T’, ‘G’, and ‘C’ in the reversed sequence with ‘t’, ‘a’, ‘c’, ‘g’, ‘T’, ‘A’, ‘C’, and ‘G’, respectively:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">string</span>
+
+<span class="k">def</span> <span class="nf">revcomp</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">seq</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nf">translate</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="nf">maketrans</span><span class="p">(</span><span class="sh">'</span><span class="s">atgcATCG</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">tagcTACG</span><span class="sh">'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Now let’s use this function to create translation in all six reading frames. The cell below uses a <code class="language-plaintext highlighter-rouge">for</code> loop that iterates over the range <code class="language-plaintext highlighter-rouge">(0, 3)</code>, representing the different phases
+(or starting positions) of the translation. At each iteration, the <code class="language-plaintext highlighter-rouge">translate_phase</code> function is called with the DNA sequence and the current phase, and the resulting protein sequence
+is appended to the <code class="language-plaintext highlighter-rouge">translations</code> list along with the <code class="language-plaintext highlighter-rouge">phase</code> and the <code class="language-plaintext highlighter-rouge">strand</code> orientation (+ or -):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">translations</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">translations</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="nf">translate_phase</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">i</span><span class="p">),</span><span class="nf">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="sh">'</span><span class="s">+</span><span class="sh">'</span><span class="p">))</span>
+    <span class="n">translations</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="nf">translate_phase</span><span class="p">(</span><span class="nf">revcomp</span><span class="p">(</span><span class="n">seq</span><span class="p">),</span><span class="n">i</span><span class="p">),</span><span class="nf">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="sh">'</span><span class="s">-</span><span class="sh">'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">translations</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('RP_PKCV_MWLLGRISLRSVSVLVIGLLSAL_R', '0', '+'),
+ ('SLIIDKQQE_ELATDRRIKWWELRRLKASSRSL', '0', '-'),
+ ('DRSPSAFECGYLGGFHCGLSPYLLLVFFLHYDA', '1', '+'),
+ ('R__STNNRNKN_PQTGESNGGNYGD_KRVPVAC', '1', '-'),
+ ('TVAQVRLNVATWEDFIAVCLRTCYWSSFCIMT', '2', '+'),
+ ('ADNRQTTGIRTSHRQANQMVGTTEIESEFP_P', '2', '-')]
+</code></pre></div></div>
+
+<h2 id="finding-coordinates-of-continuous-translations">Finding coordinates of continuous translations</h2>
+
+<p>The translation we’ve generated above contains stops (e.g., <code class="language-plaintext highlighter-rouge">_</code> symbols). The actual biologically relevant protein sequences are between stops.
+We now need to split translation strings into meaningful peptide sequences and compute their coordinates. Let’s begin by splitting a string on <code class="language-plaintext highlighter-rouge">_</code> and computing the start and end positions of each peptide:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="o">=</span> <span class="sh">"</span><span class="s">aadsds_dsds_dsds</span><span class="sh">"</span>
+
+<span class="n">split_indices</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">char</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="sh">"</span><span class="s">_</span><span class="sh">"</span><span class="p">:</span>
+        <span class="n">split_indices</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">split_indices</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[6, 11]
+</code></pre></div></div>
+
+<p>The code above generates a list of split indices for a string. The list contains the indices of the characters in the string that match a specified character (in this case, the underscore <code class="language-plaintext highlighter-rouge">_</code> character).</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">enumerate</code> function is used to loop over the characters in the string, and at each iteration, the current index and character are stored in the variables <code class="language-plaintext highlighter-rouge">i</code> and <code class="language-plaintext highlighter-rouge">char</code>, respectively.
+If the current character matches the specified character, the index <code class="language-plaintext highlighter-rouge">i</code> is appended to the <code class="language-plaintext highlighter-rouge">split_indices</code> list.</p>
+
+<p>After the loop, the <code class="language-plaintext highlighter-rouge">split_indices</code> list is printed to the console. For the input string <code class="language-plaintext highlighter-rouge">"aadsds_dsds_dsds"</code>, the output would be <code class="language-plaintext highlighter-rouge">[6, 11]</code>, indicating that the dashes are located at indices 6 and 11.</p>
+
+<p>But we actually need coordinates of peptides bound by <code class="language-plaintext highlighter-rouge">_</code> characters. To get to this let’s first modify <code class="language-plaintext highlighter-rouge">split_indices</code> by adding the beginning and end:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="o">=</span> <span class="sh">"</span><span class="s">aadsds_dsds_dsds</span><span class="sh">"</span>
+
+<span class="n">split_indices</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">char</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="sh">"</span><span class="s">_</span><span class="sh">"</span><span class="p">:</span>
+        <span class="n">split_indices</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        
+<span class="n">split_indices</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">split_indices</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">split_indices</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[-1, 6, 11, 16]
+</code></pre></div></div>
+
+<p>Now, let’s convert these to ranges and also stick the peptide sequence in:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="o">=</span> <span class="sh">"</span><span class="s">aadsds_dsds_dsds</span><span class="sh">"</span>
+
+<span class="n">split_indices</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="sh">"</span><span class="s">_</span><span class="sh">"</span><span class="p">:</span>
+        <span class="n">split_indices</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        
+<span class="n">split_indices</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">split_indices</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
+
+<span class="n">orfs</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">split_indices</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">parts</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">orfs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">split_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">split_indices</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('aadsds', 0, 6), ('dsds', 7, 11), ('dsds', 12, 16)]
+</code></pre></div></div>
+
+<p>Now let’s convert this to function:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">extract_coords</span><span class="p">(</span><span class="n">translation</span><span class="p">):</span>
+    <span class="n">split_indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">translation</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="sh">"</span><span class="s">_</span><span class="sh">"</span><span class="p">:</span>
+            <span class="n">split_indices</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        
+    <span class="n">split_indices</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">split_indices</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">translation</span><span class="p">))</span>
+
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">split_indices</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">parts</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">translation</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span> <span class="n">split_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">split_indices</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+
+    <span class="nf">return</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">extract_coords</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('aadsds', 0, 6), ('dsds', 7, 11), ('dsds', 12, 16)]
+</code></pre></div></div>
+
+<p>And specify the right parameters to make it truly generic:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">extract_coords_with_annotation</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span><span class="n">translation</span><span class="p">,</span><span class="n">phase</span><span class="p">,</span><span class="n">strand</span><span class="p">):</span>
+    <span class="n">split_indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">char</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">translation</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="n">separator</span><span class="p">:</span>
+            <span class="n">split_indices</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        
+    <span class="n">split_indices</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">split_indices</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">translation</span><span class="p">))</span>
+
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">split_indices</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">parts</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">translation</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="n">separator</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span> <span class="n">phase</span><span class="p">,</span> <span class="n">strand</span><span class="p">,</span> <span class="n">split_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">split_indices</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="nf">return</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">extract_coords_with_annotation</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">+</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('aadsds', '0', '+', 0, 6),
+ ('dsds', '0', '+', 7, 11),
+ ('dsds', '0', '+', 12, 16)]
+</code></pre></div></div>
+
+<h2 id="analyzing-all-translations-of-a-given-sequence">Analyzing all translations of a given sequence</h2>
+
+<p>We begin by parsing the <code class="language-plaintext highlighter-rouge">translations</code> list we defined above:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">all_translations</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">translations</span><span class="p">:</span>
+    <span class="n">all_translations</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">extract_coords_with_annotation</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">all_translations</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[('RP', '0', '+', 0, 2),
+  ('PKCV', '0', '+', 3, 7),
+  ('MWLLGRISLRSVSVLVIGLLSAL', '0', '+', 8, 31),
+  ('R', '0', '+', 32, 33)],
+ [('SLIIDKQQE', '0', '-', 0, 9),
+  ('ELATDRRIKWWELRRLKASSRSL', '0', '-', 10, 33)],
+ [('DRSPSAFECGYLGGFHCGLSPYLLLVFFLHYDA', '1', '+', 0, 33)],
+ [('R', '1', '-', 0, 1),
+  ('', '1', '-', 2, 2),
+  ('STNNRNKN', '1', '-', 3, 11),
+  ('PQTGESNGGNYGD', '1', '-', 12, 25),
+  ('KRVPVAC', '1', '-', 26, 33)],
+ [('TVAQVRLNVATWEDFIAVCLRTCYWSSFCIMT', '2', '+', 0, 32)],
+ [('ADNRQTTGIRTSHRQANQMVGTTEIESEFP', '2', '-', 0, 30),
+  ('P', '2', '-', 31, 32)]]
+</code></pre></div></div>
+
+<p>Now the problem with this list is that it is nested. However, we need to make it flat:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">flat_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">all_translations</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">:</span>
+        <span class="n">flat_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">flat_list</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('RP', '0', '+', 0, 2),
+ ('PKCV', '0', '+', 3, 7),
+ ('MWLLGRISLRSVSVLVIGLLSAL', '0', '+', 8, 31),
+ ('R', '0', '+', 32, 33),
+ ('SLIIDKQQE', '0', '-', 0, 9),
+ ('ELATDRRIKWWELRRLKASSRSL', '0', '-', 10, 33),
+ ('DRSPSAFECGYLGGFHCGLSPYLLLVFFLHYDA', '1', '+', 0, 33),
+ ('R', '1', '-', 0, 1),
+ ('', '1', '-', 2, 2),
+ ('STNNRNKN', '1', '-', 3, 11),
+ ('PQTGESNGGNYGD', '1', '-', 12, 25),
+ ('KRVPVAC', '1', '-', 26, 33),
+ ('TVAQVRLNVATWEDFIAVCLRTCYWSSFCIMT', '2', '+', 0, 32),
+ ('ADNRQTTGIRTSHRQANQMVGTTEIESEFP', '2', '-', 0, 30),
+ ('P', '2', '-', 31, 32)]
+</code></pre></div></div>
+
+<p>Now we can load the list into <code class="language-plaintext highlighter-rouge">Pandas</code> and plot away:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">flat_list</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">aa</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">frame</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">phase</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">start</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">end</span><span class="sh">'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>aa</th>
+      <th>frame</th>
+      <th>phase</th>
+      <th>start</th>
+      <th>end</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RP</td>
+      <td>0</td>
+      <td>+</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PKCV</td>
+      <td>0</td>
+      <td>+</td>
+      <td>3</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MWLLGRISLRSVSVLVIGLLSAL</td>
+      <td>0</td>
+      <td>+</td>
+      <td>8</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>R</td>
+      <td>0</td>
+      <td>+</td>
+      <td>32</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SLIIDKQQE</td>
+      <td>0</td>
+      <td>-</td>
+      <td>0</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ELATDRRIKWWELRRLKASSRSL</td>
+      <td>0</td>
+      <td>-</td>
+      <td>10</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>DRSPSAFECGYLGGFHCGLSPYLLLVFFLHYDA</td>
+      <td>1</td>
+      <td>+</td>
+      <td>0</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>R</td>
+      <td>1</td>
+      <td>-</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td></td>
+      <td>1</td>
+      <td>-</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>STNNRNKN</td>
+      <td>1</td>
+      <td>-</td>
+      <td>3</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>PQTGESNGGNYGD</td>
+      <td>1</td>
+      <td>-</td>
+      <td>12</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>KRVPVAC</td>
+      <td>1</td>
+      <td>-</td>
+      <td>26</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>TVAQVRLNVATWEDFIAVCLRTCYWSSFCIMT</td>
+      <td>2</td>
+      <td>+</td>
+      <td>0</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>ADNRQTTGIRTSHRQANQMVGTTEIESEFP</td>
+      <td>2</td>
+      <td>-</td>
+      <td>0</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>P</td>
+      <td>2</td>
+      <td>-</td>
+      <td>31</td>
+      <td>32</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Now let’s plot it:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">altair</span> <span class="k">as</span> <span class="n">alt</span>
+
+<span class="n">plus</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">phase</span><span class="sh">'</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">+</span><span class="sh">'</span><span class="p">]).</span><span class="nf">mark_rect</span><span class="p">().</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">X</span><span class="p">(</span><span class="sh">'</span><span class="s">start:Q</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">X2</span><span class="p">(</span><span class="sh">'</span><span class="s">end:Q</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">Y</span><span class="p">(</span><span class="sh">'</span><span class="s">frame:N</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">frame</span><span class="sh">'</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="sh">'</span><span class="s">aa:N</span><span class="sh">'</span>
+             <span class="p">).</span><span class="nf">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">minus</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">phase</span><span class="sh">'</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">-</span><span class="sh">'</span><span class="p">]).</span><span class="nf">mark_rect</span><span class="p">().</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">X</span><span class="p">(</span><span class="sh">'</span><span class="s">start:Q</span><span class="sh">'</span><span class="p">,</span><span class="n">sort</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">EncodingSortField</span><span class="p">(</span><span class="sh">'</span><span class="s">start:Q</span><span class="sh">'</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="sh">'</span><span class="s">descending</span><span class="sh">'</span><span class="p">)),</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">X2</span><span class="p">(</span><span class="sh">'</span><span class="s">end:Q</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">alt</span><span class="p">.</span><span class="nc">Y</span><span class="p">(</span><span class="sh">'</span><span class="s">frame:N</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">frame</span><span class="sh">'</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="sh">'</span><span class="s">aa:N</span><span class="sh">'</span>
+             <span class="p">).</span><span class="nf">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">plus</span> <span class="o">&amp;</span> <span class="n">minus</span>
+</code></pre></div></div>
+
+<figure id="figure-1" style="max-width: 90%;"><div style="overflow-x: auto"><object data="./images/orfs.svg" type="image/svg+xml" alt="ORFS. ">ORFS.</object></div><a target="_blank" href="./images/orfs.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Translation on plus (top) and minus (bottom) strands.</figcaption></figure>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Lists and dictionaries are key data structures in Python</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Introduction to sequencing with Python (part three) (Foundations of Data Science)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Anton Nekrutenko,  <b>Introduction to sequencing with Python (part three) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture4/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture4/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{data-science-gnmx-lecture4,
+author = "Anton Nekrutenko",
+	title = "Introduction to sequencing with Python (part three) (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture4/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/data-science/tutorials/gnmx-lecture4/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/60c339508e56bf12ca86708c47d639804f36e099">60c3395</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/gnmx-lecture4/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1707215469'></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </body>
+</html>
