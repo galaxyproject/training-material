@@ -3,10 +3,11 @@ layout: tutorial_hands_on
 topic_name: introduction
 tutorial_name: introduction-to-cpt-galaxy
 ---
+Last updated: Feb. 7 2024
 
 > ### Agenda
 >
-> In this tutorial, the following Galaxy characteristics will be reviewed:
+> In this tutorial, the following topics will be reviewed:
 > 
 > 1. First-time users
 >    > * Registering an account in Galaxy and Apollo
@@ -25,9 +26,13 @@ tutorial_name: introduction-to-cpt-galaxy
 >
 {: .agenda}
 
-#  tools from the Center for Phage Technology
+#  Registering a Galaxy account
 
- is a platform for doing reproducible bioinformatics research. It provides a user-friendly interface for a vast number of complex command line tools, and it encourages consistent science by using identical software and interfaces across all Galaxy instances. Galaxy aims to make computational biology accessible to research scientists that may not have computer programming or system administration experience. The [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) utilizes Galaxy for most computer-based analysis. Computationally intensive jobs can be launched and left; enabling scientists returns to lab work. Galaxy keeps track of the job progress and automatically saves the work done up until that point.
+For the past ten years, the [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) at Texas A&M University has developed and hosted its phage genomics tools on its own public-facing Galaxy instance. Starting in 2024, these tools will be hosted on the main European Galaxy instance at the URL https://phage.usegalaxy.eu. If you are a first-time user of the CPT Galaxy genomics platform, we strongly encourage you to begin by registering a free user account at [phage.usegalaxy.eu](https://phage.usegalaxy.eu). We are continuing to migrate our tools and workflows to this platform through 2024. If you are already a user of the CPT's original Galaxy instance at https://cpt.tamu.edu/galaxy-pub, this system will continue operating until its planned shutdown date of August 2024. After this time, we will only be supporting operations at phage.usegalaxy.eu.
+
+#  Galaxy tools from the Center for Phage Technology
+
+Galaxy is a platform for doing reproducible bioinformatics research. It provides a user-friendly interface for a vast number of complex command line tools, and it encourages consistent science by using identical software and interfaces across all Galaxy instances. Galaxy aims to make computational biology accessible to research scientists that may not have computer programming or system administration experience. The [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) utilizes Galaxy for most computer-based analysis. Computationally intensive jobs can be launched and left; enabling scientists returns to lab work. Galaxy keeps track of the job progress and automatically saves the work done up until that point.
 
 > ### {% icon tip %} Note that…
 > The screenshots displayed here may not precisely reflect what you see on your screen. As our systems are regularly updated, it is likely that the current version year/number or the exact window display is different. Look for the most recent workflows/tools.
