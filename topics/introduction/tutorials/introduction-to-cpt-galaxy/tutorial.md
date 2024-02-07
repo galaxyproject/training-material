@@ -25,20 +25,20 @@ tutorial_name: introduction-to-cpt-galaxy
 >
 {: .agenda}
 
-# Galaxy at the Center for Phage Technology
+#  tools from the Center for Phage Technology
 
-Galaxy is a platform for doing reproducible bioinformatics research. It provides a user-friendly interface for a vast number of complex command line tools, and it encourages consistent science by using identical software and interfaces across all Galaxy instances. Galaxy aims to make computational biology accessible to research scientists that may not have computer programming or system administration experience. The [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) utilizes Galaxy for most computer-based analysis. Computationally intensive jobs can be launched and left; enabling scientists returns to lab work. Galaxy keeps track of the job progress and automatically saves the work done up until that point.
+ is a platform for doing reproducible bioinformatics research. It provides a user-friendly interface for a vast number of complex command line tools, and it encourages consistent science by using identical software and interfaces across all Galaxy instances. Galaxy aims to make computational biology accessible to research scientists that may not have computer programming or system administration experience. The [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) utilizes Galaxy for most computer-based analysis. Computationally intensive jobs can be launched and left; enabling scientists returns to lab work. Galaxy keeps track of the job progress and automatically saves the work done up until that point.
 
 > ### {% icon tip %} Note that…
 > The screenshots displayed here may not precisely reflect what you see on your screen. As our systems are regularly updated, it is likely that the current version year/number or the exact window display is different. Look for the most recent workflows/tools.
 {: .tip}
 
-![](../../images/introduction-to-cpt-galaxy-screenshots/1_galaxy_interface.png)
+![](../../images/introduction-to-cpt-galaxy-screenshots/phage-usegalaxy-screenshot-jan2024.png)
 
-The Galaxy user interface consists of three panels; on the left (boxed in blue) is a column containing all available tools. In the center (boxed in purple) is where analysis will occur and results displayed. On the right (boxed in red) is where the current history resides.
+The Galaxy user interface consists of three panels; on the left is a column containing all available tools. In the center is where analysis will occur and results displayed. On the right is where the current history resides.
 
 > ### {% icon tip %} Note that…
-> If the user is lost within the browser interface, clicking **Analyze Data** in the blue bar at the top will return the user to the Galaxy home page. Refreshing the page will also return to the home page without losing any work done up until that point. Galaxy automatically saves all progress.
+> If the user is lost within the browser interface, clicking the **Home icon** in the blue bar at the top will return the user to the Galaxy home page. Refreshing the page will also return to the home page without losing any work done up until that point. Galaxy automatically saves all progress.
 {: .tip}
 
 # Tools
@@ -125,71 +125,28 @@ between them and creating new ones. This can be useful to organize different ana
 
 ### History controls
 
-![Current history buttons](../../images/introduction-to-cpt-galaxy-screenshots/current-history-buttons_2.png)
+Above the current history panel are three buttons: Create New History, Switch to History, and History Options.
 
-Above the current history panel are four buttons: the refresh, create new hitory, 'view all histories, and hitory options.
+> 1. The **Create New History** button will create a new history to begin working in. History use will be detailed later in this tutorial.
 
-> 1. The **refresh** button ![](../../images/introduction-to-cpt-galaxy-screenshots/12_rerun_icon.png) will entirely reload the history being viewed. This can be helpful if you believe the history interface needs to be updated or isn't updating properly.
+> 2. The **Switch to History** button will bring up a window for switching between multiple histories.
 
-> 2. The **create new history** button ![](../../images/introduction-to-cpt-galaxy-screenshots/create_new_history.png) will create a new history to begin working in. History use will be detailed later in this tutorial.
-
-> 3. The **'view all histories' button** ![](../../images/introduction-to-cpt-galaxy-screenshots/view_all_histories.png) sends you to the interface for managing multiple histories
-
-> 4. The **history options button** ![](../../images/introduction-to-cpt-galaxy-screenshots/20_settings_icon.png) opens the history options menu which allows you to perform history-related tasks.
-
+> 3. The **History Options** button opens the history options menu which allows you to perform history-related tasks.
 
 ### History Information
 
 Histories also store information apart from the datasets they contain. They can be named/re-named, tagged, and
 annotated. It’s good scientific practice to maintain organized records; this translates to Galaxy histories and datasets. Imagine yourself in three years looking at this history, or sharing it with another user: is it clear what the history contains?
 
-### Renaming a history
+### Renaming and tagging a history
 
 All histories begin with the name 'Unnamed history'. Users can re-name histories to provide relevant details on the work they contain, such as the name of the organism and the date of the work:
 
-1. Click the existing name. A text input field will appear with the current name.
-2. Entered a new name or edit the existing one the way you'd like.
-3. Press 'Enter' to save the new name. The input field will disappear and the new name will display.
-4. To cancel renaming, press 'Esc' or **click outside the input field.** If your name is not saving, make sure you press 'Enter' before clicking anywhere outside the box.
-
-![Renaming history](../../images/introduction-to-cpt-galaxy-screenshots/renaming.png)
-
-### Tagging a history
-
-Tags are short pieces of text used to describe the thing they're attached to and many things in Galaxy can be tagged.
-Each item can have many tags and you can add new tags or remove them at any time. Think of them as keywords, as they are searchable. Tags can be another useful way to organize and search your data. For instance, you might tag a history with the type of analysis you did in it: 'assembly' or 'variants'. Or you may tag them according to data sources or some other metadata.
-
-To tag a history:
-
-1. Click the tag button at the top of the history panel. An input field showing existing tags (if any) will appear.
-2. Begin typing your new tag in the field. Any tags that you've used previously will show below your partial entry -
-  allowing you to use this 'autocomplete' data to re-use your previous tags without typing them in full.
-3. Press enter or select one of the previous tags with your arrow keys or mouse.
-4. To remove an existing tag, click the small 'X' on the tag or use the backspace key while in the input field.
-
-![Using tags](../../images/introduction-to-cpt-galaxy-screenshots/tags.png)
-
-> ### {% icon comment %} Advanced Users…
-> * Datasets can also be **tagged** to allow for fast sorting. Look for the same icon used on histories, but within the dataset.
-{: .comment}
-
-### Annotating a history
-
-Sometimes tags and names are not enough to describe the work done within a history. Galaxy allows you to create history
-annotations: longer text entries that allow more formatting options. Newlines and whitespace are preserved. Later, if
-you publish or share the history, the annotation will be displayed automatically - allowing you to share additional
-notes about the analysis.
-
-To annotate a history:
-
-1. Click the annotation button at the top of the history panel. A larger text section will appear displaying any
-  existing annotation (or, if there's none, italic text saying you can click on the control to create an annotation).
-2. Click the annotation section. Then a larger input field will appear.
-3. Add any annotations you desire. 'Return'/'Enter' will create a line break and white space is preserved. (Tabs cannot be
-  entered since the 'Tab' button is used to switch between controls on the page - tabs can be pasted in however).
-4. To save the annotation, click the 'Done' button.
-
-![Annotations to history](../../images/introduction-to-cpt-galaxy-screenshots/annotations.png)
+1. Click the pen icon next to the existing name. A text input field will appear with the current name.
+2. Enter a new name or edit the existing one the way you'd like.
+3. A description of the history can be entered in the Annotation field below the name.
+4. Tags (short pieces of text used to describe the thing they're attached to) can be added by clicking the Add Tags button below the Annotations field. Tags are searchable within Galaxy.
+5. Press 'Enter' in the nale field or click the Save button to save. The input field will disappear and the new name will display.
 
 ### History size
 
@@ -197,25 +154,9 @@ As datasets are added to a history, Galaxy will store them in files on its file 
 for all the datasets in a history is displayed underneath the history name. For example, if a history has 200 megabytes
 of dataset data on Galaxy's filesystem, '200 MB' will be displayed underneath the name.
 
-The CPT Galaxy does not currently set a maximum quota size for users.
-
 ### Switching Histories
 
-There are four icons in the top right-hand corner of the History panel. The two-panel icon allow you to view and switch between different histories. Clicking on this reveals the different histories.
-
-![](../../images/introduction-to-cpt-galaxy-screenshots/21_view_histories.png)
-
-> ### {% icon tip %} Note that…
-> Newly created or edited histories are sometimes not displayed in the all histories page after clicking on the two-panel icon. In this case, it is still possible to find them and switch to them by clicking the ![](../../images/introduction-to-cpt-galaxy-screenshots/20_settings_icon.png) icon and selecting Saved Histories. This will display a list of all the user's saved histories.
-{: .tip}
-
-![](../../images/introduction-to-cpt-galaxy-screenshots/22_all_histories.png)
-
-On the left is the current history, and all histories on the right are other histories. The **switch to** button will set that history as the current history. At the top left-hand corner is a **done** button, which will exit this view when complete. Any analyses run will be saved in that history.
-
-> ### {% icon tip %} Pro tip …
-> In the histories view, it is possible to copy datasets between histories. Simply set the history you want to drag the datasets into as the current history, and drag the dataset from another history to the top of the current history.
-{: .tip}
+There are three icons in the top right-hand corner of the History panel. The double-arrow icon allows you to view and switch between different histories. Clicking on this reveals the different histories. In the **History Options** menu, you can select **Show Histories Side-by-Side**. In this view it is possible to copy datasets between histories by dragging datasets between them. If a history you want to see here is not shown, scroll all the way to the right and click **Select Histories** to add new histories to this view.
 
 > ### {% icon comment %} Further Reading
 > To learn more about what a user can do with histories and datasets in Galaxy, please reference [this tutorial.](https://galaxyproject.github.io/training-material/topics/galaxy-ui/tutorials/history/tutorial.html)
@@ -270,7 +211,7 @@ Near the top, the format is listed as *tabular*. At the bottom of the expanded d
 > 
 > * A common reason that tools fail is that the user specified an incorrect input dataset or tool parameters. Click on the circular arrow "re-run" button to bring up the tool's original run paramters. Double-check that you selected the correct dataset(s) as input, and that you set any other parameters approriately, and try executing the tool again.
 > 
-> * If your inputs are all correct and the tool still fails, there may be a bug in the tool. Selecting the bug icon in the bottom left-hand corner will bring up a page in the main Galaxy interface that provides the error text and a form for reporting the error as a bug. There, a message can be typed and a report submitted to CPT IT staff. It is always recommended to submit bug reports when jobs fail because it improves the system for all users.
+> * If your inputs are all correct and the tool still fails, there may be a bug in the tool. Selecting the bug icon in the bottom left-hand corner will bring up a page in the main Galaxy interface that provides the error text and a form for reporting the error as a bug. There, a message can be typed and a report submitted to Galaxy staff. It is always recommended to submit bug reports when jobs fail because it improves the system for all users.
 > 
 {: .comment}
 
@@ -278,25 +219,11 @@ Near the top, the format is listed as *tabular*. At the bottom of the expanded d
 
 ### Hiding and unhiding datasets
 
-Some procedures in Galaxy such as workflows will often **hide** history datasets in order to simplify the history
-and hide intermediate steps of an automated analysis. These hidden datasets won't normally appear in the history panel
-but they are still mentioned in the history subtitle (the smaller, grey text that appears below the history name). If your
-history has hidden datasets, the number will appear there (e.g. '95 hidden') as a clickable link. If you click this link,
-the hidden datasets are shown. Each hidden dataset has a link in the top of the summary view that allows you to unhide
-it. You can click that link again (which will now be 'hide hidden') to make them not shown again.
-
-![](../../images/introduction-to-cpt-galaxy-screenshots/16_deleted_hidden_datasets.png)
+Some procedures in Galaxy such as workflows will often **hide** history datasets in order to simplify the history and hide intermediate steps of an automated analysis. These hidden datasets won't normally appear in the history panel but they can be made visible by clicking the slashed eye icon at the top right of the History panel. If your history has hidden datasets, a number will appear next to the icon. Each hidden dataset has a link in the top of the summary view that allows you to unhide it. You can click that link again (which will now be 'hide hidden') to make them not shown again.
 
 ### Deleting and undeleting datasets
 
-You can **delete** any dataset in your history by clicking the delete button. This does not immediately remove the
-dataset's data from Galaxy and **it is reversible**. When you delete a dataset from the history, it will be removed
-from the panel but (like hidden datasets) the total number of deleted datasets is shown in the history subtitle as a
-link. Clicking this link (e.g. '33 deleted') will make the deleted datasets visible and each deleted dataset will have a
-link for manually undeleting it above its title. You can click that link again (which will now be 'hide deleted') to
-make them not shown again.
-
-![](../../images/introduction-to-cpt-galaxy-screenshots/17_deleted_dataset_example.png)
+You can **delete** any dataset in your history by clicking the delete button. This does not immediately remove the dataset's data from Galaxy and **it is reversible**. When you delete a dataset from the history, it will be removed from the panel but (like hidden datasets) the total number of deleted datasets is shown next to the trashcan icon next to the show/hide histories icon. Clicking this button will make the deleted datasets visible and each deleted dataset will have a link for manually undeleting it above its title. You can click that link again (which will now be 'hide deleted') to make them not shown again.
 
 ### Re-naming Datasets
 
@@ -330,7 +257,7 @@ Doing these tasks one by one would mean keeping track of *at least* 4 files. The
 
 ## Importing a Workflow
 
-Often times, a workflow will need to be imported for it to be used. Select the *Shared Data* drop-down menu at the top of the galaxy interface, and Select *Workflows.* This will bring up a page of all of the available workflows in [CPT Galaxy](https://cpt.tamu.edu/galaxy-pub).
+Often times, a workflow will need to be imported for it to be used. Select the *Shared Data* drop-down menu at the top of the galaxy interface, and Select *Workflows.* This will bring up a page of all of the available workflows in the Galaxy instance.
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/24_access_workflows.png)
 
