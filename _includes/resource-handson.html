@@ -24,7 +24,7 @@
           <li class="dropdown-item"><strong>Curated translations</strong></li>
            {% for lang in material.translations.tutorial %}
             <li class="dropdown-item">
-            <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{ include.material.topic_name }}/tutorials/{{ include.material.tutorial_name }}/tutorial_{{lang | upcase }}.html" title="{{ lang }}">
+            <a class="dropdown-item" hreflang="{{ lang }}" href="{{ site.baseurl }}/topics/{{ include.material.topic_name }}/tutorials/{{ include.material.tutorial_name }}/tutorial_{{lang | upcase }}.html" title="{{ lang }}">
                 {{language[lang]}}
             </a>
             </li>
@@ -35,7 +35,7 @@
          <li class="dropdown-item"><strong>Automatic translations</strong></li>
         {% for lang in language %}{% unless lang[0] == 'en' %}
 	<li class="dropdown-item">
-            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang[0] }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.material.topic_name }}%2Ftutorials%2F{{ include.material.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
+            <a class="dropdown-item" hreflang="{{ lang[0] }}" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang[0] }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.material.topic_name }}%2Ftutorials%2F{{ include.material.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
                 {{ lang[1] }}
             </a>
 	</li>
