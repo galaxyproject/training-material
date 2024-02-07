@@ -21,7 +21,7 @@ topic | features
 [EncyclopeDIA](tutorials/encyclopedia/tutorial.md) | [:book:](tutorials/encyclopedia/tutorial.md)
 [Clinical-Metaproteomics-Database-generation](tutorials/clinical-mp-1-database-generation/tutorial.md) | [:book:](tutorials/clinical-mp-1-database-generation/tutorial.md)
 [Clinical-Metaproteomics-Discovery](tutorials/clinical-mp-2-discovery/tutorial.md) | [:book:](tutorials/clinical-mp-2-discovery/tutorial.md)
-[Clinical-Metaproteomics-Data-Verification](tutorials/clinical-mp-3-data-verification/tutorial.md) | [:book:](tutorials/clinical-mp-data-3-verification/tutorial.md)
+[Clinical-Metaproteomics-Data-Verification](tutorials/clinical-mp-3-verification/tutorial.md) | [:book:](tutorials/clinical-mp-3-verification/tutorial.md)
 [Clinical-Metaproteomics-Quantitation](tutorials/clinical-mp-4-quantitation/tutorial.md) | [:book:](tutorials/clinical-mp-4-quantitation/tutorial.md)
 [Clinical-Metaproteomics-Data-Interpretation](tutorials/clinical-mp-5-data-interpretation/tutorial.md) | [:book:](tutorials/clinical-mp-5-data-interpretation/tutorial.md)
 [N-Tails](./tutorials/ntails/workflows/) | [:page_facing_up:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows) [:book:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows)
