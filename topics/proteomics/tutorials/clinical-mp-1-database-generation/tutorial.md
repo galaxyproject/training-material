@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Clinical-MP-Database Generation
+title: Clinical-MP-1-Database-Generation
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - Why do we need to generate a customized database for metaproteomics research?
@@ -32,7 +32,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - clinical-mp-discovery
+            - clinical-mp-2-discovery
 tags: [label-TMT11]
 ---
 
