@@ -1,0 +1,88 @@
+- doc: Test outline for Ecoregionalization_Workflow
+  job:
+    env.tsv:
+      class: File
+      path: test-data/env.tsv
+      filetype: tabular
+    cnidaria_filtered.tsv:
+      class: File
+      path: test-data/cnidaria_filtered.tsv
+      filetype: tabular
+  outputs:
+    coll_pred:
+      element_tests: 
+        1_brts_pred_ceamarc:
+          asserts:
+            has_n_columns:
+              n: 4
+    coll_val:
+      element_tests: 
+        1_brts_validation_ceamarc:
+          asserts:
+            has_n_columns:
+              n: 4
+    coll_distri:
+      element_tests: 
+        BRT- Actiniaria _pred_plot:
+          asserts:
+            has_text:
+              text: PNG
+        BRT- Thouarella_vulpicauda _pred_plot:
+          asserts:
+            has_text:
+              text: PNG
+    coll_plots:
+      element_tests: 
+        'BRT- Actiniaria ':
+          asserts:
+            has_size: 
+              value: 16543
+              delta: 1000
+        'BRT- Thouarella_vulpicauda ':
+          asserts:
+            has_size: 
+              value: 15595
+              delta: 1000
+    summary:
+      asserts:
+        has_n_columns:
+          n: 3
+    taxa:
+      asserts:
+        has_n_lines:
+          n: 2
+    taxa_clean:
+      asserts:
+        has_n_lines:
+          n: 2
+    SIH_index:
+          asserts:
+            has_text:
+              text: PNG
+    data_to_clus:
+      asserts:
+        has_size: 
+          value: 573
+          delta: 50
+    databio_table:
+      asserts:
+        has_n_columns:
+          n: 4
+    SIH_plot:
+          asserts:
+            has_text:
+              text: PNG
+    cluster_points:
+      asserts:
+        has_n_columns:
+          n: 3
+    cluster_info:
+      asserts:
+        has_size: 
+          value: 2301
+          delta: 500
+    eco_map:
+          asserts:
+            has_text:
+              text: PNG
+        
