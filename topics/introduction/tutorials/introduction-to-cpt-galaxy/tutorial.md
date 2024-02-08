@@ -28,7 +28,7 @@ Last updated: Feb. 7 2024
 
 #  Registering a Galaxy account
 
-For the past ten years, the [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) at Texas A&M University has developed and hosted its phage genomics tools on its own public-facing Galaxy instance. Starting in 2024, these tools will be hosted on the main European Galaxy instance at the URL https://phage.usegalaxy.eu. If you are a first-time user of the CPT Galaxy genomics platform, we strongly encourage you to begin by registering a free user account at [phage.usegalaxy.eu](https://phage.usegalaxy.eu). We are continuing to migrate our tools and workflows to this platform through 2024. If you are already a user of the CPT's original Galaxy instance at https://cpt.tamu.edu/galaxy-pub, this system will continue operating until its planned shutdown date of August 2024. After this time, we will only be supporting operations at phage.usegalaxy.eu.
+For the past ten years, the [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) at Texas A&M University has developed and hosted its phage genomics tools on its own public-facing Galaxy instance. Starting in 2024, these tools will be hosted on the main European Galaxy instance at **[phage.usegalaxy.eu](https://phage.usegalaxy.eu)**. If you are a first-time user of the CPT Galaxy genomics platform, we  encourage you to begin by registering a free user account at **[phage.usegalaxy.eu](https://phage.usegalaxy.eu)**. We are continuing to migrate our tools and workflows to this platform through 2024. If you are already a user of the CPT's original Galaxy instance at [https://cpt.tamu.edu/galaxy-pub], this system will continue operating until its planned shutdown date of August 2024. After this time, we will only be supporting operations at phage.usegalaxy.eu.
 
 #  Galaxy tools from the Center for Phage Technology
 
@@ -38,7 +38,7 @@ Galaxy is a platform for doing reproducible bioinformatics research. It provides
 > The screenshots displayed here may not precisely reflect what you see on your screen. As our systems are regularly updated, it is likely that the current version year/number or the exact window display is different. Look for the most recent workflows/tools.
 {: .tip}
 
-![](../../images/introduction-to-cpt-galaxy-screenshots/phage-usegalaxy-screenshot-jan2024.png)
+![](../../images/introduction-to-cpt-galaxy-screenshots/phage-usegalaxy-screenshot-jan2024.PNG)
 
 The Galaxy user interface consists of three panels; on the left is a column containing all available tools. In the center is where analysis will occur and results displayed. On the right is where the current history resides.
 
