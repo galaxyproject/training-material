@@ -24,7 +24,7 @@ Last updated: Feb. 7, 2024
 
 # Background Information
 
-The Center for Phage Technology (CPT) at Texas A&M University has developed extensive bioinformatic pipelines for the analysis and annotation of phage genomes, and these tools are now available via the main European Galaxy instance at htts://phage.usegalaxy.eu. Although it is not the first genome browser, Apollo is the first collaborative genomic annotation editor available solely on the Internet. Apollo is still under development and new features are frequently added. Note that Apollo is only designed for viewing genomes and for evaluating, adding, and editing genome annotations; Apollo cannot be used to directly edit the underlying DNA sequence.
+The Center for Phage Technology (CPT) at Texas A&M University has developed extensive bioinformatic pipelines for the analysis and annotation of phage genomes, and these tools are now available via the main European Galaxy instance at https://phage.usegalaxy.eu. Although it is not the first genome browser, Apollo is the first collaborative genomic annotation editor available solely on the Internet. Apollo is still under development and new features are frequently added. Note that Apollo is only designed for viewing genomes and for evaluating, adding, and editing genome annotations; Apollo cannot be used to directly edit the underlying DNA sequence.
 
 ## Useful Terms 
 > * **Static:** Unmodifiable, specifically in the context of a computer resource that you are accessing. For example, The website interface. This is opposed to “dynamic” where you can interact with the files or service, and your interactions can persist.
