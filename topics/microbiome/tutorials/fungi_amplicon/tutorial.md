@@ -20,7 +20,7 @@ contributors:
 
 Characterization of fungal communities with amplicon data is particularly difficult, since fungi exhibit high genetic diversity, complex ecological interactions, and varying levels of abundance across environments. Additionally, the presence of PCR biases, sequencing errors, and uneven coverage further complicates accurate analysis and interpretation {% cite de_filippis_different_2017 %}.
 
-LotuS2, is a tool designed to address some of the challenges associated with analyzing amplicon sequencing data, including data generated from ITS (internal transcribed spacer) regions for fungal community analysis {% ozkurt_lotus2_2022 %}.
+LotuS2, is a tool designed to address some of the challenges associated with analyzing amplicon sequencing data, including data generated from ITS (internal transcribed spacer) regions for fungal community analysis {% cite ozkurt_lotus2_2022 %}.
 
 <!-- This is a comment. -->
 
