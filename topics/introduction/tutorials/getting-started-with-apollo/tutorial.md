@@ -3,13 +3,12 @@ layout: tutorial_hands_on
 topic_name: introduction
 tutorial_name: getting-started-with-apollo
 ---
+Last updated: Feb. 7, 2024
 
 > ### Agenda
 >
 > In this tutorial, you will find:
 >
-> * First-time users
->    > * Generating an account with CPT Apollo
 > * Background Information
 >    > * History of Genome Browsers
 >    >    > 1. GBrowse
@@ -22,14 +21,10 @@ tutorial_name: getting-started-with-apollo
 >    > * Navigating Through Apollo
 {: .agenda}
 
-# Getting Started With Apollo
-{:.no_toc}
-
-The Center for Phage Technology Galaxy program is an instance of the Galaxy Project, and provides a web interface for bioinformatics tools. Apollo, a genome browser, can be accessed through Galaxy to view, edit, and annotate genomes.
 
 # Background Information
 
-Although it is not the first genome browser, Apollo is the first collaborative genomic annotation editor available solely on the Internet. Apollo is still under development and new features are frequently added.
+The Center for Phage Technology (CPT) at Texas A&M University has developed extensive bioinformatic pipelines for the analysis and annotation of phage genomes, and these tools are now available via the main European Galaxy instance at htts://phage.usegalaxy.eu. Although it is not the first genome browser, Apollo is the first collaborative genomic annotation editor available solely on the Internet. Apollo is still under development and new features are frequently added. Note that Apollo is only designed for viewing genomes and for evaluating, adding, and editing genome annotations; Apollo cannot be used to directly edit the underlying DNA sequence.
 
 ## Useful Terms 
 > * **Static:** Unmodifiable, specifically in the context of a computer resource that you are accessing. For example, The website interface. This is opposed to “dynamic” where you can interact with the files or service, and your interactions can persist.
@@ -88,7 +83,7 @@ Continuing on to Apollo, this section will cover the relationship between Galaxy
 
 ## The Galaxy-Apollo Bridge
 
-Galaxy and Apollo work together extensively at the CPT Galaxy plateform and it is important to understand the relationship between these platforms. Apollo is *not* just another tool or workflow in Galaxy. Apollo is a separate program that specializes in the display and editing of JBrowse datasets. The CPT has developed a tool called **JBrowse-in-Galaxy** (JiG), which can build JBrowse instances within Galaxy and then export them into Apollo where they can be accessed by the user. The conversion of your genome and its associated data into an Apollo-compatible JBrowse instance is carried out by several tools in the provided annotation workflows. 
+Galaxy and Apollo work together extensively on the phage.usegalaxy.eu platform and it is important to understand the relationship between these platforms. Apollo is *not* just another tool or workflow in Galaxy. Apollo is a separate program that specializes in the display and editing of JBrowse datasets. The CPT has developed a tool called **JBrowse-in-Galaxy** (JiG), which can build JBrowse instances within Galaxy and then export them into Apollo where they can be accessed by the user. The conversion of your genome and its associated data into an Apollo-compatible JBrowse instance is carried out by several tools in the provided annotation workflows. 
 
 ![](../../images/getting-started-with-apollo-screenshots/basic-galaxy-apollo-bridge.png)
 
@@ -97,15 +92,13 @@ JiG essentially sends a "snapshot" of your organism to Apollo, where you can add
 Apollo uses the concept of *Organisms,* with each organism having one or more *reference sequences* below it. Some organisms such as eukaryotes might have multiple reference sequences associated with them, which would correspond to multiple chromosomes. For phage annotation projects, **each organism will only have one reference sequence.** 
 
 ## Getting into Apollo
-Apollo can be accessed by two different methods, as shown below:
+You must have a user account at usegalaxy.eu to access the attached Apollo instance. Apollo can be accessed by two different methods, as shown below:
 
-> #### Method 1: Main page
->    > For users with organisms already loaded into Apollo, this is the most straightforward method. Simple navigate to the home page via "Analyze data" tab or refreshing the screen, and click on "CPT Apollo"
-
-![](../../images/getting-started-with-apollo-screenshots/25_access_apollo.png)
-
+> #### Method 1: Direct link
+>    > For users with organisms already loaded into Apollo, this is the most straightforward method. Simply navigate to the URL phage.usegalaxy.eu/apollo. Note that the cookie usegalaxy.eu uses to maintain your login distinguishes between phage.usegalaxy.eu and the regular usegalaxy.eu; if Apollo says you are missing a cookie, make sure you are using the correct URL when accessing Apollo (e.g., phage.usegalaxy.eu/apollo versus usegalaxy.eu/apollo).
+>    > 
 > #### Method 2: Galaxy history
->    > After running a structural or functional workflow, the history below will be generated. Click on the eye icon in that history to enter apollo within the Galaxy window. 
+>    > After running a structural or functional workflow, the history below will be generated. Click on the eye icon in that history to enter Apollo within the Galaxy window. Note that if you are using this method, the Galaxy History and Tools sidebars can be minimized using the arrow buttons at the bottom corners of the window.
 
 ![](../../images/getting-started-with-apollo-screenshots/24_annotate_data.png)
 
