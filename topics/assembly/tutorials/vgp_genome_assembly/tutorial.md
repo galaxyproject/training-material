@@ -120,13 +120,13 @@ The {VGP} assembly pipeline has a modular organization, consisting of ten workfl
 |  Input data | Assembly quality  | Analysis trajectory <br>([Fig. 2)](#figure-2)|
 |------|---------------|-----|
 | HiFi | The minimum requirement | A |
-| HiFi + HiC| Better continuity | B |
-| HiFi + BioNano | Better continuity | C |
-| HiFi + Hi-C + BioNano | Even better continuity | D |
-| HiFi + parental data| Better haplotype resolution | E |
-| HiFi + parental data + Hi-C| Better haplotype resolution and improved continuity | F |
-| HiFi + parental + BioNano | Better haplotype resolution and improved continuity | G |
-| HiFi + parental data + Hi-C + BioNano | Better haplotype resolution and ultimate continuity | H |
+| HiFi + HiC | Better haplotype resolution (less haplotype switches) | B |
+| HiFi + BioNano | Better contiguity | C |
+| HiFi + Hi-C + BioNano | Even better contiguity | D |
+| HiFi + parental data | Properly phased | E |
+| HiFi + parental data + Hi-C | Better haplotype resolution | F |
+| HiFi + parental + BioNano | Properly phased with improved contiguity | G |
+| HiFi + parental data + Hi-C + BioNano | Properly phased with even more improved contiguity | H |
 
 If this table "HiFi" and "Hi-C" are derived from the individual whose genome is being assembled. "Parental data" is high-coverage Illumina data derived from the parents of the individual being assembled. Datasets containing parental data are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.
 
