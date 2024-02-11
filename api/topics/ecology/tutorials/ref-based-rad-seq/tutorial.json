@@ -76,7 +76,7 @@
       "name": "Workflow Constructed From History 'STACKS RAD: Population Genomics With Reference Genome'",
       "title": "Workflow Constructed From History 'STACKS RAD: Population Genomics With Reference Genome'",
       "test_results": null,
-      "modified": "2024-02-10 00:11:38 +0000",
+      "modified": "2024-02-11 00:12:03 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"FastQC\"];\n  5 -->|demultiplexed| 10;\n  11[\"Map with BWA\"];\n  5 -->|demultiplexed| 11;\n  3 -->|output| 11;\n  12[\"Select\"];\n  6 -->|output_log| 12;\n  13[\"Select\"];\n  6 -->|output_log| 13;\n  14[\"Replace Text\"];\n  7 -->|outfile| 14;\n  15[\"Replace Text\"];\n  8 -->|out_file1| 15;\n  16[\"Replace Text\"];\n  9 -->|out_file1| 16;\n  17[\"MultiQC\"];\n  10 -->|text_file| 17;\n  18[\"Replace Text\"];\n  12 -->|out_file1| 18;\n  19[\"Replace Text\"];\n  13 -->|out_file1| 19;\n  2[\"Input dataset\"];\n  20[\"Add column\"];\n  14 -->|outfile| 20;\n  21[\"Concatenate datasets\"];\n  19 -->|outfile| 21;\n  15 -->|outfile| 21;\n  16 -->|outfile| 21;\n  18 -->|outfile| 21;\n  22[\"Cut\"];\n  20 -->|out_file1| 22;\n  23[\"Convert\"];\n  21 -->|out_file1| 23;\n  24[\"Regex Replace\"];\n  22 -->|out_file1| 24;\n  25[\"Stacks: reference map\"];\n  11 -->|bam_output| 25;\n  24 -->|outfile| 25;\n  26[\"Stacks: populations\"];\n  25 -->|all_output| 26;\n  24 -->|outfile| 26;\n  27[\"Summary Statistics\"];\n  26 -->|out_fstats| 27;\n  28[\"Sort\"];\n  26 -->|out_fstats| 28;\n  29[\"Count\"];\n  26 -->|out_fstats| 29;\n  3[\"Input dataset\"];\n  30[\"Filter\"];\n  26 -->|out_fstats| 30;\n  4[\"Stacks: process radtags\"];\n  1 -->|output| 4;\n  0 -->|output| 4;\n  5[\"Stacks: process radtags\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Stacks: process radtags\"];\n  1 -->|output| 6;\n  0 -->|output| 6;\n  7[\"Replace Text\"];\n  2 -->|output| 7;\n  8[\"Select\"];\n  4 -->|output_log| 8;\n  9[\"Select\"];\n  5 -->|output_log| 9;\n"
     },
     {
@@ -94,7 +94,7 @@
       "name": "Ref Based Rad Seq",
       "title": "Ref Based Rad Seq",
       "test_results": null,
-      "modified": "2024-02-10 00:11:38 +0000",
+      "modified": "2024-02-11 00:12:03 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Stacks: process radtags\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  5[\"Stacks: process radtags\"];\n  2 -->|output| 5;\n  3 -->|output| 5;\n  6[\"Stacks: process radtags\"];\n  2 -->|output| 6;\n  3 -->|output| 6;\n  7[\"Map with BWA for Illumina\"];\n  0 -->|output| 7;\n  4 -->|demultiplexed| 7;\n  8[\"Stacks: reference map\"];\n  7 -->|output| 8;\n  1 -->|output| 8;\n  9[\"Stacks: populations\"];\n  8 -->|all_output| 9;\n  1 -->|output| 9;\n"
     }
   ],
