@@ -976,6 +976,10 @@ module Jekyll
     def identify_funders(materials, site)
       TopicFilter.identify_funders(materials, site)
     end
+
+    def list_draft_materials(site)
+      TopicFilter.list_all_materials(site).select { |k, _v| k['draft'] }
+    end
   end
 end
 
