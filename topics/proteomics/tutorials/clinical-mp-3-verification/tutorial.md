@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Clinical-MP-Database Verification
+title: Clinical-MP-4-Verification
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - Why do we need to verify our identified peptides
@@ -31,8 +31,10 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - clinical-mp-quantitation
+            - clinical-mp-4-quantitation
 tags: [label-TMT11]
+redirect_from:
+- /topics/proteomics/tutorials/clinical-mp-data-verification/tutorial
 ---
 
 

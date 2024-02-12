@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Clinical-MP-Database Generation
+title: Clinical-MP-1-Database-Generation
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - Why do we need to generate a customized database for metaproteomics research?
@@ -32,8 +32,10 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - clinical-mp-discovery
+            - clinical-mp-2-discovery
 tags: [label-TMT11]
+redirect_from:
+- /topics/proteomics/tutorials/clinical-mp-database-generation/tutorial
 ---
 
 Metaproteomics is the large-scale characterization of the entire complement of proteins expressed by microbiota. However, metaproteomics analysis of clinical samples is challenged by the presence of abundant human (host) proteins which hampers the confident detection of lower abundant microbial proteins {% cite Batut2018 %} ; [{% cite Jagtap2015 %} .

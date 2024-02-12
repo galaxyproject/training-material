@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Clinical-MP-Database Discovery
+title: Clinical-MP-2-Discovery
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - How to perform database searching?
@@ -33,12 +33,13 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - clinical-mp-data-verification
+            - clinical-mp-3-verification
 tags: [label-TMT11]
+redirect_from:
+- /topics/proteomics/tutorials/clinical-mp-discovery/tutorial
 ---
 
 
-# Abstract
 
 This tutorial can be followed with any user-defined database but would work best if the clinical metaproteomics database generation module was used (see [Database Generation tutorial](https://github.com/subinamehta/training-material/blob/main/topics/proteomics/tutorials/clinical-mp-database-generation/tutorial.md)). The MetaNovo tool generates a more manageable database that contains identified proteins. The MetaNovo-generated database merged with Human SwissProt (reviewed only) and contaminants (cRAP) databases to generate a compact database (~21.2k protein sequences) that will be used for peptide identification.
 
