@@ -8,7 +8,7 @@ title: Clinical metaproteomics workflows within Galaxy
 description: |
   This learning path aims to teach you the basics of how to perform metaproteomics analysis of the clinical data within the Galaxy platform. You will learn how to use Galaxy for analysis, and will be guided through the most common first steps of any metaproteomics database generation to searching the database, verifying the proteins/peptides, and data analysis.
 
-priority: 1
+priority: 3
 
 pathway:
   - section: "Module 1: Database generation"
