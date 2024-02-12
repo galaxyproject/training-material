@@ -3,6 +3,7 @@ layout: learning-pathway
 cover-image: /assets/images/genomics_intro.png
 cover-image-alt: "Genomics intro"
 tags: [introduction, real-course]
+type: use
 editorial_board:
 - nekrut
 
@@ -24,6 +25,14 @@ pathway:
       - name: cli-basics
         topic: data-science
       - name: cli-advanced
+        topic: data-science
+      - name: python-basics
+        topic: data-science
+      - name: gnmx-lecture2
+        topic: data-science
+      - name: gnmx-lecture3
+        topic: data-science
+      - name: gnmx-lecture4
         topic: data-science
 
 

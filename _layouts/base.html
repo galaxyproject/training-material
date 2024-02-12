@@ -29,6 +29,9 @@
         <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css?v=3">
         <link rel="manifest" href="{{ site.baseurl }}/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
+	{% if page.layout == "faq" %}
+	<link rel="alternate" type="application/json+oembed" href="https://oembed.apps.galaxyproject.eu/oembed?format=json&url={{ site.url }}{{ site.baseurl }}{{ page.url }}" title="oEmbed Profile" />
+	{% endif %}
 
         {{ page | generate_dublin_core: site }}
     	  {%- assign og_desc = page.description | default: page.excerpt | default:topic.summary | default: page.content | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" -%}
