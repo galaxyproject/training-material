@@ -112,7 +112,7 @@
       "name": "Genome Assembly of MRSA using Oxford Nanopore MinION Data (imported from uploaded file)",
       "title": "Genome Assembly of MRSA using Oxford Nanopore MinION Data (imported from uploaded file)",
       "test_results": null,
-      "modified": "2024-02-12 16:00:00 +0000",
+      "modified": "2024-02-12 16:01:51 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Convert compressed file to uncompressed.\"];\n  0 -->|output| 1;\n  2[\"filtlong\"];\n  1 -->|output1| 2;\n  3[\"NanoPlot\"];\n  1 -->|output1| 3;\n  4[\"NanoPlot\"];\n  2 -->|outfile| 4;\n  5[\"Flye assembly\"];\n  2 -->|outfile| 5;\n  6[\"Bandage Image\"];\n  5 -->|assembly_gfa| 6;\n  7[\"Quast\"];\n  5 -->|consensus| 7;\n  8[\"staramr\"];\n  5 -->|consensus| 8;\n  9[\"Prokka\"];\n  5 -->|consensus| 9;\n  10[\"Select\"];\n  8 -->|detailed_summary| 10;\n  11[\"Table to GFF3\"];\n  10 -->|out_file1| 11;\n  12[\"JBrowse\"];\n  5 -->|consensus| 12;\n  9 -->|out_gff| 12;\n  11 -->|output| 12;\n"
     }
   ],
