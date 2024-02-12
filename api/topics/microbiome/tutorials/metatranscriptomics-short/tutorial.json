@@ -228,7 +228,7 @@
       "name": "Workflow 1: Preprocessing",
       "title": "Workflow 1: Preprocessing",
       "test_results": null,
-      "modified": "2024-02-12 15:59:30 +0000",
+      "modified": "2024-02-12 16:00:03 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"Cutadapt\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  2 -->|text_file| 5;\n  3 -->|text_file| 5;\n  6[\"Filter with SortMeRNA\"];\n  4 -->|out1| 6;\n  4 -->|out2| 6;\n  7[\"FASTQ interlacer\"];\n  6 -->|unaligned_forward| 7;\n  6 -->|unaligned_reverse| 7;\n"
     },
     {
@@ -282,7 +282,7 @@
       "name": "Workflow 2: Community Profile",
       "title": "Workflow 2: Community Profile",
       "test_results": null,
-      "modified": "2024-02-12 15:59:30 +0000",
+      "modified": "2024-02-12 16:00:03 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"MetaPhlAn\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Cut\"];\n  2 -->|output_file| 3;\n  4[\"Krona pie chart\"];\n  2 -->|krona_output_file| 4;\n  5[\"Export to GraPhlAn\"];\n  3 -->|out_file1| 5;\n  6[\"Generation, personalization and annotation of tree\"];\n  5 -->|annotation| 6;\n  5 -->|tree| 6;\n  7[\"GraPhlAn\"];\n  6 -->|output_tree| 7;\n"
     },
     {
@@ -336,7 +336,7 @@
       "name": "Workflow 3: Functional Information",
       "title": "Workflow 3: Functional Information",
       "test_results": null,
-      "modified": "2024-02-12 15:59:30 +0000",
+      "modified": "2024-02-12 16:00:03 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Cut\"];\n  1 -->|output| 2;\n  3[\"HUMAnN\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  4[\"Renormalize\"];\n  3 -->|gene_families_tsv| 4;\n  5[\"Renormalize\"];\n  3 -->|pathabundance_tsv| 5;\n  6[\"Regroup\"];\n  3 -->|gene_families_tsv| 6;\n  7[\"Replace\"];\n  4 -->|output| 7;\n  8[\"Unpack pathway abundances\"];\n  4 -->|output| 8;\n  5 -->|output| 8;\n  9[\"Rename features\"];\n  6 -->|output| 9;\n  10[\"Split a HUMAnN table\"];\n  6 -->|output| 10;\n  11[\"Combine MetaPhlAn2 and HUMAnN2 outputs\"];\n  7 -->|outfile| 11;\n  2 -->|out_file1| 11;\n  12[\"Select\"];\n  9 -->|output| 12;\n  13[\"Select\"];\n  9 -->|output| 13;\n  14[\"Select\"];\n  9 -->|output| 14;\n"
     },
     {
@@ -390,7 +390,7 @@
       "name": "Workflow 3: Functional Information (quick)",
       "title": "Workflow 3: Functional Information (quick)",
       "test_results": null,
-      "modified": "2024-02-12 15:59:30 +0000",
+      "modified": "2024-02-12 16:00:03 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Cut\"];\n  0 -->|output| 3;\n  4[\"Renormalize\"];\n  1 -->|output| 4;\n  5[\"Regroup\"];\n  1 -->|output| 5;\n  6[\"Renormalize\"];\n  2 -->|output| 6;\n  7[\"Replace\"];\n  4 -->|output| 7;\n  8[\"Rename features\"];\n  5 -->|output| 8;\n  9[\"Split a HUMAnN table\"];\n  5 -->|output| 9;\n  10[\"Unpack pathway abundances\"];\n  4 -->|output| 10;\n  6 -->|output| 10;\n  11[\"Combine MetaPhlAn2 and HUMAnN2 outputs\"];\n  7 -->|outfile| 11;\n  3 -->|out_file1| 11;\n  12[\"Select\"];\n  8 -->|output| 12;\n  13[\"Select\"];\n  8 -->|output| 13;\n  14[\"Select\"];\n  8 -->|output| 14;\n"
     }
   ],
