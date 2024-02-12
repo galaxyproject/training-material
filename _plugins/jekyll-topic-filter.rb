@@ -462,6 +462,19 @@ module TopicFilter
     # automatically set `slides: true`
     page_obj['slides'] = slides.length.positive? if !page_obj.key?('slides')
 
+    all_resources = slides + tutorials
+    page_obj['mod_date'] = all_resources
+      .map{|p| Gtn::ModificationTimes.obtain_time(p[1].path) }
+      .max
+
+    page_obj['pub_date'] = all_resources
+      .map{|p| Gtn::PublicationTimes.obtain_time(p[1].path)}
+      .min
+
+    page_obj['version'] = all_resources
+      .map{|p| Gtn::ModificationTimes.obtain_modification_count(p[1].path) }
+      .max
+
     folder = material['dir']
 
     ymls = Dir.glob("#{folder}/quiz/*.yml") + Dir.glob("#{folder}/quiz/*.yaml")
@@ -962,6 +975,10 @@ module Jekyll
 
     def identify_funders(materials, site)
       TopicFilter.identify_funders(materials, site)
+    end
+
+    def list_draft_materials(site)
+      TopicFilter.list_all_materials(site).select { |k, _v| k['draft'] }
     end
   end
 end

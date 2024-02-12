@@ -57,9 +57,9 @@ workflows = %w[
   ./topics/introduction/tutorials/galaxy-intro-peaks2genes/workflows/Galaxy-Introduction-Peaks2Genes-Part-1-Workflow.ga
   ./topics/introduction/tutorials/galaxy-intro-short/workflows/Galaxy-Workflow-galaxy-intro-short.ga
   ./topics/sequence-analysis/tutorials/quality-control/workflows/quality_control.ga
-  ./topics/metagenomics/tutorials/beer-data-analysis/workflows/main_workflow.ga
-  ./topics/metagenomics/tutorials/general-tutorial/workflows/amplicon.ga
-  ./topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/Nanopore_Datasets_Pathogen_Tracking_among_all_samples.ga
+  ./topics/microbiome/tutorials/beer-data-analysis/workflows/main_workflow.ga
+  ./topics/microbiome/tutorials/general-tutorial/workflows/amplicon.ga
+  ./topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/Nanopore_Datasets_Pathogen_Tracking_among_all_samples.ga
   ./topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-Count-Matrix-Filtering.ga
   ./topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-FASTQ-to-Count-Matrix.ga
   ./topics/single-cell/tutorials/scrna-case_alevin/workflows/Generating-a-single-cell-matrix-using-Alevin-1.9.ga

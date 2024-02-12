@@ -406,6 +406,10 @@ module Jekyll
       page['path'].split('/')[1]
     end
 
+    def shuffle(array)
+      array.shuffle
+    end
+
     def get_og_desc(site, page); end
 
     def get_og_title(site, page, reverse)
@@ -485,7 +489,7 @@ module Jekyll
     end
 
     def group_icons(icons)
-      icons.group_by{|k, v| v}.map{|k, v| [k, v.map{|z|z[0]} ]}.to_h.invert
+      icons.group_by { |_k, v| v }.transform_values { |v| v.map { |z| z[0] } }.invert
     end
   end
 end
@@ -502,6 +506,35 @@ Jekyll::Hooks.register :posts, :pre_render do |post, _out|
     Gtn::Contributors.fetch_name(post.site, c)
   end.join(', ')
   post.data['image'] = post.data['cover']
+end
+
+# We're going to do some find and replace, to replace `@gtn:contributorName` with a link to their profile.
+Jekyll::Hooks.register :site, :pre_render do |site|
+  site.posts.docs.each do |post|
+    if post.content
+      post.content = post.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
+        # Get first capture
+        name = match.gsub('@gtn:', '')
+        if site.data['contributors'].key?(name)
+          "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
+        else
+          match
+        end
+      end
+    end
+  end
+  site.pages.each do |page|
+    if page.content
+      page.content = page.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
+        name = match.gsub('@gtn:', '')
+        if site.data['contributors'].key?(name)
+          "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
+        else
+          match
+        end
+      end
+    end
+  end
 end
 
 # Create back-refs for affiliations
@@ -521,6 +554,24 @@ Jekyll::Hooks.register :site, :post_read do |site|
           site.data['funders'][affiliation]['members'] = [] if !site.data['funders'][affiliation].key?('members')
 
           site.data['funders'][affiliation]['members'] << name
+        end
+      end
+    end
+
+    if contributor.key?('former_affiliations')
+      contributor['former_affiliations'].each do |affiliation|
+        if site.data['organisations'].key?(affiliation)
+          if !site.data['organisations'][affiliation].key?('former_members')
+            site.data['organisations'][affiliation]['former_members'] = []
+          end
+
+          site.data['organisations'][affiliation]['former_members'] << name
+        elsif site.data['funders'].key?(affiliation)
+          if !site.data['funders'][affiliation].key?('former_members')
+            site.data['funders'][affiliation]['former_members'] = []
+          end
+
+          site.data['funders'][affiliation]['former_members'] << name
         end
       end
     end

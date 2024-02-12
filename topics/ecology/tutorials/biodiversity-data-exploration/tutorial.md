@@ -23,7 +23,10 @@ contributions:
   - colineroyaux
   - yvanlebras
   funding:
+  - pndb
   - gallantries
+  - pndb
+  - fnso2019
 
 ---
 

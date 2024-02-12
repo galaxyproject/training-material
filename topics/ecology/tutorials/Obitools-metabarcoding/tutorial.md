@@ -18,12 +18,16 @@ tags:
   - EBV workflow
   - eDNA
   - Metabarcoding
-contributors:
-- colineroyaux
-- onorvez
-- ecoissac
-- fboyer
-- yvanlebras
+contributions:
+  authorship:
+  - colineroyaux
+  - onorvez
+  - ecoissac
+  - fboyer
+  - yvanlebras
+  funding:
+  - gallantries
+  - pndb
 
 ---
 

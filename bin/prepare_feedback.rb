@@ -65,7 +65,8 @@ renamed_topics = {
   'User Interface and Features' => 'Using Galaxy and Managing your Data',
   'Data Manipulation' => 'Using Galaxy and Managing your Data',
   'User Interface and Data Manipulation' => 'Using Galaxy and Managing your Data',
-  'Assembly) is not working I can do up to multiQC and after unicycler not working' => 'Assembly'
+  'Assembly) is not working I can do up to multiQC and after unicycler not working' => 'Assembly',
+  'Metagenomics' => 'Microbiome'
 }
 
 ACCEPTABLE_TOPICS = [
@@ -82,7 +83,7 @@ ACCEPTABLE_TOPICS = [
   'Imaging',
   'Introduction to Galaxy Analyses',
   'Metabolomics',
-  'Metagenomics',
+  'Microbiome',
   'Proteomics',
   'Sequence analysis',
   'Single Cell',
