@@ -33,6 +33,8 @@ follow_up_training:
         tutorials:
             - clinical-mp-4-quantitation
 tags: [label-TMT11]
+redirect_from:
+- /topics/proteomics/tutorials/clinical-mp-data-verification/tutorial
 ---
 
 

@@ -35,6 +35,8 @@ follow_up_training:
         tutorials:
             - clinical-mp-3-verification
 tags: [label-TMT11]
+redirect_from:
+- /topics/proteomics/tutorials/clinical-mp-discovery/tutorial
 ---
 
 

@@ -33,6 +33,8 @@ follow_up_training:
         tutorials:
             - metaproteomics
 tags: [label-TMT11]
+redirect_from:
+- /topics/proteomics/tutorials/clinical-mp-data-interpretation/tutorial
 ---
 
 

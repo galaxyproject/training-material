@@ -31,6 +31,8 @@ follow_up_training:
         tutorials:
             - clinical-mp-5-data-interpretation
 tags: [label-TMT11]
+redirect_from:
+- /topics/proteomics/tutorials/clinical-mp-quantitation/tutorial
 ---
 
 
