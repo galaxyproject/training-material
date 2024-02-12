@@ -471,6 +471,10 @@ module TopicFilter
       .map{|p| Gtn::PublicationTimes.obtain_time(p[1].path)}
       .min
 
+    page_obj['version'] = all_resources
+      .map{|p| Gtn::ModificationTimes.obtain_modification_count(p[1].path) }
+      .max
+
     folder = material['dir']
 
     ymls = Dir.glob("#{folder}/quiz/*.yml") + Dir.glob("#{folder}/quiz/*.yaml")
