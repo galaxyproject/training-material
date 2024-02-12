@@ -120,7 +120,7 @@
       "name": "NGS_tutorial",
       "title": "NGS_tutorial",
       "test_results": null,
-      "modified": "2024-02-12 15:41:22 +0000",
+      "modified": "2024-02-12 15:59:29 +0000",
       "mermaid": "flowchart TD\n  0[\"Accessions\"];\n  1[\"Genome\"];\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|list_paired| 3;\n  4[\"Map with BWA-MEM\"];\n  3 -->|output_paired_coll| 4;\n  1 -->|output| 4;\n  5[\"Samtools view\"];\n  4 -->|bam_output| 5;\n  6[\"MarkDuplicates\"];\n  5 -->|outputsam| 6;\n  7[\"Samtools stats\"];\n  6 -->|outFile| 7;\n  8[\"Realign reads\"];\n  6 -->|outFile| 8;\n  1 -->|output| 8;\n  9[\"MultiQC\"];\n  3 -->|report_json| 9;\n  6 -->|metrics_file| 9;\n  7 -->|output| 9;\n  10[\"Insert indel qualities\"];\n  8 -->|realigned| 10;\n  1 -->|output| 10;\n  11[\"Call variants\"];\n  10 -->|output| 11;\n  1 -->|output| 11;\n  12[\"SnpEff eff:\"];\n  11 -->|variants| 12;\n  13[\"SnpSift Extract Fields\"];\n  12 -->|snpeff_output| 13;\n  14[\"Collapse Collection\"];\n  13 -->|output| 14;\n"
     }
   ],
