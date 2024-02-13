@@ -33,6 +33,8 @@ contributions:
     - hexylena
   testing:
     - pavanvidem
+  funding:
+    - elixir-fair-data
 
 follow_up_training:
   -

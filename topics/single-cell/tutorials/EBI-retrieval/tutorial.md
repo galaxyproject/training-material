@@ -1,13 +1,13 @@
 ---
 layout: tutorial_hands_on
 subtopic: datamanipulation
-priority: 3
-title: EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial
+priority: 2
+title: Importing files from public atlases
 questions:
-- How do I use the EBI Single Cell Expression Atlas?
+- How do I use the EBI Single Cell Expression Atlas and Human Cell Atlas?
 - How can I reformat and manipulate the downloaded files to create the correct input for downstream analysis?
 objectives:
-- You will retrieve raw data from the EBI Single Cell Expression Atlas.
+- You will retrieve raw data from the EBI Single Cell Expression Atlas and Human Cell Atlas.
 - You will manipulate the metadata and matrix files.
 - You will combine the metadata and matrix files into an AnnData or Seurat object for downstream analysis.
 
@@ -46,7 +46,7 @@ tags:
 
 # Introduction
 
-Public single cell datasets seem to accumulate by the second. Well annotated, quality datasets are slightly trickier to find. which is why projects like the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) (SCXA) exist - to curate datasets for public use. Here, we will guide you through transforming data imported from the SCXA repository into the input file required for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}).
+Public single cell datasets seem to accumulate by the second. Well annotated, quality datasets are slightly trickier to find. which is why projects like the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) (SCXA) exist - to curate datasets for public use. Here, we will guide you through transforming data imported from the SCXA repository into the input file required for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) and we will also show how to use the public atlases for your own research. 
 
 > <agenda-title></agenda-title>
 >
@@ -60,6 +60,17 @@ Public single cell datasets seem to accumulate by the second. Well annotated, qu
 # Getting data from the Single Cell Expression Atlas
 
 Galaxy has a specific tool for importing data from the SCXA ({% cite Moreno2020.04.08.032698 %}), which combines all the preprocessing steps shown in [the previous tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) into one! For this tutorial, the dataset can be seen [at the EBI](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment ID of `E-MTAB-6945`.
+
+> <details-title> How to access other experiments? </details-title>
+>
+> You can search datasets according to various criteria either using search box in **Home** tab or choosing kingdom, experiment collection, technology type (and others) in **Browse experiments** tab. When you find the experiment you are interested in, just click on it and the experiment ID will be displayed in the website URL, as shown below.
+>
+> ![Arrow pointing to the website URL where you can find experiment ID.](../../images/scrna-data/exp_id.jpg "Where to find experiment ID on the EBI Single Cell Expression Atlas website.")
+>
+> Once you know the experiment ID, you can use EBI SCXA Data Retrieval tool in Galaxy!
+> 
+{: .details}
+
 
 > <hands-on-title>Retrieving data from Single Cell Expression Atlas</hands-on-title>
 >
@@ -104,7 +115,9 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 {: .question}
 
 
-# Metadata manipulation
+## Metadata manipulation
+
+At this point you might want to do some modifications in the files before downstream analysis. That can include re-formating the cell metadata or changing the names of the column headers, it all depends on your dataset and how you want to perfrom your analysis. It's also fine to transform those files straight away. Here, we will show an extended version of metadata manipulation which allows us to create an input file consistent with [the next tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) workflow.
 
 Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about the 7 experimental samples (N701 – N707). However, in the {% icon param-file %} `exp_design.tsv` dataset, which contains the cell metadata, these samples are just numbered from 1 to 7.
 
@@ -171,7 +184,7 @@ While we're renaming things, let's also fix our titles.
 > 2. Rename {% icon galaxy-pencil %} output `Cell metadata`
 {: .hands_on}
 
-# Check mitochondrial gene name format
+## Check mitochondrial gene name format
 
 We might like to flag mitochondrial genes. They can be identified quite easily since - depending on the species and formatting convention - their names often start with `mt`. Since tools for flagging mitochondrial genes are often case-sensitive, it might be a good idea to check the formatting of the mitochondrial genes in our dataset.
 
@@ -197,7 +210,7 @@ Now we can create our single cell object!
  <div class="Scanpy" markdown="1">
 
 
-# Creating the AnnData object
+## Creating the AnnData object
 
 We will do several modifications within the AnnData object so that you can follow [the next tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}).
 
@@ -216,7 +229,7 @@ We will do several modifications within the AnnData object so that you can follo
 >
 {: .hands_on}
 
-# AnnData manipulation
+## AnnData manipulation
 
 We will now change the header of the column containing gene names from `gene_symbols` to `Symbol`. This edit is only needed to make our AnnData object compatible with this tutorial's workflow. We will also flag the mitochondrial genes.
 
@@ -241,9 +254,9 @@ And the good news is that we can do both those steps using only one tool!
 >
 {: .hands_on}
 
-And that's all! What's even more exciting about the {% icon tool %}) **AnnData Operations** tool is that it automatically calculates a bunch of metrics, such as `log1p_mean_counts`, `log1p_total_counts`, `mean_counts`, `n_cells`, `n_cells_by_counts`, `n_counts`, `pct_dropout_by_counts`, and `total_counts`. Amazing, isn't it?
+And that's all! What's even more exciting about the {% icon tool %} **AnnData Operations** tool is that it automatically calculates a bunch of metrics, such as `log1p_mean_counts`, `log1p_total_counts`, `mean_counts`, `n_cells`, `n_cells_by_counts`, `n_counts`, `pct_dropout_by_counts`, and `total_counts`. Amazing, isn't it?
 
-# Conclusion
+## Conclusion
 Now you can use this object as input for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) and its associated workflow!
 
 Even though this tutorial was designed specifically to modify the AnnData object to be compatible with the subsequent tutorial, it also shows useful tools that you can use for your own, independent data analysis. You can find the [workflow](https://singlecell.usegalaxy.eu/u/j.jakiela/w/workflow-constructed-from-history-ebi-workflow) and the [answer key history](https://singlecell.usegalaxy.eu/u/j.jakiela/h/ebi-scxa---anndata-scanpy-or-seurat-object-1). However, if you want to use the workflow from this tutorial, you have to keep in mind that different datasets may have different column names. So you have to check them first, and only then you can modify them.
@@ -252,7 +265,7 @@ Even though this tutorial was designed specifically to modify the AnnData object
 
 <div class="Seurat" markdown="1">
 
-# Creating the Seurat Object
+## Creating the Seurat Object
 
 > <hands-on-title> Create the Seurat Object </hands-on-title>
 >
@@ -264,9 +277,74 @@ Even though this tutorial was designed specifically to modify the AnnData object
 >    - *"Cell metadata"*: `Cell metadata`
 > 3. Rename {% icon galaxy-pencil %} output `Seurat object`
 >
+> You can also choose if you want to create Seurat object, Loom or Single Cell Experiment by selecting your option in *"Choose the format of the output"*.
+> 
 {: .hands_on}
 
-# Conclusion
+## Conclusion
 And you're there! You now have a usable Seurat object for analysis with Seurat tools in your history! {% icon congratulations %} Congrats!
 
 </div>
+
+
+<!---
+HCA doesn't work well for other datasets for now...
+https://github.com/galaxyproject/training-material/issues/4567 
+-->
+
+# Human Cell Atlas Matrix Downloader
+
+Another public atlas that you can use to access the datasets is [Human Cell Atlas data portal](https://data.humancellatlas.org/). We will show you the tool in Galaxy which allows to retrieve expression matrices and metadata for any public experiment available in that repository. 
+
+To use it, simply set the project title, project label or project UUID, which can be found at the [HCA data browser](https://data.humancellatlas.org/explore/projects), and select the desired matrix format (Matrix Market or Loom).
+
+![Image showing project UUID as a final fragment of link address, project title (self-explanatory) and project label as an entry in the box on the right side of the page.](../../images/scrna-data/HCA.jpg "Where to find project title, project label and project UUID")
+
+For projects that have more than one organism, one needs to be specified. Otherwise, there is no need to set the species.
+
+Let's use the suggested example of the project *Single cell transcriptome analysis of human pancreas*. If you check this project in HCA, you'll find out that it's actually its label. But it will work the same if you enter the title or UUID! 
+
+> <hands-on-title>Create AnnData object</hands-on-title>
+>
+> {% tool [Human Cell Atlas Matrix Downloader](toolshed.g2.bx.psu.edu/repos/ebi-gxa/hca_matrix_downloader/hca_matrix_downloader/v0.0.4+galaxy0) %} with the following parameters:
+>    - *"Human Cell Atlas project name/label/UUID"*: `Single cell transcriptome analysis of human pancreas`
+>    - *"Choose the format of matrix to download"*:  `Matrix Market`
+{: .hands_on}
+
+> <details-title>What will be the output?</details-title>
+>
+> When "Matrix Market" is seleted, outputs are in 10X-compatible Matrix Market format:
+> - **Matrix (txt)**: Contains the expression values for genes (rows) and cells (columns) in raw counts. This text file is formatted as a Matrix Market file, and as such it is accompanied by separate files for the gene identifiers and the cells identifiers.
+> - **Genes (tsv)**: Identifiers (column repeated) for the genes present in the matrix of expression, in the same order as the matrix rows.
+> - **Barcodes (tsv)**: Identifiers for the cells of the data matrix. The file is ordered to match the columns of the matrix.
+> - **Experiment Design file (tsv)**: Contains metadata for the different cells of the experiment.
+>
+> When "Loom" is selected, output is a single Loom HDF5 file:
+> - **Loom (h5)**: Contains expression values for genes (rows) and cells (columns) in raw counts, cell metadata table and gene metadata table, in a [single HDF5 file](http://linnarssonlab.org/loompy/format/index.html).
+>
+{: .details}
+
+If you chose **Loom** format and you need to convert your file to other datatype, you can use {% tool [SCEasy](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy1) %} (more details in the next section). If you chose **Matrix Market** format, you can then transform the output to AnnData or Seurat, as shown in the EBI SCXA example above. Below, you will find an example of transforming the output to AnnData object. 
+
+
+> <hands-on-title>Create AnnData object</hands-on-title>
+>
+> {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0) %} with the following parameters:
+>    - *"Expression matrix in sparse matrix format (.mtx)"*: `Human Cell Atlas Matrix Downloader on matrix.mtx`
+>    - *"Gene table"*:  `Human Cell Atlas Matrix Downloader on genes.tsv`
+>    - *"Barcode/cell table"*: `Human Cell Atlas Matrix Downloader on barcodes.tsv`
+>    - *"Cell metadata table"*: `Human Cell Atlas Matrix Downloader on exp_design.tsv`
+{: .hands_on}
+
+
+> <tip-title>Flagging genes by using AnnData Operations</tip-title>
+>
+> After you create AnnData file, you can additionally use the {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92) %} tool before downstream analysis. It's quite a useful tool since not only does it flag mitochondrial genes, but also automatically calculates a bunch of metrics, such as `log1p_mean_counts`, `log1p_total_counts`, `mean_counts`, `n_cells`, `n_cells_by_counts`, `n_counts`, `pct_dropout_by_counts`, and `total_counts`.
+>
+> When you use it to flag mitochondrial genes, here are some formatting tips:
+> - Remember to check the name of the column with gene symbols
+> - This tool is case sensitive
+> - No parentheses needed when typing in the values
+> - Including a dash is important to identify mitochondrial genes (eg. **MT-**)
+{: .tip}
+
