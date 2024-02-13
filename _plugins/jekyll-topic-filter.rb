@@ -464,16 +464,16 @@ module TopicFilter
 
     all_resources = slides + tutorials
     page_obj['mod_date'] = all_resources
-      .map{|p| Gtn::ModificationTimes.obtain_time(p[1].path) }
-      .max
+                           .map { |p| Gtn::ModificationTimes.obtain_time(p[1].path) }
+                           .max
 
     page_obj['pub_date'] = all_resources
-      .map{|p| Gtn::PublicationTimes.obtain_time(p[1].path)}
-      .min
+                           .map { |p| Gtn::PublicationTimes.obtain_time(p[1].path) }
+                           .min
 
     page_obj['version'] = all_resources
-      .map{|p| Gtn::ModificationTimes.obtain_modification_count(p[1].path) }
-      .max
+                          .map { |p| Gtn::ModificationTimes.obtain_modification_count(p[1].path) }
+                          .max
 
     folder = material['dir']
 

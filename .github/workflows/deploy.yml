@@ -48,7 +48,7 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - name: Build Site
+      - name: Prepare Site Metadata
         run: |
           gem install bundler
           python -m pip install --upgrade pip
@@ -62,6 +62,9 @@ jobs:
           curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
           curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
           rdoc bin _plugins/ --output gtn_rdoc
+
+      - name: Build Site
+        run: |
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
           cp metadata/feedback.csv _site/training-material/api/feedback.csv
         env:

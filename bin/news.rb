@@ -38,6 +38,10 @@ $rooms = {
     server: 'https://matrix.org',
     room: '!UQXYBSjdrLHcWgegmg:gitter.im',
   }
+  'hub-social' => {
+    server: 'https://matrix.org',
+    room: '!gegHcnUCDklLbtVQor:matrix.org',
+  }
 }
 # rubocop:enable Style/GlobalVars
 #
@@ -268,3 +272,4 @@ send_news(output, options, channel: 'single-cell') if newsworthy
 # GOATS: Rss/news only.
 output, newsworthy = build_news(data, only_news: true)
 send_news(output, options, channel: 'wg-goat') if newsworthy
+send_news(output, options, channel: 'hub-social') if newsworthy
