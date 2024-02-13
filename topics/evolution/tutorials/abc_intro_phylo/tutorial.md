@@ -1,6 +1,11 @@
 ---
 layout: tutorial_hands_on
 title: Phylogenetics - Back to basics
+abbreviations: 
+  ME: Minimum Evolution
+  MP: Maximum Parsimony
+  ML: Maximum Likelihood
+  NJ: Neighbor-Joining
 zenodo_link: 'https://zenodo.org/records/10415242'
 draft: true
 tags:
@@ -605,7 +610,7 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 
 ### Models of sequence evolution
 
-*If you are in a hurry to do the phylogenetic analysis you can skip this section and go to the next [Hands-on: running IQ Tree](#estimating-a-maximum-likelihood-tree).*
+*If you are in a hurry to do the phylogenetic analysis you can skip this section and go to the next [Hands-on: running IQ Tree](#estimating-a-maximum-likelihood-tree-with-iqtree).*
 
 > <details-title>Likelihood models</details-title>
 > Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
