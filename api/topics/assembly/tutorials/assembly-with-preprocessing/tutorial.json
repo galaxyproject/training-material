@@ -131,7 +131,7 @@
       "name": "assembly_with_preprocessing",
       "title": "assembly_with_preprocessing",
       "test_results": null,
-      "modified": "2024-02-13 15:17:00 +0000",
+      "modified": "2024-02-13 15:23:24 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset collection\"];\n  10[\"Samtools fastx\"];\n  7 -->|outputsam| 10;\n  11[\"Samtools fastx\"];\n  9 -->|outputsam| 11;\n  12[\"Collapse Collection\"];\n  10 -->|nonspecific| 12;\n  13[\"Zip Collection\"];\n  11 -->|forward| 13;\n  11 -->|reverse| 13;\n  14[\"Collapse Collection\"];\n  11 -->|forward| 14;\n  15[\"Collapse Collection\"];\n  11 -->|reverse| 15;\n  16[\"seqtk_sample\"];\n  14 -->|output| 16;\n  17[\"seqtk_sample\"];\n  15 -->|output| 17;\n  18[\"Create assemblies with Unicycler\"];\n  12 -->|output| 18;\n  16 -->|default| 18;\n  17 -->|default| 18;\n  19[\"Bandage Info\"];\n  18 -->|assembly_graph| 19;\n  2[\"fastp\"];\n  0 -->|output| 2;\n  20[\"Filter sequences by length\"];\n  18 -->|assembly| 20;\n  21[\"Bandage Image\"];\n  18 -->|assembly_graph| 21;\n  3[\"NanoPlot\"];\n  1 -->|output| 3;\n  4[\"Map with minimap2\"];\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  2 -->|report_json| 5;\n  6[\"Bowtie2\"];\n  2 -->|output_paired_coll| 6;\n  7[\"Samtools view\"];\n  4 -->|alignment_output| 7;\n  8[\"Samtools stats\"];\n  4 -->|alignment_output| 8;\n  9[\"Samtools view\"];\n  6 -->|output| 9;\n"
     },
     {
@@ -149,7 +149,7 @@
       "name": "assembly_with_preprocessing_and_sra_download",
       "title": "assembly_with_preprocessing_and_sra_download",
       "test_results": null,
-      "modified": "2024-02-13 15:17:00 +0000",
+      "modified": "2024-02-13 15:23:24 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  10[\"Samtools stats\"];\n  6 -->|alignment_output| 10;\n  11[\"Samtools view\"];\n  8 -->|output| 11;\n  12[\"Samtools fastx\"];\n  9 -->|outputsam| 12;\n  13[\"Samtools fastx\"];\n  11 -->|outputsam| 13;\n  14[\"Collapse Collection\"];\n  12 -->|nonspecific| 14;\n  15[\"Zip Collection\"];\n  13 -->|forward| 15;\n  13 -->|reverse| 15;\n  16[\"Collapse Collection\"];\n  13 -->|forward| 16;\n  17[\"Collapse Collection\"];\n  13 -->|reverse| 17;\n  18[\"seqtk_sample\"];\n  16 -->|output| 18;\n  19[\"seqtk_sample\"];\n  17 -->|output| 19;\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  0 -->|output| 2;\n  20[\"Create assemblies with Unicycler\"];\n  14 -->|output| 20;\n  18 -->|default| 20;\n  19 -->|default| 20;\n  21[\"Bandage Info\"];\n  20 -->|assembly_graph| 21;\n  22[\"Bandage Image\"];\n  20 -->|assembly_graph| 22;\n  23[\"Filter sequences by length\"];\n  20 -->|assembly| 23;\n  3[\"Faster Download and Extract Reads in FASTQ\"];\n  1 -->|output| 3;\n  4[\"fastp\"];\n  2 -->|list_paired| 4;\n  5[\"NanoPlot\"];\n  3 -->|output_collection| 5;\n  6[\"Map with minimap2\"];\n  3 -->|output_collection| 6;\n  7[\"MultiQC\"];\n  4 -->|report_json| 7;\n  8[\"Bowtie2\"];\n  4 -->|output_paired_coll| 8;\n  9[\"Samtools view\"];\n  6 -->|alignment_output| 9;\n"
     }
   ],
