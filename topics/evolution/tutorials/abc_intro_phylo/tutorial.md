@@ -21,10 +21,12 @@ objectives:
 - Assess the reliability of estimated phylogenies with bootstrapping
 - Explore phylogenetic signal using phylogenetic networks
 time_estimation: 4H
-contributors:
-- mcharleston
-- adamtaranto
-- burkemlou
+contributions:
+  authorship:
+    - mcharleston
+  editing:
+    - adamtaranto
+    - burkemlou
 
 
 ---
