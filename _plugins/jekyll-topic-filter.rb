@@ -577,6 +577,7 @@ module TopicFilter
     page_obj['translations']['tutorial'] = tutorial_translations
     page_obj['translations']['slides'] = slide_translations
     page_obj['translations']['video'] = slide_has_video # Just demand it?
+    page_obj['license'] = 'CC-BY-4.0' if page_obj['license'].nil?
     # I feel less certain about this override, but it works well enough in
     # practice, and I did not find any examples of `type: <anything other
     # than tutorial>` in topics/*/tutorials/*/tutorial.md but that doesn't
