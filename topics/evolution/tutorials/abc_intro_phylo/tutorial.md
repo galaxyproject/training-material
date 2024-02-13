@@ -694,24 +694,24 @@ While this is running you might use your time to read the [Models of sequence ev
 > <hands-on-title>Estimating a Maximum Likelihood tree with IQTree</hands-on-title>
 >
 > 1. Find the {% tool [IQTree](https://toolshed.g2.bx.psu.edu/view/iuc/iqtree/9b892d7f82cc) %} program in the tool finder.
-> 1. Load your aligned sequence data, i.e., the alignment from MAFFT.
+> 2. Load your aligned sequence data, i.e., the alignment from MAFFT.
 > 3. Leave the selection of data type as DNA.
 <!-- > 4. Ignore the Time Tree Reconstruction settings and Likelihood Mapping analysis settings. -->
-> 5. Under the **Modelling Parameters**, click **Automatic model selection**_ and then under **Use Custom Model** select "_(none))_" in the drop-down menu, and click the **Automatic model selection** menu title again to close it.
-> 6. Open the **Rate heterogeneity** menu and set the last option, **"Write maximum likelihood site ratios to .mlrate file"** to "Yes".
-> 7. Close the **Modelling Parameters** menu and open the **Bootstrap Parameters** menu, then *Ultrafast bootstrap parameters*. Enter 1000 in the field "Specify number of bootstrap replicates (>=1000)"
+> 4. Under the **Modelling Parameters**, click **Automatic model selection**_ and then under **Use Custom Model** select "_(none))_" in the drop-down menu, and click the **Automatic model selection** menu title again to close it.
+> 5. Open the **Rate heterogeneity** menu and set the last option, **"Write maximum likelihood site ratios to .mlrate file"** to "Yes".
+> 6. Close the **Modelling Parameters** menu and open the **Bootstrap Parameters** menu, then *Ultrafast bootstrap parameters*. Enter 1000 in the field "Specify number of bootstrap replicates (>=1000)"
 <!-- > 8. Open the *Nonparametric bootstrapping* Leave all the Tree Parameters as they are. (Have a look at them and see if you can work out what they do). -->
 <!-- > 9. For **Bootstrap Parameters** select "Ultrafast bootstrap parameters" and enter "1000" bootstrap replicates. -->
-> 11. Click "Run tool".
+> 7. Click "Run tool".
+> 8. Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree.
+> ![Screenshot of a phylogenetic tree of Anolis species. The root of the tree is on the left and the species are listed vertically on the right. The tree consists of multiple branching events and clades and includes bootstrap values.](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis.")
+>Observe that the bootstrap values in the IQTree output for deep branches are not as high.
 >
+>Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates of the probability that the branch is correct, so are not quite the same as traditional "naive" bootstrap values.
 {: .hands_on}
 
-
-
-
+With the visualisation open answer the following questions:
 > <question-title>How well supported is your tree?</question-title>
-> Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree.
-> ![Screenshot of a phylogenetic tree of Anolis species. The root of the tree is on the left and the species are listed vertically on the right. The tree consists of multiple branching events and clades and includes bootstrap values.](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis.")
 > 1. What are the bootstrap values near the root of the tree? Do you think those branches are well supported?
 > 2. Which do you think is the biggest well-supported clade?
 > 2. Are there some nodes that would be better left unresolved?
@@ -724,10 +724,6 @@ While this is running you might use your time to read the [Models of sequence ev
 > {: .solution}
 {: .question}
 
-
-Observe that the bootstrap values in the IQTree output for deep branches are not as high.
-
-Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates of the probability that the branch is correct, so are not quite the same as traditional "naive" bootstrap values.
 
 
 ### Report on the final tree
@@ -1152,28 +1148,31 @@ The beauty of the network is that both thes pieces of information can be shown o
 
 Here are a few things that can catch us out:
 
-  - **Long Branch Attraction (LBA):** 
-    Be wary of long branches that come out together in the estimated phylogeny. This can be the result pairs of sequences that are very different from the rest, so match each other “by chance” more than they match the rest.
-    
-    **Fix:** break up these long branches by adding in some taxa that are closely related to one or the other; remove one long branch at a time to see where the remaining one fits best; consider other methods that are more robust to LBA.
+><tip-title>Long Branch Attraction (LBA):</tip-title>
+ >Be wary of long branches that come out together in the estimated phylogeny. This can be the result pairs of sequences that are very different from the rest, so match each other “by chance” more than they match the rest.
+>
+>**Fix:** break up these long branches by adding in some taxa that are closely related to one or the other; remove one long branch at a time to see where the remaining one fits best; consider other methods that are more robust to LBA.
+{: .tip}
 
-  - **Very “Gappy” Sequences:** 
-    Sequences that are hard to align might contain many gaps and many equally “good” alignments.
-  
-    **Fix:** Try different multiple alignment programs; consider using “alignment-free” methods such as k-mer distances; remove very problematic regions using programs such as GBlocks (also available on Galaxy).
+><tip-title>Very “Gappy” Sequences:</tip-title>
+>Sequences that are hard to align might contain many gaps and many equally “good” alignments.
+>
+>**Fix:** Try different multiple alignment programs; consider using “alignment-free” methods such as k-mer distances; remove very problematic regions using programs such as GBlocks (also available on Galaxy).
+{: .tip}
 
-  - **Low resolution:** 
-    Low bootstrap support or lots of conflict in a network.
-    
-    **Fix:** Look at which sites support which splits (internal branches); consider sliding window approaches to identify recombination, or check that your sequences don’t span regions with different selection pressures; consider using PartitionFinder or similar methods to work out which sets of sites have similar evolutionary dynamics.
+><tip-title>Low resolution:</tip-title>
+>Low bootstrap support or lots of conflict in a network.
+>  
+>**Fix:** Look at which sites support which splits (internal branches); consider sliding window approaches to identify recombination, or check that your sequences don’t span regions with different selection pressures; consider using PartitionFinder or similar methods to work out which sets of sites have similar evolutionary dynamics.
+{: .tip}
 
-  - **The gene trees are different!**
-    
-    **Fix:** They might not need fixing: it might just be that the genes’ evolutionary histories aren’t the same as those of the species that host them. Look at all the gene trees and see what other events might have led to the differences between them.
+><tip-title>The gene trees are different!</tip-title>  
+>**Fix:** They might not need fixing: it might just be that the genes’ evolutionary histories aren’t the same as those of the species that host them. Look at all the gene trees and see what other events might have led to the differences between them.
+{: .tip}
 
-  - **I can’t find an outgroup!**
-
-    **Fix:** Consider mid-point rooting: it is in most cases pretty good.
+><tip-title>I can’t find an outgroup!</tip-title>
+>**Fix:** Consider mid-point rooting: it is in most cases pretty good.
+{: .tip}
 
 # Summary 
 
