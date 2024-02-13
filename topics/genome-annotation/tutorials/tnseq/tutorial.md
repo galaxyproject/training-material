@@ -28,9 +28,6 @@ subtopic: prokaryote
 priority: 4
 ---
 
-# Introduction
-
-
 In microbiology, identifying links between genotype and phenotype is key to understand bacteria growth and virulence mechanisms, and to identify targets for drugs and vaccines. These analysis are limited by the lack of bacterial genome annotations (*e.g.* 30% of genes for *S. pneumoniae* are of unknown function) and by the fact that genotypes often arose from complex composant interactions.
 
 ## Transposon insertion Sequencing

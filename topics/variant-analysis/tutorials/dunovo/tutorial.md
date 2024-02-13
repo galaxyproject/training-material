@@ -20,7 +20,6 @@ contributors:
   - NickSto
 ---
 
-# Introduction
 
 This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the *ABL1* dataset published by [Schmitt and colleagues](https://www.ncbi.nlm.nih.gov/pubmed/25849638) (SRA accession [SRR1799908](https://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)).
 

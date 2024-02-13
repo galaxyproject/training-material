@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require './_plugins/gtn/usegalaxy'
+
 module Gtn
   # Handle tool support queries
   module Supported
@@ -21,11 +23,11 @@ module Gtn
       if data.nil? || data.empty? || tool_list.empty? || tool_list.nil?
         return {
           'exact' => [],
-          'inexact' => [
-            { 'name' => 'UseGalaxy.eu', 'url' => 'https://usegalaxy.eu', 'usegalaxy' => true },
-            { 'name' => 'UseGalaxy.org', 'url' => 'https://usegalaxy.org', 'usegalaxy' => true },
-            { 'name' => 'UseGalaxy.org.au', 'url' => 'https://usegalaxy.org.au', 'usegalaxy' => true }
-          ],
+          'inexact' => Gtn::Usegalaxy.servers.map do |x|
+                         x = x.transform_keys(&:to_s)
+                         x['usegalaxy'] = true
+                         x
+                       end
         }
       end
 
@@ -70,13 +72,19 @@ module Gtn
       # generate a 'false' value when merging sets.
       inexact_support -= exact_support
 
+      usegalaxy_server_urls = Gtn::Usegalaxy.servers.map { |x| x[:url] }
+
       {
         'exact' => (exact_support || []).map do |id|
           data['servers'][id].update(
-            { 'usegalaxy' => data['servers'][id]['url'].downcase.include?('usegalaxy.').to_s }
+            { 'usegalaxy' => usegalaxy_server_urls.include?(data['servers'][id]['url']) }
           )
         end,
-        'inexact' => (inexact_support || []).map { |id| data['servers'][id] }
+        'inexact' => (inexact_support || []).map do |id|
+          data['servers'][id].update(
+            { 'usegalaxy' => usegalaxy_server_urls.include?(data['servers'][id]['url']) }
+          )
+        end
       }
     end
   end

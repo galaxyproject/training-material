@@ -18,17 +18,20 @@ tags:
   - EBV workflow
   - eDNA
   - Metabarcoding
-contributors:
-- colineroyaux
-- onorvez
-- ecoissac
-- fboyer
-- yvanlebras
+contributions:
+  authorship:
+  - colineroyaux
+  - onorvez
+  - ecoissac
+  - fboyer
+  - yvanlebras
+  funding:
+  - gallantries
+  - pndb
 
 ---
 
 
-# Introduction
 
 
 Based on this [OBITools official tutorial](https://pythonhosted.org/OBITools/wolves.html), you will learn here how to analyze DNA metabarcoding data produced on Illumina sequencers using:

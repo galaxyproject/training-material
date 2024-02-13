@@ -21,8 +21,6 @@ contributors:
 subtopic: advanced
 ---
 
-## Introduction
-
 In this tutorial we are going to demonstrate how to add a webhook to the tool-execution endpoint. This is the web-page that appears
 after you have executed a tool. As a more useful example we are going to ask [phdcomics](http://phdcomics.com) for a random comic that we can
 display to entertain our users.

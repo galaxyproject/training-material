@@ -48,8 +48,6 @@ tags:
 ---
 
 
-# Introduction
-
 Sequence-based monitoring of global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for surveilling the emergence and spread of new viral variants, and for understanding the evolutionary dynamics of the virus.
 
 The tutorial [SARS-CoV-2 sequencing data analysis]({% link topics/variant-analysis/tutorials/sars-cov-2/tutorial.md %}) shows in detail how you can identify mutations in SARS-CoV-2 samples from paired-end whole-genome sequencing data generated on the Illumina platform.

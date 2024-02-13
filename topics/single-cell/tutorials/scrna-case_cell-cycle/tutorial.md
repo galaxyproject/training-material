@@ -24,9 +24,7 @@ key_points:
 - Cell cycle genes can conceal what is happening in your data if cells are grouping together according to their stage in the cycle
 - Identifying the cell cycle genes and using them to regress out the effects of the cell cycle can reveal underlying patterns in the data
 tags:
-- single-cell
 - 10x
-- transcriptomics
 
 contributions:
   authorship:
@@ -39,7 +37,6 @@ contributions:
 ---
 
 
-# Introduction
 
 Single-cell RNA sequencing can be sensitive to both biological and technical variation, which is why preparing your data carefully is an important part of the analysis. You want the results to reflect the interesting differences in expression between cells that relate to their type or state. Other sources of variation can conceal or confound this, making it harder for you to see what is going on.
 
@@ -133,10 +130,7 @@ In addition to the scRNA-seq dataset, we will also need lists of the genes that 
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
-> <comment-title></comment-title>
-> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
-> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
-{: .comment}
+{% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
 # Cell Cycle Scoring
 
@@ -373,7 +367,7 @@ We will need to add the annotation to both the annotated dataset `CellCycle_Anno
 
 ## Filter the cell cycle genes
 
-To demonstrate the power of cell cycle regression, we're going to reduce our expression matrices to contain only the 97 cell cycle genes. This will force our dimension reduction and plotting to be based entirely on cell cycle genes. You wouldn't do this during analysis, but for proof of principle, let's go for it! 
+To demonstrate the power of cell cycle regression, we're going to reduce our expression matrices to contain only the 97 cell cycle genes. This will force our dimension reduction and plotting to be based entirely on cell cycle genes. You wouldn't do this during analysis, but for proof of principle, let's go for it!
 
 > <hands-on-title>Filter the AnnData datasets</hands-on-title>
 >
@@ -482,9 +476,9 @@ Comparing the before and after plots, we can clearly see that the effects of the
 > 1. What impact do you think the cell cycle regression will have when you analyse the whole dataset? What would happen if we plotted all of the genes from the main dataset?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > 1. The regression reduces the impact of the cell cycle on the data - this is why the cells are less separated by phase afterwards. When we analyse the whole `CellCycle_Regressed` dataset, with all of the genes, this could allow other differences in gene expression to become more apparent.
-> > 
+> >
 > > We wouldn't expect to see such clear distinctions in PCA plots created using all of the genes (not just the cell cycle ones), even before the regression. Although the cell cycle genes can have a significant effect, these won't be as obvious when other genes are also being taken into account. However, we will still see a difference after we regress out the effects of the cell cycle - the cells in different phases will become more mixed up together. How much of a difference the regression makes will depend on how strong the effects of the cell cycle are in a particular dataset - you can see the effects on this dataset below. You can also replicate these plots after completing the rest of the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial by colouring your PCA plots by phase.
 > >
 > > ![PCA plot showing some separation between cells in the G1, S and G2M Phases before regression](../../images/scrna-case_cell-cycle/CellCycle_PCA3.png "PCA Plot using all genes before regression")
@@ -502,3 +496,5 @@ In this tutorial, you have annotated and scored the cell cycle genes and regress
 You might want to check your results against this [example history](https://humancellatlas.usegalaxy.eu/u/marisa_jl/h/removing-the-effects-of-the-cell-cycle---answer-key).
 
 You can now continue to analyse this data by returning to the Preparing coordinates step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. If you use the `CellCycle_Regressed` dataset (which you may now want to rename as `Use_me_Scaled` since that is the name used in the main tutorial), you should notice some differences in your results compared to those shown there because the effects of the cell cycle have been regressed out.
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}

@@ -28,14 +28,16 @@ tags:
   - EBV dataset
   - EBV workflow
   - modeling
-contributors:
-- colineroyaux
-- yvanlebras
-- jbmihoub
+contributions:
+  authorship:
+  - colineroyaux
+  - yvanlebras
+  - jbmihoub
+  funding:
+  - gallantries
+  - pndb
 
 ---
-
-# Introduction
 
 
 This tutorial aims to present the PAMPA Galaxy workflow, how to use it to compute common

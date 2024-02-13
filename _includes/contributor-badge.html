@@ -1,13 +1,14 @@
 {%- if include.id == "newcontributors" -%}
 <a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-{{ include.id }}">{% icon hall-of-fame %}{{locale['add-contributions'] | default: "Add Contributions!" }}</a>
 {%- else -%}
-{%- assign name = site.data['contributors'][include.id].name | default: include.id -%}<a href="{{ site.baseurl }}/hall-of-fame/{{ include.id }}/" class="contributor-badge contributor-{{ include.id }}">{% if site.data['contributors'][include.id].orcid %}<img src="{% link assets/images/orcid.png %}" alt="orcid logo" width="36" height="36"/>{%- endif -%}
-{%- if site.data['contributors'][include.id].avatar -%}
-<img src="{{ site.data['contributors'][include.id].avatar }}" alt="Avatar" width="36" height="36">{{ name }}</a>
-{%- else -%}
-<img src="https://avatars.githubusercontent.com/{{ include.id }}?s=36" alt="Avatar" width="36" height="36">{{ name }}</a>
-{%- endif -%}
-{%- if include.activity -%}
-{%- include _includes/contributor-human-icons.html activity=include.activity -%}
-{%- endif -%}
+  {%- assign contributor_badge_entity = site | fetch_contributor: include.id -%}
+  {%- assign name = contributor_badge_entity.short_name | default: contributor_badge_entity.name | default: include.id -%}
+  <a href="{{ site.baseurl }}/hall-of-fame/{{ include.id }}/" class="contributor-badge contributor-{{ include.id }}">
+    {%- if contributor_badge_entity.orcid -%}<img src="{% link assets/images/orcid.png %}" alt="orcid logo" width="36" height="36"/>{%- endif -%}
+    {{ contributor_badge_entity | fetch_entity_avatar:include.id, 36 }}
+    {{ name }}
+  {%- if include.activity -%}
+  {%- include _includes/contributor-human-icons.html activity=include.activity -%}
+  {%- endif -%}
+  </a>
 {%- endif -%}

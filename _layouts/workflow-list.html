@@ -9,57 +9,62 @@ layout: base
     <p>These workflows are associated with <a href="../tutorial.html">{{ material.title }}</a></p>
     <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
-    <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Workflow</th>
-            <th>Updated</th>
-            <th>Import</th>
-            <th>Has Tests</th>
-            <th>Tested</th>
-            <th>License</th>
-            <th>Creators</th>
-        </tr>
-    </thead>
-    <tbody>
+
+    <div class="row">
     {% for workflow in material.workflows %}
-        <tr>
-            <td><a href="{{ site.url }}{{ site.baseurl }}/{{ workflow.path }}">{{ workflow.workflow }}</a></td>
-            <td>{{ workflow.path | gtn_mod_date | date: "%b %-d, %Y" }}</td>
-            <td>
-                <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="{{ workflow.trs_endpoint }}">Launch in Tutorial Mode</span>
-		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">What is tutorial mode?</abbr>
-                <br/>
-                <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url={{ workflow.trs_endpoint }}" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
-		<br/>
-                <a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url={{ workflow.trs_endpoint }}" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org</a>
-		<br/>
-                <a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url={{ workflow.trs_endpoint }}" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.org.au</a>
-		<br/>
-                <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url={{ workflow.trs_endpoint }}"
-		   class="btn btn-secondary hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-            </td>
-            <td>{% if workflow.tests %}✅{% else %}❌{% endif %}</td>
-            <td>
-		    {% if workflow.test_results != nil %}✅ View Results{% else %}❌{% endif %}
-	    </td>
-            <td>
-                {% if workflow.license %}
-                <a href="https://spdx.org/licenses/{{ workflow.license }}">{{ workflow.license }}</a>
-                {% else %}
-                None Specified, defaults to
-                <a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
-                {% endif %}
-            </td>
-            <td>
-                {% for entity in workflow.creators %}
-                <span class="contributor-badge">{{ entity.name }}</span>
-                {% endfor %}
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-    </table>
+	<div class="col-md-6">
+		<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">{{ workflow.title }}</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				{% for entity in workflow.creators %}
+				{{ entity.name }}{% if forloop.last == false %}, {% endif %}
+				{% endfor %}
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated {{ workflow.path | gtn_mod_date | date: "%b %-d, %Y" }}</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="{{ workflow.trs_endpoint }}">Launch in Tutorial Mode</span>
+			<a href="{% link faqs/galaxy/tutorial_mode.md %}" class="hide-when-galaxy-proxy-active">{% icon question %}</a>
+			<br/>
+
+
+			License: 
+				{% if workflow.license %}
+				<a href="https://spdx.org/licenses/{{ workflow.license }}">{{ workflow.license }}</a>
+				{% else %}
+				None Specified, defaults to
+				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+				{% endif %}
+				<br/>
+			Tests: {% if workflow.tests %}✅{% else %}❌{% endif %}
+			Results: {% if workflow.test_results == nil %}Not yet automated{% endif %}
+			</p>
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+    Import or Download
+  </button>
+  <div class="dropdown-menu">
+			<a href="{{ site.url }}{{ site.baseurl }}/{{ workflow.path }}" class="dropdown-item">Download Galaxy Workflow.ga</a>
+			{% assign servers = nil | list_usegalaxy_servers_shuffle %}
+			{% for server in servers %}
+			<a href="{{ server.url }}/workflows/trs_import?run_form=true&trs_url={{ workflow.trs_endpoint }}" class="dropdown-item hide-when-galaxy-proxy-active">{{ server.human }}</a>
+			{% endfor %}
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url={{ workflow.trs_endpoint }}"
+			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+  </div>
+</div>
+
+	<pre class="mermaid">{{ workflow.mermaid }}
+	</pre>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
+{% endfor %}
+
+</div>
 
    <h1 style="margin-top:2em">Importing into Galaxy</h1>
    Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!

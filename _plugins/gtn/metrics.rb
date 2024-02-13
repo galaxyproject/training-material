@@ -95,11 +95,22 @@ module Gtn
           value: segment_page_by_key(site.pages, 'layout'),
           help: 'Total number of Pages',
           type: 'counter'
-        }, 'gtn_contributors_total' => {
-             value: segment(site.data['contributors'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
-             help: 'Total number of Contributors',
-             type: 'counter'
-           },
+        },
+        'gtn_contributors_total' => {
+          value: segment(site.data['contributors'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
+          help: 'Total number of contributors',
+          type: 'counter'
+        },
+        'gtn_organisations_total' => {
+          value: segment(site.data['organisations'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
+          help: 'Total number of organisations',
+          type: 'counter'
+        },
+        'gtn_funders_total' => {
+          value: segment(site.data['funders'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
+          help: 'Total number of funders',
+          type: 'counter'
+        },
         'gtn_tutorials_total' => {
           value: tutorials.length,
           help: 'Total number of Hands-on Tutorials',

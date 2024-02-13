@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Filter, Plot and Explore Single-cell RNA-seq Data
+title: Filter, plot and explore single-cell RNA-seq data (Scanpy)
 subtopic: single-cell-CS
 priority: 3
 zenodo_link: 'https://zenodo.org/record/7053673'
@@ -32,11 +32,9 @@ requirements:
         - scrna-case_alevin
         - scrna-case_alevin-combine-datasets
 tags:
-- single-cell
 - 10x
 - paper-replication
-- español
-- transcriptomics
+
 
 contributions:
   authorship:
@@ -46,8 +44,7 @@ contributions:
     - wee-snufkin
   testing:
     - wee-snufkin
-translations:
-  - es
+
 
 follow_up_training:
   -
@@ -58,8 +55,6 @@ follow_up_training:
         - scrna-case_monocle3-trajectories
 ---
 
-
-# Introduction
 
 
 You've done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it's time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, and so forth. We're working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
@@ -111,20 +106,21 @@ You can access the data for this tutorial in multiple ways:
 >
 {: .hands_on}
 
+4. **Importing data from EBI Single Cell Expression Atlas**
+
+You can also pull the data from publicly available [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home). You can simply access the dataset we are working on by using the tool *EBI SCXA Data Retrieval* with experiment id of [E-MTAB-6945](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads). This [short tutorial]({% link topics/single-cell/tutorials/EBI-retrieval/tutorial.md %}) will show you how to use this tool and modify the output so that it's compatible with this tutorial and its workflow.
+
+
+
 # Important tips for easier analysis
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
-> <comment-title></comment-title>
-> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
-> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
-{: .comment}
+{% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
 # Filtering
 
 You have generated an annotated AnnData object from your raw scRNA-seq fastq files. However, you have only completed a 'rough' filter of your dataset - there will still be a number of 'cells' that are actually just background from empty droplets or simply low-quality. There will also be genes that could be sequencing artifacts or that appear with such low frequency that statistical tools will fail to analyse them. This background garbage of both cells and genes not only makes it harder to distinguish real biological information from the noise, but also makes it computationally heavy to analyse. These spurious reads take a lot of computational power to analyse! First on our agenda is to filter this matrix to give us cleaner data to extract meaningful insight from, and to allow faster analysis.
-
-{% snippet faqs/galaxy/tutorial_mode.md %}
 
 > <question-title></question-title>
 >
@@ -566,7 +562,7 @@ Next up, we're going to scale our data so that all genes have the same variance 
 {% icon congratulations %} Congratulations! You have processed your object!
 
 > <comment-title></comment-title>
-> At this point, we might want to remove or regress out the effects of unwanted variation on our data. A common example of this is the cell cycle, which can affect which genes are expressed and how much material is present in our cells. If you’re interested in learning how to do this, then you can move over to the [Removing the Effects of the Cell Cycle]({% link topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.md %}) tutorial now – then return here to complete your analysis. 
+> At this point, we might want to remove or regress out the effects of unwanted variation on our data. A common example of this is the cell cycle, which can affect which genes are expressed and how much material is present in our cells. If you’re interested in learning how to do this, then you can move over to the [Removing the Effects of the Cell Cycle]({% link topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.md %}) tutorial now – then return here to complete your analysis.
 {: .comment}
 
 # Preparing coordinates
@@ -620,7 +616,7 @@ We're still looking at around 20 dimensions at this point. We need to identify h
 >
 > 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunPCA** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Maximum number of neighbours used"*: `15`
 >    - *"Use the indicated representation"*: `X_pca`
 >    - *"Number of PCs to use"*: `20`
@@ -642,12 +638,12 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 > 1. {% tool [Scanpy RunTSNE](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
 >    - *"Use the indicated representation"*: `X_pca`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
 >
 > 2. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunTSNE** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `Yes`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `Yes`
 {: .hands_on}
 
 {% icon congratulations %} Congratulations! You have prepared your object and created neighborhood coordinates. We can now use those to call some clusters!
@@ -681,7 +677,7 @@ Finally, let's identify clusters! Unfortunately, it's not as majestic as biologi
 >
 > 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunUMAP** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Resolution, high value for more and smaller clusters"*: `0.6`
 {: .hands_on}
 
@@ -703,7 +699,7 @@ Nearly plotting time! But one final piece is to add in SOME gene information. Le
 > 3. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"The sample grouping/clustering to use"*: `genotype`
->    - *"Use programme defaults"*: {% icon history-share %} `Yes`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `Yes`
 >
 > 4. **Rename** {% icon galaxy-pencil %} output table (not h5ad) `Markers - genotype`
 >
@@ -825,7 +821,7 @@ The authors weren't interested in further annotation of the DP cells, so neither
 >
 > 2. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
->    - *"Copy observations (such as clusters)"*: {% icon history-share %} *Yes*
+>    - *"Copy observations (such as clusters)"*: {% icon param-toggle %} *Yes*
 >    - **Keys from obs to copy**
 >    - *"+ Insert Keys from obs to copy"*
 >    - *"Key contains"*: `louvain`
@@ -968,9 +964,9 @@ Be warned - this visualisation tool is a powerful option for exploring your data
 > For those that did not take the 'control' options, please
 > 1. **Rename** your history (by clicking on the history title) as `DECISION-Filtering and Plotting Single-cell RNA-seq Data`
 > 2. Add a history annotation {% icon history-annotate %} that includes which parameters you changed/steps you changed from the *control*
-> 
+>
 >    {% snippet faqs/galaxy/histories_sharing.md %}
-> 
+>
 > 3. Feel free to explore any other similar histories
 {: .details}
 
@@ -978,5 +974,4 @@ Be warned - this visualisation tool is a powerful option for exploring your data
 
 In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it's like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!
 
-To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
-[![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+{% snippet topics/single-cell/faqs/user_community_join.md %}

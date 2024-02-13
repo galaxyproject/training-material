@@ -25,9 +25,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
 Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g. {% cite Neumann2010 %}, {% cite Heriche2014%}). However, automated time-lapse imaging can produce large amounts of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points.
 
 To demonstrate how automatic tracking can be applied in such situations, this tutorial will track dividing nuclei in a short time-lapse recording of one mitosis of a syncytial blastoderm stage _Drosophila_ embryo expressing a GFP-histone gene that labels chromatin.
@@ -83,7 +80,7 @@ The images are saved as a zip archive on Zenodo and need to be uploaded to the G
 >    - **Important:** If setting the type to 'Auto-detect', make sure that after upload, the datatype is set to zip.
 >
 >    ```
->    https://zenodo.org/api/files/e5d1bd5c-60a0-42e4-8f0d-a2ebc863c5d9/drosophila_sample.zip
+>    https://zenodo.org/records/4567084/files/drosophila_sample.zip
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

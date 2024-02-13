@@ -33,8 +33,10 @@ contributors:
 
 # Where can Galaxy run?
 
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
+
 * Cloud (SaaS)
-  - A usegalaxy.* site [Main](https://usegalaxy.org) [Europe](https://usegalaxy.eu) [Australia](https://usegalaxy.org.au/)
+  - A usegalaxy.* site: {% for server in servers %}[{{ server.human }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}
   - [Public Galaxy Servers](https://galaxyproject.org/use)
   - [Amazon EC2 or MS Azure](https://launch.usegalaxy.org/)
   - Semi-private cloud (e.g.: [NeCTAR](https://nectar.org.au/), [Jetstream](http://jetstream-cloud.org/))

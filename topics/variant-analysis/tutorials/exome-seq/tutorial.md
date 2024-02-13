@@ -33,7 +33,6 @@ contributors:
   - bgruening
 ---
 
-# Introduction
 
 Exome sequencing is a method that enables the selective sequencing of the
 exonic regions of a genome - that is the transcribed parts of the genome present

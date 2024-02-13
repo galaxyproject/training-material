@@ -24,9 +24,6 @@ subtopic: workflows
 ---
 
 
-# Introduction
-
-
 Workflows are a powerful feature in Galaxy that allow you to chain multiple steps of an analysis together.
 To make a workflow reusable with slightly different settings you can define and use workflow parameters.
 

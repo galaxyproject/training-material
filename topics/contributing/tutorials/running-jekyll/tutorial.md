@@ -18,8 +18,6 @@ contributors:
   - shiltemann
 ---
 
-# Introduction
-
 
 If you want to run the entire GTN material website locally or test your new training material you can do this!
 

@@ -40,7 +40,6 @@ contributors:
 
 ---
 
-# Introduction
 
 
 In some research or clinical contexts it is not possible, or very hard, to

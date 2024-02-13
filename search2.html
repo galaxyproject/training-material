@@ -1,6 +1,7 @@
 ---
 layout: page
-title: Search GTN Materials
+title: GTN Materials Search
+description: Search for GTN materials by title and type.
 ---
 
 <p>
@@ -120,6 +121,8 @@ function search(){
 		return
 	}
 
+	// Include search term in page title
+	document.getElementsByTagName("title")[0].innerText = `${textQuery} | GTN Materials Search`
 	console.log(`Searching! ${textQuery} ${typeFilter} ${levelFilter}`)
 
 	// Which should be hidden
@@ -145,11 +148,6 @@ function search(){
 	previousSearch = `${textQuery} ${typeFilter} ${levelFilter}`
 }
 
-const onInputDebounced = debounce(_ => {
-	console.log('DEBOUNCED');
-	search();
-}, DEBOUNCE_DURATION);
-
 // Attribution: https://gist.github.com/beaucharman/1f93fdd7c72860736643d1ab274fee1a
 function debounce(callback, wait, context = this) {
   let timeout = null;
@@ -163,15 +161,19 @@ function debounce(callback, wait, context = this) {
   };
 }
 
+const onInputDebounced = debounce(_ => {
+	search();
+}, DEBOUNCE_DURATION);
+
 otherInputs.forEach((input) => {
 	addEventListener("change", (event) => {
-		console.log(`Change! ${event}`)
 		search()
 	})
 });
 
 // Get the q parameter from URL
-const params = (new URL(document.location)).searchParams;
+// This is a redeclaration of the `var params` in themes.js, not sure how we want to handle that long term.
+var params = (new URL(document.location)).searchParams;
 paramSearch = params.get('query')
 if (paramSearch) {
 	textInput.value = paramSearch

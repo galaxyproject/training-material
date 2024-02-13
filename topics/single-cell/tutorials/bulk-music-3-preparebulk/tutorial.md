@@ -1,9 +1,9 @@
 ---
 layout: tutorial_hands_on
 subtopic: datamanipulation
-priority: 2
+priority: 5
 
-title: Bulk matrix to ESet object | Creating the bulk RNA-seq dataset for deconvolution
+title: Bulk matrix to ESet | Creating the bulk RNA-seq dataset for deconvolution
 zenodo_link: 'https://zenodo.org/record/7319173'
 questions:
 - Where can I find good quality RNA-seq datasets?
@@ -25,11 +25,8 @@ contributions:
     - MarisaJL
 
 tags:
-  - single-cell
-  - human
-  - deconvolution
-  - bulk
   - transcriptomics
+  - data management
 
 requirements:
   -
@@ -48,8 +45,6 @@ follow_up_training:
 
 ---
 
-
-# Introduction
 
 After completing the [MuSiC deconvolution tutorial](https://xuranw.github.io/MuSiC/articles/MuSiC.html) ({% cite wang2019bulk %}), you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk RNA-seq dataset pulled from a public resource (the EMBL-EBI Expression atlas ({% cite Moreno2021 %}).  Let's get started!
 
@@ -304,3 +299,5 @@ You can find the [workflow for generating the ESet object](https://usegalaxy.eu/
 ![7 boxes in the workflow editor and a subworkflow box for converting Ensembl to GeneSymbol](../../images/bulk-music/workflow-bulk.png "Workflow: Generating the bulk ESet Objects")
 
 This tutorial is part of the [https://singlecell.usegalaxy.eu](https://singlecell.usegalaxy.eu) portal ({% cite tekman2020single %}).
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}

@@ -27,7 +27,6 @@ tags:
 ---
 
 
-# Introduction
 
 Of the four species of influenza viruses (Influenza A-D), *Influenza A* is the most virulent in human hosts and subtypes of it have been responsible for all historic flu pandemics.
 

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 subtopic: datamanipulation
-priority: 1
+priority: 4
 title: Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution
 questions:
 - Where can I find good quality scRNA-seq reference datasets?
@@ -37,15 +37,9 @@ follow_up_training:
         - bulk-music-3-preparebulk
 
 tags:
-  - single-cell
-  - human
-  - deconvolution
-  - bulk
-  - transcriptomics
+  - data management
 ---
 
-
-# Introduction
 
 
 After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw scRNA-seq dataset pulled from a public resource (the EMBL-EBI single cell expression atlas {% cite Moreno2021 %}. Let's get started!
@@ -424,3 +418,5 @@ You have successfully performed, essentially, three workflows. You can find the 
 With these workflows, you've created three Expression Set objects, capable of running in the MuSiC Compare tutorial. Now you just need the bulk RNA-seq Expression Set objects!
 
 This tutorial is part of the [https://singlecell.usegalaxy.eu](https://singlecell.usegalaxy.eu) portal ({% cite tekman2020single %}).
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}

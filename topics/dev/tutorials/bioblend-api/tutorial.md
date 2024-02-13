@@ -33,7 +33,7 @@ notebook:
   #pyolite: true # Not possible due to https://pyodide.org/en/stable/project/roadmap.html#write-http-client-in-terms-of-web-apis
 ---
 
-
+BioBlend ({% cite Sloggett2013 %}) is a Python library to enable simple interaction with Galaxy ({% cite Afgan2018 %}) via the command line or scripts.
 
 > <agenda-title></agenda-title>
 >

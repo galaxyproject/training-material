@@ -9,7 +9,7 @@ editorial_board:
 - hexylena
 - bazante1
 funding:
-- erasmusplus
+- gallantries
 - avans-atgm
 
 tags: [python, real-course]

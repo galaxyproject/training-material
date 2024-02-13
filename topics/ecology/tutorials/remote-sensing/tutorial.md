@@ -17,17 +17,16 @@ key_points:
 - Spectral indices are of key importance to asset vegetation well-being.
 - Always keep in mind that remote sensing and in-situ data are complementary.
 tags:
-- Ecology
 - Remote sensing
 contributions:
     authorship:
         - Marie59
         - yvanlebras
-
+    funding:
+        - pndb
 ---
 
 
-# Introduction
 
 This tutorial will guide you on getting Sentinel 2 data and processing them in order to calculate and visualize biodiversity indicators. This workflow made of 6 tools will allow you to explore Sentinel 2 data in the view of making biodiversity analyses.
 

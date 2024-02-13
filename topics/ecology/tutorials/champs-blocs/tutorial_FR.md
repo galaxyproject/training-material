@@ -22,7 +22,6 @@ translations:
 ---
 
 
-# Introduction
 Ce tutoriel vous permettra de mieux appréhender le workflow des indicateurs "champs de blocs". Cela vous aidera à comprendre les effets des changements globaux et locaux sur les habitats marins, et l'efficacité des mesures de gestion adoptées, nécessite un suivi standardisé et des indicateurs robustes et sensibles reflétant l'état des habitats.
 
 L'habitat "champs de blocs médiolittoraux" abrite une grande diversité de micro-habitats et d'espèces en raison de sa forte hétérogénéité structurelle et de sa position intermédiaire sur l'estran, ce qui en fait l'un des habitats médiolittoraux les plus diversifiés et d'un grand intérêt écologique le long de la Manche. -Côte atlantique. C'est aussi un habitat très attractif pour la pêche récréative qui, par le remaniement des blocs, peut impacter les communautés.
@@ -74,7 +73,7 @@ Concentrons-nous maintenant sur notre workflows d'analyse sur l'état écologiqu
 
 # Centraliser les données
 
-{% include _includes/cyoa-choices.html option1="Oui" option2="Non" default="Oui" text="Vos données ESTAMP sont prêtes ?" %}
+{% include _includes/cyoa-choice-fr.html option1="Oui" option2="Non" default="Oui" text="Vos données ESTAMP sont prêtes ?" %}
 
 <div class="Non" markdown="1">
 > 1. Télécharger les données depuis la base ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/) puis rendez-vous dans l'espace "accédez aux données" en bas à droite de la page. Après aplication des critères de filtre, vous obtenez une archive zip.

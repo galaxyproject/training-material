@@ -39,7 +39,7 @@ jobs:
           ruby-version: "3.0"
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '19'
       - uses: actions/cache@v2
         with:
           path: |
@@ -51,6 +51,7 @@ jobs:
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
+          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config # for node
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
@@ -74,6 +75,10 @@ jobs:
       - name: Ensure no unexpected encoded HTML in output
         run: |
           ! fgrep -R 'lt;blockquote' _site
+
+      - name: Ensure no unexpected jekyll in output
+        run: |
+          ! fgrep -R 'site.pages' _site
 
       - name: Run aXe accessibility testing on some representative URLs
         run: |

@@ -101,7 +101,8 @@ What is Galaxy?
 
 # Find a Galaxy server
 
-- **The Big Three**: Galaxy Main ([usegalaxy.org](https://usegalaxy.org)), Galaxy Europe ([usegalaxy.eu](https://usegalaxy.eu)), Galaxy Australia ([usegalaxy.org.au](https://usegalaxy.org.au))
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
+- **UseGalaxy.\***: {% for server in servers %}{{ server.human }} ([{{ server.name }}]({{ server.url }})){% if forloop.last %}{% else %}, {% endif %}{% endfor %}
 
   .image-50[![usegalaxy.* servers]({{site.baseurl}}/shared/images/usegalaxy_servers.png)]
 

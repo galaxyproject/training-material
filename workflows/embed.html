@@ -1,0 +1,117 @@
+---
+layout: embed
+title: Cross UseGalaxy.* Workflow Search
+description: Search for workflows across all UseGalaxy.* servers and WorkflowHub
+---
+
+<style>
+#results {
+	table-layout: fixed;
+}
+#results .tags {
+	display: flex;
+	flex-wrap: wrap;
+}
+</style>
+
+<table class="table" id="results" style="table-layout:fixed">
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Owner</th>
+			<th scope="col">Updated</th>
+			<th scope="col">Links</th>
+		</tr>
+	</thead>
+	<tbody>
+		{%- for workflow in site.data['workflows'] -%}
+			<tr id="{{ post.short_id }}">
+				<td><div>{{ workflow.name }}</div>
+					<div class="tags">
+					{%- for tag in workflow.tags -%}
+					<span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag }}</span>
+					{%- endfor -%}
+					</div>
+				</td>
+				<td>{{ workflow.owner }}</td>
+				<td>{{ workflow.updated }}</td>
+				<td>
+					{% for id in workflow.ids %}
+						{% if id[0] == "https://workflowhub.eu" %}
+					<a href="{{ id[0] }}/workflows/{{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a><br/>
+					<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id={{ id[1] }}%26trs_version=1">
+						Load in Galaxy
+					</a><br/>
+						{% else %}
+					<a href="{{ id[0] }}/published/workflow?id={{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+						{% endif %}
+					{% endfor %}
+				</td>
+			</tr>
+		{%- endfor -%}
+	</tbody>
+</table>
+
+<script>
+HTMLCollection.prototype.forEach = Array.prototype.forEach;
+NodeList.prototype.forEach = Array.prototype.forEach;
+HTMLCollection.prototype.filter = Array.prototype.filter;
+NodeList.prototype.filter = Array.prototype.filter;
+HTMLCollection.prototype.map = Array.prototype.map;
+NodeList.prototype.map = Array.prototype.map;
+
+const table  = document.getElementById('results'),
+      rows   = table.tBodies[0].rows;
+
+function clean(query){
+	return query.toLowerCase().replace(/[^a-z0-9 ]/g, '')
+}
+
+function search(params){
+	const textQuery = params.get('query')?.toLowerCase().replace(/[^a-z0-9 ]/g, '');
+	const filter_all = params.get('all')?.split(" ").map(f => f.trim().toLowerCase().replace(/[^a-z0-9 ]/g, ''));
+	const filter_any = params.get('any')?.split(" ").map(f => f.trim().toLowerCase().replace(/[^a-z0-9 ]/g, ''));
+	const filter_none = params.get('none')?.split(" ").map(f => f.trim().toLowerCase().replace(/[^a-z0-9 ]/g, ''));
+
+	var to_hide = rows.filter(row => {
+		var text = clean(row.children[0].innerText + " " + row.children[1].innerText);
+		if (filter_all) {
+			// Every term in filter_all must be present
+			// Immediately reject if not all present.
+			if (!filter_all.every(f => text.indexOf(f) != -1)) {
+				return true;
+			}
+		}
+		if (filter_none){
+			// Every term in filter_none must not be present
+			// Immediately reject if not all present.
+			if (filter_none.some(f => text.indexOf(f) != -1)) {
+				return true;
+			}
+		}
+		if (filter_any){
+			// At least one term in filter_any must be present
+			// If any failed, exit for sure.
+			if(!filter_any.some(f => text.indexOf(f) != -1)) {
+				return true;
+			}
+		}
+		if (textQuery && textQuery != "" && text.indexOf(textQuery) == -1) {
+			return true;
+		} else {
+			return false;
+		}
+		return false;
+	});
+
+	// Display all
+	document.querySelectorAll("#results tr").forEach(r => r.style.display = "");
+	// Hide the rest
+	to_hide.map(r => r.style.display = "none");
+}
+
+// Get the q parameter from URL
+// This is a redeclaration of the `var params` in themes.js, not sure how we want to handle that long term.
+var params = (new URL(document.location)).searchParams;
+search(params)
+</script>

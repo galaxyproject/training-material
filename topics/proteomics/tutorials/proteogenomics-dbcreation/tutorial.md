@@ -30,7 +30,6 @@ subtopic: multi-omics
 tags: [proteogenomics]
 ---
 
-# Introduction
 
 **Proteogenomics** involves the use of mass spectrometry (MS) based proteomics data against genomics and transcriptomics data to identify peptides and to understand protein-level evidence of gene expression. In the first section of the tutorial, we will create a protein database (FASTA) using RNA-sequencing files (FASTQ) and then perform sequence database searching using the resulting FASTA file with the MS data to identify peptides corresponding to novel proteoforms. Then, we will assign the genomic coordinates and annotations for these identified peptides and visualize the data for its spectral quality and genomic localization
 
@@ -73,7 +72,7 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >
 > 2. Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
 >    ```
->    https://zenodo.org/api/files/bf8c34bc-ed55-4b1c-9b69-edfe0926ea84/Trimmed_ref_5000_uniprot_cRAP.fasta
+>    https://zenodo.org/records/1489208/files/Trimmed_ref_5000_uniprot_cRAP.fasta
 >    https://zenodo.org/record/1489208/files/FASTQ_ProB_22LIST.fastqsanger
 >    https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 >    ```
@@ -645,13 +644,10 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 > - All the tools mentioned in this tutorial are subjected to change when the tool version is upgraded .
 {: .comment}
 
-
-# **Conclusion**
-
+# Conclusion
 
 This completes the walkthrough of the proteogenomics database creation workflow. This tutorial is a guide to have a database and mapping files ready for  Database searching and novel peptide analysis. Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes and the workflow will be needed to be modified accordingly.
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
-
 
 {: .comment}

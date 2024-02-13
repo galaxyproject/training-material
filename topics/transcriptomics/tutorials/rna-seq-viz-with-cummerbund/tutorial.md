@@ -21,8 +21,6 @@ contributors:
   - bagnacan
 ---
 
-# Introduction
-
 
 RNA-Seq analysis helps researchers annotate new genes and splice variants, and provides cell- and context-specific quantification of gene expression. RNA-Seq data, however, are complex and require both computer science and mathematical knowledge to be managed and interpreted.
 

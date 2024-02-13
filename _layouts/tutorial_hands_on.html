@@ -63,7 +63,7 @@ We should ONLY be using new_material (if at all possible.)
     <blockquote class="overview">
         <div id="overview-box" class="box-title">{{ locale['overview'] | default: "Overview"}}</div>
         {% unless page.license %}
-        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="{% link assets/images/cc-by.png %}"/>
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="{% link assets/images/cc-by.png %}" width="88" height="31"/>
         {% endunless %}
         <strong>{% icon question aria=false %} {{ locale['questions'] | default: "Questions" }}:</strong>
         <ul>
@@ -149,20 +149,26 @@ We should ONLY be using new_material (if at all possible.)
             {% endif %}
         </ul>
 
+        <div><strong>{% icon last_modification aria=false %} {{ locale['published'] | default: "Published" }}:</strong> {{ page | gtn_pub_date | date: "%b %-d, %Y"}} </div>
         <div><strong>{% icon last_modification aria=false %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page | last_modified_at | date: "%b %-d, %Y"}} </div>
         <div><strong>{% icon license aria=false %} {{ locale['license'] | default: "License" }}:</strong>
 		{% if page.copyright %}
 		{{ page.copyright }}.
 		{% endif %}
+            {{ locale['license-framework'] | default: "Tutorial Content is licensed under" }}
             {% if page.license %}
-	    Tutorial Content is licensed under <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
+              <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
             {% else %}
-            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">{{ locale['license-framework'] | default: "Tutorial Content is licensed under Creative Commons Attribution 4.0 International License" }}</a>.
-            {% endif %} The GTN Framework is licensed under <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a>
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            {% endif %}
+            The GTN Framework is licensed under <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a>
         </div>
         {% if page.short_id %}
-        <div><strong>{% icon purl %}<abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
+        <div><strong>{% icon purl %} <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
         {% endif %}
+
+	<div><strong>{% icon version %} Revision:</strong> {{ page | get_version_number }} </div>
+
     </blockquote>
     </section>
 
@@ -356,7 +362,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 
 
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
-{% assign authors = page.contributors | filter_authors:page.contributions -%}
+{% assign authors = page | filter_authors -%}
 	author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
 	title = "{{ page.title }} (Galaxy Training Materials)",
 	year = "{{ page.last_modified_at | date: "%Y"}}",

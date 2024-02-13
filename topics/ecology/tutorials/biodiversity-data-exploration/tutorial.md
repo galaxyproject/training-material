@@ -23,12 +23,13 @@ contributions:
   - colineroyaux
   - yvanlebras
   funding:
-  - erasmusplus
+  - pndb
+  - gallantries
+  - pndb
+  - fnso2019
 
 ---
 
-
-# Introduction
 
 
 This tutorial will guide you on the exploration of biodiversity data having taxonomic, spatial and temporal informations.

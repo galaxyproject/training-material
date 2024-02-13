@@ -16,15 +16,19 @@
         </a>
         {% if topic %}
         {% unless topic.tag_based %}
+        {% if topic.title %}
         <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{topic.name}}/faqs/" title="Check our FAQs for the {{topic.title}} topic">
            {% icon question %} Topic FAQs
         </a>
+        {% endif %}
         {% endunless %}
         {% elsif page.layout == 'topic' %}
         {% unless page.tag_based %}
+        {% if page.topic_title %}
         <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{page.topic_name}}/faqs/" title="Check our FAQs for the {{page.topic_title}} topic">
            {% icon question %} Topic FAQs
         </a>
+        {% endif %}
         {% endunless %}
         {% endif %}
         <a class="dropdown-item" href="{{ site.help_url }}" title="Discuss on Galaxy Help">

@@ -35,6 +35,12 @@ mapping:
                 description: Your twitter handle, without the `@`
                 examples:
                     - gxytraining
+            bluesky:
+                type: str
+                pattern: /[0-9a-zA-Z.]+/
+                description: Your bluesky handle
+                examples:
+                    - gtn.bsky.social
             fediverse:
                 type: str
                 pattern: /^https:\/\/[0-9a-zA-Z.]+/@?[0-9a-zA-Z.]+$/
@@ -87,6 +93,24 @@ mapping:
                 enum:
                     - "no"
                 description: Set this to `no` if you would like to be excluded from the hall of fame.
+            affiliations:
+                type: seq
+                description: "A set of organisations or grants your are affiliated with"
+                sequence:
+                  - type: str
+                    required: true
+                    enum:
+                    - ORGANISATIONS
+                    - FUNDERS
+            former_affiliations:
+                type: seq
+                description: "A set of organisations you were previously affiliated with"
+                sequence:
+                  - type: str
+                    required: true
+                    enum:
+                    - ORGANISATIONS
+                    - FUNDERS
             elixir_node:
                 type: str
                 enum:
@@ -115,32 +139,6 @@ mapping:
                 description: The 2 letter code identifying the ELIXIR node to which you are a member or are associated with. If you are from norway, you will need to quote your value, `"no"`, unlike everyone else, due to the [Norway Problem with YAML](https://hitchdev.com/strictyaml/why/implicit-typing-removed/)
             avatar:
                 type: str
-            funder:
-                type: bool
-                description: Set this to true if this entity is a funding agency.
-            funding_id:
-                type: str
-                description: The short identifier for your grant.
-                examples:
-                    - 2020-1-NL01-KA203-064717
-            url:
-                type: str
-                description: associated webpage (NOTE, funders only!)
-                examples:
-                  - "https://elixir-europe.org"
-            funding_system:
-                type: str
-                description: Automatically link to the grant's information in the appropriate funding system site.
-                enum:
-                    - cordis
-                    - erasmusplus
-                    - ukri
-            funding_statement:
-                type: str
-                description: A short statement about the funder, markdown is supported.
-                examples:
-                    - This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
-
             in_memoriam:
                 type: str
                 description: |
@@ -170,4 +168,3 @@ mapping:
                         description: Longitude in decimal numbers
                         examples:
                             - 55.0
-

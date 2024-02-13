@@ -28,8 +28,6 @@ contributors:
 
 In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.
 
-# Introduction to sequencing data
-
 ## FASTQ manipulation and quality control
 
 [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described [on the Wikipedia article for FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) (below you will find an explanation of quality scores and their meaning). Today, the [FASTQ Sanger](https://www.ncbi.nlm.nih.gov/pubmed/20015970) version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides [a number of utilities for converting FASTQ files](https://www.ncbi.nlm.nih.gov/pubmed/20562416) into this form (see **FASTQ Quality Control** section of Galaxy tools).
@@ -73,7 +71,7 @@ It is common to prepare pair-end and mate-pair sequencing libraries. This is hig
 
 Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or RNA in the case of RNA-seq) is sequenced from two ends and so generates two reads. These can be represented as separate files (two FASTQ files with first and second reads) or a single file were reads for each end are interleaved. Here are examples:
 
-#### Two single files
+### Two single files
 
 File 1
 
@@ -105,7 +103,7 @@ CACTACCGGGGTATCTAATCCTGTTCGCTCCCCACGCTTTCGTCCATC
 > Note that read IDs are **identical** in two files and they are listed in **the same** order. In some cases read IDs in the first and second file may be appended with `/1` and `/2` tags, respectively.
 {: .comment}
 
-#### Interleaved file
+### Interleaved file
 
 ```
 @1/1
@@ -448,7 +446,7 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 
 > <hands-on-title>Upload `SraRunInfo.csv` file into Galaxy</hands-on-title>
 >
-> 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
+> 1. Go to your Galaxy instance of choice such as one of the [UseGalaxy.* instances](https://galaxyproject.org/usegalaxy/) or any other. (This tutorial uses usegalaxy.org).
 > 1. Click *Upload Data* button:
 > ![Data upload button](../../images/upload_button.png)
 > 1. In the dialog box that would appear click "*Choose local files*" button:

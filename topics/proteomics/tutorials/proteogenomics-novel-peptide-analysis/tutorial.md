@@ -31,7 +31,6 @@ subtopic: multi-omics
 tags: [proteogenomics]
 ---
 
-# Introduction
 
 The third and the last workflow in the proteogenomics tutorial is to identifying the "**Novel peptides**" using BlastP and to localize the peptides to its genomic coordinates. Inputs from both workflow 1 and 2 will be used in this workflow.
 Please look at the following tutorials in this proteogenomics series before starting this tutorial:
