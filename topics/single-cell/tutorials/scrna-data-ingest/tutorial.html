@@ -1,0 +1,2723 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Converting between common single cell data formats / Single Cell</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@67d35f7628cbca7ff30de4aaffd1187b33152507",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1707828025' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1707828025' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Converting between common single cell data formats">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-01-27 10:45:29 +0000">
+<meta name="DC.creator" content="Julia Jakiela">
+<meta name="DC.creator" content="Morgan Howells">
+<meta name="DC.creator" content="Wendi Bacon"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Single Cell / Hands-on: Converting between common single cell data formats">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-01-27 10:45:29 +0000",
+  "datePublished": "2024-02-13 12:28:05 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Converting between common single cell data formats",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Converting between common single cell data formats",
+  "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html",
+  "version": 76,
+  "timeRequired": "PT1H",
+  "teaches": "You will identify different single cell files formats.\n - You will import single cell data into Galaxy using different methods.\n - You will manipulate the metadata and matrix files.\n - You will perform conversions between the most common single cell formats.\n - You will downsample FASTQ files.",
+  "keywords": [
+    "Single Cell",
+    "data management",
+    "data import"
+  ],
+  "description": "The questions this  addresses are:\n - What are the most popular single cell datatypes?\n - What if the format of my files is different than that used in the tutorial I want to follow?\n - Where should I start the analysis, depending on the format of my data?\n - How do I ingest data into Galaxy?\n - How do I convert datasets between formats?\n\n\nThe objectives are:\n - You will identify different single cell files formats.\n - You will import single cell data into Galaxy using different methods.\n - You will manipulate the metadata and matrix files.\n - You will perform conversions between the most common single cell formats.\n - You will downsample FASTQ files.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "name": "Julia Jakiela",
+      "image": "https://avatars.githubusercontent.com/wee-snufkin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/",
+      "name": "Morgan Howells",
+      "image": "https://avatars.githubusercontent.com/hexhowells",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0008-9422-6380",
+      "orcid": "https://orcid.org/0009-0008-9422-6380"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "orcid": "https://orcid.org/0000-0002-8170-8806"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "name": "Pavankumar Videm",
+      "image": "https://avatars.githubusercontent.com/pavanvidem",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5192-126X",
+      "orcid": "https://orcid.org/0000-0002-5192-126X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "name": "Mehmet Tekman",
+      "image": "https://avatars.githubusercontent.com/mtekman",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "data management"
+    },
+    {
+      "@type": "Thing",
+      "name": "data import"
+    }
+  ],
+  "abstract": "You finally decided to analyse some single cell data, you got your files either from the lab or publicly available sources, you opened the first tutorial available on Galaxy Training Network and... you hit the wall! The format of your files is not compatible with the one used in tutorial! Have you been there? "
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1707828025'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/single-cell" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Single Cell
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/single-cell/faqs/" title="Check our FAQs for the Single Cell topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna-data-ingest/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">2024-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-single-cell">
+    <h1 data-toc-skip>Converting between common single cell data formats</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=36" alt="Julia Jakiela avatar" width="36" class="avatar" />
+    Julia Jakiela</a><a href="/training-material/hall-of-fame/hexhowells/" class="contributor-badge contributor-hexhowells"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexhowells?s=36" alt="Morgan Howells avatar" width="36" class="avatar" />
+    Morgan Howells</a><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a></td>
+	</tr>
+	
+
+	
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" />
+    Pavankumar Videm</a><a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=36" alt="Mehmet Tekman avatar" width="36" class="avatar" />
+    Mehmet Tekman</a></td>
+	</tr>
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are the most popular single cell datatypes?</p>
+</li>
+        
+        <li><p>What if the format of my files is different than that used in the tutorial I want to follow?</p>
+</li>
+        
+        <li><p>Where should I start the analysis, depending on the format of my data?</p>
+</li>
+        
+        <li><p>How do I ingest data into Galaxy?</p>
+</li>
+        
+        <li><p>How do I convert datasets between formats?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>You will identify different single cell files formats.</p>
+</li>
+        
+        <li><p>You will import single cell data into Galaxy using different methods.</p>
+</li>
+        
+        <li><p>You will manipulate the metadata and matrix files.</p>
+</li>
+        
+        <li><p>You will perform conversions between the most common single cell formats.</p>
+</li>
+        
+        <li><p>You will downsample FASTQ files.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/4574153">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/" title="Converting between common single cell data formats workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-data-ingest/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
+    
+    
+    
+
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 13, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 27, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 76 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>You finally decided to analyse some single cell data, you got your files either from the lab or publicly available sources, you opened the first tutorial available on Galaxy Training Network and… you hit the wall! The format of your files is not compatible with the one used in tutorial! Have you been there? 
+This tutorial was created to help you overcome that problem and ensure data interoperability in single cell analysis. Once you get your data into Galaxy in the right format, that’s already 50% of success. Additionally, by using format conversion, you will be able to use different packages presented in tutorials that may require different datatypes.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#single-cell-datatypes" id="markdown-toc-single-cell-datatypes">Single cell datatypes</a></li>
+  <li><a href="#data-import" id="markdown-toc-data-import">Data import</a></li>
+  <li><a href="#sceasy-tool" id="markdown-toc-sceasy-tool">SCEasy Tool</a></li>
+  <li><a href="#seurat---anndata" id="markdown-toc-seurat---anndata">Seurat -&gt; AnnData</a>    <ol>
+      <li><a href="#quick-one-tool-method" id="markdown-toc-quick-one-tool-method">Quick one tool method</a></li>
+      <li><a href="#convert-to-anndata-object-compatible-with-filter-plot-explore-workflow" id="markdown-toc-convert-to-anndata-object-compatible-with-filter-plot-explore-workflow">Convert to AnnData object compatible with Filter, Plot, Explore workflow</a></li>
+    </ol>
+  </li>
+  <li><a href="#anndata---seurat" id="markdown-toc-anndata---seurat">AnnData -&gt; Seurat</a>    <ol>
+      <li><a href="#quick-one-step-method" id="markdown-toc-quick-one-step-method">Quick one step method</a></li>
+      <li><a href="#manual-conversion" id="markdown-toc-manual-conversion">Manual conversion</a></li>
+    </ol>
+  </li>
+  <li><a href="#anndata---singlecellexperiment-sce" id="markdown-toc-anndata---singlecellexperiment-sce">AnnData -&gt; SingleCellExperiment (SCE)</a>    <ol>
+      <li><a href="#quick-single-tool-method" id="markdown-toc-quick-single-tool-method">Quick single tool method</a></li>
+      <li><a href="#convert-manually" id="markdown-toc-convert-manually">Convert manually</a></li>
+    </ol>
+  </li>
+  <li><a href="#anndata---cell-data-set-cds" id="markdown-toc-anndata---cell-data-set-cds">Anndata -&gt; Cell Data Set (CDS)</a>    <ol>
+      <li><a href="#cds-input-for-monocle3-tutorial-use-for-pre-processed-data" id="markdown-toc-cds-input-for-monocle3-tutorial-use-for-pre-processed-data">CDS input for Monocle3 tutorial (use for pre-processed data)</a></li>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+      <li><a href="#extracting-annotations" id="markdown-toc-extracting-annotations">Extracting annotations</a></li>
+      <li><a href="#cell-metadata" id="markdown-toc-cell-metadata">Cell metadata</a></li>
+      <li><a href="#gene-annotations" id="markdown-toc-gene-annotations">Gene annotations</a></li>
+      <li><a href="#expression-matrix" id="markdown-toc-expression-matrix">Expression matrix</a></li>
+      <li><a href="#creating-cds-object" id="markdown-toc-creating-cds-object">Creating CDS object</a></li>
+      <li><a href="#general-anndata-to-cds-conversion" id="markdown-toc-general-anndata-to-cds-conversion">General AnnData to CDS conversion</a></li>
+    </ol>
+  </li>
+  <li><a href="#downsampling-fastq-files" id="markdown-toc-downsampling-fastq-files">Downsampling FASTQ files</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="single-cell-datatypes">Single cell datatypes</h1>
+
+<p>To start with, here are the most common formats and datatypes that you might come across if you work with single cell data:</p>
+<ul>
+  <li><strong>Tabular</strong> - simply using TSV, CSV or TXT formats to store expression matrix as well as cell and gene metadata.</li>
+  <li><strong>MTX</strong> - it’s just a sparse matrix format with genes on the rows and cells on the columns as output by Cell Ranger.</li>
+  <li><strong>HDF5</strong> - Hierarchical Data Format - can store datasets and groups. A dataset is a  a multidimensional array of data elements, together with supporting metadata. A group is a structure for organizing objects in an HDF5 file. This format allows for storing both the count matrices and all metadata in a single file rather than having separate features, barcodes and matrix files.</li>
+  <li><strong>AnnData objects</strong> - <a href="https://anndata.readthedocs.io/en/latest/">anndata</a> is a Python package for handling annotated data matrices. In Galaxy, you’ll see AnnData objects in <strong>h5ad</strong> format, which is based on the standard HDF5 (h5) format. There are lots of Python tools that work with this format, such as Scanpy, MUON, Cell Oracle, SquidPy, etc.</li>
+  <li><strong>Loom</strong> - it is simply an HDF5 file that contains specific groups containing the main matrix as well as row and column attributes and can be read by any language supporting HDF5. <a href="https://linnarssonlab.org/loompy/">Loompy</a> has been released as a Python API to interact with loom files, and <a href="https://github.com/mojaveazure/loomR">loomR</a> is its implementation in R.</li>
+  <li><strong>Zarr</strong> - a Python package providing an implementation of compressed, chunked, N-dimensional arrays, designed for use in parallel computing. The Zarr file format offers powerful compression options, supports multiple data store backends, and can read/write your NumPy arrays.</li>
+  <li><strong>Seurat objects</strong> - a representation of single-cell expression data for R, in Galaxy you might see them in <strong>rdata</strong> format.</li>
+  <li><strong>Single Cell Experiment (SCE) object</strong> - defines a S4 class for storing data from single-cell experiments and provides a more formalized approach towards construction and accession of data. The S4 system is one of R’s systems for object oriented programing. In Galaxy you might see SCE objects in <strong>rdata</strong> format.</li>
+  <li><strong>CellDataSet (CDS) object</strong> - the main class used by Monocle to hold single cell expression data. In Galaxy you might see CDS objects in <strong>rdata</strong> format.</li>
+</ul>
+
+<!---
+TO FURTHER IMPROVE THE TUTORIAL:
+include images showing the structure of those files
+-->
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Using tutorial mode</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<h1 id="data-import">Data import</h1>
+<p>As you can see above, there are multiple ways to store single cell data. Therefore, there are also many ways how you can get that data! 
+Obviously, before any format conversion, we need to import the data. In our tutorials we often use <a href="https://zenodo.org/">Zenodo</a> links, but you can also upload the files directly from your computer. There are also publicly available resources which you can easily access through public atlases, such as <a href="https://www.ebi.ac.uk/gxa/sc/home">Single Cell Expression Atlas</a> or <a href="https://data.humancellatlas.org/">Human Cell Atlas data portal</a>. We created a <a href="/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html">dedicated tutorial</a> to show how to use those atlases to retrieve data. But today we’re here to focus on data conversion!</p>
+
+<h1 id="sceasy-tool">SCEasy Tool</h1>
+<p>In Galaxy Toolshed there is a wonderful tool called <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> which allows you to convert between common single cell formats, such as:</p>
+<ul>
+  <li>AnnData to CellDataSet (CDS)</li>
+  <li>AnnData to Seurat</li>
+  <li>Loom to AnnData</li>
+  <li>Loom to SingleCellExperiment (SCE)</li>
+  <li>SingleCellExperiment (SCE) to AnnData</li>
+  <li>SingleCellExperiment (SCE) to Loom</li>
+  <li>Seurat to AnnData</li>
+  <li>Seurat to SingleCellExperiment (SCE)</li>
+</ul>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-two-sceasy-tools"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Two SCEasy tools</div>
+
+  <p>As of the writing of this tutorial, the updated SCEasy tool is called <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> and it’s only available on <em>usegalaxy.eu</em>. The second tool is called <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy convert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5+galaxy1)</span> and it works on <em>usegalaxy.org</em>, however has limited conversion options. Both tools should be visible on <em>singlecell.usegalaxy.eu</em> if you try to find them in the search box.</p>
+
+</blockquote>
+
+<p>In this tutorial you will see multiple examples of SCEasy Tool in action. However, sometimes it is useful to know how to do this conversion manually or at least to know how it all works and better understand the structure of the files. Therefore, we also have examples showing how to convert objects manually or prepare the input files for some of our single cell tutorials and workflows.</p>
+
+<h1 id="seurat---anndata">Seurat -&gt; AnnData</h1>
+<p>As mentioned above, there are two SCEasy tools currently available. When we speak about conversion to AnnData, the latest tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> converts Seurat into the latest version of AnnData object. However, currently it is not possible to use that output with downstream EBI single-cell tools because they only support older versions of the AnnData. If you need to use those tools, the solution is to take advantage of the second SCEasy tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy convert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5+galaxy1)</span> which has limited conversion options but can generate AnnData files compatible with the EBI single-cell tools that we are going to use next in the workflow. 
+Our Seurat starting file was generated by pulling data from <a href="https://www.ebi.ac.uk/gxa/sc/home">Single Cell Expression Atlas</a> and transforming it into the desired format, what was shown in the <a href="/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html">data import tutorial</a>. It will be our toy dataset.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-toy-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get toy data</div>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the AnnData object from <a href="https://zenodo.org/records/10397653">Zenodo</a></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/10397653/files/Seurat_object.rdata
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Alternatively, you can import history where we created the Seurat object: <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/h/ebi-scxa---anndata-scanpy-or-seurat-object-1">Input history</a></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset <code class="language-plaintext highlighter-rouge">Seurat object</code></li>
+    <li>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">rdata</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">rdata</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoaseurat2anndata">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Choose below if you just want to convert your object quickly or see how it all happens behind the scenes!
+	</p>
+	
+	
+		<input id="cyoa-opt1seurat2anndata" type="radio" name="cyoaseurat2anndata" value="Quick-one-tool-method" onclick="cyoaChoice('Quick-one-tool-method', 'gtn-cyoaseurat2anndata')" />
+		<label for="cyoa-opt1seurat2anndata" class="select btn btn-secondary">Quick one tool method</label>
+	
+	
+		<input id="cyoa-opt2seurat2anndata" type="radio" name="cyoaseurat2anndata" value="Convert-to-AnnData-object-compatible-with-Filter-Plot-Explore-workflow" onclick="cyoaChoice('Convert-to-AnnData-object-compatible-with-Filter-Plot-Explore-workflow', 'gtn-cyoaseurat2anndata')" />
+		<label for="cyoa-opt2seurat2anndata" class="select btn btn-secondary">Convert to AnnData object compatible with Filter, Plot, Explore workflow</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Quick-one-tool-method", "gtn-cyoaseurat2anndata");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Quick-one-tool-method">
+
+  <h2 id="quick-one-tool-method">Quick one tool method</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-sceasy-converter"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  SCEasy Converter</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><em>“Convert From / To”</em>: <code class="language-plaintext highlighter-rouge">Seurat to AnnData</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in rds,rdata format”</em>: <code class="language-plaintext highlighter-rouge">Seurat object</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">AnnData object</code></li>
+    </ol>
+
+  </blockquote>
+
+  <p>And that’s it! Please note that the output file is the newest AnnData version and is not compatible with EBI tools used in <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/w/copy-of-filter-plot-and-explore-single-cell-rna-seq-data-imported-from-uploaded-file-3">Filter, Plot, Explore workflow</a>.</p>
+
+</div>
+
+<div class="Convert-to-AnnData-object-compatible-with-Filter,-Plot,-Explore-workflow">
+
+  <h2 id="convert-to-anndata-object-compatible-with-filter-plot-explore-workflow">Convert to AnnData object compatible with Filter, Plot, Explore workflow</h2>
+
+  <p>Here, we use the other SCEasy tool which generates older version of the AnnData which is compatible with the EBI single-cell tools that we are going to use next in the workflow.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-seurat-to-anndata-with-sceasy-convert"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Seurat to AnnData with SCEasy convert</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy convert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5+galaxy1)</span> with the following parameters:
+        <ul>
+          <li><em>“Direction of conversion”</em>: <code class="language-plaintext highlighter-rouge">Seurat to AnnData</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in Seurat RDS format”</em>: <code class="language-plaintext highlighter-rouge">Seurat object</code>
+(if the dataset does not show up in the corresponding input field, just drag the dataset from the history panel and drop into the input field)</li>
+          <li><em>“Name of the assay to be transferred”</em>: <code class="language-plaintext highlighter-rouge">RNA</code></li>
+          <li><em>“Data type of the assay to be transferred”</em>: <code class="language-plaintext highlighter-rouge">data</code></li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Converted EBI-compatible AnnData file</code>.</p>
+      </li>
+      <li>
+        <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">h5ad</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>Now, if we do small modification to metadata, we can use the generated dataset as an input file in the workflow we created in the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">previous tutorial</a>! Let’s see how it works:</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-modify-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Modify AnnData object</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92" title="AnnData Operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AnnData Operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy92)</span></li>
+      <li>Make sure you are using version <strong>1.8.1+galaxy92</strong> of the tool (change by clicking on <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> Versions button)</li>
+      <li>Set the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> In <em>“Input object in hdf5 AnnData format”</em>: <code class="language-plaintext highlighter-rouge">Converted EBI-compatible AnnData file</code></li>
+          <li>In <em>“Change field names in AnnData var”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Change field names in AnnData var”</em>
+                <ul>
+                  <li><em>“Original name”</em>: <code class="language-plaintext highlighter-rouge">name</code></li>
+                  <li><em>“New name”</em>: <code class="language-plaintext highlighter-rouge">Symbol</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><em>“Gene symbols field in AnnData”</em>: <code class="language-plaintext highlighter-rouge">Symbol</code></li>
+          <li>In <em>“Flag genes that start with these names”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Flag genes that start with these names”</em>
+                <ul>
+                  <li><em>“Starts with”</em>: <code class="language-plaintext highlighter-rouge">mt-</code></li>
+                  <li><em>“Var name”</em>: <code class="language-plaintext highlighter-rouge">mito</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">AnnData for Filter, Plot, Explore workflow</code></li>
+    </ol>
+
+  </blockquote>
+
+  <p>The object is ready to start its journey through the <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/w/copy-of-filter-plot-and-explore-single-cell-rna-seq-data-imported-from-uploaded-file-3">Filter, Plot, Explore workflow</a>. All thanks to one conversion tool - how awesome that is!</p>
+
+</div>
+
+<h1 id="anndata---seurat">AnnData -&gt; Seurat</h1>
+
+<p>Let’s get an <strong>AnnData object</strong> that we can further work on. It’s the object used in <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">many tutorials</a>, so check it out if you’re curious.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-toy-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get toy data</div>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the AnnData object from <a href="https://zenodo.org/record/4574153">Zenodo</a></p>
+
+      <p>If you do this tutorial just for learning purposes, you can download the downsampled dataset which will be much quicker to process:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/10391629/files/Downsampled_annotated_AnnData.h5ad
+</code></pre></div>      </div>
+
+      <p>If you want to use the full dataset used in the other single-cell case study tutorials, here it is! Please note, it will take much longer to process it, so we will only show the conversions on the downsampled objects.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7053673/files/Mito-counted_AnnData
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the datasets <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
+    <li>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">h5ad</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoaanndata2seurat">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Choose below if you just want to convert your object quickly or see how it all happens behind the scenes!
+	</p>
+	
+	
+		<input id="cyoa-opt1anndata2seurat" type="radio" name="cyoaanndata2seurat" value="Quick-one-step-method" onclick="cyoaChoice('Quick-one-step-method', 'gtn-cyoaanndata2seurat')" />
+		<label for="cyoa-opt1anndata2seurat" class="select btn btn-secondary">Quick one step method</label>
+	
+	
+		<input id="cyoa-opt2anndata2seurat" type="radio" name="cyoaanndata2seurat" value="Manual-conversion" onclick="cyoaChoice('Manual-conversion', 'gtn-cyoaanndata2seurat')" />
+		<label for="cyoa-opt2anndata2seurat" class="select btn btn-secondary">Manual conversion</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Quick-one-step-method", "gtn-cyoaanndata2seurat");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Quick-one-step-method">
+
+  <h2 id="quick-one-step-method">Quick one step method</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-sceasy-converter-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  SCEasy Converter</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><em>“Convert From / To”</em>: <code class="language-plaintext highlighter-rouge">AnnData to Seurat</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in h5ad,h5 format”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Seurat object</code></li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<div class="Manual-conversion">
+
+  <h2 id="manual-conversion">Manual conversion</h2>
+
+  <p>Most of our manual conversions involve extracting tables from different data objects and importing them into the target object.
+First, we will extract observations (cell metadata) and the full matrix from our AnnData.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-inspect-anndata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Inspect AnnData</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Observations</code>.</p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">The full data matrix</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Matrix</code>.</li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>What are the rows, and what are the columns in the retrieved Matrix?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>If you just click on the <code class="language-plaintext highlighter-rouge">Matrix</code> dataset, you will see a preview showing barcodes in the first column, and genes in the first row.</p>
+
+    </blockquote>
+
+  </blockquote>
+
+  <p>However, the next tool we need expects a matrix wherein the genes are listed in the first column and the barcodes are listed in the first row. Therefore, we need to transpose the current matrix.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-transpose-the-matrix"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Transpose the matrix</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">Matrix</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>And now we are ready to input that data into <strong>DropletUtils</strong> tool, which will separate this matrix into the cells, genes, and matrix tabular files needed to build a Seurat object.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-dropletutils"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  DropletUtils</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2" title="DropletUtils tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.10.0+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><em>“Format for the input matrix”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Data”</em>: output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Filter for Barcodes</code>
+            <ul>
+              <li><em>“Method”</em>: <code class="language-plaintext highlighter-rouge">DefaultDrops</code>
+                <ul>
+                  <li><em>“Expected Number of Cells”</em>: <code class="language-plaintext highlighter-rouge">338</code></li>
+                  <li><em>“Upper Quantile”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+                  <li><em>“Lower Proportion”</em>: <code class="language-plaintext highlighter-rouge">0.0</code></li>
+                </ul>
+              </li>
+              <li><em>“Format for output matrices”</em>: <code class="language-plaintext highlighter-rouge">Bundled (barcodes.tsv, genes.tsv, matrix.mtx)</code></li>
+              <li><em>“Random Seed”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>Finally, let’s combine those files that we have just generated and turn them into the Seurat object!</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-create-seurat-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create Seurat object</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/3.2.3+galaxy0" title="Seurat Read10x tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Read10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.2.3+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><em>“Choose the format of the input”</em>: <code class="language-plaintext highlighter-rouge">10X-type MTX</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix in sparse matrix format (.mtx)”</em>: <code class="language-plaintext highlighter-rouge">DropletUtils 10X Matrices</code></li>
+          <li><em>“Gene table”</em>: <code class="language-plaintext highlighter-rouge">DropletUtils 10X Genes</code></li>
+          <li><em>“Barcode/cell table”</em>: <code class="language-plaintext highlighter-rouge">DropletUtils 10X Barcodes</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Cell Metadata”</em>: <code class="language-plaintext highlighter-rouge">Observations</code></li>
+          <li><em>“Choose the format of the output”</em>: <code class="language-plaintext highlighter-rouge">RDS with a Seurat object</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Converted Seurat object</code>.</li>
+    </ol>
+
+  </blockquote>
+
+  <p>As usual, you can check the <a href="https://usegalaxy.eu/u/j.jakiela/h/anndata-to-seurat-conversion">example history</a> and the dedicated <a href="https://usegalaxy.eu/u/j.jakiela/w/anndata---seurat-conversion">workflow</a>.</p>
+
+</div>
+
+<h1 id="anndata---singlecellexperiment-sce">AnnData -&gt; SingleCellExperiment (SCE)</h1>
+<p>We will work on the same AnnData object so if you create a new history for this exercise, you can either get this file from Zenodo again or just copy this dataset from the previous history.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-toy-data-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get toy data</div>
+
+  <ol>
+    <li>Create a new history for this section</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/10391629">Zenodo</a></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/10391629/files/Downsampled_annotated_AnnData.h5ad
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-copy-a-dataset-between-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-a-dataset-between-histories" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Copy a dataset between histories</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There 3 ways to copy datasets between histories</p>   <ol>   <li>     <p>From the original history</p>     <ol>       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon which is on the top of the list of datasets in the history panel</li>       <li>Click on <strong>Copy Datasets</strong></li>       <li>         <p>Select the desired files</p>       </li>       <li>         <p>Give a relevant name to the “New history”</p>       </li>       <li>Validate by ‘Copy History Items’</li>       <li>Click on the new history name in the green box that have just appear to switch to this history</li>     </ol>   </li>   <li>     <p>Using the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> <strong>Show Histories Side-by-Side</strong></p>     <ol>       <li>Click on the <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> dropdown arrow top right of the history panel (<strong>History options</strong>)</li>       <li>Click on <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> <strong>Show Histories Side-by-Side</strong></li>       <li>If your target history is not present         <ol>           <li>Click on ‘Select histories’</li>           <li>Click on your target history</li>           <li>Validate by ‘Change Selected’</li>         </ol>       </li>       <li>Drag the dataset to copy from its original history</li>       <li>Drop it in the target history</li>     </ol>   </li>   <li>     <p>From the target history</p>     <ol>       <li>Click on <strong>User</strong> in the top bar</li>       <li>Click on <strong>Datasets</strong></li>       <li>Search for the dataset to copy</li>       <li>Click on its name</li>       <li>Click on <strong>Copy to current History</strong></li>     </ol>   </li> </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoaanndata2sce">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Choose below if you just want to convert your object quickly or see how it all happens behind the scenes!
+	</p>
+	
+	
+		<input id="cyoa-opt1anndata2sce" type="radio" name="cyoaanndata2sce" value="Quick-single-tool-method" onclick="cyoaChoice('Quick-single-tool-method', 'gtn-cyoaanndata2sce')" />
+		<label for="cyoa-opt1anndata2sce" class="select btn btn-secondary">Quick single tool method</label>
+	
+	
+		<input id="cyoa-opt2anndata2sce" type="radio" name="cyoaanndata2sce" value="Convert-manually" onclick="cyoaChoice('Convert-manually', 'gtn-cyoaanndata2sce')" />
+		<label for="cyoa-opt2anndata2sce" class="select btn btn-secondary">Convert manually</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Quick-single-tool-method", "gtn-cyoaanndata2sce");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Quick-single-tool-method">
+
+  <h2 id="quick-single-tool-method">Quick single tool method</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-sceasy-converter-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  SCEasy Converter</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><em>“Convert From / To”</em>: <code class="language-plaintext highlighter-rouge">AnnData to Seurat</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in h5ad,h5 format”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Seurat object</code></li>
+      <li>We will use SCEasy again! <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><em>“Convert From / To”</em>: <code class="language-plaintext highlighter-rouge">Seurat to SingleCellexperiment</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in rds,rdata format”</em>: <code class="language-plaintext highlighter-rouge">Seurat object</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">SCE object</code></li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<div class="Convert-manually">
+
+  <h2 id="convert-manually">Convert manually</h2>
+
+  <p>First, we will extract observations and the full matrix from our AnnData.</p>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-skip-some-steps"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-skip-some-steps" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Skip some steps!</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>If you are following this entire tutorial (rather than using a specific section necessary!), you can stay in the your previous history and just reuse outputs to build different single cell objects!</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-inspect-anndata-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Inspect AnnData</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Observations</code>.</p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">The full data matrix</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Matrix</code>.</li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>What are the rows, and what are the columns in the retrieved Matrix?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>If you just click on the <code class="language-plaintext highlighter-rouge">Matrix</code> dataset, you will see a preview, showing barcodes in the first column, while genes are in the first row.</p>
+
+    </blockquote>
+
+  </blockquote>
+
+  <p>However, the next tool we need expects a matrix wherein the genes are listed in the first column and the barcodes are listed in the first row. Therefore, we need to transpose the current matrix.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-transpose-the-matrix-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Transpose the matrix</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">Matrix</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>And now we are ready to input that data to <strong>DropletUtils</strong> tool.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-dropletutils-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  DropletUtils</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2" title="DropletUtils tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.10.0+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><em>“Format for the input matrix”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Data”</em>: output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Filter for Barcodes</code>
+            <ul>
+              <li><em>“Method”</em>: <code class="language-plaintext highlighter-rouge">DefaultDrops</code>
+                <ul>
+                  <li><em>“Expected Number of Cells”</em>: <code class="language-plaintext highlighter-rouge">338</code></li>
+                  <li><em>“Upper Quantile”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+                  <li><em>“Lower Proportion”</em>: <code class="language-plaintext highlighter-rouge">0.0</code></li>
+                </ul>
+              </li>
+              <li><em>“Format for output matrices”</em>: <code class="language-plaintext highlighter-rouge">Bundled (barcodes.tsv, genes.tsv, matrix.mtx)</code></li>
+              <li><em>“Random Seed”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>Finally, let’s combine those files that we have just generated and turn them into the SingleCellExperiment!</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-create-sce-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create SCE object</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0" title="DropletUtils Read10x tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils Read10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.4+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix in sparse matrix format (.mtx)”</em>: <code class="language-plaintext highlighter-rouge">DropletUtils 10X Matrices</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene table”</em>: <code class="language-plaintext highlighter-rouge">DropletUtils 10X Genes</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Barcode/cell table”</em>: <code class="language-plaintext highlighter-rouge">DropletUtils 10X Barcodes</code></li>
+          <li><em>“Should metadata file be added?”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <code class="language-plaintext highlighter-rouge">Yes</code>
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Metadata file”</em>: <code class="language-plaintext highlighter-rouge">Observations</code></li>
+              <li><em>“Cell ID column”</em>: <code class="language-plaintext highlighter-rouge">index</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Converted SCE object</code>.</li>
+    </ol>
+
+  </blockquote>
+
+  <p>As usual, you can check the <a href="https://usegalaxy.eu/u/j.jakiela/h/anndata-to-singlecellexperiment-sce-conversion">example history</a> and the dedicated <a href="https://usegalaxy.eu/u/j.jakiela/w/anndata-to-singlecellexperiment-sce-conversion">workflow</a>.</p>
+
+</div>
+
+<h1 id="anndata---cell-data-set-cds">Anndata -&gt; Cell Data Set (CDS)</h1>
+<p>Cell Data Set (CDS) format is usually used when working with a package called Monocle3 (<span class="citation"><a href="#monocle3">cole-trapnell-lab</a></span>). Below we show two methods on how to transform AnnData to CDS object, one of which creates an input file for <a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html">Monocle 3 tutorial</a>.</p>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoaanndata2cds">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		You can choose whether you want just to transform AnnData to CDS or to create CDS input file for Monocle3 tutorial to proceed with the downstream analysis described in that tutorial. Please note that depending on your dataset, you might need to refer to the first method which uses both annotated and unprocessed matrices. If you did some pre-processing on your AnnData object, then you might need to choose the first method anyway since Monocle3 performs its own pre-processing, so we would also need an unprocessed expression matrix alongside annotated (pre-processed) AnnData. That method is more expanded and specific, while the general one just shows the main principle of the conversion.
+	</p>
+	
+	
+		<input id="cyoa-opt1anndata2cds" type="radio" name="cyoaanndata2cds" value="Create-CDS-input-for-Monocle3-tutorial" onclick="cyoaChoice('Create-CDS-input-for-Monocle3-tutorial', 'gtn-cyoaanndata2cds')" />
+		<label for="cyoa-opt1anndata2cds" class="select btn btn-secondary">Create CDS input for Monocle3 tutorial</label>
+	
+	
+		<input id="cyoa-opt2anndata2cds" type="radio" name="cyoaanndata2cds" value="General-AnnData-to-CDS-conversion" onclick="cyoaChoice('General-AnnData-to-CDS-conversion', 'gtn-cyoaanndata2cds')" />
+		<label for="cyoa-opt2anndata2cds" class="select btn btn-secondary">General AnnData to CDS conversion</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("General-AnnData-to-CDS-conversion", "gtn-cyoaanndata2cds");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Create-CDS-input-for-Monocle3-tutorial">
+
+  <h2 id="cds-input-for-monocle3-tutorial-use-for-pre-processed-data">CDS input for Monocle3 tutorial (use for pre-processed data)</h2>
+  <p>The <a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html">dedicated tutorial</a> shows how to perform trajectory analysis using Monocle3 which is the next step in the single-cell case study tutorial series, right after <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">pre-processing tutorial</a> and <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">analysing the metadata</a>. To keep the continuity of the series, we will continue to work on the case study data from a mouse model of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span> (see <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">the study in Single Cell Expression Atlas</a> and <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">the project submission</a>). After successfully completing this section with the mentioned dataset, you can use it directly in the <a href="https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3-1">Monocle3 tutorial workflow</a>.
+If you work on your own data, you might also need to follow this method since it shows how to deal with already pre-processed datasets. Since Monocle3 performs its own pre-processing, you will need both annotated and unprocessed matrices.</p>
+
+  <h2 id="get-data">Get data</h2>
+  <p>Monocle3 works great with annotated data, so we will make use of our annotated AnnData object, generated in the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">previous tutorial</a>. We will also need a ‘clean’ expression matrix, extracted from the AnnData object just before we started the processing.
+You have two options for uploading these datasets. Importing via history is often faster.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-option-1-data-upload-import-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 1: Data upload - Import history</div>
+
+    <ol>
+      <li>
+        <p>Import history from: <a href="https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files">input history</a></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the history to your name of choice.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-option-2-data-upload-add-to-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 2: Data upload - Add to history</div>
+
+    <ol>
+      <li>Create a new history for this tutorial</li>
+      <li>
+        <p>Import the AnnData object from <a href="https://zenodo.org/records/7078524">Zenodo</a></p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/7078524/files/AnnData_before_processing.h5ad
+https://zenodo.org/records/7078524/files/Annotated_AnnData.h5ad
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">h5ad</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <h2 id="extracting-annotations">Extracting annotations</h2>
+  <p>To run Monocle, we need cell metadata, gene metadata, and an expression matrix file of genes by cells. (In theory, the expression matrix alone could do, but then we wouldn’t have all those useful annotations that we worked on so hard in the previous tutorials!). In order to get these files, we will extract the gene and cell annotations from our AnnData object.</p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>How many lines do you expect to be in the gene and cell metadata files?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>If you click on the step with uploaded annotated AnnData file, you will see on a small preview that this object has 8605 observations and 15395 variables, so we expect to get a cell metadata file with 8605 lines and gene metadata file with 15395 lines (without headers of course!).</p>
+
+    </blockquote>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-extracting-annotations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extracting annotations</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Annotated_AnnData</code></li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the observations annotation <code class="language-plaintext highlighter-rouge">Extracted cell annotations (obs)</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Annotated_AnnData</code></li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
+        </ul>
+      </li>
+      <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the annotation of variables <code class="language-plaintext highlighter-rouge">Extracted gene annotations (var)</code></li>
+    </ol>
+
+  </blockquote>
+
+  <p>Quick and easy, isn’t it? However, we need to make some minor changes before we can input these files into the Monocle toolsuite.</p>
+
+  <h2 id="cell-metadata">Cell metadata</h2>
+  <p>Our current dataset is not just T-cells: as you might remember from the last tutorial, we identified a cluster of macrophages as well. This might be a problem, because the trajectory algorithm will try to find relationships between all the cells (even if they are not necessarily related!), rather than only the T-cells that we are interested in. We need to remove those unwanted cell types to make the analysis more accurate.</p>
+
+  <p>The <strong>Manipulate AnnData</strong> tool allows you to filter observations or variables, and that would be the most obvious way to remove those cells. However, given that we don’t need an AnnData object, it’s a lot quicker to edit a table rather than manipulate an AnnData object. Ultimately, we need cell metadata, gene metadata and expression matrix files that have macrophages removed, and that have the correct metadata that Monocle looks for. With some table manipulation, we’ll end up with three separate files, ready to be passed onto Monocle3.</p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>Where is the information about cell types stored?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>We have already extracted the cell annotations file - in one of the columns you can find the information about cell type, assigned to each cell.</p>
+      <figure id="figure-1" style="max-width: 90%;"><img src="../../images/scrna-casestudy-monocle/example_cell_annotations.png" alt="Cell annotations along the top, n_genes, n_counts, louvain, cell_type with a cell barcode and subsequent metadata as each row. " width="452" height="209" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy-monocle/example_cell_annotations.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Example cell annotations</figcaption></figure>
+
+    </blockquote>
+
+  </blockquote>
+
+  <p>Click on <code class="language-plaintext highlighter-rouge">Extracted cell annotations (obs)</code> file to see a small preview window. This shows you that the column containing the cell types has number 22.  We’ll need that to filter out unwanted cell types!</p>
+
+  <blockquote class="warning">
+    <div class="box-title warning-title" id="warning-check-the-column-number"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Check the column number!</div>
+    <p>If you are working on a different dataset, the number of the ‘cell_type’ column might be different, so make sure you check it on a preview and use the correct number!</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-filter-out-macrophages"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter out macrophages</div>
+
+    <ol>
+      <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Extracted cell annotations (obs)</code></li>
+          <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c22!='Macrophages'</code></li>
+          <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          <li>That’s it - our cell annotation file is ready for Monocle! Let’s rename it accordingly.</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code></p>
+
+        <blockquote class="details">
+          <div class="box-title details-title" id="details-parameters"><button class="gtn-boxify-button details" type="button" aria-controls="details-parameters" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Parameters</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">c22</code> means column no. 22 - that’s the column with cell types, and it will be filtered for the macrophages</li>
+            <li><code class="language-plaintext highlighter-rouge">!=</code> means ‘not equal to’ - we want to keep the cell types which ARE NOT macrophages</li>
+          </ul>
+        </blockquote>
+
+        <blockquote class="tip">
+          <div class="box-title tip-title" id="tip-other-unwanted-cell-types"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-other-unwanted-cell-types" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Other unwanted cell types</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p>It might happen that during clustering you’ll find another cell type that you want to get rid of for the trajectory analysis. Then simply re-run this tool on already filtered file and change ‘Macrophages’ to another unwanted cell type.</p>
+        </blockquote>
+      </li>
+    </ol>
+  </blockquote>
+
+  <h2 id="gene-annotations">Gene annotations</h2>
+  <p>Sometimes certain functionalities require a specific indication of where the data should be taken from. Monocle3 tools expect that the genes column is named ‘gene_short_name’. Let’s check what the name of that column is in our dataset currently.</p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>Where can you check the header of a column containing genes names?</li>
+      <li>What is the name of this column?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>Our extracted gene annotations file! Either by clicking on the eye icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> or having a look at the small preview window.</li>
+        <li>In our dataset the gene names are stored in a column called ‘Symbol’ - we need to change that!</li>
+      </ol>
+      <figure id="figure-2" style="max-width: 90%;"><img src="../../images/scrna-casestudy-monocle/window_in_history.png" alt="The dataset in the history has a preview window showing the columns of the extracted gene annotation with each gene as a row and the metadata - index, ID, symbol - as the column names. " width="259" height="415" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy-monocle/window_in_history.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Preview window in the history</figcaption></figure>
+
+    </blockquote>
+
+  </blockquote>
+
+  <p>Let’s click on the <code class="language-plaintext highlighter-rouge">Extracted gene annotations (var)</code> file to see a small preview. We can see that the gene names are in the third column with a header <code class="language-plaintext highlighter-rouge">Symbol</code>. Keep that in mind - we’ll use that in a second!</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-changing-the-column-name"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Changing the column name</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">Extracted gene annotations (var)</code></li>
+          <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c3</code> or <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
+          <li>In <em>“Check”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+                <ul>
+                  <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">Symbol</code></li>
+                  <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">gene_short_name</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+        <ul>
+          <li>Voila! That’s the gene input for Monocle! Just a quick rename…</li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Genes input data for Monocle3</code></li>
+    </ol>
+
+  </blockquote>
+
+  <h2 id="expression-matrix">Expression matrix</h2>
+  <p>Last, but not least! And in fact, the most important! The expression matrix contains all the values representing the expression level of a particular gene in a cell. This is why in theory the expression matrix is the only input file required by Monocle3. Without annotation files the CDS data can still be generated - it will be quite bare and rather unhelpful for interpretation, but it’s possible to process.
+So, the values in the expression matrix are just numbers. But do you remember that we have already done some processing such as normalisation and the calculation of principal components in the AnnData object in the previous tutorial? That affected our expression matrix. Preprocessing is one of the steps in the Monocle3 workflow, so we want to make sure that the calculations are done on a ‘clean’ expression matrix. If we apply too many operations on our raw data, it will be too ‘deformed’ to be reliable. The point of the analysis is to use algorithms that make the enormous amount of data understandable in order to draw meaningful conclusions in accordance with biology.
+So how do we do that?</p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How many cells and genes are there in the <code class="language-plaintext highlighter-rouge">Anndata_before_processing</code> file?</li>
+      <li>How many lines are there in <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code>?</li>
+      <li>How many lines are there in <code class="language-plaintext highlighter-rouge">Genes input data for Monocle3</code>?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>You can answer all the questions just by clicking on the given file and looking at the preview window.</p>
+      <ol>
+        <li>[n_obs x n_vars] = 31178 x 35734, so there are 31178 cells and 35734 genes.</li>
+        <li>8570 lines, including a header, which makes 8569 cells.</li>
+        <li>15396 lines, including a header, which makes 15395 genes.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+  <p>As you can see, there are way more genes and cells in the unprocessed AnnData file, so the expression matrix is much bigger than we need it to be. If the genes and cells we prepared for Monocle3 are not the same as in the expression matrix, Monocle3 will crash. Therefore, we have to filter that big, clean matrix and adjust it to our already prepared genes and cells files. But first, let’s extract the matrix from the unprocessed AnnData object.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-extracting-matrix"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extracting matrix</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">AnnData_before_processing</code></li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">The full data matrix</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Unprocessed expression matrix</code></li>
+    </ol>
+
+  </blockquote>
+
+  <p>If you have a look at the preview of <code class="language-plaintext highlighter-rouge">Unprocessed expression matrix</code>, you’ll see that the first column contains the cell barcodes, while the first row - the gene IDs. We would like to keep only the values corresponding to the cells and genes that are included in <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code> and <code class="language-plaintext highlighter-rouge">Genes input data for Monocle3</code>. How do we do it? First, we compare the cell barcodes from <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code> to those in <code class="language-plaintext highlighter-rouge">Unprocessed expression matrix</code> and ask Galaxy to keep the values of the matrix for which the barcodes in both files are the same. Then, we’ll do the same for gene IDs. We will cut the first columns from <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code> and <code class="language-plaintext highlighter-rouge">Genes input data for Monocle3</code> to be able to compare those columns side by side with the matrix file.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-cutting-out-the-columns"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cutting out the columns</div>
+
+    <ol>
+      <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+        <ul>
+          <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Cells IDs</code></li>
+      <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+        <ul>
+          <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">Genes input data for Monocle3</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Genes IDs</code></li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-filter-matrix-values-by-cell-barcodes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Filter matrix values by cell barcodes</div>
+
+    <ol>
+      <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: <code class="language-plaintext highlighter-rouge">Cells IDs</code></li>
+          <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c1</code>or <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: <code class="language-plaintext highlighter-rouge">Unprocessed expression matrix</code></li>
+          <li><em>“and column”</em>: <code class="language-plaintext highlighter-rouge">c1</code>or <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><em>“Keep lines of first input that do not join with second input”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          <li><em>“Keep lines of first input that are incomplete”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          <li><em>“Fill empty columns”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          <li><em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Pre-filtered matrix (by cells)</code></li>
+    </ol>
+
+  </blockquote>
+
+  <p>Look at the preview of the output file. First of all, you can see that there are 8570 lines (8569 cells) instead of 31178 cells that were present in the matrix. That’s exactly what we wanted to achieve - now we have raw information for the T-cells that we have filtered. However, the step that we have already performed left us with the matrix whose first and second columns are the same - let’s get rid of one of those!</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-remove-duplicate-column-cells-ids"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove duplicate column (cells IDs)</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Pre-filtered matrix (by cells)</code></li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Filtered matrix (by cells)</code></li>
+    </ol>
+
+  </blockquote>
+
+  <p>Now we will perform the same steps, but for gene IDs. But gene IDs are currently in the first row, so we need to transpose the matrix, and from there we can repeat the same steps as above for Gene IDs.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-filter-matrix-by-gene-ids"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter matrix by gene IDs</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">Filtered matrix (by cells)</code></li>
+          <li>The matrix is now ready to be filtered by gene IDs!</li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: <code class="language-plaintext highlighter-rouge">Genes IDs</code></li>
+          <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c1</code> or <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“and column”</em>: <code class="language-plaintext highlighter-rouge">c1</code> or <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><em>“Keep lines of first input that do not join with second input”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          <li><em>“Keep lines of first input that are incomplete”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          <li><em>“Fill empty columns”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          <li><em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: output of <strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+            </ul>
+          </li>
+          <li>Monocle3 requires that in the matrix rows are genes, and columns are cells - that is what we’ve got, so there is no need to transpose matrix again. The expression matrix is ready! Let’s just rename it…</li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Expression matrix for Monocle3</code></li>
+    </ol>
+
+  </blockquote>
+
+  <p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Finally! We have prepared all the files to pass them onto the Monocle3 workflow!</p>
+
+  <h2 id="creating-cds-object">Creating CDS object</h2>
+  <p>Monocle3 turns the expression matrix, cell and gene annotations into an object called cell_data_set (CDS), which holds single-cell expression data.</p>
+
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-input-files"><button class="gtn-boxify-button details" type="button" aria-controls="details-input-files" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Input files</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Here is what <a href="https://cole-trapnell-lab.github.io/monocle3/docs/starting/">Monocle3 documentation</a> says about the required three input files:</p>
+    <ul>
+      <li><strong>expression_matrix</strong>: a numeric matrix of expression values, where rows are genes, and columns are cells. Must have the same number of columns as the cell_metadata has rows and the same number of rows as the gene_metadata has rows.</li>
+      <li><strong>cell_metadata</strong>: a data frame, where rows are cells, and columns are cell attributes (such as cell type, culture condition, day captured, etc.)</li>
+      <li><strong>gene_metadata</strong>: a data frame, where rows are features (e.g. genes), and columns are gene attributes, such as biotype, gc content, etc. One of its columns should be named “gene_short_name”, which represents the gene symbol or simple name (generally used for plotting) for each gene.</li>
+    </ul>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-create-cds-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create CDS object</div>
+
+    <blockquote class="details">
+      <div class="box-title details-title" id="details-data-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-data-format" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Data format</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>You can provide expression matrix as TSV, CSV, MTX or RDS file, while genes and cells metadata as TSV, CSV or RDS files. In our case all three files are tabular, so we will set the format to TSV.</p>
+    </blockquote>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2" title="Monocle3 create tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 create</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix, genes as rows, cells as columns. Required input. Provide as TSV, CSV or RDS.”</em>: <code class="language-plaintext highlighter-rouge">Expression matrix for Monocle3</code></li>
+          <li><em>“Format of expression matrix”</em>: <code class="language-plaintext highlighter-rouge">TSV</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Per-cell annotation, optional. Row names must match the column names of the expression matrix. Provide as TSV, CSV or RDS.”</em>: <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code></li>
+          <li><em>“Format of cell metadata”</em>: <code class="language-plaintext highlighter-rouge">TSV</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Per-gene annotation, optional. Row names must match the row names of the expression matrix. Provide as TSV, CSV or RDS.”</em>: <code class="language-plaintext highlighter-rouge">Genes input data for Monocle3</code></li>
+          <li><em>“Format of gene annotation”</em>: <code class="language-plaintext highlighter-rouge">TSV</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">CDS input for Monocle3 tutorial</code></li>
+    </ol>
+  </blockquote>
+
+  <p>It was quite a long conversion, but we did it! If you’re interested, the “Tip” below describes how we could possibly speed up the process using alternative tools.</p>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-alternative-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-alternative-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Alternative tools </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Generally in coding you can use different ways to achieve the same result. Similarly, in Galaxy you can use different tools but the outcome will be the same.
+For example, we could have used some tools on our starting AnnData object to remove macrophages and rename the column header, and afterwards extract observations and variables. It is a good practice to use methods from the libraries (such as Scanpy below) rather than dealing with text files rows and columns. The shown approach works well, but it might be problematic with much bigger datasets sizes. Then, you can use the following route:</p>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy93" title="Scanpy FilterCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FilterCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy93)</span> on annotated Anndata to remove macrophages.</li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92" title="AnnData Operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AnnData Operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy92)</span> to change the genes name from <em>Symbol</em> to <em>gene_short_name</em>.</li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> to extract genes and cells (to be used for Monocle).</li>
+      <li>Follow further steps to filter unprocessed matrix.</li>
+    </ol>
+
+    <p>You’ve probably used the mentioned tools before, so <strong>challenge yourself</strong> and try to replicate the process using the tools above!</p>
+  </blockquote>
+
+  <p>You might want to consult your results with this <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/h/anndata---cds-conversion-for-monocle3-tutorial">control history</a>, or check out the <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3">workflow</a>. 
+And now you have your input file ready to start the <a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html">Monocle3 tutorial</a>!</p>
+
+</div>
+
+<div class="General-AnnData-to-CDS-conversion">
+
+  <h2 id="general-anndata-to-cds-conversion">General AnnData to CDS conversion</h2>
+  <p>In fact, you can do this conversion just in one step - check the <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> <strong>Tip</strong> below!</p>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-conversion-in-a-single-step"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-conversion-in-a-single-step" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Conversion in a single step</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>As mentioned in the previous section, SCEasy tool can do this conversion in a single step. Let’s try that out!</p>
+
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-sceasy-converter-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  SCEasy Converter</div>
+
+      <ol>
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> with the following parameters:
+          <ul>
+            <li><em>“Convert From / To”</em>: <code class="language-plaintext highlighter-rouge">AnnData to CellDataSet</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in h5ad,h5 format”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
+          </ul>
+        </li>
+        <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">CDS object</code></li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+  <p>Below we will also show the manual conversion, just to make you familiar with the structure of the files and operations needed. 
+We will continue working on previously used dataset, so you can copy it from your history or download from Zenodo.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-get-toy-data-again"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get toy data again</div>
+
+    <ol>
+      <li>
+        <p>Create a new history for this tutorial</p>
+      </li>
+      <li>
+        <p>You can either copy the previously used dataset from your history:</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-copy-a-dataset-between-histories-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-a-dataset-between-histories-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Copy a dataset between histories</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There 3 ways to copy datasets between histories</p>   <ol>   <li>     <p>From the original history</p>     <ol>       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon which is on the top of the list of datasets in the history panel</li>       <li>Click on <strong>Copy Datasets</strong></li>       <li>         <p>Select the desired files</p>       </li>       <li>         <p>Give a relevant name to the “New history”</p>       </li>       <li>Validate by ‘Copy History Items’</li>       <li>Click on the new history name in the green box that have just appear to switch to this history</li>     </ol>   </li>   <li>     <p>Using the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> <strong>Show Histories Side-by-Side</strong></p>     <ol>       <li>Click on the <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> dropdown arrow top right of the history panel (<strong>History options</strong>)</li>       <li>Click on <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> <strong>Show Histories Side-by-Side</strong></li>       <li>If your target history is not present         <ol>           <li>Click on ‘Select histories’</li>           <li>Click on your target history</li>           <li>Validate by ‘Change Selected’</li>         </ol>       </li>       <li>Drag the dataset to copy from its original history</li>       <li>Drop it in the target history</li>     </ol>   </li>   <li>     <p>From the target history</p>     <ol>       <li>Click on <strong>User</strong> in the top bar</li>       <li>Click on <strong>Datasets</strong></li>       <li>Search for the dataset to copy</li>       <li>Click on its name</li>       <li>Click on <strong>Copy to current History</strong></li>     </ol>   </li> </ol> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
+
+    <p>Or, alternatively, download the dataset from <a href="https://zenodo.org/record/4574153">Zenodo</a></p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/10391629/files/Downsampled_annotated_AnnData.h5ad
+</code></pre></div>    </div>
+
+    <ol>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the datasets <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
+      <li>
+        <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-5" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">h5ad</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>Now we just need to extract information about cells, genes and an expression matrix.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-inspect-anndata-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Inspect AnnData</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <p><strong>Rename</strong>  <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Cell barcodes (obs)</code>.</p>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <p><strong>Rename</strong>  <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Genes (var)</code>.</p>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">The full data matrix</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <p><strong>Rename</strong>  <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Expression matrix</code>.</p>
+
+  </blockquote>
+
+  <p>Hold on here! As mentioned, if you’re converting your files to CDS, you’ll probably be working with Monocle. There is one function in downstream analysis in Monocle that requires a specific name of the column containing gene symbols, and that is <code class="language-plaintext highlighter-rouge">gene_short_name</code>. If you use Galaxy buttons for the analysis, you won’t be able to change that name after you create CDS file, so a good piece of advice is to rename it at this stage. There is no harm in doing this, and it might save you some time and frustration later on. You only need to check which column contains the gene symbols and what is its header - you can check that in the preview window, simply by clicking on the <code class="language-plaintext highlighter-rouge">Genes</code> dataset. In our case, that’s column 3 and its name is <code class="language-plaintext highlighter-rouge">Symbol</code>. Let’s change that!</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-changing-the-column-name-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Changing the column name</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">Genes</code></li>
+          <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c3</code> or <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
+          <li>In <em>“Check”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+                <ul>
+                  <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">Symbol</code></li>
+                  <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">gene_short_name</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code>. If not, change it.</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-6" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Genes renamed</code></li>
+    </ol>
+
+  </blockquote>
+
+  <p>We’re almost there, but there is one last modification we have to do - transpose the matrix to have the genes as rows and cells as columns.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-transpose-the-matrix-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Transpose the matrix</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy1)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">Expression matrix</code></li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+
+  <p>And the final step is to create the CDS file using Monocle tool!</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-create-cell-data-set"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create Cell Data Set</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2" title="Monocle3 create tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 create</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix, genes as rows, cells as columns. Required input. Provide as TSV, CSV or RDS.”</em>: output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Format of expression matrix”</em>: <code class="language-plaintext highlighter-rouge">TSV</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Per-cell annotation, optional. Row names must match the column names of the expression matrix. Provide as TSV, CSV or RDS.”</em>: <code class="language-plaintext highlighter-rouge">Cell barcodes (obs)</code></li>
+          <li><em>“Format of cell metadata”</em>: <code class="language-plaintext highlighter-rouge">TSV</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Per-gene annotation, optional. Row names must match the row names of the expression matrix. Provide as TSV, CSV or RDS.”</em>: <code class="language-plaintext highlighter-rouge">Genes renamed</code></li>
+          <li><em>“Format of gene annotation”</em>: <code class="language-plaintext highlighter-rouge">TSV</code></li>
+        </ul>
+      </li>
+      <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">CDS Monocle file</code></li>
+    </ol>
+  </blockquote>
+
+  <p>As usual, you can check the <a href="https://usegalaxy.eu/u/j.jakiela/h/anndata-to-cell-data-set-cds-conversion">example history</a> and the dedicated <a href="https://usegalaxy.eu/u/j.jakiela/w/anndata-to-cell-data-set-cds-conversion">workflow</a> (it doesn’t include the step on renaming the column header though).</p>
+
+</div>
+
+<h1 id="downsampling-fastq-files">Downsampling FASTQ files</h1>
+<p>Sometimes, it is useful to work on smaller subsets of data (especially for teaching / learning purposes). Here is an example of how you can downsample your FASTQ files.
+First, let’s get some toy data. We just need two FASTQ files - one containing barcodes, the other with transcripts.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-toy-data-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get toy data</div>
+
+  <ol>
+    <li>Create a new history for this section <em>“Downsampling FASTQ Files”</em></li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/4574153">Zenodo</a></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
+https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Funnily enough, those files are already downsampled, so you won’t have to wait for too long to download them. We are not going to analyse that data anyway, it’s just for demonstration purposes.
+Quickly check which file contains barcodes and which file contains transcripts. If you click on the two datasets, you will see that one has shorter sequences, while the other has longer. It’s quite straight-forward to deduce that shorter sequences are barcodes.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-rename-the-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Rename the files</div>
+
+  <ol>
+    <li>
+      <p>Rename file <code class="language-plaintext highlighter-rouge">s_1.r_1</code> as <code class="language-plaintext highlighter-rouge">Barcodes</code></p>
+    </li>
+    <li>
+      <p>Rename file <code class="language-plaintext highlighter-rouge">s_1.r_2</code> as <code class="language-plaintext highlighter-rouge">Transcripts</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now we will convert the FASTQ files to tabular:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-fastq-to-tabular"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  FASTQ to tabular</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_tabular/fastq_to_tabular/1.1.5" title="FASTQ to Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ to Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ file to convert”</em>: <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> Select multiple files: <code class="language-plaintext highlighter-rouge">Barcodes</code> and <code class="language-plaintext highlighter-rouge">Transcripts</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong>  <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the datasets <code class="language-plaintext highlighter-rouge">Barcodes tabular</code> and <code class="language-plaintext highlighter-rouge">Transcripts tabular</code></li>
+  </ol>
+
+</blockquote>
+
+<p>Now let’s select the number of the reads we would like to keep. It’s totally up to you, we choose <code class="language-plaintext highlighter-rouge">100000</code> here.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-downsampling"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Downsampling</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text file”</em>: <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> Select multiple files:   <code class="language-plaintext highlighter-rouge">Barcodes tabular</code> and <code class="language-plaintext highlighter-rouge">Transcripts tabular</code></li>
+        <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep last lines</code></li>
+        <li><em>“Number of lines”</em>: <code class="language-plaintext highlighter-rouge">100000</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset <code class="language-plaintext highlighter-rouge">Barcodes cut</code> and <code class="language-plaintext highlighter-rouge">Transcripts cut</code></li>
+  </ol>
+
+</blockquote>
+
+<p>All done, now we just need to go back to FASTQ from Tabular again!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-tabular-to-fastq"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Tabular to FASTQ</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fastq/tabular_to_fastq/1.1.5" title="Tabular to FASTQ tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular to FASTQ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file to convert”</em>: <code class="language-plaintext highlighter-rouge">Barcodes cut</code> (output of <strong>Select last</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Identifier column”</em>: <code class="language-plaintext highlighter-rouge">c1</code> or <code class="language-plaintext highlighter-rouge">Column 1</code></li>
+        <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">c2</code> or <code class="language-plaintext highlighter-rouge">Column 2</code></li>
+        <li><em>“Quality column”</em>: <code class="language-plaintext highlighter-rouge">c3</code> or <code class="language-plaintext highlighter-rouge">Column 3</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset <code class="language-plaintext highlighter-rouge">Downsampled barcode read</code> and <code class="language-plaintext highlighter-rouge">Downsampled transcript read</code></li>
+  </ol>
+
+</blockquote>
+
+<p>And that’s all! Your downsampled data is ready to use. You can check your answers in this <a href="https://usegalaxy.eu/u/j.jakiela/h/how-to-downsample-fastq-files">example history</a> or if you want to accelerate this process, feel free to use the <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/w/workflow-constructed-from-history-copy-of-cs1generating-a-single-cell-matrix-using-alevin---how-to-downsample">workflow</a> next time!</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Single cell data from different sources may have unfamiliar formatting and thus may require different ways of ingesting it into Galaxy.</p>
+</li>
+                        
+                        <li><p>There are many ways of importing single cell files into Galaxy and converting between single cell formats.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/single-cell/faqs/">FAQ page for the Single Cell topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/single-cell#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9: <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a></li>
+<li id="monocle3">cole-trapnell-lab <b>monocle3</b>. <a href="https://cole-trapnell-lab.github.io/monocle3/">https://cole-trapnell-lab.github.io/monocle3/</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Converting between common single cell data formats (Single Cell)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Julia Jakiela, Morgan Howells, Wendi Bacon,  <b>Converting between common single cell data formats (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{single-cell-scrna-data-ingest,
+author = "Julia Jakiela and Morgan Howells and Wendi Bacon",
+	title = "Converting between common single cell data formats (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/elixir-fair-data" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/elixir-fair-data/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <div class="box-title">Go Further</div>
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/single-cell">Single Cell</a>
+        
+    
+    </li>
+
+                    </ul>
+                </blockquote>
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-data-ingest/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: fastq_to_tabular
+  owner: devteam
+  revisions: 4b347702c4aa
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: tabular_to_fastq
+  owner: devteam
+  revisions: 2dcfbbf9071a
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: anndata_ops
+  owner: ebi-gxa
+  revisions: a0274bc43b7e
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: dropletutils_read_10x
+  owner: ebi-gxa
+  revisions: ca62f52e0d7f
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: monocle3_create
+  owner: ebi-gxa
+  revisions: ada68a9d0aec
+  tool_panel_section_label: Monocle3
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_filter_cells
+  owner: ebi-gxa
+  revisions: 356fa6c27341
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: sceasy_convert
+  owner: ebi-gxa
+  revisions: f62bc418173f
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_read10x
+  owner: ebi-gxa
+  revisions: 301cf1b4b43d
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: regex_find_replace
+  owner: galaxyp
+  revisions: 399da6b5ec21
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: anndata_inspect
+  owner: iuc
+  revisions: 6f0d0c784f09
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: anndata_inspect
+  owner: iuc
+  revisions: ee98d611afc6
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: datamash_transpose
+  owner: iuc
+  revisions: ac092723240d
+  tool_panel_section_label: Join, Subtract and Group
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: datamash_transpose
+  owner: iuc
+  revisions: 374cb875d38a
+  tool_panel_section_label: Join, Subtract and Group
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: datamash_transpose
+  owner: iuc
+  revisions: a513e3fbb4c5
+  tool_panel_section_label: Join, Subtract and Group
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: dropletutils
+  owner: iuc
+  revisions: a9caad671439
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: sceasy_convert
+  owner: iuc
+  revisions: 2062be7efc84
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/67d35f7628cbca7ff30de4aaffd1187b33152507">67d35f7</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna-data-ingest/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1707828025'></script>
+        
+    </body>
+</html>

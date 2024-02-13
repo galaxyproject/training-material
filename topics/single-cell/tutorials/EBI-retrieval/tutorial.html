@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial / Single Cell</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Importing files from public atlases / Single Cell</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@7653e7909f24ffec3a2ffc0f6b89693db8577977",
+		release: "galaxy-training-network@67d35f7628cbca7ff30de4aaffd1187b33152507",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1707822821' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.03aefefa.js?v=1707822821' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1707828025' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1707828025' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -65,13 +65,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Hands-on: Hands-on: EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial">
+<meta name="DC.title" content="Hands-on: Hands-on: Importing files from public atlases">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-12-14 10:22:34 +0000">
+<meta name="DC.date" content="2023-12-15 13:30:34 +0000">
 <meta name="DC.creator" content="Julia Jakiela">
 <meta name="DC.creator" content="Wendi Bacon"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Single Cell / Hands-on: EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial">
+	<meta property="og:title" content="Single Cell / Hands-on: Importing files from public atlases">
         <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
@@ -118,10 +118,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2023-12-14 10:22:34 +0000",
+  "dateModified": "2023-12-15 13:30:34 +0000",
   "datePublished": "2023-11-14 17:16:58 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Hands-on: Hands-on: EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial",
+  "headline": "Hands-on: Hands-on: Importing files from public atlases",
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
   "isFamilyFriendly": true,
@@ -230,17 +230,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
   },
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on: Hands-on: EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial",
+  "name": "Hands-on: Hands-on: Importing files from public atlases",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html",
-  "version": 25,
+  "version": 29,
   "timeRequired": "PT15M",
-  "teaches": "You will retrieve raw data from the EBI Single Cell Expression Atlas.\n - You will manipulate the metadata and matrix files.\n - You will combine the metadata and matrix files into an AnnData or Seurat object for downstream analysis.",
+  "teaches": "You will retrieve raw data from the EBI Single Cell Expression Atlas and Human Cell Atlas.\n - You will manipulate the metadata and matrix files.\n - You will combine the metadata and matrix files into an AnnData or Seurat object for downstream analysis.",
   "keywords": [
     "Single Cell",
     "data import",
     "data management"
   ],
-  "description": "The questions this  addresses are:\n - How do I use the EBI Single Cell Expression Atlas?\n - How can I reformat and manipulate the downloaded files to create the correct input for downstream analysis?\n\n\nThe objectives are:\n - You will retrieve raw data from the EBI Single Cell Expression Atlas.\n - You will manipulate the metadata and matrix files.\n - You will combine the metadata and matrix files into an AnnData or Seurat object for downstream analysis.\n\n",
+  "description": "The questions this  addresses are:\n - How do I use the EBI Single Cell Expression Atlas and Human Cell Atlas?\n - How can I reformat and manipulate the downloaded files to create the correct input for downstream analysis?\n\n\nThe objectives are:\n - You will retrieve raw data from the EBI Single Cell Expression Atlas and Human Cell Atlas.\n - You will manipulate the metadata and matrix files.\n - You will combine the metadata and matrix files into an AnnData or Seurat object for downstream analysis.\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -317,8 +317,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "@context": "http://schema.org",
       "@type": "LearningResource",
       "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html",
-      "name": "Combining single cell datasets after pre-processing",
-      "description": "Hands-on for 'Combining single cell datasets after pre-processing' tutorial",
+      "name": "Hands-on: Hands-on: Combining single cell datasets after pre-processing",
+      "description": "Hands-on for 'Hands-on: Hands-on: Combining single cell datasets after pre-processing' tutorial",
       "learningResourceType": "hands-on tutorial",
       "interactivityType": "expositive",
       "provider": {
@@ -457,7 +457,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "# Introduction"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1707822821'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1707828025'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -631,7 +631,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 <article class="tutorial topic-single-cell">
-    <h1 data-toc-skip>EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial</h1>
+    <h1 data-toc-skip>Importing files from public atlases</h1>
     
 
     <section aria-labelledby="overview-box" id="tutorial-metadata">
@@ -677,7 +677,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
         
-        <li><p>How do I use the EBI Single Cell Expression Atlas?</p>
+        <li><p>How do I use the EBI Single Cell Expression Atlas and Human Cell Atlas?</p>
 </li>
         
         <li><p>How can I reformat and manipulate the downloaded files to create the correct input for downstream analysis?</p>
@@ -688,7 +688,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
         <ul>
         
-        <li><p>You will retrieve raw data from the EBI Single Cell Expression Atlas.</p>
+        <li><p>You will retrieve raw data from the EBI Single Cell Expression Atlas and Human Cell Atlas.</p>
 </li>
         
         <li><p>You will manipulate the metadata and matrix files.</p>
@@ -721,6 +721,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
             <ul>
                 
+                    
+                        
+                    
+                        
+                    
+                        
                     
                         
                     
@@ -788,10 +794,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     
                         
                     
-                        
-                    
-                        
-                    
                 
                     
                         
@@ -815,10 +817,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                         
                     
                         
-                    
-                        
                             
-                            <li> Combining single cell datasets after pre-processing:
+                            <li> Hands-on: Hands-on: Combining single cell datasets after pre-processing:
                             
                             
                                 
@@ -826,6 +826,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -893,7 +897,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/single-cell/tutorials/EBI-retrieval/workflows/" title="EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/single-cell/tutorials/EBI-retrieval/workflows/" title="Importing files from public atlases workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -967,7 +971,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 14, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 14, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 15, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -980,7 +984,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00374">https://gxy.io/GTN:T00374</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 25 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 29 </div>
 
     </blockquote>
     </section>
@@ -997,7 +1001,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
-<p>Public single cell datasets seem to accumulate by the second. Well annotated, quality datasets are slightly trickier to find. which is why projects like the <a href="https://www.ebi.ac.uk/gxa/sc/home">Single Cell Expression Atlas</a> (SCXA) exist - to curate datasets for public use. Here, we will guide you through transforming data imported from the SCXA repository into the input file required for the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot, Explore tutorial</a>.</p>
+<p>Public single cell datasets seem to accumulate by the second. Well annotated, quality datasets are slightly trickier to find. which is why projects like the <a href="https://www.ebi.ac.uk/gxa/sc/home">Single Cell Expression Atlas</a> (SCXA) exist - to curate datasets for public use. Here, we will guide you through transforming data imported from the SCXA repository into the input file required for the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot, Explore tutorial</a> and we will also show how to use the public atlases for your own research.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1008,15 +1012,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#getting-data-from-the-single-cell-expression-atlas" id="markdown-toc-getting-data-from-the-single-cell-expression-atlas">Getting data from the Single Cell Expression Atlas</a>    <ol>
       <li><a href="#examine-the-imported-files" id="markdown-toc-examine-the-imported-files">Examine the imported files</a></li>
+      <li><a href="#metadata-manipulation" id="markdown-toc-metadata-manipulation">Metadata manipulation</a></li>
+      <li><a href="#check-mitochondrial-gene-name-format" id="markdown-toc-check-mitochondrial-gene-name-format">Check mitochondrial gene name format</a></li>
+      <li><a href="#creating-the-anndata-object" id="markdown-toc-creating-the-anndata-object">Creating the AnnData object</a></li>
+      <li><a href="#anndata-manipulation" id="markdown-toc-anndata-manipulation">AnnData manipulation</a></li>
+      <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+      <li><a href="#creating-the-seurat-object" id="markdown-toc-creating-the-seurat-object">Creating the Seurat Object</a></li>
+      <li><a href="#conclusion-1" id="markdown-toc-conclusion-1">Conclusion</a></li>
     </ol>
   </li>
-  <li><a href="#metadata-manipulation" id="markdown-toc-metadata-manipulation">Metadata manipulation</a></li>
-  <li><a href="#check-mitochondrial-gene-name-format" id="markdown-toc-check-mitochondrial-gene-name-format">Check mitochondrial gene name format</a></li>
-  <li><a href="#creating-the-anndata-object" id="markdown-toc-creating-the-anndata-object">Creating the AnnData object</a></li>
-  <li><a href="#anndata-manipulation" id="markdown-toc-anndata-manipulation">AnnData manipulation</a></li>
-  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
-  <li><a href="#creating-the-seurat-object" id="markdown-toc-creating-the-seurat-object">Creating the Seurat Object</a></li>
-  <li><a href="#conclusion-1" id="markdown-toc-conclusion-1">Conclusion</a></li>
+  <li><a href="#human-cell-atlas-matrix-downloader" id="markdown-toc-human-cell-atlas-matrix-downloader">Human Cell Atlas Matrix Downloader</a></li>
 </ol>
 
 </blockquote>
@@ -1024,6 +1029,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <h1 id="getting-data-from-the-single-cell-expression-atlas">Getting data from the Single Cell Expression Atlas</h1>
 
 <p>Galaxy has a specific tool for importing data from the SCXA (<span class="citation"><a href="#Moreno2020.04.08.032698">Moreno <i>et al.</i> 2020</a></span>), which combines all the preprocessing steps shown in <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">the previous tutorial</a> into one! For this tutorial, the dataset can be seen <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads">at the EBI</a> with experiment ID of <code class="language-plaintext highlighter-rouge">E-MTAB-6945</code>.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-how-to-access-other-experiments"><button class="gtn-boxify-button details" type="button" aria-controls="details-how-to-access-other-experiments" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details:  How to access other experiments? </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>You can search datasets according to various criteria either using search box in <strong>Home</strong> tab or choosing kingdom, experiment collection, technology type (and others) in <strong>Browse experiments</strong> tab. When you find the experiment you are interested in, just click on it and the experiment ID will be displayed in the website URL, as shown below.</p>
+
+  <figure id="figure-1" style="max-width: 90%;"><img src="../../images/scrna-data/exp_id.jpg" alt="Arrow pointing to the website URL where you can find experiment ID." width="1757" height="627" loading="lazy" /><a target="_blank" href="../../images/scrna-data/exp_id.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Where to find experiment ID on the EBI Single Cell Expression Atlas website.</figcaption></figure>
+
+  <p>Once you know the experiment ID, you can use EBI SCXA Data Retrieval tool in Galaxy!</p>
+
+</blockquote>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-retrieving-data-from-single-cell-expression-atlas"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Retrieving data from Single Cell Expression Atlas</div>
@@ -1059,26 +1075,28 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Matrix Market Format! We can tell this because our first file helpfully says <code class="language-plaintext highlighter-rouge">MatrixMarket</code> in the first line.</p>
-    <figure id="figure-1" style="max-width: 90%;"><img src="../../tutorials/EBI-retrieval/images/matrix-output.png" alt="Green box containing first output, the matrix.mtx file. Columns are labelled 14458, 5218, and 5308559. " width="273" height="410" loading="lazy" /><a target="_blank" href="../../tutorials/EBI-retrieval/images/matrix-output.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Matrix Market Output</figcaption></figure>
+    <figure id="figure-2" style="max-width: 90%;"><img src="../../tutorials/EBI-retrieval/images/matrix-output.png" alt="Green box containing first output, the matrix.mtx file. Columns are labelled 14458, 5218, and 5308559. " width="273" height="410" loading="lazy" /><a target="_blank" href="../../tutorials/EBI-retrieval/images/matrix-output.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Matrix Market Output</figcaption></figure>
 
     <p>This <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">matrix.mtx</code> file, in Matrix Market format, contains a column referring to each gene (column 1), to each cell (column 2), and the expression values themselves in the final column. To be useful, then, we need to know which genes and cells the numbers are referring to. That’s why this format comes with two more files.</p>
 
-    <figure id="figure-2" style="max-width: 90%;"><img src="../../tutorials/EBI-retrieval/images/genes-output.png" alt="Green box containing second output, the genes.tsv file. The first column contains EnsemblIDs such as ENSMUSG######, while the second column contains gene names. There are 14,457 lines." width="274" height="414" loading="lazy" /><a target="_blank" href="../../tutorials/EBI-retrieval/images/genes-output.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Genes Output</figcaption></figure>
+    <figure id="figure-3" style="max-width: 90%;"><img src="../../tutorials/EBI-retrieval/images/genes-output.png" alt="Green box containing second output, the genes.tsv file. The first column contains EnsemblIDs such as ENSMUSG######, while the second column contains gene names. There are 14,457 lines." width="274" height="414" loading="lazy" /><a target="_blank" href="../../tutorials/EBI-retrieval/images/genes-output.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Genes Output</figcaption></figure>
 
     <p>The <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">genes.tsv</code> file lists each EnsemblID and its gene name. The lines (14,457) corresponds with the 14458 in the Matrix file…but the 14458 contains a header, so that’s why it has one more than the genes file!</p>
 
-    <figure id="figure-3" style="max-width: 90%;"><img src="../../tutorials/EBI-retrieval/images/cells-output.png" alt="Green box containing third output, the barcodes.tsv file. The file consists of 5,217 lines and a single column containing the cell barcode, variations of ERR2704656-AAAACACTCTGA." width="275" height="414" loading="lazy" /><a target="_blank" href="../../tutorials/EBI-retrieval/images/cells-output.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Cells Output</figcaption></figure>
+    <figure id="figure-4" style="max-width: 90%;"><img src="../../tutorials/EBI-retrieval/images/cells-output.png" alt="Green box containing third output, the barcodes.tsv file. The file consists of 5,217 lines and a single column containing the cell barcode, variations of ERR2704656-AAAACACTCTGA." width="275" height="414" loading="lazy" /><a target="_blank" href="../../tutorials/EBI-retrieval/images/cells-output.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Cells Output</figcaption></figure>
 
     <p>The <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">barcodes.tsv</code> file lists each barcode. The lines (5,217) again correspond with the 5,218 lines in the Matrix file…which adds in the header again!</p>
 
-    <figure id="figure-4" style="max-width: 90%;"><img src="../../tutorials/EBI-retrieval/images/cell-metadata.png" alt="Green box containing fourth output, the exp_design.tsv file. The file consists of 5,218 lines and numerous columns starting with 'Assay' and 'Sample Characteristic'." width="281" height="410" loading="lazy" /><a target="_blank" href="../../tutorials/EBI-retrieval/images/cell-metadata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Experimental Design</figcaption></figure>
+    <figure id="figure-5" style="max-width: 90%;"><img src="../../tutorials/EBI-retrieval/images/cell-metadata.png" alt="Green box containing fourth output, the exp_design.tsv file. The file consists of 5,218 lines and numerous columns starting with 'Assay' and 'Sample Characteristic'." width="281" height="410" loading="lazy" /><a target="_blank" href="../../tutorials/EBI-retrieval/images/cell-metadata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Experimental Design</figcaption></figure>
 
     <p>Finally, and helpfully, the tool also includes cell metadata where the <code class="language-plaintext highlighter-rouge">Assay</code> column corresponds with the barcodes in the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">barcodes.tsv</code> file. While this is not a required file to create an AnnData object from the three matrix market files, it is extremely necessary for actually interpreting the data. Imagine not knowing which barcodes came from which sample!</p>
 
   </blockquote>
 </blockquote>
 
-<h1 id="metadata-manipulation">Metadata manipulation</h1>
+<h2 id="metadata-manipulation">Metadata manipulation</h2>
+
+<p>At this point you might want to do some modifications in the files before downstream analysis. That can include re-formating the cell metadata or changing the names of the column headers, it all depends on your dataset and how you want to perfrom your analysis. It’s also fine to transform those files straight away. Here, we will show an extended version of metadata manipulation which allows us to create an input file consistent with <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">the next tutorial</a> workflow.</p>
 
 <p>Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about the 7 experimental samples (N701 – N707). However, in the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">exp_design.tsv</code> dataset, which contains the cell metadata, these samples are just numbered from 1 to 7.</p>
 
@@ -1198,7 +1216,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </ol>
 </blockquote>
 
-<h1 id="check-mitochondrial-gene-name-format">Check mitochondrial gene name format</h1>
+<h2 id="check-mitochondrial-gene-name-format">Check mitochondrial gene name format</h2>
 
 <p>We might like to flag mitochondrial genes. They can be identified quite easily since - depending on the species and formatting convention - their names often start with <code class="language-plaintext highlighter-rouge">mt</code>. Since tools for flagging mitochondrial genes are often case-sensitive, it might be a good idea to check the formatting of the mitochondrial genes in our dataset.</p>
 
@@ -1233,11 +1251,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</p>
 	
 	
-		<input id="cyoa-opt1" type="radio" name="cyoa" value="Scanpy" onclick="cyoaChoice('Scanpy')" />
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Scanpy" onclick="cyoaChoice('Scanpy', 'gtn-cyoa')" />
 		<label for="cyoa-opt1" class="select btn btn-secondary">Scanpy</label>
 	
 	
-		<input id="cyoa-opt2" type="radio" name="cyoa" value="Seurat" onclick="cyoaChoice('Seurat')" />
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Seurat" onclick="cyoaChoice('Seurat', 'gtn-cyoa')" />
 		<label for="cyoa-opt2" class="select btn btn-secondary">Seurat</label>
 	
 	
@@ -1253,7 +1271,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			}
 		}
 		ready(function() {
-			cyoaDefault("Scanpy");
+			cyoaDefault("Scanpy", "gtn-cyoa");
 		})
 	</script>
 	
@@ -1261,7 +1279,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <div class="Scanpy">
 
-  <h1 id="creating-the-anndata-object">Creating the AnnData object</h1>
+  <h2 id="creating-the-anndata-object">Creating the AnnData object</h2>
 
   <p>We will do several modifications within the AnnData object so that you can follow <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">the next tutorial</a>.</p>
 
@@ -1272,7 +1290,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy9" title="Scanpy Read10x tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy Read10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy9)</span></li>
       <li>Make sure you are using version <strong>1.8.1+galaxy9</strong> of the tool (change by clicking on <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> Versions button):</li>
     </ol>
-    <figure id="figure-5" style="max-width: 90%;"><img src="../../images/scrna-casestudy/version.png" alt="List of available tool versions shown when clicking on the 'Versions' button on the top of the page." width="444" height="562" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/version.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> How to change the version of the tool</figcaption></figure>
+    <figure id="figure-6" style="max-width: 90%;"><img src="../../images/scrna-casestudy/version.png" alt="List of available tool versions shown when clicking on the 'Versions' button on the top of the page." width="444" height="562" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/version.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> How to change the version of the tool</figcaption></figure>
 
     <ol>
       <li>Set the following parameters:
@@ -1288,7 +1306,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   </blockquote>
 
-  <h1 id="anndata-manipulation">AnnData manipulation</h1>
+  <h2 id="anndata-manipulation">AnnData manipulation</h2>
 
   <p>We will now change the header of the column containing gene names from <code class="language-plaintext highlighter-rouge">gene_symbols</code> to <code class="language-plaintext highlighter-rouge">Symbol</code>. This edit is only needed to make our AnnData object compatible with this tutorial’s workflow. We will also flag the mitochondrial genes.</p>
 
@@ -1331,9 +1349,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   </blockquote>
 
-  <p>And that’s all! What’s even more exciting about the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) <strong>AnnData Operations</strong> tool is that it automatically calculates a bunch of metrics, such as <code class="language-plaintext highlighter-rouge">log1p_mean_counts</code>, <code class="language-plaintext highlighter-rouge">log1p_total_counts</code>, <code class="language-plaintext highlighter-rouge">mean_counts</code>, <code class="language-plaintext highlighter-rouge">n_cells</code>, <code class="language-plaintext highlighter-rouge">n_cells_by_counts</code>, <code class="language-plaintext highlighter-rouge">n_counts</code>, <code class="language-plaintext highlighter-rouge">pct_dropout_by_counts</code>, and <code class="language-plaintext highlighter-rouge">total_counts</code>. Amazing, isn’t it?</p>
+  <p>And that’s all! What’s even more exciting about the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>AnnData Operations</strong> tool is that it automatically calculates a bunch of metrics, such as <code class="language-plaintext highlighter-rouge">log1p_mean_counts</code>, <code class="language-plaintext highlighter-rouge">log1p_total_counts</code>, <code class="language-plaintext highlighter-rouge">mean_counts</code>, <code class="language-plaintext highlighter-rouge">n_cells</code>, <code class="language-plaintext highlighter-rouge">n_cells_by_counts</code>, <code class="language-plaintext highlighter-rouge">n_counts</code>, <code class="language-plaintext highlighter-rouge">pct_dropout_by_counts</code>, and <code class="language-plaintext highlighter-rouge">total_counts</code>. Amazing, isn’t it?</p>
 
-  <h1 id="conclusion">Conclusion</h1>
+  <h2 id="conclusion">Conclusion</h2>
   <p>Now you can use this object as input for the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot, Explore tutorial</a> and its associated workflow!</p>
 
   <p>Even though this tutorial was designed specifically to modify the AnnData object to be compatible with the subsequent tutorial, it also shows useful tools that you can use for your own, independent data analysis. You can find the <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/w/workflow-constructed-from-history-ebi-workflow">workflow</a> and the <a href="https://singlecell.usegalaxy.eu/u/j.jakiela/h/ebi-scxa---anndata-scanpy-or-seurat-object-1">answer key history</a>. However, if you want to use the workflow from this tutorial, you have to keep in mind that different datasets may have different column names. So you have to check them first, and only then you can modify them.</p>
@@ -1342,7 +1360,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <div class="Seurat">
 
-  <h1 id="creating-the-seurat-object">Creating the Seurat Object</h1>
+  <h2 id="creating-the-seurat-object">Creating the Seurat Object</h2>
 
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-create-the-seurat-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create the Seurat Object</div>
@@ -1360,12 +1378,88 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Seurat object</code></li>
     </ol>
 
+    <p>You can also choose if you want to create Seurat object, Loom or Single Cell Experiment by selecting your option in <em>“Choose the format of the output”</em>.</p>
+
   </blockquote>
 
-  <h1 id="conclusion-1">Conclusion</h1>
+  <h2 id="conclusion-1">Conclusion</h2>
   <p>And you’re there! You now have a usable Seurat object for analysis with Seurat tools in your history! <i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congrats!</p>
 
 </div>
+
+<!---
+HCA doesn't work well for other datasets for now...
+https://github.com/galaxyproject/training-material/issues/4567 
+-->
+
+<h1 id="human-cell-atlas-matrix-downloader">Human Cell Atlas Matrix Downloader</h1>
+
+<p>Another public atlas that you can use to access the datasets is <a href="https://data.humancellatlas.org/">Human Cell Atlas data portal</a>. We will show you the tool in Galaxy which allows to retrieve expression matrices and metadata for any public experiment available in that repository.</p>
+
+<p>To use it, simply set the project title, project label or project UUID, which can be found at the <a href="https://data.humancellatlas.org/explore/projects">HCA data browser</a>, and select the desired matrix format (Matrix Market or Loom).</p>
+
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/scrna-data/HCA.jpg" alt="Image showing project UUID as a final fragment of link address, project title (self-explanatory) and project label as an entry in the box on the right side of the page." width="1869" height="973" loading="lazy" /><a target="_blank" href="../../images/scrna-data/HCA.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Where to find project title, project label and project UUID</figcaption></figure>
+
+<p>For projects that have more than one organism, one needs to be specified. Otherwise, there is no need to set the species.</p>
+
+<p>Let’s use the suggested example of the project <em>Single cell transcriptome analysis of human pancreas</em>. If you check this project in HCA, you’ll find out that it’s actually its label. But it will work the same if you enter the title or UUID!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create AnnData object</div>
+
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/hca_matrix_downloader/hca_matrix_downloader/v0.0.4+galaxy0" title="Human Cell Atlas Matrix Downloader tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Human Cell Atlas Matrix Downloader</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version v0.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“Human Cell Atlas project name/label/UUID”</em>: <code class="language-plaintext highlighter-rouge">Single cell transcriptome analysis of human pancreas</code></li>
+    <li><em>“Choose the format of matrix to download”</em>:  <code class="language-plaintext highlighter-rouge">Matrix Market</code></li>
+  </ul>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-what-will-be-the-output"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-will-be-the-output" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: What will be the output?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>When “Matrix Market” is seleted, outputs are in 10X-compatible Matrix Market format:</p>
+  <ul>
+    <li><strong>Matrix (txt)</strong>: Contains the expression values for genes (rows) and cells (columns) in raw counts. This text file is formatted as a Matrix Market file, and as such it is accompanied by separate files for the gene identifiers and the cells identifiers.</li>
+    <li><strong>Genes (tsv)</strong>: Identifiers (column repeated) for the genes present in the matrix of expression, in the same order as the matrix rows.</li>
+    <li><strong>Barcodes (tsv)</strong>: Identifiers for the cells of the data matrix. The file is ordered to match the columns of the matrix.</li>
+    <li><strong>Experiment Design file (tsv)</strong>: Contains metadata for the different cells of the experiment.</li>
+  </ul>
+
+  <p>When “Loom” is selected, output is a single Loom HDF5 file:</p>
+  <ul>
+    <li><strong>Loom (h5)</strong>: Contains expression values for genes (rows) and cells (columns) in raw counts, cell metadata table and gene metadata table, in a <a href="http://linnarssonlab.org/loompy/format/index.html">single HDF5 file</a>.</li>
+  </ul>
+
+</blockquote>
+
+<p>If you chose <strong>Loom</strong> format and you need to convert your file to other datatype, you can use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy1" title="SCEasy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy1)</span> (more details in the next section). If you chose <strong>Matrix Market</strong> format, you can then transform the output to AnnData or Seurat, as shown in the EBI SCXA example above. Below, you will find an example of transforming the output to AnnData object.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-anndata-object-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create AnnData object</div>
+
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0" title="Scanpy Read10x tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy Read10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“Expression matrix in sparse matrix format (.mtx)”</em>: <code class="language-plaintext highlighter-rouge">Human Cell Atlas Matrix Downloader on matrix.mtx</code></li>
+    <li><em>“Gene table”</em>:  <code class="language-plaintext highlighter-rouge">Human Cell Atlas Matrix Downloader on genes.tsv</code></li>
+    <li><em>“Barcode/cell table”</em>: <code class="language-plaintext highlighter-rouge">Human Cell Atlas Matrix Downloader on barcodes.tsv</code></li>
+    <li><em>“Cell metadata table”</em>: <code class="language-plaintext highlighter-rouge">Human Cell Atlas Matrix Downloader on exp_design.tsv</code></li>
+  </ul>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-flagging-genes-by-using-anndata-operations"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-flagging-genes-by-using-anndata-operations" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Flagging genes by using AnnData Operations</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>After you create AnnData file, you can additionally use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92" title="AnnData Operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AnnData Operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy92)</span> tool before downstream analysis. It’s quite a useful tool since not only does it flag mitochondrial genes, but also automatically calculates a bunch of metrics, such as <code class="language-plaintext highlighter-rouge">log1p_mean_counts</code>, <code class="language-plaintext highlighter-rouge">log1p_total_counts</code>, <code class="language-plaintext highlighter-rouge">mean_counts</code>, <code class="language-plaintext highlighter-rouge">n_cells</code>, <code class="language-plaintext highlighter-rouge">n_cells_by_counts</code>, <code class="language-plaintext highlighter-rouge">n_counts</code>, <code class="language-plaintext highlighter-rouge">pct_dropout_by_counts</code>, and <code class="language-plaintext highlighter-rouge">total_counts</code>.</p>
+
+  <p>When you use it to flag mitochondrial genes, here are some formatting tips:</p>
+  <ul>
+    <li>Remember to check the name of the column with gene symbols</li>
+    <li>This tool is case sensitive</li>
+    <li>No parentheses needed when typing in the values</li>
+    <li>Including a dash is important to identify mitochondrial genes (eg. <strong>MT-</strong>)</li>
+  </ul>
+</blockquote>
+
 
                 </section>
 
@@ -1416,7 +1510,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial (Single Cell)" alt="Feedback form link">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Importing files from public atlases (Single Cell)" alt="Feedback form link">
                     <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
                 </a>
 
@@ -1424,7 +1518,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <p>
                     <ol>
                         <li id="citation-text">
-                            Julia Jakiela, Wendi Bacon,  <b>EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html</a> Online; accessed TODAY
+                            Julia Jakiela, Wendi Bacon,  <b>Importing files from public atlases (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
@@ -1451,7 +1545,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <code id="citation-code">@misc{single-cell-EBI-retrieval,
 author = "Julia Jakiela and Wendi Bacon",
-	title = "EBI Single Cell Expression Atlas files to AnnData (Scanpy) or Seurat Object | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial (Galaxy Training Materials)",
+	title = "Importing files from public atlases (Galaxy Training Materials)",
 	year = "",
 	month = "",
 	day = ""
@@ -1564,12 +1658,8 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                         
                     
                         
-                    
-                        
-                    
-                        
                             
-                            <li> Filter, plot and explore single-cell RNA-seq data (Scanpy):
+                            <li> Hands-on: Hands-on: Filter, plot and explore single-cell RNA-seq data (Scanpy):
                             
                             
                                 
@@ -1577,6 +1667,12 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -1635,9 +1731,19 @@ tools:
   revisions: a0274bc43b7e
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: hca_matrix_downloader
+  owner: ebi-gxa
+  revisions: c3c85b67d118
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: retrieve_scxa
   owner: ebi-gxa
   revisions: 72b6e1747e37
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_read_10x
+  owner: ebi-gxa
+  revisions: d253d69ff19f
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: scanpy_read_10x
@@ -1654,6 +1760,11 @@ tools:
   owner: galaxyp
   revisions: 503bcd6ebe4b
   tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: sceasy_convert
+  owner: iuc
+  revisions: d70139524747
+  tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
                 </blockquote>
@@ -1684,7 +1795,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/7653e7909f24ffec3a2ffc0f6b89693db8577977">7653e79</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/67d35f7628cbca7ff30de4aaffd1187b33152507">67d35f7</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1712,7 +1823,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.03aefefa.js?v=1707822821'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1707828025'></script>
         
     </body>
 </html>

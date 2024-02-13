@@ -1,0 +1,435 @@
+{
+  "layout": "tutorial_hands_on",
+  "subtopic": "datamanipulation",
+  "priority": 1,
+  "title": "Converting between common single cell data formats",
+  "questions": [
+    "What are the most popular single cell datatypes?",
+    "What if the format of my files is different than that used in the tutorial I want to follow?",
+    "Where should I start the analysis, depending on the format of my data?",
+    "How do I ingest data into Galaxy?",
+    "How do I convert datasets between formats?"
+  ],
+  "objectives": [
+    "You will identify different single cell files formats.",
+    "You will import single cell data into Galaxy using different methods.",
+    "You will manipulate the metadata and matrix files.",
+    "You will perform conversions between the most common single cell formats.",
+    "You will downsample FASTQ files."
+  ],
+  "time_estimation": "1H",
+  "key_points": [
+    "Single cell data from different sources may have unfamiliar formatting and thus may require different ways of ingesting it into Galaxy.",
+    "There are many ways of importing single cell files into Galaxy and converting between single cell formats."
+  ],
+  "contributions": {
+    "authorship": [
+      "wee-snufkin",
+      "hexhowells",
+      "nomadscientist"
+    ],
+    "editing": [
+      "hexylena"
+    ],
+    "testing": [
+      "pavanvidem",
+      "mtekman"
+    ],
+    "funding": [
+      "elixir-fair-data"
+    ]
+  },
+  "zenodo_link": "https://zenodo.org/record/4574153",
+  "follow_up_training": [
+    {
+      "type": "internal",
+      "topic_name": "single-cell"
+    }
+  ],
+  "tags": [
+    "data management",
+    "data import"
+  ],
+  "mathjax": null,
+  "short_id": null,
+  "url": "/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html",
+  "topic_name": "single-cell",
+  "tutorial_name": "scrna-data-ingest",
+  "dir": "topics/single-cell/tutorials/scrna-data-ingest",
+  "id": "single-cell/scrna-data-ingest",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "mod_date": "2024-01-27 10:45:29 +0000",
+  "pub_date": "2024-02-13 12:28:05 +0000",
+  "version": 76,
+  "workflows": [
+    {
+      "workflow": "AnnData-to-Cell-Data-Set-(CDS)-conversion.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-Cell-Data-Set-(CDS)-conversion.ga",
+      "path": "topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-Cell-Data-Set-(CDS)-conversion.ga",
+      "wfid": "single-cell-scrna-data-ingest",
+      "wfname": "anndata-to-cell-data-set-(cds)-conversion",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-data-ingest/versions/anndata-to-cell-data-set-(cds)-conversion",
+      "license": "CC-BY-4.0",
+      "creators": [
+        {
+          "class": "Person",
+          "identifier": "0009-0001-2017-8805",
+          "name": "Julia Jakiela"
+        }
+      ],
+      "name": "AnnData to Cell Data Set (CDS) conversion",
+      "title": "AnnData to Cell Data Set (CDS) conversion",
+      "test_results": null,
+      "modified": "2024-02-13 12:40:29 +0000",
+      "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Inspect AnnData\"];\n  0 -->|output| 1;\n  2[\"Inspect AnnData\"];\n  0 -->|output| 2;\n  3[\"Inspect AnnData\"];\n  0 -->|output| 3;\n  4[\"Transpose\"];\n  3 -->|X| 4;\n  5[\"Monocle3 create\"];\n  1 -->|obs| 5;\n  4 -->|out_file| 5;\n  2 -->|var| 5;\n"
+    },
+    {
+      "workflow": "AnnData-to-Seurat-conversion.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-Seurat-conversion.ga",
+      "path": "topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-Seurat-conversion.ga",
+      "wfid": "single-cell-scrna-data-ingest",
+      "wfname": "anndata-to-seurat-conversion",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-data-ingest/versions/anndata-to-seurat-conversion",
+      "license": "CC-BY-4.0",
+      "creators": [
+        {
+          "class": "Person",
+          "identifier": "0009-0001-2017-8805",
+          "name": "Julia Jakiela"
+        },
+        {
+          "class": "Person",
+          "identifier": "0009-0008-9422-6380",
+          "name": "Morgan Howells"
+        }
+      ],
+      "name": "AnnData to Seurat conversion",
+      "title": "AnnData to Seurat conversion",
+      "test_results": null,
+      "modified": "2024-02-13 12:40:29 +0000",
+      "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Inspect AnnData\"];\n  0 -->|output| 1;\n  2[\"Inspect AnnData\"];\n  0 -->|output| 2;\n  3[\"Transpose\"];\n  2 -->|X| 3;\n  4[\"DropletUtils\"];\n  3 -->|out_file| 4;\n  5[\"Seurat Read10x\"];\n  4 -->|barcodes_out| 5;\n  4 -->|genes_out| 5;\n  4 -->|matrix_out| 5;\n  1 -->|obs| 5;\n"
+    },
+    {
+      "workflow": "AnnData-to-SingleCellExperiment-(SCE)-conversion.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-SingleCellExperiment-(SCE)-conversion.ga",
+      "path": "topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-SingleCellExperiment-(SCE)-conversion.ga",
+      "wfid": "single-cell-scrna-data-ingest",
+      "wfname": "anndata-to-singlecellexperiment-(sce)-conversion",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-data-ingest/versions/anndata-to-singlecellexperiment-(sce)-conversion",
+      "license": "CC-BY-4.0",
+      "creators": [
+        {
+          "class": "Person",
+          "identifier": "0009-0001-2017-8805",
+          "name": "Julia Jakiela"
+        },
+        {
+          "class": "Person",
+          "identifier": "0009-0008-9422-6380",
+          "name": "Morgan Howells"
+        }
+      ],
+      "name": "AnnData to SingleCellExperiment (SCE) conversion",
+      "title": "AnnData to SingleCellExperiment (SCE) conversion",
+      "test_results": null,
+      "modified": "2024-02-13 12:40:29 +0000",
+      "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input parameter\"];\n  2[\"Inspect AnnData\"];\n  0 -->|output| 2;\n  3[\"Inspect AnnData\"];\n  0 -->|output| 3;\n  4[\"Transpose\"];\n  3 -->|X| 4;\n  5[\"DropletUtils\"];\n  4 -->|out_file| 5;\n  6[\"DropletUtils Read10x\"];\n  1 -->|output| 6;\n  2 -->|obs| 6;\n  5 -->|barcodes_out| 6;\n  5 -->|genes_out| 6;\n  5 -->|matrix_out| 6;\n"
+    }
+  ],
+  "api": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-data-ingest/tutorial.json",
+  "tools": [
+    "Cut1",
+    "Filter1",
+    "join1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_tabular/fastq_to_tabular/1.1.5",
+    "toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fastq/tabular_to_fastq/1.1.5",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy93",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/3.2.3+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2"
+  ],
+  "supported_servers": {
+    "exact": [
+      {
+        "url": "https://usegalaxy.eu",
+        "name": "UseGalaxy.eu",
+        "usegalaxy": true
+      }
+    ],
+    "inexact": [
+
+    ]
+  },
+  "topic_name_human": "Single Cell",
+  "admin_install": {
+    "install_tool_dependencies": true,
+    "install_repository_dependencies": true,
+    "install_resolver_dependencies": true,
+    "tools": [
+      {
+        "name": "text_processing",
+        "owner": "bgruening",
+        "revisions": "d698c222f354",
+        "tool_panel_section_label": "Text Manipulation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "text_processing",
+        "owner": "bgruening",
+        "revisions": "d698c222f354",
+        "tool_panel_section_label": "Text Manipulation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "fastq_to_tabular",
+        "owner": "devteam",
+        "revisions": "4b347702c4aa",
+        "tool_panel_section_label": "FASTA/FASTQ",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "tabular_to_fastq",
+        "owner": "devteam",
+        "revisions": "2dcfbbf9071a",
+        "tool_panel_section_label": "FASTA/FASTQ",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "anndata_ops",
+        "owner": "ebi-gxa",
+        "revisions": "a0274bc43b7e",
+        "tool_panel_section_label": "Single-cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "dropletutils_read_10x",
+        "owner": "ebi-gxa",
+        "revisions": "ca62f52e0d7f",
+        "tool_panel_section_label": "Single-cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "monocle3_create",
+        "owner": "ebi-gxa",
+        "revisions": "ada68a9d0aec",
+        "tool_panel_section_label": "Monocle3",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "scanpy_filter_cells",
+        "owner": "ebi-gxa",
+        "revisions": "356fa6c27341",
+        "tool_panel_section_label": "Single-cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "sceasy_convert",
+        "owner": "ebi-gxa",
+        "revisions": "f62bc418173f",
+        "tool_panel_section_label": "Single-cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "seurat_read10x",
+        "owner": "ebi-gxa",
+        "revisions": "301cf1b4b43d",
+        "tool_panel_section_label": "Single Cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "regex_find_replace",
+        "owner": "galaxyp",
+        "revisions": "399da6b5ec21",
+        "tool_panel_section_label": "Text Manipulation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "anndata_inspect",
+        "owner": "iuc",
+        "revisions": "6f0d0c784f09",
+        "tool_panel_section_label": "Single-cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "anndata_inspect",
+        "owner": "iuc",
+        "revisions": "ee98d611afc6",
+        "tool_panel_section_label": "Single-cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "datamash_transpose",
+        "owner": "iuc",
+        "revisions": "ac092723240d",
+        "tool_panel_section_label": "Join, Subtract and Group",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "datamash_transpose",
+        "owner": "iuc",
+        "revisions": "374cb875d38a",
+        "tool_panel_section_label": "Join, Subtract and Group",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "datamash_transpose",
+        "owner": "iuc",
+        "revisions": "a513e3fbb4c5",
+        "tool_panel_section_label": "Join, Subtract and Group",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "dropletutils",
+        "owner": "iuc",
+        "revisions": "a9caad671439",
+        "tool_panel_section_label": "Single-cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "sceasy_convert",
+        "owner": "iuc",
+        "revisions": "2062be7efc84",
+        "tool_panel_section_label": "Single-cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      }
+    ]
+  },
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_to_tabular\n  owner: devteam\n  revisions: 4b347702c4aa\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tabular_to_fastq\n  owner: devteam\n  revisions: 2dcfbbf9071a\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: anndata_ops\n  owner: ebi-gxa\n  revisions: a0274bc43b7e\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: dropletutils_read_10x\n  owner: ebi-gxa\n  revisions: ca62f52e0d7f\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: monocle3_create\n  owner: ebi-gxa\n  revisions: ada68a9d0aec\n  tool_panel_section_label: Monocle3\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scanpy_filter_cells\n  owner: ebi-gxa\n  revisions: 356fa6c27341\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sceasy_convert\n  owner: ebi-gxa\n  revisions: f62bc418173f\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seurat_read10x\n  owner: ebi-gxa\n  revisions: 301cf1b4b43d\n  tool_panel_section_label: Single Cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 399da6b5ec21\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: anndata_inspect\n  owner: iuc\n  revisions: 6f0d0c784f09\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: anndata_inspect\n  owner: iuc\n  revisions: ee98d611afc6\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: datamash_transpose\n  owner: iuc\n  revisions: ac092723240d\n  tool_panel_section_label: Join, Subtract and Group\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: datamash_transpose\n  owner: iuc\n  revisions: 374cb875d38a\n  tool_panel_section_label: Join, Subtract and Group\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: datamash_transpose\n  owner: iuc\n  revisions: a513e3fbb4c5\n  tool_panel_section_label: Join, Subtract and Group\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: dropletutils\n  owner: iuc\n  revisions: a9caad671439\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sceasy_convert\n  owner: iuc\n  revisions: 2062be7efc84\n  tool_panel_section_label: Single-cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial",
+  "contributors": [
+    {
+      "name": "Julia Jakiela",
+      "email": "juliajot36@gmail.com",
+      "joined": "2022-06",
+      "id": "wee-snufkin",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/wee-snufkin.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/"
+    },
+    {
+      "name": "Morgan Howells",
+      "email": "hexhowells@gmail.com",
+      "orcid": "0009-0008-9422-6380",
+      "joined": "2023-06",
+      "id": "hexhowells",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/hexhowells.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/"
+    },
+    {
+      "name": "Wendi Bacon",
+      "email": "wendi.bacon@open.ac.uk",
+      "twitter": "WendiBacon1",
+      "matrix": "nomadscientist:matrix.org",
+      "joined": "2020-03",
+      "elixir_node": "uk",
+      "orcid": "0000-0002-8170-8806",
+      "bio": "Lecturer at The Open University",
+      "fediverse": "https://mstdn.science/@wendibacon1",
+      "fediverse_flavor": "mastodon",
+      "id": "nomadscientist",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
+    },
+    {
+      "name": "Helena Rasche",
+      "email": "hexylena@galaxians.org",
+      "orcid": "0000-0001-9760-8992",
+      "maintainer_contact": "gitter",
+      "matrix": "hexylena:matrix.org",
+      "joined": "2017-09",
+      "elixir_node": "nl",
+      "fediverse": "https://galaxians.garden/hexylena",
+      "fediverse_flavor": "akkoma",
+      "affiliations": [
+        "gallantries",
+        "by-covid",
+        "erasmusmc",
+        "elixir-europe",
+        "elixir-converge"
+      ],
+      "former_affiliations": [
+        "deNBI",
+        "avans-atgm",
+        "uni-freiburg"
+      ],
+      "contact_for_training": false,
+      "location": {
+        "country": "NL",
+        "lat": 51.91,
+        "lon": 4.46
+      },
+      "id": "hexylena",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+    },
+    {
+      "name": "Pavankumar Videm",
+      "orcid": "0000-0002-5192-126X",
+      "joined": "2017-09",
+      "affiliations": [
+        "uni-freiburg"
+      ],
+      "id": "pavanvidem",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/"
+    },
+    {
+      "name": "Mehmet Tekman",
+      "email": "mtekman89@gmail.com",
+      "joined": "2018-11",
+      "elixir_node": "de",
+      "affiliations": [
+        "uni-freiburg"
+      ],
+      "id": "mtekman",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
+    },
+    {
+      "name": "ELIXIR-UK: FAIR Data Stewardship training",
+      "short_name": "ELIXIR Fair Data",
+      "github": false,
+      "joined": "2023-06",
+      "funder": true,
+      "funding_id": "MR/V038966/1",
+      "funding_system": "ukri",
+      "funding_statement": "This work has been funded by the ELIXIR-UK FAIR Data Stewardship training UKRI award (MR/V038966/1)",
+      "id": "elixir-fair-data",
+      "url": "https://training.galaxyproject.org/training-material/api/funders/elixir-fair-data.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-fair-data/"
+    }
+  ]
+}
