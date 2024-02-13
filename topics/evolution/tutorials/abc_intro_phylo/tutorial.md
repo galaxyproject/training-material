@@ -110,7 +110,7 @@ This tutorial has the following structure:
 - Maximum Likelihood with IQTree -->
 
 ## What is a Phylogeny?
-![Charles Darwin's first sketch of an evolutionary tree. Hand drawn image from his notebook](images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. Source: Wikimedia commons"){: width="40%"}
+![Hand drawn phylogenetic tree from Charles Darwin’s notebook with clades A, B, C, D branching from a common ancestor. Prefaced with handwriting that reads ‘I think’ and annotated with other illegible notes.](images/Darwin_tree.png "Charles Darwin's first sketch of an evolutionary tree. Source: Wikimedia commons"){: width="20%"}
 
 A *phylogenetic tree*, also called a *phylogeny*, is usually a tree-like structure, like [Darwin's famous sketch](#figure-1). The leaves or tips of the tree represent extant (living/existing) taxonomic entities like species, genera, or strains (in general called "taxa"). The lines connecting taxa describe the evolutionary relationships between them.
 The intersections of lines correspond to hypothetical ancestral taxa. They represent branching events when species split into two new species, or a strain developed a phylogenetic important offshoot strain, etc.
@@ -125,12 +125,12 @@ As Theodosius Dobzhansky famously wrote, **"Nothing in biology makes sense excep
 
 There are many ways in which we can use phylogenetic analyses, from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in [Charles Darwin's famous sketch](#figure-1), to families:
 
-![Phylogenetic tree of hexapod families](./images/Hexapoda_phylogenetic_tree.png "Phylogeny of extant hexapod families. {% cite PMID:25275450 %} reproduced under Creative Commons Attribution 4.0 International License")
+![Circular phylogenetic tree of hexapods (insects). Clades are colour coded and labelled with common names e.g. ‘Fleas’. Silhouettes of representative species are shown around the outside of the tree.](./images/Hexapoda_phylogenetic_tree.png "Phylogeny of extant hexapod families. {% cite PMID:25275450 %} reproduced under Creative Commons Attribution 4.0 International License")
 
 
 and much bigger projects across all of life:
 
-![Phylogenetic tree of life based on sequenced genomes](./images/nmicrobiol201648_Fig1_HTML.webp "A modern view of the tree of life based on sequenced genomes. {% cite PMID:27572647 %} reproduced under Creative Commons Attribution 4.0 International License"){: width="800"}
+![Large and complex phylogenetic tree that includes 92 named bacterial phyla, 26 archaeal phyla and all five of the Eukaryotic supergroups. Major lineages are assigned arbitrary colours and named, with well-characterized lineage names, in italics.](./images/nmicrobiol201648_Fig1_HTML.webp "A modern view of the tree of life based on sequenced genomes. {% cite PMID:27572647 %} reproduced under Creative Commons Attribution 4.0 International License"){: width="800"}
 
 <!-- topics/evolution/tutorials/abc_intro_phylo/images/nmicrobiol201648_Fig1_HTML.webp -->
 
@@ -164,7 +164,7 @@ Aside from gaining a fundamental understanding of biology, other reasons for inf
 
 Before we start building trees, let's define some terms.
 
-![Schematic of a phylogenetic tree where features such as nodes/taxa, edges/branches are annotated](images/TreeAnatomyWithOutgroup.png "Anatomy of a phylogenetic tree."){: width="100%"}
+![Schematic of a phylogenetic tree where features such as nodes/taxa, edges/branches are annotated and colour coded. The root of the tree is at the top of the image and the tree branches into two clades as you move towards the bottom of the image. The clades are formed of hypothetical common ancestors and five extant taxa which are labelled as the ‘in group’. Two additional taxa are appended to the right hand side of the tree and are labelled as the outgroup.](images/TreeAnatomyWithOutgroup.png "Anatomy of a phylogenetic tree."){: width="100%"}
 
 
 
@@ -188,11 +188,11 @@ One way to determine where the root of a tree belongs is to include an **outgrou
 
 You can see in the diagram above that the connection of the ingroup to the outgroup could be from multiple locations. Once the unrooted tree is created, using combined data from ingroup and outgroup taxa, we can confidently say that the root is on the branch connecting our ingroup to our outgroup:
 
-![Schematic showing connection between an in group and outgroup to root a tree](images/TreeAnatomyUnrooted.png "Rooting a tree"){: width="100%"}
+![A schematic of an unrooted phylogenetic tree. It shows the relationship between an ingroup of 5 taxa on the left and an outgroup of two taxa on the right as a series of boxes connected by edges (lines). The taxa appear at approximately the same level across the image. An arrow points to an edge connecting the ingroup and outgroup where it is likely that a common ancestor exists.](images/TreeAnatomyUnrooted.png "Rooting a tree"){: width="100%"}
 
 We can then imagine lifting up the unrooted tree at the branch connecting our outgroup and ingroup -- that is our best guess at the hypothetical ancestor of all our taxa and gives us a good indication of the branching order of our ingroup (and the outgroup):
 
-![Schematic showing how inclusion of an outgroup can be used to lift a tree to create a best guess at the location of the hypothetical ancestor](./images/TreeAnatomyLiftHere.png "'Lifted' tree demonstrating hypothetical ancestor and branching order")
+![A schematic of an unrooted phylogenetic tree. It shows the relationship between an ingroup of 5 taxa on the left and an outgroup of two taxa on the right as a series of boxes connected by edges (lines). An arrow points "Lift here" points to an edge connecting the ingroup and outgroup which is a best guess at the location of the hypothetical ancestor](./images/TreeAnatomyLiftHere.png "'Lifted' tree demonstrating hypothetical ancestor and branching order")
 
 Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about **monophyly** -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
 
@@ -205,7 +205,7 @@ So, how do we estimate phylogenetic trees?
 
 We start with the leaves of the tree which can be living (extant) or older taxa:
 
-![Leaves of a tree are represented as separate rectangles containing the words Extant taxon = living species](images/WeJustHaveLeaves.png "The 'leaves' of a tree (extant or older taxa) are the starting point for buidling phylogenies"){: width="100%"}
+![Five extant taxa (living species) are depicted as five boxes equally spread from left to right. These taxa are contained within a larger blue box which is annotated with the words “Leaves of the tree: these can be extant (living) or older taxa”.](images/WeJustHaveLeaves.png "The 'leaves' of a tree (extant or older taxa) are the starting point for buidling phylogenies"){: width="100%"}
 
 There are several ways to estimate a tree, such as:
 
@@ -275,7 +275,7 @@ Distances have very desirable properties, that can be summarised as follows: for
 
 Distances can be calculated based on a variety of data. Here is a flow-chart of the process:
 
-![Flow chart illustrating how sequence alignment data or dis/similarity measures can be used to calculate phylogentic distances](images/TreeConstruction.drawio.png "Tree construction flow-chart"){:width="100%"}
+![Flow chart illustrating how sequence alignment data or dis/similarity measures are used to calculate and calculate phylogenetic distances. Colours and shapes are used to differentiate different sections of the flowchart, guiding the viewer through each step from left to right. The flowchart begins with Sequence Alignment or Dis/Similarity Measures. These are used to form a distance matrix (D) which is used to select two nodes (x and y) forming a new node z. The distance matrix is updated with the new node z until no further nodes can be formed.](images/TreeConstruction.drawio.png "Tree construction flow-chart"){:width="100%"}
 
 The blue boxes on the left show some of the input data forms. The most commonly used kind of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the species of interest. We focus on this form of molecular phylogenetics in this tutorial.
 
@@ -286,7 +286,7 @@ These distances can be expressed as a matrix _D_, which becomes the input for di
 
 Distance-based methods (orange boxes) use algorithms to select a pair of taxa, or clades, to join together to make a new clade. Once that decision is made, the two taxa / clades that have been joined are replaced with the clade that the two of them make together as seen in the [figure below](#figure-7).
 
-![Joining Clades](images/JoiningCladesForTreeConstruction.png "Joining clades for tree construction"){: width="60%"}
+![Schematic illustrating how taxa are combined into clades. The relationship between three taxa and two clades are represented by green lines. The image consists of two main steps: Taxa 1 and 2 are combined into Inferred Clade 1. Clade 1 and Taxon 3 are then combined to form a new clade. A dashed green line indicates that this process continues until all taxa and clades are joined.](images/JoiningCladesForTreeConstruction.png "Joining clades for tree construction"){: width="60%"}
 
 
 ## Let's build our first tree
@@ -365,12 +365,12 @@ ACTTGGCGTAGCCGGAGGCC
 > Let's view the unaligned sequence in a more understandable form.
 >
 > 1. Click on the title of your file to see the row of small icons for saving, linking etc: 
-> ![Screenshot of Galaxy icons](./images/LittleJobIcons.png) 
+> ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark.](./images/LittleJobIcons.png) 
 >
 > 2. Click on the **visualise icon** that looks like a bar chart and then select the **Multiple Sequence Alignment tool**.
 > You should see something like this:
 >
-> ![Unaligned Sequences](./images/UnalignedAnolis.png){:width="600"}
+> ![Screenshot of sequence visualisation output from Galaxy. Fifteen Anolis DNA sequences are arranged in rows. The nucleotides are colour coded and arranged in columns: A(blue), T (green), C (pink), G (orange). The top half of the image shows approximately 50 bases of each sequence. The lower half of the image shows a zoomed out heatmap-like image of a larger portion of the sequences.](./images/UnalignedAnolis.png){:width="600"}
 > 
 > Play around with the view. You can change colour schemes and add or remove various elements.  Good colour schemes for nucleotide data are "Clustal2" and "nucleotide".  
 >
@@ -407,7 +407,7 @@ Below is an example of an alignment. On the left are the sequences in Fasta form
 In the middle we see an alignment of those sequences, which has gaps in it that help line up the sites so that more of them agree.
 A sign of a "good" alignment is one in which the colours line up vertically. The overhanging parts can be removed as seen in the "trimmed version" on the right.
 
-![Example of sequence alignment](./images/ToyAlignmentAndTrim.png "Sequence alignment"){:width="700"}
+![Table containing DNA sequence from four taxa arranged in rows. Three columns show the sequences in ‘Unaligned’, ‘Aligned’ and ‘Trimmed’ states. The nucletodies are colour coded A (green), T (pink), C (blue) and G (orange). In the “Unaligned” column, the sequences are continuous. In the ‘Aligned’ column gaps are introduced and represented as dashes so that the sequences align vertically. In the “Trimmed” column overhanging portions of the sequences are greyed out to indicate that they would be trimmed.](./images/ToyAlignmentAndTrim.png "Sequence alignment"){:width="700"}
 
 While aligning *two* sequences is "easy", in the sense that an optimal alignment between two sequences can be found in a reasonable amount of time, optimally aligning multiple sequences is *computationally intractable*. Multiple sequence alignment is a complex process and many methods have been developed to tackle this challenge.
 
@@ -430,12 +430,12 @@ Today you will be aligning sequences using a modern multiple alignment program c
 
 Here is a visualisation of the resulting alignment. Note that the colours are now vertically aligned:
 
-![Screenshot of aligned sequences. Vertical columns of purle, blue, gred and green indicate alignment of nucleotides across sequences.](./images/MEGA_alignment.png "Aligned sequences"){:width="600px"}
+![Screenshot of aligned sequences. Multiple DNA sequences are represented in rows and aligned vertically. Vertical columns of purple (G), blue (C), red (T) and green (A) indicate alignment of nucleotides across sequences. Dots replace the letters as an abbreviation where all nucleotides are the same in a given column.](./images/MEGA_alignment.png "Aligned sequences"){:width="600px"}
 
 > <hands-on-title>Inspecting your alignment</hands-on-title>
 >
 > 1. Click on the title of the completed MAFFT job to show the row of small icons for saving, linking etc. 
-> ![LittleIcons](./images/LittleJobIcons.png){:align="center"} 
+> ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark](./images/LittleJobIcons.png){:align="center"} 
 > 2. Click the "Visualisation" icon that looks like a little bar chart.
 > 3. You will be presented with a couple of options. Select "**Multiple Sequence Alignment**".
 > *Your alignment is displayed!*
@@ -510,7 +510,7 @@ This is **Newick Format**, and it's worth knowing at least a little of what it m
 * If there is a colon ':' followed by a number, then this is the **branch length** for the subtree.
 
 
-![Schematic showing how the parenthesised list of taxon names and numbers corresponds to a tree structure](./images/NewickExplained.png "Newick Format")
+![Two rooted phylogenetic trees (a) and (b) are shown. Both trees have three taxa, labelled A, B and C as the leaves and a root y. Taxa A and B form a clade and connect to y via the internal node x. Taxon C connects directly to y. Distances between nodes are shown as numbers. For tree (a): y:C = 6 ; y:x = 2; x:A = 3 ; x:B =2. For tree (b): y:C = 5 ; y:x = 3; x:A = 3 ; x:B =2](./images/NewickExplained.png "Newick Format")
 
 The rooted, 3-taxon trees above have three taxa, labelled A, B and C.  Two of the internal nodes have been labelled (x and y), but it isn't necessary to do so in general (for example, if you wanted to use the label for something like support of each branch, as does FastTree).
 
@@ -531,7 +531,7 @@ That is why methods like FastTree are employed to find a tree with the best poss
 
 > <hands-on-title>Visualising a tree</hands-on-title>
 > 1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc. 
-> ![LittleIcons](./images/LittleJobIcons.png)
+> ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark.](./images/LittleJobIcons.png)
 >
 > 2. Click the "Visualisation" icon that looks like a little bar chart.
 > 3. You will be presented with a couple of options. Select "Phylogenetic Tree Visualisation" -- this seems to be the best one.
@@ -663,7 +663,7 @@ An unresolved node *may* be a true representation of the branching pattern of a 
 
 In phylogenetics unresolved nodes are more often due to a lack of resolving power in the data, so the phylogenetic method cannot choose the branch ordering:
 
-![Schematic trees showing unresolved nodes](./images/Unresolved.png "Unresolved nodes"){: width="400px"}
+![Four simple phylogenetic trees composed of three taxa (A, B, C) at the bottom that are connected to a common ancestor at the top. The first three trees group the taxa into two clades but differ in the branching patterns. Arrows indicate that they are so similar that there is not enough information to choose between them. The fourth tree is ‘unresolved’ where taxa A, B, C remain in a single clade derived from a common ancestor.](./images/Unresolved.png "Unresolved nodes"){: width="400px"}
 
 If there are many unresolved branches in the phylogeny, this is an indication that there is not enough information in your data: you'll need to obtain more.
 
@@ -711,7 +711,7 @@ While this is running you might use your time to read the [Models of sequence ev
 
 > <question-title>How well supported is your tree?</question-title>
 > Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree.
-> ![IQTreePhylovis](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis.")
+> ![Screenshot of a phylogenetic tree of Anolis species. The root of the tree is on the left and the species are listed vertically on the right. The tree consists of multiple branching events and clades and includes bootstrap values.](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis.")
 > 1. What are the bootstrap values near the root of the tree? Do you think those branches are well supported?
 > 2. Which do you think is the biggest well-supported clade?
 > 2. Are there some nodes that would be better left unresolved?
@@ -1085,7 +1085,7 @@ So our tree search is an attempt to find a "best" set of _splits_ that are all c
 
 However, the data may support multiple splits that are _not_ compatible. For example, we might have a set of nucleotide sequence data like this:
 
-![TableOfSitesAndSplits](./images/tableOfSitesForSplits.png)
+![A table displaying DNA sequences for four different taxa. Each row represents a taxon, and the columns ‘sequence’, ‘constant’, ‘singleton’, ‘12|34’, ‘23|14’, ‘13|24’ display portions of the DNA sequences at different sites. Constant: Contains shorter sequences that are consistent across all taxons at sites 1-4. Singleton: Displays unique sequences specific to each taxon at sites 5-8; 12|34: Displays differences in the sequence at sites 9-12; 23|14: Displays differences the sequence at sites 13 and 14; 13|24: Displays differences in sequence at site 15.](./images/tableOfSitesForSplits.png)
 
 <!-- | Taxon | Sequence          | constant | singleton | 12,34  | 23,14 | 13,24 |
 | ----- | ----------------- | -------- | --------- | ------ | ----- | ----- |
@@ -1111,7 +1111,7 @@ The next two sites, numbers 13 and 14, suggest the split (2,3) vs (1,4), which w
 
 The last site suggests that taxa 1 and 3 should go together.
 
-![A simple network of four taxa demonstrating splits that separate the taxa from each other](./images/SimpleSplits.png "Splits in a simple phylogenetic network"){: align="center"}
+![Image of a phylogenetic split in a network of four taxa. Taxa 1 and 2 appear on the left of the image and taxa 4 and 3 on the right. The taxa are connected to a rectangle in the centre of the image that represents the split. Two sets of parallel lines are highlighted. The green, horizontal lines separate taxa 1 and 2 from 3 and 4. Blue, vertical lines separate taxa 1 and 3 from 2 and 4.](./images/SimpleSplits.png "Splits in a simple phylogenetic network"){: align="center"}
 
 In the above figure we have four taxa 1,2,3,4, in a phylogenetic network.
 The pairs of parallel lines correspond to two of the _splits_ that could separate taxa from each other, and which could (separately) appear in phylogenetic trees.
@@ -1130,17 +1130,17 @@ The beauty of the network is that both thes pieces of information can be shown o
 >    Note: SplitsTree 4 is an older version, but works well. SplitsTree 6 is in development but appears to work equally well (at the time of writing). They do the same thing, and we only use tools common to both versions. Installing either version takes a minute or two.
 > 2. Download the aligned data .FASTA file (the output of MAFFT) to your own computer.
 > 3. Start up SplitsTree and open the file.  Within moments you should see something like this (using SplitsTree 4):
->    ![Default phylogenetic network](./images/ST4-default.png)
+>    ![Screenshot of a phylogenetic network of Anolis species. The root of the network is at the centre of the image and clades radiate outwards forming a circular network.](./images/ST4-default.png)
 >    Click on some of the interior branches, which will highlight sets of parallel lines, that correspond to each split that is shown in the network. 
 >    This network shows a number of deep branches that are quite well resolved, in the sense that they have very long, thin parallelograms, but there is a jumble of very small parallelograms in the centre of the network, indicating that there is not a lot of information in the data to determine the early branching order of the _Anolis_ phylogeny.
 > 
 > 4. Note that the initial distance measure is using "Uncorrected P" distance, which is simply the proportion of sites that differ between each pair of sequences. It is  possible to use more sophisticated models for maximum likelihood, such as Jukes-Cantor and HKY85. 
 >   Click on the **Distances menu** and select "HKY85".  A dialog box will appear with some options. Click "Apply" and get a network like this:
-> ![HKY85 Network](./images/ST4-HKY85.png)
+> ![HKY85 Network. Screenshot of a phylogenetic network of Anolis species. The root of the network is at the centre of the image and clades radiate outwards forming a circular network.](./images/ST4-HKY85.png)
 >   The above shows you that the basic structure of the network does not change very much using different distance measures. This is a good thing because it means reasonable assumptions you make about your data are not drastically changing the results.
 > 5. Finally, perform a bootstrap analysis on this network.  Click on the **Analysis menu** and select Bootstrap.  Leave the default number of replicates as 1000 and click "run".
 >After a few seconds (less than a minute) you should see something like this:
-> ![HKY85 Network with Bootstrap](./images/ST4-HKY85-BS.png)
+> ![HKY85 Network with Bootstrap. Screenshot of a phylogenetic network of Anolis species. The root of the network is at the centre of the image and clades radiate outwards forming a circular network. The network is annotated with bootstrap values.](./images/ST4-HKY85-BS.png)
 > This network shows the percentage of times out of those 1000 replicates that each split was in the network created for each replicate. 
 >Zoom in (there is a magnifying glass tool at the top) and scroll around the figure to see which are the strongly supported *splits*, which should correspond to the well supported bootstrap values in the trees you inferred above.
 {: .hands_on}
