@@ -34,6 +34,8 @@ pathway:
         topic: data-science
       - name: gnmx-lecture4
         topic: data-science
+      - name: gnmx-lecture5
+        topic: data-science
 
 
 ---
