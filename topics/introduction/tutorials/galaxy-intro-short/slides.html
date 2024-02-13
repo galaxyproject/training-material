@@ -101,7 +101,7 @@ What is Galaxy?
 
 # Find a Galaxy server
 
-{% assign servers = list_usegalaxy_servers_shuffle %}
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
 - **UseGalaxy.\***: {% for server in servers %}{{ server.human }} ([{{ server.name }}]({{ server.url }})){% if forloop.last %}{% else %}, {% endif %}{% endfor %}
 
   .image-50[![usegalaxy.* servers]({{site.baseurl}}/shared/images/usegalaxy_servers.png)]

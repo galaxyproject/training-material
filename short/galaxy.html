@@ -5,7 +5,7 @@ description: This page will redirect you to a specific page in your preferred Ga
 ---
 
 <div class="row justify-content-md-center">
-	<div class="card col-md-6">
+	<div class="card col-md-6" style="padding: 0">
 		<div class="card-body">
 			<h1 class="h5 card-title" style="margin-top: 0">My Galaxy Training</h1>
 
@@ -25,7 +25,7 @@ description: This page will redirect you to a specific page in your preferred Ga
 			<details id="set-preferred" open>
 				<summary>Select your Preferred Galaxy Server</summary>
 				<p class="card-text">
-					{% assign servers = list_usegalaxy_servers_shuffle %}
+					{% assign servers = nil | list_usegalaxy_servers_shuffle %}
 					{% for server in servers %}
 					<a class="clickthrough btn btn-primary" href="{{ server.url }}">{{ server.human }} ({{ server.id | upcase }})</a>
 					{% endfor %}
