@@ -40,7 +40,7 @@ For more background information about Galaxy, have a look into the Galaxy public
 
 # What does Galaxy look like?
 
-{% assign servers = list_usegalaxy_servers_shuffle %}
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
 Many different Galaxy servers exist. Some are public, some are private, some focus on a specific topic and others like the usegalaxy.\* servers cover a broad range of tools. To reproduce published results it is highly recommended to use the same Galaxy server that was used in the original study. In the case that this was a private server that is not accessible to you, you might want to use one of the main Galaxy servers: {% for server in servers %}[{{ server.name }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}. To learn more about the different Galaxy servers visit the [slides: options for using Galaxy]({% link /topics/introduction/tutorials/options-for-using-galaxy/slides.html %}). The particular Galaxy server that you are using may look slightly different than the one shown in this training. Galaxy instance administrators can choose the exact version of Galaxy they would like to offer and can customize its look to some extent. The basic functionality will be rather similar across instances, so don’t worry! In this training we will use the European Galaxy server on which the original analysis was performed and shared.
 
 
