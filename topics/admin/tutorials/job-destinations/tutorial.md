@@ -473,7 +473,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >             function: map_tool_to_destination
 >             rules_module: tpv.rules
 >             tpv_config_files:
->    +          - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
+>    +          - https://gxy.io/tpv/db.yml
 >               - "{{ tpv_config_dir }}/tpv_rules_local.yml"
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
@@ -623,7 +623,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -37,9 +37,17 @@ galaxy_job_config:
 >             tpv_config_files:
->               - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
+>               - https://gxy.io/tpv/db.yml
 >               - "{{ tpv_config_dir }}/tpv_rules_local.yml"
 >    +  resources:
 >    +    default: default
