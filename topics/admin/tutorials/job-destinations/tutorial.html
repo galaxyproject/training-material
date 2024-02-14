@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@bc76b411d108d6e0b4ae356ad067dca3adebedc0",
+		release: "galaxy-training-network@5aa9d655a65454b29c42e59040f899f439f87d89",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1707870167' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1707870167' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1707905550' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1707905550' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Mapping Jobs to Destinations using TPV">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-28 17:20:50 +0000">
+<meta name="DC.date" content="2024-02-14 09:44:48 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nuwan Goonasekera">
@@ -120,7 +120,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2023-11-28 17:20:50 +0000",
+  "dateModified": "2024-02-14 09:44:48 +0000",
   "datePublished": "2021-01-17 11:37:17 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Mapping Jobs to Destinations using TPV",
@@ -234,7 +234,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Mapping Jobs to Destinations using TPV",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html",
-  "version": 121,
+  "version": 122,
   "timeRequired": "PT2H",
   "teaches": "Know how to map tools to job destinations\n - Be able to use the dynamic job runner to make arbitrary destination mappings\n - Understand the job resource selector config and dynamic rule creation\n - The various ways in which tools can be mapped to destinations, both statically and dynamically\n - How to write a dynamic tool destination (DTD)\n - How to write a dynamic python function destination\n - How to use the job resource parameter selection feature",
   "keywords": [
@@ -672,7 +672,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "This tutorial heavily builds on the [Connecting Galaxy to a compute cluster]({% link topics/admin/tutorials/connect-to-compute-cluster/tutorial.md %}) and it's expected you have completed this tutorial first."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1707870167'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1707905550'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1161,7 +1161,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 17, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 14, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1174,7 +1174,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00012">https://gxy.io/GTN:T00012</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 121 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 122 </div>
 
     </blockquote>
     </section>
@@ -1649,7 +1649,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
          function: map_tool_to_destination
          rules_module: tpv.rules
          tpv_config_files:
-<span class="gi">+          - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
+<span class="gi">+          - https://gxy.io/tpv/db.yml
 </span>           - "{{ tpv_config_dir }}/tpv_rules_local.yml"
    tools:
      - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
@@ -1805,7 +1805,7 @@ This of course assumes that your users are well behaved enough not to choose the
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -37,9 +37,17 @@</span> galaxy_job_config:
          tpv_config_files:
-           - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
+           - https://gxy.io/tpv/db.yml
            - "{{ tpv_config_dir }}/tpv_rules_local.yml"
 <span class="gi">+  resources:
 +    default: default
@@ -2195,7 +2195,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/bc76b411d108d6e0b4ae356ad067dca3adebedc0">bc76b41</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5aa9d655a65454b29c42e59040f899f439f87d89">5aa9d65</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2223,7 +2223,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.70235143.js?v=1707870167'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1707905550'></script>
         
     </body>
 </html>
