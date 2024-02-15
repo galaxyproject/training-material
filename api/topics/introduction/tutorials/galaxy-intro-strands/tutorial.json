@@ -111,9 +111,9 @@
   },
   "hands_on": true,
   "slides": false,
-  "mod_date": "2023-11-03 14:30:27 +0000",
+  "mod_date": "2024-02-15 08:22:47 +0000",
   "pub_date": "2017-10-18 16:00:54 +0000",
-  "version": 74,
+  "version": 76,
   "workflows": [
     {
       "workflow": "Galaxy-Workflow-galaxy-intro-strands-2.ga",
@@ -130,7 +130,7 @@
       "name": "Galaxy Intro Strands 2",
       "title": "Galaxy Intro Strands 2",
       "test_results": null,
-      "modified": "2024-02-15 00:21:00 +0000",
+      "modified": "2024-02-15 09:14:20 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Gene BED To Exon/Intron/Codon BED\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  1 -->|out_file1| 2;\n  3[\"Filter\"];\n  1 -->|out_file1| 3;\n  4[\"Intersect\"];\n  2 -->|out_file1| 4;\n  3 -->|out_file1| 4;\n  5[\"Intersect\"];\n  3 -->|out_file1| 5;\n  2 -->|out_file1| 5;\n  6[\"Concatenate datasets\"];\n  5 -->|output| 6;\n  4 -->|output| 6;\n"
     },
     {
@@ -148,7 +148,7 @@
       "name": "Galaxy Intro Strands",
       "title": "Galaxy Intro Strands",
       "test_results": null,
-      "modified": "2024-02-15 00:21:00 +0000",
+      "modified": "2024-02-15 09:14:20 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  0 -->|output| 2;\n  3[\"Filter\"];\n  0 -->|output| 3;\n  4[\"Intersect\"];\n  2 -->|out_file1| 4;\n  3 -->|out_file1| 4;\n  5[\"Intersect\"];\n  3 -->|out_file1| 5;\n  2 -->|out_file1| 5;\n  6[\"Concatenate datasets\"];\n  5 -->|output| 6;\n  4 -->|output| 6;\n"
     }
   ],
@@ -158,18 +158,10 @@
     "cat1",
     "gene2exon1",
     "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0",
-    "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/0.0.1",
     "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0"
   ],
   "supported_servers": {
     "exact": [
-      {
-        "url": "https://usegalaxy.eu",
-        "name": "UseGalaxy.eu",
-        "usegalaxy": true
-      }
-    ],
-    "inexact": [
       {
         "url": "https://mississippi.sorbonne-universite.fr",
         "name": "MISSISSIPPI",
@@ -179,6 +171,11 @@
         "url": "https://usegalaxy.be/",
         "name": "UseGalaxy.be",
         "usegalaxy": false
+      },
+      {
+        "url": "https://usegalaxy.eu",
+        "name": "UseGalaxy.eu",
+        "usegalaxy": true
       },
       {
         "url": "https://usegalaxy.fr/",
@@ -200,6 +197,9 @@
         "name": "UseGalaxy.org.au",
         "usegalaxy": true
       }
+    ],
+    "inexact": [
+
     ]
   },
   "topic_name_human": "Introduction to Galaxy Analyses",
@@ -218,20 +218,13 @@
       {
         "name": "intersect",
         "owner": "devteam",
-        "revisions": "5b3c6135a982",
-        "tool_panel_section_label": "Text Manipulation",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "intersect",
-        "owner": "devteam",
         "revisions": "69c10b56f46d",
         "tool_panel_section_label": "Text Manipulation",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: ddf54b12c295\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: intersect\n  owner: devteam\n  revisions: 5b3c6135a982\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: intersect\n  owner: devteam\n  revisions: 69c10b56f46d\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: ddf54b12c295\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: intersect\n  owner: devteam\n  revisions: 69c10b56f46d\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {
