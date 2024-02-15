@@ -50,12 +50,11 @@ Alternatively, they can be classified into two security levels in our import and
 ![Beacon Framework and Model](../../images/Beacon_framework_and_model.png "Schematic representation of Beacon v2 API specification")
 
 
-|---------|---------|
-|Sequrity Level|Description|
-|Public|Beacon can be accessed by any request|
-|Registered|Only known users can access the data|
-|Controlled|Only specifically granted users can access the data|
-
+| Security Level | Description                                         |
+|----------------|-----------------------------------------------------|
+| Public         | Beacon can be accessed by any request               |
+| Registered     | Only known users can access the data                |
+| Controlled     | Only specifically granted users can access the data |
 
 The genomic variants data is usually divided into two parts. The Metadata and Genomic variants. The metadata is initially saved in different formats like Excel, CSV, etc., while the Genomic variations are kept in VCF files.
 So, before beaconing them, the beacon providers must prepare the data in JSON, also known as Beacon-friendly format (BFF). This can be done by extracting the required information from those files following the beacon schemas. 
