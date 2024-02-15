@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons"
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/records/10658688'
 subtopic: ''
 questions:
 - What does the term "beacon" refer to?
@@ -123,7 +123,7 @@ We will start with preparing the environment by installing the tools. The tutori
 > conda config --add channels conda-forge
 > conda config --set channel_priority strict
 > ``` 
-> 7. Move to the scripts directory and install vcf2json.py, phenopacket.py tools from Zenodo using the *$wget* tool. 
+> 7. Move to the scripts directory and install vcf2json.py, phenopacket.py tools from [Zenodo](https://zenodo.org/records/10658688) using the *$wget* tool. 
 > ```
 > cd scripts
 > wget https://zenodo.org/records/10657357/files/phenopacket.py
@@ -141,7 +141,7 @@ We will start with preparing the environment by installing the tools. The tutori
 > ```
 > cd path/to/the/inputs
 > ```
-> 2. Install the genomic variants file from Zenodo
+> 2. Install the genomic variants file from [Zenodo](https://zenodo.org/records/10658688)
 > ```
 > wget https://zenodo.org/records/10657357/files/HG00096.cnv.vcf
 > ``` 
@@ -173,7 +173,7 @@ few examples. The same Biosample may be referred to by many instances (e.g., tec
 > ```
 > cd path/to/inputs
 > ```
-> 2. Install the Phenopacket metadata from Zenodo
+> 2. Install the Phenopacket metadata from [Zenodo](https://zenodo.org/records/10658688)
 > ```
 > wget https://zenodo.org/records/10657357/files/igsr-1000-genomes-30x-on-grch38.tsv
 > ``` 
