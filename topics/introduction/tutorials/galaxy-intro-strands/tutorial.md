@@ -407,7 +407,7 @@ Galaxy excels at answering questions about genomic intervals and different sets 
 
 > <hands-on-title>Genomic Interval Tools</hands-on-title>
 >
-> * The next step is finding overlapping intervals, so type `interval` in the tool search box. There are many results from this search, so you might want to click the *Show sections* button (available on Galaxy servers) to see which sections the tools are organised into.
+> * The next step is finding overlapping intervals, so type `interval` in the tool search box. There are many results from this search, so you might want to click the *Show sections* button to see which sections the tools are organised into.
 > * *Explore* the tools in this toolbox, looking for something that we can use to see which genes on opposite strands overlap.
 {: .hands_on}
 
