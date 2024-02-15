@@ -161,7 +161,7 @@ disease models is made possible for physicians, biologists, and researchers stud
 and genetic data. 
 
 
-![v2.0 phenopacket schema](../../images/phenopacket-schema-v2-overview "Overview of v2.0 of the schema optained from [phenopacket-schema](https://phenopacket-schema.readthedocs.io/en/latest/schema.html#version-2-0)")
+![v2.0 phenopacket schema](../../images/phenopacket-schema-v2-overview.png "Overview of v2.0 of the schema optained from [phenopacket-schema](https://phenopacket-schema.readthedocs.io/en/latest/schema.html#version-2-0)")
 
 We are using the Biosamles phenopacket, This is a biological material unit from which the substrate molecules (genomic DNA, RNA, proteins, etc.) are extracted for molecular analyses 
 (mass spectrometry, array hybridization, sequencing, etc.). Tissue biopsies, single cells from cultures used for single-cell genome sequencing, and protein fractions from gradient centrifugations are a 
