@@ -110,11 +110,12 @@ we will start with preparing the environmnet by instlling the toola. This tutori
 > $mkdir scripts
 > ```
 >
-> ```
 > 4. Crate a conda enviroment and give it a suitable name
+>
 > ```
 > $conda create -n <enviroment name>
-> ``` 
+> ```
+> 
 > 5. Activate the the enviroment 
 > ```
 > $conda activate <enviroment name>
@@ -149,11 +150,11 @@ we will start with preparing the environmnet by instlling the toola. This tutori
 > ```
 > $cd path/to/the/inputs
 > ```
-> 3. Install the genomic varients file from Zenodo using $wget tool
+> 2. Install the genomic varients file from Zenodo using $wget tool
 > ```
 > wget https://zenodo.org/records/10657357/files/HG00096.cnv.vcf
 > ``` 
-> 4. Run the tool *vcf2json.py* tool
+> 3. Run the tool *vcf2json.py* tool
 > ```
 > $python path/to/tools/vcf2json.py -i path/to/inputs/HG00096.cnv.vcf -o path/to/outputs/HG00096.json
 > ```
@@ -171,11 +172,11 @@ we will start with preparing the environmnet by instlling the toola. This tutori
 > ```
 > $cd path/to/inputs
 > ```
-> 3. Install the phenopacket metadata from Zenodo using $wget tool
+> 2. Install the phenopacket metadata from Zenodo using $wget tool
 > ```
 > $wget https://zenodo.org/records/10657357/files/igsr-1000-genomes-30x-on-grch38.tsv
 > ``` 
-> 4. Run the tool *phenopacket.py* with the following parametars
+> 3. Run the tool *phenopacket.py* with the following parametars
 > ```
 > $python path/to/tools/phenopacket.py -i path/to/inputs/igsr-1000-genomes-30x-on-grch38.tsv -o path/to/outputs/phenopacket.json
 > ```
@@ -240,11 +241,11 @@ In this tutorial we will show an example on how to create both of those typs of 
 > ```
 > You can change the name of that bath but you have to change that also from the docker-compose.yaml file. 
 > Now we have everything ready for creating the MongoDB server hosted in docker container the only step left is to run docker. 
-> 5. run the tool 'docker-compose' with the following parametars
+> 6. Run the tool 'docker-compose' with the following parametars
 > ```
 > $docker-compose up -d
 > ```
-> 6. Check the created docker containers and test if your dokcer container is runinig
+> 7. Check the created docker containers and test if your dokcer container is runinig
 > ```
 > $docker ps
 > ```
@@ -255,7 +256,7 @@ In this tutorial we will show an example on how to create both of those typs of 
 > 38a8e4481963   mongo-express   "/sbin/tini -- /dock…"   6 weeks ago   Up 6 weeks   0.0.0.0:8081->8081/tcp, :::8081->8081/tcp       beacon_mongo-express_1
 >
 > ```
-> 7. Test your dokcer to see if it runing by 
+> 8. Test your dokcer to see if it runing by 
 > ```
 > $docker exec -it mongo-client bash
 > ```
