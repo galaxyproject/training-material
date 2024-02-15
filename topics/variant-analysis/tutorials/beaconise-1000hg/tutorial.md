@@ -16,7 +16,7 @@ objectives:
 - Learn the art of preparing data for beacons, including the transformation of variants and metadata into structures compatible with beacon requirements
 - Achieve proficiency in seamlessly importing data into beacons through a step-by-step guide, ensuring a smooth and error-free process
 - Develop the ability to query beacons for variants, unleashing the formidable capabilities of MongoDB in conducting powerful and precise variant searches
-time_estimation: ?H
+time_estimation: 2H
 key_points:
 - Understanding Beacons involves grasping their definition and concept, recognizing their significance in efficient data management, and exploring diverse use cases for these essential data structures.
 - Mastering MongoDB for Beacon Creation entails familiarizing yourself with the MongoDB database system, acquiring the skills to construct beacons for advancing institutional data management,
@@ -44,20 +44,11 @@ which only returned a Yes or No response indicating the presence of variants, Be
 The Beacon v2 comprises two main parts, namely the framework and the models. The framework specifies how the requests and responses should be formatted, while the models determine the organization of the biological data response 
 {cite Rueda2022}.
 
-![Beacon Framework and Model](../../images/Beacon_framework_and_model.png "Schematic representation of Beacon v2 API specification")
-
-Before working with a beacon, the beacon providers must prepare the data in JSON format, also known as Beacon-friendly format (BFF), using the Beacon RI tools. The data is divided into two parts - Metadata and Genomic variants.
-The metadata is initially saved in different formats like Excel format, CSV, etc., while the Genomic variations are kept in VCF format. By converting the metadata into BFF format, it generates analyses, biosamples, 
-cohorts, datasets, individuals, and runs, while the genomic variation VCF generates a genomicVariations file. When combined, they produce the seven entities present in the Beacon v2 Models (default schemas) and their 
-relationships, as represented in the diagram below:
-
-![Beacon v2 inputs](../../images/BBeacon_seven_inputs.png "Diagram representing the seven entities present in the Beacon v2 Models (default schemas) and their relationships")
-
-The Beacon provider will utilize the Beacon ri tools to upload the necessary data into MongoDB after collecting it. However, in this tutorial, we will use distinct tools to import and retrieve data from Beacon v2, 
-which was created by The University of Bradford Computational and Data-Driven Science research team.
-
 Beacon MongoDB databases can be created with different security levels for accessing Beacon data through import and query processes. These databases can be classified into three security levels: public, registered, and controlled. 
 Alternatively, they can be classified into two security levels in our import and query tools: public and authenticated.
+
+![Beacon Framework and Model](../../images/Beacon_framework_and_model.png "Schematic representation of Beacon v2 API specification")
+
 
 |---------|---------|
 |Sequrity Level|Description|
@@ -66,8 +57,14 @@ Alternatively, they can be classified into two security levels in our import and
 |Controlled|Only specifically granted users can access the data|
 
 
-In this tutorial, we will walk through the process of creating the Beacon v2 protocol using MongoDB for a sample from 1000 genome dataset. This will include showing how to prepare the data into beacon format and import it to beacon 
-also demonstrate how to perform queries.
+The genomic variants data is usually divided into two parts. The Metadata and Genomic variants. The metadata is initially saved in different formats like Excel, CSV, etc., while the Genomic variations are kept in VCF files.
+So, before beaconing them, the beacon providers must prepare the data in JSON, also known as Beacon-friendly format (BFF). This can be done by extracting the required information from those files following the beacon schemas. 
+The beacon providers can use already developed tools such as in the [B2RI tools](https://github.com/EGA-archive/beacon2-ri-tools) or develop their own tools. 
+
+For this tutorial we will show the steps to beaconing and query the [HG00096](https://s3.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&bucketType=general&prefix=data/dragen-3.5.7b/hg38_altaware_nohla-cnv-anchored/HG00096/&showversions=false) 
+biosample structural variants VCF file obtained from the [1000 Genome project](https://s3.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&bucketType=general&tab=objects) using scripts created by The University of 
+Bradford Computational and Data-Driven Science research team.
+
 
 > <agenda-title></agenda-title>
 >
@@ -84,9 +81,9 @@ also demonstrate how to perform queries.
 
 Before we start working with beacon. First, we need to prepare the data to be in the right format, Beacon protocole desiend to take and search the genomic database and its metadata in BFF format (Json format).
 Normaly, The genomic variation are saved in VCF file format and metadata are kept by the resurchers in EXCIL, CSV ,etc. So, before upload them into Beacon database we need to convert them into the proper format
- using the availabe Beacon tools in Galaxy. 
+using the availabe Beacon tools in Galaxy. 
 
-we will start with preparing the environmnet by instlling the toola. This tutorial is using ubuntu 20.04 system for the work. feel free to modify the scripts for your system. 
+we will start with preparing the environmnet by instlling the tools. These scripts we made using LINUX Ubuntu 20.04 system. please modify the scripts for your system if requierd. 
 
 ## Setting up the local environment
 
@@ -95,48 +92,48 @@ we will start with preparing the environmnet by instlling the toola. This tutori
 > 1. Create directory on your local envirment and give it a suitble naming
 >
 > ```
-> $mkdir <directory_name>
+> mkdir <directory_name>
 > ```
 >
 > 2. Move to the created Directory on the shell
 > ```
-> $cd <directory_name>
+> cd <directory_name>
 > ```
 > 3. Create another two directories and name them as inputs, output and scripts
 >
 > ```
-> $mkdir inputs
-> $mkdir outputs
-> $mkdir scripts
+> mkdir inputs
+> mkdir outputs
+> mkdir scripts
 > ```
 >
 > 4. Crate a conda enviroment and give it a suitable name
 >
 > ```
-> $conda create -n <enviroment name>
+> conda create -n <enviroment name>
 > ```
 > 
 > 5. Activate the the enviroment 
 > ```
-> $conda activate <enviroment name>
+> conda activate <enviroment name>
 > ``` 
 > 6. add bioconda channel to your channels list
 > ```
-> $conda config --add channels defaults
-> $conda config --add channels bioconda
-> $conda config --add channels conda-forge
-> $conda config --set channel_priority strict
+> conda config --add channels defaults
+> conda config --add channels bioconda
+> conda config --add channels conda-forge
+> conda config --set channel_priority strict
 > ``` 
 > 7. install the beacon2-ri-tools from conda 
 > ```
-> $conda install beacon2-ri-tools
+> conda install beacon2-ri-tools
 > ``` 
 > with this, we created the directory where we will install the data to, and installed the beacon2-ri-tools wich we will use to preprocess the data.
 > 8. Move to the scripts directory and install vcf2json.py, phenopacket.py and galaxy-beacon import tools from Zenodo. 
 > ```
-> $cd scripts
-> $wget https://zenodo.org/records/10657357/files/phenopacket.py
-> $wget https://zenodo.org/records/10657357/files/vcf2json.py
+> cd scripts
+> wget https://zenodo.org/records/10657357/files/phenopacket.py
+> wget https://zenodo.org/records/10657357/files/vcf2json.py
 > ```
 {: .hands_on}
 
@@ -148,15 +145,15 @@ we will start with preparing the environmnet by instlling the toola. This tutori
 >
 > 1. Change the directory to the inputs directory
 > ```
-> $cd path/to/the/inputs
+> cd path/to/the/inputs
 > ```
-> 2. Install the genomic varients file from Zenodo using $wget tool
+> 2. Install the genomic varients file from Zenodo using wget tool
 > ```
 > wget https://zenodo.org/records/10657357/files/HG00096.cnv.vcf
 > ``` 
 > 3. Run the tool *vcf2json.py* tool
 > ```
-> $python path/to/tools/vcf2json.py -i path/to/inputs/HG00096.cnv.vcf -o path/to/outputs/HG00096.json
+> python path/to/tools/vcf2json.py -i path/to/inputs/HG00096.cnv.vcf -o path/to/outputs/HG00096.json
 > ```
 > This will converth the genomic variations VCF file into JSON file
 {: .hands_on}
@@ -170,15 +167,15 @@ we will start with preparing the environmnet by instlling the toola. This tutori
 >
 > 1. Change the directory to the inputs directory
 > ```
-> $cd path/to/inputs
+> cd path/to/inputs
 > ```
-> 2. Install the phenopacket metadata from Zenodo using $wget tool
+> 2. Install the phenopacket metadata from Zenodo using wget tool
 > ```
-> $wget https://zenodo.org/records/10657357/files/igsr-1000-genomes-30x-on-grch38.tsv
+> wget https://zenodo.org/records/10657357/files/igsr-1000-genomes-30x-on-grch38.tsv
 > ``` 
 > 3. Run the tool *phenopacket.py* with the following parametars
 > ```
-> $python path/to/tools/phenopacket.py -i path/to/inputs/igsr-1000-genomes-30x-on-grch38.tsv -o path/to/outputs/phenopacket.json
+> python path/to/tools/phenopacket.py -i path/to/inputs/igsr-1000-genomes-30x-on-grch38.tsv -o path/to/outputs/phenopacket.json
 > ```
 > The tool will extract the informations we need from the tsv file and create a phenopacket json file from them follwing a modefied biosamble schema.
 {: .hands_on}
@@ -190,7 +187,7 @@ we will start with preparing the environmnet by instlling the toola. This tutori
 
 Beacon is created by the Beacon providing instituion to serve and work as the institution prespective and if they want to make their beacon as open access or requers authentication to query the data. 
 
-In this tutorial we will show an example on how to create both of those typs of beacon by creating 2 docker servers for MongoDB one for open access and the other Created from B2RI docker image.
+In this tutorial we will show an example on how to create both of those typs of beacon by creating 2 docker servers for MongoDB one for open access and the other Created from privet docker image.
 
 ## Create and open access MongoDB server
 
@@ -199,16 +196,16 @@ In this tutorial we will show an example on how to create both of those typs of 
 > 1. create directory on your local envirment and give it a suitble naming
 >
 > ```
-> $mkdir <directory_name>
+> mkdir <directory_name>
 > ```
 >
 > 2. Move to the created Directory on the shell
 > ```
-> $cd <directory_name>
+> cd <directory_name>
 > ```
 > 3. crate an empty file and name it 'docker-compose.yaml' using any text editor you have.
 > ```
-> $nano docker-compose.yaml
+> nano docker-compose.yaml
 > ``` 
 > 4. copy the text below into the 'docker-compose.yaml' file. 
 > ```
@@ -236,18 +233,18 @@ In this tutorial we will show an example on how to create both of those typs of 
 > ```
 > 5. create the path 'beacon/db' in your directory using 'mkdir' tool
 > ```
-> $mkdir beacon
-> $mkdir beacon/db
+> mkdir beacon
+> mkdir beacon/db
 > ```
 > You can change the name of that bath but you have to change that also from the docker-compose.yaml file. 
 > Now we have everything ready for creating the MongoDB server hosted in docker container the only step left is to run docker. 
 > 6. Run the tool 'docker-compose' with the following parametars
 > ```
-> $docker-compose up -d
+> docker-compose up -d
 > ```
 > 7. Check the created docker containers and test if your dokcer container is runinig
 > ```
-> $docker ps
+> docker ps
 > ```
 > This will give you a massage similaer to this
 > ```
@@ -258,7 +255,7 @@ In this tutorial we will show an example on how to create both of those typs of 
 > ```
 > 8. Test your dokcer to see if it runing by 
 > ```
-> $docker exec -it mongo-client bash
+> docker exec -it mongo-client bash
 > ```
 > this take you into the docker container, you can exit that by prising 'ctrl + d' from your keyboard.  
 >
@@ -273,16 +270,16 @@ In this tutorial we will show an example on how to create both of those typs of 
 > 1. create directory on your local envirment and give it a suitble naming
 >
 > ```
-> $mkdir <directory_name>
+> mkdir <directory_name>
 > ```
 >
 > 2. Move to the created Directory on the shell
 > ```
-> $cd <directory_name>
+> cd <directory_name>
 > ```
 > 3. crate an empty file and name it 'docker-compose.yaml' using any text editor you have.
 > ```
-> $nano docker-compose.yaml
+> nano docker-compose.yaml
 > ``` 
 > 4. copy the text below into the 'docker-compose.yaml' file. 
 > ```
@@ -324,11 +321,11 @@ In this tutorial we will show an example on how to create both of those typs of 
 > Now we have everything ready for creating the MongoDB server hosted in docker container the only step left is to run docker. 
 > 5. run the tool 'docker-compose' with the following parametars
 > ```
-> $docker-compose up -d
+> docker-compose up -d
 > ```
 > 6. Check the created docker containers and test if your dokcer container is runinig
 > ```
-> $docker ps
+> docker ps
 > ```
 > This will give you a massage similaer to this
 > ```
@@ -357,12 +354,12 @@ The beacon import tool is fexble to import data from institutional galaxy or fro
 > 1. Clone to the usegalaxy-eu, [galaxy-beacon-import](https://github.com/usegalaxy-eu/galaxy-beacon-import) GitHub repo to install the Beacon2 import and search tools.
 >
 > ```
-> $git clone https://github.com/usegalaxy-eu/galaxy-beacon-import.git
+> git clone https://github.com/usegalaxy-eu/galaxy-beacon-import.git
 > ```
 >
 > 2. Move to the created Directory on the shell
 > ```
-> $cd galaxy-beacon-import # change the name if the directory is cloned with a different name
+> cd galaxy-beacon-import # change the name if the directory is cloned with a different name
 > ```
 > 3. Prepare import script
 > ```
@@ -370,8 +367,8 @@ The beacon import tool is fexble to import data from institutional galaxy or fro
 > ```
 > 4. run the Beacon2-import.py tool for the genomic varience and phenopacket json files with the following parametars.
 > ```
-> $python3 beacon2-import.py -i <genomicvarience_JSON_FILE>  -d beacon -c genomecvarience - H < Hostname/IP of the beacon database> -P <Port of the beacon database>
-> $python3 beacon2-import.py -i <phenopacket_JSON_FILE>  -d beacon -c phenopacket - H < Hostname/IP of the beacon database> -P <Port of the beacon database>
+> python3 beacon2-import.py -i <genomicvarience_JSON_FILE>  -d beacon -c genomecvarience - H < Hostname/IP of the beacon database> -P <Port of the beacon database>
+> python3 beacon2-import.py -i <phenopacket_JSON_FILE>  -d beacon -c phenopacket - H < Hostname/IP of the beacon database> -P <Port of the beacon database>
 > ```
 > Tho tool can work also with a Beacon protocol with authentication, check the *Addvanced Connection to MongoDB* in the tool help section (python beacon2_import.py -h)
 {: .hands_on}
@@ -392,7 +389,7 @@ we are looking to see if there a Delation mutation  in the gene located in chrom
 >
 > 1. run the Beacon2-search.py tool for the genomic varience and phenopacket json files with the following parametars.
 > ```
-> $python3 beacon2-search.py range  -d beacon -c genomecvarience -rn 1 -s 2651463 -e 2653075 -v DEL
+> python3 beacon2-search.py range  -d beacon -c genomecvarience -rn 1 -s 2651463 -e 2653075 -v DEL
 > ```
 > The srarch function will queiry the beacon database and print out the resutls that matches our quiery specifications in this case it will print something like this. 
 > ``` 
