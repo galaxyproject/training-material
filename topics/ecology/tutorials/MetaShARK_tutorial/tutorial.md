@@ -152,10 +152,17 @@ Now we can fill personal informations. To do so, the easiest way is to provide O
 
 ![Fill personal informations](./Images/10_MetaShARK_personal.png){:width="500"}
 
+Then you can add final elements as:
 
-![Upload a metadata template for geotiff attributes](./Images/11_MetaShARK_abstract.png){:width="500"}
+- An abstract (writing directly on the dedicated field or uploading a text file containing the abstract)
 
-![Upload a metadata template for geotiff attributes](./Images/12_MetaShARK_methods.png){:width="500"}
+![Upload abstract.txt file](./Images/11_MetaShARK_abstract.png){:width="500"}
+
+- Methods (writing directly on the dedicated field or uploading a text file, can be in markdown, containing details of the methods used to create data files)
+
+![Upload methods.md file](./Images/12_MetaShARK_methods.png){:width="500"}
+
+
 
 ![Upload a metadata template for geotiff attributes](./Images/13_MetaShARK_keywords.png){:width="500"}
 
