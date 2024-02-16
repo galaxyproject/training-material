@@ -148,8 +148,9 @@ Now geographic coverage is set, one can specific taxonomic coverage. To do so, y
 
 ![Specify taxonomic coverage](./Images/9_MetaShARK_taxcov.png){:width="500"}
 
+Now we can fill personal informations. To do so, the easiest way is to provide ORCID identifiers for each individual person involved as creator, contact and/or PI. Depending on the information filled in ORCID by each individual and on the level of accessibility of each, all field can be automatically filled. If "PI" is selected, you can specify a project name, funder name and related funding number.
 
-![Upload a metadata template for geotiff attributes](./Images/10_MetaShARK_personal.png){:width="500"}
+![Fill personal informations](./Images/10_MetaShARK_personal.png){:width="500"}
 
 
 ![Upload a metadata template for geotiff attributes](./Images/11_MetaShARK_abstract.png){:width="500"}
