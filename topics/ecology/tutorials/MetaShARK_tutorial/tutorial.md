@@ -166,7 +166,9 @@ Then you can add final elements as:
 
 ![Add "Biodiversity" keyword](./Images/13_MetaShARK_keywords.png){:width="500"}
 
-![Upload a metadata template for geotiff attributes](./Images/14_MetaShARK_makeeml.png){:width="500"}
+Finally, you can specify a temporal coverage and go to the last step of this MetaShARK workflow: Generat an EML metadata file! If everything is ok, you will have creation of an EML metadata file.
+
+![Make EML](./Images/14_MetaShARK_makeeml.png){:width="500"}
 
 
 
