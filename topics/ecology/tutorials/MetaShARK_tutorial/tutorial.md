@@ -207,6 +207,23 @@ Acessible, Interoperable, Reusable) on a 100 point scale.
 
 ![FAIR scores](./Images/Fairscore_tab.png "Overall FAIR score")
 
+> <question-title></question-title>
+> How you can ameliorate your FAIR score?
+> > <solution-title></solution-title>
+> > You can look at the lines of the table for FAILURE (red) and WARNING (yellow) status. The first FAILURE 
+> > status line is related to missing annotations. This is something we can fix coming back to MetaShARK app.
+> > If you close MetaShARK navigator window, you can reopen it clicking on Menu > User > Active InteractiveTools.
+> > You can here click on "metashark visualization" hyperlink. You can then go on the Fill In module, select 
+> > the data package you created and click **Load**. You then need to click **Previous** so you can add annotations
+> > on keywords. To do so, you need to reach the MetaShARK parameters (upper right icon) then enter your CEDAR token.
+> > To create a CEDAR account, you can register here http://cedar.metadatacenter.org/. API key format is similar
+> > to `api 205b1e521f2eaf0ad4a361c438b63205b1e521f2eaf0ad4a361c438b63c438b63`. You then can click on the + button
+> > on the keyword space to **Add keyword with dataset annotation**.
+> {: .solution}
+>
+{: .question}
+
+
 # Conclusion
 
 Here is the end of this short tutorial aiming in explaining the purpose of MetaShARK and how to use it.
