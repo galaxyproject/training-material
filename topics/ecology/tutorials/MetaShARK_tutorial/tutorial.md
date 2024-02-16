@@ -1,4 +1,5 @@
 
+---
 layout: tutorial_hands_on
 
 title: Creating metadata using Ecological Metadata Language (EML) standard
@@ -59,6 +60,7 @@ This tutorial aims to teach how to use functionalities of the EML Assembly Line 
 > {:toc}
 >
 {: .agenda}
+
 
 
 # How can EML Assembly Line functionalities help producing rich metadata easily?
