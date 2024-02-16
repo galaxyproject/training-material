@@ -76,15 +76,15 @@ publishable as a real Data Paper giving recognition to all the people that helpe
 
 > <comment-title>What is a Data Paper?</comment-title>
 > According to the [GBIF](https://www.gbif.org/data-papers) (Global Biodiversity Information Facility), 
->A data paper is a peer reviewed document describing a dataset, published in a peer reviewed journal. It takes effort to prepare, curate and describe data. 
->Data papers provide recognition for this effort by means of a scholarly article.
+> A data paper is a peer reviewed document describing a dataset, published in a peer reviewed journal. It takes effort to prepare, curate and describe data. 
+>,Data papers provide recognition for this effort by means of a scholarly article.
 {:  .comment}
 # Get data
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2.Import this metadata file from [Zenodo]({{ page.zenodo_link }}) to test it
+> 2. Import this metadata file from [Zenodo]({{ page.zenodo_link }}) to test it
 >     -> Training Data for "Creating Quality FAIR assessment reports and draft of Data Papers from EML metadata with MetaShRIMPS"):
 >    ```
 >    https://zenodo.org/record/8130567/files/Kakila_database_marine_mammal.xml
@@ -96,7 +96,7 @@ publishable as a real Data Paper giving recognition to all the people that helpe
 
 # Upload Data in MetaShRIMPS
 
-When oppening MetaShRIMPS, you will have an interface looking like this :
+When opening [MetaShRIMPS](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashrimps), you will have an interface looking like this :
 
 ![Interface of MetaShRIMPS](./Images/upload_1.png){:width="500"}
 
