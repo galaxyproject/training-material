@@ -1,4 +1,4 @@
-![image](https://github.com/yvanlebras/training-material/assets/7910679/7cce3839-a31d-4d6b-9d8c-f06547c11cbb)---
+
 layout: tutorial_hands_on
 
 title: Creating metadata using Ecological Metadata Language (EML) standard
