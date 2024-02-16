@@ -84,7 +84,7 @@ Finally, through the MetaShARK R Shiny app created by the french biodiversity da
 > <hands-on-title> Data Upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial. You can name it "EML assembly Line tutorial" for example
-> 2. Download all files on your local computer from Zenodo: https://zenodo.org/api/records/10663465/files-archive . It is neccessary as for now, MetaShARK is deployed from Galaxy but without ahving a possibility to directly populate MetaShARK app with datafiles from Galaxy. You will thus then have to upload manually data files from your local computer to MetaShARK.
+> 2. Download all files on your local computer from Zenodo: https://zenodo.org/api/records/10663465/files-archive. It is neccessary as for now, MetaShARK is deployed from Galaxy but without having a possibility to directly populate MetaShARK app with datafiles from Galaxy. You will thus then have to upload manually data files from your local computer to MetaShARK.
 > 3. Unzip the donwloaded archive so you can access each file independently
 > 4. Import tsv, netcdf and geotiff data files directly from [Zenodo]({{ page.zenodo_link }}) so it can be used on some steps of the tutorial.
 >     -> Training Data for "Creating metadata using Ecological Metadata Language (EML) standard with EML Assembly Line functionalities" Galaxy tutorial:
@@ -94,18 +94,46 @@ Finally, through the MetaShARK R Shiny app created by the french biodiversity da
 >    https://zenodo.org/records/10663465/files/LakeGeneva_phytoplankton_1974-2004.nc
 >    https://zenodo.org/records/10663465/files/Present.Surface.pH.tif
 >    ```
-> 5. Import shapefile related files into Galaxy using the Galaxy upload tool, then on the "composite" tab, specifying "shp" composite type, then uploading .dbf, .shp and .shx files on the dedicated spaces.
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    ![Upload datafiles from URLs](./Images/0_Upload_datafiles.png){:width="500"}
+> 6. Import shapefile related files into Galaxy using the Galaxy upload tool, then on the "composite" tab, specifying "shp" composite type, then uploading .dbf, .shp and .shx files on the dedicated spaces.
+>    ![Upload datafiles from URLs](./Images/1_upload_shapefile.png){:width="500"}
 {: .hands_on}
 
 
 # MetaShARK
 
-When oppening MetaShRIMPS, you will have an interface looking like this :
+To deploy a MetaShARK app, you can go to the Galaxy tool [MetaShARK](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashark) and click "Execute". Then, you have to wait the launch of the app, and when ready to be used, you will see the message "There is an InteractiveTool result view available," with an hyperlink on the "Open" statement allowing you to reach the app clicking on it.
 
-![Interface of MetaShRIMPS](./Images/upload_1.png){:width="500"}
+WARNING! Note that it is a beta version of MetaShARK R shiny app. You can thus encounter issues using it!
 
-To upload data on MetaShRIMPS, if you was selecting the xml file as input of the tool, it is already launched, if not, you have to click on the browse button and select in your local folders, the file
+When oppening MetaShARK, you will have an interface looking like this :
+
+![Interface of MetaShARK](./Images/2_MetaShARK.png){:width="500"}
+
+To sstart creating metadata, you need to reach the "Fill in EML" module, then specify or complete the automatic "Data package name" and mention the "Dataset title". Here a title can be "Manage heterogeneous data files through EML". Finally, you can choose an open licence between CC-BY-4.0, default, or CC0 then click on "Create". 
+
+![Create a data package](./Images/3_MetaShARK_create.png){:width="500"}
+
+Then you can upload datafiles. Here, you can import these files from the downloaded Zenodo archive:
+- datafile_1.tsv
+- datafile_2.tsv
+- LakeGeneva_phytoplankton_1974-2004.nc
+- Present.Surface.pH.tif
+- 02_Ref.shp
+- 02_Ref.shx
+- 02_Ref.dbf
+
+![Upload data files](./Images/4_MetaShARK_upload.png){:width="500"}
+
+MetaShARK will normally guess that the three `02_Ref` files are representing a uniq shapefile. MetaShARK will normally guess each data type and infer list of attributes for each file but the geotiff `Present.Surface.pH.tif` one. So now you need to select this datafile and upload the `attributes_Present.Surface.pH.txt` metadata template file so MetaShARK can fill attributes of this file (here the attribute is named "Present.Surface.pH").
+
+![Upload a metadata template for geotiff attributes](./Images/5_MetaShARK_geotiffattributes.png){:width="500"}
+
+Then you can provide a description for this attribute, for example "Present surface pH", then look at each attribute information of each data file so you can click on the "Next" button and go to the next step!
+
+
+create upload data on MetaShARK, if you was selecting the xml file as input of the tool, it is already launched, if not, you have to click on the browse button and select in your local folders, the file
 you want to use. 
 > <warning-title>Select the right format</warning-title>
 > The file uploaded in this tool must be a metadata in XML format using EML metadata standard.
