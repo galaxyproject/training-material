@@ -170,7 +170,7 @@ Finally, you can specify a temporal coverage and go to the last step of this Met
 
 ![Make EML](./Images/14_MetaShARK_makeeml.png){:width="500"}
 
-
+Once EML written, you can download the data package through the button "Download Data Package". This will allow you to download a zip archive you can unzip on your local computer. Resulting files are organized through 2 main folders. A main folder with data_objects (all datafiles you uploaded into MetaShARK), eml (EML metadata file written in XML format), and metadata_templates (all metadata files written in text format, column separated by tabulations). A second one called "emldown" where a draft of data paper written in html format can be access.
 
 # Conclusion
 
