@@ -113,7 +113,7 @@ When oppening MetaShARK, you will have an interface looking like this :
 
 ![Interface of MetaShARK](./Images/2_MetaShARK.png){:width="500"}
 
-To start creating metadata, you need to reach the "Fill in EML" module, then specify or complete the automatic "Data package name" and mention the "Dataset title". Here a title can be "Manage heterogeneous data files through EML". Finally, you can choose an open licence between CC-BY-4.0, default, or CC0 then click on "Create". 
+To start creating metadata, you need to reach the **Fill in EML** module, then specify or complete the automatic `Data package name` and mention the `Dataset title`. Here a title can be "Manage heterogeneous data files through EML". Finally, you can choose an open licence between CC-BY-4.0, default, or CC0 then click on "Create". 
 
 ![Create a data package](./Images/3_MetaShARK_create.png){:width="500"}
 
@@ -171,6 +171,8 @@ Finally, you can specify a temporal coverage and go to the last step of this Met
 ![Make EML](./Images/14_MetaShARK_makeeml.png){:width="500"}
 
 Once EML written, you can download the data package through the button "Download Data Package". This will allow you to download a zip archive you can unzip on your local computer. Resulting files are organized through 2 main folders. A main folder with data_objects (all datafiles you uploaded into MetaShARK), eml (EML metadata file written in XML format), and metadata_templates (all metadata files written in text format, column separated by tabulations). A second one called "emldown" where a draft of data paper written in html format can be accessed. 
+
+WARNING! At this final stage, MetaShARK can freeze and show like a "front grey filter". If this is the case, you can refresh MetaShARK app pressing F5 button of your keyboard for example. To dowload the resutling data package, you can go to the "Fill In" module, select the data package you created and click on "Download.zip".
 
 # MetaShRIMPS
 
