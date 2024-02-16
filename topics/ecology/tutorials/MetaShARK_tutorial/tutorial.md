@@ -151,40 +151,17 @@ Clicking "Next" button will then allow you to fill spatial informations about al
 ![Upload a metadata template for geotiff attributes](./Images/10_MetaShARK_personal.png){:width="500"}
 
 
-11_MetaShARK_abstract.png
+![Upload a metadata template for geotiff attributes](./Images/11_MetaShARK_abstract.png){:width="500"}
 
-12_MetaShARK_methods.png
+![Upload a metadata template for geotiff attributes](./Images/12_MetaShARK_methods.png){:width="500"}
 
-13_MetaShARK_keywords.png
+![Upload a metadata template for geotiff attributes](./Images/13_MetaShARK_keywords.png){:width="500"}
 
-14_MetaShARK_makeeml.png
+![Upload a metadata template for geotiff attributes](./Images/14_MetaShARK_makeeml.png){:width="500"}
 
-# Outputs
 
-After clicking the **Execute** button, 2 new tabs called "Draft of Data Paper" and "Fair Assessment"  will appear.
-You can access all of the tool outputs by clicking on each tab (it can take a little time for your results to be displayed).
-
-## Draft of Data Paper
-
-By clicking on the "Draft of Data Paper" tab, you will have access to the draft of Data Paper presented in an HTML format.
-You can either navigate through the Data Paper with the tabs or with the scrollbar on the right and access different elements.
-
-You can at the top of the page download the draft in either an HTML format or an editable docx format.
-![Download in HTML](./Images/Download_HTML.png""Download in HTML")
-![Download in docx](./Images/Download_docx.png "Download in docx")
-
-## Fair Quality Assessment report
-
-By clicking on the "Fair Assessment" tab, you will access the FAIR Quality report of the metadata uploaded.
-You will have access to different figures such as a table displaying the results of all checks tested for your metadata.
-![Table of results](./Images/Fairscore_tab.png "Example of the table displaying the results of the Quality Checks")
-
-You will also have acces to a graph presenting scores of Quality for each of the FAIR principles tested (Findable,
-Acessible, Interoperable, Reusable) on a 100 point scale.
-
-![FAIR scores](./Images/Fairscore_bar.png "Example of a FAIR score")
 
 # Conclusion
 
-Here is the end of this short tutorial aiming in explaining the purpose of MetaShRIMPS and how to use it.
+Here is the end of this short tutorial aiming in explaining the purpose of MetaShARK and how to use it.
 Don't hesitate to contact us if you have any questions :)
