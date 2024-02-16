@@ -113,7 +113,7 @@ When oppening MetaShARK, you will have an interface looking like this :
 
 ![Interface of MetaShARK](./Images/2_MetaShARK.png){:width="500"}
 
-To sstart creating metadata, you need to reach the "Fill in EML" module, then specify or complete the automatic "Data package name" and mention the "Dataset title". Here a title can be "Manage heterogeneous data files through EML". Finally, you can choose an open licence between CC-BY-4.0, default, or CC0 then click on "Create". 
+To start creating metadata, you need to reach the "Fill in EML" module, then specify or complete the automatic "Data package name" and mention the "Dataset title". Here a title can be "Manage heterogeneous data files through EML". Finally, you can choose an open licence between CC-BY-4.0, default, or CC0 then click on "Create". 
 
 ![Create a data package](./Images/3_MetaShARK_create.png){:width="500"}
 
@@ -134,13 +134,13 @@ MetaShARK will normally guess that the three `02_Ref` files are representing a u
 
 Then you can provide a description for this attribute, for example "Present surface pH", then look at each attribute information of each data file so you can click on the "Next" button and go to the next step, to give informations on categorical variables!
 
-![Upload a metadata template for geotiff attributes](./Images/6_MetaShARK_catvars.png){:width="500"}
+![Look at categorical variables](./Images/6_MetaShARK_catvars.png){:width="500"}
 
-Clicking "Next" button will then allow you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shepfile is in Point, both are in `GCS_WGS_1984`spatial reference.
+Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shepfile is in Point, both are in `GCS_WGS_1984`spatial reference.
 
+![Specify spatial informations for GIS datafiles](./Images/7_MetaShARK_spatialinfo.png){:width="500"}
 
-![Upload a metadata template for geotiff attributes](./Images/7_MetaShARK_spatialinfo.png){:width="500"}
-
+Next step is devoted to specifying geographic coverage. You can use a method between "columns" or "custom". "Custom" allows you to create one to several geographical sites using a map widget where you can draw limits of each site or enter directly latitude and longitude coordinates. "Columns" method, used here, allows you to specify an attribute conataining site names then associated latitude and longitudes attributes.
 
 ![Upload a metadata template for geotiff attributes](./Images/8_MetaShARK_geocov.png){:width="500"}
 
