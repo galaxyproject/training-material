@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome Assembly of MRSA using Oxford Nanopore MinION Data
-zenodo_link: 'https://zenodo.org/record/4534098'
+zenodo_link: 'https://zenodo.org/record/10669812'
 questions:
 - How to check the quality of the MinION data?
 - How to perform an assembly with MinION data?
