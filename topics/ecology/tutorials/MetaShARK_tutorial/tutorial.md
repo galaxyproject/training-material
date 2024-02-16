@@ -1,4 +1,4 @@
----
+![image](https://github.com/yvanlebras/training-material/assets/7910679/7cce3839-a31d-4d6b-9d8c-f06547c11cbb)---
 layout: tutorial_hands_on
 
 title: Creating metadata using Ecological Metadata Language (EML) standard
@@ -130,18 +130,32 @@ MetaShARK will normally guess that the three `02_Ref` files are representing a u
 
 ![Upload a metadata template for geotiff attributes](./Images/5_MetaShARK_geotiffattributes.png){:width="500"}
 
-Then you can provide a description for this attribute, for example "Present surface pH", then look at each attribute information of each data file so you can click on the "Next" button and go to the next step!
+Then you can provide a description for this attribute, for example "Present surface pH", then look at each attribute information of each data file so you can click on the "Next" button and go to the next step, to give informations on categorical variables!
+
+![Upload a metadata template for geotiff attributes](./Images/6_MetaShARK_catvars.png){:width="500"}
+
+Clicking "Next" button will then allow you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shepfile is in Point, both are in `GCS_WGS_1984`spatial reference.
 
 
-create upload data on MetaShARK, if you was selecting the xml file as input of the tool, it is already launched, if not, you have to click on the browse button and select in your local folders, the file
-you want to use. 
-> <warning-title>Select the right format</warning-title>
-> The file uploaded in this tool must be a metadata in XML format using EML metadata standard.
-{: .warning}
+![Upload a metadata template for geotiff attributes](./Images/7_MetaShARK_spatialinfo.png){:width="500"}
 
-![Interface when file is selected](./Images/upload_1.png){:width="500"}
 
-After uploading the file, or if you have indicate it as input data if the tool, you just have to click on **Execute** to launch the tool with the file.
+![Upload a metadata template for geotiff attributes](./Images/8_MetaShARK_geocov.png){:width="500"}
+
+
+![Upload a metadata template for geotiff attributes](./Images/9_MetaShARK_taxcov.png){:width="500"}
+
+
+![Upload a metadata template for geotiff attributes](./Images/10_MetaShARK_personal.png){:width="500"}
+
+
+11_MetaShARK_abstract.png
+
+12_MetaShARK_methods.png
+
+13_MetaShARK_keywords.png
+
+14_MetaShARK_makeeml.png
 
 # Outputs
 
