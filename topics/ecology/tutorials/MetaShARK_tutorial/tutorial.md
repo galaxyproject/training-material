@@ -176,7 +176,9 @@ Once EML written, you can download the data package through the button "Download
 
 To evaluate and modify metadata elements you have created, you can upload the EML xml file on the Galaxy history you created and all MetaShARK metadata templates files.
 
-Open the [MetaShRIMPS interactive tool form](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashrimps) and select the EML xml file you just generate with MetaShARK. you will have an interface looking like this :
+![Interface of MetaShRIMPS](./Images/15_MetaShRIMPS.png){:width="500"}
+
+Open the [MetaShRIMPS interactive tool form](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashrimps) and select the EML xml file you just generate with MetaShARK. Clicking on Execute will launch the MetaShRIMPS R Shiny app, the message `There is an InteractiveTool result view available, waiting for view to become active... ` is displayed until the app will be ready to use. After some time, the message `There is an InteractiveTool result view available` confirm the app is deployed and you can access it clicking on **Open**. You will then have an interface looking like this :
 
 ![Interface of MetaShRIMPS](./Images/upload_1.png){:width="500"}
 
@@ -196,12 +198,12 @@ You can at the top of the page download the draft in either an HTML format or an
 
 By clicking on the "Fair Assessment" tab, you will access the FAIR Quality report of the metadata uploaded.
 You will have access to different figures such as a table displaying the results of all checks tested for your metadata.
-![Table of results](./Images/Fairscore_tab.png "Example of the table displaying the results of the Quality Checks")
+![Table of results](./Images/Fairscore_tab2.png "Example of the table displaying the results of the Quality Checks")
 
 You will also have acces to a graph presenting scores of Quality for each of the FAIR principles tested (Findable,
 Acessible, Interoperable, Reusable) on a 100 point scale.
 
-![FAIR scores](./Images/Fairscore_bar.png "Example of a FAIR score")
+![FAIR scores](./Images/Fairscore_tab.png "Overall FAIR score")
 
 # Conclusion
 
