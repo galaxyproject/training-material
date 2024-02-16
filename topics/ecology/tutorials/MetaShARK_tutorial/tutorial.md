@@ -140,12 +140,13 @@ Clicking "Next" button will then allows you to fill spatial informations about a
 
 ![Specify spatial informations for GIS datafiles](./Images/7_MetaShARK_spatialinfo.png){:width="500"}
 
-Next step is devoted to specifying geographic coverage. You can use a method between "columns" or "custom". "Custom" allows you to create one to several geographical sites using a map widget where you can draw limits of each site or enter directly latitude and longitude coordinates. "Columns" method, used here, allows you to specify an attribute conataining site names then associated latitude and longitudes attributes.
+Next step is devoted to specifying geographic coverage. You can use a method between "columns" or "custom". "Custom" allows you to create one to several geographical sites using a map widget where you can draw limits of each site or enter directly latitude and longitude coordinates. "Columns" method, used here, allows you to specify an attribute containing site names then associated latitude and longitudes attributes.
 
-![Upload a metadata template for geotiff attributes](./Images/8_MetaShARK_geocov.png){:width="500"}
+![Specify geographic coverage](./Images/8_MetaShARK_geocov.png){:width="500"}
 
+Now geographic coverage is set, one can specific taxonomic coverage. To do so, you can select a data attribute conatining taxonomic information then select kind of notation you want to have and finally on which taxonomic authority (or authorities) information will be compared. Note that this can take a while if you have a lot of taxons and time is duplicated for each selected additional authority.
 
-![Upload a metadata template for geotiff attributes](./Images/9_MetaShARK_taxcov.png){:width="500"}
+![Specify taxonomic coverage](./Images/9_MetaShARK_taxcov.png){:width="500"}
 
 
 ![Upload a metadata template for geotiff attributes](./Images/10_MetaShARK_personal.png){:width="500"}
