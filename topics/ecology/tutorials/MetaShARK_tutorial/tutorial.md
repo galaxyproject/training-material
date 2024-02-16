@@ -170,7 +170,38 @@ Finally, you can specify a temporal coverage and go to the last step of this Met
 
 ![Make EML](./Images/14_MetaShARK_makeeml.png){:width="500"}
 
-Once EML written, you can download the data package through the button "Download Data Package". This will allow you to download a zip archive you can unzip on your local computer. Resulting files are organized through 2 main folders. A main folder with data_objects (all datafiles you uploaded into MetaShARK), eml (EML metadata file written in XML format), and metadata_templates (all metadata files written in text format, column separated by tabulations). A second one called "emldown" where a draft of data paper written in html format can be access.
+Once EML written, you can download the data package through the button "Download Data Package". This will allow you to download a zip archive you can unzip on your local computer. Resulting files are organized through 2 main folders. A main folder with data_objects (all datafiles you uploaded into MetaShARK), eml (EML metadata file written in XML format), and metadata_templates (all metadata files written in text format, column separated by tabulations). A second one called "emldown" where a draft of data paper written in html format can be accessed. 
+
+# MetaShRIMPS
+
+To evaluate and modify metadata elements you have created, you can upload the EML xml file on the Galaxy history you created and all MetaShARK metadata templates files.
+
+Open the [MetaShRIMPS interactive tool form](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashrimps) and select the EML xml file you just generate with MetaShARK. you will have an interface looking like this :
+
+![Interface of MetaShRIMPS](./Images/upload_1.png){:width="500"}
+
+Click on the **Execute** Button, 2 new tabs called "Draft of Data Paper" and "Fair Assessment"  will appear.
+You can access all of the tool outputs by clicking on each tab (it can take a little time for your results to be displayed).
+
+## Draft of Data Paper
+
+By clicking on the "Draft of Data Paper" tab, you will have access to the draft of Data Paper presented in an HTML format.
+You can either navigate through the Data Paper with the tabs or with the scrollbar on the right and access different elements.
+
+You can at the top of the page download the draft in either an HTML format or an editable docx format.
+![Download in HTML](./Images/Download_HTML.png""Download in HTML")
+![Download in docx](./Images/Download_docx.png "Download in docx")
+
+## Fair Quality Assessment report
+
+By clicking on the "Fair Assessment" tab, you will access the FAIR Quality report of the metadata uploaded.
+You will have access to different figures such as a table displaying the results of all checks tested for your metadata.
+![Table of results](./Images/Fairscore_tab.png "Example of the table displaying the results of the Quality Checks")
+
+You will also have acces to a graph presenting scores of Quality for each of the FAIR principles tested (Findable,
+Acessible, Interoperable, Reusable) on a 100 point scale.
+
+![FAIR scores](./Images/Fairscore_bar.png "Example of a FAIR score")
 
 # Conclusion
 
