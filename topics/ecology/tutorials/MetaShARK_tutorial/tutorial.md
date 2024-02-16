@@ -162,9 +162,9 @@ Then you can add final elements as:
 
 ![Upload methods.md file](./Images/12_MetaShARK_methods.png){:width="500"}
 
+- Keywords, who can be linked to keyword thesaurus. This allows you to create "group" of keywords and/or refer to existing terms classifications as we can find in terminological resources such as ontologies or thesaurus.
 
-
-![Upload a metadata template for geotiff attributes](./Images/13_MetaShARK_keywords.png){:width="500"}
+![Add "Biodiversity" keyword](./Images/13_MetaShARK_keywords.png){:width="500"}
 
 ![Upload a metadata template for geotiff attributes](./Images/14_MetaShARK_makeeml.png){:width="500"}
 
