@@ -153,7 +153,7 @@
       "name": "CelSeq2: Multi Batch (mm10)",
       "title": "CelSeq2: Multi Batch (mm10)",
       "test_results": null,
-      "modified": "2024-02-16 00:11:36 +0000",
+      "modified": "2024-02-17 00:11:23 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Flatten Collection\"];\n  0 -->|output| 3;\n  4[\"CelSeq2: Single Batch mm10\"];\n  1 -->|output| 4;\n  3 -->|output| 4;\n  2 -->|output| 4;\n  5[\"Column Join\"];\n  4 -->|9:out_counts| 5;\n"
     },
     {
@@ -171,7 +171,7 @@
       "name": "CelSeq2: Single Batch (mm10)",
       "title": "CelSeq2: Single Batch (mm10)",
       "test_results": null,
-      "modified": "2024-02-16 00:11:36 +0000",
+      "modified": "2024-02-17 00:11:23 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"UMI-tools extract\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  4[\"RNA STAR\"];\n  2 -->|output| 4;\n  3 -->|out2| 4;\n  5[\"Filter\"];\n  4 -->|mapped_reads| 5;\n  6[\"featureCounts\"];\n  5 -->|out_file1| 6;\n  2 -->|output| 6;\n  7[\"UMI-tools count\"];\n  6 -->|output_bam| 7;\n"
     }
   ],
@@ -202,11 +202,6 @@
       }
     ],
     "inexact": [
-      {
-        "url": "https://usegalaxy.be/",
-        "name": "UseGalaxy.be",
-        "usegalaxy": false
-      },
       {
         "url": "https://usegalaxy.no/",
         "name": "UseGalaxy.no",
