@@ -166,6 +166,11 @@ Then you can add final elements as:
 
 ![Add "Biodiversity" keyword](./Images/13_MetaShARK_keywords.png){:width="500"}
 
+Note that here you can add semantic annotations! To do so, you need to reach the MetaShARK parameters (upper right icon)
+then enter your CEDAR token. To create a CEDAR account, you can register here http://cedar.metadatacenter.org/. API key 
+format to enter is something like: `api 205b1e521f2eaf0ad4a361c438b63205b1e521f2eaf0ad4a361c438b63c438b63`. You then can 
+use the `+` button on the keyword space to **Add keyword with dataset annotation**.
+
 Finally, you can specify a temporal coverage and go to the last step of this MetaShARK workflow: Generat an EML metadata file! If everything is ok, you will have creation of an EML metadata file.
 
 ![Make EML](./Images/14_MetaShARK_makeeml.png){:width="500"}
@@ -173,6 +178,15 @@ Finally, you can specify a temporal coverage and go to the last step of this Met
 Once EML written, you can download the data package through the button "Download Data Package". This will allow you to download a zip archive you can unzip on your local computer. Resulting files are organized through 2 main folders. A main folder with data_objects (all datafiles you uploaded into MetaShARK), eml (EML metadata file written in XML format), and metadata_templates (all metadata files written in text format, column separated by tabulations). A second one called "emldown" where a draft of data paper written in html format can be accessed. 
 
 WARNING! At this final stage, MetaShARK can freeze and show like a "front grey filter". If this is the case, you can refresh MetaShARK app pressing F5 button of your keyboard for example. To dowload the resutling data package, you can go to the "Fill In" module, select the data package you created and click on "Download.zip".
+
+
+> <tip-title>Returning on your MetaShARK instance</tip-title>
+> If you close MetaShARK navigator window, you can reopen it clicking on Menu > User > Active InteractiveTools.
+> You can here click on "metashark visualization" hyperlink. You can then go on the Fill In module, select 
+> the data package you created and click **Load**.
+>
+{: .tip}
+
 
 # MetaShRIMPS
 
@@ -210,15 +224,8 @@ Acessible, Interoperable, Reusable) on a 100 point scale.
 > <question-title></question-title>
 > How you can ameliorate your FAIR score?
 > > <solution-title></solution-title>
-> > You can look at the lines of the table for FAILURE (red) and WARNING (yellow) status. The first FAILURE 
-> > status line is related to missing annotations. This is something we can fix coming back to MetaShARK app.
-> > If you close MetaShARK navigator window, you can reopen it clicking on Menu > User > Active InteractiveTools.
-> > You can here click on "metashark visualization" hyperlink. You can then go on the Fill In module, select 
-> > the data package you created and click **Load**. You then need to click **Previous** so you can add annotations
-> > on keywords. To do so, you need to reach the MetaShARK parameters (upper right icon) then enter your CEDAR token.
-> > To create a CEDAR account, you can register here http://cedar.metadatacenter.org/. API key format is similar
-> > to `api 205b1e521f2eaf0ad4a361c438b63205b1e521f2eaf0ad4a361c438b63c438b63`. You then can click on the + button
-> > on the keyword space to **Add keyword with dataset annotation**.
+> > You can look at the lines of the table for FAILURE (red) and WARNING (yellow) status. One FAILURE 
+> > status line is related to a missing type for keyword `Biodiversity`. 
 > {: .solution}
 >
 {: .question}
