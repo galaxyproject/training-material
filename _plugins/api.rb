@@ -376,23 +376,23 @@ Jekyll::Hooks.register :site, :post_write do |site|
   dir = File.join(site.dest, 'api', 'workflows')
 
   # Public tool listing: reorganised
-  if site.data['public-server-tools'] and site.data['public-server-tools']['tools']
+  if site.data['public-server-tools'] && site.data['public-server-tools']['tools']
     site.data['public-server-tools']['tools'].each do |tool, version_data|
       path = File.join(site.dest, 'api', 'psl', "#{tool}.json")
       dir = File.dirname(path)
       FileUtils.mkdir_p(dir) unless File.directory?(dir)
 
       d = version_data.dup
-      d.keys.each do |k|
+      d.each_key do |k|
         # Replace the indexes with the server URLs from site['public-server-tools']['servers']
         d[k] = d[k].map { |v| site.data['public-server-tools']['servers'][v] }
       end
 
       File.write(path, JSON.generate(d))
     end
-    Jekyll.logger.debug "[GTN/API/PSL] PSL written"
+    Jekyll.logger.debug '[GTN/API/PSL] PSL written'
   else
-    Jekyll.logger.debug "[GTN/API/PSL] PSL Dataset not available, are you in a CI environment?"
+    Jekyll.logger.debug '[GTN/API/PSL] PSL Dataset not available, are you in a CI environment?'
   end
 
   # ro-crate-metadata.json
