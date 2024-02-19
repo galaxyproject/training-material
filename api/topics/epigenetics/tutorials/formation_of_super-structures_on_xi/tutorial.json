@@ -178,7 +178,7 @@
       "name": "GTN - ChIP Seq - Formation Of Super Structures On Xi",
       "title": "GTN - ChIP Seq - Formation Of Super Structures On Xi",
       "test_results": null,
-      "modified": "2024-02-18 00:11:53 +0000",
+      "modified": "2024-02-19 00:11:32 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"Input dataset\"];\n  7[\"Input dataset\"];\n  8[\"Input dataset\"];\n  9[\"Input dataset\"];\n  10[\"FastQC\"];\n  0 -->|output| 10;\n  11[\"Trim Galore!\"];\n  1 -->|output| 11;\n  0 -->|output| 11;\n  12[\"FastQC\"];\n  1 -->|output| 12;\n  13[\"Samtools idxstats\"];\n  2 -->|output| 13;\n  14[\"bamCoverage\"];\n  2 -->|output| 14;\n  15[\"bamCoverage\"];\n  3 -->|output| 15;\n  16[\"bamCoverage\"];\n  3 -->|output| 16;\n  17[\"Samtools idxstats\"];\n  3 -->|output| 17;\n  18[\"plotFingerprint\"];\n  3 -->|output| 18;\n  2 -->|output| 18;\n  19[\"bamCompare\"];\n  3 -->|output| 19;\n  2 -->|output| 19;\n  20[\"MACS2 callpeak\"];\n  2 -->|output| 20;\n  3 -->|output| 20;\n  21[\"bamCompare\"];\n  3 -->|output| 21;\n  2 -->|output| 21;\n  22[\"bamCompare\"];\n  4 -->|output| 22;\n  2 -->|output| 22;\n  23[\"MACS2 callpeak\"];\n  2 -->|output| 23;\n  4 -->|output| 23;\n  24[\"bamCompare\"];\n  4 -->|output| 24;\n  2 -->|output| 24;\n  25[\"bamCompare\"];\n  5 -->|output| 25;\n  2 -->|output| 25;\n  26[\"MACS2 callpeak\"];\n  2 -->|output| 26;\n  5 -->|output| 26;\n  27[\"bamCompare\"];\n  7 -->|output| 27;\n  6 -->|output| 27;\n  28[\"MACS2 callpeak\"];\n  6 -->|output| 28;\n  7 -->|output| 28;\n  29[\"bamCompare\"];\n  8 -->|output| 29;\n  6 -->|output| 29;\n  30[\"MACS2 callpeak\"];\n  6 -->|output| 30;\n  8 -->|output| 30;\n  31[\"multiBamSummary\"];\n  2 -->|output| 31;\n  3 -->|output| 31;\n  4 -->|output| 31;\n  5 -->|output| 31;\n  6 -->|output| 31;\n  7 -->|output| 31;\n  8 -->|output| 31;\n  9 -->|output| 31;\n  32[\"bamCompare\"];\n  9 -->|output| 32;\n  6 -->|output| 32;\n  33[\"MACS2 callpeak\"];\n  6 -->|output| 33;\n  9 -->|output| 33;\n  34[\"Bowtie2\"];\n  11 -->|trimmed_reads_pair1| 34;\n  11 -->|trimmed_reads_pair2| 34;\n  35[\"Concatenate datasets\"];\n  20 -->|output_narrowpeaks| 35;\n  23 -->|output_narrowpeaks| 35;\n  36[\"plotCorrelation\"];\n  31 -->|outFile| 36;\n  37[\"Concatenate datasets\"];\n  20 -->|output_narrowpeaks| 37;\n  23 -->|output_narrowpeaks| 37;\n  26 -->|output_narrowpeaks| 37;\n  28 -->|output_narrowpeaks| 37;\n  30 -->|output_narrowpeaks| 37;\n  33 -->|output_narrowpeaks| 37;\n  38[\"bedtools SortBED\"];\n  35 -->|out_file1| 38;\n  39[\"bedtools SortBED\"];\n  37 -->|out_file1| 39;\n  40[\"bedtools MergeBED\"];\n  38 -->|output| 40;\n  41[\"bedtools MergeBED\"];\n  39 -->|output| 41;\n  42[\"computeMatrix\"];\n  19 -->|outFileName| 42;\n  22 -->|outFileName| 42;\n  40 -->|output| 42;\n  43[\"computeMatrix\"];\n  19 -->|outFileName| 43;\n  22 -->|outFileName| 43;\n  25 -->|outFileName| 43;\n  27 -->|outFileName| 43;\n  29 -->|outFileName| 43;\n  32 -->|outFileName| 43;\n  41 -->|output| 43;\n  44[\"plotHeatmap\"];\n  42 -->|outFileName| 44;\n  45[\"plotHeatmap\"];\n  43 -->|outFileName| 45;\n"
     }
   ],
@@ -228,6 +228,11 @@
       {
         "url": "https://galaxy.mesocentre.uca.fr",
         "name": "Galaxy@AuBi",
+        "usegalaxy": false
+      },
+      {
+        "url": "https://usegalaxy.be/",
+        "name": "UseGalaxy.be",
         "usegalaxy": false
       },
       {

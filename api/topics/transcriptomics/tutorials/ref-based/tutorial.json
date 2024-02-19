@@ -192,7 +192,7 @@
       "name": "DEG Part - Ref Based RNA Seq - Transcriptomics - GTN",
       "title": "DEG Part - Ref Based RNA Seq - Transcriptomics - GTN",
       "test_results": null,
-      "modified": "2024-02-18 00:11:55 +0000",
+      "modified": "2024-02-19 00:11:35 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Extract element identifiers\"];\n  0 -->|output| 4;\n  5[\"Gene length and GC content\"];\n  1 -->|output| 5;\n  6[\"Replace Text\"];\n  4 -->|output| 6;\n  7[\"Change Case\"];\n  5 -->|length| 7;\n  8[\"Tag elements\"];\n  0 -->|output| 8;\n  6 -->|outfile| 8;\n  9[\"DESeq2\"];\n  8 -->|output| 9;\n  10[\"Compute\"];\n  9 -->|deseq_out| 10;\n  11[\"Annotate DESeq2/DEXSeq output tables\"];\n  1 -->|output| 11;\n  9 -->|deseq_out| 11;\n  12[\"Table Compute\"];\n  9 -->|counts_out| 12;\n  13[\"Cut\"];\n  10 -->|out_file1| 13;\n  14[\"Concatenate datasets\"];\n  2 -->|output| 14;\n  11 -->|output| 14;\n  15[\"Table Compute\"];\n  9 -->|counts_out| 15;\n  12 -->|table| 15;\n  16[\"Change Case\"];\n  13 -->|out_file1| 16;\n  17[\"Filter\"];\n  14 -->|out_file1| 17;\n  18[\"goseq\"];\n  16 -->|out_file1| 18;\n  7 -->|out_file1| 18;\n  19[\"goseq\"];\n  16 -->|out_file1| 19;\n  7 -->|out_file1| 19;\n  20[\"Cut\"];\n  17 -->|out_file1| 20;\n  21[\"Filter\"];\n  17 -->|out_file1| 21;\n  22[\"Filter\"];\n  18 -->|wallenius_tab| 22;\n  23[\"Filter\"];\n  18 -->|wallenius_tab| 23;\n  24[\"Filter\"];\n  19 -->|wallenius_tab| 24;\n  25[\"Filter\"];\n  19 -->|wallenius_tab| 25;\n  26[\"Pathview\"];\n  20 -->|out_file1| 26;\n  3 -->|output| 26;\n  27[\"Join two Datasets\"];\n  9 -->|counts_out| 27;\n  21 -->|out_file1| 27;\n  28[\"Group\"];\n  22 -->|out_file1| 28;\n  29[\"Group\"];\n  23 -->|out_file1| 29;\n  30[\"Cut\"];\n  27 -->|out_file1| 30;\n  31[\"heatmap2\"];\n  30 -->|out_file1| 31;\n  32[\"heatmap2\"];\n  30 -->|out_file1| 32;\n"
     },
     {
@@ -259,7 +259,7 @@
       "name": "QC + Mapping + Counting (single+paired) - Ref Based RNA Seq - Transcriptomics - GTN",
       "title": "QC + Mapping + Counting (single+paired) - Ref Based RNA Seq - Transcriptomics - GTN",
       "test_results": null,
-      "modified": "2024-02-18 00:11:55 +0000",
+      "modified": "2024-02-19 00:11:35 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset collection\"];\n  2[\"Input dataset\"];\n  3[\"Cutadapt\"];\n  0 -->|output| 3;\n  4[\"Flatten collection\"];\n  1 -->|output| 4;\n  5[\"Cutadapt\"];\n  1 -->|output| 5;\n  6[\"Gene length and GC content\"];\n  2 -->|output| 6;\n  7[\"Convert GTF to BED12\"];\n  2 -->|output| 7;\n  8[\"RNA STAR\"];\n  2 -->|output| 8;\n  3 -->|out1| 8;\n  9[\"Merge collections\"];\n  4 -->|output| 9;\n  0 -->|output| 9;\n  10[\"Merge collections\"];\n  5 -->|report| 10;\n  3 -->|report| 10;\n  11[\"RNA STAR\"];\n  2 -->|output| 11;\n  5 -->|out_pairs| 11;\n  12[\"featureCounts\"];\n  8 -->|mapped_reads| 12;\n  2 -->|output| 12;\n  13[\"FastQC\"];\n  9 -->|output| 13;\n  14[\"MultiQC\"];\n  10 -->|output| 14;\n  15[\"Merge collections\"];\n  11 -->|output_log| 15;\n  8 -->|output_log| 15;\n  16[\"Merge collections\"];\n  8 -->|reads_per_gene| 16;\n  11 -->|reads_per_gene| 16;\n  17[\"featureCounts\"];\n  11 -->|mapped_reads| 17;\n  2 -->|output| 17;\n  18[\"Merge collections\"];\n  11 -->|mapped_reads| 18;\n  8 -->|mapped_reads| 18;\n  19[\"Merge collections\"];\n  8 -->|signal_unique_str1| 19;\n  11 -->|signal_unique_str1| 19;\n  20[\"Merge collections\"];\n  8 -->|signal_unique_str2| 20;\n  11 -->|signal_unique_str2| 20;\n  21[\"MultiQC\"];\n  13 -->|text_file| 21;\n  22[\"MultiQC\"];\n  15 -->|output| 22;\n  23[\"Select last\"];\n  16 -->|output| 23;\n  24[\"MultiQC\"];\n  16 -->|output| 24;\n  25[\"Merge collections\"];\n  12 -->|output_short| 25;\n  17 -->|output_short| 25;\n  26[\"Merge collections\"];\n  12 -->|output_summary| 26;\n  17 -->|output_summary| 26;\n  27[\"Infer Experiment\"];\n  18 -->|output| 27;\n  7 -->|bed_file| 27;\n  28[\"Read Distribution\"];\n  18 -->|output| 28;\n  7 -->|bed_file| 28;\n  29[\"Read Distribution\"];\n  18 -->|output| 29;\n  7 -->|bed_file| 29;\n  30[\"Samtools view\"];\n  18 -->|output| 30;\n  31[\"Samtools idxstats\"];\n  18 -->|output| 31;\n  32[\"MarkDuplicates\"];\n  18 -->|output| 32;\n  33[\"pyGenomeTracks\"];\n  19 -->|output| 33;\n  20 -->|output| 33;\n  2 -->|output| 33;\n  34[\"Cut\"];\n  23 -->|outfile| 34;\n  35[\"Sort\"];\n  25 -->|output| 35;\n  36[\"MultiQC\"];\n  26 -->|output| 36;\n  37[\"MultiQC\"];\n  29 -->|output| 37;\n  38[\"Gene Body Coverage (BAM)\"];\n  30 -->|outputsam| 38;\n  7 -->|bed_file| 38;\n  39[\"MultiQC\"];\n  31 -->|output| 39;\n  40[\"MultiQC\"];\n  32 -->|metrics_file| 40;\n  41[\"Sort\"];\n  34 -->|out_file1| 41;\n  42[\"MultiQC\"];\n  38 -->|outputtxt| 42;\n"
     },
     {
@@ -326,7 +326,7 @@
       "name": "QC + Mapping + Counting - Ref Based RNA Seq - Transcriptomics - GTN - subworkflows",
       "title": "QC + Mapping + Counting - Ref Based RNA Seq - Transcriptomics - GTN - subworkflows",
       "test_results": null,
-      "modified": "2024-02-18 00:11:55 +0000",
+      "modified": "2024-02-19 00:11:35 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"cutadapt\"];\n  0 -->|output| 3;\n  4[\"STAR + multiQC\"];\n  1 -->|output| 4;\n  3 -->|out_pairs| 4;\n  5[\"more QC\"];\n  1 -->|output| 5;\n  4 -->|STAR_BAM| 5;\n  6[\"Determine strandness\"];\n  4 -->|STAR_BAM| 6;\n  1 -->|output| 6;\n  4 -->|signal_unique_str1| 6;\n  4 -->|signal_unique_str2| 6;\n  4 -->|reads_per_gene| 6;\n  7[\"count STAR\"];\n  1 -->|output| 7;\n  4 -->|reads_per_gene| 7;\n  8[\"count featureCount\"];\n  1 -->|output| 8;\n  4 -->|STAR_BAM| 8;\n"
     }
   ],
@@ -392,6 +392,11 @@
       }
     ],
     "inexact": [
+      {
+        "url": "https://usegalaxy.be/",
+        "name": "UseGalaxy.be",
+        "usegalaxy": false
+      },
       {
         "url": "https://usegalaxy.no/",
         "name": "UseGalaxy.no",
