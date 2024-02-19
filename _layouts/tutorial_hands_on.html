@@ -167,7 +167,10 @@ We should ONLY be using new_material (if at all possible.)
         <div><strong>{% icon purl %} <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
         {% endif %}
 
+	{% assign feedback_count = site | get_feedback_count: own_material.id %}
+	{% if feedback_count > 0 %}
 	<div><strong>{% icon rating %} Rating:</strong> <a href="#feedback-responses">{{ site | get_rating:own_material.id }}</a> ({{ site | get_feedback_count: own_material.id }} ratings)</div>
+	{% endif %}
 	<div><strong>{% icon version %} Revision:</strong> {{ page | get_version_number }} </div>
 
     </blockquote>
