@@ -167,9 +167,14 @@ We should ONLY be using new_material (if at all possible.)
         <div><strong>{% icon purl %} <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
         {% endif %}
 
-	{% assign feedback_count = site | get_feedback_count: own_material.id %}
+	{% assign own_material_id = own_material.id %}
+	{% if page.lang %}
+		{% capture own_material_id %}{{ own_material.id }}:{{ page.lang }}{% endcapture %}
+	{% endif %}
+
+	{% assign feedback_count = site | get_feedback_count: own_material_id %}
 	{% if feedback_count > 0 %}
-	<div><strong>{% icon rating %} Rating:</strong> <a href="#feedback-responses">{{ site | get_rating:own_material.id }}</a> ({{ site | get_feedback_count: own_material.id }} ratings)</div>
+	<div><strong>{% icon rating %} Rating:</strong> <a href="#feedback-responses">{{ site | get_rating:own_material_id }}</a> ({{ site | get_feedback_count: own_material_id }} ratings)</div>
 	{% endif %}
 	<div><strong>{% icon version %} Revision:</strong> {{ page | get_version_number }} </div>
 
@@ -331,7 +336,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 <br>{{ locale['feedback-text-learner'] | default: "Did you use this material as a learner or student? Click the form below to leave feedback." }}<i class="fas fa-hand-point-down"></i>
                 </p>
 
-		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ own_material.id }}{% if page.lang %}:{{ page.lang }}{% endif %}" alt="Feedback form link">
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ own_material_id }}" alt="Feedback form link">
                     <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
                 </a>
 
@@ -463,7 +468,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                    </div>
 
 		   <p>
-		   {% assign feedback_histo = site | get_rating_histogram_chart:own_material.id %}
+		   {% assign feedback_histo = site | get_rating_histogram_chart:own_material_id %}
 
 		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
 		   {% for hist in feedback_histo %}
@@ -474,7 +479,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 		   {% endfor %}
 		   </table>
 		   </p>
-		{% assign feedbacks = site | get_recent_feedbacks:own_material.id %}
+		{% assign feedbacks = site | get_recent_feedbacks:own_material_id %}
 		    {% for feedback in feedbacks %}
 		    <b>{{ feedback[0] }}</b>
 		    <ul>

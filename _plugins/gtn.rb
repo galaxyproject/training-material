@@ -379,14 +379,9 @@ module Jekyll
     def get_rating_histogram(site, material_id)
       return {} if material_id.nil?
 
-      begin
-        topic, tutorial = material_id.split('/')
-        feedbacks = site.data['feedback2'][topic][tutorial]
-      rescue StandardError
-        return {}
-      end
+      feedbacks = get_feedbacks(site, material_id)
 
-      return {} if feedbacks.nil?
+      return {} if feedbacks.nil? || feedbacks.empty?
 
       ratings = feedbacks.map { |f| f['rating'] }
       f = ratings.each_with_object(Hash.new(0)) { |w,counts| counts[w] += 1 }
@@ -431,9 +426,20 @@ module Jekyll
 
       begin
         topic, tutorial = material_id.split('/')
-        feedbacks = site.data['feedback2'][topic][tutorial]
-      rescue StandardError
-        Jekyll.logger.warn "[GTN/Feedback] No feedback found for #{topic}/#{tutorial}"
+
+        if tutorial.include?(':')
+          language = tutorial.split(':')[1]
+          tutorial = tutorial.split(':')[0]
+          # If a language is supplied, then
+          feedbacks = site.data['feedback2'][topic][tutorial]
+            .select{|f| (f['lang'] || "").downcase == language.downcase}
+        else
+          # English is the default
+          feedbacks = site.data['feedback2'][topic][tutorial]
+            .select{|f| f['lang'].nil? }
+        end
+
+      rescue StandardError => e
         return []
       end
 
