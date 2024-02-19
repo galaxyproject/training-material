@@ -28,7 +28,7 @@ notebook:
 
 ---
 
-![](https://i.imgur.com/1PCleoW.png)
+![Imgur image](https://i.imgur.com/1PCleoW.png)
 
 # The problem
 
@@ -154,7 +154,7 @@ Can we sequence a genome using the shotgun approach?
 
 # Simulating Sanger sequencing with Python
 
-[![](https://imgs.xkcd.com/comics/sigil_cycle.png)](https://xkcd.com/1306)
+[![xkcd1306](https://imgs.xkcd.com/comics/sigil_cycle.png)](https://xkcd.com/1306)
 
 In this lesson we will cover some of the fundamental Python basics including variables, expressions, statements, and functions.
 
