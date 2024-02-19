@@ -376,6 +376,100 @@ module Jekyll
       Gtn::ModificationTimes.obtain_modification_count(page['path'])
     end
 
+    def get_rating_histogram(site, material_id)
+      return {} if material_id.nil?
+
+      begin
+        topic, tutorial = material_id.split('/')
+        feedbacks = site.data['feedback2'][topic][tutorial]
+      rescue StandardError
+        return {}
+      end
+
+      return {} if feedbacks.nil?
+
+      ratings = feedbacks.map { |f| f['rating'] }
+      f = ratings.each_with_object(Hash.new(0)) { |w,counts| counts[w] += 1 }
+      f
+    end
+
+    def get_rating_histogram_chart(site, material_id)
+      histogram = get_rating_histogram(site, material_id)
+      return {} if histogram.empty?
+
+      highest = histogram.map { |k, v| v }.max
+      histogram
+        .map { |k, v| [k, [v, v / highest.to_f]] }
+        .sort_by { |k, v| -k }
+        .to_h
+    end
+
+    def get_rating(site, material_id)
+      f = get_rating_histogram(site, material_id)
+      rating = f.map{|k,v| k * v}.sum / f.map{|k,v| v}.sum.to_f
+      rating.round(1)
+    end
+
+    # Only accepts an integer rating
+    def to_stars(rating)
+      if rating.nil? or rating.to_i < 1 or rating == '0' or rating == 0
+        %(<span class="sr-only">0 stars</span>) +
+          ('<i class="far fa-star" aria-hidden="true"></i>')
+      else
+        if rating.to_i < 1
+          %(<span class="sr-only">0 stars</span>) +
+            ('<i class="far fa-star" aria-hidden="true"></i>')
+        else
+          %(<span class="sr-only">#{rating} stars</span>) +
+            ('<i class="fa fa-star" aria-hidden="true"></i>' * rating.to_i)
+        end
+      end
+    end
+
+    def get_feedbacks(site, material_id)
+      return [] if material_id.nil?
+
+      begin
+        topic, tutorial = material_id.split('/')
+        feedbacks = site.data['feedback2'][topic][tutorial]
+      rescue StandardError
+        Jekyll.logger.warn "[GTN/Feedback] No feedback found for #{topic}/#{tutorial}"
+        return []
+      end
+
+      return [] if feedbacks.nil? or feedbacks.empty?
+
+      return feedbacks
+        .sort_by { |f| f['date'] }
+        .reverse
+        .map{|f| f['stars'] = to_stars(f['rating']); f}
+    end
+
+    def get_feedback_count(site, material_id)
+      get_feedbacks(site, material_id).length
+    end
+
+    def get_recent_feedbacks(site, material_id)
+      f = get_feedbacks(site, material_id)
+        .select{|f|
+          (f['pro'] && f['pro'].length.positive?) ||
+          (f['con'] && f['con'].length.positive?)
+        }
+        .map{|f| f['f_date'] = Date.parse(f['date']).strftime('%B %Y'); f}
+
+      last_year = f.select { |f| Date.parse(f['date']) > Date.today - 365 }
+      # If we have fewer than 20 in the last year, then extend further.
+      if last_year.length < 20
+        return f
+          .first(20)
+          .group_by { |f| f['f_date'] }
+      else
+        # Otherwise just everything last year.
+        return last_year
+          .group_by { |f| f['f_date'] }
+      end
+    end
+
     def list_usegalaxy_servers(_site)
       Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }
     end

@@ -167,6 +167,7 @@ We should ONLY be using new_material (if at all possible.)
         <div><strong>{% icon purl %} <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
         {% endif %}
 
+	<div><strong>{% icon rating %} Rating:</strong> <a href="#feedback-responses">{{ site | get_rating:own_material.id }}</a> ({{ site | get_feedback_count: own_material.id }} ratings)</div>
 	<div><strong>{% icon version %} Revision:</strong> {{ page | get_version_number }} </div>
 
     </blockquote>
@@ -434,14 +435,56 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 {% endif %}
 
 		{% if own_material.tools %}
-                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
-                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
 			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
 <div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl {{ own_material.api }} | jq .admin_install_yaml -r)</code></pre></div>
 <p>Alternatively you can copy and paste the following YAML</p>
 <div class="highlight"><pre class="highlight"><code>{{ own_material.admin_install_yaml }}</code></pre></div>
                 </blockquote>
 		{% endif %}
+
+		<blockquote class="details" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   {% assign feedback_histo = site | get_rating_histogram_chart:own_material.id %}
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   {% for hist in feedback_histo %}
+			<tr>
+				<th scope="row">{{ hist[0] | to_stars }}</th>
+				<td style="--size: {{ hist[1][1] }}">{{ hist[1][0] }}</td>
+			</tr>
+		   {% endfor %}
+		   </table>
+		   </p>
+		{% assign feedbacks = site | get_recent_feedbacks:own_material.id %}
+		    {% for feedback in feedbacks %}
+		    <b>{{ feedback[0] }}</b>
+		    <ul>
+				{% for feed in feedback[1] %}
+				<li>
+					{{ feed.rating | to_stars }}: 
+					{% if feed.pro %}<b>Liked</b>: {{ feed.pro }}{% endif %}
+					{% if feed.con %}<b>Disliked</b>: {{ feed.con }}{% endif %}
+				</li>
+				{% endfor %}
+		    </ul>
+		    {% endfor %}
+		</blockquote>
 
 
                 </section>
