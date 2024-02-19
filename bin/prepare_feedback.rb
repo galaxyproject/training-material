@@ -106,8 +106,8 @@ end
 # Also save as yaml
 yaml_data = data.group_by { |x| x[:topic_id] }.to_h do |topic, feedback|
   fg = feedback.group_by { |x| x[:tutorial_id] }
-               .map do |tutorial, feedback|
-    [tutorial, feedback.map do |x|
+               .map do |tutorial, feedback2|
+    [tutorial, feedback2.map do |x|
                  { 'rating' => x[:rating], 'pro' => x[:pro], 'con' => x[:con], 'date' => x[:date], 'lang' => x[:lang] }
                end]
   end
