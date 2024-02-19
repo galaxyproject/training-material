@@ -16,6 +16,9 @@ key_points:
 contributions:
   authorship:
   - nekrut
+
+priority: 4
+
 subtopic: gnmx
 draft: true
 
