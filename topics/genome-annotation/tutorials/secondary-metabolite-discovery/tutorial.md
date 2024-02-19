@@ -4,49 +4,30 @@ layout: tutorial_hands_on
 title: Secondary metabolite discovery
 zenodo_link: https://zenodo.org/records/10652998
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How to discover secondary metabolites produced by microorganisms ?
+- How to identify the discovered secondary metabolites in compound libraries ?
+- How to bridge a workflow step that cannot be performed with a dedicated tool ?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Gene cluster prediction using antiSMAHS.
+- Extraction of gene cluster products using a custom script.
+- Query of the products in compound libraries using cheminformatic tools.
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Gene cluster prediction that can be performed for any assembly or genome of microorganisms (procaryotes and fungi).
+- Bridging of gene annotation and cheminformatics.
+- Usage of custom script to bridge workflow steps.
 contributors:
-- contributor1
-- contributor2
+- paulzierep
 
 ---
 
+Genome mining is an important source for various bio-active compounds such as antibiotics and fungicides ({% cite adamek_mining_2017 %}).
+The challenge in secondary metabolite discovery using genome mining requires to annotate biosynthetic gene clusters (BGCs) using dedicated tools such as antiSMASH ({% cite blin_antismash_2023 %}) as well as to query the discovered secondary metabolite against compound libraries ({% cite zierep_sempi_2020 %}) in order to identify weather they might posses bio-active properties.
 
-
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
-
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-<!-- This is a comment. -->
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+In this toturial we will:
+* Annotate biosynthetic gene clusters (BGCs) using antiSMASH. 
+* Extract the predicted compounds  as `SMILES` using a custom script. 
+* Query the predicted compounds agains the MIBiG ({% cite terlouw_mibig_2023 %}) which is a dedicated BGC database.
 
 > <agenda-title></agenda-title>
 >
@@ -57,187 +38,106 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Galaxy and data preparation
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
+Any analysis should get its own Galaxy history. So let’s start by creating a new one and get the data into it.
 
 ## Get data
 
-> <hands-on-title> Data Upload </hands-on-title>
+> <hands-on-title> History Creation and Data Upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Rename the history
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
+>
+> 3. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/records/10652998/files/MIBiG_compounds_3.0.sdf/content
->    https://zenodo.org/api/records/10652998/files/gbk2features.ipynb/content
+>    https://zenodo.org/record/10652998/files/MIBiG_compounds_3.0.sdf
+>    https://zenodo.org/record/10652998/files/gbk2features.ipynb
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
->
+>   
+>    For this training we need a custom jupyter notebook and a compound library.
+>   
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 3. Rename the datasets
-> 4. Check that the datatype
+> 4. Rename the datasets
+> 5. Check that the datatype
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
+> 6. Add to each database a tag corresponding to ...
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Biosynthetic gene clusters (BGCs) detection and compound extraction
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+The general idea of this tutorial is described in the flowchart below. 
+Zierep et. al. previously created a 
+workflow that combines BGC prediction with natural compound screening in their webserver [SeMPI 2.0](http://sempi.pharmazie.uni-freiburg.de/)
+({% cite zierep_sempi_2020 %}). 
+Here, we want to reproduce the workflow using Galaxy, which allows to adjust the workflow and combine it with other
+tools and databases. 
+E.g. the workflow could be combined with metagenomic workflows, that allow to screen a vast amount of metagenome assembly genomes (MAGs) for potential novel bioactive compounds.
 
-![Alternative text](../../images/image_name "Legend of the image")
+![Overview flowchart](../../images/bgc_screening/flowchart.drawio.png "Overview flowchart of the workflow.")
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> <details-title> More details about the theory </details-title>
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **NCBI Accession Download**
+## Download a bacterial genome with **NCBI Accession Download**
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [NCBI Accession Download](toolshed.g2.bx.psu.edu/repos/iuc/ncbi_acc_download/ncbi_acc_download/0.2.8+galaxy0) %} with the following parameters:
 >    - *"Select source for IDs"*: `Direct Entry`
->        - *"ID List"*: `{'id': 0, 'output_name': 'output'}`
+>        - *"ID List"*: `AL645882.2`
 >    - *"Molecule Type"*: `Nucleotide`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Genome download </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > This downloads the `Streptomyces coelicolor A3(2) complete genome`, 
+which should be a great source for biosynthetic gene clusters (BGCs).
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Molecule to fingerprint**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Molecule to fingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5) %} with the following parameters:
->    - {% icon param-file %} *"Molecule file"*: `output` (Input dataset)
->    - *"Type of fingerprint"*: `Open Babel FP2 fingerprints`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Antismash**
+## Detect BGCs and predict NRPS / PKS metabolite structures with **Antismash**
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Antismash](toolshed.g2.bx.psu.edu/repos/bgruening/antismash/antismash/6.1.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence file in GenBank,EMBL or FASTA format"*: `output` (output of **NCBI Accession Download** {% icon tool %})
 >    - *"Taxonomic classification of input sequence"*: `Bacteria`
->    - *"Outputs"*: ``
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> BGC detection </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > This step uses Antismash for BGC detection. Another tool that could be used is [prism](https://prism.adapsyn.com/).
+>    > But prism can only be used via a web server and is therefore not integrable into Galaxy workflows.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many BGCs are detected for the `Streptomyces coelicolor A3(2) complete genome` ?
+> 2. How many BGCs are of type NRPS ? 
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. In the HTML report of Antismash you can find 27 BGCs of various types.
+> > 2. Of those 27 BGCs 4 are pure NRPS and one more is  classified as NRPS-like.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Collapse Collection**
+## Collapse single BGC Genbank files into one **Collapse Collection**
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -245,73 +145,138 @@ A big step can have several subsections or sub steps:
 >    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `genbank` (output of **Antismash** {% icon tool %})
 >    - *"Prepend File name"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Collapse Genbank files </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Antismash produces one Genbank file for each cluster. Genbank files can contain multiple records. For downstream analysis it is more convenient to combine all clusters into one file.   
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Custom script in Galaxy
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Apply a custom script with **Interactive JupyTool and notebook**
 
-## Sub-step with **Interactive JupyTool and notebook**
+For the next steps we need to extract the `SMILES` representations of the predicted BGC metabolites.
+And convert in the `.smi` format (basically a tabular format that contains names and structures of chemical compounds).
+
+The  `SMILES` representations of the predicted BGC metabolites are stored as features of the clusters in the Genbank files.
+
+```
+     cand_cluster    1..49828
+                     /SMILES="NC(CCCN)C(=O)NC(C(O)C)C(=O)NC(CCCN)C(=O)O"
+                     /candidate_cluster_number="1"
+                     /contig_edge="False"
+                     /detection_rules="cds(Condensation and (AMP-binding or
+                     A-OX))"
+                     /kind="single"
+                     /product="NRPS"
+                     /protoclusters="1"
+                     /tool="antismash"
+```
+
+There are various tools that can convert Genbank files into GFF (like {% tool [customGbkToGff](toolshed.g2.bx.psu.edu/repos/cpt/cpt_gbk_to_gff/edu.tamu.cpt.gff3.customGbkToGff/20.1.0.0) %} and  {% tool [genbank2gff3](toolshed.g2.bx.psu.edu/repos/iuc/bp_genbank2gff3/bp_genbank2gff3/1.1) %}) and then the one could extract the SMILES string via regex.
+However, unfortunately both tools seem to have difficulty to parse SMILES and introduce artefact like: 
+
+```
+SMILES=CC(%3DO)C(%3DO)O
+```
+
+Therefore we need to quickly prototype our own script, that allows to generate the desired `SMILES` representations.
+This is in fact a great chance to demonstrate how the interactive {% tool [Interactive JupyTool and notebook](interactive_tool_jupyter_notebook) %} can be used to connect workflow steps, for which there is no dedicated tool yet available in Galaxy, showing the flexible nature of Galaxy.
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Interactive JupyTool and notebook](interactive_tool_jupyter_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Load a previous notebook`
->        - {% icon param-file %} *"IPython Notebook"*: `output` (Input dataset)
+>        - {% icon param-file %} *"IPython Notebook"*: `gbk2features.ipynb` (from your history)
 >        - *"Execute notebook and return a new one."*: `Yes`
 >    - In *"User inputs"*:
 >        - {% icon param-repeat %} *"Insert User inputs"*
->            - *"Name for parameter"*: `dataset`
+>            - *"Name for parameter"*: `dataset` (this dataset can be used in the notebook)
 >            - *"Choose the input type"*: `Dataset`
->                - {% icon param-file %} *"Select value"*: `output` (output of **Collapse Collection** {% icon tool %})
+>                - {% icon param-file %} *"Select value"*: `Collapse Genbank files` (output of **Collapse Collection** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Interactive JupyTool and notebook </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > JupyTool notebooks can be executed interactively, which allows to run any code (python / R / bash) dynamically or as a normal tool itself, that executes a provide script and return the output. More information about the JupyTool can be found in the [Interactive JupyTool Tutorial](https://training.galaxyproject.org/topics/galaxy-interface/tutorials/jupyterlab/tutorial.html).
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+In this workflow the jupyter notebook is executed and the output collected. If you want to run the notebook interactively. Rerun the tool and set the option *"Execute notebook and return a new one."*: `No`. Now the notebook start up interactively and you can play around the the python code.
+
+The code we provide for the notebook looks like this:
+
+```python
+from Bio import SeqIO
+import pandas as pd
+import numpy as np
+
+input_path = "galaxy_inputs"
+
+use_qualifiers = ["SMILES"] 
+
+feature_list = []
+
+for folder in os.listdir(input_path):
+
+    folder_path = os.path.join(input_path, folder)
+
+    if os.path.isdir(folder_path):
+
+        for file in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, file)
+            if '.genbank' in file:
+                for record in SeqIO.parse(file_path, "genbank"):
+                    #print(record)
+                    
+                    for feat in record.features:
+
+                        combined_features = {}
+                        combined_features['ID'] = record.id
+                        combined_features['Name'] = record.name
+                        combined_features['Type'] = feat.type
+                        combined_features['Start'] = feat.location.start
+                        combined_features['End'] = feat.location.end
+                        combined_features['Strand'] = feat.location.strand
+
+                        for qualifier in feat.qualifiers.items():
+                                combined_features[qualifier[0]] = qualifier[1][0]
+                        
+                        feature_list.append(combined_features)
+                
+df = pd.DataFrame(feature_list)
+
+# df trimming is simpler with pandas
+df.replace('', np.nan, inplace=True)
+df = df.dropna(subset=use_qualifiers)
+
+#remove extra space antiSMASH bug (https://github.com/antismash/antismash/issues/694)
+df['SMILES'] = df['SMILES'].str.replace(' ', '')
+
+
+#only keep what is needed downstream
+df = df.loc[:,['ID', 'Name', 'Type', 'Start', 'End', 'Strand', 'SMILES']]
+
+df.to_csv("outputs/collection/feature_table.tsv", sep="\t")
+```
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What does the notebook do ?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The notebook creates a table with a row for each `SMILES` qualifier.
 > >
 > {: .solution}
 >
 {: .question}
+
+# Cheminformatics
+
+The next two steps convert the generated table into the `.smi` format.
 
 ## Sub-step with **Text reformatting**
 
@@ -389,6 +354,42 @@ A big step can have several subsections or sub steps:
 > 1. {% tool [Remove duplicated molecules](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_remduplicates/openbabel_remDuplicates/3.1.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Molecular input file"*: `out_file1` (output of **Remove beginning** {% icon tool %})
 >    - *"Select descriptor for molecule comparison"*: `Canonical SMILES`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+## Sub-step with **Molecule to fingerprint**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Molecule to fingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5) %} with the following parameters:
+>    - {% icon param-file %} *"Molecule file"*: `output` (Input dataset)
+>    - *"Type of fingerprint"*: `Open Babel FP2 fingerprints`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
