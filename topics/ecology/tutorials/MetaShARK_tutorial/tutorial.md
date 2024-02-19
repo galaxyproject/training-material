@@ -224,8 +224,9 @@ Acessible, Interoperable, Reusable) on a 100 point scale.
 > <question-title></question-title>
 > How you can ameliorate your FAIR score?
 > > <solution-title></solution-title>
-> > You can look at the lines of the table for FAILURE (red) and WARNING (yellow) status. One FAILURE 
-> > status line is related to a missing type for keyword `Biodiversity`. 
+> > You can look at the lines of the table for FAILURE (red) and WARNING (yellow) status. Two WARNING 
+> > status lines  are related to an abstract content too short and an attribute definition too small.
+> > ![Warning status lines](./Images/WARNING.png "Overall FAIR score") 
 > {: .solution}
 >
 {: .question}
