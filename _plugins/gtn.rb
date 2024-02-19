@@ -384,40 +384,36 @@ module Jekyll
       return {} if feedbacks.nil? || feedbacks.empty?
 
       ratings = feedbacks.map { |f| f['rating'] }
-      f = ratings.each_with_object(Hash.new(0)) { |w,counts| counts[w] += 1 }
-      f
+      ratings.each_with_object(Hash.new(0)) { |w, counts| counts[w] += 1 }
     end
 
     def get_rating_histogram_chart(site, material_id)
       histogram = get_rating_histogram(site, material_id)
       return {} if histogram.empty?
 
-      highest = histogram.map { |k, v| v }.max
+      highest = histogram.map { |_k, v| v }.max
       histogram
         .map { |k, v| [k, [v, v / highest.to_f]] }
-        .sort_by { |k, v| -k }
+        .sort_by { |k, _v| -k }
         .to_h
     end
 
     def get_rating(site, material_id)
       f = get_rating_histogram(site, material_id)
-      rating = f.map{|k,v| k * v}.sum / f.map{|k,v| v}.sum.to_f
+      rating = f.map { |k, v| k * v }.sum / f.map { |_k, v| v }.sum.to_f
       rating.round(1)
     end
 
     # Only accepts an integer rating
     def to_stars(rating)
-      if rating.nil? or rating.to_i < 1 or rating == '0' or rating == 0
+      if rating.nil? || (rating.to_i < 1) || (rating == '0') || rating.zero?
         %(<span class="sr-only">0 stars</span>) +
-          ('<i class="far fa-star" aria-hidden="true"></i>')
+          '<i class="far fa-star" aria-hidden="true"></i>'
+      elsif rating.to_i < 1
+        '<span class="sr-only">0 stars</span><i class="far fa-star" aria-hidden="true"></i>'
       else
-        if rating.to_i < 1
-          %(<span class="sr-only">0 stars</span>) +
-            ('<i class="far fa-star" aria-hidden="true"></i>')
-        else
-          %(<span class="sr-only">#{rating} stars</span>) +
-            ('<i class="fa fa-star" aria-hidden="true"></i>' * rating.to_i)
-        end
+        %(<span class="sr-only">#{rating} stars</span>) +
+          ('<i class="fa fa-star" aria-hidden="true"></i>' * rating.to_i)
       end
     end
 
@@ -432,23 +428,25 @@ module Jekyll
           tutorial = tutorial.split(':')[0]
           # If a language is supplied, then
           feedbacks = site.data['feedback2'][topic][tutorial]
-            .select{|f| (f['lang'] || "").downcase == language.downcase}
+                          .select { |f| (f['lang'] || '').downcase == language.downcase }
         else
           # English is the default
           feedbacks = site.data['feedback2'][topic][tutorial]
-            .select{|f| f['lang'].nil? }
+                          .select { |f| f['lang'].nil? }
         end
-
-      rescue StandardError => e
+      rescue StandardError
         return []
       end
 
-      return [] if feedbacks.nil? or feedbacks.empty?
+      return [] if feedbacks.nil? || feedbacks.empty?
 
-      return feedbacks
+      feedbacks
         .sort_by { |f| f['date'] }
         .reverse
-        .map{|f| f['stars'] = to_stars(f['rating']); f}
+        .map do |f|
+        f['stars'] = to_stars(f['rating'])
+        f
+      end
     end
 
     def get_feedback_count(site, material_id)
@@ -456,22 +454,25 @@ module Jekyll
     end
 
     def get_recent_feedbacks(site, material_id)
-      f = get_feedbacks(site, material_id)
-        .select{|f|
-          (f['pro'] && f['pro'].length.positive?) ||
-          (f['con'] && f['con'].length.positive?)
-        }
-        .map{|f| f['f_date'] = Date.parse(f['date']).strftime('%B %Y'); f}
+      feedbacks = get_feedbacks(site, material_id)
+                  .select do |f|
+                    f['pro']&.length&.positive? ||
+                      f['con']&.length&.positive?
+                  end
+                  .map do |f|
+        f['f_date'] = Date.parse(f['date']).strftime('%B %Y')
+        f
+      end
 
-      last_year = f.select { |f| Date.parse(f['date']) > Date.today - 365 }
+      last_year = feedbacks.select { |f| Date.parse(f['date']) > Date.today - 365 }
       # If we have fewer than 20 in the last year, then extend further.
       if last_year.length < 20
-        return f
+        feedbacks
           .first(20)
           .group_by { |f| f['f_date'] }
       else
         # Otherwise just everything last year.
-        return last_year
+        last_year
           .group_by { |f| f['f_date'] }
       end
     end
