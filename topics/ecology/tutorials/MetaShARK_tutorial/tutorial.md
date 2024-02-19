@@ -231,6 +231,21 @@ Acessible, Interoperable, Reusable) on a 100 point scale.
 >
 {: .question}
 
+> <hands-on-title>Update metadata content to elevate FAIR score</hands-on-title>
+>
+> 1. Search "abstract" and "attributes_Present.Surface.pH.txt" metadarta files on your history
+>
+> 2. Modify each file using the Galaxy included text editor
+>
+>    To do so, you can go on the "visualize" functionnality of each datafile, clicking on the name of the dataset on your history then on the "visualize" button at the bottom of the dataset description. you can then select "Editor / Manually edit text" to update the content and generate a new version of the dataset.
+>
+> 3. Rename each datafile as original names ("abstract" and "attributes_Present.Surface.pH.txt"), you can add a "modified" tag / label so you can better remember in the future the modification state.
+>
+> 4. Recreate a data collection with all metadata template files, taking the new "abstract" and "attributes_Present.Surface.pH.txt" files instead of old ones.
+>
+> 5. You can recreate an EML metadata file with makeeml EAL tool and then redeploy a metashrimps tool on the new EML.
+>
+
 
 # Conclusion
 
