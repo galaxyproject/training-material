@@ -19,7 +19,7 @@ data = data.map do |x|
   x[:rating] = x['How much did you like this tutorial?']
   x[:pro] = x['What did you like?']
   x[:con] = x['What could be improved?']
-  x[:id] = x['Temporary Tutorial ID']
+  x[:id] = x['Tutorial']
 
   x.delete('Timestamp')
   x.delete('How much did you like this tutorial?')
