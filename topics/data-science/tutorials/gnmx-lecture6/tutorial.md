@@ -40,31 +40,34 @@ The following summary is based on these publications:
 
 ## Genome organization
 
-All coronaviruses contain non-segmented positive strand RNA genome approx. 30 kb in length. It is invariably 5'-leader-UTR-replicase-S-E-M-N-3'UTR-poly(A). In addition, it contains a variety of accessory proteins interspersed throughout the genome (see Fig. below; (From [Fehr and Perlman:2015](http://dx.doi.org/10.1007/978-1-4939-2438-7_1))).  
+All coronaviruses contain non-segmented positive-strand RNA genome approx. 30 kb in length. It is invariably 5'-leader-UTR-replicase-S-E-M-N-3'UTR-poly(A). In addition,
+it contains a variety of accessory proteins interspersed throughout the genome (see Fig. below; (From [Fehr and Perlman:2015](http://dx.doi.org/10.1007/978-1-4939-2438-7_1))).  
 
 ![Genome organozation](https://media.springernature.com/original/springer-static/image/chp%3A10.1007%2F978-1-4939-2438-7_1/MediaObjects/317916_1_En_1_Fig1_HTML.gif "Genomic organization of representative α, β, and γ CoVs. An illustration of the MHV genome is depicted at the top. The expanded regions below show the structural and accessory proteins in the 3′ regions of the HCoV-229E, MHV, SARS-CoV, MERS-CoV and IBV. Size of the genome and individual genes are approximated using the legend at the top of the diagram but are not drawn to scale. HCoV-229E human coronavirus 229E, MHV mouse hepatitis virus, SARS-CoV severe acute respiratory syndrome coronavirus, MERS-CoV Middle East respiratory syndrome coronavirus, IBV infectious bronchitis virus.")
 
-The long replicase gene encodes a number of non-structural proteins (nsps) and occupies 2/3 or the genome. Because of -1 ribosomal frameshifting within ORFab approx. in 25% of the cases polyprotein pp1ab is produced in place of pp1a. pp1a encodes 11 nsps while pp1ab encodes 15 (Fig. below from [Sola:2015](https://www.annualreviews.org/doi/full/10.1146/annurev-virology-100114-055218)). 
+The long replicase gene encodes a number of non-structural proteins (nsps) and occupies 2/3 of the genome. Because of -1 ribosomal frameshifting within ORFab approx. in 25% of the cases
+polyprotein pp1ab is produced in place of pp1a. pp1a encodes 11 nsps while pp1ab encodes 15 (Fig. below from [Sola:2015](https://www.annualreviews.org/doi/full/10.1146/annurev-virology-100114-055218)). 
 
-![Discontinuous transcription](https://www.annualreviews.org/na101/home/literatum/publisher/ar/journals/content/virology/2015/virology.2015.2.issue-1/annurev-virology-100114-055218/20151024/images/large/vi20265.f1.jpeg "Coronavirus genome structure and gene expression. (a) Coronavirus genome structure. The upper scheme represents the TGEV genome. Labels indicate gene names; L corresponds to the leader sequence. Also represented are the nsps derived from processing of the pp1a and pp1ab polyproteins. PLP1, PLP2, and 3CL protease sites are depicted as inverted triangles with the corresponding color code of each protease. Dark gray rectangles represent transmembrane domains, and light gray rectangles indicate other functional domains. (b) Coronavirus genome strategy of sgmRNA expression. The upper scheme represents the TGEV genome. Short lines represent the nested set of sgmRNAs, each containing a common leader sequence (black) and a specific gene to be translated (dark gray). (c) Key elements in coronavirus transcription. A TRS precedes each gene (TRS-B) and includes the core sequence (CS-B) and variable 5′ and 3′ flanking sequences. The TRS of the leader (TRS-L), containing the core sequence (CS-L), is present at the 5′ end of the genome, in an exposed location (orange box in the TRS-L loop). Discontinuous transcription occurs during the synthesis of the negative-strand RNA (light blue), when the copy of the TRS-B hybridizes with the TRS-L. Dotted lines indicate the complementarity between positive-strand and negative-strand RNA sequences. Abbreviations: EndoU, endonuclease; ExoN, exonuclease; HEL, helicase; MTase, methyltransferase (green, N7-methyltransferase; dark purple, 2′-O-methyltransferase); nsp, nonstructural protein; PLP, papain-like protease; RdRp, RNA-dependent RNA polymerase; sgmRNA, subgenomic RNA; TGEV, transmissible gastroenteritis virus; TRS, transcription-regulating sequence; UTR, untranslated region.")
+![Discontinuous transcription](https://www.annualreviews.org/na101/home/literatum/publisher/ar/journals/content/virology/2015/virology.2015.2.issue-1/annurev-virology-100114-055218/20151024/images/large/vi20265.f1.jpeg "Coronavirus genome structure and gene expression. (a) Coronavirus genome structure. The upper scheme represents the TGEV genome. Labels indicate gene names; L corresponds to the leader sequence. Also represented are the nsps derived from the processing of the pp1a and pp1ab polyproteins. PLP1, PLP2, and 3CL protease sites are depicted as inverted triangles with the corresponding color code of each protease. Dark gray rectangles represent transmembrane domains, and light gray rectangles indicate other functional domains. (b) Coronavirus genome strategy of sgmRNA expression. The upper scheme represents the TGEV genome. Short lines represent the nested set of sgmRNAs, each containing a common leader sequence (black) and a specific gene to be translated (dark gray). (c) Key elements in coronavirus transcription. A TRS precedes each gene (TRS-B) and includes the core sequence (CS-B) and variable 5′ and 3′ flanking sequences. The TRS of the leader (TRS-L), containing the core sequence (CS-L), is present at the 5′ end of the genome, in an exposed location (orange box in the TRS-L loop). Discontinuous transcription occurs during the synthesis of the negative-strand RNA (light blue), when the copy of the TRS-B hybridizes with the TRS-L. Dotted lines indicate the complementarity between positive-strand and negative-strand RNA sequences. Abbreviations: EndoU, endonuclease; ExoN, exonuclease; HEL, helicase; MTase, methyltransferase (green, N7-methyltransferase; dark purple, 2′-O-methyltransferase); nsp, nonstructural protein; PLP, papain-like protease; RdRp, RNA-dependent RNA polymerase; sgmRNA, subgenomic RNA; TGEV, transmissible gastroenteritis virus; TRS, transcription-regulating sequence; UTR, untranslated region.")
 
 ## Virion structure
 
-Coronovirus is a spherical particle approx. 125 nm in diameter. It is covered with S-protein projections giving it an appearance of solar corona - hence the term coronavirus. Inside the envelope is nucleocapsid that has helical symmetry far more typical of (-)-strand RNA viruses. There are four main structure proteins: spike (S), membrane (M), envelope (E), and nucleocapsid (N; Fig. below [Masters:2006](http://dx.doi.org/10.1016/S0065-3527(06)66005-3)): 
+Coronavirus is a spherical particle approx. 125 nm in diameter. It is covered with S-protein projections giving it an appearance of solar corona - hence the term coronavirus. Inside the envelope is a nucleocapsid that has helical symmetry far more typical of (-)-strand RNA viruses. There are four main structure proteins: spike (S), membrane (M), envelope (E), and nucleocapsid (N; Fig. below [Masters:2006](http://dx.doi.org/10.1016/S0065-3527(06)66005-3)): 
 
 ![Virion structure](https://ars.els-cdn.com/content/image/1-s2.0-S0065352706660053-gr1.jpg "Schematic of the coronavirus virion, with the minimal set of structural proteins"
 
-Mature S protein is trimer of two subunits: S1 and S2. The two subunits are produced from a single S-precursor by host proteases (see [Kirchdoerfer:2016](http://dx.doi.org/10.1038/nature17200); this however is not the case for all coronaviruses such as SARS-CoV). S1 forms the receptor-binding domain, while S2 forms the stalk. 
+Mature S protein is a trimer of two subunits: S1 and S2. The two subunits are produced from a single S-precursor by host proteases (see [Kirchdoerfer:2016](http://dx.doi.org/10.1038/nature17200); this however is not the case for all coronaviruses such as SARS-CoV). S1 forms the receptor-binding domain, while S2 forms the stalk. 
 
-M protein is the most abundant structural components of the virion and determines its shape. It possibly exists as a dimer.
+M protein is the most abundant structural component of the virion and determines its shape. It possibly exists as a dimer.
 
-E protein is least abundant protein of the capsid and possess ion channel activity. In facilitates assembly and release of the virus. In SARS-CoV it is not required for replication but is essential for pathogenesis. 
+E protein is the least abundant protein of the capsid and possesses ion channel activity. It facilitates the assembly and release of the virus. In SARS-CoV it is not required for replication but is essential for pathogenesis. 
 
-N proteins forms the nucleocapsid. It N- and C-terminal domains are capable of RNA binding. Specifically it binds to transcription regulatory sequences and the genomic packaging signal. It also binds to `nsp3` and M protein possible tethering viral genome and replicase-transcriptase complex. 
+N proteins form the nucleocapsid. Its N- and C-terminal domains are capable of RNA binding. Specifically, it binds to transcription regulatory sequences and the genomic packaging signal. It also binds to `nsp3`
+and M protein possible tethering viral genome and replicase-transcriptase complex. 
 
 ## Entering the cell
 
-Virion attaches to the cells as a result of interaction between S-protein and a cellular receptor. In case of SARS-CoV-2 (as is in SARS-CoV) angiotensin converting enzyme 2 (ACE2) serves as the receptor binding to C-terminal portion of S1 domain. After receptor binding S protein is cleaved at two sites within the S2 subdomain. The first cleavage separates receptor-binding domain of S from membrane fusion domain. The second cleavage (at S2') exposes the fusion peptide. The SARS-CoV-2 is different from SARS-CoV in that it contains a [furin](https://en.wikipedia.org/wiki/Furin) cleavage site that is processed during viral maturation within endoplasmatic reticulum (ER; see [Walls:2020](http://dx.doi.org/10.1016/j.cell.2020.02.058)). The fusion peptide inserts into the cellular membrane and triggers joining on the two heptad regions with S2 forming antiparallel six-helix bundle resulting in fusion and release of the genome into the cytoplasm (Fig. below from [Jackson:2022](https://www.nature.com/articles/s41580-021-00418-x). 
+Virion attaches to the cells as a result of interaction between S-protein and a cellular receptor. In the case of SARS-CoV-2 (as is in SARS-CoV) angiotensin converting enzyme 2 (ACE2) serves as the receptor binding to C-terminal portion of S1 domain. After receptor binding S protein is cleaved at two sites within the S2 subdomain. The first cleavage separates the receptor-binding domain of S from the membrane fusion domain. The second cleavage (at S2') exposes the fusion peptide. The SARS-CoV-2 is different from SARS-CoV in that it contains a [furin](https://en.wikipedia.org/wiki/Furin) cleavage site that is processed during viral maturation within endoplasmatic reticulum (ER; see [Walls:2020](http://dx.doi.org/10.1016/j.cell.2020.02.058)). The fusion peptide inserts into the cellular membrane and triggers joining on the two heptad regions with S2 forming an antiparallel six-helix bundle resulting in fusion and release of the genome into the cytoplasm (Fig. below from [Jackson:2022](https://www.nature.com/articles/s41580-021-00418-x). 
 
 ![Entering the cell](https://i.imgur.com/DD7EO3G.png "Two spike (S) protein cleavage events are typically necessary for the coronavirus entry process: one at the junction of the S1 and S2 subunits and the other at the S2′ site, internal to the S2 subunit. In the case of SARS-CoV-2, the polybasic sequence at the S1–S2 boundary is cleaved during virus maturation in an infected cell, but the S2′ site is cleaved at the target cell following angiotensin-converting enzyme 2 (ACE2) binding. Virus binding to ACE2 (step 1) induces conformational changes in the S1 subunit and exposes the S2′ cleavage site in the S2 subunit. Depending on the entry route taken by SARS-CoV-2, the S2′ site is cleaved by different proteases. Left: If the target cell expresses insufficient transmembrane protease, serine 2 (TMPRSS2) or if a virus–ACE2 complex does not encounter TMPRSS2, the virus–ACE2 complex is internalized via clathrin-mediated endocytosis (step 2) into the endolysosomes, where S2′ cleavage is performed by cathepsins, which require an acidic environment for their activity (steps 3 and 4). Right: In the presence of TMPRSS2, S2′ cleavage occurs at the cell surface (step 2). In both entry pathways, cleavage of the S2′ site exposes the fusion peptide (FP) and dissociation of S1 from S2 induces dramatic conformational changes in the S2 subunit, especially in heptad repeat 1, propelling the fusion peptide forward into the target membrane, initiating membrane fusion (step 5 on the left and step 3 on the right). Fusion between viral and cellular membranes forms a fusion pore through which viral RNA is released into the host cell cytoplasm for uncoating and replication (step 6 on the left and step 4 on the right). Several agents disrupt interaction between the S protein and ACE2: ACE2 mimetics, therapeutic monoclonal antibodies targeting the neutralizing epitopes on the S protein and antibodies elicited by vaccination block virus binding to ACE2 and thus inhibit both entry pathways. By contrast, strategies targeting post-receptor-binding steps differ between the two pathways. Being a serine protease inhibitor, camostat mesylate restricts the TMPRSS2-mediated entry pathway. Hydroxychloroquine and chloroquine block endosomal acidification, which is necessary for cathepsin activity, and thus restrict the cathepsin-mediated entry pathway")
 
@@ -76,29 +79,30 @@ The above figure shows that in addition to the full length (+)-strand genome the
 
   &#9757; Model for the formation of genome high-order structures regulating N gene transcription. The upper linear scheme represents the coronavirus genome. The red line indicates the leader sequence in the 5′ end of the genome. The hairpin indicates the TRS-L. The gray line with arrowheads represents the nascent negative-sense RNA. The curved blue arrow indicates the template switch to the leader sequence during discontinuous transcription. The orange line represents the copy of the leader added to the nascent RNA after the template switch. The RNA-RNA interactions between the pE (nucleotides 26894 to 26903) and dE (nucleotides 26454 to 26463) and between the B-M in the active domain (nucleotides 26412 to 26421) and the cB-M in the 5′ end of the genome (nucleotides 477 to 486) are represented by solid lines. Dotted lines indicate the complementarity between positive-strand and negative-strand RNA sequences. Abbreviations: AD, active domain secondary structure prediction; B-M, B motif; cB-M, complementary copy of the B-M; cCS-N, complementary copy of the CS-N; CS-L, conserved core sequence of the leader; CS-N, conserved core sequence of the N gene; dE, distal element; pE, proximal element; TRS-L, transcription-regulating sequence of the leader (From [Sola:2015](https://www.annualreviews.org/doi/full/10.1146/annurev-virology-100114-055218)).
 
-Furthermore [Sola:2015](https://www.annualreviews.org/doi/full/10.1146/annurev-virology-100114-055218) suggest propose the coronavirus transcription model in which transcription initiation complex forms at the 3'-end of (+)-strand genomic RNA:
+Furthermore, [Sola:2015](https://www.annualreviews.org/doi/full/10.1146/annurev-virology-100114-055218) suggests the coronavirus transcription model in which transcription initiation complex forms at the 3'-end of (+)-strand genomic RNA:
 
 ![Coronavirus transcription](https://www.annualreviews.org/na101/home/literatum/publisher/ar/journals/content/virology/2015/virology.2015.2.issue-1/annurev-virology-100114-055218/20151024/images/large/vi20265.f3.jpeg "Three-step model of coronavirus transcription. (1) Complex formation. Proteins binding transcription-regulating sequences are represented by ellipsoids, the leader sequence is indicated with a red bar, and core sequences are indicated with orange boxes. (2) Base-pairing scanning. Negative-strand RNA is shown in light blue; the transcription complex is represented by a hexagon. Vertical lines indicate complementarity between the genomic RNA and the nascent negative strand. (3) Template switch. Due to the complementarity between the newly synthesized negative-strand RNA and the transcription-regulating sequence of the leader, template switch to the leader is made by the transcription complex to complete the copy of the leader sequence")
 
 ## How virus is screened
 
-Two approaches: (1) RNAseq and (2) ampliconic
+Two approaches: (1) RNAseq and (2) amplicons
 
-RNAseq approach requires large sample quantity, but if suitable for detecting low frequency variants. Ampliconic approaches are useful for samples containing small fraction of viral RNA and are by far the most widely used (From [NEB](https://primer-monitor.neb.com/lineages)):
+RNAseq approach requires a large sample quantity, but is suitable for detecting low-frequency variants. Ampliconic approaches are useful for samples containing a small fraction of viral RNA and are
+by far the most widely used (From [NEB](https://primer-monitor.neb.com/lineages)):
 
 ![Primer schemes](https://i.imgur.com/9wLeHnZ.png "Nucleotide variants related to lineages of concern are indicated in yellow above a schematic SARS-CoV-2 genome. Primers that do not overlap with variants associated with these lineages are shown in blue. Overlapping primers are indicated in orange.")
 
 # Pandas!
 
-> This is an aggregated tutorial relying on material for the following fantastic sources:
+> This is an aggregated tutorial relying on material from the following fantastic sources:
 >-  [Justin Bois](http://justinbois.github.io/bootcamp/2020/index.html). It contains modified training datasets and adopts content to Colab environment.
 >- [BIOS821 course at Duke](https://people.duke.edu/~ccc14/bios-821-2017/index.html)
 >- [Pandas documentation](https://pandas.pydata.org/docs/user_guide/index.html/)
 {: .quote}
 
-Pandas (from "Panel Data") is an essential piece of scientific (and not only) data analysis infrastructure. It is, in essence, an highly optimized library for manipulating very large tables (or "Data Frames"). 
+Pandas (from "Panel Data") is an essential piece of scientific (and not only) data analysis infrastructure. It is, in essence, a highly optimized library for manipulating very large tables (or "Data Frames"). 
 
-Today we will be using a single notebook that explains basics of this powerful tool:
+Today we will be using a single notebook that explains the basics of this powerful tool:
 
 ## Pandas learning resources
 
@@ -114,7 +118,7 @@ import pandas as pd
 
 Throughout your research career, you will undoubtedly need to handle data, possibly lots of data. The data comes in lots of formats, and you will spend much of your time **wrangling** the data to get it into a usable form.
 
-Pandas is the primary tool in the Python ecosystem for handling data. Its primary object, the `DataFrame` is extremely useful in wrangling data. We will explore some of that functionality here, and will put it to use in the next lesson.
+Pandas is the primary tool in the Python ecosystem for handling data. Its primary object, the `DataFrame` is extremely useful in wrangling data. We will explore some of that functionality here and will put it to use in the next lesson.
 
 # Basics
 
@@ -136,7 +140,9 @@ Results are downloaded using `Send to:` menu selecting `File` and then `RunInfo`
 !gunzip -c  sra_ncov.csv.gz | head
 ```
 
-The first line contains the **headers** for each column. The data follow. Given the file I/O skills you recently learned, you could write some functions to parse this file and extract the data you want. You can imagine that this might be kind of painful. However, if the file format is nice and clean, like we more or less have here, we can use pre-built tools. Pandas has a very powerful function, `pd.read_csv()` that can read in a CSV file and store the contents in a convenient data structure called a **data frame**. In Pandas, the data type for a data frame is `DataFrame`, and we will use "data frame" and "`DataFrame`" interchangeably.
+The first line contains the **headers** for each column. The data follow. Given the file I/O skills you recently learned, you could write some functions to parse this file and extract the data you want.
+You can imagine that this might be kind of painful. However, if the file format is nice and clean like we more or less have here, we can use pre-built tools. Pandas has a very powerful function, `pd.read_csv()`
+that can read in a CSV file and store the contents in a convenient data structure called a **data frame**. In Pandas, the data type for a data frame is `DataFrame`, and we will use "data frame" and "`DataFrame`" interchangeably.
 
 ## Reading in data
 
@@ -147,7 +153,8 @@ Let's first look at the doc string of `pd.read_csv()`.
 pd.read_csv?
 ```
 
-Holy cow! There are so many options we can specify for reading in a CSV file. You will likely find reasons to use many of these throughout your research. For now, however, we do not need most of them. So, let's load in the data set. Note that despite the fact that the datset is comprssed with `gzip` we do not need to do anything additional - pandas magically understands and uncompresses the data while loading it into the dataframe.
+Holy cow! There are so many options we can specify for reading in a CSV file. You will likely find reasons to use many of these throughout your research. For now, however, we do not need most of them.
+So, let's load in the data set. Note that even though the dataset is compressed with `gzip` we do not need to do anything additional - pandas magically understands and uncompresses the data while loading it into the dataframe.
 
 
 ```python
@@ -160,7 +167,8 @@ The same result can be achieved directly without downloading the file first:
 df = pd.read_csv('https://zenodo.org/records/10680001/files/sra_ncov.csv.gz')
 ```
 
-We now have the data stored in a data frame. We can look at it in the Jupyter notebook, since Jupyter will display it in a well-organized, pretty way. Note that because our dataframe is big, we only display first five rows using `head()` function:
+We now have the data stored in a data frame. We can look at it in the Jupyter Notebook since Jupyter will display it in a well-organized, pretty way. Note that because our dataframe is big,
+we only display the first five rows using `head()` function:
 
 
 ```python
@@ -176,7 +184,8 @@ The data frame is a convenient data structure for many reasons that will become 
 df[0]
 ```
 
-Yikes! Lots of errors. The problem is that we tried to index numerically by row. **We index DataFrames, by columns.** And there is no column that has the name `0` in this data frame, though there could be. Instead, a might want to look at the column with the percentage of correct face matching tasks.
+Yikes! Lots of errors. The problem is that we tried to index numerically by row. **We index DataFrames, by columns.** And no column has the name `0` in this data frame, though there could be.
+Instead, you might want to look at the column with the percentage of correct face-matching tasks.
 
 
 ```python
@@ -190,15 +199,17 @@ This gave us the numbers we were after. Notice that when it was printed, the ind
 df['Run'][4]
 ```
 
-However, this is **not** the preferred way to do this. It is better to use `.loc`. This give the location in the data frame we want.
+However, this is **not** the preferred way to do this. It is better to use `.loc`. This gives the location in the data frame we want.
 
 > <details-title><tt>loc</tt> versus <tt>iloc</tt></details-title>
 >
 >`loc` and `iloc` are both methods in the Pandas library for DataFrame indexing.
 >
->`loc`: It is label-based indexing, meaning that you use the actual row and column labels to make selections. This means that you specify rows and columns based on their index labels. For example, df.loc[3, 'column_name'] will select the value in the third row and the column labeled 'column_name'.
+>`loc`: It is label-based indexing, meaning that you use the actual row and column labels to make selections. This means that you specify rows and columns based on their index labels.
+> For example, df.loc[3, 'column_name'] will select the value in the third row and the column labeled 'column_name'.
 >
->`iloc`: It is integer-based indexing, where you use the integer position of the rows and columns to make selections. This means that you specify rows and columns based on their integer position. For example, df.iloc[3, 2] will select the value in the fourth row and the third column (remembering that indexing starts at 0).
+>`iloc`: It is integer-based indexing, where you use the integer position of the rows and columns to make selections. This means that you specify rows and columns based on their integer position.
+> For example, df.iloc[3, 2] will select the value in the fourth row and the third column (remembering that indexing starts at 0).
 >
 >In summary, `loc` uses labels for indexing, while `iloc` uses integer positions.
 {: .details}
@@ -227,11 +238,11 @@ df.loc[4:6, 'Run':]
 df.loc[4:6, 'Run':'LibrarySource']
 ```
 
-It is also important to note that **row indices need not be integers**. And you should not count on them being integers. In practice you will almost never use row indices, but rather use **Boolean indexing**.
+It is also important to note that **row indices need not be integers**. And you should not count on them being integers. In practice, you will almost never use row indices, but rather use **Boolean indexing**.
 
 ## Filtering: Boolean indexing of data frames
 
-Let's say I wanted to pull out accession numbers of runs produced by Pacfic Biosciences machines (in this table such datasets are labeled as `PACBIO_SMRT`. I can use Boolean indexing to specify the row. Specifically, I want the row for which `df['Platform'] == 'PACBIO_SMRT'`. You can essentially plop this syntax directly when using `.loc`.
+Let's say I wanted to pull out accession numbers of runs produced by Pacific Biosciences machines (in this table such datasets are labeled as `PACBIO_SMRT`. I can use Boolean indexing to specify the row. Specifically, I want the row for which `df['Platform'] == 'PACBIO_SMRT'`. You can essentially plop this syntax directly when using `.loc`.
 
 
 ```python
@@ -244,7 +255,8 @@ If I want to pull the whole record for that participant, I can use `:` for the c
 df.loc[df['Platform'] == 'PACBIO_SMRT', :].head(10)
 ```
 
-Now, let's pull out all PacBio records that were obtained from Amplicon sequencing. We can again use Boolean indexing, but we need to use an `&` operator. We did not cover this bitwise operator before, but the syntax is self-explanatory in the example below. Note that it is important that each Boolean operation you are doing is in parentheses because of the precedence of the operators involved.
+Now, let's pull out all PacBio records that were obtained from Amplicon sequencing. We can again use Boolean indexing, but we need to use an `&` operator.
+We have not covered this bitwise operator before, but the syntax is self-explanatory in the example below. Note that it is important that each Boolean operation you are doing is in parentheses because of the precedence of the operators involved.
 
 ```python
 df.loc[(df['Platform'] == 'PACBIO_SMRT') & (df['LibraryStrategy'] == 'AMPLICON'), :].head(3)
@@ -257,7 +269,8 @@ inds = (df['Platform'] == 'PACBIO_SMRT') & (df['LibraryStrategy'] == 'AMPLICON')
 inds[2:6]
 ```
 
-Notice that `inds` is an array (actually a Pandas `Series`, essentially a `DataFrame` with one column) of `True`s and `False`s. We can apply `unique` function from [NumPy](https://numpy.org/) to see how many `True` and `False` rows we have:
+Notice that `inds` is an array (actually a Pandas `Series`, essentially a `DataFrame` with one column) of `True`s and `False`s. We can apply the `unique` function from [NumPy](https://numpy.org/) to see how
+many `True` and `False` rows we have:
 
 ```python
 import numpy as np
@@ -302,7 +315,7 @@ df.assign(over100 = df['size_MB']>=100)
 
 The `assign` method in the pandas library is used to add new columns to a pandas DataFrame. The method allows you to perform calculations or operations on existing columns to generate new columns without modifying the original DataFrame.
 
-For example, you can use the `assign` method to add a new column that calculates the sum of two existing columns, or to add a column based on a complex calculation that involves multiple columns. The method also supports adding columns based on external data sources, such as NumPy arrays or other pandas DataFrames.
+For example, you can use the `assign` method to add a new column that calculates the sum of two existing columns or to add a column based on a complex calculation that involves multiple columns. The method also supports adding columns based on external data sources, such as NumPy arrays or other pandas DataFrames.
 
 Using `assign` method is useful because it allows you to create new columns and add them to a DataFrame in a way that is both readable and easy to maintain. The method is also chain-able, meaning you can add multiple columns in one call, making your code more concise and efficient.
 
@@ -342,7 +355,8 @@ Let's take a look at what this file looks like.
 2. Each observation is a row.
 3. Each type of observation has its own separate data frame.
 
-This is less pretty to visualize as a table, but we rarely look at data in tables. Indeed, the representation of data which is convenient for visualization is different from that which is convenient for analysis. A tidy data frame is almost always **much** easier to work with than non-tidy formats.
+This is less pretty to visualize as a table, but we rarely look at data in tables. Indeed, the representation of data that is convenient for visualization is different from that which is convenient for analysis.
+A tidy data frame is almost always **much** easier to work with than non-tidy formats.
 
 Also, let's take a look at this [article](https://dtkaplan.github.io/DataComputingEbook/chap-tidy-data.html#chap:tidy-data).
 
@@ -463,7 +477,8 @@ df_sum = pd.DataFrame(grouped['size_MB'].sum())
 df_sum
 ```
 
-The outputted data frame has the sums of numerical columns only, which we have only one: `size_MS`. Note that this data frame has `Platform` as the name of the row index. If we want to instead keep `Platform` (which, remember, is what we used to split up the data set before we computed the summary statistics) as a column, we can use the `reset_index()` method.
+The outputted data frame has the sums of numerical columns only, which we have only one: `size_MS`. Note that this data frame has `Platform` as the name of the row index.
+If we want to instead keep `Platform` (which, remember, is what we used to split up the data set before we computed the summary statistics) as a column, we can use the `reset_index()` method.
 
 
 ```python
@@ -477,7 +492,8 @@ Note, though, that this was not done in-place. If you want to update your data f
 df_sum = df_sum.reset_index()
 ```
 
-We can also use multiple columns in our `groupby()` operation. To do this, we simply pass in a list of columns into `df.groupby()`. We will **chain the methods**, performing a groupby, applying a median, and then resetting the index of the result, all in one line.
+We can also use multiple columns in our `groupby()` operation. To do this, we simply pass in a list of columns into `df.groupby()`. We will **chain the methods**, performing a groupby,
+applying a median, and then resetting the index of the result, all in one line.
 
 
 ```python
@@ -486,7 +502,9 @@ df.groupby(['BioProject', 'Platform']).sum().reset_index()
 
 This type of operation is called an **aggregation**. That is, we split the data set up into groups, and then computed a summary statistic for each group, in this case the median.
 
-You now have tremendous power in your hands. When your data are tidy, you can rapidly accelerate the ubiquitous split-apply-combine methods. Importantly, you now have a logical framework to think about how you slice and dice your data. As a final, simple example, I will show you how to go start to finish after loading the data set into a data frame, splitting by `BioProject` and `Platform`, and then getting the quartiles and extrema, in addition to the mean and standard deviation.
+You now have tremendous power in your hands. When your data are tidy, you can rapidly accelerate the ubiquitous split-apply-combine methods. Importantly, you now have a logical
+framework to think about how you slice and dice your data. As a final, simple example, I will show you how to go start to finish after loading the data set into a data frame,
+splitting by `BioProject` and `Platform`, and then getting the quartiles and extrema, in addition to the mean and standard deviation.
 
 
 ```python
@@ -504,15 +522,16 @@ import numpy as np
 df.groupby(['BioProject', 'Platform']).agg({'size_MB':np.mean, 'Run':'nunique'})
 ```
 
-Yes, that's right. One single, clean, easy to read line of code. In coming tutorials, we will see how to use tidy data to quickly generate plots.
+Yes, that's right. One single, clean, easy-to-read line of code. In the coming tutorials, we will see how to use tidy data to quickly generate plots.
 
 Why `np.mean` is without quotes and `nunique` is with quotes? See [here](https://stackoverflow.com/questions/66443260/why-are-some-pandas-aggregation-functions-in-quotes-and-others-not)
 
 ## Tidying a data set
 
-You should always organize your data sets in a tidy format. However, this is sometimes just not possible, since you data sets can come from instruments that do not output the data in tidy format (though most do, at least in my experience), and you often have collaborators that send data in untidy formats.
+You should always organize your data sets in a tidy format. However, this is sometimes just not possible, since your data sets can come from instruments that do not output the
+data in tidy format (though most do, at least in my experience), and you often have collaborators that send data in untidy formats.
 
-The most useful function for tidying data is `pd.melt()`. To demonstrate this we will use a dataset describing read coverage across SARS-CoV-2 genomes for a number of samples.
+The most useful function for tidying data is `pd.melt()`. To demonstrate this we will use a dataset describing read coverage across SARS-CoV-2 genomes for several samples.
 
 
 ```python
@@ -521,13 +540,12 @@ df = pd.read_csv('https://zenodo.org/records/10680470/files/coverage.tsv.gz',sep
 df.head()
 ```
 
-Clearly these data are not tidy. When we melt the data frame, the data within it, called **values**, become a single column. The headers, called **variables**, also become new columns. So, to melt it, we need to specify what we want to call the values and what we want to call the variable. [`pd.melt()`](https://pandas.pydata.org/docs/reference/api/pandas.melt.html#pandas.melt) does the rest!
+Clearly, these data are not tidy. When we melt the data frame, the data within it, called **values**, become a single column. The headers, called **variables**, also become new columns.
+So, to melt it, we need to specify what we want to call the values and what we want to call the variable. [`pd.melt()`](https://pandas.pydata.org/docs/reference/api/pandas.melt.html#pandas.melt) does the rest!
 
 ![](https://pandas.pydata.org/docs/_images/07_melt.svg)
 
 > Image from [Pandas Docs](https://pandas.pydata.org/docs/getting_started/intro_tutorials/07_reshape_table_layout.html#wide-to-long-format).
-
-
 
 
 ```python
@@ -536,7 +554,7 @@ melted = pd.melt(df, value_name='coverage', var_name=['sample'],value_vars=df.co
 melted.head()
 ```
 
-...and we are good to do with a tidy DataFrame! Let's take a look at the summary. This wouild allow us to easily plot coverage:
+...and we are good to do with a tidy DataFrame! Let's take a look at the summary. This would allow us to easily plot coverage:
 
 
 ```python
@@ -576,7 +594,7 @@ Working with multiple tables often involves joining them on a common key:
 
 ![](https://pandas.pydata.org/docs/_images/08_merge_left.svg)
 
-In fact, this can be done in several different ways described below. But first let's define two simple dataframes:
+In fact, this can be done in several different ways described below. But first, let's define two simple dataframes:
 
 
 ```python
@@ -776,7 +794,7 @@ print('Latest entry:', sra['collection_date'].max())
 > {: .solution}
 {: .question}
 
-It is likely that the data will need a bit of cleaning:
+The data will likely need a bit of cleaning:
 
 ```py
 sra = sra[ 
@@ -786,7 +804,7 @@ sra = sra[
 ]
 ```
 
-Finally, in order to buold the heatmap, we need to aggregate the data:
+Finally, in order to build the heatmap, we need to aggregate the data:
 
 ```py
 heatmap_2d = sra.groupby(
@@ -914,7 +932,7 @@ This would give us the text:
 
 ![](https://i.imgur.com/pKalDaC.png)
 
-To superimpose these on top of each other we should simple do this:
+To superimpose these on top of each other we should simply do this:
 
 ```py
 back + front
