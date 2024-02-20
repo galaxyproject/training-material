@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@95bf5e8fee8384421f85c39abd50444f0afe1dca",
+		release: "galaxy-training-network@7c933010e310fb1fce1c8c535309db857cec828c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708410430' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708410430' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708434319' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708434319' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -677,7 +677,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708410430'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708434319'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1364,6 +1364,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00301">https://gxy.io/GTN:T00301</a> </div>
         
 
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.9</a> (29 ratings)</div>
+	
 	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 61 </div>
 
     </blockquote>
@@ -1437,7 +1444,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="import-data-from-urls">Import data from URLs</h2>
 
-<p>Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 (<span class="citation"><a href="#kim2015hisat">Kim <i>et al.</i> 2015</a></span>), STAR (<span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>) and Subread (<span class="citation"><a href="#Liao2013">Liao <i>et al.</i> 2013</a></span>). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don’t have access to a server you can try to use one of the publically available Galaxies e.g. <a href="https://usegalaxy.org">UseGalaxy.org</a>, <a href="https://usegalaxy.org.au">UseGalaxy.org.au</a>, <a href="https://usegalaxy.eu">UseGalaxy.eu</a>, <a href="https://usegalaxy.fr">UseGalaxy.fr</a>.</p>
+<p>Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 (<span class="citation"><a href="#kim2015hisat">Kim <i>et al.</i> 2015</a></span>), STAR (<span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>) and Subread (<span class="citation"><a href="#Liao2013">Liao <i>et al.</i> 2013</a></span>). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don’t have access to a server you can try to use one of the publically available Galaxies e.g. <a href="https://usegalaxy.org">UseGalaxy.org</a>, <a href="https://usegalaxy.eu">UseGalaxy.eu</a>, <a href="https://usegalaxy.fr">UseGalaxy.fr</a>, <a href="https://usegalaxy.org.au">UseGalaxy.org.au</a>.</p>
 
 <p>The raw reads used in this tutorial were obtained from SRA from the link in GEO for the the mouse mammary gland dataset (e.g <code class="language-plaintext highlighter-rouge">ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534</code>). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in <a href="https://zenodo.org/record/4249555">Zenodo</a> and the links to the FASTQ files are provided below.</p>
 
@@ -2555,7 +2562,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=1: RNA-Seq reads to counts (Transcriptomics)" alt="Feedback form link">
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=transcriptomics/rna-seq-reads-to-counts" alt="Feedback form link">
                     <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
                 </a>
 
@@ -2712,8 +2719,15 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
 		
-                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
-                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
 			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
 <div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
 <p>Alternatively you can copy and paste the following YAML</p>
@@ -2821,6 +2835,153 @@ tools:
                 </blockquote>
 		
 
+		<blockquote class="details" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">25</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.16">4</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+		    
+		    <b>July 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: The clarity of the instructions.
+					<b>Disliked</b>: Great as it is.
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Very hands-on! And the qc-report workflow can be directly used in furture
+					
+				</li>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: The step By step guide.
+					<b>Disliked</b>: adding videos for all the tuitorials as well
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: very friendly people and very informative.
+					<b>Disliked</b>: nothing
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: It is so clear to show the process step by step.
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>September 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: the clarity, and the examples
+					
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Very clear, easy to follow
+					<b>Disliked</b>: Examples with paired-end data, since there are additional complications
+				</li>
+				
+		    </ul>
+		    
+		    <b>July 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: I liked that it was interactive and that there were datasets to apply to the exercises.
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>April 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: The workflow is very clear and easy to use
+					<b>Disliked</b>: A little bit more information about alternative parameters, like using other annotation files than the build in genome and going a bit further into the advanced parameters of the featurecounts tool (How to map per feature vs. metafeature)
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Very clear tutorial thank you very much! :)
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: All
+					<b>Disliked</b>: There is a mistake in upload file . LF and LE are lactate luminal and not virgin luminal.
+				</li>
+				
+		    </ul>
+		    
+		    <b>December 2019</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Stepwise procedure is helpful
+					<b>Disliked</b>: Additional GUI based support tool and environment , parameters like isoforms, splice variant, etc can also be explained in detail
+				</li>
+				
+		    </ul>
+		    
+		    <b>September 2019</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: very user friendly 
+					
+				</li>
+				
+		    </ul>
+		    
+		</blockquote>
+
 
                 </section>
 
@@ -2846,7 +3007,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/95bf5e8fee8384421f85c39abd50444f0afe1dca">95bf5e8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/7c933010e310fb1fce1c8c535309db857cec828c">7c93301</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2874,7 +3035,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.70235143.js?v=1708410430'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1708434319'></script>
         
     </body>
 </html>

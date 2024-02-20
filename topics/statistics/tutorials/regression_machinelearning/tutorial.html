@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@95bf5e8fee8384421f85c39abd50444f0afe1dca",
+		release: "galaxy-training-network@7c933010e310fb1fce1c8c535309db857cec828c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708410430' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708410430' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708434319' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708434319' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -425,7 +425,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "In this tutorial you will learn how to use Galaxy tools to solve [regression](https://en.wikipedia.org/wiki/Regression_analysis) problems. First, we will introduce the concept of regression briefly, and then examine linear regression, which models the relationship between a target variable and some explanatory variables (also known as independent variables). Next, we will discuss gradient boosting regression, an more advanced regressor model which can model nonlinear relationships between variables. Then, we will show how to visualize the results in each step. Finally, we will discuss how to train our models by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the models and learning algorithms work."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708410430'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708434319'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -850,6 +850,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00271">https://gxy.io/GTN:T00271</a> </div>
         
 
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.3</a> (18 ratings)</div>
+	
 	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 21 </div>
 
     </blockquote>
@@ -1479,7 +1486,7 @@ The quality of predictions is visualized using multiple plots to ascertain the r
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Regression in Machine Learning (Statistics and machine learning)" alt="Feedback form link">
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/regression_machinelearning" alt="Feedback form link">
                     <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
                 </a>
 
@@ -1557,8 +1564,15 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
 		
-                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
-                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
 			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
 <div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/regression_machinelearning/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
 <p>Alternatively you can copy and paste the following YAML</p>
@@ -1616,6 +1630,143 @@ tools:
                 </blockquote>
 		
 
+		<blockquote class="details" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">12</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.16666666666666666">2</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.25">3</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">1 stars</span><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.08333333333333333">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+		    
+		    <b>June 2023</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Everything is very well explained ! Love it <3
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2022</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: excellent content overall loved it
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>October 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: It analyzes biological data in a user-friendly platform.
+					<b>Disliked</b>: Giving more examples of biological data.
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Simplicity and explanation
+					<b>Disliked</b>: Idk
+				</li>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: To get to know Galaxy tools
+					<b>Disliked</b>: You could make breakout rooms to catch up between steps.
+				</li>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: It is very well organized
+					<b>Disliked</b>: More information links for each parameter could be provided. I did the tutorial in a one-day lesson I did not get the concepts of each parameter.
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: the reproducibility 
+					<b>Disliked</b>: a better way to find the tools
+				</li>
+				
+		    </ul>
+		    
+		    <b>June 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					
+					<b>Disliked</b>: In one place you write: “Select input data file”: test_rows_labels_without_header.csv Here the ".csv" suffix is not needed because it's not part of the name we gave to it. It's tabular file anyway.  In multiple places the figure references are wrong:  The residual plot shown in figure 9 -> figure 7  To infer how its values exhibit model performance, we can compare the figures 7 and 8. -> figures 8 and 9  Figures 5, 6 and 9 show that the prediction is acceptable -> figures 5, 6 and 7  The idea of cross-validation is shown in figure 3. -> figure 12 
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Clarity and detail.
+					<b>Disliked</b>: Nothing I can think of...
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: The description of each step is really clear. In the end the "key points" is also good.
+					
+				</li>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: It's nice that the output plots are shown and some parts/questions are hidden and you just need to open them if you dont know. 
+					<b>Disliked</b>: At the beginning, all files are renamed which helps to follow the tutorial, but later on, this parts are being skipped and you can get lost  it is very bad to find the tools for first use. the search box is not working properly. I know its a galaxy problem, but you should state in the tutorial were to find the tools!
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: clear self-explanatory steps for execution
+					<b>Disliked</b>: N.A
+				</li>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					
+					<b>Disliked</b>: Tutorial steps are different in the latest Galaxy and should take a review
+				</li>
+				
+		    </ul>
+		    
+		</blockquote>
+
 
                 </section>
 
@@ -1641,7 +1792,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/95bf5e8fee8384421f85c39abd50444f0afe1dca">95bf5e8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/7c933010e310fb1fce1c8c535309db857cec828c">7c93301</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1669,7 +1820,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.70235143.js?v=1708410430'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1708434319'></script>
         
     </body>
 </html>

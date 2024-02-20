@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@95bf5e8fee8384421f85c39abd50444f0afe1dca",
+		release: "galaxy-training-network@7c933010e310fb1fce1c8c535309db857cec828c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708410430' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708410430' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708434319' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708434319' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -436,7 +436,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "In this section we will use a software tool called Prokka to annotate a draft genome sequence. Prokka is a “wrapper”; it collects together several pieces of software (from various authors), and so avoids “re-inventing the wheel”."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708410430'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708434319'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -910,6 +910,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00168">https://gxy.io/GTN:T00168</a> </div>
         
 
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.8</a> (17 ratings)</div>
+	
 	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 39 </div>
 
     </blockquote>
@@ -1114,7 +1121,7 @@ We will choose to display the annotations (the Prokka.gff file).</p>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Genome annotation with Prokka (Genome Annotation)" alt="Feedback form link">
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=genome-annotation/annotation-with-prokka" alt="Feedback form link">
                     <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
                 </a>
 
@@ -1192,8 +1199,15 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
 		
-                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
-                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
 			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
 <div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
 <p>Alternatively you can copy and paste the following YAML</p>
@@ -1226,6 +1240,150 @@ tools:
                 </blockquote>
 		
 
+		<blockquote class="details" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">9</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.3333333333333333">3</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">2 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.3333333333333333">3</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">1 stars</span><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.1111111111111111">1</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">0 stars</span><i class="far fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.1111111111111111">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+		    
+		    <b>May 2023</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Really easy to follow and to understand. The most important points were explained in a clear and concise manner. 
+					<b>Disliked</b>: I got everything I needed as an introduction to using Prokka. 
+				</li>
+				
+		    </ul>
+		    
+		    <b>November 2022</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Short and precise, not more or less than what the title promises
+					<b>Disliked</b>: One setting in the JBrowse step isn't congruent with the most recent Prokka version anymore: can't configure "Produce Standalone Instance”: "Yes" maybe you can update this :)
+				</li>
+				
+		    </ul>
+		    
+		    <b>October 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: quick and simple
+					<b>Disliked</b>: none
+				</li>
+				
+		    </ul>
+		    
+		    <b>April 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">2 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: It seemed clear - just didn't work.
+					<b>Disliked</b>: I read the tutorial as I tried to duplicate it in Galaxy with a phage genome sequence. The tutorial did not correspond with what was in Galaxy. JBrowse did not work - no indication why.
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">1 stars</span><i class="fa fa-star" aria-hidden="true"></i>: 
+					
+					<b>Disliked</b>: It doesn't show you where to begin. It gives you steps but doesn't show you how to get to each step. Very frustrating 
+				</li>
+				
+		    </ul>
+		    
+		    <b>February 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Simple and easy to demonstrate gene annotation using contigs
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>January 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Concise and clear. Thank you!
+					
+				</li>
+				
+				<li>
+					<span class="sr-only">2 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: The explaination about how to use Prokka
+					<b>Disliked</b>: JBrowse doesn't work with this parameters, you should update this tutorial
+				</li>
+				
+		    </ul>
+		    
+		    <b>September 2018</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">0 stars</span><i class="far fa-star" aria-hidden="true"></i>: 
+					
+					<b>Disliked</b>: I am doing this tutorial 09/2018 -> the step using the JBrowse tool works only (at least in my hands) with this version: (Galaxy Version 1.12.5+galaxy0) i had troubles finding it (maybe the search does not work properly?)
+				</li>
+				
+				<li>
+					<span class="sr-only">2 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					
+					<b>Disliked</b>: I am doing this tutorial 09/2018 -> the step using the JBrowse tool works only (at least in my hands) with this version: (Galaxy Version 1.12.5+galaxy0) i had troubles finding it (maybe the search does not work properly?)
+				</li>
+				
+		    </ul>
+		    
+		</blockquote>
+
 
                 </section>
 
@@ -1251,7 +1409,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/95bf5e8fee8384421f85c39abd50444f0afe1dca">95bf5e8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/7c933010e310fb1fce1c8c535309db857cec828c">7c93301</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1279,7 +1437,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.70235143.js?v=1708410430'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1708434319'></script>
         
     </body>
 </html>

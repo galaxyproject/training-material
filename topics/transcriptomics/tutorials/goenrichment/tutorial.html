@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@95bf5e8fee8384421f85c39abd50444f0afe1dca",
+		release: "galaxy-training-network@7c933010e310fb1fce1c8c535309db857cec828c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708410430' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708410430' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708434319' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708434319' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -520,7 +520,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "When we have a large list of genes of interest, such as a list of differentially expressed genes obtained from an RNA-Seq experiment, how do we extract biological meaning from it?"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708410430'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708434319'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -971,6 +971,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00291">https://gxy.io/GTN:T00291</a> </div>
         
 
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.8</a> (9 ratings)</div>
+	
 	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 34 </div>
 
     </blockquote>
@@ -1439,7 +1446,7 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=GO Enrichment Analysis (Transcriptomics)" alt="Feedback form link">
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=transcriptomics/goenrichment" alt="Feedback form link">
                     <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
                 </a>
 
@@ -1517,8 +1524,15 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
 		
-                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
-                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
 			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
 <div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/transcriptomics/tutorials/goenrichment/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
 <p>Alternatively you can copy and paste the following YAML</p>
@@ -1540,6 +1554,111 @@ tools:
 </code></pre></div>
                 </blockquote>
 		
+
+		<blockquote class="details" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">3</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">3</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.6666666666666666">2</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">1 stars</span><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.3333333333333333">1</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+		    
+		    <b>October 2023</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: As a new hand and being not literate at coding, this step-by-step tutorial is what i really needed. Especially the provided data sets. 
+					<b>Disliked</b>: Because I am very new, once the results is not what I should see, I was totally lost. E.g. after running the GOEnrichment tool, next is "Analyze again the table and graph from Biological Process". Here I was lost. I suppose to do more analysis? I suppose I can visualize the CC, MF, BP graphs through the eye icon, only the top of the graph (100%BP) showed up. The rest of the ontology was invisible. I was lost again.  I posted this question on the Galaxy Help. I realized that it might be a stupid question. I am very new to this, for which I apologize.
+				</li>
+				
+		    </ul>
+		    
+		    <b>June 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Quite clear overall
+					<b>Disliked</b>: There is no way to find out the p-values corresponding to the different colors, the meaning of the dotted and solid arrows, etc. Please add those information if you want to make your plots more comprehensible! 
+				</li>
+				
+		    </ul>
+		    
+		    <b>January 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					
+					<b>Disliked</b>: This tutorial would benefit from the addition of an updated data import section for the Zenodo inputs. Seems like a good candidate for a Co-Fest GTN+Papercuts contribution (should be quick to do + examples in other tutos). reminder @jennaj
+				</li>
+				
+		    </ul>
+		    
+		    <b>July 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: exercises
+					<b>Disliked</b>: use data starting from scratch instead of already prepared data
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">1 stars</span><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: easy to start and its not completely frustrating like the university slides. It's quite astonishing that our university can't provide clear instructions how stuff works but the platform that is aimed at scientists does a better job explaining it. Thanks a lot
+					<b>Disliked</b>: explanation part for hypergeometrical distribution is confusing me because the same words are used over and over again. maby include graphics to visualize the frequencies 
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2019</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Nicely explained and easy to follow even with own data.
+					<b>Disliked</b>: There is no explanation of the graph (colours, %, arrows) and meaning of columns in tabular output (Study#, pvalue, qvalue). Would be nice to shortly describe this with one example GO term.
+				</li>
+				
+		    </ul>
+		    
+		</blockquote>
 
 
                 </section>
@@ -1566,7 +1685,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/95bf5e8fee8384421f85c39abd50444f0afe1dca">95bf5e8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/7c933010e310fb1fce1c8c535309db857cec828c">7c93301</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1594,7 +1713,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.70235143.js?v=1708410430'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1708434319'></script>
         
     </body>
 </html>

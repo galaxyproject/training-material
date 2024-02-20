@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@95bf5e8fee8384421f85c39abd50444f0afe1dca",
+		release: "galaxy-training-network@7c933010e310fb1fce1c8c535309db857cec828c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708410430' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708410430' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708434319' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708434319' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -649,7 +649,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Exome sequencing is a method that enables the selective sequencing of the"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708410430'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708434319'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1117,6 +1117,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00311">https://gxy.io/GTN:T00311</a> </div>
         
 
+	
+	
+
+	
+	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.2</a> (26 ratings)</div>
+	
 	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 41 </div>
 
     </blockquote>
@@ -2722,7 +2729,7 @@ relevance of which can then be addressed through standard methods.</p>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Exome sequencing data analysis for diagnosing a genetic disease (Variant Analysis)" alt="Feedback form link">
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=variant-analysis/exome-seq" alt="Feedback form link">
                     <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
                 </a>
 
@@ -2800,8 +2807,15 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
 		
-                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
-                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
 			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
 <div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/exome-seq/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
 <p>Alternatively you can copy and paste the following YAML</p>
@@ -2874,6 +2888,234 @@ tools:
                 </blockquote>
 		
 
+		<blockquote class="details" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 1.0">17</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.11764705882352941">2</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.23529411764705882">4</td>
+			</tr>
+		   
+			<tr>
+				<th scope="row"><span class="sr-only">1 stars</span><i class="fa fa-star" aria-hidden="true"></i></th>
+				<td style="--size: 0.17647058823529413">3</td>
+			</tr>
+		   
+		   </table>
+		   </p>
+		
+		    
+		    <b>May 2023</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					
+					<b>Disliked</b>: Gemini is no longer used
+				</li>
+				
+		    </ul>
+		    
+		    <b>April 2023</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Most part of the instructions were very clear and detailed.
+					<b>Disliked</b>: There are still some part of the tutorial which can be a little more clear, for example at "Hands-on: Generating FreeBayes calls" I was confused and took a while to figure out.
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2023</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					
+					<b>Disliked</b>: You should specify that you can't feed GEMINI tool more recent versions of hg19 at the outset. I used a more recent version hg38 throughout my analysis, only to get to the last step and realize that I had to start over using hg19.   Also, GEMINI is not available on usegalaxy.org, only on galaxy.eu, and I am having a lot of difficulty importing my datasets over since the tags for my PED file disappear on transfer.   Extremely frustrating end result for what I originally thought was a great tutorial! 
+				</li>
+				
+		    </ul>
+		    
+		    <b>November 2022</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: detailed explanation of variant calling and genotype calling
+					
+				</li>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: This tutorial gives a comprehensive overview about all analysis steps and important parameters involved.
+					<b>Disliked</b>: Where is the actual hands-on command code, which is generated after all parameter boxes have been checked, and the 'submit button' is clicked? Where are the actual tool commands for each step, a user would need to perform these analysis steps on the command line? I know these can be displayed in Galaxy, but it would be helpful to show them in the tutorials as well. 
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2022</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: The step-by-step approach and the additional explanations for some input fields
+					<b>Disliked</b>: Perhaps an additional indication of which patch of the hg19 is recognised as the database of the SNPeff eff output of GEMINI load. It took me several attempts to realise that it must be the unpatched version.
+				</li>
+				
+		    </ul>
+		    
+		    <b>November 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Nice features and understandable handling for beginners
+					<b>Disliked</b>: Some data and tools are not at the described places; specifically genome annotation fasta and snpTools... snpEff is not existing, so I used snpEff eff; snpSift Annotate exists twice with different features. Description on how to create the pedigree file.
+				</li>
+				
+		    </ul>
+		    
+		    <b>June 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Oustanding material!
+					<b>Disliked</b>: Nothing!
+				</li>
+				
+		    </ul>
+		    
+		    <b>May 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: all of it
+					<b>Disliked</b>: nothing - it's perfect
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Gareth, Melissa and Khalid (I was in breakout room 3) were all incredibly helpful and it went at a good pace. It was VERY helpful getting the course material ahead of the workshop, which allowed time to familiarise myself with the content. 
+					<b>Disliked</b>: I think it was on the mark for me. 
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Going to use this in Australia soon (late May 2021)- excited about it. More feedback to come afterwards no doubt!
+					<b>Disliked</b>: I can see in the intro that this tutorial is set up for raw (fastq) and BAM data entry points. This is great but I was hoping you could include a workflow for fastq to BAM. I realise it is in the full workflow so I took the liberty of comparing the two offered workflows and trimmed down to a QC to BAM workflow (https://usegalaxy.org.au/u/gareth-qfab/w/copy-of-exome-seq-training-full-w-cached-ref-imported-from-uploaded-file ). I understand we can do this elsewhere but good to have it consistent within this tutorial. Tested on Zenodo data and works fine. Thanks, Gareth
+				</li>
+				
+		    </ul>
+		    
+		    <b>February 2021</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Concentration on the essential aspects with the possibility to further deepen the knowledge about the individual tools
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>June 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: I liked that it was very specific and went step by step on how to do everything. nothing was left out.
+					<b>Disliked</b>: I would like to know how to take the vcf file and identify polymorphic sites in all three individuals. 
+				</li>
+				
+		    </ul>
+		    
+		    <b>March 2020</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Clear, stepwise
+					<b>Disliked</b>: Gemini load dialog in usegalaxy.eu suggested the SnpEff eff output file was 'unavailable' to use. It made me go back and check things before pressing on regardless. Not a problem with the tutorial per se. Thanks
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Very accessible, especially if you compare the galaxy ui to something like bash.
+					<b>Disliked</b>: -
+				</li>
+				
+		    </ul>
+		    
+		    <b>July 2019</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Even simple steps were explained.
+					
+				</li>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: looking at genes
+					
+				</li>
+				
+		    </ul>
+		    
+		    <b>December 2018</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">1 stars</span><i class="fa fa-star" aria-hidden="true"></i>: 
+					
+					<b>Disliked</b>: unfortunately in compare with others tutorial, this is very unclear and o'm not satisfied please improve this very important tutorial with clear and accurate dive.
+				</li>
+				
+		    </ul>
+		    
+		    <b>November 2018</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">1 stars</span><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: I like the idea of it
+					<b>Disliked</b>: It seems impossible to complete.  The training data is not available in the shared data link.  If it is, it's too hard to find.  A more general point would be to explain how the tutorial could be used on other data sets.  or ref genomes.  For this I tried using an hg19 fasta file from another data set, but got an error about indexing.  So I guess, explaining how the training data sets are pre-formatted would help when trying to use sets from other sources
+				</li>
+				
+		    </ul>
+		    
+		</blockquote>
+
 
                 </section>
 
@@ -2899,7 +3141,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/95bf5e8fee8384421f85c39abd50444f0afe1dca">95bf5e8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/7c933010e310fb1fce1c8c535309db857cec828c">7c93301</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2927,7 +3169,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.70235143.js?v=1708410430'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1708434319'></script>
         
     </body>
 </html>

@@ -90,6 +90,8 @@
     <li ><a href="#method-i-jupyter_post_write">#jupyter_post_write</a>
     <li ><a href="#method-i-jupyter_pre_render">#jupyter_pre_render</a>
     <li ><a href="#method-i-linkify">#linkify</a>
+    <li ><a href="#method-i-lookup_topic">#lookup_topic</a>
+    <li ><a href="#method-i-lookup_tuto">#lookup_tuto</a>
     <li ><a href="#method-i-onlyEnabled">#onlyEnabled</a>
     <li ><a href="#method-i-parseOptions">#parseOptions</a>
     <li ><a href="#method-i-parse_metadata">#parse_metadata</a>
@@ -132,8 +134,6 @@
         <h3>Constants</h3>
       </header>
       <dl>
-        <dt id="ACCEPTABLE_TOPICS">ACCEPTABLE_TOPICS
-        <dd>
         <dt id="APPROVED_VOICES">APPROVED_VOICES
         <dd>
         <dt id="ARI_MAP">ARI_MAP
@@ -146,8 +146,6 @@
         <dd>
         <dt id="CONTRIBUTORS_SCHEMA_UNSAFE">CONTRIBUTORS_SCHEMA_UNSAFE
         <dd><p>Any error messages</p>
-        <dt id="DEAD_TUTORIALS">DEAD_TUTORIALS
-        <dd>
         <dt id="END_OF_SENTENCE_DURATION">END_OF_SENTENCE_DURATION
         <dd>
         <dt id="END_OF_SLIDE_DURATION">END_OF_SLIDE_DURATION
@@ -177,6 +175,8 @@
         <dt id="TEST_PHRASES">TEST_PHRASES
         <dd>
         <dt id="TITLE_TOPIC">TITLE_TOPIC
+        <dd>
+        <dt id="TUTO_ID">TUTO_ID
         <dd>
         <dt id="WORD_MAP">WORD_MAP
         <dd>
@@ -880,6 +880,72 @@
             <pre><span class="ruby-comment"># File bin/news.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">linkify</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">path</span>)
   <span class="ruby-node">&quot;[#{text.gsub(&#39;|&#39;, &#39;-&#39;)}](https://training.galaxyproject.org/training-material/#{path}?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news)&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-lookup_topic" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">lookup_topic</span><span
+            class="method-args">(topic_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="lookup_topic-source">
+            <pre><span class="ruby-comment"># File bin/prepare_feedback.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lookup_topic</span>(<span class="ruby-identifier">topic_id</span>)
+  <span class="ruby-ivar">@cache</span> <span class="ruby-operator">||=</span> {}
+  <span class="ruby-ivar">@cache</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">topic_id</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">file</span> = <span class="ruby-node">&quot;metadata/#{topic_id}.yaml&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">file</span>
+
+    <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">file</span>)
+    <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;title&#39;</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-lookup_tuto" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">lookup_tuto</span><span
+            class="method-args">(topic_id, tuto_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="lookup_tuto-source">
+            <pre><span class="ruby-comment"># File bin/prepare_feedback.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lookup_tuto</span>(<span class="ruby-identifier">topic_id</span>, <span class="ruby-identifier">tuto_id</span>)
+  <span class="ruby-ivar">@cache</span> <span class="ruby-operator">||=</span> {}
+  <span class="ruby-ivar">@cache</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-node">&quot;#{topic_id}/#{tuto_id}&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-keyword">nil</span>
+
+    <span class="ruby-identifier">file</span> = <span class="ruby-node">&quot;topics/#{topic_id}/tutorials/#{tuto_id}/tutorial.md&quot;</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">file</span>
+      <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">file</span>)
+      <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;title&#39;</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">file</span> = <span class="ruby-node">&quot;topics/#{topic_id}/tutorials/#{tuto_id}/slides.html&quot;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">file</span>
+        <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">file</span>)
+        <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;title&#39;</span>]
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;No file for #{topic_id}/#{tuto_id}&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
