@@ -54,7 +54,7 @@ polyprotein pp1ab is produced in place of pp1a. pp1a encodes 11 nsps while pp1ab
 
 Coronavirus is a spherical particle approx. 125 nm in diameter. It is covered with S-protein projections giving it an appearance of solar corona - hence the term coronavirus. Inside the envelope is a nucleocapsid that has helical symmetry far more typical of (-)-strand RNA viruses. There are four main structure proteins: spike (S), membrane (M), envelope (E), and nucleocapsid (N; Fig. below [Masters:2006](http://dx.doi.org/10.1016/S0065-3527(06)66005-3)): 
 
-![Virion structure](https://ars.els-cdn.com/content/image/1-s2.0-S0065352706660053-gr1.jpg "Schematic of the coronavirus virion, with the minimal set of structural proteins"
+![Virion structure](https://ars.els-cdn.com/content/image/1-s2.0-S0065352706660053-gr1.jpg "Schematic of the coronavirus virion, with the minimal set of structural proteins")
 
 Mature S protein is a trimer of two subunits: S1 and S2. The two subunits are produced from a single S-precursor by host proteases (see [Kirchdoerfer:2016](http://dx.doi.org/10.1038/nature17200); this however is not the case for all coronaviruses such as SARS-CoV). S1 forms the receptor-binding domain, while S2 forms the stalk. 
 
