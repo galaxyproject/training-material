@@ -524,7 +524,10 @@ df.groupby(['BioProject', 'Platform']).agg({'size_MB':np.mean, 'Run':'nunique'})
 
 Yes, that's right. One single, clean, easy-to-read line of code. In the coming tutorials, we will see how to use tidy data to quickly generate plots.
 
-Why `np.mean` is without quotes and `nunique` is with quotes? See [here](https://stackoverflow.com/questions/66443260/why-are-some-pandas-aggregation-functions-in-quotes-and-others-not)
+> <tip-title>Quotes versus no quotes?</tip-title>
+>
+>[Why `np.mean` is without quotes and `nunique` is with quotes?](https://stackoverflow.com/questions/66443260/why-are-some-pandas-aggregation-functions-in-quotes-and-others-not)
+{: .tip}
 
 ## Tidying a data set
 
