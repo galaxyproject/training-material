@@ -90,7 +90,7 @@
       "name": "preparing genomic data for phylogeny recostruction (GTN)",
       "title": "preparing genomic data for phylogeny recostruction (GTN)",
       "test_results": null,
-      "modified": "2024-02-20 13:05:21 +0000",
+      "modified": "2024-02-20 13:31:51 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Replace Text\"];\n  0 -->|output| 1;\n  2[\"RepeatMasker\"];\n  1 -->|outfile| 2;\n  3[\"Funannotate predict annotation\"];\n  2 -->|output_masked_genome| 3;\n  4[\"Extract ORF\"];\n  3 -->|annot_gbk| 4;\n  5[\"Regex Find And Replace\"];\n  4 -->|aa_output| 5;\n  6[\"Collapse Collection\"];\n  5 -->|out_file1| 6;\n  7[\"Proteinortho\"];\n  5 -->|out_file1| 7;\n  8[\"Busco\"];\n  5 -->|out_file1| 8;\n  9[\"Filter\"];\n  7 -->|proteinortho| 9;\n  10[\"Proteinortho grab proteins\"];\n  6 -->|output| 10;\n  9 -->|out_file1| 10;\n  11[\"Regex Find And Replace\"];\n  10 -->|listproteinorthograbproteins| 11;\n  12[\"ClustalW\"];\n  11 -->|out_file1| 12;\n  13[\"ClipKIT. Alignment trimming software for phylogenetics.\"];\n  12 -->|output| 13;\n  14[\"PhyKit - Alignment-based functions\"];\n  13 -->|trimmed_output| 14;\n"
     }
   ],
