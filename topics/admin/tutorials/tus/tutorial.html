@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@37a0ac372e97735dd6891cdc86ccdf0c8ece56cf",
+		release: "galaxy-training-network@bf2a241ff7cf06f96129799b86eab9183bc37896",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708441517' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708441517' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708442302' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708442302' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Performant Uploads with TUS">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-18 12:25:14 +0000">
+<meta name="DC.date" content="2024-01-31 16:33:56 +0000">
 <meta name="DC.creator" content="Marius van den Beek">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Lucille Delisle"><meta name="description" content="Resources related to configuration and maintenance of Galaxy servers">
@@ -119,7 +119,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2023-04-18 12:25:14 +0000",
+  "dateModified": "2024-01-31 16:33:56 +0000",
   "datePublished": "2022-03-01 10:29:25 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Performant Uploads with TUS",
@@ -233,7 +233,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Performant Uploads with TUS",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/tus/tutorial.html",
-  "version": 41,
+  "version": 42,
   "timeRequired": "PT30M",
   "teaches": "Setup TUSd\n - Configure Galaxy to use it to process uploads",
   "keywords": [
@@ -524,7 +524,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Here you'll learn to setup [TUS](https://tus.io/) an open source resumable file upload server to process uploads for Galaxy. We use an external process here to offload the main Galaxy processes for more important work and not impact the entire system during periods of heavy uploading."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708441517'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708442302'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1058,7 +1058,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 1, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 18, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 31, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1078,7 +1078,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 ratings)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 41 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 42 </div>
 
     </blockquote>
     </section>
@@ -1161,7 +1161,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
       <div data-commit="Configure TUS in your group variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -67,6 +67,9 @@</span> galaxy_config:
+</span><span class="p">@@ -70,6 +70,9 @@</span> galaxy_config:
      # Tool security
      outputs_to_working_directory: true
      new_user_dataset_access_role_default_private: true # Make datasets private by default
@@ -1171,7 +1171,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </span>   gravity:
      process_manager: systemd
      galaxy_root: "{{ galaxy_root }}/server"
-<span class="p">@@ -87,6 +90,10 @@</span> galaxy_config:
+<span class="p">@@ -90,6 +93,10 @@</span> galaxy_config:
      celery:
        concurrency: 2
        loglevel: DEBUG
@@ -1182,7 +1182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </span>     handlers:
        handler:
          processes: 2
-<span class="p">@@ -156,3 +163,7 @@</span> nginx_conf_http:
+<span class="p">@@ -159,3 +166,7 @@</span> nginx_conf_http:
  nginx_ssl_role: usegalaxy_eu.certbot
  nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
  nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
@@ -1485,7 +1485,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/37a0ac372e97735dd6891cdc86ccdf0c8ece56cf">37a0ac3</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/bf2a241ff7cf06f96129799b86eab9183bc37896">bf2a241</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1513,7 +1513,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.70235143.js?v=1708441517'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1708442302'></script>
         
     </body>
 </html>

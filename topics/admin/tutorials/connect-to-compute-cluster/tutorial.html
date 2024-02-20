@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@37a0ac372e97735dd6891cdc86ccdf0c8ece56cf",
+		release: "galaxy-training-network@bf2a241ff7cf06f96129799b86eab9183bc37896",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708441517' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708441517' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708442302' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708442302' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Connecting Galaxy to a compute cluster">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-12-07 09:12:10 +0000">
+<meta name="DC.date" content="2024-01-31 16:33:56 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Resources related to configuration and maintenance of Galaxy servers">
@@ -119,7 +119,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2023-12-07 09:12:10 +0000",
+  "dateModified": "2024-01-31 16:33:56 +0000",
   "datePublished": "2018-01-07 13:46:01 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Connecting Galaxy to a compute cluster",
@@ -233,7 +233,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Connecting Galaxy to a compute cluster",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html",
-  "version": 138,
+  "version": 139,
   "timeRequired": "PT1H",
   "teaches": "Be familiar with the basics of installing, configuring, and using Slurm\n - Understand all components of the Galaxy job running stack\n - Understand how the job conf controls Galaxy's jobs subsystem\n - Have a strong understanding of Galaxy job destinations\n - Understand the purpose and function of Galaxy job metrics",
   "keywords": [
@@ -540,7 +540,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "The tools that are added to Galaxy can have a wide variance in the compute resources that they require and work efficiently on."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708441517'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708442302'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1075,7 +1075,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 7, 2018 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 7, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 31, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1095,7 +1095,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.7</a> (15 ratings)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 138 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 139 </div>
 
     </blockquote>
     </section>
@@ -1215,7 +1215,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
       <div data-commit="Add slurm configuration" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -191,6 +191,16 @@</span> nginx_ssl_role: usegalaxy_eu.certbot
+</span><span class="p">@@ -194,6 +194,16 @@</span> nginx_ssl_role: usegalaxy_eu.certbot
  nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
  nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
     
@@ -2177,7 +2177,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/37a0ac372e97735dd6891cdc86ccdf0c8ece56cf">37a0ac3</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/bf2a241ff7cf06f96129799b86eab9183bc37896">bf2a241</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2205,7 +2205,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.70235143.js?v=1708441517'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1708442302'></script>
         
     </body>
 </html>

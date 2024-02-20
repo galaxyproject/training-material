@@ -134,7 +134,7 @@
       "name": "CS2_Combining datasets after pre-processing",
       "title": "CS2_Combining datasets after pre-processing",
       "test_results": null,
-      "modified": "2024-02-20 15:05:21 +0000",
+      "modified": "2024-02-20 15:18:27 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"Input dataset\"];\n  7[\"EBI SCXA Data Retrieval\"];\n  8[\"Manipulate AnnData\"];\n  0 -->|output| 8;\n  1 -->|output| 8;\n  2 -->|output| 8;\n  3 -->|output| 8;\n  4 -->|output| 8;\n  5 -->|output| 8;\n  6 -->|output| 8;\n  9[\"Scanpy Read10x\"];\n  7 -->|barcode_tsv| 9;\n  7 -->|design_tsv| 9;\n  7 -->|genes_tsv| 9;\n  7 -->|matrix_mtx| 9;\n  10[\"Inspect AnnData\"];\n  8 -->|anndata| 10;\n  11[\"Inspect AnnData\"];\n  8 -->|anndata| 11;\n  12[\"Inspect AnnData\"];\n  8 -->|anndata| 12;\n  13[\"Replace Text\"];\n  11 -->|obs| 13;\n  14[\"Replace Text\"];\n  11 -->|obs| 14;\n  15[\"Cut\"];\n  13 -->|outfile| 15;\n  16[\"Cut\"];\n  14 -->|outfile| 16;\n  17[\"Paste\"];\n  16 -->|out_file1| 17;\n  15 -->|out_file1| 17;\n  18[\"Manipulate AnnData\"];\n  8 -->|anndata| 18;\n  17 -->|out_file1| 18;\n  19[\"Manipulate AnnData\"];\n  18 -->|anndata| 19;\n  20[\"AnnData Operations\"];\n  19 -->|anndata| 20;\n"
     }
   ],

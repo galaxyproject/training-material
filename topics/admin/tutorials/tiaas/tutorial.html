@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@37a0ac372e97735dd6891cdc86ccdf0c8ece56cf",
+		release: "galaxy-training-network@bf2a241ff7cf06f96129799b86eab9183bc37896",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708441517' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708441517' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708442302' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708442302' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Training Infrastructure as a Service (TIaaS)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-20 15:18:40 +0000">
+<meta name="DC.date" content="2024-01-31 16:33:56 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="Resources related to configuration and maintenance of Galaxy servers">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -118,7 +118,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2023-04-20 15:18:40 +0000",
+  "dateModified": "2024-01-31 16:33:56 +0000",
   "datePublished": "2020-02-12 14:46:40 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Training Infrastructure as a Service (TIaaS)",
@@ -232,7 +232,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Training Infrastructure as a Service (TIaaS)",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html",
-  "version": 101,
+  "version": 102,
   "timeRequired": "PT30M",
   "teaches": "Setup TIaaS\n - Request and manage trainings\n - Join a training",
   "keywords": [
@@ -672,7 +672,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Galaxy is widely used for teaching. In order to facilitate instructors, the Galaxy Project has developed Training Infrastructure as a Service (TIaaS)."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708441517'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708442302'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1546,7 +1546,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 12, 2020 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 20, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 31, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1566,7 +1566,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 ratings)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 101 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 102 </div>
 
     </blockquote>
     </section>
@@ -1641,7 +1641,7 @@ resources, thus reducing queue times on the day of the training.</p>
 
       <div data-commit="Configure tiaas" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -346,3 +346,8 @@</span> telegraf_plugins_extra:
+</span><span class="p">@@ -349,3 +349,8 @@</span> telegraf_plugins_extra:
        - timeout = "10s"
        - data_format = "influx"
        - interval = "15s"
@@ -2196,7 +2196,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/37a0ac372e97735dd6891cdc86ccdf0c8ece56cf">37a0ac3</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/bf2a241ff7cf06f96129799b86eab9183bc37896">bf2a241</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2224,7 +2224,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.70235143.js?v=1708441517'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1708442302'></script>
         
     </body>
 </html>
