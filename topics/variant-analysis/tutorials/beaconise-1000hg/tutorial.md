@@ -49,7 +49,7 @@ which only returned a Yes or No response indicating the presence of variants, Be
 The Beacon v2 comprises two main parts, the framework and the models. The framework specifies how the requests and responses should be formatted, while the models determine the organization of the biological data response 
 {% cite Rueda2022 %}.
 
-![Beacon Framework and Model](../../images/Beacon_framework_and_model.png "Schematic representation of Beacon v2 API specification")
+![Beacon Framework and Model](../../images/Beacon_framework_and_model.png "Schematic representation of Beacon v2 API specification from B2RI documentation")
 
 Beacon MongoDB databases can be created with different security levels for accessing Beacon data through import and query processes. These databases can be classified into three security levels: public, registered, and controlled. 
 Alternatively, they can be classified into two security levels in our import and query tools: public and authenticated.
@@ -160,7 +160,7 @@ disease models is made possible for physicians, biologists, and researchers stud
 and genetic data. 
 
 
-![v2.0 phenopacket schema](../../images/phenopacket-schema-v2-overview.png "Overview of v2.0 of the schema optained from [phenopacket-schema](https://phenopacket-schema.readthedocs.io/en/latest/schema.html#version-2-0)")
+![v2.0 phenopacket schema](../../images/phenopacket-schema-v2-overview.png "Overview of v2.0 of the schema optained from phenopacket-schema documentation")
 
 We are using the Biosamles phenopacket, This is a biological material unit from which the substrate molecules (genomic DNA, RNA, proteins, etc.) are extracted for molecular analyses 
 (mass spectrometry, array hybridization, sequencing, etc.). Tissue biopsies, single cells from cultures used for single-cell genome sequencing, and protein fractions from gradient centrifugations are a 
