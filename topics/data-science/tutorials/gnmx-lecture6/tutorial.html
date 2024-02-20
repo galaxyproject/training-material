@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@bf2a241ff7cf06f96129799b86eab9183bc37896",
+		release: "galaxy-training-network@0b70a8bea7387d737f8ed348520ad5ed42b26ae3",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708442302' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708442302' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708446018' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708446018' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Data manipulation with Pandas">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-02-20 02:28:15 +0000">
+<meta name="DC.date" content="2024-02-20 15:19:25 +0000">
 <meta name="DC.creator" content="Anton Nekrutenko"><meta name="description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Foundations of Data Science / Hands-on: Data manipulation with Pandas">
@@ -117,7 +117,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-02-20 02:28:15 +0000",
+  "dateModified": "2024-02-20 15:19:25 +0000",
   "datePublished": "2024-02-20 06:18:29 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Data manipulation with Pandas",
@@ -231,7 +231,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Data manipulation with Pandas",
   "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/gnmx-lecture6/tutorial.html",
-  "version": 4,
+  "version": 5,
   "timeRequired": "PT1H",
   "teaches": "Understand data manipulation in Pandas",
   "keywords": [
@@ -314,7 +314,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "#  SARS-CoV-2 as a research problem"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708442302'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708446018'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -637,7 +637,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
 
     </blockquote>
     </section>
@@ -725,7 +725,7 @@ polyprotein pp1ab is produced in place of pp1a. pp1a encodes 11 nsps while pp1ab
 
 <p>Coronavirus is a spherical particle approx. 125 nm in diameter. It is covered with S-protein projections giving it an appearance of solar corona - hence the term coronavirus. Inside the envelope is a nucleocapsid that has helical symmetry far more typical of (-)-strand RNA viruses. There are four main structure proteins: spike (S), membrane (M), envelope (E), and nucleocapsid (N; Fig. below <a href="http://dx.doi.org/10.1016/S0065-3527(06)66005-3">Masters:2006</a>):</p>
 
-<p>![Virion structure](https://ars.els-cdn.com/content/image/1-s2.0-S0065352706660053-gr1.jpg “Schematic of the coronavirus virion, with the minimal set of structural proteins”</p>
+<figure id="figure-3" style="max-width: 90%;"><img src="https://ars.els-cdn.com/content/image/1-s2.0-S0065352706660053-gr1.jpg" alt="Virion structure. " loading="lazy" /><a target="_blank" href="https://ars.els-cdn.com/content/image/1-s2.0-S0065352706660053-gr1.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Schematic of the coronavirus virion, with the minimal set of structural proteins</figcaption></figure>
 
 <p>Mature S protein is a trimer of two subunits: S1 and S2. The two subunits are produced from a single S-precursor by host proteases (see <a href="http://dx.doi.org/10.1038/nature17200">Kirchdoerfer:2016</a>; this however is not the case for all coronaviruses such as SARS-CoV). S1 forms the receptor-binding domain, while S2 forms the stalk.</p>
 
@@ -740,7 +740,7 @@ and M protein possible tethering viral genome and replicase-transcriptase comple
 
 <p>Virion attaches to the cells as a result of interaction between S-protein and a cellular receptor. In the case of SARS-CoV-2 (as is in SARS-CoV) angiotensin converting enzyme 2 (ACE2) serves as the receptor binding to C-terminal portion of S1 domain. After receptor binding S protein is cleaved at two sites within the S2 subdomain. The first cleavage separates the receptor-binding domain of S from the membrane fusion domain. The second cleavage (at S2’) exposes the fusion peptide. The SARS-CoV-2 is different from SARS-CoV in that it contains a <a href="https://en.wikipedia.org/wiki/Furin">furin</a> cleavage site that is processed during viral maturation within endoplasmatic reticulum (ER; see <a href="http://dx.doi.org/10.1016/j.cell.2020.02.058">Walls:2020</a>). The fusion peptide inserts into the cellular membrane and triggers joining on the two heptad regions with S2 forming an antiparallel six-helix bundle resulting in fusion and release of the genome into the cytoplasm (Fig. below from <a href="https://www.nature.com/articles/s41580-021-00418-x">Jackson:2022</a>.</p>
 
-<figure id="figure-3" style="max-width: 90%;"><img src="https://i.imgur.com/DD7EO3G.png" alt="Entering the cell. " loading="lazy" /><a target="_blank" href="https://i.imgur.com/DD7EO3G.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Two spike (S) protein cleavage events are typically necessary for the coronavirus entry process: one at the junction of the S1 and S2 subunits and the other at the S2′ site, internal to the S2 subunit. In the case of SARS-CoV-2, the polybasic sequence at the S1–S2 boundary is cleaved during virus maturation in an infected cell, but the S2′ site is cleaved at the target cell following angiotensin-converting enzyme 2 (ACE2) binding. Virus binding to ACE2 (step 1) induces conformational changes in the S1 subunit and exposes the S2′ cleavage site in the S2 subunit. Depending on the entry route taken by SARS-CoV-2, the S2′ site is cleaved by different proteases. Left: If the target cell expresses insufficient transmembrane protease, serine 2 (TMPRSS2) or if a virus–ACE2 complex does not encounter TMPRSS2, the virus–ACE2 complex is internalized via clathrin-mediated endocytosis (step 2) into the endolysosomes, where S2′ cleavage is performed by cathepsins, which require an acidic environment for their activity (steps 3 and 4). Right: In the presence of TMPRSS2, S2′ cleavage occurs at the cell surface (step 2). In both entry pathways, cleavage of the S2′ site exposes the fusion peptide (FP) and dissociation of S1 from S2 induces dramatic conformational changes in the S2 subunit, especially in heptad repeat 1, propelling the fusion peptide forward into the target membrane, initiating membrane fusion (step 5 on the left and step 3 on the right). Fusion between viral and cellular membranes forms a fusion pore through which viral RNA is released into the host cell cytoplasm for uncoating and replication (step 6 on the left and step 4 on the right). Several agents disrupt interaction between the S protein and ACE2: ACE2 mimetics, therapeutic monoclonal antibodies targeting the neutralizing epitopes on the S protein and antibodies elicited by vaccination block virus binding to ACE2 and thus inhibit both entry pathways. By contrast, strategies targeting post-receptor-binding steps differ between the two pathways. Being a serine protease inhibitor, camostat mesylate restricts the TMPRSS2-mediated entry pathway. Hydroxychloroquine and chloroquine block endosomal acidification, which is necessary for cathepsin activity, and thus restrict the cathepsin-mediated entry pathway</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="https://i.imgur.com/DD7EO3G.png" alt="Entering the cell. " loading="lazy" /><a target="_blank" href="https://i.imgur.com/DD7EO3G.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Two spike (S) protein cleavage events are typically necessary for the coronavirus entry process: one at the junction of the S1 and S2 subunits and the other at the S2′ site, internal to the S2 subunit. In the case of SARS-CoV-2, the polybasic sequence at the S1–S2 boundary is cleaved during virus maturation in an infected cell, but the S2′ site is cleaved at the target cell following angiotensin-converting enzyme 2 (ACE2) binding. Virus binding to ACE2 (step 1) induces conformational changes in the S1 subunit and exposes the S2′ cleavage site in the S2 subunit. Depending on the entry route taken by SARS-CoV-2, the S2′ site is cleaved by different proteases. Left: If the target cell expresses insufficient transmembrane protease, serine 2 (TMPRSS2) or if a virus–ACE2 complex does not encounter TMPRSS2, the virus–ACE2 complex is internalized via clathrin-mediated endocytosis (step 2) into the endolysosomes, where S2′ cleavage is performed by cathepsins, which require an acidic environment for their activity (steps 3 and 4). Right: In the presence of TMPRSS2, S2′ cleavage occurs at the cell surface (step 2). In both entry pathways, cleavage of the S2′ site exposes the fusion peptide (FP) and dissociation of S1 from S2 induces dramatic conformational changes in the S2 subunit, especially in heptad repeat 1, propelling the fusion peptide forward into the target membrane, initiating membrane fusion (step 5 on the left and step 3 on the right). Fusion between viral and cellular membranes forms a fusion pore through which viral RNA is released into the host cell cytoplasm for uncoating and replication (step 6 on the left and step 4 on the right). Several agents disrupt interaction between the S protein and ACE2: ACE2 mimetics, therapeutic monoclonal antibodies targeting the neutralizing epitopes on the S protein and antibodies elicited by vaccination block virus binding to ACE2 and thus inhibit both entry pathways. By contrast, strategies targeting post-receptor-binding steps differ between the two pathways. Being a serine protease inhibitor, camostat mesylate restricts the TMPRSS2-mediated entry pathway. Hydroxychloroquine and chloroquine block endosomal acidification, which is necessary for cathepsin activity, and thus restrict the cathepsin-mediated entry pathway</figcaption></figure>
 
 <h2 id="replication">Replication</h2>
 
@@ -752,7 +752,7 @@ and M protein possible tethering viral genome and replicase-transcriptase comple
 
 <p>Furthermore, <a href="https://www.annualreviews.org/doi/full/10.1146/annurev-virology-100114-055218">Sola:2015</a> suggests the coronavirus transcription model in which transcription initiation complex forms at the 3’-end of (+)-strand genomic RNA:</p>
 
-<figure id="figure-4" style="max-width: 90%;"><img src="https://www.annualreviews.org/na101/home/literatum/publisher/ar/journals/content/virology/2015/virology.2015.2.issue-1/annurev-virology-100114-055218/20151024/images/large/vi20265.f3.jpeg" alt="Coronavirus transcription. " loading="lazy" /><a target="_blank" href="https://www.annualreviews.org/na101/home/literatum/publisher/ar/journals/content/virology/2015/virology.2015.2.issue-1/annurev-virology-100114-055218/20151024/images/large/vi20265.f3.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Three-step model of coronavirus transcription. (1) Complex formation. Proteins binding transcription-regulating sequences are represented by ellipsoids, the leader sequence is indicated with a red bar, and core sequences are indicated with orange boxes. (2) Base-pairing scanning. Negative-strand RNA is shown in light blue; the transcription complex is represented by a hexagon. Vertical lines indicate complementarity between the genomic RNA and the nascent negative strand. (3) Template switch. Due to the complementarity between the newly synthesized negative-strand RNA and the transcription-regulating sequence of the leader, template switch to the leader is made by the transcription complex to complete the copy of the leader sequence</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="https://www.annualreviews.org/na101/home/literatum/publisher/ar/journals/content/virology/2015/virology.2015.2.issue-1/annurev-virology-100114-055218/20151024/images/large/vi20265.f3.jpeg" alt="Coronavirus transcription. " loading="lazy" /><a target="_blank" href="https://www.annualreviews.org/na101/home/literatum/publisher/ar/journals/content/virology/2015/virology.2015.2.issue-1/annurev-virology-100114-055218/20151024/images/large/vi20265.f3.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Three-step model of coronavirus transcription. (1) Complex formation. Proteins binding transcription-regulating sequences are represented by ellipsoids, the leader sequence is indicated with a red bar, and core sequences are indicated with orange boxes. (2) Base-pairing scanning. Negative-strand RNA is shown in light blue; the transcription complex is represented by a hexagon. Vertical lines indicate complementarity between the genomic RNA and the nascent negative strand. (3) Template switch. Due to the complementarity between the newly synthesized negative-strand RNA and the transcription-regulating sequence of the leader, template switch to the leader is made by the transcription complex to complete the copy of the leader sequence</figcaption></figure>
 
 <h2 id="how-virus-is-screened">How virus is screened</h2>
 
@@ -761,7 +761,7 @@ and M protein possible tethering viral genome and replicase-transcriptase comple
 <p>RNAseq approach requires a large sample quantity, but is suitable for detecting low-frequency variants. Ampliconic approaches are useful for samples containing a small fraction of viral RNA and are
 by far the most widely used (From <a href="https://primer-monitor.neb.com/lineages">NEB</a>):</p>
 
-<figure id="figure-5" style="max-width: 90%;"><img src="https://i.imgur.com/9wLeHnZ.png" alt="Primer schemes. " loading="lazy" /><a target="_blank" href="https://i.imgur.com/9wLeHnZ.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Nucleotide variants related to lineages of concern are indicated in yellow above a schematic SARS-CoV-2 genome. Primers that do not overlap with variants associated with these lineages are shown in blue. Overlapping primers are indicated in orange.</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%;"><img src="https://i.imgur.com/9wLeHnZ.png" alt="Primer schemes. " loading="lazy" /><a target="_blank" href="https://i.imgur.com/9wLeHnZ.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Nucleotide variants related to lineages of concern are indicated in yellow above a schematic SARS-CoV-2 genome. Primers that do not overlap with variants associated with these lineages are shown in blue. Overlapping primers are indicated in orange.</figcaption></figure>
 
 <h1 id="pandas">Pandas!</h1>
 
@@ -1921,7 +1921,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/bf2a241ff7cf06f96129799b86eab9183bc37896">bf2a241</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/0b70a8bea7387d737f8ed348520ad5ed42b26ae3">0b70a8b</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1945,7 +1945,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.70235143.js?v=1708442302'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1708446018'></script>
         
     </body>
 </html>
