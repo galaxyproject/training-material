@@ -311,7 +311,7 @@ df.head()
 df.assign(over100 = df['size_MB']>=100)
 ```
 
-### A note of `assign`
+## A note of `assign`
 
 The `assign` method in the pandas library is used to add new columns to a pandas DataFrame. The method allows you to perform calculations or operations on existing columns to generate new columns without modifying the original DataFrame.
 
@@ -546,7 +546,7 @@ df.head()
 Clearly, these data are not tidy. When we melt the data frame, the data within it, called **values**, become a single column. The headers, called **variables**, also become new columns.
 So, to melt it, we need to specify what we want to call the values and what we want to call the variable. [`pd.melt()`](https://pandas.pydata.org/docs/reference/api/pandas.melt.html#pandas.melt) does the rest!
 
-![](https://pandas.pydata.org/docs/_images/07_melt.svg)
+![Dataframe melt](https://pandas.pydata.org/docs/_images/07_melt.svg)
 
 > Image from [Pandas Docs](https://pandas.pydata.org/docs/getting_started/intro_tutorials/07_reshape_table_layout.html#wide-to-long-format).
 
@@ -582,7 +582,7 @@ melted.groupby(['sample'])['coverage'].describe()
 
 To get back from melted (narrow) format to wide format we can use [`pivot()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot.html#pandas.DataFrame.pivot) function.
 
-![](https://pandas.pydata.org/docs/_images/07_pivot.svg)
+![Dataframe pivot](https://pandas.pydata.org/docs/_images/07_pivot.svg)
 
 > Image from [Pandas Docs](https://pandas.pydata.org/docs/getting_started/intro_tutorials/07_reshape_table_layout.html#long-to-wide-table-format).
 
@@ -595,7 +595,7 @@ melted.pivot(index=['start','end'],columns='sample',values='coverage')
 
 Working with multiple tables often involves joining them on a common key:
 
-![](https://pandas.pydata.org/docs/_images/08_merge_left.svg)
+![Left join](https://pandas.pydata.org/docs/_images/08_merge_left.svg)
 
 In fact, this can be done in several different ways described below. But first, let's define two simple dataframes:
 
@@ -624,7 +624,7 @@ df2
 
 ## Inner join
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/SQL_Join_-_07_A_Inner_Join_B.svg/234px-SQL_Join_-_07_A_Inner_Join_B.svg.png?20170204165143)
+![Inner join](https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/SQL_Join_-_07_A_Inner_Join_B.svg/234px-SQL_Join_-_07_A_Inner_Join_B.svg.png?20170204165143)
 
 > Figure from Wikimedia Commons
 
@@ -644,7 +644,7 @@ pysqldf('select * from df1 join df2 on df1.key=df2.key')
 
 ## Left join
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/SQL_Join_-_01b_A_Left_Join_B.svg/234px-SQL_Join_-_01b_A_Left_Join_B.svg.png?20170204144906)
+![Left join again](https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/SQL_Join_-_01b_A_Left_Join_B.svg/234px-SQL_Join_-_01b_A_Left_Join_B.svg.png?20170204144906)
 
 > Figure from Wikimedia Commons
 
@@ -667,7 +667,7 @@ pysqldf('select df1.key, df1.value as value_x, df2.value as value_y from df1 lef
 
 ## Right join
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/SQL_Join_-_03_A_Right_Join_B.svg/234px-SQL_Join_-_03_A_Right_Join_B.svg.png?20170130230641)
+![Right join](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/SQL_Join_-_03_A_Right_Join_B.svg/234px-SQL_Join_-_03_A_Right_Join_B.svg.png?20170130230641)
 
 > Figure from Wikimedia Commons
 
@@ -680,7 +680,7 @@ pd.merge(df1, df2, on="key", how="right").fillna('.')
 
 ## Full join
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/SQL_Join_-_05_A_Full_Join_B.svg/234px-SQL_Join_-_05_A_Full_Join_B.svg.png?20170130230643)
+![Full join](https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/SQL_Join_-_05_A_Full_Join_B.svg/234px-SQL_Join_-_05_A_Full_Join_B.svg.png?20170130230643)
 
 > Figure from Wikimedia Commons
 
@@ -697,7 +697,7 @@ pd.merge(df1, df2, on="key", how="outer").fillna('.')
 
 Vega-Altair is a declarative statistical visualization library for Python, based on Vega and Vega-Lite. It offers a powerful and concise grammar that enables you to quickly build a wide range of statistical visualizations. [This site](https://uwdata.github.io/visualization-curriculum/intro.html) contains a complete set of "how-to" tutorials explaining all aspects of this remarkable package.  
 
-### Importing data
+## Importing data
 
 First, import all the packages we need:
 
@@ -765,7 +765,7 @@ sra = sra[
 ]
 ```
 
-### Cleaning the data
+## Cleaning the data
 
 The `collection_date` field will be useful for us to be able to filter out nonsense as you will see below. But to use it properly, we need tell Pandas that it is not just a text, but actually dates:
 
@@ -856,7 +856,7 @@ This will look something like this:
 | 32 | PACBIO_SMRT           | WGS                 |              48 |
 
 
-### Plotting the data
+## Plotting the data
 
 Now let's create a graph. This graph will be layered: the "back" will be the heatmap squares and the "front" will be the numbers (see heatmap at the beginning of this page):
 
@@ -909,7 +909,7 @@ back
 
 This would give us a grid:
 
-![](https://i.imgur.com/74itE5M.png)
+![Grid](https://i.imgur.com/74itE5M.png)
 
 Now, it would be nice to fill the rectangles with actual numbers:
 
@@ -933,7 +933,7 @@ front
 
 This would give us the text:
 
-![](https://i.imgur.com/pKalDaC.png)
+![Text for grid](https://i.imgur.com/pKalDaC.png)
 
 To superimpose these on top of each other we should simply do this:
 
@@ -941,6 +941,6 @@ To superimpose these on top of each other we should simply do this:
 back + front
 ```
 
-![](https://i.imgur.com/SzhM1QW.png)
+![Full graph](https://i.imgur.com/SzhM1QW.png)
 
 
