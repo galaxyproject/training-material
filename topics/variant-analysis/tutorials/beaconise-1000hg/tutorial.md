@@ -427,6 +427,6 @@ Now, you have a general knowledge of beacon and MongoDB and how to create your o
 
 You can apply what you learned in this tutorial to create a beacon query for your institution's genomic variant data.
 
-For more information about how to query beacon databases, please look into [pymongo documantation](https://pymongo.readthedocs.io/en/stable/tutorial.html). Use the documentation steps to query the phenopacket and search for the metadata for our sample ({"id": "HG00096"}).
+For more information about how to query beacon databases, please look into [pymongo documantation](https://pymongo.readthedocs.io/en/stable/tutorial.html). Use the documentation steps to query the phenopacket and search for the metadata for our sample `{"id": "HG00096"}`.
 
 We hope you find this tutorial helpful!
