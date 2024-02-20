@@ -370,7 +370,7 @@ The beacon import tool is flexible. The tool imports the data from an institutio
 > python3 beacon2-import.py -i <genomicvarience_JSON_FILE>  -d beacon -c genomecvarience - H < Hostname/IP of the beacon database> -P <Port of the beacon database>
 > python3 beacon2-import.py -i <phenopacket_JSON_FILE>  -d beacon -c phenopacket - H < Hostname/IP of the beacon database> -P <Port of the beacon database>
 > ```
-> The tool also works with a Beacon protocol with authentication. Check the *Advanced Connection to MongoDB* in the tool help section (python beacon2-import.py -h)
+> The tool also works with a Beacon protocol with authentication. Check the *Advanced Connection to MongoDB* in the tool help section `python beacon2-import.py -h`
 {: .hands_on}
 
 
@@ -405,7 +405,7 @@ We are looking to see if there is a deletion mutation in the gene **located** in
 > >       }
 > >     }
 > > ```
-> The tool also works with a Beacon protocol with authentication. Check the *Advanced Connection to MongoDB* in the tool help section (python beacon2-search.py -h)
+> The tool also works with a Beacon protocol with authentication. Check the *Advanced Connection to MongoDB* in the tool help section `python beacon2-search.py -h`
 > 
 > > <question-title></question-title>
 >    >
