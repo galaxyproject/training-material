@@ -1877,7 +1877,8 @@ var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
 
 // Cited blockquotes
 document.querySelectorAll("blockquote[cite],blockquote[author]").forEach(bq => {
-	var url = bq.getAttribute("cite") ? `<cite class="text-muted"><a href="${url}"><i>Source</i></a></cite>` : "";
-	var author = bq.getAttribute("author") ? "— " + bq.getAttribute("author") + " " : "";
-	bq.insertAdjacentHTML("beforeend", `<footer>${author}${url}</footer>`)
+	let bq_cite = bq.getAttribute("cite");
+	let bq_url = bq_cite ? `<cite class="text-muted"><a href="${bq_cite}"><i>Source</i></a></cite>` : "";
+	let bq_author = bq.getAttribute("author") ? "— " + bq.getAttribute("author") + " " : "";
+	bq.insertAdjacentHTML("beforeend", `<footer>${bq_author}${bq_url}</footer>`)
 })
