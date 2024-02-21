@@ -32,6 +32,7 @@ contributions:
   authorship:
   - colineroyaux
   - yvanlebras
+  - dpelletier
   - jbmihoub
   funding:
   - gallantries
