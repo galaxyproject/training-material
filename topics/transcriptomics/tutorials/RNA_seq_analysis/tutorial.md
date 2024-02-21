@@ -14,11 +14,6 @@ time_estimation: 8H
 key_points:
 - This course will NOT allow you to design an analysis pipeline set-up for your specific needs
 - This course WILL give you the basis information to understand and run a generic RNA-seq analysis, its key steps and problematics, and how to interact with bioinformaticians/bioanalysts that can analyze your RNA-seq datasets
-supporting_materials:
-  available_on_these_galaxies:
-    known_working:
-      - UseGalaxy.fr
-      - UseGalaxy.fr   
 contributions:
   authorship:
     - kamimrcht
