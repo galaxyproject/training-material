@@ -6,6 +6,7 @@ zenodo_link: "http://doi.org/10.5281/zenodo.3567224"
 tags:
   - plants
   - nanopore
+  - jbrowse1
 questions:
   - "How can we assemble a chloroplast genome?"
 objectives:

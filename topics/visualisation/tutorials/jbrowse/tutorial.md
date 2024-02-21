@@ -14,6 +14,9 @@ key_points:
 - This tutorial can not exhaustively cover every data type, but maybe it provides inspiration for your own analyses
 - JBrowse is a great, workflow-compatible alternative to other genome browsers
 - You can build visualisations that summarise dozens of analyses in one visualisation
+tags:
+  - gmod
+  - jbrowse1
 contributors:
   - hexylena
   - shiltemann

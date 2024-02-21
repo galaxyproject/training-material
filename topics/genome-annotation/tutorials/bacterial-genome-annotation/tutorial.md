@@ -16,9 +16,11 @@ key_points:
 - Bakta is a powerful tool to annotate a bacterial genome
 - Annotation can be easily visualized to understand the genomic context and help making sense of the annotations
 tags:
+- gmod
 - illumina
 - bacteria
 - microgalaxy
+- jbrowse1
 subtopic: prokaryote
 level: Introductory
 
