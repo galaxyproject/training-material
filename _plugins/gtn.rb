@@ -477,6 +477,24 @@ module Jekyll
       end
     end
 
+    def tutorials_over_time_bar_chart(site)
+      graph = Hash.new(0)
+      TopicFilter.list_all_materials(site).each do |material|
+        yymm = material['pub_date'].strftime('%Y-%m')
+        graph[yymm] += 1
+      end
+
+      # Cumulative over time
+      # https://stackoverflow.com/questions/71745593/how-to-do-a-single-line-cumulative-count-for-hash-values-in-ruby
+      graph
+        # Turns it into an array
+        .sort_by{|k, v| k}
+        # Cumulative sum
+        .each_with_object([]) { |(k, v), a| a << [k, v + a.last&.last.to_i] }.to_h
+        .map{ |k, v| { 'x' => k, 'y' => v } }
+        .to_json
+    end
+
     def list_usegalaxy_servers(_site)
       Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }
     end

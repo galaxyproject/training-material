@@ -64,7 +64,8 @@ description: Some useful statistics about the GTN. We're a growing community!
  <div class="card">
   <div class="card-body">
    <h5 class="card-title">Growing Community</h5>
-   <canvas id="contributorsGraph" width="400" height="400"></canvas>
+   <canvas id="contributorsGraph" width="400" height="200"></canvas>
+   <canvas id="tutoTimeBar" width="400" height="200"></canvas>
    </div>
  </div>
 </div>
@@ -286,8 +287,6 @@ var tutorialsBarTechnical = new Chart("tutorialsBarTechnical", {
 // Contributors chart
 var data_contributors = [{%for c in contributors_over_time %}{x:"{{contributors_over_time_labels[forloop.index]}}" , y: {{c}} } {%unless forloop.last%},{%endunless%}{%endfor%}];
 
-var labels_contributors = [{%for l in contributors_over_time_labels %}"{{l}}"{%unless forloop.last%},{%endunless%}{%endfor%}];
-
 var contributorsBar = new Chart('contributorsGraph', {
   type: 'line',
   data: {
@@ -323,5 +322,47 @@ var contributorsBar = new Chart('contributorsGraph', {
     }
   }
 });
+
+// Tutorials Over Time chart
+var data_tuto_over_time = {{ site | tutorials_over_time_bar_chart }};
+var labels_tuto_over_time = data_tuto_over_time.map(x => x.x)
+
+var tutoTimeBar = new Chart('tutoTimeBar', {
+  type: 'line',
+  data: {
+    datasets: [{
+      data: data_tuto_over_time,
+      borderColor: style.getPropertyValue("--text-color"),
+    }]
+  },
+
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }],
+      xAxes: [{
+        type: 'time',
+        time: {
+          displayFormats:{month:'YYYY-MM'},
+          min:'2017-10',
+          unit: 'month',
+          distribution: 'linear'
+        }
+      }]
+    },
+    legend: {
+	  display: false
+	},
+    title: {
+      display: true,
+      text: 'Materials over time (Tutorials + Slides)'
+    }
+  }
+});
+
+
 
 </script>
