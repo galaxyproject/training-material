@@ -1,12 +1,13 @@
 ---
 layout: tutorial_hands_on
+draft: true
 
 title: Secondary metabolite discovery
 zenodo_link: https://zenodo.org/records/10652998
 questions:
 - How to discover secondary metabolites produced by microorganisms ?
 - How to identify the discovered secondary metabolites in compound libraries ?
-- How to bridge a workflow step that cannot be performed with a dedicated tool ?
+- How to bridge workflow steps using custom scripts ?
 objectives:
 - Gene cluster prediction using antiSMAHS.
 - Extraction of gene cluster products using a custom script.
@@ -22,12 +23,13 @@ contributors:
 ---
 
 Genome mining is an important source for various bio-active compounds such as antibiotics and fungicides ({% cite adamek_mining_2017 %}).
-The challenge in secondary metabolite discovery using genome mining requires to annotate biosynthetic gene clusters (BGCs) using dedicated tools such as antiSMASH ({% cite blin_antismash_2023 %}) as well as to query the discovered secondary metabolite against compound libraries ({% cite zierep_sempi_2020 %}) in order to identify weather they might posses bio-active properties.
+One challenge in secondary metabolite discovery using genome mining requires to annotate biosynthetic gene clusters (BGCs) using dedicated tools such as antiSMASH ({% cite blin_antismash_2023 %}) as well as to query the discovered secondary metabolites against compound libraries ({% cite zierep_sempi_2020 %}) in order to identify weather they might posses bio-active properties.
 
 In this toturial we will:
 * Annotate biosynthetic gene clusters (BGCs) using antiSMASH. 
 * Extract the predicted compounds  as `SMILES` using a custom script. 
 * Query the predicted compounds agains the MIBiG ({% cite terlouw_mibig_2023 %}) which is a dedicated BGC database.
+* Characterize the predicted compounds using dedicated cheminformatic tools.
 
 > <agenda-title></agenda-title>
 >
@@ -68,11 +70,11 @@ Any analysis should get its own Galaxy history. So let’s start by creating a n
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 4. Rename the datasets
-> 5. Check that the datatype
+> 5. Check that the datatype is correct
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 6. Add to each database a tag corresponding to ...
+> 6. Add useful tags to your datasets 
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -112,7 +114,7 @@ which should be a great source for biosynthetic gene clusters (BGCs).
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Antismash](toolshed.g2.bx.psu.edu/repos/bgruening/antismash/antismash/6.1.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Sequence file in GenBank,EMBL or FASTA format"*: `output` (output of **NCBI Accession Download** {% icon tool %})
+>    - {% icon param-file %} *"Sequence file in GenBank,EMBL or FASTA format"*: `Downloaded Files` (output of **NCBI Accession Download** {% icon tool %})
 >    - *"Taxonomic classification of input sequence"*: `Bacteria`
 >
 >    > <comment-title> BGC detection </comment-title>
@@ -137,12 +139,12 @@ which should be a great source for biosynthetic gene clusters (BGCs).
 >
 {: .question}
 
-## Collapse single BGC Genbank files into one **Collapse Collection**
+## Collapse single BGC Genbank files into one with **Collapse Collection**
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `genbank` (output of **Antismash** {% icon tool %})
+>    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `Genbank` (output of **Antismash** {% icon tool %})
 >    - *"Prepend File name"*: `Yes`
 >
 >    > <comment-title> Collapse Genbank files </comment-title>
@@ -152,12 +154,12 @@ which should be a great source for biosynthetic gene clusters (BGCs).
 >
 {: .hands_on}
 
-# Custom script in Galaxy
+# Use custom scripts in Galaxy to bridge between workflow steps
 
-## Apply a custom script with **Interactive JupyTool and notebook**
+## Integrate a custom script into the workflow using **Interactive JupyTool and notebook**
 
 For the next steps we need to extract the `SMILES` representations of the predicted BGC metabolites.
-And convert in the `.smi` format (basically a tabular format that contains names and structures of chemical compounds).
+And convert it into the `.smi` format (basically a tabular format that contains names and structures of chemical compounds).
 
 The  `SMILES` representations of the predicted BGC metabolites are stored as features of the clusters in the Genbank files.
 
@@ -174,8 +176,8 @@ The  `SMILES` representations of the predicted BGC metabolites are stored as fea
                      /tool="antismash"
 ```
 
-There are various tools that can convert Genbank files into GFF (like {% tool [customGbkToGff](toolshed.g2.bx.psu.edu/repos/cpt/cpt_gbk_to_gff/edu.tamu.cpt.gff3.customGbkToGff/20.1.0.0) %} and  {% tool [genbank2gff3](toolshed.g2.bx.psu.edu/repos/iuc/bp_genbank2gff3/bp_genbank2gff3/1.1) %}) and then the one could extract the SMILES string via regex.
-However, unfortunately both tools seem to have difficulty to parse SMILES and introduce artefact like: 
+There are various tools that can convert Genbank files into GFF (like {% tool [customGbkToGff](toolshed.g2.bx.psu.edu/repos/cpt/cpt_gbk_to_gff/edu.tamu.cpt.gff3.customGbkToGff/20.1.0.0) %} and  {% tool [genbank2gff3](toolshed.g2.bx.psu.edu/repos/iuc/bp_genbank2gff3/bp_genbank2gff3/1.1) %}). From the GFF one could extract the SMILES string via regex.
+However, unfortunately both tools seem to have difficulty to parse SMILES and introduce artefacts like: 
 
 ```
 SMILES=CC(%3DO)C(%3DO)O
@@ -192,7 +194,7 @@ This is in fact a great chance to demonstrate how the interactive {% tool [Inter
 >        - *"Execute notebook and return a new one."*: `Yes`
 >    - In *"User inputs"*:
 >        - {% icon param-repeat %} *"Insert User inputs"*
->            - *"Name for parameter"*: `dataset` (this dataset can be used in the notebook)
+>            - *"Name for parameter"*: `dataset` (a file called `dataset` will be created in the notebook in the folder `galaxy_inputs`)
 >            - *"Choose the input type"*: `Dataset`
 >                - {% icon param-file %} *"Select value"*: `Collapse Genbank files` (output of **Collapse Collection** {% icon tool %})
 >
@@ -204,7 +206,7 @@ This is in fact a great chance to demonstrate how the interactive {% tool [Inter
 >
 {: .hands_on}
 
-In this workflow the jupyter notebook is executed and the output collected. If you want to run the notebook interactively. Rerun the tool and set the option *"Execute notebook and return a new one."*: `No`. Now the notebook start up interactively and you can play around the the python code.
+In this workflow the jupyter notebook is executed and the output collected. If you want to run the notebook interactively. Rerun the tool and set the option *"Execute notebook and return a new one."*: `No`. Now the notebook will start up interactively and you can play around the the python code.
 
 The code we provide for the notebook looks like this:
 
@@ -276,297 +278,114 @@ df.to_csv("outputs/collection/feature_table.tsv", sep="\t")
 
 # Cheminformatics
 
-The next two steps convert the generated table into the `.smi` format.
+Now, that we have predicted the products of the BGCs found in the `Streptomyces coelicolor A3(2) complete genome`,
+we can compare the chemical structures of the prediction with natural compound libraries to see if some of the compounds 
+are similar to other compounds with known bio-activte properties. Those compounds should be further investigated.
+The natural compound library we are using here comprises all the compounds found in the MIBiG ({% cite terlouw_mibig_2023 %}).
 
-## Sub-step with **Text reformatting**
+## Convert the table into a two column table 
 
-> <hands-on-title> Task description </hands-on-title>
+The next two steps convert the generated table into the `.smi` format. The `.smi` format is basically a specific table format where the first column is a chemical structure and the second column the ID or name of the compound. The table must
+not have a header.
+
+> <hands-on-title> Table to smi format conversion</hands-on-title>
 >
 > 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `output_collection` (output of **Interactive JupyTool and notebook** {% icon tool %})
 >    - *"AWK Program"*: `{print $8, $2-$5-$6}`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Remove beginning**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+> 2. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - {% icon param-file %} *"from"*: `outfile` (output of **Text reformatting** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
+> 3. Now, that the table is indeed the same as the `.smi` format it can also be converted into `.smi`.
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="smi" %}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## **Remove duplicated molecules**
 
-## Sub-step with **Remove duplicated molecules**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Remove duplicated molecules </hands-on-title>
 >
 > 1. {% tool [Remove duplicated molecules](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_remduplicates/openbabel_remDuplicates/3.1.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Molecular input file"*: `out_file1` (output of **Remove beginning** {% icon tool %})
+>    - {% icon param-file %} *"Molecular input file"*: (output of **Remove beginning** {% icon tool %})
 >    - *"Select descriptor for molecule comparison"*: `Canonical SMILES`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > <comment-title> short description </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > For the downstream analysis deduplicated molecules are not required. Especially short, hybrid or uncompleted cluster can produce short molecular structures, that appear multiple times in an organisms. These structures can be regarded as artefacts and could probably be removed as well.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Generate fingerprints for the predicted secondary metabolites and the target database with **Molecule to fingerprint**
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Sub-step with **Molecule to fingerprint**
+Various molecular fingerprint options can be used to convert the compounds. Details about molecular fingerprint can be found in {% cite muegge_overview_2016 %} and {% cite capecchi_one_2020 %}.
 
 > <hands-on-title> Task description </hands-on-title>
+>
 >
 > 1. {% tool [Molecule to fingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5) %} with the following parameters:
->    - {% icon param-file %} *"Molecule file"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Molecule file"*: (output of **Remove duplicated molecules** {% icon tool %})
 >    - *"Type of fingerprint"*: `Open Babel FP2 fingerprints`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Molecule to fingerprint**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Molecule to fingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5) %} with the following parameters:
->    - {% icon param-file %} *"Molecule file"*: `outfile` (output of **Remove duplicated molecules** {% icon tool %})
+> 2. {% tool [Molecule to fingerprint](toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5) %} with the following parameters:
+>    - {% icon param-file %} *"Molecule file"*: `output` (MIBiG_compounds_3.0.sdf)
 >    - *"Type of fingerprint"*: `Open Babel FP2 fingerprints`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Be consitent </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > A major application of molecular fingerprints is to determine the similarity of compounds. For the downstream tool
+>    > {% tool [Similarity Search](toolshed.g2.bx.psu.edu/repos/bgruening/simsearch/ctb_simsearch/0.2) %} it is **important** that the same fingerprint are used for the query and target compounds!
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+Now that we have converted our compounds into molecular fingerprints, we can compare them to find the closest match between our prediction and the target database.
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Natural Product**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Natural Product](toolshed.g2.bx.psu.edu/repos/bgruening/natural_product_likeness/ctb_np-likeness-calculator/2.1) %} with the following parameters:
->    - {% icon param-file %} *"Molecule file"*: `outfile` (output of **Remove duplicated molecules** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Drug-likeness**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Drug-likeness](toolshed.g2.bx.psu.edu/repos/bgruening/qed/ctb_silicos_qed/2021.03.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Molecule data in SDF or SMILES format"*: `outfile` (output of **Remove duplicated molecules** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Similarity Search**
+## Compare prediction with target DB using **Similarity Search**
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Similarity Search](toolshed.g2.bx.psu.edu/repos/bgruening/simsearch/ctb_simsearch/0.2) %} with the following parameters:
 >    - *"Subject database/sequences"*: `Chemfp fingerprint file`
 >        - *"Query Mode"*: `Query molecules are stores in a separate file`
->            - {% icon param-file %} *"Target molecules"*: `outfile` (output of **Molecule to fingerprint** {% icon tool %})
+>            - {% icon param-file %} *"Query molecules"*: (output of **Molecule to fingerprint** for `MIBiG_compounds_3.0.sdf` {% icon tool %})
+>            - {% icon param-file %} *"Target molecules"*: (output of **Molecule to fingerprint** from **Remove duplicated molecules** {% icon tool %})
 >        - *"select the k nearest neighbors"*: `1`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
+## Determine the novelty of the compounds using **Natural Product** likeness calculator
+
+Normally, this tool allows to estimate how similar any kind of compound is to a natural product.
+In our case we know that the compounds are natural compounds. However, by comparing to a large source of known 
+natural products we can estimate the novelty of our predicted structure. This could for example be used to 
+mine metagenomic datasets for likely sources of uncharacterized molecular scaffolds. 
+
+> <hands-on-title> Task description </hands-on-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. {% tool [Natural Product](toolshed.g2.bx.psu.edu/repos/bgruening/natural_product_likeness/ctb_np-likeness-calculator/2.1) %} with the following parameters:
+>    - {% icon param-file %} *"Molecule file"*: (output of **Remove duplicated molecules** {% icon tool %})
 >
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
 >
-{: .question}
+{: .hands_on}
 
+## Check **Drug-likeness** of the predicted compounds
 
-## Re-arrange
+Estimates the drug-likeness of molecules, based on eight commonly used molecular properties, and reports a score between 0 (all properties unfavourable) to 1 (all properties favourable). Two possible methods to weight the features are available (QEDw,mo, QEDw,max), as well as an option to leave features unweighted (QEDw,u).
 
-To create the template, each step of the workflow had its own subsection.
+The eight properties used are: molecular weight (MW), octanol–water partition coefficient (ALOGP), number of hydrogen bond donors (HBDs), number of hydrogen bond acceptors (HBAs), molecular polar surface area (PSA), number of rotatable bonds (ROTBs), number of aromatic rings (AROMs) and number of structural alerts (ALERTS).
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Drug-likeness](toolshed.g2.bx.psu.edu/repos/bgruening/qed/ctb_silicos_qed/2021.03.4+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Molecule data in SDF or SMILES format"*: (output of **Remove duplicated molecules** {% icon tool %})
+>
+{: .hands_on}
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this simple use case the combination of BGC prediction software and cheminformatics was used to detect and characterize novel secondary metabolites. 
