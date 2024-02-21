@@ -577,6 +577,8 @@ module Jekyll
         og_title.push page['title']
       end
 
+      og_title.gsub!(/Hands-on: Hands-on:/, 'Hands-on:')
+
       Jekyll.logger.debug "Material #{page['layout']} :: #{page['path']} => #{topic_id}/#{material_id} => #{og_title}"
 
       if reverse.to_s == 'true'
