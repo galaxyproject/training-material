@@ -577,14 +577,12 @@ module Jekyll
         og_title.push page['title']
       end
 
-      og_title.gsub!(/Hands-on: Hands-on:/, 'Hands-on:')
-
       Jekyll.logger.debug "Material #{page['layout']} :: #{page['path']} => #{topic_id}/#{material_id} => #{og_title}"
 
       if reverse.to_s == 'true'
-        og_title.compact.reverse.join(' / ')
+        og_title.compact.reverse.join(' / ').gsub(/Hands-on: Hands-on:/, 'Hands-on:')
       else
-        og_title.compact.join(' / ')
+        og_title.compact.join(' / ').gsub(/Hands-on: Hands-on:/, 'Hands-on:')
       end
     end
 
