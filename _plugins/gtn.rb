@@ -376,10 +376,10 @@ module Jekyll
       Gtn::ModificationTimes.obtain_modification_count(page['path'])
     end
 
-    def get_rating_histogram(site, material_id)
+    def get_rating_histogram(site, material_id, recent: false)
       return {} if material_id.nil?
 
-      feedbacks = get_feedbacks(site, material_id)
+      feedbacks = recent ? get_recent_feedbacks_time(site, material_id) : get_feedbacks(site, material_id)
 
       return {} if feedbacks.nil? || feedbacks.empty?
 
@@ -398,10 +398,15 @@ module Jekyll
         .to_h
     end
 
-    def get_rating(site, material_id)
-      f = get_rating_histogram(site, material_id)
+    def get_rating(site, material_id, recent: false)
+      f = get_rating_histogram(site, material_id, recent: recent)
       rating = f.map { |k, v| k * v }.sum / f.map { |_k, v| v }.sum.to_f
       rating.round(1)
+    end
+
+    def get_rating_recent(site, material_id)
+      r = get_rating(site, material_id, recent: true)
+      r.nan? ? get_rating(site, material_id, recent: false) : r
     end
 
     # Only accepts an integer rating
@@ -451,6 +456,24 @@ module Jekyll
 
     def get_feedback_count(site, material_id)
       get_feedbacks(site, material_id).length
+    end
+
+    def get_feedback_count_recent(site, material_id)
+      get_recent_feedbacks_time(site, material_id).length
+    end
+
+    def get_recent_feedbacks_time(site, material_id)
+      feedbacks = get_feedbacks(site, material_id)
+                  .select do |f|
+                    f['pro']&.length&.positive? ||
+                      f['con']&.length&.positive?
+                  end
+                  .map do |f|
+        f['f_date'] = Date.parse(f['date']).strftime('%B %Y')
+        f
+      end
+
+      feedbacks.select { |f| Date.parse(f['date']) > Date.today - 365 }
     end
 
     def get_recent_feedbacks(site, material_id)

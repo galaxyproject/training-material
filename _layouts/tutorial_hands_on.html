@@ -174,7 +174,7 @@ We should ONLY be using new_material (if at all possible.)
 
 	{% assign feedback_count = site | get_feedback_count: own_material_id %}
 	{% if feedback_count > 0 %}
-	<div><strong>{% icon rating %} Rating:</strong> <a href="#feedback-responses">{{ site | get_rating:own_material_id }}</a> ({{ site | get_feedback_count: own_material_id }} ratings)</div>
+	<div><strong>{% icon rating %} Rating:</strong> <a href="#feedback-responses">{{ site | get_rating_recent:own_material_id }}</a> ({{ site | get_feedback_count_recent: own_material_id }} recent ratings, {{ feedback_count }} all time)</div>
 	{% endif %}
 	<div><strong>{% icon version %} Revision:</strong> {{ page | get_version_number }} </div>
 
