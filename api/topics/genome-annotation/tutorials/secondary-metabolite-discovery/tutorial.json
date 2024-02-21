@@ -1,0 +1,205 @@
+{
+  "layout": "tutorial_hands_on",
+  "draft": true,
+  "title": "Secondary metabolite discovery",
+  "zenodo_link": "https://zenodo.org/records/10652998",
+  "questions": [
+    "How to discover secondary metabolites produced by microorganisms ?",
+    "How to identify the discovered secondary metabolites in compound libraries ?",
+    "How to bridge workflow steps using custom scripts ?"
+  ],
+  "objectives": [
+    "Gene cluster prediction using antiSMAHS.",
+    "Extraction of gene cluster products using a custom script.",
+    "Query of the products in compound libraries using cheminformatic tools."
+  ],
+  "time_estimation": "3H",
+  "key_points": [
+    "Gene cluster prediction that can be performed for any assembly or genome of microorganisms (procaryotes and fungi).",
+    "Bridging of gene annotation and cheminformatics.",
+    "Usage of custom script to bridge workflow steps."
+  ],
+  "contributors": [
+    {
+      "name": "Paul Zierep",
+      "email": "zierep@informatik.uni-freiburg.de",
+      "orcid": "0000-0003-2982-388X",
+      "joined": "2023-02",
+      "affiliations": [
+        "uni-freiburg"
+      ],
+      "id": "paulzierep",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/paulzierep.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/paulzierep/"
+    }
+  ],
+  "mathjax": null,
+  "short_id": null,
+  "url": "/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html",
+  "topic_name": "genome-annotation",
+  "tutorial_name": "secondary-metabolite-discovery",
+  "dir": "topics/genome-annotation/tutorials/secondary-metabolite-discovery",
+  "id": "genome-annotation/secondary-metabolite-discovery",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "mod_date": "2024-02-21 12:40:51 +0000",
+  "pub_date": "2024-02-21 14:08:32 +0000",
+  "version": 3,
+  "workflows": [
+    {
+      "workflow": "main_workflow.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/workflows/main_workflow.ga",
+      "path": "topics/genome-annotation/tutorials/secondary-metabolite-discovery/workflows/main_workflow.ga",
+      "wfid": "genome-annotation-secondary-metabolite-discovery",
+      "wfname": "main_workflow",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-secondary-metabolite-discovery/versions/main_workflow",
+      "license": null,
+      "creators": [
+
+      ],
+      "name": "Gene Cluster Product Similarity Search ",
+      "title": "Gene Cluster Product Similarity Search ",
+      "test_results": null,
+      "modified": "2024-02-21 14:16:13 +0000",
+      "mermaid": "flowchart TD\n  0[\"Input parameter\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"NCBI Accession Download\"];\n  0 -->|output| 3;\n  4[\"Molecule to fingerprint\"];\n  2 -->|output| 4;\n  5[\"Antismash\"];\n  3 -->|output| 5;\n  6[\"Collapse Collection\"];\n  5 -->|genbank| 6;\n  7[\"Interactive JupyTool and notebook\"];\n  1 -->|output| 7;\n  6 -->|output| 7;\n  8[\"Text reformatting\"];\n  7 -->|output_collection| 8;\n  9[\"Remove beginning\"];\n  8 -->|outfile| 9;\n  10[\"Remove duplicated molecules\"];\n  9 -->|out_file1| 10;\n  11[\"Molecule to fingerprint\"];\n  10 -->|outfile| 11;\n  12[\"Natural Product\"];\n  10 -->|outfile| 12;\n  13[\"Drug-likeness\"];\n  10 -->|outfile| 13;\n  14[\"Similarity Search\"];\n  11 -->|outfile| 14;\n  4 -->|outfile| 14;\n"
+    }
+  ],
+  "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.json",
+  "tools": [
+    "Remove beginning1",
+    "interactive_tool_jupyter_notebook",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/antismash/antismash/6.1.1+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/natural_product_likeness/ctb_np-likeness-calculator/2.1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_remduplicates/openbabel_remDuplicates/3.1.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/qed/ctb_silicos_qed/2021.03.4+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/simsearch/ctb_simsearch/0.2",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+    "toolshed.g2.bx.psu.edu/repos/cpt/cpt_gbk_to_gff/edu.tamu.cpt.gff3.customGbkToGff/20.1.0.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bp_genbank2gff3/bp_genbank2gff3/1.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_acc_download/ncbi_acc_download/0.2.8+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"
+  ],
+  "supported_servers": {
+    "exact": [
+      {
+        "url": "https://usegalaxy.eu",
+        "name": "UseGalaxy.eu",
+        "usegalaxy": true
+      }
+    ],
+    "inexact": [
+
+    ]
+  },
+  "topic_name_human": "Genome Annotation",
+  "admin_install": {
+    "install_tool_dependencies": true,
+    "install_repository_dependencies": true,
+    "install_resolver_dependencies": true,
+    "tools": [
+      {
+        "name": "antismash",
+        "owner": "bgruening",
+        "revisions": "bc88856eddab",
+        "tool_panel_section_label": "Annotation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "chemfp",
+        "owner": "bgruening",
+        "revisions": "73de2fe4bf92",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "natural_product_likeness",
+        "owner": "bgruening",
+        "revisions": "6052dd3fa475",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "openbabel_remduplicates",
+        "owner": "bgruening",
+        "revisions": "b2569e22b40c",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "qed",
+        "owner": "bgruening",
+        "revisions": "52a8d34dd08f",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "simsearch",
+        "owner": "bgruening",
+        "revisions": "0892f7ced10c",
+        "tool_panel_section_label": "ChemicalToolBox",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "text_processing",
+        "owner": "bgruening",
+        "revisions": "d698c222f354",
+        "tool_panel_section_label": "Text Manipulation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "cpt_gbk_to_gff",
+        "owner": "cpt",
+        "revisions": "a921d6148d88",
+        "tool_panel_section_label": "Convert Formats",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "bp_genbank2gff3",
+        "owner": "iuc",
+        "revisions": "11c3eb512633",
+        "tool_panel_section_label": "Annotation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "ncbi_acc_download",
+        "owner": "iuc",
+        "revisions": "e063168e0a81",
+        "tool_panel_section_label": "Get Data",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "collapse_collections",
+        "owner": "nml",
+        "revisions": "90981f86000f",
+        "tool_panel_section_label": "Collection Operations",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      }
+    ]
+  },
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: antismash\n  owner: bgruening\n  revisions: bc88856eddab\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemfp\n  owner: bgruening\n  revisions: 73de2fe4bf92\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: natural_product_likeness\n  owner: bgruening\n  revisions: 6052dd3fa475\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: openbabel_remduplicates\n  owner: bgruening\n  revisions: b2569e22b40c\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: qed\n  owner: bgruening\n  revisions: 52a8d34dd08f\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: simsearch\n  owner: bgruening\n  revisions: '0892f7ced10c'\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cpt_gbk_to_gff\n  owner: cpt\n  revisions: a921d6148d88\n  tool_panel_section_label: Convert Formats\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bp_genbank2gff3\n  owner: iuc\n  revisions: 11c3eb512633\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_acc_download\n  owner: iuc\n  revisions: e063168e0a81\n  tool_panel_section_label: Get Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 90981f86000f\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "license": "CC-BY-4.0",
+  "type": "tutorial",
+  "tags": [
+    "work-in-progress"
+  ]
+}

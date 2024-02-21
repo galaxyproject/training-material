@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hands-on: Secondary metabolite discovery / Genome Annotation</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@036e70bfdc38225009ac23459dd76fa32dc435f1",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708524970' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708524970' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Secondary metabolite discovery">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-02-21 12:40:51 +0000">
+<meta name="DC.creator" content="Paul Zierep"><meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Genome Annotation / Hands-on: Secondary metabolite discovery">
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-02-21 12:40:51 +0000",
+  "datePublished": "2024-02-21 14:08:32 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Secondary metabolite discovery",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Draft",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Secondary metabolite discovery",
+  "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html",
+  "version": 3,
+  "timeRequired": "PT3H",
+  "teaches": "Gene cluster prediction using antiSMAHS.\n - Extraction of gene cluster products using a custom script.\n - Query of the products in compound libraries using cheminformatic tools.",
+  "keywords": [
+    "Genome Annotation"
+  ],
+  "description": "The questions this  addresses are:\n - How to discover secondary metabolites produced by microorganisms ?\n - How to identify the discovered secondary metabolites in compound libraries ?\n - How to bridge workflow steps using custom scripts ?\n\n\nThe objectives are:\n - Gene cluster prediction using antiSMAHS.\n - Extraction of gene cluster products using a custom script.\n - Query of the products in compound libraries using cheminformatic tools.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/paulzierep/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/paulzierep/",
+      "name": "Paul Zierep",
+      "image": "https://avatars.githubusercontent.com/paulzierep",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2982-388X",
+      "orcid": "https://orcid.org/0000-0003-2982-388X"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0362",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0362",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0362"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+
+  ],
+  "abstract": "Genome mining is an important source for various bio-active compounds such as antibiotics and fungicides ({% cite adamek_mining_2017 %})."
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708524970'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/genome-annotation" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Genome Annotation
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/genome-annotation/faqs/" title="Check our FAQs for the Genome Annotation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html">2024-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html">2024-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-genome-annotation">
+    <h1 data-toc-skip>Secondary metabolite discovery</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/paulzierep/" class="contributor-badge contributor-paulzierep"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/paulzierep?s=36" alt="Paul Zierep avatar" width="36" class="avatar" />
+    Paul Zierep</a>
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to discover secondary metabolites produced by microorganisms ?</p>
+</li>
+        
+        <li><p>How to identify the discovered secondary metabolites in compound libraries ?</p>
+</li>
+        
+        <li><p>How to bridge workflow steps using custom scripts ?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Gene cluster prediction using antiSMAHS.</p>
+</li>
+        
+        <li><p>Extraction of gene cluster products using a custom script.</p>
+</li>
+        
+        <li><p>Query of the products in compound libraries using cheminformatic tools.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/10652998">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/workflows/" title="Secondary metabolite discovery workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/genome-annotation/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 21, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 21, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Genome mining is an important source for various bio-active compounds such as antibiotics and fungicides (<span class="citation"><a href="#adamek_mining_2017">Adamek <i>et al.</i> 2017</a></span>).
+One challenge in secondary metabolite discovery using genome mining requires to annotate biosynthetic gene clusters (BGCs) using dedicated tools such as antiSMASH (<span class="citation"><a href="#blin_antismash_2023">Blin <i>et al.</i> 2023</a></span>) as well as to query the discovered secondary metabolites against compound libraries (<span class="citation"><a href="#zierep_sempi_2020">Zierep <i>et al.</i> 2020</a></span>) in order to identify weather they might posses bio-active properties.</p>
+
+<p>In this toturial we will:</p>
+<ul>
+  <li>Annotate biosynthetic gene clusters (BGCs) using antiSMASH.</li>
+  <li>Extract the predicted compounds  as <code class="language-plaintext highlighter-rouge">SMILES</code> using a custom script.</li>
+  <li>Query the predicted compounds agains the MIBiG (<span class="citation"><a href="#terlouw_mibig_2023">Terlouw <i>et al.</i> 2023</a></span>) which is a dedicated BGC database.</li>
+  <li>Characterize the predicted compounds using dedicated cheminformatic tools.</li>
+</ul>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#galaxy-and-data-preparation" id="markdown-toc-galaxy-and-data-preparation">Galaxy and data preparation</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+    </ol>
+  </li>
+  <li><a href="#biosynthetic-gene-clusters-bgcs-detection-and-compound-extraction" id="markdown-toc-biosynthetic-gene-clusters-bgcs-detection-and-compound-extraction">Biosynthetic gene clusters (BGCs) detection and compound extraction</a>    <ol>
+      <li><a href="#download-a-bacterial-genome-with-ncbi-accession-download" id="markdown-toc-download-a-bacterial-genome-with-ncbi-accession-download">Download a bacterial genome with <strong>NCBI Accession Download</strong></a></li>
+      <li><a href="#detect-bgcs-and-predict-nrps--pks-metabolite-structures-with-antismash" id="markdown-toc-detect-bgcs-and-predict-nrps--pks-metabolite-structures-with-antismash">Detect BGCs and predict NRPS / PKS metabolite structures with <strong>Antismash</strong></a></li>
+      <li><a href="#collapse-single-bgc-genbank-files-into-one-with-collapse-collection" id="markdown-toc-collapse-single-bgc-genbank-files-into-one-with-collapse-collection">Collapse single BGC Genbank files into one with <strong>Collapse Collection</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#use-custom-scripts-in-galaxy-to-bridge-between-workflow-steps" id="markdown-toc-use-custom-scripts-in-galaxy-to-bridge-between-workflow-steps">Use custom scripts in Galaxy to bridge between workflow steps</a>    <ol>
+      <li><a href="#integrate-a-custom-script-into-the-workflow-using-interactive-jupytool-and-notebook" id="markdown-toc-integrate-a-custom-script-into-the-workflow-using-interactive-jupytool-and-notebook">Integrate a custom script into the workflow using <strong>Interactive JupyTool and notebook</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#cheminformatics" id="markdown-toc-cheminformatics">Cheminformatics</a>    <ol>
+      <li><a href="#convert-the-table-into-a-two-column-table" id="markdown-toc-convert-the-table-into-a-two-column-table">Convert the table into a two column table</a></li>
+      <li><a href="#remove-duplicated-molecules" id="markdown-toc-remove-duplicated-molecules"><strong>Remove duplicated molecules</strong></a></li>
+      <li><a href="#generate-fingerprints-for-the-predicted-secondary-metabolites-and-the-target-database-with-molecule-to-fingerprint" id="markdown-toc-generate-fingerprints-for-the-predicted-secondary-metabolites-and-the-target-database-with-molecule-to-fingerprint">Generate fingerprints for the predicted secondary metabolites and the target database with <strong>Molecule to fingerprint</strong></a></li>
+      <li><a href="#compare-prediction-with-target-db-using-similarity-search" id="markdown-toc-compare-prediction-with-target-db-using-similarity-search">Compare prediction with target DB using <strong>Similarity Search</strong></a></li>
+      <li><a href="#determine-the-novelty-of-the-compounds-using-natural-product-likeness-calculator" id="markdown-toc-determine-the-novelty-of-the-compounds-using-natural-product-likeness-calculator">Determine the novelty of the compounds using <strong>Natural Product</strong> likeness calculator</a></li>
+      <li><a href="#check-drug-likeness-of-the-predicted-compounds" id="markdown-toc-check-drug-likeness-of-the-predicted-compounds">Check <strong>Drug-likeness</strong> of the predicted compounds</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="galaxy-and-data-preparation">Galaxy and data preparation</h1>
+
+<p>Any analysis should get its own Galaxy history. So let’s start by creating a new one and get the data into it.</p>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-history-creation-and-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  History Creation and Data Upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/records/10652998">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">genome-annotation</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">Secondary metabolite discovery</code>):</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/10652998/files/MIBiG_compounds_3.0.sdf
+https://zenodo.org/record/10652998/files/gbk2features.ipynb
+</code></pre></div>      </div>
+
+      <p>For this training we need a custom jupyter notebook and a compound library.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Rename the datasets</li>
+    <li>
+      <p>Check that the datatype is correct</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Add useful tags to your datasets</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add a tag  starting with <code class="language-plaintext highlighter-rouge">#</code>     <ul>       <li>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>     </ul>   </li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="biosynthetic-gene-clusters-bgcs-detection-and-compound-extraction">Biosynthetic gene clusters (BGCs) detection and compound extraction</h1>
+
+<p>The general idea of this tutorial is described in the flowchart below. 
+Zierep et. al. previously created a 
+workflow that combines BGC prediction with natural compound screening in their webserver <a href="http://sempi.pharmazie.uni-freiburg.de/">SeMPI 2.0</a>
+(<span class="citation"><a href="#zierep_sempi_2020">Zierep <i>et al.</i> 2020</a></span>). 
+Here, we want to reproduce the workflow using Galaxy, which allows to adjust the workflow and combine it with other
+tools and databases. 
+E.g. the workflow could be combined with metagenomic workflows, that allow to screen a vast amount of metagenome assembly genomes (MAGs) for potential novel bioactive compounds.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/bgc_screening/flowchart.drawio.png" alt="Overview flowchart. " width="827" height="563" loading="lazy" /><a target="_blank" href="../../images/bgc_screening/flowchart.drawio.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Overview flowchart of the workflow.</figcaption></figure>
+
+<h2 id="download-a-bacterial-genome-with-ncbi-accession-download">Download a bacterial genome with <strong>NCBI Accession Download</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ncbi_acc_download/ncbi_acc_download/0.2.8+galaxy0" title="NCBI Accession Download tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NCBI Accession Download</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.8+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><em>“Select source for IDs”</em>: <code class="language-plaintext highlighter-rouge">Direct Entry</code>
+          <ul>
+            <li><em>“ID List”</em>: <code class="language-plaintext highlighter-rouge">AL645882.2</code></li>
+          </ul>
+        </li>
+        <li><em>“Molecule Type”</em>: <code class="language-plaintext highlighter-rouge">Nucleotide</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-genome-download"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Genome download</div>
+
+        <p>This downloads the <code class="language-plaintext highlighter-rouge">Streptomyces coelicolor A3(2) complete genome</code>, 
+which should be a great source for biosynthetic gene clusters (BGCs).</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="detect-bgcs-and-predict-nrps--pks-metabolite-structures-with-antismash">Detect BGCs and predict NRPS / PKS metabolite structures with <strong>Antismash</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/antismash/antismash/6.1.1+galaxy1" title="Antismash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Antismash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.1.1+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequence file in GenBank,EMBL or FASTA format”</em>: <code class="language-plaintext highlighter-rouge">Downloaded Files</code> (output of <strong>NCBI Accession Download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Taxonomic classification of input sequence”</em>: <code class="language-plaintext highlighter-rouge">Bacteria</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-bgc-detection"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  BGC detection</div>
+
+        <p>This step uses Antismash for BGC detection. Another tool that could be used is <a href="https://prism.adapsyn.com/">prism</a>.
+But prism can only be used via a web server and is therefore not integrable into Galaxy workflows.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many BGCs are detected for the <code class="language-plaintext highlighter-rouge">Streptomyces coelicolor A3(2) complete genome</code> ?</li>
+    <li>How many BGCs are of type NRPS ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>In the HTML report of Antismash you can find 27 BGCs of various types.</li>
+      <li>Of those 27 BGCs 4 are pure NRPS and one more is  classified as NRPS-like.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="collapse-single-bgc-genbank-files-into-one-with-collapse-collection">Collapse single BGC Genbank files into one with <strong>Collapse Collection</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.1.0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Collection of files to collapse into single dataset”</em>: <code class="language-plaintext highlighter-rouge">Genbank</code> (output of <strong>Antismash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-collapse-genbank-files"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Collapse Genbank files</div>
+
+        <p>Antismash produces one Genbank file for each cluster. Genbank files can contain multiple records. For downstream analysis it is more convenient to combine all clusters into one file.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="use-custom-scripts-in-galaxy-to-bridge-between-workflow-steps">Use custom scripts in Galaxy to bridge between workflow steps</h1>
+
+<h2 id="integrate-a-custom-script-into-the-workflow-using-interactive-jupytool-and-notebook">Integrate a custom script into the workflow using <strong>Interactive JupyTool and notebook</strong></h2>
+
+<p>For the next steps we need to extract the <code class="language-plaintext highlighter-rouge">SMILES</code> representations of the predicted BGC metabolites.
+And convert it into the <code class="language-plaintext highlighter-rouge">.smi</code> format (basically a tabular format that contains names and structures of chemical compounds).</p>
+
+<p>The  <code class="language-plaintext highlighter-rouge">SMILES</code> representations of the predicted BGC metabolites are stored as features of the clusters in the Genbank files.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     cand_cluster    1..49828
+                     /SMILES="NC(CCCN)C(=O)NC(C(O)C)C(=O)NC(CCCN)C(=O)O"
+                     /candidate_cluster_number="1"
+                     /contig_edge="False"
+                     /detection_rules="cds(Condensation and (AMP-binding or
+                     A-OX))"
+                     /kind="single"
+                     /product="NRPS"
+                     /protoclusters="1"
+                     /tool="antismash"
+</code></pre></div></div>
+
+<p>There are various tools that can convert Genbank files into GFF (like <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/cpt/cpt_gbk_to_gff/edu.tamu.cpt.gff3.customGbkToGff/20.1.0.0" title="customGbkToGff tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>customGbkToGff</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 20.1.0.0)</span> and  <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bp_genbank2gff3/bp_genbank2gff3/1.1" title="genbank2gff3 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>genbank2gff3</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1)</span>). From the GFF one could extract the SMILES string via regex.
+However, unfortunately both tools seem to have difficulty to parse SMILES and introduce artefacts like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SMILES=CC(%3DO)C(%3DO)O
+</code></pre></div></div>
+
+<p>Therefore we need to quickly prototype our own script, that allows to generate the desired <code class="language-plaintext highlighter-rouge">SMILES</code> representations.
+This is in fact a great chance to demonstrate how the interactive <span class="tool" data-tool="interactive_tool_jupyter_notebook" title="Interactive JupyTool and notebook tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Interactive JupyTool and notebook</strong></span> can be used to connect workflow steps, for which there is no dedicated tool yet available in Galaxy, showing the flexible nature of Galaxy.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool="interactive_tool_jupyter_notebook" title="Interactive JupyTool and notebook tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Interactive JupyTool and notebook</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Do you already have a notebook?”</em>: <code class="language-plaintext highlighter-rouge">Load a previous notebook</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“IPython Notebook”</em>: <code class="language-plaintext highlighter-rouge">gbk2features.ipynb</code> (from your history)</li>
+            <li><em>“Execute notebook and return a new one.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li>In <em>“User inputs”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert User inputs”</em>
+              <ul>
+                <li><em>“Name for parameter”</em>: <code class="language-plaintext highlighter-rouge">dataset</code> (a file called <code class="language-plaintext highlighter-rouge">dataset</code> will be created in the notebook in the folder <code class="language-plaintext highlighter-rouge">galaxy_inputs</code>)</li>
+                <li><em>“Choose the input type”</em>: <code class="language-plaintext highlighter-rouge">Dataset</code>
+                  <ul>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select value”</em>: <code class="language-plaintext highlighter-rouge">Collapse Genbank files</code> (output of <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-interactive-jupytool-and-notebook"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Interactive JupyTool and notebook</div>
+
+        <p>JupyTool notebooks can be executed interactively, which allows to run any code (python / R / bash) dynamically or as a normal tool itself, that executes a provide script and return the output. More information about the JupyTool can be found in the <a href="https://training.galaxyproject.org/topics/galaxy-interface/tutorials/jupyterlab/tutorial.html">Interactive JupyTool Tutorial</a>.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>In this workflow the jupyter notebook is executed and the output collected. If you want to run the notebook interactively. Rerun the tool and set the option <em>“Execute notebook and return a new one.”</em>: <code class="language-plaintext highlighter-rouge">No</code>. Now the notebook will start up interactively and you can play around the the python code.</p>
+
+<p>The code we provide for the notebook looks like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">Bio</span> <span class="kn">import</span> <span class="n">SeqIO</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">input_path</span> <span class="o">=</span> <span class="sh">"</span><span class="s">galaxy_inputs</span><span class="sh">"</span>
+
+<span class="n">use_qualifiers</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">SMILES</span><span class="sh">"</span><span class="p">]</span> 
+
+<span class="n">feature_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">os</span><span class="p">.</span><span class="nf">listdir</span><span class="p">(</span><span class="n">input_path</span><span class="p">):</span>
+
+    <span class="n">folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">isdir</span><span class="p">(</span><span class="n">folder_path</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">os</span><span class="p">.</span><span class="nf">listdir</span><span class="p">(</span><span class="n">folder_path</span><span class="p">):</span>
+            <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+            <span class="k">if</span> <span class="sh">'</span><span class="s">.genbank</span><span class="sh">'</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">SeqIO</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="sh">"</span><span class="s">genbank</span><span class="sh">"</span><span class="p">):</span>
+                    <span class="c1">#print(record)
+</span>                    
+                    <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">record</span><span class="p">.</span><span class="n">features</span><span class="p">:</span>
+
+                        <span class="n">combined_features</span> <span class="o">=</span> <span class="p">{}</span>
+                        <span class="n">combined_features</span><span class="p">[</span><span class="sh">'</span><span class="s">ID</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">record</span><span class="p">.</span><span class="nb">id</span>
+                        <span class="n">combined_features</span><span class="p">[</span><span class="sh">'</span><span class="s">Name</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">record</span><span class="p">.</span><span class="n">name</span>
+                        <span class="n">combined_features</span><span class="p">[</span><span class="sh">'</span><span class="s">Type</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">feat</span><span class="p">.</span><span class="nb">type</span>
+                        <span class="n">combined_features</span><span class="p">[</span><span class="sh">'</span><span class="s">Start</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">feat</span><span class="p">.</span><span class="n">location</span><span class="p">.</span><span class="n">start</span>
+                        <span class="n">combined_features</span><span class="p">[</span><span class="sh">'</span><span class="s">End</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">feat</span><span class="p">.</span><span class="n">location</span><span class="p">.</span><span class="n">end</span>
+                        <span class="n">combined_features</span><span class="p">[</span><span class="sh">'</span><span class="s">Strand</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">feat</span><span class="p">.</span><span class="n">location</span><span class="p">.</span><span class="n">strand</span>
+
+                        <span class="k">for</span> <span class="n">qualifier</span> <span class="ow">in</span> <span class="n">feat</span><span class="p">.</span><span class="n">qualifiers</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+                                <span class="n">combined_features</span><span class="p">[</span><span class="n">qualifier</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">qualifier</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                        
+                        <span class="n">feature_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">combined_features</span><span class="p">)</span>
+                
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">feature_list</span><span class="p">)</span>
+
+<span class="c1"># df trimming is simpler with pandas
+</span><span class="n">df</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sh">''</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nf">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="n">use_qualifiers</span><span class="p">)</span>
+
+<span class="c1">#remove extra space antiSMASH bug (https://github.com/antismash/antismash/issues/694)
+</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">SMILES</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">SMILES</span><span class="sh">'</span><span class="p">].</span><span class="nb">str</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sh">'</span><span class="s"> </span><span class="sh">'</span><span class="p">,</span> <span class="sh">''</span><span class="p">)</span>
+
+
+<span class="c1">#only keep what is needed downstream
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="sh">'</span><span class="s">ID</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Type</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Start</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">End</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Strand</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">SMILES</span><span class="sh">'</span><span class="p">]]</span>
+
+<span class="n">df</span><span class="p">.</span><span class="nf">to_csv</span><span class="p">(</span><span class="sh">"</span><span class="s">outputs/collection/feature_table.tsv</span><span class="sh">"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sh">"</span><span class="se">\t</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What does the notebook do ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The notebook creates a table with a row for each <code class="language-plaintext highlighter-rouge">SMILES</code> qualifier.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="cheminformatics">Cheminformatics</h1>
+
+<p>Now, that we have predicted the products of the BGCs found in the <code class="language-plaintext highlighter-rouge">Streptomyces coelicolor A3(2) complete genome</code>,
+we can compare the chemical structures of the prediction with natural compound libraries to see if some of the compounds 
+are similar to other compounds with known bio-activte properties. Those compounds should be further investigated.
+The natural compound library we are using here comprises all the compounds found in the MIBiG (<span class="citation"><a href="#terlouw_mibig_2023">Terlouw <i>et al.</i> 2023</a></span>).</p>
+
+<h2 id="convert-the-table-into-a-two-column-table">Convert the table into a two column table</h2>
+
+<p>The next two steps convert the generated table into the <code class="language-plaintext highlighter-rouge">.smi</code> format. The <code class="language-plaintext highlighter-rouge">.smi</code> format is basically a specific table format where the first column is a chemical structure and the second column the ID or name of the compound. The table must
+not have a header.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-table-to-smi-format-conversion"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Table to smi format conversion</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text reformatting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">output_collection</code> (output of <strong>Interactive JupyTool and notebook</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“AWK Program”</em>: <code class="language-plaintext highlighter-rouge">{print $8, $2-$5-$6}</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Remove beginning1" title="Remove beginning tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li>
+      <p>Now, that the table is indeed the same as the <code class="language-plaintext highlighter-rouge">.smi</code> format it can also be converted into <code class="language-plaintext highlighter-rouge">.smi</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">smi</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="remove-duplicated-molecules"><strong>Remove duplicated molecules</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-remove-duplicated-molecules"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Remove duplicated molecules</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_remduplicates/openbabel_remDuplicates/3.1.1+galaxy0" title="Remove duplicated molecules tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove duplicated molecules</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: (output of <strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select descriptor for molecule comparison”</em>: <code class="language-plaintext highlighter-rouge">Canonical SMILES</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-short-description"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  short description</div>
+
+        <p>For the downstream analysis deduplicated molecules are not required. Especially short, hybrid or uncompleted cluster can produce short molecular structures, that appear multiple times in an organisms. These structures can be regarded as artefacts and could probably be removed as well.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="generate-fingerprints-for-the-predicted-secondary-metabolites-and-the-target-database-with-molecule-to-fingerprint">Generate fingerprints for the predicted secondary metabolites and the target database with <strong>Molecule to fingerprint</strong></h2>
+
+<p>Various molecular fingerprint options can be used to convert the compounds. Details about molecular fingerprint can be found in <span class="citation"><a href="#muegge_overview_2016">Muegge and Mukherjee 2016</a></span> and <span class="citation"><a href="#capecchi_one_2020">Capecchi <i>et al.</i> 2020</a></span>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description-4"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5" title="Molecule to fingerprint tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Molecule to fingerprint</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecule file”</em>: (output of <strong>Remove duplicated molecules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Type of fingerprint”</em>: <code class="language-plaintext highlighter-rouge">Open Babel FP2 fingerprints</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5" title="Molecule to fingerprint tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Molecule to fingerprint</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecule file”</em>: <code class="language-plaintext highlighter-rouge">output</code> (MIBiG_compounds_3.0.sdf)</li>
+        <li><em>“Type of fingerprint”</em>: <code class="language-plaintext highlighter-rouge">Open Babel FP2 fingerprints</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-be-consitent"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Be consitent</div>
+
+        <p>A major application of molecular fingerprints is to determine the similarity of compounds. For the downstream tool
+<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/simsearch/ctb_simsearch/0.2" title="Similarity Search tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Similarity Search</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2)</span> it is <strong>important</strong> that the same fingerprint are used for the query and target compounds!</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now that we have converted our compounds into molecular fingerprints, we can compare them to find the closest match between our prediction and the target database.</p>
+
+<h2 id="compare-prediction-with-target-db-using-similarity-search">Compare prediction with target DB using <strong>Similarity Search</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description-5"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/simsearch/ctb_simsearch/0.2" title="Similarity Search tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Similarity Search</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2)</span> with the following parameters:
+      <ul>
+        <li><em>“Subject database/sequences”</em>: <code class="language-plaintext highlighter-rouge">Chemfp fingerprint file</code>
+          <ul>
+            <li><em>“Query Mode”</em>: <code class="language-plaintext highlighter-rouge">Query molecules are stores in a separate file</code>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Query molecules”</em>: (output of <strong>Molecule to fingerprint</strong> for <code class="language-plaintext highlighter-rouge">MIBiG_compounds_3.0.sdf</code> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Target molecules”</em>: (output of <strong>Molecule to fingerprint</strong> from <strong>Remove duplicated molecules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+            <li><em>“select the k nearest neighbors”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="determine-the-novelty-of-the-compounds-using-natural-product-likeness-calculator">Determine the novelty of the compounds using <strong>Natural Product</strong> likeness calculator</h2>
+
+<p>Normally, this tool allows to estimate how similar any kind of compound is to a natural product.
+In our case we know that the compounds are natural compounds. However, by comparing to a large source of known 
+natural products we can estimate the novelty of our predicted structure. This could for example be used to 
+mine metagenomic datasets for likely sources of uncharacterized molecular scaffolds.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description-6"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/natural_product_likeness/ctb_np-likeness-calculator/2.1" title="Natural Product tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Natural Product</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecule file”</em>: (output of <strong>Remove duplicated molecules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="check-drug-likeness-of-the-predicted-compounds">Check <strong>Drug-likeness</strong> of the predicted compounds</h2>
+
+<p>Estimates the drug-likeness of molecules, based on eight commonly used molecular properties, and reports a score between 0 (all properties unfavourable) to 1 (all properties favourable). Two possible methods to weight the features are available (QEDw,mo, QEDw,max), as well as an option to leave features unweighted (QEDw,u).</p>
+
+<p>The eight properties used are: molecular weight (MW), octanol–water partition coefficient (ALOGP), number of hydrogen bond donors (HBDs), number of hydrogen bond acceptors (HBAs), molecular polar surface area (PSA), number of rotatable bonds (ROTBs), number of aromatic rings (AROMs) and number of structural alerts (ALERTS).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description-7"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/qed/ctb_silicos_qed/2021.03.4+galaxy0" title="Drug-likeness tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Drug-likeness</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2021.03.4+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecule data in SDF or SMILES format”</em>: (output of <strong>Remove duplicated molecules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this simple use case the combination of BGC prediction software and cheminformatics was used to detect and characterize novel secondary metabolites.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Gene cluster prediction that can be performed for any assembly or genome of microorganisms (procaryotes and fungi).</p>
+</li>
+                        
+                        <li><p>Bridging of gene annotation and cheminformatics.</p>
+</li>
+                        
+                        <li><p>Usage of custom script to bridge workflow steps.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/genome-annotation/faqs/">FAQ page for the Genome Annotation topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="muegge_overview_2016">Muegge, I., and P. Mukherjee, 2016 <b>An overview of molecular fingerprint similarity search in virtual screening</b>. Expert Opinion on Drug Discovery 11: 137–148. <a href="https://doi.org/10.1517/17460441.2016.1117070">10.1517/17460441.2016.1117070</a></li>
+<li id="adamek_mining_2017">Adamek, M., M. Spohn, E. Stegmann, and N. Ziemert, 2017 <b>Mining Bacterial Genomes for Secondary Metabolite Gene Clusters</b>. Methods in Molecular Biology (Clifton, N.J.) 1520: 23–47. <a href="https://doi.org/10.1007/978-1-4939-6634-9_2">10.1007/978-1-4939-6634-9_2</a></li>
+<li id="capecchi_one_2020">Capecchi, A., D. Probst, and J.-L. Reymond, 2020 <b>One molecular fingerprint to rule them all: drugs, biomolecules, and the metabolome</b>. Journal of Cheminformatics 12: 43. <a href="https://doi.org/10.1186/s13321-020-00445-4">10.1186/s13321-020-00445-4</a></li>
+<li id="zierep_sempi_2020">Zierep, P. F., A. T. Ceci, I. Dobrusin, S. C. Rockwell-Kollmann, and S. Günther, 2020 <b>SeMPI 2.0-A Web Server for PKS and NRPS Predictions Combined with Metabolite Screening in Natural Product Databases</b>. Metabolites 11: 13. <a href="https://doi.org/10.3390/metabo11010013">10.3390/metabo11010013</a></li>
+<li id="blin_antismash_2023">Blin, K., S. Shaw, H. E. Augustijn, Z. L. Reitz, F. Biermann <i>et al.</i>, 2023 <b>antiSMASH 7.0: new and improved predictions for detection, regulation, chemical structures and visualisation</b>. Nucleic Acids Research 51: W46–W50. <a href="https://doi.org/10.1093/nar/gkad344">10.1093/nar/gkad344</a></li>
+<li id="terlouw_mibig_2023">Terlouw, B. R., K. Blin, J. C. Navarro-Muñoz, N. E. Avalon, M. G. Chevrette <i>et al.</i>, 2023 <b>MIBiG 3.0: a community-driven effort to annotate experimentally validated biosynthetic gene clusters</b>. Nucleic Acids Research 51: D603–D610. <a href="https://doi.org/10.1093/nar/gkac1049">10.1093/nar/gkac1049</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=genome-annotation/secondary-metabolite-discovery" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Paul Zierep,  <b>Secondary metabolite discovery (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{genome-annotation-secondary-metabolite-discovery,
+author = "Paul Zierep",
+	title = "Secondary metabolite discovery (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: antismash
+  owner: bgruening
+  revisions: bc88856eddab
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: chemfp
+  owner: bgruening
+  revisions: 73de2fe4bf92
+  tool_panel_section_label: ChemicalToolBox
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: natural_product_likeness
+  owner: bgruening
+  revisions: 6052dd3fa475
+  tool_panel_section_label: ChemicalToolBox
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: openbabel_remduplicates
+  owner: bgruening
+  revisions: b2569e22b40c
+  tool_panel_section_label: ChemicalToolBox
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: qed
+  owner: bgruening
+  revisions: 52a8d34dd08f
+  tool_panel_section_label: ChemicalToolBox
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: simsearch
+  owner: bgruening
+  revisions: '0892f7ced10c'
+  tool_panel_section_label: ChemicalToolBox
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cpt_gbk_to_gff
+  owner: cpt
+  revisions: a921d6148d88
+  tool_panel_section_label: Convert Formats
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bp_genbank2gff3
+  owner: iuc
+  revisions: 11c3eb512633
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ncbi_acc_download
+  owner: iuc
+  revisions: e063168e0a81
+  tool_panel_section_label: Get Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: collapse_collections
+  owner: nml
+  revisions: 90981f86000f
+  tool_panel_section_label: Collection Operations
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+		    
+		</blockquote>
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/036e70bfdc38225009ac23459dd76fa32dc435f1">036e70b</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1708524970'></script>
+        
+    </body>
+</html>
