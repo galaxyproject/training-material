@@ -92,7 +92,7 @@
       "name": "MuSiC-Deconvolution: Data generation | sc | matrix + ESet",
       "title": "MuSiC-Deconvolution: Data generation | sc | matrix + ESet",
       "test_results": null,
-      "modified": "2024-02-21 14:16:14 +0000",
+      "modified": "2024-02-21 14:43:51 +0000",
       "mermaid": "flowchart TD\n  0[\"EBI SCXA Data Retrieval\"];\n  1[\"Input dataset\"];\n  2[\"Scanpy Read10x\"];\n  0 -->|barcode_tsv| 2;\n  0 -->|genes_tsv| 2;\n  0 -->|matrix_mtx| 2;\n  3[\"Inspect AnnData\"];\n  2 -->|output_h5| 3;\n  4[\"Transpose\"];\n  3 -->|X| 4;\n  5[\"annotateMyIDs\"];\n  4 -->|out_file| 5;\n  6[\"1st step removed - Convert from Ensembl to GeneSymbol, summing duplicate genes\"];\n  5 -->|out_tab| 6;\n  4 -->|out_file| 6;\n  7[\"Construct Expression Set Object\"];\n  6 -->|Gene Symbol Count Matrix| 7;\n  1 -->|output| 7;\n  8[\"Manipulate Expression Set Object\"];\n  7 -->|out_rds| 8;\n  9[\"Manipulate Expression Set Object\"];\n  7 -->|out_rds| 9;\n"
     },
     {
@@ -119,7 +119,7 @@
       "name": "MuSiC-Deconvolution: Data generation | sc | metadata",
       "title": "MuSiC-Deconvolution: Data generation | sc | metadata",
       "test_results": null,
-      "modified": "2024-02-21 14:16:14 +0000",
+      "modified": "2024-02-21 14:43:51 +0000",
       "mermaid": "flowchart TD\n  0[\"EBI SCXA Data Retrieval\"];\n  1[\"Cut\"];\n  0 -->|design_tsv| 1;\n  2[\"Add line to file\"];\n  0 -->|barcode_tsv| 2;\n  3[\"Regex Find And Replace\"];\n  1 -->|out_file1| 3;\n  4[\"Join two Datasets\"];\n  2 -->|outfile| 4;\n  3 -->|out_file1| 4;\n  5[\"Advanced Cut\"];\n  4 -->|out_file1| 5;\n"
     }
   ],

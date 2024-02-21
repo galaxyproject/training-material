@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@036e70bfdc38225009ac23459dd76fa32dc435f1",
+		release: "galaxy-training-network@94b7384ba7c83c4c866f0576fd2f63f6748386e6",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708524970' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708524970' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708526627' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.70235143.js?v=1708526627' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,14 +67,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="GTN Statistics">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-01-08 10:54:31 +0000"><meta name="description" content="Some useful statistics about the GTN. We're a growing community!">
+<meta name="DC.date" content="2024-02-21 11:51:35 +0000"><meta name="description" content="Some useful statistics about the GTN. We're a growing community!">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="GTN Statistics">
         <meta property="og:description" content="Some useful statistics about the GTN. We're a growing community!">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708524970'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708526627'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -254,7 +254,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
  <div class="card">
   <div class="card-body">
    <h5 class="card-title">Growing Community</h5>
-   <canvas id="contributorsGraph" width="400" height="400"></canvas>
+   <canvas id="contributorsGraph" width="400" height="200"></canvas>
+   <canvas id="tutoTimeBar" width="400" height="200"></canvas>
    </div>
  </div>
 </div>
@@ -764,8 +765,6 @@ var tutorialsBarTechnical = new Chart("tutorialsBarTechnical", {
 // Contributors chart
 var data_contributors = [{x:"2017-10" , y: 61 } ,{x:"2017-12" , y: 63 } ,{x:"2018-02" , y: 64 } ,{x:"2018-06" , y: 66 } ,{x:"2018-07" , y: 82 } ,{x:"2018-08" , y: 88 } ,{x:"2018-09" , y: 93 } ,{x:"2018-10" , y: 104 } ,{x:"2018-11" , y: 105 } ,{x:"2018-12" , y: 108 } ,{x:"2019-01" , y: 109 } ,{x:"2019-02" , y: 110 } ,{x:"2019-03" , y: 111 } ,{x:"2019-04" , y: 117 } ,{x:"2019-05" , y: 124 } ,{x:"2019-06" , y: 128 } ,{x:"2019-07" , y: 137 } ,{x:"2019-08" , y: 145 } ,{x:"2019-09" , y: 147 } ,{x:"2019-10" , y: 149 } ,{x:"2019-11" , y: 150 } ,{x:"2019-12" , y: 152 } ,{x:"2020-01" , y: 154 } ,{x:"2020-03" , y: 156 } ,{x:"2020-04" , y: 157 } ,{x:"2020-07" , y: 158 } ,{x:"2020-09" , y: 163 } ,{x:"2020-10" , y: 164 } ,{x:"2020-11" , y: 167 } ,{x:"2020-12" , y: 171 } ,{x:"2021-01" , y: 173 } ,{x:"2021-02" , y: 176 } ,{x:"2021-03" , y: 179 } ,{x:"2021-05" , y: 182 } ,{x:"2021-06" , y: 190 } ,{x:"2021-08" , y: 192 } ,{x:"2021-09" , y: 194 } ,{x:"2021-10" , y: 196 } ,{x:"2021-11" , y: 219 } ,{x:"2021-12" , y: 226 } ,{x:"2022-01" , y: 229 } ,{x:"2022-02" , y: 234 } ,{x:"2022-03" , y: 240 } ,{x:"2022-04" , y: 258 } ,{x:"2022-05" , y: 263 } ,{x:"2022-06" , y: 266 } ,{x:"2022-07" , y: 268 } ,{x:"2022-08" , y: 270 } ,{x:"2022-09" , y: 272 } ,{x:"2022-10" , y: 277 } ,{x:"2022-11" , y: 279 } ,{x:"2022-12" , y: 284 } ,{x:"2023-01" , y: 286 } ,{x:"2023-02" , y: 287 } ,{x:"2023-03" , y: 289 } ,{x:"2023-04" , y: 294 } ,{x:"2023-05" , y: 303 } ,{x:"2023-06" , y: 304 } ,{x:"2023-07" , y: 315 } ,{x:"2023-08" , y: 316 } ,{x:"2023-09" , y: 319 } ,{x:"2023-10" , y: 323 } ,{x:"2023-11" , y: 324 } ,{x:"2024-01" , y: 326 } ,{x:"2024-02" , y: 327 } ,{x:"" , y: 328 } ];
 
-var labels_contributors = ["2017-09","2017-10","2017-12","2018-02","2018-06","2018-07","2018-08","2018-09","2018-10","2018-11","2018-12","2019-01","2019-02","2019-03","2019-04","2019-05","2019-06","2019-07","2019-08","2019-09","2019-10","2019-11","2019-12","2020-01","2020-03","2020-04","2020-07","2020-09","2020-10","2020-11","2020-12","2021-01","2021-02","2021-03","2021-05","2021-06","2021-08","2021-09","2021-10","2021-11","2021-12","2022-01","2022-02","2022-03","2022-04","2022-05","2022-06","2022-07","2022-08","2022-09","2022-10","2022-11","2022-12","2023-01","2023-02","2023-03","2023-04","2023-05","2023-06","2023-07","2023-08","2023-09","2023-10","2023-11","2024-01","2024-02"];
-
 var contributorsBar = new Chart('contributorsGraph', {
   type: 'line',
   data: {
@@ -802,6 +801,48 @@ var contributorsBar = new Chart('contributorsGraph', {
   }
 });
 
+// Tutorials Over Time chart
+var data_tuto_over_time = [{"x":"2015-06","y":1},{"x":"2016-03","y":3},{"x":"2016-07","y":5},{"x":"2016-08","y":7},{"x":"2016-09","y":13},{"x":"2016-10","y":18},{"x":"2016-12","y":20},{"x":"2017-01","y":22},{"x":"2017-02","y":37},{"x":"2017-03","y":39},{"x":"2017-04","y":41},{"x":"2017-05","y":45},{"x":"2017-06","y":64},{"x":"2017-09","y":65},{"x":"2017-10","y":70},{"x":"2017-12","y":71},{"x":"2018-01","y":74},{"x":"2018-02","y":77},{"x":"2018-03","y":79},{"x":"2018-05","y":80},{"x":"2018-06","y":88},{"x":"2018-07","y":90},{"x":"2018-08","y":93},{"x":"2018-09","y":96},{"x":"2018-10","y":98},{"x":"2018-11","y":107},{"x":"2018-12","y":112},{"x":"2019-01","y":132},{"x":"2019-02","y":136},{"x":"2019-03","y":140},{"x":"2019-04","y":143},{"x":"2019-05","y":145},{"x":"2019-06","y":153},{"x":"2019-07","y":159},{"x":"2019-08","y":162},{"x":"2019-09","y":165},{"x":"2019-10","y":171},{"x":"2019-11","y":173},{"x":"2019-12","y":175},{"x":"2020-01","y":179},{"x":"2020-02","y":184},{"x":"2020-03","y":189},{"x":"2020-04","y":193},{"x":"2020-05","y":195},{"x":"2020-06","y":197},{"x":"2020-07","y":203},{"x":"2020-10","y":210},{"x":"2020-11","y":213},{"x":"2020-12","y":218},{"x":"2021-01","y":226},{"x":"2021-02","y":229},{"x":"2021-03","y":234},{"x":"2021-04","y":240},{"x":"2021-05","y":246},{"x":"2021-06","y":259},{"x":"2021-08","y":263},{"x":"2021-09","y":267},{"x":"2021-10","y":274},{"x":"2021-11","y":282},{"x":"2021-12","y":284},{"x":"2022-01","y":285},{"x":"2022-02","y":290},{"x":"2022-03","y":295},{"x":"2022-04","y":309},{"x":"2022-05","y":312},{"x":"2022-06","y":316},{"x":"2022-07","y":323},{"x":"2022-08","y":325},{"x":"2022-09","y":345},{"x":"2022-10","y":356},{"x":"2022-11","y":358},{"x":"2022-12","y":359},{"x":"2023-01","y":366},{"x":"2023-02","y":367},{"x":"2023-03","y":368},{"x":"2023-04","y":378},{"x":"2023-05","y":394},{"x":"2023-06","y":399},{"x":"2023-07","y":401},{"x":"2023-08","y":402},{"x":"2023-09","y":407},{"x":"2023-10","y":410},{"x":"2023-11","y":419},{"x":"2023-12","y":423},{"x":"2024-01","y":433},{"x":"2024-02","y":450}];
+var labels_tuto_over_time = data_tuto_over_time.map(x => x.x)
+
+var tutoTimeBar = new Chart('tutoTimeBar', {
+  type: 'line',
+  data: {
+    datasets: [{
+      data: data_tuto_over_time,
+      borderColor: style.getPropertyValue("--text-color"),
+    }]
+  },
+
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }],
+      xAxes: [{
+        type: 'time',
+        time: {
+          displayFormats:{month:'YYYY-MM'},
+          min:'2017-10',
+          unit: 'month',
+          distribution: 'linear'
+        }
+      }]
+    },
+    legend: {
+	  display: false
+	},
+    title: {
+      display: true,
+      text: 'Materials over time (Tutorials + Slides)'
+    }
+  }
+});
+
+
+
 </script>
 
 
@@ -819,7 +860,7 @@ var contributorsBar = new Chart('contributorsGraph', {
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/036e70bfdc38225009ac23459dd76fa32dc435f1">036e70b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/94b7384ba7c83c4c866f0576fd2f63f6748386e6">94b7384</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -843,7 +884,7 @@ var contributorsBar = new Chart('contributorsGraph', {
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.70235143.js?v=1708524970'></script>
+        <script src='/training-material/assets/js/bundle.70235143.js?v=1708526627'></script>
         
     </body>
 </html>
