@@ -197,7 +197,7 @@ In this tutorial, we will use the first MongoDB method to create the Beacon prot
 > ```bash
 > mkdir <directory_name>
 > ```
-> 2. Change your location to the newly created directory
+> 2. Change your location to the created directory
 > ```bash
 > cd <directory_name>
 > ```
@@ -267,7 +267,7 @@ In this tutorial, we will use the first MongoDB method to create the Beacon prot
 > ```bash
 > mkdir <directory_name>
 > ```
-> 2. Change your location to the newly created directory
+> 2. Change your location to the created directory
 > ```bash
 > cd <directory_name>
 > ```
