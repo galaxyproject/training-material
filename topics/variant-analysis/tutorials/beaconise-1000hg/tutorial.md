@@ -11,11 +11,11 @@ questions:
 - What are the steps involved in importing data into a beacon seamlessly?
 - How does one perform queries on a beacon to retrieve information about variants?
 objectives:
-- Gain a comprehensive understanding of beacons by unveiling their concept and exploring their significance
-- Master the skill of utilizing MongoDB to construct beacons, fostering institutional advancement through effective data management
+- Gain a comprehensive understanding of beacons
+- Master the skill of utilizing MongoDB to construct beacons
 - Learn the art of preparing data for beacons, including the transformation of variants and metadata into structures compatible with beacon requirements
-- Achieve proficiency in seamlessly importing data into beacons through a step-by-step guide, ensuring a smooth and error-free process
-- Develop the ability to query beacons for variants, unleashing the formidable capabilities of MongoDB in conducting powerful and precise variant searches
+- Achieve proficiency in seamlessly importing data into beacons through a step-by-step guide
+- Develop the ability to query beacons for variants
 requirements:
 - type: external
   title: The Unix Shell
