@@ -32,6 +32,8 @@ layout: base
     <div class="row">
         <div class="col-lg-7 col-md-7 col-sm-12">
             <h2>Galaxy for Scientists</h2>
+	    <p>We have separated the tutorials into several categories based on field and technology. We are exploring other ways to organise the tutorials going forward!</p>
+            <h3>Fields</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -43,12 +45,40 @@ layout: base
                 {% for topic_name in sorted_topics %}
                     {% assign topic = site.data[topic_name] %}
                     {% if topic.type == "use" %}
+                    {% if topic.topic_type != "technology" %}
                     {% if topic.draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter_tutorial_count:topic.name %}
                         <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Technologies</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for topic_name in sorted_topics %}
+                    {% assign topic = site.data[topic_name] %}
+                    {% if topic.type == "use" %}
+                    {% if topic.topic_type == "technology" %}
+                    {% if topic.draft != true or jekyll.environment != "production" %}
+                    <tr>
+                        {% assign tutorial_number = site | topic_filter_tutorial_count:topic.name %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td>{{ tutorial_number }}</td>
+                    </tr>
+                    {% endif %}
                     {% endif %}
                     {% endif %}
                 {% endfor %}
