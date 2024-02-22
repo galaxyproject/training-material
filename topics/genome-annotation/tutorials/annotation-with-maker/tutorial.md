@@ -7,6 +7,7 @@ tags:
   - gmod
   - eukaryote
   - jbrowse1
+  - maker
 questions:
   - How to annotate an eukaryotic genome?
   - How to evaluate and visualize annotated genomic features?
