@@ -51,8 +51,7 @@ The Beacon v2 comprises two main parts, the framework and the models. The framew
 
 ![Beacon Framework and Model](../../images/Beacon_framework_and_model.png "Schematic representation of Beacon v2 API specification from B2RI Documentation")
 
-Beacon MongoDB databases can be created with different security levels for accessing Beacon data through import and query processes. These databases can be classified into three security levels: public, registered, and controlled. 
-Alternatively, they can be classified into two security levels in our import and query tools: public and authenticated.
+MongoDB databases are created with different security levels. This controls accessing the Beacon through the import and query processes. There are three security levels for Beacon. Public, registered and controlled, in our import and query tools, we have classified them into public and authenticated.
 
 
 | Security Level | Description                                         |
@@ -61,8 +60,8 @@ Alternatively, they can be classified into two security levels in our import and
 | Registered     | Only known users can access the data                |
 | Controlled     | Only specifically granted users can access the data |
 
-The genomic variants data is usually divided into two parts. The Metadata and Genomic variants. The metadata is initially saved in different formats like Excel, CSV, etc., while the Genomic variations are kept in VCF files.
-So, before beaconing them, the beacon providers must prepare the data in JSON, also known as Beacon-friendly format (BFF). This can be done by extracting the required information from those files following the beacon schemas. 
+The Beacon data is divided into two parts. The Metadata and Genomic variants. The metadata is initially saved in different formats like Excel, CSV, etc., while the Genomic variations are kept in VCF files.
+So, before creating a Beacon database for them, the Beacon providers must prepare the data in JSON, also known as Beacon-friendly format (BFF). This can be done by extracting the required information from those files following the beacon schemas. 
 The beacon providers can use already developed tools such as in the [B2RI tools](https://github.com/EGA-archive/beacon2-ri-tools) or develop their own tools. 
 
 For this tutorial we will show the steps to create a beacon and query it for the [HG00096](https://s3.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&bucketType=general&prefix=data/dragen-3.5.7b/hg38_altaware_nohla-cnv-anchored/HG00096/&showversions=false) 
