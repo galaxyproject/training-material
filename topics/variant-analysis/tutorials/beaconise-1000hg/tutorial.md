@@ -82,10 +82,10 @@ Bradford Computational and Data-Driven Science research team.
 
 # prepare the Data
 
-Before we start working with Beacon. First, we will preprocess the data and convert it to the Beacon accepted format as the Beacon protocol is designed to take and query the  BFF format (JSON format) database.
-The genomic variation files are usually in VCF format, while the metadata files are kept in EXCEL, CSV, etc.
+We will preprocess the genomic variant data and convert it from VCF format into JSON format.
 
 We will start with preparing the environment by installing the tools. The tutorial was made to create a Beacon for a structural variant sample from the 1000 human genome project using the LINUX Ubuntu 20.04 system. Please modify the scripts for your system if required.
+
 
 ## Setting up the local environment
 
