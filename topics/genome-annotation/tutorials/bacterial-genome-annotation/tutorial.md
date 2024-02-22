@@ -568,7 +568,7 @@ If it takes too long to build the JBrowse instance, you can view an embedded one
 > <comment-title></comment-title>
 > 1. It is ok to have the message stating `Error reading from name store.`.
 > 2. The feature name search will not work.
-> {: .comment}
+{: .comment}
 
 > <question-title></question-title>
 >

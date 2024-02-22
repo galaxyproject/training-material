@@ -136,7 +136,7 @@ module TopicFilter
         seen_ids += specific_resources.map { |x| x['id'] }
       end
 
-      all_topics_for_tutorial = filter_by_tag(site, tn)
+      filter_by_tag(site, tn)
       out['__OTHER__'] = {
         'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
         'materials' => materials.reject { |x| seen_ids.include?(x['id']) }
@@ -261,9 +261,7 @@ module TopicFilter
     return nil if parts[-1] =~ /data[_-]library.yaml/ || parts[-1] =~ /data[_-]manager.yaml/
 
     # Check if it's a symlink
-    if File.symlink?(material['dir'])
-      material['symlink'] = true
-    end
+    material['symlink'] = true if File.symlink?(material['dir'])
 
     if parts[4] =~ /tutorial.*\.md/ || layout == 'tutorial_hands_on'
       material['type'] = 'tutorial'
