@@ -119,16 +119,33 @@ module TopicFilter
         'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
         'materials' => all_topics_for_tutorial.reject { |x| seen_ids.include?(x['id']) }
       }
-    elsif site.data[topic_name]['tag_based'] && site.data[topic_name]['custom_ordering']
-      # TODO
-      Jekyll.logger.error 'UNIMPLEMENTED'
+    elsif site.data[topic_name]['tag_based'] && site.data[topic_name].key?('subtopics')
       out = {}
+      seen_ids = []
+      tn = topic_name.gsub('by_tag_', '')
+      materials = filter_by_tag(site, tn)
+
+      # For each subtopics
+      site.data[topic_name]['subtopics'].each do |subtopic, _v|
+        # Find matching tag-based tutorials in our filtered-by-tag materials
+        specific_resources = materials.select { |x| (x['tags'] || []).include?(subtopic['id']) }
+        out[subtopic['id']] = {
+          'subtopic' => subtopic,
+          'materials' => specific_resources
+        }
+        seen_ids += specific_resources.map { |x| x['id'] }
+      end
+
+      all_topics_for_tutorial = filter_by_tag(site, tn)
+      out['__OTHER__'] = {
+        'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
+        'materials' => materials.reject { |x| seen_ids.include?(x['id']) }
+      }
     elsif site.data[topic_name]['tag_based'] # Tag based Topic
       # We'll construct a new hash of subtopic(parent topic) => tutorials
       out = {}
       seen_ids = []
       tn = topic_name.gsub('by_tag_', '')
-
       materials = filter_by_tag(site, tn)
 
       # Which topics are represented in those materials?

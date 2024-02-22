@@ -19,7 +19,7 @@ contributions:
 
 tags:
 - gmod
-- apollo
+- apollo2
 draft: true
 ---
 
