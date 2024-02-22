@@ -211,8 +211,6 @@ module TopicFilter
   # Returns:
   # +Hash+:: The annotation
   #
-  # This is a bit of a hack, but it works for now.
-  #
   # Example:
   #  /topics/assembly/tutorials/velvet-assembly/tutorial.md
   #  => {
@@ -244,6 +242,11 @@ module TopicFilter
     return nil if path =~ %r{/faqs/}
 
     return nil if parts[-1] =~ /data[_-]library.yaml/ || parts[-1] =~ /data[_-]manager.yaml/
+
+    # Check if it's a symlink
+    if File.symlink?(material['dir'])
+      material['symlink'] = true
+    end
 
     if parts[4] =~ /tutorial.*\.md/ || layout == 'tutorial_hands_on'
       material['type'] = 'tutorial'
@@ -357,6 +360,7 @@ module TopicFilter
       page.data['tutorial_name'] = material_meta['tutorial_name']
       page.data['dir'] = material_meta['dir']
       page.data['short_id'] = shortlinks_reversed[page.data['url']]
+      page.data['symlink'] = material_meta['symlink']
 
       interesting[mk]['resources'].push([material_meta['type'], page])
     end
@@ -538,7 +542,7 @@ module TopicFilter
     domain = if !site.config.nil? && site.config.key?('url')
                "#{site.config['url']}#{site.config['baseurl']}"
              else
-               'http://localhost:4000//training-material/'
+               'http://localhost:4000/training-material/'
              end
     # Similar as above.
     workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
