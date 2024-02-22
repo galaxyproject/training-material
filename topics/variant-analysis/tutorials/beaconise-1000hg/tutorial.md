@@ -83,11 +83,10 @@ Bradford Computational and Data-Driven Science research team.
 
 # prepare the Data
 
-Before we start working with Beacon. First, we will preprocess the data and convert it to the correct format because the Beacon protocol is designed to take and search the genomic database and its metadata in BFF format (JSON format).
-The genomic variation files are usually in VCF format, while the metadata files are kept in EXCEL, CSV, etc. So, before uploading them into the Beacon database, we need to convert them into the proper format
-using the available Beacon tools in Galaxy.
+Before we start working with Beacon. First, we will preprocess the data and convert it to the Beacon accepted format as the Beacon protocol is designed to take and query the  BFF format (JSON format) database.
+The genomic variation files are usually in VCF format, while the metadata files are kept in EXCEL, CSV, etc.
 
-We will start with preparing the environment by installing the tools. The tutorial was made to create a beacon for the genomic data on the LINUX Ubuntu 20.04 system. Please modify the scripts for your system if required.
+We will start with preparing the environment by installing the tools. The tutorial was made to create a Beacon for a structural variant sample from the 1000 human genome project using the LINUX Ubuntu 20.04 system. Please modify the scripts for your system if required.
 
 ## Setting up the local environment
 
@@ -188,8 +187,8 @@ few examples. The same Biosample may be referred to by many instances (e.g., tec
 
 # Create Beacon data discovery protocol using MongoDB
 
-The beacon-providing institution creates a Beacon to serve the institution's needs and if they want to make their beacon open access or private. We will show examples of creating both types of Beacons 
-by creating 2 docker servers for MongoDB. The first method is for the open-access Beacon, and the second is for the private Beacon. 
+The beacon-providing institution creates a Beacon to serve the institution's needs, and it depends if they want to make their Beacon open access or private. We will show examples of creating both types of Beacons 
+by creating 2 docker servers for MongoDB. The first docker is for the open-access Beacon, and the second is for the private Beacon. 
 
 In this tutorial, we will use the first MongoDB method to create the Beacon protocol. Depending on your requirements, you can choose between the methods to customise your Beacon. We will use docker and docker-compose for this step. If you don't have it installed, please follow this [documentation](https://docs.docker.com/engine/install/) to install it
 ## Create and open access MongoDB server
@@ -349,7 +348,7 @@ In this tutorial, we will use the first MongoDB method to create the Beacon prot
 
 Now that the data are in the beacon proper format and with creating the Beacon MongoDB server, we are ready to import the data we have into Beacon.
 
-The beacon import tool is flexible. The tool imports the data from an institutional galaxy or local environment.
+The Beacon import tool is flexible. The tool imports the data from an institutional galaxy or local environment.
 
 > <hands-on-title>Import data into Beacon MongoDB</hands-on-title>
 >
@@ -376,7 +375,7 @@ The beacon import tool is flexible. The tool imports the data from an institutio
 
 # Search Beacon MongoDB
 
-In the last step, we imported the data into the beacon. Now, we will query the database to look for the samples that match our query. 
+In the last step, we imported the data into the Beacon. Now, we will query the database to look for the samples that match our query. 
 
 We are looking to see if there is a deletion mutation in the gene **located** in `chromosome 1`, which **starts** at `58278107` and **ends** at `58279217`.
 
@@ -423,10 +422,10 @@ We are looking to see if there is a deletion mutation in the gene **located** in
 
 # Conclusion
 
-Now, you have a general knowledge of beacon and MongoDB and how to create your own beacon and upload your data. 
+Now, you have a general knowledge of Beacon and MongoDB and how to create your own beacon and upload your data. 
 
 You can apply what you learned in this tutorial to create a beacon query for your institution's genomic variant data.
 
-For more information about how to query beacon databases, please look into [pymongo documantation](https://pymongo.readthedocs.io/en/stable/tutorial.html). Use the documentation steps to query the phenopacket and search for the metadata for our sample `{"id": "HG00096"}`.
+For more information about how to query Beacon databases, please look into [pymongo documantation](https://pymongo.readthedocs.io/en/stable/tutorial.html). Use the documentation steps to query the phenopacket and search for the metadata for our sample `{"id": "HG00096"}`.
 
 We hope you find this tutorial helpful!
