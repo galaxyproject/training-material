@@ -103,7 +103,7 @@ module TopicFilter
       # We'll construct a new hash of subtopic => tutorials
       out = {}
       seen_ids = []
-      site.data[topic_name]['subtopics'].each do |subtopic, _v|
+      site.data[topic_name]['subtopics'].each_key do |subtopic|
         specific_resources = filter_by_topic_subtopic(site, topic_name, subtopic['id'])
         out[subtopic['id']] = {
           'subtopic' => subtopic,
