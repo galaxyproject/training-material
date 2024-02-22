@@ -260,7 +260,7 @@ In this tutorial, we will use the first MongoDB method to create the Beacon prot
 {: .hands_on}
 
 
-## Create authenticated beacon MongoDB database
+## Create private MongoDB database
 
 > <hands-on-title>Create a Private Beacon Database on MongoDB</hands-on-title>
 > 1. Create a directory in your local environment and give it a suitable name
