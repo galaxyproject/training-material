@@ -94,7 +94,7 @@
       "name": "Cell Cycle Regression Workflow",
       "title": "Cell Cycle Regression Workflow",
       "test_results": null,
-      "modified": "2024-02-21 15:46:21 +0000",
+      "modified": "2024-02-22 00:12:35 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Inspect AnnData\"];\n  0 -->|output| 4;\n  5[\"Concatenate datasets\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  6[\"Inspect and manipulate\"];\n  0 -->|output| 6;\n  2 -->|output| 6;\n  1 -->|output| 6;\n  7[\"Table Compute\"];\n  4 -->|var| 7;\n  8[\"Add column\"];\n  5 -->|out_file1| 8;\n  9[\"Scanpy RegressOut\"];\n  6 -->|anndata_out| 9;\n  10[\"Add column\"];\n  7 -->|table| 10;\n  11[\"Join\"];\n  10 -->|out_file1| 11;\n  8 -->|out_file1| 11;\n  12[\"Sort\"];\n  11 -->|output| 12;\n  13[\"Table Compute\"];\n  12 -->|out_file1| 13;\n  14[\"Concatenate datasets\"];\n  3 -->|output| 14;\n  13 -->|table| 14;\n  15[\"Manipulate AnnData\"];\n  6 -->|anndata_out| 15;\n  14 -->|out_file1| 15;\n  16[\"Manipulate AnnData\"];\n  9 -->|output_h5ad| 16;\n  14 -->|out_file1| 16;\n  17[\"Manipulate AnnData\"];\n  15 -->|anndata| 17;\n  18[\"Manipulate AnnData\"];\n  16 -->|anndata| 18;\n  19[\"Cluster, infer trajectories and embed\"];\n  17 -->|anndata| 19;\n  20[\"Cluster, infer trajectories and embed\"];\n  18 -->|anndata| 20;\n  21[\"Plot\"];\n  19 -->|anndata_out| 21;\n  22[\"Plot\"];\n  20 -->|anndata_out| 22;\n"
     }
   ],
