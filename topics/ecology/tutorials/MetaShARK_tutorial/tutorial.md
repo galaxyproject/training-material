@@ -247,7 +247,7 @@ Acessible, Interoperable, Reusable) on a 100 point scale.
 >
 > 4. Recreate a data collection with all metadata template files, taking the new "abstract" and "attributes_Present.Surface.pH.txt" files instead of old ones.
 >
-> 5. You can recreate an EML metadata file with makeeml EAL tool and then redeploy a metashrimps tool on the new EML.
+> 5. You can recreate an EML metadata file with [**Make EML**](https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/makeeml/makeeml/0.1.1+galaxy1) EAL tool and then redeploy a metashrimps tool on the new EML.
 >
 
 
