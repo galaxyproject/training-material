@@ -166,10 +166,14 @@ Then you can add final elements as:
 
 ![Add "Biodiversity" keyword](./Images/13_MetaShARK_keywords.png){:width="500"}
 
-Note that here you can add semantic annotations! To do so, you need to reach the MetaShARK parameters (upper right icon)
+Note that here you can add [semantic annotations](https://eml.ecoinformatics.org/semantic-annotation-primer)! To do so, you need to reach the MetaShARK parameters (upper right icon)
 then enter your CEDAR token. To create a CEDAR account, you can register here http://cedar.metadatacenter.org/. API key 
 format to enter is something like: `api 205b1e521f2eaf0ad4a361c438b63205b1e521f2eaf0ad4a361c438b63c438b63`. You then can 
-use the `+` button on the keyword space to **Add keyword with dataset annotation**.
+use the `+` button on the keyword space to **Add keyword with dataset annotation**. You will have to choose a "predicate", from IAO ontology, then an "object" from ontologies coming from Bioportal to add information concerning a "subject", the ‘thing’ being annotated, here, regarding keyword, "dataset", but you can also apply the same to datafiles "attributes".
+
+![CEDAR semantic annotation module add predicate from IAO ontology](./Images/17_MetaShARK_annotations_predicate.png){:width="500"}
+
+![CEDAR semantic annotation module add object](./Images/18_MetaShARK_annotations_object.png){:width="500"}
 
 Finally, you can specify a temporal coverage and go to the last step of this MetaShARK workflow: Generat an EML metadata file! If everything is ok, you will have creation of an EML metadata file.
 
