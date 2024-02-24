@@ -136,7 +136,7 @@ Then you can provide a description for this attribute, for example "Present surf
 
 ![Look at categorical variables](./Images/6_MetaShARK_catvars.png){:width="500"}
 
-Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shepfile is in Point, both are in `GCS_WGS_1984`spatial reference.
+Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shapefile is in Point, both are in `GCS_WGS_1984`spatial reference.
 
 ![Specify spatial informations for GIS datafiles](./Images/7_MetaShARK_spatialinfo.png){:width="500"}
 
