@@ -376,6 +376,148 @@ module Jekyll
       Gtn::ModificationTimes.obtain_modification_count(page['path'])
     end
 
+    def get_rating_histogram(site, material_id, recent: false)
+      return {} if material_id.nil?
+
+      feedbacks = recent ? get_recent_feedbacks_time(site, material_id) : get_feedbacks(site, material_id)
+
+      return {} if feedbacks.nil? || feedbacks.empty?
+
+      ratings = feedbacks.map { |f| f['rating'] }
+      ratings.each_with_object(Hash.new(0)) { |w, counts| counts[w] += 1 }
+    end
+
+    def get_rating_histogram_chart(site, material_id)
+      histogram = get_rating_histogram(site, material_id)
+      return {} if histogram.empty?
+
+      highest = histogram.map { |_k, v| v }.max
+      histogram
+        .map { |k, v| [k, [v, v / highest.to_f]] }
+        .sort_by { |k, _v| -k }
+        .to_h
+    end
+
+    def get_rating(site, material_id, recent: false)
+      f = get_rating_histogram(site, material_id, recent: recent)
+      rating = f.map { |k, v| k * v }.sum / f.map { |_k, v| v }.sum.to_f
+      rating.round(1)
+    end
+
+    def get_rating_recent(site, material_id)
+      r = get_rating(site, material_id, recent: true)
+      r.nan? ? get_rating(site, material_id, recent: false) : r
+    end
+
+    # Only accepts an integer rating
+    def to_stars(rating)
+      if rating.nil? || (rating.to_i < 1) || (rating == '0') || rating.zero?
+        %(<span class="sr-only">0 stars</span>) +
+          '<i class="far fa-star" aria-hidden="true"></i>'
+      elsif rating.to_i < 1
+        '<span class="sr-only">0 stars</span><i class="far fa-star" aria-hidden="true"></i>'
+      else
+        %(<span class="sr-only">#{rating} stars</span>) +
+          ('<i class="fa fa-star" aria-hidden="true"></i>' * rating.to_i)
+      end
+    end
+
+    def get_feedbacks(site, material_id)
+      return [] if material_id.nil?
+
+      begin
+        topic, tutorial = material_id.split('/')
+
+        if tutorial.include?(':')
+          language = tutorial.split(':')[1]
+          tutorial = tutorial.split(':')[0]
+          # If a language is supplied, then
+          feedbacks = site.data['feedback2'][topic][tutorial]
+                          .select { |f| (f['lang'] || '').downcase == language.downcase }
+        else
+          # English is the default
+          feedbacks = site.data['feedback2'][topic][tutorial]
+                          .select { |f| f['lang'].nil? }
+        end
+      rescue StandardError
+        return []
+      end
+
+      return [] if feedbacks.nil? || feedbacks.empty?
+
+      feedbacks
+        .sort_by { |f| f['date'] }
+        .reverse
+        .map do |f|
+        f['stars'] = to_stars(f['rating'])
+        f
+      end
+    end
+
+    def get_feedback_count(site, material_id)
+      get_feedbacks(site, material_id).length
+    end
+
+    def get_feedback_count_recent(site, material_id)
+      get_recent_feedbacks_time(site, material_id).length
+    end
+
+    def get_recent_feedbacks_time(site, material_id)
+      feedbacks = get_feedbacks(site, material_id)
+                  .select do |f|
+                    f['pro']&.length&.positive? ||
+                      f['con']&.length&.positive?
+                  end
+                  .map do |f|
+        f['f_date'] = Date.parse(f['date']).strftime('%B %Y')
+        f
+      end
+
+      feedbacks.select { |f| Date.parse(f['date']) > Date.today - 365 }
+    end
+
+    def get_recent_feedbacks(site, material_id)
+      feedbacks = get_feedbacks(site, material_id)
+                  .select do |f|
+                    f['pro']&.length&.positive? ||
+                      f['con']&.length&.positive?
+                  end
+                  .map do |f|
+        f['f_date'] = Date.parse(f['date']).strftime('%B %Y')
+        f
+      end
+
+      last_year = feedbacks.select { |f| Date.parse(f['date']) > Date.today - 365 }
+      # If we have fewer than 20 in the last year, then extend further.
+      if last_year.length < 20
+        feedbacks
+          .first(20)
+          .group_by { |f| f['f_date'] }
+      else
+        # Otherwise just everything last year.
+        last_year
+          .group_by { |f| f['f_date'] }
+      end
+    end
+
+    def tutorials_over_time_bar_chart(site)
+      graph = Hash.new(0)
+      TopicFilter.list_all_materials(site).each do |material|
+        yymm = material['pub_date'].strftime('%Y-%m')
+        graph[yymm] += 1
+      end
+
+      # Cumulative over time
+      # https://stackoverflow.com/questions/71745593/how-to-do-a-single-line-cumulative-count-for-hash-values-in-ruby
+      graph
+        # Turns it into an array
+        .sort_by{|k, v| k}
+        # Cumulative sum
+        .each_with_object([]) { |(k, v), a| a << [k, v + a.last&.last.to_i] }.to_h
+        .map{ |k, v| { 'x' => k, 'y' => v } }
+        .to_json
+    end
+
     def list_usegalaxy_servers(_site)
       Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }
     end
@@ -461,9 +603,9 @@ module Jekyll
       Jekyll.logger.debug "Material #{page['layout']} :: #{page['path']} => #{topic_id}/#{material_id} => #{og_title}"
 
       if reverse.to_s == 'true'
-        og_title.compact.reverse.join(' / ')
+        og_title.compact.reverse.join(' / ').gsub(/Hands-on: Hands-on:/, 'Hands-on:')
       else
-        og_title.compact.join(' / ')
+        og_title.compact.join(' / ').gsub(/Hands-on: Hands-on:/, 'Hands-on:')
       end
     end
 
