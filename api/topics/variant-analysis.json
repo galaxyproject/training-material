@@ -387,7 +387,7 @@
           "name": "Calling variants in non-diploid systems",
           "title": "Calling variants in non-diploid systems",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"raw_child-ds-1.fq\"];\n  1[\"raw_child-ds-2.fq\"];\n  2[\"raw_mother-ds-1.fq\"];\n  3[\"raw_mother-ds-2.fq\"];\n  4[\"FastQC\"];\n  0 -->|output| 4;\n  5[\"FastQC\"];\n  1 -->|output| 5;\n  6[\"Map with BWA-MEM\"];\n  0 -->|output| 6;\n  1 -->|output| 6;\n  7[\"FastQC\"];\n  2 -->|output| 7;\n  8[\"FastQC\"];\n  3 -->|output| 8;\n  9[\"Map with BWA-MEM\"];\n  2 -->|output| 9;\n  3 -->|output| 9;\n  10[\"MergeSamFiles\"];\n  9 -->|bam_output| 10;\n  6 -->|bam_output| 10;\n  11[\"MarkDuplicates\"];\n  10 -->|outFile| 11;\n  12[\"BamLeftAlign\"];\n  11 -->|outFile| 12;\n  13[\"Filter\"];\n  12 -->|output_bam| 13;\n  14[\"FreeBayes\"];\n  13 -->|out_file1| 14;\n  15[\"VCFfilter:\"];\n  14 -->|output_vcf| 15;\n  16[\"VCFtoTab-delimited:\"];\n  15 -->|out_file1| 16;\n  17[\"Cut\"];\n  16 -->|out_file1| 17;\n"
         }
       ],
@@ -618,7 +618,7 @@
           "name": "Du Novo GTN Tutorial - Make Consensus Sequences",
           "title": "Du Novo GTN Tutorial - Make Consensus Sequences",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Du Novo: Make families\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Du Novo: Correct barcodes\"];\n  2 -->|output| 3;\n  4[\"Du Novo: Align families\"];\n  3 -->|output| 4;\n  5[\"Du Novo: Make consensus reads\"];\n  4 -->|output| 5;\n  6[\"Sequence Content Trimmer\"];\n  5 -->|dcs1| 6;\n  5 -->|dcs2| 6;\n  7[\"Sequence Content Trimmer\"];\n  5 -->|sscs1| 7;\n  5 -->|sscs2| 7;\n"
         },
         {
@@ -636,7 +636,7 @@
           "name": "Du Novo GTN Tutorial - Variant Calling",
           "title": "Du Novo GTN Tutorial - Variant Calling",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Map with BWA-MEM\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"BamLeftAlign\"];\n  2 -->|bam_output| 3;\n  4[\"Naive Variant Caller (NVC)\"];\n  3 -->|output_bam| 4;\n  5[\"Variant Annotator\"];\n  4 -->|output_vcf| 5;\n  6[\"Filter\"];\n  5 -->|output| 6;\n"
         }
       ],
@@ -851,7 +851,7 @@
           "name": "Microbial Variant Calling",
           "title": "Microbial Variant Calling",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"snippy\"];\n  0 -->|output| 5;\n  1 -->|output| 5;\n  3 -->|output| 5;\n  6[\"JBrowse\"];\n  5 -->|snpgff| 6;\n  4 -->|output| 6;\n  5 -->|snpsbam| 6;\n  2 -->|output| 6;\n"
         }
       ],
@@ -1014,7 +1014,7 @@
           "name": "Mapping And Molecular Identification Of Phenotype Causing Mutations",
           "title": "Mapping And Molecular Identification Of Phenotype Causing Mutations",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"SnpEff Download\"];\n  4[\"Replace\"];\n  0 -->|output| 4;\n  5[\"MiModD Variant Calling\"];\n  4 -->|outfile| 5;\n  2 -->|output| 5;\n  1 -->|output| 5;\n  6[\"MiModD Extract Variant Sites\"];\n  5 -->|ofile| 6;\n  7[\"MiModD NacreousMap\"];\n  6 -->|output_vcf| 7;\n  8[\"MiModD VCF Filter\"];\n  6 -->|output_vcf| 8;\n  9[\"SnpEff\"];\n  8 -->|outputfile| 9;\n  3 -->|snpeff_db| 9;\n  10[\"MiModD Report Variants\"];\n  9 -->|snpeff_output| 10;\n"
         }
       ],
@@ -1250,7 +1250,7 @@
           "name": "Simple COVID-19 - PE Variation",
           "title": "Simple COVID-19 - PE Variation",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  1 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|list_paired| 3;\n  4[\"Map with BWA-MEM\"];\n  3 -->|output_paired_coll| 4;\n  0 -->|output| 4;\n  5[\"MarkDuplicates\"];\n  4 -->|bam_output| 5;\n  6[\"Realign reads\"];\n  5 -->|outFile| 6;\n  0 -->|output| 6;\n  7[\"Samtools stats\"];\n  5 -->|outFile| 7;\n  8[\"Insert indel qualities\"];\n  6 -->|realigned| 8;\n  0 -->|output| 8;\n  9[\"Call variants\"];\n  8 -->|output| 9;\n  0 -->|output| 9;\n  10[\"SnpEff eff:\"];\n  9 -->|variants| 10;\n  11[\"SnpSift Extract Fields\"];\n  10 -->|snpeff_output| 11;\n  12[\"MultiQC\"];\n  3 -->|report_json| 12;\n  7 -->|output| 12;\n  5 -->|metrics_file| 12;\n  10 -->|csvFile| 12;\n"
         }
       ],
@@ -1571,7 +1571,7 @@
           "name": "pox-virus-tiled-amplicon-ref-masking",
           "title": "pox-virus-tiled-amplicon-ref-masking",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Select\"];\n  0 -->|output| 2;\n  3[\"Select\"];\n  0 -->|output| 3;\n  4[\"Compute sequence length\"];\n  1 -->|output| 4;\n  5[\"Datamash\"];\n  2 -->|out_file1| 5;\n  6[\"Datamash\"];\n  3 -->|out_file1| 6;\n  7[\"Cut\"];\n  4 -->|output| 7;\n  8[\"Compute\"];\n  5 -->|out_file| 8;\n  9[\"Parse parameter value\"];\n  6 -->|out_file| 9;\n  10[\"Parse parameter value\"];\n  7 -->|out_file1| 10;\n  11[\"Parse parameter value\"];\n  8 -->|out_file1| 11;\n  12[\"Compose text parameter value\"];\n  9 -->|text_param| 12;\n  13[\"Compose text parameter value\"];\n  11 -->|text_param| 13;\n  10 -->|text_param| 13;\n  14[\"maskseq\"];\n  1 -->|output| 14;\n  12 -->|out1| 14;\n  15[\"maskseq\"];\n  1 -->|output| 15;\n  13 -->|out1| 15;\n"
         }
       ],
@@ -1925,7 +1925,7 @@
           "name": "Diploid",
           "title": "Diploid",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"SnpEff Download\"];\n  2[\"Input dataset\"];\n  3[\"FreeBayes\"];\n  0 -->|output| 3;\n  4[\"VcfAllelicPrimitives:\"];\n  3 -->|output_vcf| 4;\n  5[\"SnpEff eff:\"];\n  4 -->|out_file1| 5;\n  1 -->|snpeff_db| 5;\n  6[\"GEMINI load\"];\n  5 -->|snpeff_output| 6;\n  2 -->|output| 6;\n  7[\"GEMINI db_info\"];\n  6 -->|outfile| 7;\n  8[\"GEMINI query\"];\n  6 -->|outfile| 8;\n  9[\"GEMINI query\"];\n  6 -->|outfile| 9;\n"
         }
       ],
@@ -2398,7 +2398,7 @@
           "name": "Identification of somatic and germline variants from tumor and normal sample pairs tutorial",
           "title": "Identification of somatic and germline variants from tumor and normal sample pairs tutorial",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"SLGFSK-N_231335_r1_chr5_12_17.fastq\"];\n  1[\"SLGFSK-N_231335_r2_chr5_12_17.fastq\"];\n  2[\"SLGFSK-T_231336_r1_chr5_12_17.fastq\"];\n  3[\"SLGFSK-T_231336_r2_chr5_12_17.fastq\"];\n  4[\"hg19.chr5_12_17.fa\"];\n  5[\"hotspots.bed\"];\n  6[\"cgi_variant_positions.bed\"];\n  7[\"01-Feb-2019-CIVic.bed\"];\n  8[\"dbsnp.b147.chr5_12_17.vcf.gz\"];\n  9[\"Uniprot_Cancer_Genes.13Feb2019.txt\"];\n  10[\"cgi_genes.txt\"];\n  11[\"01-Feb-2019-GeneSummaries.tsv\"];\n  12[\"FastQC\"];\n  0 -->|output| 12;\n  13[\"FastQC\"];\n  1 -->|output| 13;\n  14[\"Trimmomatic\"];\n  0 -->|output| 14;\n  1 -->|output| 14;\n  15[\"FastQC\"];\n  2 -->|output| 15;\n  16[\"FastQC\"];\n  3 -->|output| 16;\n  17[\"Trimmomatic\"];\n  2 -->|output| 17;\n  3 -->|output| 17;\n  18[\"FastQC\"];\n  14 -->|fastq_out_r2_paired| 18;\n  19[\"FastQC\"];\n  14 -->|fastq_out_r1_paired| 19;\n  20[\"Map with BWA-MEM\"];\n  14 -->|fastq_out_r1_paired| 20;\n  14 -->|fastq_out_r2_paired| 20;\n  21[\"MultiQC\"];\n  13 -->|text_file| 21;\n  15 -->|text_file| 21;\n  16 -->|text_file| 21;\n  12 -->|text_file| 21;\n  22[\"FastQC\"];\n  17 -->|fastq_out_r1_paired| 22;\n  23[\"FastQC\"];\n  17 -->|fastq_out_r2_paired| 23;\n  24[\"Map with BWA-MEM\"];\n  17 -->|fastq_out_r1_paired| 24;\n  17 -->|fastq_out_r2_paired| 24;\n  25[\"Filter\"];\n  20 -->|bam_output| 25;\n  26[\"MultiQC\"];\n  19 -->|text_file| 26;\n  22 -->|text_file| 26;\n  23 -->|text_file| 26;\n  18 -->|text_file| 26;\n  27[\"Filter\"];\n  24 -->|bam_output| 27;\n  28[\"RmDup\"];\n  25 -->|out_file1| 28;\n  29[\"RmDup\"];\n  27 -->|out_file1| 29;\n  30[\"BamLeftAlign\"];\n  28 -->|output1| 30;\n  31[\"BamLeftAlign\"];\n  29 -->|output1| 31;\n  32[\"CalMD\"];\n  30 -->|output_bam| 32;\n  33[\"CalMD\"];\n  31 -->|output_bam| 33;\n  34[\"Filter\"];\n  32 -->|calmd_output| 34;\n  35[\"Filter\"];\n  33 -->|calmd_output| 35;\n  36[\"VarScan somatic\"];\n  34 -->|out_file1| 36;\n  35 -->|out_file1| 36;\n  37[\"SnpEff eff:\"];\n  36 -->|output| 37;\n  38[\"GEMINI load\"];\n  37 -->|snpeff_output| 38;\n  39[\"GEMINI annotate\"];\n  36 -->|output| 39;\n  38 -->|outfile| 39;\n  40[\"GEMINI annotate\"];\n  8 -->|output| 40;\n  39 -->|outfile| 40;\n  41[\"GEMINI annotate\"];\n  5 -->|output| 41;\n  40 -->|outfile| 41;\n  42[\"GEMINI annotate\"];\n  7 -->|output| 42;\n  41 -->|outfile| 42;\n  43[\"GEMINI annotate\"];\n  6 -->|output| 43;\n  42 -->|outfile| 43;\n  44[\"GEMINI query\"];\n  43 -->|outfile| 44;\n  45[\"GEMINI query\"];\n  43 -->|outfile| 45;\n  46[\"GEMINI query\"];\n  43 -->|outfile| 46;\n  47[\"GEMINI query\"];\n  43 -->|outfile| 47;\n  48[\"Join\"];\n  47 -->|outfile| 48;\n  9 -->|output| 48;\n  49[\"Join\"];\n  48 -->|output| 49;\n  10 -->|output| 49;\n  50[\"Join\"];\n  49 -->|output| 50;\n  11 -->|output| 50;\n  51[\"Column arrange\"];\n  50 -->|output| 51;\n"
         }
       ],
@@ -2751,7 +2751,7 @@
           "name": "M. tuberculosis Variant Analysis tutorial",
           "title": "M. tuberculosis Variant Analysis tutorial",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"FastQC\"];\n  0 -->|output| 5;\n  6[\"FastQC\"];\n  1 -->|output| 6;\n  7[\"Trimmomatic\"];\n  0 -->|output| 7;\n  1 -->|output| 7;\n  8[\"MultiQC\"];\n  6 -->|text_file| 8;\n  5 -->|text_file| 8;\n  9[\"snippy\"];\n  7 -->|fastq_out_r1_paired| 9;\n  7 -->|fastq_out_r2_paired| 9;\n  2 -->|output| 9;\n  10[\"Kraken2\"];\n  7 -->|fastq_out_r1_paired| 10;\n  7 -->|fastq_out_r2_paired| 10;\n  11[\"TB Variant Filter\"];\n  9 -->|snpvcf| 11;\n  12[\"TB-Profiler Profile\"];\n  9 -->|snpsbam| 12;\n  13[\"JBrowse\"];\n  4 -->|output| 13;\n  9 -->|snpsbam| 13;\n  11 -->|output1| 13;\n  3 -->|output| 13;\n  14[\"TB Variant Report\"];\n  9 -->|snpvcf| 14;\n  12 -->|results_json| 14;\n"
         }
       ],
@@ -3086,7 +3086,7 @@
           "name": "Trio Analysis Tutorial",
           "title": "Trio Analysis Tutorial",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"EGA Download Client\"];\n  1[\"EGA Download Client\"];\n  2[\"Input dataset\"];\n  3[\"Search in textfiles\"];\n  1 -->|dataset_file_list| 3;\n  4[\"EGA Download Client\"];\n  3 -->|output| 4;\n  5[\"Convert compressed file to uncompressed.\"];\n  4 -->|downloaded_file_collection| 5;\n  6[\"Column Regex Find And Replace\"];\n  5 -->|output1| 6;\n  7[\"bcftools norm\"];\n  6 -->|out_file1| 7;\n  8[\"Filter\"];\n  7 -->|output_file| 8;\n  9[\"bcftools merge\"];\n  8 -->|out_file1| 9;\n  10[\"SnpEff eff:\"];\n  9 -->|output_file| 10;\n  11[\"Convert uncompressed file to compressed\"];\n  10 -->|snpeff_output| 11;\n  12[\"gene.iobio visualisation\"];\n  11 -->|output1| 12;\n  11 -->|output1| 12;\n  11 -->|output1| 12;\n  13[\"GEMINI load\"];\n  11 -->|output1| 13;\n  2 -->|output| 13;\n  14[\"GEMINI inheritance pattern\"];\n  13 -->|outfile| 14;\n"
         }
       ],
@@ -3363,7 +3363,7 @@
           "name": "Exome Seq Training Pre-Mapped W Cached Ref",
           "title": "Exome Seq Training Pre-Mapped W Cached Ref",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Samtools view\"];\n  0 -->|output| 4;\n  5[\"Samtools view\"];\n  1 -->|output| 5;\n  6[\"Samtools view\"];\n  2 -->|output| 6;\n  7[\"RmDup\"];\n  4 -->|outputsam| 7;\n  8[\"RmDup\"];\n  5 -->|outputsam| 8;\n  9[\"RmDup\"];\n  6 -->|outputsam| 9;\n  10[\"FreeBayes\"];\n  7 -->|output1| 10;\n  8 -->|output1| 10;\n  9 -->|output1| 10;\n  11[\"bcftools norm\"];\n  10 -->|output_vcf| 11;\n  12[\"SnpEff eff:\"];\n  11 -->|output_file| 12;\n  13[\"GEMINI load\"];\n  12 -->|snpeff_output| 13;\n  3 -->|output| 13;\n  14[\"GEMINI inheritance pattern\"];\n  13 -->|outfile| 14;\n"
         },
         {
@@ -3385,7 +3385,7 @@
           "name": "Exome Seq Training Full W Cached Ref",
           "title": "Exome Seq Training Full W Cached Ref",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"Input dataset\"];\n  7[\"FastQC\"];\n  0 -->|output| 7;\n  8[\"FastQC\"];\n  1 -->|output| 8;\n  9[\"Map with BWA-MEM\"];\n  0 -->|output| 9;\n  1 -->|output| 9;\n  10[\"FastQC\"];\n  2 -->|output| 10;\n  11[\"FastQC\"];\n  3 -->|output| 11;\n  12[\"Map with BWA-MEM\"];\n  2 -->|output| 12;\n  3 -->|output| 12;\n  13[\"FastQC\"];\n  4 -->|output| 13;\n  14[\"FastQC\"];\n  5 -->|output| 14;\n  15[\"Map with BWA-MEM\"];\n  4 -->|output| 15;\n  5 -->|output| 15;\n  16[\"Samtools view\"];\n  9 -->|bam_output| 16;\n  17[\"Samtools view\"];\n  12 -->|bam_output| 17;\n  18[\"MultiQC\"];\n  7 -->|text_file| 18;\n  8 -->|text_file| 18;\n  10 -->|text_file| 18;\n  11 -->|text_file| 18;\n  13 -->|text_file| 18;\n  14 -->|text_file| 18;\n  19[\"Samtools view\"];\n  15 -->|bam_output| 19;\n  20[\"RmDup\"];\n  16 -->|outputsam| 20;\n  21[\"RmDup\"];\n  17 -->|outputsam| 21;\n  22[\"RmDup\"];\n  19 -->|outputsam| 22;\n  23[\"FreeBayes\"];\n  20 -->|output1| 23;\n  21 -->|output1| 23;\n  22 -->|output1| 23;\n  24[\"bcftools norm\"];\n  23 -->|output_vcf| 24;\n  25[\"SnpEff eff:\"];\n  24 -->|output_file| 25;\n  26[\"GEMINI load\"];\n  25 -->|snpeff_output| 26;\n  6 -->|output| 26;\n  27[\"GEMINI inheritance pattern\"];\n  26 -->|outfile| 27;\n"
         }
       ],
@@ -3687,7 +3687,7 @@
           "name": "Somatic-Variant-Discovery-from-WES-Data-Using-Control-FREEC",
           "title": "Somatic-Variant-Discovery-from-WES-Data-Using-Control-FREEC",
           "test_results": null,
-          "modified": "2024-02-23 00:11:19 +0000",
+          "modified": "2024-02-24 00:24:34 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Create text file\"];\n  4[\"Input dataset\"];\n  5[\"Input dataset\"];\n  6[\"FastQC\"];\n  0 -->|output| 6;\n  7[\"Trimmomatic\"];\n  0 -->|output| 7;\n  1 -->|output| 7;\n  8[\"FastQC\"];\n  1 -->|output| 8;\n  9[\"FastQC\"];\n  2 -->|output| 9;\n  10[\"Trimmomatic\"];\n  2 -->|output| 10;\n  4 -->|output| 10;\n  11[\"FastQC\"];\n  4 -->|output| 11;\n  12[\"FastQC\"];\n  7 -->|fastq_out_r2_paired| 12;\n  13[\"Map with BWA-MEM\"];\n  7 -->|fastq_out_r1_paired| 13;\n  7 -->|fastq_out_r2_paired| 13;\n  14[\"FastQC\"];\n  7 -->|fastq_out_r1_paired| 14;\n  15[\"FastQC\"];\n  10 -->|fastq_out_r2_paired| 15;\n  16[\"Map with BWA-MEM\"];\n  10 -->|fastq_out_r1_paired| 16;\n  10 -->|fastq_out_r2_paired| 16;\n  17[\"FastQC\"];\n  10 -->|fastq_out_r1_paired| 17;\n  18[\"MultiQC\"];\n  9 -->|text_file| 18;\n  6 -->|text_file| 18;\n  8 -->|text_file| 18;\n  11 -->|text_file| 18;\n  19[\"Build list\"];\n  13 -->|bam_output| 19;\n  16 -->|bam_output| 19;\n  20[\"MultiQC\"];\n  12 -->|text_file| 20;\n  14 -->|text_file| 20;\n  15 -->|text_file| 20;\n  17 -->|text_file| 20;\n  21[\"Relabel identifiers\"];\n  3 -->|outfile| 21;\n  19 -->|output| 21;\n  22[\"Samtools view\"];\n  21 -->|output| 22;\n  23[\"RmDup\"];\n  22 -->|outputsam| 23;\n  24[\"BamLeftAlign\"];\n  23 -->|output1| 24;\n  25[\"Samtools calmd\"];\n  24 -->|output_bam| 25;\n  26[\"Samtools view\"];\n  25 -->|calmd_output| 26;\n  27[\"Samtools view\"];\n  25 -->|calmd_output| 27;\n  28[\"Select\"];\n  26 -->|outputsam| 28;\n  29[\"Replace Text\"];\n  28 -->|out_file1| 29;\n  30[\"Samtools view\"];\n  27 -->|outputsam| 30;\n  29 -->|outfile| 30;\n  31[\"Extract dataset\"];\n  30 -->|outputsam| 31;\n  32[\"Extract dataset\"];\n  30 -->|outputsam| 32;\n  33[\"Control-FREEC\"];\n  5 -->|output| 33;\n  32 -->|output| 33;\n  31 -->|output| 33;\n  34[\"Circos\"];\n  33 -->|out_chr_sorted_circos| 34;\n  33 -->|out_ratio_log2_circos| 34;\n"
         }
       ],
