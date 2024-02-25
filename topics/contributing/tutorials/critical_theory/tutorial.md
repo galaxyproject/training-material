@@ -15,8 +15,6 @@ contributions:
     - gallardoalba
 ---
 
-In this tutorial we will discuss the principles of learning
-
 > *Critical thinking aims to define the irrational character of the established rationality.*
 > **Herbert Marcuse, One-Dimensional Man: Studies in the Ideology of Advanced Industrial Society**
 {: .quote}
