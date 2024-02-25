@@ -77,7 +77,7 @@ publishable as a real Data Paper giving recognition to all the people that helpe
 > <comment-title>What is a Data Paper?</comment-title>
 > According to the [GBIF](https://www.gbif.org/data-papers) (Global Biodiversity Information Facility), 
 > A data paper is a peer reviewed document describing a dataset, published in a peer reviewed journal. It takes effort to prepare, curate and describe data. 
->,Data papers provide recognition for this effort by means of a scholarly article.
+> Data papers provide recognition for this effort using a scholarly article.
 {:  .comment}
 # Get data
 
