@@ -96,7 +96,7 @@ publishable as a real Data Paper giving recognition to all the people that helpe
 
 # Upload Data in MetaShRIMPS
 
-When opening [MetaShRIMPS](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashrimps), you will have an interface looking like this :
+When opening {% tool [MetaShRIMPS](interactive_tool_metashrimps) %}, you will have an interface looking like this :
 
 ![Interface of MetaShRIMPS](./Images/upload_1.png){:width="500"}
 
