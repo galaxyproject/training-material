@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@42fba78ac4ff2d92c97766c3f3c20705f4cc29eb",
+		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708932023' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1708932023' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1708938183' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1708938183' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Creating FAIR Quality assessment reports and draft of Data Papers from EML metadata with MetaShRIMPS">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-02-03 15:15:16 +0000">
+<meta name="DC.date" content="2024-02-25 00:04:44 +0000">
 <meta name="DC.creator" content="Tanguy Genthon">
 <meta name="DC.creator" content="Yvan Le Bras"><meta name="description" content="Learn to analyse Ecological data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -118,7 +118,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-02-03 15:15:16 +0000",
+  "dateModified": "2024-02-25 00:04:44 +0000",
   "datePublished": "2024-01-22 09:50:51 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Creating FAIR Quality assessment reports and draft of Data Papers from EML metadata with MetaShRIMPS",
@@ -232,7 +232,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Creating FAIR Quality assessment reports and draft of Data Papers from EML metadata with MetaShRIMPS",
   "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/Metashrimps_tutorial/tutorial.html",
-  "version": 10,
+  "version": 13,
   "timeRequired": "PT30M",
   "teaches": "Learn how to use the interactive tool Metashrimps\n - Understand the challenges MetaShRIMPS is trying to respond to\n - Learn how to create a FAIR Quality assessment report from a metadata using EML standard\n - Understand the concept of Data Paper and learn how to produce it\n - Explain the necessity of using such tools when producing ecological metadata",
   "keywords": [
@@ -489,7 +489,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "This tutorial aims to teach how to use the interactive tool MetaShRIMPS, available on Galaxy Ecology,"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708932023'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1708938183'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -833,34 +833,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     </a>
     <ul class="dropdown-menu">
         
-    
 	<li class="dropdown-header">
-		<b>Possibly Working</b>
+		<b>Known Working</b>
 	</li>
+	
+	
+
     
 	<li>
 		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
-			UseGalaxy.eu
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
 		</a>
 	</li>
     
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org" title="">
-			UseGalaxy.org
-		</a>
-	</li>
     
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
-			UseGalaxy.org.au
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
-			UseGalaxy.fr
-		</a>
-	</li>
     
     
 
@@ -882,7 +868,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 22, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 3, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 25, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -900,7 +886,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 13 </div>
 
     </blockquote>
     </section>
@@ -964,7 +950,7 @@ publishable as a real Data Paper giving recognition to all the people that helpe
   <div class="box-title comment-title" id="comment-what-is-a-data-paper"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What is a Data Paper?</div>
   <p>According to the <a href="https://www.gbif.org/data-papers">GBIF</a> (Global Biodiversity Information Facility), 
 A data paper is a peer reviewed document describing a dataset, published in a peer reviewed journal. It takes effort to prepare, curate and describe data. 
-Data papers provide recognition for this effort by means of a scholarly article.</p>
+Data papers provide recognition for this effort using a scholarly article.</p>
 </blockquote>
 <h1 id="get-data">Get data</h1>
 
@@ -972,8 +958,8 @@ Data papers provide recognition for this effort by means of a scholarly article.
   <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Data Upload</div>
 
   <ol>
-    <li>Create a new history for this tutorial
-2.Import this metadata file from <a href="https://doi.org/10.5281/zenodo.8130567">Zenodo</a> to test it
+    <li>Create a new history for this tutorial</li>
+    <li>Import this metadata file from <a href="https://doi.org/10.5281/zenodo.8130567">Zenodo</a> to test it
  -&gt; Training Data for “Creating Quality FAIR assessment reports and draft of Data Papers from EML metadata with MetaShRIMPS”):
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/8130567/files/Kakila_database_marine_mammal.xml
 </code></pre></div>      </div>
@@ -987,7 +973,7 @@ Data papers provide recognition for this effort by means of a scholarly article.
 
 <h1 id="upload-data-in-metashrimps">Upload Data in MetaShRIMPS</h1>
 
-<p>When oppening MetaShRIMPS, you will have an interface looking like this :</p>
+<p>When opening <span class="tool" data-tool="interactive_tool_metashrimps" title="MetaShRIMPS tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MetaShRIMPS</strong></span>, you will have an interface looking like this :</p>
 
 <p><a href="./Images/upload_1.png" rel="noopener noreferrer"><img src="./Images/upload_1.png" alt="Interface of MetaShRIMPS. " width="1110" height="521" loading="lazy" /></a></p>
 
@@ -1252,7 +1238,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/42fba78ac4ff2d92c97766c3f3c20705f4cc29eb">42fba78</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1280,7 +1266,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1708932023'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1708938183'></script>
         
     </body>
 </html>
