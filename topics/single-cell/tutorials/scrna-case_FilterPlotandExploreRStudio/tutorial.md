@@ -672,7 +672,7 @@ FeaturePlot(object = filtered_srt, reduction = "umap", features = "Hba-a1")
 Hemoglobin--a red blood cell marker that should NOT be found in T-cells--appears throughout the entire dataset in low numbers and as a likely marker of Cluster 6. This suggests that some background noise may have been introduced by the media the cells were in. We might consider in the wet lab trying to get a purer, more informative sample, with less background. Alternatively, in the dry lab, we can take advantage of techniques such as SoupX or others to remove this technical noise.
 
 ><tip-title>Removing Noise</tip-title>
->Adjusting the filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios of unexpected noise.
+>Adjusting the filtering settings (increasing minimum counts/cell, etc.) is often the place to start in the case of unexpected noise.
 {: .tip}
 
 Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?
