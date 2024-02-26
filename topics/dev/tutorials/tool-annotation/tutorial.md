@@ -16,6 +16,7 @@ time_estimation: 1H
 key_points:
 - Galaxy tools can get EDAM ontology terms from bio.tools
 - bio.tools entry can be created and modified to provide the best EDAM annotations
+- An up-to-date bio.tools entry provides readily accessible metadata that can help users find and understand tools that are available on Galaxy
 - bio.tools entry can easily be added to a Galaxy tool
 contributions:
   authorship:
@@ -23,7 +24,7 @@ contributions:
 
 ---
 
-Galaxy offers thousands of tools. A vast majority of these tools come with poor metadata. 
+Galaxy offers thousands of tools. Many of these tools either have incomplete metadata or are not yet linked to sources of high-quality metadata such as [bio.tools](https://bio.tools/).
 
 This prevents filtering for all tools in a specific research community or domain, and makes it all but impossible to employ advanced filtering with ontology terms like the ones from EDAM or to group tools based on an ontology to improve the Galaxy tool panel.
 
@@ -182,13 +183,15 @@ Now we have the wrapper, and can add the bio.tools entry.
 > <hands-on-title>Add bio.tools entry to the Galaxy wrapper</hands-on-title>
 > 
 > 1. Open the Galaxy tool XML file
-> 2. Add the xref snippet indicated below: it should appear below the `macros` section and before the `requirements` section
+> 2. Add the xref snippet indicated below:
 >
 >    ```
 >    <xrefs>
 >        <xref type="bio.tools">biotool-id</xref>
 >    </xrefs>
 >    ```
+>
+>    It should appear below the `macros` section and before the `requirements` section
 >
 > 3. Replace `biotool-id` in the example snippet above with the bio.tools ID for your tool
 > 3. Commit the change on a new branch
