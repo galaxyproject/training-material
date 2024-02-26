@@ -142,7 +142,7 @@
       "name": "Workflow constructed from history 'Hsp90-MDAnalysis'",
       "title": "Workflow constructed from history 'Hsp90-MDAnalysis'",
       "test_results": null,
-      "modified": "2024-02-26 00:11:51 +0000",
+      "modified": "2024-02-26 07:08:59 +0000",
       "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"GROMACS structure configuration\"];\n  0 -->|output| 2;\n  3[\"MDTraj file converter\"];\n  1 -->|output| 3;\n  4[\"RMSD Analysis\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  5[\"RMSF Analysis\"];\n  2 -->|output| 5;\n  3 -->|output| 5;\n  6[\"PCA\"];\n  2 -->|output| 6;\n  3 -->|output| 6;\n  7[\"Cosine Content\"];\n  3 -->|output| 7;\n  2 -->|output| 7;\n  8[\"PCA visualization\"];\n  2 -->|output| 8;\n  3 -->|output| 8;\n  9[\"Hydrogen Bond Analysis using VMD\"];\n  3 -->|output| 9;\n  2 -->|output| 9;\n  10[\"RMSD Analysis\"];\n  2 -->|output| 10;\n  3 -->|output| 10;\n"
     },
     {
@@ -160,7 +160,7 @@
       "name": "MD protein-ligand workflow (from PDB structure)",
       "title": "MD protein-ligand workflow (from PDB structure)",
       "test_results": null,
-      "modified": "2024-02-26 00:11:51 +0000",
+      "modified": "2024-02-26 07:08:59 +0000",
       "mermaid": "flowchart TD\n  0[\"Input parameter\"];\n  1[\"Input parameter\"];\n  2[\"Get PDB file\"];\n  0 -->|output| 2;\n  3[\"Search in textfiles\"];\n  2 -->|output| 3;\n  4[\"Search in textfiles\"];\n  2 -->|output| 4;\n  1 -->|output| 4;\n  5[\"GROMACS initial setup\"];\n  3 -->|output| 5;\n  6[\"Compound conversion\"];\n  4 -->|output| 6;\n  7[\"Generate MD topologies for small molecules\"];\n  6 -->|outfile| 7;\n  8[\"Merge GROMACS topologies\"];\n  7 -->|gro_output| 8;\n  5 -->|output1| 8;\n  5 -->|output2| 8;\n  7 -->|output| 8;\n  9[\"GROMACS structure configuration\"];\n  8 -->|complex_gro| 9;\n  10[\"GROMACS solvation and adding ions\"];\n  8 -->|complex_top| 10;\n  9 -->|output| 10;\n  11[\"GROMACS energy minimization\"];\n  10 -->|output2| 11;\n  10 -->|output1| 11;\n  12[\"GROMACS simulation\"];\n  5 -->|output3| 12;\n  10 -->|output2| 12;\n  11 -->|output1| 12;\n  13[\"GROMACS simulation\"];\n  5 -->|output3| 13;\n  10 -->|output2| 13;\n  12 -->|output1| 13;\n  12 -->|output5| 13;\n  14[\"GROMACS simulation\"];\n  10 -->|output2| 14;\n  13 -->|output1| 14;\n  13 -->|output5| 14;\n"
     }
   ],
