@@ -612,7 +612,7 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype", split.
 ```
 ![DimPlot colored by labelled celltype split by genotype](../../images/scrna-SeuratRStudio/plot14.png "DimPlot colored by assigned cell typesplit by genotype")
 
-We can see that there seems to be a decrease in cellcounts across the celltypes in the het mutant... INTERESTING! What next? We might look further at the transcripts present in both of those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.
+We can see that there seems to be a decrease in cell counts across the cell types in the het mutant... INTERESTING! What next? We might look further at the transcripts present in both of those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.
 
 # Technical Assessment
 Is our analysis real? Is it correct? Well, we can assess that a little bit.
