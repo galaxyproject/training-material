@@ -371,7 +371,7 @@
           "name": "Amplicon Tutorial",
           "title": "Amplicon Tutorial",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Input dataset\"];\n  5[\"Merge.files\"];\n  2 -->|output| 5;\n  1 -->|output| 5;\n  6[\"Make.group\"];\n  1 -->|output| 6;\n  2 -->|output| 6;\n  7[\"Unique.seqs\"];\n  5 -->|output| 7;\n  8[\"Count.seqs\"];\n  6 -->|output| 8;\n  7 -->|out_names| 8;\n  9[\"Summary.seqs\"];\n  8 -->|seq_count| 9;\n  7 -->|out_fasta| 9;\n  10[\"Screen.seqs\"];\n  7 -->|out_fasta| 10;\n  8 -->|seq_count| 10;\n  11[\"Align.seqs\"];\n  0 -->|output| 11;\n  10 -->|fasta_out| 11;\n  12[\"Summary.seqs\"];\n  10 -->|count_out| 12;\n  11 -->|out_file| 12;\n  13[\"Screen.seqs\"];\n  11 -->|out_file| 13;\n  10 -->|count_out| 13;\n  14[\"Filter.seqs\"];\n  13 -->|fasta_out| 14;\n  15[\"Pre.cluster\"];\n  14 -->|filteredfasta| 15;\n  13 -->|count_out| 15;\n  16[\"Classify.seqs\"];\n  15 -->|count_out| 16;\n  3 -->|output| 16;\n  15 -->|fasta_out| 16;\n  4 -->|output| 16;\n  17[\"Cluster.split\"];\n  16 -->|taxonomy_out| 17;\n  15 -->|fasta_out| 17;\n  15 -->|count_out| 17;\n  18[\"Make.shared\"];\n  15 -->|count_out| 18;\n  17 -->|otulist| 18;\n  19[\"Classify.otu\"];\n  15 -->|count_out| 19;\n  16 -->|taxonomy_out| 19;\n  17 -->|otulist| 19;\n  20[\"Make.biom\"];\n  18 -->|shared| 20;\n  19 -->|taxonomies| 20;\n  21[\"Visualize  with Krona\"];\n  19 -->|taxonomies| 21;\n"
         },
         {
@@ -389,7 +389,7 @@
           "name": "WGS Part In \"Analyses Of Metagenomics Data - The Global Picture\"",
           "title": "WGS Part In \"Analyses Of Metagenomics Data - The Global Picture\"",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"MetaPhlAn2\"];\n  0 -->|output| 1;\n  2[\"Format MetaPhlAn2\"];\n  1 -->|output_file| 2;\n  3[\"HUMAnN2\"];\n  0 -->|output| 3;\n  1 -->|output_file| 3;\n  4[\"Krona pie chart\"];\n  2 -->|krona| 4;\n  5[\"Renormalize\"];\n  3 -->|gene_families_tsv| 5;\n  6[\"Regroup\"];\n  3 -->|gene_families_tsv| 6;\n  7[\"Renormalize\"];\n  6 -->|output_table| 7;\n"
         }
       ],
@@ -712,7 +712,7 @@
           "name": "Identification of the micro-organisms in a beer using Nanopore sequencing",
           "title": "Identification of the micro-organisms in a beer using Nanopore sequencing",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"input\"];\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Porechop\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|outfile| 3;\n  4[\"Kraken2\"];\n  3 -->|out1| 4;\n  5[\"Filter\"];\n  4 -->|report_output| 5;\n  6[\"Filter\"];\n  4 -->|report_output| 6;\n  7[\"Krakentools: Convert kraken report file\"];\n  4 -->|report_output| 7;\n  8[\"Krona pie chart\"];\n  7 -->|output| 8;\n"
         }
       ],
@@ -1133,7 +1133,7 @@
           "name": "Workflow 1: Preprocessing",
           "title": "Workflow 1: Preprocessing",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"Cutadapt\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  2 -->|text_file| 5;\n  3 -->|text_file| 5;\n  6[\"Filter with SortMeRNA\"];\n  4 -->|out1| 6;\n  4 -->|out2| 6;\n  7[\"FASTQ interlacer\"];\n  6 -->|unaligned_forward| 7;\n  6 -->|unaligned_reverse| 7;\n"
         },
         {
@@ -1187,7 +1187,7 @@
           "name": "Workflow 2: Community Profile",
           "title": "Workflow 2: Community Profile",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"MetaPhlAn\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Cut\"];\n  2 -->|output_file| 3;\n  4[\"Krona pie chart\"];\n  2 -->|krona_output_file| 4;\n  5[\"Export to GraPhlAn\"];\n  3 -->|out_file1| 5;\n  6[\"Generation, personalization and annotation of tree\"];\n  5 -->|annotation| 6;\n  5 -->|tree| 6;\n  7[\"GraPhlAn\"];\n  6 -->|output_tree| 7;\n"
         },
         {
@@ -1241,7 +1241,7 @@
           "name": "Workflow 3: Functional Information",
           "title": "Workflow 3: Functional Information",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Cut\"];\n  1 -->|output| 2;\n  3[\"HUMAnN\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  4[\"Renormalize\"];\n  3 -->|gene_families_tsv| 4;\n  5[\"Renormalize\"];\n  3 -->|pathabundance_tsv| 5;\n  6[\"Regroup\"];\n  3 -->|gene_families_tsv| 6;\n  7[\"Replace\"];\n  4 -->|output| 7;\n  8[\"Unpack pathway abundances\"];\n  4 -->|output| 8;\n  5 -->|output| 8;\n  9[\"Rename features\"];\n  6 -->|output| 9;\n  10[\"Split a HUMAnN table\"];\n  6 -->|output| 10;\n  11[\"Combine MetaPhlAn2 and HUMAnN2 outputs\"];\n  7 -->|outfile| 11;\n  2 -->|out_file1| 11;\n  12[\"Select\"];\n  9 -->|output| 12;\n  13[\"Select\"];\n  9 -->|output| 13;\n  14[\"Select\"];\n  9 -->|output| 14;\n"
         },
         {
@@ -1295,7 +1295,7 @@
           "name": "Workflow 3: Functional Information (quick)",
           "title": "Workflow 3: Functional Information (quick)",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Cut\"];\n  0 -->|output| 3;\n  4[\"Renormalize\"];\n  1 -->|output| 4;\n  5[\"Regroup\"];\n  1 -->|output| 5;\n  6[\"Renormalize\"];\n  2 -->|output| 6;\n  7[\"Replace\"];\n  4 -->|output| 7;\n  8[\"Rename features\"];\n  5 -->|output| 8;\n  9[\"Split a HUMAnN table\"];\n  5 -->|output| 9;\n  10[\"Unpack pathway abundances\"];\n  4 -->|output| 10;\n  6 -->|output| 10;\n  11[\"Combine MetaPhlAn2 and HUMAnN2 outputs\"];\n  7 -->|outfile| 11;\n  3 -->|out_file1| 11;\n  12[\"Select\"];\n  8 -->|output| 12;\n  13[\"Select\"];\n  8 -->|output| 13;\n  14[\"Select\"];\n  8 -->|output| 14;\n"
         }
       ],
@@ -1620,7 +1620,7 @@
           "name": "Taxonomic Profiling and Visualization of Metagenomic Data",
           "title": "Taxonomic Profiling and Visualization of Metagenomic Data",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"raw-reads\"];\n  1[\"metadata\"];\n  2[\"Unzip collection\"];\n  0 -->|output| 2;\n  3[\"Kraken2\"];\n  0 -->|output| 3;\n  4[\"MetaPhlAn\"];\n  2 -->|forward| 4;\n  2 -->|reverse| 4;\n  5[\"Krakentools: Convert kraken report file\"];\n  3 -->|report_output| 5;\n  6[\"Kraken-biom\"];\n  3 -->|report_output| 6;\n  1 -->|output| 6;\n  7[\"Pavian\"];\n  3 -->|report_output| 7;\n  8[\"Estimate Abundance at Taxonomic Level\"];\n  3 -->|report_output| 8;\n  9[\"Krona pie chart\"];\n  4 -->|krona_output_file| 9;\n  10[\"Krona pie chart\"];\n  5 -->|output| 10;\n  11[\"Phinch Visualisation\"];\n  6 -->|biomOutput| 11;\n"
         }
       ],
@@ -1923,7 +1923,7 @@
           "name": "Training: 16S rRNA Sequencing With Mothur: Main Tutorial",
           "title": "Training: 16S rRNA Sequencing With Mothur: Main Tutorial",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  10[\"Count.seqs\"];\n  8 -->|groups_out| 10;\n  9 -->|out_names| 10;\n  11[\"Align.seqs\"];\n  1 -->|output| 11;\n  9 -->|out_fasta| 11;\n  12[\"Summary.seqs\"];\n  10 -->|seq_count| 12;\n  11 -->|out_align| 12;\n  13[\"Screen.seqs\"];\n  10 -->|seq_count| 13;\n  11 -->|out_align| 13;\n  14[\"Filter.seqs\"];\n  13 -->|fasta_out| 14;\n  15[\"Unique.seqs\"];\n  14 -->|filteredfasta| 15;\n  13 -->|count_out| 15;\n  16[\"Pre.cluster\"];\n  15 -->|out_fasta| 16;\n  15 -->|out_count| 16;\n  17[\"Chimera.vsearch\"];\n  16 -->|fasta_out| 17;\n  16 -->|count_out| 17;\n  18[\"Remove.seqs\"];\n  17 -->|out_accnos| 18;\n  17 -->|out_count| 18;\n  16 -->|fasta_out| 18;\n  19[\"Classify.seqs\"];\n  2 -->|output| 19;\n  18 -->|count_out| 19;\n  18 -->|fasta_out| 19;\n  3 -->|output| 19;\n  2[\"Input dataset\"];\n  20[\"Remove.lineage\"];\n  18 -->|count_out| 20;\n  18 -->|fasta_out| 20;\n  19 -->|taxonomy_out| 20;\n  21[\"Get.groups\"];\n  20 -->|fasta_out| 21;\n  20 -->|count_out| 21;\n  22[\"Remove.groups\"];\n  20 -->|fasta_out| 22;\n  20 -->|count_out| 22;\n  20 -->|taxonomy_out| 22;\n  23[\"Seq.error\"];\n  4 -->|output| 23;\n  21 -->|count_out| 23;\n  21 -->|fasta_out| 23;\n  24[\"Dist.seqs\"];\n  21 -->|fasta_out| 24;\n  25[\"Cluster.split\"];\n  22 -->|fasta_out| 25;\n  22 -->|count_out| 25;\n  22 -->|taxonomy_out| 25;\n  26[\"Cluster\"];\n  21 -->|count_out| 26;\n  24 -->|out_dist| 26;\n  27[\"Make.shared\"];\n  22 -->|count_out| 27;\n  25 -->|otulist| 27;\n  28[\"Classify.otu\"];\n  22 -->|count_out| 28;\n  25 -->|otulist| 28;\n  22 -->|taxonomy_out| 28;\n  29[\"Make.shared\"];\n  21 -->|count_out| 29;\n  26 -->|otulist| 29;\n  3[\"Input dataset\"];\n  30[\"Summary.single\"];\n  27 -->|shared| 30;\n  31[\"Count.groups\"];\n  27 -->|shared| 31;\n  32[\"Dist.shared\"];\n  27 -->|shared| 32;\n  33[\"Rarefaction.single\"];\n  27 -->|shared| 33;\n  34[\"Sub.sample\"];\n  27 -->|shared| 34;\n  35[\"Taxonomy-to-Krona\"];\n  28 -->|taxonomies| 35;\n  36[\"Rarefaction.single\"];\n  29 -->|shared| 36;\n  37[\"Tree.shared\"];\n  32 -->|distfiles| 37;\n  38[\"Heatmap.sim\"];\n  32 -->|distfiles| 38;\n  39[\"Plotting tool\"];\n  33 -->|rarefactioncurves| 39;\n  4[\"Input dataset\"];\n  40[\"Venn\"];\n  34 -->|shared_out| 40;\n  41[\"Make.biom\"];\n  28 -->|taxonomies| 41;\n  5 -->|output| 41;\n  34 -->|shared_out| 41;\n  42[\"Krona pie chart\"];\n  35 -->|outputfile| 42;\n  43[\"Newick Display\"];\n  37 -->|tre| 43;\n  5[\"Input dataset\"];\n  6[\"Make.contigs\"];\n  0 -->|output| 6;\n  7[\"Summary.seqs\"];\n  6 -->|fasta| 7;\n  8[\"Screen.seqs\"];\n  6 -->|fasta| 8;\n  6 -->|group| 8;\n  9[\"Unique.seqs\"];\n  8 -->|fasta_out| 9;\n"
         }
       ],
@@ -2342,7 +2342,7 @@
           "name": "Metagenomics assembly tutorial workflow",
           "title": "Metagenomics assembly tutorial workflow",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"metaSPAdes\"];\n  0 -->|output| 1;\n  2[\"MEGAHIT\"];\n  0 -->|output| 2;\n  3[\"Bowtie2\"];\n  0 -->|output| 3;\n  2 -->|output| 3;\n  4[\"megahit contig2fastg\"];\n  2 -->|output| 4;\n  5[\"Quast\"];\n  2 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Bandage Image\"];\n  4 -->|fastg| 6;\n  7[\"Bandage Info\"];\n  4 -->|fastg| 7;\n  8[\"Column join\"];\n  7 -->|outfile| 8;\n"
         },
         {
@@ -2360,7 +2360,7 @@
           "name": "workflow-generate-dataset-for-assembly-tutorial",
           "title": "workflow-generate-dataset-for-assembly-tutorial",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Cutadapt\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"MEGAHIT\"];\n  2 -->|out1| 3;\n  2 -->|out2| 3;\n  4[\"Bowtie2\"];\n  2 -->|out1| 4;\n  2 -->|out2| 4;\n  3 -->|output| 4;\n  5[\"BAM filter\"];\n  4 -->|output| 5;\n  6[\"BAM filter\"];\n  4 -->|output| 6;\n  7[\"Convert, Merge, Randomize\"];\n  5 -->|outfile| 7;\n  8[\"Convert, Merge, Randomize\"];\n  6 -->|outfile| 8;\n  9[\"Select random lines\"];\n  7 -->|out_file1| 9;\n  10[\"Select random lines\"];\n  8 -->|out_file1| 10;\n  11[\"Filter Tabular\"];\n  9 -->|out_file1| 11;\n  12[\"Filter Tabular\"];\n  10 -->|out_file1| 12;\n  13[\"Unique\"];\n  11 -->|output| 13;\n  14[\"Unique\"];\n  12 -->|output| 14;\n  15[\"Concatenate datasets\"];\n  13 -->|outfile| 15;\n  14 -->|outfile| 15;\n  16[\"seqtk_subseq\"];\n  2 -->|out1| 16;\n  15 -->|out_file1| 16;\n  17[\"seqtk_subseq\"];\n  2 -->|out2| 17;\n  15 -->|out_file1| 17;\n  18[\"FastQC\"];\n  16 -->|default| 18;\n  19[\"FastQC\"];\n  17 -->|default| 19;\n"
         }
       ],
@@ -2754,7 +2754,7 @@
           "name": "Workflow 1: Quality Control [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "title": "Workflow 1: Quality Control [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Summary.seqs\"];\n  0 -->|output| 2;\n  3[\"Screen.seqs\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  4[\"Summary.seqs\"];\n  3 -->|fasta_out| 4;\n  5[\"Unique.seqs\"];\n  3 -->|fasta_out| 5;\n  6[\"Count.seqs\"];\n  3 -->|groups_out| 6;\n  5 -->|out_names| 6;\n"
         },
         {
@@ -2776,7 +2776,7 @@
           "name": "Workflow 2: Data Cleaning And Chimera Removal [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "title": "Workflow 2: Data Cleaning And Chimera Removal [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Summary.seqs\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Screen.seqs\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  4[\"Filter.seqs\"];\n  3 -->|fasta_out| 4;\n  5[\"Unique.seqs\"];\n  4 -->|filteredfasta| 5;\n  3 -->|count_out| 5;\n  6[\"Pre.cluster\"];\n  5 -->|out_fasta| 6;\n  5 -->|out_count| 6;\n  7[\"Summary.seqs\"];\n  6 -->|count_out| 7;\n  6 -->|fasta_out| 7;\n  8[\"Chimera.vsearch\"];\n  6 -->|fasta_out| 8;\n  6 -->|count_out| 8;\n  9[\"Remove.seqs\"];\n  8 -->|out_accnos| 9;\n  8 -->|out_count| 9;\n  6 -->|fasta_out| 9;\n  10[\"Summary.seqs\"];\n  9 -->|count_out| 10;\n  9 -->|fasta_out| 10;\n"
         },
         {
@@ -2798,7 +2798,7 @@
           "name": "Workflow 3: Classification [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "title": "Workflow 3: Classification [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Input dataset\"];\n  4[\"Classify.seqs\"];\n  2 -->|output| 4;\n  1 -->|output| 4;\n  0 -->|output| 4;\n  3 -->|output| 4;\n  5[\"Remove.lineage\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  4 -->|taxonomy_out| 5;\n  6[\"Summary.seqs\"];\n  5 -->|count_out| 6;\n  5 -->|fasta_out| 6;\n"
         },
         {
@@ -2820,7 +2820,7 @@
           "name": "Workflow 4: Mock OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "title": "Workflow 4: Mock OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Dist.seqs\"];\n  1 -->|output| 2;\n  3[\"Cluster\"];\n  0 -->|output| 3;\n  2 -->|out_dist| 3;\n  4[\"Make.shared\"];\n  0 -->|output| 4;\n  3 -->|otulist| 4;\n  5[\"Rarefaction.single\"];\n  4 -->|shared| 5;\n"
         },
         {
@@ -2842,7 +2842,7 @@
           "name": "Workflow 5: OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "title": "Workflow 5: OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Input dataset\"];\n  3[\"Remove.groups\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  2 -->|output| 3;\n  4[\"Cluster.split\"];\n  3 -->|fasta_out| 4;\n  3 -->|count_out| 4;\n  3 -->|taxonomy_out| 4;\n  5[\"Make.shared\"];\n  3 -->|count_out| 5;\n  4 -->|otulist| 5;\n  6[\"Classify.otu\"];\n  3 -->|count_out| 6;\n  4 -->|otulist| 6;\n  3 -->|taxonomy_out| 6;\n  7[\"Count.groups\"];\n  5 -->|shared| 7;\n  8[\"Sub.sample\"];\n  5 -->|shared| 8;\n"
         },
         {
@@ -2864,7 +2864,7 @@
           "name": "Workflow 6: Alpha Diversity [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "title": "Workflow 6: Alpha Diversity [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Rarefaction.single\"];\n  0 -->|output| 1;\n  2[\"Summary.single\"];\n  0 -->|output| 2;\n  3[\"Plotting tool\"];\n  1 -->|rarefactioncurves| 3;\n"
         },
         {
@@ -2886,7 +2886,7 @@
           "name": "Workflow7: Beta Diversity [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "title": "Workflow7: Beta Diversity [Galaxy Training: 16S Microbial Analysis With Mothur]",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset collection\"];\n  2[\"Dist.shared\"];\n  0 -->|output| 2;\n  3[\"Collapse Collection\"];\n  1 -->|output| 3;\n  4[\"Heatmap.sim\"];\n  2 -->|distfiles| 4;\n  5[\"Tree.shared\"];\n  2 -->|distfiles| 5;\n  6[\"Venn\"];\n  3 -->|output| 6;\n  7[\"Newick Display\"];\n  5 -->|tre| 7;\n"
         }
       ],
@@ -3281,7 +3281,7 @@
           "name": "Copy Of GTN Training - Antibiotic Resistance Detection",
           "title": "Copy Of GTN Training - Antibiotic Resistance Detection",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"NanoPlot\"];\n  0 -->|output| 1;\n  10[\"NanoPlot\"];\n  9 -->|out_fa| 10;\n  11[\"Map with minimap2\"];\n  0 -->|output| 11;\n  9 -->|out_fa| 11;\n  12[\"Racon\"];\n  9 -->|out_fa| 12;\n  11 -->|alignment_output| 12;\n  0 -->|output| 12;\n  2[\"Map with minimap2\"];\n  0 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Create assemblies with Unicycler\"];\n  0 -->|output| 3;\n  4[\"miniasm\"];\n  2 -->|alignment_output| 4;\n  0 -->|output| 4;\n  5[\"Bandage Image\"];\n  3 -->|assembly_graph| 5;\n  6[\"PlasFlow\"];\n  3 -->|assembly| 6;\n  7[\"staramr\"];\n  3 -->|assembly| 7;\n  8[\"Bandage Image\"];\n  4 -->|gfa| 8;\n  9[\"GFA to FASTA\"];\n  4 -->|gfa| 9;\n"
         }
       ],
@@ -3576,7 +3576,7 @@
           "name": "Pathogen-Detection-Nanopore-Gene-based-pathogenic-Identification-collection",
           "title": "Pathogen-Detection-Nanopore-Gene-based-pathogenic-Identification-collection",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Build list\"];\n  0 -->|output| 2;\n  3[\"Extract element identifiers\"];\n  0 -->|output| 3;\n  4[\"Flye\"];\n  2 -->|output| 4;\n  5[\"Split file\"];\n  3 -->|output| 5;\n  6[\"Bandage Image\"];\n  4 -->|assembly_gfa| 6;\n  7[\"medaka consensus pipeline\"];\n  4 -->|consensus| 7;\n  0 -->|output| 7;\n  8[\"Parse parameter value\"];\n  5 -->|list_output_txt| 8;\n  9[\"Build list\"];\n  7 -->|out_consensus| 9;\n  10[\"ABRicate\"];\n  7 -->|out_consensus| 10;\n  11[\"FASTA-to-Tabular\"];\n  7 -->|out_consensus| 11;\n  12[\"ABRicate\"];\n  7 -->|out_consensus| 12;\n  13[\"Compose text parameter value\"];\n  8 -->|text_param| 13;\n  14[\"MLST\"];\n  9 -->|output| 14;\n  15[\"Cut\"];\n  10 -->|report| 15;\n  16[\"Cut\"];\n  12 -->|report| 16;\n  17[\"Replace\"];\n  8 -->|text_param| 17;\n  13 -->|out1| 17;\n  10 -->|report| 17;\n  18[\"Replace\"];\n  13 -->|out1| 18;\n  11 -->|output| 18;\n  19[\"Replace Text\"];\n  14 -->|report| 19;\n  8 -->|text_param| 19;\n  20[\"Add line to file\"];\n  15 -->|out_file1| 20;\n  8 -->|text_param| 20;\n  21[\"Add line to file\"];\n  16 -->|out_file1| 21;\n  8 -->|text_param| 21;\n  22[\"Tabular-to-FASTA\"];\n  18 -->|outfile| 22;\n  23[\"Concatenate datasets\"];\n  1 -->|output| 23;\n  19 -->|outfile| 23;\n"
         },
         {
@@ -3605,7 +3605,7 @@
           "name": "Pathogen-Detection-Nanopore-All-Samples-Analysis",
           "title": "Pathogen-Detection-Nanopore-All-Samples-Analysis",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset collection\"];\n  2[\"Input dataset collection\"];\n  3[\"Input dataset collection\"];\n  4[\"Collapse Collection\"];\n  0 -->|output| 4;\n  5[\"Collapse Collection\"];\n  1 -->|output| 5;\n  6[\"Collapse Collection\"];\n  2 -->|output| 6;\n  7[\"Split by group\"];\n  4 -->|output| 7;\n  8[\"Add line to file\"];\n  6 -->|output| 8;\n  9[\"Cut\"];\n  7 -->|split_output| 9;\n  10[\"Filter sequences by ID\"];\n  7 -->|split_output| 10;\n  5 -->|output| 10;\n  11[\"Multi-Join\"];\n  3 -->|output| 11;\n  8 -->|outfile| 11;\n  12[\"Remove beginning\"];\n  9 -->|out_file1| 12;\n  13[\"Replace\"];\n  11 -->|outfile| 13;\n  14[\"Advanced Cut\"];\n  11 -->|outfile| 14;\n  15[\"bedtools getfasta\"];\n  10 -->|output_pos| 15;\n  12 -->|out_file1| 15;\n  16[\"Replace\"];\n  13 -->|outfile| 16;\n  17[\"ClustalW\"];\n  15 -->|output| 17;\n  18[\"Replace\"];\n  16 -->|outfile| 18;\n  19[\"Filter empty datasets\"];\n  17 -->|output| 19;\n  20[\"Advanced Cut\"];\n  18 -->|outfile| 20;\n  21[\"FASTTREE\"];\n  19 -->|output| 21;\n  22[\"Paste\"];\n  14 -->|output| 22;\n  20 -->|output| 22;\n  23[\"Newick Display\"];\n  21 -->|output| 23;\n  24[\"Transpose\"];\n  22 -->|out_file1| 24;\n  25[\"Replace\"];\n  22 -->|out_file1| 25;\n  26[\"Heatmap w ggplot\"];\n  24 -->|out_file| 26;\n"
         },
         {
@@ -3634,7 +3634,7 @@
           "name": "Pathogen-Detection-Nanopore-Pre-Processing-collection",
           "title": "Pathogen-Detection-Nanopore-Pre-Processing-collection",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Porechop\"];\n  0 -->|output| 1;\n  2[\"NanoPlot\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  0 -->|output| 3;\n  4[\"fastp\"];\n  1 -->|outfile| 4;\n  5[\"NanoPlot\"];\n  4 -->|out1| 5;\n  6[\"Kraken2\"];\n  4 -->|out1| 6;\n  7[\"FastQC\"];\n  4 -->|out1| 7;\n  8[\"Filter failed datasets\"];\n  6 -->|output| 8;\n  9[\"Filter failed datasets\"];\n  6 -->|report_output| 9;\n  10[\"MultiQC\"];\n  3 -->|text_file| 10;\n  7 -->|text_file| 10;\n  11[\"Krakentools: Extract Kraken Reads By ID\"];\n  4 -->|out1| 11;\n  9 -->|output| 11;\n  8 -->|output| 11;\n"
         },
         {
@@ -3663,7 +3663,7 @@
           "name": "Pathogen-Detection-Nanopore-SNP-based-pathogenetic-Identification-collection",
           "title": "Pathogen-Detection-Nanopore-SNP-based-pathogenetic-Identification-collection",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Convert compressed file to uncompressed.\"];\n  1 -->|output| 2;\n  3[\"Map with minimap2\"];\n  0 -->|output| 3;\n  2 -->|output1| 3;\n  4[\"Clair3\"];\n  3 -->|alignment_output| 4;\n  2 -->|output1| 4;\n  5[\"bcftools norm\"];\n  4 -->|merge_output| 5;\n  2 -->|output1| 5;\n  6[\"SnpSift Filter\"];\n  5 -->|output_file| 6;\n  7[\"SnpSift Extract Fields\"];\n  6 -->|output| 7;\n  8[\"bcftools consensus\"];\n  6 -->|output| 8;\n  2 -->|output1| 8;\n"
         },
         {
@@ -3692,7 +3692,7 @@
           "name": "Pathogen Detection-Nanopore-Taxonomy-Profiling-and-Visualization-collection",
           "title": "Pathogen Detection-Nanopore-Taxonomy-Profiling-and-Visualization-collection",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"Input dataset\"];\n  2[\"Kraken2\"];\n  0 -->|output| 2;\n  3[\"Kraken-biom\"];\n  2 -->|report_output| 3;\n  1 -->|output| 3;\n  4[\"Phinch Visualisation\"];\n  3 -->|biomOutput| 4;\n"
         }
       ],
@@ -4293,7 +4293,7 @@
           "name": "Training: 16S rRNA Analysis with Nanopore Sequencing Reads",
           "title": "Training: 16S rRNA Analysis with Nanopore Sequencing Reads",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset collection\"];\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Porechop\"];\n  0 -->|output| 2;\n  3[\"MultiQC\"];\n  1 -->|text_file| 3;\n  4[\"fastp\"];\n  2 -->|outfile| 4;\n  5[\"FastQC\"];\n  4 -->|out1| 5;\n  6[\"Kraken2\"];\n  4 -->|out1| 6;\n  7[\"MultiQC\"];\n  5 -->|text_file| 7;\n  8[\"Reverse\"];\n  6 -->|report_output| 8;\n  9[\"Replace Text\"];\n  8 -->|out_file| 9;\n  10[\"Remove beginning\"];\n  9 -->|outfile| 10;\n  11[\"Krona pie chart\"];\n  10 -->|out_file1| 11;\n"
         }
       ],
@@ -4658,7 +4658,7 @@
           "name": "Main Metatranscriptomics Analysis",
           "title": "Main Metatranscriptomics Analysis",
           "test_results": null,
-          "modified": "2024-02-25 00:12:16 +0000",
+          "modified": "2024-02-26 00:11:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Input dataset\"];\n  1[\"Input dataset\"];\n  2[\"Workflow 1: Preprocessing\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Workflow 2: Community Profile\"];\n  2 -->|Cutadapt on input dataset(s): Read 1 Output| 3;\n  2 -->|Cutadapt on input dataset(s): Read 2 Output| 3;\n  4[\"Workflow 3: Functional Information\"];\n  2 -->|FASTQ interlacer pairs from input dataset(s)| 4;\n  3 -->|MetaPhlAn on input dataset(s): Predicted taxon relative abundances| 4;\n"
         }
       ],
