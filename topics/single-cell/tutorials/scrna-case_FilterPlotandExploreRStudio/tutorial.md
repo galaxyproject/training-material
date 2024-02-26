@@ -260,7 +260,7 @@ plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xl
 ![UMI x mito zoomed in Y](../../images/scrna-SeuratRStudio/plot6.png "UMI counts x Percent mito-Zoomed in on Y.")
 
 ><comment-title>Interpretations</comment-title>
->We can see a clear trend wherein cells that have around 3 percent mito counts or higher also have far fewer total counts. These cells are likely low quality, will muddy our data, and were probably stressed or ruptured prior to their encapsulation within a droplet.
+>We can see a clear trend wherein cells that have around 3 percent mito counts or higher also have far fewer total counts. These cells are likely of low quality, will muddy our data, and were probably stressed or ruptured prior to their encapsulation within a droplet.
 >
 {: .comment}
 
