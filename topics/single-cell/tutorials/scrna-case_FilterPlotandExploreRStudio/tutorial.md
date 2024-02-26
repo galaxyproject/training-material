@@ -66,7 +66,7 @@ library(Seurat)
 library(dplyr)
 ```
 
-The packages are called--now let's get our data files moved from our Galaxy history and into the RStudio enviornment so that we can create a Seurat object.
+The packages are called--now let's get our data files moved from our Galaxy history and into the RStudio environment so that we can create a Seurat object.
 
 # Upload, view and modify the files
 Now that we've made it into RStudio and called the packages we'll use, let's begin moving datasets from Galaxy and into RStudio. Galaxy helps us with this by providing the gx_get() function, which will tell us the file paths for the datasets currently occupying our Galaxy histories.
