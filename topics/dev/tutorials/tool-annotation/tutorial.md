@@ -25,22 +25,22 @@ contributions:
 
 Galaxy offers thousands of tools. A vast majority of these tools come with poor metadata. 
 
-This prevents filtering for all tools in a specific research community or domain, and makes it all but impossible to employ advanced filtering with ontology terms like ones from EDAM or to group tools given ontology to improve the Galaxy tool panel.
+This prevents filtering for all tools in a specific research community or domain, and makes it all but impossible to employ advanced filtering with ontology terms like the ones from EDAM or to group tools based on an ontology to improve the Galaxy tool panel.
 
 [EDAM](https://edamontology.org/page) ({% cite black2021edam %}) is a comprehensive ontology of well-established, familiar concepts that are prevalent within bioscientific data analysis and data management. It includes 4 main sections of concepts (sub-ontologies):
 
-- **Topic**:  A category denoting a rather broad domain or field of interest, of study, application, work, data, or technology. Topics have no clearly defined borders between each other
-- **Operation**> A function that processes a set of inputs and results in a set of outputs, or associates arguments (inputs) with values (outputs)
-- **Data**: Information, represented in an information artefact (data record) that is "understandable" by dedicated computational tools that can use the data as input or produce it as output
+- **Topic**:  A category denoting a rather broad domain or field of interest, of study, application, work, data, or technology. Topics have no clearly defined borders between each other.
+- **Operation**> A function that processes a set of inputs and results in a set of outputs, or associates arguments (inputs) with values (outputs).
+- **Data**: Information, represented in an information artefact (data record) that is "understandable" by dedicated computational tools that can use the data as input or produce it as output.
 - **Format**: A defined way or layout of representing and structuring data in a computer file, blob, string, message, or elsewhere.
 
 ![Simplified data flow diagram in EDAM architecture: boxes for concepts, lines for relations. Streamlined data management.](./images/EDAMrelations.png "EDAM architecture is simple. Boxes indicate top-level concepts (sections, sub-ontologies), and lines indicate types of relations. Source: <a href="https://edamontology.org/page">EDAM website</a>")
 
 The ontology can be navigated using [EDAM Browser](https://edamontology.github.io/edam-browser/):
 
-<iframe id="edam" src="https://edamontology.github.io/edam-browser/#operation_0291" frameBorder="0" width="80%" height="600px"> ![Krona at bacteria level](./images/edam_browser.png) </iframe>
+<iframe id="edam" src="https://edamontology.github.io/edam-browser/#operation_0291" frameBorder="0" width="80%" height="600px"> ![EDAM ontology browser](./images/edam_browser.png) </iframe>
 
-A tool or software can be then characterized by different EDAM terms:
+A tool or software can then be characterized by different EDAM terms:
 - A topic term, *e.g.*  [`Proteomics`](https://edamontology.github.io/edam-browser/#topic_0121),
 - An operation (a specific scientific thing that a tool does) term, *e.g.* [`Peptide identification`](https://edamontology.github.io/edam-browser/#operation_3631),
 - A data term for the type of biological data, *e.g.* [`Mass spectrum`](https://edamontology.github.io/edam-browser/#data_0943),
