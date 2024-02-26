@@ -12,15 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     services:
       # Label used to access the service container
-      mozillatts:
-        image: synesthesiam/mozillatts
-        ports:
-          - 5002:5002
+      # mozillatts:
+      #   image: synesthesiam/mozillatts
+      #   ports:
+      #     - 5002:5002
     steps:
       # Shallow should be fine for video
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v2
