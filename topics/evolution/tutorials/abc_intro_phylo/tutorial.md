@@ -612,6 +612,7 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 
 *If you are in a hurry to do the phylogenetic analysis you can skip this section and go to the next [Hands-on: running IQ Tree](#estimating-a-maximum-likelihood-tree-with-iqtree).*
 
+
 > <details-title>Likelihood models</details-title>
 > Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
 > The simplest model for DNA is that each nucleotide has the same rate of change, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC69) model published in 1969, and this model has just one parameter.
@@ -621,15 +622,34 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 > A next level of sophistication is the Hasegawa-Kishino-Yano model (HKY85) published in 1985, which acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
 > Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
 > 
-> ![HKY85 Formula](./images/HKY85RateMatrix.png "HKY85 rate matrix"){: width="300px"}
+><!-- ![HKY85 Formula](./images/HKY85RateMatrix.png "HKY85 rate matrix"){: width="300px"}-->
+>
+>$$
+>Q_{HKY} = \left[\begin{array}{c@{ }c@{ }c@{ }c}
+>\ * & \kappa\pi_{G} & \pi_{C} & \pi_{T} \\
+>\kappa\pi_{A} & * & \pi_{C} & \pi_{T} \\
+>\pi_{A} & \pi_{G} & * & \kappa\pi_{T} \\
+>\pi_{A} & \pi_{G} & \kappa\pi_{C} & * \\
+>\end{array}\right]
+>$$
+>
 > 
 > In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "the sum of everything else in the row."
 > 
 > A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the "reversible" property) but otherwise all rates are independent of each other:
 > 
-> ![GTR](./images/GTRRateMatrix.png "GTR rate matrix"){: width="300px"}
+><!-- ![GTR](./images/GTRRateMatrix.png "GTR rate matrix"){: width="300px"}-->
 >
-> A further level of sophistication is the recognition that some sites may be constrained from changing at all. For example, there may be some that have a critical role in fixing the correct amino acid for a protein to function. This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
+>$$
+>Q_{GTR} = \left[\begin{array}{c@{ }c@{ }c@{ }c}
+>* & \alpha\pi_{G} & \beta\pi_{C} & \gamma\pi_{T} \\
+>\alpha\pi_{A} & * & \delta\pi_{C} & \epsilon\pi_{T} \\
+>\beta\pi_{A} & \delta\pi_{G} & * & \eta\pi_{T} \\
+>\gamma\pi_{A} & \epsilon\pi_{G} & \eta\pi_{C} & * \\
+>\end{array}\right]
+>$$
+>
+>A further level of sophistication is the recognition that some sites may be constrained from changing at all. For example, there may be some that have a critical role in fixing the correct amino acid for a protein to function. This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
 > 
 > The last level of sophistication is that some sites may evolve faster than others, even if they are under the same kind of model with the same parameters in the matrix $$Q$$.
 > The most common way to allow for this is to imagine that the relative rate for a particular site is drawn from a Gamma $$\Gamma$$ probability distribution, which has some nice properties like allowing most sites to change very slowly and permitting some to change rapidly.
