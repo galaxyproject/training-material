@@ -5,12 +5,13 @@ level: Introductory
 subtopic: tooldev
 questions:
 - Is it possible to have an overview of all Galaxy tools for a specific scientific domain?
+- How can I create a new overview for a specific Galaxy community or domain?
 objectives:
-- Create a community reviewed table for Galaxy tools
+- Create a community reviewed table for Galaxy tools within a specific scientific domain
 - Embed an interactive table in a community page
 time_estimation: 1H
 key_points:
-- Galaxy Tool Metadata Extractor extracts all Galaxy tools to create interactive tables
+- The Galaxy Tool Metadata Extractor extracts all Galaxy tools to create interactive tables
 - The tool tables can be filtered by ToolShed categories and community-reviewed lists of tools to keep or exclude
 - The community interactive Galaxy tools table can be embed into any website
 tags:
@@ -51,27 +52,29 @@ The aim is this tutorial is to create such table for a community.
 >
 {: .agenda}
 
-# Add your community Galaxy Tool Metadata Extractor pipeline
+# Add your community to the Galaxy Tool Metadata Extractor pipeline
 
-To create a table for a community, you first need to create a folder in the `data/community` folder within [Galaxy Tool Metadata Extractor code source](https://github.com/galaxyproject/galaxy_tool_metadata_extractor). 
+To create a table for a community, you first need to create a new folder in the `data/community` folder within [Galaxy Tool Metadata Extractor code source](https://github.com/galaxyproject/galaxy_tool_metadata_extractor). 
 
 > <hands-on-title>Create a folder for your community</hands-on-title>
 >
-> 1. Fork the repository [Galaxy Tool Metadata Extractor repository](https://github.com/galaxyproject/galaxy_tool_metadata_extractor) if not already done
+> 1. If not already done, fork the [Galaxy Tool Metadata Extractor repository](https://github.com/galaxyproject/galaxy_tool_metadata_extractor) 
 > 2. Go to the `data/communities` folder
-> 3. Click on **Add file** drop-down menu on the top
+> 3. Click on **Add file** in the drop-down menu at the top
 > 4. Select **Create a new file**
-> 5. Fill in `Name of your file` with:  name of your community + `/categories`
+> 5. Fill in the `Name of your file` field with:  name of your community + `/categories`
+>
+>    This will create a new folder for your community and add a categories file to this folder.
 > 
 {: .hands_on}
 
-One of the filter of the main table for a community is based on the tool categories on the [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/). Only tools in the selected ToolShed categories will be added to the filtered table. It is then recommended to have large categories.
+One of the filters for the main community table is based on the tool categories on the [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/). Only tools in the selected ToolShed categories will be added to the filtered table. As a result, it is recommended to include broad categories.
 
 > <hands-on-title>Select the ToolShed categories</hands-on-title>
 >
 > 1. Go to the [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/)
-> 2. Pick in the main page the most obvious categories for your community
-> 3. Add the name of these categories in the `categories` file you started above with 1 ToolShed category per row
+> 2. On the main page, pick the most obvious categories that represent tools used by your community
+> 3. Add the name of these categories in the `categories` file you started above, with 1 ToolShed category per row
 >
 >    For example:
 >    ```
@@ -79,16 +82,16 @@ One of the filter of the main table for a community is based on the tool categor
 >    Metagenomics
 >    ```
 >
-> 4. Search on the [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/) for some of the favorite tools in your community
-> 5. Open their entry on the ToolShed
-> 6. Add to the `categories` file any categories you might have missed before
+> 4. Search on the [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/) for some of the popular tools in your community
+> 5. Open the tool entries on the ToolShed, and note their categories
+> 6. Add any new categories to the `categories` file 
 {: .hands_on}
 
-Once you have a list of the ToolShed categories to keep, you can submit this to Galaxy Tool Metadata Extractor.
+Once you have a list of the ToolShed categories that you wish to keep, you can submit this to Galaxy Tool Metadata Extractor.
 
 > <hands-on-title>Submit the new community to Galaxy Tool Metadata Extractor</hands-on-title>
 >
-> 1. Click on **Commit changes** on the top
+> 1. Click on **Commit changes** at the top
 > 2. Fill in the commit message with something like `Add X community`
 > 3. Click on `Create a new branch for this commit and start a pull request`
 > 4. Create the pull request by following the instructions
@@ -97,15 +100,15 @@ Once you have a list of the ToolShed categories to keep, you can submit this to 
 
 The Pull Request will be reviewed. Make sure to respond to any feedback. 
 
-Once the Pull Request will be merged, the interactive table will be created and available online at `https://galaxyproject.github.io/galaxy_tool_metadata_extractor/<your community>`.
+Once the Pull Request is merged, the interactive table will be created and made available online at `https://galaxyproject.github.io/galaxy_tool_metadata_extractor/<your community>`.
 
 # Review the generated interactive table
 
-The interactive table will have all tools associated with the ToolShed categories you selected. Not all that tools might be interesting for your community. 
+The interactive table will contain all the tools associated with the ToolShed categories that you selected. However, not all of these tools might be interesting for your community. 
 
-Galaxy Tool Metadata Extractor provides 2 extra possible filters for tools:
+Galaxy Tool Metadata Extractor provides 2 optional filters for tools:
 - A list of tools to exclude
-- A list of tools to really keep.
+- A list of tools that should definitely be kept.
 
 ## Add a list of tools to exclude
 
@@ -117,13 +120,13 @@ Galaxy Tool Metadata Extractor provides 2 extra possible filters for tools:
 > 4. Click on **Add file** drop-down menu on the top
 > 5. Select **Create a new file**
 > 6. Fill in `tools_to_exclude` in `Name of your file`
-> 7. Add the `Galaxy wrapper id` of the tools to exlude with 1 tool identifier per row
+> 7. Add the `Galaxy wrapper id` of the tools to exclude, with 1 tool identifier per row
 > 8. Submit your changes as before
 > 9. Wait for the Pull Request to be merged
 >
 {: .hands_on}
 
-## Add a list of tools to really keep
+## Add a list of tools to keep
 
 > <hands-on-title>Add a list of tools to keep</hands-on-title>
 >
@@ -133,7 +136,7 @@ Galaxy Tool Metadata Extractor provides 2 extra possible filters for tools:
 > 4. Click on **Add file** drop-down menu on the top
 > 5. Select **Create a new file**
 > 6. Fill in `tools_to_keep` in `Name of your file`
-> 7. Add the `Galaxy wrapper id` of the tools to keep with 1 tool identifier per row
+> 7. Add the `Galaxy wrapper id` of the tools to keep, with 1 tool identifier per row
 > 8. Submit your changes as before
 > 9. Wait for the Pull Request to be merged
 >
@@ -141,25 +144,25 @@ Galaxy Tool Metadata Extractor provides 2 extra possible filters for tools:
 
 ## Review all tools in your table
 
-Once you have the filters implemented, you can review the full list of tools to check the tools to keep and the ones to exclude to have an interactive table reflecting the Galaxy tool landscape for your community
+Once the required filters have been implemented, you can review the full list of tools to ensure that you have created an interactive table reflecting the Galaxy tool landscape for your community.
 
 > <hands-on-title>Review all tools in your table</hands-on-title>
 >
 > 1. Download the `tools.tsv` file in `results/<your community>`
-> 2. Open `tools.tsv` with a Spreedsheet Software
+> 2. Open `tools.tsv` with a Spreadsheet Software
 > 3. Review each line corresponding to a tool
 >    1. Change the value in the `Reviewed` column from `False` to `True`
->    2. Add in the `Reviewed` column `True` if the tool should be kept or `False` if not
+>    2. Add `True` to the `To keep` column if the tool should be kept, and `False` if not
 > 4. Extract the list of tools to keep
 >    1. Create a sheet for the list of tools to keep to
 >       1. Filter on the `To keep` column to keep value `True`
 >       2. Keep only the `Galaxy wrapper id` column
->    2. Add this list of `Galaxy wrapper id` to the `tools_to_keep` files
+>    2. Add this list of `Galaxy wrapper id` to the `tools_to_keep` file
 > 5. Extract the list of tools to exclude
 >    1. Create a sheet for the list of tools to keep to
 >       1. Filter on the `To keep` column to keep value `False`
 >       2. Keep only the `Galaxy wrapper id` column
->    2. Add this list of `Galaxy wrapper id` to the `tools_to_exclude` files
+>    2. Add this list of `Galaxy wrapper id` to the `tools_to_exclude` file
 > 6. Submit the changes
 > 7. Wait for the Pull Request to be merged
 >
@@ -169,11 +172,11 @@ You should have now an interactive table reflecting the Galaxy tool landscape fo
 
 # Embed the interactive table in your community page on the Hub
 
-This interactive table can be embed in your community page on the Hub, e.g. [microGalaxy](https://galaxyproject.org/community/sig/microbial/#tools).
+The interactive table you have created can be embedded in your community page on the Hub, e.g. [microGalaxy](https://galaxyproject.org/community/sig/microbial/#tools).
 
-> <hands-on-title>Review all tools in your table</hands-on-title>
+> <hands-on-title>Embed your table as an iframe</hands-on-title>
 >
-> 1. Fork the repository [Galaxy Hub](https://github.com/galaxyproject/galaxy-hub) if not already done
+> 1.  If not already done, fork the repository [Galaxy Hub](https://github.com/galaxyproject/galaxy-hub)
 > 2. Open or create your community page: `content/community/sig/<your community>/index.md`
 > 3. Add an iframe to embed the interactive table
 >
@@ -196,5 +199,5 @@ This interactive table can be embed in your community page on the Hub, e.g. [mic
 
 # Conclusion
 
-You have now an interactive table with tools available for your community and a community page that embed it.
+You now have an interactive table with Galaxy tools available for your community, and this table is embedded in a community page.
 
