@@ -39,49 +39,36 @@ contributions:
 ---
 
 
+<p align="justify">This tutorial aims to teach <b>how to use functionalities of the EML Assembly Line R package to produce rich metadata</b> using the Ecological Metadata Language (EML) international metadata standard. Here, we will notably propose a concrete example on how to use <b>Galaxy Ecology tools to create, evaluate and modify EML metadata</b> content using both EML Assemby Line metadata template tabular files, easily readable and editable by humans, and XML file, devoted to machine.</p>
 
-This tutorial aims to teach how to use functionalities of the EML Assembly Line R package to produce rich metadata using the Ecological Metadata Language (EML) international metadata standard. Here, we will notably propose a concrete example on how to use Galaxy Ecology tools to create, evaluate and modify EML metadata content using both EML Assemby Line metadata template tabular files, easily readable and editable by humans, and XML file, devoted to machine.
-
-
-> <comment-title>What does FAIR mean?</comment-title>
-> [FAIR](https://www.go-fair.org/fair-principles/) stand for **Findable, Accessible, Interoperable, Reusable**. 
->
->![FAIR Data Principles](./Images/FAIR_data_principles.jpg){:width="500"}
->These principles were to improve the access and usabiliy of data by the machine and to help making data reusable and shareable for users.
->Metadata is the data used to describe and explain all the context behind the production of data. It is necessary to produce a rich and FAIR metadata in order 
->to permit external users to understand and reuse data for their own studies.
-{:  .comment}
-> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
-> 1. TOC
-> {:toc}
->
-{: .agenda}
+> TOC TABLE OF CONTENT
 
 
 
+# 1] How can EML Assembly Line functionalities help producing rich metadata easily?
 
-# How can EML Assembly Line functionalities help producing rich metadata easily?
+<p align="justify"> A major gap when a researcher is writing metadata documents is the fact that metadata international <b>standards often use formats not really human readable</b> and/or editable as XML or JSON. To answer this issue, <b>Environmental Data Initiative</b> (insert:https://edirepository.org/) (EDI) through the <b>EML Assembly Line R package</b> propose to generate intermediate metadata template files using classical tabular text format.
+<br><br>
+Another major issue regarding <b>metadata fill in</b>, is the fact that one <b>need to take a lot of time to write</b>, and often rewrite, metadata elements who can be already filled using automatic inferences or use of webservices. Here again, Environmental Data Initiaitve (EDI) through the <b>EML Assembly Line R</b> package propose to <b>generate automatically information</b> related to data attributes, geographic coverage, taxonomic coverage, using the content of provided datafiles.
+<br><br>
+Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiversity data hub research infrastructure (Pôle national de données de Biodiversité (<b>PNDB</b>)), user can <b>use <b>MetaShark</b>, a graphical user interface to apply the EML Assembly Line workflow</b> and benefit from some additionnal functionnalities as:</p>
 
-A major gap when a researcher is writing metadata documents is the fact that metadata international standards often use formats not really human readable and/or editable as XML or JSON. To answer this issue, Environmental Data Initiaitve (EDI) through the EML Assembly Line R package propose to generate intermediate metadata template files using classical tabular text format.
+- Capacity to associate terminological resources terms coming from Bioportal ontologies to data attributes as keywords using CEDAR API
+- Automatic fill in of personal information using ORCID API
+- Automatic production of a data paper draft
 
-Another major issue regarding metadata fill in, is the fact that one need to take a lot of time to write, and often rewrite, metadata elements who can be already filled using automatic inferences or use of webservices. Here again, Environmental Data Initiaitve (EDI) through the EML Assembly Line R package propose to generate automatically information related to data attributes, geographic coverage, taxonomic coverage, using the content of provided datafiles.
+<br>
 
-Finally, through the MetaShARK R Shiny app created by the french biodiversity data hub research infrastructure (Pôle national de données de Biodiversité (PNDB)), user can use a graphical user interface to apply the EML Assembly Line workflow and benefit from some additionnal functionnalities as:
-- The capacity to associate terminological resources terms coming from Bioportal ontologies to data attributes as keywords using CEDAR API,
-- Automatic fill in of personal information using ORCID API,
-- Automatic production of a data paper draft.
+> [!NOTE]
+> What is a **Data Paper**?
+> <p align="justify"> According to the [GBIF](https://www.gbif.org/data-papers) (Global Biodiversity Information Facility), 
+> A data paper is a peer reviewed document describing a dataset, published in a peer reviewed journal. It takes effort to prepare, curate and describe data. 
+> Data papers provide recognition for this effort by means of a scholarly article.</p>
 
-
-> <comment-title>What is a Data Paper?</comment-title>
-> According to the [GBIF](https://www.gbif.org/data-papers) (Global Biodiversity Information Facility), 
->A data paper is a peer reviewed document describing a dataset, published in a peer reviewed journal. It takes effort to prepare, curate and describe data. 
->Data papers provide recognition for this effort by means of a scholarly article.
-{:  .comment}
-
-# Get data
+# 2] Get data to describe 💾📂
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
@@ -96,128 +83,180 @@ Finally, through the MetaShARK R Shiny app created by the french biodiversity da
 >    https://zenodo.org/records/10663465/files/LakeGeneva_phytoplankton_1974-2004.nc
 >    https://zenodo.org/records/10663465/files/Present.Surface.pH.tif
 >    ```
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->    ![Upload datafiles from URLs](./Images/0_Upload_datafiles.png){:width="500"}
+>    <img src="./Images/0_Upload_datafiles.png" width=100%>
 > 6. Import shapefile related files into Galaxy using the Galaxy upload tool, then on the "composite" tab, specifying "shp" composite type, then uploading .dbf, .shp and .shx files on the dedicated spaces.
->    ![Upload datafiles from URLs](./Images/1_upload_shapefile.png){:width="500"}
-{: .hands_on}
+>    <img src="./Images/1_upload_shapefile.png" width=100%>
 
 
-# MetaShARK
+# 3] MetaShARK 🦈 : Write an EML document 
 
 To deploy a MetaShARK app, you can go to the Galaxy tool [MetaShARK](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashark) and click "Execute". Then, you have to wait the launch of the app, and when ready to be used, you will see the message "There is an InteractiveTool result view available," with an hyperlink on the "Open" statement allowing you to reach the app clicking on it.
 
-WARNING! Note that it is a beta version of MetaShARK R shiny app. You can thus encounter issues using it!
+> [!WARNING]
+> 🚧 Note that it is a beta version of MetaShARK R shiny app. You can thus encounter issues using it!
 
 When oppening MetaShARK, you will have an interface looking like this :
 
-![Interface of MetaShARK](./Images/2_MetaShARK.png){:width="500"}
+<img src="./Images/2_MetaShARK.png" width=100%>
 
 To start creating metadata, you need to reach the **Fill in EML** module, then specify or complete the automatic `Data package name` and mention the `Dataset title`. Here a title can be "Manage heterogeneous data files through EML". Finally, you can choose an open licence between CC-BY-4.0, default, or CC0 then click on "Create". 
 
-![Create a data package](./Images/3_MetaShARK_create.png){:width="500"}
+<img src="./Images/3_MetaShARK_create.png" width=100%>
 
-Then you can upload datafiles. Here, you can import these files from the downloaded Zenodo archive:
-- datafile_1.tsv
-- datafile_2.tsv
-- LakeGeneva_phytoplankton_1974-2004.nc
-- Present.Surface.pH.tif
-- 02_Ref.shp
-- 02_Ref.shx
-- 02_Ref.dbf
+Then you can upload datafiles. Here, you can import these files from the downloaded Zenodo archive (link : https://zenodo.org/api/records/10663465/files-archive):
 
-![Upload data files](./Images/4_MetaShARK_upload.png){:width="500"}
+📁 List of datasets : 
+ - datafile_1.**tsv**
+ - datafile_2.**tsv**
+ - LakeGeneva_phytoplankton_1974-2004.**nc**
+ - Present.Surface.pH.**tif**
+ - 02_Ref.**shp**
+ - 02_Ref.**shx**
+ - 02_Ref.**dbf**
 
-MetaShARK will normally guess that the three `02_Ref` files are representing a uniq shapefile. MetaShARK will normally guess each data type and infer list of attributes for each file but the geotiff `Present.Surface.pH.tif` one. So now you need to select this datafile and upload the `attributes_Present.Surface.pH.txt` metadata template file so MetaShARK can fill attributes of this file (here the attribute is named "Present.Surface.pH").
+> [!NOTE]
+> The folder contains many files with different extensions, which is no problem for MetaShark, which is able to recognise several types of file extension!
 
-![Upload a metadata template for geotiff attributes](./Images/5_MetaShARK_geotiffattributes.png){:width="500"}
 
-Then you can provide a description for this attribute, for example "Present surface pH", then look at each attribute information of each data file so you can click on the "Next" button and go to the next step, to give informations on categorical variables!
+<img src="./Images/4_MetaShARK_upload.png" width=100%>
 
-![Look at categorical variables](./Images/6_MetaShARK_catvars.png){:width="500"}
+<p align="justify">MetaShARK will normally guess that the three `02_Ref` files are representing a uniq shapefile. MetaShARK will normally guess each data type and infer list of attributes for each file but the geotiff `Present.Surface.pH.tif` one. So now you need to select this datafile and upload the `attributes_Present.Surface.pH.txt` metadata template file so MetaShARK can fill attributes of this file (here the attribute is named "Present.Surface.pH").</p>
 
-Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shapefile is in Point, both are in `GCS_WGS_1984`spatial reference.
+<img src="./Images/5_MetaShARK_geotiffattributes.png" width=100%>
 
-![Specify spatial informations for GIS datafiles](./Images/7_MetaShARK_spatialinfo.png){:width="500"}
+<p align="justify">Then you can provide a description for this attribute, for example "Present surface pH", then look at each attribute information of each data file so you can click on the "Next" button and go to the next step, to give informations on categorical variables!</p>
 
-Next step is devoted to specifying geographic coverage. You can use a method between "columns" or "custom". "Custom" allows you to create one to several geographical sites using a map widget where you can draw limits of each site or enter directly latitude and longitude coordinates. "Columns" method, used here, allows you to specify an attribute containing site names then associated latitude and longitudes attributes.
+<img src="./Images/6_MetaShARK_catvars.png" width=100%>
 
-![Specify geographic coverage](./Images/8_MetaShARK_geocov.png){:width="500"}
+<p align="justify">Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shapefile is in Point, both are in `GCS_WGS_1984`spatial reference.</p>
 
-Now geographic coverage is set, one can specific taxonomic coverage. To do so, you can select a data attribute conatining taxonomic information then select kind of notation you want to have and finally on which taxonomic authority (or authorities) information will be compared. Note that this can take a while if you have a lot of taxons and time is duplicated for each selected additional authority.
+<img src="./Images/7_MetaShARK_spatialinfo.png" width=100%>
 
-![Specify taxonomic coverage](./Images/9_MetaShARK_taxcov.png){:width="500"}
+<p align="justify">Next step is devoted to specifying geographic coverage.<br><br> You can use a method between "columns" or "custom". "Custom" allows you to create one to several geographical sites using a map widget where you can draw limits of each site or enter directly latitude and longitude coordinates. "Columns" method, used here, allows you to specify an attribute containing site names then associated latitude and longitudes attributes.</p>
 
-Now we can fill personal informations. To do so, the easiest way is to provide ORCID identifiers for each individual person involved as creator, contact and/or PI. Depending on the information filled in ORCID by each individual and on the level of accessibility of each, all field can be automatically filled. If "PI" is selected, you can specify a project name, funder name and related funding number.
+<img src="./Images/8_MetaShARK_geocov.png" width=100%>
 
-![Fill personal informations](./Images/10_MetaShARK_personal.png){:width="500"}
+<p align="justify">Now geographic coverage is set, one can specific taxonomic coverage.<br><br> To do so, you can select a data attribute containing taxonomic information then select kind of notation you want to have and finally on which taxonomic authority (or authorities) information will be compared. Note that this can take a while if you have a lot of taxons and time is duplicated for each selected additional authority.</p>
+
+<img src="./Images/9_MetaShARK_taxcov.png" width=100%>
+
+<p align="justify">Now we can fill personal informations.<br><br> To do so, the easiest way is to provide ORCID identifiers for each individual person involved as creator, contact and/or PI. Depending on the information filled in ORCID by each individual and on the level of accessibility of each, all field can be automatically filled. If "PI" is selected, you can specify a project name, funder name and related funding number.</p>
+
+<img src="./Images/10_MetaShARK_personal.png" width=100%>
 
 Then you can add final elements as:
 
 - An abstract (writing directly on the dedicated field or uploading a text file containing the abstract)
 
-![Upload abstract.txt file](./Images/11_MetaShARK_abstract.png){:width="500"}
+<img src="./Images/11_MetaShARK_abstract.png" width=100%>
 
 - Methods (writing directly on the dedicated field or uploading a text file, can be in markdown, containing details of the methods used to create data files)
 
-![Upload methods.md file](./Images/12_MetaShARK_methods.png){:width="500"}
+<img src="./Images/12_MetaShARK_methods.png" width=100%>
 
 - Keywords, who can be linked to keyword thesaurus. This allows you to create "group" of keywords and/or refer to existing terms classifications as we can find in terminological resources such as ontologies or thesaurus.
 
-![Add "Biodiversity" keyword](./Images/13_MetaShARK_keywords.png){:width="500"}
+<img src="./Images/13_MetaShARK_keywords.png" width=100%>
 
-Note that here you can add [semantic annotations](https://eml.ecoinformatics.org/semantic-annotation-primer)! To do so, you need to reach the MetaShARK parameters (upper right icon)
-then enter your CEDAR token. To create a CEDAR account, you can register here http://cedar.metadatacenter.org/. API key 
-format to enter is something like: `api 205b1e521f2eaf0ad4a361c438b63205b1e521f2eaf0ad4a361c438b63c438b63`. You then can 
-use the `+` button on the keyword space to **Add keyword with dataset annotation**. You will have to choose a "predicate", from IAO ontology, then an "object" from ontologies coming from Bioportal to add information concerning a "subject", the ‘thing’ being annotated, here, regarding keyword, "dataset", but you can also apply the same to datafiles "attributes".
+> [!TIP]
+> **You can add [semantic annotations](https://eml.ecoinformatics.org/semantic-annotation-primer)!**
+ 
+<p align="justify"> To do so, you need to reach the MetaShARK parameters (upper right icon) then enter your CEDAR token. To create a CEDAR account, you can register here http://cedar.metadatacenter.org/.</p>
 
-![CEDAR semantic annotation module add predicate from IAO ontology](./Images/17_MetaShARK_annotations_predicate.png){:width="500"}
+ API key format to enter is something like: 
+```
+api 205b1e521f2eaf0ad4a361c438b63205b1e521f2eaf0ad4a361c438b63c438b63
+```
 
-![CEDAR semantic annotation module add object](./Images/18_MetaShARK_annotations_object.png){:width="500"}
+<p align="justify">You then can  use the `+` button on the keyword space to **Add keyword with dataset annotation**. You will have to choose a "predicate", from IAO ontology, then an "object" from ontologies coming from Bioportal to add information concerning a "subject", the ‘thing’ being annotated, here, regarding keyword, "dataset", but you can also apply the same to datafiles "attributes".</p>
 
-Finally, you can specify a temporal coverage and go to the last step of this MetaShARK workflow: Generat an EML metadata file! If everything is ok, you will have creation of an EML metadata file.
+<img src="./Images/17_MetaShARK_annotations_predicate.png" width=100%>
 
-![Make EML](./Images/14_MetaShARK_makeeml.png){:width="500"}
+<img src="./Images/18_MetaShARK_annotations_object.png" width=100%>
 
-Once EML written, you can download the data package through the button "Download Data Package". This will allow you to download a zip archive you can unzip on your local computer. Resulting files are organized through 2 main folders. A main folder with data_objects (all datafiles you uploaded into MetaShARK), eml (EML metadata file written in XML format), and metadata_templates (all metadata files written in text format, column separated by tabulations). A second one called "emldown" where a draft of data paper written in html format can be accessed. 
+<p align="justify">Finally, you can specify a temporal coverage and go to the last step of this MetaShARK workflow: Generat an EML metadata file! If everything is ok, you will have creation of an EML metadata file.</p>
 
-WARNING! At this final stage, MetaShARK can freeze and show like a "front grey filter". If this is the case, you can refresh MetaShARK app pressing F5 button of your keyboard for example. To dowload the resutling data package, you can go to the "Fill In" module, select the data package you created and click on "Download.zip".
+<img src="./Images/14_MetaShARK_makeeml.png" width=100%>
+
+<p align="justify">Once EML written, you can <b>download the data package through the button</b> "Download Data Package". This will allow you to <b>download a zip archive</b> you can unzip on your local computer. Resulting files are organized through 2 main folders : </p>
+
+- **A main folder with data_objects**
+  -  `all datafiles ` you uploaded into MetaShARK
+  -  `eml ` which is the EML metadata file written in XML format
+  -  `metadata_templates ` with all metadata files written in text format, column separated by tabulations
+  
+- A **second folder called "emldown"** where a **draft of data paper** written in html format can be accessed
+
+<hr>
+<p align="center"><b>👏 Congratulations! You've just produced your first EML yourself!👏</b></p>
+<hr>
 
 
-> <tip-title>Returning on your MetaShARK instance</tip-title>
+> [!CAUTION]
+> **At this final stage, MetaShARK can freeze and show like a "front grey filter"**
+> 
+> If this is the case, you can refresh MetaShARK app pressing F5 button of your keyboard for example. To dowload the resutling data package, you can go to the "Fill In" module, select the data package you created and click on "Download.zip".
+>
+> Returning on your MetaShARK instance</tip-title>
 > If you close MetaShARK navigator window, you can reopen it clicking on Menu > User > Active InteractiveTools.
 > You can here click on "metashark visualization" hyperlink. You can then go on the Fill In module, select 
 > the data package you created and click **Load**.
 >
-{: .tip}
 
 
-# MetaShRIMPS
+# 4] MetaShRIMPS 🦐 : Modify created metadata element
 
 To evaluate and modify metadata elements you have created, you can upload the EML xml file on the Galaxy history you created and all MetaShARK metadata templates files.
 
-![Interface of MetaShRIMPS](./Images/15_MetaShRIMPS.png){:width="500"}
+<img src="./Images/15_MetaShRIMPS.png" width=100%>
 
-Open the [MetaShRIMPS interactive tool form](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashrimps) and select the EML xml file you just generate with MetaShARK. Clicking on Execute will launch the MetaShRIMPS R Shiny app, the message `There is an InteractiveTool result view available, waiting for view to become active... ` is displayed until the app will be ready to use. After some time, the message `There is an InteractiveTool result view available` confirm the app is deployed and you can access it clicking on **Open**. You will then have an interface looking like this :
+Open the [MetaShRIMPS interactive tool form](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashrimps) and select the EML xml file you just generate with MetaShARK. Clicking on Execute will launch the MetaShRIMPS R Shiny app, the message `There is an InteractiveTool result view available, waiting for view to become active... ` is displayed until the app will be ready to use. After some time, the message `There is an InteractiveTool result view available` confirm the app is deployed and you can access it clicking on **Open**. You will then have an interface looking like this:
 
-![Interface of MetaShRIMPS](./Images/upload_1.png){:width="500"}
+<img src="./Images/upload_1.png" width=100%>
 
 Click on the **Execute** Button, 2 new tabs called "Draft of Data Paper" and "Fair Assessment"  will appear.
 You can access all of the tool outputs by clicking on each tab (it can take a little time for your results to be displayed).
 
-## Draft of Data Paper
+# 5] Draft of Data Paper 📝
 
-By clicking on the "Draft of Data Paper" tab, you will have access to the draft of Data Paper presented in an HTML format.
-You can either navigate through the Data Paper with the tabs or with the scrollbar on the right and access different elements.
+<p align="justify">By clicking on the <b>"Draft of Data Paper"</b> tab, you will have access to the draft of Data Paper presented in an HTML format. You can either navigate through the Data Paper with the tabs or with the scrollbar on the right and access different elements.</p>
 
-You can at the top of the page download the draft in either an HTML format or an editable docx format.
-![Download in HTML](./Images/Download_HTML.png""Download in HTML")
-![Download in docx](./Images/Download_docx.png "Download in docx")
+- You can at the top of the page **download the draft** in either an _HTML format_ .... :
 
-## Fair Quality Assessment report
+<img src="./Images/Download_HTML.png" width=50%>
 
-By clicking on the "Fair Assessment" tab, you will access the FAIR Quality report of the metadata uploaded.
-You will have access to different figures such as a table displaying the results of all checks tested for your metadata.
+- .... or an editable _docx format_ :
+
+<img src="./Images/Download_docx.png" width=50%>
+
+<hr>
+Voir comment mettre les deux photos côtés à côtes ou un truc mieux
+<hr>
+
+# 6] FAIR Quality Assessment report 📊✅
+
+[FAIR](https://www.go-fair.org/fair-principles/) stand for **Findable, Accessible, Interoperable, Reusable**. 
+<br> <br>
+
+<img src="./Images/FAIR_data_principles.jpg" width=65%>
+
+ <br>
+
+<p align="justify">These principles were to <b>improve the access and usabiliy of data</b> by the machine and to help <b>making data reusable and shareable for users</b>. It covers the whole concept of why it is necessary to produce a rich and described metadata in order to permit external users to <b>understand and reuse data</b> for their own studies.
+  
+There are several ways of computing the FAIR index, for each letter of the word is associated with a degree of FAIRitude of the data.</p>
+
+> [!NOTE]
+> The aim is to propose a metadata quality index and to see how it is possible to improve, not to punish the user 👍
+
+<hr>
+> Mettre une photo avec encadré rouge pour montrer où cliquer!!!⚠️
+<hr>
+
+By clicking on the `Fair Assessment` tab, you will access the FAIR Quality report of the metadata uploaded. 
+
+You will have access to different figures such as a **table displaying the results of all checks tested for your metadata**:
+
 ![Table of results](./Images/Fairscore_tab2.png "Example of the table displaying the results of the Quality Checks")
 
 You will also have acces to a graph presenting scores of Quality for each of the FAIR principles tested (Findable,
@@ -225,17 +264,20 @@ Acessible, Interoperable, Reusable) on a 100 point scale.
 
 ![FAIR scores](./Images/Fairscore_tab.png "Overall FAIR score")
 
-> <question-title></question-title>
-> How you can ameliorate your FAIR score?
-> > <solution-title></solution-title>
-> > You can look at the lines of the table for FAILURE (red) and WARNING (yellow) status. Two WARNING 
-> > status lines  are related to an abstract content too short and an attribute definition too small.
-> > ![Warning status lines](./Images/WARNING.png "Overall FAIR score") 
-> {: .solution}
->
-{: .question}
+<hr>
+Image un peu laide, je l'a modifierai un peu sur Paint pour optimiser sa taille vis à vis du vide/blanc occupé par certaines parties
+<hr>
 
-> <hands-on-title>Update metadata content to elevate FAIR score</hands-on-title>
+> [!TIP]
+> **How you can improve your FAIR score?** 
+> 
+> You can look at the lines of the table for FAILURE (red) and WARNING (yellow) status. Two WARNING 
+> status lines  are related to an abstract content too short and an attribute definition too small.
+> 
+> ![Warning status lines](./Images/WARNING.png "Overall FAIR score") 
+
+> [!NOTE]
+> **Update metadata content to elevate FAIR score**
 >
 > 1. Search "abstract" and "attributes_Present.Surface.pH.txt" metadarta files on your history
 >
@@ -251,7 +293,15 @@ Acessible, Interoperable, Reusable) on a 100 point scale.
 >
 
 
-# Conclusion
+# 7] Conclusion
 
 Here is the end of this short tutorial aiming in explaining the purpose of MetaShARK and how to use it.
-Don't hesitate to contact us if you have any questions :)
+
+Resumé rapide de ce qui a été vu 
+
+1. _lorem ipsum_
+2. _lorem ipsum_
+3. _lorem ipsum_
+4. _lorem ipsum_
+
+Don't hesitate to contact us if you have any questions ☺️
