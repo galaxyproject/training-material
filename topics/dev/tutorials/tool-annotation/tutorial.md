@@ -6,6 +6,8 @@ subtopic: tooldev
 questions:
 - How are Galaxy tools linked to EDAM ontology?
 - How to connect Galaxy tools to bio.tools?
+- What is bio.tools?
+- How to add, and update, entries in bio.tools?
 objectives:
 - Identify Galaxy tools without bio.tools entry
 - Create a bio.tools entry
@@ -21,6 +23,7 @@ key_points:
 contributions:
   authorship:
     - bebatut
+    - supernord
 
 ---
 
@@ -68,11 +71,11 @@ The aim of this tutorial is to improve the annotation of a given Galaxy tool by 
 
 # Choose a tool without a bio.tools identifier
 
-To start, we need to select a tool without bio.tools identifier.
+To start, we need to select a tool without a bio.tools identifier.
 
-> <hands-on-title>Choose a tool without bio.tools identifier</hands-on-title>
+> <hands-on-title>Choose a tool without a bio.tools identifier</hands-on-title>
 >
-> 1. Open [the list of Galaxy tool](https://galaxyproject.github.io/galaxy_tool_metadata_extractor/)
+> 1. Open [the list of Galaxy tools](https://galaxyproject.github.io/galaxy_tool_metadata_extractor/)
 > 2. Click on **Add Condition**
 > 3. Select *bio.tool id* in **Data** drop-down
 > 4. Select *Empty* in **Condition** drop-down
@@ -84,7 +87,7 @@ To start, we need to select a tool without bio.tools identifier.
 
 Now let's search for our selected tool on bio.tools.
 
-> <hands-on-title>Search a tool in bio.tools</hands-on-title>
+> <hands-on-title>Search for a tool in bio.tools</hands-on-title>
 >
 > 1. Open [bio.tools](https://bio.tools/)
 > 2. Type the name of your tool in the "Search bio.tools" bar on the top
@@ -101,12 +104,12 @@ If the tool is not on bio.tools, we need to create a new entry populate it with 
 
 > <hands-on-title> Create a bio.tools entry with minimum metadata </hands-on-title>
 >
-> 1. Sign up to bio.tools
+> 1. Sign up to [bio.tools](https://bio.tools/)
 > 2. Select **Add a tool** from the drop-down **Menu**
-> 3. Fill in general information
->    1. Fill in **Tool name** 
->    2. Fill in **Description**
->    3. Fill in **Homepage URL**
+> 3. Fill in general information in the first tab of the wizard. Required information includes:
+>    1. **Tool name** 
+>    2. **Description**
+>    3. **Homepage URL**
 > 4. Add EDAM operation concepts, as well as EDAM data concepts for both inputs and outputs
 >    
 >    {% include topics/dev/tutorials/tool-annotation/add_edam_function.md %}
@@ -115,10 +118,11 @@ If the tool is not on bio.tools, we need to create a new entry populate it with 
 >    
 >    {% include topics/dev/tutorials/tool-annotation/add_edam_topic.md %}
 > 
-> 6. Add the tool type, language, and other metadata as needed
-> 7. Click on **Validate** on the top
-> 7. Click on **Save** to create the bio.tools entry
-> 8. Copy the bio.tools id
+> 6. Add the tool type, license, language, and other metadata as needed
+> 7. In the Permissions tab, select **Make this resource editable by anyone**
+> 8. Click on **Validate** on the top
+> 9. Click on **Save** to create the bio.tools entry
+> 10. Copy the bio.tools id
 {: .hands_on}
 
 </div>
@@ -132,8 +136,8 @@ Before linking a Galaxy tool with its corresponding bio.tools entry, we need to 
 > <hands-on-title>Check EDAM terms in a bio.tools entry</hands-on-title>
 >
 > 1. Open the bio.tools entry for the tool
-> 2. Check the EDAM topic terms by looking at the green boxes (if they exist) below the tool name, URL, and available versions
-> 3. Check the EDAM operation terms by looking at the blue boxes (if they exist) below the tool description
+> 2. Check the EDAM **Topic** terms by looking at the green boxes (if they exist) below the tool name, URL, and available versions
+> 3. Check the EDAM **Operation** terms by looking at the blue boxes (if they exist) below the tool description
 {: .hands_on}
 
 {% include _includes/cyoa-choices.html option1="Terms to be modified" option2="Correct terms" default="Terms to be modified" text="What do you think about the EDAM terms in the bio.tools entry?" disambiguation="edamUpdate"%}
@@ -142,20 +146,20 @@ Before linking a Galaxy tool with its corresponding bio.tools entry, we need to 
 
 To modify EDAM terms in a bio.tools entry, we need to request editing rights and then modify this entry.
 
-> <hands-on-title>Modify EDAM terms in a bio.tools entry</hands-on-title>
+> <hands-on-title>Modify the EDAM concepts in a bio.tools entry</hands-on-title>
 >
-> 1. Sign up for bio.tools
-> 2. Click on **Request editing rights** on the bottom of bio.tools entry page
+> 1. Sign up for [bio.tools](https://bio.tools/)
+> 2. Click on **Request editing rights** at the bottom of the bio.tools entry page
 > 3. Wait for the request to be approved
 > 4. Click on **Update this record**
-> 5. Update, or add, EDAM operation term(s) and EDAM data term(s) for both inputs and outputs
+> 5. Update, or add, EDAM **Operation** term(s) and EDAM **Data** term(s) for both inputs and outputs
 >    
 >    {% include topics/dev/tutorials/tool-annotation/add_edam_function.md %}
 > 
-> 6. Update, or add, EDAM topic term(s)
+> 6. Update, or add, EDAM **Topic** term(s)
 >    
 >    {% include topics/dev/tutorials/tool-annotation/add_edam_topic.md %}
-> 7. Update, or add, the metadata for tool type, language, and other fields as needed
+> 7. Update, or add, the metadata for tool type, license, language, and other fields as needed
 > 8. Click on **Validate** on the top
 > 8. Click on **Save** to create the bio.tools entry
 > 9. Copy the bio.tools ID
@@ -194,10 +198,10 @@ Now we have the wrapper, and can add the bio.tools entry.
 >    It should appear below the `macros` section and before the `requirements` section
 >
 > 3. Replace `biotool-id` in the example snippet above with the bio.tools ID for your tool
-> 3. Commit the change on a new branch
-> 4. Make a pull request (PR) against the original repository
-> 5. Wait patiently for the PR to be merged, at which point the new bio.tools reference will be added to the Galaxy tool wrapper
-> 6. Make sure to respond to any feedback from the owner of the wrapper
+> 4. Commit the change on a new branch
+> 5. Make a pull request (PR) against the original repository
+> 6. Wait patiently for the PR to be merged, at which point the new bio.tools reference will be added to the Galaxy tool wrapper
+> 7. Make sure to respond to any feedback from the owner of the wrapper
 >
 {: .hands_on}
 
