@@ -364,6 +364,14 @@ module TopicFilter
     interesting
   end
 
+  def self.mermaid_safe_label(label)
+    (label || "")
+      .gsub('(', '').gsub(')', '')
+      .gsub('[', '').gsub(']', '')
+      .gsub('"', '”') # We accept that this is not perfectly correct.
+      .gsub("'", '’')
+  end
+
   def self.mermaid(wf)
     # We're converting it to Mermaid.js
     # flowchart TD
@@ -373,24 +381,59 @@ module TopicFilter
     #     D --> B
     #     B -- No ----> E[End]
 
-    output = "flowchart TD\n"
+    statements = []
     wf['steps'].each_key do |id|
       step = wf['steps'][id]
-      output += "  #{id}[\"#{step['name']}\"];\n"
+      chosen_label = mermaid_safe_label(step['label'] || step['name'])
+
+      if step['type'] == 'data_collection_input' 
+        statements.append "#{id}[\"ℹ️ Input Collection\\n#{chosen_label}\"];"
+      elsif step['type'] == 'data_input'
+        statements.append "#{id}[\"ℹ️ Input Dataset\\n#{chosen_label}\"];"
+      elsif step['type'] == 'parameter_input'
+        statements.append "#{id}[\"ℹ️ Input Parameter\\n#{chosen_label}\"];"
+      elsif step['type'] == 'subworkflow'
+        statements.append "#{id}[\"🛠️ Subworkflow\\n#{chosen_label}\"];"
+      else
+        statements.append "#{id}[\"#{chosen_label}\"];"
+      end
+
+      if step['type'] == 'data_collection_input' or step['type'] == 'data_input'
+        statements.append "style #{id} stroke:#2c3143,stroke-width:4px;"
+      elsif step['type'] == 'parameter_input'
+        statements.append "style #{id} fill:#ded,stroke:#393,stroke-width:4px;"
+      elsif step['type'] == 'subworkflow'
+        statements.append "style #{id} fill:#edd,stroke:#900,stroke-width:4px;"
+      end
+
       step = wf['steps'][id]
       step['input_connections'].each do |_, v|
         # if v is a list
         if v.is_a?(Array)
           v.each do |v2|
-            output += "  #{v2['id']} -->|#{v2['output_name']}| #{id};\n"
+            statements.append "#{v2['id']} -->|#{mermaid_safe_label(v2['output_name'])}| #{id};"
           end
         else
-          output += "  #{v['id']} -->|#{v['output_name']}| #{id};\n"
+          statements.append "#{v['id']} -->|#{mermaid_safe_label(v['output_name'])}| #{id};"
         end
+      end
+
+      (step['workflow_outputs'] || [])
+        .reject{|wo| wo['label'].nil? }
+        .map{|wo| 
+          if wo['uuid'].nil? 
+            wo['uuid'] = SecureRandom.uuid.to_s;
+          end
+          wo
+        }
+        .each do |wo|
+        statements.append "#{wo['uuid']}[\"Output\\n#{wo['label']}\"];"
+        statements.append "#{id} --> #{wo['uuid']};"
+        statements.append "style #{wo['uuid']} stroke:#2c3143,stroke-width:4px;"
       end
     end
 
-    output
+    "flowchart TD\n" + statements.sort.map{|q| "  " + q}.join("\n")
   end
 
   def self.resolve_material(site, material)
