@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Genome Assembly of MRSA using Oxford Nanopore MinION (and Illumina data if available)
+title: Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data)
 zenodo_link: 'https://zenodo.org/record/10669812'
 questions:
 - How to check the quality of the MinION data (together with Illumina data)?
@@ -40,9 +40,9 @@ contributions:
 
 follow_up_training:
 - type: "internal"
-  topic_name: visualisation
+  topic_name: genome-annotation
   tutorials:
-  - jbrowse
+  - amr-gene-detection
 - type: "internal"
   topic_name: galaxy-interface
   tutorials:
@@ -311,7 +311,7 @@ For each run, **NanoPlot** generates 5 outputs:
    > > <solution-title></solution-title>
    > > 1. 3,400 bp to 5,451 bp, a 60.3% increase
    > > 2. A -2.0% decrease is not a very significant decrease. Our data was quite good to start with and didn't have many short reads which were removed (23.4%)
-   > > 3. The coverage is a measure of how many reads 'cover' on average a single base in the genome. If you divide the total reads by the genome size, you will get a number how many times your genomes could theoretically be ‘covered’ by reads.
+   > > 3. The coverage is a measure of how many reads 'cover' on average a single base in the genome. If you divide the total reads by the genome size, you will get a number how many times your genomes could theoretically be "covered" by reads.
    > > 4. Before $$ \frac{621,945,741}{2,900,000} = 214.4$$ and after $$ \frac{609,657,642}{2,900,000} = 210.2$$. This is *not* a very big decrease in coverage, so no cause for concern. Generally in sequencing experiments you have some minimum coverage you expect to see based on how much of your sample you sequenced. If it falls below that threshold it might be cause for concern.
    > >
    > {: .solution}
@@ -432,7 +432,7 @@ Several tools exist for polishing, e.g. Racon ({% cite Vaser_2017 %}). Here we w
 
 **Polypolish** needs as input the assembly but also SAM/BAM files where each read has been aligned to *all* possible locations (not just a single best location). Errors in repeats will be covered by short-read alignments, and **Polypolish** can therefore fix those errors. 
 
-To get the SAM/BAM files, we need to map the short reads on the assembly. We will use **BWA-MEM** ({% cite Li_2009, Li_2010, Li2013Aligning %}).
+To get the SAM/BAM files, we need to map the short reads on the assembly. We will use **BWA-MEM** ({% cite Li_2009 %}, {% cite Li_2010 %}, {% cite Li2013Aligning %}).
 
 We need to set up **BWA-MEM** so it aligns each read to all possible locations, not just the best location. This option does not work with paired-end alignment. We will then need to align forward and reverse read files separately, instead of aligning both read files with a single BWA-MEM run as usually recommended.
 
