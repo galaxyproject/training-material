@@ -226,88 +226,38 @@ Now let's get an idea of how other variables, like  sex or genotype of the mice,
   ![Violin Plot split by Genotype](../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Genotype_vln_plot.png "Violin Plot of counts split by Genotype--Mutant versus Control.")
 
 # Finding Our Filtering Parameters
-Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells and then remove them. First, we'll plot the percent mito (perc.mt) against the cell count (nCount_RNA) to get an idea of what threshold we should set for nCount:
+Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells and then remove them. 
 
-```r
-plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "percent mito")
-```
-![UMI x mito](../../images/scrna-SeuratRStudio/plot4.png "UMI counts x Percent mito.")
-We are looking for cell counts with high mitochondrial percentages in their feature expression.
+In a standard workflow, we would plot the percent mito (perc.mt) against the transcript count (nCount_RNA) and gene count (nFeature_RNA) to get an idea of our thresholds. 
 
 ><comment-title>High Mitochondrial Reads</comment-title>
 >High mito expression will typically indicate stressed out cells (often due to the extraction, sorting, or sample prep protocols).
 >
 {: .comment}
 
-These cells won't tell us much biologically, rather, they will contribute noise that we'll aim to filter out of our data. With that being said, there is a level of metabolic activity that is expected but will be specific to your samples/tissue/organism--so it is worth looking into what that might look like when it comes time to analyze your own data.
+However, this is not always necessary, and in fact, filtering based on counts and features (indeed, even just counts alone) will often remove the cells with spuriously high mitochondrial transcripts. These tools (and this tutorial) will soon be updated to allow us to do so--in the meantime, please see [Filter, plot and explore single-cell RNA-seq (Scanpy)](../../tutorials/scrna-case_basic-pipeline/), [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)](../../tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md),
+or [Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)](../../tutorials/scrna-case-jupyter_basic-pipeline/) if you hope to include perc.mt in your own data analysis adventures. 
 
-We can also zoom in on the x-axis to get a better idea of what threshold to set by adjusting the xlim parameter:
+For now, we will use just transcript and gene counts to filter our data. Let's take a look back at our nFeature Violin Plot to pick our gene threshold: 
 
-```r
-plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "percent mito", xlim = c(0,1750))
-```
-![UMI x mito zoomed in on X](../../images/scrna-SeuratRStudio/plot5.png "UMI counts x Percent mito-Zoomed in on X.")
+![Violin Plot of Features](../../images/scrna-case_FPE_SeuratTools/nFeature_RNA_vln_plot.png "Violin Plot of features.")
 
 ><comment-title>Interpretations</comment-title>
->It looks like just before nCount_RNA = 1750, the perc.mito peaks above 2 percent--a conservative threshold.
->
+>You can see that very few cells in the dataset contain fewer than ~500 genes. Biologically, this makes sense, and the cells appear to be outliers in the data. As such, we will set our lower threshold of genes (nFeature) at 500. 
 {: .comment}
 
-Now we can take a closer look at the y-axis to decide on a mito threshold to set. Once more, we want to get rid of as few cells as possible while still removing those with unexpectedly high mito percentages.
+Now, what about transcripts (nCount)? Let's take a look: 
 
-```r
-plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "percent mito", ylim = c(0,3))
-```
-![UMI x mito zoomed in Y](../../images/scrna-SeuratRStudio/plot6.png "UMI counts x Percent mito-Zoomed in on Y.")
+![Violin Plot of Counts](../../images/scrna-case_FPE_SeuratTools/nCount_RNA_vln_plot.png "Violin Plot of counts.")
 
 ><comment-title>Interpretations</comment-title>
->We can see a clear trend wherein cells that have around 3 percent mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet.
->
+>This one is a bit more difficult to visualize but we see a severe drop off in the number of cells that contain fewer than 500 and more than 10,000 transcripts. These will be our nCount thresholds that we filter based on. 
 {: .comment}
 
-Take a look at what proportion of cells those thresholds will include and disclude from our dataset:
-
-```r
-prop.table(table(srt@meta.data$nCount_RNA > 1750))
-prop.table(table(srt@meta.data$perc.mt > 3))
-```
-
-If we are happy with those thresholds for cells and percent mito, we can look at the the gene count threshold next.
-
-><comment-title>Otherwise</comment-title>
->If not, repeat the preceding steps to hone in on a threshold more suited to your needs.
->
-{: .comment}
-
-To set a threshold for gene count, let's plot the gene counts (nFeature_RNA) against the percent mito (perc.mt):
-
-```r
-plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "percent mito")
-```
-![Gene x mito](../../images/scrna-SeuratRStudio/plot7.png "Gene counts x Percent mito.")
-
-Once again, let's zoom in on the x-axis, but this time to get an idea of which nFeature_RNA threshold to set:
-
-```r
-plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "percent mito", xlim = c(0,1275))
-```
-![Gene x mito--zoomed in](../../images/scrna-SeuratRStudio/plot8.png "Gene counts x Percent mito zoomed in.")
-
-><comment-title>Interpretations</comment-title>
->You can see how cells with nFeature_RNA up to around, perhaps 575 genes, often have high perc.mt. The same can be said for cells with nFeature_RNA above 1275.
->
->We could also use the violin plots to come up with these thresholds, and thus also take batch into account. It’s good to look at the violins as well, because you don’t want to accidentally cut out an entire sample (i.e. N703 and N707 which both have cell counts on the lower side).
->
-{: .comment}
-
-Now let's take a look at what those nFeature_RNA thresholds will include and disclude from our data.
-
-```r
-prop.table(table(srt@meta.data$nFeature_RNA > 1275 | srt@meta.data$nFeature_RNA < 575))
-```
+These cells won't tell us much biologically, rather, they will contribute noise that we'll want to filter out of the data. With that being said, filtering scRNA-seq data will always be an iterative process--so label your work well and be ready to revisit these thresholds if your analyses seem strange down the line.
 
 # Applying our Thresholds
-Once we are happy with our filtering thresholds, it’s time to apply them to our data!
+It’s time to apply these thresholds to our data!
 
 ><tip-title>Create a new object</tip-title>
 > You will notice in the next line of code, we have indicated a new object name for this filtered (subset) data. This is good practice  so that you don't have to start all over in case you decide to change your filtering parameters, which you likely will, or if something goes awry.
