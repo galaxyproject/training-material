@@ -103,6 +103,8 @@ This also alleviates the necessity to convert the AnnData object into a Seurat o
 >
 {: .hands_on}
 
+INSERT TIP HERE AB SWAPPING TO A SEURAT OBJECT 
+
 # Generating a Seurat object
 You now should have imported the `matrix.mtx`, `genes.tsv`, `barcodes.tsv`, and `exp_design.tsv` files into your Galaxy history. In order for Seurat tools to work, we will have to convert the data into a format that Seurat recognizes. To do so, we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.
 
@@ -235,7 +237,7 @@ In a standard workflow, we would plot the percent mito (perc.mt) against the tra
 >
 {: .comment}
 
-However, this is not always necessary, and in fact, filtering based on counts and features (indeed, even just counts alone) will often remove the cells with spuriously high mitochondrial transcripts. These tools (and this tutorial) will soon be updated to allow us to do so--in the meantime, please see [Filter, plot and explore single-cell RNA-seq (Scanpy)](../../tutorials/scrna-case_basic-pipeline/), [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)](../../tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md),
+However, this is not always necessary, and in fact, filtering based on counts and features (indeed, even just counts alone) will often remove the cells with spuriously high mitochondrial transcripts. These tools (and this tutorial) will soon be updated to allow us to do so--in the meantime, please see [Filter, plot and explore single-cell RNA-seq (Scanpy)](../../tutorials/scrna-case_basic-pipeline/), [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)](../../tutorials/scrna-case_FilterPlotandExploreRStudio/),
 or [Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)](../../tutorials/scrna-case-jupyter_basic-pipeline/) if you hope to include perc.mt in your own data analysis adventures. 
 
 For now, we will use just transcript and gene counts to filter our data. Let's take a look back at our nFeature Violin Plot to pick our gene threshold: 
@@ -257,45 +259,34 @@ Now, what about transcripts (nCount)? Let's take a look:
 These cells won't tell us much biologically, rather, they will contribute noise that we'll want to filter out of the data. With that being said, filtering scRNA-seq data will always be an iterative process--so label your work well and be ready to revisit these thresholds if your analyses seem strange down the line.
 
 # Applying our Thresholds
-It’s time to apply these thresholds to our data!
+It’s time to filter our cells by applying the above thresholds!
 
-><tip-title>Create a new object</tip-title>
-> You will notice in the next line of code, we have indicated a new object name for this filtered (subset) data. This is good practice  so that you don't have to start all over in case you decide to change your filtering parameters, which you likely will, or if something goes awry.
+In order to include more than one parameter by which to filter, use the "Insert Subsets used to filter cells" button below the first parameter box.
+
+> <hands-on-title>Filter Cells</hands-on-title>
 >
-{: .tip}
-
-```r
-subset_srt<-subset(srt, nCount_RNA > 1750 & nFeature_RNA > 1275 & perc.mt < 3 | nFeature_RNA < 600)
-```
-
-In this step we are also creating a new object (notice the new object name preceding the subset() function you just ran) so that we may compare back and forth between our unfiltered and filtered data set if we please.
-
-Next, we want to filter out genes that no longer show any expression in the remaining, high quality cells in our filtered dataset. In order to do so we will extract the filtered matrix from our filtered object.
-
-```r
-subset_matrix<-GetAssayData(subset_srt)
-```
-
-Since you’ve removed a whole heap of cells, and the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes in your matrix that are not expressed in any of the cells left in our filtered matrix.
-
-Genes that do not appear in any cell, or even in only 1 or 2 cells, may break some analytical tools and will generally not be biologically informative. So let’s remove them!
-
-We can use the filtered matrix we just extracted to create a new Seurat object, this time including the argument: min.cells = 3. This will remove any genes from our matrix that have less than 3 cells expressing them.
-
-><tip-title>More Thresholds</tip-title>
-> Note that 3 is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more.
+> Run{% tool [FilterCells](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_filter_cells/seurat_filter_cells/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
+> - *"Name of Parameter to filter on"*: `nCount_RNA`
+> - *"Min value"*: `500.0`
+> - *"Max value"*: `10000`
 >
-{: .tip}
+> - *"Name of Parameter to filter on"*: `nFeature_RNA`
+> - *"Min value"*: `500.0`
+> - *"Max value"*: `1000000000.0`
+>
+> - *"Choose the format of the output"*: `RDS with a Seurat object`
+{: .hands_on}
 
-```r
-filtered_srt <- CreateSeuratObject(counts = subset_matrix, meta.data = subset_srt@meta.data, min.cells = 3)
-```
+In this step we are creating a new Seurat object (notice that the selected output of this tool will be an RDS file as opposed to the png plots we have thus far been creating).
 
-Now that we have filtered out both noisy "cells" and genes from our dataset, let's clean up our environment. Remove objects that we no longer need to ensure that we stay organized and RStudio has enough memory capacity to perform downstream analyses. This likely will not be an issue while doing this tutorial, but in practice it will help things run smoothly.
+Now, genes that do not appear in any cell, or even in only 1 or 2 cells, may break some analytical tools and will generally not be biologically informative.
 
-```r
-rm(subset_matrix, subset_srt)
-```
+Since you’ve removed a whole heap of cells, and the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes still present in your matrix that are not expressed in any of the cells.
+
+The removal of these genes is by no means necessary, but will speed up your analyses. The developers are currently working to enable a means of doing this through the Seurat Tools, but, in the meantime if you are analyzing your own data and would like to filter genes--please see [Filter, plot and explore single-cell RNA-seq (Scanpy)](../../tutorials/scrna-case_basic-pipeline/), [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)](../../tutorials/scrna-case_FilterPlotandExploreRStudio/),
+or [Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)](../../tutorials/scrna-case-jupyter_basic-pipeline/). 
 
 # Processing
 Currently, we still have quite big data. We have two issues here
