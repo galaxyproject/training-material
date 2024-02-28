@@ -237,8 +237,7 @@ In a standard workflow, we would plot the percent mito (perc.mt) against the tra
 >
 {: .comment}
 
-However, this is not always necessary, and in fact, filtering based on counts and features (indeed, even just counts alone) will often remove the cells with spuriously high mitochondrial transcripts. These tools (and this tutorial) will soon be updated to allow us to do so--in the meantime, please see [Filter, plot and explore single-cell RNA-seq (Scanpy)](../../tutorials/scrna-case_basic-pipeline/), [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)](../../tutorials/scrna-case_FilterPlotandExploreRStudio/),
-or [Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)](../../tutorials/scrna-case-jupyter_basic-pipeline/) if you hope to include perc.mt in your own data analysis adventures. 
+However, this is not always necessary, and in fact, filtering based on counts and features (indeed, even just counts alone) will often remove the cells with spuriously high mitochondrial transcripts. These tools (and this tutorial) will soon be updated to allow us to do so--in the meantime, please see [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md %}) [Filter, plot and explore single-cell RNA-seq (Scanpy)]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), or [Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)]({% link topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.md %}) if you hope to include perc.mt in your own data analysis adventures. 
 
 For now, we will use just transcript and gene counts to filter our data. Let's take a look back at our nFeature Violin Plot to pick our gene threshold: 
 
@@ -285,8 +284,7 @@ Now, genes that do not appear in any cell, or even in only 1 or 2 cells, may bre
 
 Since you’ve removed a whole heap of cells, and the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes still present in your matrix that are not expressed in any of the cells.
 
-The removal of these genes is by no means necessary, but will speed up your analyses. The developers are currently working to enable a means of doing this through the Seurat Tools, but, in the meantime if you are analyzing your own data and would like to filter genes--please see [Filter, plot and explore single-cell RNA-seq (Scanpy)](../../tutorials/scrna-case_basic-pipeline/), [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)](../../tutorials/scrna-case_FilterPlotandExploreRStudio/),
-or [Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)](../../tutorials/scrna-case-jupyter_basic-pipeline/). 
+The removal of these genes is by no means necessary, but will speed up your analyses. The developers are currently working to enable a means of doing this through the Seurat Tools, but, in the meantime if you are analyzing your own data and would like to filter genes--please see [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md %}) [Filter, plot and explore single-cell RNA-seq (Scanpy)]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), or [Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)]({% link topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.md %}). 
 
 # Processing
 Currently, we still have quite big data. We have two issues here
