@@ -1,9 +1,9 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Filter, plot, and explore single cell RNA-seq data (Seurat, R)'
+title: 'Filter, plot, and explore single cell RNA-seq data (Seurat Tools)'
 subtopic: single-cell-CS-code
-priority: 2
+priority: 3
 zenodo_link: 'https://zenodo.org/record/7053673'
 
 questions:
@@ -42,11 +42,7 @@ contributions:
   authorship:
     - Camila-goclowski
   editing:
-    - nomadscientist
-    - hexylena
-    - mtekman
-    - shiltemann
-    - pavanvidem
+   
 
 ---
 
