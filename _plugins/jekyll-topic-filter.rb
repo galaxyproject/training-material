@@ -433,7 +433,7 @@ module TopicFilter
       end
     end
 
-    "flowchart TD\n" + statements.sort.map{|q| "  " + q}.join("\n")
+    "flowchart TD\n" + statements.map{|q| "  " + q}.join("\n")
   end
 
   def self.resolve_material(site, material)
