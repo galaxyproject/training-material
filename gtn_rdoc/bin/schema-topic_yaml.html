@@ -155,6 +155,14 @@ type:
 
         `instructors`
         :  Specific to topics related to instruction of Galaxy
+topic_type:
+    type: str
+    required: false
+    enum:
+        - technology
+        - field
+    description: |
+      These are used to organise the home page tutorials only, not used anywhere else.
 title:
     type: str
     required: true
@@ -302,7 +310,7 @@ tag_based:
     type: bool
     required: false
     description: |
-        If this is a synthetic tag based topic (no tutorials of it&#39;s own)
+        If this is a tag based topic (no tutorials of it&#39;s own)
         then you must set this flag to indicate it as such, otherwise you
         will find yourself with an empty topic page.
 og_image:

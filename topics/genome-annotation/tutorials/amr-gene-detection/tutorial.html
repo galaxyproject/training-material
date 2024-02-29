@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
+		release: "galaxy-training-network@2653689712b509f8391b945ab7f4d89f7654727a",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709214055' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709214055' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Identification of AMR genes in an assembled bacterial genome">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-01-26 15:19:31 +0000">
+<meta name="DC.date" content="2024-02-29 12:49:27 +0000">
 <meta name="DC.creator" content="Bazante Sanders">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -118,7 +118,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-01-26 15:19:31 +0000",
+  "dateModified": "2024-02-29 12:49:27 +0000",
   "datePublished": "2024-01-23 16:20:06 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Identification of AMR genes in an assembled bacterial genome",
@@ -232,14 +232,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Identification of AMR genes in an assembled bacterial genome",
   "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html",
-  "version": 6,
+  "version": 7,
   "timeRequired": "PT2H",
   "teaches": "Run a series of tool to assess the presence of antimicrobial resistance genes (ARG)\n - Get information about ARGs\n - Visualize the ARGs and plasmid genes in their genomic context",
   "keywords": [
     "Genome Annotation",
+    "gmod",
     "illumina",
     "amr",
-    "one-health"
+    "one-health",
+    "jbrowse1"
   ],
   "description": "The questions this  addresses are:\n - Which resistance genes are on a bacterial genome?\n - Where are the genes located on the genome?\n\n\nThe objectives are:\n - Run a series of tool to assess the presence of antimicrobial resistance genes (ARG)\n - Get information about ARGs\n - Visualize the ARGs and plasmid genes in their genomic context\n\n",
   "inLanguage": {
@@ -552,6 +554,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "mentions": [
     {
       "@type": "Thing",
+      "name": "gmod"
+    },
+    {
+      "@type": "Thing",
       "name": "illumina"
     },
     {
@@ -561,12 +567,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     {
       "@type": "Thing",
       "name": "one-health"
+    },
+    {
+      "@type": "Thing",
+      "name": "jbrowse1"
     }
   ],
   "abstract": "Antimicrobial resistance (AMR) is a global phenomenon with no geographical or species boundaries, which poses an important threat to human, animal and environmental health. It is a complex and growing problem that compromises our ability to treat bacterial infections."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709214055'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -963,7 +973,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 23, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 26, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 29, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -981,7 +991,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
 
     </blockquote>
     </section>
@@ -2137,7 +2147,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/2653689712b509f8391b945ab7f4d89f7654727a">2653689</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2165,7 +2175,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709214055'></script>
         
     </body>
 </html>
