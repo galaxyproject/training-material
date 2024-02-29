@@ -43,6 +43,6 @@ This training aspires to be a introduction on the **Critical Learning Theory** a
 >
 {: .quote}
 
-Education is the result of multiple contextual variables that have an effect on behaviour, ideology and professional development, so it could be said that human beings, as social beings, are educated and transformed by their context ({% cite Careaga2007 %}). In this line, John Dewey, a distinguished American philosopher and advocate for educational reform, beautifully articulated that the education proposed by society has its roots in society itself ({% cite Perez2018 %}). Thus, in order to contextualise current educational practices, we can start by analyzing the stage of society, the so-called **Information Society**.
+Education is the result of multiple contextual variables that have an effect on behaviour, ideology and professional development, so it could be said that human beings, as social beings, are educated and transformed by their context ({% cite Careaga2007 %}). In this line, John Dewey, a distinguished American philosopher and advocate for educational reform, beautifully articulated that the education proposed by society has its roots in society itself ({% cite Perez2018 %}). Thus, in order to contextualise current educational practices, we can start by analyzing the current stage of society, the so-called **Information Society**.
 
 
