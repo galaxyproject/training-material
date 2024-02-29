@@ -21,9 +21,11 @@ contributions:
 
 Critical Learning Theory (also known as Critical Theory of Education) represents a framework that critically examines the role of education in shaping and perpetuating social inequalities, power structures, and cultural norms. 
 
-Rooted in the broader Critical Theory tradition, which originated with the Frankfurt School, Critical Learning Theory applies the principles of critical social theory to educational practices and institutions. The Frankfurt School, comprising intellectuals such as Max Horkheimer, Theodor Adorno, and Herbert Marcuse, developed Critical Theory as a multidisciplinary approach to understanding and challenging the oppressive dynamics of industrial societies.
+Rooted in the broader Critical Theory tradition, which originated with the Frankfurt School, Critical Learning Theory applies the principles of critical social theory to educational practices and institutions. 
 
 ![Frankfurt_school_picture.](./images/critical_theory/frankfurt_school.png "Photo taken in Heidelberg in April 1964 by Jeremy J. Shapiro at the Max Weber Institute of Sociology. In front: Max Horkheimer and Theodor W. Adorno. Back left: Siegfried Landshut. Right back: Jürgen Habermas. Licence: CC BY-SA 4.0")
+
+The Frankfurt School, comprising intellectuals such as Max Horkheimer, Theodor Adorno, and Herbert Marcuse, developed Critical Theory as a multidisciplinary approach to understanding and challenging the oppressive dynamics of industrial societies.
 
 In the realm of education, Henry Giroux, a prominent American-Canadian critical pedagogue, has extended and applied these foundational ideas to the field of Critical Learning THeory. Giroux emphasizes the role of education in shaping consciousness and social structures.
 
