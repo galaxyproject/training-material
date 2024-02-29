@@ -25,7 +25,7 @@ contributions:
 
 The **Critical Learning Theory**  is a pedagogical paradigm rooted in the broader **Critical Theory** tradition originated with the **Frankfurt School** of thought, formally known as the Institute for Social Research (*Institut für Sozialforschung*), an academic hub founded in 1923 at Goethe University in Frankfurt, Germany. 
 
-Consisting of a renowned collective of critical theorists such as Max Horkheimer, Theodor Adorno, Walter Benjamin, and Herbert Marcuse, the **Frankfurt School** developed the **Critical Theory** as a multidisciplinary approach crafted with the intent to comprehend and actively confront the oppressive dynamics ingrained within industrial societies.
+Consisting of a renowned collective of critical theorists such as Max Horkheimer, Theodor Adorno, Walter Benjamin, and Herbert Marcuse, the **Frankfurt School** developed the **Critical Theory** as a multidisciplinary approach crafted with the intent to comprehend and actively confront the oppressive dynamics ingrained within industrial societies (fig. 1).
 
 ![Frankfurt School picture](../../images/critical_theory/frankfurt_school.png "Left image: Max Horkheimer and Theodor Adorno in Heidelberg in 1964 at the Max Weber Institute of Sociology. Right image: Herbert Marcuse in Newton, Massachusetts in 1955. Licence: CC BY-SA 4.0")
 
