@@ -19,15 +19,13 @@ contributions:
 > **Herbert Marcuse, One-Dimensional Man: Studies in the Ideology of Advanced Industrial Society**
 {: .quote}
 
-Critical Learning Theory (also known as Critical Theory of Education) represents a framework that critically examines the role of education in shaping and perpetuating social inequalities, power structures, and cultural norms. 
+Critical Learning Theory (also known as Critical Theory of Education) is rooted in the broader Critical Theory tradition, which originated with the Frankfurt School, Critical Learning Theory applies the principles of critical social theory to educational practices and institutions. 
 
-Rooted in the broader Critical Theory tradition, which originated with the Frankfurt School, Critical Learning Theory applies the principles of critical social theory to educational practices and institutions. 
-
-![Frankfurt_school_picture.](./images/critical_theory/frankfurt_school.png "Photo taken in Heidelberg in April 1964 by Jeremy J. Shapiro at the Max Weber Institute of Sociology. In front: Max Horkheimer and Theodor W. Adorno. Back left: Siegfried Landshut. Right back: Jürgen Habermas. Licence: CC BY-SA 4.0")
+![Frankfurt_school_picture.](.../images/critical_theory/frankfurt_school.png "Photo taken in Heidelberg in April 1964 by Jeremy J. Shapiro at the Max Weber Institute of Sociology. In front: Max Horkheimer and Theodor W. Adorno. Back left: Siegfried Landshut. Right back: Jürgen Habermas. Licence: CC BY-SA 4.0")
 
 The Frankfurt School, comprising intellectuals such as Max Horkheimer, Theodor Adorno, and Herbert Marcuse, developed Critical Theory as a multidisciplinary approach to understanding and challenging the oppressive dynamics of industrial societies.
 
-In the realm of education, Henry Giroux, a prominent American-Canadian critical pedagogue, has extended and applied these foundational ideas to the field of Critical Learning THeory. Giroux emphasizes the role of education in shaping consciousness and social structures.
+In the realm of education, the Critical Learning Theory represents a framework for critically examinate the role of education in shaping and perpetuating power structures, cultural norms and social inequalities throught the repression of critical thinking. A leading figure of this school of thought is Henry Giroux, a prominent American-Canadian critical pedagogue. 
 
 Within the realm of Critical Learning Theory, the concept of the hidden curriculum, extensively explored by Giroux, refers to the implicit messages, values, and norms transmitted to students through the informal aspects of the educational system, distinct from the explicit and planned syllabus.
 
