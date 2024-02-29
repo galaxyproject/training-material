@@ -54,6 +54,15 @@ layout: base
                     </tr>
                     {% endif %}
                     {% endif %}
+                    {% if topic.type == "basics" %}
+                    {% if topic.draft != true or jekyll.environment != "production" %}
+                    <tr>
+                        {% assign tutorial_number = site | topic_filter:topic.name | topic_count %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td>{{ tutorial_number }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endif %}
                 {% endfor %}
                 </tbody>
             </table>
@@ -107,54 +116,6 @@ layout: base
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
-                    {% endif %}
-                    {% endif %}
-                {% endfor %}
-                </tbody>
-            </table>
-
-            <h2>Galaxy Tips & Tricks</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Topic</th>
-                        <th scope="col">Tutorials</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for topic_name in sorted_topics %}
-                    {% assign topic = site.data[topic_name] %}
-                    {% if topic.type == "basics" %}
-                    {% if topic.draft != true or jekyll.environment != "production" %}
-                    <tr>
-                        {% assign tutorial_number = site | topic_filter:topic.name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
-                        <td>{{ tutorial_number }}</td>
-                    </tr>
-                    {% endif %}
-                    {% endif %}
-                {% endfor %}
-                </tbody>
-            </table>
-
-            <h2>Data Science Survival Kit</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Topic</th>
-                        <th scope="col">Tutorials</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for topic_name in sorted_topics %}
-                    {% assign topic = site.data[topic_name] %}
-                    {% if topic.type == "data-science" %}
-                    {% if topic.draft != true or jekyll.environment != "production" %}
-                    <tr>
-                        {% assign tutorial_number = site | topic_filter:topic.name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
-                        <td>{{ tutorial_number }}</td>
-                    </tr>
                     {% endif %}
                     {% endif %}
                 {% endfor %}
