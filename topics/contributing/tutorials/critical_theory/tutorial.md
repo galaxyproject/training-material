@@ -27,7 +27,7 @@ The **Critical Learning Theory**  is a pedagogical paradigm rooted in the broade
 
 Consisting of a renowned collective of critical theorists such as Max Horkheimer, Theodor Adorno, Walter Benjamin, and Herbert Marcuse, the **Frankfurt School** developed the **Critical Theory** as a multidisciplinary approach crafted with the intent to comprehend and actively confront the oppressive dynamics ingrained within industrial societies.
 
-![Frankfurt School picture](../../images/critical_theory/frankfurt_school.png "Photo taken in Heidelberg in April 1964 at the Max Weber Institute of Sociology. In front: Max Horkheimer and Theodor W. Adorno. Licence: CC BY-SA 4.0")
+![Frankfurt School picture](../../images/critical_theory/frankfurt_school.png "Left image: Max Horkheimer and Theodor Adorno in Heidelberg in 1964 at the Max Weber Institute of Sociology. Right image: Herbert Marcuse in Newton, Massachusetts in 1955. Licence: CC BY-SA 4.0")
 
 In the realm of education, the **Critical Learning Theory** aligns with the Frankfurt School's tradition, emphasizing a critical analysis of educative systems as social institutions. It represents a framework for critically examinate the role of education in shaping and perpetuating power structures, cultural norms and social inequalities throught the repression of **critical thinking** ({% cite Giroux2018 %}). A leading figure of this school of thought is  prominent American-Canadian critical pedagogue Henry Giroux.
 
