@@ -181,8 +181,8 @@ We can, and should, ask a number of questions about the quality of our data befo
 > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
 > - *"Plot_type_selector"*: `VlnPlot`
 > - *"Features"*: `nCount_RNA`
-> - *"Group by"*: `Sample.Characteristic.individual`
-> - *"Split by"*: `Sample.Characteristic.individual`
+> - *"Group by"*: `Sample.Characteristic.individual.`
+> - *"Split by"*: `Sample.Characteristic.individual.`
 > - *"Log"*: `Yes`
 > - *"Slot"*: `data`
 > - *"Fill by"*: `ident`
@@ -209,8 +209,8 @@ Now let's get an idea of how other variables, like  sex or genotype of the mice,
   > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
   > - *"Plot_type_selector"*: `VlnPlot`
   > - *"Features"*: `nCount_RNA`
-  > - *"Group by"*: `Sample.Characteristic.sex`
-  > - *"Split by"*: `Sample.Characteristic.sex`
+  > - *"Group by"*: `Sample.Characteristic.sex.`
+  > - *"Split by"*: `Sample.Characteristic.sex.`
   > - *"Log"*: `Yes`
   > - *"Slot"*: `data`
   > - *"Fill by"*: `ident`
@@ -225,8 +225,8 @@ Now let's get an idea of how other variables, like  sex or genotype of the mice,
   > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
   > - *"Plot_type_selector"*: `VlnPlot`
   > - *"Features"*: `nCount_RNA`
-  > - *"Group by"*: `Sample.Characteristic.genotype`
-  > - *"Split by"*: `Sample.Characteristic.genotype`
+  > - *"Group by"*: `Sample.Characteristic.genotype.`
+  > - *"Split by"*: `Sample.Characteristic.genotype.`
   > - *"Log"*: `Yes`
   > - *"Slot"*: `data`
   > - *"Fill by"*: `ident`
@@ -542,10 +542,16 @@ Now it’s the fun bit! We can see where genes are expressed, and start consider
 
 Let's take another look at what our clusters look like:
 
-```r
-DimPlot(object = filtered_srt, reduction = "umap", label = TRUE, label.box = TRUE, group.by = "seurat_clusters") + NoLegend()
-```
-![DimPlot colored by 0.5 resolution cluster](../../images/scrna-SeuratRStudio/plot10.png "DimPlot colored by 0.5 resolution cluster.")
+> <hands-on-title>Plot UMAP </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `DimPlot`
+> - *"Group by"*: `RNA_nn_res.0.5`
+{: .hands_on}
+
+![DimPlot colored by 0.5 resolution cluster](../../images/scrna-case_FPE_SeuratTools/DimPlot_GroupBy_pt5Res.png "DimPlot colored by 0.5 resolution cluster.")
 
 ><comment-title>On Cluster Numbering</comment-title>
 >Note that Seurat's cluster numbering is based on size alone, so clusters 0 and 1 are not necessarily related, they are just the clusters containing the most cells.
@@ -553,49 +559,35 @@ DimPlot(object = filtered_srt, reduction = "umap", label = TRUE, label.box = TRU
 
 It would be nice to know what these cells are. This analysis (googling all of the marker genes, both checking where the ones you know are and then going through marker tables we generated) is a fun task for any individual experiment, so we’re going to speed past that and nab the assessment from the original paper!
 
+(will include manual cluster/ marker identification with featureplots)
+
 | Clusters | Markers                 | Cell Type                           |
 |----------|-------------------------|-------------------------------------|
-| 3        | Il2ra                   | Double negative (early T-cell)      |
-| 1,2,5    | Cd8b1, Cd8a, Cd4        | Double positive (middle T-cell)     |
-| 0        | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
-| 4        | Itm2a                   | Mature T-cell                       |
+| 2        | Il2ra                   | Double negative (early T-cell)      |
+| 0, 4, 5, 6, 7    | Cd8b1, Cd8a, Cd4        | Double positive (middle T-cell)     |
+| 1        | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
+| 3        | Itm2a                   | Mature T-cell                       |
 
-Feel free to plot these markers onto our dataset to see where they fall. This is generally a useful method of discerning cell types and can be useful for initial annotations.
-
-><tip-title>Plotting Markers</tip-title>
->To do so, simply use the same FeaturePlot() function we used above, but replace the feature parameter with your new marker of interest.
->```r
->FeaturePlot(object = filtered_srt, features = c("Il2ra", "Cd8b1", "Cd8a", "Cd4", "Itm2a"), order = T, ncol = 3)
->```
->![FeaturePlots of cell type markers](../../images/scrna-SeuratRStudio/plot21.png "FeaturePlots of our known cell type markers")
-{: .tip}
-
-We can then manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate() function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned:
-
-```r
-filtered_srt@meta.data<- mutate(filtered_srt@meta.data, celltype = case_when(
-  seurat_clusters %in% c(3) ~ "Double negative (early T-cell)",
-  seurat_clusters %in% c(1,2,5) ~ " Double positive (middle T-cell)",
-  seurat_clusters %in% c(0) ~ "Double positive (late middle T-cell)",
-  seurat_clusters %in% c(4) ~ "Mature T-cell"
-))
-```
-Once we have labelled our clusters, we can visualize what our cell types actually look like:
-
-```r
-DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype")
-```
-![DimPlot colored by labelled celltype](../../images/scrna-SeuratRStudio/plot13.png "DimPlot colored by assigned cell type")
 
 Now we can begin to feel a bit more oriented in exploring our data. The clusters are labelled with cell types, and our object has been processed enough such that we may now begin to answer some real biological questions! Now that we know what we’re dealing with, let’s examine the effect of our variable, real science!
 
 ## Keep Digging
 Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus? We can begin to answer this question visually by using the "split.by" parameter in Seurat's plot functions.
 
-```r
-DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype", split.by = "Genotype")
-```
-![DimPlot colored by labelled celltype split by genotype](../../images/scrna-SeuratRStudio/plot14.png "DimPlot colored by assigned cell typesplit by genotype")
+> <hands-on-title>Visualize Counts Split by Genotype</hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
+> - *"Plot_type_selector"*: `VlnPlot`
+> - *"Features"*: `nCount_RNA`
+> - *"Group by"*: `RNA_nn_res.0.5`
+> - *"Split by"*: `Sample.Characteristic.genotype.`
+> - *"Log"*: `Yes`
+> - *"Slot"*: `data`
+> - *"Fill by"*: `ident`
+{: .hands_on}
+![DimPlot colored by labelled celltype split by genotype](../../images/scrna-case_FPE_SeuratTools/DimPlot_SplitbyGenotype.png "DimPlot colored by assigned clusters split by genotype")
 
 We can see that there seems to be a decrease in cellcounts across the celltypes in the het mutant... INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.
 
@@ -604,37 +596,67 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 
 First thing's first, is there a batch effect?
 
-```r
-DimPlot(object = filtered_srt, reduction = "umap", group.by = "Individual")
-```
-![DimPlot colored by labelled celltype split by individual/batch](../../images/scrna-SeuratRStudio/plot15.png "DimPlot colored by assigned cell types split by individual/batch")
+> <hands-on-title>Visualize Counts Split by Individual</hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
+> - *"Plot_type_selector"*: `VlnPlot`
+> - *"Features"*: `nCount_RNA`
+> - *"Group by"*: `RNA_nn_res.0.5`
+> - *"Split by"*: `Sample.Characteristic.individual.`
+> - *"Log"*: `Yes`
+> - *"Slot"*: `data`
+> - *"Fill by"*: `ident`
+{: .hands_on}
+![DimPlot colored by labelled celltype split by individual/batch](../../images/scrna-case_FPE_SeuratTools//DimPlot_SplitbyIndividual.png "DimPlot colored by assigned clusters split by individual/batch")
 
 While some differences across batch are expected and nothing to be concerned about, the immature T-cells looks to be mainly comprised of Individual 3. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction.
 
 Additionally, we will also look at the confounding effect of sex:
 
-```r
-DimPlot(object = filtered_srt, reduction = "umap", group.by = c("Sex", "Individual", "Genotype"))
-```
-![DimPlot colored by Sex, Individual, and Genotype](../../images/scrna-SeuratRStudio/plot16.png "DimPlot colored by Sex, Individual, and Genotype")
+> <hands-on-title>Visualize Counts Split by Sex</hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
+> - *"Plot_type_selector"*: `VlnPlot`
+> - *"Features"*: `nCount_RNA`
+> - *"Group by"*: `RNA_nn_res.0.5`
+> - *"Split by"*: `Sample.Characteristic.sex.`
+> - *"Log"*: `Yes`
+> - *"Slot"*: `data`
+> - *"Fill by"*: `ident`
+{: .hands_on}
+![DimPlot colored by Sex, Individual, and Genotype](../../images/scrna-case_FPE_SeuratTools/DimPlot_SplitbySex.png "DimPlot colored by assigned clusters and split by Sex")
 
 
 We note that the one female sample - unfortunately one of merely three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.
 
 Are there any clusters or differences being driven by sequencing depth, a technical and random factor?
 
-```r
-FeaturePlot(object = filtered_srt, reduction = "umap", features = "nCount_SCT")
-```
-![FeaturePlot colored by counts](../../images/scrna-SeuratRStudio/plot17.png "FeaturePlot colored by counts")
+> <hands-on-title>Plot Counts </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `FeaturePlot`
+> - *"Feature"*: `nCount_RNA`
+{: .hands_on}
+![FeaturePlot colored by counts](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_nCount.png "FeaturePlot colored by counts")
 
 
 There doesn't visually appear to be any differences in sequencing depth across the clusters, but let's check out some of those other variables we grouped by:
 
-```r
-FeaturePlot(object = filtered_srt, reduction = "umap", features = "nCount_SCT", split.by = "Individual")
-```
-![FeaturePlot colored by counts](../../images/scrna-SeuratRStudio/plot18.png "FeaturePlot colored by counts split by Individual")
+> <hands-on-title>Plot Features </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `FeaturePlot`
+> - *"Feature"*: `nCount_RNA`
+{: .hands_on}
+![FeaturePlot colored by counts](../../images/scrna-case_FPE_SeuratTools/FeaturePlog_nFeature.png "FeaturePlot colored by counts split by Individual")
 
 There we go! This might explain the dramatic shift in early to middle T-Cell between wildtype and knockout cells--the leftmost early to middle T-cells simply have a higher sequencing depth represented by Individual 3 (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge (specifically this likely accounts for the discernment between clusters 1, 2, and 5).
 
@@ -661,13 +683,6 @@ Hemoglobin--a red blood cell marker that should NOT be found in T-cells--appears
 {: .tip}
 
 Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?
-
-```r
-CellType_DimPlot<-DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype")
-Cd4_FeaturePlot<-FeaturePlot(object = filtered_srt, reduction = "umap", features = "Cd4")
-CellType_DimPlot | Cd4_FeaturePlot
-```
-![Double Positive differentiation?](../../images/scrna-SeuratRStudio/plot20.png "Double Positive differentiation?")
 
 Important to note, lest all bioinformaticians combine forces to attack the biologists: just because a cluster doesn’t look like a cluster by eye is NOT enough to say it’s not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the double positive populations, which we know are also affected by depth of sequencing. That’s a reasonable argument that Clusters 1, 2, and 5 might not be all that different. Maybe we need more depth of sequencing across all those cells, or to compare these explicitly to each other (consider variations on FindMarkers!).
 
