@@ -32,6 +32,34 @@ layout: base
     <div class="row">
         <div class="col-lg-7 col-md-7 col-sm-12">
             <h2>Galaxy for Scientists</h2>
+	    <p>We have separated the tutorials into several categories based on field and technology. We are exploring other ways to organise the tutorials going forward!</p>
+
+	    <h3>Introduction</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for topic_name in sorted_topics %}
+                    {% assign topic = site.data[topic_name] %}
+                    {% if topic.name == "introduction" %}
+                    {% if topic.draft != true or jekyll.environment != "production" %}
+                    <tr>
+                        {% assign tutorial_number = site | topic_filter_tutorial_count:topic.name %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td>{{ tutorial_number }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+            <h3>Fields</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -43,12 +71,42 @@ layout: base
                 {% for topic_name in sorted_topics %}
                     {% assign topic = site.data[topic_name] %}
                     {% if topic.type == "use" %}
+                    {% if topic.name != "introduction" %}
+                    {% if topic.topic_type != "technology" %}
                     {% if topic.draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter_tutorial_count:topic.name %}
                         <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Technologies</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for topic_name in sorted_topics %}
+                    {% assign topic = site.data[topic_name] %}
+                    {% if topic.type == "use" %}
+                    {% if topic.topic_type == "technology" %}
+                    {% if topic.draft != true or jekyll.environment != "production" %}
+                    <tr>
+                        {% assign tutorial_number = site | topic_filter_tutorial_count:topic.name %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td>{{ tutorial_number }}</td>
+                    </tr>
+                    {% endif %}
                     {% endif %}
                     {% endif %}
                 {% endfor %}
@@ -159,6 +217,23 @@ layout: base
                 </tbody>
             </table>
 
+           <!-- Our awesome Contributors -->
+            <h2>Contributor Hall of Fame</h2>
+
+            <p>
+             {% snippet faqs/gtn/gtn_stats.md compact=true %}
+			</p>
+            <p>
+			This project would not be possible without the many amazing community contributors!
+			</p>
+			<p>
+		<a class="btn btn-info" href="{{ site.baseurl }}/hall-of-fame">View the Hall of Fame</a>
+
+        <a class="btn btn-warning" href="{{ site.baseurl }}/stats">View all GTN stats</a>
+
+			</p>
+			<p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing/">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
+
         </div>
 
         <div class="col-lg-5 col-md-5 col-sm-12">
@@ -186,41 +261,17 @@ layout: base
                  <!-- GTN Tweets -->
           <div class="col-12">
             <h2>GTN Toots</h2>
-	    <a rel="me" href="https://mstdn.science/@gtn">Follow us on Mastodon</a>
+
+<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/js/emfed/toots.css">
+		<script type="module" src="{{ site.baseurl }}/assets/js/emfed/emfed.js"></script>
+		<a rel="me" class="mastodon-feed"
+		href="https://mstdn.science/@gtn"
+		data-toot-limit="3"
+		>Follow us on the Mastodon/Fediverse</a>
           </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-7 col-md-7 col-sm-12">
-           <!-- Our awesome Contributors -->
-        <div class="col-12">
-            <h2>Contributor Hall of Fame</h2>
-
-            <p>
-             {% snippet faqs/gtn/gtn_stats.md compact=true %}
-			</p>
-            <p>
-			This project would not be possible without the many amazing community contributors!
-			</p>
-			<p>
-		<a class="btn btn-info" href="{{ site.baseurl }}/hall-of-fame">View the Hall of Fame</a>
-
-        <a class="btn btn-warning" href="{{ site.baseurl }}/stats">View all GTN stats</a>
-
-			</p>
-			<p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing/">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
-
-        </div>
-        </div>
-        <div class="col-lg-5 col-md-5 col-sm-12">
-          <div class="col-12">
-                        <h2>The Galaxy Training Network</h2>
-                        {% include _includes/map.html height=300 %}
-
-            </div>
-          </div>
-        </div>
         <h2 id="acknowledgment-and-funding">Acknowledgment and Funding</h2>
     <p>
             More information about this project can be found in our <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">publication in PLOS Computational Biology</a>.

@@ -27,9 +27,12 @@ else
 	ENV_FILE=environment.yml
 endif
 
-CONDA=$(shell which conda)
+CONDA=$(shell which mamba)
 ifeq ($(CONDA),)
-	CONDA=${HOME}/miniconda3/bin/conda
+    CONDA=$(shell which conda)
+    ifeq ($(CONDA),)
+    	CONDA=${HOME}/miniconda3/bin/mamba
+    endif
 endif
 
 default: help
@@ -214,27 +217,31 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 
 _site/%/slides.pdf: _site/%/slides.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
+	./node_modules/.bin/http-server _site -p 9876 & \
 	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_ES.pdf: _site/%/slides_ES.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
+	./node_modules/.bin/http-server _site -p 9876 & \
 	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
+	./node_modules/.bin/http-server _site -p 9876 & \
 	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 video: ## Build all videos
 	bash bin/ari-make.sh
+
+metadata/public-server-tools.json:
+	python ./bin/supported-fetch.py
 
 annotate: ## annotate the tutorials with usable Galaxy instances
 	${ACTIVATE_ENV} && \
 	wget https://github.com/hexylena/toolshed-version-database/raw/main/guid-rev.json -O metadata/toolshed-revisions.json && \
 	python bin/supported-fetch.py
 	bin/workflows-fetch.rb
+	bin/fetch-categories.rb
 .PHONY: annotate
 
 rebuild-search-index: ## Rebuild search index

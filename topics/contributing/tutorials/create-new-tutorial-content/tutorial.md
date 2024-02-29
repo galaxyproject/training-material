@@ -201,7 +201,7 @@ All tutorials and slides must give credit to all contributors. This can be any t
      funder: true
      funding_id: 2020-1-NL01-KA203-064717
      funding_statement: |
-        This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+        This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
         ![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)
    ```
 
@@ -321,12 +321,11 @@ We can also cross-reference images inside our Markdown with an anchor. For examp
 > should be functional; `figcaption` descriptions should be editorial or
 > illustrative.**
 >
-> [*via thoughtbot.com*](https://thoughtbot.com/blog/alt-vs-figcaption)
-{: .quote}
+{: .quote cite="https://thoughtbot.com/blog/alt-vs-figcaption" author="thoughtbot.com"}
 
 As an example for this image:
 
-![alt text]({{site.baseurl}}/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
+![alt text]({{site.baseurl}}/topics/microbiome/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
 
 {% raw %}
 ```markdown
@@ -854,6 +853,28 @@ Rendered:
 > ```
 {: .code-out}
 
+## **Quote** boxes
+
+{% raw %}
+```markdown
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra" author="Yogi Berra"}
+```
+{% endraw %}
+
+Rendered:
+
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra" author="Yogi Berra"}
+
+The citation and author parameters are both optional. If provided the `cite` key must be a URL.
+
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra"}
+
+> If you don't know where you're going, you might not get there.
+{: .quote author="Yogi Berra"}
+
 # Additional Features to Improve Learning
 
 Here we cover additional features you can use throughout your tutorials to improve the learning experience.
@@ -898,6 +919,42 @@ The alternative is to figure out the ID for the tool you want to use:
 
 ![Finding the tool ID](../../images/tool-id.png)
 
+
+## Workflows
+
+In some tutorials you aren't as interested in teaching users the individual steps for analysing data, but rather want to focus on some downstream aspects of analysis, or to showcase the best practice workflows that are already available for a user to use! In those cases it can be useful to have a nicer way of inviting the user to execute those steps.
+
+### WorkflowHub
+
+You can use a dedicated snippet to invite users to run a WorkflowHub workflow:
+
+{% raw %}
+```markdown
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" %}
+```
+{% endraw %}
+
+Rendered:
+
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" %}
+
+Note that it links to a specific workflow, on any Galaxy server. When this tutorial is opened from within the Tutorial Mode, that link will change to one on the current server, removing the intermediate step.
+
+### Dockstore
+
+Please note that the dockstore ID should be provided without the `#` character.
+
+{% raw %}
+```markdown
+{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+```
+{% endraw %}
+
+Rendered:
+
+{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+
+This snippet has the same behaviour, it will use my.galaxy.training links to make them server independent, but in Tutorial Mode it will open on the current server.
 
 
 ## FAQs (snippets)
@@ -1033,11 +1090,14 @@ To use these icons, take the name of the icon, 'details' in this example, and wr
 {% raw %}{% icon details %}{% endraw %}
 ```
 
+Some icons have multiple aliases, any may be used, but we'd suggest trying to choose the most semantically appropriate one in case Galaxy later decides to change the icon.
+
 <div class="row">
-{% for icon in site["icon-tag"] %}
+{% assign icon_groups = site['icon-tag'] | group_icons %}
+{% for icon in icon_groups %}
 	<div class="col-md-2 col-sm-3" style="text-align: center">
-		<div style="font-size: 400%">{% icon_var icon[0] %}</div>
-		<div>{{ icon[0] }}</div>
+		<div style="font-size: 400%">{% icon_var icon[0][0] %}</div>
+		<div>{% for z in icon[0] %}{{ z }}{%unless forloop.last%},{%endunless%} {% endfor %}</div>
 	</div>
 {% endfor %}
 </div>
@@ -1135,6 +1195,25 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 
 This can also be used inline: My favourite fruit is an <span class="Ananas">🍍</span><span class="Avocados">🥑</span>.
 
+> <tip-title>Multiple, Disconnected CYOAs</tip-title>
+> If you wish to have multiple CYOAs in a single tutorial, you are free to do that! However you must:
+>
+> 1. Ensure that all options are disjoint, there should not be any shared terms! (I.e if the both CYOAs need to use "STAR", please find a different way to phrase it, or even use "STAR ", it just needs to be different.)
+> 2. Provide a disambiguation term for them, passed as a parameter to all, or all but one, includes.
+>
+> This disambiguation term will affect the URL parameter, which will become `?gtn-cyoa{term}={value}`
+>
+> E.g.:
+>
+> ```
+> {% raw %}
+> {% include _includes/cyoa-choices.html option1="Oui" option2="Non" default="Oui" text="Vos données ESTAMP sont prêtes ?" %}
+> {% include _includes/cyoa-choices.html option1="Yes" option2="No" text="Do the thing?" disambiguation="english" %}
+> {% endraw %}
+> ```
+{: .tip}
+
+
 ### URL Parameter
 
 The branch can be selected via URL parameter e.g. for courses, to prevent users selecting the wrong path. Just supply `?gtn-cyoa=Ananas` (or your preferred value) on the tutorial URL.
@@ -1230,7 +1309,7 @@ To use this system, you need to take care of a few things:
 
 - Do **not** use hands-on boxes for segments that should be executed (code needs to be left aligned!)
 - Do **not** use snippets
-- Do **not** use icons `{% raw %}{% icon X %}{% endraw %}`
+- Do **not** use icons `{% raw %}{% icon galaxy-eye %}{% endraw %}`
 - Do not use a terminal or prompt character (that would be included in the execution.)
 - Avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
 

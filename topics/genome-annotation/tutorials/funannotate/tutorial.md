@@ -4,7 +4,9 @@ layout: tutorial_hands_on
 title: Genome annotation with Funannotate
 zenodo_link: https://zenodo.org/record/7867921
 tags:
+  - gmod
   - eukaryote
+  - jbrowse1
 questions:
   - How to annotate an eukaryotic genome with Funannotate?
   - How to perform functional annotation?
@@ -33,6 +35,7 @@ contributions:
     - stephanierobin
   funding:
     - gallantries
+    - eurosciencegateway
 
 abbreviations:
   NMDS: Non-metric multidimensional scaling
@@ -42,6 +45,11 @@ requirements:
    topic_name: genome-annotation
    tutorials:
      - repeatmasker
+follow_up_training:
+  - type: "internal"
+    topic_name: genome-annotation
+    tutorials:
+      - apollo
 
 subtopic: eukaryote
 priority: 2

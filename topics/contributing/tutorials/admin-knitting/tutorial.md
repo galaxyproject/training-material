@@ -55,8 +55,8 @@ The `data-commit` will be turned into the commit message, so, you can write some
 
 In knitting you sometimes need to rip out the stitches, a process sometimes called frogging.
 
-> If they are not secured, the loops of a knitted course will come undone when their yarn is pulled; this is known as ripping out, unravelling knitting, or humorously, frogging (because you 'rip it', this sounds like a frog croaking: 'rib-bit'). [via Wikipedia](https://en.wikipedia.org/wiki/Knitting)
-{: .quote}
+> If they are not secured, the loops of a knitted course will come undone when their yarn is pulled; this is known as ripping out, unravelling knitting, or humorously, frogging (because you 'rip it', this sounds like a frog croaking: 'rib-bit').
+{: .quote cite="https://en.wikipedia.org/wiki/Knitting"}
 
 ```console
 $ python bin/knit-frog.py topics/admin/tutorials/singularity/tutorial.md /tmp/03-singularity

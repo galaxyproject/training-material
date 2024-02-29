@@ -12,7 +12,7 @@ objectives:
   - Identify if it is appropriate
   - Interact with the service administrators to arrange for infrastructure
 key_points:
-  - Infrastructure is available for running Galaxy trainings for free from UseGalaxy.eu, UseGalaxy.org, and UseGalaxy.org.au
+  - Infrastructure is available for running Galaxy trainings for free from UseGalaxy.*
   - This can be easier than setting up a local Galaxy and may have more resources available
   - But have a backup plan
 contributors:

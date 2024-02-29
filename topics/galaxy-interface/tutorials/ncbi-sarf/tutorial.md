@@ -104,12 +104,13 @@ We will import the JSON files into Galaxy to query them directory, however the f
 >
 {: .comment}
 
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
 
 > <hands-on-title>Loading SRA Aligned Read Format (SARF) Object Metadata URLs into Galaxy</hands-on-title>
 >
 >This step needs to be repeated at the beginning of an analysis to refresh the metadata to the latest daily version.
 >
-> 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other.
+> 1. Go to your Galaxy instance of choice such as one of the {% for server in servers %}[{{ server.name }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %} or any other.
 >
 > 2. Create a new history
 >

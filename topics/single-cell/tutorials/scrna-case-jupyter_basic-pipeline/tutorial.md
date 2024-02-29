@@ -31,6 +31,7 @@ requirements:
 tags:
 - 10x
 - paper-replication
+- Python
 
 contributions:
   authorship:

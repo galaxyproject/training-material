@@ -33,14 +33,15 @@ contributors:
 
 Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a
 human brain work. In the past decade, there has been a huge resurgence of neural networks thanks
-to the vast availability of data and enormous increases in computing capacity (Successfully
+to the vast availability of data and enormous increases in computing capacity (successfully
 training complex neural networks in some domains requires lots of data and compute capacity). There
-are various types of neural networks (Feedforward, recurrent, etc). In this tutorial, we discuss
-recurrent neural networks, which model sequential data, and have been successfully applied to language
+are various types of neural networks (feedforward, recurrent, etc). In this tutorial, we discuss
+recurrent neural networks (RNN), which model sequential data, and have been successfully applied to language
 generation, machine translation, speech recognition, image description, and text summarization
 ({% cite wen-etal-2015-semantically %}, {% cite cho-etal-2014-learning %}, {% cite LimEtAl %},
-{% cite karpathyEtAl %}, {% cite li-etal-2017-deep %}). We then explain how RNN differ from feedforward networks,
-describe various RNN architectures and solve a sentiment analysis problem using RNN in Galaxy.
+{% cite karpathyEtAl %}, {% cite li-etal-2017-deep %}). We start by explaining how RNN differ from
+feedforward networks (FNN), describe various RNN architectures, and solve a sentiment analysis problem
+using RNN in Galaxy.
 
 > <agenda-title></agenda-title>
 >
@@ -51,14 +52,11 @@ describe various RNN architectures and solve a sentiment analysis problem using 
 >
 {: .agenda}
 
-# Review of feedforward neural networks (FNN)
+# Feedforward neural networks (FNN)
 
 In feedforward neural networks (FNN) a single training example is presented to the network,
-after which the the network generates an output. For example, a lung X-ray image is passed
-to a FNN, and the network predicts tumor or no tumor. By contrast, in RNN a training example
-is a sequence, which is presented to the network one at a time. For example, a sequence of
-English words is passed to a RNN, one at a time, and the network generates a sequence of
-Persian words, one at a time. RNN handle sequential data, whether its temporal or ordinal.
+after which the network generates an output. For example, a lung X-ray image is passed
+to a FNN, and the network predicts tumor or no tumor.
 
 ## Single layer FNN
 
@@ -70,7 +68,7 @@ weight. Afterwards, the results are summed up, along with a bias, and passed to 
 ![An activation function (such as Sigmoid, Tanh, etc.) applied to the input of the only neuron in the output layer of a feedforward neural network](../../images/activation.gif "Activation of the output neuron o1. Activation function f could be Sigmoid, Tanh, ReLU, etc.")
 
 The activation function can have many forms (sigmoid, tanh, ReLU, linear, step function, sign function, etc.).
-Output layer neurons usually have sigmoid or tanh functions. For more information on the listed activation
+Output layer neurons usually have *sigmoid* or *tanh* functions. For more information on the listed activation
 functions, please refer to {% cite nwankpaEtAl %}.
 
 ![Mathmatical formula for Sigmoid activation function](../../images/sigmoid.gif "Sigmoid activation function")
@@ -105,25 +103,29 @@ direction of the gradient, to find the local minimum.
 
 # Recurrent neural networks
 
-Unlike FNN, in RNN the output of the network at time t is used as network input at time t+1. RNN handle sequential data (e.g. temporal or ordinal).
+Unlike FNN, in RNN the output of the network at time *t* is used as network input
+at time *t+1*. In RNN, a training example is a sequence, which is presented to the
+network one at a time. For example, a sequence of English words is passed to a
+RNN, one at a time, and the network generates a sequence of Persian words, one
+at a time. RNN handle sequential data, whether its temporal or ordinal.
 
 ## Possible RNN inputs/outputs
 
-There are 4 possible input/output combinations for RNN and each have a specific application. One-to-one is basically a FNN. One-to-many,
+There are 4 possible input/output combinations for RNN and each have a specific application. *One-to-one* is basically a FNN. *One-to-many* is
 where we have one input and a variable number of outputs. One example application is image captioning, where a single image is provided
-as input and a variable number of words (which caption the image) is returned as output (See Figure 7).
+as input and a variable number of words (which caption the image) is returned as output (see Figure 7).
 
 ![Neurons forming a one-to-many recurrent neural network](../../images/RNN_1_to_n.png "One-to-many RNN")
 
-Many-to-one RNN, on the other hand, have a variable number of inputs and a single output. One example application is document sentiment
+*Many-to-one* RNN combination has a variable number of inputs and a single output. One example application is document sentiment
 classification, where a variable number of words in a document are presented as input, and a single output predicts whether the document
-has a positive or negative sentiment regarding a topic (See Figure 8).
+has a positive or negative sentiment regarding a topic (see Figure 8).
 
 ![Neurons forming a many-to-one recurrent neural network](../../images/RNN_n_to_1.png "Many-to-one RNN")
 
-There are two types of many-to-many RNN. One in which the number of inputs and outputs match, e.g., in labeling the video frames the number
+Finally there is many-to-many RNN, which have two types: one in which the number of inputs and outputs match, e.g., in labeling the video frames the number
 of frames matches the number of labels, and the other in which the number of inputs and outputs do not match, e.g., in language translation
-we pass in n words in English and get m words in Italian (See Figure 9).
+we pass in *n* words in English and get *m* words in Italian (see Figure 9).
 
 ![Neurons forming a many-to-many recurrent neural network](../../images/RNN_n_to_m.png "Many-to-many RNN")
 
@@ -131,23 +133,23 @@ we pass in n words in English and get m words in Italian (See Figure 9).
 
 Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM ({% cite hochreiter1997long %}), and 3) GRU ({% cite cho-etal-2014-learning %}).
 A Vanilla RNN, simply combines the state information from the previous timestamp with the input from the current timestamp to generate the
-state information and output for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the
-**vanishing gradient** problem. Basically, weights/biases are updated according to the gradient of the loss functions relative to 
-the weights/biases. The gradients are calculated recursively from the output layer towards the input layer (Hence, the name *backpropagation*).
+state information and output for current timestamp. A problem with Vanilla RNN is that training deep RNN networks is impossible due to the
+**vanishing gradient** problem. Basically, weights/biases are updated according to the gradient of the loss functions relative to
+the weights/biases. The gradients are calculated recursively from the output layer towards the input layer (hence, the name *backpropagation*).
 The gradient of the input layer is the product of the gradient of the subsequent layers. If those gradients are small, the gradient of the input
 layer (which is the product of multiple small values) will very small, resulting in very small updates to weights/biases of the initial layers
 of the RNN, effectively halting the learning process.
 
 LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this
-tutorial (Please refer to {% cite hochreiter1997long %} and {% cite cho-etal-2014-learning %}), but in a nutshell both LSTM and GRU use **gates** such that the weights/biases updates in previous
+tutorial (please refer to {% cite hochreiter1997long %} and {% cite cho-etal-2014-learning %}), but in a nutshell both LSTM and GRU use **gates** such that the weights/biases updates in previous
 layers are calculated via a series of additions (not multiplications). Hence, these architectures can learn even when the RNN has hundreds or
 thousands of layers.
 
 # Text representation schemes
 
 In this tutorial we perform sentiment analysis on IMDB (https://www.imdb.com/) movie reviews dataset ({% cite maas-EtAl %}). We train our RNN on
-the training dataset, which is made up of 25000 movie reviews, some positive and some negative. We then test our RNN on the test set, which is
-also made up of 25000 movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with
+the training dataset, which is made up of 25,000 movie reviews, some positive and some negative. We then test our RNN on the test set, which is
+also made up of 25,000 movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with
 text data, it's a good idea to review various mechanisms for representing text data. Before that, we are going to briefly discuss how to preprocess
 text documents.
 
@@ -155,8 +157,8 @@ text documents.
 
 The first step is to tokenize a document, i.e., break it down into words. Next, we remove the punctuation marks, URLs, and stop words -- words like
 'a', 'of', 'the', etc. that happen frequently in all documents and do not have much value in discriminating between documents. Next, we normalize
-the text, e.g., replace 'brb' with 'Be right back', etc. Then, We then run the spell checker to fix typos and also make all words lowercase. Next, we perform stemming or lemmatization. Basically, if we have words like 'organizer', 'organize', 'organized', and 'organization' we want to reduce all of them to a single word. Stemming cuts the end of these words to come up with a single root (e.g., 'organiz'). The root may not be an actual word.
-Lemmatization is smarter in that it reduces the word variants to a root that is actually a word (e.g., 'organize'). All of these steps help reduce
+the text, e.g., replace 'brb' with 'Be right back', etc. Then, We then run the spell checker to fix typos and also make all words lowercase. Next, we perform stemming or lemmatization. Namely, if we have words like 'organizer', 'organize', 'organized', and 'organization' we want to reduce all of them to a single word. Stemming cuts the end of these words to come up with a single root (e.g., 'organiz'). The root may not be an actual word.
+Meanwhile, lemmatization is smarter in that it reduces the word variants to a root that is actually a word (e.g., 'organize'). All of these steps help reduce
 the number of features in feature vector of a document and should make the training of our model faster/easier.
 
 For this introductory tutorial, we do minimal text preprocessing. We ignore the top 50 words in IMDB reviews (mostly stop words) and include
@@ -178,18 +180,18 @@ representation of these documents is given in Figure 10.
 BoW's advantage is its simplicity, yet it does not take into account the rarity of a word across documents, which unlike common words are
 important for document classification.
 
-In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Term frequency, the
-frequency of a word in a document, and 2) Inverse document frequency, the inverse of the number of documents that have the word divided
+In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) term frequency, the
+frequency of a word in a document, and 2) inverse document frequency, the inverse of the number of documents that have the word divided
 by the total number of documents (we usually use logarithm of the IDF).
 
-TF-IDF takes into account the rarity of a word across documents, but like BoW does not capture word order or word meaning in documents. BoW
-and TF-IDF are suitable representations for when word order is not important. They are used in document classification problems like spam detection.
+TF-IDF takes into account the rarity of a word across documents, and like BoW, it also does not capture word order or word meaning in documents. BoW
+and TF-IDF are suitable representations for when word order is not important. They are used in document classification problems, like spam detection.
 
 ## One hot encoding (OHE)
 
 OHE is a technique to convert categorical variables such as words into a vector. Suppose our vocabulary has 3 words: orange, apple, banana.
 Each word for this vocabulary is represented by a vector of size 3. Orange is represented by a vector whose first element is 1 and other
-elements are 0; Apple is represented by a vector whose second element is 1 and other elements are 0; And banana is represented by a
+elements are 0; apple is represented by a vector whose second element is 1 and other elements are 0; and banana is represented by a
 vector whose third element is 1 and other elements are 0. As you can see only one element in the vector is 1 and the rest are 0's. The same
 concept applies if the size of the vocabulary is N.
 
@@ -200,14 +202,14 @@ concept of word similarity.
 
 ## Word2Vec
 
-In Word2Vec, each word is represented as an n dimensional vector (n being much smaller than vocabulary size), such that the words that have
+In Word2Vec, each word is represented as an *n* dimensional vector (*n* being much smaller than vocabulary size), such that the words that have
 similar meanings are closer to each other in the vector space, and words that don't have a similar meaning are farther apart. Words are
 considered to have a similar meaning if they co-occur often in documents. There are 2 Word2Vec architectures, one that predicts the probability
-of a word given the surrounding words (Continuous BOW), and one that given a word predicts the probability of the surrounding words (Continuous
+of a word given the surrounding words (continuous BoW), and one that given a word predicts the probability of the surrounding words (continuous
 skip-gram).
 
-In this tutorial, we find an n dimensional representation of the IMDB movie review words, not based on word meanings, but based on how they
-improve the sentiment classification task. The n dimensional representation is learned by the learning algorithm, simply by reducing the
+In this tutorial, we find an *n* dimensional representation of the IMDB movie review words, not based on word meanings, but based on how they
+improve the sentiment classification task. The *n* dimensional representation is learned by the learning algorithm, simply by reducing the
 cost function via backpropagation.
 
 # Get Data
@@ -218,7 +220,7 @@ cost function via backpropagation.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the files from [Zenodo](https://zenodo.org/record/4477881) or from the shared data library
+> 2. Import the files from [Zenodo](https://zenodo.org/record/4477881) and choose the type of data as `tabular`
 >
 >    ```
 >    https://zenodo.org/record/4477881/files/X_test.tsv
@@ -228,8 +230,6 @@ cost function via backpropagation.
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 > 3. Rename the datasets as `X_test`, `X_train`, `y_test`, and `y_train` respectively.
@@ -271,11 +271,11 @@ and plot the confusion matrix.
 {: .hands_on}
 
 Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 3 layers. The first layer is
-an embedding layer, that transforms each review words into a 32 dimensional vector (*output_dim*). We have 10000 unique words in our IMDB dataset
-(*input_dim*). The second layer is an *LSTM* layer, which is a type of RNN. Output of the LSTM layer has a size of *100*. The third layer is a
+an embedding layer, that transforms each review words into a 32 dimensional vector (*output_dim*). We have 10,000 unique words in our IMDB dataset
+(*input_dim*). The second layer is an *LSTM* layer, which is a type of RNN and it learns dependencies between time steps. We set the output size of the LSTM layer to *100*. The third layer is a
 *Dense* layer, which is a fully connected layer (all 100 output neurons in LSTM layer are connected to a single neuron in this layer). It has a
 *sigmoid* activation function, that generates an output between 0 and 1. Any output greater than 0.5 is considered a predicted positive review,
-and anything less than 0.5 a negative one. The model config can be downloaded as a JSON file.
+and anything less than 0.5 a negative one. The model config can be downloaded as a JSON file for future reuse.
 
 ## Create a deep learning model
 
@@ -298,7 +298,7 @@ and anything less than 0.5 a negative one. The model config can be downloaded as
 A loss function measures how different the predicted output is versus the expected output. For binary classification problems, we use
 *binary cross entropy* as loss function. Epochs is the number of times the whole training data is used to train the model. Setting *epochs* to 2
 means each training example in our dataset is used twice to train our model. If we update network weights/biases after all the training data is
-feed to the network, the training will be very slow (as we have 25000 training examples in our dataset). To speed up the training, we present
+feed to the network, the training will be very slow (as we have 25,000 training examples in our dataset). To speed up the training, we present
 only a subset of the training examples to the network, after which we update the weights/biases. *batch_size* decides the size of this subset.
 The model builder can be downloaded as a zip file.
 
@@ -319,7 +319,7 @@ The model builder can be downloaded as a zip file.
 >
 {: .hands_on}
 
-The training step generates 2 datasets. 1) accuracy of the trained model, 2) the trained model, in h5mlm format. These files are needed for prediction in the next step.
+The training step generates 2 datasets. 1) accuracy of the trained model, 2) the trained model, in *h5mlm* format. These files are needed for prediction in the next step.
 
 ## Model Prediction
 
@@ -327,7 +327,6 @@ The training step generates 2 datasets. 1) accuracy of the trained model, 2) the
 >
 > - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.10.0) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
->    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step.
 >    - *"Select invocation method"*: `predict`
 >    - *"Select input data type for prediction"*: `tabular data`
 >    - *"Training samples dataset"*: Select `X_test` dataset
@@ -354,12 +353,12 @@ the test dataset.
 {: .hands_on}
 
 **Confusion Matrix** is a table that describes the performance of a classification model. It lists the number of positive and negative examples
-that were correctly classified by the model, True positives (TP) and true negatives (TN), respectively. It also lists the number of examples that
-were classified as positive that were actually negative (False positive, FP, or Type I error), and the number of examples that were classified
-as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate **precision** and
-**recall** {% cite TatbulEtAl  %}. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall
-is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is
-to use the **F score**, which is the harmonic mean of precision and recall
+that were correctly classified by the model, true positives (TP) and true negatives (TN), respectively. It also lists the number of examples that
+were classified as positive that were actually negative (false positive, FP, or type I error), and the number of examples that were classified
+as negative that were actually positive (false negative, FN, or type 2 error). Given the confusion matrix, we can calculate **precision** and
+**recall** {% cite TatbulEtAl  %}. Precision is the fraction of predicted positives that are true positives (precision = TP / (TP + FP)). Recall
+is the fraction of true positives that are predicted (recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is
+to use the **F score**, which is the harmonic mean of precision and recall.
 
 $$ Precision = \frac{\text{True positives}}{\text{True positives + False positives}} $$
 
@@ -369,14 +368,14 @@ $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} $$
 
 ![Confusion matrix for our sentiment analysis problem](../../images/ConfusionMatrix.png "Sentiment analysis confusion matrix")
 
-Figure 12 is the resultant confusion matrix for our sentiment analysis problem. The first row in the table represents the *true* 0 (or negative sentiment)
-class labels (we have 10,397 + 2,103 = 12,500 reviews with negative sentiment). The second row represents the *true* 1 (or positive sentiment) class labels
+Figure 12 is the resultant confusion matrix for our sentiment analysis problem (note that your numbers in the matrix may differ, and that is expected). The top row in the figure represents the *true* 0 (or negative sentiment)
+class labels (we have 10,397 + 2,103 = 12,500 reviews with negative sentiment). The bottom row represents the *true* 1 (or positive sentiment) class labels
 (Again, we have 1,281 + 11,219 = 12,500 reviews with positive sentiment). The left column represents the *predicted* negative sentiment class labels (Our RNN
 predicted 10,397 + 1,281 = 11,678 reviews as having a negative sentiment). The right column represents the *predicted* positive class labels (Our RNN
 predicted 11,219 + 2,103 = 13,322 reviews as having a positive sentiment).Looking at the bottom right cell, we see that our RNN has correctly predicted 11,219
-reviews as having a positive sentiment (True positives). Looking at the top right cell, we see that our RNN has incorrectly predicted 2,103 reviews as having
-a positive (False positives). Similarly, looking at the top left cell, we see that our RNN has correctly predicted 10,397 reviews as having negative sentiment
-(True negative). Finally, looking at the bottom left cell, we see that our RNN has incorrectly predicted 1,281 reviews as negative (False negative). Given
+reviews as having a positive sentiment (true positives). Looking at the top right cell, we see that our RNN has incorrectly predicted 2,103 reviews as having
+a positive (false positives). Similarly, looking at the top left cell, we see that our RNN has correctly predicted 10,397 reviews as having negative sentiment
+(true negative). Finally, looking at the bottom left cell, we see that our RNN has incorrectly predicted 1,281 reviews as negative (false negative). Given
 these numbers we can calculate Precision, Recall, and the F score as follows:
 
 $$ Precision = \frac{\text{True positives}}{\text{True positives + False positives}} = \frac{11,219}{11,219 + 2,102} = 0.84 $$
@@ -389,5 +388,5 @@ $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \
 
 
 In this tutorial, we briefly reviewed feedforward neural networks, explained how recurrent neural networks are different, and discussed various
-RNN input/output and architectures. We also discussed various text representation and preprocessing schemes and used Galaxy to solve a sentiment
+RNN input/outputs and architectures. We also discussed various text representation and preprocessing schemes and used Galaxy to solve a sentiment
 classification problem using RNN on IMDB movie reviews dataset.

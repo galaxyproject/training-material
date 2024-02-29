@@ -10,9 +10,13 @@ objectives:
     - Learn how to import/export data from/to InterMine instances
     - Understand the InterMine Interchange Dataset
 time_estimation: 1h
-contributors:
+contributions:
+  authorship:
     - danielabutano
     - yochannah
+tags:
+  - gmod
+  - intermine
 subtopic: analyse
 ---
 

@@ -4,8 +4,11 @@ layout: tutorial_hands_on
 title: Refining Genome Annotations with Apollo (eukaryotes)
 zenodo_link: https://zenodo.org/record/3270822
 tags:
+  - gmod
   - eukaryote
   - cyoa
+  - jbrowse1
+  - apollo2
 questions:
   - How to visualize your genome after automated annotations have been performed?
   - How to manually annotate genome after automated annotations have been performed?
@@ -29,6 +32,7 @@ contributions:
     - abretaud
   funding:
     - gallantries
+    - eurosciencegateway
 
 requirements:
   - type: "internal"

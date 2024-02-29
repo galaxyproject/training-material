@@ -85,7 +85,7 @@ If you would like to try the 'fast' option, once you've imported the datasets, y
 >
 > 1. **Import the workflow** into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga" title="Quality Control" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/microbiome/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga" title="Quality Control" %}
 >
 > 2. Run the workflow {% icon workflow %} using the following parameters:
 >

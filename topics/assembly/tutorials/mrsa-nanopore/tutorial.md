@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome Assembly of MRSA using Oxford Nanopore MinION Data
-zenodo_link: 'https://zenodo.org/record/4534098'
+zenodo_link: 'https://zenodo.org/record/10669812'
 questions:
 - How to check the quality of the MinION data?
 - How to perform an assembly with MinION data?
@@ -25,6 +25,8 @@ tags:
 - nanopore
 - assembly
 - amr
+- gmod
+- jbrowse1
 
 contributions:
   authorship:
@@ -63,7 +65,7 @@ Japan" from {% cite Hikichi_2019 %} which describes:
 > range from asymptomatic colonization of the nasal mucosa to soft tissue
 > infection to fulminant invasive disease. Here, we report the complete
 > genome sequences of eight MRSA strains isolated from patients in Japan.
-{: .quote}
+{: .quote cite="{% cite_url Hikichi_2019 %}"}
 
 > <agenda-title></agenda-title>
 >

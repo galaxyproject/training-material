@@ -102,7 +102,7 @@ module Jekyll
     # Returns:
     # nil
     def generateLibrary(site)
-      puts '[GTN/API] Data Library'
+      Jekyll.logger.info '[GTN/API] Data Library'
       page2 = PageWithoutAFile.new(site, '', 'api/', 'data-library.yaml')
       data_libraries = Dir.glob('topics/**/data-library.yaml')
       data_libraries.map! { |x| YAML.load_file(x) }
@@ -123,9 +123,10 @@ module Jekyll
       # TODO:
       # generateLibrary(site)
 
+      Jekyll.logger.info '[GTN/API] Generating API'
       # Full Bibliography
       Gtn::Scholar.load_bib(site)
-      puts '[GTN/API] Bibliography'
+      Jekyll.logger.debug '[GTN/API] Bibliography'
       page3 = PageWithoutAFile.new(site, '', 'api/', 'gtn.bib')
       page3.content = site.config['cached_global_bib'].to_s
       page3.data['layout'] = nil
@@ -143,8 +144,20 @@ module Jekyll
       page2.data['layout'] = nil
       site.pages << page2
 
+      # Tool Categories
+      page2 = PageWithoutAFile.new(site, '', 'api/', 'toolcats.json')
+      page2.content = JSON.generate(site.data['toolcats'])
+      page2.data['layout'] = nil
+      site.pages << page2
+
+      # Tool Categories
+      page2 = PageWithoutAFile.new(site, '', 'api/', 'toolshed-revisions.json')
+      page2.content = JSON.generate(site.data['toolshed-revisions'])
+      page2.data['layout'] = nil
+      site.pages << page2
+
       # Contributors
-      puts '[GTN/API] Contributors, Funders, Organisations'
+      Jekyll.logger.debug '[GTN/API] Contributors, Funders, Organisations'
       %w[contributors funders organisations].each do |type|
         page2 = PageWithoutAFile.new(site, '', 'api/', "#{type}.json")
         page2.content = JSON.pretty_generate(site.data[type].map { |c, _| mapContributor(site, c) })
@@ -184,7 +197,7 @@ module Jekyll
       site.pages << page2
 
       # Trigger the topic cache to generate if it hasn't already
-      puts '[GTN/API] Tutorials'
+      Jekyll.logger.debug '[GTN/API] Tutorials'
       TopicFilter.topic_filter(site, 'does-not-matter')
       TopicFilter.list_topics(site).map do |topic|
         out = site.data[topic].dup
@@ -226,7 +239,7 @@ module Jekyll
       end
 
       topics = {}
-      puts '[GTN/API] Topics'
+      Jekyll.logger.debug '[GTN/API] Topics'
       # Individual Topic Indexes
       site.data.each_pair do |k, v|
         if v.is_a?(Hash) && v.key?('type') && v.key?('editorial_board')
@@ -265,7 +278,7 @@ module Jekyll
       page2.data['layout'] = nil
       site.pages << page2
 
-      puts '[GTN/API] Tutorial and Slide pages'
+      Jekyll.logger.debug '[GTN/API] Tutorial and Slide pages'
 
       TopicFilter.list_all_materials(site).each do |material|
         directory = material['dir']
@@ -304,7 +317,7 @@ module Jekyll
       site.pages << page2
 
       # Top Tools
-      puts '[GTN/API] Top Tools'
+      Jekyll.logger.debug '[GTN/API] Top Tools'
       page2 = PageWithoutAFile.new(site, '', 'api/', 'top-tools.json')
       page2.content = JSON.pretty_generate(TopicFilter.list_materials_by_tool(site))
       page2.data['layout'] = nil
@@ -361,6 +374,26 @@ end
 # Basically like `PageWithoutAFile`, we just write out the ones we'd created earlier.
 Jekyll::Hooks.register :site, :post_write do |site|
   dir = File.join(site.dest, 'api', 'workflows')
+
+  # Public tool listing: reorganised
+  if site.data['public-server-tools'] && site.data['public-server-tools']['tools']
+    site.data['public-server-tools']['tools'].each do |tool, version_data|
+      path = File.join(site.dest, 'api', 'psl', "#{tool}.json")
+      dir = File.dirname(path)
+      FileUtils.mkdir_p(dir) unless File.directory?(dir)
+
+      d = version_data.dup
+      d.each_key do |k|
+        # Replace the indexes with the server URLs from site['public-server-tools']['servers']
+        d[k] = d[k].map { |v| site.data['public-server-tools']['servers'][v] }
+      end
+
+      File.write(path, JSON.generate(d))
+    end
+    Jekyll.logger.debug '[GTN/API/PSL] PSL written'
+  else
+    Jekyll.logger.debug '[GTN/API/PSL] PSL Dataset not available, are you in a CI environment?'
+  end
 
   # ro-crate-metadata.json
   TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|

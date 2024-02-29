@@ -61,7 +61,7 @@ module Gtn
     # from disk ourselves.
     def self._load_file(site, category)
       if site.nil?
-        Jekyll.logger.warning "[GTN/Contributor] Loading #{category} from disk, this access could be improved"
+        Jekyll.logger.warn "[GTN/Contributor] Loading #{category} from disk, this access could be improved"
         File.open("_data/#{category}.yml", 'r') { |f| YAML.safe_load(f) }
       else
         site.data[category]
@@ -84,10 +84,10 @@ module Gtn
       elsif _load_file(site, 'funders').key?(c)
         return ['funder', site.data['funders'][c]]
       else
-        Jekyll.logger.error "Contributor #{c} not found"
+        Jekyll.logger.warn "Contributor #{c} not found"
       end
 
-      [nil, nil]
+      ['contributor', { 'name' => c }]
     end
 
     ##
@@ -119,7 +119,10 @@ module Gtn
     # Returns:
     # +Hash+ of contributors, funders, organisations merged together
     def self.list(site)
-      site.data['contributors'].merge(site.data['funders']).merge(site.data['organisations'])
+      site.data['contributors']
+          .merge(site.data['funders'])
+          .merge(site.data['organisations'])
+          .reject { |c| c['halloffame'] == 'no' }
     end
 
     ##

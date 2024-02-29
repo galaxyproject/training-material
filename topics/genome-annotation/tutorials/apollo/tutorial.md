@@ -4,7 +4,11 @@ layout: tutorial_hands_on
 title: Refining Genome Annotations with Apollo (prokaryotes)
 zenodo_link: https://zenodo.org/record/4889110
 tags:
+  - gmod
   - prokaryote
+  - microgalaxy
+  - jbrowse1
+  - apollo2
 questions:
   - How to visualize your genome after automated annotations have been performed?
   - How to manually annotate genome after automated annotations have been performed?
@@ -31,6 +35,7 @@ contributions:
     - mboudet
   funding:
     - gallantries
+    - eurosciencegateway
 
 requirements:
   - type: "internal"

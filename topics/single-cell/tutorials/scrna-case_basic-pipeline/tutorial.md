@@ -106,6 +106,12 @@ You can access the data for this tutorial in multiple ways:
 >
 {: .hands_on}
 
+4. **Importing data from EBI Single Cell Expression Atlas**
+
+You can also pull the data from publicly available [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home). You can simply access the dataset we are working on by using the tool *EBI SCXA Data Retrieval* with experiment id of [E-MTAB-6945](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads). This [short tutorial]({% link topics/single-cell/tutorials/EBI-retrieval/tutorial.md %}) will show you how to use this tool and modify the output so that it's compatible with this tutorial and its workflow.
+
+
+
 # Important tips for easier analysis
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
@@ -610,7 +616,7 @@ We're still looking at around 20 dimensions at this point. We need to identify h
 >
 > 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunPCA** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Maximum number of neighbours used"*: `15`
 >    - *"Use the indicated representation"*: `X_pca`
 >    - *"Number of PCs to use"*: `20`
@@ -632,12 +638,12 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 > 1. {% tool [Scanpy RunTSNE](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
 >    - *"Use the indicated representation"*: `X_pca`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
 >
 > 2. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunTSNE** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `Yes`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `Yes`
 {: .hands_on}
 
 {% icon congratulations %} Congratulations! You have prepared your object and created neighborhood coordinates. We can now use those to call some clusters!
@@ -671,7 +677,7 @@ Finally, let's identify clusters! Unfortunately, it's not as majestic as biologi
 >
 > 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunUMAP** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Resolution, high value for more and smaller clusters"*: `0.6`
 {: .hands_on}
 
@@ -693,7 +699,7 @@ Nearly plotting time! But one final piece is to add in SOME gene information. Le
 > 3. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"The sample grouping/clustering to use"*: `genotype`
->    - *"Use programme defaults"*: {% icon history-share %} `Yes`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `Yes`
 >
 > 4. **Rename** {% icon galaxy-pencil %} output table (not h5ad) `Markers - genotype`
 >
@@ -815,7 +821,7 @@ The authors weren't interested in further annotation of the DP cells, so neither
 >
 > 2. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
->    - *"Copy observations (such as clusters)"*: {% icon history-share %} *Yes*
+>    - *"Copy observations (such as clusters)"*: {% icon param-toggle %} *Yes*
 >    - **Keys from obs to copy**
 >    - *"+ Insert Keys from obs to copy"*
 >    - *"Key contains"*: `louvain`

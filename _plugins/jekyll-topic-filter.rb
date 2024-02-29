@@ -39,14 +39,14 @@ module TopicFilter
   def self.fill_cache(site)
     return if site.data.key?('cache_topic_filter')
 
-    puts '[GTN/TopicFilter] Begin Cache Prefill'
+    Jekyll.logger.debug '[GTN/TopicFilter] Begin Cache Prefill'
     site.data['cache_topic_filter'] = {}
 
     # For each topic
     list_topics(site).each do |topic|
       site.data['cache_topic_filter'][topic] = filter_by_topic(site, topic)
     end
-    puts '[GTN/TopicFilter] End Cache Prefill'
+    Jekyll.logger.debug '[GTN/TopicFilter] End Cache Prefill'
   end
 
   ##
@@ -119,16 +119,33 @@ module TopicFilter
         'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
         'materials' => all_topics_for_tutorial.reject { |x| seen_ids.include?(x['id']) }
       }
-    elsif site.data[topic_name]['tag_based'] && site.data[topic_name]['custom_ordering']
-      # TODO
-      Jekyll.logger.error 'UNIMPLEMENTED'
+    elsif site.data[topic_name]['tag_based'] && site.data[topic_name].key?('subtopics')
       out = {}
+      seen_ids = []
+      tn = topic_name.gsub('by_tag_', '')
+      materials = filter_by_tag(site, tn)
+
+      # For each subtopics
+      site.data[topic_name]['subtopics'].each do |subtopic|
+        # Find matching tag-based tutorials in our filtered-by-tag materials
+        specific_resources = materials.select { |x| (x['tags'] || []).include?(subtopic['id']) }
+        out[subtopic['id']] = {
+          'subtopic' => subtopic,
+          'materials' => specific_resources
+        }
+        seen_ids += specific_resources.map { |x| x['id'] }
+      end
+
+      filter_by_tag(site, tn)
+      out['__OTHER__'] = {
+        'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
+        'materials' => materials.reject { |x| seen_ids.include?(x['id']) }
+      }
     elsif site.data[topic_name]['tag_based'] # Tag based Topic
       # We'll construct a new hash of subtopic(parent topic) => tutorials
       out = {}
       seen_ids = []
       tn = topic_name.gsub('by_tag_', '')
-
       materials = filter_by_tag(site, tn)
 
       # Which topics are represented in those materials?
@@ -183,7 +200,8 @@ module TopicFilter
   def self.fetch_tutorial_material(site, topic_name, tutorial_name)
     fill_cache(site)
     if site.data['cache_topic_filter'][topic_name].nil?
-      Jekyll.logger.warn "Topic cache not filled, cannot fetch tutorial material for #{topic_name}"
+      Jekyll.logger.warn "Cannot fetch tutorial material for #{topic_name}"
+      nil
     else
       site.data['cache_topic_filter'][topic_name].select { |p| p['tutorial_name'] == tutorial_name }[0]
     end
@@ -210,8 +228,6 @@ module TopicFilter
   # Returns:
   # +Hash+:: The annotation
   #
-  # This is a bit of a hack, but it works for now.
-  #
   # Example:
   #  /topics/assembly/tutorials/velvet-assembly/tutorial.md
   #  => {
@@ -222,7 +238,7 @@ module TopicFilter
   #    "dir" => "topics/assembly/tutorials/velvet-assembly"
   #    "type" => "tutorial"
   #  }
-  def self.annotate_path(path)
+  def self.annotate_path(path, layout)
     parts = path.split('/')
     parts.shift if parts[0] == '.'
 
@@ -244,9 +260,12 @@ module TopicFilter
 
     return nil if parts[-1] =~ /data[_-]library.yaml/ || parts[-1] =~ /data[_-]manager.yaml/
 
-    if parts[4] =~ /tutorial.*\.md/
+    # Check if it's a symlink
+    material['symlink'] = true if File.symlink?(material['dir'])
+
+    if parts[4] =~ /tutorial.*\.md/ || layout == 'tutorial_hands_on'
       material['type'] = 'tutorial'
-    elsif parts[4] =~ /slides.*\.html/
+    elsif parts[4] =~ /slides.*\.html/ || %w[tutorial_slides base_slides introduction_slides].include?(layout)
       material['type'] = 'slides'
     elsif parts[4] =~ /ipynb$/
       material['type'] = 'ipynb'
@@ -339,7 +358,7 @@ module TopicFilter
 
       # Extract the material metadata based on the path
       page.data['url'] = page.url
-      material_meta = annotate_path(page.path)
+      material_meta = annotate_path(page.path, page.data['layout'])
 
       # If unannotated then we want to skip this material.
       next if material_meta.nil?
@@ -356,11 +375,84 @@ module TopicFilter
       page.data['tutorial_name'] = material_meta['tutorial_name']
       page.data['dir'] = material_meta['dir']
       page.data['short_id'] = shortlinks_reversed[page.data['url']]
+      page.data['symlink'] = material_meta['symlink']
 
       interesting[mk]['resources'].push([material_meta['type'], page])
     end
 
     interesting
+  end
+
+  def self.mermaid_safe_label(label)
+    (label || '')
+      .gsub('(', '').gsub(')', '')
+      .gsub('[', '').gsub(']', '')
+      .gsub('"', '”') # We accept that this is not perfectly correct.
+      .gsub("'", '’')
+  end
+
+  def self.mermaid(wf)
+    # We're converting it to Mermaid.js
+    # flowchart TD
+    #     A[Start] --> B{Is it?}
+    #     B -- Yes --> C[OK]
+    #     C --> D[Rethink]
+    #     D --> B
+    #     B -- No ----> E[End]
+
+    statements = []
+    wf['steps'].each_key do |id|
+      step = wf['steps'][id]
+      chosen_label = mermaid_safe_label(step['label'] || step['name'])
+
+      case step['type']
+      when 'data_collection_input'
+        statements.append "#{id}[\"ℹ️ Input Collection\\n#{chosen_label}\"];"
+      when 'data_input'
+        statements.append "#{id}[\"ℹ️ Input Dataset\\n#{chosen_label}\"];"
+      when 'parameter_input'
+        statements.append "#{id}[\"ℹ️ Input Parameter\\n#{chosen_label}\"];"
+      when 'subworkflow'
+        statements.append "#{id}[\"🛠️ Subworkflow\\n#{chosen_label}\"];"
+      else
+        statements.append "#{id}[\"#{chosen_label}\"];"
+      end
+
+      case step['type']
+      when 'data_collection_input', 'data_input'
+        statements.append "style #{id} stroke:#2c3143,stroke-width:4px;"
+      when 'parameter_input'
+        statements.append "style #{id} fill:#ded,stroke:#393,stroke-width:4px;"
+      when 'subworkflow'
+        statements.append "style #{id} fill:#edd,stroke:#900,stroke-width:4px;"
+      end
+
+      step = wf['steps'][id]
+      step['input_connections'].each do |_, v|
+        # if v is a list
+        if v.is_a?(Array)
+          v.each do |v2|
+            statements.append "#{v2['id']} -->|#{mermaid_safe_label(v2['output_name'])}| #{id};"
+          end
+        else
+          statements.append "#{v['id']} -->|#{mermaid_safe_label(v['output_name'])}| #{id};"
+        end
+      end
+
+      (step['workflow_outputs'] || [])
+        .reject { |wo| wo['label'].nil? }
+        .map do |wo|
+          wo['uuid'] = SecureRandom.uuid.to_s if wo['uuid'].nil?
+          wo
+        end
+        .each do |wo|
+        statements.append "#{wo['uuid']}[\"Output\\n#{wo['label']}\"];"
+        statements.append "#{id} --> #{wo['uuid']};"
+        statements.append "style #{wo['uuid']} stroke:#2c3143,stroke-width:4px;"
+      end
+    end
+
+    "flowchart TD\n" + statements.map { |q| "  #{q}" }.join("\n")
   end
 
   def self.resolve_material(site, material)
@@ -432,6 +524,19 @@ module TopicFilter
     # automatically set `slides: true`
     page_obj['slides'] = slides.length.positive? if !page_obj.key?('slides')
 
+    all_resources = slides + tutorials
+    page_obj['mod_date'] = all_resources
+                           .map { |p| Gtn::ModificationTimes.obtain_time(p[1].path) }
+                           .max
+
+    page_obj['pub_date'] = all_resources
+                           .map { |p| Gtn::PublicationTimes.obtain_time(p[1].path) }
+                           .min
+
+    page_obj['version'] = all_resources
+                          .map { |p| Gtn::ModificationTimes.obtain_modification_count(p[1].path) }
+                          .max
+
     folder = material['dir']
 
     ymls = Dir.glob("#{folder}/quiz/*.yml") + Dir.glob("#{folder}/quiz/*.yaml")
@@ -452,7 +557,7 @@ module TopicFilter
     domain = if !site.config.nil? && site.config.key?('url')
                "#{site.config['url']}#{site.config['baseurl']}"
              else
-               'http://localhost:4000//training-material/'
+               'http://localhost:4000/training-material/'
              end
     # Similar as above.
     workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
@@ -466,6 +571,7 @@ module TopicFilter
         wf_json = JSON.parse(File.read(wf_path))
         license = wf_json['license']
         creators = wf_json['creator'] || []
+        wftitle = wf_json['name']
 
         # /galaxy-intro-101-workflow.eu.json
         workflow_test_results = Dir.glob(wf_path.gsub(/.ga$/, '.*.json'))
@@ -487,8 +593,10 @@ module TopicFilter
           'license' => license,
           'creators' => creators,
           'name' => wf_json['name'],
+          'title' => wftitle,
           'test_results' => workflow_test_outputs,
           'modified' => File.mtime(wf_path),
+          'mermaid' => mermaid(wf_json),
         }
       end
     end
@@ -521,7 +629,7 @@ module TopicFilter
     topic_name_human = site.data[page_obj['topic_name']]['title']
     page_obj['topic_name_human'] = topic_name_human # TODO: rename 'topic_name' and 'topic_name' to 'topic_id'
     admin_install = Gtn::Toolshed.format_admin_install(site.data['toolshed-revisions'], page_obj['tools'],
-                                                       topic_name_human)
+                                                       topic_name_human, site.data['toolcats'])
     page_obj['admin_install'] = admin_install
     page_obj['admin_install_yaml'] = admin_install.to_yaml
 
@@ -531,6 +639,7 @@ module TopicFilter
     page_obj['translations']['tutorial'] = tutorial_translations
     page_obj['translations']['slides'] = slide_translations
     page_obj['translations']['video'] = slide_has_video # Just demand it?
+    page_obj['license'] = 'CC-BY-4.0' if page_obj['license'].nil?
     # I feel less certain about this override, but it works well enough in
     # practice, and I did not find any examples of `type: <anything other
     # than tutorial>` in topics/*/tutorials/*/tutorial.md but that doesn't
@@ -550,7 +659,7 @@ module TopicFilter
     return site.data['cache_processed_pages'] if site.data.key?('cache_processed_pages')
 
     materials = collate_materials(site, pages).map { |_k, v| resolve_material(site, v) }
-    puts '[GTN/TopicFilter] Filling Materials Cache'
+    Jekyll.logger.info '[GTN/TopicFilter] Filling Materials Cache'
     site.data['cache_processed_pages'] = materials
 
     # Prepare short URLs
@@ -808,16 +917,40 @@ module Jekyll
     # Find the most recently modified tutorials
     # Parameters:
     # +site+:: The +Jekyll::Site+ object, used to get the list of pages.
+    # +exclude_recently_published+:: Do not include ones that were recently
+    #                                published in the slice, to make it look a bit nicer.
     # Returns:
     # +Array+:: An array of the 10 most recently modified pages
     # Example:
     #  {% assign latest_tutorials = site | recently_modified_tutorials %}
-    def recently_modified_tutorials(site)
+    def recently_modified_tutorials(site, exclude_recently_published: true)
       tutorials = site.pages.select { |page| page.data['layout'] == 'tutorial_hands_on' }
 
       latest = tutorials.sort do |x, y|
         Gtn::ModificationTimes.obtain_time(y.path) <=> Gtn::ModificationTimes.obtain_time(x.path)
       end
+
+      latest_published = recently_published_tutorials(site)
+      latest = latest.reject { |x| latest_published.include?(x) } if exclude_recently_published
+
+      latest.slice(0, 10)
+    end
+
+    ##
+    # Find the most recently published tutorials
+    # Parameters:
+    # +site+:: The +Jekyll::Site+ object, used to get the list of pages.
+    # Returns:
+    # +Array+:: An array of the 10 most recently published modified pages
+    # Example:
+    #  {% assign latest_tutorials = site | recently_modified_tutorials %}
+    def recently_published_tutorials(site)
+      tutorials = site.pages.select { |page| page.data['layout'] == 'tutorial_hands_on' }
+
+      latest = tutorials.sort do |x, y|
+        Gtn::PublicationTimes.obtain_time(y.path) <=> Gtn::PublicationTimes.obtain_time(x.path)
+      end
+
       latest.slice(0, 10)
     end
 
@@ -905,6 +1038,10 @@ module Jekyll
 
     def identify_funders(materials, site)
       TopicFilter.identify_funders(materials, site)
+    end
+
+    def list_draft_materials(site)
+      TopicFilter.list_all_materials(site).select { |k, _v| k['draft'] }
     end
   end
 end
