@@ -16,10 +16,9 @@ contributions:
     - gallardoalba
 ---
 
-> *Critical thinking aims to define the irrational character of the established rationality.*
->
-> *One-Dimensional Man: Studies in the Ideology of Advanced Industrial Society. Herbert Marcuse*
-{: .quote}
+> <warning-title>Recommended starting point</warning-title>
+> This training can be considered as the continuation of [Principles of learning and how they apply to training and teaching ]({% link topics/contributing/tutorials/learning-principles/tutorial.md %}). If you wish to have a panoramic view of the theoretical corpus in which the **Critical Learning Theory** is embedded, we recommend that you start with the above-mentioned training.
+{: .warning}
 
 **Critical Learning Theory** (also known as *Critical Education Theory*) is rooted in the broader **Critical Theory** tradition, originated with the Frankfurt School of thought, formally known as the Institute for Social Research (*Institut für Sozialforschung*).
 
@@ -34,6 +33,12 @@ Within the realm of **Critical Learning Theory**, the concept of **Hidden Curric
 This training aspires to be a introduction on the **Critical Learning Theory** and the concept of **Hidden Curriculum**, with the aim of pointing out which pedagogical elements are the most appropriate to stimulate **critical thinking**, the backbone of scientific development.
 
 # Contextualising framework
+
+> *Critical thinking aims to define the irrational character of the established rationality.*
+>
+> One-Dimensional Man: Studies in the Ideology of Advanced Industrial Society. Herbert Marcuse
+>
+{: .quote}
 
 Education is the result of multiple contextual variables that have an effect on behaviour, ideology and professional development, so it could be said that human beings, as social beings, are educated and transformed by their context ({% cite Careaga2007 %}). In this line, John Dewey, a distinguished American philosopher and advocate for educational reform, beautifully articulated that the education proposed by society has its roots in society itself ({% cite Perez2018 %}). Thus, in order to contextualise current educational practices, we can start by analyzing the stage of society, the so-called **Information Society**.
 
