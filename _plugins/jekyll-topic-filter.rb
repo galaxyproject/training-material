@@ -365,7 +365,7 @@ module TopicFilter
   end
 
   def self.mermaid_safe_label(label)
-    (label || "")
+    (label || '')
       .gsub('(', '').gsub(')', '')
       .gsub('[', '').gsub(']', '')
       .gsub('"', '”') # We accept that this is not perfectly correct.
@@ -386,23 +386,25 @@ module TopicFilter
       step = wf['steps'][id]
       chosen_label = mermaid_safe_label(step['label'] || step['name'])
 
-      if step['type'] == 'data_collection_input' 
+      case step['type']
+      when 'data_collection_input'
         statements.append "#{id}[\"ℹ️ Input Collection\\n#{chosen_label}\"];"
-      elsif step['type'] == 'data_input'
+      when 'data_input'
         statements.append "#{id}[\"ℹ️ Input Dataset\\n#{chosen_label}\"];"
-      elsif step['type'] == 'parameter_input'
+      when 'parameter_input'
         statements.append "#{id}[\"ℹ️ Input Parameter\\n#{chosen_label}\"];"
-      elsif step['type'] == 'subworkflow'
+      when 'subworkflow'
         statements.append "#{id}[\"🛠️ Subworkflow\\n#{chosen_label}\"];"
       else
         statements.append "#{id}[\"#{chosen_label}\"];"
       end
 
-      if step['type'] == 'data_collection_input' or step['type'] == 'data_input'
+      case step['type']
+      when 'data_collection_input', 'data_input'
         statements.append "style #{id} stroke:#2c3143,stroke-width:4px;"
-      elsif step['type'] == 'parameter_input'
+      when 'parameter_input'
         statements.append "style #{id} fill:#ded,stroke:#393,stroke-width:4px;"
-      elsif step['type'] == 'subworkflow'
+      when 'subworkflow'
         statements.append "style #{id} fill:#edd,stroke:#900,stroke-width:4px;"
       end
 
@@ -419,13 +421,11 @@ module TopicFilter
       end
 
       (step['workflow_outputs'] || [])
-        .reject{|wo| wo['label'].nil? }
-        .map{|wo| 
-          if wo['uuid'].nil? 
-            wo['uuid'] = SecureRandom.uuid.to_s;
-          end
+        .reject { |wo| wo['label'].nil? }
+        .map do |wo|
+          wo['uuid'] = SecureRandom.uuid.to_s if wo['uuid'].nil?
           wo
-        }
+        end
         .each do |wo|
         statements.append "#{wo['uuid']}[\"Output\\n#{wo['label']}\"];"
         statements.append "#{id} --> #{wo['uuid']};"
@@ -433,7 +433,7 @@ module TopicFilter
       end
     end
 
-    "flowchart TD\n" + statements.map{|q| "  " + q}.join("\n")
+    "flowchart TD\n" + statements.map { |q| "  #{q}" }.join("\n")
   end
 
   def self.resolve_material(site, material)

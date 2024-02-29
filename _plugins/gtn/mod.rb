@@ -14,7 +14,7 @@ module Gtn
       @@TIME_CACHE = {}
       @@COMMIT_COUNT_CACHE = Hash.new(0)
       Jekyll.logger.info '[GTN/Time/Mod] Filling Time Cache'
-      self.cached_command
+      cached_command
         .split('GTN_GTN:')
         .map { |x| x.split("\n\n") }
         .select { |x| x.length > 1 }
@@ -36,18 +36,16 @@ module Gtn
       rev = `git rev-list -n 1 main`.strip
 
       if discover_caches.nil?
-        File.write("metadata/git-mod-#{rev}.txt", self.command)
+        File.write("metadata/git-mod-#{rev}.txt", command)
       else
         prev = discover_caches
-        File.write("metadata/git-mod-#{rev}.txt", self.cached_command)
+        File.write("metadata/git-mod-#{rev}.txt", cached_command)
         File.delete(prev)
       end
     end
 
     def self.cached_command
-      if discover_caches.nil?
-        return self.command
-      end
+      return command if discover_caches.nil?
 
       Jekyll.logger.info '[GTN/Time/Mod] Using cached modification times'
 
@@ -116,7 +114,7 @@ module Gtn
       renames = {}
 
       Jekyll.logger.info '[GTN/Time/Pub] Filling Publication Time Cache'
-      self.cached_command
+      cached_command
         .split('GTN_GTN:')
         .map { |x| x.split("\n\n") }
         .select { |x| x.length > 1 }
@@ -146,18 +144,16 @@ module Gtn
       rev = `git rev-list -n 1 main`.strip
 
       if discover_caches.nil?
-        File.write("metadata/git-pub-#{rev}.txt", self.command)
+        File.write("metadata/git-pub-#{rev}.txt", command)
       else
         prev = discover_caches
-        File.write("metadata/git-pub-#{rev}.txt", self.cached_command)
+        File.write("metadata/git-pub-#{rev}.txt", cached_command)
         File.delete(prev)
       end
     end
 
     def self.cached_command
-      if discover_caches.nil?
-        return self.command
-      end
+      return command if discover_caches.nil?
 
       Jekyll.logger.info '[GTN/Time/Pub] Using cached publication times'
 
