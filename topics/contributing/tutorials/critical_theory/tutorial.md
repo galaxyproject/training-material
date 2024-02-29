@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "On Critical Learning Theory: the hidden curriculum"
+title: "On Critical Learning Theory: the Hidden Curriculum"
 subtopic: pedagogy
 time_estimation: 2h
 questions:
