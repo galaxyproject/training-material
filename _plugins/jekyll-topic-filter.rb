@@ -126,7 +126,7 @@ module TopicFilter
       materials = filter_by_tag(site, tn)
 
       # For each subtopics
-      site.data[topic_name]['subtopics'].each do |subtopic, _v|
+      site.data[topic_name]['subtopics'].each do |subtopic|
         # Find matching tag-based tutorials in our filtered-by-tag materials
         specific_resources = materials.select { |x| (x['tags'] || []).include?(subtopic['id']) }
         out[subtopic['id']] = {

@@ -1,6 +1,6 @@
 ---
 title: "GTN ❤️ GMOD"
-tags: [new topic,new feature]
+tags: [new topic, new feature, genome annotation]
 contributions:
   authorship: [hexylena, abretaud]
   infrastructure: [hexylena]
@@ -19,7 +19,7 @@ Galaxy Project itself has long been a GMOD component, but you'll recognise some 
 
 ## Current State
 
-As such we've created a new topic to help aggregate all of the GMOD related material together. This currently includes tutorials on the use of JBrowse, Apollo, InterMine, and more!
+As such we've created a new topic to help aggregate all of the GMOD related material together. This currently includes tutorials on the use of [JBrowse](/training-material/topics/gmod/#st-jbrowse1), [Apollo](/training-material/topics/gmod/#st-apollo2), [InterMine](/training-material/topics/gmod/#st-intermine), and [MAKER](/training-material/topics/gmod/#st-maker)!
 
 For teachers, tag based topics now support a second level of organisation, in 'subtopics'. We've used that to add a new topic, using subtopics to organise each GMOD component.
 
