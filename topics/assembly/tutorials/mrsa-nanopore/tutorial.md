@@ -25,6 +25,8 @@ tags:
 - nanopore
 - assembly
 - amr
+- gmod
+- jbrowse1
 
 contributions:
   authorship:

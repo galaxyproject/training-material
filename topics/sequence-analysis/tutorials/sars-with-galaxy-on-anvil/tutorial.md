@@ -18,6 +18,8 @@ key_points:
 - Use Galaxy on the AnVIL cloud computing resource to check data, perform an alignment, and visualize the results.
 tags:
   - covid19
+  - gmod
+  - jbrowse1
 contributions:
     authorship:
     - nakucher
