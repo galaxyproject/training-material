@@ -73,7 +73,7 @@ You can access the data for this tutorial in multiple ways:
 > - *"Choose the type of matrix to download"*: `Raw filtered counts`
 {: .hands_on}
 
-2. **Importing from a history** - You can import [this history](https://dev.gvl.org.au/u/cgoclowski/h/fpe-buttons-take-13)
+2. **Importing from a history** - You can import [this history](BLANK)
 
    {% snippet faqs/galaxy/histories_import.md %}
 This also alleviates the necessity to convert the AnnData object into a Seurat one.
@@ -104,12 +104,9 @@ This also alleviates the necessity to convert the AnnData object into a Seurat o
 >
 >> <hands-on-title>Filter Cells</hands-on-title>
 >>
->> Run{% tool [FilterCells](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_filter_cells/seurat_filter_cells/4.0.4+galaxy0) %} with the following parameters:
+>> Run{% tool [Seurat 4 converter](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_convert/seurat_convert/4.0.4+galaxy0) %} with the following parameters:
 >> - *"Choose the format of the input"*: `AnnData`
 >> - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
->> - *"Name of Parameter to filter on"*: `nCount_RNA`
->> - *"Min value"*: `0`
->> - *"Max value"*: `0`
 >> - *"Choose the format of the output"*: `RDS with a Seurat object`
 > {: .hands_on}
 {: .tip}
@@ -526,61 +523,18 @@ Because each cluster of cells was grouped based on similar transcriptome profile
 
 Following an initial look at the DimPlots and FeaturePlots, we can take an even closer look at which genes are driving the clustering.
 
-In order to do so we can run cluster level differential expression tests. First, we will need to set our object's active identity to be the clusters. This will ensure that when Seurat's differential expression function is run, the groupings of cells across which it will compare are the clusters.
+To do so, we'll run Seurat's FindMarkers function, which will compare each identity (in this case cluster) against every other identity within its class (all the other clusters). This function of marker finding is particularly useful in identifying up, or down, regulated genes that drive differences in identity/cluster.
 
-><tip-title>What are Identities?</tip-title>
-> Identities are, at their core, categorical metadata values. They are columns of cell-level metadata that somehow group the cells together. Examples of identities could be cluster number, cell type if/once known, genotype, etc.
+> <hands-on-title>Find Markers </hands-on-title>
 >
-{: .tip}
+> Run{% tool [FindMarkers](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_markers/seurat_find_markers/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+{: .hands_on}
 
-```r
-Idents(filtered_srt)<- filtered_srt$seurat_clusters
-```
-
-><tip-title>Syntax Lesson</tip-title>
-> There are often many different ways to get the same job done in R, but especially when manipulating Seurat objects. We could alternatively set the active identity of our object with the following line of code too:
->
->```r
->filtered_srt<-SetIdent(object = filtered_srt, value = "seurat_clusters")
->```
-{: .tip}
-
-Then, we'll run Seurat's FindAllMarkers function, which will compare each identity (in this case cluster) against every other identity within its class (all the other clusters). This function of marker finding is particularly useful in identifying up, or down, regulated genes that drive differences in identity/cluster.
-
-```r
-cluster_markers<-FindAllMarkers(object = filtered_srt)
-View(cluster_markers)
-```
-
-We'll use these marker lists later on to label our cell types.
-
-We can also see which genes are differentially expressed across other variables in our metadata. For example, you can see which genes are up or down regulated across the different genotypes present in our dataset. To do so, let's first get a list of all the identity classes in our data. This information is kept in the metadata column, and any categorical variable will do. Here, let's pick genotype.
-
-```r
-metadata<-as.data.frame(filtered_srt@meta.data)
-filtered_srt<-SetIdent(object = filtered_srt, value = "Genotype")
-```
-
-The "metadata" object now in your environment is a dataframe with column names representing the different identities you may choose to group your cells by when running differential expression. The second line of code above will set the object's identity class to be the genotype from which the cell came from.
-
-Now, let's see what genes differentiate our wildtype from our mutant cells. First, we can identify how many different genotypes are in our data:
-
-```r
-unique(filtered_srt$Genotype)
-```
-
-This output helpfully shows us what the genotypes are, and how they are labelled in our metadata. The small details, like capitalization, are important for referencing metadata information--our references must perfectly match the labelling in the object, otherwise they will not be recognized by the functions.
-
-Now that we know how our wildtype and mutant cells are labelled, we can use that information to directly compare the two. This time we will use a pairwise comparison method by using Seurat's FindMarkers() function (not to be confused with FindAllMarkers which has a comprehensive comparison approach):
-
-```r
-markers<-FindMarkers(object = filtered_srt, ident.1 = "wild type genotype", ident.2 = "Igf2-p0 heterozygous knockout", test.use = "wilcox")
-```
-
-The above function will find all of the differentially expressed genes between ident.1 (wildtype) and ident.2 (mutant) using the Wilcoxon test. The resulting output will show genes with positive fold changes (denoting a higher expression in the first identity--wildtype) and negative fold changes (denoting a higher expression value in the second identity--mutant).
+The marker list that has been output by this tool will be useful to us shortly for identifying which cells types are represented by the various clusters.\
 
 ><comment-title>On Finding Markers</comment-title>
-> This same test of differential expression can be run using any identity class and any two identities within the same class. As this is a more fine tuned comparison than FindAllMarkers, it can be useful to uncover differences across specific samples.
+> Differential expression can be run using any identity class and any two identities within the same class. The tools as of current do not allow for such direct comparisons (but will soon!) and I implore you to try [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md %}) if you hope to conduct marker identification across, say, genotypes. 
 {: .comment}
 
 # Biological Interpretations
