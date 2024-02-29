@@ -439,6 +439,8 @@ Now we can use the neighborhood graph to identify clusters of cells whose transc
 > Run{% tool [FindClusters](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_clusters/seurat_find_clusters/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat FindNeighbours on data 16: Seurat RDS`
+> - *"Advanced Options "*
+> - *"Resolution"*: `0.5`
 {: .hands_on}
 
 This tool will output two new datasets: as usual, a new Seurat object which includes a metadata column denoting which cluster each of the cells was assigned to, and a csv file of the same information. 
@@ -476,36 +478,46 @@ You now have a completely preprocessed and ready to be analyzed Seurat object--c
 # Let's Take a Look
 Now that we have run dimensionality reduction on our dataset, it is ready for visualization. Let's take a look at what our cells look like in a UMAP projection:
 
-```r
-DimPlot(filtered_srt, reduction = "umap", label = TRUE, label.box = TRUE)+ NoLegend()
-```
-![DimPlot colored by 0.5 resolution cluster](../../images/scrna-SeuratRStudio/plot10.png "DimPlot colored by 0.5 resolution cluster.")
-Good work! It looks like with a clustering resolution of 0.5, we are able to identify 7 clusters of cells in our data.
+> <hands-on-title>Plot UMAP </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `DimPlot`
+> - *"Group by"*: `RNA_nn_res.0.5`
+{: .hands_on}
+
+![DimPlot colored by 0.5 resolution cluster](../../images/scrna-case_FPE_SeuratTools/DimPlot_GroupBy_pt5Res.png "DimPlot colored by 0.5 resolution cluster.")
+
+Good work! It looks like with a clustering resolution of 0.5, we are able to identify 8 clusters of cells in our data.
 
 We can also look for expression of particular genes and see how those map to our UMAP projection. This is often useful in getting an initial understanding of which clusters might be representative of which cell types.
 
-```r
-FeaturePlot(filtered_srt, features = "Gapdh", order = TRUE)
-```
-![FeaturePlot: Gapdh](../../images/scrna-SeuratRStudio/plot11.png "FeaturePlot: Gapdh")
+> <hands-on-title>Plot Gapdh </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `FeaturePlot`
+> - *"Feature"*: `Gapdh`
+{: .hands_on}
+![FeaturePlot: Gapdh](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Gapdh.png "FeaturePlot: Gapdh")
 
 We just plotted a housekeeping gene, Gapdh, so the broad expression we observe is expected.
-
-><tip-title>Weird scale?</tip-title>
-> If the scale of your data looks weird, it may be due to the DefaultAssay of your object. When we ran SCTransform, the function creates an entirely new assay within our Seurat object that includes scaled and normalized count values. This SCT Assay is what we want to visualize our expression values off of. So, if your scale is super broad, or goes negative, try running the following command before attempting to plot again:
->```r
->DefaultAssay(filtered_srt)<-"SCT"
->```
-{: .tip}
 
 In practice, it is helpful to plot known markers of cell types you expect to be in your dataset. This will give you a first look at how your cells are clustered.
 
 For example, we can plot early T-cell marker Il2ra and get an idea of which cells and/or clusters might resemble the early T-cells:
 
-```r
-FeaturePlot(filtered_srt, features = "Il2ra", order = TRUE)
-```
-![FeaturePlot: Aif1](../../images/scrna-SeuratRStudio/plot12.png "FeaturePlot: Il2ra")
+> <hands-on-title>Plot Il2ra </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `FeaturePlot`
+> - *"Feature"*: `Il2ra`
+{: .hands_on}
+![FeaturePlot: Il2ra](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Il2ra.png "FeaturePlot: Il2ra")
 
 It is a good idea, when analyzing your own data, to plot some markers of cell types you expect to be present. Later on we can also use these FeaturePlots to visualize manual annotation of clusters.
 
