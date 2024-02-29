@@ -511,10 +511,10 @@ module Jekyll
       # https://stackoverflow.com/questions/71745593/how-to-do-a-single-line-cumulative-count-for-hash-values-in-ruby
       graph
         # Turns it into an array
-        .sort_by{|k, v| k}
+        .sort_by { |k, _v| k }
         # Cumulative sum
         .each_with_object([]) { |(k, v), a| a << [k, v + a.last&.last.to_i] }.to_h
-        .map{ |k, v| { 'x' => k, 'y' => v } }
+        .map { |k, v| { 'x' => k, 'y' => v } }
         .to_json
     end
 
