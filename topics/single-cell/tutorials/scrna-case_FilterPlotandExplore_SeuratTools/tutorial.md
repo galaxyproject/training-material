@@ -559,14 +559,92 @@ Let's take another look at what our clusters look like:
 
 It would be nice to know what these cells are. This analysis (googling all of the marker genes, both checking where the ones you know are and then going through marker tables we generated) is a fun task for any individual experiment, so we’re going to speed past that and nab the assessment from the original paper!
 
-(will include manual cluster/ marker identification with featureplots)
+Here are the markers per cell type that the paper uses to classify the avrious cell types which are expected to be present in the data: 
 
-| Clusters | Markers                 | Cell Type                           |
-|----------|-------------------------|-------------------------------------|
-| 2        | Il2ra                   | Double negative (early T-cell)      |
-| 0, 4, 5, 6, 7    | Cd8b1, Cd8a, Cd4        | Double positive (middle T-cell)     |
-| 1        | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
-| 3        | Itm2a                   | Mature T-cell                       |
+| Markers                 | Cell Type                           |
+|-------------------------|-------------------------------------|
+| Il2ra                   | Double negative (early T-cell)      |
+| Cd8b1, Cd8a, Cd4        | Double positive (middle T-cell)     |
+| Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
+| Itm2a                   | Mature T-cell                       |
+
+We can plot these markers as a means of discerning which cluster might be representing a given cell type. Let's start with the Mature T-cell marker Itm2a: 
+
+> <hands-on-title>Plot Itm2a </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `FeaturePlot`
+> - *"Feature"*: `Itm2a`
+{: .hands_on}
+![FeaturePlot Itm2a](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Itm2a.png "FeaturePlot of Itm2a")
+
+We can see that Cluster 3 seems to be most highly expressing this gene, and when we look back at the marker list we created earlier, Itm2a appears as a marker for cluster 3 with an average log fold change of 3! Therefore, we can quite conficently say that cluster 3 is likely to be representing Mature T-cells! 
+
+Now what about the opposite end of the spectrum: the double negative early T-cells? We can see from our table about that Il2ra is a known marker of this cell type, let's see where it's most strongly expressed in the data: 
+
+> <hands-on-title>Plot Il2ra </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `FeaturePlot`
+> - *"Feature"*: `Il2ra`
+{: .hands_on}
+![FeaturePlot Il2ra](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Il2ra.png "FeaturePlot of Il2ra")
+
+Il2ra expression seems to be most prominent in Cluster 2 and as seen in our marker list, has a fold change of 2.79! 
+
+It can, and should, act as a sanity check that the most (and least) differentiated cell types expected in the data appear as two "island" clusters. 
+
+Now for the intermediate populations--which may be a bit more tricky to deconvolute. Based on our known markers, we see that both the double-positive populations express many of the same genes: Cd8b1, Cd8a, and Cd4. Let's make sure that the remaining clusters (0, 1, 3, 4, 5, 6, and 7) all express these: 
+
+> <hands-on-title>Plot Cd8b1 </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `FeaturePlot`
+> - *"Feature"*: `Cd8b1`
+{: .hands_on}
+![FeaturePlot Cd8b1](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8b1.png "FeaturePlot of Cd8b1")
+
+It looks like clusters 1, 4, 5, and 6 pretty strongly express Cd8b1, now what about Cd8a? 
+
+> <hands-on-title>Plot Cd8a </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `FeaturePlot`
+> - *"Feature"*: `Cd8a`
+{: .hands_on}
+![FeaturePlot Cd8a](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8a.png "FeaturePlot of Cd8a")
+
+This looks pretty consistent with the Cd8b1 plot, which is expected as these are markers of a double positive population! The true discernment between the two populations will be the level of Cd4 expression: 
+
+> <hands-on-title>Plot Cd4 </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `FeaturePlot`
+> - *"Feature"*: `Cd4`
+{: .hands_on}
+![FeaturePlot Cd4](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd4.png "FeaturePlot of Cd4")
+
+Looks like the top portion of these clusters, and mainly cluster 1 hold the vast majority of Cd4 expression. This, coupled with Cd4 being identified as a marker of cluster 1 in our marker table above tells us pretty confidently that the upper part of this "body" cluster are likely the late middle t-cells! 
+
+Here is a breakdown of the cell type labeling we just accomplished: 
+
+| Clusters     | Markers                 | Cell Type                           |
+|--------------|-------------------------|-------------------------------------|
+| 2            | Il2ra                   | Double negative (early T-cell)      |
+| 0            | Il2ra, Cd8b1, Cd8a      | [maybe] Early transitioning T-cell  |
+| 4, 5, 6, 7   | Cd8b1, Cd8a, Cd4        | Double positive (middle T-cell)     |
+| 1            | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
+| 3            | Itm2a                   | Mature T-cell                       |
 
 
 Now we can begin to feel a bit more oriented in exploring our data. The clusters are labelled with cell types, and our object has been processed enough such that we may now begin to answer some real biological questions! Now that we know what we’re dealing with, let’s examine the effect of our variable, real science!
@@ -658,7 +736,7 @@ There doesn't visually appear to be any differences in sequencing depth across t
 {: .hands_on}
 ![FeaturePlot colored by counts](../../images/scrna-case_FPE_SeuratTools/FeaturePlog_nFeature.png "FeaturePlot colored by counts split by Individual")
 
-There we go! This might explain the dramatic shift in early to middle T-Cell between wildtype and knockout cells--the leftmost early to middle T-cells simply have a higher sequencing depth represented by Individual 3 (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge (specifically this likely accounts for the discernment between clusters 1, 2, and 5).
+There we go! This might explain the dramatic shift in early to middle T-Cell between wildtype and knockout cells--the leftmost early to middle T-cells simply have a higher sequencing depth represented by Individual 3 (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge (specifically this likely accounts for the discernment between clusters 0, 4, 5, 6, and 7).
 
 Luckily, and importantly, we don’t see the double negative or mature T-cells being similarly affected. So, although, this variable of sequencing depth, or moreso, Individual, might be something to regress out somehow, it doesn’t seem to be impacting our dataset such that we cannot draw meaningful insights.
 
@@ -670,10 +748,15 @@ Luckily, and importantly, we don’t see the double negative or mature T-cells b
 
 Do you think we processed these samples well enough? We have seen in the previous images that these clusters are not very tight or distinct, so we could consider stronger filtering. Let's take a look at gene expression of a gene we know should not be expressed in tCells as a sanity check:
 
-```r
-FeaturePlot(object = filtered_srt, reduction = "umap", features = "Hba-a1")
-```
-![FeaturePlot of Hemoglobin](../../images/scrna-SeuratRStudio/plot19.png "FeaturePlot of Hemoglobin")
+> <hands-on-title>Plot Hba-a1 </hands-on-title>
+>
+> Run{% tool [Plot with Seurat](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
+> - *"Plot_type_selector"*: `FeaturePlot`
+> - *"Feature"*: `Hba-a1`
+{: .hands_on}
+![FeaturePlot Hba-a1](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Hba-a1.png "FeaturePlot of Hba-a1")
 
 
 Hemoglobin--a red blood cell marker that should NOT be found in T-cells--appears throughout the entire dataset in low numbers and as a likely marker of Cluster 6. This suggests that some background noise may have been introduced by the media the cells were in. We might consider in the wet lab trying to get a purer, happier sample, with less background or in the dry lab, we can take advantage of techniques such as SoupX or others to remove this technical noise.
@@ -684,21 +767,12 @@ Hemoglobin--a red blood cell marker that should NOT be found in T-cells--appears
 
 Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?
 
-Important to note, lest all bioinformaticians combine forces to attack the biologists: just because a cluster doesn’t look like a cluster by eye is NOT enough to say it’s not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the double positive populations, which we know are also affected by depth of sequencing. That’s a reasonable argument that Clusters 1, 2, and 5 might not be all that different. Maybe we need more depth of sequencing across all those cells, or to compare these explicitly to each other (consider variations on FindMarkers!).
+Important to note, lest all bioinformaticians combine forces to attack the biologists: just because a cluster doesn’t look like a cluster by eye is NOT enough to say it’s not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the double positive populations, which we know are also affected by depth of sequencing. That’s a reasonable argument that Clusters 0, 4, 5, 6, and 7 might not be all that different. Maybe we need more depth of sequencing across all those cells, or to compare these explicitly to each other (consider variations on FindMarkers!).
 
 However, the late double positive cluster is both seemingly leaving the larger body of clusters and also has fewer knockout cells, so we might go and look at what those cells are expressing in the marker genes. If we look at the mature T-cells further, we can see that their marker gene--Itm2a--is only expressed in half of the cluster. You might consider sub-clustering this to investigate further, either through changing the resolution or through analysing this cluster alone.
 
 If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that many, if not most, of the genes in that list are actually ribosomal. This could be a housekeeping background, it might be cell cycle related, it may be biological, or some combination of all three. You might consider investigating the cycling status of the cells, or even regressing this out (which is what the authors did).
 
 Ultimately, there are quite a lot ways to analyse your single-cell data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population, suggesting some sort of abberant development of T-cells in the Igf2-p0 hets.
-
-Finally, we can export plots and objects from RStudio back into Galaxy. To do so, we'll use the gx_put() function provided to us by Galaxy. Let's save our Seurat object and the cell type labelled DimPlot!
-
-```r
-gx_put(filtered_srt)
-gx_put(CellType_DimPlot)
-```
-
-The above functions will export your object and the plot into your Galaxy history!
 
 Congratulations! You have interpreted your plots in several important ways!
