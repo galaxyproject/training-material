@@ -49,12 +49,12 @@ module Gtn
         return self.command
       end
 
-      Jekyll.logger.info '[GTN/Time/Pub] Using cached modification times'
+      Jekyll.logger.info '[GTN/Time/Mod] Using cached modification times'
 
       previous_commit = discover_caches.split('-').last.split('.').first
       previous = File.read(discover_caches)
 
-      `git log --name-only --pretty='GTN_GTN:%ct' #{previous_commit}..main` + previous
+      `git log --name-only --pretty='GTN_GTN:%ct' #{previous_commit}..` + previous
     end
 
     def self.command
@@ -86,6 +86,7 @@ module Gtn
         begin
           # Non git file.
           @@TIME_CACHE[f] = File.mtime(f)
+          Jekyll.logger.warning "[GTN/Time/Mod] No git cached time available for #{f}, defaulting to checkout"
           @@TIME_CACHE[f]
         rescue StandardError
           Time.at(0)
@@ -115,7 +116,7 @@ module Gtn
       renames = {}
 
       Jekyll.logger.info '[GTN/Time/Pub] Filling Publication Time Cache'
-      self.command
+      self.cached_command
         .split('GTN_GTN:')
         .map { |x| x.split("\n\n") }
         .select { |x| x.length > 1 }
@@ -163,11 +164,11 @@ module Gtn
       previous_commit = discover_caches.split('-').last.split('.').first
       previous = File.read(discover_caches)
 
-      `git log --first-parent --name-status --diff-filter=AR --pretty='GTN_GTN:%ct' #{previous_commit}..main` + previous
+      `git log --first-parent --name-status --diff-filter=AR --pretty='GTN_GTN:%ct' #{previous_commit}..` + previous
     end
 
     def self.command
-      `git log --first-parent --name-status --diff-filter=AR --pretty='GTN_GTN:%ct' main`
+      `git log --first-parent --name-status --diff-filter=AR --pretty='GTN_GTN:%ct' `
     end
 
     def self.time_cache
@@ -182,6 +183,7 @@ module Gtn
         begin
           # Non git file.
           @@TIME_CACHE[f] = File.mtime(f)
+          Jekyll.logger.warning "[GTN/Time/Pub] No git cached time available for #{f}, defaulting to checkout"
           @@TIME_CACHE[f]
         rescue StandardError
           Time.at(0)
